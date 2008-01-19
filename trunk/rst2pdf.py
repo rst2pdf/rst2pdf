@@ -270,7 +270,7 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
     st=spans+tstyleNorm
 
     if hasHead:
-      st+=[headtStyle]
+      st+=[tstyleHead]
 
     node.elements=[Table(data,style=TableStyle(st))]
 
@@ -481,7 +481,7 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
 
   elif isinstance (node, docutils.nodes.comment):
     # Class that generates no output
-    gnode.elements=[]
+    node.elements=[]
 
   elif isinstance (node, docutils.nodes.line_block):
     # Obsolete? Let's do something anyway.
