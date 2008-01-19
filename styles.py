@@ -40,7 +40,9 @@ def getStyleSheet():
 
     stylesheet.add(ParagraphStyle(name='Normal',
                                   fontName=stdFont,
+                                  bulletFontName=stdFont,
                                   fontSize=10,
+                                  bulletFontSize=10,
                                   leading=12)
                    )
 
@@ -48,53 +50,60 @@ def getStyleSheet():
                                   parent=stylesheet['Normal'],
                                   spaceBefore=6)
                    )
-    
+
     stylesheet.add(ParagraphStyle(name='Footer',
                                   parent=stylesheet['Normal'],
                                   backColor='#EFEFEF',
                                   alignment=TA_CENTER)
                    )
-                   
+
     stylesheet.add(ParagraphStyle(name='Attribution',
                                   parent=stylesheet['BodyText'],
                                   alignment=TA_RIGHT)
                    )
-                   
+
     stylesheet.add(ParagraphStyle(name='FieldName',
                                   parent=stylesheet['BodyText'],
                                   alignment=TA_RIGHT,
                                   fontName=stdBold,
+                                  bulletFontName=stdBold,
                                   )
                    )
-                   
+
     stylesheet.add(ParagraphStyle(name='Rubric',
                                   parent=stylesheet['BodyText'],
                                   textColor=colors.darkred,
                                   alignment=TA_CENTER)
                    )
-                   
+
     stylesheet.add(ParagraphStyle(name='Italic',
                                   parent=stylesheet['BodyText'],
-                                  fontName = stdItalic)
+                                  fontName = stdItalic,
+                                  bulletFontName=stdItalic)
                    )
-    
+
     stylesheet.add(ParagraphStyle(name='Title',
                                   parent=stylesheet['Normal'],
                                   fontName = stdBold,
+                                  bulletFontName=stdBold,
                                   fontSize=18,
+                                  bulletFontSize=18,
                                   leading=22,
                                   alignment=TA_CENTER,
                                   spaceAfter=6),
                    alias='title')
     stylesheet.add(ParagraphStyle(name='Subtitle',
                                   parent=stylesheet['Title'],
-                                  fontSize=14),
+                                  fontSize=14,
+                                  bulletFontSize=14),
                    alias='subtitle')
 
     stylesheet.add(ParagraphStyle(name='Heading1',
                                   parent=stylesheet['Normal'],
                                   fontName = stdBold,
+                                  bulletFontName=stdBold,
                                   fontSize=18,
+                                  bulletFontSize=18,
                                   leading=22,
                                   keepWithNext=True,
                                   spaceAfter=6),
@@ -104,7 +113,9 @@ def getStyleSheet():
     stylesheet.add(ParagraphStyle(name='Heading2',
                                   parent=stylesheet['Normal'],
                                   fontName = stdBold,
+                                  bulletFontName=stdBold,
                                   fontSize=14,
+                                  bulletFontSize=14,
                                   leading=18,
                                   spaceBefore=12,
                                   keepWithNext=True,
@@ -114,17 +125,21 @@ def getStyleSheet():
     stylesheet.add(ParagraphStyle(name='Heading3',
                                   parent=stylesheet['Normal'],
                                   fontName = stdBoldItalic,
+                                  bulletFontName=stdBoldItalic,
                                   fontSize=12,
+                                  bulletFontSize=12,
                                   leading=14,
                                   spaceBefore=12,
                                   keepWithNext=True,
                                   spaceAfter=6),
                    alias='h3')
-    
+
     stylesheet.add(ParagraphStyle(name='Heading4',
                                   parent=stylesheet['Normal'],
                                   fontName = stdBoldItalic,
+                                  bulletFontName=stdBoldItalic,
                                   fontSize=12,
+                                  bulletFontSize=12,
                                   leading=14,
                                   spaceBefore=12,
                                   keepWithNext=True,
@@ -143,16 +158,20 @@ def getStyleSheet():
                                   leftIndent=36,
                                   bulletIndent=0,
                                   spaceBefore=6,
-                                  fontName=stdBold),
+                                  fontName=stdBold,
+                                  bulletFontName=stdBold),
                    alias='df')
 
     stylesheet.add(ParagraphStyle(name='Code',
                                   parent=stylesheet['Normal'],
                                   fontName=stdMono,
+                                  bulletFontName=stdMono,
                                   fontSize=8,
+                                  bulletFontSize=8,
                                   leading=8.8,
                                   firstLineIndent=0,
-                                  leftIndent=36))
+                                  leftIndent=12,
+                                  spaceBefore=4))
 
 
     return stylesheet
@@ -169,7 +188,7 @@ tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
                                ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
                                ('BOX', (0,0), (-1,-1), 0.25, colors.black),
                              ]
-                             
+
 # Header row in tables
 
 tstyleHead = ('BACKGROUND',(0,0),(-1,0),colors.yellow)
@@ -181,14 +200,6 @@ tstyles['Field']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                               ('ALIGNMENT',(0,0),(1,-1),'RIGHT'),
                             ])
 fieldlist_lwidth=3*cm
-
-# Used for lists
-
-tstyles['List']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
-                             ('ALIGNMENT',(0,0),(1,-1),'RIGHT'),
-                           ])
-list_lwidth=.6*cm
-                           
 
 # Used for endnotes
 
