@@ -588,7 +588,7 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
   # set anchors for internal references
   for id in node['ids']:
     node.elements.insert(
-        isinstance(node.elements[0], PageBreak) and 1 or 0,
+        node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
         Paragraph('<a name="%s"/>'%id,style))
 
   return node.elements
