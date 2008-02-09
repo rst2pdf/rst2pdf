@@ -11,6 +11,11 @@ from reportlab.lib.styles import *
 from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 
+try:
+  from wordaxe.rl.paragraph import Paragraph
+  from wordaxe.rl.styles import ParagraphStyle,getSampleStyleSheet
+except:
+  print "No hyphenation support install wordaxe"
 import os
 
 # Set these, and then **maybe** think of setting the stylesheets below
@@ -43,13 +48,17 @@ def getStyleSheet():
                                   bulletFontName=stdFont,
                                   fontSize=10,
                                   bulletFontSize=10,
-                                  leading=12)
-                   )
+                                  leading=12,
+                                  language='EN',
+                                  hyphenation=True
+				  ))
 
     stylesheet.add(ParagraphStyle(name='BodyText',
                                   parent=stylesheet['Normal'],
-                                  spaceBefore=6)
-                   )
+                                  spaceBefore=6,
+                                  language='EN',
+                                  hyphenation=True
+				  ))
 
     stylesheet.add(ParagraphStyle(name='Footer',
                                   parent=stylesheet['Normal'],

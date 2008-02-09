@@ -24,8 +24,25 @@ from reportlab.lib.pagesizes import *
 from copy import copy
 from cgi import escape
 
+try:
+  from wordaxe.rl.paragraph import Paragraph
+  from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+except:
+  print "No support for hyphenation, install wordaxe"
+
 from styles import *
 styles=getStyleSheet()
+
+try:
+  import wordaxe
+  from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+  try:
+    wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5) 
+  except:
+    wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5,purePython=True) 
+except:
+  print "No support for hyphenation, install wordaxe"
+
 
 # This is A4 paper, change it as you wish
 pw,ph=ps=A4
