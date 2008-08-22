@@ -711,6 +711,8 @@ if __name__ == "__main__":
   doc=docutils.core.publish_doctree(input)
   elements=gen_elements(doc,0)
 
+
+  # Put the endnotes at the end ;-)
   endnotes = decoration['endnotes']
   if endnotes:
       elements.append(Spacer(1,2*cm))
@@ -721,6 +723,7 @@ if __name__ == "__main__":
   head=decoration['header']
   foot=decoration['footer']
 
+  # If there are headers and footers, use them
   if head:
     hh=head.wrap(tw,ph)[1]
   else:
@@ -731,10 +734,8 @@ if __name__ == "__main__":
     fh=0
 
   # So, now, create the FancyPage with the right sizes and elements
-
   FP=FancyPage("fancypage",pw,ph,tm,bm,lm,rm,hh,fh,head,foot)
 
-  # A basic document for us to write to 'rl_hello_platypus.pdf'
   pdfdoc = BaseDocTemplate(sys.argv[1]+'.pdf',pageTemplates=[FP],showBoundary=0,pagesize=ps)
   pdfdoc.build(elements)
 
