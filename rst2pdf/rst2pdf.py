@@ -706,8 +706,7 @@ def filltable (rows):
 
 from optparse import OptionParser
 
-if __name__ == "__main__":
-
+def main():
   parser = OptionParser()
   parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
   (options,args)=parser.parse_args()
@@ -755,3 +754,5 @@ if __name__ == "__main__":
   pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=ps)
   pdfdoc.build(elements)
 
+if __name__ == "__main__":
+  main()
