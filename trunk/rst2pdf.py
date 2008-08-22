@@ -240,6 +240,14 @@ def PreformattedFit(text,style):
 
 def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
 
+  if node['classes']:
+    # Supports only one class, sorry ;-)
+    try:
+      style=styles[node['classes'][0]]
+    except:
+      print "Unknown class %s"%node['classes'][0]
+      
+
   global decoration
 
   if isinstance (node, docutils.nodes.document):
