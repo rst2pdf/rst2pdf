@@ -704,9 +704,25 @@ def filltable (rows):
         spans.append(('SPAN',(x,y),(x+mc,y+mr)))
   return spans
 
+from optparse import OptionParser
+
 if __name__ == "__main__":
 
-  input=open(sys.argv[1]).read()
+  parser = OptionParser()
+  parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
+  (options,args)=parser.parse_args()
+  if len(args) <> 1:
+    _log('Usage: %s file.txt [ -o file.pdf ]'%sys.argv[0])
+    sys.exit(1)
+    
+    
+  infile=args[0]
+  if options.output:
+    outfile=options.output
+  else:
+    outfile=infile+'.pdf'
+
+  input=open(infile).read()
   import docutils.core
   doc=docutils.core.publish_doctree(input)
   elements=gen_elements(doc,0)
@@ -736,6 +752,6 @@ if __name__ == "__main__":
   # So, now, create the FancyPage with the right sizes and elements
   FP=FancyPage("fancypage",pw,ph,tm,bm,lm,rm,hh,fh,head,foot)
 
-  pdfdoc = BaseDocTemplate(sys.argv[1]+'.pdf',pageTemplates=[FP],showBoundary=0,pagesize=ps)
+  pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=ps)
   pdfdoc.build(elements)
 
