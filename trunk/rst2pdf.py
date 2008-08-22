@@ -24,11 +24,15 @@ from reportlab.lib.pagesizes import *
 from copy import copy
 from cgi import escape
 
+def _log(msg):
+  sys.stderr.write('%s\n'%str(msg))
+  sys.stderr.flush()
+
 try:
   from wordaxe.rl.paragraph import Paragraph
   from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
 except:
-  print "No support for hyphenation, install wordaxe"
+  _log("No support for hyphenation, install wordaxe")
 
 from styles import *
 styles=getStyleSheet()
@@ -41,7 +45,7 @@ try:
   except:
     wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5,purePython=True) 
 except:
-  print "No support for hyphenation, install wordaxe"
+  _log("No support for hyphenation, install wordaxe")
 
 
 # This is A4 paper, change it as you wish
@@ -217,8 +221,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
       node.pdftext=escape(node.pdftext,True)
 
   else:
-    print "Unkn. node (gen_pdftext): ", node.__class__
-    print node
+    _log("Unkn. node (gen_pdftext): %s"%str(node.__class__))
+    _log(node)
     #print node.transform
     sys.exit(1)
 
@@ -245,7 +249,7 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
     try:
       style=styles[node['classes'][0]]
     except:
-      print "Unknown class %s"%node['classes'][0]
+      _log("Unknown class %s"%node['classes'][0])
       
 
   global decoration
@@ -480,8 +484,8 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
     elif node.parent.get ('enumtype')=='upperalpha':
       b=str(loweralpha[node.parent.children.index(node)].upper())+'.'
     else:
-      print "Unknown kind of list_item"
-      print node.parent
+      _log("Unknown kind of list_item")
+      _log(node.parent)
       sys.exit(1)
     el[0].bulletText = b
     node.elements=el
@@ -606,8 +610,8 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
     :
     node.elements=[]
   else:
-    print "Unkn. node (gen_elements): ", node.__class__
-    print node
+    _log("Unkn. node (gen_elements): %s"%str(node.__class__))
+    _log(node)
     sys.exit(1)
 
   # set anchors for internal references
