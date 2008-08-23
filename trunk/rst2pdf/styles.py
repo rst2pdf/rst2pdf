@@ -66,6 +66,12 @@ def getStyleSheet():
                                   alignment=TA_CENTER)
                    )
 
+    stylesheet.add(ParagraphStyle(name='Header',
+                                  parent=stylesheet['Normal'],
+                                  backColor='#EFEFEF',
+                                  alignment=TA_CENTER)
+                   )
+
     stylesheet.add(ParagraphStyle(name='Attribution',
                                   parent=stylesheet['BodyText'],
                                   alignment=TA_RIGHT)
