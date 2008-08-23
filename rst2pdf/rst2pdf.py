@@ -11,7 +11,6 @@ from docutils.frontend import OptionParser
 from docutils.transforms import Transformer
 import docutils.readers.doctree
 
-
 from urlparse import *
 
 from reportlab.platypus import *
@@ -183,6 +182,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     node.pdftext=gather_pdftext(node,depth)
     if replaceEnt:
       node.pdftext=escape(node.pdftext,True)
+      
     node.pdftext=pre+node.pdftext+post
 
   elif    isinstance (node, docutils.nodes.system_message)   \
@@ -351,10 +351,10 @@ def gen_elements(node, depth, in_line_block=False, style=styles['BodyText']):
     node.elements=gather_elements(node,depth,style=style)
 
   elif isinstance (node, docutils.nodes.header):
-    decoration['header']=Paragraph(gather_pdftext(node,depth),style=styles['Footer'])
+    decoration['header']=gather_pdftext(node,depth)
     node.elements=[]
   elif isinstance (node, docutils.nodes.footer):
-    decoration['footer']=Paragraph(gather_pdftext(node,depth),style=styles['Footer'])
+    decoration['footer']=gather_pdftext(node,depth)
     node.elements=[]
 
   elif isinstance (node, docutils.nodes.author):
@@ -640,9 +640,20 @@ class Separation(Flowable):
 
 
 class FancyPage(PageTemplate):
-  def __init__(self,_id,pw,ph,tm,bm,lm,rm,hh,fh,head,foot):
+  def __init__(self,_id,pw,ph,tm,bm,lm,rm,head,foot):
 
+      
     tw=pw-lm-rm
+        
+    if head:
+      hh=Paragraph(head,style=styles['Header']).wrap(tw,ph)[1]
+    else:
+      hh=0
+    if foot:
+      fh=Paragraph(foot,style=styles['Footer']).wrap(tw,ph)[1]
+    else:
+      fh=0
+    
     #textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh)
     textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh,topPadding=hh,bottomPadding=fh)
 
@@ -653,14 +664,24 @@ class FancyPage(PageTemplate):
     self.foot=foot
     self.fx=lm
     self.fy=bm
+    self.tw=tw
+    self.ph=ph
 
     PageTemplate.__init__(self,_id,[textframe])
 
   def beforeDrawPage(self,canv,doc):
+
+    # Replace ###Page### with the actual page number
+    
+
     if self.head:
-      self.head.drawOn(canv,self.hx,self.hy)
+      para=Paragraph(self.head.replace('###Page###',str(doc.page)),style=styles['Header'])
+      para.wrap(self.tw,self.ph)
+      para.drawOn(canv,self.hx,self.hy)
     if self.foot:
-      self.foot.drawOn(canv,self.fx,self.fy)
+      para=Paragraph(self.foot.replace('###Page###',str(doc.page)),style=styles['Footer'])
+      para.wrap(self.tw,self.ph)
+      para.drawOn(canv,self.fx,self.fy)
 
 def filltable (rows):
 
@@ -738,18 +759,8 @@ def main():
   head=decoration['header']
   foot=decoration['footer']
 
-  # If there are headers and footers, use them
-  if head:
-    hh=head.wrap(tw,ph)[1]
-  else:
-    hh=0
-  if foot:
-    fh=foot.wrap(tw,ph)[1]
-  else:
-    fh=0
-
   # So, now, create the FancyPage with the right sizes and elements
-  FP=FancyPage("fancypage",pw,ph,tm,bm,lm,rm,hh,fh,head,foot)
+  FP=FancyPage("fancypage",pw,ph,tm,bm,lm,rm,head,foot)
 
   pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=ps)
   pdfdoc.build(elements)
