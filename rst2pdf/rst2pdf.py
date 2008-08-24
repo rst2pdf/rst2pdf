@@ -36,6 +36,14 @@ except:
 from styles import *
 styles=getStyleSheet()
 
+def styleToFont(style):
+  '''Takes a style name, returns a font tag for it, like 
+  "<font face=helvetica size=14 color=red>". Used for inline 
+  nodes (custom interpreted roles)'''
+
+  s=styles[style]
+  return '<font face="%s" size="%d" color="%s">'%(s.fontName,s.fontSize,s.textColor)
+
 try:
   import wordaxe
   from wordaxe.PyHnjHyphenator import PyHnjHyphenator
@@ -219,6 +227,9 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     node.pdftext=gather_pdftext(node,depth)
     if replaceEnt:
       node.pdftext=escape(node.pdftext,True)
+
+  elif isinstance (node, docutils.nodes.inline):
+    node.pdftext="%s %s</font>"%(styleToFont(node['classes'][0]),gather_pdftext(node,depth))
 
   else:
     _log("Unkn. node (gen_pdftext): %s"%str(node.__class__))
