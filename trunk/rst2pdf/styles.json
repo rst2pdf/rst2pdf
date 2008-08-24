@@ -3,11 +3,11 @@
     "stdFont": "Helvetica",
     "stdBold": "Helvetica-Bold",
     "stdItalic": "Helvetica-Oblique",
-    "stdBoldItalic": "Helvetica-Bold-Oblique",
+    "stdBoldItalic": "Helvetica-BoldOblique",
     "stdMono": "Courier",
     "stdMonoItalic": "Courier-Oblique",
     "stdMonoBold": "Courier-Bold",
-    "stdMonoBoldItalic": "Courier-Bold-Oblique"
+    "stdMonoBoldItalic": "Courier-BoldOblique"
   },
   "styles" : [
     [ "base" , {
@@ -154,7 +154,7 @@
       "bulletFontName": "stdMono",
       "fontSize": 8,
       "bulletFontSize": 8,
-      "leading": 24,
+      "leading": 10,
       "firstLineIndent": 0,
       "leftIndent": 12,
       "spaceBefore": 4
