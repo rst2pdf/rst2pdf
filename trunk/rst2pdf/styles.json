@@ -1,0 +1,162 @@
+{
+  "fontsAlias" : {
+    "stdFont": "Helvetica",
+    "stdBold": "Helvetica-Bold",
+    "stdItalic": "Helvetica-Oblique",
+    "stdBoldItalic": "Helvetica-BoldOblique",
+    "stdMono": "Courier"
+  },
+  "styles" : [
+    [ "base" , {
+      "parent": null,
+      "fontName": "stdFont",
+      "fontSize":10,
+      "leading":12,
+      "leftIndent":0,
+      "rightIndent":0,
+      "firstLineIndent":0,
+      "alignment":"TA_LEFT",
+      "spaceBefore":0,
+      "spaceAfter":0,
+      "bulletFontName":"stdFont",
+      "bulletFontSize":10,
+      "bulletIndent":0,
+      "textColor": "black",
+      "backColor": null,
+      "wordWrap": null,
+      "borderWidth": 0,
+      "borderPadding": 0,
+      "borderColor": null,
+      "borderRadius": null,
+      "allowWidows": 1,
+      "allowOrphans": false,
+      "hyphenation": false
+    }] ,
+    ["normal" , {
+      "parent": "base",
+      "language": "EN"
+    }],
+    ["redtext" , {
+      "parent": "base",
+      "textColor": "red"
+    }],
+    ["bodytext" , {
+      "parent": "normal",
+      "spaceBefore":6,
+      "hyphenation": false
+    }],
+    ["footer" , {
+      "parent": "normal",
+      "backcolor": "#EFEFEF",
+      "alignment": "TA_CENTER"
+    }],
+    ["header" , {
+      "parent": "normal",
+      "backcolor": "#EFEFEF",
+      "alignment": "TA_CENTER"
+    }],
+    ["attribution" , {
+      "parent": "bodytext",
+      "alignment": "TA_RIGHT"
+    }],
+    ["fieldname" , {
+      "parent": "bodytext",
+      "alignment": "TA_RIGHT",
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold"
+    }],
+    ["rubric" , {
+      "parent": "bodytext",
+      "textColor": "darkred",
+      "alignment": "TA_CENTER"
+    }],
+    ["italic" , {
+      "parent": "bodytext",
+      "fontName": "stdItalic",
+      "bulletFontName": "stdItalic"
+    }],
+    ["title" , {
+      "parent": "normal",
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold",
+      "fontSize": 18,
+      "bulletFontSize": 18,
+      "leading": 22,
+      "alignment": "TA_CENTER",
+      "spaceAfter": 6
+    }],
+    ["subtitle" , {
+      "parent": "title",
+      "fontSize": 14,
+      "bulletFontSize": 14
+    }],
+    ["heading1" , {
+      "parent": "normal",
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold",
+      "fontSize": 18,
+      "bulletFontSize": 18,
+      "leading": 22,
+      "keepWithNext": true,
+      "spaceAfter": 6
+    }],
+    ["heading2" , {
+      "parent": "normal",
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold",
+      "fontSize": 14,
+      "bulletFontSize": 14,
+      "leading": 18,
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["heading3" , {
+      "parent": "normal",
+      "fontName": "stdBoldItalic",
+      "bulletFontName": "stdBoldItalic",
+      "fontSize": 12,
+      "bulletFontSize": 12,
+      "leading": 14,
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["heading4" , {
+      "parent": "normal",
+      "fontName": "stdBoldItalic",
+      "bulletFontName": "stdBoldItalic",
+      "fontSize": 12,
+      "bulletFontSize": 12,
+      "leading": 14,
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["bullet" , {
+      "parent": "normal",
+      "firstLineIndent": 0,
+      "spaceBefore": 3
+    }],
+    ["definition" , {
+      "parent": "normal",
+      "firstLineIndent": 0,
+      "leftIndent": 36,
+      "bulletIndent": 0,
+      "spaceBefore": 6,
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold"
+    }],
+    ["code" , {
+      "parent": "normal",
+      "fontName": "stdMono",
+      "bulletFontName": "stdMono",
+      "fontSize": 8,
+      "bulletFontSize": 8,
+      "leading": 8.8,
+      "firstLineIndent": 0,
+      "leftIndent": 12,
+      "spaceBefore": 4
+    }]
+  ]
+}
