@@ -258,7 +258,7 @@ def PreformattedFit(text,style):
     style=copy(style)
     f=max((0.375,mw/w))
     style.fontSize*=f
-    style.leading*=f
+    #style.leading*=f
   return XPreformatted(text,style)
 
 
