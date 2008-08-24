@@ -4,6 +4,10 @@ How to use rst2pdf
 :author: Roberto Alsina
 :version: 0.3
 
+.. footer::
+
+   Page ###Page###
+
 .. contents::
 
 Introduction
@@ -130,3 +134,22 @@ will, though.
 If your document requires a style that is not defined in your styleheet, it will 
 print a warning and use bodytext instead.
 
+Syntax Highlighting
+-------------------
+
+Rst2pdf adds a non-standard directive, called code-block, which produces syntax
+highlighted for many languages using Pygments_.
+
+For example, if you want to include a python fragment::
+
+  .. code-block:: python
+
+     def myFun(x,y):
+       print x+y
+
+Notice that you need to declare the language of the fragment. Here's a list of
+the currently supported_.
+
+.. _supported: http://pygments.org/docs/lexers/
+
+.. _pygments: http://pygments.org/
