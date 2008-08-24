@@ -1,0 +1,132 @@
+How to use rst2pdf
+==================
+
+:author: Roberto Alsina
+:version: 0.3
+
+.. contents::
+
+Introduction
+------------
+
+This document explains how to use rst2pdf version 0.3. Here is the very short version::
+
+
+  rst2pdf.py mydocument.txt -o mydocument.pdf
+
+That will, as long as mydocument.txt is a valid Restructured Text (ReST) 
+document, produce a file called mydocument.pdf which is a PDF 
+version of your document.
+
+Of course, that means you just used default styles and settings. If it 
+looks good enough for you, then you may stop reading this document, 
+because you are done with it. If you are reading this in a PDF,
+it was generated using those default settings.
+
+However, if you want to customize the output, or are just curious to see
+what can be done, let´s continue.
+
+-----------------
+
+Headers and Footers
+-------------------
+
+ReST supports headers and footers, using the header and footer directive::
+
+  .. header::
+
+     This will be at the top of every page.
+
+Often, you may want to put a page number there, or a section name.The following
+magic tokens will be replaced (More will be added as rst2pdf evolves):
+
+:###Page###: Replaced by the current page number.
+
+Styles
+------
+
+You can style paragraphs with a style using the class directive::
+
+  .. class:: special
+
+  This paragraph is special.
+
+  This one is not.
+
+Or inline styles using custom interpreted roles::
+
+   .. role:: redtext
+
+   I like color :redtext:`red`.
+
+For more information about this, please check the ReST docs.
+
+The only special thing about using rst2pdf here is the syntax of
+the stylesheet. 
+
+You can make rst2pdf print the default stylesheet:
+
+  rst2pdf --print-stylesheet
+
+If you want to add styles, just take the standard stylesheet, 
+modify it and pass it with the -s option::
+
+  rst2pdf mydoc.txt -s mystyles.txt
+
+
+-----------------
+
+StyleSheet Syntax
+-----------------
+
+It´s a JSON file with two elements in it::
+
+  "fontsAlias" : {
+    "stdFont": "Helvetica",
+    "stdBold": "Helvetica-Bold",
+    "stdItalic": "Helvetica-Oblique",
+    "stdBoldItalic": "Helvetica-BoldOblique",
+    "stdMono": "Courier"
+  },
+
+This defines the fonts used in the styles. You can use, for example, Helvetica 
+directly in a style, but if later you want to use another font all through
+your document, you will haveto change it in each style. So, I suggest you
+use aliases.
+
+The standard PDF fonts are these:
+
+  Times_Roman
+  Times-Bold
+  Times-Italic
+  Times-Bold-Italic
+  Helvetica
+  Helvetica_Bold
+  Helvetica-Oblique
+  Helvetica-Bold-Oblique
+  Courier
+  Courier-Bold
+  Courier-Oblique
+  Courier-Bold-Oblique
+  Symbol
+  Zapf-Dingbats
+
+Reportlab supports embedding TrueType fonts, but rst2pdf has no interface for it yet.
+
+Then you have a list of [ stylename, styleproperties ]. For example::
+
+    ["normal" , {
+      "parent": "base",
+      "language": "EN"
+    }],
+
+This means that the style called "normal" inherits style "base". So, each property 
+not defined in the normal style will be taken from the base style. Also, it defines 
+the language to be english, only useful if you enable hyphenation.
+
+I suggest you do not remove any style from the default stylesheet. Add or modify at
+will, though.
+
+If your document requires a style that is not defined in your styleheet, it will 
+print a warning and use bodytext instead.
+

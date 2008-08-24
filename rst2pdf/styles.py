@@ -11,12 +11,21 @@ from reportlab.lib.styles import *
 from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 
+
+import os,sys
+
+def _log(msg):
+  sys.stderr.write('%s\n'%str(msg))
+  sys.stderr.flush()
+
 try:
   from wordaxe.rl.paragraph import Paragraph
   from wordaxe.rl.styles import ParagraphStyle,getSampleStyleSheet
 except:
-  print "No hyphenation support install wordaxe"
-import os
+  _log("No hyphenation support, install wordaxe")
+
+
+
 
 # Set these, and then **maybe** think of setting the stylesheets below
 # if you want finer control
@@ -39,155 +48,44 @@ if os.path.isfile('wrabbit/WHITRABT.TTF'):
     addMapping('WhiteRabbit', 1, 1, 'WhiteRabbit')    #italic and bold
     stdMono = 'WhiteRabbit'
 
-def getStyleSheet():
+def getStyleSheet(fname):
     """Returns a stylesheet object"""
     stylesheet = StyleSheet1()
 
-    stylesheet.add(ParagraphStyle(name='Normal',
-                                  fontName=stdFont,
-                                  bulletFontName=stdFont,
-                                  fontSize=10,
-                                  bulletFontSize=10,
-                                  leading=12,
-                                  language='EN',
-                                  hyphenation=True
-				  ))
+    from simplejson import loads
 
-    stylesheet.add(ParagraphStyle(name='BodyText',
-                                  parent=stylesheet['Normal'],
-                                  spaceBefore=6,
-                                  language='EN',
-                                  hyphenation=True
-				  ))
+    data=loads(open(fname).read())
 
-    stylesheet.add(ParagraphStyle(name='Footer',
-                                  parent=stylesheet['Normal'],
-                                  backColor='#EFEFEF',
-                                  alignment=TA_CENTER)
-                   )
+    styles=data['styles']
+    fonts=data['fontsAlias']
+    while True:
+      for [skey,style] in data['styles']:
+	sdict={}
+	if 'parent' in style:
+	  if not style['parent']:
+	    del style['parent']
+	  else:
+	    style['parent']=stylesheet[style['parent']]
+	for key in style:
 
-    stylesheet.add(ParagraphStyle(name='Header',
-                                  parent=stylesheet['Normal'],
-                                  backColor='#EFEFEF',
-                                  alignment=TA_CENTER)
-                   )
+	  # Handle font aliases
+	  if key in ['fontName','bulletFontName'] and style[key] in fonts:
+	    style[key]=fonts[style[key]]
 
-    stylesheet.add(ParagraphStyle(name='Attribution',
-                                  parent=stylesheet['BodyText'],
-                                  alignment=TA_RIGHT)
-                   )
-
-    stylesheet.add(ParagraphStyle(name='FieldName',
-                                  parent=stylesheet['BodyText'],
-                                  alignment=TA_RIGHT,
-                                  fontName=stdBold,
-                                  bulletFontName=stdBold,
-                                  )
-                   )
-
-    stylesheet.add(ParagraphStyle(name='Rubric',
-                                  parent=stylesheet['BodyText'],
-                                  textColor=colors.darkred,
-                                  alignment=TA_CENTER)
-                   )
-
-    stylesheet.add(ParagraphStyle(name='Italic',
-                                  parent=stylesheet['BodyText'],
-                                  fontName = stdItalic,
-                                  bulletFontName=stdItalic)
-                   )
-
-    stylesheet.add(ParagraphStyle(name='Title',
-                                  parent=stylesheet['Normal'],
-                                  fontName = stdBold,
-                                  bulletFontName=stdBold,
-                                  fontSize=18,
-                                  bulletFontSize=18,
-                                  leading=22,
-                                  alignment=TA_CENTER,
-                                  spaceAfter=6),
-                   alias='title')
-    stylesheet.add(ParagraphStyle(name='Subtitle',
-                                  parent=stylesheet['Title'],
-                                  fontSize=14,
-                                  bulletFontSize=14),
-                   alias='subtitle')
-
-    stylesheet.add(ParagraphStyle(name='Heading1',
-                                  parent=stylesheet['Normal'],
-                                  fontName = stdBold,
-                                  bulletFontName=stdBold,
-                                  fontSize=18,
-                                  bulletFontSize=18,
-                                  leading=22,
-                                  keepWithNext=True,
-                                  spaceAfter=6),
-                   alias='h1')
-
-
-    stylesheet.add(ParagraphStyle(name='Heading2',
-                                  parent=stylesheet['Normal'],
-                                  fontName = stdBold,
-                                  bulletFontName=stdBold,
-                                  fontSize=14,
-                                  bulletFontSize=14,
-                                  leading=18,
-                                  spaceBefore=12,
-                                  keepWithNext=True,
-                                  spaceAfter=6),
-                   alias='h2')
-
-    stylesheet.add(ParagraphStyle(name='Heading3',
-                                  parent=stylesheet['Normal'],
-                                  fontName = stdBoldItalic,
-                                  bulletFontName=stdBoldItalic,
-                                  fontSize=12,
-                                  bulletFontSize=12,
-                                  leading=14,
-                                  spaceBefore=12,
-                                  keepWithNext=True,
-                                  spaceAfter=6),
-                   alias='h3')
-
-    stylesheet.add(ParagraphStyle(name='Heading4',
-                                  parent=stylesheet['Normal'],
-                                  fontName = stdBoldItalic,
-                                  bulletFontName=stdBoldItalic,
-                                  fontSize=12,
-                                  bulletFontSize=12,
-                                  leading=14,
-                                  spaceBefore=12,
-                                  keepWithNext=True,
-                                  spaceAfter=6),
-                   alias='h4')
-
-    stylesheet.add(ParagraphStyle(name='Bullet',
-                                  parent=stylesheet['Normal'],
-                                  firstLineIndent=0,
-                                  spaceBefore=3),
-                   alias='bu')
-
-    stylesheet.add(ParagraphStyle(name='Definition',
-                                  parent=stylesheet['Normal'],
-                                  firstLineIndent=0,
-                                  leftIndent=36,
-                                  bulletIndent=0,
-                                  spaceBefore=6,
-                                  fontName=stdBold,
-                                  bulletFontName=stdBold),
-                   alias='df')
-
-    stylesheet.add(ParagraphStyle(name='Code',
-                                  parent=stylesheet['Normal'],
-                                  fontName=stdMono,
-                                  bulletFontName=stdMono,
-                                  fontSize=8,
-                                  bulletFontSize=8,
-                                  leading=8.8,
-                                  firstLineIndent=0,
-                                  leftIndent=12,
-                                  spaceBefore=4))
-
+	  # Handle color references by name
+	  if key in ['backColor','textColor'] and style[key] in colors.__dict__:
+	    style[key]=colors.__dict__[style[key]]
+	  
+	  # Handle alignment constants
+	  if key == 'alignment':
+	    style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
+	  
+	  # Make keys str instead of unicode (required by reportlab)
+	  sdict[str(key)]=style[key]
+	sdict['name']=skey
+	stylesheet.add(ParagraphStyle(**sdict))
+      else:
+	break
 
     return stylesheet
 
@@ -207,18 +105,18 @@ tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
 # Header row in tables
 
 tstyleHead = ('BACKGROUND',(0,0),(-1,0),colors.yellow)
-tstyles['Normal']=TableStyle(tstyleNorm)
+tstyles['normal']=TableStyle(tstyleNorm)
 
 # Used for field lists
 
-tstyles['Field']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
+tstyles['field']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                               ('ALIGNMENT',(0,0),(1,-1),'RIGHT'),
                             ])
 fieldlist_lwidth=3*cm
 
 # Used for endnotes
 
-tstyles['Endnote']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
+tstyles['endnote']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                                 ('ALIGNMENT',(0,0),(1,-1),'RIGHT'),
                               ])
 # Left column of the endnote. The content of the note takes the rest of
@@ -227,6 +125,6 @@ endnote_lwidth=2*cm
 
 # Used for sidebars
 
-tstyles['Sidebar']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
+tstyles['sidebar']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                              ('BACKGROUND',(0,0),(-1,-1),colors.lightyellow),
                            ])
