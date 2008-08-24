@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import docutils.core,docutils.nodes,sys,re
+import pygments_code_block_directive
 import sys
 import pprint
 from types import StringType
@@ -41,8 +42,12 @@ def styleToFont(style):
   "<font face=helvetica size=14 color=red>". Used for inline 
   nodes (custom interpreted roles)'''
 
-  s=styles[style]
-  return '<font face="%s" size="%d" color="%s">'%(s.fontName,s.fontSize,s.textColor)
+  try:
+    s=styles[style]
+    return '<font face="%s" size="%d" color="%s">'%(s.fontName,s.fontSize,s.textColor)
+  except KeyError:
+    _log('Unknown class %s'%style)
+    return None
 
 try:
   import wordaxe
@@ -229,7 +234,11 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
       node.pdftext=escape(node.pdftext,True)
 
   elif isinstance (node, docutils.nodes.inline):
-    node.pdftext="%s %s</font>"%(styleToFont(node['classes'][0]),gather_pdftext(node,depth))
+    ftag=styleToFont(node['classes'][0])
+    if ftag:
+      node.pdftext="%s%s</font>"%(ftag,gather_pdftext(node,depth))
+    else:
+      node.pdftext=gather_pdftext(node,depth)
 
   else:
     _log("Unkn. node (gen_pdftext): %s"%str(node.__class__))
@@ -250,7 +259,7 @@ def PreformattedFit(text,style):
     f=max((0.375,mw/w))
     style.fontSize*=f
     style.leading*=f
-  return Preformatted(text,style)
+  return XPreformatted(text,style)
 
 
 def gen_elements(node, depth, in_line_block=False, style=None):
