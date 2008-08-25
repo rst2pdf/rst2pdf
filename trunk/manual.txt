@@ -2,7 +2,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.3
+:version: 0.4 (svn)
 
 .. footer::
 
@@ -79,12 +79,12 @@ modify it and pass it with the -s option::
 StyleSheet Syntax
 -----------------
 
-It´s a JSON file with three elements in it.
+It´s a JSON file with several elements in it.
 
-fontsAlias
+Font Alias
 ~~~~~~~~~~
 
-By default, uses some of the standard PDF fonts::
+This is the fontsAlias element. By default, it uses some of the standard PDF fonts::
 
   "fontsAlias" : {
     "stdFont": "Helvetica",
@@ -205,6 +205,35 @@ By default, rst2pdf will search for the fonts in its fonts folder and
 in the current folder. You can make it search another folder by passing
 the --font-folder option, or you can use absolute paths in your stylesheet.
 
+Page Size and Margins
+~~~~~~~~~~~~~~~~~~~~~
+
+In your stylesheet, the pageSetup element controls your page layout.
+
+Here's the default stylesheet's::
+
+  "pageSetup" : {
+    "size": "A4",
+    "width": null,
+    "height": null,
+    "margin-top": "2cm",
+    "margin-bottom": "2cm",
+    "margin-left": "3cm",
+    "margin-right": "1.5cm"
+  },
+
+Size is one of the standard paper sizes, like A4 or LETTER.
+
+Here's a list: A0, A1, A2, A3, A4, A5, A6, B0, B1, B2, B3, B4, B5, B6,
+LETTER, LEGAL, ELEVENSEVENTEEN.
+
+If you want a non-standard size, set size to null and use width and height.
+
+When specifying width, height or margins, you need to use units, like
+in (inches) or cm (centimeters).
+ 
+When both width/height and size are specified, size will be used, and
+width/height ignored.
 
 Syntax Highlighting
 -------------------

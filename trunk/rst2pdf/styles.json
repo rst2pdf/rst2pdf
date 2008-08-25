@@ -1,6 +1,14 @@
 {
   "embeddedFonts" : [ ],
-
+  "pageSetup" : {
+    "size": "A4",
+    "width": null,
+    "height": null,
+    "margin-top": "2cm",
+    "margin-bottom": "2cm",
+    "margin-left": "3cm",
+    "margin-right": "1.5cm"
+  },
   "fontsAlias" : {
     "stdFont": "Helvetica",
     "stdBold": "Helvetica-Bold",
