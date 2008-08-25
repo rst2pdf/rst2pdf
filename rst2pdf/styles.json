@@ -3,7 +3,7 @@
 
   "fontsAlias" : {
     "stdFont": "Helvetica",
-    "stdBold": "Helvetica_Bold",
+    "stdBold": "Helvetica-Bold",
     "stdItalic": "Helvetica-Oblique",
     "stdBoldItalic": "Helvetica-BoldOblique",
     "stdMono": "Courier",
