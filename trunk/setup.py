@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name = "rst2pdf",
-    version = "0.2",
+    version = "0.3",
     packages = ["rst2pdf"],
     package_data = {'rst2pdf': ['*/*.ttf','*.json']},
     install_requires = ['docutils','reportlab>=2.1','Pygments'],
