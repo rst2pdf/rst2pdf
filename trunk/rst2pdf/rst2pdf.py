@@ -750,6 +750,7 @@ def filltable (rows):
   return spans
 
 from optparse import OptionParser
+import reportlab
 
 def main():
   global styles
@@ -757,8 +758,9 @@ def main():
   parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
   parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
   parser.add_option('--print-stylesheet',dest='printssheet',action="store_true", default=False,help='Print the default stylesheet and exit')
+  parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
   (options,args)=parser.parse_args()
-  
+
   if options.printssheet:
     print open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')).read()
     sys.exit(0)
@@ -773,6 +775,10 @@ def main():
     outfile=options.output
   else:
     outfile=infile+'.pdf'
+
+
+  if options.ffolder:
+    TTFSearchPath.append(ffolder)
 
   if options.style:
     styles=getStyleSheet(options.style)

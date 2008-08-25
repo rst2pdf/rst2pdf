@@ -37,16 +37,16 @@ stdBoldItalic = 'Helvetica-BoldOblique'
 stdMono       = 'Courier'
 
 
+TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
 
-# You can embed your own fonts and use them later if you want
+def findFont(fn):
+  if not os.path.isabs(fn):
+    for D in TTFSearchPath:
+      tfn = os.path.join(D,fn)
+      if os.path.isfile(tfn):
+        return str(tfn)
+    return str(fn)
 
-if os.path.isfile('wrabbit/WHITRABT.TTF'):
-    pdfmetrics.registerFont(TTFont('WhiteRabbit', 'wrabbit/WHITRABT.TTF'))
-    addMapping('WhiteRabbit', 0, 0, 'WhiteRabbit')    #normal
-    addMapping('WhiteRabbit', 0, 1, 'WhiteRabbit')    #italic
-    addMapping('WhiteRabbit', 1, 0, 'WhiteRabbit')    #bold
-    addMapping('WhiteRabbit', 1, 1, 'WhiteRabbit')    #italic and bold
-    stdMono = 'WhiteRabbit'
 
 def getStyleSheet(fname):
     """Returns a stylesheet object"""
@@ -58,6 +58,31 @@ def getStyleSheet(fname):
 
     styles=data['styles']
     fonts=data['fontsAlias']
+    embedded=data['embeddedFonts']
+
+    for font in embedded:
+      # Each "font" is a list of four files, which will be used for
+      # regular / bold / italic / bold+italic versions of the font.
+      # If your font doesn't have one of them, just repeat the regular
+      # font.
+
+      # Example, using the Tuffy font from http://tulrich.com/fonts/
+      # "embeddedFonts" : [
+      #                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
+      #                   ],
+
+      # The fonts will be registered with the file name, minus the extension.
+
+      for variant in font:
+        pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
+
+      # And map them all together
+      regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
+      addMapping(regular,0,0,regular)
+      addMapping(regular,0,1,italic)
+      addMapping(regular,1,0,bold)
+      addMapping(regular,1,1,bolditalic)
+
     while True:
       for [skey,style] in data['styles']:
 	sdict={}

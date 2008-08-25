@@ -1,7 +1,9 @@
 {
+  "embeddedFonts" : [ ],
+
   "fontsAlias" : {
     "stdFont": "Helvetica",
-    "stdBold": "Helvetica-Bold",
+    "stdBold": "Helvetica_Bold",
     "stdItalic": "Helvetica-Oblique",
     "stdBoldItalic": "Helvetica-BoldOblique",
     "stdMono": "Courier",
