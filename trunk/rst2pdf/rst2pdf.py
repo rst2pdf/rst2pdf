@@ -491,10 +491,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       _log(node.parent)
       sys.exit(1)
     # FIXME: use different unicode bullets depending on b
-    if b in "*+-":
+    if b and b in "*+-":
       b=u'\u2022'
 
     el[0].bulletText = b
+    for e in el[1:]:
+      e.bulletText=" "
     node.elements=[Table([[el]],style=sty.tstyles["bullet"])]
 
   elif isinstance (node, docutils.nodes.transition):
