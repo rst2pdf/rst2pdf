@@ -48,7 +48,8 @@
     ["bodytext" , {
       "parent": "normal",
       "spaceBefore":6,
-      "hyphenation": false
+      "alignment": "TA_JUSTIFY",
+      "hyphenation": true
     }],
     ["footer" , {
       "parent": "normal",
