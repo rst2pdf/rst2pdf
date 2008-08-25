@@ -1,7 +1,7 @@
 How to use rst2pdf
 ==================
 
-:author: Roberto Alsina
+:author: Roberto Alsina <ralsina@netmanagers.com.ar>
 :version: 0.3
 
 .. footer::
@@ -29,8 +29,6 @@ it was generated using those default settings.
 
 However, if you want to customize the output, or are just curious to see
 what can be done, let´s continue.
-
------------------
 
 Headers and Footers
 -------------------
@@ -77,8 +75,6 @@ modify it and pass it with the -s option::
 
   rst2pdf mydoc.txt -s mystyles.txt
 
-
------------------
 
 StyleSheet Syntax
 -----------------
@@ -229,3 +225,33 @@ the currently supported_.
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
+
+
+Hyphenation
+-----------
+
+If you want good looking documents, you want to enable hyphenation.
+
+To do it, you need to install Wordaxe version 0.2.5 or later from
+http://deco-cow.sf.net.
+
+If after installing it you get the letter "s" or a black square instead of a hyphen,
+that means you need to replace the rl_codecs.py file from reportlab with the one from
+wordaxe.
+
+For more information, see `this issue`_ in rst2pdf's bug tracker.
+
+.. _this issue: http://code.google.com/p/rst2pdf/issues/detail?id=5
+
+Also, you may need to set hyphenation to true in one or more styles, and the language
+for hyphenation.
+
+For english, this seems to be enough::
+
+    ["bodytext" , {
+      "parent": "normal",
+      "spaceBefore":6,
+      "alignment": "TA_JUSTIFY",
+      "hyphenation": true
+    }],
+
