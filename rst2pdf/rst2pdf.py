@@ -37,6 +37,8 @@ except:
 
 import styles as sty
 styles=None
+doc_title=None
+doc_author=None
 
 def styleToFont(style):
   '''Takes a style name, returns a font tag for it, like 
@@ -246,6 +248,8 @@ def PreformattedFit(text,style):
 
 
 def gen_elements(node, depth, in_line_block=False, style=None):
+  global doc_title,doc_author
+
   if style is None:
     style=styles['bodytext']
 
@@ -313,6 +317,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     if isinstance (node.parent, docutils.nodes.document):
       # FIXME maybe make it a coverpage?
       node.elements=[Paragraph(gen_pdftext(node,depth), styles['title'])]
+      doc_title=unicode(gen_pdftext(node,depth)).strip()
     elif isinstance (node.parent, docutils.nodes.topic):
       # FIXME style correctly
       node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
@@ -366,12 +371,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     if isinstance (node.parent,docutils.nodes.authors):
       # Is only one of multiple authors. Return a paragraph
       node.elements=[Paragraph(gather_pdftext(node,depth), style=style)]
-
     else:
       # A single author: works like a field
       fb=gather_pdftext(node,depth)
       node.elements=[Table([[Paragraph("Author:",style=styles['fieldname']),
                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
+      doc_author=fb.strip()
 
   elif isinstance (node, docutils.nodes.authors):
     # Multiple authors. Create a two-column table. Author references on the right.
@@ -683,14 +688,17 @@ class FancyPage(PageTemplate):
     PageTemplate.__init__(self,_id,[textframe])
 
   def beforeDrawPage(self,canv,doc):
-
     # Replace ###Page### with the actual page number
     if self.head:
-      para=Paragraph(self.head.replace('###Page###',str(doc.page)),style=styles['header'])
+      head=self.head.replace('###Page###',str(doc.page))
+      head=head.replace("###Title###",str(doc.title))
+      para=Paragraph(head,style=styles['header'])
       para.wrap(self.tw,self.ph)
       para.drawOn(canv,self.hx,self.hy)
     if self.foot:
-      para=Paragraph(self.foot.replace('###Page###',str(doc.page)),style=styles['footer'])
+      foot=self.foot.replace('###Page###',str(doc.page))
+      foot=foot.replace("###Title###",str(doc.title))
+      para=Paragraph(foot,style=styles['footer'])
       para.wrap(self.tw,self.ph)
       para.drawOn(canv,self.fx,self.fy)
 
@@ -799,7 +807,7 @@ def main():
   FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
                 sty.bm,sty.lm,sty.rm,head,foot)
 
-  pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps)
+  pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=doc_title,author=doc_author)
   pdfdoc.build(elements)
 
 if __name__ == "__main__":

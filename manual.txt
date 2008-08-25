@@ -6,7 +6,7 @@ How to use rst2pdf
 
 .. footer::
 
-   Page ###Page###
+   ###Title### - Page ###Page###
 
 .. contents::
 
