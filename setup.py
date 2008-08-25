@@ -3,7 +3,7 @@ setup(
     name = "rst2pdf",
     version = "0.2",
     packages = ["rst2pdf"],
-    install_requires = ['docutils','reportlab>=2.1'],
+    install_requires = ['docutils','reportlab>=2.1','Pygments'],
     # metadata for upload to PyPI
     author = "Roberto Alsina",
     author_email = "ralsina@netmanagers.com.ar",
