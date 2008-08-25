@@ -4,6 +4,7 @@
 import docutils.core,docutils.nodes,sys,re
 import pygments_code_block_directive
 import sys
+import os
 import pprint
 from types import StringType
 from docutils import __version__, __version_details__, SettingsSpec
@@ -34,7 +35,7 @@ try:
 except:
   _log("No support for hyphenation, install wordaxe")
 
-from styles import *
+import styles as sty
 styles=None
 
 def styleToFont(style):
@@ -60,21 +61,6 @@ except:
   _log("No support for hyphenation, install wordaxe")
 
 
-# This is A4 paper, change it as you wish
-pw,ph=ps=A4
-
-# Margins
-tm=2*cm
-bm=2*cm
-lm=3*cm
-rm=1.5*cm
-
-# tw is the text width.
-# We need it to calculate header-footer height
-# and compress literal blocks.
-tw=pw-lm-rm
-
-page_break_level=0
 
 marks="#=-_*^>%&|"
 lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
@@ -229,7 +215,6 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     if replaceEnt:
       node.pdftext=escape(node.pdftext,True)
     node.pdftext=pre+node.pdftext
-    print node.pdftext
 
   elif isinstance (node, docutils.nodes.inline):
     ftag=styleToFont(node['classes'][0])
@@ -251,7 +236,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
 def PreformattedFit(text,style):
   """Preformatted section that gets horizontally compressed if needed."""
   w=max(map(lambda line:stringWidth(line,style.fontName,style.fontSize),text.splitlines()))
-  mw=tw-style.leftIndent-style.rightIndent
+  mw=sty.tw-style.leftIndent-style.rightIndent
   if w>mw:
     style=copy(style)
     f=max((0.375,mw/w))
@@ -360,7 +345,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     fn=Paragraph(gather_pdftext(node.children[0],depth)+":",style=styles['fieldname'])
     fb=gen_elements(node.children[1],depth)
-    node.elements=[Table([[fn,fb]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])]
+    node.elements=[Table([[fn,fb]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
   elif isinstance (node, docutils.nodes.decoration):
     # This is a tricky one. We need to switch our document's
@@ -386,52 +371,52 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       # A single author: works like a field
       fb=gather_pdftext(node,depth)
       node.elements=[Table([[Paragraph("Author:",style=styles['fieldname']),
-                Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])]
+                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
   elif isinstance (node, docutils.nodes.authors):
     # Multiple authors. Create a two-column table. Author references on the right.
     td=[[Paragraph("Authors:",style=styles['fieldname']),gather_elements(node,depth,style=style)]]
-    node.elements=[Table(td,style=tstyles['field'],colWidths=[fieldlist_lwidth,None])]
+    node.elements=[Table(td,style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
   elif isinstance (node, docutils.nodes.organization):
     fb=gather_pdftext(node,depth)
     t=Table([[Paragraph("Organization:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.contact):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Contact:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.address):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Address:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.version):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Version:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.revision):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Revision:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.status):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Version:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.date):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Date:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.copyright):
     fb=gather_pdftext(node,depth)
     t=Table([[Paragraph("Copyright:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=tstyles['field'],colWidths=[fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
     node.elements=[t]
 
   elif    isinstance (node, docutils.nodes.topic)                \
@@ -440,7 +425,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     node.elements=gather_elements(node,depth,style=style)
 
   elif isinstance (node, docutils.nodes.section):
-    if depth<page_break_level:
+    if depth<sty.page_break_level:
       node.elements=[PageBreak()]+gather_elements(node,depth+1)
     else:
       node.elements=gather_elements(node,depth+1)
@@ -459,7 +444,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     og   = gather_elements(node.children[0],depth,style)
     desc = gather_elements(node.children[1],depth,style)
 
-    node.elements=[Table([[og,desc]],style=tstyles['field'])]
+    node.elements=[Table([[og,desc]],style=sty.tstyles['field'])]
 
 
   elif isinstance (node, docutils.nodes.definition_list_item):
@@ -581,7 +566,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     node.elements=gather_elements(node,depth,style=style)
 
   elif isinstance (node, docutils.nodes.sidebar):
-    node.elements=[Table([[ gather_elements(node,depth,style=style)]],style=tstyles['sidebar'])]
+    node.elements=[Table([[ gather_elements(node,depth,style=style)]],style=sty.tstyles['sidebar'])]
 
   elif isinstance (node, docutils.nodes.rubric):
     node.elements=[Paragraph(gather_pdftext(node,depth),styles['rubric'])]
@@ -604,7 +589,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       if not r:
         continue
       t.append(r)
-    node.elements=[Table(t,style=tstyles['normal'])]
+    node.elements=[Table(t,style=sty.tstyles['normal'])]
 
   elif isinstance (node, docutils.nodes.footnote):
     # It seems a footnote contains a label and a series of elements
@@ -696,8 +681,6 @@ class FancyPage(PageTemplate):
   def beforeDrawPage(self,canv,doc):
 
     # Replace ###Page### with the actual page number
-    
-
     if self.head:
       para=Paragraph(self.head.replace('###Page###',str(doc.page)),style=styles['header'])
       para.wrap(self.tw,self.ph)
@@ -787,10 +770,9 @@ def main():
     TTFSearchPath.append(ffolder)
 
   if options.style:
-    styles=getStyleSheet(options.style)
+    styles=sty.getStyleSheet(options.style)
   else:
-    styles=getStyleSheet(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json'))
-
+    styles=sty.getStyleSheet(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json'))
 
   input=open(infile).read()
   import docutils.core
@@ -804,15 +786,16 @@ def main():
       elements.append(Spacer(1,2*cm))
       elements.append(Separation())
       for n in decoration['endnotes']:
-        elements.append(Table([[n[0],n[1]]],style=tstyles['endnote'],colWidths=[endnote_lwidth,None]))
+        elements.append(Table([[n[0],n[1]]],style=sty.tstyles['endnote'],colWidths=[endnote_lwidth,None]))
 
   head=decoration['header']
   foot=decoration['footer']
 
   # So, now, create the FancyPage with the right sizes and elements
-  FP=FancyPage("fancypage",pw,ph,tm,bm,lm,rm,head,foot)
+  FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
+                sty.bm,sty.lm,sty.rm,head,foot)
 
-  pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=ps)
+  pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps)
   pdfdoc.build(elements)
 
 if __name__ == "__main__":
