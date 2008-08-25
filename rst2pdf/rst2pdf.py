@@ -206,7 +206,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
 
   elif isinstance (node, docutils.nodes.footnote_reference):
     # Fixme link to the right place
-    node.pdftext=u'<super><font color="blue">%s</font></super>'%node.astext()
+    anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+    node.pdftext=u'%s<super><link href="%s">%s</link></super>'%(anchors,'#FOOTNOTE-'+node.astext(),node.astext())
   elif isinstance (node, docutils.nodes.citation_reference):
     # Fixme link to the right place
     node.pdftext=u'<font color="blue">[%s]</font>'%node.astext()
@@ -603,7 +604,17 @@ def gen_elements(node, depth, in_line_block=False, style=None):
   elif isinstance (node, docutils.nodes.footnote):
     # It seems a footnote contains a label and a series of elements
 
-    label=Paragraph(gather_pdftext(node.children[0],depth),style)
+    ltext=gather_pdftext(node.children[0],depth)
+    if node ['backrefs']:
+      backrefs=[]
+      i=1
+      for r in node['backrefs']:
+        backrefs.append('<link href="#%s">%d</link>'%(r,i))
+        i+=1
+      backrefs='(%s)'%','.join(backrefs)
+    else:
+      backrefs=''
+    label=Paragraph('<a name="FOOTNOTE-%s"/>%s'%(ltext,ltext+backrefs),style)
     contents=gather_elements(node,depth,style)[1:]
     decoration['endnotes'].append([label,contents])
     node.elements=[]
@@ -798,7 +809,8 @@ def main():
       elements.append(Spacer(1,2*cm))
       elements.append(Separation())
       for n in decoration['endnotes']:
-        elements.append(Table([[n[0],n[1]]],style=sty.tstyles['endnote'],colWidths=[sty.endnote_lwidth,None]))
+        elements.append(Table([[n[0],n[1]]],
+            style=sty.tstyles['endnote'],colWidths=[sty.endnote_lwidth,None]))
 
   head=decoration['header']
   foot=decoration['footer']
