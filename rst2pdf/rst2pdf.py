@@ -99,7 +99,6 @@ def gather_pdftext (node, depth, in_line_block=False,replaceEnt=True):
   return ''.join([gen_pdftext(n,depth,in_line_block,replaceEnt) for n in node.children ])
 
 def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
-
   pre=""
   post=""
 
@@ -227,9 +226,12 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
   # FIXME nodes we are ignoring for the moment
   elif isinstance (node, docutils.nodes.target):
     # FIXME: make it work as a target for links
+    pre=u'<a name="%s"/>'%node['ids'][0]
     node.pdftext=gather_pdftext(node,depth)
     if replaceEnt:
       node.pdftext=escape(node.pdftext,True)
+    node.pdftext=pre+node.pdftext
+    print node.pdftext
 
   elif isinstance (node, docutils.nodes.inline):
     ftag=styleToFont(node['classes'][0])
@@ -621,9 +623,11 @@ def gen_elements(node, depth, in_line_block=False, style=None):
   elif isinstance (node, docutils.nodes.entry):
     node.elements=gather_elements(node,depth,style)
 
+  elif isinstance (node, docutils.nodes.target):
+    node.elements=gather_elements(node,depth,style)
+
   # FIXME nodes we are ignoring for the moment
-  elif    isinstance (node, docutils.nodes.target)              \
-       or isinstance (node, docutils.nodes.footnote)   \
+  elif    isinstance (node, docutils.nodes.footnote)   \
        or isinstance (node, docutils.nodes.citation)   \
        or isinstance (node, docutils.nodes.reference)   \
        or isinstance (node, docutils.nodes.raw)   \
