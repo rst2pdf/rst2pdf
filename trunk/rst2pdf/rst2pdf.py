@@ -223,9 +223,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     # Fixme link to the right place
     node.pdftext=u'<font color="blue">[%s]</font>'%node.astext()
 
-  # FIXME nodes we are ignoring for the moment
   elif isinstance (node, docutils.nodes.target):
-    # FIXME: make it work as a target for links
     pre=u'<a name="%s"/>'%node['ids'][0]
     node.pdftext=gather_pdftext(node,depth)
     if replaceEnt:
