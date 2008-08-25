@@ -135,8 +135,6 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     pre='<font face="%s">'%styles['code'].fontName
     post="</font>"
     node.pdftext=gather_pdftext(node,depth)
-    if replaceEnt:
-      node.pdftext=escape(node.pdftext,True)
     node.pdftext=pre+node.pdftext+post
 
   elif isinstance (node, docutils.nodes.superscript):
@@ -712,7 +710,6 @@ def filltable (rows):
   # If there is a multicol cell, we need to insert Continuation Cells
   # to make all rows the same length
 
-
   for y in range(0,len( rows)):
     for x in range (0,len(rows[y])):
       cell=rows[y][x]
@@ -730,6 +727,13 @@ def filltable (rows):
       if cell.get("morerows"):
         for i in range(0,cell.get("morerows")):
           rows[y+i+1].insert(x,"")
+
+
+  # If a row is shorter, add empty cells at the right end
+  maxw=max([len(r) for r in rows])
+  for r in rows:
+    while len(r) < maxw:
+      r.append("")
 
   # Create spans list for reportlab's table style
   spans=[]
