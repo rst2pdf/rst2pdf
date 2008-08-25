@@ -301,10 +301,10 @@ def gen_elements(node, depth, in_line_block=False, style=None):
           r.append(gather_elements(cell,depth))
       data.append(r)
 
-    st=spans+tstyleNorm
+    st=spans+sty.tstyleNorm
 
     if hasHead:
-      st+=[tstyleHead]
+      st+=[sty.tstyleHead]
 
     node.elements=[Table(data,style=TableStyle(st))]
 
@@ -386,12 +386,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
   elif isinstance (node, docutils.nodes.contact):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Contact:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.address):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Address:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.version):
     fb=gather_pdftext(node,depth)
@@ -401,22 +401,22 @@ def gen_elements(node, depth, in_line_block=False, style=None):
   elif isinstance (node, docutils.nodes.revision):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Revision:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.status):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Version:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.date):
     fb=gather_pdftext(node,depth)
     t=Table([[ Paragraph("Date:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
   elif isinstance (node, docutils.nodes.copyright):
     fb=gather_pdftext(node,depth)
     t=Table([[Paragraph("Copyright:",style=styles['fieldname']),
-              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[style.fieldlist_lwidth,None])
+              Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
     node.elements=[t]
 
   elif    isinstance (node, docutils.nodes.topic)                \
@@ -437,7 +437,6 @@ def gen_elements(node, depth, in_line_block=False, style=None):
        or isinstance (node, docutils.nodes.field_list)           \
        or isinstance (node, docutils.nodes.definition)           \
        :
-
     node.elements=gather_elements(node,depth,style=style)
 
   elif isinstance (node, docutils.nodes.option_list_item):
@@ -468,7 +467,6 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     el=gather_elements(node,depth,style=style)
     b=""
-
     if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
       # FIXME: use correct bullet symbols, check inter-paragraph spacing
       b=str(node.parent.get('bullet'))
@@ -492,8 +490,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       _log("Unknown kind of list_item")
       _log(node.parent)
       sys.exit(1)
+    # FIXME: use different unicode bullets depending on b
+    if b in "*+-":
+      b=u'\u2022'
+
     el[0].bulletText = b
-    node.elements=el
+    node.elements=[Table([[el]],style=sty.tstyles["bullet"])]
 
   elif isinstance (node, docutils.nodes.transition):
     node.elements=[Separation()]
@@ -786,7 +788,7 @@ def main():
       elements.append(Spacer(1,2*cm))
       elements.append(Separation())
       for n in decoration['endnotes']:
-        elements.append(Table([[n[0],n[1]]],style=sty.tstyles['endnote'],colWidths=[endnote_lwidth,None]))
+        elements.append(Table([[n[0],n[1]]],style=sty.tstyles['endnote'],colWidths=[sty.endnote_lwidth,None]))
 
   head=decoration['header']
   foot=decoration['footer']
