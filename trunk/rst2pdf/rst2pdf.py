@@ -207,10 +207,11 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
   elif isinstance (node, docutils.nodes.footnote_reference):
     # Fixme link to the right place
     anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
-    node.pdftext=u'%s<super><link href="%s">%s</link></super>'%(anchors,'#FOOTNOTE-'+node.astext(),node.astext())
+    node.pdftext=u'%s<super><a href="%s" color="blue">%s</a></super>'%(anchors,'#'+node.astext(),node.astext())
   elif isinstance (node, docutils.nodes.citation_reference):
     # Fixme link to the right place
-    node.pdftext=u'<font color="blue">[%s]</font>'%node.astext()
+    anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+    node.pdftext=u'%s[<a href="%s" color="blue">%s</a>]'%(anchors,'#'+node.astext(),node.astext())
 
   elif isinstance (node, docutils.nodes.target):
     pre=u'<a name="%s"/>'%node['ids'][0]
@@ -601,7 +602,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       t.append(r)
     node.elements=[Table(t,style=sty.tstyles['normal'])]
 
-  elif isinstance (node, docutils.nodes.footnote):
+  elif isinstance (node, docutils.nodes.footnote) or \
+       isinstance (node, docutils.nodes.citation):
     # It seems a footnote contains a label and a series of elements
 
     ltext=gather_pdftext(node.children[0],depth)
@@ -609,12 +611,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
       backrefs=[]
       i=1
       for r in node['backrefs']:
-        backrefs.append('<link href="#%s">%d</link>'%(r,i))
+        backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
         i+=1
       backrefs='(%s)'%','.join(backrefs)
     else:
       backrefs=''
-    label=Paragraph('<a name="FOOTNOTE-%s"/>%s'%(ltext,ltext+backrefs),style)
+    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),style)
     contents=gather_elements(node,depth,style)[1:]
     decoration['endnotes'].append([label,contents])
     node.elements=[]
@@ -630,8 +632,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     node.elements=gather_elements(node,depth,style)
 
   # FIXME nodes we are ignoring for the moment
-  elif    isinstance (node, docutils.nodes.footnote)   \
-       or isinstance (node, docutils.nodes.citation)   \
+  elif    isinstance (node, docutils.nodes.citation)   \
        or isinstance (node, docutils.nodes.reference)   \
        or isinstance (node, docutils.nodes.raw)   \
     :
