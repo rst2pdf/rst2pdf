@@ -17,7 +17,8 @@
     "stdMono": "Courier",
     "stdMonoItalic": "Courier-Oblique",
     "stdMonoBold": "Courier-Bold",
-    "stdMonoBoldItalic": "Courier-BoldOblique"
+    "stdMonoBoldItalic": "Courier-BoldOblique",
+    "stdSerif": "Times-Roman"
   },
   "styles" : [
     [ "base" , {
@@ -31,7 +32,7 @@
       "alignment":"TA_LEFT",
       "spaceBefore":0,
       "spaceAfter":0,
-      "bulletFontName":"stdFont",
+      "bulletFontName":"stdSerif",
       "bulletFontSize":8,
       "bulletIndent":0,
       "textColor": "black",
@@ -144,11 +145,6 @@
       "keepWithNext": true,
       "spaceBefore": 12,
       "spaceAfter": 6
-    }],
-    ["bullet" , {
-      "parent": "normal",
-      "firstLineIndent": 0,
-      "spaceBefore": 3
     }],
     ["definition" , {
       "parent": "normal",

@@ -204,3 +204,7 @@ endnote_lwidth=2*units.cm
 tstyles['sidebar']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                              ('BACKGROUND',(0,0),(-1,-1),colors.lightyellow),
                            ])
+
+
+tstyles['bullet']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
+                             ])
