@@ -94,9 +94,13 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
   pre=""
   post=""
 
-#  print node.__class__
-#  print node
-#  print "----"
+  if verbose:
+    try:
+      print node.__class__
+      print node
+      print "----"
+    except: # unicode problems
+      pass
 
   if isinstance (node, docutils.nodes.paragraph) \
      or isinstance (node, docutils.nodes.title) \
@@ -130,6 +134,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     pre='<font face="%s">'%styles['code'].fontName
     post="</font>"
     node.pdftext=gather_pdftext(node,depth)
+    #if replaceEnt:
+    #  node.pdftext=escape(node.pdftext,True)
     node.pdftext=pre+node.pdftext+post
 
   elif isinstance (node, docutils.nodes.superscript):
@@ -149,8 +155,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     node.pdftext=pre+node.pdftext+post
 
   elif isinstance (node, docutils.nodes.title_reference):
-    # FIXME needs to work as a link
-    pre='<font color="blue">'
+    pre=styleToFont("title_reference")
     post="</font>"
     node.pdftext=gather_pdftext(node,depth)
     if replaceEnt:
@@ -252,7 +257,7 @@ def PreformattedFit(text,style):
   if w>mw:
     style=copy(style)
     f=max((0.375,mw/w))
-    style.fontSize*=f
+    #style.fontSize*=f
     #style.leading*=f
   return XPreformatted(text,style)
 
@@ -551,7 +556,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
        or isinstance (node, docutils.nodes.doctest_block) \
        or isinstance (node, docutils.nodes.option) \
     :
-    node.elements=[PreformattedFit(gather_pdftext(node,depth,replaceEnt=False),styles['code'])]
+    node.elements=[PreformattedFit(gather_pdftext(node,depth,replaceEnt=True),styles['code'])]
 
   elif    isinstance (node, docutils.nodes.attention)    \
        or isinstance (node, docutils.nodes.caution)      \
@@ -774,15 +779,20 @@ def filltable (rows):
 
 from optparse import OptionParser
 import reportlab
+verbose=False
 
 def main():
-  global styles
+  global styles,verbose
   parser = OptionParser()
   parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
   parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
-  parser.add_option('--print-stylesheet',dest='printssheet',action="store_true", default=False,help='Print the default stylesheet and exit')
+  parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
   parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
+  parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
   (options,args)=parser.parse_args()
+
+  if options.verbose:
+    verbose=True
 
   if options.printssheet:
     print open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')).read()
