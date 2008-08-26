@@ -3,6 +3,12 @@ import unittest
 
 class InstallTests(unittest.TestCase):
 
+    def setUp(self):
+        pass
+        
+    def tearDown(self):
+        pass
+        
     def testexample(self):
         pass
         
