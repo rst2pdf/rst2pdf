@@ -44,6 +44,17 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
 
 :###Page###: Replaced by the current page number.
 
+Footnotes
+---------
+
+Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
+There is a real complicated technical reason for this: I can't figure out a
+clean way to do it right.
+
+I could go the HTML path and just render them where you put them, but then they
+wouldn't be footnotes either, would they? They would be
+"in-the-middle-of-text-notes" or just plain notes.
+
 Styles
 ------
 
@@ -230,7 +241,7 @@ LETTER, LEGAL, ELEVENSEVENTEEN.
 If you want a non-standard size, set size to null and use width and height.
 
 When specifying width, height or margins, you need to use units, like
-in (inches) or cm (centimeters).
+inch (inches) or cm (centimeters).
  
 When both width/height and size are specified, size will be used, and
 width/height ignored.
