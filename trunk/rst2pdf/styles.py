@@ -135,8 +135,8 @@ def getStyleSheet(fname):
       addMapping(regular,1,1,bolditalic)
 
     while True:
-      for [skey,style] in data['styles']:
-    sdict={}
+    for [skey,style] in data['styles']:
+        sdict={}
     if 'parent' in style:
       if not style['parent']:
         del style['parent']
