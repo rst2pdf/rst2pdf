@@ -73,6 +73,5 @@ setup(
     url = "http://rst2pdf.googlecode.com",
     download_url = "http://code.google.com/p/rst2pdf/downloads/list",
     entry_points = {'console_scripts': ['rst2pdf = rst2pdf.rst2pdf:main']},
-#    test_suite = 'rst2pdf.tests.',
-
+    test_suite = 'rst2pdf.tests.test_rst2pdf.test_suite',
 )
