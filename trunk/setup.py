@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 setup(
     name = "rst2pdf",
-    version = "0.3",
+    version = "0.4",
     packages = ["rst2pdf"],
     package_data = {'rst2pdf': ['*/*.ttf','*.json']},
-    install_requires = ['docutils','reportlab>=2.1','Pygments'],
+    install_requires = ['docutils','reportlab>=2.1','Pygments','simplejson'],
     # metadata for upload to PyPI
     author = "Roberto Alsina",
     author_email = "ralsina@netmanagers.com.ar",
