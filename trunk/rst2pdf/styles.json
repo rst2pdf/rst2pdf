@@ -42,7 +42,7 @@
       "borderPadding": 0,
       "borderColor": null,
       "borderRadius": null,
-      "allowWidows": 1,
+      "allowWidows": false,
       "allowOrphans": false,
       "hyphenation": false
     }] ,

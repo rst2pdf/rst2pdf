@@ -94,9 +94,9 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
   pre=""
   post=""
 
-  print node.__class__
-  print node
-  print "----"
+#  print node.__class__
+#  print node
+#  print "----"
 
   if isinstance (node, docutils.nodes.paragraph) \
      or isinstance (node, docutils.nodes.title) \
@@ -210,7 +210,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     node.pdftext=pre+node.pdftext+post
 
   elif isinstance (node, docutils.nodes.image):
-    node.pdftext='image: <img src="%s"/> :image'%node.get('uri')
+    node.pdftext='<img src="%s" />'%node.get('uri')
 
   elif isinstance (node, docutils.nodes.footnote_reference):
     # Fixme link to the right place
