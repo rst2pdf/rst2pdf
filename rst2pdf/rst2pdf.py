@@ -25,6 +25,10 @@ from reportlab.lib.pagesizes import *
 from copy import copy
 from cgi import escape
 
+#def escape (x,y):
+#  "Dummy escape function to test for excessive escaping"
+#  return x
+
 def _log(msg):
   sys.stderr.write('%s\n'%str(msg))
   sys.stderr.flush()
@@ -89,6 +93,10 @@ def gather_pdftext (node, depth, in_line_block=False,replaceEnt=True):
 def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
   pre=""
   post=""
+
+  print node.__class__
+  print node
+  print "----"
 
   if isinstance (node, docutils.nodes.paragraph) \
      or isinstance (node, docutils.nodes.title) \
@@ -202,7 +210,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     node.pdftext=pre+node.pdftext+post
 
   elif isinstance (node, docutils.nodes.image):
-    node.pdftext='<img src="%s" />'%node.get('uri')
+    node.pdftext='image: <img src="%s"/> :image'%node.get('uri')
 
   elif isinstance (node, docutils.nodes.footnote_reference):
     # Fixme link to the right place
@@ -559,12 +567,14 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     node.elements=[Paragraph(node.tagname.title(),style=styles['heading3'])]+gather_elements(node,depth,style=style)
 
   elif isinstance (node, docutils.nodes.image):
-    # FIXME handle all the other attributes
+    # FIXME: handle all the other attributes
     i=Image(filename=str(node.get("uri")))
     if node.get('align'):
       i.hAlign=node.get('align').upper()
-
+    else:
+      i.hAlign='CENTER'
     node.elements=[i]
+
   elif isinstance (node, docutils.nodes.figure):
     # The sub-elements are the figure and the caption, and't ugly if
     # they separate
