@@ -136,32 +136,32 @@ def getStyleSheet(fname):
 
     while True:
       for [skey,style] in data['styles']:
-	sdict={}
-	if 'parent' in style:
-	  if not style['parent']:
-	    del style['parent']
-	  else:
-	    style['parent']=stylesheet[style['parent']]
-	for key in style:
-
-	  # Handle font aliases
-	  if key in ['fontName','bulletFontName'] and style[key] in fonts:
-	    style[key]=fonts[style[key]]
-
-	  # Handle color references by name
-	  if key in ['backColor','textColor'] and style[key] in colors.__dict__:
-	    style[key]=colors.__dict__[style[key]]
-	  
-	  # Handle alignment constants
-	  if key == 'alignment':
-	    style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
-	  
-	  # Make keys str instead of unicode (required by reportlab)
-	  sdict[str(key)]=style[key]
-	sdict['name']=skey
-	stylesheet.add(ParagraphStyle(**sdict))
+    sdict={}
+    if 'parent' in style:
+      if not style['parent']:
+        del style['parent']
       else:
-	break
+        style['parent']=stylesheet[style['parent']]
+    for key in style:
+
+      # Handle font aliases
+      if key in ['fontName','bulletFontName'] and style[key] in fonts:
+        style[key]=fonts[style[key]]
+
+      # Handle color references by name
+      if key in ['backColor','textColor'] and style[key] in colors.__dict__:
+        style[key]=colors.__dict__[style[key]]
+      
+      # Handle alignment constants
+      if key == 'alignment':
+        style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
+      
+      # Make keys str instead of unicode (required by reportlab)
+      sdict[str(key)]=style[key]
+    sdict['name']=skey
+    stylesheet.add(ParagraphStyle(**sdict))
+      else:
+    break
 
     return stylesheet
 
