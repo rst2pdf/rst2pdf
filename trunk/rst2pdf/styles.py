@@ -40,10 +40,10 @@ TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')
 
 def findFont(fn):
     if not os.path.isabs(fn):
-	for D in TTFSearchPath:
-	    tfn = os.path.join(D,fn)
-	    if os.path.isfile(tfn):
-		return str(tfn)
+        for D in TTFSearchPath:
+            tfn = os.path.join(D,fn)
+            if os.path.isfile(tfn):
+                return str(tfn)
     return str(fn)
 
 # Page width, height
@@ -69,7 +69,7 @@ def adjustUnits(v):
     '''Takes something like 2cm and returns 2*cm'''
     _,n,u=re.split('([0-9\.]*)',v)
     if u in units.__dict__:
-	return float(n)*units.__dict__[u]
+        return float(n)*units.__dict__[u]
     else:
       _log('Unknown unit %s'%u)
 
@@ -88,16 +88,16 @@ def getStyleSheet(fname):
     fonts=data['fontsAlias']
     page=data['pageSetup']
     if page['size']: # A standard size
-	if page['size'] in pagesizes.__dict__:
-	    ps=pagesizes.__dict__[page['size']]
-	else:
-	    _log('Unknown page size %s'%page['size'])
-	    sys.exit(1)
+        if page['size'] in pagesizes.__dict__:
+            ps=pagesizes.__dict__[page['size']]
+        else:
+            _log('Unknown page size %s'%page['size'])
+            sys.exit(1)
     else: #A custom size
-	# The sizes are expressed in some unit.
-	# For example, 2cm is 2 centimeters, and we need
-	# to do 2*cm (cm comes from reportlab.lib.units)
-	ps=[adjustUnits(page['width']),adjustUnits(page['height'])]
+        # The sizes are expressed in some unit.
+        # For example, 2cm is 2 centimeters, and we need
+        # to do 2*cm (cm comes from reportlab.lib.units)
+        ps=[adjustUnits(page['width']),adjustUnits(page['height'])]
     pw,ph=ps
     lm=adjustUnits(page['margin-left'])
     rm=adjustUnits(page['margin-right'])
@@ -112,55 +112,55 @@ def getStyleSheet(fname):
     embedded=data['embeddedFonts']
 
     for font in embedded:
-	# Each "font" is a list of four files, which will be used for
-	# regular / bold / italic / bold+italic versions of the font.
-	# If your font doesn't have one of them, just repeat the regular
-	# font.
+        # Each "font" is a list of four files, which will be used for
+        # regular / bold / italic / bold+italic versions of the font.
+        # If your font doesn't have one of them, just repeat the regular
+        # font.
 
-	# Example, using the Tuffy font from http://tulrich.com/fonts/
-	# "embeddedFonts" : [
-	#                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
-	#                   ],
+        # Example, using the Tuffy font from http://tulrich.com/fonts/
+        # "embeddedFonts" : [
+        #                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
+        #                   ],
 
-	# The fonts will be registered with the file name, minus the extension.
+        # The fonts will be registered with the file name, minus the extension.
 
-	for variant in font:
-	    pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
+        for variant in font:
+            pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
 
-	    # And map them all together
-	    regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
-	    addMapping(regular,0,0,regular)
-	    addMapping(regular,0,1,italic)
-	    addMapping(regular,1,0,bold)
-	    addMapping(regular,1,1,bolditalic)
+            # And map them all together
+            regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
+            addMapping(regular,0,0,regular)
+            addMapping(regular,0,1,italic)
+            addMapping(regular,1,0,bold)
+            addMapping(regular,1,1,bolditalic)
 
     while True:
-	for [skey,style] in data['styles']:
-	    sdict={}
-	    if 'parent' in style:
-		if not style['parent']:
-		    del style['parent']
-		else:
-		    style['parent']=stylesheet[style['parent']]
-	    for key in style:
-		# Handle font aliases
-		if key in ['fontName','bulletFontName'] and style[key] in fonts:
-		    style[key]=fonts[style[key]]
+        for [skey,style] in data['styles']:
+            sdict={}
+            if 'parent' in style:
+                if not style['parent']:
+                    del style['parent']
+                else:
+                    style['parent']=stylesheet[style['parent']]
+            for key in style:
+                # Handle font aliases
+                if key in ['fontName','bulletFontName'] and style[key] in fonts:
+                    style[key]=fonts[style[key]]
 
-		# Handle color references by name
-		if key in ['backColor','textColor'] and style[key] in colors.__dict__:
-		    style[key]=colors.__dict__[style[key]]
+                # Handle color references by name
+                if key in ['backColor','textColor'] and style[key] in colors.__dict__:
+                    style[key]=colors.__dict__[style[key]]
 
-		# Handle alignment constants
-		if key == 'alignment':
-		    style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
+                # Handle alignment constants
+                if key == 'alignment':
+                    style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
 
-		# Make keys str instead of unicode (required by reportlab)
-		sdict[str(key)]=style[key]
-		sdict['name']=skey
-	    stylesheet.add(ParagraphStyle(**sdict))
-	else:
-	    break
+                # Make keys str instead of unicode (required by reportlab)
+                sdict[str(key)]=style[key]
+                sdict['name']=skey
+            stylesheet.add(ParagraphStyle(**sdict))
+        else:
+            break
     return stylesheet
 
 
@@ -172,9 +172,9 @@ tstyles={}
 # Used for regular tables
 
 tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
-                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
-                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
-                             ]
+               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+             ]
 
 # Header row in tables
 
