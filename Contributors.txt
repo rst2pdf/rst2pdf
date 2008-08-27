@@ -3,9 +3,9 @@ Main developpers
 ================
 
 * Roberto Alsina <ralsina at netmanagers dot com dot ar>
-* 
 
 with contributions of
 ---------------------
 
 * Nicolas Laurance <nlaurance at zindep dot com>
+* Christoph Zwerschke 
