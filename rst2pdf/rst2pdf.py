@@ -292,7 +292,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     #######################
 
     elif isinstance (node, docutils.nodes.table):
-                    node.elements=gather_elements(node,depth)
+	# FIXME: make spacing configurable
+	node.elements=[Spacer(0,6)]+gather_elements(node,depth)
 
     elif isinstance (node, docutils.nodes.tgroup):
         rows=[]
