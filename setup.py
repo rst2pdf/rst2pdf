@@ -39,7 +39,7 @@ tests_require = install_requires
     
 setup(
     name = "rst2pdf",
-    version = "0.4",
+    version = "0.5",
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data = {'rst2pdf': ['*/*.ttf','*.json']},
     namespace_packages=['rst2pdf'],
