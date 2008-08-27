@@ -11,11 +11,6 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('LICENCE.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
     read('README.txt')
     + '\n' +
     'Contributors\n' 
@@ -77,6 +72,6 @@ setup(
     keywords = "restructured convert rst pdf docutils pygments reportlab",
     url = "http://rst2pdf.googlecode.com",
     download_url = "http://code.google.com/p/rst2pdf/downloads/list",
-    entry_points = {'console_scripts': ['rst2pdf = rst2pdf.rst2pdf:main']},
+    entry_points = {'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
     test_suite = 'rst2pdf.tests.test_rst2pdf.test_suite',
 )

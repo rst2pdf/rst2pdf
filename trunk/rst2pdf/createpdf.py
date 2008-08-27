@@ -830,6 +830,7 @@ def createPdf(text,output,styleSheet=None):
        or a file object), the data is saved there.
 
        styleSheet is the path to the style file.'''
+
     global styles,verbose,vverbose
 
     styleSheet=styleSheet or defSsheet
