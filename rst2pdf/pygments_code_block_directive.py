@@ -127,9 +127,34 @@ def code_block_directive(name, arguments, options, content, lineno,
     if 'include' in options:
         try:
             content=open(options['include']).read()
-        except IOError: # no file or problem finding it
+        except IOError, UnicodeError: # no file or problem finding it or reading it
             content=''
             state_machine.reporter.warning('Error reading file: "%s"'%options['include'],line=lineno)
+        if content:
+            # here we define the start-at options so that it is included in extraction
+            # this is different than the start-after directive of docutils
+            # (docutils/parsers/rst/directives/misc.py)
+            # which excludes the beginning
+            # the reason is we want to be able to define a start-at like
+            # def mymethod(self)
+            # and have such a definition included
+            after_text = options.get('start-at', None)
+            if after_text:
+                # skip content in include_text before *and incl.* a matching text
+                after_index = content.find(after_text)
+                if after_index < 0:
+                    raise state_machine.reporter.severe('Problem with "start-at" option of "%s" '
+                                      'directive:\nText not found.' % options['start-at'])
+                content = content[after_index:]
+            # same changes here for the same reason
+            before_text = options.get('end-at', None)
+            if before_text:
+                # skip content in include_text after *and incl.* a matching text
+                before_index = content.find(before_text)
+                if before_index < 0:
+                    raise state_machine.reporter.severe('Problem with "end-at" option of "%s" '
+                                      'directive:\nText not found.' % options['end-at'])
+                content = content[:before_index + len(before_text)]
     else:
         content=u'\n'.join(content)
 
@@ -154,7 +179,10 @@ def code_block_directive(name, arguments, options, content, lineno,
 
 code_block_directive.arguments = (1, 0, 1)
 code_block_directive.content = 1
-code_block_directive.options = { 'include' : directives.unchanged }
+code_block_directive.options = { 'include' : directives.unchanged,
+                                 'start-at' : directives.unchanged_required,
+                                 'end-at' : directives.unchanged_required,
+                                 }
 directives.register_directive('code-block', code_block_directive)
 
 # .. _doctutils: http://docutils.sf.net/
