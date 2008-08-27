@@ -649,6 +649,9 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     elif isinstance (node, docutils.nodes.target):
         node.elements=gather_elements(node,depth,style)
 
+    elif isinstance (node, docutils.nodes.reference):
+        node.elements=gather_elements(node,depth,style)
+	
     # FIXME nodes we are ignoring for the moment
     elif isinstance (node, docutils.nodes.citation) \
          or isinstance (node, docutils.nodes.raw):
