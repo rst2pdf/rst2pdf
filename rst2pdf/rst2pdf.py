@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__docformat__ = 'reStructuredText'
+
 import docutils.core,docutils.nodes,sys,re
 import pygments_code_block_directive
 import sys
@@ -819,53 +821,24 @@ import reportlab
 verbose=False
 vverbose=False
 
-def main():
+defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
+
+def createPdf(text,output,styleSheet=None):
+    '''Create a PDF from text (ReST input), and save it in outfile.
+       If outfile is a string, it's a filename.
+       If it's something with a write method, (like a StringIO,
+       or a file object), the data is saved there.
+
+       styleSheet is the path to the style file.'''
     global styles,verbose,vverbose
-    parser = OptionParser()
-    parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
-    parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
-    parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
-    parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
-    parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
-    parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
-    (options,args)=parser.parse_args()
 
-    if options.verbose:
-        verbose=True
-    if options.vverbose:
-        verbose=True
-        vverbose=True
+    styleSheet=styleSheet or defSsheet
+    styles=sty.getStyleSheet(styleSheet)
 
-    if options.printssheet:
-        print open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')).read()
-        sys.exit(0)
-
-    if len(args) <> 1:
-        _log('Usage: %s file.txt [ -o file.pdf ]'%sys.argv[0])
-        sys.exit(1)
-    
-    
-    infile=args[0]
-    if options.output:
-        outfile=options.output
-    else:
-        outfile=infile+'.pdf'
-
-
-    if options.ffolder:
-        TTFSearchPath.append(ffolder)
-
-    if options.style:
-        styles=sty.getStyleSheet(options.style)
-    else:
-        styles=sty.getStyleSheet(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json'))
-
-    input=open(infile).read()
     import docutils.core
-    doc=docutils.core.publish_doctree(input)
+    doc=docutils.core.publish_doctree(text)
     elements=gen_elements(doc,0)
-
-
+    
     # Put the endnotes at the end ;-)
     endnotes = decoration['endnotes']
     if endnotes:
@@ -884,8 +857,53 @@ def main():
     FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
                                 sty.bm,sty.lm,sty.rm,head,foot)
 
-    pdfdoc = BaseDocTemplate(outfile,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=doc_title,author=doc_author)
+    pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=doc_title,author=doc_author)
     pdfdoc.build(elements)
+
+
+def main():
+    '''Parse command line and call createPdf with the correct data'''
+
+    global styles,verbose,vverbose
+    parser = OptionParser()
+    parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
+    parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
+    parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
+    parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
+    parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
+    parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
+    (options,args)=parser.parse_args()
+
+    if options.verbose:
+        verbose=True
+    if options.vverbose:
+        verbose=True
+        vverbose=True
+
+    if options.printssheet:
+        print open(defSsheet).read()
+        sys.exit(0)
+
+    if len(args) <> 1:
+        _log('Usage: %s file.txt [ -o file.pdf ]'%sys.argv[0])
+        sys.exit(1)
+    
+    infile=args[0]
+    if options.output:
+        outfile=options.output
+    else:
+        outfile=infile+'.pdf'
+
+    if options.ffolder:
+        TTFSearchPath.append(ffolder)
+
+    if options.style:
+        ssheet=options.style
+    else:
+        ssheet=None
+
+    createPdf(open(infile).read(),outfile)
+    
 
 if __name__ == "__main__":
     main()
