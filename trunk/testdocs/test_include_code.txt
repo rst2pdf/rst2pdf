@@ -1,2 +1,10 @@
+This one gives a warning:
+
 .. code-block:: python
-    :include: ../setup.py
+   :include: xyzzy.py
+
+This one works:
+
+.. code-block:: python
+   :include: ../setup.py
+
