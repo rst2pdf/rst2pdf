@@ -721,7 +721,6 @@ class FancyPage(PageTemplate):
         PageTemplate.__init__(self,_id,[textframe])
 
     def beforeDrawPage(self,canv,doc):
-        # Replace ###Page### with the actual page number
         if self.head:
             head=self.head.replace('###Page###',str(doc.page))
             head=head.replace("###Title###",str(doc.title))
