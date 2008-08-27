@@ -180,16 +180,15 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
             node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.option_string)     \
-         or isinstance (node, docutils.nodes.option_argument) \
-             :
+    elif isinstance (node, docutils.nodes.option_string) \
+         or isinstance (node, docutils.nodes.option_argument):
         node.pdftext=node.astext()
         if replaceEnt:
             node.pdftext=escape(node.pdftext,True)
+	print "parent",node.parent,type(node.parent.__class__)
 
     elif isinstance (node, docutils.nodes.header) \
-         or isinstance (node, docutils.nodes.footer) \
-                    :
+         or isinstance (node, docutils.nodes.footer):
         node.pdftext=gather_pdftext(node,depth)
         if replaceEnt:
             node.pdftext=escape(node.pdftext,True)
@@ -197,8 +196,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         node.pdftext=pre+node.pdftext+post
 
     elif isinstance (node, docutils.nodes.system_message)     \
-         or isinstance (node, docutils.nodes.problematic)     \
-             :
+         or isinstance (node, docutils.nodes.problematic):
         sys.stderr.write (node.astext()+"\n")
         sys.stderr.flush()
         pre='<font color="red">'
