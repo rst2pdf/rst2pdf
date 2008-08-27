@@ -80,10 +80,10 @@ class MyIndenter(Indenter):
     height=0
 
 def depth (node):
-        if node.parent==None:
-                return 0
-        else:
-                return 1+depth(node.parent)
+    if node.parent==None:
+        return 0
+    else:
+        return 1+depth(node.parent)
 
 decoration = {'header':None, 'footer':None, 'endnotes':[]}
 
@@ -104,8 +104,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
 
     if isinstance (node, docutils.nodes.paragraph) \
          or isinstance (node, docutils.nodes.title) \
-         or isinstance (node, docutils.nodes.subtitle) \
-         :
+         or isinstance (node, docutils.nodes.subtitle):
         node.pdftext=gather_pdftext(node,depth)+"\n"
 
     elif isinstance (node, docutils.nodes.Text):
@@ -181,15 +180,15 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
             node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
 
-    elif        isinstance (node, docutils.nodes.option_string)     \
-             or isinstance (node, docutils.nodes.option_argument) \
+    elif isinstance (node, docutils.nodes.option_string)     \
+         or isinstance (node, docutils.nodes.option_argument) \
              :
         node.pdftext=node.astext()
         if replaceEnt:
             node.pdftext=escape(node.pdftext,True)
 
-    elif        isinstance (node, docutils.nodes.header) \
-             or isinstance (node, docutils.nodes.footer) \
+    elif isinstance (node, docutils.nodes.header) \
+         or isinstance (node, docutils.nodes.footer) \
                     :
         node.pdftext=gather_pdftext(node,depth)
         if replaceEnt:
@@ -197,8 +196,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     
         node.pdftext=pre+node.pdftext+post
 
-    elif        isinstance (node, docutils.nodes.system_message)     \
-             or isinstance (node, docutils.nodes.problematic)     \
+    elif isinstance (node, docutils.nodes.system_message)     \
+         or isinstance (node, docutils.nodes.problematic)     \
              :
         sys.stderr.write (node.astext()+"\n")
         sys.stderr.flush()
@@ -440,9 +439,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                             Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
         node.elements=[t]
 
-    elif        isinstance (node, docutils.nodes.topic)                                \
-             or isinstance (node, docutils.nodes.field_body)                     \
-             :
+    elif isinstance (node, docutils.nodes.topic)                                \
+         or isinstance (node, docutils.nodes.field_body):
         node.elements=gather_elements(node,depth,style=style)
 
     elif isinstance (node, docutils.nodes.section):
@@ -451,17 +449,17 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         else:
             node.elements=gather_elements(node,depth+1)
 
-    elif        isinstance (node, docutils.nodes.bullet_list)                    \
-             or isinstance (node, docutils.nodes.enumerated_list)            \
-             or isinstance (node, docutils.nodes.definition_list)            \
-             or isinstance (node, docutils.nodes.option_list)                    \
-             or isinstance (node, docutils.nodes.field_list)                     \
-             or isinstance (node, docutils.nodes.definition)                     \
-             :
+    elif isinstance (node, docutils.nodes.bullet_list)                    \
+         or isinstance (node, docutils.nodes.enumerated_list)            \
+         or isinstance (node, docutils.nodes.definition_list)            \
+         or isinstance (node, docutils.nodes.option_list)                    \
+         or isinstance (node, docutils.nodes.field_list)                     \
+         or isinstance (node, docutils.nodes.definition):
+
         node.elements=gather_elements(node,depth,style=style)
 
     elif isinstance (node, docutils.nodes.option_list_item):
-        og     = gather_elements(node.children[0],depth,style)
+        og = gather_elements(node.children[0],depth,style)
         desc = gather_elements(node.children[1],depth,style)
 
         node.elements=[Table([[og,desc]],style=sty.tstyles['field'])]
@@ -524,9 +522,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         node.elements=[Separation()]
 
 
-    elif        isinstance (node, docutils.nodes.system_message)     \
-             or isinstance (node, docutils.nodes.problematic)     \
-             :
+    elif isinstance (node, docutils.nodes.system_message)     \
+         or isinstance (node, docutils.nodes.problematic):
         # FIXME show the error in the document, red, whatever
         sys.stderr.write (node.astext()+"\n")
         sys.stderr.flush()
@@ -553,23 +550,22 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         # All elements in one line
         node.elements=[Paragraph(gather_pdftext(node,depth),style=style)]
 
-    elif        isinstance (node, docutils.nodes.literal_block) \
-             or isinstance (node, docutils.nodes.doctest_block) \
-             or isinstance (node, docutils.nodes.option) \
-        :
+    elif isinstance (node, docutils.nodes.literal_block) \
+         or isinstance (node, docutils.nodes.doctest_block) \
+         or isinstance (node, docutils.nodes.option):
+
         node.elements=[PreformattedFit(gather_pdftext(node,depth,replaceEnt=True),styles['code'])]
 
-    elif        isinstance (node, docutils.nodes.attention)        \
-             or isinstance (node, docutils.nodes.caution)            \
-             or isinstance (node, docutils.nodes.danger)             \
-             or isinstance (node, docutils.nodes.error)                \
-             or isinstance (node, docutils.nodes.hint)                 \
-             or isinstance (node, docutils.nodes.important)        \
-             or isinstance (node, docutils.nodes.note)                 \
-             or isinstance (node, docutils.nodes.tip)                    \
-             or isinstance (node, docutils.nodes.warning)            \
-             or isinstance (node, docutils.nodes.admonition)     \
-    :
+    elif isinstance (node, docutils.nodes.attention)        \
+         or isinstance (node, docutils.nodes.caution)            \
+         or isinstance (node, docutils.nodes.danger)             \
+         or isinstance (node, docutils.nodes.error)                \
+         or isinstance (node, docutils.nodes.hint)                 \
+         or isinstance (node, docutils.nodes.important)        \
+         or isinstance (node, docutils.nodes.note)                 \
+         or isinstance (node, docutils.nodes.tip)                    \
+         or isinstance (node, docutils.nodes.warning)            \
+         or isinstance (node, docutils.nodes.admonition):
         node.elements=[Paragraph(node.tagname.title(),style=styles['heading3'])]+gather_elements(node,depth,style=style)
 
     elif isinstance (node, docutils.nodes.image):
@@ -648,10 +644,9 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         node.elements=gather_elements(node,depth,style)
 
     # FIXME nodes we are ignoring for the moment
-    elif        isinstance (node, docutils.nodes.citation)     \
-             or isinstance (node, docutils.nodes.reference)     \
-             or isinstance (node, docutils.nodes.raw)     \
-        :
+    elif isinstance (node, docutils.nodes.citation)     \
+         or isinstance (node, docutils.nodes.reference)     \
+         or isinstance (node, docutils.nodes.raw):
         node.elements=[]
     else:
         _log("Unkn. node (gen_elements): %s"%str(node.__class__))
