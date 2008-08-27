@@ -753,6 +753,21 @@ class FancyPage(PageTemplate):
             para.drawOn(canv,self.fx,self.fy)
 
 def filltable (rows):
+    """
+    Takes a list of rows, consisting of cells and performs the following fixes:
+
+    * For multicolumn cells, add continuation cells, to make all rows the same
+      size.
+
+    * For multirow cell, insert continuation cells, to make all columns the
+      same size.
+
+    * If there are still shorter rows, add empty cells at the end (ReST quirk)
+
+    * Once the table is *normalized*, create spans list, fitting for reportlab´s
+      Table class.
+
+    """
 
     # If there is a multicol cell, we need to insert Continuation Cells
     # to make all rows the same length
