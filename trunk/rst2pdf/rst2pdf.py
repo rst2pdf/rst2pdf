@@ -292,14 +292,14 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     #######################
 
     elif isinstance (node, docutils.nodes.table):
-	# FIXME: make spacing configurable
-	node.elements=[Spacer(0,6)]+gather_elements(node,depth)
+        # FIXME: make spacing configurable
+        node.elements=[Spacer(0,6)]+gather_elements(node,depth)
 
     elif isinstance (node, docutils.nodes.tgroup):
         rows=[]
-	colwidths=[]
+        colwidths=[]
         hasHead=False
-	headRows=0
+        headRows=0
         for n in node.children:
             if isinstance (n,docutils.nodes.thead):
                 hasHead=True
@@ -308,15 +308,15 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                     for cell in row.children:
                         r.append(cell)
                     rows.append(r)
-		headRows=len(rows)
+                headRows=len(rows)
             elif isinstance (n,docutils.nodes.tbody):
                 for row in n.children:
                     r=[]
                     for cell in row.children:
                         r.append(cell)
                     rows.append(r)
-	    elif isinstance (n,docutils.nodes.colspec):
-		colwidths.append(int(n['colwidth']))
+            elif isinstance (n,docutils.nodes.colspec):
+                colwidths.append(int(n['colwidth']))
 
         spans=filltable (rows)
 
@@ -336,12 +336,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         if hasHead:
             st+=[sty.tstyleHead(headRows)]
 
-	# Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
-	if colwidths:
-	    _tw=sty.tw/sum(colwidths)
-	    colwidths=[ w*_tw for w in colwidths ]
-	else:
-	    colwidths=None # Auto calculate
+        # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
+        if colwidths:
+            _tw=sty.tw/sum(colwidths)
+            colwidths=[ w*_tw for w in colwidths ]
+        else:
+            colwidths=None # Auto calculate
 
         node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
 
@@ -479,7 +479,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     elif isinstance (node, docutils.nodes.option_list_item):
 
-	optext = ', '.join([gather_pdftext(child,depth) for child in node.children[0].children])
+        optext = ', '.join([gather_pdftext(child,depth) for child in node.children[0].children])
         desc = gather_elements(node.children[1],depth,style)
 
         node.elements=[Table([[PreformattedFit(optext,styles["code"]),desc]],style=sty.tstyles['field'])]
@@ -644,11 +644,11 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                 backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
                 i+=1
             backrefs='(%s)'%', '.join(backrefs)
-	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),styles["normal"])
+            label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),styles["normal"])
         elif len(node['backrefs'])==1:
-	    label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),styles["normal"])
-	else:
-	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),styles["normal"])
+            label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),styles["normal"])
+        else:
+            label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),styles["normal"])
         contents=gather_elements(node,depth,style)[1:]
         decoration['endnotes'].append([label,contents])
         node.elements=[]
@@ -665,7 +665,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     elif isinstance (node, docutils.nodes.reference):
         node.elements=gather_elements(node,depth,style)
-	
+        
     # FIXME nodes we are ignoring for the moment
     elif isinstance (node, docutils.nodes.citation) \
          or isinstance (node, docutils.nodes.raw):
