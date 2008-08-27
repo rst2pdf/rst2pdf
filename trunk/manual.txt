@@ -281,6 +281,14 @@ For example, if you want to include a python fragment::
 Notice that you need to declare the language of the fragment. Here's a list of
 the currently supported_.
 
+Also, you can use the code-block directive with an external file, using
+the :include: option::
+
+  .. code-block:: python
+     :include: setup.py
+
+This will give a warning if setup.py doesn't exist or can't be opened.
+
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
