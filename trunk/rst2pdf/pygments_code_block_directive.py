@@ -129,7 +129,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             content=open(options['include']).read()
         except IOError: # no file or problem finding it
             content=''
-            # FIXME : issue a warning or an error
+            w=state_machine.reporter.warning('Error reading file: "%s"'%options['include'],line=lineno)
     else:
         content=u'\n'.join(content)
 
