@@ -1,20 +1,35 @@
+New in 0.5
+----------
+
+* Support for :widths: in tables
+* Support for captions in tables
+* Support for multi-row headers in tables
+* Improved definition lists
+* Fixed bug in image directive 
+* Whitespace conforming to PEP8
+* Fixed bug in text size on code-block
+* Package is more setuptools compliant
+* Fix for option groups in option lists
+* Citations support
+* Title reference role fix
+
 New in 0.4
 ----------
 
-    * Fixed bullet and item lists indentation/nesting. 
-    * Implemented citations 
-    * Working links between footnotes and its references 
-    * Justification enabled by default 
-    * Fixed table bug (demo.txt works now) 
-    * Title and author support in PDF properties 
-    * Support for document title in header/footer 
-    * Custom page sizes and margins 
+* Fixed bullet and item lists indentation/nesting. 
+* Implemented citations 
+* Working links between footnotes and its references 
+* Justification enabled by default 
+* Fixed table bug (demo.txt works now) 
+* Title and author support in PDF properties 
+* Support for document title in header/footer 
+* Custom page sizes and margins 
 
 New in 0.3
 ----------
 
-    * Font embedding (use any True Type font in your PDFs) 
-    * Syntax highlighter using Pygments 
-    * User's manual 
-    * External/custom stylesheets 
-    * Support for page numbers in header/footer 
+* Font embedding (use any True Type font in your PDFs) 
+* Syntax highlighter using Pygments 
+* User's manual 
+* External/custom stylesheets 
+* Support for page numbers in header/footer 
