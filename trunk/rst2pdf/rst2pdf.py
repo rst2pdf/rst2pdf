@@ -185,7 +185,6 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         node.pdftext=node.astext()
         if replaceEnt:
             node.pdftext=escape(node.pdftext,True)
-	print "parent",node.parent,type(node.parent.__class__)
 
     elif isinstance (node, docutils.nodes.header) \
          or isinstance (node, docutils.nodes.footer):
@@ -276,9 +275,14 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     global decoration
 
+    print node.__class__
+
     if isinstance (node, docutils.nodes.document):
         node.elements=gather_elements(node,depth,style=style)
 
+    elif isinstance (node, docutils.nodes.option_group):
+	print "OG",node
+	sys.exit(1)
 
     #######################
     ## Tables
@@ -447,20 +451,21 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         else:
             node.elements=gather_elements(node,depth+1)
 
-    elif isinstance (node, docutils.nodes.bullet_list)                    \
+    elif isinstance (node, docutils.nodes.bullet_list)                   \
          or isinstance (node, docutils.nodes.enumerated_list)            \
          or isinstance (node, docutils.nodes.definition_list)            \
-         or isinstance (node, docutils.nodes.option_list)                    \
-         or isinstance (node, docutils.nodes.field_list)                     \
+         or isinstance (node, docutils.nodes.option_list)                \
+         or isinstance (node, docutils.nodes.field_list)                 \
          or isinstance (node, docutils.nodes.definition):
 
         node.elements=gather_elements(node,depth,style=style)
 
     elif isinstance (node, docutils.nodes.option_list_item):
-        og = gather_elements(node.children[0],depth,style)
+
+	optext = ', '.join([gather_pdftext(child,depth) for child in node.children[0].children])
         desc = gather_elements(node.children[1],depth,style)
 
-        node.elements=[Table([[og,desc]],style=sty.tstyles['field'])]
+        node.elements=[Table([[PreformattedFit(optext,styles["code"]),desc]],style=sty.tstyles['field'])]
 
 
     elif isinstance (node, docutils.nodes.definition_list_item):
@@ -549,9 +554,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         node.elements=[Paragraph(gather_pdftext(node,depth),style=style)]
 
     elif isinstance (node, docutils.nodes.literal_block) \
-         or isinstance (node, docutils.nodes.doctest_block) \
-         or isinstance (node, docutils.nodes.option):
-
+         or isinstance (node, docutils.nodes.doctest_block):
         node.elements=[PreformattedFit(gather_pdftext(node,depth,replaceEnt=True),styles['code'])]
 
     elif isinstance (node, docutils.nodes.attention)        \
