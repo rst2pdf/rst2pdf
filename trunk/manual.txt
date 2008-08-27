@@ -42,7 +42,11 @@ ReST supports headers and footers, using the header and footer directive::
 Often, you may want to put a page number there, or a section name.The following
 magic tokens will be replaced (More will be added as rst2pdf evolves):
 
-:###Page###: Replaced by the current page number.
+###Page###
+    Replaced by the current page number.
+###Title###
+    Replaced by the document title
+
 
 Footnotes
 ---------
@@ -54,6 +58,21 @@ clean way to do it right.
 I could go the HTML path and just render them where you put them, but then they
 wouldn't be footnotes either, would they? They would be
 "in-the-middle-of-text-notes" or just plain notes.
+
+Inline Images
+-------------
+
+You can insert images in the middle of your text like this::
+
+  This |biohazard| means you have to run.
+
+  .. |biohazard| image:: biohazard.png
+
+However, although I think rst2pdf generates the right reportlab code, the image
+will not be visible.
+
+It will work, however, if you use a development version of reportlab. In which case
+wordaxe won work, and you will have no hyphenation. Your choice ;-)
 
 Styles
 ------
