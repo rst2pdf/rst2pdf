@@ -621,20 +621,19 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         node.elements=[Table(t,style=sty.tstyles['normal'])]
 
     elif isinstance (node, docutils.nodes.footnote) or \
-             isinstance (node, docutils.nodes.citation):
+         isinstance (node, docutils.nodes.citation):
         # It seems a footnote contains a label and a series of elements
-
         ltext=gather_pdftext(node.children[0],depth)
-        if node ['backrefs']:
+        if len(node['backrefs'])>1:
             backrefs=[]
             i=1
             for r in node['backrefs']:
                 backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
                 i+=1
             backrefs='(%s)'%','.join(backrefs)
+	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),style)
         else:
-            backrefs=''
-        label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),style)
+	    label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),style)
         contents=gather_elements(node,depth,style)[1:]
         decoration['endnotes'].append([label,contents])
         node.elements=[]
@@ -667,7 +666,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                 node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
                 Paragraph('<a name="%s"/>'%id,style))
 
-    if verbose:
+    if vverbose:
         try:
             print "gen_elements: ",node.elements
             print "----"
@@ -789,19 +788,24 @@ def filltable (rows):
 from optparse import OptionParser
 import reportlab
 verbose=False
+vverbose=False
 
 def main():
-    global styles,verbose
+    global styles,verbose,vverbose
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
     parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
+    parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
     (options,args)=parser.parse_args()
 
     if options.verbose:
         verbose=True
+    if options.vverbose:
+        verbose=True
+        vverbose=True
 
     if options.printssheet:
         print open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')).read()
