@@ -508,8 +508,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         el=gather_elements(node,depth,style=style)
         b=""
         if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
-            # FIXME: use correct bullet symbols, check inter-paragraph spacing
-            b=str(node.parent.get('bullet'))
+            b=node.parent.get('bullet')
             if b=="None":
                 b=""
 
