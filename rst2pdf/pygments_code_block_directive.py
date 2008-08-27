@@ -124,12 +124,17 @@ def code_block_directive(name, arguments, options, content, lineno,
                        content_offset, block_text, state, state_machine):
     """parse and classify content of a code_block
     """
+    if 'include' in options:
+        content=open(options['include']).read()
+    else:
+        content=u'\n'.join(content)
+
     language = arguments[0]
     # create a literal block element and set class argument
     code_block = nodes.literal_block(classes=["code", language])
     
     # parse content with pygments and add to code_block element
-    for cls, value in DocutilsInterface(u'\n'.join(content), language):
+    for cls, value in DocutilsInterface(content, language):
         if cls in unstyled_tokens:
             # insert as Text to decrease the verbosity of the output.
             code_block += nodes.Text(value, value)
@@ -145,6 +150,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 
 code_block_directive.arguments = (1, 0, 1)
 code_block_directive.content = 1
+code_block_directive.options = { 'include' : directives.unchanged }
 directives.register_directive('code-block', code_block_directive)
 
 # .. _doctutils: http://docutils.sf.net/
