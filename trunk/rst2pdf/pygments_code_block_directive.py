@@ -125,7 +125,11 @@ def code_block_directive(name, arguments, options, content, lineno,
     """parse and classify content of a code_block
     """
     if 'include' in options:
-        content=open(options['include']).read()
+        try:
+            content=open(options['include']).read()
+        except IOError: # no file or problem finding it
+            content=''
+            # FIXME : issue a warning or an error
     else:
         content=u'\n'.join(content)
 
