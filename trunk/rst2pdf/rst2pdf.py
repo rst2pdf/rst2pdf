@@ -298,6 +298,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     elif isinstance (node, docutils.nodes.tgroup):
         rows=[]
         hasHead=False
+	headRows=0
         for n in node.children:
             if isinstance (n,docutils.nodes.thead):
                 hasHead=True
@@ -306,6 +307,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                     for cell in row.children:
                         r.append(cell)
                     rows.append(r)
+		headRows=len(rows)
             elif isinstance (n,docutils.nodes.tbody):
                 for row in n.children:
                     r=[]
@@ -329,7 +331,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         st=spans+sty.tstyleNorm
 
         if hasHead:
-            st+=[sty.tstyleHead]
+            st+=[sty.tstyleHead(headRows)]
 
         node.elements=[Table(data,style=TableStyle(st))]
 

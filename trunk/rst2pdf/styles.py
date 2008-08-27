@@ -178,7 +178,9 @@ tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
 
 # Header row in tables
 
-tstyleHead = ('BACKGROUND',(0,0),(-1,0),colors.yellow)
+def tstyleHead(rows=1):
+    return ('BACKGROUND',(0,0),(-1,rows-1),colors.yellow)
+    
 tstyles['normal']=TableStyle(tstyleNorm)
 
 # Used for field lists
