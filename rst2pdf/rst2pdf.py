@@ -297,6 +297,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     elif isinstance (node, docutils.nodes.tgroup):
         rows=[]
+	colwidths=[]
         hasHead=False
 	headRows=0
         for n in node.children:
@@ -314,6 +315,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                     for cell in row.children:
                         r.append(cell)
                     rows.append(r)
+	    elif isinstance (n,docutils.nodes.colspec):
+		colwidths.append(int(n['colwidth']))
 
         spans=filltable (rows)
 
@@ -333,7 +336,14 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         if hasHead:
             st+=[sty.tstyleHead(headRows)]
 
-        node.elements=[Table(data,style=TableStyle(st))]
+	# Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
+	if colwidths:
+	    _tw=sty.tw/sum(colwidths)
+	    colwidths=[ w*_tw for w in colwidths ]
+	else:
+	    colwidths=None # Auto calculate
+
+        node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
 
     elif isinstance (node, docutils.nodes.title):
         # Special cases: (Not sure this is right ;-)
