@@ -1,0 +1,2 @@
+.. code-block:: python
+    :include: ../setup.py
