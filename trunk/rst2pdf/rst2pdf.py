@@ -345,7 +345,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
             # FIXME style correctly
             node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
         elif isinstance (node.parent, docutils.nodes.admonition) or \
-                 isinstance (node.parent, docutils.nodes.sidebar):
+                 isinstance (node.parent, docutils.nodes.sidebar) or \
+                 isinstance (node.parent, docutils.nodes.table) :
             node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
         else:
             node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading%d'%min(depth,3)])]
