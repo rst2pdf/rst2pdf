@@ -1,0 +1,20 @@
+New in 0.4
+----------
+
+    * Fixed bullet and item lists indentation/nesting. 
+    * Implemented citations 
+    * Working links between footnotes and its references 
+    * Justification enabled by default 
+    * Fixed table bug (demo.txt works now) 
+    * Title and author support in PDF properties 
+    * Support for document title in header/footer 
+    * Custom page sizes and margins 
+
+New in 0.3
+----------
+
+    * Font embedding (use any True Type font in your PDFs) 
+    * Syntax highlighter using Pygments 
+    * User's manual 
+    * External/custom stylesheets 
+    * Support for page numbers in header/footer 
