@@ -50,9 +50,9 @@
       "parent": "base",
       "language": "EN"
     }],
-    ["redtext" , {
-      "parent": "base",
-      "textColor": "red"
+    ["title_reference" , {
+      "parent": "normal",
+      "fontName": "stdItalic"
     }],
     ["bodytext" , {
       "parent": "normal",
