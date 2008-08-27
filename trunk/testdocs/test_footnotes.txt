@@ -1,4 +1,6 @@
 [2]_ will be "2" (manually numbered),
+[2]_ is mentioned more than once.
+[2]_ actually three times
 [#]_ will be "3" (anonymous auto-numbered), and
 [#label]_ will be "1" (labeled auto-numbered).
 Here is a symbolic footnote reference: [*]_.
