@@ -352,6 +352,9 @@
       "parent": "code",
       "textColor": "#003060"
     }],
+    ["pygments-nx" , {
+      "parent": "code"
+    }],
     ["pygments-ow" , {
       "parent": "code",
       "textColor": "#000000",
