@@ -643,10 +643,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
             for r in node['backrefs']:
                 backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
                 i+=1
-            backrefs='(%s)'%','.join(backrefs)
-	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),style)
-        else:
-	    label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),style)
+            backrefs='(%s)'%', '.join(backrefs)
+	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),styles["normal"])
+        elif len(node['backrefs'])==1:
+	    label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),styles["normal"])
+	else:
+	    label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),styles["normal"])
         contents=gather_elements(node,depth,style)[1:]
         decoration['endnotes'].append([label,contents])
         node.elements=[]
@@ -853,11 +855,13 @@ def main():
     # Put the endnotes at the end ;-)
     endnotes = decoration['endnotes']
     if endnotes:
-            elements.append(Spacer(1,2*cm))
-            elements.append(Separation())
-            for n in decoration['endnotes']:
-                elements.append(Table([[n[0],n[1]]],
-                        style=sty.tstyles['endnote'],colWidths=[sty.endnote_lwidth,None]))
+        elements.append(Spacer(1,2*cm))
+        elements.append(Separation())
+        # FIXME: the width of the left column should not be fixed
+        for n in decoration['endnotes']:
+            elements.append(Table([[n[0],n[1]]],
+                            style=sty.tstyles['endnote'],
+                            colWidths=[sty.endnote_lwidth,None]))
 
     head=decoration['header']
     foot=decoration['footer']
