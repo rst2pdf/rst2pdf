@@ -161,6 +161,7 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         if replaceEnt:
             node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
+	print "titref: ",node.pdftext
 
     elif isinstance (node, docutils.nodes.reference) :
         pre='<font color="blue">'
