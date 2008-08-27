@@ -96,9 +96,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
 
     if verbose:
         try:
-            print node.__class__
-            print node
-            print "----"
+            print "gen_pdftext: ",node.__class__
+            print "gen_pdftext: ",node
         except: # unicode problems
             pass
 
@@ -240,6 +239,12 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         #print node.transform
         sys.exit(1)
 
+    if verbose:
+        try:
+            print "gen_pdftext: ",node.pdftext
+            print "----"
+        except: # unicode problems
+            pass
     return node.pdftext
 
 
@@ -258,6 +263,13 @@ def PreformattedFit(text,style):
 
 def gen_elements(node, depth, in_line_block=False, style=None):
     global doc_title,doc_author
+
+    if verbose:
+        try:
+            print "gen_elements: ",node.__class__
+            print "gen_elements: ",node
+        except: # unicode problems
+            pass
 
     if style is None:
         style=styles['bodytext']
@@ -651,6 +663,12 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                 node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
                 Paragraph('<a name="%s"/>'%id,style))
 
+    if verbose:
+        try:
+            print "gen_elements: ",node.elements
+            print "----"
+        except: # unicode problems
+            pass
     return node.elements
 
 def gather_elements (node, depth, in_line_block=False,style=None):
