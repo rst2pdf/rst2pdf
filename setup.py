@@ -6,7 +6,12 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 long_description = (
-    read('README.txt')
+    read('LICENSE.txt')
+    + '\n' +
+    'Detailed Documentation\n'
+    '**********************\n'
+    + '\n' +
+    read('LICENCE.txt')
     + '\n' +
     'Detailed Documentation\n'
     '**********************\n'

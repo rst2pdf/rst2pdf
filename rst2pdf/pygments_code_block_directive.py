@@ -133,7 +133,7 @@ def code_block_directive(name, arguments, options, content, lineno,
         if content:
             # here we define the start-at options so that it is included in extraction
             # this is different than the start-after directive of docutils
-            # (docutils/parsers/rst/directives/misc.py)
+            # (docutils/parsers/rst/directives/misc.py L73+)
             # which excludes the beginning
             # the reason is we want to be able to define a start-at like
             # def mymethod(self)
