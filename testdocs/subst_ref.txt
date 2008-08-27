@@ -1,0 +1,5 @@
+Here you should see a biohazard symbol: |example| |example2|
+
+.. |example| image:: images/biohazard.png
+
+.. |example2| replace:: some *words*
