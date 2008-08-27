@@ -117,16 +117,16 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         pre="<b>"
         post="</b>"
         node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
+        #if replaceEnt:
+        #    node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
 
     elif isinstance (node, docutils.nodes.emphasis):
         pre="<i>"
         post="</i>"
         node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
+        #if replaceEnt:
+        #    node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
 
     elif isinstance (node, docutils.nodes.literal):
@@ -162,21 +162,19 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
         node.pdftext=pre+node.pdftext+post
 
     elif isinstance (node, docutils.nodes.reference) :
-        pre='<font color="blue">'
-        post="</font>"
         uri=node.get('refuri')
         if uri:
             if urlparse(uri)[0]:
-                pre+=u'<a href="%s">'%uri
+                pre+=u'<a href="%s" color="blue">'%uri
                 post='</a>'+post
         else:
                 uri=node.get('refid')
                 if uri:
                         pre+=u'<a href="#%s">'%uri
                         post='</a>'+post
-        node.pdftext=node.astext()
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
+        node.pdftext=gather_pdftext(node,depth)
+        #if replaceEnt:
+        #    node.pdftext=escape(node.pdftext,True)
         node.pdftext=pre+node.pdftext+post
 
     elif isinstance (node, docutils.nodes.option_string) \
@@ -639,8 +637,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         node.elements=gather_elements(node,depth,style)
 
     # FIXME nodes we are ignoring for the moment
-    elif isinstance (node, docutils.nodes.citation)     \
-         or isinstance (node, docutils.nodes.reference)     \
+    elif isinstance (node, docutils.nodes.citation) \
          or isinstance (node, docutils.nodes.raw):
         node.elements=[]
     else:
