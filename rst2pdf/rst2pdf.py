@@ -474,13 +474,14 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         tt=[]
         dt=[]
         for n in node.children:
-            if isinstance(n,docutils.nodes.term) or \
-                 isinstance(n,docutils.nodes.classifier) :
-                tt.append(gather_pdftext(n,depth,style))
+            if isinstance(n,docutils.nodes.term):
+                tt.append(styleToFont("definition_list_term")+gather_pdftext(n,depth,style)+"</font>")
+            elif isinstance(n,docutils.nodes.classifier) :
+                tt.append(styleToFont("definition_list_classifier")+gather_pdftext(n,depth,style)+"</font>")
             else:
                 dt=dt+gen_elements(n,depth,style)
 
-        node.elements=[Paragraph(':'.join(tt),style),MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
+        node.elements=[Paragraph(' : '.join(tt),style),MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
 
     elif isinstance (node, docutils.nodes.list_item):
         # A list_item is a table of two columns.
