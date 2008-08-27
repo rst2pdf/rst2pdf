@@ -72,6 +72,16 @@
       "parent": "bodytext",
       "alignment": "TA_RIGHT"
     }],
+    ["definition_list_term" , {
+      "parent": "normal",
+      "fontName": "stdBold",
+      "bulletFontName": "stdBold"
+    }],
+    ["definition_list_classifier" , {
+      "parent": "normal",
+      "fontName": "stdItalic",
+      "bulletFontName": "stdItalic"
+    }],
     ["fieldname" , {
       "parent": "bodytext",
       "alignment": "TA_RIGHT",
