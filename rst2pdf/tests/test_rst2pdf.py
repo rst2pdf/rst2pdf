@@ -3,8 +3,7 @@ import unittest
 from pyPdf import PdfFileReader
 import cStringIO
 import rst2pdf
-from rst2pdf.createpdf import createPdf, gen_elements
-from rst2pdf import styles as sty
+from rst2pdf.createpdf import RstToPdf
 
 import docutils.core
 
@@ -32,8 +31,7 @@ class FullGenerationTests(unittest.TestCase):
 class GenerationTests(unittest.TestCase):
 
     def setUp(self):
-        defSsheet= join(rst2pdf.__path__[0], 'styles.json')
-        self.styles=sty.getStyleSheet(defSsheet)
+        self.converter=RstToPdf()
         
     def tearDown(self):
         pass
@@ -43,8 +41,8 @@ class GenerationTests(unittest.TestCase):
         input_file = input_file_path('test_bullet_chars.txt')
         input=open(input_file,'r').read()
         doctree=docutils.core.publish_doctree(input)
-        elements=gen_elements(doctree,0, style=self.styles)
         pdb.set_trace()
+        elements=self.converter.gen_elements(doctree,0)
         
 def test_suite():
     return unittest.makeSuite(GenerationTests)
