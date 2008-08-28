@@ -188,8 +188,6 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.system_message)     \
             or isinstance (node, docutils.nodes.problematic):
-            sys.stderr.write (node.astext()+"\n")
-            sys.stderr.flush()
             pre='<font color="red">'
             post="</font>"
             node.pdftext=self.gather_pdftext(node,depth)
