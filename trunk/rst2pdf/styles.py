@@ -51,7 +51,7 @@ def adjustUnits(v,total=0):
       if u=='%':
           return float(n)*total/100
       log.error('Unknown unit "%s"' % u)
-      return n
+      return float(n)
 
 TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
 
