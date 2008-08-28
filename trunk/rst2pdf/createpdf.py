@@ -13,7 +13,6 @@ from types import StringType
 from urlparse import *
 from copy import copy
 from cgi import escape
-import shlex
 import logging
 from optparse import OptionParser
 
