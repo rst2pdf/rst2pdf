@@ -6,8 +6,6 @@ by Alexandre Dumas, Pere
 ------------------------
 
 .. figure:: if.jpg
-   :width: 256
-   :height: 192
 
 ..
 
