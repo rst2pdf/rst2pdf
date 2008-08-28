@@ -2,7 +2,9 @@
 import unittest
 from pyPdf import PdfFileReader
 import cStringIO
-from rst2pdf.createpdf import createPdf
+from rst2pdf.createpdf import createPdf, gen_elements
+
+import docutils.core
 
 from os.path import join, abspath, dirname, basename
 PREFIX = abspath(dirname(__file__))
@@ -13,13 +15,13 @@ def input_file_path(file):
 class GenerationTests(unittest.TestCase):
 
     def setUp(self):
-        self.output=cStringIO.StringIO()
-        
+        pass
         
     def tearDown(self):
         pass
         
-    def test_bullet_chars(self):
+    def test_bullet_chars_full(self):
+        self.output=cStringIO.StringIO()
         input_file = input_file_path('test_bullet_chars.txt')
         input=open(input_file,'r').read()
         createPdf(text=input, output=self.output, styleSheet=None)
@@ -27,6 +29,12 @@ class GenerationTests(unittest.TestCase):
         result = PdfFileReader(self.output)
         text_result = result.getPage(0).extractText()
         self.assertEqual(text_result, u'\nTest\nItem 1\nItem 2\n')
+        
+    def test_bullet_chars(self):
+        input_file = input_file_path('test_bullet_chars.txt')
+        input=open(input_file,'r').read()
+        doctree=docutils.core.publish_doctree(input)
+        elements=gen_elements(doctree,0)
         
 def test_suite():
     return unittest.makeSuite(GenerationTests)

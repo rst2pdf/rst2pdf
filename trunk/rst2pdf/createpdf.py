@@ -3,34 +3,42 @@
 
 __docformat__ = 'reStructuredText'
 
-import docutils.core,docutils.nodes,sys,re
-import pygments_code_block_directive
+import re
 import sys
 import os
 import pprint
+import string
 from types import StringType
+from urlparse import *
+from copy import copy
+from cgi import escape
+import shlex
+from optparse import OptionParser
+
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
 from docutils.frontend import OptionParser
 from docutils.transforms import Transformer
 import docutils.readers.doctree
+import docutils.core
+import docutils.nodes
 
-from urlparse import *
+import pygments_code_block_directive
 
+import reportlab
 from reportlab.platypus import *
 #from reportlab.platypus.para import Paragraph,FastPara,Para
 from reportlab.pdfbase.pdfmetrics import stringWidth
-from reportlab.lib.enums import *
 import reportlab.lib.colors as colors
+from reportlab.lib.enums import *
 from reportlab.lib.units import *
 from reportlab.lib.pagesizes import *
-from copy import copy
-from cgi import escape
 
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
 from utils import log
+import styles as sty
 
 try:
     import wordaxe
@@ -44,12 +52,19 @@ try:
 except ImportError:
     log.warning("No support for hyphenation, install wordaxe")
 
-import styles as sty
+
+marks="#=-_*^>%&|"
+lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
+loweralpha=string.ascii_lowercase
 styles=None
 doc_title=None
 doc_author=None
+decoration = {'header':None, 'footer':None, 'endnotes':[]}
+verbose=False
+vverbose=False
 
-import shlex
+defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
+
 
 def parseRaw (data):
     '''Parse and process a simple DSL to handle creation of flowables.
@@ -87,13 +102,6 @@ def styleToFont(style):
         log.warning('Unknown class %s' % style)
         return None
 
-
-
-
-marks="#=-_*^>%&|"
-lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
-loweralpha="abcdefghijklmnopqrstuvwxyz"
-
 class MyIndenter(Indenter):
     # Bugs in reportlab?
     def draw(self):
@@ -107,7 +115,6 @@ def depth (node):
     else:
         return 1+depth(node.parent)
 
-decoration = {'header':None, 'footer':None, 'endnotes':[]}
 
 def gather_pdftext (node, depth, in_line_block=False,replaceEnt=True):
     return ''.join([gen_pdftext(n,depth,in_line_block,replaceEnt) for n in node.children ])
@@ -118,8 +125,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
 
     if verbose:
         try:
-            print "gen_pdftext: ",node.__class__
-            print "gen_pdftext: ",node
+            log.debug( "gen_pdftext: %s" % node.__class__)
+            log.debug( "gen_pdftext: %s" % node)
         except: # unicode problems
             pass
 
@@ -841,12 +848,6 @@ def filltable (rows):
                 spans.append(('SPAN',(x,y),(x+mc,y+mr)))
     return spans
 
-from optparse import OptionParser
-import reportlab
-verbose=False
-vverbose=False
-
-defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
 
 def createPdf(text=None,output=None,doctree=None,styleSheet=None):
     '''Create a PDF from text (ReST input), or doctree (docutil nodes)
@@ -862,8 +863,6 @@ def createPdf(text=None,output=None,doctree=None,styleSheet=None):
 
     styleSheet=styleSheet or defSsheet
     styles=sty.getStyleSheet(styleSheet)
-
-    import docutils.core
 
     if not doctree:
         if text:
