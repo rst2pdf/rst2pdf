@@ -519,8 +519,7 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.system_message)     \
             or isinstance (node, docutils.nodes.problematic):
             # FIXME show the error in the document, red, whatever
-            sys.stderr.write (node.astext()+"\n")
-            sys.stderr.flush()
+            log.error("Problematic node %s",node.astext())
             node.elements=[]
 
         elif isinstance (node, docutils.nodes.block_quote):
@@ -564,11 +563,11 @@ class RstToPdf(object):
             # FIXME: handle all the other attributes
             w=node.get('width')
             if w is not None:
-                w=int(w)
+                w=sty.adjustUnits(w,sty.pw)
                 
             h=node.get('height')
             if h is not None:
-                h=int(h)
+                h=sty.adjustUnits(h,sty.ph)
 
             i=Image(filename=str(node.get("uri")),
                     height=h,

@@ -32,6 +32,23 @@ stdItalic     = 'Helvetica-Oblique'
 stdBoldItalic = 'Helvetica-BoldOblique'
 stdMono       = 'Courier'
 
+def adjustUnits(v,total=0):
+    '''Takes something like 2cm and returns 2*cm.
+       If you use % as a unit, it returns the percentage
+       of "total".
+
+       Example::
+       
+            >>> adjustUnits('50%',200)
+            100
+    '''
+    _,n,u=re.split('(-?[0-9\.]*)',v)
+    if u in units.__dict__:
+        return float(n)*units.__dict__[u]
+    else:
+      if u=='%':
+          return float(n)*total/100
+      log.error('Unknown unit %s' % u)
 
 TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
 
@@ -63,13 +80,6 @@ tw=0
 # After what level of section do we break page
 page_break_level=0
 
-def adjustUnits(v):
-    '''Takes something like 2cm and returns 2*cm'''
-    _,n,u=re.split('(-?[0-9\.]*)',v)
-    if u in units.__dict__:
-        return float(n)*units.__dict__[u]
-    else:
-      log.error('Unknown unit %s' % u)
 
 import reportlab.lib.pagesizes as pagesizes
 
