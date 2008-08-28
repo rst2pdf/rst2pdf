@@ -15,11 +15,6 @@ from copy import copy
 from cgi import escape
 import logging
 from optparse import OptionParser
-try:
-    from PIL import Image as PILImage
-except ImportError:
-    import Image as PILImage
-
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
 from docutils.transforms import Transformer
@@ -43,6 +38,14 @@ from reportlab.lib.pagesizes import *
 #    return x
 from utils import log,parseRaw
 import styles as sty
+
+try:
+    from PIL import Image as PILImage
+except ImportError:
+    try:
+        import Image as PILImage
+    except ImportError:
+        log.warning("No support for images other than JPG, and limited support for image size. Please install PIL")
 
 try:
     import wordaxe
@@ -574,8 +577,16 @@ class RstToPdf(object):
 
             # Find the image size in pixels:
 
-            img=PILImage.open(imgname)
-            iw,ih=img.size
+            try:
+                img=PILImage.open(imgname)
+                iw,ih=img.size
+            except NameError: # No PIL
+                 # FIXME: surely we can do better than this ;-)
+                 # but this only means that image sizes specified
+                 # in % or unspecified will probably be broken.
+                 iw=None
+                 ih=None
+
 
             # Assume a DPI of 300, which is pretty much made up,
             # and then a 100% size would be iw*inch/300, so we pass
@@ -583,20 +594,28 @@ class RstToPdf(object):
 
             w=node.get('width')
             if w is not None:
-                w=sty.adjustUnits(w,iw*inch/300)
+                if iw:
+                    w=sty.adjustUnits(w,iw*inch/300)
+                else:
+                    w=sty.adjustUnits(w,sty.pw*.5)
             else:
                 # No width specified at all. Make it up
                 # as if we knew what we're doing
-                w=iw*inch/300
+                if iw:
+                    w=iw*inch/300                   
 
             h=node.get('height')
             if h is not None:
-                h=sty.adjustUnits(h,ih*inch/300)
+                if ih:
+                    h=sty.adjustUnits(h,ih*inch/300)
+                else:
+                    h=sty.adjustUnits(h,sty.ph*.5)
             else:
-            # Now, often, only the width is specified!
-            # if we don't have a height, we need to keep the
-            # aspect ratio, or else it will look ugly
-                h=w*ih/iw
+                # Now, often, only the width is specified!
+                # if we don't have a height, we need to keep the
+                # aspect ratio, or else it will look ugly
+                if iw:
+                    h=w*ih/iw
 
             # And now we have this probably completely bogus size!
             log.warning("Image %s guessed as with size:  %fcm by %fcm",imgname,w/cm,w/cm)
