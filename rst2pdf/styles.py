@@ -43,12 +43,15 @@ def adjustUnits(v,total=0):
             100
     '''
     _,n,u=re.split('(-?[0-9\.]*)',v)
+    if not u:
+        return n # assume points
     if u in units.__dict__:
         return float(n)*units.__dict__[u]
     else:
       if u=='%':
           return float(n)*total/100
-      log.error('Unknown unit %s' % u)
+      log.error('Unknown unit "%s"' % u)
+      return n
 
 TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
 
