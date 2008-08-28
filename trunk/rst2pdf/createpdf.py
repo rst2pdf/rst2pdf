@@ -68,7 +68,7 @@ class RstToPdf(object):
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
-        self.defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
+        self.defSsheet=os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
 
 
     def styleToFont(self, style):
@@ -880,8 +880,10 @@ def main():
     if options.vverbose:
         log.setLevel(logging.DEBUG)
 
+    rtp=RstToPdf()
+
     if options.printssheet:
-        print open(defSsheet).read()
+        print open(rtp.defSsheet).read()
         sys.exit(0)
 
     if len(args) <> 1:
@@ -902,7 +904,7 @@ def main():
     else:
         ssheet=None
 
-    RstToPdf().createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
+    rtp.createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
     
 
 if __name__ == "__main__":
