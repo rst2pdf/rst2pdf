@@ -294,9 +294,9 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     if verbose:
         try:
-            print "gen_elements: ",node.__class__
-            print "gen_elements: ",node
-        except: # unicode problems
+            log.debug( "gen_elements: %s" % node.__class__)
+            log.debug( "gen_elements: %s" % node)
+        except: # unicode problems FIXME/ explicit error
             pass
 
     if style is None:
@@ -716,9 +716,8 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     if vverbose:
         try:
-            print "gen_elements: ",node.elements
-            print "----"
-        except: # unicode problems
+            log.debug( "gen_elements: %s" % node.elements)
+        except: # unicode problems FIXME: explicit error
             pass
     return node.elements
 
@@ -898,6 +897,8 @@ def main():
     '''Parse command line and call createPdf with the correct data'''
 
     global styles,verbose,vverbose
+    # NiL : I don't like globals :)
+    
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
     parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
