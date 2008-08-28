@@ -46,6 +46,33 @@ styles=None
 doc_title=None
 doc_author=None
 
+import shlex
+
+def parseRaw (data):
+    '''Parse and process a simple DSL to handle creation of flowables.
+
+    Supported (can add others on request):
+    
+    * PageBreak
+
+    * Spacer width, height
+
+    '''
+    elements=[]
+    lines=data.splitlines()
+    for line in lines:
+        lexer=shlex.shlex(line)
+        lexer.whitespace+=','
+        tokens=list(lexer)
+        print "TOK:",tokens
+        command=tokens[0]
+        if command == 'PageBreak':
+            elements.append(PageBreak())
+        if command == 'Spacer':
+            elements.append(Spacer(int(tokens[1]),int(tokens[2])))
+    return elements
+
+
 def styleToFont(style):
     '''Takes a style name, returns a font tag for it, like
     "<font face=helvetica size=14 color=red>". Used for inline
@@ -238,8 +265,8 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
     else:
         _log("Unkn. node (gen_pdftext): %s"%str(node.__class__))
         _log(node)
+        node.pdftext=gather_pdftext(node,depth)
         #print node.transform
-        sys.exit(1)
 
     if verbose:
         try:
@@ -666,15 +693,21 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     elif isinstance (node, docutils.nodes.reference):
         node.elements=gather_elements(node,depth,style)
+
+    elif isinstance (node, docutils.nodes.raw):
+        # Not really raw, but what the heck
+        node.elements=parseRaw(str(node.astext()))
+        print node.elements
         
     # FIXME nodes we are ignoring for the moment
-    elif isinstance (node, docutils.nodes.citation) \
-         or isinstance (node, docutils.nodes.raw):
+    elif isinstance (node, docutils.nodes.citation):
         node.elements=[]
     else:
         _log("Unkn. node (gen_elements): %s"%str(node.__class__))
+        # Why fail? Just log it and do our best.
         _log(node)
-        sys.exit(1)
+        node.elements=gather_elements(node,depth,style)
+        #sys.exit(1)
 
     # set anchors for internal references
     for id in node['ids']:
@@ -823,8 +856,10 @@ vverbose=False
 
 defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
 
-def createPdf(text,output,styleSheet=None):
-    '''Create a PDF from text (ReST input), and save it in outfile.
+def createPdf(text=None,output=None,doctree=None,styleSheet=None):
+    '''Create a PDF from text (ReST input), or doctree (docutil nodes)
+       and save it in outfile.
+       
        If outfile is a string, it's a filename.
        If it's something with a write method, (like a StringIO,
        or a file object), the data is saved there.
@@ -837,8 +872,14 @@ def createPdf(text,output,styleSheet=None):
     styles=sty.getStyleSheet(styleSheet)
 
     import docutils.core
-    doc=docutils.core.publish_doctree(text)
-    elements=gen_elements(doc,0)
+
+    if not doctree:
+        if text:
+            doctree=docutils.core.publish_doctree(text)
+        else:
+            _log('Error: createPdf needs a text or a doctree to be useful')
+            return
+    elements=gen_elements(doctree,0)
     
     # Put the endnotes at the end ;-)
     endnotes = decoration['endnotes']
