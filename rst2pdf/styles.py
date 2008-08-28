@@ -12,16 +12,13 @@ from reportlab.pdfbase import pdfmetrics
 
 
 import os,sys
-
-def _log(msg):
-    sys.stderr.write('%s\n'%str(msg))
-    sys.stderr.flush()
+from utils import log
 
 try:
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle,getSampleStyleSheet
 except:
-    _log("No hyphenation support, install wordaxe")
+    log.warning("No hyphenation support, install wordaxe")
 
 
 
@@ -71,7 +68,7 @@ def adjustUnits(v):
     if u in units.__dict__:
         return float(n)*units.__dict__[u]
     else:
-      _log('Unknown unit %s'%u)
+      log.error('Unknown unit %s' % u)
 
 import reportlab.lib.pagesizes as pagesizes
 
@@ -91,7 +88,7 @@ def getStyleSheet(fname):
         if page['size'] in pagesizes.__dict__:
             ps=pagesizes.__dict__[page['size']]
         else:
-            _log('Unknown page size %s'%page['size'])
+            log.critical('Unknown page size %s' % page['size'])
             sys.exit(1)
     else: #A custom size
         # The sizes are expressed in some unit.

@@ -32,7 +32,7 @@ class Writer(writers.Writer):
 if __name__ == "__main__":
     from docutils.core import publish_cmdline, default_description
 
-    description = ('Generates pseudo-XML from standalone reStructuredText '
+    description = ('Generates PDF from standalone reStructuredText '
                    'sources (for testing purposes).  ' + default_description)
 
     publish_cmdline(writer=Writer(),description=description)
