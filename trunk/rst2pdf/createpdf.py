@@ -834,7 +834,7 @@ class RstToPdf(object):
 
         # So, now, create the FancyPage with the right sizes and elements
         FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
-                                    sty.bm,sty.lm,sty.rm,head,foot,self.styles)
+                                    sty.bm,sty.lm,sty.rm,sty.gm,head,foot,self.styles)
 
         pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=self.doc_title,author=self.doc_author)
         pdfdoc.build(elements)
@@ -864,10 +864,10 @@ class Separation(Flowable):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,pw,ph,tm,bm,lm,rm,head,foot,styles):
+    def __init__(self,_id,pw,ph,tm,bm,lm,rm,gm,head,foot,styles):
 
         self.styles=styles
-        tw=pw-lm-rm
+        tw=pw-lm-rm-gm
 
         if head:
             hh=Paragraph(head,style=self.styles['header']).wrap(tw,ph)[1]
@@ -878,8 +878,7 @@ class FancyPage(PageTemplate):
         else:
             fh=0
 
-        #textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh)
-        textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh,topPadding=hh,bottomPadding=fh)
+        #textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh,topPadding=hh,bottomPadding=fh)
 
         self.head=head
         self.hx=lm
@@ -890,10 +889,38 @@ class FancyPage(PageTemplate):
         self.fy=bm
         self.tw=tw
         self.ph=ph
+        self.gm=gm
+        self.lm=lm
+        self.tm=tm
+        self.hh=hh
+        self.fh=fh
+        self.bm=bm
 
-        PageTemplate.__init__(self,_id,[textframe])
+        PageTemplate.__init__(self,_id,[])
 
     def beforeDrawPage(self,canv,doc):
+        '''Do adjustments to the page according to where we are in the document.
+
+           * Gutter margins on left or right as needed
+
+           * Put doc_title or page number in header/footer
+
+        '''
+
+        # Adjust gutter margins
+        if doc.page%2: # Left page
+            textframe=Frame(self.lm,self.tm+self.hh,self.tw,
+                            self.ph-self.tm-self.bm-self.hh-self.fh,
+                            topPadding=self.hh,bottomPadding=self.fh)
+        else: # Right page
+            textframe=Frame(self.lm+self.gm,self.tm+self.hh,self.tw,
+                            self.ph-self.tm-self.bm-self.hh-self.fh,
+                            topPadding=self.hh,bottomPadding=self.fh)
+
+
+
+        self.frames=[textframe]
+        
         if self.head:
             head=self.head.replace('###Page###',str(doc.page))
             head=head.replace("###Title###",str(doc.title))
