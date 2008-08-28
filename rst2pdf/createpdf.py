@@ -255,7 +255,7 @@ class RstToPdf(object):
             try:
                 style=self.styles[node['classes'][0]]
             except:
-                log.warning("Unknown class %s, using class bodytext." % node['classes'][0])
+                log.info("Unknown class %s, using class bodytext." % node['classes'][0])
 
         if isinstance (node, docutils.nodes.document):
             node.elements=self.gather_elements(node,depth,style=style)
@@ -517,7 +517,7 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.system_message)     \
             or isinstance (node, docutils.nodes.problematic):
             # FIXME show the error in the document, red, whatever
-            log.error("Problematic node %s",node.astext())
+            log.warning("Problematic node %s",node.astext())
             node.elements=[]
 
         elif isinstance (node, docutils.nodes.block_quote):
@@ -677,7 +677,8 @@ class RstToPdf(object):
             style=self.styles['bodytext']
         r=[]
         for n in node.children:
-            r=r+(self.gen_elements(n,depth,in_line_block,style=style))
+            #import pdb; pdb.set_trace()
+            r.extend(self.gen_elements(n,depth,in_line_block,style=style))
         return r
 
 
@@ -890,7 +891,10 @@ def main():
     if options.output:
         outfile=options.output
     else:
-        outfile=infile + '.pdf'
+        if infile.endswith('.txt') or infile.endswith('.rst'):
+            outfile = infile[:-4] + '.pdf'
+        else:
+            outfile=infile + '.pdf'
 
     if options.ffolder:
         TTFSearchPath.append(ffolder)
