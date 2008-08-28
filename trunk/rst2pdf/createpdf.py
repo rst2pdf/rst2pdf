@@ -15,6 +15,7 @@ from copy import copy
 from cgi import escape
 import logging
 from optparse import OptionParser
+from PIL import Image as PILImage
 
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
@@ -558,15 +559,46 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.image):
             # FIXME: handle all the other attributes
+
+            imgname=str(node.get("uri"))
+
+            # Figuring out the size to display of an image is ... annoying.
+            # If the user provides a size with a unit, it's simple, adjustUnits
+            # will return it in points and we're done.
+
+            # However, often the unit wil be "%" (specially if it's meant for
+            # HTML originally.In which case, we will use the following:
+
+            # Find the image size in pixels:
+            
+            img=PILImage.open(imgname)
+            iw,ih=img.size
+
+            # Assume a DPI of 300, which is pretty much made up,
+            # and then a 100% size would be iw*inch/300, so we pass
+            # that as the second parameter to adjustUnits
+
             w=node.get('width')
             if w is not None:
-                w=sty.adjustUnits(w,sty.pw)
-                
+                w=sty.adjustUnits(w,iw*inch/300)
+            else:
+                # No width specified at all. Make it up
+                # as if we knew what we're doing
+                w=iw*inch/300
+
             h=node.get('height')
             if h is not None:
-                h=sty.adjustUnits(h,sty.ph)
+                h=sty.adjustUnits(h,ih*inch/300)
+            else:
+            # Now, often, only the width is specified!
+            # if we don't have a height, we need to keep the
+            # aspect ratio, or else it will look ugly
+                h=w*ih/iw
 
-            i=Image(filename=str(node.get("uri")),
+            # And now we have this probably completely bogus size!
+            log.warning("Image %s guessed as with size:  %fcm by %fcm",imgname,w/cm,w/cm)
+            
+            i=Image(filename=imgname,
                     height=h,
                     width=w)
             if node.get('align'):
