@@ -44,7 +44,7 @@ def adjustUnits(v,total=0):
     '''
     _,n,u=re.split('(-?[0-9\.]*)',v)
     if not u:
-        return n # assume points
+        return float(n) # assume points
     if u in units.__dict__:
         return float(n)*units.__dict__[u]
     else:
