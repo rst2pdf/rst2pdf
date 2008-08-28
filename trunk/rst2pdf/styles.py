@@ -108,28 +108,38 @@ def getStyleSheet(fname):
     tw=pw-lm-rm
     embedded=data['embeddedFonts']
 
+
     for font in embedded:
-        # Each "font" is a list of four files, which will be used for
-        # regular / bold / italic / bold+italic versions of the font.
-        # If your font doesn't have one of them, just repeat the regular
-        # font.
+        try:
+            # Each "font" is a list of four files, which will be used for
+            # regular / bold / italic / bold+italic versions of the font.
+            # If your font doesn't have one of them, just repeat the regular
+            # font.
 
-        # Example, using the Tuffy font from http://tulrich.com/fonts/
-        # "embeddedFonts" : [
-        #                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
-        #                   ],
+            # Example, using the Tuffy font from http://tulrich.com/fonts/
+            # "embeddedFonts" : [
+            #                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
+            #                   ],
 
-        # The fonts will be registered with the file name, minus the extension.
+            # The fonts will be registered with the file name, minus the extension.
 
-        for variant in font:
-            pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
+            for variant in font:
+                pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
 
-            # And map them all together
-            regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
-            addMapping(regular,0,0,regular)
-            addMapping(regular,0,1,italic)
-            addMapping(regular,1,0,bold)
-            addMapping(regular,1,1,bolditalic)
+                # And map them all together
+                regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
+                addMapping(regular,0,0,regular)
+                addMapping(regular,0,1,italic)
+                addMapping(regular,1,0,bold)
+                addMapping(regular,1,1,bolditalic)
+        except:
+             try:
+                fname=font[0].split('.')[0]
+                log.error("Error processing font %s, registering as Helvetica alias",fname)
+                fonts[fname]='Helvetica'
+             except:
+                log.error("Error processing font %s",fname)
+                sys.exit(1)
 
     while True:
         for [skey,style] in data['styles']:
