@@ -7,7 +7,8 @@
     "margin-top": "1cm",
     "margin-bottom": "1cm",
     "margin-left": "1cm",
-    "margin-right": "1cm"
+    "margin-right": "1cm",
+    "margin-gutter": "1cm"
   },
   "fontsAlias" : {
     "stdFont": "Helvetica",
