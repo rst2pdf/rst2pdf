@@ -1,6 +1,7 @@
 import sys
 import logging
 from reportlab.platypus import PageBreak, Spacer
+import shlex
 
 log = logging.getLogger('rst2pdf')
 hdlr = logging.StreamHandler(sys.stdout)
