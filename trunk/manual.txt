@@ -248,8 +248,9 @@ Here's the default stylesheet's::
     "height": null,
     "margin-top": "2cm",
     "margin-bottom": "2cm",
-    "margin-left": "3cm",
-    "margin-right": "1.5cm"
+    "margin-left": "2cm",
+    "margin-right": "2cm",
+    "margin-gutter": "0cm"
   },
 
 Size is one of the standard paper sizes, like A4 or LETTER.
@@ -264,6 +265,17 @@ inch (inches) or cm (centimeters).
  
 When both width/height and size are specified, size will be used, and
 width/height ignored.
+
+All margins should be self-explanatory, except for margin-gutter. That's the
+margin in the center of a two-page spread.
+
+This value is added to the left margin of odd pages and the right margin of
+even pages, adding (or removing, if it's negative) space "in the middle" of
+opposingpages.
+
+If you intend to bound a printed copy, you may need extra space there. OTOH,
+if you will display it on-screen on a two-page format (common in many PDF
+readers, nice for ebooks), a negative value may be pleasant.
 
 Syntax Highlighting
 -------------------

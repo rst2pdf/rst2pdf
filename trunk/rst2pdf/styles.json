@@ -6,8 +6,9 @@
     "height": null,
     "margin-top": "2cm",
     "margin-bottom": "2cm",
-    "margin-left": "3cm",
-    "margin-right": "1.5cm"
+    "margin-left": "2cm",
+    "margin-right": "2cm",
+    "margin-gutter": "0cm"
   },
   "pageTemplates" : {
     "firstPage": {
