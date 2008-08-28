@@ -40,7 +40,7 @@
       "alignment":"TA_LEFT",
       "spaceBefore":0,
       "spaceAfter":0,
-      "bulletFontName":"stdSerif",
+      "bulletFontName":"stdFont",
       "bulletFontSize":8,
       "bulletIndent":0,
       "textColor": "black",
