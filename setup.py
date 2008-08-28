@@ -35,7 +35,7 @@ install_requires = [
         'simplejson',
         ]
         
-tests_require = install_requires
+tests_require = ['pyPdf',]
     
 setup(
     name = "rst2pdf",
@@ -50,6 +50,7 @@ setup(
     ], 
     install_requires = install_requires,
     tests_require=tests_require,
+    extras_require=dict(tests=tests_require),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
