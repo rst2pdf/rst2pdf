@@ -41,8 +41,8 @@ class GenerationTests(unittest.TestCase):
         input_file = input_file_path('test_bullet_chars.txt')
         input=open(input_file,'r').read()
         doctree=docutils.core.publish_doctree(input)
-        pdb.set_trace()
         elements=self.converter.gen_elements(doctree,0)
+        pdb.set_trace()
         
 def test_suite():
     return unittest.makeSuite(GenerationTests)
