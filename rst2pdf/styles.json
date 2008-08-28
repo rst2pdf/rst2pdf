@@ -80,6 +80,10 @@
       "parent": "bodytext",
       "alignment": "TA_RIGHT"
     }],
+    ["figure" , {
+      "parent": "bodytext",
+      "alignment": "TA_CENTER"
+    }],
     ["definition_list_term" , {
       "parent": "normal",
       "fontName": "stdBold",
