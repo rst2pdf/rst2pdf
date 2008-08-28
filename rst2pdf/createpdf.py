@@ -6,6 +6,7 @@ __docformat__ = 'reStructuredText'
 import re
 import sys
 import os
+from os.path import join, abspath, dirname
 import pprint
 import string
 from types import StringType
@@ -61,15 +62,14 @@ class MyIndenter(Indenter):
 
 class RstToPdf(object):
 
-    def __init__(self):
+    def __init__(self, stylesheetfile = None):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
-        self.styles=None
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
-        self.defSsheet=os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
-
+        stylesheetfile = stylesheetfile or join(abspath(dirname(__file__)), 'styles.json')
+        self.styles=sty.getStyleSheet(stylesheetfile)
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -745,7 +745,7 @@ class RstToPdf(object):
         return spans
 
 
-    def createPdf(self,text=None,output=None,doctree=None,styleSheet=None):
+    def createPdf(self,text=None,output=None,doctree=None):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
         and save it in outfile.
 
@@ -753,10 +753,8 @@ class RstToPdf(object):
         If it's something with a write method, (like a StringIO,
         or a file object), the data is saved there.
 
-        styleSheet is the path to the style file.'''
+        '''
 
-        styleSheet=styleSheet or self.defSsheet
-        self.styles=sty.getStyleSheet(styleSheet)
 
         if not doctree:
             if text:
@@ -880,10 +878,8 @@ def main():
     if options.vverbose:
         log.setLevel(logging.DEBUG)
 
-    rtp=RstToPdf()
-
     if options.printssheet:
-        print open(rtp.defSsheet).read()
+        print open(join(abspath(dirname(__file__)), 'styles.json')).read()
         sys.exit(0)
 
     if len(args) <> 1:
@@ -904,7 +900,7 @@ def main():
     else:
         ssheet=None
 
-    rtp.createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
+    RstToPdf(stylesheetfile = ssheet).createPdf(text=open(infile).read(), output=outfile)
     
 
 if __name__ == "__main__":
