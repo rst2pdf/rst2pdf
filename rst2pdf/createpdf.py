@@ -64,7 +64,6 @@ def parseRaw (data):
         lexer=shlex.shlex(line)
         lexer.whitespace+=','
         tokens=list(lexer)
-        print "TOK:",tokens
         command=tokens[0]
         if command == 'PageBreak':
             elements.append(PageBreak())
@@ -697,7 +696,6 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     elif isinstance (node, docutils.nodes.raw):
         # Not really raw, but what the heck
         node.elements=parseRaw(str(node.astext()))
-        print node.elements
         
     # FIXME nodes we are ignoring for the moment
     elif isinstance (node, docutils.nodes.citation):
