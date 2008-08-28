@@ -9,6 +9,13 @@
     "margin-left": "3cm",
     "margin-right": "1.5cm"
   },
+  "pageTemplates" : {
+    "firstPage": {
+        "frames": [
+            ["0cm", "0cm", "0cm", "0cm"]
+        ]
+    }
+  },
   "fontsAlias" : {
     "stdFont": "Helvetica",
     "stdBold": "Helvetica-Bold",

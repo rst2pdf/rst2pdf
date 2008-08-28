@@ -608,11 +608,13 @@ def gen_elements(node, depth, in_line_block=False, style=None):
 
     elif isinstance (node, docutils.nodes.image):
         # FIXME: handle all the other attributes
-        i=Image(filename=str(node.get("uri")))
+        i=Image(filename=str(node.get("uri")),
+                height=int(node.get('height')),
+                width=int(node.get('width')))
         if node.get('align'):
             i.hAlign=node.get('align').upper()
         else:
-            i.hAlign='CENTER'
+            i.hAlign='CENTER'            
         node.elements=[i]
 
     elif isinstance (node, docutils.nodes.figure):
