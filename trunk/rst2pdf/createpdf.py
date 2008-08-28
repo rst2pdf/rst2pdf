@@ -30,16 +30,19 @@ from cgi import escape
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
-
-def _log(msg):
-    sys.stderr.write('%s\n'%str(msg))
-    sys.stderr.flush()
+from utils import log
 
 try:
+    import wordaxe
+    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-except:
-    _log("No support for hyphenation, install wordaxe")
+    try:
+        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5)
+    except:
+        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5,purePython=True)
+except ImportError:
+    log.warning("No support for hyphenation, install wordaxe")
 
 import styles as sty
 styles=None
@@ -79,20 +82,11 @@ def styleToFont(style):
 
     try:
         s=styles[style]
-        return '<font face="%s" size="%d" color="%s">'%(s.fontName,s.fontSize,s.textColor)
+        return '<font face="%s" size="%d" color="%s">' % (s.fontName,s.fontSize,s.textColor)
     except KeyError:
-        _log('Unknown class %s'%style)
+        log.warning('Unknown class %s' % style)
         return None
 
-try:
-    import wordaxe
-    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    try:
-        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5)
-    except:
-        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5,purePython=True)
-except:
-    _log("No support for hyphenation, install wordaxe")
 
 
 
@@ -262,16 +256,15 @@ def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
             node.pdftext=gather_pdftext(node,depth)
 
     else:
-        _log("Unkn. node (gen_pdftext): %s"%str(node.__class__))
-        _log(node)
+        log.warning("Unkn. node (gen_pdftext): %s" % str(node.__class__))
+        log.warning(node)
         node.pdftext=gather_pdftext(node,depth)
         #print node.transform
 
     if verbose:
         try:
-            print "gen_pdftext: ",node.pdftext
-            print "----"
-        except: # unicode problems
+            log.info("gen_pdftext: %s" % node.pdftext)
+        except: # unicode problems FIXME: should declare explicit execption
             pass
     return node.pdftext
 
@@ -307,7 +300,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         try:
             style=styles[node['classes'][0]]
         except:
-            _log("Unknown class %s, using class bodytext."%node['classes'][0])
+            log.warning("Unknown class %s, using class bodytext." % node['classes'][0])
     
 
     global decoration
@@ -387,7 +380,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
                  isinstance (node.parent, docutils.nodes.table) :
             node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
         else:
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading%d'%min(depth,3)])]
+            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading%d' % min(depth,3)])]
 
 
     elif isinstance (node, docutils.nodes.subtitle):
@@ -554,8 +547,7 @@ def gen_elements(node, depth, in_line_block=False, style=None):
         elif node.parent.get ('enumtype')=='upperalpha':
             b=str(loweralpha[node.parent.children.index(node)].upper())+'.'
         else:
-            _log("Unknown kind of list_item")
-            _log(node.parent)
+            log.critical("Unknown kind of list_item %s" % node.parent)
             sys.exit(1)
         # FIXME: use different unicode bullets depending on b
         if b and b in "*+-":
@@ -701,9 +693,9 @@ def gen_elements(node, depth, in_line_block=False, style=None):
     elif isinstance (node, docutils.nodes.citation):
         node.elements=[]
     else:
-        _log("Unkn. node (gen_elements): %s"%str(node.__class__))
+        log.error("Unkn. node (gen_elements): %s" % str(node.__class__))
         # Why fail? Just log it and do our best.
-        _log(node)
+        log.error(node)
         node.elements=gather_elements(node,depth,style)
         #sys.exit(1)
 
@@ -875,7 +867,7 @@ def createPdf(text=None,output=None,doctree=None,styleSheet=None):
         if text:
             doctree=docutils.core.publish_doctree(text)
         else:
-            _log('Error: createPdf needs a text or a doctree to be useful')
+            log.error('Error: createPdf needs a text or a doctree to be useful')
             return
     elements=gen_elements(doctree,0)
     
@@ -925,14 +917,14 @@ def main():
         sys.exit(0)
 
     if len(args) <> 1:
-        _log('Usage: %s file.txt [ -o file.pdf ]'%sys.argv[0])
+        log.critical('Usage: %s file.txt [ -o file.pdf ]' % sys.argv[0])
         sys.exit(1)
     
     infile=args[0]
     if options.output:
         outfile=options.output
     else:
-        outfile=infile+'.pdf'
+        outfile=infile + '.pdf'
 
     if options.ffolder:
         TTFSearchPath.append(ffolder)
@@ -942,7 +934,7 @@ def main():
     else:
         ssheet=None
 
-    createPdf(text=open(infile).read(),output=outfile,styleSheet=ssheet)
+    createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
     
 
 if __name__ == "__main__":
