@@ -15,7 +15,10 @@ from copy import copy
 from cgi import escape
 import logging
 from optparse import OptionParser
-from PIL import Image as PILImage
+try:
+    from PIL import Image as PILImage
+except ImportError:
+    import Image as PILImage
 
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
@@ -570,7 +573,7 @@ class RstToPdf(object):
             # HTML originally.In which case, we will use the following:
 
             # Find the image size in pixels:
-            
+
             img=PILImage.open(imgname)
             iw,ih=img.size
 
@@ -597,7 +600,7 @@ class RstToPdf(object):
 
             # And now we have this probably completely bogus size!
             log.warning("Image %s guessed as with size:  %fcm by %fcm",imgname,w/cm,w/cm)
-            
+
             i=Image(filename=imgname,
                     height=h,
                     width=w)
@@ -888,7 +891,7 @@ class FancyPage(PageTemplate):
 
 def main():
     '''Parse command line and call createPdf with the correct data'''
-    
+
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
     parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
@@ -915,7 +918,7 @@ def main():
     if len(args) <> 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]' % sys.argv[0])
         sys.exit(1)
-    
+
     infile=args[0]
     if options.output:
         outfile=options.output
@@ -934,7 +937,7 @@ def main():
         ssheet=None
 
     RstToPdf(stylesheetfile = ssheet).createPdf(text=open(infile).read(), output=outfile)
-    
+
 
 if __name__ == "__main__":
     main()
