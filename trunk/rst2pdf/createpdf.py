@@ -13,6 +13,7 @@ from urlparse import *
 from copy import copy
 from cgi import escape
 import shlex
+import logging
 from optparse import OptionParser
 
 from docutils import __version__, __version_details__, SettingsSpec
@@ -859,6 +860,7 @@ def createPdf(text=None,output=None,doctree=None,styleSheet=None):
        styleSheet is the path to the style file.'''
 
     global styles,verbose,vverbose
+    # globals MUST go away !!
 
     styleSheet=styleSheet or defSsheet
     styles=sty.getStyleSheet(styleSheet)
@@ -905,14 +907,18 @@ def main():
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
+    parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,help='Print less information.')
     parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
     (options,args)=parser.parse_args()
 
+    if options.quiet:
+        log.setLevel(logging.CRITICAL)
+
     if options.verbose:
-        verbose=True
+        log.setLevel(logging.INFO)
+
     if options.vverbose:
-        verbose=True
-        vverbose=True
+        log.setLevel(logging.DEBUG)
 
     if options.printssheet:
         print open(defSsheet).read()
