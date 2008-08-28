@@ -139,10 +139,10 @@ def code_block_directive(name, arguments, options, content, lineno,
             # the reason is we want to be able to define a start-at like
             # def mymethod(self)
             # and have such a definition included
-            
+            #import pdb; pdb.set_trace()
             after_text = options.get('start-at', None)
             if after_text:
-                # skip content in include_text before *and incl.* a matching text
+                # skip content in include_text before *and NOT incl.* a matching text
                 after_index = content.find(after_text)
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-at" option of "%s" '
@@ -171,7 +171,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 
             before_text = options.get('end-before', None)
             if before_text:
-                # skip content in include_text after *and incl.* a matching text
+                # skip content in include_text after *and NOT incl.* a matching text
                 before_index = content.find(before_text)
                 if before_index < 0:
                     raise state_machine.reporter.severe('Problem with "end-before" option of "%s" '
