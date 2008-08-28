@@ -36,7 +36,8 @@ install_requires = [
         ]
         
 tests_require = ['pyPdf',]
-    
+hyphenation_require = ['wordaxe',]
+
 setup(
     name = "rst2pdf",
     version = "0.5",
@@ -50,7 +51,8 @@ setup(
     ], 
     install_requires = install_requires,
     tests_require=tests_require,
-    extras_require=dict(tests=tests_require),
+    extras_require=dict(tests=tests_require,
+                        hyphenation=hyphenation_require,),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
