@@ -32,7 +32,7 @@ install_requires = [
         'docutils',
         'reportlab>=2.1',
         'Pygments',
-        'simplejson',
+        'simplejson'
         ]
         
 tests_require = ['pyPdf',]
