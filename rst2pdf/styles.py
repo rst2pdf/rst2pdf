@@ -55,6 +55,7 @@ tm=0
 bm=0
 lm=0
 rm=0
+gm=0
 
 #text width
 tw=0
@@ -64,7 +65,7 @@ page_break_level=0
 
 def adjustUnits(v):
     '''Takes something like 2cm and returns 2*cm'''
-    _,n,u=re.split('([0-9\.]*)',v)
+    _,n,u=re.split('(-?[0-9\.]*)',v)
     if u in units.__dict__:
         return float(n)*units.__dict__[u]
     else:
@@ -74,7 +75,7 @@ import reportlab.lib.pagesizes as pagesizes
 
 def getStyleSheet(fname):
     """Returns a stylesheet object"""
-    global pw,ph,ps,tm,bm,lm,rm,tw
+    global pw,ph,ps,tm,bm,lm,rm,tw,gm
     stylesheet = StyleSheet1()
 
     from simplejson import loads
@@ -100,14 +101,14 @@ def getStyleSheet(fname):
     rm=adjustUnits(page['margin-right'])
     tm=adjustUnits(page['margin-top'])
     bm=adjustUnits(page['margin-bottom'])
+    gm=adjustUnits(page['margin-gutter'])
 
 
     # tw is the text width.
     # We need it to calculate header-footer height
     # and compress literal blocks.
-    tw=pw-lm-rm
+    tw=pw-lm-rm-gm
     embedded=data['embeddedFonts']
-
 
     for font in embedded:
         try:

@@ -18,7 +18,6 @@ from optparse import OptionParser
 
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
-from docutils.frontend import OptionParser
 from docutils.transforms import Transformer
 import docutils.readers.doctree
 import docutils.core
@@ -38,7 +37,7 @@ from reportlab.lib.pagesizes import *
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
-from utils import log
+from utils import log,parseRaw
 import styles as sty
 
 try:
@@ -53,56 +52,6 @@ try:
 except ImportError:
     log.warning("No support for hyphenation, install wordaxe")
 
-
-marks="#=-_*^>%&|"
-lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
-loweralpha=string.ascii_lowercase
-styles=None
-doc_title=None
-doc_author=None
-decoration = {'header':None, 'footer':None, 'endnotes':[]}
-verbose=False
-vverbose=False
-
-defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
-
-
-def parseRaw (data):
-    '''Parse and process a simple DSL to handle creation of flowables.
-
-    Supported (can add others on request):
-    
-    * PageBreak
-
-    * Spacer width, height
-
-    '''
-    elements=[]
-    lines=data.splitlines()
-    for line in lines:
-        lexer=shlex.shlex(line)
-        lexer.whitespace+=','
-        tokens=list(lexer)
-        command=tokens[0]
-        if command == 'PageBreak':
-            elements.append(PageBreak())
-        if command == 'Spacer':
-            elements.append(Spacer(int(tokens[1]),int(tokens[2])))
-    return elements
-
-
-def styleToFont(style):
-    '''Takes a style name, returns a font tag for it, like
-    "<font face=helvetica size=14 color=red>". Used for inline
-    nodes (custom interpreted roles)'''
-
-    try:
-        s=styles[style]
-        return '<font face="%s" size="%d" color="%s">' % (s.fontName,s.fontSize,s.textColor)
-    except KeyError:
-        log.warning('Unknown class %s' % style)
-        return None
-
 class MyIndenter(Indenter):
     # Bugs in reportlab?
     def draw(self):
@@ -110,173 +59,738 @@ class MyIndenter(Indenter):
     width=0
     height=0
 
-def depth (node):
-    if node.parent==None:
-        return 0
-    else:
-        return 1+depth(node.parent)
+class RstToPdf(object):
+
+    def __init__(self):
+        self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
+        self.loweralpha=string.ascii_lowercase
+        self.styles=None
+        self.doc_title=None
+        self.doc_author=None
+        self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
+        self.defSsheet= os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles.json')
 
 
-def gather_pdftext (node, depth, in_line_block=False,replaceEnt=True):
-    return ''.join([gen_pdftext(n,depth,in_line_block,replaceEnt) for n in node.children ])
+    def styleToFont(self, style):
+        '''Takes a style name, returns a font tag for it, like
+        "<font face=helvetica size=14 color=red>". Used for inline
+        nodes (custom interpreted roles)'''
 
-def gen_pdftext(node, depth, in_line_block=False,replaceEnt=True):
-    pre=""
-    post=""
-
-    if verbose:
         try:
-            log.debug( "gen_pdftext: %s" % node.__class__)
-            log.debug( "gen_pdftext: %s" % node)
+            s=self.styles[style]
+            return '<font face="%s" size="%d" color="%s">' % (s.fontName,s.fontSize,s.textColor)
+        except KeyError:
+            log.warning('Unknown class %s' % style)
+            return None
+
+
+    def gather_pdftext (self, node, depth, in_line_block=False,replaceEnt=True):
+        return ''.join([self.gen_pdftext(n,depth,in_line_block,replaceEnt) for n in node.children ])
+
+    def gen_pdftext(self, node, depth, in_line_block=False,replaceEnt=True):
+        pre=""
+        post=""
+
+        try:
+            log.debug( "self.gen_pdftext: %s" % node.__class__)
+            log.debug( "self.gen_pdftext: %s" % node)
         except: # unicode problems
             pass
 
-    if isinstance (node, docutils.nodes.paragraph) \
-         or isinstance (node, docutils.nodes.title) \
-         or isinstance (node, docutils.nodes.subtitle):
-        node.pdftext=gather_pdftext(node,depth)+"\n"
+        if isinstance (node, docutils.nodes.paragraph) \
+            or isinstance (node, docutils.nodes.title) \
+            or isinstance (node, docutils.nodes.subtitle):
+            node.pdftext=self.gather_pdftext(node,depth)+"\n"
 
-    elif isinstance (node, docutils.nodes.Text):
-        node.pdftext=node.astext()
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.Text):
+            node.pdftext=node.astext()
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.strong):
-        pre="<b>"
-        post="</b>"
-        node.pdftext=gather_pdftext(node,depth)
-        #if replaceEnt:
-        #    node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.strong):
+            pre="<b>"
+            post="</b>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            #if replaceEnt:
+            #    node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.emphasis):
-        pre="<i>"
-        post="</i>"
-        node.pdftext=gather_pdftext(node,depth)
-        #if replaceEnt:
-        #    node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.emphasis):
+            pre="<i>"
+            post="</i>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            #if replaceEnt:
+            #    node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.literal):
-        pre='<font face="%s">'%styles['code'].fontName
-        post="</font>"
-        node.pdftext=gather_pdftext(node,depth)
-        #if replaceEnt:
-        #    node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.literal):
+            pre='<font face="%s">'%self.styles['code'].fontName
+            post="</font>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            #if replaceEnt:
+            #    node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.superscript):
-        pre='<super>'
-        post="</super>"
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.superscript):
+            pre='<super>'
+            post="</super>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.subscript):
-        pre='<sub>'
-        post="</sub>"
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.subscript):
+            pre='<sub>'
+            post="</sub>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.title_reference):
-        pre=styleToFont("title_reference")
-        post="</font>"
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+        elif isinstance (node, docutils.nodes.title_reference):
+            pre=self.styleToFont("title_reference")
+            post="</font>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
 
-    elif isinstance (node, docutils.nodes.reference) :
-        uri=node.get('refuri')
-        if uri:
-            if urlparse(uri)[0]:
-                pre+=u'<a href="%s" color="blue">'%uri
-                post='</a>'+post
+        elif isinstance (node, docutils.nodes.reference) :
+            uri=node.get('refuri')
+            if uri:
+                if urlparse(uri)[0]:
+                    pre+=u'<a href="%s" color="blue">'%uri
+                    post='</a>'+post
+            else:
+                    uri=node.get('refid')
+                    if uri:
+                            pre+=u'<a href="#%s">'%uri
+                            post='</a>'+post
+            node.pdftext=self.gather_pdftext(node,depth)
+            #if replaceEnt:
+            #    node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
+
+        elif isinstance (node, docutils.nodes.option_string) \
+            or isinstance (node, docutils.nodes.option_argument):
+            node.pdftext=node.astext()
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+
+        elif isinstance (node, docutils.nodes.header) \
+            or isinstance (node, docutils.nodes.footer):
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+
+            node.pdftext=pre+node.pdftext+post
+
+        elif isinstance (node, docutils.nodes.system_message)     \
+            or isinstance (node, docutils.nodes.problematic):
+            sys.stderr.write (node.astext()+"\n")
+            sys.stderr.flush()
+            pre='<font color="red">'
+            post="</font>"
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
+
+        elif isinstance (node, docutils.nodes.generated):
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext+post
+
+        elif isinstance (node, docutils.nodes.image):
+            node.pdftext='<img src="%s" />'%node.get('uri')
+
+        elif isinstance (node, docutils.nodes.footnote_reference):
+            # Fixme link to the right place
+            anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+            node.pdftext=u'%s<super><a href="%s" color="blue">%s</a></super>'%(anchors,'#'+node.astext(),node.astext())
+        elif isinstance (node, docutils.nodes.citation_reference):
+            # Fixme link to the right place
+            anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+            node.pdftext=u'%s[<a href="%s" color="blue">%s</a>]'%(anchors,'#'+node.astext(),node.astext())
+
+        elif isinstance (node, docutils.nodes.target):
+            pre=u'<a name="%s"/>'%node['ids'][0]
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext
+
+        elif isinstance (node, docutils.nodes.inline):
+            ftag=self.styleToFont(node['classes'][0])
+            if ftag:
+                node.pdftext="%s%s</font>"%(ftag,self.gather_pdftext(node,depth))
+            else:
+                node.pdftext=self.gather_pdftext(node,depth)
+
         else:
-                uri=node.get('refid')
-                if uri:
-                        pre+=u'<a href="#%s">'%uri
-                        post='</a>'+post
-        node.pdftext=gather_pdftext(node,depth)
-        #if replaceEnt:
-        #    node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
+            log.warning("Unkn. node (self.gen_pdftext): %s" % str(node.__class__))
+            log.warning(node)
+            node.pdftext=self.gather_pdftext(node,depth)
+            #print node.transform
 
-    elif isinstance (node, docutils.nodes.option_string) \
-         or isinstance (node, docutils.nodes.option_argument):
-        node.pdftext=node.astext()
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-
-    elif isinstance (node, docutils.nodes.header) \
-         or isinstance (node, docutils.nodes.footer):
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-    
-        node.pdftext=pre+node.pdftext+post
-
-    elif isinstance (node, docutils.nodes.system_message)     \
-         or isinstance (node, docutils.nodes.problematic):
-        sys.stderr.write (node.astext()+"\n")
-        sys.stderr.flush()
-        pre='<font color="red">'
-        post="</font>"
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
-
-    elif isinstance (node, docutils.nodes.generated):
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext+post
-
-    elif isinstance (node, docutils.nodes.image):
-        node.pdftext='<img src="%s" />'%node.get('uri')
-
-    elif isinstance (node, docutils.nodes.footnote_reference):
-        # Fixme link to the right place
-        anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
-        node.pdftext=u'%s<super><a href="%s" color="blue">%s</a></super>'%(anchors,'#'+node.astext(),node.astext())
-    elif isinstance (node, docutils.nodes.citation_reference):
-        # Fixme link to the right place
-        anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
-        node.pdftext=u'%s[<a href="%s" color="blue">%s</a>]'%(anchors,'#'+node.astext(),node.astext())
-
-    elif isinstance (node, docutils.nodes.target):
-        pre=u'<a name="%s"/>'%node['ids'][0]
-        node.pdftext=gather_pdftext(node,depth)
-        if replaceEnt:
-            node.pdftext=escape(node.pdftext,True)
-        node.pdftext=pre+node.pdftext
-
-    elif isinstance (node, docutils.nodes.inline):
-        ftag=styleToFont(node['classes'][0])
-        if ftag:
-            node.pdftext="%s%s</font>"%(ftag,gather_pdftext(node,depth))
-        else:
-            node.pdftext=gather_pdftext(node,depth)
-
-    else:
-        log.warning("Unkn. node (gen_pdftext): %s" % str(node.__class__))
-        log.warning(node)
-        node.pdftext=gather_pdftext(node,depth)
-        #print node.transform
-
-    if verbose:
         try:
-            log.info("gen_pdftext: %s" % node.pdftext)
+            log.info("self.gen_pdftext: %s" % node.pdftext)
         except: # unicode problems FIXME: should declare explicit execption
             pass
-    return node.pdftext
+        return node.pdftext
+
+    def gen_elements(self, node, depth, in_line_block=False, style=None):
+
+        try:
+            log.debug( "gen_elements: %s" % node.__class__)
+            log.debug( "gen_elements: %s" % node)
+        except: # unicode problems FIXME/ explicit error
+            pass
+
+        if style is None:
+            style=self.styles['bodytext']
+
+        if node['classes']:
+            # Supports only one class, sorry ;-)
+            try:
+                style=self.styles[node['classes'][0]]
+            except:
+                log.warning("Unknown class %s, using class bodytext." % node['classes'][0])
+
+        if isinstance (node, docutils.nodes.document):
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        #######################
+        ## Tables
+        #######################
+
+        elif isinstance (node, docutils.nodes.table):
+            # FIXME: make spacing configurable
+            node.elements=[Spacer(0,6)]+self.gather_elements(node,depth)
+
+        elif isinstance (node, docutils.nodes.tgroup):
+            rows=[]
+            colwidths=[]
+            hasHead=False
+            headRows=0
+            for n in node.children:
+                if isinstance (n,docutils.nodes.thead):
+                    hasHead=True
+                    for row in n.children:
+                        r=[]
+                        for cell in row.children:
+                            r.append(cell)
+                        rows.append(r)
+                    headRows=len(rows)
+                elif isinstance (n,docutils.nodes.tbody):
+                    for row in n.children:
+                        r=[]
+                        for cell in row.children:
+                            r.append(cell)
+                        rows.append(r)
+                elif isinstance (n,docutils.nodes.colspec):
+                    colwidths.append(int(n['colwidth']))
+
+            spans=self.filltable (rows)
+
+            data=[]
+
+            for row in rows:
+                r=[]
+                for cell in row:
+                    if isinstance(cell,str):
+                        r.append("")
+                    else:
+                        r.append(self.gather_elements(cell,depth))
+                data.append(r)
+
+            st=spans+sty.tstyleNorm
+
+            if hasHead:
+                st+=[sty.tstyleHead(headRows)]
+
+            # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
+            if colwidths:
+                _tw=sty.tw/sum(colwidths)
+                colwidths=[ w*_tw for w in colwidths ]
+            else:
+                colwidths=None # Auto calculate
+
+            node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
+
+        elif isinstance (node, docutils.nodes.title):
+            # Special cases: (Not sure this is right ;-)
+            if isinstance (node.parent, docutils.nodes.document):
+                # FIXME maybe make it a coverpage?
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['title'])]
+                self.doc_title=unicode(self.gen_pdftext(node,depth)).strip()
+            elif isinstance (node.parent, docutils.nodes.topic):
+                # FIXME style correctly
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
+            elif isinstance (node.parent, docutils.nodes.admonition) or \
+                    isinstance (node.parent, docutils.nodes.sidebar) or \
+                    isinstance (node.parent, docutils.nodes.table) :
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
+            else:
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading%d' % min(depth,3)])]
 
 
+        elif isinstance (node, docutils.nodes.subtitle):
+            if isinstance (node.parent,docutils.nodes.sidebar):
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading4'])]
+            elif isinstance (node.parent,docutils.nodes.document):
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['subtitle'])]
+
+        elif isinstance (node, docutils.nodes.paragraph):
+            node.elements=[Paragraph(self.gen_pdftext(node,depth), style)]
+
+        elif isinstance (node, docutils.nodes.docinfo):
+            # A docinfo usually contains several fields.
+            # We'll render it as a series of elements, one field each.
+
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.field):
+            # A field has two child elements, a field_name and a field_body.
+            # We render as a two-column table, left-column is right-aligned,
+            # bold, and much smaller
+
+            fn=Paragraph(self.gather_pdftext(node.children[0],depth)+":",style=self.styles['fieldname'])
+            fb=self.gen_elements(node.children[1],depth)
+            node.elements=[Table([[fn,fb]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
+
+        elif isinstance (node, docutils.nodes.decoration):
+            # This is a tricky one. We need to switch our document's
+            # page templates based on this. If decoration contains a
+            # header and/or a footer, we need to use those
+            # right now, we avoid trouble.
+            # FIXME Implement
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.header):
+            self.decoration['header']=self.gather_pdftext(node,depth)
+            node.elements=[]
+        elif isinstance (node, docutils.nodes.footer):
+            self.decoration['footer']=self.gather_pdftext(node,depth)
+            node.elements=[]
+
+        elif isinstance (node, docutils.nodes.author):
+            if isinstance (node.parent,docutils.nodes.authors):
+                # Is only one of multiple authors. Return a paragraph
+                node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
+            else:
+                # A single author: works like a field
+                fb=self.gather_pdftext(node,depth)
+                node.elements=[Table([[Paragraph("Author:",style=self.styles['fieldname']),
+                                    Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
+                self.doc_author=fb.strip()
+
+        elif isinstance (node, docutils.nodes.authors):
+            # Multiple authors. Create a two-column table. Author references on the right.
+            td=[[Paragraph("Authors:",style=self.styles['fieldname']),self.gather_elements(node,depth,style=style)]]
+            node.elements=[Table(td,style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
+
+        elif isinstance (node, docutils.nodes.organization):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[Paragraph("Organization:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.contact):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Contact:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.address):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Address:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.version):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Version:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.revision):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Revision:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.status):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Version:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.date):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[ Paragraph("Date:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+        elif isinstance (node, docutils.nodes.copyright):
+            fb=self.gather_pdftext(node,depth)
+            t=Table([[Paragraph("Copyright:",style=self.styles['fieldname']),
+                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
+            node.elements=[t]
+
+        elif isinstance (node, docutils.nodes.topic)                                \
+            or isinstance (node, docutils.nodes.field_body):
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.section):
+            if depth<sty.page_break_level:
+                node.elements=[PageBreak()]+self.gather_elements(node,depth+1)
+            else:
+                node.elements=self.gather_elements(node,depth+1)
+
+        elif isinstance (node, docutils.nodes.bullet_list)                   \
+            or isinstance (node, docutils.nodes.enumerated_list)            \
+            or isinstance (node, docutils.nodes.definition_list)            \
+            or isinstance (node, docutils.nodes.option_list)                \
+            or isinstance (node, docutils.nodes.field_list)                 \
+            or isinstance (node, docutils.nodes.definition):
+
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.option_list_item):
+
+            optext = ', '.join([self.gather_pdftext(child,depth) for child in node.children[0].children])
+            desc = self.gather_elements(node.children[1],depth,style)
+
+            node.elements=[Table([[PreformattedFit(optext,self.styles["code"]),desc]],style=sty.tstyles['field'])]
+
+
+        elif isinstance (node, docutils.nodes.definition_list_item):
+
+            # I need to catch the classifiers here
+            tt=[]
+            dt=[]
+            for n in node.children:
+                if isinstance(n,docutils.nodes.term):
+                    tt.append(self.styleToFont("definition_list_term")+self.gather_pdftext(n,depth,style)+"</font>")
+                elif isinstance(n,docutils.nodes.classifier) :
+                    tt.append(self.styleToFont("definition_list_classifier")+self.gather_pdftext(n,depth,style)+"</font>")
+                else:
+                    dt=dt+self.gen_elements(n,depth,style)
+
+            node.elements=[Paragraph(' : '.join(tt),style),MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
+
+        elif isinstance (node, docutils.nodes.list_item):
+            # A list_item is a table of two columns.
+            # The left one is the bullet itself, the right is the
+            # item content. This way we can nest them.
+
+            el=self.gather_elements(node,depth,style=style)
+            b=""
+            if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
+                b=node.parent.get('bullet')
+                if b=="None":
+                    b=""
+
+            elif node.parent.get ('enumtype')=='arabic':
+                b=str(node.parent.children.index(node)+1)+'.'
+
+            elif node.parent.get ('enumtype')=='lowerroman':
+                b=str(self.lowerroman[node.parent.children.index(node)])+'.'
+
+            elif node.parent.get ('enumtype')=='upperroman':
+                b=str(self.lowerroman[node.parent.children.index(node)].upper())+'.'
+
+            elif node.parent.get ('enumtype')=='loweralpha':
+                b=str(self.loweralpha[node.parent.children.index(node)])+'.'
+            elif node.parent.get ('enumtype')=='upperalpha':
+                b=str(self.loweralpha[node.parent.children.index(node)].upper())+'.'
+            else:
+                log.critical("Unknown kind of list_item %s" % node.parent)
+                sys.exit(1)
+            # FIXME: use different unicode bullets depending on b
+            if b and b in "*+-":
+                b=u'\u2022'
+
+            el[0].bulletText = b
+            for e in el[1:]:
+                e.bulletText=" "
+            node.elements=[Table([[el]],style=sty.tstyles["bullet"])]
+
+        elif isinstance (node, docutils.nodes.transition):
+            node.elements=[Separation()]
+
+
+        elif isinstance (node, docutils.nodes.system_message)     \
+            or isinstance (node, docutils.nodes.problematic):
+            # FIXME show the error in the document, red, whatever
+            sys.stderr.write (node.astext()+"\n")
+            sys.stderr.flush()
+            node.elements=[]
+
+        elif isinstance (node, docutils.nodes.block_quote):
+            node.elements=[MyIndenter(left=20)]+self.gather_elements(node,depth,style)+[MyIndenter(left=-20)]
+
+        elif isinstance (node, docutils.nodes.attribution):
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['attribution'])]
+
+        elif isinstance (node, docutils.nodes.comment):
+            # Class that generates no output
+            node.elements=[]
+
+        elif isinstance (node, docutils.nodes.line_block):
+            # Obsolete? Let's do something anyway.
+            # FIXME: indent or not?
+            qstyle=copy(style)
+            qstyle.leftIndent+=30
+            node.elements=self.gather_elements(node,depth,style=qstyle)
+
+        elif isinstance (node, docutils.nodes.line):
+            # All elements in one line
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),style=style)]
+
+        elif isinstance (node, docutils.nodes.literal_block) \
+            or isinstance (node, docutils.nodes.doctest_block):
+            node.elements=[PreformattedFit(self.gather_pdftext(node,depth,replaceEnt=True),self.styles['code'])]
+
+        elif isinstance (node, docutils.nodes.attention)        \
+            or isinstance (node, docutils.nodes.caution)            \
+            or isinstance (node, docutils.nodes.danger)             \
+            or isinstance (node, docutils.nodes.error)                \
+            or isinstance (node, docutils.nodes.hint)                 \
+            or isinstance (node, docutils.nodes.important)        \
+            or isinstance (node, docutils.nodes.note)                 \
+            or isinstance (node, docutils.nodes.tip)                    \
+            or isinstance (node, docutils.nodes.warning)            \
+            or isinstance (node, docutils.nodes.admonition):
+            node.elements=[Paragraph(node.tagname.title(),style=self.styles['heading3'])]+self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.image):
+            # FIXME: handle all the other attributes
+            w=node.get('width')
+            if w is not None:
+                w=int(w)
+                
+            h=node.get('height')
+            if h is not None:
+                h=int(h)
+
+            i=Image(filename=str(node.get("uri")),
+                    height=h,
+                    width=w)
+            if node.get('align'):
+                i.hAlign=node.get('align').upper()
+            else:
+                i.hAlign='CENTER'
+            node.elements=[i]
+
+        elif isinstance (node, docutils.nodes.figure):
+            # The sub-elements are the figure and the caption, and't ugly if
+            # they separate
+            node.elements=[KeepTogether(self.gather_elements(node,depth,style=style))]
+
+        elif isinstance (node, docutils.nodes.caption):
+            node.elements=[Paragraph('<i>'+self.gather_pdftext(node,depth)+'</i>',style=style)]
+
+        elif isinstance (node, docutils.nodes.legend):
+            node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node, docutils.nodes.sidebar):
+            node.elements=[Table([[ self.gather_elements(node,depth,style=style)]],style=sty.tstyles['sidebar'])]
+
+        elif isinstance (node, docutils.nodes.rubric):
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
+
+        elif isinstance (node, docutils.nodes.compound):
+            # FIXME think if this is even implementable
+            node.elements=self.gather_elements(node,depth,style)
+
+        elif isinstance (node, docutils.nodes.container):
+            # FIXME think if this is even implementable
+            node.elements=self.gather_elements(node,depth,style)
+
+        elif isinstance (node, docutils.nodes.substitution_definition):
+            node.elements=[]
+
+        elif isinstance (node, docutils.nodes.tbody):
+            rows=[self.gen_elements(n,depth) for n in node.children]
+            t=[]
+            for r in rows:
+                if not r:
+                    continue
+                t.append(r)
+            node.elements=[Table(t,style=sty.tstyles['normal'])]
+
+        elif isinstance (node, docutils.nodes.footnote) or \
+            isinstance (node, docutils.nodes.citation):
+            # It seems a footnote contains a label and a series of elements
+            ltext=self.gather_pdftext(node.children[0],depth)
+            if len(node['backrefs'])>1:
+                backrefs=[]
+                i=1
+                for r in node['backrefs']:
+                    backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
+                    i+=1
+                backrefs='(%s)'%', '.join(backrefs)
+                label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),self.styles["normal"])
+            elif len(node['backrefs'])==1:
+                label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),self.styles["normal"])
+            else:
+                label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),self.styles["normal"])
+            contents=self.gather_elements(node,depth,style)[1:]
+            self.decoration['endnotes'].append([label,contents])
+            node.elements=[]
+
+        elif isinstance (node, docutils.nodes.label):
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),style)]
+        elif isinstance (node, docutils.nodes.Text):
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),style)]
+        elif isinstance (node, docutils.nodes.entry):
+            node.elements=self.gather_elements(node,depth,style)
+
+        elif isinstance (node, docutils.nodes.target):
+            node.elements=self.gather_elements(node,depth,style)
+
+        elif isinstance (node, docutils.nodes.reference):
+            node.elements=self.gather_elements(node,depth,style)
+
+        elif isinstance (node, docutils.nodes.raw):
+            # Not really raw, but what the heck
+            node.elements=parseRaw(str(node.astext()))
+
+        # FIXME nodes we are ignoring for the moment
+        elif isinstance (node, docutils.nodes.citation):
+            node.elements=[]
+        else:
+            log.error("Unkn. node (gen_elements): %s" % str(node.__class__))
+            # Why fail? Just log it and do our best.
+            log.error(node)
+            node.elements=self.gather_elements(node,depth,style)
+            #sys.exit(1)
+
+        # set anchors for internal references
+        for id in node['ids']:
+            node.elements.insert(
+                    node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
+                    Paragraph('<a name="%s"/>'%id,style))
+
+        try:
+            log.debug( "gen_elements: %s" % node.elements)
+        except: # unicode problems FIXME: explicit error
+            pass
+        return node.elements
+
+    def gather_elements (self,node, depth, in_line_block=False,style=None):
+        if style is None:
+            style=self.styles['bodytext']
+        r=[]
+        for n in node.children:
+            r=r+(self.gen_elements(n,depth,in_line_block,style=style))
+        return r
+
+
+    def filltable (self,rows):
+        """
+        Takes a list of rows, consisting of cells and performs the following fixes:
+
+        * For multicolumn cells, add continuation cells, to make all rows the same
+        size.
+
+        * For multirow cell, insert continuation cells, to make all columns the
+        same size.
+
+        * If there are still shorter rows, add empty cells at the end (ReST quirk)
+
+        * Once the table is *normalized*, create spans list, fitting for reportlab´s
+        Table class.
+
+        """
+
+        # If there is a multicol cell, we need to insert Continuation Cells
+        # to make all rows the same length
+
+        for y in range(0,len( rows)):
+            for x in range (0,len(rows[y])):
+                cell=rows[y][x]
+                if isinstance (cell,str):
+                    continue
+                if cell.get("morecols"):
+                    for i in range(0,cell.get("morecols")):
+                        rows[y].insert(x+1,"")
+
+        for y in range(0,len( rows)):
+            for x in range (0,len(rows[y])):
+                cell=rows[y][x]
+                if isinstance (cell,str):
+                    continue
+                if cell.get("morerows"):
+                    for i in range(0,cell.get("morerows")):
+                        rows[y+i+1].insert(x,"")
+
+
+        # If a row is shorter, add empty cells at the right end
+        maxw=max([len(r) for r in rows])
+        for r in rows:
+            while len(r) < maxw:
+                r.append("")
+
+        # Create spans list for reportlab's table style
+        spans=[]
+        for y in range(0,len( rows)):
+            for x in range (0,len(rows[y])):
+                cell=rows[y][x]
+                if isinstance (cell,str):
+                    continue
+                if cell.get("morecols"):
+                    mc=cell.get("morecols")
+                else: mc=0
+                if cell.get("morerows"):
+                    mr=cell.get("morerows")
+                else: mr=0
+
+                if mc or mr:
+                    spans.append(('SPAN',(x,y),(x+mc,y+mr)))
+        return spans
+
+
+    def createPdf(self,text=None,output=None,doctree=None,styleSheet=None):
+        '''Create a PDF from text (ReST input), or doctree (docutil nodes)
+        and save it in outfile.
+
+        If outfile is a string, it's a filename.
+        If it's something with a write method, (like a StringIO,
+        or a file object), the data is saved there.
+
+        styleSheet is the path to the style file.'''
+
+        styleSheet=styleSheet or self.defSsheet
+        self.styles=sty.getStyleSheet(styleSheet)
+
+        if not doctree:
+            if text:
+                doctree=docutils.core.publish_doctree(text)
+            else:
+                log.error('Error: createPdf needs a text or a doctree to be useful')
+                return
+        elements=self.gen_elements(doctree,0)
+
+        # Put the endnotes at the end ;-)
+        endnotes = self.decoration['endnotes']
+        if endnotes:
+            elements.append(Spacer(1,2*cm))
+            elements.append(Separation())
+            # FIXME: the width of the left column should not be fixed
+            for n in self.decoration['endnotes']:
+                elements.append(Table([[n[0],n[1]]],
+                                style=sty.tstyles['endnote'],
+                                colWidths=[sty.endnote_lwidth,None]))
+
+        head=self.decoration['header']
+        foot=self.decoration['footer']
+
+        # So, now, create the FancyPage with the right sizes and elements
+        FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
+                                    sty.bm,sty.lm,sty.rm,head,foot)
+        # FIXME: make this nice
+        FP.styles=self.styles
+
+        pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=self.doc_title,author=self.doc_author)
+        pdfdoc.build(elements)
 
 def PreformattedFit(text,style):
     """Preformatted section that gets horizontally compressed if needed."""
@@ -289,449 +803,8 @@ def PreformattedFit(text,style):
         #style.leading*=f
     return XPreformatted(text,style)
 
-
-def gen_elements(node, depth, in_line_block=False, style=None):
-    global doc_title,doc_author
-
-    if verbose:
-        try:
-            log.debug( "gen_elements: %s" % node.__class__)
-            log.debug( "gen_elements: %s" % node)
-        except: # unicode problems FIXME/ explicit error
-            pass
-
-    if style is None:
-        style=styles['bodytext']
-
-    if node['classes']:
-        # Supports only one class, sorry ;-)
-        try:
-            style=styles[node['classes'][0]]
-        except:
-            log.warning("Unknown class %s, using class bodytext." % node['classes'][0])
-    
-
-    global decoration
-
-    if isinstance (node, docutils.nodes.document):
-        node.elements=gather_elements(node,depth,style=style)
-
-    #######################
-    ## Tables
-    #######################
-
-    elif isinstance (node, docutils.nodes.table):
-        # FIXME: make spacing configurable
-        node.elements=[Spacer(0,6)]+gather_elements(node,depth)
-
-    elif isinstance (node, docutils.nodes.tgroup):
-        rows=[]
-        colwidths=[]
-        hasHead=False
-        headRows=0
-        for n in node.children:
-            if isinstance (n,docutils.nodes.thead):
-                hasHead=True
-                for row in n.children:
-                    r=[]
-                    for cell in row.children:
-                        r.append(cell)
-                    rows.append(r)
-                headRows=len(rows)
-            elif isinstance (n,docutils.nodes.tbody):
-                for row in n.children:
-                    r=[]
-                    for cell in row.children:
-                        r.append(cell)
-                    rows.append(r)
-            elif isinstance (n,docutils.nodes.colspec):
-                colwidths.append(int(n['colwidth']))
-
-        spans=filltable (rows)
-
-        data=[]
-
-        for row in rows:
-            r=[]
-            for cell in row:
-                if isinstance(cell,str):
-                    r.append("")
-                else:
-                    r.append(gather_elements(cell,depth))
-            data.append(r)
-
-        st=spans+sty.tstyleNorm
-
-        if hasHead:
-            st+=[sty.tstyleHead(headRows)]
-
-        # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
-        if colwidths:
-            _tw=sty.tw/sum(colwidths)
-            colwidths=[ w*_tw for w in colwidths ]
-        else:
-            colwidths=None # Auto calculate
-
-        node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
-
-    elif isinstance (node, docutils.nodes.title):
-        # Special cases: (Not sure this is right ;-)
-        if isinstance (node.parent, docutils.nodes.document):
-            # FIXME maybe make it a coverpage?
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['title'])]
-            doc_title=unicode(gen_pdftext(node,depth)).strip()
-        elif isinstance (node.parent, docutils.nodes.topic):
-            # FIXME style correctly
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
-        elif isinstance (node.parent, docutils.nodes.admonition) or \
-                 isinstance (node.parent, docutils.nodes.sidebar) or \
-                 isinstance (node.parent, docutils.nodes.table) :
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading3'])]
-        else:
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading%d' % min(depth,3)])]
-
-
-    elif isinstance (node, docutils.nodes.subtitle):
-        if isinstance (node.parent,docutils.nodes.sidebar):
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['heading4'])]
-        elif isinstance (node.parent,docutils.nodes.document):
-            node.elements=[Paragraph(gen_pdftext(node,depth), styles['subtitle'])]
-
-    elif isinstance (node, docutils.nodes.paragraph):
-        node.elements=[Paragraph(gen_pdftext(node,depth), style)]
-
-    elif isinstance (node, docutils.nodes.docinfo):
-        # A docinfo usually contains several fields.
-        # We'll render it as a series of elements, one field each.
-
-        node.elements=gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.field):
-        # A field has two child elements, a field_name and a field_body.
-        # We render as a two-column table, left-column is right-aligned,
-        # bold, and much smaller
-
-        fn=Paragraph(gather_pdftext(node.children[0],depth)+":",style=styles['fieldname'])
-        fb=gen_elements(node.children[1],depth)
-        node.elements=[Table([[fn,fb]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
-
-    elif isinstance (node, docutils.nodes.decoration):
-        # This is a tricky one. We need to switch our document's
-        # page templates based on this. If decoration contains a
-        # header and/or a footer, we need to use those
-        # right now, we avoid trouble.
-        # FIXME Implement
-        node.elements=gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.header):
-        decoration['header']=gather_pdftext(node,depth)
-        node.elements=[]
-    elif isinstance (node, docutils.nodes.footer):
-        decoration['footer']=gather_pdftext(node,depth)
-        node.elements=[]
-
-    elif isinstance (node, docutils.nodes.author):
-        if isinstance (node.parent,docutils.nodes.authors):
-            # Is only one of multiple authors. Return a paragraph
-            node.elements=[Paragraph(gather_pdftext(node,depth), style=style)]
-        else:
-            # A single author: works like a field
-            fb=gather_pdftext(node,depth)
-            node.elements=[Table([[Paragraph("Author:",style=styles['fieldname']),
-                                Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
-            doc_author=fb.strip()
-
-    elif isinstance (node, docutils.nodes.authors):
-        # Multiple authors. Create a two-column table. Author references on the right.
-        td=[[Paragraph("Authors:",style=styles['fieldname']),gather_elements(node,depth,style=style)]]
-        node.elements=[Table(td,style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
-
-    elif isinstance (node, docutils.nodes.organization):
-        fb=gather_pdftext(node,depth)
-        t=Table([[Paragraph("Organization:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.contact):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Contact:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.address):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Address:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.version):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Version:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.revision):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Revision:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.status):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Version:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.date):
-        fb=gather_pdftext(node,depth)
-        t=Table([[ Paragraph("Date:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-    elif isinstance (node, docutils.nodes.copyright):
-        fb=gather_pdftext(node,depth)
-        t=Table([[Paragraph("Copyright:",style=styles['fieldname']),
-                            Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
-        node.elements=[t]
-
-    elif isinstance (node, docutils.nodes.topic)                                \
-         or isinstance (node, docutils.nodes.field_body):
-        node.elements=gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.section):
-        if depth<sty.page_break_level:
-            node.elements=[PageBreak()]+gather_elements(node,depth+1)
-        else:
-            node.elements=gather_elements(node,depth+1)
-
-    elif isinstance (node, docutils.nodes.bullet_list)                   \
-         or isinstance (node, docutils.nodes.enumerated_list)            \
-         or isinstance (node, docutils.nodes.definition_list)            \
-         or isinstance (node, docutils.nodes.option_list)                \
-         or isinstance (node, docutils.nodes.field_list)                 \
-         or isinstance (node, docutils.nodes.definition):
-
-        node.elements=gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.option_list_item):
-
-        optext = ', '.join([gather_pdftext(child,depth) for child in node.children[0].children])
-        desc = gather_elements(node.children[1],depth,style)
-
-        node.elements=[Table([[PreformattedFit(optext,styles["code"]),desc]],style=sty.tstyles['field'])]
-
-
-    elif isinstance (node, docutils.nodes.definition_list_item):
-
-        # I need to catch the classifiers here
-        tt=[]
-        dt=[]
-        for n in node.children:
-            if isinstance(n,docutils.nodes.term):
-                tt.append(styleToFont("definition_list_term")+gather_pdftext(n,depth,style)+"</font>")
-            elif isinstance(n,docutils.nodes.classifier) :
-                tt.append(styleToFont("definition_list_classifier")+gather_pdftext(n,depth,style)+"</font>")
-            else:
-                dt=dt+gen_elements(n,depth,style)
-
-        node.elements=[Paragraph(' : '.join(tt),style),MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
-
-    elif isinstance (node, docutils.nodes.list_item):
-        # A list_item is a table of two columns.
-        # The left one is the bullet itself, the right is the
-        # item content. This way we can nest them.
-
-        el=gather_elements(node,depth,style=style)
-        b=""
-        if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
-            b=node.parent.get('bullet')
-            if b=="None":
-                b=""
-
-        elif node.parent.get ('enumtype')=='arabic':
-            b=str(node.parent.children.index(node)+1)+'.'
-
-        elif node.parent.get ('enumtype')=='lowerroman':
-            b=str(lowerroman[node.parent.children.index(node)])+'.'
-
-        elif node.parent.get ('enumtype')=='upperroman':
-            b=str(lowerroman[node.parent.children.index(node)].upper())+'.'
-
-        elif node.parent.get ('enumtype')=='loweralpha':
-            b=str(loweralpha[node.parent.children.index(node)])+'.'
-        elif node.parent.get ('enumtype')=='upperalpha':
-            b=str(loweralpha[node.parent.children.index(node)].upper())+'.'
-        else:
-            log.critical("Unknown kind of list_item %s" % node.parent)
-            sys.exit(1)
-        # FIXME: use different unicode bullets depending on b
-        if b and b in "*+-":
-            b=u'\u2022'
-
-        el[0].bulletText = b
-        for e in el[1:]:
-            e.bulletText=" "
-        node.elements=[Table([[el]],style=sty.tstyles["bullet"])]
-
-    elif isinstance (node, docutils.nodes.transition):
-        node.elements=[Separation()]
-
-
-    elif isinstance (node, docutils.nodes.system_message)     \
-         or isinstance (node, docutils.nodes.problematic):
-        # FIXME show the error in the document, red, whatever
-        sys.stderr.write (node.astext()+"\n")
-        sys.stderr.flush()
-        node.elements=[]
-
-    elif isinstance (node, docutils.nodes.block_quote):
-        node.elements=[MyIndenter(left=20)]+gather_elements(node,depth,style)+[MyIndenter(left=-20)]
-
-    elif isinstance (node, docutils.nodes.attribution):
-        node.elements=[Paragraph(gather_pdftext(node,depth),styles['attribution'])]
-
-    elif isinstance (node, docutils.nodes.comment):
-        # Class that generates no output
-        node.elements=[]
-
-    elif isinstance (node, docutils.nodes.line_block):
-        # Obsolete? Let's do something anyway.
-        # FIXME: indent or not?
-        qstyle=copy(style)
-        qstyle.leftIndent+=30
-        node.elements=gather_elements(node,depth,style=qstyle)
-
-    elif isinstance (node, docutils.nodes.line):
-        # All elements in one line
-        node.elements=[Paragraph(gather_pdftext(node,depth),style=style)]
-
-    elif isinstance (node, docutils.nodes.literal_block) \
-         or isinstance (node, docutils.nodes.doctest_block):
-        node.elements=[PreformattedFit(gather_pdftext(node,depth,replaceEnt=True),styles['code'])]
-
-    elif isinstance (node, docutils.nodes.attention)        \
-         or isinstance (node, docutils.nodes.caution)            \
-         or isinstance (node, docutils.nodes.danger)             \
-         or isinstance (node, docutils.nodes.error)                \
-         or isinstance (node, docutils.nodes.hint)                 \
-         or isinstance (node, docutils.nodes.important)        \
-         or isinstance (node, docutils.nodes.note)                 \
-         or isinstance (node, docutils.nodes.tip)                    \
-         or isinstance (node, docutils.nodes.warning)            \
-         or isinstance (node, docutils.nodes.admonition):
-        node.elements=[Paragraph(node.tagname.title(),style=styles['heading3'])]+gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.image):
-        # FIXME: handle all the other attributes
-        i=Image(filename=str(node.get("uri")),
-                height=int(node.get('height')),
-                width=int(node.get('width')))
-        if node.get('align'):
-            i.hAlign=node.get('align').upper()
-        else:
-            i.hAlign='CENTER'            
-        node.elements=[i]
-
-    elif isinstance (node, docutils.nodes.figure):
-        # The sub-elements are the figure and the caption, and't ugly if
-        # they separate
-        node.elements=[KeepTogether(gather_elements(node,depth,style=style))]
-
-    elif isinstance (node, docutils.nodes.caption):
-        node.elements=[Paragraph('<i>'+gather_pdftext(node,depth)+'</i>',style=style)]
-
-    elif isinstance (node, docutils.nodes.legend):
-        node.elements=gather_elements(node,depth,style=style)
-
-    elif isinstance (node, docutils.nodes.sidebar):
-        node.elements=[Table([[ gather_elements(node,depth,style=style)]],style=sty.tstyles['sidebar'])]
-
-    elif isinstance (node, docutils.nodes.rubric):
-        node.elements=[Paragraph(gather_pdftext(node,depth),styles['rubric'])]
-
-    elif isinstance (node, docutils.nodes.compound):
-        # FIXME think if this is even implementable
-        node.elements=gather_elements(node,depth,style)
-
-    elif isinstance (node, docutils.nodes.container):
-        # FIXME think if this is even implementable
-        node.elements=gather_elements(node,depth,style)
-
-    elif isinstance (node, docutils.nodes.substitution_definition):
-        node.elements=[]
-
-    elif isinstance (node, docutils.nodes.tbody):
-        rows=[gen_elements(n,depth) for n in node.children]
-        t=[]
-        for r in rows:
-            if not r:
-                continue
-            t.append(r)
-        node.elements=[Table(t,style=sty.tstyles['normal'])]
-
-    elif isinstance (node, docutils.nodes.footnote) or \
-         isinstance (node, docutils.nodes.citation):
-        # It seems a footnote contains a label and a series of elements
-        ltext=gather_pdftext(node.children[0],depth)
-        if len(node['backrefs'])>1:
-            backrefs=[]
-            i=1
-            for r in node['backrefs']:
-                backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
-                i+=1
-            backrefs='(%s)'%', '.join(backrefs)
-            label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),styles["normal"])
-        elif len(node['backrefs'])==1:
-            label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),styles["normal"])
-        else:
-            label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),styles["normal"])
-        contents=gather_elements(node,depth,style)[1:]
-        decoration['endnotes'].append([label,contents])
-        node.elements=[]
-
-    elif isinstance (node, docutils.nodes.label):
-        node.elements=[Paragraph(gather_pdftext(node,depth),style)]
-    elif isinstance (node, docutils.nodes.Text):
-        node.elements=[Paragraph(gather_pdftext(node,depth),style)]
-    elif isinstance (node, docutils.nodes.entry):
-        node.elements=gather_elements(node,depth,style)
-
-    elif isinstance (node, docutils.nodes.target):
-        node.elements=gather_elements(node,depth,style)
-
-    elif isinstance (node, docutils.nodes.reference):
-        node.elements=gather_elements(node,depth,style)
-
-    elif isinstance (node, docutils.nodes.raw):
-        # Not really raw, but what the heck
-        node.elements=parseRaw(str(node.astext()))
-        
-    # FIXME nodes we are ignoring for the moment
-    elif isinstance (node, docutils.nodes.citation):
-        node.elements=[]
-    else:
-        log.error("Unkn. node (gen_elements): %s" % str(node.__class__))
-        # Why fail? Just log it and do our best.
-        log.error(node)
-        node.elements=gather_elements(node,depth,style)
-        #sys.exit(1)
-
-    # set anchors for internal references
-    for id in node['ids']:
-        node.elements.insert(
-                node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
-                Paragraph('<a name="%s"/>'%id,style))
-
-    if vverbose:
-        try:
-            log.debug( "gen_elements: %s" % node.elements)
-        except: # unicode problems FIXME: explicit error
-            pass
-    return node.elements
-
-def gather_elements (node, depth, in_line_block=False,style=None):
-    if style is None:
-        style=styles['bodytext']
-    r=[]
-    for n in node.children:
-        r=r+(gen_elements(n,depth,in_line_block,style=style))
-    return r
-
 class Separation(Flowable):
-    " A simple <hr>-like thingie"
+    """A simple <hr>-like flowable"""
 
     def wrap(self,w,h):
         self.w=w
@@ -742,20 +815,22 @@ class Separation(Flowable):
 
 
 class FancyPage(PageTemplate):
+    """ A page template that handles changing layouts.
+    """
     def __init__(self,_id,pw,ph,tm,bm,lm,rm,head,foot):
 
-    
+
         tw=pw-lm-rm
-    
+
         if head:
-            hh=Paragraph(head,style=styles['header']).wrap(tw,ph)[1]
+            hh=Paragraph(head,style=self.styles['header']).wrap(tw,ph)[1]
         else:
             hh=0
         if foot:
-            fh=Paragraph(foot,style=styles['footer']).wrap(tw,ph)[1]
+            fh=Paragraph(foot,style=self.styles['footer']).wrap(tw,ph)[1]
         else:
             fh=0
-    
+
         #textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh)
         textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh,topPadding=hh,bottomPadding=fh)
 
@@ -775,131 +850,19 @@ class FancyPage(PageTemplate):
         if self.head:
             head=self.head.replace('###Page###',str(doc.page))
             head=head.replace("###Title###",str(doc.title))
-            para=Paragraph(head,style=styles['header'])
+            para=Paragraph(head,style=self.styles['header'])
             para.wrap(self.tw,self.ph)
             para.drawOn(canv,self.hx,self.hy)
         if self.foot:
             foot=self.foot.replace('###Page###',str(doc.page))
             foot=foot.replace("###Title###",str(doc.title))
-            para=Paragraph(foot,style=styles['footer'])
+            para=Paragraph(foot,style=self.styles['footer'])
             para.wrap(self.tw,self.ph)
             para.drawOn(canv,self.fx,self.fy)
-
-def filltable (rows):
-    """
-    Takes a list of rows, consisting of cells and performs the following fixes:
-
-    * For multicolumn cells, add continuation cells, to make all rows the same
-      size.
-
-    * For multirow cell, insert continuation cells, to make all columns the
-      same size.
-
-    * If there are still shorter rows, add empty cells at the end (ReST quirk)
-
-    * Once the table is *normalized*, create spans list, fitting for reportlab´s
-      Table class.
-
-    """
-
-    # If there is a multicol cell, we need to insert Continuation Cells
-    # to make all rows the same length
-
-    for y in range(0,len( rows)):
-        for x in range (0,len(rows[y])):
-            cell=rows[y][x]
-            if isinstance (cell,str):
-                continue
-            if cell.get("morecols"):
-                for i in range(0,cell.get("morecols")):
-                    rows[y].insert(x+1,"")
-
-    for y in range(0,len( rows)):
-        for x in range (0,len(rows[y])):
-            cell=rows[y][x]
-            if isinstance (cell,str):
-                continue
-            if cell.get("morerows"):
-                for i in range(0,cell.get("morerows")):
-                    rows[y+i+1].insert(x,"")
-
-
-    # If a row is shorter, add empty cells at the right end
-    maxw=max([len(r) for r in rows])
-    for r in rows:
-        while len(r) < maxw:
-            r.append("")
-
-    # Create spans list for reportlab's table style
-    spans=[]
-    for y in range(0,len( rows)):
-        for x in range (0,len(rows[y])):
-            cell=rows[y][x]
-            if isinstance (cell,str):
-                continue
-            if cell.get("morecols"):
-                mc=cell.get("morecols")
-            else: mc=0
-            if cell.get("morerows"):
-                mr=cell.get("morerows")
-            else: mr=0
-
-            if mc or mr:
-                spans.append(('SPAN',(x,y),(x+mc,y+mr)))
-    return spans
-
-
-def createPdf(text=None,output=None,doctree=None,styleSheet=None):
-    '''Create a PDF from text (ReST input), or doctree (docutil nodes)
-       and save it in outfile.
-       
-       If outfile is a string, it's a filename.
-       If it's something with a write method, (like a StringIO,
-       or a file object), the data is saved there.
-
-       styleSheet is the path to the style file.'''
-
-    global styles,verbose,vverbose
-    # globals MUST go away !!
-
-    styleSheet=styleSheet or defSsheet
-    styles=sty.getStyleSheet(styleSheet)
-
-    if not doctree:
-        if text:
-            doctree=docutils.core.publish_doctree(text)
-        else:
-            log.error('Error: createPdf needs a text or a doctree to be useful')
-            return
-    elements=gen_elements(doctree,0)
-    
-    # Put the endnotes at the end ;-)
-    endnotes = decoration['endnotes']
-    if endnotes:
-        elements.append(Spacer(1,2*cm))
-        elements.append(Separation())
-        # FIXME: the width of the left column should not be fixed
-        for n in decoration['endnotes']:
-            elements.append(Table([[n[0],n[1]]],
-                            style=sty.tstyles['endnote'],
-                            colWidths=[sty.endnote_lwidth,None]))
-
-    head=decoration['header']
-    foot=decoration['footer']
-
-    # So, now, create the FancyPage with the right sizes and elements
-    FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
-                                sty.bm,sty.lm,sty.rm,head,foot)
-
-    pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=doc_title,author=doc_author)
-    pdfdoc.build(elements)
 
 
 def main():
     '''Parse command line and call createPdf with the correct data'''
-
-    global styles,verbose,vverbose
-    # NiL : I don't like globals :)
     
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
@@ -942,7 +905,7 @@ def main():
     else:
         ssheet=None
 
-    createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
+    RstToPdf().createPdf(text=open(infile).read(), output=outfile, styleSheet=ssheet)
     
 
 if __name__ == "__main__":

@@ -4,11 +4,11 @@
     "size": "A5",
     "width": null,
     "height": null,
-    "margin-top": "1cm",
-    "margin-bottom": "1cm",
-    "margin-left": "1cm",
-    "margin-right": "1cm",
-    "margin-gutter": "1cm"
+    "margin-top": "2cm",
+    "margin-bottom": "2cm",
+    "margin-left": "2cm",
+    "margin-right": "2cm",
+    "margin-gutter": "-1cm"
   },
   "fontsAlias" : {
     "stdFont": "Helvetica",
