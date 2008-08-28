@@ -293,6 +293,34 @@ This will give a warning if setup.py doesn't exist or can't be opened.
 
 .. _pygments: http://pygments.org/
 
+Raw Directive
+-------------
+
+Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
+
+You can use the eaw directive to insert pagebreaks and spacers (other reportlab flowables
+may be added if there's interest).
+
+The syntax is shell-like.
+
+Here's an example that shows all the sytax::
+
+    One page
+
+    .. raw:: pdf
+
+        PageBreak
+
+    Another page. Now some space:
+
+    .. raw:: pdf
+
+        Spacer 0,200
+        Spacer 0 200
+
+    And another paragraph.
+
+The unit used by the spacer is points, and using a space or a comma is the same thing in all cases.
 
 Hyphenation
 -----------
