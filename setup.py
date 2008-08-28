@@ -47,7 +47,9 @@ setup(
     include_package_data=True,
     # place to find an egg distrib of reportlab 2.1
     dependency_links = [
-       "http://ftp.schooltool.org/schooltool/eggs/3.4"
+       "http://ftp.schooltool.org/schooltool/eggs/3.4",
+       #wordaxe
+       "http://sourceforge.net/project/platformdownload.php?group_id=105867",
     ], 
     install_requires = install_requires,
     tests_require=tests_require,
