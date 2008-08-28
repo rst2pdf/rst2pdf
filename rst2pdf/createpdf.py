@@ -579,7 +579,7 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if
             # they separate
-            node.elements=[KeepTogether(self.gather_elements(node,depth,style=self.styles[figure]))]
+            node.elements=[KeepTogether(self.gather_elements(node,depth,style=self.styles["figure"]))]
 
         elif isinstance (node, docutils.nodes.caption):
             node.elements=[Paragraph('<i>'+self.gather_pdftext(node,depth)+'</i>',style=style)]
