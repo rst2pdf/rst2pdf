@@ -780,9 +780,7 @@ class RstToPdf(object):
 
         # So, now, create the FancyPage with the right sizes and elements
         FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
-                                    sty.bm,sty.lm,sty.rm,head,foot)
-        # FIXME: make this nice
-        FP.styles=self.styles
+                                    sty.bm,sty.lm,sty.rm,head,foot,self.styles)
 
         pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=self.doc_title,author=self.doc_author)
         pdfdoc.build(elements)
@@ -812,9 +810,9 @@ class Separation(Flowable):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,pw,ph,tm,bm,lm,rm,head,foot):
+    def __init__(self,_id,pw,ph,tm,bm,lm,rm,head,foot,styles):
 
-
+        self.styles=styles
         tw=pw-lm-rm
 
         if head:
