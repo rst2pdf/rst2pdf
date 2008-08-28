@@ -942,7 +942,7 @@ def main():
     else:
         ssheet=None
 
-    createPdf(open(infile).read(),outfile)
+    createPdf(text=open(infile).read(),output=outfile,styleSheet=ssheet)
     
 
 if __name__ == "__main__":
