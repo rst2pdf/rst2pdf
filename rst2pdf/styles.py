@@ -164,12 +164,13 @@ class StyleSheet(object):
                 sdict={}
                 # FIXME: this is done completely backwards
                 for key in style:
+
                     # Handle font aliases
-                    if key in ['fontName','bulletFontName'] and style[key] in self.fonts:
+                    if (key == 'fontName' or key.endswith('FontName')) and style[key] in self.fonts:
                         style[key]=self.fonts[style[key]]
 
                     # Handle color references by name
-                    elif key in ['backColor','textColor'] and style[key]:
+                    elif key == 'color' or key.endswith('Color') and style[key]:
                         if style[key] in colors.__dict__:
                             style[key]=colors.__dict__[style[key]]
                         else: # Hopefully, a hex color:
