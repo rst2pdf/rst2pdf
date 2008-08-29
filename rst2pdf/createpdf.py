@@ -67,27 +67,27 @@ class MyIndenter(Indenter):
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheetfile = None, language = 'en_US',breaklevel=1):
+    def __init__(self, stylesheets = [], language = 'en_US',breaklevel=1):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
-        stylesheetfile = stylesheetfile or join(abspath(dirname(__file__)), 'styles.json')
-        self.styles=sty.getStyleSheet(stylesheetfile)
+        stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets 
+        self.styles=sty.StyleSheet(stylesheets)
         self.breaklevel=breaklevel
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
-            if not sty.languages:
-                sty.languages=[language]
+            if not self.styles.languages:
+                self.styles.languages=[language]
                 self.styles['bodytext'].language=language
-            for lang in sty.languages:
+            for lang in self.styles.languages:
                 try:
                     wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5)
                 except ImportError: #PyHnj C extension is not installed
                     wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
-            log.info('hyphenation by default in %s , loaded %s'%(self.styles['bodytext'].language,','.join(sty.languages)))
+            log.info('hyphenation by default in %s , loaded %s'%(self.styles['bodytext'].language,','.join(self.styles.languages)))
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -329,7 +329,7 @@ class RstToPdf(object):
 
             # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
             if colwidths:
-                _tw=sty.tw/sum(colwidths)
+                _tw=self.styles.tw/sum(colwidths)
                 colwidths=[ w*_tw for w in colwidths ]
             else:
                 colwidths = None # Auto calculate
@@ -481,7 +481,7 @@ class RstToPdf(object):
             optext = ', '.join([self.gather_pdftext(child,depth) for child in node.children[0].children])
             desc = self.gather_elements(node.children[1],depth,style)
 
-            node.elements=[Table([[PreformattedFit(optext,self.styles["code"]),desc]],style=sty.tstyles['field'])]
+            node.elements=[Table([[self.PreformattedFit(optext,self.styles["code"]),desc]],style=sty.tstyles['field'])]
 
 
         elif isinstance (node, docutils.nodes.definition_list_item):
@@ -570,7 +570,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.literal_block) \
             or isinstance (node, docutils.nodes.doctest_block):
-            node.elements=[PreformattedFit(self.gather_pdftext(node,depth,replaceEnt=True),self.styles['code'])]
+            node.elements=[self.PreformattedFit(self.gather_pdftext(node,depth,replaceEnt=True),self.styles['code'])]
 
         elif isinstance (node, docutils.nodes.attention)        \
             or isinstance (node, docutils.nodes.caution)            \
@@ -618,7 +618,7 @@ class RstToPdf(object):
                 if iw:
                     w=sty.adjustUnits(w,iw*inch/300)
                 else:
-                    w=sty.adjustUnits(w,sty.pw*.5)
+                    w=sty.adjustUnits(w,self.styles.pw*.5)
             else:
                 log.warning("Using image %s without specifying size. Calculating based on 300dpi"%imgname)
                 # No width specified at all. Make it up
@@ -631,7 +631,7 @@ class RstToPdf(object):
                 if ih:
                     h=sty.adjustUnits(h,ih*inch/300)
                 else:
-                    h=sty.adjustUnits(h,sty.ph*.5)
+                    h=sty.adjustUnits(h,self.styles.ph*.5)
             else:
                 # Now, often, only the width is specified!
                 # if we don't have a height, we need to keep the
@@ -821,6 +821,17 @@ class RstToPdf(object):
                     spans.append(('SPAN',(x,y),(x+mc,y+mr)))
         return spans
 
+    def PreformattedFit(self,text,style):
+        """Preformatted section that gets horizontally compressed if needed."""
+        # FIXME: make it scale correctly
+        w=max(map(lambda line:stringWidth(line,style.fontName,style.fontSize),text.splitlines()))
+        mw=self.styles.tw-style.leftIndent-style.rightIndent
+        if w>mw:
+            style=copy(style)
+            f=max((0.375,mw/w))
+            #style.fontSize*=f
+            #style.leading*=f
+        return XPreformatted(text,style)
 
     def createPdf(self,text=None,output=None,doctree=None,compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
@@ -856,29 +867,20 @@ class RstToPdf(object):
         foot=self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
-                                    sty.bm,sty.lm,sty.rm,sty.gm,head,foot,self.styles)
+        FP=FancyPage("fancypage",self.styles.pw,self.styles.ph,self.styles.tm,
+                                 self.styles.bm,self.styles.lm,self.styles.rm,
+                                 self.styles.gm,head,foot,self.styles)
 
         pdfdoc = BaseDocTemplate(output,
                                  pageTemplates=[FP],
                                  showBoundary=0,
-                                 pagesize=sty.ps,
+                                 pagesize=self.styles.ps,
                                  title=self.doc_title,
                                  author=self.doc_author,
                                  pageCompression=compressed
                                  )
         pdfdoc.build(elements)
 
-def PreformattedFit(text,style):
-    """Preformatted section that gets horizontally compressed if needed."""
-    w=max(map(lambda line:stringWidth(line,style.fontName,style.fontSize),text.splitlines()))
-    mw=sty.tw-style.leftIndent-style.rightIndent
-    if w>mw:
-        style=copy(style)
-        f=max((0.375,mw/w))
-        #style.fontSize*=f
-        #style.leading*=f
-    return XPreformatted(text,style)
 
 class OutlineEntry(Flowable):
     def __init__(self,label,text,level=0,snum=None):
@@ -1026,8 +1028,8 @@ def main():
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',metavar='FILE'
                       ,help='Write the PDF to FILE')
-    parser.add_option('-s', '--stylesheet',dest='style',metavar='STYLESHEET',
-                      help='Custom stylesheet')
+    parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',
+                      help='A comma-separated list of custom stylesheets')
     parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=False,
                       help='Create a compressed PDF')
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,
@@ -1076,11 +1078,11 @@ def main():
         TTFSearchPath.append(ffolder)
 
     if options.style:
-        ssheet=options.style
+        ssheet=options.style.split(',')
     else:
-        ssheet=None
+        ssheet=[]
 
-    RstToPdf(stylesheetfile = ssheet,
+    RstToPdf(stylesheets = ssheet,
              language=options.language,
              breaklevel=int(options.breaklevel)).createPdf(text=open(infile).read(),
                                                   output=outfile,
