@@ -56,7 +56,6 @@
     }] ,
     ["normal" , {
       "parent": "base",
-      "language": "EN"
     }],
     ["title_reference" , {
       "parent": "normal",

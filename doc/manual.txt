@@ -75,7 +75,7 @@ However, although I think rst2pdf generates the right reportlab code, the image
 will not be visible.
 
 It will work, however, if you use a development version of reportlab. In which case
-wordaxe won work, and you will have no hyphenation. Your choice ;-)
+wordaxe won't work, and you will have no hyphenation. Your choice ;-)
 
 Styles
 ------
@@ -155,13 +155,11 @@ Style Definition
 Then you have a 'styles' which is a list of [ stylename, styleproperties ]. For example::
 
     ["normal" , {
-      "parent": "base",
-      "language": "EN"
+      "parent": "base"
     }],
 
 This means that the style called "normal" inherits style "base". So, each property 
-not defined in the normal style will be taken from the base style. Also, it defines 
-the language to be english, only useful if you enable hyphenation.
+not defined in the normal style will be taken from the base style.
 
 I suggest you do not remove any style from the default stylesheet. Add or modify at
 will, though.
@@ -356,7 +354,7 @@ For more information, see `this issue`_ in rst2pdf's bug tracker.
 Also, you may need to set hyphenation to true in one or more styles, and the language
 for hyphenation.
 
-For english, this seems to be enough::
+For english, this should be enough::
 
     ["bodytext" , {
       "parent": "normal",
@@ -365,3 +363,53 @@ For english, this seems to be enough::
       "hyphenation": true
     }],
 
+If you are not an english speaker, you need to change the language.
+
+You can use the -l or --language option. The currently available dictionaries
+for wordaxe are:
+
+* de_DE
+
+* da
+
+* en_GB
+
+* en_US
+
+* ru
+
+For example, this will enable german hyphenation globally:
+
+    rst2pdf -l de_DE mydocument.txt
+
+If you are creating a multilingual document, you can declare styles with specific languages.
+For example, you could inherit bodytext for german:
+
+    ["bodytext_de" , {
+      "parent": "bodytext",
+      "alignment": "TA_JUSTIFY",
+      "hyphenation": true,
+      "language": de
+    }],
+
+And all paragraps declared of bodytext_de style would have german hyphenation::
+
+    .. class:: bodytext_de
+
+    Ein Vierteljahrhundert hindurch hatte ich Kopf, Herz, Hand und--Füße der
+    Schilderung der Alpenwelt und ihrer Bewohner gewidmet mit dem
+    erfreulichen Erfolg, daß die deutsche Leserwelt es gewöhnt geworden war,
+    beim Anblick meines Namens auf Büchern sofort an die--Alpen zu denken.
+
+BTW: I have no idea what that says, I just copied it from project Gutenberg.
+Hopefully it's not offensive :-)
+
+If you explicitly configure a language in a paragraph style and pass it in the
+command line, the style has priority, so remember:
+
+    If you configure the bodytext style to have a language, your document
+    is supposed to be in that language, regardless of what the command line
+    says.
+
+    If this is too confusing, let me know, I will try to figure out a simpler
+    way.
