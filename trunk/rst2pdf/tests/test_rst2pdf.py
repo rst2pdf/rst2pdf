@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-# $Id$
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 from unittest import TestCase, makeSuite
 from pyPdf import PdfFileReader
 import cStringIO

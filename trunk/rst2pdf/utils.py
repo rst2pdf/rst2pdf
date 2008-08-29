@@ -1,3 +1,6 @@
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 import sys
 import logging
 from reportlab.platypus import PageBreak, Spacer

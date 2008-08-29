@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
-# :Date: $Date: 2007-06-13 12:20:42 +0200 (Wed, 13 Jun 2007) $
+# :Date: $Date$
 # :Copyright: This module has been placed in the public domain.
 # 
 # This is a merge of `Using Pygments in ReST documents`_ from the pygments_

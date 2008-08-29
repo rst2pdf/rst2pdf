@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 import os
 from setuptools import setup, find_packages
 
