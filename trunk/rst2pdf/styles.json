@@ -55,7 +55,7 @@
       "hyphenation": false
     }] ,
     ["normal" , {
-      "parent": "base",
+      "parent": "base"
     }],
     ["title_reference" , {
       "parent": "normal",
