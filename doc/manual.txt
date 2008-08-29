@@ -6,7 +6,7 @@ How to use rst2pdf
 
 .. footer::
 
-   ###Title### - Page ###Page###
+   ###Section### - Page ###Page###
 
 .. contents::
 
@@ -46,7 +46,8 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the current page number.
 ###Title###
     Replaced by the document title
-
+###Section###
+    Replaced by the currect section title
 
 Footnotes
 ---------
