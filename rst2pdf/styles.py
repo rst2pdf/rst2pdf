@@ -171,8 +171,15 @@ def getStyleSheet(fname):
                     style[key]=fonts[style[key]]
 
                 # Handle color references by name
-                elif key in ['backColor','textColor'] and style[key] in colors.__dict__:
-                    style[key]=colors.__dict__[style[key]]
+                elif key in ['backColor','textColor'] and style[key]:
+                    if style[key] in colors.__dict__:
+                        style[key]=colors.__dict__[style[key]]
+                    else: # Hopefully, a hex color:
+                        c=style[key]
+                        r=int(c[1:3],16)
+                        g=int(c[3:5],16)
+                        b=int(c[5:7],16)
+                        style[key]=colors.Color(r,g,b)
 
                 # Handle alignment constants
                 elif key == 'alignment':
