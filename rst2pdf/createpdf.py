@@ -340,8 +340,13 @@ class RstToPdf(object):
             else:
                 # Section/Subsection/etc.
                 text=self.gen_pdftext(node,depth)
+                fch=node.children[0]
+                if isinstance(fch,docutils.nodes.generated) and fch['classes']==['sectnum']:
+                    snum=fch.astext()
+                else:
+                    snum=None
                 key=node.get('refid')
-                node.elements=[OutlineEntry(key,text,depth-1),
+                node.elements=[OutlineEntry(key,text,depth-1,snum),
                                Paragraph(text, self.styles['heading%d' % min(depth,3)])]
 
 
@@ -855,7 +860,7 @@ def PreformattedFit(text,style):
     return XPreformatted(text,style)
 
 class OutlineEntry(Flowable):
-    def __init__(self,label,text,level=0):
+    def __init__(self,label,text,level=0,snum=None):
         '''* label is a unique label.
            * text is the text to be displayed in the outline tree
            * level is the level, 0 is outermost, 1 is child of 0, etc.
@@ -863,6 +868,7 @@ class OutlineEntry(Flowable):
         self.label=label.strip()
         self.text=text.strip()
         self.level=int(level)
+        self.snum=snum
         Flowable.__init__(self)
 
     def wrap(self,w,h):
@@ -872,6 +878,10 @@ class OutlineEntry(Flowable):
     def draw(self):
         self.canv.bookmarkPage(self.label)
         self.canv.sectName=self.text
+        if self.snum is not None:
+            self.canv.sectNum=self.snum
+        else:
+            self.canv.sectNum=""
         self.canv.addOutlineEntry(self.text,
                                   self.label,
                                   self.level)
@@ -952,12 +962,16 @@ class FancyPage(PageTemplate):
 
     def replaceTokens(self,text,canv,doc):
         text=text.replace('###Page###',str(doc.page))
-        text=text.replace("###Title###",str(doc.title))
+        text=text.replace("###Title###",doc.title)
         # FIXME: make this nicer
         try:
-            text=text.replace("###Section###",str(canv.sectName))
+            text=text.replace("###Section###",canv.sectName)
         except AttributeError:
             text=text.replace("###Section###",'')
+        try:
+            text=text.replace("###SectNum###",canv.sectNum)
+        except AttributeError:
+            text=text.replace("###SectNum###",'')
         return text
         
     def afterDrawPage(self,canv,doc):
