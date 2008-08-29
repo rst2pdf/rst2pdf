@@ -338,7 +338,11 @@ class RstToPdf(object):
                     isinstance (node.parent, docutils.nodes.table) :
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
             else:
-                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading%d' % min(depth,3)])]
+                # Section/Subsection/etc.
+                text=self.gen_pdftext(node,depth)
+                key=node.get('refid')
+                node.elements=[OutlineEntry(key,text,depth-1),
+                               Paragraph(text, self.styles['heading%d' % min(depth,3)])]
 
 
         elif isinstance (node, docutils.nodes.subtitle):
@@ -849,6 +853,30 @@ def PreformattedFit(text,style):
         #style.fontSize*=f
         #style.leading*=f
     return XPreformatted(text,style)
+
+class OutlineEntry(Flowable):
+    def __init__(self,label,text,level=0):
+        '''* label is a unique label.
+           * text is the text to be displayed in the outline tree
+           * level is the level, 0 is outermost, 1 is child of 0, etc.
+        '''
+        self.label=label.strip()
+        self.text=text.strip()
+        self.level=int(level)
+        Flowable.__init__(self)
+
+    def wrap(self,w,h):
+        '''This takes no space'''
+        return (0,0)
+
+    def draw(self):
+        self.canv.bookmarkPage(self.label)
+        self.canv.addOutlineEntry(self.text,
+                                  self.label,
+                                  self.level)
+
+    def __repr__(self):
+        return "OutlineEntry (label=%s , text=%s , level=%d) \n"%(self.label,self.text,self.level)
 
 class Separation(Flowable):
     """A simple <hr>-like flowable"""
