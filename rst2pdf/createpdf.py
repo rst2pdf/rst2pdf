@@ -184,7 +184,7 @@ class RstToPdf(object):
             uri=node.get('refuri')
             if uri:
                 if urlparse(uri)[0]:
-                    pre+=u'<a href="%s" color="blue">'%uri
+                    pre+=u'<a href="%s" color="%s">'%(uri,self.styles.linkColor)
                     post='</a>'+post
             else:
                     uri=node.get('refid')
@@ -231,11 +231,13 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
             anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])
-            node.pdftext=u'%s<super><a href="%s" color="blue">%s</a></super>'%(anchors,'#'+node.astext(),node.astext())
+            node.pdftext=u'%s<super><a href="%s" color="%s">%s</a></super>'%(
+                anchors,'#'+node.astext(),self.styles.linkColor,node.astext())
         elif isinstance (node, docutils.nodes.citation_reference):
             # Fixme link to the right place
             anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])
-            node.pdftext=u'%s[<a href="%s" color="blue">%s</a>]'%(anchors,'#'+node.astext(),node.astext())
+            node.pdftext=u'%s[<a href="%s" color="%s">%s</a>]'%(
+                anchors,'#'+node.astext(),self.styles.linkColor,node.astext())
 
         elif isinstance (node, docutils.nodes.target):
             pre=u'<a name="%s"/>'%node['ids'][0]
@@ -707,12 +709,14 @@ class RstToPdf(object):
                 backrefs=[]
                 i=1
                 for r in node['backrefs']:
-                    backrefs.append('<a href="#%s" color="blue">%d</a>'%(r,i))
+                    backrefs.append('<a href="#%s" color="%s">%d</a>'%(
+                        r,self.styles.linkColor,i))
                     i+=1
                 backrefs='(%s)'%', '.join(backrefs)
                 label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),self.styles["normal"])
             elif len(node['backrefs'])==1:
-                label=Paragraph('<a name="%s"/><a href="%s" color="blue">%s</a>'%(ltext,node['backrefs'][0],ltext),self.styles["normal"])
+                label=Paragraph('<a name="%s"/><a href="%s" color="%s">%s</a>'%(
+                    ltext,node['backrefs'][0],self.styles.linkColor,ltext),self.styles["normal"])
             else:
                 label=Paragraph('<a name="%s"/>%s'%(ltext,ltext),self.styles["normal"])
             contents=self.gather_elements(node,depth,style)[1:]

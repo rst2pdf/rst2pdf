@@ -31,7 +31,7 @@ def adjustUnits(v,total=0):
        of "total".
 
        Example::
-       
+
             >>> adjustUnits('50%',200)
             100
     '''
@@ -156,7 +156,9 @@ class StyleSheet(object):
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles=[]
+        self.linkColor = 'navy'
         for data,ssname in zip(ssdata,flist):
+            self.linkColor=data.get('linkColor') or self.linkColor
             styles=data.get('styles',{})
             for [skey,style] in styles:
                 sdict={}
@@ -232,7 +234,7 @@ tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
 
 def tstyleHead(rows=1):
     return ('BACKGROUND',(0,0),(-1,rows-1),colors.yellow)
-    
+
 tstyles['normal']=TableStyle(tstyleNorm)
 
 # Used for field lists
