@@ -48,7 +48,9 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the document title
 ###Section###
     Replaced by the currect section title
-
+###SectNum###
+    Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
+    
 Footnotes
 ---------
 
