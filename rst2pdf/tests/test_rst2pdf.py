@@ -5,6 +5,9 @@
 from unittest import TestCase, makeSuite
 from pyPdf import PdfFileReader
 import cStringIO
+
+#import pdb; pdb.set_trace()
+
 import rst2pdf
 from rst2pdf.createpdf import RstToPdf
 
@@ -73,6 +76,18 @@ This one exists:
         self.assertEqual(include.tagname, 'literal_block')
         self.assertEqual(include.children[0].astext(), u'# -*- coding: utf-8 -*-')
 
+    def test_wrong_lang(self):
+        input="""
+This one exists:
+
+.. code-block:: nothing
+   :include: %s
+""" % __file__
+        doctree=docutils.core.publish_doctree(input)
+        include = doctree.children[1]
+        self.assertEqual(include.tagname, 'literal_block')
+        self.assertEqual(include.astext().split('\n')[0], u'# -*- coding: utf-8 -*-')
+
     def test_existing_file_start_at(self):
         input="""
 This one exists:
@@ -86,6 +101,34 @@ This one exists:
         self.assertEqual(include.tagname, 'literal_block')
         self.assertEqual(include.astext().split('\n')[0], u'def input_file_path(file):')
         self.assertEqual(include.astext().split('\n')[-2:][0], u"    unittest.main(defaultTest='test_suite')")
+        
+    def test_existing_file_start_after(self):
+        input="""
+This one exists:
+
+.. code-block:: py
+   :include: %s
+   :start-after: def input_file_path(file):
+""" % __file__
+        doctree=docutils.core.publish_doctree(input)
+        include = doctree.children[1]
+        self.assertEqual(include.tagname, 'literal_block')
+        self.assertEqual(include.astext().split('\n')[0], u"    return join(PREFIX, 'input', file)")
+        self.assertEqual(include.astext().split('\n')[-2:][0], u"    unittest.main(defaultTest='test_suite')")
+        
+    def test_existing_file_end_before(self):
+        input="""
+This one exists:
+
+.. code-block:: py
+   :include: %s
+   :end-before: return join(PREFIX, 'input', file)
+""" % __file__
+        doctree=docutils.core.publish_doctree(input)
+        include = doctree.children[1]
+        self.assertEqual(include.tagname, 'literal_block')
+        self.assertEqual(include.children[0].astext(), u'# -*- coding: utf-8 -*-')
+        self.assertEqual(include.astext().split('\n')[-3:][0], u'def input_file_path(file):')
         
     def test_existing_file_end_at(self):
         input="""

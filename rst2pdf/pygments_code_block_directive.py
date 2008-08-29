@@ -41,7 +41,7 @@ try:
 except ImportError:
     pass
 
-
+from utils import log
 
 # Customisation
 # -------------
@@ -85,7 +85,8 @@ class DocutilsInterface(object):
         try:
             lexer = get_lexer_by_name(self.language)
         except ValueError:
-            # info: "no pygments lexer for %s, using 'text'"%self.language
+            log.info( "no pygments lexer for %s, using 'text'" % self.language)
+            # what happens if pygment isn't present ?
             lexer = get_lexer_by_name('text')
         return pygments.lex(self.code, lexer)
         
@@ -109,7 +110,7 @@ class DocutilsInterface(object):
         try:
             tokens = self.lex()
         except IOError:
-            print "INFO: Pygments lexer not found, using fallback"
+            log.info("Pygments lexer not found, using fallback")
             # TODO: write message to INFO 
             yield ('', self.code)
             return
@@ -131,8 +132,8 @@ def code_block_directive(name, arguments, options, content, lineno,
         try:
             content=open(options['include']).read()
         except IOError, UnicodeError: # no file or problem finding it or reading it
-            content=''
-            state_machine.reporter.warning('Error reading file: "%s"' % options['include'], line=lineno)
+            log.error('Error reading file: "%s" L %s' % (options['include'],lineno))
+            content=u''
         if content:
             # here we define the start-at and end-at options 
             # so that limit is included in extraction
@@ -149,7 +150,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 after_index = content.find(after_text)
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-at" option of "%s" '
-                                      'directive:\nText not found.' % options['start-at'])
+                                      'code-block directive:\nText not found.' % options['start-at'])
                 content = content[after_index:]
                 
             after_text = options.get('start-after', None)
@@ -158,7 +159,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 after_index = content.find(after_text)
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
-                                      'directive:\nText not found.' % options['start-after'])
+                                      'code-block directive:\nText not found.' % options['start-after'])
                 content = content[after_index + len(after_text):]
                 
                 
@@ -169,7 +170,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 before_index = content.find(before_text)
                 if before_index < 0:
                     raise state_machine.reporter.severe('Problem with "end-at" option of "%s" '
-                                      'directive:\nText not found.' % options['end-at'])
+                                      'code-block directive:\nText not found.' % options['end-at'])
                 content = content[:before_index + len(before_text)]
                 
             before_text = options.get('end-before', None)
@@ -178,7 +179,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 before_index = content.find(before_text)
                 if before_index < 0:
                     raise state_machine.reporter.severe('Problem with "end-before" option of "%s" '
-                                      'directive:\nText not found.' % options['end-before'])
+                                      'code-block directive:\nText not found.' % options['end-before'])
                 content = content[:before_index]
 
     else:
