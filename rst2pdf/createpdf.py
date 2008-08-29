@@ -67,7 +67,7 @@ class MyIndenter(Indenter):
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheetfile = None, language = 'en_US'):
+    def __init__(self, stylesheetfile = None, language = 'en_US',breaklevel=1):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -75,6 +75,7 @@ class RstToPdf(object):
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheetfile = stylesheetfile or join(abspath(dirname(__file__)), 'styles.json')
         self.styles=sty.getStyleSheet(stylesheetfile)
+        self.breaklevel=breaklevel
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
@@ -359,6 +360,8 @@ class RstToPdf(object):
                 key=node.get('refid')
                 node.elements=[OutlineEntry(key,text,depth-1,snum),
                                Paragraph(text, self.styles['heading%d' % min(depth,3)])]
+                if depth <=self.breaklevel:
+                    node.elements.insert(0,PageBreak())
 
 
         elif isinstance (node, docutils.nodes.subtitle):
@@ -1023,15 +1026,26 @@ def main():
     '''Parse command line and call createPdf with the correct data'''
 
     parser = OptionParser()
-    parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
-    parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
-    parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=False,help='Create a compressed PDF')
-    parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
-    parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
-    parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
-    parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,help='Print less information.')
-    parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
-    parser.add_option('-l','--language',metavar='LANG',default='en_US',help='Language to be used for hyphenation.')
+    parser.add_option('-o', '--output',dest='output',metavar='FILE'
+                      ,help='Write the PDF to FILE')
+    parser.add_option('-s', '--stylesheet',dest='style',metavar='STYLESHEET',
+                      help='Custom stylesheet')
+    parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=False,
+                      help='Create a compressed PDF')
+    parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,
+                      help='Print the default stylesheet and exit')
+    parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
+                      help='Search this folder for fonts.')
+    parser.add_option('-l','--language',metavar='LANG',default='en_US',
+                      help='Language to be used for hyphenation.')
+    parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default='1',
+                      help='Maximum section level that starts in a new page. Default: 1')
+    parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
+                      help='Print less information.')
+    parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,
+                      help='Print debug information.')
+    parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,
+                      help='Print even more debug information.')
     (options,args)=parser.parse_args()
 
     if options.quiet:
@@ -1069,7 +1083,8 @@ def main():
         ssheet=None
 
     RstToPdf(stylesheetfile = ssheet,
-             language=options.language).createPdf(text=open(infile).read(),
+             language=options.language,
+             breaklevel=options.breaklevel).createPdf(text=open(infile).read(),
                                                   output=outfile,
                                                   compressed=options.compressed)
 
