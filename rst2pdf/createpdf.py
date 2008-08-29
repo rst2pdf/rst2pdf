@@ -808,7 +808,7 @@ class RstToPdf(object):
         return spans
 
 
-    def createPdf(self,text=None,output=None,doctree=None):
+    def createPdf(self,text=None,output=None,doctree=None,compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
         and save it in outfile.
 
@@ -845,7 +845,14 @@ class RstToPdf(object):
         FP=FancyPage("fancypage",sty.pw,sty.ph,sty.tm,
                                     sty.bm,sty.lm,sty.rm,sty.gm,head,foot,self.styles)
 
-        pdfdoc = BaseDocTemplate(output,pageTemplates=[FP],showBoundary=0,pagesize=sty.ps,title=self.doc_title,author=self.doc_author)
+        pdfdoc = BaseDocTemplate(output,
+                                 pageTemplates=[FP],
+                                 showBoundary=0,
+                                 pagesize=sty.ps,
+                                 title=self.doc_title,
+                                 author=self.doc_author,
+                                 pageCompression=compressed
+                                 )
         pdfdoc.build(elements)
 
 def PreformattedFit(text,style):
@@ -876,6 +883,7 @@ class OutlineEntry(Flowable):
         return (0,0)
 
     def draw(self):
+        print self.canv._pageCompression
         self.canv.bookmarkPage(self.label)
         self.canv.sectName=self.text
         if self.snum is not None:
@@ -993,6 +1001,7 @@ def main():
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',help='Write the PDF to FILE',metavar='FILE')
     parser.add_option('-s', '--stylesheet',dest='style',help='Custom stylesheet',metavar='STYLESHEET')
+    parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=False,help='Create a compressed PDF')
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,help='Print the default stylesheet and exit')
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',help='Search this folder for fonts.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
@@ -1034,7 +1043,9 @@ def main():
     else:
         ssheet=None
 
-    RstToPdf(stylesheetfile = ssheet).createPdf(text=open(infile).read(), output=outfile)
+    RstToPdf(stylesheetfile = ssheet).createPdf(text=open(infile).read(),
+                                                output=outfile,
+                                                compressed=options.compressed)
 
 
 if __name__ == "__main__":
