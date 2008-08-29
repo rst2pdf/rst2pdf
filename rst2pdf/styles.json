@@ -190,6 +190,8 @@
       "spaceBefore": 8,
       "spaceAfter": 8,
       "backColor": "beige",
+      "borderColor": "darkgray",
+      "borderWidth": 0.5,
       "borderPadding": 6
     }],
     ["pygments-p" , {
