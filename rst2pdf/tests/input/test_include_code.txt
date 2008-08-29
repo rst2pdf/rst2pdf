@@ -11,7 +11,7 @@ This one gives a warning, no file specified:
 This one works:
 
 .. code-block:: python
-   :include: ../setup.py
+   :include: ../test_rst2pdf.py
 
 Test start option:
 
