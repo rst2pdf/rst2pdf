@@ -1007,7 +1007,7 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx=self.hx+self.gm
             fx=self.fx+self.gm
-
+            
         if self.head:
             head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])

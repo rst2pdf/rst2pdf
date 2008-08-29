@@ -94,8 +94,16 @@ def getStyleSheet(fname):
 
     from simplejson import loads
 
-    data=loads(open(fname).read())
-
+    try:
+        data=loads(open(fname).read())
+    except ValueError,e: # Error parsing the JSON data
+        log.error('Error parsing stylesheet "%s": %s'%(fname,str(e)))
+        sys.exit(1)
+    except IOError,e: #Error opening the ssheet
+        log.error('Error opening stylesheet "%s": %s'%(fname,str(e)))
+        sys.exit(1)
+    
+        
     styles=data['styles']
     fonts=data['fontsAlias']
     page=data['pageSetup']
