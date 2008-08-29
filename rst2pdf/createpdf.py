@@ -86,7 +86,7 @@ class RstToPdf(object):
             if not sty.languages:
                 sty.languages=[language]
                 self.styles['bodytext'].language=dicts[language]
-            for lang in sty.languages:                
+            for lang in sty.languages:
                 try:
                     wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5)
                 except ImportError: #PyHnj C extension is not installed
@@ -627,7 +627,7 @@ class RstToPdf(object):
                 # No width specified at all. Make it up
                 # as if we knew what we're doing
                 if iw:
-                    w=iw*inch/300                   
+                    w=iw*inch/300
 
             h=node.get('height')
             if h is not None:
@@ -888,8 +888,9 @@ class OutlineEntry(Flowable):
            * text is the text to be displayed in the outline tree
            * level is the level, 0 is outermost, 1 is child of 0, etc.
         '''
-        if label==None: # it happens
-            self.label=str(text).strip()
+        if label is None: # it happens
+            self.label=text.replace(u'\xa0', ' ').strip(
+                ).replace(' ', '_').encode('ascii', 'replace')
         else:
             self.label=label.strip()
         self.text=text.strip()
@@ -999,7 +1000,7 @@ class FancyPage(PageTemplate):
         except AttributeError:
             text=text.replace("###SectNum###",'')
         return text
-        
+
     def afterDrawPage(self,canv,doc):
         if self.head:
             head=self.replaceTokens(self.head,canv,doc)
