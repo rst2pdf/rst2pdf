@@ -52,12 +52,10 @@ try:
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    try:
-        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5)
-    except:
-        wordaxe.hyphRegistry['EN'] = PyHnjHyphenator('en_US',5,purePython=True)
+    haveWordaxe=True
 except ImportError:
     log.warning("No support for hyphenation, install wordaxe")
+    haveWordaxe=False
 
 class MyIndenter(Indenter):
     # Bugs in reportlab?
@@ -68,7 +66,7 @@ class MyIndenter(Indenter):
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheetfile = None):
+    def __init__(self, stylesheetfile = None, language = 'en_US'):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -76,6 +74,25 @@ class RstToPdf(object):
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheetfile = stylesheetfile or join(abspath(dirname(__file__)), 'styles.json')
         self.styles=sty.getStyleSheet(stylesheetfile)
+
+        # Load the hyphenators for all required languages
+        if haveWordaxe:
+            dicts={ 'en_US':'EN',
+                    'en_GB':'EN',
+                    'de_DE':'DE',
+                    'ru':'ru',
+                    'da':'da'
+                   }
+            if not sty.languages:
+                sty.languages=[language]
+                self.styles['bodytext'].language=dicts[language]
+            print sty.languages
+            for lang in sty.languages:                
+                try:
+                    wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5)
+                except ImportError: #PyHnj C extension is not installed
+                    wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5,purePython=True)
+            log.info('hyphenation by default in %s , loaded %s'%(self.styles['bodytext'].language,','.join(sty.languages)))
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -883,7 +900,6 @@ class OutlineEntry(Flowable):
         return (0,0)
 
     def draw(self):
-        print self.canv._pageCompression
         self.canv.bookmarkPage(self.label)
         self.canv.sectName=self.text
         if self.snum is not None:
@@ -1007,6 +1023,7 @@ def main():
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,help='Print debug information.')
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,help='Print less information.')
     parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,help='Print even more debug information.')
+    parser.add_option('-l','--language',metavar='LANG',default='en_US',help='Language to be used for hyphenation.')
     (options,args)=parser.parse_args()
 
     if options.quiet:
@@ -1043,9 +1060,10 @@ def main():
     else:
         ssheet=None
 
-    RstToPdf(stylesheetfile = ssheet).createPdf(text=open(infile).read(),
-                                                output=outfile,
-                                                compressed=options.compressed)
+    RstToPdf(stylesheetfile = ssheet,
+             language=options.language).createPdf(text=open(infile).read(),
+                                                  output=outfile,
+                                                  compressed=options.compressed)
 
 
 if __name__ == "__main__":

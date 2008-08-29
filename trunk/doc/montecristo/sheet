@@ -48,8 +48,7 @@
       "hyphenation": false
     }] ,
     ["normal" , {
-      "parent": "base",
-      "language": "EN"
+      "parent": "base"
     }],
     ["title_reference" , {
       "parent": "normal",

@@ -83,12 +83,13 @@ tw=0
 # After what level of section do we break page
 page_break_level=0
 
+languages=[]
 
 import reportlab.lib.pagesizes as pagesizes
 
 def getStyleSheet(fname):
     """Returns a stylesheet object"""
-    global pw,ph,ps,tm,bm,lm,rm,tw,gm
+    global pw,ph,ps,tm,bm,lm,rm,tw,gm,languages
     stylesheet = StyleSheet1()
 
     from simplejson import loads
@@ -163,19 +164,23 @@ def getStyleSheet(fname):
                     del style['parent']
                 else:
                     style['parent']=stylesheet[style['parent']]
+            # FIXME: this is done completely backwards
             for key in style:
                 # Handle font aliases
                 if key in ['fontName','bulletFontName'] and style[key] in fonts:
                     style[key]=fonts[style[key]]
 
                 # Handle color references by name
-                if key in ['backColor','textColor'] and style[key] in colors.__dict__:
+                elif key in ['backColor','textColor'] and style[key] in colors.__dict__:
                     style[key]=colors.__dict__[style[key]]
 
                 # Handle alignment constants
-                if key == 'alignment':
+                elif key == 'alignment':
                     style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
 
+                elif key == 'language':
+                    if not style[key] in languages:
+                        languages.append(style[key])
                 # Make keys str instead of unicode (required by reportlab)
                 sdict[str(key)]=style[key]
                 sdict['name']=skey
