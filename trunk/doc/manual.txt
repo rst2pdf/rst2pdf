@@ -284,6 +284,11 @@ If you intend to bound a printed copy, you may need extra space there. OTOH,
 if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
+.. raw:: pdf
+
+    PageBreak
+
+
 Syntax Highlighting
 ===================
 
