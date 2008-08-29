@@ -999,16 +999,24 @@ class FancyPage(PageTemplate):
         return text
 
     def afterDrawPage(self,canv,doc):
+        # Adjust gutter margins
+        if doc.page%2: # Left page
+            hx=self.hx
+            fx=self.fx
+        else: # Right Page
+            hx=self.hx+self.gm
+            fx=self.fx+self.gm
+
         if self.head:
             head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])
             para.wrap(self.tw,self.ph)
-            para.drawOn(canv,self.hx,self.hy)
+            para.drawOn(canv,hx,self.hy)
         if self.foot:
             foot=self.replaceTokens(self.foot,canv,doc)
             para=Paragraph(foot,style=self.styles['footer'])
             para.wrap(self.tw,self.ph)
-            para.drawOn(canv,self.fx,self.fy)
+            para.drawOn(canv,fx,self.fy)
 
 
 def main():
