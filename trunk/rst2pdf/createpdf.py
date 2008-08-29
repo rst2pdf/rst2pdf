@@ -465,10 +465,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.section):
-            if depth<sty.page_break_level:
-                node.elements=[PageBreak()]+self.gather_elements(node,depth+1)
-            else:
-                node.elements=self.gather_elements(node,depth+1)
+            node.elements=self.gather_elements(node,depth+1)
 
         elif isinstance (node, docutils.nodes.bullet_list)                   \
             or isinstance (node, docutils.nodes.enumerated_list)            \
@@ -741,6 +738,7 @@ class RstToPdf(object):
         # set anchors for internal references
         for id in node['ids']:
             node.elements.insert(
+                    # FIXME: WTF does this do?
                     node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
                     Paragraph('<a name="%s"/>'%id,style))
 
@@ -1084,7 +1082,7 @@ def main():
 
     RstToPdf(stylesheetfile = ssheet,
              language=options.language,
-             breaklevel=options.breaklevel).createPdf(text=open(infile).read(),
+             breaklevel=int(options.breaklevel)).createPdf(text=open(infile).read(),
                                                   output=outfile,
                                                   compressed=options.compressed)
 
