@@ -1,6 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 __docformat__ = 'reStructuredText'
 
 import re
@@ -116,7 +117,7 @@ class RstToPdf(object):
         try:
             log.debug( "self.gen_pdftext: %s" % node.__class__)
             log.debug( "self.gen_pdftext: %s" % node)
-        except: # unicode problems
+        except UnicodeDecodeError: 
             pass
 
         if isinstance (node, docutils.nodes.paragraph) \
@@ -257,7 +258,7 @@ class RstToPdf(object):
 
         try:
             log.info("self.gen_pdftext: %s" % node.pdftext)
-        except: # unicode problems FIXME: should declare explicit execption
+        except UnicodeDecodeError: 
             pass
         return node.pdftext
 
@@ -266,7 +267,7 @@ class RstToPdf(object):
         try:
             log.debug( "gen_elements: %s" % node.__class__)
             log.debug( "gen_elements: %s" % node)
-        except: # unicode problems FIXME/ explicit error
+        except UnicodeDecodeError: 
             pass
 
         if style is None:
@@ -336,7 +337,7 @@ class RstToPdf(object):
                 _tw=sty.tw/sum(colwidths)
                 colwidths=[ w*_tw for w in colwidths ]
             else:
-                colwidths=None # Auto calculate
+                colwidths = None # Auto calculate
 
             node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
 
@@ -448,7 +449,7 @@ class RstToPdf(object):
             node.elements=[t]
         elif isinstance (node, docutils.nodes.status):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Version:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph("Status:",style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.date):
@@ -772,7 +773,7 @@ class RstToPdf(object):
 
         * If there are still shorter rows, add empty cells at the end (ReST quirk)
 
-        * Once the table is *normalized*, create spans list, fitting for reportlab´s
+        * Once the table is *normalized*, create spans list, fitting for reportlab's
         Table class.
 
         """

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# $Id$
 from unittest import TestCase, makeSuite
 from pyPdf import PdfFileReader
 import cStringIO

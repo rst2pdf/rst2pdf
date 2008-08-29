@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date: 2007-06-13 12:20:42 +0200 (Wed, 13 Jun 2007) $
@@ -231,12 +231,7 @@ if __name__ == '__main__':
         locale.setlocale(locale.LC_ALL, '')
     except:
         pass
-    # Uncomment the desired output format:
-    publish_cmdline(writer_name='pseudoxml', description=description)
-    # publish_cmdline(writer_name='xml', description=description)
-    # publish_cmdline(writer_name='html', description=description)
-    # publish_cmdline(writer_name='latex', description=description)
-    # publish_cmdline(writer_name='newlatex2e', description=description)
+    publish_cmdline(writer_name='pdf', description=description)
     
 
 
