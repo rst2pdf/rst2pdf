@@ -83,9 +83,6 @@ gm=0
 #text width
 tw=0
 
-# After what level of section do we break page
-page_break_level=0
-
 languages=[]
 
 import reportlab.lib.pagesizes as pagesizes
