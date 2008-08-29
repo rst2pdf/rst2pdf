@@ -78,20 +78,14 @@ class RstToPdf(object):
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
-            dicts={ 'en_US':'EN',
-                    'en_GB':'EN',
-                    'de_DE':'DE',
-                    'ru':'ru',
-                    'da':'da'
-                   }
             if not sty.languages:
                 sty.languages=[language]
                 self.styles['bodytext'].language=dicts[language]
             for lang in sty.languages:
                 try:
-                    wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5)
+                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5)
                 except ImportError: #PyHnj C extension is not installed
-                    wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5,purePython=True)
+                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s'%(self.styles['bodytext'].language,','.join(sty.languages)))
 
     def styleToFont(self, style):
