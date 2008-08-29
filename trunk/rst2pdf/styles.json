@@ -185,9 +185,11 @@
       "bulletFontSize": 8,
       "leading": 10,
       "firstLineIndent": 0,
-      "leftIndent": 12,
-      "spaceBefore": 4,
-      "backColor": "beige"
+      "leftIndent": 6,
+      "spaceBefore": 8,
+      "spaceAfter": 8,
+      "backColor": "beige",
+      "borderPadding": 6
     }],
     ["pygments-p" , {
       "parent": "code"

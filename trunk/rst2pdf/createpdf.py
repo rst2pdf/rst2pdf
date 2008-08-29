@@ -96,7 +96,12 @@ class RstToPdf(object):
 
         try:
             s=self.styles[style]
-            return '<font face="%s" size="%d" color="%s">' % (s.fontName,s.fontSize,s.textColor)
+            bc=s.backColor
+            if bc:
+                r='<font face="%s" size="%d" color="#%s" backColor="#%s">' % (s.fontName,s.fontSize,s.textColor.hexval(),bc.hexval())
+            else:
+                r='<font face="%s" size="%d" color="#%s">' % (s.fontName,s.fontSize,s.textColor.hexval())
+            return r
         except KeyError:
             log.warning('Unknown class %s' % style)
             return None
