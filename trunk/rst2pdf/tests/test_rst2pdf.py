@@ -6,27 +6,20 @@ from unittest import TestCase, makeSuite
 from pyPdf import PdfFileReader
 import cStringIO
 
-#import pdb; pdb.set_trace()
-
-import rst2pdf
-from rst2pdf.createpdf import RstToPdf
-
 import docutils.core
 
-from os.path import join, abspath, dirname, basename
-PREFIX = abspath(dirname(__file__))
+import rst2pdf
+from utils import *
 
 import pdb
+#import pdb; pdb.set_trace()
 
 def input_file_path(file):
     return join(PREFIX, 'input', file)
 
-class rst2pdfTests(TestCase):
-
-    def setUp(self):
-        self.converter=RstToPdf()
-    
 class FullGenerationTests(TestCase):
+    """ broken since createPdf is no longer a function
+    """
     def test_bullet_chars_full(self):
         self.output=cStringIO.StringIO()
         input_file = input_file_path('test_bullet_chars.txt')
@@ -38,127 +31,6 @@ class FullGenerationTests(TestCase):
         self.assertEqual(text_result, u'\nTest\nItem 1\nItem 2\n')
 
     
-class IncludeTests(rst2pdfTests):
-    def test_wrong_file(self):
-        input="""
-This one gives a warning, non existent file:
-
-.. code-block:: python
-   :include: xyzzy.py
-"""
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.astext(), u'\n')
-        
-    def test_missing_file(self):
-        input="""
-This one gives a warning, missing file:
-
-.. code-block:: python
-   :include:
-"""
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'system_message')
-        self.assertEqual(include.children[1].tagname, 'literal_block')
-        self.assertEqual(include.children[1].astext(), u'.. code-block:: python\n   :include:')
-
-    def test_existing_file(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.children[0].astext(), u'# -*- coding: utf-8 -*-')
-
-    def test_wrong_lang(self):
-        input="""
-This one exists:
-
-.. code-block:: nothing
-   :include: %s
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.astext().split('\n')[0], u'# -*- coding: utf-8 -*-')
-
-    def test_existing_file_start_at(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-   :start-at: def input_file_path(file):
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.astext().split('\n')[0], u'def input_file_path(file):')
-        self.assertEqual(include.astext().split('\n')[-2:][0], u"    unittest.main(defaultTest='test_suite')")
-        
-    def test_existing_file_start_after(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-   :start-after: def input_file_path(file):
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.astext().split('\n')[0], u"    return join(PREFIX, 'input', file)")
-        self.assertEqual(include.astext().split('\n')[-2:][0], u"    unittest.main(defaultTest='test_suite')")
-        
-    def test_existing_file_end_before(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-   :end-before: return join(PREFIX, 'input', file)
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.children[0].astext(), u'# -*- coding: utf-8 -*-')
-        self.assertEqual(include.astext().split('\n')[-3:][0], u'def input_file_path(file):')
-        
-    def test_existing_file_end_at(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-   :end-at: def input_file_path(file):
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.children[0].astext(), u'# -*- coding: utf-8 -*-')
-        self.assertEqual(include.astext().split('\n')[-2:][0], u'def input_file_path(file):')
-        
-    def test_existing_file_start_at_end_at(self):
-        input="""
-This one exists:
-
-.. code-block:: py
-   :include: %s
-   :start-at: def input_file_path(file):
-   :end-at: return join(PREFIX, 'input', file)
-""" % __file__
-        doctree=docutils.core.publish_doctree(input)
-        include = doctree.children[1]
-        self.assertEqual(include.tagname, 'literal_block')
-        self.assertEqual(include.astext().split('\n')[0], u'def input_file_path(file):')
-        self.assertEqual(include.astext().split('\n')[-2:][0], u"    return join(PREFIX, 'input', file)")
-        
 class GenerationTests(rst2pdfTests):
 
     def test_bullet_chars(self):
@@ -176,7 +48,6 @@ class GenerationTests(rst2pdfTests):
         
 def test_suite():
     suite = makeSuite(GenerationTests)
-    suite.addTest(makeSuite(IncludeTests))
     return suite
     
 if __name__ == '__main__':
