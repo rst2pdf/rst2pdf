@@ -352,7 +352,7 @@ For more information, see `this issue`_ in rst2pdf's bug tracker.
 .. _this issue: http://code.google.com/p/rst2pdf/issues/detail?id=5
 
 Also, you may need to set hyphenation to true in one or more styles, and the language
-for hyphenation.
+for hyphenation via the command line or paragraph styles.
 
 For english, this should be enough::
 
@@ -389,7 +389,7 @@ For example, you could inherit bodytext for german:
       "parent": "bodytext",
       "alignment": "TA_JUSTIFY",
       "hyphenation": true,
-      "language": de
+      "language": "de_DE"
     }],
 
 And all paragraps declared of bodytext_de style would have german hyphenation::
@@ -404,8 +404,8 @@ And all paragraps declared of bodytext_de style would have german hyphenation::
 BTW: I have no idea what that says, I just copied it from project Gutenberg.
 Hopefully it's not offensive :-)
 
-If you explicitly configure a language in a paragraph style and pass it in the
-command line, the style has priority, so remember:
+If you explicitly configure a language in a paragraph style and also pass a
+language in the command line, the style has priority, so remember:
 
     If you configure the bodytext style to have a language, your document
     is supposed to be in that language, regardless of what the command line
