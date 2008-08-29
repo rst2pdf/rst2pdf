@@ -619,6 +619,7 @@ class RstToPdf(object):
                 else:
                     w=sty.adjustUnits(w,sty.pw*.5)
             else:
+                log.warning("Using image %s without specifying size. Calculating based on 300dpi"%imgname)
                 # No width specified at all. Make it up
                 # as if we knew what we're doing
                 if iw:
@@ -638,7 +639,7 @@ class RstToPdf(object):
                     h=w*ih/iw
 
             # And now we have this probably completely bogus size!
-            log.warning("Image %s guessed as with size:  %fcm by %fcm",imgname,w/cm,w/cm)
+            log.info("Image %s size calculated:  %fcm by %fcm",imgname,w/cm,w/cm)
 
             i=Image(filename=imgname,
                     height=h,
