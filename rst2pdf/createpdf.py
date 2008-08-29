@@ -86,7 +86,6 @@ class RstToPdf(object):
             if not sty.languages:
                 sty.languages=[language]
                 self.styles['bodytext'].language=dicts[language]
-            print sty.languages
             for lang in sty.languages:                
                 try:
                     wordaxe.hyphRegistry[dicts[lang]] = PyHnjHyphenator(lang,5)
