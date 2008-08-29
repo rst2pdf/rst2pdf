@@ -888,7 +888,10 @@ class OutlineEntry(Flowable):
            * text is the text to be displayed in the outline tree
            * level is the level, 0 is outermost, 1 is child of 0, etc.
         '''
-        self.label=label.strip()
+        if label==None: # it happens
+            self.label=str(text).strip()
+        else:
+            self.label=label.strip()
         self.text=text.strip()
         self.level=int(level)
         self.snum=snum
