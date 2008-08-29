@@ -871,6 +871,7 @@ class OutlineEntry(Flowable):
 
     def draw(self):
         self.canv.bookmarkPage(self.label)
+        self.canv.sectName=self.text
         self.canv.addOutlineEntry(self.text,
                                   self.label,
                                   self.level)
@@ -948,16 +949,25 @@ class FancyPage(PageTemplate):
 
 
         self.frames=[textframe]
+
+    def replaceTokens(self,text,canv,doc):
+        text=text.replace('###Page###',str(doc.page))
+        text=text.replace("###Title###",str(doc.title))
+        # FIXME: make this nicer
+        try:
+            text=text.replace("###Section###",str(canv.sectName))
+        except AttributeError:
+            text=text.replace("###Section###",'')
+        return text
         
+    def afterDrawPage(self,canv,doc):
         if self.head:
-            head=self.head.replace('###Page###',str(doc.page))
-            head=head.replace("###Title###",str(doc.title))
+            head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])
             para.wrap(self.tw,self.ph)
             para.drawOn(canv,self.hx,self.hy)
         if self.foot:
-            foot=self.foot.replace('###Page###',str(doc.page))
-            foot=foot.replace("###Title###",str(doc.title))
+            foot=self.replaceTokens(self.foot,canv,doc)
             para=Paragraph(foot,style=self.styles['footer'])
             para.wrap(self.tw,self.ph)
             para.drawOn(canv,self.fx,self.fy)

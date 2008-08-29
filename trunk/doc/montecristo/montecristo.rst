@@ -10,10 +10,13 @@ by Alexandre Dumas, Pere
 ..
 
 
+.. header::
+
+   ###Section###
 
 .. footer::
 
-   Page ###Page###
+   ###Page###
 
 .. raw:: pdf
 
