@@ -86,7 +86,8 @@
     ["definition_list_term" , {
       "parent": "normal",
       "fontName": "stdBold",
-      "bulletFontName": "stdBold"
+      "bulletFontName": "stdBold",
+      "keepWithNext": true
     }],
     ["definition_list_classifier" , {
       "parent": "normal",

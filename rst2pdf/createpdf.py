@@ -497,7 +497,8 @@ class RstToPdf(object):
                 else:
                     dt=dt+self.gen_elements(n,depth,style)
 
-            node.elements=[Paragraph(' : '.join(tt),style),MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
+            node.elements=[Paragraph(' : '.join(tt),self.styles['definition_list_term']),
+                           MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
 
         elif isinstance (node, docutils.nodes.list_item):
             # A list_item is a table of two columns.
