@@ -6,9 +6,13 @@ How to use rst2pdf
 :version: 0.6 (svn)
 :revision: $LastChangedRevision$
 
+.. header::
+
+   ###Section###
+
 .. footer::
 
-   ###Section### - Page ###Page###
+   Page ###Page###
 
 .. contents::
 .. section-numbering::
@@ -175,6 +179,32 @@ print a warning and use bodytext instead.
 
 Also, the order of the styles is important: if styleA is the parent of styleB,
 styleA should be earlier in the stylesheet.
+
+These are all the possible attributes for a style and their default values.
+Some of them, like alignment, apply only when used to paragraphs,
+and not on inline styles::
+
+    "fontName":"Times-Roman",
+    "fontSize":10,
+    "leading":12,
+    "leftIndent":0,
+    "rightIndent":0,
+    "firstLineIndent":0,
+    "alignment":TA_LEFT,
+    "spaceBefore":0,
+    "spaceAfter":0,
+    "bulletFontName":"Times-Roman",
+    "bulletFontSize":10,
+    "bulletIndent":0,
+    "textColor": black,
+    "backColor":None,
+    "wordWrap":None,
+    "borderWidth": 0,
+    "borderPadding": 0,
+    "borderColor": None,
+    "borderRadius": None,
+    "allowWidows": 1,
+    "allowOrphans": 0,
 
 Font Embedding
 --------------
