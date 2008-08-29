@@ -28,6 +28,7 @@
     "stdMonoBoldItalic": "Courier-BoldOblique",
     "stdSerif": "Times-Roman"
   },
+  "linkColor" : "navy",
   "styles" : [
     [ "base" , {
       "parent": null,
