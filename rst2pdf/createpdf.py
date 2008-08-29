@@ -909,7 +909,7 @@ class OutlineEntry(Flowable):
             self.canv.sectNum=""
         self.canv.addOutlineEntry(self.text,
                                   self.label,
-                                  self.level)
+                                  self.level, False)
 
     def __repr__(self):
         return "OutlineEntry (label=%s , text=%s , level=%d) \n"%(self.label,self.text,self.level)
