@@ -1,3 +1,4 @@
+==================
 How to use rst2pdf
 ==================
 
@@ -9,14 +10,14 @@ How to use rst2pdf
    ###Section### - Page ###Page###
 
 .. contents::
+.. section-numbering::
 
 Introduction
-------------
+============
 
-This document explains how to use rst2pdf version 0.3. Here is the very short version::
+This document explains how to use rst2pdf. Here is the very short version::
 
-
-  rst2pdf.py mydocument.txt -o mydocument.pdf
+    rst2pdf.py mydocument.txt -o mydocument.pdf
 
 That will, as long as mydocument.txt is a valid Restructured Text (ReST) 
 document, produce a file called mydocument.pdf which is a PDF 
@@ -31,7 +32,7 @@ However, if you want to customize the output, or are just curious to see
 what can be done, let´s continue.
 
 Headers and Footers
--------------------
+===================
 
 ReST supports headers and footers, using the header and footer directive::
 
@@ -52,7 +53,7 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
     
 Footnotes
----------
+=========
 
 Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
 There is a real complicated technical reason for this: I can't figure out a
@@ -63,13 +64,17 @@ wouldn't be footnotes either, would they? They would be
 "in-the-middle-of-text-notes" or just plain notes.
 
 Inline Images
--------------
+=============
 
 You can insert images in the middle of your text like this::
 
   This |biohazard| means you have to run.
 
   .. |biohazard| image:: biohazard.png
+
+This |biohazard| means you have to run.
+
+.. |biohazard| image:: biohazard.png
 
 However, although I think rst2pdf generates the right reportlab code, the image
 will not be visible.
@@ -78,7 +83,7 @@ It will work, however, if you use a development version of reportlab. In which c
 wordaxe won't work, and you will have no hyphenation. Your choice ;-)
 
 Styles
-------
+======
 
 You can style paragraphs with a style using the class directive::
 
@@ -99,7 +104,7 @@ For more information about this, please check the ReST docs.
 The only special thing about using rst2pdf here is the syntax of
 the stylesheet. 
 
-You can make rst2pdf print the default stylesheet:
+You can make rst2pdf print the default stylesheet::
 
   rst2pdf --print-stylesheet
 
@@ -115,7 +120,7 @@ StyleSheet Syntax
 It´s a JSON file with several elements in it.
 
 Font Alias
-~~~~~~~~~~
+----------
 
 This is the fontsAlias element. By default, it uses some of the standard PDF fonts::
 
@@ -150,7 +155,7 @@ The standard PDF fonts are these:
   Zapf-Dingbats
 
 Style Definition
-~~~~~~~~~~~~~~~~
+----------------
 
 Then you have a 'styles' which is a list of [ stylename, styleproperties ]. For example::
 
@@ -171,7 +176,7 @@ Also, the order of the styles is important: if styleA is the parent of styleB,
 styleA should be earlier in the stylesheet.
 
 Font Embedding
-~~~~~~~~~~~~~~
+--------------
 
 There are thousands of excelent free True Type fonts available on the web, and
 you can use them in your documents by declaring them in your stylesheet.
@@ -207,13 +212,13 @@ as regular text).
 If you want to use this as the base font for your document, you should change the fontsAlias
 section accordingly. For example::
 
-  "fontsAlias" : {
-    "stdFont": "Tuffy",
-    "stdBold": "Tuffy_Bold",
-    "stdItalic": "Tuffy_Italic",
-    "stdBoldItalic": "Tuffy_Bold_Italic",
-    "stdMono": "Courier"
-  },
+      "fontsAlias" : {
+        "stdFont": "Tuffy",
+        "stdBold": "Tuffy_Bold",
+        "stdItalic": "Tuffy_Italic",
+        "stdBoldItalic": "Tuffy_Bold_Italic",
+        "stdMono": "Courier"
+      },
 
 If, on the other hand, you only want a specific style to use the Tuffy
 font, don't change the fontAlias, and set the fontName properties for
@@ -237,7 +242,7 @@ in the current folder. You can make it search another folder by passing
 the --font-folder option, or you can use absolute paths in your stylesheet.
 
 Page Size and Margins
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 In your stylesheet, the pageSetup element controls your page layout.
 
@@ -279,20 +284,60 @@ if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
 Syntax Highlighting
--------------------
+===================
+
+Inline
+------
 
 Rst2pdf adds a non-standard directive, called code-block, which produces syntax
 highlighted for many languages using Pygments_.
 
 For example, if you want to include a python fragment::
 
-  .. code-block:: python
+    .. code-block:: python
 
-     def myFun(x,y):
-       print x+y
+        def myFun(x,y):
+            print x+y
+       
+.. code-block:: python
+
+    def myFun(x,y):
+        print x+y
 
 Notice that you need to declare the language of the fragment. Here's a list of
 the currently supported_.
+
+Examples
+~~~~~~~~
+
+As rst2pdf is in python let's see some examples and variations around python
+
+Python in console
+
+  .. code-block:: pycon
+
+        >>> my_string="python is great"
+        >>> my_string.find('great')
+        10
+        >>> my_string.startswith('py')
+        True
+
+Python traceback
+
+  .. code-block:: pytb
+
+    Traceback (most recent call last):
+      File "error.py", line 9, in ?
+        main()
+      File "error.py", line 6, in main
+        print call_error()
+      File "error.py", line 2, in call_error
+        r = 1/0
+    ZeroDivisionError: integer division or modulo by zero
+    Exit 1
+
+File inclusion
+--------------
 
 Also, you can use the code-block directive with an external file, using
 the :include: option::
@@ -302,12 +347,49 @@ the :include: option::
 
 This will give a warning if setup.py doesn't exist or can't be opened.
 
+include with boundaries
+~~~~~~~~~~~~~~~~~~~~~~~
+
+you can add selectors to limit the inclusion to a portion of the file.
+the options are:
+
+* :start-at: string
+
+    will include file beginning at the first occurence of string, string **included**
+    
+* :start-after: string
+
+    will include file beginning at the first occurence of string, string **excluded**
+
+* :end-before: string
+
+    will include file up to the first occurence of string, string **excluded**
+
+* :end-at: string
+
+    will include file up to the first occurence of string, string **included**
+
+Let's display a class from rst2pdf::
+    
+      .. code-block:: python
+         :include: ../rst2pdf/createpdf.py
+         :start-at: class Separation(Flowable):
+         :end-before: class FancyPage(PageTemplate):
+
+this command gives
+         
+.. code-block:: python
+    :include: ../rst2pdf/createpdf.py
+    :start-at: class Separation(Flowable):
+    :end-before: class FancyPage(PageTemplate):
+
+    
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
 
 Raw Directive
--------------
+=============
 
 Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
 
@@ -336,7 +418,7 @@ Here's an example that shows all the sytax::
 The unit used by the spacer is points, and using a space or a comma is the same thing in all cases.
 
 Hyphenation
------------
+===========
 
 If you want good looking documents, you want to enable hyphenation.
 
@@ -383,7 +465,7 @@ For example, this will enable german hyphenation globally:
     rst2pdf -l de_DE mydocument.txt
 
 If you are creating a multilingual document, you can declare styles with specific languages.
-For example, you could inherit bodytext for german:
+For example, you could inherit bodytext for german::
 
     ["bodytext_de" , {
       "parent": "bodytext",

@@ -7,8 +7,9 @@
  /F2 3 0 R
  /F3 4 0 R
  /F4 6 0 R
- /F5 20 0 R
- /F6 24 0 R >>
+ /F5 24 0 R
+ /F6 28 0 R
+ /F7 31 0 R >>
 endobj
 % 'F1': class PDFType1Font 
 2 0 obj
@@ -67,10 +68,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 21 0 R
+ /Dest [ 25 0 R
  /XYZ
  62.69291
- 445.1969
+ 381.1969
  0 ]
  /Rect [ 68.69291
  645.1969
@@ -85,10 +86,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 21 0 R
+ /Dest [ 25 0 R
  /XYZ
  62.69291
- 309.1969
+ 245.1969
  0 ]
  /Rect [ 68.69291
  629.1969
@@ -103,10 +104,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 21 0 R
+ /Dest [ 26 0 R
  /XYZ
  62.69291
- 131.1969
+ 713.1969
  0 ]
  /Rect [ 68.69291
  613.1969
@@ -121,10 +122,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 22 0 R
+ /Dest [ 26 0 R
  /XYZ
  62.69291
- 751.1969
+ 623.1969
  0 ]
  /Rect [ 68.69291
  597.1969
@@ -139,10 +140,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 22 0 R
+ /Dest [ 26 0 R
  /XYZ
  62.69291
- 621.1969
+ 477.1969
  0 ]
  /Rect [ 68.69291
  581.1969
@@ -157,15 +158,15 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 22 0 R
+ /Dest [ 26 0 R
  /XYZ
  62.69291
- 369.1969
+ 227.1969
  0 ]
- /Rect [ 68.69291
- 565.1969
- 526.5827
- 575.1969 ]
+ /Rect [ 74.69291
+ 568.1969
+ 520.5827
+ 578.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -175,10 +176,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 22 0 R
+ /Dest [ 26 0 R
  /XYZ
  62.69291
- 315.1969
+ 165.1969
  0 ]
  /Rect [ 74.69291
  552.1969
@@ -193,10 +194,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 22 0 R
+ /Dest [ 29 0 R
  /XYZ
  62.69291
- 111.1969
+ 663.1969
  0 ]
  /Rect [ 74.69291
  536.1969
@@ -211,10 +212,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 25 0 R
+ /Dest [ 29 0 R
  /XYZ
  62.69291
- 619.1969
+ 493.1969
  0 ]
  /Rect [ 74.69291
  520.1969
@@ -229,10 +230,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 25 0 R
+ /Dest [ 33 0 R
  /XYZ
  62.69291
- 127.1969
+ 709.1969
  0 ]
  /Rect [ 74.69291
  504.1969
@@ -247,10 +248,10 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 28 0 R
+ /Dest [ 33 0 R
  /XYZ
  62.69291
- 509.1969
+ 379.1969
  0 ]
  /Rect [ 68.69291
  485.1969
@@ -265,15 +266,15 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 28 0 R
+ /Dest [ 33 0 R
  /XYZ
  62.69291
- 291.1969
+ 341.1969
  0 ]
- /Rect [ 68.69291
- 469.1969
- 526.5827
- 479.1969 ]
+ /Rect [ 74.69291
+ 472.1969
+ 520.5827
+ 482.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -283,20 +284,92 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 31 0 R
+ /Dest [ 33 0 R
  /XYZ
  62.69291
- 735.1969
+ 179.1969
+ 0 ]
+ /Rect [ 80.69291
+ 459.1969
+ 514.5827
+ 469.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER15': class LinkAnnotation 
+20 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 34 0 R
+ /XYZ
+ 62.69291
+ 641.1969
+ 0 ]
+ /Rect [ 74.69291
+ 440.1969
+ 520.5827
+ 450.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER16': class LinkAnnotation 
+21 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 34 0 R
+ /XYZ
+ 62.69291
+ 539.1969
+ 0 ]
+ /Rect [ 80.69291
+ 427.1969
+ 514.5827
+ 437.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER17': class LinkAnnotation 
+22 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 34 0 R
+ /XYZ
+ 62.69291
+ 127.1969
  0 ]
  /Rect [ 68.69291
- 453.1969
+ 405.1969
  526.5827
- 463.1969 ]
+ 415.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER18': class LinkAnnotation 
+23 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 37 0 R
+ /XYZ
+ 62.69291
+ 569.1969
+ 0 ]
+ /Rect [ 68.69291
+ 389.1969
+ 526.5827
+ 399.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
 % 'F5': class PDFType1Font 
-20 0 obj
+24 0 obj
 % Font Courier
 << /BaseFont /Courier
  /Encoding /WinAnsiEncoding
@@ -305,7 +378,7 @@ endobj
  /Type /Font >>
 endobj
 % 'Page1': class PDFPage 
-21 0 obj
+25 0 obj
 % Page dictionary
 << /Annots [ 5 0 R
  7 0 R
@@ -320,13 +393,17 @@ endobj
  16 0 R
  17 0 R
  18 0 R
- 19 0 R ]
- /Contents 49 0 R
+ 19 0 R
+ 20 0 R
+ 21 0 R
+ 22 0 R
+ 23 0 R ]
+ /Contents 60 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 48 0 R
+ /Parent 59 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -338,14 +415,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page2': class PDFPage 
-22 0 obj
+26 0 obj
 % Page dictionary
-<< /Contents 50 0 R
+<< /Contents 61 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 48 0 R
+ /Parent 59 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -356,8 +433,8 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER15': class PDFDictionary 
-23 0 obj
+% 'Annot.NUMBER19': class PDFDictionary 
+27 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://tulrich.com/fonts/) >>
@@ -365,14 +442,14 @@ endobj
  0
  0 ]
  /Rect [ 236.5649
- 490.1969
+ 364.1969
  269.9169
- 500.1969 ]
+ 374.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
 % 'F6': class PDFType1Font 
-24 0 obj
+28 0 obj
 % Font Helvetica-Oblique
 << /BaseFont /Helvetica-Oblique
  /Encoding /WinAnsiEncoding
@@ -381,15 +458,15 @@ endobj
  /Type /Font >>
 endobj
 % 'Page3': class PDFPage 
-25 0 obj
+29 0 obj
 % Page dictionary
-<< /Annots [ 23 0 R ]
- /Contents 51 0 R
+<< /Annots [ 27 0 R ]
+ /Contents 62 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 48 0 R
+ /Parent 59 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -400,8 +477,8 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER16': class PDFDictionary 
-26 0 obj
+% 'Annot.NUMBER20': class PDFDictionary 
+30 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://pygments.org/) >>
@@ -409,14 +486,23 @@ endobj
  0
  0 ]
  /Rect [ 486.4449
- 460.1969
+ 284.1969
  522.0129
- 470.1969 ]
+ 294.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Annot.NUMBER17': class PDFDictionary 
-27 0 obj
+% 'F7': class PDFType1Font 
+31 0 obj
+% Font Courier-Bold
+<< /BaseFont /Courier-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F7
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Annot.NUMBER21': class PDFDictionary 
+32 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://pygments.org/docs/lexers/) >>
@@ -424,23 +510,23 @@ endobj
  0
  0 ]
  /Rect [ 381.2769
- 384.1969
+ 184.1969
  416.8529
- 394.1969 ]
+ 194.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
 % 'Page4': class PDFPage 
-28 0 obj
+33 0 obj
 % Page dictionary
-<< /Annots [ 26 0 R
- 27 0 R ]
- /Contents 52 0 R
+<< /Annots [ 30 0 R
+ 32 0 R ]
+ /Contents 63 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 48 0 R
+ /Parent 59 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -451,8 +537,27 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER18': class PDFDictionary 
-29 0 obj
+% 'Page5': class PDFPage 
+34 0 obj
+% Page dictionary
+<< /Contents 64 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 59 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER22': class PDFDictionary 
+35 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://deco-cow.sf.net) >>
@@ -460,14 +565,14 @@ endobj
  0
  0 ]
  /Rect [ 288.1249
- 670.1969
+ 504.1969
  364.1649
- 680.1969 ]
+ 514.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Annot.NUMBER19': class PDFDictionary 
-30 0 obj
+% 'Annot.NUMBER23': class PDFDictionary 
+36 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://code.google.com/p/rst2pdf/issues/detail?id=5) >>
@@ -475,23 +580,23 @@ endobj
  0
  0 ]
  /Rect [ 156.5009
- 628.1969
+ 462.1969
  189.8449
- 638.1969 ]
+ 472.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Page5': class PDFPage 
-31 0 obj
+% 'Page6': class PDFPage 
+37 0 obj
 % Page dictionary
-<< /Annots [ 29 0 R
- 30 0 R ]
- /Contents 53 0 R
+<< /Annots [ 35 0 R
+ 36 0 R ]
+ /Contents 65 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 48 0 R
+ /Parent 59 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -502,271 +607,2153 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'R32': class PDFCatalog 
-32 0 obj
+% 'Page7': class PDFPage 
+38 0 obj
+% Page dictionary
+<< /Contents 66 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 59 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R39': class PDFCatalog 
+39 0 obj
 % Document Root
-<< /Outlines 34 0 R
+<< /Outlines 41 0 R
  /PageMode /UseNone
- /Pages 48 0 R
+ /Pages 59 0 R
  /Type /Catalog >>
 endobj
-% 'R33': class PDFInfo 
-33 0 obj
+% 'R40': class PDFInfo 
+40 0 obj
 << /Author (Roberto Alsina &lt;<a href="mailto:ralsina@netmanagers.com.ar" color="blue">ralsina@netmanagers.com.ar</a>&gt;)
- /CreationDate (20080828212101)
+ /CreationDate (20080829123856)
  /Keywords ()
  /Producer (ReportLab http://www.reportlab.com)
  /Subject (\(unspecified\))
  /Title (How to use rst2pdf) >>
 endobj
-% 'R34': class PDFOutlines 
-34 0 obj
-<< /Count 14
- /First 35 0 R
- /Last 47 0 R
+% 'R41': class PDFOutlines 
+41 0 obj
+<< /Count 21
+ /First 42 0 R
+ /Last 58 0 R
  /Type /Outlines >>
 endobj
 % 'Outline.0': class OutlineEntryObject 
-35 0 obj
-<< /Dest [ 21 0 R
- /Fit ]
- /Next 36 0 R
- /Parent 34 0 R
- /Title (Introduction) >>
-endobj
-% 'Outline.1': class OutlineEntryObject 
-36 0 obj
-<< /Dest [ 21 0 R
- /Fit ]
- /Next 37 0 R
- /Parent 34 0 R
- /Prev 35 0 R
- /Title (Headers and Footers) >>
-endobj
-% 'Outline.2': class OutlineEntryObject 
-37 0 obj
-<< /Dest [ 21 0 R
- /Fit ]
- /Next 38 0 R
- /Parent 34 0 R
- /Prev 36 0 R
- /Title (Footnotes) >>
-endobj
-% 'Outline.3': class OutlineEntryObject 
-38 0 obj
-<< /Dest [ 22 0 R
- /Fit ]
- /Next 39 0 R
- /Parent 34 0 R
- /Prev 37 0 R
- /Title (Inline Images) >>
-endobj
-% 'Outline.4': class OutlineEntryObject 
-39 0 obj
-<< /Dest [ 22 0 R
- /Fit ]
- /Next 40 0 R
- /Parent 34 0 R
- /Prev 38 0 R
- /Title (Styles) >>
-endobj
-% 'Outline.5': class OutlineEntryObject 
-40 0 obj
-<< /Count 4
- /Dest [ 22 0 R
- /Fit ]
- /First 41 0 R
- /Last 44 0 R
- /Next 45 0 R
- /Parent 34 0 R
- /Prev 39 0 R
- /Title (StyleSheet Syntax) >>
-endobj
-% 'Outline.14.0': class OutlineEntryObject 
-41 0 obj
-<< /Dest [ 22 0 R
- /Fit ]
- /Next 42 0 R
- /Parent 40 0 R
- /Title (Font Alias) >>
-endobj
-% 'Outline.14.1': class OutlineEntryObject 
 42 0 obj
-<< /Dest [ 22 0 R
+<< /Dest [ 25 0 R
  /Fit ]
  /Next 43 0 R
- /Parent 40 0 R
- /Prev 41 0 R
- /Title (Style Definition) >>
+ /Parent 41 0 R
+ /Title (\376\377\0001\000\240\000\240\000\240\000I\000n\000t\000r\000o\000d\000u\000c\000t\000i\000o\000n) >>
 endobj
-% 'Outline.14.2': class OutlineEntryObject 
+% 'Outline.1': class OutlineEntryObject 
 43 0 obj
 << /Dest [ 25 0 R
  /Fit ]
  /Next 44 0 R
- /Parent 40 0 R
+ /Parent 41 0 R
  /Prev 42 0 R
- /Title (Font Embedding) >>
+ /Title (\376\377\0002\000\240\000\240\000\240\000H\000e\000a\000d\000e\000r\000s\000 \000a\000n\000d\000 \000F\000o\000o\000t\000e\000r\000s) >>
 endobj
-% 'Outline.14.3': class OutlineEntryObject 
+% 'Outline.2': class OutlineEntryObject 
 44 0 obj
-<< /Dest [ 25 0 R
+<< /Dest [ 26 0 R
  /Fit ]
- /Parent 40 0 R
+ /Next 45 0 R
+ /Parent 41 0 R
  /Prev 43 0 R
- /Title (Page Size and Margins) >>
+ /Title (\376\377\0003\000\240\000\240\000\240\000F\000o\000o\000t\000n\000o\000t\000e\000s) >>
 endobj
-% 'Outline.6': class OutlineEntryObject 
+% 'Outline.3': class OutlineEntryObject 
 45 0 obj
-<< /Dest [ 28 0 R
+<< /Dest [ 26 0 R
  /Fit ]
  /Next 46 0 R
- /Parent 34 0 R
- /Prev 40 0 R
- /Title (Syntax Highlighting) >>
+ /Parent 41 0 R
+ /Prev 44 0 R
+ /Title (\376\377\0004\000\240\000\240\000\240\000I\000n\000l\000i\000n\000e\000 \000I\000m\000a\000g\000e\000s) >>
+endobj
+% 'Outline.4': class OutlineEntryObject 
+46 0 obj
+<< /Count 5
+ /Dest [ 26 0 R
+ /Fit ]
+ /First 47 0 R
+ /Last 51 0 R
+ /Next 52 0 R
+ /Parent 41 0 R
+ /Prev 45 0 R
+ /Title (\376\377\0005\000\240\000\240\000\240\000S\000t\000y\000l\000e\000s) >>
+endobj
+% 'Outline.18.0': class OutlineEntryObject 
+47 0 obj
+<< /Dest [ 26 0 R
+ /Fit ]
+ /Next 48 0 R
+ /Parent 46 0 R
+ /Title (\376\377\0005\000.\0001\000\240\000\240\000\240\000S\000t\000y\000l\000e\000S\000h\000e\000e\000t\000 \000S\000y\000n\000t\000a\000x) >>
+endobj
+% 'Outline.18.1': class OutlineEntryObject 
+48 0 obj
+<< /Dest [ 26 0 R
+ /Fit ]
+ /Next 49 0 R
+ /Parent 46 0 R
+ /Prev 47 0 R
+ /Title (\376\377\0005\000.\0002\000\240\000\240\000\240\000F\000o\000n\000t\000 \000A\000l\000i\000a\000s) >>
+endobj
+% 'Outline.18.2': class OutlineEntryObject 
+49 0 obj
+<< /Dest [ 29 0 R
+ /Fit ]
+ /Next 50 0 R
+ /Parent 46 0 R
+ /Prev 48 0 R
+ /Title (\376\377\0005\000.\0003\000\240\000\240\000\240\000S\000t\000y\000l\000e\000 \000D\000e\000f\000i\000n\000i\000t\000i\000o\000n) >>
+endobj
+% 'Outline.18.3': class OutlineEntryObject 
+50 0 obj
+<< /Dest [ 29 0 R
+ /Fit ]
+ /Next 51 0 R
+ /Parent 46 0 R
+ /Prev 49 0 R
+ /Title (\376\377\0005\000.\0004\000\240\000\240\000\240\000F\000o\000n\000t\000 \000E\000m\000b\000e\000d\000d\000i\000n\000g) >>
+endobj
+% 'Outline.18.4': class OutlineEntryObject 
+51 0 obj
+<< /Dest [ 33 0 R
+ /Fit ]
+ /Parent 46 0 R
+ /Prev 50 0 R
+ /Title (\376\377\0005\000.\0005\000\240\000\240\000\240\000P\000a\000g\000e\000 \000S\000i\000z\000e\000 \000a\000n\000d\000 \000M\000a\000r\000g\000i\000n\000s) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+52 0 obj
+<< /Count 4
+ /Dest [ 33 0 R
+ /Fit ]
+ /First 53 0 R
+ /Last 55 0 R
+ /Next 57 0 R
+ /Parent 41 0 R
+ /Prev 46 0 R
+ /Title (\376\377\0006\000\240\000\240\000\240\000S\000y\000n\000t\000a\000x\000 \000H\000i\000g\000h\000l\000i\000g\000h\000t\000i\000n\000g) >>
+endobj
+% 'Outline.19.0': class OutlineEntryObject 
+53 0 obj
+<< /Count 1
+ /Dest [ 33 0 R
+ /Fit ]
+ /First 54 0 R
+ /Last 54 0 R
+ /Next 55 0 R
+ /Parent 52 0 R
+ /Title (\376\377\0006\000.\0001\000\240\000\240\000\240\000I\000n\000l\000i\000n\000e) >>
+endobj
+% 'Outline.20.0': class OutlineEntryObject 
+54 0 obj
+<< /Dest [ 33 0 R
+ /Fit ]
+ /Parent 53 0 R
+ /Title (\376\377\0006\000.\0001\000.\0001\000\240\000\240\000\240\000E\000x\000a\000m\000p\000l\000e\000s) >>
+endobj
+% 'Outline.19.1': class OutlineEntryObject 
+55 0 obj
+<< /Count 1
+ /Dest [ 34 0 R
+ /Fit ]
+ /First 56 0 R
+ /Last 56 0 R
+ /Parent 52 0 R
+ /Prev 53 0 R
+ /Title (\376\377\0006\000.\0002\000\240\000\240\000\240\000F\000i\000l\000e\000 \000i\000n\000c\000l\000u\000s\000i\000o\000n) >>
+endobj
+% 'Outline.21.0': class OutlineEntryObject 
+56 0 obj
+<< /Dest [ 34 0 R
+ /Fit ]
+ /Parent 55 0 R
+ /Title (\376\377\0006\000.\0002\000.\0001\000\240\000\240\000\240\000i\000n\000c\000l\000u\000d\000e\000 \000w\000i\000t\000h\000 \000b\000o\000u\000n\000d\000a\000r\000i\000e\000s) >>
+endobj
+% 'Outline.6': class OutlineEntryObject 
+57 0 obj
+<< /Dest [ 34 0 R
+ /Fit ]
+ /Next 58 0 R
+ /Parent 41 0 R
+ /Prev 52 0 R
+ /Title (\376\377\0007\000\240\000\240\000\240\000R\000a\000w\000 \000D\000i\000r\000e\000c\000t\000i\000v\000e) >>
 endobj
 % 'Outline.7': class OutlineEntryObject 
-46 0 obj
-<< /Dest [ 28 0 R
+58 0 obj
+<< /Dest [ 37 0 R
  /Fit ]
- /Next 47 0 R
- /Parent 34 0 R
- /Prev 45 0 R
- /Title (Raw Directive) >>
+ /Parent 41 0 R
+ /Prev 57 0 R
+ /Title (\376\377\0008\000\240\000\240\000\240\000H\000y\000p\000h\000e\000n\000a\000t\000i\000o\000n) >>
 endobj
-% 'Outline.8': class OutlineEntryObject 
-47 0 obj
-<< /Dest [ 31 0 R
- /Fit ]
- /Parent 34 0 R
- /Prev 46 0 R
- /Title (Hyphenation) >>
-endobj
-% 'R48': class PDFPages 
-48 0 obj
+% 'R59': class PDFPages 
+59 0 obj
 % page tree
-<< /Count 5
- /Kids [ 21 0 R
- 22 0 R
- 25 0 R
- 28 0 R
- 31 0 R ]
+<< /Count 7
+ /Kids [ 25 0 R
+ 26 0 R
+ 29 0 R
+ 33 0 R
+ 34 0 R
+ 37 0 R
+ 38 0 R ]
  /Type /Pages >>
 endobj
-% 'R49': class PDFStream 
-49 0 obj
+% 'R60': class PDFStream 
+60 0 obj
 % page stream
-<< /Filter [ /ASCII85Decode
- /FlateDecode ]
- /Length 1805 >>
+<< /Length 7269 >>
 stream
-Gau`Thf%7-&:P.Os5AJlbS_C#e1Y%B0W]&Z-,>C\M6SGC0G7s'Pt4]Hid-+QNg-YJZ'.^m;Bp2JR+1Z<n*[nOM1CLK`;WI<pjE3^cNt-n-5ho\$"3<OI%2/urHio[em$&5M./-pqN)D7K53E1Zf<8e6Q3jUX0>XFeu3@XP*e4X'Z@LD8RZQ]Q_5X(MF"5K[n&;7L!Ok\J=OF9$VZ#(e+P'le)0kC$X)Pm!KEi#+`S37OR;&,@5Ool-Sk^kK:]:epasZ"p`.dIHU+ZXca-B%^(^D&_bT+bg=l?*,*1M&C;G1BmTVn3)pb'77c8KKS@9NL+E0jgqkLP4mj^Jej]R5K]t>.A`mOJ(QKEDm@>qJ12%3/hZAq0[f,`kZ!=j`4H,E7Mo3JN/T^[k.<*sC+95;6A9e]jLJXKLf-]s*Mb@Y7$kLY\D/aSPFmtO&kIR>/jkl1ndi)4C]hcfKiIuhGe\/:e$5i%=^8Pc4XEVrEt)+C*REpZZLaI@>9]bHnAXnI(IHW9KteQ.12qP+GgQU7#oXV-W`m`W9;Ou_5$oED!=VC59'_RYmL5PN.b`Ws@un-Xj((GX(i_,;QAK#)#LqUQVYBQPBHf6W_VL)\(WL)Z+Y!:TTN0b)_bU$9&,Plj?nLti^`>9TnMGm-Dp:upR;bIHInA.>HW"#9YW\7'*o`N1kr59?aDS$2X;b_kg9>0aX&+q#G@ZgjaC?!UWQ_.W?Z?b/>`%JK!^?13Y'i<(_Np?Gl5(Nj\qIWr&#baG-MQnJNuJ#18iAbi#_KKT-tm-1Kak;Y[9HOQB\MC3JJ+I,Mui5>rggENOtS1rj6rOo<<HZ1"_JI>L6^ao)JR=uA(]][_44_GdTO#t^ARC*5?[XbPi3K"UdX,R4ArheXRDL]!8'Dhp$YS2q*+,pbMa6jeZ=;jZ.L*b1;+]&?Q'Jo?0%jOtBiKiUgKe'$BM;bU0QGS=6icK.YXs_\^-8%YffT\W%KoBMo8nagVm^AUhSF^9/9lE.;/Y^Q5cC=%>$s'Y`)q.PPEkM2CjM[fQG'sb[Y7)%+?EkZN%e<RQMV3`?i(KoRagVs^QI.26T^3A)H\Q"`aK9L@1'=\A<V]Y29Ze':OO\.WR4O=8A!RF:Yb7AK=tZJdM'"Cj's?9/h!oa/&o*Tc>Y$TW;i+H=P&$jlgI!n-gW"aO$ja.#1mjRGjV\`5U`,f&<4tr!dDhl>(EGL`II89I.ApE+$onBiTe@iq2\pLe/Bbo;@T0hCdYeIG8+)=S2?ZTOE`jit=Y]!Q6n+f2)7$%H+_Q,d7=i<@$?W1T*Sp7okMmADjHen_p5D%4pO5^%HI'*JC=oM%p:"kf!)V3TJ\m:r]EKIZ+UjhcA*`6Y<Cf()^7uNl?3c(@)"1I7a&tbhCQ:3S!T9HH'VgF1KeSo'>Z6re7*N*""ce?YF,7cl+[b\=2[`Z?1_[br,rW_n[=Ipdi..bFXtC17P1B5VeR2T:#[/opJkfi3cfNSC!:OfNJel'UET_)YYa6[b"k1:8=gC*rdZgSF*CAl?FBNc;o38)h-QU)o`dL7Lp#'`Wk04i$RcE.tB8r@dU="0qo9tZ.Q-B;nRF4bK>ASN.J[!UBooR3-Y4E\eqp-@dm^q7J=kZ.)kU_"]-^64+&+$9<FW<S<1`q3L[JSIBF?42UBqMts9>]=%fkPh?VcLNHMCOlbM4aE09hc;IX\N&I6S"YYbtsD,*GGnV##(h9fg,dG:V4!J16KO"kDATtRO*$+T6%?7:`dh'@YTNAG)9Rp-Ai?i5/T\4FC)>?j>d.3r2e+fWAIOAC$mPH<!"$]r=;W#1%Y~>endstream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 765.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 743.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 153.9359 0 Td (How to use rst2pdf) Tj T* -153.9359 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 721.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 44.15937 0 Td (Author:) Tj T* -44.15937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+n 59.36 1 m 164.4 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Roberto Alsina <) Tj 0 0 1 rg (ralsina@netmanagers.com.ar) Tj 0 0 0 rg (>) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 705.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 41.03137 0 Td (Version:) Tj T* -41.03137 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (0.4 \(svn\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 689.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 663.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (Contents) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 641.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (1   Introduction) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 625.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (2   Headers and Footers) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 609.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (3   Footnotes) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 593.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (4   Inline Images) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 497.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 83 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5   Styles) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 67 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5.1   StyleSheet Syntax) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 51 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5.2   Font Alias) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 35 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5.3   Style Definition) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 19 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5.4   Font Embedding) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (5.5   Page Size and Margins) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 417.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 67 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6   Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 35 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.1   Inline) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.1.1   Examples) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.2   File inclusion) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.2.1   include with boundaries) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 401.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (7   Raw Directive) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 385.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+0 0 0 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (8   Hyphenation) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 369.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 369.1969 cm
+Q
+q
+1 0 0 1 62.69291 347.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (1   Introduction) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 331.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (This document explains how to use rst2pdf. Here is the very short version:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 317.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 2 Tm /F5 8 Tf 10 TL (rst2pdf.py mydocument.txt -o mydocument.pdf) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 291.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .108088 Tw (That will, as long as mydocument.txt is a valid Restructured Text \(ReST\) document, produce a file called mydocument.pdf which is a) Tj T* 0 Tw (PDF version of your document.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 265.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .979903 Tw (Of course, that means you just used default styles and settings. If it looks good enough for you, then you may stop reading this) Tj T* 0 Tw (document, because you are done with it. If you are reading this in a PDF, it was generated using those default settings.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 249.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (However, if you want to customize the output, or are just curious to see what can be done, let\264s continue.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 233.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 233.1969 cm
+Q
+q
+1 0 0 1 62.69291 211.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (2   Headers and Footers) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 195.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (ReST supports headers and footers, using the header and footer directive:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 161.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 30 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 22 Tm /F5 8 Tf 10 TL (.. header::) Tj T*  T* (   This will be at the top of every page.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 135.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .07312 Tw (Often, you may want to put a page number there, or a section name.The following magic tokens will be replaced \(More will be added) Tj T* 0 Tw (as rst2pdf evolves\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 119.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL (###Page###) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 103.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Replaced by the current page number.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 87.19685 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL (###Title###) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 71.19685 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Replaced by the document title) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 181.5809 0 Td (2   Headers and Footers - Page 1) Tj T* -181.5809 0 Td ET
+Q
+Q
+ 
+endstream
 
 endobj
-% 'R50': class PDFStream 
-50 0 obj
+% 'R61': class PDFStream 
+61 0 obj
 % page stream
-<< /Filter [ /ASCII85Decode
- /FlateDecode ]
- /Length 1891 >>
+<< /Length 6141 >>
 stream
-Gau0DD0+Gi%/uj1r!-KAbh^s@-!?,mIFt[fHL\.D]@pW'lWm.V[)GKI<JlgsXo%PhTpJl`SMG2S(J>qq&-VMc!:7Q6IpMo013g*TT:WUOHE^M&4*!fpGRhJAcHe\GT=M@C&3AdgS*\s!)$p^C5crAY:lX3Z7U6mG*L"pF;<^h\`t(ZRS6j.\]9HOH&iM$@<GJ^n="o/+CsBeC%#YY#p^m_d=,]k'dGLO,TiW1T&Hn+U#q(^D*ID$HW3X;I4l7?nYh7f9fPCY91Pk*=NF=D)-QF`T0:kPIF94"SiPVPBTQhN!AS*aN-<tQCaUJq'9ga>2<d2+MfYQ-PbC@mCjKOeFk>Lma\A1\dY@^Aq(KfU.Zh'lqY#im-MiVPa-h7:q%PeX:.3HX]5k>pX+H;Z%,ESo\Z:LD)JYnr,ku[fG:QG<jc[DqA-;J6Gn#?,MN-irTrCC1QWjqW8,niDe=O<Q!WQ7*D15qgQEjnEfB"^QOgj=[o*O-SP??2l.d'EF7!E1!KaH_ShN"S5r8Au=a8Pr7MN!hu\B4+8W[<Y'Y]EKnjT9_ejllW+a:QTR^QP?5%]B0<>C6Q,(@K(V6ds6SS1n?rpj:qFDde;VXN^ZRuf*3!AeVW(_':9ZHj]=$$XEi)+1C,bM<aqU:4;LiZPV!KX1%3R"D#h!g9aq:8KW[`mQ799G6g+\3]5S;OS.kaJi!0DDRBEXD8p/[>UtME6n0%:3&E?kBMi?g;E4-H92t>AbbCNfV9I$87_[bQh>qrrGf=][M\B3s0V<F"^fqjjB=!/eDNOg-T@j3^$Ukh#.4F$bUdO2s$71^Ka7q@5A#m<!7]@<,aJrA*GTeu(Dg/)Uf=HShm0IDG%j-rs-CC8N=ARu1Q:d!1cRTn3-@)J6HR\PN-J5E.T&`.*8,Jhe<'+fMtQ30>#;U1V<&kNlmLbMJ("XgPB98+'Q4AT97CH"_Mm::rMR]Abpc!sQ_V_*<W3f.V!QY%soV;ebRqMpVK(%FdL`N22(-)U/$k.RV+7OO;^1L)c#=Ik7q,umF]#I]jrSVXS4,m$#A&g]ZOU1er!k6m)WA6UdIHn1@BBH7jM(d@2eM([f`F_tK.Z45tqM'XXk06as=2hi@;M#njZgc#.$mc7npBC+ol@P&8u*n_1t(#,O1c_e<!E89/(oH.mJ><!/7OMU>DG5h!u8G1opZRUZGR;m`[(<?+)qc*g")&5<sPV>7/%C,)b5"9-8<]^k]E`Z[_;!<c`brZ"QQbl.l-&hd1$RZi0+$su-`GC=Gmq=9)E;=<OR;8BGD$Vc.;h"(H4sjbE`]NbOgmees$"9,]4onD7rRM?H,ppSqjtHafPt61Cr2$BSO:ZZZ9gqI([BKhEru%3<i>Lut4sK%?7,e+_N6!1&R]d;o^SZTcegXqpE9pKrXsnLIl^"nqj)PBrll&(R)d$R;MIh=^pau$eOFHlp=f&nHVsa?Dq&h`9c3XZH\)qfLHu!]WoMucq_S;'B4b1g_WFOuFcIfKSElldGY!p8iU]!825*9PqV/c!YjBZM5R\_46;uC[(MN8^*09bk"hoO]!N>Jng4cX4U%@[mEec$D"qQEoqPn:6Zqh)#=is.49:e*nj^aR6\EXrF&f&NWoY;6/8W?:=".&MOPYRJ^Q5.%JmMg-ddnD1\&YJ(@\<\MFP<HYSn21AXd-ab2Q50XpqmB<LE'Qq4`/HY(2NBq0kgZ>-'-t,,Z\d22=QSWFiBk[h7ZB*g_\QQ*r-KDPf1pF7a9#r#9]_l"SU^:FdMLtCL]hVcP\aCo+paGdjiM8MPOn&"uCRO-AdQIbXI9U,hDnHsu4l>u$*PM1N#,-sD%Q)qhX^`I<CLoj(cm[V?C^9.8Cai<XRh`!?;ll"G9O$Y9$0CAjnEj.`7l/<'q:Yd`A"On~>endstream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 765.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL (###Section###) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 749.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Replaced by the currect section title) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 733.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL (###SectNum###) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 717.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Replaced by the currect section number. ) Tj /F2 8 Tf (Important:) Tj /F1 8 Tf ( You must use the sectnum directive for this to work.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 701.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 701.1969 cm
+Q
+q
+1 0 0 1 62.69291 679.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (3   Footnotes) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 653.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL -0.015907 Tw (Currently rst2pdf doesn't support real footnotes, and converts them to endnotes. There is a real complicated technical reason for this:) Tj T* 0 Tw (I can't figure out a clean way to do it right.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 627.1969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .623381 Tw /F1 8 Tf 0 0 0 rg (I could go the HTML path and just render them where you put them, but then they wouldn't be footnotes either, would they? They) Tj T* 0 Tw (would be ") Tj (in-the-middle-of-text-notes) Tj (" or just plain notes.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 611.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 611.1969 cm
+Q
+q
+1 0 0 1 62.69291 589.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (4   Inline Images) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 573.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can insert images in the middle of your text like this:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 539.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 30 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 22 Tm /F5 8 Tf 10 TL (This |biohazard| means you have to run.) Tj T*  T* (.. |biohazard| image:: biohazard.png) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 523.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (This means you have to run.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 507.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (However, although I think rst2pdf generates the right reportlab code, the image will not be visible.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 481.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL 1.462989 Tw (It will work, however, if you use a development version of reportlab. In which case wordaxe won't work, and you will have no) Tj T* 0 Tw (hyphenation. Your choice ;-\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 465.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 465.1969 cm
+Q
+q
+1 0 0 1 62.69291 443.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (5   Styles) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 427.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can style paragraphs with a style using the class directive:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 373.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 50 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 42 Tm /F5 8 Tf 10 TL (.. class:: special) Tj T*  T* (This paragraph is special.) Tj T*  T* (This one is not.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 357.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Or inline styles using custom interpreted roles:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 323.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 30 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 22 Tm /F5 8 Tf 10 TL (.. role:: redtext) Tj T*  T* (I like color :redtext:`red`.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 307.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (For more information about this, please check the ReST docs.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 291.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (The only special thing about using rst2pdf here is the syntax of the stylesheet.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 275.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can make rst2pdf print the default stylesheet:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 261.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 2 Tm /F5 8 Tf 10 TL (rst2pdf --print-stylesheet) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 245.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want to add styles, just take the standard stylesheet, modify it and pass it with the -s option:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 231.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 2 Tm /F5 8 Tf 10 TL (rst2pdf mydoc.txt -s mystyles.txt) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 215.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 215.1969 cm
+Q
+q
+1 0 0 1 62.69291 185.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (5.1   StyleSheet Syntax) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 169.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (It\264s a JSON file with several elements in it.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 153.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 153.1969 cm
+Q
+q
+1 0 0 1 62.69291 123.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (5.2   Font Alias) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 107.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (This is the fontsAlias element. By default, it uses some of the standard PDF fonts:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 73.19685 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 30 re f*
+Q
+q
+BT 1 0 0 1 12 22 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (fontsAlias) Tj (") Tj ( : {) Tj T* (  ) Tj (") Tj (stdFont) Tj (") Tj (: ) Tj (") Tj (Helvetica) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (stdBold) Tj (") Tj (: ) Tj (") Tj (Helvetica-Bold) Tj (") Tj (,) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 198.0329 0 Td (5.2   Font Alias - Page 2) Tj T* -198.0329 0 Td ET
+Q
+Q
+ 
+endstream
 
 endobj
-% 'R51': class PDFStream 
-51 0 obj
+% 'R62': class PDFStream 
+62 0 obj
 % page stream
-<< /Filter [ /ASCII85Decode
- /FlateDecode ]
- /Length 2372 >>
+<< /Length 8724 >>
 stream
-Gb!#]D/\/e&H5uYs5C18nHMFiCs+L-eufHc?nFFX__AGd5tdH=71rU`MX(`Kn%0ej=\<L#E>N"riS"uk\sMTj4'k&eiZHKo"rY'Y_Xf8g]Fc\>n0[Q+QG:6$jk6uDB@"5*X$:a)Mp\9l--4;bU"LR?B?sD5f*FiKR?9Nh6AHi7>BoR\3a(D$AI*oI@KTe!WAmGF7n"92"aj]n%c\X>q'R_CJrB%/dcjj)\#%c"<%0ZqB<J_2/frAU@Po*uV+.jQWA_9;gQ]T+*[Q*+'9Ulb4RgLMfB8FrS2"-c4GU$e+_J2'(n<*S6(Pn?:4a;qKkkCs1l)E$JpE`iN'$`K+[s5D::Po%/mJ\hr#<h:P[F.5I(JN&X/.K/?u.[.ME\fGXkpI*0_f><1&/TaP7*e`['KlFr*AVC!9cNqR,kgG/7!FCXI/"<"m:uKPi_3D&T^Y"lhBe=7`mrfSXs/VH&'$h1jl9njSH4A@_RBSAf'X$^QpTD1ZL#fTOXkhKA.e@^s\I&Yg8Mpj>!!X<n5bgc>hfH35?D@V?4^PEhOX%/>MPW2t+)Y.p8>e9ju",ZPs$U,Xkc2@n7pTkQ&<;DKk&.Wph$#/Q<UE[I]6n.#[8(KPTq)aO;`G3\"'!+p2gQmL!;?D[Q\2,C[0d"5s&('C7<LEkUVV+As?s`[d3bK'8M=.p%i&`Z-gpQ)V48.ct!2h-gR[X\=C>ZiuC.3R5J.U0P`e9c,NY2o3""U@LU<+_spQY@Sn<jT_d"_%WR/:;kC+Z\&Z@TeeDVA:d\rCm`G1I#WR\9`eXXE3&dn'U:2n=kM?7dJ.8,/>gM[6AA`CRVR/AaJ:(3K[_R)QNSP>rdr^8QVAZG`iQpslK8LAPD0:&9Vr-=Xmk3TCJW]>#;]n%;4SdZ],'h!IQpa$JNa#!4,V^V5i96"<]gdFaSj?UrEc>EgD<M,17hS#O33nZIS"EZU(C^i_Sj1m4Je-.P&jaJ&jNf.dLT>H1uGSa2(:lEBPmOe1#O>B"tV\U`<TNJm[=aq<a.t@O>>Lp[7Ok2QOSuVJ3W`L#Cq!7Vt>e5#AlB37G)c^4ZCdI+b`P=)4q=tnUh+_lgW_O<c-3==''f%nP2kG^Sqh\hbjeA-`m`8hcDpJ'Tl+aj#tN57#`<S=fG@Yd;4g=G]YI_9M7saQ-#+=Z*s=A?Mrcua<3[-pF\u6?hH%<fP^A!&17"OB63QS@s:+(6:(l$,l212_=&gX570[-APi_T0KF0+.Bm]S9dNR:9Ru4S9`eik`XiYM=Y&1@YDa[kmcK'8$_IVp*i*@\X$kK]@pB`M$DiL0DouTj;MG,B@o%2@Au?GrWs!QaN0u[rV9ho\Ytigc!`Rqo-X[[ij47gn6RfgfN;V-2mB.i%e/(^Z4i'&H(JbIJDED]ek@u%)Bn8?m^:Y.ofPBMObn)G>AKKS*\N_\6oEAMC[/9"5b[1e!a84quD\9HMaP3-<-6J]i]=HHo;WlPVf!U^D&m0+Ap=Ar;6o214q:3tE1e<Qi<4,o/3?SS_l9s9.Z6I;8S#AD\&u%Fpa;rRH'7\MRf/nlXRPT82-Xa/Hp`hjZn^aSp("\mXR[p>,IRB=Q7jL8B5M]d?7+s%n8aB,kf5[M`k-!AhRO#H/U5ICS<AGBU7b"7'PQa"qJQD?4-8Y&&``0R=cE_k$D4GM3$o&-`6%<6b%f`HnI'Pp6=ZB`XSs\Dk%DV#QZ*7ru>q7NE8?ItKKVF?c2?d;q)aI?th["L[AI%0k/Rj\g;MMY0Kt!ImM1$>ic(fKn)>EHUO5-Z$<)f<n=B_(BYCUqO)""\u[RO90#d?m)f0i!Q]LW^#TQi_E'3Geg^X*_[p6<\CG^(od,,2!K+MH7h/tNT6AX#(U3&X?BkLBeA1FTAjCCa)8Ec9PaOZ"dT/9K4PLG\BK\lBi!bC:m[ED5rL#W02nhB,\hjS>_r,PGL#4O5+p9E@V+3;*5Ci.j.5&SIH&%;cr\Jd4l#c"AnbfQF(YU)&Xa>i0+MJYXkfMX+mM4j,hO-CWb:6rZ"2Vj^%;Sl+A2(o%k-R<?MO_3!>VQWE!$mG'K]4U@q==oTeO<[IH7qW\A4PIB)b?[$(-o,bJ*mTaMEEp(5OFR['TkJcoB5JG1\F6Ae-lh4aF(G+Jt,2Hf\SshPbH4Q?*s/?2rhY?_GcGe-NNW%P[:30`Zl`7_JgrW5)=.IAT##!7mA:isop.'cq_&PdHY=<Is.F$Af5&oPBC:9>2)bs+H-'RFKqc!XdDHANgp'l6(ie$$0;=,&$eR&Ptm;Bp5Co'O'C)S#U=IhVd_G'c)nS1]\Y\.j^bl*_0K'%R5Lf,Q>n!I?i2r;mGl(ZdVpU=B$>jYM>gGQb.\h'<G=FahE,#reN4i^b2Ibtq\3.(?P3g>W.~>endstream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 735.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 40 re f*
+Q
+q
+BT 1 0 0 1 12 32 Tm 10 TL /F5 8 Tf 0 0 0 rg (  ) Tj (") Tj (stdItalic) Tj (") Tj (: ) Tj (") Tj (Helvetica-Oblique) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (stdBoldItalic) Tj (") Tj (: ) Tj (") Tj (Helvetica-BoldOblique) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (stdMono) Tj (") Tj (: ) Tj (") Tj (Courier) Tj (") Tj  T* (},) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 709.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .351111 Tw (This defines the fonts used in the styles. You can use, for example, Helvetica directly in a style, but if later you want to use another) Tj T* 0 Tw (font all through your document, you will haveto change it in each style. So, I suggest you use aliases.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 693.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (The standard PDF fonts are these:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 667.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL 1.463109 Tw (Times_Roman Times-Bold Times-Italic Times-Bold-Italic Helvetica Helvetica_Bold Helvetica-Oblique Helvetica-Bold-Oblique) Tj T* 0 Tw (Courier Courier-Bold Courier-Oblique Courier-Bold-Oblique Symbol Zapf-Dingbats) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 651.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 651.1969 cm
+Q
+q
+1 0 0 1 62.69291 621.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (5.3   Style Definition) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 605.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Then you have a 'styles' which is a list of [ stylename, styleproperties ]. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 571.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 30 re f*
+Q
+q
+BT 1 0 0 1 12 22 Tm 10 TL /F5 8 Tf 0 0 0 rg ([) Tj (") Tj (normal) Tj (") Tj ( , {) Tj T* (  ) Tj (") Tj (parent) Tj (") Tj (: ) Tj (") Tj (base) Tj (") Tj  T* (}],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 545.1969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .570989 Tw /F1 8 Tf 0 0 0 rg (This means that the style called ") Tj (normal) Tj (" inherits style ") Tj (base) Tj (") Tj (. So, each property not defined in the normal style will be taken from) Tj T* 0 Tw (the base style.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 529.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (I suggest you do not remove any style from the default stylesheet. Add or modify at will, though.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 513.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If your document requires a style that is not defined in your styleheet, it will print a warning and use bodytext instead.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 497.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Also, the order of the styles is important: if styleA is the parent of styleB, styleA should be earlier in the stylesheet.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 481.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 481.1969 cm
+Q
+q
+1 0 0 1 62.69291 451.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (5.4   Font Embedding) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 425.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .438989 Tw (There are thousands of excelent free True Type fonts available on the web, and you can use them in your documents by declaring) Tj T* 0 Tw (them in your stylesheet.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 409.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (The last element is called ") Tj (embeddedFonts) Tj (" and handles embedding True Type fonts in your PDF.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 393.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Usually, it's empty, because with the default styles you are not using any font beyond the standard PDF fonts:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 379.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+BT 1 0 0 1 12 2 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (") Tj ( : [ ],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 363.1969 cm
+q
+n 173.872 1 m 207.224 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Suppose you want to use the nice public domain ) Tj 0 0 1 rg (Tuffy font) Tj 0 0 0 rg ( \(included in rst2pdf's source distribution\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 347.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (First, you need to tell rst2pdf that you want it embedded in your PDF, by using the embeddedFonts property of the stylesheet:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 333.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+BT 1 0 0 1 12 2 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (") Tj ( : [ [) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Italic.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold_Italic.ttf) Tj (") Tj (] ],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 297.1969 cm
+q
+BT 1 0 0 1 0 22 Tm 10 TL .275903 Tw /F1 8 Tf 0 0 0 rg (This will provide your styles with fonts called ") Tj (Tuffy) Tj (" ") Tj (Tuffy_Bold) Tj (" and so on. Also, if you use ) Tj /F6 8 Tf (italics) Tj /F1 8 Tf ( in a paragraph whose style uses) Tj T* 0 Tw .083452 Tw (the Tuffy font, it will use Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and that is the order in which) Tj T* 0 Tw (you should put them. If your font lacks a variant, use the ") Tj (normal) Tj (" variant instead. For example, if you only had Tuffy.ttf:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 283.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 10 re f*
+Q
+q
+BT 1 0 0 1 12 2 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (") Tj ( : [ [) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy.ttf) Tj (") Tj (] ],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 267.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (However, that means that italics and bold in styles using Tuffy will not work \(they will display as regular text\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 251.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want to use this as the base font for your document, you should change the fontsAlias section accordingly. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 177.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 70 re f*
+Q
+q
+BT 1 0 0 1 12 62 Tm 10 TL /F5 8 Tf .878431 .878431 1 rg (") Tj (fontsAlias) Tj (") Tj 0 0 0 rg ( ) Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj ({) Tj  T* (  ) Tj .878431 .878431 1 rg (") Tj (stdFont) Tj (") Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj .878431 .878431 1 rg (") Tj (Tuffy) Tj (") Tj .188235 .188235 .188235 rg (,) Tj 0 0 0 rg  T* (  ) Tj .878431 .878431 1 rg (") Tj (stdBold) Tj (") Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj .878431 .878431 1 rg (") Tj (Tuffy_Bold) Tj (") Tj .188235 .188235 .188235 rg (,) Tj 0 0 0 rg  T* (  ) Tj .878431 .878431 1 rg (") Tj (stdItalic) Tj (") Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj .878431 .878431 1 rg (") Tj (Tuffy_Italic) Tj (") Tj .188235 .188235 .188235 rg (,) Tj 0 0 0 rg  T* (  ) Tj .878431 .878431 1 rg (") Tj (stdBoldItalic) Tj (") Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj .878431 .878431 1 rg (") Tj (Tuffy_Bold_Italic) Tj (") Tj .188235 .188235 .188235 rg (,) Tj 0 0 0 rg  T* (  ) Tj .878431 .878431 1 rg (") Tj (stdMono) Tj (") Tj .188235 .188235 .188235 rg (:) Tj 0 0 0 rg ( ) Tj .878431 .878431 1 rg (") Tj (Courier) Tj (") Tj 0 0 0 rg  T* (}) Tj .188235 .188235 .188235 rg (,) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 151.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .115073 Tw (If, on the other hand, you only want a specific style to use the Tuffy font, don't change the fontAlias, and set the fontName properties) Tj T* 0 Tw (for that style. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 67.19685 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 80 re f*
+Q
+q
+BT 1 0 0 1 12 72 Tm 10 TL /F5 8 Tf 0 0 0 rg ([) Tj (") Tj (heading1) Tj (") Tj ( , {) Tj T* (  ) Tj (") Tj (parent) Tj (") Tj (: ) Tj (") Tj (normal) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (fontName) Tj (") Tj (: ) Tj (") Tj (Tuffy_Bold) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (bulletFontName) Tj (") Tj (: ) Tj (") Tj (Tuffy_Bold) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (fontSize) Tj (") Tj (: 18,) Tj T* (  ) Tj (") Tj (bulletFontSize) Tj (") Tj (: 18,) Tj T* (  ) Tj (") Tj (leading) Tj (") Tj (: 22,) Tj T* (  ) Tj (") Tj (keepWithNext) Tj (") Tj (: true,) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 186.4689 0 Td (5.4   Font Embedding - Page 3) Tj T* -186.4689 0 Td ET
+Q
+Q
+ 
+endstream
 
 endobj
-% 'R52': class PDFStream 
-52 0 obj
+% 'R63': class PDFStream 
+63 0 obj
 % page stream
-<< /Filter [ /ASCII85Decode
- /FlateDecode ]
- /Length 2030 >>
+<< /Length 6869 >>
 stream
-Gau0D;/b2I&:P.Os)?U`h+^p%=a"8hfpK)S#h#k12@RY7/^]k"M:>'G[PmKemuEQ?b=ba`l'a*,7-aR'n[n7Mp0`D8T)B[A0OM\P.h=`aQ>>sk2h:!!/=,I3J"E9Xp!hCA*DcUT_1s_N'*`W3g74e/)=P[$g<-MI95AW7-G>9!%`cBgLR/VFY2pFXKL0`VgA#s#L-Buo)\0]2=T/?En"JWfKeWI7ruW@&q_b%)n]:AMj2hVKHIlElG8a0!+l[9<U^"1T;m'WUbr\(*!54D#4SDqa%bAVW:@--RJfh-bebT_Gk^@*qkiEY34)Tqg\uhUA'`Mu(oDi')3r+]C*_b>KZ_2I,]OYZE6mb)Q,`4F,nV*>XS(N,5)];SD7.cJ_?N]YM=Z=:,\Wo!@B&D$Gb1F[_]ucjl-;\V9\1*Bql8=KP[RFutT-psPi,N^^-J]ga+jhD9#J%8\V%"(M;\A(Ak6d$Kg4;)+i%PO(._&V4Q]'1-7r\IgX_H("EG_R,)`TPCnFH)fiYCB/_JAMR*672$2TN'_Nm2Q[Nam,MX74QpT4U"l/8c6</oL.Af5e.+mHTHc4P>dff20Tk[S.N[7S(pVMD7QO!R6W&6ip"!#rl[beg@r@X0T2Zf[8d>A?`hf>_(+FR&nJ!Cao]c]fp:_`G)+Nq'7q\R^,bG`&(.Z6l<giO8a*Hs.8)bdWOFT\M-Up0cTUr=)T_)[s<U`'3BX1W84,&g41uuCM+;%3RtHQJig3rj:a_OWNCB.NKB#f?,=:Lbfp\h*Gs0./CK>^BqDL)I$^a)0I'T^!8iJm2m@bbS6Bl:=N8S7KsDW5NNm]7&").>ndN`Cp8O'\+;AIZ*?.a[Wh'=IS2A46%>J1C\:E[an)1p?/n7kQ8!XokL0,-iHm4LplO@Y5.O1+P%G,brBS+e!K,OS!2qq)Ia:bcP^5#!O4HkhNk<Q>-KE<@mL7.+b,;XJf6Jf47+I%j4f:g?M-q]tlD1UcYe7d.1e2:FcjMQ>)#OX:UVut[C8V4Q%CnOh7^^gio7F*.`AR8E:RBa%i:VJWB<IU)uMS&@tq=30._s.m)4\@OdWl4B,ku4N?`_q[]H6BsXB%irqN0[Tn/[$oV9)/&='bH9W_&X(YBO:kUP4AW0hBDiu@pe[c_*h>e.;'P&Z=?"L,DH#51,YV,*Qj4#VYdR(r6h*n:.ZI*S*>Q<+o$LdE_Bin%^(r,.1mDbeC!GV46$GHrm8=qTmb#Kk`A!*E7Z6Sq[EC-GOq1VqRAXVM;f[qQ3/:';p2A#pK+=&*urqQ$*&BUA5n5LQF_)fDB-RIPp@M):olR/:#:J"VeUZ1I"^HW\]I[1o[Dh->$!H^Vq:&]@crb_aM3-i:nbna_WmC%&Z=tF9oL?).qWdE4CARF*I8f$q-f8!e3`</#Jm!,CCJJ1Fgjs*+3;U*6JV<Y:3lkgHI.Q/5:[,Gqk<A4pi:UIZ(ZC+N\1E,Z/I*M^$uCC]9O_JiknHjCP[5&;?aLD?SeKl6^q2ictWZPiNQ,c8(7$r9"I95<_0sR\251thE&nZ/M$2tRBS9*7JaBJqfG0L[=''01KT1)YYL")<H?Gje!bY_/2no<U+>?:U]OH>4+VFjW')\+Vd;=N8hC#7YhBl/(9%asNa[Ad6#jb`D,<JC\JFWB#1Sf(d2(Xl<Yh*EdCEO%H7s^pnA`'!:IbANjbm2$Z#=:NV)b;G48XCWr62V=A!7V_G/t1h57KHG/nQ@VO'H+%9!X+"<Q;qDM*u!P90(H>W3O/oW9JlmUa[`s3Armsak7f;'Vj/G)_8m,fo]aXJ,5#[pEOP6(r*b_fTN)A1:@Kq@2no:29WH&;jt:+C&n"r^cI`b[S!eWf6pcOJLBc`;af<8[Sh*^3ZluO_<E?H-%5ei[1N_9H$GeOkrdX=BlA$<,LBC-dBj!U\\`F>(8%>rf^D:%K\#h^72q!)d2/YSGqK"D\D>/*_+0&WCeMnjXcGOEqdo,a2SCt''@i\</Ji<d(:;;17>Y`&j*-eU0Q?s+T[dL.")oru%h+u#r<po=Z-!~>endstream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 755.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 20 re f*
+Q
+q
+BT 1 0 0 1 12 12 Tm 10 TL /F5 8 Tf 0 0 0 rg (  ) Tj (") Tj (spaceAfter) Tj (") Tj (: 6) Tj T* (}],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 739.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 713.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL -0.235769 Tw (By default, rst2pdf will search for the fonts in its fonts folder and in the current folder. You can make it search another folder by passing) Tj T* 0 Tw (the --font-folder option, or you can use absolute paths in your stylesheet.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 697.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 697.1969 cm
+Q
+q
+1 0 0 1 62.69291 667.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (5.5   Page Size and Margins) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 651.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (In your stylesheet, the pageSetup element controls your page layout.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 635.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's the default stylesheet's:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 531.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 100 re f*
+Q
+q
+BT 1 0 0 1 12 92 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (pageSetup) Tj (") Tj ( : {) Tj T* (  ) Tj (") Tj (size) Tj (") Tj (: ) Tj (") Tj (A4) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (width) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (height) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (margin-top) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-bottom) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-left) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-right) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-gutter) Tj (") Tj (: ) Tj (") Tj (0cm) Tj (") Tj  T* (},) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 515.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Size is one of the standard paper sizes, like A4 or LETTER.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 499.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's a list: A0, A1, A2, A3, A4, A5, A6, B0, B1, B2, B3, B4, B5, B6, LETTER, LEGAL, ELEVENSEVENTEEN.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 483.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want a non-standard size, set size to null and use width and height.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 467.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When specifying width, height or margins, you need to use units, like inch \(inches\) or cm \(centimeters\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 451.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When both width/height and size are specified, size will be used, and width/height ignored.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 435.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (All margins should be self-explanatory, except for margin-gutter. That's the margin in the center of a two-page spread.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 409.1969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .431407 Tw /F1 8 Tf 0 0 0 rg (This value is added to the left margin of odd pages and the right margin of even pages, adding \(or removing, if it's negative\) space) Tj T* 0 Tw (") Tj (in the middle) Tj (" of opposingpages.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 383.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .347407 Tw (If you intend to bound a printed copy, you may need extra space there. OTOH, if you will display it on-screen on a two-page format) Tj T* 0 Tw (\(common in many PDF readers, nice for ebooks\), a negative value may be pleasant.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 367.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 367.1969 cm
+Q
+q
+1 0 0 1 62.69291 345.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (6   Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 329.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 329.1969 cm
+Q
+q
+1 0 0 1 62.69291 299.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (6.1   Inline) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 283.1969 cm
+q
+n 423.752 1 m 459.32 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Rst2pdf adds a non-standard directive, called code-block, which produces syntax highlighted for many languages using ) Tj 0 0 1 rg (Pygments) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 267.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (For example, if you want to include a python fragment:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 223.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 40 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 32 Tm /F5 8 Tf 10 TL (.. code-block:: python) Tj T*  T* (    def myFun\(x,y\):) Tj T* (        print x+y) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 199.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 20 re f*
+Q
+q
+BT 1 0 0 1 12 12 Tm 10 TL /F7 8 Tf .12549 .501961 .564706 rg (def) Tj /F5 8 Tf 0 0 0 rg ( ) Tj /F7 8 Tf .313725 .878431 .815686 rg (myFun) Tj /F5 8 Tf 0 0 0 rg (\() Tj (x) Tj (,) Tj (y) Tj (\):) Tj  T* (    ) Tj /F7 8 Tf .12549 .501961 .564706 rg (print) Tj /F5 8 Tf 0 0 0 rg ( ) Tj (x) Tj .188235 .188235 .188235 rg (+) Tj 0 0 0 rg (y) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 183.1969 cm
+q
+n 318.584 1 m 354.16 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Notice that you need to declare the language of the fragment. Here's a list of the currently ) Tj 0 0 1 rg (supported) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 167.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 167.1969 cm
+Q
+q
+1 0 0 1 62.69291 141.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (6.1.1   Examples) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 125.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (As rst2pdf is in python let's see some examples and variations around python) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 109.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Python in console) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 75.19685 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 437.8898 30 re f*
+Q
+q
+BT 1 0 0 1 12 22 Tm 10 TL /F7 8 Tf .776471 .364706 .035294 rg (>) Tj (>) Tj (>) Tj ( ) Tj /F5 8 Tf 0 0 0 rg (my_string) Tj .188235 .188235 .188235 rg (=) Tj 0 0 0 rg (") Tj (python is great) Tj (") Tj  T* /F7 8 Tf .776471 .364706 .035294 rg (>) Tj (>) Tj (>) Tj ( ) Tj /F5 8 Tf 0 0 0 rg (my_string) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (find) Tj (\() Tj ('great') Tj (\)) Tj  T* .501961 .501961 .501961 rg (10) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 194.9209 0 Td (6.1.1   Examples - Page 4) Tj T* -194.9209 0 Td ET
+Q
+Q
+ 
+endstream
 
 endobj
-% 'R53': class PDFStream 
-53 0 obj
+% 'R64': class PDFStream 
+64 0 obj
 % page stream
-<< /Filter [ /ASCII85Decode
- /FlateDecode ]
- /Length 1027 >>
+<< /Length 8375 >>
 stream
-Gau0Ad;IYl'R`L2+0PGq2UN3D&kLn`BiR+Z@8esVdkk&O0hGEd:2OVX:&FZj4$X*&D2'lu^p:/IcTUIdR_T1n`;M#/>fL`+7=b.E07Za/$,dqDD;=U9pNpEk)MDE6q9dJ1.:'a1"fSN[__bnn(itrplc^Xqfp!a+hDh#n\/_D#\<]cA&o,ZVC#`:Z!`%]!bnpSe+oVN4)`V\QZ'[_cmgcYM?NZ`$JOcFgH57A68_2OG?#95A_1bF2$>FOXTV@<UMH79s!V=1mj65URTB9\rk6u*&(s>>To+`ALckT7d8"lW>KeRh/cr,fN6jC#$"fZI.aKhU"cL%>P_gr7H"AmAeTpk5K7JPnD&V!/d&8qr4]PtdF5@cql1Ep*QS2:qSO:Hm23tAGq<R(_)KbW?X%;-^JE^6jQ$WtLhQ;e^BUeH>4H"T-5AQ"l=WO31#O!CkhB95>elmPCA[Tt2`gq]D<Z$7[*N.ap&G0JpBK3F`Wd;]em6=Ce"Jt_QCAg+OdQMD_)8fnoJA4e(I(jWh3=L3!^d#nb_95sZq_ed3FR-OV9/7jZ#:#saO$VrI_%;JZ*>4gkn(Qt?+]Q#VC'*@^pW>\VZ]!-G2A[sm2>eq:6m^@(HCqtnF2:0V*8TV#rS0iHQmq\qj9>P9K&p(3e*+B+eTO_$c(5n&Mgg3a&JE"%p6rLBnX^G"F[UEQS5n=s!(b_05F:QL2jDLG$XC6D-.++;>J%Fg/B^Eu51M7J4(P?5AEeSn*d]p$<Wc\4\JnAiV"P@oT2BlG54lL62>5.en)Wl/H7NoB;FY/Q6s4!BekkHcL_6n)3:e=_mq)*J6kG$][UM<GnPBFd>2Cm)(:#/s7MQF7I+&[JSUBma;5<i1U-8JokgmT-=6u>S6Oj=oJa?%Mj42N,V+eeDb"tcg+I@kplhnS;l0%6(o&#M2j6hn&T1&u!iiJW\d[l&<bNY'dT]JVQ/Pg)@qQOMDPm?HSG/X.'>-ssb$?eiBqHkX9,qUuBK^A"cnVR<S\meZm1S)I3fkkG&V^(,*=~>endstream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 82.69291 755.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 437.8898 20 re f*
+Q
+q
+BT 1 0 0 1 12 12 Tm 10 TL /F7 8 Tf .776471 .364706 .035294 rg (>) Tj (>) Tj (>) Tj ( ) Tj /F5 8 Tf 0 0 0 rg (my_string) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (startswith) Tj (\() Tj ('py') Tj (\)) Tj  T* .501961 .501961 .501961 rg (True) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 739.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Python traceback) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 645.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 437.8898 90 re f*
+Q
+q
+BT 1 0 0 1 12 82 Tm 10 TL /F5 8 Tf 0 .25098 .815686 rg (Traceback \(most recent call last\):) Tj T* 0 0 0 rg (  File ) Tj 0 .439216 .12549 rg (") Tj (error.py) Tj (") Tj 0 0 0 rg (, line ) Tj /F7 8 Tf .023529 0 .878431 rg (9) Tj /F5 8 Tf 0 0 0 rg (, in ) Tj .501961 0 0 rg (?) Tj 0 0 0 rg  T* (    ) Tj (main) Tj (\(\)) Tj  T* (  File ) Tj 0 .439216 .12549 rg (") Tj (error.py) Tj (") Tj 0 0 0 rg (, line ) Tj /F7 8 Tf .023529 0 .878431 rg (6) Tj /F5 8 Tf 0 0 0 rg (, in ) Tj .501961 0 0 rg (main) Tj 0 0 0 rg  T* (    ) Tj /F7 8 Tf .12549 .501961 .564706 rg (print) Tj /F5 8 Tf 0 0 0 rg ( ) Tj (call_error) Tj (\(\)) Tj  T* (  File ) Tj 0 .439216 .12549 rg (") Tj (error.py) Tj (") Tj 0 0 0 rg (, line ) Tj /F7 8 Tf .023529 0 .878431 rg (2) Tj /F5 8 Tf 0 0 0 rg (, in ) Tj .501961 0 0 rg (call_error) Tj 0 0 0 rg  T* (    ) Tj (r) Tj ( ) Tj .188235 .188235 .188235 rg (=) Tj 0 0 0 rg ( ) Tj /F7 8 Tf .376471 0 .878431 rg (1) Tj /F5 8 Tf .188235 .188235 .188235 rg (/) Tj /F7 8 Tf .376471 0 .878431 rg (0) Tj /F5 8 Tf 0 0 0 rg  T* /F7 8 Tf .878431 .564706 .878431 rg (ZeroDivisionError) Tj /F5 8 Tf 0 0 0 rg (: ) Tj .501961 0 0 rg (integer division or modulo by zero) Tj 0 0 0 rg  T* .941176 0 0 rg (Exit 1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 629.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 629.1969 cm
+Q
+q
+1 0 0 1 62.69291 599.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (6.2   File inclusion) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 583.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Also, you can use the code-block directive with an external file, using the :include: option:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 559.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 20 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 12 Tm /F5 8 Tf 10 TL (.. code-block:: python) Tj T* (   :include: setup.py) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 543.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (This will give a warning if setup.py doesn't exist or can't be opened.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 527.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 527.1969 cm
+Q
+q
+1 0 0 1 62.69291 501.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (6.2.1   include with boundaries) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 485.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (you can add selectors to limit the inclusion to a portion of the file. the options are:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 447.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 43.26337 0 Td (start-at:) Tj T* -43.26337 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (string) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (will include file beginning at the first occurence of string, string ) Tj /F2 8 Tf (included) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 409.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 33.03937 0 Td (start-after:) Tj T* -33.03937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (string) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (will include file beginning at the first occurence of string, string ) Tj /F2 8 Tf (excluded) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 371.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 29.03937 0 Td (end-before:) Tj T* -29.03937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (string) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (will include file up to the first occurence of string, string ) Tj /F2 8 Tf (excluded) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 333.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 8 Tf 10 TL 46.37537 0 Td (end-at:) Tj T* -46.37537 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 19 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (string) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (will include file up to the first occurence of string, string ) Tj /F2 8 Tf (included) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 317.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Let's display a class from rst2pdf:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 273.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 40 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 32 Tm /F5 8 Tf 10 TL (.. code-block:: python) Tj T* (   :include: ../rst2pdf/createpdf.py) Tj T* (   :start-at: class Separation\(Flowable\):) Tj T* (   :end-before: class FancyPage\(PageTemplate\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 257.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (this command gives) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 163.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 90 re f*
+Q
+q
+BT 1 0 0 1 12 82 Tm 10 TL /F7 8 Tf .12549 .501961 .564706 rg (class) Tj /F5 8 Tf 0 0 0 rg ( ) Tj /F7 8 Tf .878431 .564706 .878431 rg (Separation) Tj /F5 8 Tf 0 0 0 rg (\() Tj (Flowable) Tj (\):) Tj  T* (    ) Tj .815686 .25098 .12549 rg (") Tj (") Tj (") Tj (A simple ) Tj (<) Tj (hr) Tj (>) Tj (-like flowable) Tj (") Tj (") Tj (") Tj 0 0 0 rg  T*  T* (    ) Tj /F7 8 Tf .12549 .501961 .564706 rg (def) Tj /F5 8 Tf 0 0 0 rg ( ) Tj /F7 8 Tf .313725 .878431 .815686 rg (wrap) Tj /F5 8 Tf 0 0 0 rg (\() Tj 0 .439216 .12549 rg (self) Tj 0 0 0 rg (,) Tj (w) Tj (,) Tj (h) Tj (\):) Tj  T* (        ) Tj 0 .439216 .12549 rg (self) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (w) Tj .188235 .188235 .188235 rg (=) Tj 0 0 0 rg (w) Tj  T* (        ) Tj /F7 8 Tf .12549 .501961 .564706 rg (return) Tj /F5 8 Tf 0 0 0 rg ( ) Tj (\() Tj (w) Tj (,) Tj /F7 8 Tf .376471 0 .878431 rg (1) Tj /F5 8 Tf .188235 .188235 .188235 rg (*) Tj 0 0 0 rg (cm) Tj (\)) Tj  T*  T* (    ) Tj /F7 8 Tf .12549 .501961 .564706 rg (def) Tj /F5 8 Tf 0 0 0 rg ( ) Tj /F7 8 Tf .313725 .878431 .815686 rg (draw) Tj /F5 8 Tf 0 0 0 rg (\() Tj 0 .439216 .12549 rg (self) Tj 0 0 0 rg (\):) Tj  T* (        ) Tj 0 .439216 .12549 rg (self) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (canv) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (line) Tj (\() Tj /F7 8 Tf .376471 0 .878431 rg (0) Tj /F5 8 Tf 0 0 0 rg (,) Tj /F7 8 Tf .376471 0 .878431 rg (0.5) Tj /F5 8 Tf .188235 .188235 .188235 rg (*) Tj 0 0 0 rg (cm) Tj (,) Tj 0 .439216 .12549 rg (self) Tj .188235 .188235 .188235 rg (.) Tj 0 0 0 rg (w) Tj (,) Tj /F7 8 Tf .376471 0 .878431 rg (0.5) Tj /F5 8 Tf .188235 .188235 .188235 rg (*) Tj 0 0 0 rg (cm) Tj (\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 147.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 131.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 115.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 115.1969 cm
+Q
+q
+1 0 0 1 62.69291 93.19685 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (7   Raw Directive) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 77.19685 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 194.4849 0 Td (7   Raw Directive - Page 5) Tj T* -194.4849 0 Td ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R65': class PDFStream 
+65 0 obj
+% page stream
+<< /Length 6190 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 765.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can use the eaw directive to insert pagebreaks and spacers \(other reportlab flowables may be added if there's interest\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 749.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (The syntax is shell-like.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 733.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's an example that shows all the sytax:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 589.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 140 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 132 Tm /F5 8 Tf 10 TL (One page) Tj T*  T* (.. raw:: pdf) Tj T*  T* (    PageBreak) Tj T*  T* (Another page. Now some space:) Tj T*  T* (.. raw:: pdf) Tj T*  T* (    Spacer 0,200) Tj T* (    Spacer 0 200) Tj T*  T* (And another paragraph.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 573.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (The unit used by the spacer is points, and using a space or a comma is the same thing in all cases.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 557.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 557.1969 cm
+Q
+q
+1 0 0 1 62.69291 535.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL (8   Hyphenation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 519.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want good looking documents, you want to enable hyphenation.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 503.1969 cm
+q
+n 225.432 1 m 301.472 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (To do it, you need to install Wordaxe version 0.2.5 or later from ) Tj 0 0 1 rg (http://deco-cow.sf.net) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 477.1969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .354311 Tw /F1 8 Tf 0 0 0 rg (If after installing it you get the letter ") Tj (s) Tj (" or a black square instead of a hyphen, that means you need to replace the rl_codecs.py file) Tj T* 0 Tw (from reportlab with the one from wordaxe.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 461.1969 cm
+q
+n 93.808 1 m 127.152 1 l S
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (For more information, see ) Tj 0 0 1 rg (this issue) Tj 0 0 0 rg ( in rst2pdf's bug tracker.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 445.1969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 9.6 TL  T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 419.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .864077 Tw (Also, you may need to set hyphenation to true in one or more styles, and the language for hyphenation via the command line or) Tj T* 0 Tw (paragraph styles.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 403.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (For english, this should be enough:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 339.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 60 re f*
+Q
+q
+BT 1 0 0 1 12 52 Tm 10 TL /F5 8 Tf 0 0 0 rg ([) Tj (") Tj (bodytext) Tj (") Tj ( , {) Tj T* (  ) Tj (") Tj (parent) Tj (") Tj (: ) Tj (") Tj (normal) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (spaceBefore) Tj (") Tj (:6,) Tj T* (  ) Tj (") Tj (alignment) Tj (") Tj (: ) Tj (") Tj (TA_JUSTIFY) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (hyphenation) Tj (") Tj (: true) Tj T* (}],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 323.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you are not an english speaker, you need to change the language.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 307.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can use the -l or --language option. The currently available dictionaries for wordaxe are:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 291.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (\177) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.6 0 Td (de_DE) Tj T* -7.6 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 275.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (\177) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.6 0 Td (da) Tj T* -7.6 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 259.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (\177) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.6 0 Td (en_GB) Tj T* -7.6 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 243.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (\177) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.6 0 Td (en_US) Tj T* -7.6 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 227.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (\177) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.6 0 Td (ru) Tj T* -7.6 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 211.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (For example, this will enable german hyphenation globally:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 195.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (rst2pdf -l de_DE mydocument.txt) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 169.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL -0.204712 Tw (If you are creating a multilingual document, you can declare styles with specific languages. For example, you could inherit bodytext for) Tj T* 0 Tw (german:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 105.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 60 re f*
+Q
+q
+BT 1 0 0 1 12 52 Tm 10 TL /F5 8 Tf 0 0 0 rg ([) Tj (") Tj (bodytext_de) Tj (") Tj ( , {) Tj T* (  ) Tj (") Tj (parent) Tj (") Tj (: ) Tj (") Tj (bodytext) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (alignment) Tj (") Tj (: ) Tj (") Tj (TA_JUSTIFY) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (hyphenation) Tj (") Tj (: true,) Tj T* (  ) Tj (") Tj (language) Tj (") Tj (: ) Tj (") Tj (de_DE) Tj (") Tj  T* (}],) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 89.19685 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (And all paragraps declared of bodytext_de style would have german hyphenation:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 196.6969 0 Td (8   Hyphenation - Page 6) Tj T* -196.6969 0 Td ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R66': class PDFStream 
+66 0 obj
+% page stream
+<< /Length 1627 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 715.1969 cm
+q
+.960784 .960784 .862745 rg
+n 12 0 457.8898 60 re f*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 12 52 Tm /F5 8 Tf 10 TL (.. class:: bodytext_de) Tj T*  T* (Ein Vierteljahrhundert hindurch hatte ich Kopf, Herz, Hand und--F\374\337e der) Tj T* (Schilderung der Alpenwelt und ihrer Bewohner gewidmet mit dem) Tj T* (erfreulichen Erfolg, da\337 die deutsche Leserwelt es gew\366hnt geworden war,) Tj T* (beim Anblick meines Namens auf B\374chern sofort an die--Alpen zu denken.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 699.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (BTW: I have no idea what that says, I just copied it from project Gutenberg. Hopefully it's not offensive :-\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 673.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .555555 Tw (If you explicitly configure a language in a paragraph style and also pass a language in the command line, the style has priority, so) Tj T* 0 Tw (remember:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 647.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL -0.188647 Tw (If you configure the bodytext style to have a language, your document is supposed to be in that language, regardless of what the) Tj T* 0 Tw (command line says.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 631.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If this is too confusing, let me know, I will try to figure out a simpler way.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 196.6969 0 Td (8   Hyphenation - Page 7) Tj T* -196.6969 0 Td ET
+Q
+Q
+ 
+endstream
 
 endobj
 xref
-0 54
+0 67
 0000000000 65535 f
 0000000113 00000 n
-0000000271 00000 n
-0000000436 00000 n
-0000000611 00000 n
-0000000792 00000 n
-0000001031 00000 n
-0000001233 00000 n
-0000001474 00000 n
-0000001715 00000 n
-0000001956 00000 n
-0000002198 00000 n
-0000002440 00000 n
-0000002682 00000 n
-0000002924 00000 n
-0000003167 00000 n
-0000003410 00000 n
-0000003653 00000 n
-0000003896 00000 n
-0000004139 00000 n
-0000004368 00000 n
-0000004528 00000 n
-0000004942 00000 n
-0000005237 00000 n
-0000005469 00000 n
-0000005649 00000 n
-0000005965 00000 n
-0000006205 00000 n
-0000006442 00000 n
-0000006767 00000 n
-0000007009 00000 n
-0000007265 00000 n
-0000007576 00000 n
-0000007714 00000 n
-0000008045 00000 n
-0000008171 00000 n
-0000008318 00000 n
-0000008487 00000 n
-0000008646 00000 n
-0000008809 00000 n
-0000008965 00000 n
-0000009177 00000 n
-0000009325 00000 n
-0000009494 00000 n
-0000009661 00000 n
-0000009817 00000 n
-0000009986 00000 n
-0000010149 00000 n
-0000010279 00000 n
-0000010423 00000 n
-0000012373 00000 n
-0000014409 00000 n
-0000016926 00000 n
-0000019101 00000 n
+0000000284 00000 n
+0000000449 00000 n
+0000000624 00000 n
+0000000805 00000 n
+0000001044 00000 n
+0000001246 00000 n
+0000001487 00000 n
+0000001728 00000 n
+0000001969 00000 n
+0000002211 00000 n
+0000002453 00000 n
+0000002695 00000 n
+0000002937 00000 n
+0000003180 00000 n
+0000003423 00000 n
+0000003666 00000 n
+0000003909 00000 n
+0000004152 00000 n
+0000004395 00000 n
+0000004638 00000 n
+0000004881 00000 n
+0000005124 00000 n
+0000005353 00000 n
+0000005513 00000 n
+0000005963 00000 n
+0000006258 00000 n
+0000006490 00000 n
+0000006670 00000 n
+0000006986 00000 n
+0000007213 00000 n
+0000007398 00000 n
+0000007635 00000 n
+0000007945 00000 n
+0000008240 00000 n
+0000008482 00000 n
+0000008738 00000 n
+0000009048 00000 n
+0000009329 00000 n
+0000009467 00000 n
+0000009798 00000 n
+0000009924 00000 n
+0000010156 00000 n
+0000010438 00000 n
+0000010670 00000 n
+0000010922 00000 n
+0000011184 00000 n
+0000011454 00000 n
+0000011704 00000 n
+0000011984 00000 n
+0000012254 00000 n
+0000012541 00000 n
+0000012868 00000 n
+0000013125 00000 n
+0000013345 00000 n
+0000013642 00000 n
+0000013934 00000 n
+0000014186 00000 n
+0000014397 00000 n
+0000014559 00000 n
+0000021929 00000 n
+0000028171 00000 n
+0000036996 00000 n
+0000043966 00000 n
+0000052442 00000 n
+0000058733 00000 n
 trailer
 << /ID 
  % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
- [(\345=\3304a\3541\253%\264\374\263\027/Z\375) (\345=\3304a\3541\253%\264\374\263\027/Z\375)] 
+ [(\020\352q\021\260=\316EnI\2166\303\307\332\321) (\020\352q\021\260=\316EnI\2166\303\307\332\321)] 
 
- /Info 33 0 R
- /Root 32 0 R
- /Size 54 >>
+ /Info 40 0 R
+ /Root 39 0 R
+ /Size 67 >>
 startxref
-20246
+60434
 %%EOF

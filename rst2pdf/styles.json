@@ -185,7 +185,8 @@
       "leading": 10,
       "firstLineIndent": 0,
       "leftIndent": 12,
-      "spaceBefore": 4
+      "spaceBefore": 4,
+      "backColor": "beige"
     }],
     ["pygments-p" , {
       "parent": "code"
@@ -332,6 +333,10 @@
       "fontName": "stdMonoBold"
     }],
     ["pygments-ni" , {
+      "parent": "code",
+      "textColor": "#800000"
+    }],
+    ["pygments-n-Identifier" , {
       "parent": "code",
       "textColor": "#800000"
     }],
