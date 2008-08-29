@@ -73,7 +73,7 @@ class RstToPdf(object):
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
-        stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets 
+        stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets)
         self.breaklevel=breaklevel
 
@@ -87,7 +87,8 @@ class RstToPdf(object):
                     wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5)
                 except ImportError: #PyHnj C extension is not installed
                     wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
-            log.info('hyphenation by default in %s , loaded %s'%(self.styles['bodytext'].language,','.join(self.styles.languages)))
+            log.info('hyphenation by default in %s , loaded %s',
+                self.styles['bodytext'].language, ','.join(self.styles.languages))
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -103,7 +104,7 @@ class RstToPdf(object):
                 r='<font face="%s" size="%d" color="#%s">' % (s.fontName,s.fontSize,s.textColor.hexval())
             return r
         except KeyError:
-            log.warning('Unknown class %s' % style)
+            log.warning('Unknown class %s', style)
             return None
 
 
@@ -114,11 +115,11 @@ class RstToPdf(object):
         pre=""
         post=""
 
+        log.debug("self.gen_pdftext: %s", node.__class__)
         try:
-            log.debug( "self.gen_pdftext: %s" % node.__class__)
-            log.debug( "self.gen_pdftext: %s" % node)
-        except UnicodeDecodeError: 
-            pass
+            log.debug("self.gen_pdftext: %s", node)
+        except (UnicodeDecodeError, UnicodeEncodeError):
+            log.debug("self.gen_pdftext: %r", node)
 
         if isinstance (node, docutils.nodes.paragraph) \
             or isinstance (node, docutils.nodes.title) \
@@ -229,11 +230,11 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
-            anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+            anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])
             node.pdftext=u'%s<super><a href="%s" color="blue">%s</a></super>'%(anchors,'#'+node.astext(),node.astext())
         elif isinstance (node, docutils.nodes.citation_reference):
             # Fixme link to the right place
-            anchors=''.join( ['<a name="%s"/>'%i for i in node['ids'] ])
+            anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])
             node.pdftext=u'%s[<a href="%s" color="blue">%s</a>]'%(anchors,'#'+node.astext(),node.astext())
 
         elif isinstance (node, docutils.nodes.target):
@@ -251,24 +252,27 @@ class RstToPdf(object):
                 node.pdftext=self.gather_pdftext(node,depth)
 
         else:
-            log.warning("Unkn. node (self.gen_pdftext): %s" % str(node.__class__))
-            log.warning(node)
+            log.warning("Unkn. node (self.gen_pdftext): %s", node.__class__)
+            try:
+                log.warning(node)
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                log.warning(repr(node))
             node.pdftext=self.gather_pdftext(node,depth)
             #print node.transform
 
         try:
             log.info("self.gen_pdftext: %s" % node.pdftext)
-        except UnicodeDecodeError: 
+        except UnicodeDecodeError:
             pass
         return node.pdftext
 
     def gen_elements(self, node, depth, in_line_block=False, style=None):
 
+        log.debug("gen_elements: %s", node.__class__)
         try:
-            log.debug( "gen_elements: %s" % node.__class__)
-            log.debug( "gen_elements: %s" % node)
-        except UnicodeDecodeError: 
-            pass
+            log.debug("gen_elements: %s", node)
+        except (UnicodeDecodeError, UnicodeEncodeError):
+            log.debug("gen_elements: %r", node)
 
         if style is None:
             style=self.styles['bodytext']
@@ -278,7 +282,7 @@ class RstToPdf(object):
             try:
                 style=self.styles[node['classes'][0]]
             except:
-                log.info("Unknown class %s, using class bodytext." % node['classes'][0])
+                log.info("Unknown class %s, using class bodytext.", node['classes'][0])
 
         if isinstance (node, docutils.nodes.document):
             node.elements=self.gather_elements(node,depth,style=style)
@@ -531,7 +535,7 @@ class RstToPdf(object):
             elif node.parent.get ('enumtype')=='upperalpha':
                 b=str(self.loweralpha[node.parent.children.index(node)].upper())+'.'
             else:
-                log.critical("Unknown kind of list_item %s" % node.parent)
+                log.critical("Unknown kind of list_item %s", node.parent)
                 sys.exit(1)
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
@@ -549,7 +553,7 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.system_message)     \
             or isinstance (node, docutils.nodes.problematic):
             # FIXME show the error in the document, red, whatever
-            log.warning("Problematic node %s",node.astext())
+            log.warning("Problematic node %s", node.astext())
             node.elements=[]
 
         elif isinstance (node, docutils.nodes.block_quote):
@@ -625,7 +629,8 @@ class RstToPdf(object):
                 else:
                     w=sty.adjustUnits(w,self.styles.pw*.5)
             else:
-                log.warning("Using image %s without specifying size. Calculating based on 300dpi"%imgname)
+                log.warning("Using image %s without specifying size."
+                    "Calculating based on 300dpi", imgname)
                 # No width specified at all. Make it up
                 # as if we knew what we're doing
                 if iw:
@@ -645,7 +650,8 @@ class RstToPdf(object):
                     h=w*ih/iw
 
             # And now we have this probably completely bogus size!
-            log.info("Image %s size calculated:  %fcm by %fcm",imgname,w/cm,w/cm)
+            log.info("Image %s size calculated:  %fcm by %fcm",
+                imgname, w/cm, h/cm)
 
             i=Image(filename=imgname,
                     height=h,
@@ -734,9 +740,12 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.citation):
             node.elements=[]
         else:
-            log.error("Unkn. node (gen_elements): %s" % str(node.__class__))
+            log.error("Unkn. node (gen_elements): %s", str(node.__class__))
             # Why fail? Just log it and do our best.
-            log.error(node)
+            try:
+                log.error(node)
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                log.debug(repr(node))
             node.elements=self.gather_elements(node,depth,style)
             #sys.exit(1)
 
@@ -748,7 +757,7 @@ class RstToPdf(object):
                     Paragraph('<a name="%s"/>'%id,style))
 
         try:
-            log.debug( "gen_elements: %s" % node.elements)
+            log.debug("gen_elements: %s", node.elements)
         except: # unicode problems FIXME: explicit error
             pass
         return node.elements
@@ -783,7 +792,7 @@ class RstToPdf(object):
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
 
-        for y in range(0,len( rows)):
+        for y in range(0,len(rows)):
             for x in range (0,len(rows[y])):
                 cell=rows[y][x]
                 if isinstance (cell,str):
@@ -792,7 +801,7 @@ class RstToPdf(object):
                     for i in range(0,cell.get("morecols")):
                         rows[y].insert(x+1,"")
 
-        for y in range(0,len( rows)):
+        for y in range(0,len(rows)):
             for x in range (0,len(rows[y])):
                 cell=rows[y][x]
                 if isinstance (cell,str):
@@ -810,7 +819,7 @@ class RstToPdf(object):
 
         # Create spans list for reportlab's table style
         spans=[]
-        for y in range(0,len( rows)):
+        for y in range(0,len(rows)):
             for x in range (0,len(rows[y])):
                 cell=rows[y][x]
                 if isinstance (cell,str):
@@ -1014,7 +1023,7 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx=self.hx+self.gm
             fx=self.fx+self.gm
-            
+
         if self.head:
             head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])
@@ -1067,7 +1076,7 @@ def main():
         sys.exit(0)
 
     if len(args) <> 1:
-        log.critical('Usage: %s file.txt [ -o file.pdf ]' % sys.argv[0])
+        log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
 
     infile=args[0]
