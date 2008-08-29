@@ -314,6 +314,31 @@ If you intend to bound a printed copy, you may need extra space there. OTOH,
 if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
+Multiple Stylesheets
+--------------------
+
+When you use a custom stylesheet, you don't need to define *everything* in it.
+Whatever you don't define will be taken from the default stylesheet. For example,
+if you only want to chage page size, default font and font size, this would
+be enough:
+
+.. code-block:: js
+
+    {
+        "pageSetup" : {
+            "size": "A5",
+        },
+        "fontsAlias" : {
+            "stdFont": "Times-Roman",
+        },
+        "styles" : [
+            ["normal" , {
+            "fontSize": 14
+            }]
+        ]
+    }
+
+
 .. raw:: pdf
 
     PageBreak
