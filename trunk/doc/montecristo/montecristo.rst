@@ -525,8 +525,3 @@ much alarmed.
 "No, no, my dear Edmond--my boy--my son!--no; but I did not expect you;
 and joy, the surprise of seeing you so suddenly--Ah, I feel as if I were
 going to die."
-
-"Come, come, cheer up, my dear father! 'Tis I--really I! They say joy
-never hurts, and so I came to you without any warning. Come now, do
-smile, instead of looking at me so solemnly. Here I am back again, and
-

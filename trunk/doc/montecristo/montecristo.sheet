@@ -1,0 +1,45 @@
+{
+  "embeddedFonts" : [["SCRIPTIN.ttf", "SCRIPTIN.ttf","SCRIPTIN.ttf","SCRIPTIN.ttf"]],
+  "pageSetup" : {
+    "size": "A5",
+    "margin-top": "2cm",
+    "margin-bottom": "2cm",
+    "margin-left": "2cm",
+    "margin-right": "2cm",
+    "margin-gutter": "-1cm"
+  },
+  "pageTemplates" : {
+    "firstPage": {
+        "frames": [
+            ["0cm", "0cm", "49%", "100%"],
+            ["51%", "0cm", "49%", "100%"]
+        ]
+    }
+  },
+  "styles" : [
+    ["bodytext" , {
+      "parent": "normal",
+      "spaceBefore":6,
+      "alignment": "TA_JUSTIFY",
+      "hyphenation": true
+    }],
+    ["footer" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER"
+    }],
+    ["header" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER"
+    }],
+    ["heading1" , {
+      "parent": "normal",
+      "fontName": "SCRIPTIN",
+      "bulletFontName": "SCRIPTIN",
+      "fontSize": 18,
+      "bulletFontSize": 18,
+      "leading": 22,
+      "keepWithNext": true,
+      "spaceAfter": 36
+    }]
+  ]
+}
