@@ -494,7 +494,7 @@ class RstToPdf(object):
             optext = ', '.join([self.gather_pdftext(child,depth) for child in node.children[0].children])
             desc = self.gather_elements(node.children[1],depth,style)
 
-            node.elements=[Table([[self.PreformattedFit(optext,self.styles["code"]),desc]],style=sty.tstyles['field'])]
+            node.elements=[Table([[self.PreformattedFit(optext,self.styles["literal"]),desc]],style=sty.tstyles['field'])]
 
 
         elif isinstance (node, docutils.nodes.definition_list_item):
