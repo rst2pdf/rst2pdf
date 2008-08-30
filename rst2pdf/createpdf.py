@@ -991,12 +991,14 @@ class FancyPage(PageTemplate):
             x1=self.styles.lm+self.styles.gm
             y1=self.styles.tm+self.hh
 
-        #self.frames=[]
-        #for frame in self.styles.pageTemplates['firstPage']['frames']:
-            #self.frames.append(Frame(self.styles
-        textframe=Frame(x1,y1,self.tw,self.th)
-                        
-        self.frames=[textframe]
+        self.frames=[]
+        for frame in self.styles.pageTemplates['firstPage']['frames']:
+            self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
+                                     self.styles.adjustUnits(frame[1],self.th)+y1,
+                                     self.styles.adjustUnits(frame[2],self.tw),
+                                     self.styles.adjustUnits(frame[3],self.th)))
+        #textframe=Frame(x1,y1,self.tw,self.th)                        
+        #self.frames=[textframe]
 
     def replaceTokens(self,text,canv,doc):
         ''' Put doc_title/page number/etc in text of header/footer'''
