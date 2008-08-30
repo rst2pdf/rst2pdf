@@ -58,3 +58,23 @@ class Separation(Flowable):
 
     def draw(self):
         self.canv.line(0,0.5*cm,self.w,0.5*cm)
+
+class MyPageBreak(Flowable):
+    """A PageBreak that takes an optional argument, templateName.
+    It sets canv.templateName when drawing.
+
+    rst2pdf uses that to switch page templates.
+    """
+
+    def __init__(self, templateName=None):
+        self.templateName=templateName
+        Flowable.__init__(self)
+        
+    def wrap(self, availWidth, availHeight):
+        self.width = availWidth
+        self.height = availHeight
+        return (availWidth,availHeight-1e-8)  #step back a point
+    def draw(self):
+        if self.templateName:
+            print "setting template to",self.templateName
+            self.canv.templateName=self.templateName

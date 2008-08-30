@@ -368,7 +368,7 @@ class RstToPdf(object):
                 node.elements=[OutlineEntry(key,text,depth-1,snum),
                                Paragraph(text, self.styles['heading%d' % min(depth,3)])]
                 if depth <=self.breaklevel:
-                    node.elements.insert(0,PageBreak())
+                    node.elements.insert(0,MyPageBreak())
 
 
         elif isinstance (node, docutils.nodes.subtitle):
@@ -940,7 +940,7 @@ class FancyPage(PageTemplate):
             y1=self.styles.tm+self.hh
 
         # What page template to use?
-        tname=doc.__dict__.get('templateName',self.styles.firstTemplate)
+        tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
         self.frames=[]
         for frame in self.styles.pageTemplates[tname]['frames']:
             self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
