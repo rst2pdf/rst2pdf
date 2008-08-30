@@ -887,9 +887,7 @@ class RstToPdf(object):
         foot=self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP=FancyPage("fancypage",self.styles.pw,self.styles.ph,self.styles.tm,
-                                 self.styles.bm,self.styles.lm,self.styles.rm,
-                                 self.styles.gm,head,foot,self.styles)
+        FP=FancyPage("fancypage",head,foot,self.styles)
 
         pdfdoc = BaseDocTemplate(output,
                                  pageTemplates=[FP],
@@ -950,37 +948,29 @@ class Separation(Flowable):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,pw,ph,tm,bm,lm,rm,gm,head,foot,styles):
+    def __init__(self,_id,head,foot,styles):
 
         self.styles=styles
-        tw=pw-lm-rm-gm
+        self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
 
         if head:
-            hh=Paragraph(head,style=self.styles['header']).wrap(tw,ph)[1]
+            self.hh=Paragraph(head,style=self.styles['header']).\
+                    wrap(self.styles.tw,self.styles.ph)[1]
         else:
-            hh=0
+            self.hh=0
         if foot:
-            fh=Paragraph(foot,style=self.styles['footer']).wrap(tw,ph)[1]
+            self.fh=Paragraph(foot,style=self.styles['footer']).\
+                    wrap(tw,ph)[1]
         else:
-            fh=0
-
-        #textframe=Frame(lm,tm+hh,tw,ph-tm-bm-hh-fh,topPadding=hh,bottomPadding=fh)
+            self.fh=0
 
         self.head=head
-        self.hx=lm
-        self.hy=ph-tm
+        self.hx=styles.lm
+        self.hy=styles.ph-styles.tm
 
         self.foot=foot
-        self.fx=lm
-        self.fy=bm
-        self.tw=tw
-        self.ph=ph
-        self.gm=gm
-        self.lm=lm
-        self.tm=tm
-        self.hh=hh
-        self.fh=fh
-        self.bm=bm
+        self.fx=styles.lm
+        self.fy=styles.bm
 
         PageTemplate.__init__(self,_id,[])
 
@@ -995,12 +985,12 @@ class FancyPage(PageTemplate):
 
         # Adjust gutter margins
         if doc.page%2: # Left page
-            textframe=Frame(self.lm,self.tm+self.hh,self.tw,
-                            self.ph-self.tm-self.bm-self.hh-self.fh,
+            textframe=Frame(self.styles.lm,self.styles.tm+self.hh,self.tw,
+                            self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh,
                             topPadding=self.hh,bottomPadding=self.fh)
         else: # Right page
-            textframe=Frame(self.lm+self.gm,self.tm+self.hh,self.tw,
-                            self.ph-self.tm-self.bm-self.hh-self.fh,
+            textframe=Frame(self.styles.lm+self.styles.gm,self.styles.tm+self.hh,self.tw,
+                            self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh,
                             topPadding=self.hh,bottomPadding=self.fh)
 
 
@@ -1027,18 +1017,18 @@ class FancyPage(PageTemplate):
             hx=self.hx
             fx=self.fx
         else: # Right Page
-            hx=self.hx+self.gm
-            fx=self.fx+self.gm
+            hx=self.hx+self.styles.gm
+            fx=self.fx+self.styles.gm
 
         if self.head:
             head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])
-            para.wrap(self.tw,self.ph)
+            para.wrap(self.tw,self.styles.ph)
             para.drawOn(canv,hx,self.hy)
         if self.foot:
             foot=self.replaceTokens(self.foot,canv,doc)
             para=Paragraph(foot,style=self.styles['footer'])
-            para.wrap(self.tw,self.ph)
+            para.wrap(self.tw,self.styles.ph)
             para.drawOn(canv,fx,self.fy)
 
 
