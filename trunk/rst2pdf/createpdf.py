@@ -964,7 +964,6 @@ class FancyPage(PageTemplate):
         else:
             self.fh=0
 
-        self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
 
         self.head=head
         self.hx=styles.lm
@@ -973,6 +972,7 @@ class FancyPage(PageTemplate):
         self.foot=foot
         self.fx=styles.lm
         self.fy=styles.bm
+        self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
 
         PageTemplate.__init__(self,_id,[])
 
@@ -990,8 +990,11 @@ class FancyPage(PageTemplate):
         else: # Right page
             x1=self.styles.lm+self.styles.gm
             y1=self.styles.tm+self.hh
-        textframe=Frame(x1,y1,self.tw,self.th,
-                        topPadding=self.hh,bottomPadding=self.fh)
+
+        #self.frames=[]
+        #for frame in self.styles.pageTemplates['firstPage']['frames']:
+            #self.frames.append(Frame(self.styles
+        textframe=Frame(x1,y1,self.tw,self.th)
                         
         self.frames=[textframe]
 
