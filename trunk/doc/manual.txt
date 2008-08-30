@@ -374,8 +374,8 @@ For example, if you want to include a python fragment::
        
 .. code-block:: python
 
-    def myFun(x,y):
-        print x+y
+   def myFun(x,y):
+       print x+y
 
 Notice that you need to declare the language of the fragment. Here's a list of
 the currently supported_.
@@ -387,24 +387,24 @@ As rst2pdf is in python let's see some examples and variations around python
 
 Python in console
 
-  .. code-block:: pycon
+.. code-block:: pycon
 
-        >>> my_string="python is great"
-        >>> my_string.find('great')
-        10
-        >>> my_string.startswith('py')
-        True
+    >>> my_string="python is great"
+    >>> my_string.find('great')
+    10
+    >>> my_string.startswith('py')
+    True
 
 Python traceback
 
-  .. code-block:: pytb
+.. code-block:: pytb
 
     Traceback (most recent call last):
-      File "error.py", line 9, in ?
+        File "error.py", line 9, in ?
         main()
-      File "error.py", line 6, in main
+        File "error.py", line 6, in main
         print call_error()
-      File "error.py", line 2, in call_error
+        File "error.py", line 2, in call_error
         r = 1/0
     ZeroDivisionError: integer division or modulo by zero
     Exit 1
