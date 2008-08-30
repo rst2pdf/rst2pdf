@@ -18,6 +18,8 @@ long_description = (
     + '\n' +
     'Contributors\n' 
     '************\n'
+
+    
     + '\n' +
     read('Contributors.txt')
     + '\n' +

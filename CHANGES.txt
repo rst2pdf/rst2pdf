@@ -1,3 +1,25 @@
+New in 0.6
+----------
+
+* Stylesheet-defined page layout (For example, multicolumn) and layout switching
+* Cascading Stylesheets (change exactly what you need changed)
+* PDF table of contents
+* Current section names and numbers in headers/footers
+* Support for compressed PDF files
+* Link color is configurable
+* Fixed bugs in color handling
+* Multilingual hyphenation
+* Auto-guessing image size, support for sizes in %
+* Gutter margins
+* Big refactoring
+* More tolerant of minor problems
+* Limited _raw_ directive (you can insert pagebreaks and vertical space)
+* Implemented a "traditional" docutils writer
+* Offer a reasonable API for use as a library
+* Fixed copyright/licensing
+* code-block now supports including files (whole or in part) so you can highlight external code.
+
+
 New in 0.5
 ----------
 
