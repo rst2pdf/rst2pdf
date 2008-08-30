@@ -204,7 +204,19 @@ and not on inline styles::
     "borderColor": None,
     "borderRadius": None,
     "allowWidows": 1,
-    "allowOrphans": 0,
+    "allowOrphans": 0
+
+The following are the only attributes that work on styles when used for interpreted roles
+(inline styles):
+
+* fontName
+
+* fontSize
+
+* textColor
+
+Notice that backColor is **not** in that list.
+    
 
 Font Embedding
 --------------
