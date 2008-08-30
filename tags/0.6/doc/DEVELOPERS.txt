@@ -1,0 +1,42 @@
+===========================
+Help for rst2txt developers
+===========================
+
+-----------------------------
+Or, how do I hack this thing?
+-----------------------------
+
+
+Some real data coming soon.
+
+But first:
+  
+Running tests
+-------------
+
+first run
+~~~~~~~~~
+
+while in project::
+
+  python bootstrap.py
+  ./bin/buildout
+  ./bin/test
+  
+next runs
+~~~~~~~~~
+
+while in project::
+
+  ./bin/test
+
+Testing the tests
+-----------------
+
+while in project::
+
+  ./bin/test --coverage=.
+  
+that may be much longer
+
+results are in part/test
