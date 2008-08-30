@@ -25,27 +25,6 @@ except:
     log.warning("No hyphenation support, install wordaxe")
 
 
-def adjustUnits(v,total=0):
-    '''Takes something like 2cm and returns 2*cm.
-       If you use % as a unit, it returns the percentage
-       of "total".
-
-       Example::
-
-            >>> adjustUnits('50%',200)
-            100
-    '''
-    _,n,u=re.split('(-?[0-9\.]*)',v)
-    if not u:
-        return float(n) # assume points
-    if u in units.__dict__:
-        return float(n)*units.__dict__[u]
-    else:
-      if u=='%':
-          return float(n)*total/100
-      log.error('Unknown unit "%s"' % u)
-      return float(n)
-
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
     def __init__(self,flist):
@@ -98,18 +77,18 @@ class StyleSheet(object):
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
                     # to do 2*cm (cm comes from reportlab.lib.units)
-                    self.ps=[adjustUnits(page['width']),adjustUnits(page['height'])]
+                    self.ps=[self.adjustUnits(page['width']),self.adjustUnits(page['height'])]
                 self.pw,self.ph=self.ps
                 if 'margin-left' in page:
-                    self.lm=adjustUnits(page['margin-left'])
+                    self.lm=self.adjustUnits(page['margin-left'])
                 if 'margin-right' in page:
-                    self.rm=adjustUnits(page['margin-right'])
+                    self.rm=self.adjustUnits(page['margin-right'])
                 if 'margin-top' in page:
-                    self.tm=adjustUnits(page['margin-top'])
+                    self.tm=self.adjustUnits(page['margin-top'])
                 if 'margin-bottom' in page:
-                    self.bm=adjustUnits(page['margin-bottom'])
+                    self.bm=self.adjustUnits(page['margin-bottom'])
                 if 'margin-gutter' in page:
-                    self.gm=adjustUnits(page['margin-gutter'])
+                    self.gm=self.adjustUnits(page['margin-gutter'])
 
                 # tw is the text width.
                 # We need it to calculate header-footer height
@@ -225,6 +204,34 @@ class StyleSheet(object):
                     return str(tfn)
         return str(fn)
 
+    def adjustUnits(self,v,total=None):
+        '''Takes something like 2cm and returns 2*cm.
+        If you use % as a unit, it returns the percentage
+        of "total".
+
+        If total is not given, returns a percentage of the page
+        width. However, if you get to that stage, you are
+        doing it wrong.
+
+        Example::
+
+                >>> adjustUnits('50%',200)
+                100
+        '''
+
+        if total is None:
+            total=self.pw
+
+        _,n,u=re.split('(-?[0-9\.]*)',v)
+        if not u:
+            return float(n) # assume points
+        if u in units.__dict__:
+            return float(n)*units.__dict__[u]
+        else:
+            if u=='%':
+                return float(n)*total/100
+            log.error('Unknown unit "%s"' % u)
+        return float(n)
 
 
 # Some table styles used for pieces of the document

@@ -629,9 +629,9 @@ class RstToPdf(object):
             w=node.get('width')
             if w is not None:
                 if iw:
-                    w=sty.adjustUnits(w,iw*inch/300)
+                    w=self.styles.adjustUnits(w,iw*inch/300)
                 else:
-                    w=sty.adjustUnits(w,self.styles.pw*.5)
+                    w=self.styles.adjustUnits(w,self.styles.pw*.5)
             else:
                 log.warning("Using image %s without specifying size."
                     "Calculating based on 300dpi", imgname)
@@ -643,9 +643,9 @@ class RstToPdf(object):
             h=node.get('height')
             if h is not None:
                 if ih:
-                    h=sty.adjustUnits(h,ih*inch/300)
+                    h=self.styles.adjustUnits(h,ih*inch/300)
                 else:
-                    h=sty.adjustUnits(h,self.styles.ph*.5)
+                    h=self.styles.adjustUnits(h,self.styles.ph*.5)
             else:
                 # Now, often, only the width is specified!
                 # if we don't have a height, we need to keep the
