@@ -1,14 +1,21 @@
+# -*- coding: utf-8 -*-
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
+__docformat__ = 'reStructuredText'
+
 from reportlab.platypus import *
 from reportlab.lib.units import *
 
 class MyIndenter(Indenter):
-    # Bugs in reportlab?
+    '''I can't remember why this exists'''
     def draw(self):
         pass
     width=0
     height=0
 
 class OutlineEntry(Flowable):
+    '''Creates outline entries in the PDF TOC'''
     def __init__(self,label,text,level=0,snum=None):
         '''* label is a unique label.
            * text is the text to be displayed in the outline tree
