@@ -1,5 +1,6 @@
 {
+  "embeddedFonts" : [ ["wqy-zenhei.ttf", "wqy-zenhei.ttf", "wqy-zenhei.ttf", "wqy-zenhei.ttf"] ],
   "fontsAlias" : {
-    "stdFont": "STSong-Light"
+    "stdFont": "wqy-zenhei"
   }
 }
