@@ -991,8 +991,11 @@ class FancyPage(PageTemplate):
             x1=self.styles.lm+self.styles.gm
             y1=self.styles.tm+self.hh
 
+        # What page template to use?
+        tname=doc.__dict__.get('templateName',self.styles.firstTemplate)
+        print 'using template:',tname
         self.frames=[]
-        for frame in self.styles.pageTemplates['firstPage']['frames']:
+        for frame in self.styles.pageTemplates[tname]['frames']:
             self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
                                      self.styles.adjustUnits(frame[1],self.th)+y1,
                                      self.styles.adjustUnits(frame[2],self.tw),
