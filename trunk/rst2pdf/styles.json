@@ -8,7 +8,8 @@
     "margin-bottom": "2cm",
     "margin-left": "2cm",
     "margin-right": "2cm",
-    "margin-gutter": "0cm"
+    "margin-gutter": "0cm",
+    "firstTemplate": "firstPage"
   },
   "pageTemplates" : {
     "firstPage": {
