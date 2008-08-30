@@ -31,13 +31,10 @@ def parseRaw (data):
         lexer.whitespace+=','
         tokens=list(lexer)
         command=tokens[0]
-        print tokens
         if command == 'PageBreak':
             if len(tokens)==1:
-                print 'X1'
-                elements.append(PageBreak())
+                elements.append(MyPageBreak())
             else:
-                print 'X2'
                 elements.append(MyPageBreak(tokens[1]))
         if command == 'Spacer':
             elements.append(Spacer(int(tokens[1]),int(tokens[2])))
