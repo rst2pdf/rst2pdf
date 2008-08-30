@@ -94,6 +94,21 @@ class StyleSheet(object):
                 # We need it to calculate header-footer height
                 # and compress literal blocks.
                 self.tw=self.pw-self.lm-self.rm-self.gm
+                self.firstTemplate=data.get('firstTemplate','firstPage')
+
+        # Get page templates from all stylesheets
+        self.pageTemplates={}
+        for data,ssname in zip(ssdata,flist):
+            templates=data.get('pageTemplates',{})
+            # templates is a dictionary of pageTemplates
+            for key in templates:
+                template=templates[key]
+                # template is a dict.
+                # template[´frames'] is a list of frames
+                if key in self.pageTemplates:
+                    self.pageTemplates[key].update(template)
+                else:
+                    self.pageTemplates[key]=template
 
         # Get font aliases from all stylesheets in order
         self.fonts={}
