@@ -87,33 +87,34 @@ class StyleSheet(object):
         # Get pageSetup data from all stylessheets in order:
         for data,ssname in zip(ssdata,flist):
             page=data.get('pageSetup',{})
-            if page.get('size',None): # A standard size
-                if page['size'] in pagesizes.__dict__:
-                    self.ps=pagesizes.__dict__[page['size']]
-                else:
-                    log.critical('Unknown page size %s in stylesheet %s' % (page['size'],ssname))
-                    sys.exit(1)
-            else: #A custom size
-                # The sizes are expressed in some unit.
-                # For example, 2cm is 2 centimeters, and we need
-                # to do 2*cm (cm comes from reportlab.lib.units)
-                self.ps=[adjustUnits(page['width']),adjustUnits(page['height'])]
-            self.pw,self.ph=self.ps
-            if 'margin-left' in page:
-                self.lm=adjustUnits(page['margin-left'])
-            if 'margin-right' in page:
-                self.rm=adjustUnits(page['margin-right'])
-            if 'margin-top' in page:
-                self.tm=adjustUnits(page['margin-top'])
-            if 'margin-bottom' in page:
-                self.bm=adjustUnits(page['margin-bottom'])
-            if 'margin-butter' in page:
-                self.gm=adjustUnits(page['margin-gutter'])
+            if page:
+                if page.get('size',None): # A standard size
+                    if page['size'] in pagesizes.__dict__:
+                        self.ps=pagesizes.__dict__[page['size']]
+                    else:
+                        log.critical('Unknown page size %s in stylesheet %s' % (page['size'],ssname))
+                        sys.exit(1)
+                else: #A custom size
+                    # The sizes are expressed in some unit.
+                    # For example, 2cm is 2 centimeters, and we need
+                    # to do 2*cm (cm comes from reportlab.lib.units)
+                    self.ps=[adjustUnits(page['width']),adjustUnits(page['height'])]
+                self.pw,self.ph=self.ps
+                if 'margin-left' in page:
+                    self.lm=adjustUnits(page['margin-left'])
+                if 'margin-right' in page:
+                    self.rm=adjustUnits(page['margin-right'])
+                if 'margin-top' in page:
+                    self.tm=adjustUnits(page['margin-top'])
+                if 'margin-bottom' in page:
+                    self.bm=adjustUnits(page['margin-bottom'])
+                if 'margin-gutter' in page:
+                    self.gm=adjustUnits(page['margin-gutter'])
 
-            # tw is the text width.
-            # We need it to calculate header-footer height
-            # and compress literal blocks.
-            self.tw=self.pw-self.lm-self.rm-self.gm
+                # tw is the text width.
+                # We need it to calculate header-footer height
+                # and compress literal blocks.
+                self.tw=self.pw-self.lm-self.rm-self.gm
 
         # Get font aliases from all stylesheets in order
         self.fonts={}
