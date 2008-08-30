@@ -131,7 +131,7 @@ class StyleSheet(object):
                     # The fonts will be registered with the file name, minus the extension.
 
                     for variant in font:
-                        pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), findFont(variant)))
+                        pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), self.findFont(variant)))
 
                         # And map them all together
                         regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
@@ -139,13 +139,14 @@ class StyleSheet(object):
                         addMapping(regular,0,1,italic)
                         addMapping(regular,1,0,bold)
                         addMapping(regular,1,1,bolditalic)
-                except:
+                except Exception, e:
                     try:
                         fname=font[0].split('.')[0]
-                        log.error("Error processing font %s, registering as Helvetica alias",fname)
-                        fonts[fname]='Helvetica'
-                    except:
-                        log.error("Error processing font %s",fname)
+                        log.error("Error processing font %s: %s",fname,str(e))
+                        log.error("Registering %s as Helvetica alias",fname)
+                        self.fonts[fname]='Helvetica'
+                    except Exception,e:
+                        log.error("Error processing font %s: %s",fname,str(e))
                         sys.exit(1)
 
         # Get styles from all stylesheets in order
@@ -209,7 +210,7 @@ class StyleSheet(object):
     def __getitem__(self,key):
         return self.StyleSheet[key]
 
-    def findFont(fn):
+    def findFont(self,fn):
         '''Given a font file name, searches for it in TTFSearchPath
         and returns the real file name'''
         if not os.path.isabs(fn):
