@@ -13,7 +13,7 @@
   "pageTemplates" : {
     "firstPage": {
         "frames": [
-            ["0cm", "0cm", "0cm", "0cm"]
+            ["0cm", "0cm", "100%", "100%"]
         ]
     }
   },
@@ -178,14 +178,17 @@
       "fontName": "stdBold",
       "bulletFontName": "stdBold"
     }],
-    ["code" , {
+    ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",
       "bulletFontName": "stdMono",
       "fontSize": 8,
       "bulletFontSize": 8,
       "leading": 10,
-      "firstLineIndent": 0,
+      "firstLineIndent": 0
+    }],
+    ["code" , {
+      "parent": "literal",
       "leftIndent": 6,
       "spaceBefore": 8,
       "spaceAfter": 8,
