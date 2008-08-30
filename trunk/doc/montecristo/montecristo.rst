@@ -57,7 +57,7 @@ Produced by Anonymous Project Gutenberg Volunteers
 
 .. raw:: pdf
 
-   PageBreak
+   PageBreak twoColumn
    
 
 

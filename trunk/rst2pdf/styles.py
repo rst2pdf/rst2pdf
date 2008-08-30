@@ -97,7 +97,6 @@ class StyleSheet(object):
                 # and compress literal blocks.
                 self.tw=self.pw-self.lm-self.rm-self.gm
 
-        print 'firstTemplate',self.firstTemplate
         # Get page templates from all stylesheets
         self.pageTemplates={}
         for data,ssname in zip(ssdata,flist):
