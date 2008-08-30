@@ -104,7 +104,6 @@ class RstToPdf(object):
                                                                               bc.hexval()[2:])
             else:
                 r='<font face="%s" size="%d" color="#%s">' % (s.fontName,s.fontSize,s.textColor.hexval()[2:])
-            print r
             return r
         except KeyError:
             log.warning('Unknown class %s', style)
