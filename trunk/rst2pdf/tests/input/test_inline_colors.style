@@ -1,0 +1,12 @@
+{
+    "styles" : [
+    [ "red" , { 
+        "textColor": "red",
+        "backColor": null
+      }],
+    [ "white-on-red" , {
+        "textColor": "white",
+        "backColor": "red"
+      }]
+   ]
+}
