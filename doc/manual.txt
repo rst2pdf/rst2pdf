@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.6 (svn)
+:version: 0.6
 :revision: $LastChangedRevision$
 
 .. header::
@@ -15,6 +15,7 @@ How to use rst2pdf
    Page ###Page###
 
 .. contents::
+    
 .. section-numbering::
 
 Introduction
@@ -445,16 +446,16 @@ the options are:
 Let's display a class from rst2pdf::
     
       .. code-block:: python
-         :include: ../rst2pdf/createpdf.py
+         :include: ../rst2pdf/flowables.py
          :start-at: class Separation(Flowable):
          :end-before: class FancyPage(PageTemplate):
 
 this command gives
          
 .. code-block:: python
-    :include: ../rst2pdf/createpdf.py
+    :include: ../rst2pdf/flowables.py
     :start-at: class Separation(Flowable):
-    :end-before: class FancyPage(PageTemplate):
+    :end-before: class MyPageBreak(FrameActionFlowable):
 
     
 .. _supported: http://pygments.org/docs/lexers/
@@ -568,3 +569,70 @@ language in the command line, the style has priority, so remember:
 
     If this is too confusing, let me know, I will try to figure out a simpler
     way.
+
+
+Page Layout
+===========
+
+By default, your document will have a single column of text covering the space
+between the margins. You can change that, though, in fact you can do so even in
+the middle of your document!
+
+To do it, you need to define *Page Templates* in your stylesheet. The default
+stylesheet already has 2 of them::
+
+  "pageTemplates" : {
+    "oneColumn": {
+        "frames": [
+            ["0cm", "0cm", "100%", "100%"]
+        ]
+    },
+    "twoColumn": {
+        "frames": [
+            ["0cm", "0cm", "49%", "100%"],
+            ["51%", "0cm", "49%", "100%"]
+        ]
+    }
+  },
+
+A page template has a name (oneColumn, twoColumn) and a list of frames. A frame
+is a list containing this::
+
+    [ left position, top position, width, height ]
+
+For example, this defines a frame "at the very left", "at the very top", "a bit less than half
+a page wide" and "as tall as possible"::
+
+    ["0cm", "0cm", "49%", "100%"]
+
+And this means "the bottom third of the page"::
+
+    ["0cm", "66.66%", "100%", "33.34%"]
+
+You can use all the usual units, cm, mm, inch, and % which means "percentage of
+the page (excluding margins and headers or footers)". Using % is probably the smartest
+for columns and gives you a fluid layout, while the other units are better for more
+"fixed" elements.
+
+Since we can have more than one template, there is a way to specify which one we want
+to use, and a way to change from one to another.
+
+To specify the first template, do it in your stylesheet, in pageSetup (oneColumn is
+the default)::
+
+  "pageSetup" : {
+    "firstTemplate": "oneColumn"
+  }
+
+Then, to change to another template, in your document use this syntax (will change soon,
+though):
+
+.. code-block:: rst
+
+   .. raw:: pdf
+
+      PageBreak twoColumn
+
+That will trigger a page break, and the new page will use the twoColumn template.
+
+You can see an example of this in the *Montecristo* folder in the source package.
