@@ -5,6 +5,7 @@
 __docformat__ = 'reStructuredText'
 
 from reportlab.platypus import *
+from reportlab.platypus.doctemplate import *
 from reportlab.lib.units import *
 
 class MyIndenter(Indenter):
@@ -59,7 +60,17 @@ class Separation(Flowable):
     def draw(self):
         self.canv.line(0,0.5*cm,self.w,0.5*cm)
 
-class MyPageBreak(Flowable):
+class MyPageBreak(FrameActionFlowable):
+    def __init__(self, templateName=None):
+        self.templateName=templateName
+
+    def frameAction(self,frame):
+        if not frame._atTop:
+            frame._generated_content = [SetNextTemplate(self.templateName),PageBreak()]
+        else:
+            frame._generated_content = [SetNextTemplate(self.templateName)]
+
+class SetNextTemplate(Flowable):
     """A PageBreak that takes an optional argument, templateName.
     It sets canv.templateName when drawing.
 
@@ -70,10 +81,6 @@ class MyPageBreak(Flowable):
         self.templateName=templateName
         Flowable.__init__(self)
         
-    def wrap(self, availWidth, availHeight):
-        self.width = availWidth
-        self.height = availHeight
-        return (availWidth,availHeight-1e-8)  #step back a point
     def draw(self):
         if self.templateName:
             print "setting template to",self.templateName
