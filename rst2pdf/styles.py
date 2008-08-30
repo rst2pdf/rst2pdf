@@ -201,10 +201,16 @@ class StyleSheet(object):
         self.StyleSheet=StyleSheet1()
         for s in self.styles:
             if 'parent' in s:
-                if not s['parent']:
-                    del s['parent']
+                if s['parent'] is None:
+                    if s['name'] <> 'base':
+                        s['parent']=self.StyleSheet['base']
+                    else:
+                        del(s['parent'])
                 else:
                     s['parent']=self.StyleSheet[s['parent']]
+            else:
+                if s['name'] <> 'base':
+                    s['parent']=self.StyleSheet['base']
             self.StyleSheet.add(ParagraphStyle(**s))
     def __getitem__(self,key):
         return self.StyleSheet[key]
