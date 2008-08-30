@@ -71,8 +71,8 @@ class MyPageBreak(FrameActionFlowable):
             frame._generated_content = [SetNextTemplate(self.templateName)]
 
 class SetNextTemplate(Flowable):
-    """A PageBreak that takes an optional argument, templateName.
-    It sets canv.templateName when drawing.
+    """
+    Sets canv.templateName when drawing.
 
     rst2pdf uses that to switch page templates.
     """
@@ -83,5 +83,5 @@ class SetNextTemplate(Flowable):
         
     def draw(self):
         if self.templateName:
-            print "setting template to",self.templateName
+            log.info("Switching template to: %s",self.templateName)
             self.canv.templateName=self.templateName
