@@ -964,6 +964,8 @@ class FancyPage(PageTemplate):
         else:
             self.fh=0
 
+        self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
+
         self.head=head
         self.hx=styles.lm
         self.hy=styles.ph-styles.tm
@@ -983,16 +985,14 @@ class FancyPage(PageTemplate):
 
         # Adjust gutter margins
         if doc.page%2: # Left page
-            textframe=Frame(self.styles.lm,self.styles.tm+self.hh,self.tw,
-                            self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh,
-                            topPadding=self.hh,bottomPadding=self.fh)
+            x1=self.styles.lm
+            y1=self.styles.tm+self.hh
         else: # Right page
-            textframe=Frame(self.styles.lm+self.styles.gm,self.styles.tm+self.hh,self.tw,
-                            self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh,
-                            topPadding=self.hh,bottomPadding=self.fh)
-
-
-
+            x1=self.styles.lm+self.styles.gm
+            y1=self.styles.tm+self.hh
+        textframe=Frame(x1,y1,self.tw,self.th,
+                        topPadding=self.hh,bottomPadding=self.fh)
+                        
         self.frames=[textframe]
 
     def replaceTokens(self,text,canv,doc):
