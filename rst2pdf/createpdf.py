@@ -955,12 +955,12 @@ class FancyPage(PageTemplate):
 
         if head:
             self.hh=Paragraph(head,style=self.styles['header']).\
-                    wrap(self.styles.tw,self.styles.ph)[1]
+                    wrap(self.tw,self.styles.ph)[1]
         else:
             self.hh=0
         if foot:
             self.fh=Paragraph(foot,style=self.styles['footer']).\
-                    wrap(tw,ph)[1]
+                    wrap(self.tw,self.styles.ph)[1]
         else:
             self.fh=0
 
@@ -979,8 +979,6 @@ class FancyPage(PageTemplate):
 
            * Gutter margins on left or right as needed
 
-           * Put doc_title or page number in header/footer
-
         '''
 
         # Adjust gutter margins
@@ -998,6 +996,8 @@ class FancyPage(PageTemplate):
         self.frames=[textframe]
 
     def replaceTokens(self,text,canv,doc):
+        ''' Put doc_title/page number/etc in text of header/footer'''
+
         text=text.replace('###Page###',str(doc.page))
         text=text.replace("###Title###",doc.title)
         # FIXME: make this nicer
@@ -1012,7 +1012,8 @@ class FancyPage(PageTemplate):
         return text
 
     def afterDrawPage(self,canv,doc):
-        # Adjust gutter margins
+        '''Draw header/footer'''
+        # Adjust for gutter margin
         if doc.page%2: # Left page
             hx=self.hx
             fx=self.fx
