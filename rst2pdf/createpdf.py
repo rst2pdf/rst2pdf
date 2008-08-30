@@ -753,7 +753,7 @@ class RstToPdf(object):
         for id in node['ids']:
             node.elements.insert(
                     # FIXME: WTF does this do?
-                    node.elements and isinstance(node.elements[0], PageBreak) and 1 or 0,
+                    node.elements and isinstance(node.elements[0], MyPageBreak) and 1 or 0,
                     Paragraph('<a name="%s"/>'%id,style))
 
         try:
