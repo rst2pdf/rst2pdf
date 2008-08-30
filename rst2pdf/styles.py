@@ -89,13 +89,15 @@ class StyleSheet(object):
                     self.bm=self.adjustUnits(page['margin-bottom'])
                 if 'margin-gutter' in page:
                     self.gm=self.adjustUnits(page['margin-gutter'])
+                if 'firstTemplate' in page:
+                    self.firstTemplate=page['firstTemplate']
 
                 # tw is the text width.
                 # We need it to calculate header-footer height
                 # and compress literal blocks.
                 self.tw=self.pw-self.lm-self.rm-self.gm
-                self.firstTemplate=data.get('firstTemplate','firstPage')
 
+        print 'firstTemplate',self.firstTemplate
         # Get page templates from all stylesheets
         self.pageTemplates={}
         for data,ssname in zip(ssdata,flist):
