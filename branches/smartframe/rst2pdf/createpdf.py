@@ -7,6 +7,7 @@ __docformat__ = 'reStructuredText'
 import re
 import sys
 import os
+from copy import copy
 from os.path import join, abspath, dirname
 import pprint
 import string
@@ -889,7 +890,180 @@ class RstToPdf(object):
         pdfdoc.build(elements)
 
 class FancyDocTemplate(BaseDocTemplate):
-    pass
+        
+    def build(self, flowables, filename=None, canvasmaker=canvas.Canvas):
+        """Build the document from a list of flowables.
+           If the filename argument is provided then that filename is used
+           rather than the one provided upon initialization.
+           If the canvasmaker argument is provided then it will be used
+           instead of the default.  For example a slideshow might use
+           an alternate canvas which places 6 slides on a page (by
+           doing translations, scalings and redefining the page break
+           operations).
+        """
+        #assert filter(lambda x: not isinstance(x,Flowable), flowables)==[], "flowables argument error"
+        self._startBuild(filename,canvasmaker)
+        flowableCount = len(flowables)
+        handled = 0
+        while len(flowables):
+            self.clean_hanging()
+            first = flowables[0]
+            self.handle_flowable(flowables)
+            handled += 1
+        self._endBuild()
+
+    def handle_flowable(self,flowables):
+        '''try to handle one flowable from the front of list flowables.'''
+
+        #allow document a chance to look at, modify or ignore
+        #the object(s) about to be processed
+        self.filterFlowables(flowables)
+
+        self.handle_breakBefore(flowables)
+        self.handle_keepWithNext(flowables)
+        f = flowables[0]
+        del flowables[0]
+        if f is None:
+            return
+
+        if isinstance(f,PageBreak):
+            if isinstance(f,SlowPageBreak):
+                self.handle_pageBreak(slow=1)
+            else:
+                self.handle_pageBreak()
+            self.afterFlowable(f)
+        elif isinstance(f,ActionFlowable):
+            f.apply(self)
+            self.afterFlowable(f)
+        else:
+            frame = self.frame
+            #try to fit it then draw it
+            if frame.add(f, self.canv, trySplit=self.allowSplitting):
+                if not isinstance(f,FrameActionFlowable):
+                    self._curPageFlowableCount += 1
+                    self.afterFlowable(f)
+                else:
+                    S = getattr(frame,'_generated_content',None)
+                    if S:
+                        for i,f in enumerate(S):
+                            flowables.insert(i,f)
+                        del frame._generated_content
+            else:
+                if self.allowSplitting:
+                    # see if this is a splittable thing
+                    S = frame.split(f,self.canv)
+                    n = len(S)
+                else:
+                    n = 0
+                if n:
+                    if not isinstance(S[0],(PageBreak,SlowPageBreak,ActionFlowable)):
+                        if frame.add(S[0], self.canv, trySplit=0):
+                            self._curPageFlowableCount += 1
+                            self.afterFlowable(S[0])
+                        else:
+                            ident = "Splitting error(n==%d) on page %d in\n%s" % (n,self.page,self._fIdent(f,30,frame))
+                            #leave to keep apart from the raise
+                            raise LayoutError(ident)
+                        del S[0]
+                    for i,f in enumerate(S):
+                        flowables.insert(i,f)   # put split flowables back on the list
+                else:
+                    if hasattr(f,'_postponed'):
+                        ident = "Flowable %s too large on page %d" % (self._fIdent(f,30,frame), self.page)
+                        #leave to keep apart from the raise
+                        raise LayoutError(ident)
+                    # this ought to be cleared when they are finally drawn!
+                    f._postponed = 1
+                    flowables.insert(0,f)           # put the flowable back
+                    self.handle_frameEnd()
+
+
+class SmartFrame(Frame):
+    '''A (Hopefully) smarter frame object that knows how to
+    handle a two-pass layout procedure'''
+
+    def _dryAdd(self, flowable, canv, trySplit=0):
+        """ Draws the flowable at the current position.
+        Returns 1 if successful, 0 if it would not fit.
+        Raises a LayoutError if the object is too wide,
+        or if it is too high for a totally empty frame,
+        to avoid infinite loops"""
+        if getattr(flowable,'frameAction',None):
+            flowable.frameAction(self)
+            return 1
+
+        y = self._y
+        p = self._y1p
+        s = 0
+        aW = self._getAvailableWidth()
+        if not self._atTop:
+            s =flowable.getSpaceBefore()
+            if self._oASpace:
+                s = max(s-self._prevASpace,0)
+        h = y - p - s
+        if h>0:
+            flowable._frame = self
+            flowable.canv = canv #so they can use stringWidth etc
+            w, h = flowable.wrap(aW, h)
+            del flowable.canv, flowable._frame
+        else:
+            return 0
+
+        h += s
+        y -= h
+
+        if y < p-_FUZZ:
+            if not rl_config.allowTableBoundsErrors and ((h>self._aH or w>aW) and not trySplit):
+                raise "LayoutError", "Flowable %s (%sx%s points) too large for frame (%sx%s points)." % (
+                    flowable.__class__, w,h, aW,self._aH)
+            return 0
+        else:
+            #now we can draw it, and update the current point.
+            flowable._frame = self
+            #flowable.drawOn(canv, self._x + self._leftExtraIndent, y, _sW=aW-w)
+            if self._debug: logger.debug('drew %s' % flowable.identity())
+            del flowable._frame
+            s = flowable.getSpaceAfter()
+            y -= s
+            if self._oASpace: self._prevASpace = s
+            if y!=self._y: self._atTop = 0
+            self._y = y
+            return 1
+    
+    def dryRun(self, _flowables, canv, trySplit=0):
+        '''Goes through the flowables and returns a list of
+        which ones would fit in this frame.
+        Uses the same algorithm as Platypus Frame object uses
+        in _add'''
+
+        # Save the state of the frame
+        class backup:
+            pass
+        backup._y=self._y
+        backup._y1p=self._y1p
+        backup._atTop=self._atTop
+        backup._prevASpace=self._prevASpace
+
+        #Now, create a copy of the flowable list
+        flowables=copy(_flowables)
+        used=[]
+        while len(flowables) > 0:
+            head = flowables[0]
+            if self._dryAdd(head,canv,trySplit=0):
+                used.append(head)
+                del flowables[0]
+            else:
+                #leave it in the list for later
+                break
+        for flowable in flowables:
+            self._dryAdd(flowable)
+
+        # Restore the state of the frame
+        self._y=backup._y
+        self._y1p=backup._y1p
+        self._atTop=backup._atTop
+        self._prevASpace=backup._prevASpace
+        return used
 
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
@@ -943,10 +1117,10 @@ class FancyPage(PageTemplate):
 
         self.frames=[]
         for frame in self.template['frames']:
-            self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
-                                     self.styles.adjustUnits(frame[1],self.th)+y1,
-                                     self.styles.adjustUnits(frame[2],self.tw),
-                                     self.styles.adjustUnits(frame[3],self.th)))
+            self.frames.append(SmartFrame(self.styles.adjustUnits(frame[0],self.tw)+x1,
+                                          self.styles.adjustUnits(frame[1],self.th)+y1,
+                                          self.styles.adjustUnits(frame[2],self.tw),
+                                          self.styles.adjustUnits(frame[3],self.th)))
         #textframe=Frame(x1,y1,self.tw,self.th)                        
         #self.frames=[textframe]
 
