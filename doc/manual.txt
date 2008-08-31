@@ -85,6 +85,9 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the currect section title
 ###SectNum###
     Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
+
+Headers and footers are visible by default but they can be disabled by specific
+`Page Templates`_ for example, cover pages.
     
 Footnotes
 =========
@@ -606,6 +609,8 @@ By default, your document will have a single column of text covering the space
 between the margins. You can change that, though, in fact you can do so even in
 the middle of your document!
 
+.. _page templates:
+    
 To do it, you need to define *Page Templates* in your stylesheet. The default
 stylesheet already has 2 of them::
 
