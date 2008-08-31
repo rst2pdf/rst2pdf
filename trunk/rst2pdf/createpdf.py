@@ -185,10 +185,10 @@ class RstToPdf(object):
                     pre+=u'<a href="%s" color="%s">'%(uri,self.styles.linkColor)
                     post='</a>'+post
             else:
-                    uri=node.get('refid')
-                    if uri:
-                            pre+=u'<a href="#%s">'%uri
-                            post='</a>'+post
+                uri=node.get('refid')
+                if uri:
+                    pre+=u'<a href="#%s" color="%s">'%(uri,self.styles.linkColor)
+                    post='</a>'+post
             node.pdftext=self.gather_pdftext(node,depth)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
