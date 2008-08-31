@@ -61,14 +61,14 @@ except ImportError:
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets = [], language = 'en_US',breaklevel=1):
+    def __init__(self, stylesheets = [], language = 'en_US',breaklevel=1,fontFolder=None):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets
-        self.styles=sty.StyleSheet(stylesheets)
+        self.styles=sty.StyleSheet(stylesheets,fontFolder)
         self.breaklevel=breaklevel
 
         # Load the hyphenators for all required languages
@@ -1040,9 +1040,6 @@ def main():
         else:
             outfile=infile + '.pdf'
 
-    if options.ffolder:
-        TTFSearchPath.append(ffolder)
-
     if options.style:
         ssheet=options.style.split(',')
     else:
@@ -1050,7 +1047,8 @@ def main():
 
     RstToPdf(stylesheets = ssheet,
              language=options.language,
-             breaklevel=int(options.breaklevel)).createPdf(text=open(infile).read(),
+             breaklevel=int(options.breaklevel),
+             fontFolder=options.ffolder).createPdf(text=open(infile).read(),
                                                   output=outfile,
                                                   compressed=options.compressed)
 
