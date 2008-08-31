@@ -60,6 +60,22 @@ class Separation(Flowable):
     def draw(self):
         self.canv.line(0,0.5*cm,self.w,0.5*cm)
 
+class Reference(Flowable):
+    '''A flowable to insert an anchor without taking space'''
+    def __init__(self,refid):
+        self.refid=refid
+        Flowable.__init__(self)
+        
+    def wrap(self,w,h):
+        '''This takes no space'''
+        return (0,0)
+
+    def draw(self):
+        self.canv.bookmarkPage(self.refid)
+
+    def repr(self):
+        return "Anchor: %s"%self.refid
+
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):
         self.templateName=templateName

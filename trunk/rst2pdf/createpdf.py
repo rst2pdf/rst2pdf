@@ -237,12 +237,12 @@ class RstToPdf(object):
             node.pdftext=u'%s[<a href="%s" color="%s">%s</a>]'%(
                 anchors,'#'+node.astext(),self.styles.linkColor,node.astext())
 
-        elif isinstance (node, docutils.nodes.target):
-            pre=u'<a name="%s"/>'%node['ids'][0]
-            node.pdftext=self.gather_pdftext(node,depth)
-            if replaceEnt:
-                node.pdftext=escape(node.pdftext,True)
-            node.pdftext=pre+node.pdftext
+        #elif isinstance (node, docutils.nodes.target):
+            #pre=u'<a name="%s"/>'%node['ids'][0]
+            #node.pdftext=self.gather_pdftext(node,depth)
+            #if replaceEnt:
+                #node.pdftext=escape(node.pdftext,True)
+            #node.pdftext=pre+node.pdftext
 
         elif isinstance (node, docutils.nodes.inline):
             ftag=self.styleToFont(node['classes'][0])
@@ -756,7 +756,7 @@ class RstToPdf(object):
             node.elements.insert(
                     # FIXME: WTF does this do?
                     node.elements and isinstance(node.elements[0], MyPageBreak) and 1 or 0,
-                    Paragraph('<a name="%s"/>'%id,style))
+                    Reference(id))
 
         try:
             log.debug("gen_elements: %s", node.elements)
