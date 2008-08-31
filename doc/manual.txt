@@ -18,6 +18,10 @@ How to use rst2pdf
     
 .. section-numbering::
 
+.. raw:: pdf
+
+   PageBreak oneColumn
+
 Introduction
 ============
 

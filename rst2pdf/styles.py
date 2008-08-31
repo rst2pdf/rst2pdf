@@ -65,6 +65,7 @@ class StyleSheet(object):
                 sys.exit(1)
 
         # Get pageSetup data from all stylessheets in order:
+        self.ps=pagesizes.A4
         for data,ssname in zip(ssdata,flist):
             page=data.get('pageSetup',{})
             if page:
@@ -78,7 +79,10 @@ class StyleSheet(object):
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
                     # to do 2*cm (cm comes from reportlab.lib.units)
-                    self.ps=[self.adjustUnits(page['width']),self.adjustUnits(page['height'])]
+                    if 'width' in page:
+                        self.ps[0]=self.adjustUnits(page['width'])
+                    if 'height' in page:
+                        self.ps[1]=self.adjustUnits(page['height'])
                 self.pw,self.ph=self.ps
                 if 'margin-left' in page:
                     self.lm=self.adjustUnits(page['margin-left'])

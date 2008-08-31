@@ -83,7 +83,6 @@ class SetNextTemplate(Flowable):
         
     def draw(self):
         if self.templateName:
-            log.info("Switching template to: %s",self.templateName)
             self.canv.templateName=self.templateName
 
 
