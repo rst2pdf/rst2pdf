@@ -612,9 +612,16 @@ the middle of your document!
 .. _page templates:
     
 To do it, you need to define *Page Templates* in your stylesheet. The default
-stylesheet already has 2 of them::
+stylesheet already has 3 of them::
 
   "pageTemplates" : {
+    "coverPage": {
+        "frames": [
+            ["0cm", "0cm", "100%", "100%"]
+        ],
+        "showHeader" : false,
+        "showFooter" : false
+    },
     "oneColumn": {
         "frames": [
             ["0cm", "0cm", "100%", "100%"]
@@ -626,10 +633,10 @@ stylesheet already has 2 of them::
             ["51%", "0cm", "49%", "100%"]
         ]
     }
-  },
+  }
 
-A page template has a name (oneColumn, twoColumn) and a list of frames. A frame
-is a list containing this::
+A page template has a name (oneColumn, twoColumn) some options, and a list of frames.
+A frame is a list containing this::
 
     [ left position, top position, width, height ]
 
@@ -669,3 +676,9 @@ though):
 That will trigger a page break, and the new page will use the twoColumn template.
 
 You can see an example of this in the *Montecristo* folder in the source package.
+
+The supported page template options and their defaults are:
+
+* showHeader : True
+
+* showFooter : True
