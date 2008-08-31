@@ -27,12 +27,13 @@ except:
 
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
-    def __init__(self,flist):
+    def __init__(self,flist,ffolder=None):
         log.info('Using stylesheets: %s'%','.join(flist))
         '''flist is a list of stylesheet filenames.They will
         be loaded and merged in order'''
         self.TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
-
+        if ffolder:
+            self.TTFSearchPath.insert(0,ffolder)
         # Page width, height
         self.pw=0
         self.ph=0
