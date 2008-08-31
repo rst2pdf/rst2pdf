@@ -59,6 +59,8 @@ except ImportError:
     log.warning("No support for hyphenation, install wordaxe")
     haveWordaxe=False
 
+import reportlab.platypus.paragraph as pla_para
+
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
@@ -1052,5 +1054,52 @@ def main():
                                                   compressed=options.compressed)
 
 
+
+
+
+################Ugly stuff below
+
+def _do_post_text(i, t_off, tx):
+    '''From reportlab's paragraph.py, patched to avoid underlined links'''
+    xs = tx.XtraState
+    leading = xs.style.leading
+    ff = 0.125*xs.f.fontSize
+    y0 = xs.cur_y - i*leading
+    y = y0 - ff
+    ulc = None
+    for x1,x2,c in xs.underlines:
+        if c!=ulc:
+            tx._canvas.setStrokeColor(c)
+            ulc = c
+        tx._canvas.line(t_off+x1, y, t_off+x2, y)
+    xs.underlines = []
+    xs.underline=0
+    xs.underlineColor=None
+
+    ys = y0 + 2*ff
+    ulc = None
+    for x1,x2,c in xs.strikes:
+        if c!=ulc:
+            tx._canvas.setStrokeColor(c)
+            ulc = c
+        tx._canvas.line(t_off+x1, ys, t_off+x2, ys)
+    xs.strikes = []
+    xs.strike=0
+    xs.strikeColor=None
+
+    yl = y + leading
+    for x1,x2,link in xs.links:
+        # This is the bad line
+        #tx._canvas.line(t_off+x1, y, t_off+x2, y)
+        _doLink(tx, link, (t_off+x1, y, t_off+x2, yl))
+    xs.links = []
+    xs.link=None
+
+# Look behind you! A three-headed monkey!
+pla_para._do_post_text.func_code = _do_post_text.func_code
+
+############### End of the ugly
+
 if __name__ == "__main__":
     main()
+
