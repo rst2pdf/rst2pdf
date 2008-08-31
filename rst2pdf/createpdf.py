@@ -894,29 +894,8 @@ class FancyPage(PageTemplate):
     def __init__(self,_id,head,foot,styles):
 
         self.styles=styles
-        self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
-
-        if head:
-            self.hh=Paragraph(head,style=self.styles['header']).\
-                    wrap(self.tw,self.styles.ph)[1]
-        else:
-            self.hh=0
-        if foot:
-            self.fh=Paragraph(foot,style=self.styles['footer']).\
-                    wrap(self.tw,self.styles.ph)[1]
-        else:
-            self.fh=0
-
-
         self.head=head
-        self.hx=styles.lm
-        self.hy=styles.ph-styles.tm
-
         self.foot=foot
-        self.fx=styles.lm
-        self.fy=styles.bm
-        self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
-
         PageTemplate.__init__(self,_id,[])
 
     def beforeDrawPage(self,canv,doc):
@@ -925,6 +904,31 @@ class FancyPage(PageTemplate):
            * Gutter margins on left or right as needed
 
         '''
+        
+        # What page template to use?
+        tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
+
+        # Adjust text space accounting for header/footer
+        self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
+
+        if self.head:
+            self.hh=Paragraph(self.head,style=self.styles['header']).\
+                    wrap(self.tw,self.styles.ph)[1]
+        else:
+            self.hh=0
+        if self.foot:
+            self.fh=Paragraph(self.foot,style=self.styles['footer']).\
+                    wrap(self.tw,self.styles.ph)[1]
+        else:
+            self.fh=0
+
+        self.hx=self.styles.lm
+        self.hy=self.styles.ph-self.styles.tm
+
+        self.fx=self.styles.lm
+        self.fy=self.styles.bm
+        self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
+
 
         # Adjust gutter margins
         if doc.page%2: # Left page
@@ -934,8 +938,8 @@ class FancyPage(PageTemplate):
             x1=self.styles.lm+self.styles.gm
             y1=self.styles.tm+self.hh
 
-        # What page template to use?
-        tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
+
+
         self.frames=[]
         for frame in self.styles.pageTemplates[tname]['frames']:
             self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,

@@ -12,6 +12,13 @@
     "firstTemplate": "oneColumn"
   },
   "pageTemplates" : {
+    "coverPage": {
+        "frames": [
+            ["0cm", "0cm", "100%", "100%"]
+        ],
+        "showHeader" : false,
+        "showFooter" : false
+    },
     "oneColumn": {
         "frames": [
             ["0cm", "0cm", "100%", "100%"]
