@@ -878,7 +878,7 @@ class RstToPdf(object):
         # So, now, create the FancyPage with the right sizes and elements
         FP=FancyPage("fancypage",head,foot,self.styles)
 
-        pdfdoc = BaseDocTemplate(output,
+        pdfdoc = FancyDocTemplate(output,
                                  pageTemplates=[FP],
                                  showBoundary=0,
                                  pagesize=self.styles.ps,
@@ -887,6 +887,9 @@ class RstToPdf(object):
                                  pageCompression=compressed
                                  )
         pdfdoc.build(elements)
+
+class FancyDocTemplate(BaseDocTemplate):
+    pass
 
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
