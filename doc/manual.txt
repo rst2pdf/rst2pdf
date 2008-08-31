@@ -40,21 +40,25 @@ what can be done, let´s continue.
 Command line Options
 ====================
 
--h, --help                show this help message and exit
--o FILE, --output=FILE    Write the PDF to FILE
+-h, --help            show this help message and exit
+-o FILE, --output=FILE
+                    Write the PDF to FILE
 -s STYLESHEETS, --stylesheets=STYLESHEETS
-                          A comma-separated list of custom stylesheets
--c, --compressed          Create a compressed PDF
---print-stylesheet        Print the default stylesheet and exit
---font-folder=FOLDER      Search this folder for fonts.
+                    A comma-separated list of custom stylesheets
+-c, --compressed      Create a compressed PDF
+--print-stylesheet    Print the default stylesheet and exit
+--font-folder=FOLDER  Search this folder for fonts.
 -l LANG, --language=LANG
-                          Language to be used for hyphenation.
+                    Language to be used for hyphenation.
+--fit-literal-mode=MODE
+                    What todo when a literal is too wide. One of
+                    error,overflow,shrink,truncate. Defaults to truncate.
 -b LEVEL, --break-level=LEVEL
-                          Maximum section level that starts in a new page.
-                          Default: 1
--q, --quiet               Print less information.
--v, --verbose             Print debug information.
---very-verbose            Print even more debug information.
+                    Maximum section level that starts in a new page.
+                    Default: 1
+-q, --quiet           Print less information.
+-v, --verbose         Print debug information.
+--very-verbose        Print even more debug information.
 
 
 Headers and Footers

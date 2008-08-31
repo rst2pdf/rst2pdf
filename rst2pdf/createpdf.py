@@ -61,7 +61,8 @@ except ImportError:
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets = [], language = 'en_US',breaklevel=1,fontFolder=None):
+    def __init__(self, stylesheets = [], language = 'en_US',
+                 breaklevel=1,fontFolder=None,fitMode='truncate'):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -70,6 +71,7 @@ class RstToPdf(object):
         stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontFolder)
         self.breaklevel=breaklevel
+        self.fitMode=fitMode
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
@@ -837,15 +839,9 @@ class RstToPdf(object):
 
     def PreformattedFit(self,text,style):
         """Preformatted section that gets horizontally compressed if needed."""
-        # FIXME: make it scale correctly
-        w=max(map(lambda line:stringWidth(line,style.fontName,style.fontSize),text.splitlines()))
-        mw=self.styles.tw-style.leftIndent-style.rightIndent
-        if w>mw:
-            style=copy(style)
-            f=max((0.375,mw/w))
-            #style.fontSize*=f
-            #style.leading*=f
-        return XPreformatted(text,style)
+        # Pass a ridiculous size, then it will shrink to what's available
+        # in the frame
+        return KeepInFrame(2000*cm,2000*cm,content=[XPreformatted(text,style)],mode=self.fitMode)
 
     def createPdf(self,text=None,output=None,doctree=None,compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
@@ -1002,8 +998,10 @@ def main():
                       help='Print the default stylesheet and exit')
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
                       help='Search this folder for fonts.')
-    parser.add_option('-l','--language',metavar='LANG',default='en_US',
+    parser.add_option('-l','--language',metavar='LANG',default='en_US',dest='language',
                       help='Language to be used for hyphenation.')
+    parser.add_option('--fit-literal-mode',metavar='MODE',default='truncate',dest='fitMode',
+                      help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Defaults to truncate.')
     parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default='1',
                       help='Maximum section level that starts in a new page. Default: 1')
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
@@ -1048,6 +1046,7 @@ def main():
     RstToPdf(stylesheets = ssheet,
              language=options.language,
              breaklevel=int(options.breaklevel),
+             fitMode=options.fitMode,
              fontFolder=options.ffolder).createPdf(text=open(infile).read(),
                                                   output=outfile,
                                                   compressed=options.compressed)
