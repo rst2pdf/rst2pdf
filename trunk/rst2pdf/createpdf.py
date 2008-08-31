@@ -905,18 +905,18 @@ class FancyPage(PageTemplate):
 
         '''
         
+        self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
         # What page template to use?
         tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
-
+        self.template=self.styles.pageTemplates[tname]
         # Adjust text space accounting for header/footer
-        self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
 
-        if self.head:
+        if self.head and self.template.get('showHeader',True):
             self.hh=Paragraph(self.head,style=self.styles['header']).\
                     wrap(self.tw,self.styles.ph)[1]
         else:
             self.hh=0
-        if self.foot:
+        if self.head and self.template.get('showFooter',True):
             self.fh=Paragraph(self.foot,style=self.styles['footer']).\
                     wrap(self.tw,self.styles.ph)[1]
         else:
@@ -938,10 +938,8 @@ class FancyPage(PageTemplate):
             x1=self.styles.lm+self.styles.gm
             y1=self.styles.tm+self.hh
 
-
-
         self.frames=[]
-        for frame in self.styles.pageTemplates[tname]['frames']:
+        for frame in self.template['frames']:
             self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
                                      self.styles.adjustUnits(frame[1],self.th)+y1,
                                      self.styles.adjustUnits(frame[2],self.tw),
@@ -975,12 +973,12 @@ class FancyPage(PageTemplate):
             hx=self.hx+self.styles.gm
             fx=self.fx+self.styles.gm
 
-        if self.head:
+        if self.head and self.template.get('showHeader',True):
             head=self.replaceTokens(self.head,canv,doc)
             para=Paragraph(head,style=self.styles['header'])
             para.wrap(self.tw,self.styles.ph)
             para.drawOn(canv,hx,self.hy)
-        if self.foot:
+        if self.foot and self.template.get('showFooter',True):
             foot=self.replaceTokens(self.foot,canv,doc)
             para=Paragraph(foot,style=self.styles['footer'])
             para.wrap(self.tw,self.styles.ph)
