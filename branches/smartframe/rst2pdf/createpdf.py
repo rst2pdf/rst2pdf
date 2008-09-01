@@ -675,7 +675,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=[Sidebar(5*cm,self.gather_elements(node,depth,style=style))]
+            node.elements=[Sidebar(4*cm,self.gather_elements(node,depth,style=self.styles['sidebar']))]
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]

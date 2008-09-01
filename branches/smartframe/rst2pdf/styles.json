@@ -211,6 +211,12 @@
       "borderWidth": 0.5,
       "borderPadding": 6
     }],
+    ["sidebar" , {
+      "parent": "bodytext",
+      "backColor": "beige",
+      "borderColor": "darkgray",
+      "borderWidth": 0.5
+    }],
     ["pygments-p" , {
       "parent": "code"
     }],
