@@ -1,0 +1,54 @@
+.TH RST2PDF 1 "September 01, 2008"
+.SH NAME
+rst2pdf \- Convert reStructuredText documents to PDF
+.SH SYNOPSIS
+.B rst2pdf
+.RI [options]
+.SH DESCRIPTION
+The usual way of creating PDF from reStructuredText (ReST) is by going
+through LaTeX. The \fBrst2pdf\fP utility provides an alternative by
+producing PDF directly using the ReportLab library.
+.SH OPTIONS
+.TP
+\fB\--output=\fP\fIFILE\fR, \fB\-o\fP \fIFILE\fR
+Specify output location.
+.TP
+\fB\--stylesheet=\fP\fISTYLESHEET\fR, \fB\-s\fP \fISTYLESHEET\fR
+Specify custom stylesheets (comma-seperated)
+.TP
+\fB\--compressed\fP, \fB\-c\fP
+Create a compressed PDF.
+.TP
+.B \--print-stylesheet
+Print the default stylesheet and exit.
+.TP
+\fB\--language=\fP\fILANG\fR, \fB\-l\fP \fILANG\fR
+Language to be used for hyphenation.
+.TP
+\fB\--break-level=\fP\fILEVEL\fR, \fB\-b\fP \fILEVEL\fR
+Maximum section level that starts in a new page. (Default: 1)
+.TP
+.B \--font-folder=\fIFOLDER\fR
+Search this folder for fonts
+.TP
+\fB\--quiet\fP, \fB\-q\fP
+Print less information.
+.TP
+\fB\--verbose\fP, \fB\-v\fP
+Print debugging information.
+.TP
+.B \--very-verbose
+Print even more debugging information.
+.TP
+\fB\-help\fP, \fB\-h\fP
+Show help message.
+.SH EXAMPLES
+.TP
+\fB$ rst2pdf rest.txt \-o out.pdf\fP
+Produce an \fIout.pdf\fR file which is a PDF version of the ReST document
+\fIrest.txt\fR.
+.SH AUTHOR
+\fBrst2pdf\fP was written by Roberto Alsina <ralsina@netmanagers.com.ar>.
+.PP
+This manual page was written by Chris Lamb <chris@chris-lamb.co.uk>,
+for the Debian project (but may be used by others).
