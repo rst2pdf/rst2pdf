@@ -46,7 +46,6 @@ class GenerationTests(rst2pdfTests):
         self.assertEqual(elements[2]._cellvalues[0][0][0].bulletText, u'\u2022')
         self.assertEqual(elements[3]._cellvalues[0][0][0].text, 'Item 2')
         self.assertEqual(elements[3]._cellvalues[0][0][0].bulletText, u'\u2022')
-        #pdb.set_trace()
         
     def test_transition(self):
         input="""
@@ -63,6 +62,30 @@ It divides the section.
         elements=self.converter.gen_elements(doctree,0)
         self.assertEqual(len(elements), 5)
         assert(isinstance(elements[3],rst2pdf.flowables.Separation))
+        
+    def test_strong(self):
+        input="""
+**strong**"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 1)
+        para = elements[0]
+        self.assertEqual(para.text, '<b>strong</b>')
+        parafrag = para.frags[0]
+        self.assertEqual(parafrag.bold, 1)
+        
+    def test_emphasis(self):
+        input="""
+*emphasis*"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 1)
+        para = elements[0]
+        self.assertEqual(para.text, '<i>emphasis</i>')
+        parafrag = para.frags[0]
+        self.assertEqual(parafrag.italic, 1)
+        # pdb.set_trace()
+        
         
 def test_suite():
     suite = makeSuite(GenerationTests)
