@@ -76,6 +76,36 @@ class Reference(Flowable):
     def repr(self):
         return "Anchor: %s"%self.refid
 
+
+class SmartFrame(Frame):
+    '''A (Hopefully) smarter frame object that knows how to
+    handle a two-pass layout procedure'''
+
+    def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            overlapAttachedSpace=None,_debug=None):
+        self.container=container
+        Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
+            rightPadding, topPadding, id, showBoundary,
+            overlapAttachedSpace,_debug)
+
+class Sidebar(FrameActionFlowable):
+    def __init__(self, width=5*cm,flowables=[]):
+        print "Created sidebar"
+        self.width=width
+        self.kif=KeepInFrame(width,2000*cm,flowables)
+        print self.kif.__dict__
+
+    def frameAction(self,frame):
+        print "sidebar_action_frame"
+
+        idx=frame.container.frames.index(frame)
+        frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1+self.width,frame._y1,
+                                                        frame._width-self.width,frame._height))
+        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1+self.width,frame._y1,
+                                                        frame._width-self.width,frame._height))
+        frame._generated_content = [self.kif,FrameBreak()]
+
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):
         self.templateName=templateName
