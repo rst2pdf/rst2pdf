@@ -237,12 +237,12 @@ class RstToPdf(object):
             node.pdftext=u'%s[<a href="%s" color="%s">%s</a>]'%(
                 anchors,'#'+node.astext(),self.styles.linkColor,node.astext())
 
-        #elif isinstance (node, docutils.nodes.target):
-            #pre=u'<a name="%s"/>'%node['ids'][0]
-            #node.pdftext=self.gather_pdftext(node,depth)
-            #if replaceEnt:
-                #node.pdftext=escape(node.pdftext,True)
-            #node.pdftext=pre+node.pdftext
+        elif isinstance (node, docutils.nodes.target):
+            pre=u'<a name="%s"/>'%node['ids'][0]
+            node.pdftext=self.gather_pdftext(node,depth)
+            if replaceEnt:
+                node.pdftext=escape(node.pdftext,True)
+            node.pdftext=pre+node.pdftext
 
         elif isinstance (node, docutils.nodes.inline):
             ftag=self.styleToFont(node['classes'][0])
@@ -856,6 +856,7 @@ class RstToPdf(object):
         if not doctree:
             if text:
                 doctree=docutils.core.publish_doctree(text)
+                print doctree
             else:
                 log.error('Error: createPdf needs a text or a doctree to be useful')
                 return
