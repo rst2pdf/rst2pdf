@@ -183,6 +183,12 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["sidebar-title" , {
+      "parent": "heading3"
+    }],
+    ["sidebar-subtitle" , {
+      "parent": "heading4"
+    }],
     ["definition" , {
       "parent": "normal",
       "firstLineIndent": 0,

@@ -356,9 +356,10 @@ class RstToPdf(object):
                 # FIXME style correctly
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
             elif isinstance (node.parent, docutils.nodes.admonition) or \
-                    isinstance (node.parent, docutils.nodes.sidebar) or \
                     isinstance (node.parent, docutils.nodes.table) :
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
+            elif isinstance (node.parent, docutils.nodes.sidebar):
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-title'])]
             else:
                 # Section/Subsection/etc.
                 text=self.gen_pdftext(node,depth)
@@ -376,7 +377,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.subtitle):
             if isinstance (node.parent,docutils.nodes.sidebar):
-                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading4'])]
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-subtitle'])]
             elif isinstance (node.parent,docutils.nodes.document):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['subtitle'])]
 
@@ -675,7 +676,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=[Sidebar(4*cm,self.gather_elements(node,depth,style=self.styles['sidebar']))]
+            node.elements=[Sidebar(4*cm,self.gather_elements(node,depth,style=style))]
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
