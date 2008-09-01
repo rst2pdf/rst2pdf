@@ -212,7 +212,7 @@
       "borderPadding": 6
     }],
     ["sidebar" , {
-      "parent": "bodytext",
+      "parent": "normal",
       "backColor": "beige",
       "borderColor": "darkgray",
       "borderWidth": 0.5

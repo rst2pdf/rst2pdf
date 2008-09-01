@@ -82,7 +82,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=1,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -97,10 +97,10 @@ class FrameCutter(FrameActionFlowable):
     def frameAction(self,frame):
         idx=frame.container.frames.index(frame)
         frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1+self.dx,
-                                                        frame._y2-self.f.height,self.width,
-                                                        self.f.height))
-        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1,frame._y1,
-                                                        self.width+self.dx,frame._height-self.f.height))
+                                                        frame._y2-self.f.height-12,self.width,
+                                                        self.f.height+12,bottomPadding=0,topPadding=6,leftPadding=0))
+        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1,frame._y1p,
+                                                        self.width+self.dx,frame._height-self.f.height-12,topPadding=0))
 
 class Sidebar(FrameActionFlowable):
     def __init__(self, width=5*cm,flowables=[]):
@@ -110,8 +110,8 @@ class Sidebar(FrameActionFlowable):
     def frameAction(self,frame):
         print frame.__dict__
         idx=frame.container.frames.index(frame)
-        frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1,frame._y1,
-                                                        self.width,frame._y-frame._y1))
+        frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1,frame._y1p,
+                                                        self.width,frame._y-frame._y1p,bottomPadding=6,topPadding=6))
         frame._generated_content = [FrameBreak(),self.kif,FrameCutter(self.width,frame.width-self.width,self.kif),FrameBreak()]
 
 class MyPageBreak(FrameActionFlowable):
