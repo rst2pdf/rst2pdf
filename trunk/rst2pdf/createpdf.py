@@ -62,7 +62,7 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 breaklevel=1,fontFolder=None,fitMode='truncate'):
+                 breaklevel=1,fontFolder=None,fitMode='shrink'):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -1005,8 +1005,8 @@ def main():
                       help='Search this folder for fonts.')
     parser.add_option('-l','--language',metavar='LANG',default='en_US',dest='language',
                       help='Language to be used for hyphenation.')
-    parser.add_option('--fit-literal-mode',metavar='MODE',default='truncate',dest='fitMode',
-                      help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Defaults to truncate.')
+    parser.add_option('--fit-literal-mode',metavar='MODE',default='shrink',dest='fitMode',
+                      help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Defaults to shrink.')
     parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default='1',
                       help='Maximum section level that starts in a new page. Default: 1')
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
