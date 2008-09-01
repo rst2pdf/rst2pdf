@@ -6,7 +6,7 @@ from unittest import TestCase, makeSuite
 from pyPdf import PdfFileReader
 import cStringIO
 
-import docutils.core
+from docutils.core import publish_doctree
 
 import rst2pdf
 from utils import *
@@ -29,6 +29,8 @@ class FullGenerationTests(TestCase):
         result = PdfFileReader(self.output)
         text_result = result.getPage(0).extractText()
         self.assertEqual(text_result, u'\nTest\nItem 1\nItem 2\n')
+        
+
 
     
 class GenerationTests(rst2pdfTests):
@@ -36,7 +38,7 @@ class GenerationTests(rst2pdfTests):
     def test_bullet_chars(self):
         input_file = input_file_path('test_bullet_chars.txt')
         input=open(input_file,'r').read()
-        doctree=docutils.core.publish_doctree(input)
+        doctree=publish_doctree(input)
         elements=self.converter.gen_elements(doctree,0)
         self.assertEqual(len(elements), 4)
         self.assertEqual(elements[1].text, 'Test')
@@ -45,6 +47,22 @@ class GenerationTests(rst2pdfTests):
         self.assertEqual(elements[3]._cellvalues[0][0][0].text, 'Item 2')
         self.assertEqual(elements[3]._cellvalues[0][0][0].bulletText, u'\u2022')
         #pdb.set_trace()
+        
+    def test_transition(self):
+        input="""
+Transitions
+-----------
+
+Here's a transition:
+
+---------
+
+It divides the section.
+"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 5)
+        assert(isinstance(elements[3],rst2pdf.flowables.Separation))
         
 def test_suite():
     suite = makeSuite(GenerationTests)

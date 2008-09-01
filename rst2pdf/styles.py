@@ -58,10 +58,10 @@ class StyleSheet(object):
             try:
                 ssdata.append(loads(open(fname).read()))
             except ValueError,e: # Error parsing the JSON data
-                log.error('Error parsing stylesheet "%s": %s'%(fname,str(e)))
+                log.critical('Error parsing stylesheet "%s": %s'%(fname,str(e)))
                 sys.exit(1)
             except IOError,e: #Error opening the ssheet
-                log.error('Error opening stylesheet "%s": %s'%(fname,str(e)))
+                log.critical('Error opening stylesheet "%s": %s'%(fname,str(e)))
                 sys.exit(1)
 
         # Get pageSetup data from all stylessheets in order:
@@ -152,7 +152,7 @@ class StyleSheet(object):
                         log.error("Registering %s as Helvetica alias",fname)
                         self.fonts[fname]='Helvetica'
                     except Exception,e:
-                        log.error("Error processing font %s: %s",fname,str(e))
+                        log.critical("Error processing font %s: %s",fname,str(e))
                         sys.exit(1)
 
         # Get styles from all stylesheets in order
@@ -213,6 +213,7 @@ class StyleSheet(object):
                 if s['name'] <> 'base':
                     s['parent']=self.StyleSheet['base']
             self.StyleSheet.add(ParagraphStyle(**s))
+            
     def __getitem__(self,key):
         return self.StyleSheet[key]
 

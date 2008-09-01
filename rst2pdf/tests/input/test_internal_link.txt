@@ -2,4 +2,4 @@ One paragraph.
 
 .. _internal link:
 
-The above internal link shoould not use any space in the page.
+The above internal link should not use any space in the page.
