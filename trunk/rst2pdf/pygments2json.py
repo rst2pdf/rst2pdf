@@ -8,9 +8,9 @@ You can generate a pygments CSS file like this (replace murphy with whatever sty
 
 import sys,simplejson
 
-styles={}
+styles=[]
 for line in open(sys.argv[1]):
-    style={}
+    style={"parent": "code"}
     line=line.strip()
     sname="pygments-"+line.split(' ')[0][1:]
     options=line.split('{')[1].split('}')[0].split(';')
@@ -18,9 +18,9 @@ for line in open(sys.argv[1]):
         option=option.strip()
         option,argument=option.split(':')
         if option=='color':
-            style['textColor']=argument
+            style['textColor']=argument.strip()
         if option=='background-color':
-            style['backColor']=argument
+            style['backColor']=argument.strip()
             
         # These two can come in any order
         if option=='font-weight' and argument=='bold':
@@ -33,5 +33,5 @@ for line in open(sys.argv[1]):
               style['fontName']='stdMonoBoldItalic'
             else:
               style['fontName']='stdMonoItalic'
-    styles[sname]=style
+    styles.append([sname,style])
 print simplejson.dumps({'styles':styles})
