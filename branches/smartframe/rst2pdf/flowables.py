@@ -90,18 +90,23 @@ class SmartFrame(Frame):
             overlapAttachedSpace,_debug)
 
 class FrameCutter(FrameActionFlowable):
-    def __init__(self,dx,width,flowable):
+    def __init__(self,dx,width,flowable,padding,lpad):
         self.width=width
         self.dx=dx
         self.f=flowable
+        self.padding=padding
+        self.lpad=lpad
     def frameAction(self,frame):
         idx=frame.container.frames.index(frame)
-        if self.width-6 > 10: # Don´ t bother inserting a silly thin frame
-            frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1+self.dx+6,
-                                                           frame._y2-self.f.height-12,self.width-6,
-                                                           self.f.height+12,bottomPadding=0,topPadding=6,leftPadding=0))
-        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1,frame._y1p,
-                                                        self.width+self.dx,frame._height-self.f.height-12,topPadding=0))
+        if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                           frame._x1+self.dx-self.padding,
+                                                           frame._y2-self.f.height-2*self.padding,
+                                                           self.width,
+                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=self.padding,
+                                                           leftPadding=self.lpad))
+        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
+                                                        self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
 
 class BoxedContainer(KeepInFrame):
     def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
@@ -116,24 +121,37 @@ class BoxedContainer(KeepInFrame):
         if self.style.backColor:
             canv.setFillColor(self.style.backColor)
         p = canv.beginPath()
-        p.rect(x, y, self.width+6,self.height+3)
+        p.rect(x-self.style.padding, y-2*self.style.padding, self.width+2*self.style.padding,self.height+2*self.style.padding)
         canv.drawPath(p,stroke=1,fill=1)
         canv.restoreState()
-        KeepInFrame.drawOn(self,canv,x+3,y,_sW)
+        KeepInFrame.drawOn(self,canv,x,y-self.style.padding,_sW)
 
 class Sidebar(FrameActionFlowable):
     def __init__(self,flowables,style):
         self.style=style
         self.width=self.style.width
-        self.kif=BoxedContainer(flowables,style)
+        self.flowables=flowables
 
     def frameAction(self,frame):
         print frame.__dict__
         w=frame.container.styles.adjustUnits(self.width,frame.width)
         idx=frame.container.frames.index(frame)
-        frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1,frame._y1p,
-                                                       w,frame._y-frame._y1p,leftPadding=6,bottomPadding=6,topPadding=6))
-        frame._generated_content = [FrameBreak(),self.kif,FrameCutter(w,frame.width-w,self.kif),FrameBreak()]
+        padding = self.style.borderPadding
+        self.style.lpad = frame.leftPadding
+        width=self.style.width
+        self.style.padding=frame.container.styles.adjustUnits(str(padding),frame.width)
+        self.style.width=frame.container.styles.adjustUnits(str(width),frame.width)
+        self.kif=BoxedContainer(self.flowables,self.style)
+        frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                       frame._x1+self.style.padding,
+                                                       frame._y1p,
+                                                       w-2*self.style.padding,
+                                                       frame._y-frame._y1p,
+                                                       leftPadding=self.style.lpad,
+                                                       rightPadding=0,
+                                                       bottomPadding=0,
+                                                       topPadding=0))
+        frame._generated_content = [FrameBreak(),self.kif,FrameCutter(w,frame.width-w,self.kif,padding,self.style.lpad),FrameBreak()]
 
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):

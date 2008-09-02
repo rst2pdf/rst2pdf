@@ -218,10 +218,12 @@
       "borderPadding": 6
     }],
     ["sidebar" , {
+      "float": "left",
       "width": "30%",
       "parent": "normal",
       "backColor": "teal",
       "borderColor": "darkgray",
+      "borderPadding": 3,
       "borderWidth": 0.5
     }],
     ["pygments-p" , {
