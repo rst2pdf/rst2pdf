@@ -82,7 +82,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            rightPadding=6, topPadding=6, id=None, showBoundary=1,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -90,24 +90,39 @@ class SmartFrame(Frame):
             overlapAttachedSpace,_debug)
 
 class FrameCutter(FrameActionFlowable):
-    def __init__(self,dx,width,flowable,padding,lpad):
+    def __init__(self,dx,width,flowable,padding,lpad,floatLeft=True):
         self.width=width
         self.dx=dx
         self.f=flowable
         self.padding=padding
         self.lpad=lpad
+        self.floatLeft=floatLeft
     def frameAction(self,frame):
         idx=frame.container.frames.index(frame)
-        if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
-            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+        if self.floatLeft:
+            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+                frame.container.frames.insert(idx+1,SmartFrame(frame.container,
                                                            frame._x1+self.dx-self.padding,
                                                            frame._y2-self.f.height-2*self.padding,
                                                            self.width,
                                                            self.f.height+2*self.padding,bottomPadding=0,topPadding=self.padding,
                                                            leftPadding=self.lpad))
-        frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
+            frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
                                                         self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
-
+        else:
+            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+                frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                           frame._x1-self.padding-self.width,
+                                                           frame._y2-self.f.height-2*self.padding,
+                                                           self.width,
+                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=self.padding,
+                                                           rightPadding=self.lpad))
+            frame.container.frames.insert(idx+2,SmartFrame(frame.container,
+                frame._x1-self.padding-self.width,
+                frame._y1p,
+                self.width+self.dx,
+                frame._height-self.f.height-2*self.
+                padding,topPadding=0))
 class BoxedContainer(KeepInFrame):
     def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
         self.style=style
@@ -137,12 +152,13 @@ class Sidebar(FrameActionFlowable):
         w=frame.container.styles.adjustUnits(self.width,frame.width)
         idx=frame.container.frames.index(frame)
         padding = self.style.borderPadding
-        self.style.lpad = frame.leftPadding
         width=self.style.width
         self.style.padding=frame.container.styles.adjustUnits(str(padding),frame.width)
         self.style.width=frame.container.styles.adjustUnits(str(width),frame.width)
         self.kif=BoxedContainer(self.flowables,self.style)
-        frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+        if self.style.float=='left':
+            self.style.lpad = frame.leftPadding
+            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
                                                        frame._x1+self.style.padding,
                                                        frame._y1p,
                                                        w-2*self.style.padding,
@@ -151,7 +167,33 @@ class Sidebar(FrameActionFlowable):
                                                        rightPadding=0,
                                                        bottomPadding=0,
                                                        topPadding=0))
-        frame._generated_content = [FrameBreak(),self.kif,FrameCutter(w,frame.width-w,self.kif,padding,self.style.lpad),FrameBreak()]
+            frame._generated_content = [FrameBreak(),self.kif,
+                FrameCutter(w,
+                    frame.width-w,
+                    self.kif,
+                    padding,
+                    self.style.lpad,
+                    True),
+                FrameBreak()]
+        elif self.style.float=='right':
+            self.style.lpad = frame.rightPadding
+            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                       frame._x1+self.style.padding+frame.width-self.style.width,
+                                                       frame._y1p,
+                                                       w-2*self.style.padding,
+                                                       frame._y-frame._y1p,
+                                                       leftPadding=self.style.lpad,
+                                                       rightPadding=0,
+                                                       bottomPadding=0,
+                                                       topPadding=0))
+            frame._generated_content = [FrameBreak(),self.kif,
+                FrameCutter(w,
+                    frame.width-w,
+                    self.kif,
+                    padding,
+                    self.style.lpad,
+                    False),
+                FrameBreak()]
 
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):

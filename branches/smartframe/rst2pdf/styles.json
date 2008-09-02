@@ -218,7 +218,7 @@
       "borderPadding": 6
     }],
     ["sidebar" , {
-      "float": "left",
+      "float": "right",
       "width": "30%",
       "parent": "normal",
       "backColor": "teal",
