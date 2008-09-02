@@ -82,7 +82,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=1,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -148,7 +148,6 @@ class Sidebar(FrameActionFlowable):
         self.flowables=flowables
 
     def frameAction(self,frame):
-        print frame.__dict__
         w=frame.container.styles.adjustUnits(self.width,frame.width)
         idx=frame.container.frames.index(frame)
         padding = self.style.borderPadding
