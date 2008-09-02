@@ -68,7 +68,7 @@ class RstToPdf(object):
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
-        stylesheets = [join(abspath(dirname(__file__)), 'styles.json')]+stylesheets
+        stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontFolder)
         self.breaklevel=breaklevel
         self.fitMode=fitMode
@@ -1027,7 +1027,7 @@ def main():
         log.setLevel(logging.DEBUG)
 
     if options.printssheet:
-        print open(join(abspath(dirname(__file__)), 'styles.json')).read()
+        print open(os.path.join(abspath(dirname(__file__)),'styles','styles.json')).read()
         sys.exit(0)
 
     if len(args) <> 1:
