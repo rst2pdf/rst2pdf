@@ -176,10 +176,13 @@ class StyleSheet(object):
                         if style[key] in colors.__dict__:
                             style[key]=colors.__dict__[style[key]]
                         else: # Hopefully, a hex color:
-                            c=style[key]
-                            r=int(c[1:3],16)
-                            g=int(c[3:5],16)
-                            b=int(c[5:7],16)
+                            c=style[key].strip()
+                            if c[0]=='#':
+                                c=c[1:]
+                            while len(c)<6:c='0'+c
+                            r=int(c[:2],16)
+                            g=int(c[2:4],16)
+                            b=int(c[4:6],16)
                             style[key]=colors.Color(r,g,b)
 
                     # Handle alignment constants
