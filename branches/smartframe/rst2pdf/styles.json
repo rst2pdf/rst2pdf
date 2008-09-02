@@ -218,8 +218,9 @@
       "borderPadding": 6
     }],
     ["sidebar" , {
+      "width": "30%",
       "parent": "normal",
-      "backColor": "beige",
+      "backColor": "teal",
       "borderColor": "darkgray",
       "borderWidth": 0.5
     }],

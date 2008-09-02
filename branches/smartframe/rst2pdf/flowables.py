@@ -96,22 +96,25 @@ class FrameCutter(FrameActionFlowable):
         self.f=flowable
     def frameAction(self,frame):
         idx=frame.container.frames.index(frame)
-        frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1+self.dx+6,
-                                                        frame._y2-self.f.height-12,self.width-6,
-                                                        self.f.height+12,bottomPadding=0,topPadding=6,leftPadding=0))
+        if self.width-6 > 10: # Don´ t bother inserting a silly thin frame
+            frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1+self.dx+6,
+                                                           frame._y2-self.f.height-12,self.width-6,
+                                                           self.f.height+12,bottomPadding=0,topPadding=6,leftPadding=0))
         frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1,frame._y1p,
                                                         self.width+self.dx,frame._height-self.f.height-12,topPadding=0))
 
 class BoxedContainer(KeepInFrame):
-    def __init__(self, style, maxWidth, maxHeight, content=[], mergeSpace=1, mode='shrink', name=''):
+    def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
         self.style=style
-        KeepInFrame.__init__(self,maxWidth, maxHeight, content, mergeSpace, mode, name)
+        KeepInFrame.__init__(self,self.style.width, 200*cm, content, mergeSpace, mode, name)
 
     def drawOn(self,canv,x,y,_sW=0):
         canv.saveState()
-        canv.setLineWidth(.5)
-        canv.setStrokeColor('darkgray')
-        canv.setFillColor('beige')
+        if self.style.borderWidth >0:
+            canv.setLineWidth(self.style.borderWidth)
+            canv.setStrokeColor(self.style.borderColor)
+        if self.style.backColor:
+            canv.setFillColor(self.style.backColor)
         p = canv.beginPath()
         p.rect(x, y, self.width+6,self.height+3)
         canv.drawPath(p,stroke=1,fill=1)
@@ -119,16 +122,18 @@ class BoxedContainer(KeepInFrame):
         KeepInFrame.drawOn(self,canv,x+3,y,_sW)
 
 class Sidebar(FrameActionFlowable):
-    def __init__(self, width=5*cm-12,flowables=[]):
-        self.width=width
-        self.kif=BoxedContainer(None,width,20*cm,flowables,mode="shrink")
+    def __init__(self,flowables,style):
+        self.style=style
+        self.width=self.style.width
+        self.kif=BoxedContainer(flowables,style)
 
     def frameAction(self,frame):
         print frame.__dict__
+        w=frame.container.styles.adjustUnits(self.width,frame.width)
         idx=frame.container.frames.index(frame)
         frame.container.frames.insert(idx+1,SmartFrame(frame.container,frame._x1,frame._y1p,
-                                                        self.width,frame._y-frame._y1p,leftPadding=6,bottomPadding=6,topPadding=6))
-        frame._generated_content = [FrameBreak(),self.kif,FrameCutter(self.width,frame.width-self.width,self.kif),FrameBreak()]
+                                                       w,frame._y-frame._y1p,leftPadding=6,bottomPadding=6,topPadding=6))
+        frame._generated_content = [FrameBreak(),self.kif,FrameCutter(w,frame.width-w,self.kif),FrameBreak()]
 
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):
