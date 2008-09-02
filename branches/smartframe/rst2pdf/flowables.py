@@ -82,7 +82,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            rightPadding=6, topPadding=6, id=None, showBoundary=1,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -105,17 +105,18 @@ class FrameCutter(FrameActionFlowable):
                                                            frame._x1+self.dx-self.padding,
                                                            frame._y2-self.f.height-2*self.padding,
                                                            self.width,
-                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=self.padding,
+                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                                                            leftPadding=self.lpad))
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
                                                         self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
         else:
+            pass
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
                 frame.container.frames.insert(idx+1,SmartFrame(frame.container,
                                                            frame._x1-self.padding-self.width,
                                                            frame._y2-self.f.height-2*self.padding,
                                                            self.width,
-                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=self.padding,
+                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                                                            rightPadding=self.lpad))
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,
                 frame._x1-self.padding-self.width,
@@ -177,12 +178,12 @@ class Sidebar(FrameActionFlowable):
         elif self.style.float=='right':
             self.style.lpad = frame.rightPadding
             frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                       frame._x1+self.style.padding+frame.width-self.style.width,
+                                                       frame._x1+frame.width-self.style.width+self.style.padding,
                                                        frame._y1p,
                                                        w-2*self.style.padding,
                                                        frame._y-frame._y1p,
-                                                       leftPadding=self.style.lpad,
-                                                       rightPadding=0,
+                                                       rightPadding=self.style.lpad,
+                                                       leftPadding=0,
                                                        bottomPadding=0,
                                                        topPadding=0))
             frame._generated_content = [FrameBreak(),self.kif,

@@ -223,7 +223,7 @@
       "parent": "normal",
       "backColor": "teal",
       "borderColor": "darkgray",
-      "borderPadding": 3,
+      "borderPadding": 20,
       "borderWidth": 0.5
     }],
     ["pygments-p" , {
