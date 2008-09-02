@@ -31,7 +31,8 @@ class StyleSheet(object):
         log.info('Using stylesheets: %s'%','.join(flist))
         '''flist is a list of stylesheet filenames.They will
         be loaded and merged in order'''
-        self.TTFSearchPath=[os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts'),'.']
+        self.TTFSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')]
+        self.StyleSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles')]
         if ffolder:
             self.TTFSearchPath.insert(0,ffolder)
         # Page width, height
@@ -55,6 +56,7 @@ class StyleSheet(object):
         ssdata=[]
         # First parse all files and store the results
         for fname in flist:
+            fname=self.findStyle(fname)
             try:
                 ssdata.append(loads(open(fname).read()))
             except ValueError,e: # Error parsing the JSON data
@@ -220,8 +222,18 @@ class StyleSheet(object):
     def __getitem__(self,key):
         return self.StyleSheet[key]
 
+    def findStyle(self,fn):
+        '''Given a style filename, searches for it in StyleSearchPath
+        and returns the real file name'''
+        if not os.path.isabs(fn):
+            for D in self.StyleSearchPath:
+                tfn = os.path.join(D,fn)
+                if os.path.isfile(tfn):
+                    return str(tfn)
+        return str(fn)
+
     def findFont(self,fn):
-        '''Given a font file name, searches for it in TTFSearchPath
+        '''Given a font filename, searches for it in TTFSearchPath
         and returns the real file name'''
         if not os.path.isabs(fn):
             for D in self.TTFSearchPath:
