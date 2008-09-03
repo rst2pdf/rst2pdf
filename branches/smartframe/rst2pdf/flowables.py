@@ -82,7 +82,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=1,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -101,23 +101,27 @@ class FrameCutter(FrameActionFlowable):
         idx=frame.container.frames.index(frame)
         if self.floatLeft:
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
-                frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                           frame._x1+self.dx-self.padding,
-                                                           frame._y2-self.f.height-2*self.padding,
-                                                           self.width,
-                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
-                                                           leftPadding=self.lpad))
+                f1=SmartFrame(frame.container,
+                              frame._x1+self.dx-self.padding,
+                              frame._y2-self.f.height-2*self.padding,
+                              self.width,
+                              self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
+                              leftPadding=self.lpad)
+                f1._atTop=0
+                frame.container.frames.insert(idx+1,f1)
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
                                                         self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
         else:
             pass
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
-                frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                           frame._x1-self.padding-self.width,
-                                                           frame._y2-self.f.height-2*self.padding,
-                                                           self.width,
-                                                           self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
-                                                           rightPadding=self.lpad))
+                f1=SmartFrame(frame.container,
+                              frame._x1-self.padding-self.width,
+                              frame._y2-self.f.height-2*self.padding,
+                              self.width,
+                              self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
+                              rightPadding=self.lpad)
+                f1._atTop=0
+                frame.container.frames.insert(idx+1,f1)
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,
                 frame._x1-self.padding-self.width,
                 frame._y1p,
