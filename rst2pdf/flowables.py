@@ -110,7 +110,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            rightPadding=6, topPadding=6, id=None, showBoundary=1,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -256,19 +256,21 @@ class BoundByWidth(Flowable):
     def wrap(self,availWidth,availHeight):
         '''If we need more width than we have, complain, keep a scale'''
         if self.style:
-            self.pad = self.style.borderPadding
+            self.pad = self.style.borderPadding+self.style.borderWidth+.1
         else:
             self.pad=0
         maxWidth = float(min(self.maxWidth or availWidth,availWidth))
+        self.maxWidth=maxWidth
         maxWidth -= 2*self.pad
         self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)
+        self.scale=1.0
         if self.width > maxWidth:
             log.warning("BoundByWidth too wide to fit in frame: %s",self.identity)
-            self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
+            if self.mode=='shrink':
+                self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
+                self.height=self.height*self.scale
             #self.width=maxWidth
-        else:
-            self.scale=1.0
-        return self.width, self.height+2*self.pad
+        return self.width, self.height+2*self.pad*self.scale
 
     def split(self,availWidth,availHeight):
         if len(self.content)>1:
@@ -293,7 +295,7 @@ class BoundByWidth(Flowable):
         aW = scale*(aW+_sW)
         if content is None:
             content = self.content
-        y += self.height*scale
+        y += (self.height+self.pad)/scale
         x += self.pad
         for c in content:
             w, h = c.wrapOn(canv,aW,0xfffffff)
@@ -303,6 +305,10 @@ class BoundByWidth(Flowable):
             canv.saveState()
             if self.mode=='shrink':
                 canv.scale(scale,scale)
+            elif self.mode=='truncate':
+                p=canv.beginPath()
+                p.rect(x-self.pad,y-self.pad,self.maxWidth,self.height+2*self.pad)
+                canv.clipPath(p,stroke=0)
             c.drawOn(canv,x,y,_sW=aW-w)
             canv.restoreState()
             if c is not content[-1]:
