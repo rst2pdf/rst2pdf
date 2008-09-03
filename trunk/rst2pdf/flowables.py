@@ -102,6 +102,133 @@ class SetNextTemplate(Flowable):
             self.canv.templateName=self.templateName
 
 
+class SmartFrame(Frame):
+    '''A (Hopefully) smarter frame object that knows how to
+    handle a two-pass layout procedure'''
+
+    def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            overlapAttachedSpace=None,_debug=None):
+        self.container=container
+        Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
+            rightPadding, topPadding, id, showBoundary,
+            overlapAttachedSpace,_debug)
+
+class FrameCutter(FrameActionFlowable):
+    def __init__(self,dx,width,flowable,padding,lpad,floatLeft=True):
+        self.width=width
+        self.dx=dx
+        self.f=flowable
+        self.padding=padding
+        self.lpad=lpad
+        self.floatLeft=floatLeft
+    def frameAction(self,frame):
+        idx=frame.container.frames.index(frame)
+        if self.floatLeft:
+            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+                f1=SmartFrame(frame.container,
+                              frame._x1+self.dx-self.padding,
+                              frame._y2-self.f.height-2*self.padding,
+                              self.width,
+                              self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
+                              leftPadding=self.lpad)
+                f1._atTop=frame._atTop
+                frame.container.frames.insert(idx+1,f1)
+            frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
+                                                        self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
+        else:
+            pass
+            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+                f1=SmartFrame(frame.container,
+                              frame._x1-self.padding-self.width,
+                              frame._y2-self.f.height-2*self.padding,
+                              self.width,
+                              self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
+                              rightPadding=self.lpad)
+                f1._atTop=frame._atTop
+                frame.container.frames.insert(idx+1,f1)
+            frame.container.frames.insert(idx+2,SmartFrame(frame.container,
+                frame._x1-self.padding-self.width,
+                frame._y1p,
+                self.width+self.dx,
+                frame._height-self.f.height-2*self.
+                padding,topPadding=0))
+class BoxedContainer(KeepInFrame):
+    def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
+        self.style=style
+        KeepInFrame.__init__(self,self.style.width, 200*cm, content, mergeSpace, mode, name)
+
+    def drawOn(self,canv,x,y,_sW=0):
+        canv.saveState()
+        if self.style.borderWidth >0:
+            canv.setLineWidth(self.style.borderWidth)
+            canv.setStrokeColor(self.style.borderColor)
+        if self.style.backColor:
+            canv.setFillColor(self.style.backColor)
+        p = canv.beginPath()
+        p.rect(x-self.style.padding, y-2*self.style.padding, self.width+2*self.style.padding,self.height+2*self.style.padding)
+        canv.drawPath(p,stroke=1,fill=1)
+        canv.restoreState()
+        KeepInFrame.drawOn(self,canv,x,y-self.style.padding,_sW)
+
+class Sidebar(FrameActionFlowable):
+    def __init__(self,flowables,style):
+        self.style=style
+        self.width=self.style.width
+        self.flowables=flowables
+
+    def frameAction(self,frame):
+        w=frame.container.styles.adjustUnits(self.width,frame.width)
+        idx=frame.container.frames.index(frame)
+        padding = self.style.borderPadding
+        width=self.style.width
+        self.style.padding=frame.container.styles.adjustUnits(str(padding),frame.width)
+        self.style.width=frame.container.styles.adjustUnits(str(width),frame.width)
+        self.kif=BoxedContainer(self.flowables,self.style)
+        if self.style.float=='left':
+            self.style.lpad = frame.leftPadding
+            f1=SmartFrame(frame.container,
+                          frame._x1+self.style.padding,
+                          frame._y1p,
+                          w-2*self.style.padding,
+                          frame._y-frame._y1p,
+                          leftPadding=self.style.lpad,
+                          rightPadding=0,
+                          bottomPadding=0,
+                          topPadding=0)
+            f1._atTop=frame.atTop
+            frame.container.frames.insert(idx+1,f1)
+            frame._generated_content = [FrameBreak(),self.kif,
+                FrameCutter(w,
+                    frame.width-w,
+                    self.kif,
+                    padding,
+                    self.style.lpad,
+                    True),
+                FrameBreak()]
+        elif self.style.float=='right':
+            self.style.lpad = frame.rightPadding
+            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                       frame._x1+frame.width-self.style.width+self.style.padding,
+                                                       frame._y1p,
+                                                       w-2*self.style.padding,
+                                                       frame._y-frame._y1p,
+                                                       rightPadding=self.style.lpad,
+                                                       leftPadding=0,
+                                                       bottomPadding=0,
+                                                       topPadding=0))
+            frame._generated_content = [FrameBreak(),self.kif,
+                FrameCutter(w,
+                    frame.width-w,
+                    self.kif,
+                    padding,
+                    self.style.lpad,
+                    False),
+                FrameBreak()]
+
+
+
+
 import reportlab.platypus.paragraph as pla_para
 
 ################Ugly stuff below

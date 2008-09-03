@@ -183,6 +183,12 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["sidebar-title" , {
+      "parent": "heading3"
+    }],
+    ["sidebar-subtitle" , {
+      "parent": "heading4"
+    }],
     ["definition" , {
       "parent": "normal",
       "firstLineIndent": 0,
@@ -191,6 +197,15 @@
       "spaceBefore": 6,
       "fontName": "stdBold",
       "bulletFontName": "stdBold"
+    }],
+    ["sidebar" , {
+      "float": "right",
+      "width": "30%",
+      "parent": "normal",
+      "backColor": "beige",
+      "borderColor": "darkgray",
+      "borderPadding": 20,
+      "borderWidth": 0.5
     }],
     ["literal" , {
       "parent": "normal",
