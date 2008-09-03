@@ -15,7 +15,7 @@ from reportlab.lib.styles import *
 from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
-from utils import log
+from log import log
 from simplejson import loads
 import docutils.nodes
 

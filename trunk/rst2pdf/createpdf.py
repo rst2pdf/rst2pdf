@@ -34,6 +34,7 @@ from reportlab.lib.units import *
 from reportlab.lib.pagesizes import *
 
 from flowables import *
+from log import log
 
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
@@ -846,7 +847,7 @@ class RstToPdf(object):
         """Preformatted section that gets horizontally compressed if needed."""
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
-        return KeepInFrame(2000*cm,2000*cm,content=[XPreformatted(text,style)],mode=self.fitMode)
+        return BoundByWidth(2000*cm,content=[XPreformatted(text,style)],mode=self.fitMode,style=style)
 
     def createPdf(self,text=None,output=None,doctree=None,compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)

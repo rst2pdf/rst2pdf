@@ -41,7 +41,8 @@ try:
 except ImportError:
     pass
 
-from utils import log
+import codecs
+from log import log
 
 # Customisation
 # -------------
@@ -130,7 +131,7 @@ def code_block_directive(name, arguments, options, content, lineno,
     """
     if 'include' in options:
         try:
-            content=open(options['include']).read()
+            content=codecs.open(options['include'],'r','utf-8').read()
         except IOError, UnicodeError: # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'],lineno))
             content=u''
@@ -156,6 +157,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             after_text = options.get('start-after', None)
             if after_text:
                 # skip content in include_text before *and incl.* a matching text
+                print type(content),type(after_text)
                 after_index = content.find(after_text)
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
