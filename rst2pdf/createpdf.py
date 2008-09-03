@@ -335,7 +335,7 @@ class RstToPdf(object):
             st=spans+sty.tstyleNorm
 
             if hasHead:
-                st+=[sty.tstyleHead(headRows)]
+                st+=self.styles.tstyleHead(headRows)
 
             # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
             if colwidths:

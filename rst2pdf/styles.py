@@ -292,6 +292,10 @@ class StyleSheet(object):
             log.error('Unknown unit "%s"' % u)
         return float(n)
 
+    def tstyleHead(self,rows=1):
+        return [('BACKGROUND',(0,0),(-1,rows-1),self['table'].headerBackColor),
+                ('ALIGMENT',(0,0),(-1,rows-1),"CENTRE"),
+               ]
 
 # Some table styles used for pieces of the document
 
@@ -306,8 +310,6 @@ tstyleNorm = [ ('VALIGN',(0,0),(-1,-1),'TOP'),
 
 # Header row in tables
 
-def tstyleHead(rows=1):
-    return ('BACKGROUND',(0,0),(-1,rows-1),colors.yellow)
 
 tstyles['normal']=TableStyle(tstyleNorm)
 
