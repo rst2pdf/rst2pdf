@@ -134,8 +134,13 @@ class FrameCutter(FrameActionFlowable):
                               leftPadding=self.lpad)
                 f1._atTop=frame._atTop
                 frame.container.frames.insert(idx+1,f1)
-            frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
-                                                        self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
+
+            if frame._height-self.f.height-2*self.padding >30: # Don't add silly thin frame
+                frame.container.frames.insert(idx+2,SmartFrame(frame.container,
+                                                               frame._x1-self.padding,
+                                                               frame._y1p,
+                                                               self.width+self.dx,
+                                                               frame._height-self.f.height-2*self.padding,topPadding=0))
         else:
             pass
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
@@ -147,12 +152,14 @@ class FrameCutter(FrameActionFlowable):
                               rightPadding=self.lpad)
                 f1._atTop=frame._atTop
                 frame.container.frames.insert(idx+1,f1)
-            frame.container.frames.insert(idx+2,SmartFrame(frame.container,
-                frame._x1-self.padding-self.width,
-                frame._y1p,
-                self.width+self.dx,
-                frame._height-self.f.height-2*self.
-                padding,topPadding=0))
+            if frame._height-self.f.height-2*self.padding >30:
+                frame.container.frames.insert(idx+2,SmartFrame(frame.container,
+                    frame._x1-self.padding-self.width,
+                    frame._y1p,
+                    self.width+self.dx,
+                    frame._height-self.f.height-2*self.padding,
+                    topPadding=0))
+                    
 class BoxedContainer(KeepInFrame):
     def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
         self.style=style
