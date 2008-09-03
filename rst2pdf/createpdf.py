@@ -275,8 +275,8 @@ class RstToPdf(object):
             log.debug("gen_elements: %r", node)
 
         if style is None:
-            style=self.styles['bodytext']
-
+            style=self.styles.styleForNode(node)
+            
         if node['classes']:
             # Supports only one class, sorry ;-)
             try:
@@ -355,9 +355,10 @@ class RstToPdf(object):
                 # FIXME style correctly
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
             elif isinstance (node.parent, docutils.nodes.admonition) or \
-                    isinstance (node.parent, docutils.nodes.sidebar) or \
                     isinstance (node.parent, docutils.nodes.table) :
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
+            elif isinstance (node.parent, docutils.nodes.sidebar):
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-title'])]
             else:
                 # Section/Subsection/etc.
                 text=self.gen_pdftext(node,depth)
@@ -375,7 +376,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.subtitle):
             if isinstance (node.parent,docutils.nodes.sidebar):
-                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading4'])]
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-subtitle'])]
             elif isinstance (node.parent,docutils.nodes.document):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['subtitle'])]
 
@@ -665,7 +666,9 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if
             # they separate
-            node.elements=[KeepTogether(self.gather_elements(node,depth,style=self.styles["figure"]))]
+            #node.elements=[KeepTogether(self.gather_elements(node,depth,style=self.styles["figure"]))]
+            # FIXME: using KeepTogether as a container fails inside a float.
+            node.elements=self.gather_elements(node,depth,style=self.styles["figure"])
 
         elif isinstance (node, docutils.nodes.caption):
             node.elements=[Paragraph('<i>'+self.gather_pdftext(node,depth)+'</i>',style=style)]
@@ -674,7 +677,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=[Table([[ self.gather_elements(node,depth,style=style)]],style=sty.tstyles['sidebar'])]
+            node.elements=self.gather_elements(node,depth,style=None)
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
@@ -758,6 +761,9 @@ class RstToPdf(object):
                     node.elements and isinstance(node.elements[0], MyPageBreak) and 1 or 0,
                     Reference(id))
 
+        if 'float' in style.__dict__:
+            node.elements=[Sidebar(node.elements,style)]
+
         try:
             log.debug("gen_elements: %s", node.elements)
         except: # unicode problems FIXME: explicit error
@@ -766,13 +772,12 @@ class RstToPdf(object):
 
     def gather_elements (self,node, depth, in_line_block=False,style=None):
         if style is None:
-            style=self.styles['bodytext']
+            style=self.styles.styleForNode(node)
         r=[]
         for n in node.children:
             #import pdb; pdb.set_trace()
-            r.extend(self.gen_elements(n,depth,in_line_block,style=style))
+            r.extend(self.gen_elements(n,depth,in_line_block,style=None))
         return r
-
 
     def filltable (self,rows):
         """
@@ -944,11 +949,11 @@ class FancyPage(PageTemplate):
 
         self.frames=[]
         for frame in self.template['frames']:
-            self.frames.append(Frame(self.styles.adjustUnits(frame[0],self.tw)+x1,
-                                     self.styles.adjustUnits(frame[1],self.th)+y1,
-                                     self.styles.adjustUnits(frame[2],self.tw),
-                                     self.styles.adjustUnits(frame[3],self.th)))
-        #textframe=Frame(x1,y1,self.tw,self.th)                        
+            self.frames.append(SmartFrame(self,self.styles.adjustUnits(frame[0],self.tw)+x1,
+                                          self.styles.adjustUnits(frame[1],self.th)+y1,
+                                          self.styles.adjustUnits(frame[2],self.tw),
+                                          self.styles.adjustUnits(frame[3],self.th)))
+        #textframe=Frame(x1,y1,self.tw,self.th)
         #self.frames=[textframe]
 
     def replaceTokens(self,text,canv,doc):

@@ -17,6 +17,7 @@ from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 from utils import log
 from simplejson import loads
+import docutils.nodes
 
 try:
     from wordaxe.rl.paragraph import Paragraph
@@ -241,6 +242,26 @@ class StyleSheet(object):
                 if os.path.isfile(tfn):
                     return str(tfn)
         return str(fn)
+
+    def findStyle(self,fn):
+        '''Given a style filename, searches for it in StyleSearchPath
+        and returns the real file name'''
+        if not os.path.isabs(fn):
+            for D in self.StyleSearchPath:
+                tfn = os.path.join(D,fn)
+                if os.path.isfile(tfn):
+                    return str(tfn)
+        return str(fn)
+
+    def styleForNode(self,node):
+        '''Returns the right default style for any kind of node.
+        That usually means "bodytext", but for sidebars, for
+        example, it's sidebar'''
+
+        if isinstance(node,docutils.nodes.sidebar):
+            return self['sidebar']
+        return self['bodytext']
+
 
     def adjustUnits(self,v,total=None):
         '''Takes something like 2cm and returns 2*cm.
