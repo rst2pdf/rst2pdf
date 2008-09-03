@@ -110,7 +110,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=1,
+            rightPadding=6, topPadding=6, id=None, showBoundary=0,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -130,9 +130,9 @@ class FrameCutter(FrameActionFlowable):
         if self.floatLeft:
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
                 f1=SmartFrame(frame.container,
-                              frame._x1+self.dx-self.padding,
+                              frame._x1+self.dx-2*self.padding,
                               frame._y2-self.f.height-2*self.padding,
-                              self.width,
+                              self.width+2*self.padding,
                               self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                               leftPadding=self.lpad)
                 f1._atTop=frame._atTop
@@ -140,7 +140,7 @@ class FrameCutter(FrameActionFlowable):
 
             if frame._height-self.f.height-2*self.padding >30: # Don't add silly thin frame
                 frame.container.frames.insert(idx+2,SmartFrame(frame.container,
-                                                               frame._x1-self.padding,
+                                                               frame._x1,
                                                                frame._y1p,
                                                                self.width+self.dx,
                                                                frame._height-self.f.height-2*self.padding,topPadding=0))
@@ -148,7 +148,7 @@ class FrameCutter(FrameActionFlowable):
             pass
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
                 f1=SmartFrame(frame.container,
-                              frame._x1-self.padding-self.width,
+                              frame._x1-self.width,
                               frame._y2-self.f.height-2*self.padding,
                               self.width,
                               self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
@@ -157,30 +157,12 @@ class FrameCutter(FrameActionFlowable):
                 frame.container.frames.insert(idx+1,f1)
             if frame._height-self.f.height-2*self.padding >30:
                 frame.container.frames.insert(idx+2,SmartFrame(frame.container,
-                    frame._x1-self.padding-self.width,
+                    frame._x1-self.width,
                     frame._y1p,
                     self.width+self.dx,
                     frame._height-self.f.height-2*self.padding,
                     topPadding=0))
                     
-class BoxedContainer(KeepInFrame):
-    def __init__(self, content, style, mergeSpace=1, mode='shrink', name=''):
-        self.style=style
-        KeepInFrame.__init__(self,self.style.width, 200*cm, content, mergeSpace, mode, name)
-
-    def drawOn(self,canv,x,y,_sW=0):
-        canv.saveState()
-        if self.style.borderWidth >0:
-            canv.setLineWidth(self.style.borderWidth)
-            canv.setStrokeColor(self.style.borderColor)
-        if self.style.backColor:
-            canv.setFillColor(self.style.backColor)
-        p = canv.beginPath()
-        p.rect(x-self.style.padding, y-2*self.style.padding, self.width+2*self.style.padding,self.height+2*self.style.padding)
-        canv.drawPath(p,stroke=1,fill=1)
-        canv.restoreState()
-        KeepInFrame.drawOn(self,canv,x,y-self.style.padding,_sW)
-
 class Sidebar(FrameActionFlowable):
     def __init__(self,flowables,style):
         self.style=style
@@ -198,7 +180,7 @@ class Sidebar(FrameActionFlowable):
         if self.style.float=='left':
             self.style.lpad = frame.leftPadding
             f1=SmartFrame(frame.container,
-                          frame._x1+self.style.padding,
+                          frame._x1,
                           frame._y1p,
                           w-2*self.style.padding,
                           frame._y-frame._y1p,
@@ -206,7 +188,7 @@ class Sidebar(FrameActionFlowable):
                           rightPadding=0,
                           bottomPadding=0,
                           topPadding=0)
-            f1._atTop=frame.atTop
+            f1._atTop=frame._atTop
             frame.container.frames.insert(idx+1,f1)
             frame._generated_content = [FrameBreak(),self.kif,
                 FrameCutter(w,
@@ -219,9 +201,9 @@ class Sidebar(FrameActionFlowable):
         elif self.style.float=='right':
             self.style.lpad = frame.rightPadding
             frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                       frame._x1+frame.width-self.style.width+self.style.padding,
+                                                       frame._x1+frame.width-self.style.width,
                                                        frame._y1p,
-                                                       w-2*self.style.padding,
+                                                       w,
                                                        frame._y-frame._y1p,
                                                        rightPadding=self.style.lpad,
                                                        leftPadding=0,
@@ -301,7 +283,7 @@ class BoundByWidth(Flowable):
             w, h = c.wrapOn(canv,aW,0xfffffff)
             if (w<_FUZZ or h<_FUZZ) and not getattr(c,'_ZEROSIZE',None): continue
             if c is not content[0]: h += max(c.getSpaceBefore()-pS,0)
-            y -= h -self.pad
+            y -= h
             canv.saveState()
             if self.mode=='shrink':
                 canv.scale(scale,scale)
@@ -316,6 +298,34 @@ class BoundByWidth(Flowable):
                 y -= pS
         canv.restoreState()
 
+class BoxedContainer(BoundByWidth):
+    def __init__(self, content, style, mode='shrink'):
+        BoundByWidth.__init__(self,style.width, content, mode=mode, style=None)
+        self.style=style
+
+    def draw(self):
+        canv=self.canv
+        canv.saveState()
+        x=canv._x
+        y=canv._y
+        _sW=0
+        lw=0
+        if self.style and self.style.borderWidth >0:
+            lw=self.style.borderWidth
+            canv.setLineWidth(self.style.borderWidth)
+            canv.setStrokeColor(self.style.borderColor)
+        if self.style and self.style.backColor:
+            canv.setFillColor(self.style.backColor)
+        if self.style and self.style.padding:
+            self.padding=self.style.padding
+        else:
+            self.padding=0
+        self.padding+=lw
+        p = canv.beginPath()
+        p.rect(x, y, self.width+2*self.padding,self.height+2*self.padding)
+        canv.drawPath(p,stroke=1,fill=1)
+        canv.restoreState()
+        BoundByWidth.draw(self)
 
 import reportlab.platypus.paragraph as pla_para
 
