@@ -302,7 +302,6 @@ class BoundByWidth(Flowable):
             y -= h -self.pad
             canv.saveState()
             if self.mode=='shrink':
-                print "SCALE:",scale
                 canv.scale(scale,scale)
             c.drawOn(canv,x,y,_sW=aW-w)
             canv.restoreState()
