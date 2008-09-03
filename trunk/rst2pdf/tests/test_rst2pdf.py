@@ -7,6 +7,7 @@ from pyPdf import PdfFileReader
 import cStringIO
 
 from docutils.core import publish_doctree
+import reportlab
 
 import rst2pdf
 from utils import *
@@ -30,8 +31,6 @@ class FullGenerationTests(TestCase):
         text_result = result.getPage(0).extractText()
         self.assertEqual(text_result, u'\nTest\nItem 1\nItem 2\n')
         
-
-
     
 class GenerationTests(rst2pdfTests):
 
@@ -90,6 +89,24 @@ Another page.
         self.assertEqual(len(elements), 3)
         pagebreak = elements[1]
         self.assertEqual(pagebreak.__class__, rst2pdf.flowables.MyPageBreak)
+        #pdb.set_trace()
+        
+    def test_raw_spacer(self):
+        input="""
+A paragraph
+
+.. raw:: pdf
+
+    Spacer 0,200
+
+And another paragraph.
+
+"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 3)
+        spacer = elements[1]
+        self.assertEqual(spacer.__class__, reportlab.platypus.flowables.Spacer)
         #pdb.set_trace()
         
     def test_bullets(self):
