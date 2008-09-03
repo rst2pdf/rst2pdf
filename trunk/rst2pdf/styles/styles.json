@@ -224,7 +224,7 @@
       "backColor": "beige",
       "borderColor": "darkgray",
       "borderWidth": 0.5,
-      "borderPadding": 50
+      "borderPadding": 6
     }],
     ["pygments-p" , {
       "parent": "code"
