@@ -110,7 +110,7 @@ class SmartFrame(Frame):
     handle a two-pass layout procedure'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
-            rightPadding=6, topPadding=6, id=None, showBoundary=0,
+            rightPadding=6, topPadding=6, id=None, showBoundary=1,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
@@ -256,16 +256,19 @@ class BoundByWidth(Flowable):
     def wrap(self,availWidth,availHeight):
         '''If we need more width than we have, complain, keep a scale'''
         if self.style:
-            pad = self.style.borderPadding
+            self.pad = self.style.borderPadding
         else:
-            pad=0
-        maxWidth = float(min(self.maxWidth-pad or availWidth-pad,availWidth-pad))
+            self.pad=0
+        maxWidth = float(min(self.maxWidth or availWidth,availWidth))
+        maxWidth -= 2*self.pad
         self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)
-        if self.width > availWidth:
+        if self.width > maxWidth:
             log.warning("BoundByWidth too wide to fit in frame: %s",self.identity)
-            self.scale=self.width/availWidth
-            self.width=availWidth
-        return self.width, self.height
+            self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
+            #self.width=maxWidth
+        else:
+            self.scale=1.0
+        return self.width, self.height+2*self.pad
 
     def split(self,availWidth,availHeight):
         if len(self.content)>1:
@@ -281,7 +284,7 @@ class BoundByWidth(Flowable):
         x=canv._x
         y=canv._y
         _sW=0
-        scale=1.0
+        scale=self.scale
         content=None
         aW=None
         #, canv, x, y, _sW=0, scale=1.0, content=None, aW=None):
@@ -291,12 +294,18 @@ class BoundByWidth(Flowable):
         if content is None:
             content = self.content
         y += self.height*scale
+        x += self.pad
         for c in content:
             w, h = c.wrapOn(canv,aW,0xfffffff)
             if (w<_FUZZ or h<_FUZZ) and not getattr(c,'_ZEROSIZE',None): continue
             if c is not content[0]: h += max(c.getSpaceBefore()-pS,0)
-            y -= h
+            y -= h -self.pad
+            canv.saveState()
+            if self.mode=='shrink':
+                print "SCALE:",scale
+                canv.scale(scale,scale)
             c.drawOn(canv,x,y,_sW=aW-w)
+            canv.restoreState()
             if c is not content[-1]:
                 pS = c.getSpaceAfter()
                 y -= pS
