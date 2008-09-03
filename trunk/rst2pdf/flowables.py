@@ -107,7 +107,7 @@ class SetNextTemplate(Flowable):
 
 class SmartFrame(Frame):
     '''A (Hopefully) smarter frame object that knows how to
-    handle a two-pass layout procedure'''
+    handle a two-pass layout procedure (someday)'''
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
             rightPadding=6, topPadding=6, id=None, showBoundary=0,
