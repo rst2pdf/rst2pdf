@@ -499,6 +499,12 @@ I recommend you try |Python|_.
 
 .. |Python| replace:: Python, *the* best language around
 
+.. I break a page here, or we get a literal-block next to a sidebar, which breaks
+
+.. raw:: pdf
+
+   PageBreak
+
 Compound Paragraph
 ``````````````````
 
@@ -509,7 +515,7 @@ Compound Paragraph
        Connecting... OK
        Transmitting data... OK
        Disconnecting... OK
-      
+
    and thus consists of a simple paragraph, a literal block, and
    another simple paragraph.  Nonetheless it is semantically *one*
    paragraph.
