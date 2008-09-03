@@ -86,6 +86,23 @@ It divides the section.
         self.assertEqual(parafrag.italic, 1)
         # pdb.set_trace()
         
+    def test_raw_pagebreak(self):
+        input="""
+One page
+
+.. raw:: pdf
+
+   PageBreak
+
+Another page.
+"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 3)
+        pagebreak = elements[1]
+        self.assertEqual(pagebreak.__class__, rst2pdf.flowables.MyPageBreak)
+        #pdb.set_trace()
+        
         
 def test_suite():
     suite = makeSuite(GenerationTests)
