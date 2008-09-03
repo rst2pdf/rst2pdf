@@ -35,17 +35,6 @@ class FullGenerationTests(TestCase):
     
 class GenerationTests(rst2pdfTests):
 
-    def test_bullet_chars(self):
-        input_file = input_file_path('test_bullet_chars.txt')
-        input=open(input_file,'r').read()
-        doctree=publish_doctree(input)
-        elements=self.converter.gen_elements(doctree,0)
-        self.assertEqual(len(elements), 4)
-        self.assertEqual(elements[1].text, 'Test')
-        self.assertEqual(elements[2]._cellvalues[0][0][0].text, 'Item 1')
-        self.assertEqual(elements[2]._cellvalues[0][0][0].bulletText, u'\u2022')
-        self.assertEqual(elements[3]._cellvalues[0][0][0].text, 'Item 2')
-        self.assertEqual(elements[3]._cellvalues[0][0][0].bulletText, u'\u2022')
         
     def test_transition(self):
         input="""
@@ -103,6 +92,38 @@ Another page.
         self.assertEqual(pagebreak.__class__, rst2pdf.flowables.MyPageBreak)
         #pdb.set_trace()
         
+    def test_bullets(self):
+        input="""
+ Test
+======
+
+- Item 1
+- Item 2
+"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 4)
+        self.assertEqual(elements[1].text, 'Test')
+        self.assertEqual(elements[2]._cellvalues[0][0][0].text, 'Item 1')
+        self.assertEqual(elements[2]._cellvalues[0][0][0].bulletText, u'\u2022')
+        self.assertEqual(elements[3]._cellvalues[0][0][0].text, 'Item 2')
+        self.assertEqual(elements[3]._cellvalues[0][0][0].bulletText, u'\u2022')
+        
+    def test_sidebar(self):
+        input="""
+.. sidebar:: The Sidebar
+
+   This is a real sidebar, declared with the sidebar directive.
+
+Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. 
+"""
+        doctree=publish_doctree(input)
+        elements=self.converter.gen_elements(doctree,0)
+        self.assertEqual(len(elements), 2)
+        sidebar = elements[0]
+        self.assertEqual(sidebar.__class__, rst2pdf.flowables.Sidebar)
+        #pdb.set_trace()
+
         
 def test_suite():
     suite = makeSuite(GenerationTests)
