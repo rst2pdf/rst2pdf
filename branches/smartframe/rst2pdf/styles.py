@@ -17,6 +17,7 @@ from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 from utils import log
 from simplejson import loads
+import docutils.nodes
 
 try:
     from wordaxe.rl.paragraph import Paragraph
@@ -254,6 +255,15 @@ class StyleSheet(object):
                 return float(n)*total/100
             log.error('Unknown unit "%s"' % u)
         return float(n)
+
+    def styleForNode(self,node):
+        '''Returns the right default style for any kind of node.
+        That usually means "bodytext", but for sidebars, for
+        example, it's sidebar'''
+
+        if isinstance(node,docutils.nodes.sidebar):
+            return self['sidebar']
+        return self['bodytext']
 
 
 # Some table styles used for pieces of the document

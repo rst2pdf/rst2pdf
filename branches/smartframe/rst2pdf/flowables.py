@@ -107,7 +107,7 @@ class FrameCutter(FrameActionFlowable):
                               self.width,
                               self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                               leftPadding=self.lpad)
-                f1._atTop=0
+                f1._atTop=frame._atTop
                 frame.container.frames.insert(idx+1,f1)
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,frame._x1-self.padding,frame._y1p,
                                                         self.width+self.dx,frame._height-self.f.height-2*self.padding,topPadding=0))
@@ -120,7 +120,7 @@ class FrameCutter(FrameActionFlowable):
                               self.width,
                               self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                               rightPadding=self.lpad)
-                f1._atTop=0
+                f1._atTop=frame._atTop
                 frame.container.frames.insert(idx+1,f1)
             frame.container.frames.insert(idx+2,SmartFrame(frame.container,
                 frame._x1-self.padding-self.width,
@@ -162,15 +162,17 @@ class Sidebar(FrameActionFlowable):
         self.kif=BoxedContainer(self.flowables,self.style)
         if self.style.float=='left':
             self.style.lpad = frame.leftPadding
-            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                       frame._x1+self.style.padding,
-                                                       frame._y1p,
-                                                       w-2*self.style.padding,
-                                                       frame._y-frame._y1p,
-                                                       leftPadding=self.style.lpad,
-                                                       rightPadding=0,
-                                                       bottomPadding=0,
-                                                       topPadding=0))
+            f1=SmartFrame(frame.container,
+                          frame._x1+self.style.padding,
+                          frame._y1p,
+                          w-2*self.style.padding,
+                          frame._y-frame._y1p,
+                          leftPadding=self.style.lpad,
+                          rightPadding=0,
+                          bottomPadding=0,
+                          topPadding=0)
+            f1._atTop=frame.atTop
+            frame.container.frames.insert(idx+1,f1)
             frame._generated_content = [FrameBreak(),self.kif,
                 FrameCutter(w,
                     frame.width-w,

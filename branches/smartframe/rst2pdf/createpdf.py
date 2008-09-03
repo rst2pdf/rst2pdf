@@ -276,8 +276,8 @@ class RstToPdf(object):
             log.debug("gen_elements: %r", node)
 
         if style is None:
-            style=self.styles['bodytext']
-
+            style=self.styles.styleForNode(node)
+            
         if node['classes']:
             # Supports only one class, sorry ;-)
             try:
@@ -667,7 +667,8 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if
             # they separate
-            node.elements=[KeepTogether(self.gather_elements(node,depth,style=self.styles["figure"]))]
+            # FIXME: using KeepTogether as a container fails inside a float.
+            node.elements=self.gather_elements(node,depth,style=self.styles["figure"])
 
         elif isinstance (node, docutils.nodes.caption):
             node.elements=[Paragraph('<i>'+self.gather_pdftext(node,depth)+'</i>',style=style)]
@@ -676,7 +677,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=[Sidebar(self.gather_elements(node,depth,style=style),self.styles['sidebar'])]
+            node.elements=self.gather_elements(node,depth,style=None)
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
@@ -764,15 +765,19 @@ class RstToPdf(object):
             log.debug("gen_elements: %s", node.elements)
         except: # unicode problems FIXME: explicit error
             pass
+
+        if 'float' in style.__dict__:
+            node.elements=[Sidebar(node.elements,style)]
+
         return node.elements
 
     def gather_elements (self,node, depth, in_line_block=False,style=None):
         if style is None:
-            style=self.styles['bodytext']
+            style=self.styles.styleForNode(node)
         r=[]
         for n in node.children:
             #import pdb; pdb.set_trace()
-            r.extend(self.gen_elements(n,depth,in_line_block,style=style))
+            r.extend(self.gen_elements(n,depth,in_line_block,style=None))
         return r
 
 
