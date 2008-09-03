@@ -7,6 +7,9 @@ __docformat__ = 'reStructuredText'
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.units import *
+from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+
+from log import log
 
 class MyIndenter(Indenter):
     '''I can't remember why this exists'''
@@ -234,6 +237,70 @@ class Sidebar(FrameActionFlowable):
                 FrameBreak()]
 
 
+class BoundByWidth(Flowable):
+    '''Limits a list of flowables by width, but still lets them break
+    over pages and frames'''
+    
+    def __init__(self, maxWidth, content=[], style=None, mode=None):
+        self.maxWidth=maxWidth
+        self.content=content
+        self.style=style
+        self.mode=mode
+
+    def identity(self, maxLen=None):
+        return "<%s at %s%s%s> size=%sx%s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
+                getattr(self,'name','') and (' name="%s"'% getattr(self,'name','')) or '',
+                getattr(self,'maxWidth','') and (' maxWidth=%s'%str(getattr(self,'maxWidth',0))) or '',
+                getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '')
+
+    def wrap(self,availWidth,availHeight):
+        '''If we need more width than we have, complain, keep a scale'''
+        if self.style:
+            pad = self.style.borderPadding
+        else:
+            pad=0
+        maxWidth = float(min(self.maxWidth-pad or availWidth-pad,availWidth-pad))
+        self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)
+        if self.width > availWidth:
+            log.warning("BoundByWidth too wide to fit in frame: %s",self.identity)
+            self.scale=self.width/availWidth
+            self.width=availWidth
+        return self.width, self.height
+
+    def split(self,availWidth,availHeight):
+        if len(self.content)>1:
+            # Try splitting in our individual elements
+            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content ]
+        else: # We need to split the only element we have
+            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth,availHeight) ]
+
+    def draw(self):
+        '''we simulate being added to a frame'''
+        canv=self.canv
+        canv.saveState()
+        x=canv._x
+        y=canv._y
+        _sW=0
+        scale=1.0
+        content=None
+        aW=None
+        #, canv, x, y, _sW=0, scale=1.0, content=None, aW=None):
+        pS = 0
+        if aW is None: aW = self.width
+        aW = scale*(aW+_sW)
+        if content is None:
+            content = self.content
+        y += self.height*scale
+        for c in content:
+            w, h = c.wrapOn(canv,aW,0xfffffff)
+            if (w<_FUZZ or h<_FUZZ) and not getattr(c,'_ZEROSIZE',None): continue
+            if c is not content[0]: h += max(c.getSpaceBefore()-pS,0)
+            y -= h
+            c.drawOn(canv,x,y,_sW=aW-w)
+            if c is not content[-1]:
+                pS = c.getSpaceAfter()
+                y -= pS
+        canv.restoreState()
 
 
 import reportlab.platypus.paragraph as pla_para

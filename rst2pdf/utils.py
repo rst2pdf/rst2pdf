@@ -2,17 +2,10 @@
 #$LastChangedDate$
 #$LastChangedRevision$
 import sys
-import logging
 from reportlab.platypus import PageBreak, Spacer
 from flowables import *
 import shlex
-
-log = logging.getLogger('rst2pdf')
-hdlr = logging.StreamHandler(sys.stdout)
-formatter = logging.Formatter('[%(levelname)s] %(filename)s L%(lineno)d %(message)s')
-hdlr.setFormatter(formatter)
-log.addHandler(hdlr)
-log.setLevel(logging.WARNING)
+from log import log
 
 def parseRaw (data):
     '''Parse and process a simple DSL to handle creation of flowables.
