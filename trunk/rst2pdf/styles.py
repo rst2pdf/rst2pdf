@@ -300,6 +300,15 @@ class StyleSheet(object):
         table style from the stylesheet'''
         return [("ROWBACKGROUNDS",(0,0),(-1,-1),[formatColor(c,numeric=False) for c in self['table'].rowBackgrounds]),
             ]
+
+    def pStyleToTStyle(self,style,x,y):
+        '''Given a reportlab paragraph style, returns a spec for a table style
+           that adopts some of its features (example, background color)'''
+        results=[]
+        if style.backColor:
+            results.append(('BACKGROUND',(x,y),(x,y),style.backColor))
+        return results
+           
                
 # Some table styles used for pieces of the document
 
