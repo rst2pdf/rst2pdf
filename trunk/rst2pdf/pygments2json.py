@@ -7,12 +7,18 @@ You can generate a pygments CSS file like this (replace murphy with whatever sty
 '''
 
 import sys,simplejson
+from pygments.token import STANDARD_TYPES
+dstyles={}
+# First create a dumb stylesheet
+for key in STANDARD_TYPES:
+    dstyles["pygments-"+STANDARD_TYPES[key]]={'parent':'code'}
+
 
 styles=[]
 for line in open(sys.argv[1]):
-    style={"parent": "code"}
     line=line.strip()
     sname="pygments-"+line.split(' ')[0][1:]
+    style=dstyles.get(sname,{'parent':'code'})
     options=line.split('{')[1].split('}')[0].split(';')
     for option in options:
         option=option.strip()
