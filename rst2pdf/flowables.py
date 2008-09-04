@@ -10,6 +10,7 @@ from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 
 from log import log
+import styles
 
 class MyIndenter(Indenter):
     '''I can't remember why this exists'''
@@ -78,6 +79,37 @@ class Reference(Flowable):
 
     def repr(self):
         return "Anchor: %s"%self.refid
+
+class DelayedTable(Flowable):
+    '''A flowable that inserts a table for which it has the data.
+    Needed so column widths can be determined after we know on what
+    frame the table will be inserted, thus making the overal table width
+    correct'''
+    def __init__(self,data,colwidths,style):
+        self.data=data
+        self.colwidths=colwidths
+        self.style=style
+        self.t=None
+    def wrap(self,w,h):
+        # First create the table, with the widths from colwidths reinterpreted
+        # if needed as percentages of frame/cell/whatever width w is.
+
+        # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
+        # So, we need to calculate them relative to something
+        # and we use the text width of the page. That sucks for
+        # multicolumn pages
+        # FIXME: make it work for multicolumn pages. No idea how, yet.
+        _tw=w/sum(self.colwidths)
+        colwidths=[ _w*_tw for _w in self.colwidths ]
+        
+        self.t=Table(self.data,colWidths=colwidths,style=TableStyle(self.style))
+        return self.t.wrap(w,h)
+
+    def split(self,w,h):
+        return self.t.split(w,h)
+
+    def drawOn(self,canvas,x,y,_sW=0):
+        self.t.drawOn(canvas,x,y,_sW)
 
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None):
@@ -245,7 +277,7 @@ class BoundByWidth(Flowable):
             self.pad = self.style.borderPadding+self.style.borderWidth+.1
         else:
             self.pad=0
-        maxWidth = float(min(self.maxWidth or availWidth,availWidth))
+        maxWidth = float(min(styles.adjustUnits(self.maxWidth,availWidth) or availWidth,availWidth))
         self.maxWidth=maxWidth
         maxWidth -= 2*self.pad
         self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)

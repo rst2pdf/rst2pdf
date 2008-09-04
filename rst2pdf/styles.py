@@ -182,10 +182,6 @@ class StyleSheet(object):
                     elif key == 'alignment':
                         style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4, 'DECIMAL':8}[style[key]]
 
-                    # Handle width specifications
-                    elif key == 'width':
-                        style[key]=self.adjustUnits(style[key],self.pw)
-
                     elif key == 'language':
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
@@ -256,36 +252,6 @@ class StyleSheet(object):
             return self['sidebar']
         return self['bodytext']
 
-
-    def adjustUnits(self,v,total=None):
-        '''Takes something like 2cm and returns 2*cm.
-        If you use % as a unit, it returns the percentage
-        of "total".
-
-        If total is not given, returns a percentage of the page
-        width. However, if you get to that stage, you are
-        doing it wrong.
-
-        Example::
-
-                >>> adjustUnits('50%',200)
-                100
-        '''
-
-        if total is None:
-            total=self.pw
-        v=str(v)
-        _,n,u=re.split('(-?[0-9\.]*)',v)
-        if not u:
-            return float(n) # assume points
-        if u in units.__dict__:
-            return float(n)*units.__dict__[u]
-        else:
-            if u=='%':
-                return float(n)*total/100
-            log.error('Unknown unit "%s"' % u)
-        return float(n)
-
     def tstyleHead(self,rows=1):
         '''Returns a table style spec for a table header of `rows` based on the
         table-heading style from the stylesheet'''
@@ -312,7 +278,39 @@ class StyleSheet(object):
         if style.backColor:
             results.append(('BACKGROUND',(x,y),(x,y),style.backColor))
         return results
-           
+
+    def adjustUnits(self,v,total=None):
+        if total is None:
+            total=self.pw
+        return adjustUnits(v,total)
+        
+def adjustUnits(v,total=None):
+    '''Takes something like 2cm and returns 2*cm.
+    If you use % as a unit, it returns the percentage
+    of "total".
+
+    If total is not given, returns a percentage of the page
+    width. However, if you get to that stage, you are
+    doing it wrong.
+
+    Example::
+
+            >>> adjustUnits('50%',200)
+            100
+    '''
+
+    v=str(v)
+    _,n,u=re.split('(-?[0-9\.]*)',v)
+    if not u:
+        return float(n) # assume points
+    if u in units.__dict__:
+        return float(n)*units.__dict__[u]
+    else:
+        if u=='%':
+            return float(n)*total/100
+        log.error('Unknown unit "%s"' % u)
+    return float(n)
+
                
 # Some table styles used for pieces of the document
 
