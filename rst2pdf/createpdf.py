@@ -322,20 +322,29 @@ class RstToPdf(object):
             spans=self.filltable (rows)
 
             data=[]
+            cellStyles=[]
             rowids=range(0,len(rows))
             for row,i in zip(rows,rowids):
                 r=[]
+                j=0
                 for cell in row:
                     if isinstance(cell,str):
                         r.append("")
                     else:
                         if i<headRows:
-                            r.append(self.gather_elements(cell,depth,style=self.styles['table-heading']))
+                            ell=self.gather_elements(cell,depth,style=self.styles['table-heading'])
                         else:
-                            r.append(self.gather_elements(cell,depth,style=style))
+                            ell=self.gather_elements(cell,depth,style=style)
+                        if len(ell)==1:
+                            # Experiment: if the cell has a single element, extract its
+                            # class and use it for the cell. That way, you can have cells
+                            # with specific background colors, at least
+                            cellStyles+=self.styles.pStyleToTStyle(ell[0].style,j,i)
+                        r.append(ell)
+                    j+=1
                 data.append(r)
 
-            st=spans+sty.tstyleNorm+self.styles.tstyleBody()
+            st=spans+sty.tstyleNorm+self.styles.tstyleBody()+cellStyles
 
             if hasHead:
                 st+=self.styles.tstyleHead(headRows)
