@@ -182,6 +182,10 @@ class StyleSheet(object):
                     elif key == 'alignment':
                         style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4, 'DECIMAL':8}[style[key]]
 
+                    # Handle width specifications
+                    elif key == 'width':
+                        style[key]=self.adjustUnits(style[key],self.pw)
+
                     elif key == 'language':
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
@@ -270,7 +274,7 @@ class StyleSheet(object):
 
         if total is None:
             total=self.pw
-
+        v=str(v)
         _,n,u=re.split('(-?[0-9\.]*)',v)
         if not u:
             return float(n) # assume points
