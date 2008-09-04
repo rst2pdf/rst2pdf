@@ -227,13 +227,17 @@ class BoundByWidth(Flowable):
         self.content=content
         self.style=style
         self.mode=mode
+        if self.style:
+            self.pad = self.style.borderPadding+self.style.borderWidth+.1
+        else:
+            self.pad=0
+        Flowable.__init__(self)
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s> size=%sx%s containing %s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
+        return "<%s at %s%s%s> size=%sx%s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
                 getattr(self,'name','') and (' name="%s"'% getattr(self,'name','')) or '',
                 getattr(self,'maxWidth','') and (' maxWidth=%s'%str(getattr(self,'maxWidth',0))) or '',
-                getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '',
-                self.content[0])
+                getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '')
 
     def wrap(self,availWidth,availHeight):
         '''If we need more width than we have, complain, keep a scale'''
@@ -261,7 +265,6 @@ class BoundByWidth(Flowable):
             # Try splitting in our individual elements
             return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content ]
         else: # We need to split the only element we have
-            print "split2"
             return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
     def draw(self):

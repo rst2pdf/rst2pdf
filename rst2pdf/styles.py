@@ -294,7 +294,7 @@ class StyleSheet(object):
 
     def tstyleHead(self,rows=1):
         return [('BACKGROUND',(0,0),(-1,rows-1),self['table'].headerBackColor),
-                ('ALIGMENT',(0,0),(-1,rows-1),"CENTRE"),
+                ('ALIGN',(0,0),(-1,rows-1),"CENTER"),
                ]
 
 # Some table styles used for pieces of the document
