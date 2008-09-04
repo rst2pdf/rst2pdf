@@ -506,14 +506,14 @@ Let's display a class from rst2pdf::
       .. code-block:: python
          :include: ../rst2pdf/flowables.py
          :start-at: class Separation(Flowable):
-         :end-before: class FancyPage(PageTemplate):
+         :end-before: class Reference(Flowable):
 
 this command gives
          
 .. code-block:: python
     :include: ../rst2pdf/flowables.py
     :start-at: class Separation(Flowable):
-    :end-before: class MyPageBreak(FrameActionFlowable):
+    :end-before: class Reference(Flowable):
 
     
 .. _supported: http://pygments.org/docs/lexers/
@@ -524,13 +524,10 @@ Raw Directive
 =============
 
 Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
-
-You can use the eaw directive to insert pagebreaks and spacers (other reportlab flowables
+You can use the raw directive to insert pagebreaks and spacers (other reportlab flowables
 may be added if there's interest).
 
-The syntax is shell-like.
-
-Here's an example that shows all the sytax::
+The syntax is shell-like, here's an example that shows all the syntax::
 
     One page
 
