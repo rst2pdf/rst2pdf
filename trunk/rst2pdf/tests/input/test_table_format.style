@@ -1,7 +1,9 @@
 {
  "styles" : [
   [ "red", {
-    "backColor" : "red"
+    "backColor" : "red",
+    "borderColor" : "green",
+    "borderWidth" : 3
     }
   ]
  ]

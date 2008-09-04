@@ -277,6 +277,15 @@ class StyleSheet(object):
         results=[]
         if style.backColor:
             results.append(('BACKGROUND',(x,y),(x,y),style.backColor))
+        if style.borderWidth:
+            bw=style.borderWidth
+            del(style.__dict__['borderWidth'])
+            if style.borderColor:
+                bc=style.borderColor
+                del(style.__dict__['borderColor'])
+            else:
+                bc=colors.black
+            results.append(('BOX',(x,y),(x,y),bw,bc))
         return results
 
     def adjustUnits(self,v,total=None):
