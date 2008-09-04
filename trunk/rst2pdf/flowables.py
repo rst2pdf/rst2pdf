@@ -227,32 +227,33 @@ class BoundByWidth(Flowable):
         self.content=content
         self.style=style
         self.mode=mode
+
+    def identity(self, maxLen=None):
+        return "<%s at %s%s%s> size=%sx%s containing %s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
+                getattr(self,'name','') and (' name="%s"'% getattr(self,'name','')) or '',
+                getattr(self,'maxWidth','') and (' maxWidth=%s'%str(getattr(self,'maxWidth',0))) or '',
+                getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '',
+                self.content[0])
+
+    def wrap(self,availWidth,availHeight):
+        '''If we need more width than we have, complain, keep a scale'''
         if self.style:
             self.pad = self.style.borderPadding+self.style.borderWidth+.1
         else:
             self.pad=0
-
-    def identity(self, maxLen=None):
-        return "<%s at %s%s%s> size=%sx%s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
-                getattr(self,'name','') and (' name="%s"'% getattr(self,'name','')) or '',
-                getattr(self,'maxWidth','') and (' maxWidth=%s'%str(getattr(self,'maxWidth',0))) or '',
-                getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '')
-
-    def wrap(self,availWidth,availHeight):
-        '''If we need more width than we have, complain, keep a scale'''
         maxWidth = float(min(self.maxWidth or availWidth,availWidth))
         self.maxWidth=maxWidth
         maxWidth -= 2*self.pad
         self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)
         self.scale=1.0
         if self.width > maxWidth:
-            log.warning("BoundByWidth too wide to fit in frame: %s",self.identity)
+            log.warning("BoundByWidth too wide to fit in frame: %s",self.identity())
             if self.mode=='shrink':
                 self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
                 self.height=self.height*self.scale
             #self.width=maxWidth
         if self.height+2*self.pad*self.scale > availHeight:
-            log.warning("BoundByWidth too tall to fit in frame: %s",self.identity)
+            log.warning("BoundByWidth too tall to fit in frame: %s",self.identity())
         return self.width, self.height+2*self.pad*self.scale
 
     def split(self,availWidth,availHeight):
@@ -260,6 +261,7 @@ class BoundByWidth(Flowable):
             # Try splitting in our individual elements
             return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content ]
         else: # We need to split the only element we have
+            print "split2"
             return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
     def draw(self):
