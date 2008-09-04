@@ -212,7 +212,11 @@
       "firstLineIndent": 0
     }],
     ["table" , {
-      "cellBackColor" : "white"
+      "rowBackgrounds" : ["white","#E0E0E0"]
+    }],
+    ["table-title" , {
+      "parent" : "heading4",
+      "alignment" : "TA_CENTER"
     }],
     ["table-heading" , {
       "parent" : "heading4",

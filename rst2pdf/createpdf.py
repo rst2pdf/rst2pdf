@@ -335,7 +335,7 @@ class RstToPdf(object):
                             r.append(self.gather_elements(cell,depth,style=style))
                 data.append(r)
 
-            st=spans+sty.tstyleNorm
+            st=spans+sty.tstyleNorm+self.styles.tstyleBody()
 
             if hasHead:
                 st+=self.styles.tstyleHead(headRows)
@@ -361,7 +361,7 @@ class RstToPdf(object):
             elif isinstance (node.parent, docutils.nodes.admonition):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
             elif isinstance (node.parent, docutils.nodes.table):
-                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['table-heading'])]
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['table-title'])]
             elif isinstance (node.parent, docutils.nodes.sidebar):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-title'])]
             else:

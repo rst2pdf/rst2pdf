@@ -176,17 +176,7 @@ class StyleSheet(object):
 
                     # Handle color references by name
                     elif key == 'color' or key.endswith('Color') and style[key]:
-                        if style[key] in colors.__dict__:
-                            style[key]=colors.__dict__[style[key]]
-                        else: # Hopefully, a hex color:
-                            c=style[key].strip()
-                            if c[0]=='#':
-                                c=c[1:]
-                            while len(c)<6:c='0'+c
-                            r=int(c[:2],16)
-                            g=int(c[2:4],16)
-                            b=int(c[4:6],16)
-                            style[key]=colors.Color(r,g,b)
+                        style[key]=formatColor(style[key])
 
                     # Handle alignment constants
                     elif key == 'alignment':
@@ -293,6 +283,8 @@ class StyleSheet(object):
         return float(n)
 
     def tstyleHead(self,rows=1):
+        '''Returns a table style spec for a table header of `rows` based on the
+        table-heading style from the stylesheet'''
         # This alignment thing is exactly backwards from the alignment for paragraphstyles
         alignment={0:'LEFT', 1:'CENTER', 1:'CENTRE', 2:'RIGHT', 4:'JUSTIFY',8:'DECIMAL'}[self['table-heading'].alignment]
         return [('BACKGROUND',(0,0),(-1,rows-1),self['table-heading'].backColor),
@@ -303,7 +295,12 @@ class StyleSheet(object):
                                           self['table-heading'].leading),
                 ('VALIGN',(0,0),(-1,rows-1),self['table-heading'].valign)
                ]
-
+    def tstyleBody(self,rows=1):
+        '''Returns a table style spec for a table of any size based on the
+        table style from the stylesheet'''
+        return [("ROWBACKGROUNDS",(0,0),(-1,-1),[formatColor(c,numeric=False) for c in self['table'].rowBackgrounds]),
+            ]
+               
 # Some table styles used for pieces of the document
 
 tstyles={}
@@ -345,3 +342,21 @@ tstyles['sidebar']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
 
 tstyles['bullet']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                              ])
+
+def formatColor(value,numeric=True):
+    '''Converts a color like "gray" or "0xf" or "ffff" to something
+    reportlab will like'''
+    if value in colors.__dict__:
+        return colors.__dict__[value]
+    else: # Hopefully, a hex color:
+        c=value.strip()
+        if c[0]=='#':
+            c=c[1:]
+        while len(c)<6:c='0'+c
+        if numeric:
+            r=int(c[:2],16)
+            g=int(c[2:4],16)
+            b=int(c[4:6],16)
+            return colors.Color(r,g,b)
+        else:
+            return str("#"+c)
