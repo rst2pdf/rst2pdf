@@ -1,0 +1,14 @@
+{
+ "styles" : [
+  [ "halfwidth", {
+    "inherit" : "bodytext",
+    "width" : "50%"
+    }
+  ],
+  [ "threeq", {
+    "inherit" : "bodytext",
+    "width" : "75%"
+    }
+  ]
+ ]
+}
