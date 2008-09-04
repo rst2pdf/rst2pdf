@@ -190,7 +190,7 @@ class StyleSheet(object):
 
                     # Handle alignment constants
                     elif key == 'alignment':
-                        style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4}[style[key]]
+                        style[key]={'TA_LEFT':0, 'TA_CENTER':1, 'TA_CENTRE':1, 'TA_RIGHT':2, 'TA_JUSTIFY':4, 'DECIMAL':8}[style[key]]
 
                     elif key == 'language':
                         if not style[key] in self.languages:
@@ -293,8 +293,15 @@ class StyleSheet(object):
         return float(n)
 
     def tstyleHead(self,rows=1):
-        return [('BACKGROUND',(0,0),(-1,rows-1),self['table'].headerBackColor),
-                ('ALIGN',(0,0),(-1,rows-1),"CENTER"),
+        # This alignment thing is exactly backwards from the alignment for paragraphstyles
+        alignment={0:'LEFT', 1:'CENTER', 1:'CENTRE', 2:'RIGHT', 4:'JUSTIFY',8:'DECIMAL'}[self['table-heading'].alignment]
+        return [('BACKGROUND',(0,0),(-1,rows-1),self['table-heading'].backColor),
+                ('ALIGN',(0,0),(-1,rows-1),alignment),
+                ('TEXTCOLOR',(0,0),(-1,rows-1),self['table-heading'].textColor),
+                ('FONT',(0,0),(-1,rows-1),self['table-heading'].fontName,
+                                          self['table-heading'].fontSize,
+                                          self['table-heading'].leading),
+                ('VALIGN',(0,0),(-1,rows-1),self['table-heading'].valign)
                ]
 
 # Some table styles used for pieces of the document

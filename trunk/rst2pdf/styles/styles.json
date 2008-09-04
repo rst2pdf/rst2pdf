@@ -212,13 +212,13 @@
       "firstLineIndent": 0
     }],
     ["table" , {
-      "headerBackColor" : "beige",
       "cellBackColor" : "white"
     }],
     ["table-heading" , {
       "parent" : "heading4",
-      "headerBackColor" : "beige",
-      "alignment" : "TA_CENTER"
+      "backColor" : "beige",
+      "alignment" : "TA_CENTER",
+      "valign" : "BOTTOM"
     }],
     ["code" , {
       "parent": "literal",
