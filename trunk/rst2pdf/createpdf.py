@@ -349,15 +349,8 @@ class RstToPdf(object):
             if hasHead:
                 st+=self.styles.tstyleHead(headRows)
 
-            # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
-            # So, we need to calculate them relative to something
-            # and we use the text width of the page. That sucks for
-            # multicolumn pages
-            # FIXME: make it work for multicolumn pages. No idea how, yet.
-            _tw=self.styles.tw/sum(colwidths)
-            colwidths=[ w*_tw for w in colwidths ]
-
-            node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
+            #node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
+            node.elements=[DelayedTable(data,colwidths,st)]
 
         elif isinstance (node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
@@ -780,7 +773,8 @@ class RstToPdf(object):
         if 'float' in style.__dict__:
             node.elements=[Sidebar(node.elements,style)]
         elif 'width' in style.__dict__:
-            node.elements=[BoundByWidth(style.width,node.elements,style)]
+            print "Bounding to:",style.width
+            node.elements=[BoundByWidth(style.width,node.elements,style,mode="shrink")]
         try:
             log.debug("gen_elements: %s", node.elements)
         except: # unicode problems FIXME: explicit error
