@@ -773,7 +773,6 @@ class RstToPdf(object):
         if 'float' in style.__dict__:
             node.elements=[Sidebar(node.elements,style)]
         elif 'width' in style.__dict__:
-            print "Bounding to:",style.width
             node.elements=[BoundByWidth(style.width,node.elements,style,mode="shrink")]
         try:
             log.debug("gen_elements: %s", node.elements)
