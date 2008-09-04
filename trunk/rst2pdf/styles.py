@@ -25,6 +25,7 @@ try:
 except:
     log.warning("No hyphenation support, install wordaxe")
 
+unit_separator = re.compile('(-?[0-9\.]*)')
 
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
@@ -57,7 +58,7 @@ class StyleSheet(object):
         ssdata=[]
         # First parse all files and store the results
         for fname in flist:
-            fname=self.findStyle(fname)
+            fname = self.findStyle(fname)
             try:
                 ssdata.append(loads(open(fname).read()))
             except ValueError,e: # Error parsing the JSON data
@@ -69,10 +70,10 @@ class StyleSheet(object):
 
         # Get pageSetup data from all stylessheets in order:
         self.ps=pagesizes.A4
-        for data,ssname in zip(ssdata,flist):
-            page=data.get('pageSetup',{})
+        for data, ssname in zip(ssdata, flist):
+            page=data.get('pageSetup', {})
             if page:
-                if page.get('size',None): # A standard size
+                if page.get('size', None): # A standard size
                     if page['size'] in pagesizes.__dict__:
                         self.ps=pagesizes.__dict__[page['size']]
                     else:
@@ -107,7 +108,7 @@ class StyleSheet(object):
 
         # Get page templates from all stylesheets
         self.pageTemplates={}
-        for data,ssname in zip(ssdata,flist):
+        for data, ssname in zip(ssdata,flist):
             templates=data.get('pageTemplates',{})
             # templates is a dictionary of pageTemplates
             for key in templates:
@@ -121,7 +122,7 @@ class StyleSheet(object):
 
         # Get font aliases from all stylesheets in order
         self.fonts={}
-        for data,ssname in zip(ssdata,flist):
+        for data, ssname in zip(ssdata, flist):
             self.fonts.update(data.get('fontsAlias',{}))
             embedded=data.get('embeddedFonts',[])
 
@@ -162,11 +163,11 @@ class StyleSheet(object):
         self.stylesheet = {}
         self.styles=[]
         self.linkColor = 'navy'
-        for data,ssname in zip(ssdata,flist):
-            self.linkColor=data.get('linkColor') or self.linkColor
-            styles=data.get('styles',{})
-            for [skey,style] in styles:
-                sdict={}
+        for data, ssname in zip(ssdata, flist):
+            self.linkColor = data.get('linkColor') or self.linkColor
+            styles = data.get('styles', {})
+            for [skey, style] in styles:
+                sdict = {}
                 # FIXME: this is done completely backwards
                 for key in style:
 
@@ -195,19 +196,19 @@ class StyleSheet(object):
                     self.stylesheet[skey]=sdict
                     self.styles.append(sdict)
         # And create  reportlabs stylesheet
-        self.StyleSheet=StyleSheet1()
+        self.StyleSheet = StyleSheet1()
         for s in self.styles:
             if 'parent' in s:
                 if s['parent'] is None:
-                    if s['name'] <> 'base':
-                        s['parent']=self.StyleSheet['base']
+                    if s['name'] != 'base':
+                        s['parent'] = self.StyleSheet['base']
                     else:
                         del(s['parent'])
                 else:
-                    s['parent']=self.StyleSheet[s['parent']]
+                    s['parent'] = self.StyleSheet[s['parent']]
             else:
-                if s['name'] <> 'base':
-                    s['parent']=self.StyleSheet['base']
+                if s['name'] != 'base':
+                    s['parent'] = self.StyleSheet['base']
             self.StyleSheet.add(ParagraphStyle(**s))
             
     def __getitem__(self,key):
@@ -228,16 +229,6 @@ class StyleSheet(object):
         and returns the real file name'''
         if not os.path.isabs(fn):
             for D in self.TTFSearchPath:
-                tfn = os.path.join(D,fn)
-                if os.path.isfile(tfn):
-                    return str(tfn)
-        return str(fn)
-
-    def findStyle(self,fn):
-        '''Given a style filename, searches for it in StyleSearchPath
-        and returns the real file name'''
-        if not os.path.isabs(fn):
-            for D in self.StyleSearchPath:
                 tfn = os.path.join(D,fn)
                 if os.path.isfile(tfn):
                     return str(tfn)
@@ -265,10 +256,12 @@ class StyleSheet(object):
                                           self['table-heading'].leading),
                 ('VALIGN',(0,0),(-1,rows-1),self['table-heading'].valign)
                ]
+               
     def tstyleBody(self,rows=1):
         '''Returns a table style spec for a table of any size based on the
         table style from the stylesheet'''
-        return [("ROWBACKGROUNDS",(0,0),(-1,-1),[formatColor(c,numeric=False) for c in self['table'].rowBackgrounds]),
+        return [("ROWBACKGROUNDS",(0,0),(-1,-1),
+                [formatColor(c,numeric=False) for c in self['table'].rowBackgrounds]),
             ]
 
     def pStyleToTStyle(self,style,x,y):
@@ -288,9 +281,9 @@ class StyleSheet(object):
             results.append(('BOX',(x,y),(x,y),bw,bc))
         return results
 
-    def adjustUnits(self,v,total=None):
+    def adjustUnits(self, v, total = None):
         if total is None:
-            total=self.pw
+            total = self.pw
         return adjustUnits(v,total)
         
 def adjustUnits(v,total=None):
@@ -308,15 +301,15 @@ def adjustUnits(v,total=None):
             100
     '''
 
-    v=str(v)
-    _,n,u=re.split('(-?[0-9\.]*)',v)
+    v = str(v)
+    _,n,u = re.split('(-?[0-9\.]*)',v)
     if not u:
         return float(n) # assume points
     if u in units.__dict__:
-        return float(n)*units.__dict__[u]
+        return float(n) * units.__dict__[u]
     else:
         if u=='%':
-            return float(n)*total/100
+            return float(n) * total/100
         log.error('Unknown unit "%s"' % u)
     return float(n)
 
@@ -369,14 +362,15 @@ def formatColor(value,numeric=True):
     if value in colors.__dict__:
         return colors.__dict__[value]
     else: # Hopefully, a hex color:
-        c=value.strip()
-        if c[0]=='#':
-            c=c[1:]
-        while len(c)<6:c='0'+c
+        c = value.strip()
+        if c[0] == '#':
+            c = c[1:]
+        while len(c) < 6:
+            c = '0'+c
         if numeric:
-            r=int(c[:2],16)
-            g=int(c[2:4],16)
-            b=int(c[4:6],16)
+            r = int(c[:2],16)
+            g = int(c[2:4],16)
+            b = int(c[4:6],16)
             return colors.Color(r,g,b)
         else:
             return str("#"+c)
