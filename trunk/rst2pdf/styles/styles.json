@@ -176,12 +176,7 @@
       "parent": "normal",
       "fontName": "stdBoldItalic",
       "bulletFontName": "stdBoldItalic",
-      "fontSize": 12,
-      "bulletFontSize": 12,
-      "leading": 14,
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "keepWithNext": true
     }],
     ["sidebar-title" , {
       "parent": "heading3"
@@ -219,6 +214,11 @@
     ["table" , {
       "headerBackColor" : "beige",
       "cellBackColor" : "white"
+    }],
+    ["table-heading" , {
+      "parent" : "heading4",
+      "headerBackColor" : "beige",
+      "alignment" : "TA_CENTER"
     }],
     ["code" , {
       "parent": "literal",

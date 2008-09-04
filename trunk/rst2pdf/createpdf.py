@@ -107,10 +107,10 @@ class RstToPdf(object):
             return None
 
 
-    def gather_pdftext (self, node, depth, in_line_block=False,replaceEnt=True):
-        return ''.join([self.gen_pdftext(n,depth,in_line_block,replaceEnt) for n in node.children ])
+    def gather_pdftext (self, node, depth,replaceEnt=True):
+        return ''.join([self.gen_pdftext(n,depth,replaceEnt) for n in node.children ])
 
-    def gen_pdftext(self, node, depth, in_line_block=False,replaceEnt=True):
+    def gen_pdftext(self, node, depth, replaceEnt=True):
         pre=""
         post=""
 
@@ -267,7 +267,7 @@ class RstToPdf(object):
             pass
         return node.pdftext
 
-    def gen_elements(self, node, depth, in_line_block=False, style=None):
+    def gen_elements(self, node, depth, style=None):
 
         log.debug("gen_elements: %s", node.__class__)
         try:
@@ -322,14 +322,17 @@ class RstToPdf(object):
             spans=self.filltable (rows)
 
             data=[]
-
-            for row in rows:
+            rowids=range(0,len(rows))
+            for row,i in zip(rows,rowids):
                 r=[]
                 for cell in row:
                     if isinstance(cell,str):
                         r.append("")
                     else:
-                        r.append(self.gather_elements(cell,depth))
+                        if i<headRows:
+                            r.append(self.gather_elements(cell,depth,style=self.styles['table-heading']))
+                        else:
+                            r.append(self.gather_elements(cell,depth,style=style))
                 data.append(r)
 
             st=spans+sty.tstyleNorm
@@ -355,9 +358,10 @@ class RstToPdf(object):
             elif isinstance (node.parent, docutils.nodes.topic):
                 # FIXME style correctly
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
-            elif isinstance (node.parent, docutils.nodes.admonition) or \
-                    isinstance (node.parent, docutils.nodes.table) :
+            elif isinstance (node.parent, docutils.nodes.admonition):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['heading3'])]
+            elif isinstance (node.parent, docutils.nodes.table):
+                node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['table-heading'])]
             elif isinstance (node.parent, docutils.nodes.sidebar):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-title'])]
             else:
@@ -679,6 +683,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.sidebar):
             node.elements=self.gather_elements(node,depth,style=None)
+            style=self.styles['sidebar']
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
@@ -771,13 +776,14 @@ class RstToPdf(object):
             pass
         return node.elements
 
-    def gather_elements (self,node, depth, in_line_block=False,style=None):
+    def gather_elements (self,node, depth,style=None):
         if style is None:
             style=self.styles.styleForNode(node)
         r=[]
+        if 'float' in style.__dict__: style = None # Don't pass floating styles to children!
         for n in node.children:
             #import pdb; pdb.set_trace()
-            r.extend(self.gen_elements(n,depth,in_line_block,style=None))
+            r.extend(self.gen_elements(n,depth,style=style))
         return r
 
     def filltable (self,rows):
