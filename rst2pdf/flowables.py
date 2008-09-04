@@ -104,7 +104,6 @@ class SetNextTemplate(Flowable):
         if self.templateName:
             self.canv.templateName=self.templateName
 
-
 class SmartFrame(Frame):
     '''A (Hopefully) smarter frame object that knows how to
     handle a two-pass layout procedure (someday)'''
@@ -228,6 +227,10 @@ class BoundByWidth(Flowable):
         self.content=content
         self.style=style
         self.mode=mode
+        if self.style:
+            self.pad = self.style.borderPadding+self.style.borderWidth+.1
+        else:
+            self.pad=0
 
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> size=%sx%s" % (self.__class__.__name__, hex(id(self)), self._frameName(),
@@ -237,10 +240,6 @@ class BoundByWidth(Flowable):
 
     def wrap(self,availWidth,availHeight):
         '''If we need more width than we have, complain, keep a scale'''
-        if self.style:
-            self.pad = self.style.borderPadding+self.style.borderWidth+.1
-        else:
-            self.pad=0
         maxWidth = float(min(self.maxWidth or availWidth,availWidth))
         self.maxWidth=maxWidth
         maxWidth -= 2*self.pad
@@ -252,6 +251,8 @@ class BoundByWidth(Flowable):
                 self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
                 self.height=self.height*self.scale
             #self.width=maxWidth
+        if self.height+2*self.pad*self.scale > availHeight:
+            log.warning("BoundByWidth too tall to fit in frame: %s",self.identity)
         return self.width, self.height+2*self.pad*self.scale
 
     def split(self,availWidth,availHeight):
@@ -259,7 +260,7 @@ class BoundByWidth(Flowable):
             # Try splitting in our individual elements
             return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content ]
         else: # We need to split the only element we have
-            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth,availHeight) ]
+            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
     def draw(self):
         '''we simulate being added to a frame'''
