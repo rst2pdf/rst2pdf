@@ -153,7 +153,6 @@ def autoEmbed(fname):
     fontList=[]
     f=findFont(fname)
     if f: # It's a Type 1 font, and we have it
-        fontList.append(fname)
         family=families[f[2]]
 
         # Register the whole family of faces
@@ -169,7 +168,6 @@ def autoEmbed(fname):
 
         # Map the variants
         regular,italic,bold,bolditalic=family
-        # Define as an alias from the font family to the regular font in the family
         addMapping(fname,0,0,regular)
         addMapping(fname,0,1,italic)
         addMapping(fname,1,0,bold)
@@ -182,11 +180,14 @@ def autoEmbed(fname):
 
     variants=findTTFont(fname)
     if variants: #It is a TT Font and we found it using fc-match (or found *something*)
-        fontList.append(fname)
         for variant in variants:
             vname=os.path.basename(variant)[:-4]
             pdfmetrics.registerFont(TTFont(vname,variant))
             fontList.append(vname)
+        ## Also register "standard" aliases for the variants
+        #for variant,name in zip(variants,[fname+suffix for suffix in ["","-Oblique","-Bold","-BoldOblique"]]):
+            #fontList.append(name)
+            #pdfmetrics.registerFont(TTFont(name,variant))
 
         # And map them all together
         regular,bold,italic,bolditalic = [ os.path.basename(variant)[:-4] for variant in variants ]
@@ -195,6 +196,32 @@ def autoEmbed(fname):
         addMapping(regular,1,0,bold)
         addMapping(regular,1,1,bolditalic)
     return fontList
+
+
+def guessFont(fname):
+    '''given a font name (like Tahoma-BoldOblique) guess what it means and return
+    (family,x)
+
+    where x is 0: regular
+               1: italic
+               2: bold
+               3: bolditalic
+
+    May beuseful someday.
+    '''
+
+    if '-' not in fname:
+        return fname,0
+    italic=0
+    bold=0
+    family,mod=fname.split('-')
+    mod=mod.lower()
+    if "oblique" in mod or "italic" in mod:
+        italic=1
+    if "bold" in mod or "black" in mod:
+        bold=1
+    return family,2*bold+italic
+            
 
 def main():
     global flist
