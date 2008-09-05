@@ -1,6 +1,6 @@
 {
   "styles": [ 
-	[ "normal", { "fontName" : "Tahoma" } ],
+	[ "normal", { "fontName" : "Georgia" } ],
 	[ "title", { "fontName" : "URWPalladioL-Bold" } ] 
   ]
 }

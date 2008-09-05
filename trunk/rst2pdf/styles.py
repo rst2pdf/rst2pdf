@@ -225,12 +225,14 @@ class StyleSheet(object):
                             # Map the variants
                             regular,italic,bold,bolditalic=family
                             # Define as an alias from the font family to the regular font in the family
-                            self.fonts[style[key]]=regular
-                            style[key]=regular
                             addMapping(style[key],0,0,regular)
                             addMapping(style[key],0,1,italic)
                             addMapping(style[key],1,0,bold)
                             addMapping(style[key],1,1,bolditalic)
+                            addMapping(regular,0,0,regular)
+                            addMapping(regular,0,1,italic)
+                            addMapping(regular,1,0,bold)
+                            addMapping(regular,1,1,bolditalic)
                             continue # Start with next font/style
 
                         variants=findfonts.findTTFont(style[key])
