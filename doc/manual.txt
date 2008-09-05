@@ -253,17 +253,92 @@ Notice that backColor is **not** in that list.
 Font Embedding
 --------------
 
-There are thousands of excelent free True Type fonts available on the web, and
-you can use them in your documents by declaring them in your stylesheet.
+There are thousands of excelent free True Type and Type 1 fonts available on the
+web, and you can use many of them in your documents by declaring them in your
+stylesheet.
 
-The last element is called "embeddedFonts" and handles embedding True Type fonts
-in your PDF.
+
+The Easy Way
+~~~~~~~~~~~~
+
+Just use the font name in your style. For example, you can define this::
+
+    ["normal" , {
+      "fontName" : "fonty"
+    }]
+
+And then it *may* work.
+
+What would need to happen for this to work?
+
+a. Fonty is a True Type font:
+
+    1. You need to have it installed in your system, and have the fc-match
+       utility available. You can test if it is so by running this command::
+
+            $ fc-match fonty
+            fonty.ttf: "Fonty" "Normal"
+
+       If you are in Windows, I need your help ;-)
+
+    2. The folder where fonty.ttf is located needs to be in your font path. You can set it
+       using the --font-path option. For example::
+
+            rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/fonts
+
+       You don't need to put the *exact* folder, just something that is above it. In my own case,
+       fonty is in /usr/share/fonts/TTF
+
+b. Fonty is a Type 1 font:
+
+   You need it installed, and the folders where its font metric (.afm) and binary (.pfb) files
+   are located need to be in your font fath.
+
+   For example, the "URW Palladio L" font that came with my installation of TeX consists of
+   the following files::
+
+        /usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
+        /usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb
+        /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
+        /usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb
+        /usr/share/texmf-dist/fonts/afm/urw/palatino/uplb8a.afm
+        /usr/share/texmf-dist/fonts/afm/urw/palatino/uplbi8a.afm
+        /usr/share/texmf-dist/fonts/afm/urw/palatino/uplr8a.afm
+        /usr/share/texmf-dist/fonts/afm/urw/palatino/uplri8a.afm
+
+   So, I can use it if I put ``/usr/share/texmf-dist/fonts`` in my font path::
+
+        rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/texmf-dist/fonts
+
+   And putting this in my stylesheet, for example::
+ 
+        [ "title", { "fontName" : "URWPalladioL-Bold" } ]
+
+   There are some standard aliases defined so you can use other names::
+   
+        'ITC Bookman'            : 'URW Bookman L',
+        'ITC Avant Garde Gothic' : 'URW Gothic L',
+        'Palatino'               : 'URW Palladio L',
+        'New Century Schoolbook' : 'Century Schoolbook L',
+        'ITC Zapf Chancery'      : 'URW Chancery L'
+
+    So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique`` And it will mean
+    ``URWPalladioL`` or ``CenturySchL-Ital``, respectively.
+
+Whenever a font is embedded, you can refer to it in a style by its name, and
+to its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique,
+regardless of whether it's True Type or Type 1.
+
+The Harder Way (True Type)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The stylesheet has an element is "embeddedFonts" that handles embedding True Type
+fonts in your PDF.
 
 Usually, it's empty, because with the default styles you are not using any font
 beyond the standard PDF fonts::
 
   "embeddedFonts" : [ ],
-
 
 Suppose you want to use the nice public domain `Tuffy font`_ (included in rst2pdf's
 source distribution).
@@ -315,6 +390,11 @@ that style. For example::
 By default, rst2pdf will search for the fonts in its fonts folder and
 in the current folder. You can make it search another folder by passing
 the --font-folder option, or you can use absolute paths in your stylesheet.
+
+The Harder Way (Type1)
+~~~~~~~~~~~~~~~~~~~~~~
+
+To be written
 
 Page Size and Margins
 ---------------------
