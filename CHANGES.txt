@@ -1,3 +1,15 @@
+New in 0.7
+----------
+
+* Automatic Type1 and True Type font embedding. Just use the font or family name, and (with a little luck), it will be embedded for you. 
+* width attribute in styles, to create narrow paragraphs/tables 
+* Styles for table headers and table cells
+* "Zebra tables" 
+* Improvements in the handling of overflowing literal blocks (code, for instance) 
+* Different modes to handle too-large literal blocks: overflow/truncate/shrink. 
+* Real sidebars and "floating" elements. 
+* Fixed link style (no ugly black underlining!) 
+
 New in 0.6
 ----------
 
