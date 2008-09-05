@@ -140,15 +140,27 @@ class StyleSheet(object):
 
                     # The fonts will be registered with the file name, minus the extension.
 
-                    for variant in font:
-                        pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), self.findFont(variant)))
+                    if font[0].lower().endswith('.ttf'): # A True Type font
+                        for variant in font:
+                            pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), self.findFont(variant)))
 
-                        # And map them all together
-                        regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
-                        addMapping(regular,0,0,regular)
-                        addMapping(regular,0,1,italic)
-                        addMapping(regular,1,0,bold)
-                        addMapping(regular,1,1,bolditalic)
+                            # And map them all together
+                            regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
+                            addMapping(regular,0,0,regular)
+                            addMapping(regular,0,1,italic)
+                            addMapping(regular,1,0,bold)
+                            addMapping(regular,1,1,bolditalic)
+                    else: # A Type 1 font
+                        # For type 1 fonts we require [FontName,regular,italic,bold,bolditalic]
+                        # where each variant is a (pfbfile,afmfile) pair.
+                        # For example, for the URW palatino from TeX:
+                        # ["Palatino",("uplr8a.pfb","uplr8a.afm"),("uplri8a.pfb","uplri8a.afm"),("uplb8a.pfb","uplb8a.afm"),("uplbi8a.pfb","uplbi8a.afm")]
+                        faceName=font[0]
+                        regular=pdfmetrics.EmbeddedType1Face(*font[1])
+                        italic=pdfmetrics.EmbeddedType1Face(*font[2])
+                        bold=pdfmetrics.EmbeddedType1Face(*font[3])
+                        bolditalic=pdfmetrics.EmbeddedType1Face(*font[4])
+                        
                 except Exception, e:
                     try:
                         fname=font[0].split('.')[0]
