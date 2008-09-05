@@ -4,6 +4,9 @@
 
 import os,sys
 from log import log
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.fonts import addMapping
 
 flist=[]
 afmList=[]
@@ -142,7 +145,57 @@ def findTTFont(fname):
         log.error("Unknown font: %s",fname)
         return None
     return get_variants(family)
-        
+
+def autoEmbed(fname):
+    '''Given a font name, does a best-effort of embedding said font
+    and its variants, returning a list of the font names
+    it registered with reportlab'''
+    fontList=[]
+    f=findFont(fname)
+    if f: # It's a Type 1 font, and we have it
+        fontList.append(fname)
+        family=families[f[2]]
+
+        # Register the whole family of faces
+        faces= [ pdfmetrics.EmbeddedType1Face(*fonts[fn][:2]) \
+                    for fn in family]
+        for face in faces:
+            pdfmetrics.registerTypeFace(face)
+
+        for face,name in zip(faces,family):
+            fontList.append(name)
+            font=pdfmetrics.Font(face,name,"WinAnsiEncoding")
+            pdfmetrics.registerFont(font)
+
+        # Map the variants
+        regular,italic,bold,bolditalic=family
+        # Define as an alias from the font family to the regular font in the family
+        addMapping(fname,0,0,regular)
+        addMapping(fname,0,1,italic)
+        addMapping(fname,1,0,bold)
+        addMapping(fname,1,1,bolditalic)
+        addMapping(regular,0,0,regular)
+        addMapping(regular,0,1,italic)
+        addMapping(regular,1,0,bold)
+        addMapping(regular,1,1,bolditalic)
+        return fontList
+
+    variants=findTTFont(fname)
+    if variants: #It is a TT Font and we found it using fc-match (or found *something*)
+        fontList.append(fname)
+        for variant in variants:
+            vname=os.path.basename(variant)[:-4]
+            pdfmetrics.registerFont(TTFont(vname,variant))
+            fontList.append(vname)
+
+        # And map them all together
+        regular,bold,italic,bolditalic = [ os.path.basename(variant)[:-4] for variant in variants ]
+        addMapping(regular,0,0,regular)
+        addMapping(regular,0,1,italic)
+        addMapping(regular,1,0,bold)
+        addMapping(regular,1,1,bolditalic)
+    return fontList
+
 def main():
     global flist
     if len(sys.argv)<>2:

@@ -206,53 +206,13 @@ class StyleSheet(object):
                         # Now we need to do something
                         
                         # See if we can find the font
-                        f=findfonts.findFont(style[key])
-                        if f: # It's a Type 1 font, and we have it
-                            self.embedded.append(style[key])
-                            family=findfonts.families[f[2]]
-
-                            # Register the whole family of faces
-                            faces= [ pdfmetrics.EmbeddedType1Face(*findfonts.fonts[fn][:2]) \
-                                     for fn in family]
-                            for face in faces:
-                                pdfmetrics.registerTypeFace(face)
-
-                            for face,name in zip(faces,family):
-                                self.embedded.append(name)
-                                font=pdfmetrics.Font(face,name,"WinAnsiEncoding")
-                                pdfmetrics.registerFont(font)
-
-                            # Map the variants
-                            regular,italic,bold,bolditalic=family
-                            # Define as an alias from the font family to the regular font in the family
-                            addMapping(style[key],0,0,regular)
-                            addMapping(style[key],0,1,italic)
-                            addMapping(style[key],1,0,bold)
-                            addMapping(style[key],1,1,bolditalic)
-                            addMapping(regular,0,0,regular)
-                            addMapping(regular,0,1,italic)
-                            addMapping(regular,1,0,bold)
-                            addMapping(regular,1,1,bolditalic)
-                            continue # Start with next font/style
-
-                        variants=findfonts.findTTFont(style[key])
-                        if variants: #It is a TT Font and we found it using fc-match (or found *something*)                            
-                            self.embedded.append(style[key])
-                            for variant in variants:
-                                vname=os.path.basename(variant)[:-4]
-                                pdfmetrics.registerFont(TTFont(vname,variant))
-                                self.embedded.append(vname)
-
-                            # And map them all together
-                            regular,bold,italic,bolditalic = [ os.path.basename(variant)[:-4] for variant in variants ]
-                            addMapping(regular,0,0,regular)
-                            addMapping(regular,0,1,italic)
-                            addMapping(regular,1,0,bold)
-                            addMapping(regular,1,1,bolditalic)
+                        fontList=findfonts.autoEmbed(style[key])
+                        if fontList is not None:
+                            self.embedded+=fontList
                         else:
                             log.error("Unknown font: \"%s\", replacing with Helvetica",style[key])
                             style[key]="Helvetica"
-
+                            
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles=[]
