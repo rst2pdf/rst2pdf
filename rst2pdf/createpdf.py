@@ -63,14 +63,14 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 breaklevel=1,fontFolder=None,fitMode='shrink'):
+                 breaklevel=1,fontPath=[],fitMode='shrink'):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
         self.doc_author=None
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
-        self.styles=sty.StyleSheet(stylesheets,fontFolder)
+        self.styles=sty.StyleSheet(stylesheets,fontPath)
         self.breaklevel=breaklevel
         self.fitMode=fitMode
 
@@ -1019,6 +1019,8 @@ def main():
                       help='Print the default stylesheet and exit')
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
                       help='Search this folder for fonts.')
+    parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',
+                      help='A colon-separated list of folders to search for fonts.')   
     parser.add_option('-l','--language',metavar='LANG',default='en_US',dest='language',
                       help='Language to be used for hyphenation.')
     parser.add_option('--fit-literal-mode',metavar='MODE',default='shrink',dest='fitMode',
@@ -1064,13 +1066,19 @@ def main():
     else:
         ssheet=[]
 
+    fpath=[]
+    if options.fpath:
+        fpath=options.fpath.split(':')
+    if options.ffolder:
+        fpath.append(options.ffolder)
+
     RstToPdf(stylesheets = ssheet,
              language=options.language,
              breaklevel=int(options.breaklevel),
              fitMode=options.fitMode,
-             fontFolder=options.ffolder).createPdf(text=open(infile).read(),
-                                                  output=outfile,
-                                                  compressed=options.compressed)
+             fontPath=fpath).createPdf(text=open(infile).read(),
+                                                 output=outfile,
+                                                 compressed=options.compressed)
 
 if __name__ == "__main__":
     main()

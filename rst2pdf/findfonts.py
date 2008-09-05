@@ -96,21 +96,66 @@ def findFont(fname):
     # So now we are sure we know the families and font names. Well, return some data!
     if fname in fonts:
         font=fonts[fname]
-    if fname in Alias:
+    elif fname in Alias:
         fname=Alias[fname]
-    if fname in families:
-        font=fonts[families[fname][0]]
+        if fname in families:
+            font=fonts[families[fname][0]]
     else:
-        log.warning("Unknown font %s"%fname)
         return None
     return font
+
+def findTTFont(fname):
+    def get_family(query):
+        data=os.popen("fc-match \"%s\""%query,"r").read()
+        for line in data.splitlines():
+            line=line.strip()
+            if not line: continue
+            fname,family,_,variant=line.split('"')[:4]
+            family=family.replace('"','')
+            if family:
+                return family
+        return None
+
+    def get_fname(query):
+        data=os.popen("fc-match -v \"%s\""%query,"r").read()
+        for line in data.splitlines():
+            line=line.strip()
+            if line.startswith("file: "):
+                return line.split('"')[1]
+        return None
+
+    def get_variants(family):
+        variants=[ get_fname(family+":style=Roman"),
+                 get_fname(family+":style=Oblique"),
+                 get_fname(family+":style=Bold"),
+                 get_fname(family+":style=Bold Oblique")]
+        if variants[1]==variants[0]:
+            variants[1]=get_fname(family+":style=Italic")
+        if variants[3]==variants[0]:
+            variants[3]=get_fname(family+":style=Bold Italic")
+        if variants[0].endswith('.pfb'):
+            return None
+        return variants
+        
+    family=get_family(fname)
+    if not family:
+        log.error("Unknown font: %s",fname)
+        return None
+    return get_variants(family)
         
 def main():
+    global flist
     if len(sys.argv)<>2:
         print "Usage: findfont fontName"
         sys.exit(1)
-    print findFont(sys.argv[1])
-
+    flist=["/usr/share/fonts","/usr/share/texmf-dist/fonts"]
+    f=findFont(sys.argv[1])
+    if not f:
+        f=findTTFont(sys.argv[1])
+    if f:
+        print f
+    else:
+        print "Unknown font %s"%sys.argv[1]
 
 if __name__ == "__main__":
     main()
