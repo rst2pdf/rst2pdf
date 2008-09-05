@@ -33,10 +33,10 @@ class StyleSheet(object):
         log.info('Using stylesheets: %s'%','.join(flist))
         '''flist is a list of stylesheet filenames.They will
         be loaded and merged in order'''
-        self.TTFSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')]
+        self.FontSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')]
         self.StyleSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles')]
         if ffolder:
-            self.TTFSearchPath.insert(0,ffolder)
+            self.FontSearchPath.insert(0,ffolder)
         # Page width, height
         self.pw=0
         self.ph=0
@@ -225,10 +225,10 @@ class StyleSheet(object):
         return str(fn)
 
     def findFont(self,fn):
-        '''Given a font filename, searches for it in TTFSearchPath
+        '''Given a font filename, searches for it in FontSearchPath
         and returns the real file name'''
         if not os.path.isabs(fn):
-            for D in self.TTFSearchPath:
+            for D in self.FontSearchPath:
                 tfn = os.path.join(D,fn)
                 if os.path.isfile(tfn):
                     return str(tfn)
