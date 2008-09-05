@@ -18,6 +18,7 @@ import reportlab.lib.pagesizes as pagesizes
 from log import log
 from simplejson import loads
 import docutils.nodes
+import findfonts
 
 try:
     from wordaxe.rl.paragraph import Paragraph
@@ -37,6 +38,8 @@ class StyleSheet(object):
         self.StyleSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles')]
         if ffolder:
             self.FontSearchPath.insert(0,ffolder)
+
+        findfonts.flist=self.FontSearchPath
         # Page width, height
         self.pw=0
         self.ph=0
@@ -124,6 +127,10 @@ class StyleSheet(object):
         self.fonts={}
         for data, ssname in zip(ssdata, flist):
             self.fonts.update(data.get('fontsAlias',{}))
+
+        self.embedded=[]
+        # Embed all fonts indicated in all stylesheets
+        for data, ssname in zip(ssdata, flist):
             embedded=data.get('embeddedFonts',[])
 
             for font in embedded:
@@ -143,13 +150,14 @@ class StyleSheet(object):
                     if font[0].lower().endswith('.ttf'): # A True Type font
                         for variant in font:
                             pdfmetrics.registerFont(TTFont(str(variant.split('.')[0]), self.findFont(variant)))
+                            self.embedded.append(str(variant.split('.')[0]))
 
-                            # And map them all together
-                            regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
-                            addMapping(regular,0,0,regular)
-                            addMapping(regular,0,1,italic)
-                            addMapping(regular,1,0,bold)
-                            addMapping(regular,1,1,bolditalic)
+                        # And map them all together
+                        regular,bold,italic,bolditalic = [ variant.split('.')[0] for variant in font ]
+                        addMapping(regular,0,0,regular)
+                        addMapping(regular,0,1,italic)
+                        addMapping(regular,1,0,bold)
+                        addMapping(regular,1,1,bolditalic)
                     else: # A Type 1 font
                         # For type 1 fonts we require [FontName,regular,italic,bold,bolditalic]
                         # where each variant is a (pfbfile,afmfile) pair.
@@ -171,6 +179,61 @@ class StyleSheet(object):
                         log.critical("Error processing font %s: %s",fname,str(e))
                         sys.exit(1)
 
+        # Go though all styles in all stylesheets and find all fontNames.
+        # Then decide what to do with them
+        for data, ssname in zip(ssdata, flist):
+            styles = data.get('styles', {})
+            for [skey, style] in styles:
+                for key in style:
+                    if key == 'fontName' or key.endswith('FontName'):
+                        if style[key] in self.fonts: # It´s an alias, replace it
+                            style[key]=self.fonts[style[key]]
+                        if style[key] in self.embedded: # Embedded already, nothing to do
+                            continue
+                        if style[key] in ("Courier",
+                                          "Courier-Bold",
+                                          "Courier-BoldOblique",
+                                          "Courier-Oblique",
+                                          "Helvetica",
+                                          "Helvetica-Bold",
+                                          "Helvetica-BoldOblique",
+                                          "Helvetica-Oblique",
+                                          "Symbol",
+                                          "Times-Bold",
+                                          "Times-BoldItalic",
+                                          "Times-Italic",
+                                          "Times-Roman",
+                                          "ZapfDingbats"): # Standard font, nothing to do
+                            continue
+                        # Now we need to do something
+                        
+                        # See if we can find the font
+                        f=findfonts.findFont(style[key])
+                        if not f:
+                            log.error("Unknown font: \"%s\", replacing with Helvetica",style[key])
+                            style[key]="Helvetica"
+                        else:
+                            family=findfonts.families[f[2]]
+
+                            # Register the whole family of faces
+                            faces= [ pdfmetrics.EmbeddedType1Face(*findfonts.fonts[fn][:2]) \
+                                     for fn in family]
+                            for face in faces:
+                                pdfmetrics.registerTypeFace(face)
+
+                            for face,name in zip(faces,family):
+                                print face,name
+                                font=pdfmetrics.Font(face,name,"WinAnsiEncoding")
+                                pdfmetrics.registerFont(font)
+
+                            # Map the variants
+                            regular,italic,bold,bolditalic=family
+                            style[key]=regular
+                            addMapping(style[key],0,0,regular)
+                            addMapping(style[key],0,1,italic)
+                            addMapping(style[key],1,0,bold)
+                            addMapping(style[key],1,1,bolditalic)
+
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles=[]
@@ -182,13 +245,8 @@ class StyleSheet(object):
                 sdict = {}
                 # FIXME: this is done completely backwards
                 for key in style:
-
-                    # Handle font aliases
-                    if (key == 'fontName' or key.endswith('FontName')) and style[key] in self.fonts:
-                        style[key]=self.fonts[style[key]]
-
                     # Handle color references by name
-                    elif key == 'color' or key.endswith('Color') and style[key]:
+                    if key == 'color' or key.endswith('Color') and style[key]:
                         style[key]=formatColor(style[key])
 
                     # Handle alignment constants
