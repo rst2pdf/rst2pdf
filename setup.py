@@ -35,6 +35,7 @@ long_description = (
 install_requires = [
         'setuptools',
         'docutils',
+        'PIL',
         'reportlab>=2.1',
         'Pygments',
         'simplejson'
@@ -52,9 +53,12 @@ setup(
     include_package_data=True,
     # place to find an egg distrib of reportlab 2.1
     dependency_links = [
+       #reportlab as egg
        "http://ftp.schooltool.org/schooltool/eggs/3.4",
        #wordaxe
        "http://sourceforge.net/project/platformdownload.php?group_id=105867",
+       #PIL as egg
+       "http://dist.repoze.org",
     ], 
     install_requires = install_requires,
     tests_require=tests_require,
