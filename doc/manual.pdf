@@ -7,8 +7,8 @@
  /F2 3 0 R
  /F3 4 0 R
  /F4 6 0 R
- /F5 28 0 R
- /F6 37 0 R >>
+ /F5 31 0 R
+ /F6 39 0 R >>
 endobj
 % 'F1': class PDFType1Font 
 2 0 obj
@@ -67,7 +67,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 29 0 R
+ /Dest [ 32 0 R
  /Fit ]
  /Rect [ 68.69291
  649.1969
@@ -82,7 +82,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 30 0 R
+ /Dest [ 33 0 R
  /Fit ]
  /Rect [ 68.69291
  633.1969
@@ -97,7 +97,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 32 0 R
+ /Dest [ 35 0 R
  /Fit ]
  /Rect [ 68.69291
  617.1969
@@ -112,7 +112,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 33 0 R
+ /Dest [ 36 0 R
  /Fit ]
  /Rect [ 68.69291
  601.1969
@@ -127,7 +127,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 34 0 R
+ /Dest [ 37 0 R
  /Fit ]
  /Rect [ 68.69291
  585.1969
@@ -142,7 +142,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 35 0 R
+ /Dest [ 38 0 R
  /Fit ]
  /Rect [ 68.69291
  569.1969
@@ -157,7 +157,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 35 0 R
+ /Dest [ 38 0 R
  /Fit ]
  /Rect [ 74.69291
  556.1969
@@ -172,7 +172,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 35 0 R
+ /Dest [ 38 0 R
  /Fit ]
  /Rect [ 74.69291
  540.1969
@@ -187,7 +187,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 35 0 R
+ /Dest [ 38 0 R
  /Fit ]
  /Rect [ 74.69291
  524.1969
@@ -202,7 +202,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 38 0 R
+ /Dest [ 40 0 R
  /Fit ]
  /Rect [ 74.69291
  508.1969
@@ -217,12 +217,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 39 0 R
+ /Dest [ 40 0 R
  /Fit ]
- /Rect [ 74.69291
- 492.1969
- 520.5827
- 502.1969 ]
+ /Rect [ 80.69291
+ 495.1969
+ 514.5827
+ 505.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -232,12 +232,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 39 0 R
+ /Dest [ 42 0 R
  /Fit ]
- /Rect [ 74.69291
- 476.1969
- 520.5827
- 486.1969 ]
+ /Rect [ 80.69291
+ 479.1969
+ 514.5827
+ 489.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -247,12 +247,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 43 0 R
+ /Dest [ 44 0 R
  /Fit ]
- /Rect [ 68.69291
- 457.1969
- 526.5827
- 467.1969 ]
+ /Rect [ 80.69291
+ 463.1969
+ 514.5827
+ 473.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -262,7 +262,7 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 43 0 R
+ /Dest [ 44 0 R
  /Fit ]
  /Rect [ 74.69291
  444.1969
@@ -277,12 +277,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 43 0 R
+ /Dest [ 45 0 R
  /Fit ]
- /Rect [ 80.69291
- 431.1969
- 514.5827
- 441.1969 ]
+ /Rect [ 74.69291
+ 428.1969
+ 520.5827
+ 438.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -292,12 +292,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 44 0 R
+ /Dest [ 48 0 R
  /Fit ]
- /Rect [ 74.69291
- 412.1969
- 520.5827
- 422.1969 ]
+ /Rect [ 68.69291
+ 409.1969
+ 526.5827
+ 419.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -307,12 +307,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 44 0 R
+ /Dest [ 48 0 R
  /Fit ]
- /Rect [ 80.69291
- 399.1969
- 514.5827
- 409.1969 ]
+ /Rect [ 74.69291
+ 396.1969
+ 520.5827
+ 406.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -322,12 +322,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 45 0 R
+ /Dest [ 48 0 R
  /Fit ]
- /Rect [ 68.69291
- 377.1969
- 526.5827
- 387.1969 ]
+ /Rect [ 80.69291
+ 383.1969
+ 514.5827
+ 393.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -337,12 +337,12 @@ endobj
  0
  0 ]
  /Contents ()
- /Dest [ 48 0 R
+ /Dest [ 49 0 R
  /Fit ]
- /Rect [ 68.69291
- 361.1969
- 526.5827
- 371.1969 ]
+ /Rect [ 74.69291
+ 364.1969
+ 520.5827
+ 374.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
@@ -354,15 +354,60 @@ endobj
  /Contents ()
  /Dest [ 49 0 R
  /Fit ]
+ /Rect [ 80.69291
+ 351.1969
+ 514.5827
+ 361.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER22': class LinkAnnotation 
+27 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 50 0 R
+ /Fit ]
  /Rect [ 68.69291
- 345.1969
+ 329.1969
  526.5827
- 355.1969 ]
+ 339.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER23': class LinkAnnotation 
+28 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 53 0 R
+ /Fit ]
+ /Rect [ 68.69291
+ 313.1969
+ 526.5827
+ 323.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER24': class LinkAnnotation 
+29 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 54 0 R
+ /Fit ]
+ /Rect [ 68.69291
+ 297.1969
+ 526.5827
+ 307.1969 ]
  /Subtype /Link
  /Type /Annot >>
 endobj
 % 'Page1': class PDFPage 
-27 0 obj
+30 0 obj
 % Page dictionary
 << /Annots [ 5 0 R
  7 0 R
@@ -384,13 +429,16 @@ endobj
  23 0 R
  24 0 R
  25 0 R
- 26 0 R ]
- /Contents 75 0 R
+ 26 0 R
+ 27 0 R
+ 28 0 R
+ 29 0 R ]
+ /Contents 83 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -402,7 +450,7 @@ endobj
  /Type /Page >>
 endobj
 % 'F5': class PDFType1Font 
-28 0 obj
+31 0 obj
 % Font Courier
 << /BaseFont /Courier
  /Encoding /WinAnsiEncoding
@@ -411,14 +459,14 @@ endobj
  /Type /Font >>
 endobj
 % 'Page2': class PDFPage 
-29 0 obj
+32 0 obj
 % Page dictionary
-<< /Contents 76 0 R
+<< /Contents 84 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -430,14 +478,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page3': class PDFPage 
-30 0 obj
+33 0 obj
 % Page dictionary
-<< /Contents 77 0 R
+<< /Contents 85 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -448,13 +496,13 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER22': class LinkAnnotation 
-31 0 obj
+% 'Annot.NUMBER25': class LinkAnnotation 
+34 0 obj
 << /Border [ 0
  0
  0 ]
  /Contents ()
- /Dest [ 49 0 R
+ /Dest [ 54 0 R
  /Fit ]
  /Rect [ 341.0529
  532.9969
@@ -464,15 +512,15 @@ endobj
  /Type /Annot >>
 endobj
 % 'Page4': class PDFPage 
-32 0 obj
+35 0 obj
 % Page dictionary
-<< /Annots [ 31 0 R ]
- /Contents 78 0 R
+<< /Annots [ 34 0 R ]
+ /Contents 86 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -484,14 +532,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page5': class PDFPage 
-33 0 obj
+36 0 obj
 % Page dictionary
-<< /Contents 79 0 R
+<< /Contents 87 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -503,14 +551,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page6': class PDFPage 
-34 0 obj
+37 0 obj
 % Page dictionary
-<< /Contents 80 0 R
+<< /Contents 88 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -522,14 +570,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page7': class PDFPage 
-35 0 obj
+38 0 obj
 % Page dictionary
-<< /Contents 81 0 R
+<< /Contents 89 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -540,23 +588,8 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER23': class PDFDictionary 
-36 0 obj
-<< /A << /S /URI
- /Type /Action
- /URI (http://tulrich.com/fonts/) >>
- /Border [ 0
- 0
- 0 ]
- /Rect [ 236.5649
- 251.7969
- 269.9169
- 261.7969 ]
- /Subtype /Link
- /Type /Annot >>
-endobj
 % 'F6': class PDFType1Font 
-37 0 obj
+39 0 obj
 % Font Helvetica-Oblique
 << /BaseFont /Helvetica-Oblique
  /Encoding /WinAnsiEncoding
@@ -565,53 +598,14 @@ endobj
  /Type /Font >>
 endobj
 % 'Page8': class PDFPage 
-38 0 obj
-% Page dictionary
-<< /Annots [ 36 0 R ]
- /Contents 82 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 74 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
-endobj
-% 'Page9': class PDFPage 
-39 0 obj
-% Page dictionary
-<< /Contents 83 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 74 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
-endobj
-% 'Page10': class PDFPage 
 40 0 obj
 % Page dictionary
-<< /Contents 84 0 R
+<< /Contents 90 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -622,8 +616,97 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER24': class PDFDictionary 
+% 'Annot.NUMBER26': class PDFDictionary 
 41 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://www.freedesktop.org/fontconfig/) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 421.424
+ 744.1969
+ 456.112
+ 754.1969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Page9': class PDFPage 
+42 0 obj
+% Page dictionary
+<< /Annots [ 41 0 R ]
+ /Contents 91 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 82 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER27': class PDFDictionary 
+43 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://tulrich.com/fonts/) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 236.5649
+ 712.9969
+ 269.9169
+ 722.9969 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Page10': class PDFPage 
+44 0 obj
+% Page dictionary
+<< /Annots [ 43 0 R ]
+ /Contents 92 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 82 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page11': class PDFPage 
+45 0 obj
+% Page dictionary
+<< /Contents 93 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 82 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER28': class PDFDictionary 
+46 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://pygments.org/) >>
@@ -637,8 +720,8 @@ endobj
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Annot.NUMBER25': class PDFDictionary 
-42 0 obj
+% 'Annot.NUMBER29': class PDFDictionary 
+47 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://pygments.org/docs/lexers/) >>
@@ -652,36 +735,17 @@ endobj
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Page11': class PDFPage 
-43 0 obj
-% Page dictionary
-<< /Annots [ 41 0 R
- 42 0 R ]
- /Contents 85 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 74 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
-endobj
 % 'Page12': class PDFPage 
-44 0 obj
+48 0 obj
 % Page dictionary
-<< /Contents 86 0 R
+<< /Annots [ 46 0 R
+ 47 0 R ]
+ /Contents 94 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -693,14 +757,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page13': class PDFPage 
-45 0 obj
+49 0 obj
 % Page dictionary
-<< /Contents 87 0 R
+<< /Contents 95 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -711,8 +775,27 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'Annot.NUMBER26': class PDFDictionary 
-46 0 obj
+% 'Page14': class PDFPage 
+50 0 obj
+% Page dictionary
+<< /Contents 96 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 82 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER30': class PDFDictionary 
+51 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://deco-cow.sf.net) >>
@@ -726,8 +809,8 @@ endobj
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Annot.NUMBER27': class PDFDictionary 
-47 0 obj
+% 'Annot.NUMBER31': class PDFDictionary 
+52 0 obj
 << /A << /S /URI
  /Type /Action
  /URI (http://code.google.com/p/rst2pdf/issues/detail?id=5) >>
@@ -741,36 +824,17 @@ endobj
  /Subtype /Link
  /Type /Annot >>
 endobj
-% 'Page14': class PDFPage 
-48 0 obj
-% Page dictionary
-<< /Annots [ 46 0 R
- 47 0 R ]
- /Contents 88 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 74 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
-endobj
 % 'Page15': class PDFPage 
-49 0 obj
+53 0 obj
 % Page dictionary
-<< /Contents 89 0 R
+<< /Annots [ 51 0 R
+ 52 0 R ]
+ /Contents 97 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -782,14 +846,14 @@ endobj
  /Type /Page >>
 endobj
 % 'Page16': class PDFPage 
-50 0 obj
+54 0 obj
 % Page dictionary
-<< /Contents 90 0 R
+<< /Contents 98 0 R
  /MediaBox [ 0
  0
  595.2756
  841.8898 ]
- /Parent 74 0 R
+ /Parent 82 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
  /Text
@@ -800,238 +864,286 @@ endobj
  /Trans <<  >>
  /Type /Page >>
 endobj
-% 'R51': class PDFCatalog 
-51 0 obj
+% 'Page17': class PDFPage 
+55 0 obj
+% Page dictionary
+<< /Contents 99 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 82 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R56': class PDFCatalog 
+56 0 obj
 % Document Root
-<< /Outlines 53 0 R
+<< /Outlines 58 0 R
  /PageMode /UseNone
- /Pages 74 0 R
+ /Pages 82 0 R
  /Type /Catalog >>
 endobj
-% 'R52': class PDFInfo 
-52 0 obj
+% 'R57': class PDFInfo 
+57 0 obj
 << /Author (Roberto Alsina &lt;<a href="mailto:ralsina@netmanagers.com.ar" color="navy">ralsina@netmanagers.com.ar</a>&gt;)
- /CreationDate (20080904164044)
+ /CreationDate (20080905182216)
  /Keywords ()
  /Producer (ReportLab http://www.reportlab.com)
  /Subject (\(unspecified\))
  /Title (How to use rst2pdf) >>
 endobj
-% 'R53': class PDFOutlines 
-53 0 obj
-<< /Count 24
- /First 54 0 R
- /Last 73 0 R
+% 'R58': class PDFOutlines 
+58 0 obj
+<< /Count 28
+ /First 59 0 R
+ /Last 81 0 R
  /Type /Outlines >>
 endobj
 % 'Outline.0': class OutlineEntryObject 
-54 0 obj
-<< /Dest [ 29 0 R
+59 0 obj
+<< /Dest [ 32 0 R
  /Fit ]
- /Next 55 0 R
- /Parent 53 0 R
+ /Next 60 0 R
+ /Parent 58 0 R
  /Title (\376\377\0001\000\240\000\240\000\240\000I\000n\000t\000r\000o\000d\000u\000c\000t\000i\000o\000n) >>
 endobj
 % 'Outline.1': class OutlineEntryObject 
-55 0 obj
-<< /Dest [ 30 0 R
+60 0 obj
+<< /Dest [ 33 0 R
  /Fit ]
- /Next 56 0 R
- /Parent 53 0 R
- /Prev 54 0 R
+ /Next 61 0 R
+ /Parent 58 0 R
+ /Prev 59 0 R
  /Title (\376\377\0002\000\240\000\240\000\240\000C\000o\000m\000m\000a\000n\000d\000 \000l\000i\000n\000e\000 \000O\000p\000t\000i\000o\000n\000s) >>
 endobj
 % 'Outline.2': class OutlineEntryObject 
-56 0 obj
-<< /Dest [ 32 0 R
- /Fit ]
- /Next 57 0 R
- /Parent 53 0 R
- /Prev 55 0 R
- /Title (\376\377\0003\000\240\000\240\000\240\000H\000e\000a\000d\000e\000r\000s\000 \000a\000n\000d\000 \000F\000o\000o\000t\000e\000r\000s) >>
-endobj
-% 'Outline.3': class OutlineEntryObject 
-57 0 obj
-<< /Dest [ 33 0 R
- /Fit ]
- /Next 58 0 R
- /Parent 53 0 R
- /Prev 56 0 R
- /Title (\376\377\0004\000\240\000\240\000\240\000F\000o\000o\000t\000n\000o\000t\000e\000s) >>
-endobj
-% 'Outline.4': class OutlineEntryObject 
-58 0 obj
-<< /Dest [ 34 0 R
- /Fit ]
- /Next 59 0 R
- /Parent 53 0 R
- /Prev 57 0 R
- /Title (\376\377\0005\000\240\000\240\000\240\000I\000n\000l\000i\000n\000e\000 \000I\000m\000a\000g\000e\000s) >>
-endobj
-% 'Outline.5': class OutlineEntryObject 
-59 0 obj
-<< /Count 6
- /Dest [ 35 0 R
- /Fit ]
- /First 60 0 R
- /Last 65 0 R
- /Next 66 0 R
- /Parent 53 0 R
- /Prev 58 0 R
- /Title (\376\377\0006\000\240\000\240\000\240\000S\000t\000y\000l\000e\000s) >>
-endobj
-% 'Outline.21.0': class OutlineEntryObject 
-60 0 obj
-<< /Dest [ 35 0 R
- /Fit ]
- /Next 61 0 R
- /Parent 59 0 R
- /Title (\376\377\0006\000.\0001\000\240\000\240\000\240\000S\000t\000y\000l\000e\000S\000h\000e\000e\000t\000 \000S\000y\000n\000t\000a\000x) >>
-endobj
-% 'Outline.21.1': class OutlineEntryObject 
 61 0 obj
 << /Dest [ 35 0 R
  /Fit ]
  /Next 62 0 R
- /Parent 59 0 R
+ /Parent 58 0 R
  /Prev 60 0 R
- /Title (\376\377\0006\000.\0002\000\240\000\240\000\240\000F\000o\000n\000t\000 \000A\000l\000i\000a\000s) >>
+ /Title (\376\377\0003\000\240\000\240\000\240\000H\000e\000a\000d\000e\000r\000s\000 \000a\000n\000d\000 \000F\000o\000o\000t\000e\000r\000s) >>
 endobj
-% 'Outline.21.2': class OutlineEntryObject 
+% 'Outline.3': class OutlineEntryObject 
 62 0 obj
-<< /Dest [ 35 0 R
+<< /Dest [ 36 0 R
  /Fit ]
  /Next 63 0 R
- /Parent 59 0 R
+ /Parent 58 0 R
  /Prev 61 0 R
- /Title (\376\377\0006\000.\0003\000\240\000\240\000\240\000S\000t\000y\000l\000e\000 \000D\000e\000f\000i\000n\000i\000t\000i\000o\000n) >>
+ /Title (\376\377\0004\000\240\000\240\000\240\000F\000o\000o\000t\000n\000o\000t\000e\000s) >>
 endobj
-% 'Outline.21.3': class OutlineEntryObject 
+% 'Outline.4': class OutlineEntryObject 
 63 0 obj
-<< /Dest [ 38 0 R
+<< /Dest [ 37 0 R
  /Fit ]
  /Next 64 0 R
- /Parent 59 0 R
+ /Parent 58 0 R
  /Prev 62 0 R
+ /Title (\376\377\0005\000\240\000\240\000\240\000I\000n\000l\000i\000n\000e\000 \000I\000m\000a\000g\000e\000s) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+64 0 obj
+<< /Count 9
+ /Dest [ 38 0 R
+ /Fit ]
+ /First 65 0 R
+ /Last 73 0 R
+ /Next 74 0 R
+ /Parent 58 0 R
+ /Prev 63 0 R
+ /Title (\376\377\0006\000\240\000\240\000\240\000S\000t\000y\000l\000e\000s) >>
+endobj
+% 'Outline.24.0': class OutlineEntryObject 
+65 0 obj
+<< /Dest [ 38 0 R
+ /Fit ]
+ /Next 66 0 R
+ /Parent 64 0 R
+ /Title (\376\377\0006\000.\0001\000\240\000\240\000\240\000S\000t\000y\000l\000e\000S\000h\000e\000e\000t\000 \000S\000y\000n\000t\000a\000x) >>
+endobj
+% 'Outline.24.1': class OutlineEntryObject 
+66 0 obj
+<< /Dest [ 38 0 R
+ /Fit ]
+ /Next 67 0 R
+ /Parent 64 0 R
+ /Prev 65 0 R
+ /Title (\376\377\0006\000.\0002\000\240\000\240\000\240\000F\000o\000n\000t\000 \000A\000l\000i\000a\000s) >>
+endobj
+% 'Outline.24.2': class OutlineEntryObject 
+67 0 obj
+<< /Dest [ 38 0 R
+ /Fit ]
+ /Next 68 0 R
+ /Parent 64 0 R
+ /Prev 66 0 R
+ /Title (\376\377\0006\000.\0003\000\240\000\240\000\240\000S\000t\000y\000l\000e\000 \000D\000e\000f\000i\000n\000i\000t\000i\000o\000n) >>
+endobj
+% 'Outline.24.3': class OutlineEntryObject 
+68 0 obj
+<< /Count 3
+ /Dest [ 40 0 R
+ /Fit ]
+ /First 69 0 R
+ /Last 71 0 R
+ /Next 72 0 R
+ /Parent 64 0 R
+ /Prev 67 0 R
  /Title (\376\377\0006\000.\0004\000\240\000\240\000\240\000F\000o\000n\000t\000 \000E\000m\000b\000e\000d\000d\000i\000n\000g) >>
 endobj
-% 'Outline.21.4': class OutlineEntryObject 
-64 0 obj
-<< /Dest [ 39 0 R
+% 'Outline.25.0': class OutlineEntryObject 
+69 0 obj
+<< /Dest [ 40 0 R
  /Fit ]
- /Next 65 0 R
- /Parent 59 0 R
- /Prev 63 0 R
+ /Next 70 0 R
+ /Parent 68 0 R
+ /Title (\376\377\0006\000.\0004\000.\0001\000\240\000\240\000\240\000T\000h\000e\000 \000E\000a\000s\000y\000 \000W\000a\000y) >>
+endobj
+% 'Outline.25.1': class OutlineEntryObject 
+70 0 obj
+<< /Dest [ 42 0 R
+ /Fit ]
+ /Next 71 0 R
+ /Parent 68 0 R
+ /Prev 69 0 R
+ /Title (\376\377\0006\000.\0004\000.\0002\000\240\000\240\000\240\000T\000h\000e\000 \000H\000a\000r\000d\000e\000r\000 \000W\000a\000y\000 \000\(\000T\000r\000u\000e\000 \000T\000y\000p\000e\000\)) >>
+endobj
+% 'Outline.25.2': class OutlineEntryObject 
+71 0 obj
+<< /Dest [ 44 0 R
+ /Fit ]
+ /Parent 68 0 R
+ /Prev 70 0 R
+ /Title (\376\377\0006\000.\0004\000.\0003\000\240\000\240\000\240\000T\000h\000e\000 \000H\000a\000r\000d\000e\000r\000 \000W\000a\000y\000 \000\(\000T\000y\000p\000e\0001\000\)) >>
+endobj
+% 'Outline.24.4': class OutlineEntryObject 
+72 0 obj
+<< /Dest [ 44 0 R
+ /Fit ]
+ /Next 73 0 R
+ /Parent 64 0 R
+ /Prev 68 0 R
  /Title (\376\377\0006\000.\0005\000\240\000\240\000\240\000P\000a\000g\000e\000 \000S\000i\000z\000e\000 \000a\000n\000d\000 \000M\000a\000r\000g\000i\000n\000s) >>
 endobj
-% 'Outline.21.5': class OutlineEntryObject 
-65 0 obj
-<< /Dest [ 39 0 R
+% 'Outline.24.5': class OutlineEntryObject 
+73 0 obj
+<< /Dest [ 45 0 R
  /Fit ]
- /Parent 59 0 R
- /Prev 64 0 R
+ /Parent 64 0 R
+ /Prev 72 0 R
  /Title (\376\377\0006\000.\0006\000\240\000\240\000\240\000M\000u\000l\000t\000i\000p\000l\000e\000 \000S\000t\000y\000l\000e\000s\000h\000e\000e\000t\000s) >>
 endobj
 % 'Outline.6': class OutlineEntryObject 
-66 0 obj
+74 0 obj
 << /Count 4
- /Dest [ 43 0 R
+ /Dest [ 48 0 R
  /Fit ]
- /First 67 0 R
- /Last 69 0 R
- /Next 71 0 R
- /Parent 53 0 R
- /Prev 59 0 R
+ /First 75 0 R
+ /Last 77 0 R
+ /Next 79 0 R
+ /Parent 58 0 R
+ /Prev 64 0 R
  /Title (\376\377\0007\000\240\000\240\000\240\000S\000y\000n\000t\000a\000x\000 \000H\000i\000g\000h\000l\000i\000g\000h\000t\000i\000n\000g) >>
 endobj
-% 'Outline.22.0': class OutlineEntryObject 
-67 0 obj
+% 'Outline.26.0': class OutlineEntryObject 
+75 0 obj
 << /Count 1
- /Dest [ 43 0 R
+ /Dest [ 48 0 R
  /Fit ]
- /First 68 0 R
- /Last 68 0 R
- /Next 69 0 R
- /Parent 66 0 R
+ /First 76 0 R
+ /Last 76 0 R
+ /Next 77 0 R
+ /Parent 74 0 R
  /Title (\376\377\0007\000.\0001\000\240\000\240\000\240\000I\000n\000l\000i\000n\000e) >>
 endobj
-% 'Outline.23.0': class OutlineEntryObject 
-68 0 obj
-<< /Dest [ 43 0 R
+% 'Outline.27.0': class OutlineEntryObject 
+76 0 obj
+<< /Dest [ 48 0 R
  /Fit ]
- /Parent 67 0 R
+ /Parent 75 0 R
  /Title (\376\377\0007\000.\0001\000.\0001\000\240\000\240\000\240\000E\000x\000a\000m\000p\000l\000e\000s) >>
 endobj
-% 'Outline.22.1': class OutlineEntryObject 
-69 0 obj
+% 'Outline.26.1': class OutlineEntryObject 
+77 0 obj
 << /Count 1
- /Dest [ 44 0 R
+ /Dest [ 49 0 R
  /Fit ]
- /First 70 0 R
- /Last 70 0 R
- /Parent 66 0 R
- /Prev 67 0 R
+ /First 78 0 R
+ /Last 78 0 R
+ /Parent 74 0 R
+ /Prev 75 0 R
  /Title (\376\377\0007\000.\0002\000\240\000\240\000\240\000F\000i\000l\000e\000 \000i\000n\000c\000l\000u\000s\000i\000o\000n) >>
 endobj
-% 'Outline.24.0': class OutlineEntryObject 
-70 0 obj
-<< /Dest [ 44 0 R
+% 'Outline.28.0': class OutlineEntryObject 
+78 0 obj
+<< /Dest [ 49 0 R
  /Fit ]
- /Parent 69 0 R
+ /Parent 77 0 R
  /Title (\376\377\0007\000.\0002\000.\0001\000\240\000\240\000\240\000i\000n\000c\000l\000u\000d\000e\000 \000w\000i\000t\000h\000 \000b\000o\000u\000n\000d\000a\000r\000i\000e\000s) >>
 endobj
 % 'Outline.7': class OutlineEntryObject 
-71 0 obj
-<< /Dest [ 45 0 R
+79 0 obj
+<< /Dest [ 50 0 R
  /Fit ]
- /Next 72 0 R
- /Parent 53 0 R
- /Prev 66 0 R
+ /Next 80 0 R
+ /Parent 58 0 R
+ /Prev 74 0 R
  /Title (\376\377\0008\000\240\000\240\000\240\000R\000a\000w\000 \000D\000i\000r\000e\000c\000t\000i\000v\000e) >>
 endobj
 % 'Outline.8': class OutlineEntryObject 
-72 0 obj
-<< /Dest [ 48 0 R
+80 0 obj
+<< /Dest [ 53 0 R
  /Fit ]
- /Next 73 0 R
- /Parent 53 0 R
- /Prev 71 0 R
+ /Next 81 0 R
+ /Parent 58 0 R
+ /Prev 79 0 R
  /Title (\376\377\0009\000\240\000\240\000\240\000H\000y\000p\000h\000e\000n\000a\000t\000i\000o\000n) >>
 endobj
 % 'Outline.9': class OutlineEntryObject 
-73 0 obj
-<< /Dest [ 49 0 R
+81 0 obj
+<< /Dest [ 54 0 R
  /Fit ]
- /Parent 53 0 R
- /Prev 72 0 R
+ /Parent 58 0 R
+ /Prev 80 0 R
  /Title (\376\377\0001\0000\000\240\000\240\000\240\000P\000a\000g\000e\000 \000L\000a\000y\000o\000u\000t) >>
 endobj
-% 'R74': class PDFPages 
-74 0 obj
+% 'R82': class PDFPages 
+82 0 obj
 % page tree
-<< /Count 16
- /Kids [ 27 0 R
- 29 0 R
- 30 0 R
+<< /Count 17
+ /Kids [ 30 0 R
  32 0 R
  33 0 R
- 34 0 R
  35 0 R
+ 36 0 R
+ 37 0 R
  38 0 R
- 39 0 R
  40 0 R
- 43 0 R
+ 42 0 R
  44 0 R
  45 0 R
  48 0 R
  49 0 R
- 50 0 R ]
+ 50 0 R
+ 53 0 R
+ 54 0 R
+ 55 0 R ]
  /Type /Pages >>
 endobj
-% 'R75': class PDFStream 
-75 0 obj
+% 'R83': class PDFStream 
+83 0 obj
 % page stream
-<< /Length 5395 >>
+<< /Length 5990 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
@@ -1100,7 +1212,7 @@ q
 1 0 0 1 91.03937 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (243) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (293) Tj T* ET
 Q
 Q
 q
@@ -1192,11 +1304,11 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 469.1969 cm
+1 0 0 1 62.69291 421.1969 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
-1 0 0 1 6 99 cm
+1 0 0 1 6 147 cm
 q
 0 0 .501961 rg
 0 0 .501961 RG
@@ -1204,7 +1316,7 @@ BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6   Styles) Tj T* ET
 Q
 Q
 q
-1 0 0 1 6 83 cm
+1 0 0 1 6 131 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1219,7 +1331,7 @@ q
 Q
 Q
 q
-1 0 0 1 6 67 cm
+1 0 0 1 6 115 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1234,7 +1346,7 @@ q
 Q
 Q
 q
-1 0 0 1 6 51 cm
+1 0 0 1 6 99 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1253,11 +1365,56 @@ q
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
-1 0 0 1 6 3 cm
+1 0 0 1 6 51 cm
 q
 0 0 .501961 rg
 0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.4   Font Embedding) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 35 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.4.1   The Easy Way) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 19 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.4.2   The Harder Way \(True Type\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (6.4.3   The Harder Way \(Type1\)) Tj T* ET
+Q
+Q
+q
 Q
 Q
 q
@@ -1297,7 +1454,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 389.1969 cm
+1 0 0 1 62.69291 341.1969 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1372,7 +1529,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 373.1969 cm
+1 0 0 1 62.69291 325.1969 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1387,7 +1544,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 357.1969 cm
+1 0 0 1 62.69291 309.1969 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1402,7 +1559,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 341.1969 cm
+1 0 0 1 62.69291 293.1969 cm
 0 0 0 rg
 BT /F3 10 Tf 12 TL ET
 q
@@ -1417,7 +1574,7 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 341.1969 cm
+1 0 0 1 62.69291 293.1969 cm
 Q
 q
 1 0 0 1 56.69291 785.1969 cm
@@ -1433,8 +1590,8 @@ Q
 endstream
 
 endobj
-% 'R76': class PDFStream 
-76 0 obj
+% 'R84': class PDFStream 
+84 0 obj
 % page stream
 << /Length 1904 >>
 stream
@@ -1525,8 +1682,8 @@ Q
 endstream
 
 endobj
-% 'R77': class PDFStream 
-77 0 obj
+% 'R85': class PDFStream 
+85 0 obj
 % page stream
 << /Length 4962 >>
 stream
@@ -1913,8 +2070,8 @@ Q
 endstream
 
 endobj
-% 'R78': class PDFStream 
-78 0 obj
+% 'R86': class PDFStream 
+86 0 obj
 % page stream
 << /Length 2633 >>
 stream
@@ -2049,8 +2206,8 @@ Q
 endstream
 
 endobj
-% 'R79': class PDFStream 
-79 0 obj
+% 'R87': class PDFStream 
+87 0 obj
 % page stream
 << /Length 1163 >>
 stream
@@ -2102,8 +2259,8 @@ Q
 endstream
 
 endobj
-% 'R80': class PDFStream 
-80 0 obj
+% 'R88': class PDFStream 
+88 0 obj
 % page stream
 << /Length 1637 >>
 stream
@@ -2190,8 +2347,8 @@ Q
 endstream
 
 endobj
-% 'R81': class PDFStream 
-81 0 obj
+% 'R89': class PDFStream 
+89 0 obj
 % page stream
 << /Length 5989 >>
 stream
@@ -2480,10 +2637,10 @@ Q
 endstream
 
 endobj
-% 'R82': class PDFStream 
-82 0 obj
+% 'R90': class PDFStream 
+90 0 obj
 % page stream
-<< /Length 7168 >>
+<< /Length 5096 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
@@ -2609,24 +2766,363 @@ q
 1 0 0 1 62.69291 331.9969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .438989 Tw (There are thousands of excelent free True Type fonts available on the web, and you can use them in your documents by declaring) Tj T* 0 Tw (them in your stylesheet.) Tj T* ET
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .976407 Tw (There are thousands of excelent free True Type and Type 1 fonts available on the web, and you can use many of them in your) Tj T* 0 Tw (documents by declaring them in your stylesheet.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 315.9969 cm
+1 0 0 1 62.69291 331.9969 cm
+Q
 q
-BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (The last element is called ") Tj (embeddedFonts) Tj (" and handles embedding True Type fonts in your PDF.) Tj T* ET
+1 0 0 1 62.69291 331.9969 cm
+Q
+q
+1 0 0 1 62.69291 305.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (6.4.1   The Easy Way) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 299.9969 cm
+1 0 0 1 62.69291 289.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Just use the font name in your style. For example, you can define this:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 238.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 42 re B*
+Q
+q
+BT 1 0 0 1 0 22 Tm 10 TL /F5 8 Tf 0 0 0 rg ([) Tj (") Tj (normal) Tj (") Tj ( , {) Tj T* (  ) Tj (") Tj (fontName) Tj (") Tj ( : ) Tj (") Tj (fonty) Tj (") Tj  T* (}]) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 220.7969 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (And then it ) Tj /F6 8 Tf (may) Tj /F1 8 Tf ( work.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 204.7969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (What would need to happen for this to work?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 785.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 202.7049 0 Td (6.4.1   The Easy Way) Tj T* -202.7049 0 Td ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 228.2689 0 Td (Page 8) Tj T* -228.2689 0 Td ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R91': class PDFStream 
+91 0 obj
+% page stream
+<< /Length 7744 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 590.7969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 165.4 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (a.) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 11.472 0 Td (Fonty is a True Type font:) Tj T* -11.472 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 165.4 cm
+Q
+q
+1 0 0 1 6 74.2 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 68.2 cm
+q
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (1.) Tj ET
+BT 1 0 0 1 0 12 Tm 10 TL 11.472 0 Td .087729 Tw /F1 8 Tf 0 0 0 rg (You need to have it installed in your system, and have the fc-match utility available \(it's part of ) Tj 0 0 .501961 rg (fontconfig) Tj 0 0 0 rg (\). You can test if it) Tj T* 0 Tw -11.472 0 Td (is so by running this command:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 27 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 444.6898 32 re B*
+Q
+q
+BT 1 0 0 1 0 12 Tm 10 TL /F5 8 Tf 0 0 0 rg ($ fc-match fonty) Tj T* (fonty.ttf: ) Tj (") Tj (Fonty) Tj (") Tj ( ) Tj (") Tj (Normal) Tj (") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.024 0 Td (If you are in Windows, I need your help ;-\)) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 58.2 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (2.) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 11.472 0 Td (The folder where fonty.ttf is located needs to be in your font path. You can set it using the --font-path option. For example:) Tj T* -11.472 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 27 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 444.6898 22 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F5 8 Tf 10 TL (rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/fonts) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+BT 1 0 0 1 0 2 Tm 10 TL 7.024 0 Td /F1 8 Tf 0 0 0 rg (You don't need to put the ) Tj /F6 8 Tf (exact) Tj /F1 8 Tf ( folder, just something that is above it. In my own case, fonty is in /usr/share/fonts/TTF) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 6 3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 209.1645 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 368.6323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg (b.) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 11.472 0 Td (Fonty is a Type 1 font:) Tj T* -11.472 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 352.6323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.024 0 Td (You need it installed, and the folders where its font metric \(.afm\) and binary \(.pfb\) files are located need to be in your font fath.) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 336.6323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+BT 1 0 0 1 0 2 Tm 10 TL 7.024 0 Td /F1 8 Tf 0 0 0 rg (For example, the ") Tj (URW Palladio L) Tj (" font that came with my installation of TeX consists of the following files:) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 235.4323 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 456.6898 92 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 72 Tm /F5 8 Tf 10 TL (/usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb) Tj T* (/usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb) Tj T* (/usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb) Tj T* (/usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb) Tj T* (/usr/share/texmf-dist/fonts/afm/urw/palatino/uplb8a.afm) Tj T* (/usr/share/texmf-dist/fonts/afm/urw/palatino/uplbi8a.afm) Tj T* (/usr/share/texmf-dist/fonts/afm/urw/palatino/uplr8a.afm) Tj T* (/usr/share/texmf-dist/fonts/afm/urw/palatino/uplri8a.afm) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 6 211.4323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+BT 1 0 0 1 0 2 Tm 10 TL 7.024 0 Td /F1 8 Tf 0 0 0 rg (So, I can use it if I put ) Tj /F5 8 Tf (/usr/share/texmf-dist/fonts) Tj /F1 8 Tf ( in my font path:) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 180.2323 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 456.6898 22 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F5 8 Tf 10 TL (rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/texmf-dist/fonts) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 6 156.2323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.024 0 Td (And putting this in my stylesheet, for example:) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 125.0323 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 456.6898 22 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F5 8 Tf 0 0 0 rg ([ ) Tj (") Tj (title) Tj (") Tj (, { ) Tj (") Tj (fontName) Tj (") Tj ( : ) Tj (") Tj (URWPalladioL-Bold) Tj (") Tj ( } ]) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 6 101.0323 cm
+q
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 9.6 TL 0 0 0 rg ( ) Tj ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 7.024 0 Td (There are some standard aliases defined so you can use other names:) Tj T* -7.024 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+q
+.966012 0 0 .966012 0 0 cm
+q
+1 0 0 1 6.6 6.832212 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 472.8 92 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 72 Tm /F5 8 Tf 10 TL (    'ITC Bookman'            : 'URW Bookman L',) Tj T* (    'ITC Avant Garde Gothic' : 'URW Gothic L',) Tj T* (    'Palatino'               : 'URW Palladio L',) Tj T* (    'New Century Schoolbook' : 'Century Schoolbook L',) Tj T* (    'ITC Zapf Chancery'      : 'URW Chancery L') Tj T*  T* (So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique`` And it will mean) Tj T* (``URWPalladioL`` or ``CenturySchL-Ital``, respectively.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 183.1645 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .05174 Tw (Whenever a font is embedded, you can refer to it in a style by its name, and to its variants by the aliases Name-Oblique, Name-Bold,) Tj T* 0 Tw (Name-BoldOblique, regardless of whether it's True Type or Type 1.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 183.1645 cm
+Q
+q
+1 0 0 1 62.69291 183.1645 cm
+Q
+q
+1 0 0 1 62.69291 157.1645 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (6.4.2   The Harder Way \(True Type\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 141.1645 cm
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (The stylesheet has an element is ") Tj (embeddedFonts) Tj (" that handles embedding True Type fonts in your PDF.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 125.1645 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Usually, it's empty, because with the default styles you are not using any font beyond the standard PDF fonts:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 268.7969 cm
+1 0 0 1 62.69291 93.96452 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2646,46 +3142,96 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 250.7969 cm
+1 0 0 1 62.69291 75.96452 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You can put there the name of the font, and rst2pdf will try to embed it as described above. Example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 785.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 177.3689 0 Td (6.4.2   The Harder Way \(True Type\)) Tj T* -177.3689 0 Td ET
+Q
+Q
+q
+1 0 0 1 56.69291 56.69291 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 228.2689 0 Td (Page 9) Tj T* -228.2689 0 Td ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R92': class PDFStream 
+92 0 obj
+% page stream
+<< /Length 7074 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 745.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 22 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (") Tj ( : [ ) Tj (") Tj (Tuffy) Tj (") Tj ( ],) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 727.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Or you can be explicit and tell rst2pdf the files that contain each variant of the font.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 711.9969 cm
 q
 BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (Suppose you want to use the nice public domain ) Tj 0 0 .501961 rg (Tuffy font) Tj 0 0 0 rg ( \(included in rst2pdf's source distribution\).) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 234.7969 cm
+1 0 0 1 62.69291 695.9969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (First, you need to tell rst2pdf that you want it embedded in your PDF, by using the embeddedFonts property of the stylesheet:) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (You need to give the filenames of all variants:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 203.798 cm
+1 0 0 1 82.69291 679.9969 cm
 q
-q
-.991329 0 0 .991329 0 0 cm
-q
-1 0 0 1 6.6 6.657732 cm
-q
-.662745 .662745 .662745 RG
-.5 w
-.960784 .960784 .862745 rg
-n -6 -6 472.8 22 re B*
-Q
-q
-BT 1 0 0 1 0 2 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (") Tj ( : [ [) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Italic.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold_Italic.ttf) Tj (") Tj (] ],) Tj T* ET
-Q
-Q
-Q
+BT 1 0 0 1 0 2 Tm 10 TL /F1 8 Tf 0 0 0 rg (") Tj (embeddedFonts) Tj (" : [ [) Tj (") Tj (Tuffy.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Italic.ttf) Tj (") Tj (,) Tj (") Tj (Tuffy_Bold_Italic.ttf) Tj (") Tj (] ],) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 165.798 cm
+1 0 0 1 62.69291 643.9969 cm
 q
-BT 1 0 0 1 0 22 Tm 10 TL .275903 Tw /F1 8 Tf 0 0 0 rg (This will provide your styles with fonts called ") Tj (Tuffy) Tj (" ") Tj (Tuffy_Bold) Tj (" and so on. Also, if you use ) Tj /F6 8 Tf (italics) Tj /F1 8 Tf ( in a paragraph whose style uses) Tj T* 0 Tw .083452 Tw (the Tuffy font, it will use Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and that is the order in which) Tj T* 0 Tw (you should put them. If your font lacks a variant, use the ") Tj (normal) Tj (" variant instead. For example, if you only had Tuffy.ttf:) Tj T* ET
+BT 1 0 0 1 0 22 Tm 10 TL .179207 Tw /F1 8 Tf 0 0 0 rg (This will provide your styles with fonts called ") Tj (Tuffy) Tj (" ") Tj (Tuffy_Bold) Tj (" and so on. They will be available with the names based on the file\255) Tj T* 0 Tw .232118 Tw (names \(Tuffy_Bold\) and also by standard aliases similar to those of the standard PDF fonts \(Tuffy-Bold/Tuffy-Oblique/Tuffy-BoldOb\255) Tj T* 0 Tw (lique\).) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 134.598 cm
+1 0 0 1 62.69291 607.9969 cm
+q
+BT 1 0 0 1 0 22 Tm 10 TL .032683 Tw /F1 8 Tf 0 0 0 rg (Now, if you use ) Tj /F6 8 Tf (italics) Tj /F1 8 Tf ( in a paragraph whose style uses the Tuffy font, it will use Tuffy_Italic. That's why it's better if you use fonts that) Tj T* 0 Tw .284231 Tw (provide the four variants, and that is the order in which you should put them. If your font lacks a variant, use the ") Tj (normal) Tj (" variant in\255) Tj T* 0 Tw (stead. For example, if you only had Tuffy.ttf:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 576.7969 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2705,45 +3251,21 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 116.598 cm
+1 0 0 1 62.69291 558.7969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (However, that means that italics and bold in styles using Tuffy will not work \(they will display as regular text\).) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (However, that means that italics and bold in styles using Tuffy will not work correctly \(they will display as regular text\).) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 100.598 cm
+1 0 0 1 62.69291 542.7969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want to use this as the base font for your document, you should change the fontsAlias section accordingly. For example:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 785.1969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 202.7009 0 Td (6.4   Font Embedding) Tj T* -202.7009 0 Td ET
-Q
-Q
-q
-1 0 0 1 56.69291 56.69291 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 228.2689 0 Td (Page 8) Tj T* -228.2689 0 Td ET
-Q
-Q
- 
-endstream
-
-endobj
-% 'R83': class PDFStream 
-83 0 obj
-% page stream
-<< /Length 6246 >>
-stream
-1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
-q
-1 0 0 1 62.69291 685.9969 cm
+1 0 0 1 62.69291 451.5969 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2763,14 +3285,14 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 657.9969 cm
+1 0 0 1 62.69291 423.5969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .115073 Tw (If, on the other hand, you only want a specific style to use the Tuffy font, don't change the fontAlias, and set the fontName properties) Tj T* 0 Tw (for that style. For example:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 536.7969 cm
+1 0 0 1 62.69291 302.3969 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2790,162 +3312,200 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 528.7969 cm
+1 0 0 1 62.69291 294.3969 cm
 Q
 q
-1 0 0 1 62.69291 502.7969 cm
+1 0 0 1 62.69291 268.3969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL -0.235769 Tw (By default, rst2pdf will search for the fonts in its fonts folder and in the current folder. You can make it search another folder by passing) Tj T* 0 Tw (the --font-folder option, or you can use absolute paths in your stylesheet.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 502.7969 cm
+1 0 0 1 62.69291 268.3969 cm
 Q
 q
-1 0 0 1 62.69291 502.7969 cm
+1 0 0 1 62.69291 268.3969 cm
 Q
 q
-1 0 0 1 62.69291 472.7969 cm
+1 0 0 1 62.69291 242.3969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 12 Tf 14 TL (6.4.3   The Harder Way \(Type1\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 226.3969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (To be written \(and implemented and tested\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 226.3969 cm
+Q
+q
+1 0 0 1 62.69291 226.3969 cm
+Q
+q
+1 0 0 1 62.69291 196.3969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (6.5   Page Size and Margins) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 456.7969 cm
+1 0 0 1 62.69291 180.3969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (In your stylesheet, the pageSetup element controls your page layout.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 440.7969 cm
+1 0 0 1 62.69291 164.3969 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's the default stylesheet's:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 319.5969 cm
+1 0 0 1 62.69291 73.19685 cm
 q
 q
-1 0 0 1 0 0 cm
 q
 1 0 0 1 6.6 6.6 cm
 q
 .662745 .662745 .662745 RG
 .5 w
 .960784 .960784 .862745 rg
-n -6 -6 468.6898 112 re B*
+n -6 -6 468.6898 82 re B*
 Q
 q
-BT 1 0 0 1 0 92 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (pageSetup) Tj (") Tj ( : {) Tj T* (  ) Tj (") Tj (size) Tj (") Tj (: ) Tj (") Tj (A4) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (width) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (height) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (margin-top) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-bottom) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-left) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-right) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-gutter) Tj (") Tj (: ) Tj (") Tj (0cm) Tj (") Tj  T* (},) Tj T* ET
+BT 1 0 0 1 0 62 Tm 10 TL /F5 8 Tf 0 0 0 rg (") Tj (pageSetup) Tj (") Tj ( : {) Tj T* (  ) Tj (") Tj (size) Tj (") Tj (: ) Tj (") Tj (A4) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (width) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (height) Tj (") Tj (: null,) Tj T* (  ) Tj (") Tj (margin-top) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-bottom) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-left) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* ET
 Q
 Q
 Q
-Q
-Q
-q
-1 0 0 1 62.69291 301.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Size is one of the standard paper sizes, like A4 or LETTER.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 285.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's a list: A0, A1, A2, A3, A4, A5, A6, B0, B1, B2, B3, B4, B5, B6, LETTER, LEGAL, ELEVENSEVENTEEN.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 269.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want a non-standard size, set size to null and use width and height.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 253.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When specifying width, height or margins, you need to use units, like inch \(inches\) or cm \(centimeters\).) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 237.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When both width/height and size are specified, size will be used, and width/height ignored.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 221.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (All margins should be self-explanatory, except for margin-gutter. That's the margin in the center of a two-page spread.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 195.5969 cm
-q
-BT 1 0 0 1 0 12 Tm 10 TL .431407 Tw /F1 8 Tf 0 0 0 rg (This value is added to the left margin of odd pages and the right margin of even pages, adding \(or removing, if it's negative\) space) Tj T* 0 Tw (") Tj (in the middle) Tj (" of opposingpages.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 169.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .347407 Tw (If you intend to bound a printed copy, you may need extra space there. OTOH, if you will display it on-screen on a two-page format) Tj T* 0 Tw (\(common in many PDF readers, nice for ebooks\), a negative value may be pleasant.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 169.5969 cm
-Q
-q
-1 0 0 1 62.69291 169.5969 cm
-Q
-q
-1 0 0 1 62.69291 139.5969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (6.6   Multiple Stylesheets) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 113.5969 cm
-q
-BT 1 0 0 1 0 12 Tm 10 TL .054685 Tw /F1 8 Tf 0 0 0 rg (When you use a custom stylesheet, you don't need to define ) Tj /F6 8 Tf (everything) Tj /F1 8 Tf ( in it. Whatever you don't define will be taken from the default) Tj T* 0 Tw (stylesheet. For example, if you only want to chage page size, default font and font size, this would be enough:) Tj T* ET
 Q
 Q
 q
 1 0 0 1 56.69291 785.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 196.4809 0 Td (6.6   Multiple Stylesheets) Tj T* -196.4809 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 190.6969 0 Td (6.5   Page Size and Margins) Tj T* -190.6969 0 Td ET
 Q
 Q
 q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 228.2689 0 Td (Page 9) Tj T* -228.2689 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 10) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R84': class PDFStream 
-84 0 obj
+% 'R93': class PDFStream 
+93 0 obj
 % page stream
-<< /Length 1981 >>
+<< /Length 4745 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 625.9969 cm
+1 0 0 1 62.69291 725.9969 cm
+q
+q
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 42 re B*
+Q
+q
+BT 1 0 0 1 0 22 Tm 10 TL /F5 8 Tf 0 0 0 rg (  ) Tj (") Tj (margin-right) Tj (") Tj (: ) Tj (") Tj (2cm) Tj (") Tj (,) Tj T* (  ) Tj (") Tj (margin-gutter) Tj (") Tj (: ) Tj (") Tj (0cm) Tj (") Tj  T* (},) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 707.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Size is one of the standard paper sizes, like A4 or LETTER.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 691.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (Here's a list: A0, A1, A2, A3, A4, A5, A6, B0, B1, B2, B3, B4, B5, B6, LETTER, LEGAL, ELEVENSEVENTEEN.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 675.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (If you want a non-standard size, set size to null and use width and height.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 659.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When specifying width, height or margins, you need to use units, like inch \(inches\) or cm \(centimeters\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 643.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (When both width/height and size are specified, size will be used, and width/height ignored.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 627.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL (All margins should be self-explanatory, except for margin-gutter. That's the margin in the center of a two-page spread.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 601.9969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .431407 Tw /F1 8 Tf 0 0 0 rg (This value is added to the left margin of odd pages and the right margin of even pages, adding \(or removing, if it's negative\) space) Tj T* 0 Tw (") Tj (in the middle) Tj (" of opposingpages.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 575.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 8 Tf 10 TL .347407 Tw (If you intend to bound a printed copy, you may need extra space there. OTOH, if you will display it on-screen on a two-page format) Tj T* 0 Tw (\(common in many PDF readers, nice for ebooks\), a negative value may be pleasant.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 575.9969 cm
+Q
+q
+1 0 0 1 62.69291 575.9969 cm
+Q
+q
+1 0 0 1 62.69291 545.9969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 14 Tf 18 TL (6.6   Multiple Stylesheets) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 519.9969 cm
+q
+BT 1 0 0 1 0 12 Tm 10 TL .054685 Tw /F1 8 Tf 0 0 0 rg (When you use a custom stylesheet, you don't need to define ) Tj /F6 8 Tf (everything) Tj /F1 8 Tf ( in it. Whatever you don't define will be taken from the default) Tj T* 0 Tw (stylesheet. For example, if you only want to chage page size, default font and font size, this would be enough:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 368.7969 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2965,7 +3525,7 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 617.9969 cm
+1 0 0 1 62.69291 360.7969 cm
 Q
 q
 1 0 0 1 56.69291 785.1969 cm
@@ -2978,15 +3538,15 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 10) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 11) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R85': class PDFStream 
-85 0 obj
+% 'R94': class PDFStream 
+94 0 obj
 % page stream
 << /Length 8331 >>
 stream
@@ -3417,15 +3977,15 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 11) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 12) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R86': class PDFStream 
-86 0 obj
+% 'R95': class PDFStream 
+95 0 obj
 % page stream
 << /Length 7537 >>
 stream
@@ -3729,15 +4289,15 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 12) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 13) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R87': class PDFStream 
-87 0 obj
+% 'R96': class PDFStream 
+96 0 obj
 % page stream
 << /Length 1720 >>
 stream
@@ -3811,15 +4371,15 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 13) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 14) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R88': class PDFStream 
-88 0 obj
+% 'R97': class PDFStream 
+97 0 obj
 % page stream
 << /Length 6833 >>
 stream
@@ -4099,15 +4659,15 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 14) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 15) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R89': class PDFStream 
-89 0 obj
+% 'R98': class PDFStream 
+98 0 obj
 % page stream
 << /Length 6606 >>
 stream
@@ -4339,17 +4899,17 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 15) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 16) Tj T* -226.0449 0 Td ET
 Q
 Q
  
 endstream
 
 endobj
-% 'R90': class PDFStream 
-90 0 obj
+% 'R99': class PDFStream 
+99 0 obj
 % page stream
-<< /Length 824 >>
+<< /Length 860 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
@@ -4383,6 +4943,9 @@ q
 Q
 Q
 q
+1 0 0 1 62.69291 737.1969 cm
+Q
+q
 1 0 0 1 56.69291 785.1969 cm
 q
 0 0 0 rg
@@ -4393,7 +4956,7 @@ q
 1 0 0 1 56.69291 56.69291 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 16) Tj T* -226.0449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 8 Tf 10 TL 226.0449 0 Td (Page 17) Tj T* -226.0449 0 Td ET
 Q
 Q
  
@@ -4401,7 +4964,7 @@ endstream
 
 endobj
 xref
-0 91
+0 100
 0000000000 65535 f
 0000000113 00000 n
 0000000271 00000 n
@@ -4429,78 +4992,87 @@ xref
 0000004912 00000 n
 0000005129 00000 n
 0000005346 00000 n
-0000005547 00000 n
-0000006026 00000 n
-0000006186 00000 n
-0000006466 00000 n
-0000006762 00000 n
-0000006963 00000 n
-0000007264 00000 n
-0000007544 00000 n
-0000007824 00000 n
-0000008119 00000 n
-0000008351 00000 n
-0000008531 00000 n
-0000008832 00000 n
-0000009113 00000 n
-0000009408 00000 n
-0000009648 00000 n
-0000009886 00000 n
-0000010197 00000 n
-0000010478 00000 n
-0000010773 00000 n
-0000011015 00000 n
-0000011272 00000 n
-0000011583 00000 n
-0000011864 00000 n
-0000012145 00000 n
-0000012283 00000 n
-0000012614 00000 n
-0000012740 00000 n
-0000012972 00000 n
-0000013259 00000 n
-0000013541 00000 n
-0000013773 00000 n
-0000014025 00000 n
-0000014287 00000 n
-0000014557 00000 n
-0000014807 00000 n
-0000015087 00000 n
-0000015357 00000 n
-0000015662 00000 n
-0000015944 00000 n
-0000016271 00000 n
-0000016528 00000 n
-0000016748 00000 n
-0000017045 00000 n
-0000017337 00000 n
-0000017589 00000 n
-0000017831 00000 n
-0000018047 00000 n
-0000018291 00000 n
-0000023787 00000 n
-0000025792 00000 n
-0000030855 00000 n
-0000033589 00000 n
-0000034853 00000 n
-0000036591 00000 n
-0000042681 00000 n
-0000049950 00000 n
-0000056297 00000 n
-0000058379 00000 n
-0000066811 00000 n
-0000074449 00000 n
-0000076270 00000 n
-0000083204 00000 n
-0000089911 00000 n
+0000005563 00000 n
+0000005780 00000 n
+0000005997 00000 n
+0000006198 00000 n
+0000006704 00000 n
+0000006864 00000 n
+0000007144 00000 n
+0000007440 00000 n
+0000007641 00000 n
+0000007942 00000 n
+0000008222 00000 n
+0000008502 00000 n
+0000008784 00000 n
+0000008964 00000 n
+0000009259 00000 n
+0000009500 00000 n
+0000009816 00000 n
+0000010047 00000 n
+0000010349 00000 n
+0000010644 00000 n
+0000010884 00000 n
+0000011122 00000 n
+0000011433 00000 n
+0000011714 00000 n
+0000012009 00000 n
+0000012251 00000 n
+0000012508 00000 n
+0000012819 00000 n
+0000013100 00000 n
+0000013381 00000 n
+0000013519 00000 n
+0000013850 00000 n
+0000013976 00000 n
+0000014208 00000 n
+0000014495 00000 n
+0000014777 00000 n
+0000015009 00000 n
+0000015261 00000 n
+0000015523 00000 n
+0000015793 00000 n
+0000016043 00000 n
+0000016323 00000 n
+0000016635 00000 n
+0000016890 00000 n
+0000017232 00000 n
+0000017539 00000 n
+0000017844 00000 n
+0000018126 00000 n
+0000018453 00000 n
+0000018710 00000 n
+0000018930 00000 n
+0000019227 00000 n
+0000019519 00000 n
+0000019771 00000 n
+0000020013 00000 n
+0000020229 00000 n
+0000020482 00000 n
+0000026573 00000 n
+0000028578 00000 n
+0000033641 00000 n
+0000036375 00000 n
+0000037639 00000 n
+0000039377 00000 n
+0000045467 00000 n
+0000050664 00000 n
+0000058509 00000 n
+0000065684 00000 n
+0000070530 00000 n
+0000078962 00000 n
+0000086600 00000 n
+0000088421 00000 n
+0000095355 00000 n
+0000102062 00000 n
 trailer
 << /ID 
  % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
- [(~\245s\272+\372\011\005\255\262m/\360\337p\365) (~\245s\272+\372\011\005\255\262m/\360\337p\365)] 
+ [(\236=\256$\312\203\340\006\211\210T\340b\270\323N) (\236=\256$\312\203\340\006\211\210T\340b\270\323N)] 
 
- /Info 52 0 R
- /Root 51 0 R
- /Size 91 >>
+ /Info 57 0 R
+ /Root 56 0 R
+ /Size 100 >>
 startxref
-90808
+102995
 %%EOF
