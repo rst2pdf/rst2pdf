@@ -1,7 +1,6 @@
 {
   "styles": [ 
-	[
-		"normal", { "fontName" : "Palatino" } 
-	] 
+	[ "normal", { "fontName" : "Tahoma" } ],
+	[ "title", { "fontName" : "URWPalladioL-Bold" } ] 
   ]
 }
