@@ -133,6 +133,23 @@ class StyleSheet(object):
 
             for font in embedded:
                 try:
+                    if isinstance(font,unicode): # Just a font name, try to embed it
+                        # See if we can find the font
+                        fname,pos=findfonts.guessFont(font)
+                        fontList=findfonts.autoEmbed(font)
+                        if not fontList:
+                            fontList=findfonts.autoEmbed(fname)
+                        if fontList is not None:
+                            self.embedded+=fontList
+                            # Maybe the font we got is not called the same as the one we gave
+                            # so check that out
+                            suff=["","-Oblique","-Bold","-BoldOblique"]
+                            if not fontList[0].startswith(font):
+                                # We need to create font aliases, and use them
+                                for fname,aliasname in zip(fontList,[font+suffix for suffix in suff]):
+                                    self.fontsAlias[aliasname]=fname
+                        continue
+                    
                     # Each "font" is a list of four files, which will be used for
                     # regular / bold / italic / bold+italic versions of the font.
                     # If your font doesn't have one of them, just repeat the regular

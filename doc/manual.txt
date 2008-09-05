@@ -341,24 +341,34 @@ beyond the standard PDF fonts::
 
   "embeddedFonts" : [ ],
 
+You can put there the name of the font, and rst2pdf will try to embed it as described
+above. Example::
+
+  "embeddedFonts" : [ "Tuffy" ],
+
+Or you can be explicit and tell rst2pdf the files that contain each variant of the
+font.
+
 Suppose you want to use the nice public domain `Tuffy font`_ (included in rst2pdf's
 source distribution).
 
-First, you need to tell rst2pdf that you want it embedded in your PDF, by using the
-embeddedFonts property of the stylesheet::
+You need to give the filenames of all variants:
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
 
-This will provide your styles with fonts called "Tuffy" "Tuffy_Bold" and so on. Also,
-if you use *italics* in a paragraph whose style uses the Tuffy font, it will use
+This will provide your styles with fonts called "Tuffy" "Tuffy_Bold" and so on. They will
+be available with the names based on the filenames (Tuffy_Bold) and also by standard
+aliases similar to those of the standard PDF fonts (Tuffy-Bold/Tuffy-Oblique/Tuffy-BoldOblique).
+
+Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it will use
 Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and
 that is the order in which you should put them. If your font lacks a variant, use the
 "normal" variant instead. For example, if you only had Tuffy.ttf::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy.ttf","Tuffy.ttf","Tuffy.ttf"] ],
 
-However, that means that italics and bold in styles using Tuffy will not work (they will display
-as regular text).
+However, that means that italics and bold in styles using Tuffy will not work correctly (they will
+display as regular text).
 
 If you want to use this as the base font for your document, you should change the fontsAlias
 section accordingly. For example::
@@ -395,7 +405,7 @@ the --font-folder option, or you can use absolute paths in your stylesheet.
 The Harder Way (Type1)
 ~~~~~~~~~~~~~~~~~~~~~~
 
-To be written
+To be written (and implemented and tested)
 
 Page Size and Margins
 ---------------------
