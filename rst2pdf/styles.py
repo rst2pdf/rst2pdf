@@ -122,9 +122,9 @@ class StyleSheet(object):
                     self.pageTemplates[key]=template
 
         # Get font aliases from all stylesheets in order
-        self.fonts={}
+        self.fontsAlias={}
         for data, ssname in zip(ssdata, flist):
-            self.fonts.update(data.get('fontsAlias',{}))
+            self.fontsAlias.update(data.get('fontsAlias',{}))
 
         self.embedded=[]
         # Embed all fonts indicated in all stylesheets
@@ -172,7 +172,7 @@ class StyleSheet(object):
                         fname=font[0].split('.')[0]
                         log.error("Error processing font %s: %s",fname,str(e))
                         log.error("Registering %s as Helvetica alias",fname)
-                        self.fonts[fname]='Helvetica'
+                        self.fontsAlias[fname]='Helvetica'
                     except Exception,e:
                         log.critical("Error processing font %s: %s",fname,str(e))
                         sys.exit(1)
@@ -184,8 +184,8 @@ class StyleSheet(object):
             for [skey, style] in styles:
                 for key in style:
                     if key == 'fontName' or key.endswith('FontName'):
-                        if style[key] in self.fonts: # It´s an alias, replace it
-                            style[key]=self.fonts[style[key]]
+                        if style[key] in self.fontsAlias: # It´s an alias, replace it
+                            style[key]=self.fontsAlias[style[key]]
                         if style[key] in self.embedded: # Embedded already, nothing to do
                             continue
                         if style[key] in ("Courier",
@@ -203,12 +203,23 @@ class StyleSheet(object):
                                           "Times-Roman",
                                           "ZapfDingbats"): # Standard font, nothing to do
                             continue
+
                         # Now we need to do something
-                        
                         # See if we can find the font
-                        fontList=findfonts.autoEmbed(style[key])
+                        fname,pos=findfonts.guessFont(style[key])
+                        fontList=findfonts.autoEmbed(fname)
                         if fontList is not None:
                             self.embedded+=fontList
+                            # Maybe the font we got is not called the same as the one we gave
+                            # so check that out
+                            suff=["","-Oblique","-Bold","-BoldOblique"]
+                            if not fontList[0].startswith(style[key]):
+                                # We need to create font aliases, and use them
+                                for fname,aliasname in zip(fontList,[style[key]+suffix for suffix in suff]):
+                                    self.fontsAlias[aliasname]=fname
+                                style[key]=self.fontsAlias[style[key]+suff[pos]]
+                                
+                            
                         else:
                             log.error("Unknown font: \"%s\", replacing with Helvetica",style[key])
                             style[key]="Helvetica"

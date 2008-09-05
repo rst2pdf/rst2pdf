@@ -1,6 +1,6 @@
 {
   "styles": [ 
-	[ "normal", { "fontName" : "Georgia" } ],
-	[ "title", { "fontName" : "URWPalladioL-Bold" } ] 
+	[ "normal", { "fontName" : "Georgia-Oblique" } ],
+	[ "title", { "fontName" : "Palatino-BoldItalic" } ] 
   ]
 }
