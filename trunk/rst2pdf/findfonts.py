@@ -5,7 +5,7 @@
 import os,sys
 from log import log
 
-flist=['/usr/share/texmf-dist/fonts/']
+flist=[]
 afmList=[]
 pfbList={}
 
