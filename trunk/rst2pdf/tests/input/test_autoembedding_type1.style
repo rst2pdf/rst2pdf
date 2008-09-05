@@ -1,6 +1,9 @@
 {
+  "embeddedFonts" : ["Georgia"],
+  "fontsAlias" : {
+    "stdFont": "Georgia-Bold"
+  },
   "styles": [ 
-	[ "normal", { "fontName" : "Georgia-Oblique" } ],
 	[ "title", { "fontName" : "URWPalladioL-Bold" } ],
 	[ "heading1", { "fontName" : "Palatino" } ],
 	[ "heading2", { "fontName" : "New Century Schoolbook-Oblique" } ],
