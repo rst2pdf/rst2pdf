@@ -3,6 +3,7 @@
 '''Scan a list of folders and find all .afm files, then create rst2pdf-ready font-aliases.'''
 
 import os,sys
+from log import log
 
 flist=['/usr/share/texmf-dist/fonts/']
 afmList=[]
@@ -28,7 +29,7 @@ families={}
 fontMappings={}
 
 
-def findFont(fname):
+def loadFonts():
     '''Given a font name, returns the actual font files. If the font name is not valid, it will treat it as a
     font family name, and return the value of searching for the regular font of said family.'''    
     if not afmList or not pfbList:
@@ -90,15 +91,19 @@ def findFont(fname):
             # FIXME: what happens if there are Demi and Medium weights? We get a random one.
             else: families[family][0]=fontName
 
+def findFont(fname):
+    loadFonts()
     # So now we are sure we know the families and font names. Well, return some data!
     if fname in fonts:
-        return fonts[fname]
+        font=fonts[fname]
     if fname in Alias:
         fname=Alias[fname]
     if fname in families:
-        return fonts[families[fname][0]]
+        font=fonts[families[fname][0]]
     else:
+        log.warning("Unknown font %s"%fname)
         return None
+    return font
         
 def main():
     if len(sys.argv)<>2:
