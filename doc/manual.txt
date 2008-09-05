@@ -274,7 +274,8 @@ What would need to happen for this to work?
 a. Fonty is a True Type font:
 
     1. You need to have it installed in your system, and have the fc-match
-       utility available. You can test if it is so by running this command::
+       utility available (it's part of fontconfig_). You can test if it is
+       so by running this command::
 
             $ fc-match fonty
             fonty.ttf: "Fonty" "Normal"
@@ -786,3 +787,6 @@ The supported page template options and their defaults are:
 * showHeader : True
 
 * showFooter : True
+
+
+.. _fontconfig: http://www.freedesktop.org/fontconfig/
