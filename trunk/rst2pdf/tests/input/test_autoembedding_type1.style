@@ -1,6 +1,9 @@
 {
   "styles": [ 
 	[ "normal", { "fontName" : "Georgia-Oblique" } ],
-	[ "title", { "fontName" : "Palatino-BoldItalic" } ] 
+	[ "title", { "fontName" : "URWPalladioL-Bold" } ],
+	[ "heading1", { "fontName" : "Palatino" } ],
+	[ "heading2", { "fontName" : "New Century Schoolbook-Oblique" } ],
+	[ "heading3", { "fontName" : "URW Palladio L-Bold" } ] 
   ]
 }

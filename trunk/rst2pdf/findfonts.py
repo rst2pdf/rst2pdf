@@ -99,12 +99,13 @@ def findFont(fname):
     # So now we are sure we know the families and font names. Well, return some data!
     if fname in fonts:
         font=fonts[fname]
-    elif fname in Alias:
-        fname=Alias[fname]
+    else:
+        if fname in Alias:
+            fname=Alias[fname]
         if fname in families:
             font=fonts[families[fname][0]]
-    else:
-        return None
+        else:
+            return None
     return font
 
 def findTTFont(fname):
@@ -136,7 +137,7 @@ def findTTFont(fname):
             variants[1]=get_fname(family+":style=Italic")
         if variants[3]==variants[0]:
             variants[3]=get_fname(family+":style=Bold Italic")
-        if variants[0].endswith('.pfb'):
+        if variants[0].endswith('.pfb') or variants[0].endswith('.gz') :
             return None
         return variants
         
@@ -235,7 +236,14 @@ def main():
     if f:
         print f
     else:
-        print "Unknown font %s"%sys.argv[1]
+        fn,pos=guessFont(sys.argv[1])
+        f=findFont(fn)
+        if not f:
+            f=findTTFont(fn)
+        if f:
+            print f
+        else:
+            print "Unknown font %s"%sys.argv[1]
 
 if __name__ == "__main__":
     main()

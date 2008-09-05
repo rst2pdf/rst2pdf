@@ -159,7 +159,7 @@ class StyleSheet(object):
                     else: # A Type 1 font
                         # For type 1 fonts we require [FontName,regular,italic,bold,bolditalic]
                         # where each variant is a (pfbfile,afmfile) pair.
-                        # For example, for the URW palatino from TeX:
+                        # For example, for the URW palladio from TeX:
                         # ["Palatino",("uplr8a.pfb","uplr8a.afm"),("uplri8a.pfb","uplri8a.afm"),("uplb8a.pfb","uplb8a.afm"),("uplbi8a.pfb","uplbi8a.afm")]
                         faceName=font[0]
                         regular=pdfmetrics.EmbeddedType1Face(*font[1])
@@ -207,7 +207,9 @@ class StyleSheet(object):
                         # Now we need to do something
                         # See if we can find the font
                         fname,pos=findfonts.guessFont(style[key])
-                        fontList=findfonts.autoEmbed(fname)
+                        fontList=findfonts.autoEmbed(style[key])
+                        if not fontList:
+                            fontList=findfonts.autoEmbed(fname)                            
                         if fontList is not None:
                             self.embedded+=fontList
                             # Maybe the font we got is not called the same as the one we gave
@@ -218,8 +220,6 @@ class StyleSheet(object):
                                 for fname,aliasname in zip(fontList,[style[key]+suffix for suffix in suff]):
                                     self.fontsAlias[aliasname]=fname
                                 style[key]=self.fontsAlias[style[key]+suff[pos]]
-                                
-                            
                         else:
                             log.error("Unknown font: \"%s\", replacing with Helvetica",style[key])
                             style[key]="Helvetica"
