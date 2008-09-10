@@ -1061,6 +1061,10 @@ def main():
     
     if options.output:
         outfile=options.output
+        if outfile =='-':
+            outfile = sys.stdout
+            #we must stay quiet
+            log.setLevel(logging.CRITICAL)
     else:
         if filename:
             if filename.endswith('.txt') or filename.endswith('.rst'):
