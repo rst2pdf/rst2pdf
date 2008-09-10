@@ -24,7 +24,8 @@ try:
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle,getSampleStyleSheet
 except:
-    log.warning("No hyphenation support, install wordaxe")
+    pass
+    #log.warning("No hyphenation support, install wordaxe")
 
 unit_separator = re.compile('(-?[0-9\.]*)')
 
