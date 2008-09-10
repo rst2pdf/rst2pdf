@@ -36,6 +36,8 @@ from reportlab.lib.pagesizes import *
 from flowables import *
 from log import log
 
+import config
+
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
@@ -1013,22 +1015,38 @@ def main():
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',metavar='FILE'
                       ,help='Write the PDF to FILE')
-    parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',
-                      help='A comma-separated list of custom stylesheets')
-    parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=False,
-                      help='Create a compressed PDF')
+                      
+    def_ssheets=config.getValue("general","stylesheets","")
+    parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',default=def_ssheets,
+                      help='A comma-separated list of custom stylesheets. Default="%s"'%def_ssheets)
+
+    def_compressed=config.getValue("general","compressed",False)
+    parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=def_compressed,
+                      help='Create a compressed PDF. Default=%s'%def_compressed)
+                      
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,
                       help='Print the default stylesheet and exit')
+
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
-                      help='Search this folder for fonts.')
-    parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',
-                      help='A colon-separated list of folders to search for fonts.')   
-    parser.add_option('-l','--language',metavar='LANG',default='en_US',dest='language',
-                      help='Language to be used for hyphenation.')
-    parser.add_option('--fit-literal-mode',metavar='MODE',default='shrink',dest='fitMode',
-                      help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Defaults to shrink.')
-    parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default='0',
-                      help='Maximum section level that starts in a new page. Default: 0 (no section level starts in a new page)')
+                      help='Search this folder for fonts. (Deprecated)')
+                  
+    def_fontpath=config.getValue("general","font_path","")
+    parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_fontpath,
+                      help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)   
+
+    
+    def_lang=config.getValue("general","language","en_US")
+    parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
+                      help='Language to be used for hyphenation. Default="%s"'%def_lang)
+                      
+    def_fit=config.getValue("general","fit_mode","shrink")
+    parser.add_option('--fit-literal-mode',metavar='MODE',default=def_fit,dest='fitMode',
+                      help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Default="%s"'%def_fit)
+                      
+    def_break=config.getValue("general","break_level",0)
+    parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default=def_break,
+                      help='Maximum section level that starts in a new page. Default: %d'%def_break)
+                      
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
                       help='Print less information.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,
