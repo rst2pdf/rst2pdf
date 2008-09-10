@@ -287,6 +287,31 @@ class StyleSheet(object):
             else:
                 if s['name'] != 'base':
                     s['parent'] = self.StyleSheet['base']
+
+            # If the style has no bulletFontName but it has a fontName, set it
+            if ('bulletFontName' not in s) and ('fontName' in s):
+                s['bulletFontName']=s['fontName']
+
+            # Adjust fontsize units
+            if 'fontSize' not in s:
+                s['fontSize']=s['parent'].fontSize
+            elif 'parent' in s:
+                # This means you can set the fontSize to "2cm" or to "150%" which
+                # will be calculated relative to the parent style
+                s['fontSize']=self.adjustUnits(s['fontSize'],s['parent'].fontSize)
+            else:
+                # If s has no parent, it's base, which has an explicit point size
+                # by default and % makes no sense, but guess it as % of 10pt
+                s['fontSize']=self.adjustUnits(s['fontSize'],10)
+
+            # If the leading is not set, but the size is, set it
+            if 'leading' not in s:
+                s['leading']=1.2*s['fontSize']
+
+            # If the bullet font size is not set, set it as fontSize
+            if ('bulletFontSize' not in s) and ('fontSize' in s):
+                s['bulletFontSize'] = s['fontSize']
+
             self.StyleSheet.add(ParagraphStyle(**s))
             
     def __getitem__(self,key):
