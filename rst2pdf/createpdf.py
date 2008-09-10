@@ -619,57 +619,59 @@ class RstToPdf(object):
             try:
                 img=PILImage.open(imgname)
                 iw,ih=img.size
+                # Assume a DPI of 300, which is pretty much made up,
+                # and then a 100% size would be iw*inch/300, so we pass
+                # that as the second parameter to adjustUnits
+
+                w=node.get('width')
+                if w is not None:
+                    if iw:
+                        w=self.styles.adjustUnits(w,iw*inch/300)
+                    else:
+                        w=self.styles.adjustUnits(w,self.styles.pw*.5)
+                else:
+                    log.warning("Using image %s without specifying size."
+                        "Calculating based on 300dpi", imgname)
+                    # No width specified at all. Make it up
+                    # as if we knew what we're doing
+                    if iw:
+                        w=iw*inch/300
+
+                h=node.get('height')
+                if h is not None:
+                    if ih:
+                        h=self.styles.adjustUnits(h,ih*inch/300)
+                    else:
+                        h=self.styles.adjustUnits(h,self.styles.ph*.5)
+                else:
+                    # Now, often, only the width is specified!
+                    # if we don't have a height, we need to keep the
+                    # aspect ratio, or else it will look ugly
+                    if iw:
+                        h=w*ih/iw
+
+                # And now we have this probably completely bogus size!
+                log.info("Image %s size calculated:  %fcm by %fcm",
+                    imgname, w/cm, h/cm)
+
+                i=Image(filename=imgname,
+                        height=h,
+                        width=w)
+                if node.get('align'):
+                    i.hAlign=node.get('align').upper()
+                else:
+                    i.hAlign='CENTER'
+                node.elements=[i]
             except NameError: # No PIL
-                 # FIXME: surely we can do better than this ;-)
-                 # but this only means that image sizes specified
-                 # in % or unspecified will probably be broken.
-                 iw=None
-                 ih=None
-
-
-            # Assume a DPI of 300, which is pretty much made up,
-            # and then a 100% size would be iw*inch/300, so we pass
-            # that as the second parameter to adjustUnits
-
-            w=node.get('width')
-            if w is not None:
-                if iw:
-                    w=self.styles.adjustUnits(w,iw*inch/300)
-                else:
-                    w=self.styles.adjustUnits(w,self.styles.pw*.5)
-            else:
-                log.warning("Using image %s without specifying size."
-                    "Calculating based on 300dpi", imgname)
-                # No width specified at all. Make it up
-                # as if we knew what we're doing
-                if iw:
-                    w=iw*inch/300
-
-            h=node.get('height')
-            if h is not None:
-                if ih:
-                    h=self.styles.adjustUnits(h,ih*inch/300)
-                else:
-                    h=self.styles.adjustUnits(h,self.styles.ph*.5)
-            else:
-                # Now, often, only the width is specified!
-                # if we don't have a height, we need to keep the
-                # aspect ratio, or else it will look ugly
-                if iw:
-                    h=w*ih/iw
-
-            # And now we have this probably completely bogus size!
-            log.info("Image %s size calculated:  %fcm by %fcm",
-                imgname, w/cm, h/cm)
-
-            i=Image(filename=imgname,
-                    height=h,
-                    width=w)
-            if node.get('align'):
-                i.hAlign=node.get('align').upper()
-            else:
-                i.hAlign='CENTER'
-            node.elements=[i]
+                # FIXME: surely we can do better than this ;-)
+                # but this only means that image sizes specified
+                # in % or unspecified will probably be broken.
+                iw=None
+                ih=None
+            except IOError: #No image, or no permissions
+                log.error('Error opening "%s"'%imgname)
+                node.elements=[]
+                
 
         elif isinstance (node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if
