@@ -271,7 +271,8 @@ class StyleSheet(object):
                     self.stylesheet[skey].update(sdict)
                 else: # New style
                     self.stylesheet[skey]=sdict
-                    self.styles.append(sdict)
+                    self.styles.append(sdict)        
+                    
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
         for s in self.styles:
@@ -286,6 +287,14 @@ class StyleSheet(object):
             else:
                 if s['name'] != 'base':
                     s['parent'] = self.StyleSheet['base']
+
+            # If the style has no bulletFontName but it has a fontName, set it
+            if ('bulletFontName' not in s) and ('fontName' in s):
+                s['bulletFontName']=s['fontName']
+            # If the leading is not set, but the size is, set it
+            if ('leading' not in s) and ('fontSize' in s):
+                s['leading']=1.2*s['fontSize']
+                print s['leading']
             self.StyleSheet.add(ParagraphStyle(**s))
             
     def __getitem__(self,key):
