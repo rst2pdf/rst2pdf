@@ -64,6 +64,25 @@ Command line Options
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.
 
+Pipe usage
+==========
+
+you may want to use rst2pdf in a linux pipe as such::
+
+    cat readme.txt | rst2pdf | gzip -c > readme.pdf.gz
+    
+or::
+
+    curl http://docutils.sourceforge.net/docs/user/rst/quickstart.txt | rst2pdf > quickstart.pdf
+    
+if no input argument is provided, stdin will be used::
+
+    cat readme.txt | rst2pdf -o readme.pdf
+
+if outpufile is specified to dash '-', output goes to stdout::
+
+    rst2pdf -o - readme.txt > output.df
+
 
 Headers and Footers
 ===================
@@ -603,7 +622,7 @@ this command gives
          
 .. code-block:: python
     :include: ../rst2pdf/flowables.py
-    :start-at: class Separation(Flowable):
+    :start-at: class Reference(Flowable):
     :end-before: class Reference(Flowable):
 
     
