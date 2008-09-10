@@ -307,6 +307,11 @@ class StyleSheet(object):
             # If the leading is not set, but the size is, set it
             if 'leading' not in s:
                 s['leading']=1.2*s['fontSize']
+
+            # If the bullet font size is not set, set it as fontSize
+            if ('bulletFontSize' not in s) and ('fontSize' in s):
+                s['bulletFontSize'] = s['fontSize']
+            
             self.StyleSheet.add(ParagraphStyle(**s))
             
     def __getitem__(self,key):
