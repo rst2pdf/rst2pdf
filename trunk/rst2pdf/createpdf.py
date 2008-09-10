@@ -1063,6 +1063,7 @@ def main():
         outfile=options.output
         if outfile =='-':
             outfile = sys.stdout
+            options.compressed = False
             #we must stay quiet
             log.setLevel(logging.CRITICAL)
     else:
@@ -1073,6 +1074,7 @@ def main():
                 outfile=filename + '.pdf'
         else:
             outfile = sys.stdout
+            options.compressed = False
             #we must stay quiet
             log.setLevel(logging.CRITICAL)
             #/reportlab/pdfbase/pdfdoc.py output can be a callable (stringio, stdout ...)            
