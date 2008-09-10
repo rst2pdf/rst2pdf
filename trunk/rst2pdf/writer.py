@@ -24,7 +24,7 @@ class PdfWriter(writers.Writer):
 
     def translate(self):
         sio=StringIO('')
-        createpdf.RstToPdf().createPdf(doctree=self.document,output=sio,compressed=False)
+        createpdf.RstToPdf(sphinx=True).createPdf(doctree=self.document,output=sio,compressed=False)
         self.output=unicode(sio.getvalue(),'utf-8','ignore')
 
     def supports(self, format):

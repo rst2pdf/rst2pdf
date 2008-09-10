@@ -288,8 +288,9 @@ class BoundByWidth(Flowable):
                 self.scale=(maxWidth+2*self.pad)/(self.width+2*self.pad)
                 self.height=self.height*self.scale
             #self.width=maxWidth
-        if self.height+2*self.pad*self.scale > availHeight:
-            log.warning("BoundByWidth too tall to fit in frame: %s",self.identity())
+        # No need to warn here, it will just split
+        #if self.height+2*self.pad*self.scale > availHeight:
+            #log.warning("BoundByWidth too tall to fit in frame: %s",self.identity())
         return self.width, self.height+2*self.pad*self.scale
 
     def split(self,availWidth,availHeight):
