@@ -105,12 +105,12 @@
     }],
     ["definition_list_classifier" , {
       "parent": "normal",
-      "fontName": "stdItalic",
+      "fontName": "stdItalic"
     }],
     ["fieldname" , {
       "parent": "bodytext",
       "alignment": "TA_RIGHT",
-      "fontName": "stdBold",
+      "fontName": "stdBold"
     }],
     ["rubric" , {
       "parent": "bodytext",
@@ -119,7 +119,7 @@
     }],
     ["italic" , {
       "parent": "bodytext",
-      "fontName": "stdItalic",
+      "fontName": "stdItalic"
     }],
     ["title" , {
       "parent": "normal",
@@ -131,7 +131,7 @@
     }],
     ["subtitle" , {
       "parent": "title",
-      "fontSize": 14,
+      "fontSize": 14
     }],
     ["heading1" , {
       "parent": "normal",
@@ -176,7 +176,7 @@
       "leftIndent": 36,
       "bulletIndent": 0,
       "spaceBefore": 6,
-      "fontName": "stdBold",
+      "fontName": "stdBold"
     }],
     ["sidebar" , {
       "float": "left",
