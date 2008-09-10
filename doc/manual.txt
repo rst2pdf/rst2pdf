@@ -67,6 +67,8 @@ Command line Options
 Pipe usage
 ==========
 
+if no input nor output are provided, stdin and stdout will be used respectively
+
 you may want to use rst2pdf in a linux pipe as such::
 
     cat readme.txt | rst2pdf | gzip -c > readme.pdf.gz
@@ -81,7 +83,7 @@ if no input argument is provided, stdin will be used::
 
 if outpufile is specified to dash '-', output goes to stdout::
 
-    rst2pdf -o - readme.txt > output.df
+    rst2pdf -o - readme.txt > output.pdf
 
 
 Headers and Footers
