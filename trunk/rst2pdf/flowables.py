@@ -365,47 +365,49 @@ class BoxedContainer(BoundByWidth):
         canv.restoreState()
         BoundByWidth.draw(self)
 
-import reportlab.platypus.paragraph as pla_para
+if reportlab.Version == '2.1':
 
-################Ugly stuff below
+    import reportlab.platypus.paragraph as pla_para
 
-def _do_post_text(i, t_off, tx):
-    '''From reportlab's paragraph.py, patched to avoid underlined links'''
-    xs = tx.XtraState
-    leading = xs.style.leading
-    ff = 0.125*xs.f.fontSize
-    y0 = xs.cur_y - i*leading
-    y = y0 - ff
-    ulc = None
-    for x1,x2,c in xs.underlines:
-        if c!=ulc:
-            tx._canvas.setStrokeColor(c)
-            ulc = c
-        tx._canvas.line(t_off+x1, y, t_off+x2, y)
-    xs.underlines = []
-    xs.underline=0
-    xs.underlineColor=None
+    ################Ugly stuff below
 
-    ys = y0 + 2*ff
-    ulc = None
-    for x1,x2,c in xs.strikes:
-        if c!=ulc:
-            tx._canvas.setStrokeColor(c)
-            ulc = c
-        tx._canvas.line(t_off+x1, ys, t_off+x2, ys)
-    xs.strikes = []
-    xs.strike=0
-    xs.strikeColor=None
+    def _do_post_text(i, t_off, tx):
+        '''From reportlab's paragraph.py, patched to avoid underlined links'''
+        xs = tx.XtraState
+        leading = xs.style.leading
+        ff = 0.125*xs.f.fontSize
+        y0 = xs.cur_y - i*leading
+        y = y0 - ff
+        ulc = None
+        for x1,x2,c in xs.underlines:
+            if c!=ulc:
+                tx._canvas.setStrokeColor(c)
+                ulc = c
+            tx._canvas.line(t_off+x1, y, t_off+x2, y)
+        xs.underlines = []
+        xs.underline=0
+        xs.underlineColor=None
 
-    yl = y + leading
-    for x1,x2,link in xs.links:
-        # This is the bad line
-        #tx._canvas.line(t_off+x1, y, t_off+x2, y)
-        _doLink(tx, link, (t_off+x1, y, t_off+x2, yl))
-    xs.links = []
-    xs.link=None
+        ys = y0 + 2*ff
+        ulc = None
+        for x1,x2,c in xs.strikes:
+            if c!=ulc:
+                tx._canvas.setStrokeColor(c)
+                ulc = c
+            tx._canvas.line(t_off+x1, ys, t_off+x2, ys)
+        xs.strikes = []
+        xs.strike=0
+        xs.strikeColor=None
 
-# Look behind you! A three-headed monkey!
-pla_para._do_post_text.func_code = _do_post_text.func_code
+        yl = y + leading
+        for x1,x2,link in xs.links:
+            # This is the bad line
+            #tx._canvas.line(t_off+x1, y, t_off+x2, y)
+            _doLink(tx, link, (t_off+x1, y, t_off+x2, yl))
+        xs.links = []
+        xs.link=None
 
-############### End of the ugly
+    # Look behind you! A three-headed monkey!
+    pla_para._do_post_text.func_code = _do_post_text.func_code
+
+    ############### End of the ugly
