@@ -65,7 +65,7 @@ except ImportError:
 try:
     import sphinx
     HAS_SPHINX=True
-except ImprotError:
+except ImportError:
     HAS_SPHINX=False
 
 class RstToPdf(object):
