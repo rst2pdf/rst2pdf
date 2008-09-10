@@ -62,10 +62,16 @@ except ImportError:
     #log.warning("No support for hyphenation, install wordaxe")
     haveWordaxe=False
 
+try:
+    import sphinx
+    HAS_SPHINX=True
+except ImprotError:
+    HAS_SPHINX=False
+
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 breaklevel=1,fontPath=[],fitMode='shrink'):
+                 breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False):
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -75,6 +81,13 @@ class RstToPdf(object):
         self.styles=sty.StyleSheet(stylesheets,fontPath)
         self.breaklevel=breaklevel
         self.fitMode=fitMode
+
+        # Sorry about this, but importing sphinx.roles makes some
+        # ordinary documents fail (demo.txt specifically) so
+        # I can' t just try to import it outside. I need
+        # to do it only if it's requested
+        if HAS_SPHINX and sphinx:
+            import sphinx.roles
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
@@ -257,9 +270,9 @@ class RstToPdf(object):
         else:
             log.warning("Unkn. node (self.gen_pdftext): %s", node.__class__)
             try:
-                log.warning(node)
+                log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
-                log.warning(repr(node))
+                log.debug(repr(node))
             node.pdftext=self.gather_pdftext(node,depth)
             #print node.transform
 
@@ -279,17 +292,23 @@ class RstToPdf(object):
 
         if style is None:
             style=self.styles.styleForNode(node)
-            
-        if node['classes']:
-            # Supports only one class, sorry ;-)
-            try:
-                style=self.styles[node['classes'][0]]
-            except:
-                log.info("Unknown class %s, using class bodytext.", node['classes'][0])
+
+        try:
+            if node['classes']:
+                # Supports only one class, sorry ;-)
+                try:
+                    style=self.styles[node['classes'][0]]
+                except:
+                    log.info("Unknown class %s, using class bodytext.", node['classes'][0])
+        except TypeError: # Happens when a docutils.node.Text reaches here
+            pass
 
         if isinstance (node, docutils.nodes.document):
             node.elements=self.gather_elements(node,depth,style=style)
 
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.glossary):
+            node.elements=self.gather_elements(node,depth,style=style)
+          
         #######################
         ## Tables
         #######################
@@ -389,6 +408,9 @@ class RstToPdf(object):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['sidebar-subtitle'])]
             elif isinstance (node.parent,docutils.nodes.document):
                 node.elements=[Paragraph(self.gen_pdftext(node,depth), self.styles['subtitle'])]
+
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.compact_paragraph):
+            node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.paragraph):
             node.elements=[Paragraph(self.gen_pdftext(node,depth), style)]
@@ -511,6 +533,8 @@ class RstToPdf(object):
             dt=[]
             for n in node.children:
                 if isinstance(n,docutils.nodes.term):
+                    for i in n['ids']: # Used by sphinx glossary lists
+                        tt.append('<a name="%s"/>'%i)
                     tt.append(self.styleToFont("definition_list_term")+self.gather_pdftext(n,depth,style)+"</font>")
                 elif isinstance(n,docutils.nodes.classifier) :
                     tt.append(self.styleToFont("definition_list_classifier")+self.gather_pdftext(n,depth,style)+"</font>")
@@ -761,18 +785,23 @@ class RstToPdf(object):
             log.error("Unkn. node (gen_elements): %s", str(node.__class__))
             # Why fail? Just log it and do our best.
             try:
-                log.error(node)
+                log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
                 log.debug(repr(node))
             node.elements=self.gather_elements(node,depth,style)
             #sys.exit(1)
 
         # set anchors for internal references
-        for id in node['ids']:
-            node.elements.insert(
-                    # FIXME: WTF does this do?
-                    node.elements and isinstance(node.elements[0], MyPageBreak) and 1 or 0,
-                    Reference(id))
+        try:
+            for i in node['ids']:
+                # ids should link **after** pagebreaks
+                if len(node.elements) and isinstance(node.elements[0],MyPageBreak):
+                    idx=1
+                else:
+                    idx=0
+                node.elements.insert(idx,Reference(i))
+        except TypeError: #Hapens with docutils.node.Text
+            pass
 
         if 'float' in style.__dict__:
             node.elements=[Sidebar(node.elements,style)]
