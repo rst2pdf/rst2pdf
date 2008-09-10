@@ -57,7 +57,7 @@ try:
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
     haveWordaxe=True
 except ImportError:
-    log.warning("No support for hyphenation, install wordaxe")
+    #log.warning("No support for hyphenation, install wordaxe")
     haveWordaxe=False
 
 class RstToPdf(object):
@@ -1048,24 +1048,36 @@ def main():
         print open(os.path.join(abspath(dirname(__file__)),'styles','styles.json')).read()
         sys.exit(0)
 
-    if len(args) <> 1:
+    filename = False
+        
+    if len(args) == 0:
+        infile = sys.stdin
+    elif len(args) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
-
-    infile=args[0]
+    else:
+        filename = args[0]
+        infile=open(filename)
+    
     if options.output:
         outfile=options.output
     else:
-        if infile.endswith('.txt') or infile.endswith('.rst'):
-            outfile = infile[:-4] + '.pdf'
+        if filename:
+            if filename.endswith('.txt') or filename.endswith('.rst'):
+                outfile = filename[:-4] + '.pdf'
+            else:
+                outfile=filename + '.pdf'
         else:
-            outfile=infile + '.pdf'
+            outfile = sys.stdout
+            #we must stay quiet
+            log.setLevel(logging.CRITICAL)
+            #/reportlab/pdfbase/pdfdoc.py output can be a callable (stringio, stdout ...)            
 
     if options.style:
         ssheet=options.style.split(',')
     else:
         ssheet=[]
-
+        
     fpath=[]
     if options.fpath:
         fpath=options.fpath.split(':')
@@ -1076,7 +1088,7 @@ def main():
              language=options.language,
              breaklevel=int(options.breaklevel),
              fitMode=options.fitMode,
-             fontPath=fpath).createPdf(text=open(infile).read(),
+             fontPath=fpath).createPdf(text=infile.read(),
                                                  output=outfile,
                                                  compressed=options.compressed)
 
