@@ -1,0 +1,31 @@
+# This is an example config file. Modify and place in ~/.rst2pdf/config
+
+[general]
+# A comma-separated list of custom stylesheets. Example:
+# stylesheets="fruity.json,a4paper.json,verasans.json"
+
+stylesheets=""
+
+# Create a compressed PDF
+
+compressed=False
+
+# A colon-separated list of folders to search for fonts. Example:
+# font_path="/usr/share/fonts:/usr/share/texmf-dist/fonts/"
+
+font_path=""
+
+# Language to be used for hyphenation support
+
+language="en_US"
+
+# What to do if a literal block is too large. Can be
+# shrink/truncate/overflow
+
+fit_mode="shrink"
+
+# What is the maximum level of heading that starts in a new page.
+# 0 means no level starts in a new page.
+
+break_level=0
+
