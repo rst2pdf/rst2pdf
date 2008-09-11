@@ -23,24 +23,31 @@ except ImportError:
     pass
 
 class SVGImage(Flowable):
-    def __init__(self,imgname):
+    def __init__(self,filename,width=None,height=None):
+        Flowable.__init__(self)
         if HAS_UNICONVERTOR:
-            self.doc = load.load_drawing(imgname)
+            self.doc = load.load_drawing(filename)
             self.saver = plugins.find_export_plugin(plugins.guess_export_plugin(".pdf"))
+            self.width=width
+            self.height=height
+            _,_,self._w,self._h=self.doc.BoundingRect()
+            if not self.width: self.width=self._w
+            if not self.height: self.height=self._h
+            print "W/H:",self.width,self.height
         else:
             log.error("SVG image support not enabled, install uniconvertor")
-        Flowable.__init__(self)
     
     def wrap(self,aW,aH):
-        if HAS_UNICONVERTOR:            
-            br=self.doc.BoundingRect()
-            return br[2],br[3]
+        if HAS_UNICONVERTOR:
+            print "svg wrapped to:",self.width,self.height
+            return self.width ,self.height
         return 0,0
     
     def drawOn(self,canv,x,y,_sW=0):
         if HAS_UNICONVERTOR:            
             canv.saveState()
             canv.translate(x,y)
+            canv.scale(self.width/self._w,self.height/self._h)
             save (self.doc,open(".ignoreme.pdf","w"),".ignoreme.pdf",options={'pdfgen_canvas':canv})
             os.unlink(".ignoreme.pdf")
             canv.restoreState()

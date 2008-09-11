@@ -1,0 +1,13 @@
+.. image:: warning.svg
+
+.. image:: warning.svg
+   :width: 4cm
+   :height: 4cm
+
+.. image:: warning.svg
+   :width: 4cm
+   :height: 2cm
+
+.. image:: warning.svg
+   :width: 400pc
+   :height: 400pc

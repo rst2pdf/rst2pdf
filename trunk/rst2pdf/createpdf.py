@@ -34,6 +34,7 @@ from reportlab.lib.units import *
 from reportlab.lib.pagesizes import *
 
 from flowables import *
+from svgimage import SVGImage
 from log import log
 
 import config
@@ -633,6 +634,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.image):
             # FIXME: handle all the other attributes
+            print node
 
             imgname=str(node.get("uri"))
 
@@ -646,12 +648,12 @@ class RstToPdf(object):
             # Find the image size in pixels:
 
             try:
-                if imgname[-4:].lower() not in [".svg",".pdf"]:
+                # FIXME find extensions uniconvertor supports
+                if imgname.split('.')[-1].lower() in ["svg","eps","ps"]:
+                    iw,ih=SVGImage(imgname).wrap(0,0)
+                else:
                     img=PILImage.open(imgname)
                     iw,ih=img.size
-                else:
-                    iw=None
-                    ih=None
                 # Assume a DPI of 300, which is pretty much made up,
                 # and then a 100% size would be iw*inch/300, so we pass
                 # that as the second parameter to adjustUnits
@@ -690,21 +692,19 @@ class RstToPdf(object):
                 # And now we have this probably completely bogus size!
                 log.info("Image %s size calculated:  %fcm by %fcm",
                     imgname, w/cm, h/cm)
-
-                i=Image(filename=imgname,
-                        height=h,
-                        width=w)
+                if imgname.split('.')[-1].lower() in ["svg","eps","ps"]:
+                    node.elements=[SVGImage(filename=imgname,
+                                            height=h,
+                                            width=w)]
+                else:
+                    node.elements=[Image(filename=imgname,
+                                         height=h,
+                                         width=w)]
+                i=node.elements[0]
                 if node.get('align'):
                     i.hAlign=node.get('align').upper()
                 else:
                     i.hAlign='CENTER'
-                node.elements=[i]
-            except NameError: # No PIL
-                # FIXME: surely we can do better than this ;-)
-                # but this only means that image sizes specified
-                # in % or unspecified will probably be broken.
-                iw=None
-                ih=None
             except IOError,e: #No image, or no permissions
                 log.error('Error opening "%s": %s'%(imgname,str(e)))
                 node.elements=[]
