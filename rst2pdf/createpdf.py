@@ -646,8 +646,12 @@ class RstToPdf(object):
             # Find the image size in pixels:
 
             try:
-                img=PILImage.open(imgname)
-                iw,ih=img.size
+                if imgname[-4:].lower() not in [".svg",".pdf"]:
+                    img=PILImage.open(imgname)
+                    iw,ih=img.size
+                else:
+                    iw=None
+                    ih=None
                 # Assume a DPI of 300, which is pretty much made up,
                 # and then a 100% size would be iw*inch/300, so we pass
                 # that as the second parameter to adjustUnits
@@ -665,6 +669,8 @@ class RstToPdf(object):
                     # as if we knew what we're doing
                     if iw:
                         w=iw*inch/300
+                    else:
+                        w=2*inch # We are getting desperate here ;-)
 
                 h=node.get('height')
                 if h is not None:
@@ -678,6 +684,8 @@ class RstToPdf(object):
                     # aspect ratio, or else it will look ugly
                     if iw:
                         h=w*ih/iw
+                    else:
+                        h=2*inch # We are getting desperate here ;-)
 
                 # And now we have this probably completely bogus size!
                 log.info("Image %s size calculated:  %fcm by %fcm",
@@ -697,8 +705,8 @@ class RstToPdf(object):
                 # in % or unspecified will probably be broken.
                 iw=None
                 ih=None
-            except IOError: #No image, or no permissions
-                log.error('Error opening "%s"'%imgname)
+            except IOError,e: #No image, or no permissions
+                log.error('Error opening "%s": %s'%(imgname,str(e)))
                 node.elements=[]
                 
 
