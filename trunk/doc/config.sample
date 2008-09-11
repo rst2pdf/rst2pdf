@@ -7,7 +7,7 @@
 stylesheets=""
 
 # Create a compressed PDF
-
+# Use true/false (lower case) or 1/0
 compressed=False
 
 # A colon-separated list of folders to search for fonts. Example:
