@@ -2,6 +2,7 @@
 
 import sys,os
 from reportlab.platypus import *
+from log import log
 
 HAS_UNICONVERTOR=False
 
