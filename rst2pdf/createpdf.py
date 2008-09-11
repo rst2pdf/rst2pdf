@@ -72,6 +72,7 @@ class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
                  breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False):
+        global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=None
@@ -88,6 +89,8 @@ class RstToPdf(object):
         # to do it only if it's requested
         if HAS_SPHINX and sphinx:
             import sphinx.roles
+        else:
+            HAS_SPHINX=False
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
