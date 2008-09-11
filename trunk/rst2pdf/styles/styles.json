@@ -132,7 +132,7 @@
     ["subtitle" , {
       "parent": "title",
       "spaceBefore": 12,
-      "fontSize": "140%"
+      "fontSize": "75%"
     }],
     ["heading1" , {
       "parent": "normal",
