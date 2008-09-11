@@ -1056,7 +1056,8 @@ def main():
     parser.add_option('-o', '--output',dest='output',metavar='FILE'
                       ,help='Write the PDF to FILE')
                       
-    def_ssheets=config.getValue("general","stylesheets","")
+    def_ssheets=','.join([ os.path.expanduser(p) for p in \
+    config.getValue("general","stylesheets","").split(',')])    
     parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',default=def_ssheets,
                       help='A comma-separated list of custom stylesheets. Default="%s"'%def_ssheets)
 
@@ -1070,7 +1071,8 @@ def main():
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
                       help='Search this folder for fonts. (Deprecated)')
                   
-    def_fontpath=config.getValue("general","font_path","")
+    def_fontpath=':'.join([ os.path.expanduser(p) for p in \
+        config.getValue("general","font_path","").split(':')])
     parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_fontpath,
                       help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)   
 
