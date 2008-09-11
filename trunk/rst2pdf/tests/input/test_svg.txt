@@ -1,13 +1,40 @@
 .. image:: warning.svg
 
 .. image:: warning.svg
-   :width: 4cm
-   :height: 4cm
+   :width: 200%
 
 .. image:: warning.svg
-   :width: 4cm
-   :height: 2cm
+   :width: 300%
 
 .. image:: warning.svg
-   :width: 400pc
-   :height: 400pc
+   :width: 400%
+
+.. image:: warning.svg
+   :width: 500%
+
+.. image:: warning.svg
+   :width: 600%
+
+.. image:: warning.svg
+   :width: 700%
+
+.. image:: warning.svg
+   :width: 600%
+
+.. image:: warning.svg
+   :width: 500%
+
+.. image:: warning.svg
+   :width: 400%
+
+.. image:: warning.svg
+   :width: 300%
+
+.. image:: warning.svg
+   :width: 200%
+
+.. image:: warning.svg
+   :width: 100%
+
+.. image:: warning.svg
+   :width: 50%

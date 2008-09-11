@@ -634,7 +634,6 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.image):
             # FIXME: handle all the other attributes
-            print node
 
             imgname=str(node.get("uri"))
 

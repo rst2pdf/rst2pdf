@@ -33,13 +33,11 @@ class SVGImage(Flowable):
             _,_,self._w,self._h=self.doc.BoundingRect()
             if not self.width: self.width=self._w
             if not self.height: self.height=self._h
-            print "W/H:",self.width,self.height
         else:
             log.error("SVG image support not enabled, install uniconvertor")
     
     def wrap(self,aW,aH):
         if HAS_UNICONVERTOR:
-            print "svg wrapped to:",self.width,self.height
             return self.width ,self.height
         return 0,0
     
