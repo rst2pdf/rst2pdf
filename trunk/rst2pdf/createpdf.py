@@ -648,7 +648,7 @@ class RstToPdf(object):
 
             try:
                 # FIXME find extensions uniconvertor supports
-                if imgname.split('.')[-1].lower() in ["svg","eps","ps"]:
+                if imgname.split('.')[-1].lower() in ["ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
                     iw,ih=SVGImage(imgname).wrap(0,0)
                 else:
                     img=PILImage.open(imgname)
@@ -691,7 +691,7 @@ class RstToPdf(object):
                 # And now we have this probably completely bogus size!
                 log.info("Image %s size calculated:  %fcm by %fcm",
                     imgname, w/cm, h/cm)
-                if imgname.split('.')[-1].lower() in ["svg","eps","ps"]:
+                if imgname.split('.')[-1].lower() in ["ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
                     node.elements=[SVGImage(filename=imgname,
                                             height=h,
                                             width=w)]
