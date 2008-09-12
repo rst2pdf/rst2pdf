@@ -210,6 +210,9 @@ To test suitability of your vector images for use with rst2pdf, try converting t
 to PDF using uniconvertor. The result should be exactly the way they will look
 when used in your documents.
 
+If you can choose between raster and vectorial images, for non-photographic images,
+vector files are usually smaller and look better, specially when printed.
+
 Styles
 ======
 
@@ -549,7 +552,7 @@ Multiple Stylesheets
 
 When you use a custom stylesheet, you don't need to define *everything* in it.
 Whatever you don't define will be taken from the default stylesheet. For example,
-if you only want to chage page size, default font and font size, this would
+if you only want to change page size, default font and font size, this would
 be enough:
 
 .. code-block:: js
@@ -753,8 +756,6 @@ for hyphenation via the command line or paragraph styles.
 For english, this should be enough::
 
     ["bodytext" , {
-      "parent": "normal",
-      "spaceBefore":6,
       "alignment": "TA_JUSTIFY",
       "hyphenation": true
     }],
@@ -797,11 +798,22 @@ And all paragraps declared of bodytext_de style would have german hyphenation::
     erfreulichen Erfolg, daß die deutsche Leserwelt es gewöhnt geworden war,
     beim Anblick meines Namens auf Büchern sofort an die--Alpen zu denken.
 
+Here is the result (made thinner to force hyphenation):
+
+.. class:: thin
+
+Ein Vierteljahrhundert hindurch hatte ich Kopf, Herz, Hand und--Füße der
+Schilderung der Alpenwelt und ihrer Bewohner gewidmet mit dem
+erfreulichen Erfolg, daß die deutsche Leserwelt es gewöhnt geworden war,
+beim Anblick meines Namens auf Büchern sofort an die--Alpen zu denken.
+
 BTW: I have no idea what that says, I just copied it from project Gutenberg.
 Hopefully it's not offensive :-)
 
 If you explicitly configure a language in a paragraph style and also pass a
 language in the command line, the style has priority, so remember:
+
+.. important::
 
     If you configure the bodytext style to have a language, your document
     is supposed to be in that language, regardless of what the command line
