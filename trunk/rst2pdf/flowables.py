@@ -162,9 +162,9 @@ class FrameCutter(FrameActionFlowable):
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
                 f1=SmartFrame(frame.container,
                               frame._x1+self.dx-2*self.padding,
-                              frame._y2-self.f.height-2*self.padding,
+                              frame._y2-self.f.height-3*self.padding,
                               self.width+2*self.padding,
-                              self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
+                              self.f.height+3*self.padding,bottomPadding=0,topPadding=0,
                               leftPadding=self.lpad)
                 f1._atTop=frame._atTop
                 frame.container.frames.insert(idx+1,f1)
@@ -174,9 +174,8 @@ class FrameCutter(FrameActionFlowable):
                                                                frame._x1,
                                                                frame._y1p,
                                                                self.width+self.dx,
-                                                               frame._height-self.f.height-2*self.padding,topPadding=0))
+                                                               frame._height-self.f.height-3*self.padding,topPadding=0))
         else:
-            pass
             if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
                 f1=SmartFrame(frame.container,
                               frame._x1-self.width,
