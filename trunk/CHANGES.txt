@@ -1,3 +1,29 @@
+New in 0.8
+----------
+
+* Support for vector graphics: SVG, EPS, PS, CDR and others (requires uniconvertor)
+* Support for stdin and stdout, so you can use rst2pdf in pipes.
+* Works with reportlab 2.1 and 2.2
+* Simpler stylesheets (guess bulletFontName, leading, bulletFontSize from other parameters)
+* Some support for sphinx
+* Fixed the docutils Writer interface
+* Continue processing when an image is missing
+* Support for user config file
+* Font sizes can be expressed in units or % of parent style's size
+* Larger font size in the default stylesheet
+
+New in 0.7
+----------
+
+* Automatic Type1 and True Type font embedding. Just use the font or family name, and (with a little luck), it will be embedded for you.
+* width attribute in styles, to create narrow paragraphs/tables
+* Styles for table headers and table cells
+* "Zebra tables"
+* Improvements in the handling of overflowing literal blocks (code, for instance)
+* Different modes to handle too-large literal blocks: overflow/truncate/shrink.
+* Real sidebars and "floating" elements.
+* Fixed link style (no ugly black underlining!)
+
 New in 0.6
 ----------
 
