@@ -48,18 +48,23 @@ Command line Options
 -o FILE, --output=FILE
                     Write the PDF to FILE
 -s STYLESHEETS, --stylesheets=STYLESHEETS
-                    A comma-separated list of custom stylesheets
--c, --compressed      Create a compressed PDF
+                    A comma-separated list of custom stylesheets.
+                    Default=""
+-c, --compressed      Create a compressed PDF. Default=False
 --print-stylesheet    Print the default stylesheet and exit
---font-folder=FOLDER  Search this folder for fonts.
+--font-folder=FOLDER  Search this folder for fonts. (Deprecated)
+--font-path=FOLDER:FOLDER:...:FOLDER
+                    A colon-separated list of folders to search for fonts.
+                    Default="/usr/share/fonts:/usr/share/texmf-
+                    dist/fonts/"
 -l LANG, --language=LANG
-                    Language to be used for hyphenation.
+                    Language to be used for hyphenation. Default="en_US"
 --fit-literal-mode=MODE
                     What todo when a literal is too wide. One of
-                    error,overflow,shrink,truncate. Defaults to truncate.
+                    error,overflow,shrink,truncate. Default="shrink"
 -b LEVEL, --break-level=LEVEL
                     Maximum section level that starts in a new page.
-                    Default: 1
+                    Default: 0
 -q, --quiet           Print less information.
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.
@@ -67,9 +72,9 @@ Command line Options
 Pipe usage
 ==========
 
-if no input nor output are provided, stdin and stdout will be used respectively
+If no input nor output are provided, stdin and stdout will be used respectively
 
-you may want to use rst2pdf in a linux pipe as such::
+You may want to use rst2pdf in a linux pipe as such::
 
     cat readme.txt | rst2pdf | gzip -c > readme.pdf.gz
     
@@ -77,11 +82,11 @@ or::
 
     curl http://docutils.sourceforge.net/docs/user/rst/quickstart.txt | rst2pdf > quickstart.pdf
     
-if no input argument is provided, stdin will be used::
+If no input argument is provided, stdin will be used::
 
     cat readme.txt | rst2pdf -o readme.pdf
 
-if outpufile is specified to dash '-', output goes to stdout::
+If outpufile is set to dash '-', output goes to stdout::
 
     rst2pdf -o - readme.txt > output.pdf
 
