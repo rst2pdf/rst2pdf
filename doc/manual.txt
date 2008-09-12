@@ -70,7 +70,6 @@ Command line Options
 
 Some of these options' defaults can be changed by creating a `configuration file`_
 
-
 Configuration File
 ==================
 
@@ -164,8 +163,11 @@ I could go the HTML path and just render them where you put them, but then they
 wouldn't be footnotes either, would they? They would be
 "in-the-middle-of-text-notes" or just plain notes.
 
-Inline Images
-=============
+Images
+======
+
+Inline
+------
 
 You can insert images in the middle of your text like this::
 
@@ -178,6 +180,35 @@ This |biohazard| means you have to run.
 .. |biohazard| image:: biohazard.png
 
 This only works correctly with reportlab 2.2 or later [1]_.
+
+Supported Image Types
+---------------------
+
+For raster images, rst2pdf supports anything PIL (The Python Imaging Library) supports.
+The exact list of supported formats varies according to your PIL version and system.
+
+For vector image support, you need to install Uniconvertor from http://sk1project.org
+version 1.1.3 or later.
+
+It provides support for these formats:
+
+* CorelDRAW ver.7-X3,X4 (CDR/CDT/CCX/CDRX/CMX)
+* Adobe Illustrator up to 9 ver. (AI postscript based)
+* Postscript (PS)
+* Encapsulated Postscript (EPS)
+* Computer Graphics Metafile (CGM)
+* Windows Metafile (WMF)
+* XFIG
+* Scalable Vector Graphics (SVG)
+* Skencil/Sketch/sK1 (SK and SK1)
+* Acorn Draw (AFF)
+
+Some features will not work when using these images.For example, gradients will not
+display, and text may cause problems.
+
+To test suitability of your vector images for use with rst2pdf, try converting them
+to PDF using uniconvertor. The result should be exactly the way they will look
+when used in your documents.
 
 Styles
 ======
@@ -630,7 +661,7 @@ the :include: option::
 
 This will give a warning if setup.py doesn't exist or can't be opened.
 
-include with boundaries
+Include with Boundaries
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 you can add selectors to limit the inclusion to a portion of the file.
@@ -860,6 +891,5 @@ The supported page template options and their defaults are:
 .. [1] You can get Wordaxe from htp://deco-cow.sf.net. For reportlab 2.1 version 0.2.5
        or later should work. For reportlab 2.2, you may need a later version or
        wordaxe from SVN.
-
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
