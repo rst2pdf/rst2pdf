@@ -42,7 +42,18 @@ class SVGImage(Flowable):
         return 0,0
     
     def drawOn(self,canv,x,y,_sW=0):
-        if HAS_UNICONVERTOR:            
+        if HAS_UNICONVERTOR:
+
+            if _sW and hasattr(self,'hAlign'):
+                from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+                a = self.hAlign
+                if a in ('CENTER','CENTRE', TA_CENTER):
+                    x = x + 0.5*_sW
+                elif a in ('RIGHT',TA_RIGHT):
+                    x = x + _sW
+                elif a not in ('LEFT',TA_LEFT):
+                    raise ValueError, "Bad hAlign value "+str(a)
+        
             canv.saveState()
             canv.translate(x,y)
             canv.scale(self.width/self._w,self.height/self._h)
