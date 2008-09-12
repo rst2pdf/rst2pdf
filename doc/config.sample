@@ -8,7 +8,7 @@ stylesheets=""
 
 # Create a compressed PDF
 # Use true/false (lower case) or 1/0
-compressed=False
+compressed=false
 
 # A colon-separated list of folders to search for fonts. Example:
 # font_path="/usr/share/fonts:/usr/share/texmf-dist/fonts/"
