@@ -47,16 +47,15 @@ Command line Options
 -h, --help            show this help message and exit
 -o FILE, --output=FILE
                     Write the PDF to FILE
--s STYLESHEETS, --stylesheets=STYLESHEETS
+-s STYLESHEETS
                     A comma-separated list of custom stylesheets.
                     Default=""
 -c, --compressed      Create a compressed PDF. Default=False
 --print-stylesheet    Print the default stylesheet and exit
---font-folder=FOLDER  Search this folder for fonts. (Deprecated)
---font-path=FOLDER:FOLDER:...:FOLDER
-                    A colon-separated list of folders to search for fonts.
-                    Default="/usr/share/fonts:/usr/share/texmf-
-                    dist/fonts/"
+--font-folder=FOLDER     Search this folder for fonts. (Deprecated)
+--font-path=FOLDERLIST
+                      A colon-separated list of folders to search for fonts.
+                      Default=""
 -l LANG, --language=LANG
                     Language to be used for hyphenation. Default="en_US"
 --fit-literal-mode=MODE
@@ -68,6 +67,45 @@ Command line Options
 -q, --quiet           Print less information.
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.
+
+Some of these options' defaults can be changed by creating a `configuration file`_
+
+
+Configuration File
+==================
+
+Since version 0.8, rst2pdf will read (if it is available) a file in ``~/.rst2pdf/config``.
+Here's an example file showing all the currently available options:
+
+.. code-block:: ini
+
+    # This is an example config file. Modify and place in ~/.rst2pdf/config
+    
+    [general]
+    # A comma-separated list of custom stylesheets. Example:
+    # stylesheets="fruity.json,a4paper.json,verasans.json"
+    stylesheets=""
+
+    # Create a compressed PDF
+    # Use true/false (lower case) or 1/0
+    # Example: compressed=true
+    compressed=false
+
+    # A colon-separated list of folders to search for fonts. Example:
+    # font_path="/usr/share/fonts:/usr/share/texmf-dist/fonts/"
+    font_path=""
+
+    # Language to be used for hyphenation support
+    language="en_US"
+
+    # What to do if a literal block is too large. Can be
+    # shrink/truncate/overflow
+    fit_mode="shrink"
+
+    # What is the maximum level of heading that starts in a new page.
+    # 0 means no level starts in a new page.
+    break_level=0
+
 
 Pipe usage
 ==========
@@ -139,11 +177,7 @@ This |biohazard| means you have to run.
 
 .. |biohazard| image:: biohazard.png
 
-However, although I think rst2pdf generates the right reportlab code, the image
-will not be visible.
-
-It will work, however, if you use a development version of reportlab. In which case
-wordaxe won't work, and you will have no hyphenation. Your choice ;-)
+This only works correctly with reportlab 2.2 or later [1]_.
 
 Styles
 ======
@@ -306,7 +340,7 @@ a. Fonty is a True Type font:
             $ fc-match fonty
             fonty.ttf: "Fonty" "Normal"
 
-       If you are in Windows, I need your help ;-)
+       If you are in Windows, I need your help ;-) or you can use `The Harder Way (True Type)`_
 
     2. The folder where fonty.ttf is located needs to be in your font path. You can set it
        using the --font-path option. For example::
@@ -378,7 +412,7 @@ font.
 Suppose you want to use the nice public domain `Tuffy font`_ (included in rst2pdf's
 source distribution).
 
-You need to give the filenames of all variants:
+You need to give the filenames of all variants::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
 
@@ -668,8 +702,7 @@ Hyphenation
 
 If you want good looking documents, you want to enable hyphenation.
 
-To do it, you need to install Wordaxe version 0.2.5 or later from
-http://deco-cow.sf.net.
+To do it, you need to install Wordaxe [1]_.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
 that means you need to replace the rl_codecs.py file from reportlab with the one from
@@ -823,6 +856,10 @@ The supported page template options and their defaults are:
 * showHeader : True
 
 * showFooter : True
+
+.. [1] You can get Wordaxe from htp://deco-cow.sf.net. For reportlab 2.1 version 0.2.5
+       or later should work. For reportlab 2.2, you may need a later version or
+       wordaxe from SVN.
 
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
