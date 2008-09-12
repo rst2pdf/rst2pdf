@@ -77,7 +77,7 @@ class StyleSheet(object):
             if page:
                 if page.get('size', None): # A standard size
                     if page['size'] in pagesizes.__dict__:
-                        self.ps=pagesizes.__dict__[page['size']]
+                        self.ps=list(pagesizes.__dict__[page['size']])
                     else:
                         log.critical('Unknown page size %s in stylesheet %s' % (page['size'],ssname))
                         sys.exit(1)
