@@ -1,6 +1,28 @@
 {
   "pageSetup" : {
     "firstTemplate": "coverPage"
-  }
+  },
+  "fontsAlias" : {
+    "stdFont": "Vera",
+    "stdBold": "Vera-Bold",
+    "stdItalic": "Vera-Oblique",
+    "stdBoldItalic": "Vera-BoldOblique",
+    "stdMono": "Courier",
+    "stdMonoItalic": "Courier-Oblique",
+    "stdMonoBold": "Courier-Bold",
+    "stdMonoBoldItalic": "Courier-BoldOblique",
+    "stdSerif": "Times-Roman"
+  },
+  "styles" : [
+    ["thin" , {
+    "parent" : "bodytext",
+    "width" : "55%",
+    "alignment": "TA_JUSTIFY",
+    "hyphenation": true,
+    "language": "de_DE"
+
+    }
+    ]
+   ]
 }
 
