@@ -295,9 +295,9 @@ class BoundByWidth(Flowable):
     def split(self,availWidth,availHeight):
         if len(self.content)>1:
             # Try splitting in our individual elements
-            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content ]
+            return [ BoundByWidth(self.maxWidth,[f],self.style,self.mode) for f in self.content ]
         else: # We need to split the only element we have
-            return [ BoundByWidth(self.maxWidth,[f],self.style) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
+            return [ BoundByWidth(self.maxWidth,[f],self.style,self.mode) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
     def draw(self):
         '''we simulate being added to a frame'''
@@ -340,6 +340,7 @@ class BoxedContainer(BoundByWidth):
     def __init__(self, content, style, mode='shrink'):
         BoundByWidth.__init__(self,style.width, content, mode=mode, style=None)
         self.style=style
+        self.mode=mode
 
     def draw(self):
         canv=self.canv
@@ -364,6 +365,13 @@ class BoxedContainer(BoundByWidth):
         canv.drawPath(p,stroke=1,fill=1)
         canv.restoreState()
         BoundByWidth.draw(self)
+        
+    def split(self,availWidth,availHeight):
+        if len(self.content)>1:
+            # Try splitting in our individual elements
+            return [ BoxedContainer([f],self.style,self.mode) for f in self.content ]
+        else: # We need to split the only element we have
+            return [ BoxedContainer([f],self.style,self.mode) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
 if reportlab.Version == '2.1':
 
