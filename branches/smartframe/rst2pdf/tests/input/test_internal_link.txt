@@ -1,5 +1,0 @@
-One paragraph.
-
-.. _internal link:
-
-The above internal link shoould not use any space in the page.

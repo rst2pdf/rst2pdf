@@ -1,6 +1,0 @@
-{
-  "embeddedFonts" : [ ["wqy-zenhei.ttf", "wqy-zenhei.ttf", "wqy-zenhei.ttf", "wqy-zenhei.ttf"] ],
-  "fontsAlias" : {
-    "stdFont": "wqy-zenhei"
-  }
-}
