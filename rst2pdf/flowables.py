@@ -144,6 +144,7 @@ class SmartFrame(Frame):
             rightPadding=6, topPadding=6, id=None, showBoundary=0,
             overlapAttachedSpace=None,_debug=None):
         self.container=container
+        self.onSidebar=False
         Frame.__init__(self,x1, y1, width,height, leftPadding, bottomPadding,
             rightPadding, topPadding, id, showBoundary,
             overlapAttachedSpace,_debug)
@@ -167,6 +168,8 @@ class FrameCutter(FrameActionFlowable):
                               self.f.height+3*self.padding,bottomPadding=0,topPadding=0,
                               leftPadding=self.lpad)
                 f1._atTop=frame._atTop
+                # This is a frame next to a sidebar.
+                f1.onSidebar=True
                 frame.container.frames.insert(idx+1,f1)
 
             if frame._height-self.f.height-2*self.padding >30: # Don't add silly thin frame
@@ -184,6 +187,8 @@ class FrameCutter(FrameActionFlowable):
                               self.f.height+2*self.padding,bottomPadding=0,topPadding=0,
                               rightPadding=self.lpad)
                 f1._atTop=frame._atTop
+                # This is a frame next to a sidebar.
+                f1.onSidebar=True
                 frame.container.frames.insert(idx+1,f1)
             if frame._height-self.f.height-2*self.padding >30:
                 frame.container.frames.insert(idx+2,SmartFrame(frame.container,
@@ -200,53 +205,56 @@ class Sidebar(FrameActionFlowable):
         self.flowables=flowables
 
     def frameAction(self,frame):
-        w=frame.container.styles.adjustUnits(self.width,frame.width)
-        idx=frame.container.frames.index(frame)
-        padding = self.style.borderPadding
-        width=self.style.width
-        self.style.padding=frame.container.styles.adjustUnits(str(padding),frame.width)
-        self.style.width=frame.container.styles.adjustUnits(str(width),frame.width)
-        self.kif=BoxedContainer(self.flowables,self.style)
-        if self.style.float=='left':
-            self.style.lpad = frame.leftPadding
-            f1=SmartFrame(frame.container,
-                          frame._x1,
-                          frame._y1p,
-                          w-2*self.style.padding,
-                          frame._y-frame._y1p,
-                          leftPadding=self.style.lpad,
-                          rightPadding=0,
-                          bottomPadding=0,
-                          topPadding=0)
-            f1._atTop=frame._atTop
-            frame.container.frames.insert(idx+1,f1)
-            frame._generated_content = [FrameBreak(),self.kif,
-                FrameCutter(w,
-                    frame.width-w,
-                    self.kif,
-                    padding,
-                    self.style.lpad,
-                    True),
-                FrameBreak()]
-        elif self.style.float=='right':
-            self.style.lpad = frame.rightPadding
-            frame.container.frames.insert(idx+1,SmartFrame(frame.container,
-                                                       frame._x1+frame.width-self.style.width,
-                                                       frame._y1p,
-                                                       w,
-                                                       frame._y-frame._y1p,
-                                                       rightPadding=self.style.lpad,
-                                                       leftPadding=0,
-                                                       bottomPadding=0,
-                                                       topPadding=0))
-            frame._generated_content = [FrameBreak(),self.kif,
-                FrameCutter(w,
-                    frame.width-w,
-                    self.kif,
-                    padding,
-                    self.style.lpad,
-                    False),
-                FrameBreak()]
+        if frame.onSidebar: #We are still on the frame next to a sidebar!
+            frame._generated_content = [FrameBreak(),self]
+        else:
+            w=frame.container.styles.adjustUnits(self.width,frame.width)
+            idx=frame.container.frames.index(frame)
+            padding = self.style.borderPadding
+            width=self.style.width
+            self.style.padding=frame.container.styles.adjustUnits(str(padding),frame.width)
+            self.style.width=frame.container.styles.adjustUnits(str(width),frame.width)
+            self.kif=BoxedContainer(self.flowables,self.style)
+            if self.style.float=='left':
+                self.style.lpad = frame.leftPadding
+                f1=SmartFrame(frame.container,
+                            frame._x1,
+                            frame._y1p,
+                            w-2*self.style.padding,
+                            frame._y-frame._y1p,
+                            leftPadding=self.style.lpad,
+                            rightPadding=0,
+                            bottomPadding=0,
+                            topPadding=0)
+                f1._atTop=frame._atTop
+                frame.container.frames.insert(idx+1,f1)
+                frame._generated_content = [FrameBreak(),self.kif,
+                    FrameCutter(w,
+                        frame.width-w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        True),
+                    FrameBreak()]
+            elif self.style.float=='right':
+                self.style.lpad = frame.rightPadding
+                frame.container.frames.insert(idx+1,SmartFrame(frame.container,
+                                                        frame._x1+frame.width-self.style.width,
+                                                        frame._y1p,
+                                                        w,
+                                                        frame._y-frame._y1p,
+                                                        rightPadding=self.style.lpad,
+                                                        leftPadding=0,
+                                                        bottomPadding=0,
+                                                        topPadding=0))
+                frame._generated_content = [FrameBreak(),self.kif,
+                    FrameCutter(w,
+                        frame.width-w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        False),
+                    FrameBreak()]
 
 
 class BoundByWidth(Flowable):
