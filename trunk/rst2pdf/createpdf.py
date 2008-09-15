@@ -453,6 +453,10 @@ class RstToPdf(object):
             if isinstance (node.parent,docutils.nodes.authors):
                 # Is only one of multiple authors. Return a paragraph
                 node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
+                if self.doc_author:
+                    self.doc_author+="; "+node.astext().strip()
+                else:
+                    self.doc_author=node.astext().strip()
             else:
                 # A single author: works like a field
                 fb=self.gather_pdftext(node,depth)
