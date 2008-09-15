@@ -8,3 +8,5 @@
   This is a longish paragraph.
   This is a longish paragraph.
   This is a longish paragraph.
+
+This is a normal paragraph
