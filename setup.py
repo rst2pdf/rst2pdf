@@ -48,7 +48,7 @@ setup(
     name = "rst2pdf",
     version = "0.8",
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-    package_data = {'rst2pdf': ['*/*.ttf','*.json']},
+    package_data = {'rst2pdf': ['*.json']},
     namespace_packages=['rst2pdf'],
     include_package_data=True,
     # place to find an egg distrib of reportlab 2.1
