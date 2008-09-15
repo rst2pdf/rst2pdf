@@ -584,12 +584,18 @@ class RstToPdf(object):
             if b and b in "*+-":
                 b=u'\u2022'
 
-            indentation=el[0].style.leading
+
+            # FIXME: this is really really not good code
+            if "style" in el[0].__dict__:
+                indentation=el[0].style.leading
+            else:
+                indentation=12
             el[0].bulletText = b
             for e in el:
-                indentedStyle=copy(e.style)
-                indentedStyle.leftIndent=indentation
-                e.style=indentedStyle
+                if "style" in e.__dict__:
+                    indentedStyle=copy(e.style)
+                    indentedStyle.leftIndent+=indentation
+                    e.style=indentedStyle
             for e in el[1:]:
                 e.bulletText=" "
             node.elements=el
