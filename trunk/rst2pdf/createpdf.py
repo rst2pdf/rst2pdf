@@ -583,8 +583,10 @@ class RstToPdf(object):
             el[0].bulletText = b
             for e in el[1:]:
                 e.bulletText=" "
-            node.elements=[Table([[el]],style=sty.tstyles["bullet"])]
-
+            e.style.leftIndent=e.style.leading
+            #e.style.bulletIndent=-2*e.style.leading
+            node.elements=el
+            
         elif isinstance (node, docutils.nodes.transition):
             node.elements=[Separation()]
 
