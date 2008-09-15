@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.6
+:version: 0.9pre
 :revision: $LastChangedRevision$
 
 .. header::
@@ -73,7 +73,18 @@ Some of these options' defaults can be changed by creating a `configuration file
 Configuration File
 ==================
 
-Since version 0.8, rst2pdf will read (if it is available) a file in ``~/.rst2pdf/config``.
+Since version 0.8, rst2pdf will read (if it is available) configuration files in
+``/etc/rst2pdf.conf`` and ``~/.rst2pdf/config``.
+
+The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
+``/etc/rst2pdf.conf`` [#]_
+
+.. [#] The ``/etc/rst2pdf.conf`` location makes sense for Linux and linux-like systems.
+       if you are using rst2pdf in other systems, please contact me and tell me where
+       the system-wide config file should be.
+
+
+
 Here's an example file showing all the currently available options:
 
 .. code-block:: ini
@@ -179,7 +190,13 @@ This |biohazard| means you have to run.
 
 .. |biohazard| image:: biohazard.png
 
-This only works correctly with reportlab 2.2 or later [1]_.
+This only works correctly with reportlab 2.2 or later [#]_.
+
+
+.. [#] You can get Wordaxe from htp://deco-cow.sf.net. For reportlab 2.1 version 0.2.5
+       or later should work. For reportlab 2.2, you may need a later version or
+       wordaxe from SVN.
+
 
 Supported Image Types
 ---------------------
@@ -904,8 +921,6 @@ The supported page template options and their defaults are:
 
 * showFooter : True
 
-.. [1] You can get Wordaxe from htp://deco-cow.sf.net. For reportlab 2.1 version 0.2.5
-       or later should work. For reportlab 2.2, you may need a later version or
-       wordaxe from SVN.
+
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
