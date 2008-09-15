@@ -458,7 +458,7 @@ class RstToPdf(object):
                 fb=self.gather_pdftext(node,depth)
                 node.elements=[Table([[Paragraph("Author:",style=self.styles['fieldname']),
                                     Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
-                self.doc_author=fb.strip()
+                self.doc_author=node.astext().strip()
 
         elif isinstance (node, docutils.nodes.authors):
             # Multiple authors. Create a two-column table. Author references on the right.
