@@ -17,22 +17,6 @@ def getValue(section,key,default=None):
   except:
     return default
 
-def setValue(section,key,value):
-  section=str(section)
-  key=str(key)
-  section=section.lower()
-  key=key.lower()
-  value=dumps(value)
-  try:
-    r=conf.set(section,key,value)
-  except ConfigParser.NoSectionError:
-    conf.add_section(section)
-    r=conf.set(section,key,value)
-  f=open(cfname,'w')
-  conf.write(f)
-  return r
-
-
 class ConfigError(Exception):
   def __init__(self,modulename,msg):
     self.modulename=modulename
@@ -43,8 +27,4 @@ conf=ConfigParser.SafeConfigParser()
 if not os.path.isdir(cfdir):
   os.mkdir(cfdir)
 
-if not os.path.isfile(cfname):
-  open(cfname, 'w').close()
-f=open(cfname,'r')
-conf.readfp(f)
-f.close()
+conf.read(cfname)
