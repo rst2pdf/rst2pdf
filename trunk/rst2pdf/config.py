@@ -24,7 +24,4 @@ class ConfigError(Exception):
 
 
 conf=ConfigParser.SafeConfigParser()
-if not os.path.isdir(cfdir):
-  os.mkdir(cfdir)
-
-conf.read(cfname)
+conf.read(["/etc/rst2pdf.conf",cfname])
