@@ -190,12 +190,8 @@ This |biohazard| means you have to run.
 
 .. |biohazard| image:: biohazard.png
 
-This only works correctly with reportlab 2.2 or later [#]_.
+This only works correctly with reportlab 2.2 or later.
 
-
-.. [#] You can get Wordaxe from htp://deco-cow.sf.net. For reportlab 2.1 version 0.2.5
-       or later should work. For reportlab 2.2, you may need a later version or
-       wordaxe from SVN.
 
 
 Supported Image Types
@@ -757,7 +753,10 @@ Hyphenation
 
 If you want good looking documents, you want to enable hyphenation.
 
-To do it, you need to install Wordaxe [1]_.
+To do it, you need to install Wordaxe [#]_.
+
+.. [#] You can get Wordaxe from htp://deco-cow.sf.net. Version 0.2.6 or later is
+       recommended.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
 that means you need to replace the rl_codecs.py file from reportlab with the one from
@@ -791,6 +790,12 @@ for wordaxe are:
 * en_US
 
 * ru
+
+However, since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
+available. PyHyphen can use any OpenOffice dictionary, and can even download
+them automatically. [#]_
+
+.. [#] For more information, please check the PyHyphen website at http://pyhyphen.googlecode.com
 
 For example, this will enable german hyphenation globally:
 

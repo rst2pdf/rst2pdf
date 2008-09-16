@@ -55,9 +55,10 @@ except ImportError:
 
 try:
     import wordaxe
-    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
     haveWordaxe=True
 except ImportError:
     #log.warning("No support for hyphenation, install wordaxe")
@@ -100,9 +101,11 @@ class RstToPdf(object):
                 self.styles['bodytext'].language=language
             for lang in self.styles.languages:
                 try:
-                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5)
-                except ImportError: #PyHnj C extension is not installed
-                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
+                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
+                    continue
+                except:
+                    log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang) 
+                wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language, ','.join(self.styles.languages))
 
