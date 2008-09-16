@@ -292,9 +292,11 @@ class StyleSheet(object):
             if ('bulletFontName' not in s) and ('fontName' in s):
                 s['bulletFontName']=s['fontName']
 
+            hasFS=True
             # Adjust fontsize units
             if 'fontSize' not in s:
                 s['fontSize']=s['parent'].fontSize
+                hasFS=False
             elif 'parent' in s:
                 # This means you can set the fontSize to "2cm" or to "150%" which
                 # will be calculated relative to the parent style
@@ -305,7 +307,7 @@ class StyleSheet(object):
                 s['fontSize']=self.adjustUnits(s['fontSize'],10)
 
             # If the leading is not set, but the size is, set it
-            if 'leading' not in s:
+            if 'leading' not in s and hasFS:
                 s['leading']=1.2*s['fontSize']
 
             # If the bullet font size is not set, set it as fontSize
