@@ -43,6 +43,8 @@ install_requires = [
         
 tests_require = ['pyPdf',]
 hyphenation_require = ['wordaxe',]
+svgsupport_require = ['uniconvertor',]
+sphinx_require = ['sphinx',]
 
 setup(
     name = "rst2pdf",
@@ -59,11 +61,17 @@ setup(
        "http://sourceforge.net/project/platformdownload.php?group_id=105867",
        #PIL as egg
        "http://dist.repoze.org",
+       # uniconvertor
+       "http://sk1project.org/downloads/uniconvertor/v1.1.3/uniconvertor-1.1.3.tar.gz",
+       
     ], 
     install_requires = install_requires,
     tests_require=tests_require,
-    extras_require=dict(tests=tests_require,
-                        hyphenation=hyphenation_require,),
+    extras_require=dict(tests = tests_require,
+                        hyphenation = hyphenation_require,
+                        svgsupport = svgsupport_require,
+                        sphinx = sphinx_require,
+                        ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
