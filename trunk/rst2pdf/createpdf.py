@@ -73,7 +73,7 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False):
+                 inlinelinks=False,breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
@@ -82,6 +82,7 @@ class RstToPdf(object):
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath)
+        self.inlinelinks=inlinelinks
         self.breaklevel=breaklevel
         self.fitMode=fitMode
 
@@ -205,8 +206,12 @@ class RstToPdf(object):
             uri=node.get('refuri')
             if uri:
                 if urlparse(uri)[0]:
-                    pre+=u'<a href="%s" color="%s">'%(uri,self.styles.linkColor)
-                    post='</a>'+post
+                    if self.inlinelinks:
+                        import pdb; pdb.set_trace()
+                        post = u' (%s)' % uri
+                    else:
+                        pre+=u'<a href="%s" color="%s">'%(uri,self.styles.linkColor)
+                        post='</a>'+post
             else:
                 uri=node.get('refid')
                 if uri:
@@ -1105,7 +1110,8 @@ def main():
     def_break=config.getValue("general","break_level",0)
     parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default=def_break,
                       help='Maximum section level that starts in a new page. Default: %d'%def_break)
-                      
+    parser.add_option('--inline-links',action="store_true",dest='inlinelinks',default=False,
+                      help='shows target between parenthesis instead of active link')
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
                       help='Print less information.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,
@@ -1172,6 +1178,7 @@ def main():
     RstToPdf(stylesheets = ssheet,
              language=options.language,
              breaklevel=int(options.breaklevel),
+             inlinelinks = options.inlinelinks,
              fitMode=options.fitMode,
              fontPath=fpath).createPdf(text=infile.read(),
                                                  output=outfile,
