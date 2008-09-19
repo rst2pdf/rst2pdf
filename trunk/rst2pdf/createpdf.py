@@ -77,8 +77,8 @@ class RstToPdf(object):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
-        self.doc_title=None
-        self.doc_author=None
+        self.doc_title="" 
+        self.doc_author="" 
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath)
@@ -1002,7 +1002,7 @@ class FancyPage(PageTemplate):
                     wrap(self.tw,self.styles.ph)[1]
         else:
             self.hh=0
-        if self.head and self.template.get('showFooter',True):
+        if self.foot and self.template.get('showFooter',True):
             self.fh=Paragraph(self.foot,style=self.styles['footer']).\
                     wrap(self.tw,self.styles.ph)[1]
         else:
@@ -1035,6 +1035,9 @@ class FancyPage(PageTemplate):
 
     def replaceTokens(self,text,canv,doc):
         ''' Put doc_title/page number/etc in text of header/footer'''
+
+        if text is None:
+            return ''
 
         text=text.replace('###Page###',str(doc.page))
         text=text.replace("###Title###",doc.title)
