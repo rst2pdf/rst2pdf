@@ -27,6 +27,7 @@ import pygments_code_block_directive
 
 import reportlab
 from reportlab.platypus import *
+from reportlab.platypus.flowables import _listWrapOn,_Container
 from reportlab.pdfbase.pdfmetrics import stringWidth
 import reportlab.lib.colors as colors
 from reportlab.lib.enums import *
@@ -443,18 +444,13 @@ class RstToPdf(object):
             node.elements=[Table([[fn,fb]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
         elif isinstance (node, docutils.nodes.decoration):
-            # This is a tricky one. We need to switch our document's
-            # page templates based on this. If decoration contains a
-            # header and/or a footer, we need to use those
-            # right now, we avoid trouble.
-            # FIXME Implement
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.header):
-            self.decoration['header']=self.gather_pdftext(node,depth)
+            self.decoration['header']=self.gather_elements(node,depth,style=self.styles['header'])
             node.elements=[]
         elif isinstance (node, docutils.nodes.footer):
-            self.decoration['footer']=self.gather_pdftext(node,depth)
+            self.decoration['footer']=self.gather_elements(node,depth,style=self.styles['footer'])
             node.elements=[]
 
         elif isinstance (node, docutils.nodes.author):
@@ -998,13 +994,11 @@ class FancyPage(PageTemplate):
         # Adjust text space accounting for header/footer
 
         if self.head and self.template.get('showHeader',True):
-            self.hh=Paragraph(self.head,style=self.styles['header']).\
-                    wrap(self.tw,self.styles.ph)[1]
+            _,self.hh=_listWrapOn(self.head,self.tw,canv)
         else:
             self.hh=0
         if self.foot and self.template.get('showFooter',True):
-            self.fh=Paragraph(self.foot,style=self.styles['footer']).\
-                    wrap(self.tw,self.styles.ph)[1]
+            _,self.fh=_listWrapOn(self.foot,self.tw,canv)
         else:
             self.fh=0
 
@@ -1030,27 +1024,27 @@ class FancyPage(PageTemplate):
                                           self.styles.adjustUnits(frame[1],self.th)+y1,
                                           self.styles.adjustUnits(frame[2],self.tw),
                                           self.styles.adjustUnits(frame[3],self.th)))
-        #textframe=Frame(x1,y1,self.tw,self.th)
-        #self.frames=[textframe]
 
-    def replaceTokens(self,text,canv,doc):
+    def replaceTokens(self,elems,canv,doc):
         ''' Put doc_title/page number/etc in text of header/footer'''
 
-        if text is None:
-            return ''
+        for e in elems:
+            i=elems.index(e)
+            if isinstance(e,Paragraph):
+                text=e.text
+                text=text.replace('###Page###',str(doc.page))
+                text=text.replace("###Title###",doc.title)
+                # FIXME: make this nicer
+                try:
+                    text=text.replace("###Section###",canv.sectName)
+                except AttributeError:
+                    text=text.replace("###Section###",'')
+                try:
+                    text=text.replace("###SectNum###",canv.sectNum)
+                except AttributeError:
+                    text=text.replace("###SectNum###",'')
+                elems[i]=Paragraph(text,e.style)
 
-        text=text.replace('###Page###',str(doc.page))
-        text=text.replace("###Title###",doc.title)
-        # FIXME: make this nicer
-        try:
-            text=text.replace("###Section###",canv.sectName)
-        except AttributeError:
-            text=text.replace("###Section###",'')
-        try:
-            text=text.replace("###SectNum###",canv.sectNum)
-        except AttributeError:
-            text=text.replace("###SectNum###",'')
-        return text
 
     def afterDrawPage(self,canv,doc):
         '''Draw header/footer'''
@@ -1063,16 +1057,19 @@ class FancyPage(PageTemplate):
             fx=self.fx+self.styles.gm
 
         if self.head and self.template.get('showHeader',True):
-            head=self.replaceTokens(self.head,canv,doc)
-            para=Paragraph(head,style=self.styles['header'])
-            para.wrap(self.tw,self.styles.ph)
-            para.drawOn(canv,hx,self.hy)
+            self.replaceTokens(self.head,canv,doc)
+            container=_Container()
+            container._content=self.head
+            container.width=self.tw
+            container.height=self.hh
+            container.drawOn(canv,hx,self.hy)
         if self.foot and self.template.get('showFooter',True):
-            foot=self.replaceTokens(self.foot,canv,doc)
-            para=Paragraph(foot,style=self.styles['footer'])
-            para.wrap(self.tw,self.styles.ph)
-            para.drawOn(canv,fx,self.fy)
-
+            self.replaceTokens(self.foot,canv,doc)
+            container=_Container()
+            container._content=self.foot
+            container.width=self.tw
+            container.height=self.fh
+            container.drawOn(canv,fx,self.fy)
 
 def main():
     '''Parse command line and call createPdf with the correct data'''
