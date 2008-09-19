@@ -35,6 +35,8 @@ OPTIONS
 -b LEVEL, --break-level=LEVEL  
                     Maximum section level that starts in a new page.
                     Default: 0
+--inline-links      Shows target between parenthesis instead of active
+                    link
 -q, --quiet  
                     Print less information.
 -v, --verbose  

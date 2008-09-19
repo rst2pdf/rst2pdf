@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.9pre
+:version: 0.8.1
 :revision: $LastChangedRevision$
 
 .. header::
@@ -64,6 +64,8 @@ Command line Options
 -b LEVEL, --break-level=LEVEL
                     Maximum section level that starts in a new page.
                     Default: 0
+--inline-links        Shows target between parenthesis instead of active
+                        link
 -q, --quiet           Print less information.
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.
