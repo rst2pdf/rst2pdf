@@ -1,0 +1,7 @@
+.. header:: 
+
+   |example|
+
+.. |example| image:: images/title.png
+
+This is the body of the document
