@@ -1,0 +1,83 @@
+New in 0.8
+----------
+
+* Support for vector graphics: SVG, EPS, PS, CDR and others (requires uniconvertor)
+* Support for stdin and stdout, so you can use rst2pdf in pipes.
+* Works with reportlab 2.1 and 2.2
+* Simpler stylesheets (guess bulletFontName, leading, bulletFontSize from other parameters)
+* Some support for sphinx
+* Fixed the docutils Writer interface
+* Continue processing when an image is missing
+* Support for user config file
+* Font sizes can be expressed in units or % of parent style's size
+* Larger font size in the default stylesheet
+
+New in 0.7
+----------
+
+* Automatic Type1 and True Type font embedding. Just use the font or family name, and (with a little luck), it will be embedded for you.
+* width attribute in styles, to create narrow paragraphs/tables
+* Styles for table headers and table cells
+* "Zebra tables"
+* Improvements in the handling of overflowing literal blocks (code, for instance)
+* Different modes to handle too-large literal blocks: overflow/truncate/shrink.
+* Real sidebars and "floating" elements.
+* Fixed link style (no ugly black underlining!)
+
+New in 0.6
+----------
+
+* Stylesheet-defined page layout (For example, multicolumn) and layout switching
+* Cascading Stylesheets (change exactly what you need changed)
+* PDF table of contents
+* Current section names and numbers in headers/footers
+* Support for compressed PDF files
+* Link color is configurable
+* Fixed bugs in color handling
+* Multilingual hyphenation
+* Auto-guessing image size, support for sizes in %
+* Gutter margins
+* Big refactoring
+* More tolerant of minor problems
+* Limited _raw_ directive (you can insert pagebreaks and vertical space)
+* Implemented a "traditional" docutils writer
+* Offer a reasonable API for use as a library
+* Fixed copyright/licensing
+* code-block now supports including files (whole or in part) so you can highlight external code.
+
+
+New in 0.5
+----------
+
+* Support for :widths: in tables
+* Support for captions in tables
+* Support for multi-row headers in tables
+* Improved definition lists
+* Fixed bug in image directive 
+* Whitespace conforming to PEP8
+* Fixed bug in text size on code-block
+* Package is more setuptools compliant
+* Fix for option groups in option lists
+* Citations support
+* Title reference role fix
+
+New in 0.4
+----------
+
+* Fixed bullet and item lists indentation/nesting. 
+* Implemented citations 
+* Working links between footnotes and its references 
+* Justification enabled by default 
+* Fixed table bug (demo.txt works now) 
+* Title and author support in PDF properties 
+* Support for document title in header/footer 
+* Custom page sizes and margins 
+
+New in 0.3
+----------
+
+* Font embedding (use any True Type font in your PDFs) 
+* Syntax highlighter using Pygments 
+* User's manual 
+* External/custom stylesheets 
+* Support for page numbers in header/footer 
