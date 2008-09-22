@@ -590,6 +590,8 @@ class RstToPdf(object):
 
 
             # FIXME: this is really really not good code
+            if not el:
+                el=[Paragraph(u"\xa0",self.styles["bodytext"])]
             if "style" in el[0].__dict__:
                 indentation=el[0].style.leading
             else:
@@ -602,6 +604,8 @@ class RstToPdf(object):
                     e.style=indentedStyle
             for e in el[1:]:
                 e.bulletText=" "
+                
+            print el
             node.elements=el
             
         elif isinstance (node, docutils.nodes.transition):
