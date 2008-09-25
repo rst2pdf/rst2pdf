@@ -257,6 +257,13 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.image):
             node.pdftext='<img src="%s" />'%node.get('uri')
 
+        elif isinstance (node, math_node):
+            # FIXME: implement this using inline images
+            mf=Math(node.math_data)
+            w,h=mf.wrap(0,0)
+            #node.pdftext='<img src="" width=%f height=%f />'%(w,h)
+            node.pdftext=node.math_data
+        
         elif isinstance (node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
             anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])

@@ -10,15 +10,15 @@ class Math(rst.Directive):
     def run(self):
         # Raise an error if the directive does not have contents.
         #self.assert_has_content()
-        return [ math_node(''.join(self.content),''.join(self.content)) ]
+        return [ math_node(data=''.join(self.content),rawsource=''.join(self.content)) ]
     def __repr__(self):
         return u''.join(self.content)
 
 class math_node(General,Inline,Element):
     children = ()
-    def __init__(self,data='',rawsource='',*children, **attributes):
+    def __init__(self,rawsource='',*children, **attributes):
        self.rawsource=rawsource
-       self.math_data=data
+       self.math_data=attributes['data']
        Element.__init__(self,rawsource,*children, **attributes)
- 
+
 directives.register_directive('math', Math)

@@ -10,7 +10,7 @@ One with a few horizontal lines:
    \frac{2 \pm \sqrt{7}}{3}
 
 
-Inline is broken |AA| 
+Inline is broken |AA| <-- there should be an alpha  
 
 .. |AA| math:: \alpha
 
