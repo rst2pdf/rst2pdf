@@ -22,3 +22,8 @@ class math_node(General,Inline,Element):
        Element.__init__(self,rawsource,*children, **attributes)
 
 directives.register_directive('math', Math)
+
+def math_role(name,rawtext,text,lineno,inliner,options={},content=[]):
+    return [math_node(rawtext[7:-1],data=rawtext[7:-1])],[]
+
+roles.register_local_role('math',math_role)
