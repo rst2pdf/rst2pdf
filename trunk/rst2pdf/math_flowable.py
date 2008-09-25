@@ -33,9 +33,9 @@ class Math(Flowable):
         if HAS_MATPLOTLIB:
             global fonts
             width, height, descent, glyphs, rects, used_characters = \
-            self.parser.parse(self.s, 72)
+            self.parser.parse('$%s$'%self.s, 72)
             canv.saveState()
-            canv.translate(x,y)
+            canv.translate(x,y-descent)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 if not fontname in fonts:
                     fonts[fontname]=fontname
