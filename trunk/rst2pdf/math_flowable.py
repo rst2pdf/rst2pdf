@@ -3,6 +3,7 @@ from reportlab.lib.units import inch
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from log import log
+import tempfile,os
 
 HAS_MATPLOTLIB=False
 try:
@@ -51,16 +52,37 @@ class Math(Flowable):
         else:
             return
 
+    def descent(self):
+        '''Returns the descent of this flowable, useful to align it when used inline'''
+        width, height, descent, glyphs, rects, used_characters = \
+        self.parser.parse('$%s$'%self.s, 72)
+        return descent
+
     def genImage(self):
         '''Create a PNG from the contents of this flowable. Required so we can
         put inline math in paragraphs. Returns the file name. The file
         is caller's responsability'''
         if not HAS_MATPLOTLIB:
             return None
-            
-        w,h=self.wrap(0,0)
-        import Image
-        Image.new('L',(300*w,300*h))
+        # FIXME: make DPI configurable
+        dpi=72
+        import Image,ImageFont,ImageDraw,ImageColor
+        width, height, descent, glyphs, rects, used_characters = \
+        self.parser.parse('$%s$'%self.s,72)
+        img=Image.new('L',(int(width*dpi),int(height*dpi)),ImageColor.getcolor("white","L"))
+        draw=ImageDraw.Draw(img)
+        for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
+            font=ImageFont.truetype(fontname,int(fontsize*dpi))
+            tw,th=draw.textsize(unichr(num),font=font)
+            draw.text((ox*dpi,(height-oy+descent)*dpi-th),unichr(num),font=font)
+
+        #for ox, oy, width, height in rects:
+            #canv.rect(ox, oy+2*height, width, height,fill=1)
+        fh,fn=tempfile.mkstemp(suffix=".png")
+        os.close(fh)
+        img.save(fn)
+        return fn
+        
         
 
 if __name__ == "__main__":

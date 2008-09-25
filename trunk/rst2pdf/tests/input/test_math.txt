@@ -10,7 +10,11 @@ One with a few horizontal lines:
    \frac{2 \pm \sqrt{7}}{3}
 
 
-Inline is broken |AA| <-- there should be an alpha  
+Inline replacements works, too: |AA| <-- there should be an alpha + beta
 
-.. |AA| math:: \alpha
+You can use a math role: :math:`\alpha + \beta`  but it has some problems 
+with spacing and if things are not one-line: :math:`\alpha^2` so inline replacements
+work better.
+
+.. |AA| math:: \alpha + \beta^2
 

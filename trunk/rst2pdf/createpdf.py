@@ -88,6 +88,7 @@ class RstToPdf(object):
         self.inlinelinks=inlinelinks
         self.breaklevel=breaklevel
         self.fitMode=fitMode
+        self.to_unlink=[]
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -261,8 +262,10 @@ class RstToPdf(object):
             # FIXME: implement this using inline images
             mf=Math(node.math_data)
             w,h=mf.wrap(0,0)
-            #node.pdftext='<img src="" width=%f height=%f />'%(w,h)
-            node.pdftext=node.math_data
+            descent=mf.descent()
+            img=mf.genImage()
+            self.to_unlink.append(img)
+            node.pdftext='<img src="%s" width=%f height=%f valign=%f/>'%(img,w,h,-descent)
         
         elif isinstance (node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
@@ -982,6 +985,8 @@ class RstToPdf(object):
                                  pageCompression=compressed
                                  )
         pdfdoc.build(elements)
+        for fn in self.to_unlink:
+            os.unlink(fn)
 
 class FancyDocTemplate(BaseDocTemplate):
     pass
