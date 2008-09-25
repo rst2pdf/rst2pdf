@@ -540,10 +540,12 @@ class RstToPdf(object):
             or isinstance (node, docutils.nodes.enumerated_list)            \
             or isinstance (node, docutils.nodes.definition_list)            \
             or isinstance (node, docutils.nodes.option_list)                \
-            or isinstance (node, docutils.nodes.field_list)                 \
-            or isinstance (node, docutils.nodes.definition):
+            or isinstance (node, docutils.nodes.field_list):
 
             node.elements=self.gather_elements(node,depth,style=style)
+            
+        elif isinstance (node, docutils.nodes.definition):
+            node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
 
         elif isinstance (node, docutils.nodes.option_list_item):
 

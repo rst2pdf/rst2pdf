@@ -101,11 +101,19 @@
     ["definition_list_term" , {
       "parent": "normal",
       "fontName": "stdBold",
+      "spaceBefore": 4,
+      "spaceAfter": 0,
       "keepWithNext": true
     }],
     ["definition_list_classifier" , {
       "parent": "normal",
       "fontName": "stdItalic"
+    }],
+    ["definition" , {
+      "parent": "bodytext",
+      "firstLineIndent": 0,
+      "bulletIndent": 0,
+      "spaceBefore": 0
     }],
     ["fieldname" , {
       "parent": "bodytext",
@@ -168,14 +176,6 @@
     }],
     ["sidebar-subtitle" , {
       "parent": "heading4"
-    }],
-    ["definition" , {
-      "parent": "normal",
-      "firstLineIndent": 0,
-      "leftIndent": 36,
-      "bulletIndent": 0,
-      "spaceBefore": 6,
-      "fontName": "stdBold"
     }],
     ["sidebar" , {
       "float": "left",
