@@ -1,12 +1,12 @@
 1. Arabic numerals.
 
-   a) lower alpha)
+   a) lower alpha
 
-      (i) (lower roman)
+      (i) lower roman
 
           A. upper alpha.
 
-             I) upper roman)
+             I) upper roman
 
 2. Lists that don't start at 1:
 
@@ -24,3 +24,6 @@
 
 #. List items may also be auto-enumerated.
 
+#. An item with more than one paragraph
+
+   The second paragraph
