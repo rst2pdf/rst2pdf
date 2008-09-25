@@ -580,24 +580,29 @@ class RstToPdf(object):
 
             el=self.gather_elements(node,depth,style=style)
             b=""
+            if node.parent.get('start'):
+                start=int(node.parent.get('start'))
+            else:
+                start=1
+                
             if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
                 b=node.parent.get('bullet')
                 if b=="None":
                     b=""
 
             elif node.parent.get ('enumtype')=='arabic':
-                b=str(node.parent.children.index(node)+1)+'.'
+                b=str(node.parent.children.index(node)+start)+'.'
 
             elif node.parent.get ('enumtype')=='lowerroman':
-                b=str(self.lowerroman[node.parent.children.index(node)])+'.'
+                b=str(self.lowerroman[node.parent.children.index(node)+start-1])+'.'
 
             elif node.parent.get ('enumtype')=='upperroman':
-                b=str(self.lowerroman[node.parent.children.index(node)].upper())+'.'
+                b=str(self.lowerroman[node.parent.children.index(node)+start-1].upper())+'.'
 
             elif node.parent.get ('enumtype')=='loweralpha':
-                b=str(self.loweralpha[node.parent.children.index(node)])+'.'
+                b=str(self.loweralpha[node.parent.children.index(node)+start-1])+'.'
             elif node.parent.get ('enumtype')=='upperalpha':
-                b=str(self.loweralpha[node.parent.children.index(node)].upper())+'.'
+                b=str(self.loweralpha[node.parent.children.index(node)+start-1].upper())+'.'
             else:
                 log.critical("Unknown kind of list_item %s", node.parent)
                 sys.exit(1)
