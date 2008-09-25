@@ -25,7 +25,7 @@ class Math(Flowable):
     def wrap(self,aW,aH):
         if HAS_MATPLOTLIB:
             width, height, descent, glyphs, rects, used_characters = \
-            self.parser.parse(self.s, 72)
+            self.parser.parse('$%s$'%self.s, 72)
             return width, height
         return 0,0
 
@@ -35,7 +35,7 @@ class Math(Flowable):
             width, height, descent, glyphs, rects, used_characters = \
             self.parser.parse('$%s$'%self.s, 72)
             canv.saveState()
-            canv.translate(x,y-descent)
+            canv.translate(x,y)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 if not fontname in fonts:
                     fonts[fontname]=fontname
@@ -50,6 +50,18 @@ class Math(Flowable):
             canv.restoreState()
         else:
             return
+
+    def genImage(self):
+        '''Create a PNG from the contents of this flowable. Required so we can
+        put inline math in paragraphs. Returns the file name. The file
+        is caller's responsability'''
+        if not HAS_MATPLOTLIB:
+            return None
+            
+        w,h=self.wrap(0,0)
+        import Image
+        Image.new('L',(300*w,300*h))
+        
 
 if __name__ == "__main__":
     doc = SimpleDocTemplate("mathtest.pdf")
