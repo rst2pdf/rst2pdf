@@ -1,0 +1,12 @@
+A simple formula:
+
+.. math::
+
+   $\alpha > \beta$
+
+
+One with a few lines:
+
+.. math::
+
+   $\frac{2 \pm \sqrt{7}}{3}$

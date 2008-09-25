@@ -36,6 +36,8 @@ from reportlab.lib.pagesizes import *
 
 from flowables import *
 from svgimage import SVGImage
+from math_directive import math_node
+from math_flowable import Math
 from log import log
 
 import config
@@ -321,6 +323,9 @@ class RstToPdf(object):
 
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.glossary):
             node.elements=self.gather_elements(node,depth,style=style)
+
+        elif isinstance (node,math_node):
+            node.elements=[Math(node.math_data)]
           
         #######################
         ## Tables
