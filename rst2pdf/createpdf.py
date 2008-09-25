@@ -595,10 +595,8 @@ class RstToPdf(object):
 
             elif node.parent.get ('enumtype')=='lowerroman':
                 b=str(self.lowerroman[node.parent.children.index(node)+start-1])+'.'
-
             elif node.parent.get ('enumtype')=='upperroman':
                 b=str(self.lowerroman[node.parent.children.index(node)+start-1].upper())+'.'
-
             elif node.parent.get ('enumtype')=='loweralpha':
                 b=str(self.loweralpha[node.parent.children.index(node)+start-1])+'.'
             elif node.parent.get ('enumtype')=='upperalpha':
@@ -609,7 +607,6 @@ class RstToPdf(object):
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
                 b=u'\u2022'
-
 
             # FIXME: this is really really not good code
             if not el:
@@ -624,10 +621,8 @@ class RstToPdf(object):
                     indentedStyle=copy(e.style)
                     indentedStyle.leftIndent+=indentation
                     e.style=indentedStyle
-            for e in el[1:]:
-                e.bulletText=" "
-                
-            print el
+            #for e in el[1:]:
+                #e.bulletText=" "                
             node.elements=el
             
         elif isinstance (node, docutils.nodes.transition):
