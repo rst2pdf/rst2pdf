@@ -24,7 +24,6 @@ class Math(Flowable):
       
     def wrap(self,aW,aH):
         if HAS_MATPLOTLIB:
-            print "S:",self.s
             width, height, descent, glyphs, rects, used_characters = \
             self.parser.parse(self.s, 72)
             return width, height
@@ -48,7 +47,6 @@ class Math(Flowable):
             canv.setDash([])
             for ox, oy, width, height in rects:
                 canv.rect(ox, oy+2*height, width, height,fill=1)
-
             canv.restoreState()
         else:
             return

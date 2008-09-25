@@ -1,12 +1,16 @@
 A simple formula:
 
-.. math::
-
-   $\alpha > \beta$
+.. math:: $\alpha > \beta$
 
 
-One with a few lines:
+One with a few horizontal lines:
 
 .. math::
 
    $\frac{2 \pm \sqrt{7}}{3}$
+
+
+Inline is broken |AA| 
+
+.. |AA| math:: $\alpha$
+
