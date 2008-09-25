@@ -633,7 +633,7 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.system_message)     \
             or isinstance (node, docutils.nodes.problematic):
             # FIXME show the error in the document, red, whatever
-            log.warning("Problematic node %s", node.astext())
+            #log.warning("Problematic node %s", node.astext())
             node.elements=[]
 
         elif isinstance (node, docutils.nodes.block_quote):
