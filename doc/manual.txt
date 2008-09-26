@@ -777,9 +777,17 @@ of the math *role*::
 Produces: This is :math:`\pi`
 
 Currently, the math role is slightly buggy, and in some cases will produce misaligned and
-generally broken output.
+generally broken output. Also, while the math directive embeds fonts and draws your formula
+as text, the math role embeds an image. That means:
 
-You can also use an inline substitution of the math directive for things you use often::
+* You can't copy the text of inline math
+
+* Inline math will look worse when printed, or make your file larger.
+
+So, use it only in emergencies ;-)
+
+You can also use an inline substitution of the math directive for things you use often,
+which is the same as using the math role::
 
     This is the square of x: |xsq|
 
@@ -790,7 +798,7 @@ This is the square of x: |xsq|
 .. |xsq| math:: x^2
 
 You don't need to worry about fonts, the correct math fonts will be used and embedded in
-your PDF automatically.
+your PDF automatically (they are included with matplotlib).
 
 .. _matplotlib: http://matplotlib.sf.net
 
