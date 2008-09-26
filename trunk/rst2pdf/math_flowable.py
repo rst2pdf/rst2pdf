@@ -64,20 +64,26 @@ class Math(Flowable):
         is caller's responsability'''
         if not HAS_MATPLOTLIB:
             return None
-        # FIXME: make DPI configurable
         dpi=72
+        scale=10
         import Image,ImageFont,ImageDraw,ImageColor
         width, height, descent, glyphs, rects, used_characters = \
-        self.parser.parse('$%s$'%self.s,72)
-        img=Image.new('L',(int(width*dpi),int(height*dpi)),ImageColor.getcolor("white","L"))
+        self.parser.parse('$%s$'%self.s,dpi)
+        img=Image.new('L',(int(width*scale),int(height*scale)),ImageColor.getcolor("white","L"))
         draw=ImageDraw.Draw(img)
         for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-            font=ImageFont.truetype(fontname,int(fontsize*dpi))
+            font=ImageFont.truetype(fontname,int(fontsize*scale))
             tw,th=draw.textsize(unichr(num),font=font)
-            draw.text((ox*dpi,(height-oy+descent)*dpi-th),unichr(num),font=font)
+            # No, I don't understand why that 4 is there. As we used to say in the pure math
+            # department, that was a numerical solution.
+            draw.text((ox*scale,(height-oy-fontsize+4)*scale),unichr(num),font=font)
 
-        #for ox, oy, width, height in rects:
-            #canv.rect(ox, oy+2*height, width, height,fill=1)
+        for ox, oy, w, h in rects:
+            x1=ox*scale
+            x2=x1+w*scale
+            y1=(height-oy)*scale
+            y2=y1+h*scale
+            draw.rectangle([x1,y1,x2,y2],fill=ImageColor.getcolor("black","L"))
         fh,fn=tempfile.mkstemp(suffix=".png")
         os.close(fh)
         img.save(fn)
