@@ -750,6 +750,58 @@ The syntax is shell-like, here's an example that shows all the syntax::
 
 The unit used by the spacer is points, and using a space or a comma is the same thing in all cases.
 
+Mathematics
+===========
+
+If you have Matplotlib_ installed, rst2pdf supports a math role and a math directive. You can use
+them to insert formulae and mathematical notation in your documents using a subset of LaTeX
+syntax, but doesn't require you have LaTeX installed.
+
+For example, here's how you use the math directive::
+
+    .. math::
+
+       \frac{2 \pm \sqrt{7}}{3}
+
+And here's the result:
+
+.. math::
+
+   \frac{2 \pm \sqrt{7}}{3}
+
+If you want to insert mathematical notation in your text like this: :math:`\pi` that is the job
+of the math *role*::
+
+    This is :math:`\pi`
+
+Produces: This is :math:`\pi`
+
+Currently, the math role is slightly buggy, and in some cases will produce misaligned and
+generally broken output.
+
+You can also use an inline substitution of the math directive for things you use often::
+
+    This is the square of x: |xsq|
+
+    .. |xsq| math:: x^2
+
+This is the square of x: |xsq|
+
+.. |xsq| math:: x^2
+
+You don't need to worry about fonts, the correct math fonts will be used and embedded in
+your PDF automatically.
+
+.. _matplotlib: http://matplotlib.sf.net
+
+For an introduction to LaTeX syntax, see http://www.tex.ac.uk/tex-archive/info/lshort/english/lshort.pdf
+specifically the "Typesetting Mathematical Formulae" chapter.
+
+Basically, the inline form ``$a^2$`` is similar to the math role, and the display form
+is similar to the math directive.
+
+Rst2pdf doesn't support numbering equations yet.
+
 Hyphenation
 ===========
 
