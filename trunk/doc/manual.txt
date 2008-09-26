@@ -802,8 +802,10 @@ your PDF automatically (they are included with matplotlib).
 
 .. _matplotlib: http://matplotlib.sf.net
 
-For an introduction to LaTeX syntax, see http://www.tex.ac.uk/tex-archive/info/lshort/english/lshort.pdf
-specifically the "Typesetting Mathematical Formulae" chapter.
+For an introduction to LaTeX syntax, see the "Typesetting Mathematical Formulae" chapter
+in "The Not So Short Introduction to LaTeX 2e":
+
+http://www.tex.ac.uk/tex-archive/info/lshort/english/lshort.pdf
 
 Basically, the inline form ``$a^2$`` is similar to the math role, and the display form
 is similar to the math directive.
