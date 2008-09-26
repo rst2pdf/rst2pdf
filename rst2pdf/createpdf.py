@@ -1082,16 +1082,18 @@ class FancyPage(PageTemplate):
             fx=self.fx+self.styles.gm
 
         if self.head and self.template.get('showHeader',True):
-            self.replaceTokens(self.head,canv,doc)
+            curHead=copy(self.head)
+            self.replaceTokens(curHead,canv,doc)
             container=_Container()
-            container._content=self.head
+            container._content=curHead
             container.width=self.tw
             container.height=self.hh
             container.drawOn(canv,hx,self.hy)
         if self.foot and self.template.get('showFooter',True):
-            self.replaceTokens(self.foot,canv,doc)
+            curFoot=copy(self.foot)
+            self.replaceTokens(curFoot,canv,doc)
             container=_Container()
-            container._content=self.foot
+            container._content=curFoot
             container.width=self.tw
             container.height=self.fh
             container.drawOn(canv,fx,self.fy)
