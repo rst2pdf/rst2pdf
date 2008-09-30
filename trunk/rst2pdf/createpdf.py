@@ -56,16 +56,17 @@ except ImportError:
     except ImportError:
         log.warning("No support for images other than JPG, and limited support for image size. Please install PIL")
 
+haveWordaxe=False
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
     haveWordaxe=True
+    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
 except ImportError:
     #log.warning("No support for hyphenation, install wordaxe")
-    haveWordaxe=False
+    pass
 
 try:
     import sphinx
@@ -109,7 +110,7 @@ class RstToPdf(object):
                     wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
                     continue
                 except:
-                    log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang) 
+                    log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
                 wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language, ','.join(self.styles.languages))
