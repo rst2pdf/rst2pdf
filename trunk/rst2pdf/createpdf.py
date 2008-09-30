@@ -39,6 +39,7 @@ from svgimage import SVGImage
 from math_directive import math_node
 from math_flowable import Math
 from log import log
+from smartypants import smartyPants
 
 import config
 
@@ -77,7 +78,7 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 inlinelinks=False,breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False):
+                 inlinelinks=False,breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False,smarty='0'):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
@@ -90,6 +91,7 @@ class RstToPdf(object):
         self.breaklevel=breaklevel
         self.fitMode=fitMode
         self.to_unlink=[]
+        self.smarty=smarty
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -306,6 +308,13 @@ class RstToPdf(object):
             log.debug("self.gen_pdftext: %s" % node.pdftext)
         except UnicodeDecodeError:
             pass
+        # Try to be clever about when to use smartypants
+        if node.__class__ in [docutils.nodes.paragraph,
+                              docutils.nodes.block_quote,
+                              docutils.nodes.title
+                              ]:
+            node.pdftext=smartyPants(node.pdftext,self.smarty)
+        
         return node.pdftext
 
     def gen_elements(self, node, depth, style=None):
@@ -979,7 +988,7 @@ class RstToPdf(object):
         foot=self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP=FancyPage("fancypage",head,foot,self.styles)
+        FP=FancyPage("fancypage",head,foot,self.styles,smarty=self.smarty)
 
         pdfdoc = FancyDocTemplate(output,
                                  pageTemplates=[FP],
@@ -999,11 +1008,12 @@ class FancyDocTemplate(BaseDocTemplate):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,head,foot,styles):
+    def __init__(self,_id,head,foot,styles,smarty="0"):
 
         self.styles=styles
         self.head=head
         self.foot=foot
+        self.smarty=smarty
         PageTemplate.__init__(self,_id,[])
 
     def beforeDrawPage(self,canv,doc):
@@ -1069,6 +1079,7 @@ class FancyPage(PageTemplate):
                     text=text.replace("###SectNum###",canv.sectNum)
                 except AttributeError:
                     text=text.replace("###SectNum###",'')
+                text=smartyPants(text,self.smarty)
                 elems[i]=Paragraph(text,e.style)
 
 
@@ -1130,6 +1141,10 @@ def main():
     def_lang=config.getValue("general","language","en_US")
     parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
                       help='Language to be used for hyphenation. Default="%s"'%def_lang)
+
+    def_smartquotes=config.getValue("general","smartquotes","0")
+    parser.add_option("--smart-quotes",metavar="VALUE",default=def_smartquotes,dest="smarty",
+                      help='Try to convert ASCII quotes, ellipsis and dashes to the typographically correct equivalent. For details, read the man page or the manual. Default="%s"'%def_smartquotes)
                       
     def_fit=config.getValue("general","fit_mode","shrink")
     parser.add_option('--fit-literal-mode',metavar='MODE',default=def_fit,dest='fitMode',
@@ -1208,9 +1223,10 @@ def main():
              breaklevel=int(options.breaklevel),
              inlinelinks = options.inlinelinks,
              fitMode=options.fitMode,
+             smarty=options.smarty,
              fontPath=fpath).createPdf(text=infile.read(),
-                                                 output=outfile,
-                                                 compressed=options.compressed)
+                                       output=outfile,
+                                       compressed=options.compressed)
 
 if __name__ == "__main__":
     main()

@@ -58,6 +58,9 @@ Command line Options
                       Default=""
 -l LANG, --language=LANG
                     Language to be used for hyphenation. Default="en_US"
+--smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
+                      the typographically correct equivalent. For details,
+                      read `Smart quotes`_. Default="0"
 --fit-literal-mode=MODE
                     What todo when a literal is too wide. One of
                     error,overflow,shrink,truncate.
@@ -993,3 +996,33 @@ The supported page template options and their defaults are:
 
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
+
+
+Smart Quotes
+============
+
+Quoted from the smartypants_ documentation:
+
+    This feature can perform the following transformations:
+
+    Straight quotes ( " and ' ) into "curly" quote HTML entities
+    Backticks-style quotes (``like this'') into "curly" quote HTML entities
+    Dashes (-- and ---) into en- and em-dash entities
+    Three consecutive dots (... or . . .) into an ellipsis entity
+    This means you can write, edit, and save your posts using plain old ASCII straight quotes, plain dashes, and plain dots, but your published posts (and final PDF output) will appear with smart quotes, em-dashes, and proper ellipses.
+
+You can enable this by passing the ``--smart-quotes`` option in the command line. By default, it's disabled.
+Here are the different values you can use (again, from the smartypants docs):
+
+    0
+        Suppress all transformations. (Do nothing.)
+    1
+        Performs default SmartyPants transformations: quotes (including ``backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
+    2
+        Same as smarty_pants="1", except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
+    3
+        Same as smarty_pants="2", but inverts the shorthand for dashes: "--" (dash dash) for em-dashes, and "---" (dash dash dash) for en-dashes.
+
+Currently, even if you enable it, this transformation will only take place in regular paragraphs, titles, headers, footers and block quotes.
+
+In addition, there is currently an incompatibility between this and wordaxe's pyhyphen plugin, so it's not really usable in some cases.
