@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#$HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/test_rst2pdf.py $
+#$HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/test_include.py $
 #$LastChangedDate: 2008-08-29 16:09:08 +0200 (Fri, 29 Aug 2008) $
 #$LastChangedRevision: 160 $
 from unittest import TestCase, makeSuite
@@ -18,7 +18,7 @@ def input_file_path(file):
     """ unused here
     is looked for in tests below
     where am I"""
-    return join(PREFIX, 'input', file)
+    return join(PREFIX, file)
 
 class IncludeTests(TestCase):
     def test_wrong_file(self):
@@ -52,7 +52,7 @@ This one exists:
 
 .. code-block:: py
    :include: %s
-""" % __file__
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -64,7 +64,7 @@ This one exists:
 
 .. code-block:: nothing
    :include: %s
-""" % __file__
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -77,7 +77,7 @@ This one exists:
 .. code-block:: py
    :include: %s
    :start-at: def input_file_path(file):
-""" % __file__
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -91,7 +91,7 @@ This one exists:
 .. code-block:: py
    :include: %s
    :start-after: def input_file_path(file):
-""" % __file__
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -104,8 +104,8 @@ This one exists:
 
 .. code-block:: py
    :include: %s
-   :end-before: return join(PREFIX, 'input', file)
-""" % __file__
+   :end-before: return join(PREFIX, file)
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -119,7 +119,7 @@ This one exists:
 .. code-block:: py
    :include: %s
    :end-at: def input_file_path(file):
-""" % __file__
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
@@ -133,13 +133,13 @@ This one exists:
 .. code-block:: py
    :include: %s
    :start-at: def input_file_path(file):
-   :end-at: return join(PREFIX, 'input', file)
-""" % __file__
+   :end-at: return join(PREFIX, file)
+""" % input_file_path('test_include.py')
         doctree=publish_doctree(input)
         include = doctree.children[1]
         self.assertEqual(include.tagname, 'literal_block')
         self.assertEqual(include.astext().split('\n')[0], u'def input_file_path(file):')
-        self.assertEqual(include.astext().split('\n')[-2:][0], u"    return join(PREFIX, 'input', file)")
+        self.assertEqual(include.astext().split('\n')[-2:][0], u"    return join(PREFIX, file)")
         
         
 def test_suite():
