@@ -121,10 +121,10 @@ And another paragraph.
         elements=self.converter.gen_elements(doctree,0)
         self.assertEqual(len(elements), 4)
         self.assertEqual(elements[1].text, 'Test')
-        self.assertEqual(elements[2]._cellvalues[0][0][0].text, 'Item 1')
-        self.assertEqual(elements[2]._cellvalues[0][0][0].bulletText, u'\u2022')
-        self.assertEqual(elements[3]._cellvalues[0][0][0].text, 'Item 2')
-        self.assertEqual(elements[3]._cellvalues[0][0][0].bulletText, u'\u2022')
+        self.assertEqual(elements[2].text, 'Item 1')
+        self.assertEqual(elements[2].bulletText, u'\u2022')
+        self.assertEqual(elements[3].text, 'Item 2')
+        self.assertEqual(elements[3].bulletText, u'\u2022')
         
     def test_sidebar(self):
         input="""
