@@ -1026,3 +1026,5 @@ Here are the different values you can use (again, from the smartypants docs):
 Currently, even if you enable it, this transformation will only take place in regular paragraphs, titles, headers, footers and block quotes.
 
 In addition, there is currently an incompatibility between this and wordaxe's pyhyphen plugin, so it's not really usable in some cases.
+
+.. _smartypants: http://web.chad.org/projects/smartypants.py/
