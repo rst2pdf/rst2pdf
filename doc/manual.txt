@@ -189,11 +189,11 @@ You can insert images in the middle of your text like this::
 
   This |biohazard| means you have to run.
 
-  .. |biohazard| image:: biohazard.png
+  .. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
 
 This |biohazard| means you have to run.
 
-.. |biohazard| image:: biohazard.png
+.. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
 
 This only works correctly with reportlab 2.2 or later.
 
