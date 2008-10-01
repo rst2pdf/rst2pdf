@@ -1006,7 +1006,7 @@ Quoted from the smartypants_ documentation:
     This feature can perform the following transformations:
 
     Straight quotes ( " and ' ) into "curly" quote HTML entities
-    Backticks-style quotes (``like this'') into "curly" quote HTML entities
+    Backticks-style quotes (\`\`like this'') into "curly" quote HTML entities
     Dashes (-- and ---) into en- and em-dash entities
     Three consecutive dots (... or . . .) into an ellipsis entity
     This means you can write, edit, and save your posts using plain old ASCII straight quotes, plain dashes, and plain dots, but your published posts (and final PDF output) will appear with smart quotes, em-dashes, and proper ellipses.
@@ -1017,7 +1017,7 @@ Here are the different values you can use (again, from the smartypants docs):
     0
         Suppress all transformations. (Do nothing.)
     1
-        Performs default SmartyPants transformations: quotes (including ``backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
+        Performs default SmartyPants transformations: quotes (including \`\`backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
     2
         Same as smarty_pants="1", except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
     3
