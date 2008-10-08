@@ -29,3 +29,14 @@ fit_mode="shrink"
 
 break_level=0
 
+# Smart quotes.
+# 0:  Suppress  all  transformations. (Do nothing.)
+# 1: Performs default SmartyPants transformations: quotes (including ‘‘backticks''
+# -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash;
+# there is no support for en-dashes.
+# 2:  Same as 1, except that it uses the old-school typewriter shorthand for
+# dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
+# 3: Same as 2, but inverts the shorthand for dashes: "--" (dash dash) for
+# em-dashes,  and "---" (dash dash dash) for en-dashes.
+
+smartquotes=0

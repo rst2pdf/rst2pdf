@@ -1223,7 +1223,7 @@ def main():
              breaklevel=int(options.breaklevel),
              inlinelinks = options.inlinelinks,
              fitMode=options.fitMode,
-             smarty=options.smarty,
+             smarty=str(options.smarty),
              fontPath=fpath).createPdf(text=infile.read(),
                                        output=outfile,
                                        compressed=options.compressed)
