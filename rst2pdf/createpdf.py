@@ -214,7 +214,7 @@ class RstToPdf(object):
             if uri:
                 if urlparse(uri)[0]:
                     if self.inlinelinks:
-                        import pdb; pdb.set_trace()
+                        #import pdb; pdb.set_trace()
                         post = u' (%s)' % uri
                     else:
                         pre+=u'<a href="%s" color="%s">'%(uri,self.styles.linkColor)
