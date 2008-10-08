@@ -632,7 +632,7 @@ class RstToPdf(object):
                     indentedStyle.leftIndent+=indentation
                     indentedStyle.bulletIndent+=indentation
                     e.style=indentedStyle
-            for e in el[1:]:
+            for e in el:
                 if 'style' in e.__dict__:
                     e.style.leftIndent=e.style.bulletIndent+indentation
             node.elements=el
