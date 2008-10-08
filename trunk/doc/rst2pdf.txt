@@ -31,8 +31,7 @@ OPTIONS
                     Language to be used for hyphenation. Default="en_US"
 
 --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
-                      the typographically correct equivalent. For details,
-                      read `Smart quotes`_. Default="0"
+                      the typographically correct equivalent. Default=0
 
 The possible values are:
     
@@ -41,9 +40,9 @@ The possible values are:
     1
         Performs default SmartyPants transformations: quotes (including ``backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
     2
-        Same as smarty_pants="1", except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
+        Same as --smart-quotes=1, except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
     3
-        Same as smarty_pants="2", but inverts the shorthand for dashes: "--" (dash dash) for em-dashes, and "---" (dash dash dash) for en-dashes.
+        Same as --smart-quotes=2, but inverts the shorthand for dashes: "--" (dash dash) for em-dashes, and "---" (dash dash dash) for en-dashes.
 
 
 --fit-literal-mode=MODE
