@@ -31,12 +31,14 @@ unit_separator = re.compile('(-?[0-9\.]*)')
 
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
-    def __init__(self,flist,fontPath=[]):
+    def __init__(self,flist,fontPath=[],stylePath=None):
         log.info('Using stylesheets: %s'%','.join(flist))
         '''flist is a list of stylesheet filenames.They will
         be loaded and merged in order'''
         self.FontSearchPath=fontPath+['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')]
-        self.StyleSearchPath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles')]
+        if stylePath is None:
+            stylePath=['.',os.path.join(os.path.abspath(os.path.dirname(__file__)), 'styles'),'~/.rst2pdf/styles']
+        self.StyleSearchPath=map(os.path.expanduser,stylePath)
 
         findfonts.flist=self.FontSearchPath
         # Page width, height
