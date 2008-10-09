@@ -136,6 +136,50 @@ class SetNextTemplate(Flowable):
         if self.templateName:
             self.canv.templateName=self.templateName
 
+
+class Transition(Flowable):
+    """Wraps canvas.setPageTransition. Sets the transition effect from the current page to the next."""
+    PageTransitionEffects = {
+        'Split': ['direction', 'motion'],
+        'Blinds': ['dimension'],
+        'Box': ['motion'],
+        'Wipe' : ['direction'],
+        'Dissolve' : [],
+        'Glitter':['direction']
+        }
+        
+    def __init__(self,*args):
+        args=args[0]
+        print "ARG0",args[0]
+        if len(args)<1:
+            args=[None,1] # No transition            
+        # See if we got a valid transition effect name
+        if args[0] not in self.PageTransitionEffects:
+            log.error('Unknown transition effect name: %s'%args[0])
+            args[0]=None
+        elif len(args)==1:
+            args.append(1)
+
+        # FIXME: validate more
+        self.args=args
+
+    def wrap(self,aw,ah):
+        return 0,0
+    def draw(self):
+        kwargs={'effectname': None,
+                'duration':1,
+                'direction':0,
+                'dimension':'H',
+                'motion':'I' }
+                
+        ceff=['effectname','duration']+self.PageTransitionEffects[self.args[0]]
+        for argname,argvalue in zip(ceff,self.args):
+            kwargs[argname]=argvalue
+        print kwargs
+        kwargs['duration']=int(kwargs['duration'])
+        kwargs['direction']=int(kwargs['direction'])
+        self.canv.setPageTransition(**kwargs)
+
 class SmartFrame(Frame):
     '''A (Hopefully) smarter frame object that knows how to
     handle a two-pass layout procedure (someday)'''

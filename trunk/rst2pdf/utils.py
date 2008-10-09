@@ -31,6 +31,8 @@ def parseRaw (data):
                 elements.append(MyPageBreak(tokens[1]))
         if command == 'Spacer':
             elements.append(Spacer(int(tokens[1]),int(tokens[2])))
+        if command == 'Transition':
+            elements.append(Transition(tokens[1:]))
     return elements
 
 # Looks like this is not used anywhere now
