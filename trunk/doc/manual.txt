@@ -746,9 +746,9 @@ Raw Directive
 
 Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
 You can use the raw directive to insert pagebreaks and spacers (other reportlab flowables
-may be added if there's interest).
+may be added if there's interest), and set page transitions.
 
-The syntax is shell-like, here's an example that shows all the syntax::
+The syntax is shell-like, here's an example::
 
     One page
 
@@ -765,7 +765,58 @@ The syntax is shell-like, here's an example that shows all the syntax::
 
     And another paragraph.
 
-The unit used by the spacer is points, and using a space or a comma is the same thing in all cases.
+The unit used by the spacer by default is points, and using a space or a comma is the same thing in all cases.
+
+
+Page Transitions
+----------------
+
+Page transitions are effects used when you change pages in *Presentation* or *Full Screen* mode (depends on the viewer).
+You can use it when creating a presentation using PDF files.
+
+The syntax is this::
+
+    .. raw:: pdf
+
+       Transition effect duration [optional arguments]
+
+The optional arguments are:
+
+direction:
+    Can be 0,90,180 or 270 (top,right,bottom,left)
+
+dimension:
+    Can be H or V
+
+motion:
+    Can be I or O (Inside or Outside)
+
+
+The effects with their arguments are:
+
+* Split duration direction motion
+* Blinds duration dimension
+* Box duration motion
+* Wipe duration direction
+* Dissolve duration
+* Glitter duration direction
+
+For example::
+
+    .. raw:: pdf
+
+       Transition Glitter 3 90
+
+Uses the Glitter effect, for 3 seconds, at direction 90 degress (from the right?)
+
+Keep in mind that Transition sets the transition *from this page to the next* so the
+natural thing is to use it before a PageBreak::
+
+    .. raw:: pdf
+
+       Transition Dissolve 1
+       PageBreak
+
 
 Mathematics
 ===========
