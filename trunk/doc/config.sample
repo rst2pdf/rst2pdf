@@ -15,6 +15,10 @@ compressed=false
 
 font_path=""
 
+# A colon-separated list of folders to search for stylesheets. Example:
+# stylesheet_path="~/styles:/usr/share/styles"
+stylesheet_path=""
+
 # Language to be used for hyphenation support
 
 language="en_US"

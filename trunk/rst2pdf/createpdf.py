@@ -78,7 +78,8 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 inlinelinks=False,breaklevel=1,fontPath=[],fitMode='shrink',sphinx=False,smarty='0'):
+                 inlinelinks=False,breaklevel=1,fontPath=[],stylePath=[],
+                 fitMode='shrink',sphinx=False,smarty='0'):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
@@ -86,7 +87,7 @@ class RstToPdf(object):
         self.doc_author="" 
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
-        self.styles=sty.StyleSheet(stylesheets,fontPath)
+        self.styles=sty.StyleSheet(stylesheets,fontPath,stylePath)
         self.inlinelinks=inlinelinks
         self.breaklevel=breaklevel
         self.fitMode=fitMode
@@ -1121,6 +1122,11 @@ def main():
     config.getValue("general","stylesheets","").split(',')])    
     parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',default=def_ssheets,
                       help='A comma-separated list of custom stylesheets. Default="%s"'%def_ssheets)
+                      
+    def_sheetpath=':'.join([ os.path.expanduser(p) for p in \
+        config.getValue("general","stylesheet_path","").split(':')])
+    parser.add_option('--stylesheet-path',dest='stylepath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_sheetpath,
+                      help='A colon-separated list of folders to search for stylesheets. Default="%s"'%def_sheetpath)
 
     def_compressed=config.getValue("general","compressed",False)
     parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=def_compressed,
@@ -1218,15 +1224,20 @@ def main():
     if options.ffolder:
         fpath.append(options.ffolder)
 
+    spath=[]
+    if options.stylepath:
+        spath=options.stylepath.split(':')
+
     RstToPdf(stylesheets = ssheet,
              language=options.language,
              breaklevel=int(options.breaklevel),
              inlinelinks = options.inlinelinks,
              fitMode=options.fitMode,
              smarty=str(options.smarty),
-             fontPath=fpath).createPdf(text=infile.read(),
-                                       output=outfile,
-                                       compressed=options.compressed)
+             fontPath=fpath,
+             stylePath=spath).createPdf(text=infile.read(),
+                                        output=outfile,
+                                        compressed=options.compressed)
 
 if __name__ == "__main__":
     main()
