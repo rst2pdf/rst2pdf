@@ -50,8 +50,11 @@ Command line Options
 -s STYLESHEETS
                     A comma-separated list of custom stylesheets.
                     Default=""
--c, --compressed      Create a compressed PDF. Default=False
+--stylesheet-path=FOLDERLIST
+                    A colon-separated list of folders to search for
+                    stylesheets. Default=""
 --print-stylesheet    Print the default stylesheet and exit
+-c, --compressed      Create a compressed PDF. Default=False
 --font-folder=FOLDER     Search this folder for fonts. (Deprecated)
 --font-path=FOLDERLIST
                       A colon-separated list of folders to search for fonts.
@@ -262,6 +265,17 @@ modify it and pass it with the -s option::
 
   rst2pdf mydoc.txt -s mystyles.txt
 
+Those styles will always be searched in these places, in order:
+
+* What you specify using --stylesheet_path
+
+* The option stylesheet_path in the config file
+
+* The current folder
+
+* ~/.rst2pdf/styles
+
+* The styles folder within rst2pdf's installation folder.
 
 StyleSheet Syntax
 -----------------

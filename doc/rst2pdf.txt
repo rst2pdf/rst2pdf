@@ -18,6 +18,9 @@ OPTIONS
 -s STYLESHEETS  
                     A comma-separated list of custom stylesheets.
                     Default=""
+--stylesheet-path=FOLDERLIST
+                    A colon-separated list of folders to search for
+                    stylesheets. Default=""
 -c, --compressed  
                     Create a compressed PDF. Default=False
 --print-stylesheet  
