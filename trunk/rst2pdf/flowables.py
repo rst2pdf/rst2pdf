@@ -149,7 +149,6 @@ class Transition(Flowable):
         }
         
     def __init__(self,*args):
-        args=args[0]
         if len(args)<1:
             args=[None,1] # No transition            
         # See if we got a valid transition effect name
