@@ -150,7 +150,6 @@ class Transition(Flowable):
         
     def __init__(self,*args):
         args=args[0]
-        print "ARG0",args[0]
         if len(args)<1:
             args=[None,1] # No transition            
         # See if we got a valid transition effect name
@@ -175,7 +174,6 @@ class Transition(Flowable):
         ceff=['effectname','duration']+self.PageTransitionEffects[self.args[0]]
         for argname,argvalue in zip(ceff,self.args):
             kwargs[argname]=argvalue
-        print kwargs
         kwargs['duration']=int(kwargs['duration'])
         kwargs['direction']=int(kwargs['direction'])
         self.canv.setPageTransition(**kwargs)
