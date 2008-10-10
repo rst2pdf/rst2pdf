@@ -1184,7 +1184,7 @@ def main():
 
     filename = False
         
-    if len(args) == 0:
+    if len(args) == 0 or args[0]=='-':
         infile = sys.stdin
     elif len(args) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
