@@ -1,0 +1,10 @@
+{"fontsAlias": {"stdFont": "Serif",
+                "stdBold": "Serif-Bold",
+                "stdItalic": "Serif-Italic",
+                "stdBoldItalic": "Serif-BoldItalic",
+                "stdMono": "Monospace",
+                "stdMonoItalic": "Monospace-Italic",
+                "stdMonoBold": "Monospace-Bold",
+                "stdMonoBoldItalic": "Monospace-BoldItalic",
+                "stdSerif": "Serif-Roman"}
+}
