@@ -475,9 +475,9 @@ def formatColor(value,numeric=True):
         while len(c) < 6:
             c = '0'+c
         if numeric:
-            r = int(c[:2],16)
-            g = int(c[2:4],16)
-            b = int(c[4:6],16)
+            r = int(c[:2],16)/255.
+            g = int(c[2:4],16)/255.
+            b = int(c[4:6],16)/255.
             return colors.Color(r,g,b)
         else:
             return str("#"+c)
