@@ -59,6 +59,7 @@ Command line Options
 --font-path=FOLDERLIST
                       A colon-separated list of folders to search for fonts.
                       Default=""
+--baseurl=URL         The base URL for relative URLs. Default="None"
 -l LANG, --language=LANG
                     Language to be used for hyphenation. Default="en_US"
 --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to

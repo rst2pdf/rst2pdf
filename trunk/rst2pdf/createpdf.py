@@ -79,7 +79,7 @@ class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
                  inlinelinks=False,breaklevel=1,fontPath=[],stylePath=[],
-                 fitMode='shrink',sphinx=False,smarty='0'):
+                 fitMode='shrink',sphinx=False,smarty='0',baseurl=None):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
@@ -93,6 +93,7 @@ class RstToPdf(object):
         self.fitMode=fitMode
         self.to_unlink=[]
         self.smarty=smarty
+        self.baseurl=baseurl
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -213,6 +214,8 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.reference) :
             uri=node.get('refuri')
             if uri:
+                if self.baseurl: # Need to join the uri with the base url
+                    uri=urljoin(self.baseurl,uri)
                 if urlparse(uri)[0]:
                     if self.inlinelinks:
                         #import pdb; pdb.set_trace()
@@ -1147,7 +1150,10 @@ def main():
     parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_fontpath,
                       help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)   
 
-    
+    def_baseurl=None
+    parser.add_option('--baseurl',dest='baseurl',metavar='URL',default=def_baseurl,
+                      help='The base URL for relative URLs. Default="%s"'%def_baseurl)
+
     def_lang=config.getValue("general","language","en_US")
     parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
                       help='Language to be used for hyphenation. Default="%s"'%def_lang)
@@ -1236,6 +1242,7 @@ def main():
              language=options.language,
              breaklevel=int(options.breaklevel),
              inlinelinks = options.inlinelinks,
+             baseurl = options.baseurl,
              fitMode=options.fitMode,
              smarty=str(options.smarty),
              fontPath=fpath,
