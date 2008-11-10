@@ -399,7 +399,11 @@ class RstToPdf(object):
                             # Experiment: if the cell has a single element, extract its
                             # class and use it for the cell. That way, you can have cells
                             # with specific background colors, at least
-                            cellStyles+=self.styles.pStyleToTStyle(ell[0].style,j,i)
+                            
+                            try:
+                                cellStyles+=self.styles.pStyleToTStyle(ell[0].style,j,i)
+                            except AttributeError: # Fix for issue 85: only do it if it has a style.
+                                pass
                         r.append(ell)
                     j+=1
                 data.append(r)

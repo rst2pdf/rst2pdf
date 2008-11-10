@@ -322,7 +322,9 @@ class BoundByWidth(Flowable):
     def wrap(self,availWidth,availHeight):
         '''If we need more width than we have, complain, keep a scale'''
         if self.style:
-            self.pad = self.style.borderPadding+self.style.borderWidth+.1
+            bp=self.style.__dict__.get("borderPadding",0)
+            bw=self.style.__dict__.get("borderWidth",0)
+            self.pad = bp+bw+.1
         else:
             self.pad=0
         maxWidth = float(min(styles.adjustUnits(self.maxWidth,availWidth) or availWidth,availWidth))
