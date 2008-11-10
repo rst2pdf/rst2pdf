@@ -959,7 +959,7 @@ class RstToPdf(object):
         # in the frame
         return BoundByWidth(2000*cm,content=[XPreformatted(text,style)],mode=self.fitMode,style=style)
 
-    def createPdf(self,text=None,output=None,doctree=None,compressed=False):
+    def createPdf(self,text=None,source_path=None,output=None,doctree=None,compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
         and save it in outfile.
 
@@ -971,7 +971,7 @@ class RstToPdf(object):
 
         if doctree is None:
             if text is not None:
-                doctree=docutils.core.publish_doctree(text)
+                doctree=docutils.core.publish_doctree(text,source_path=source_path)
                 log.debug(doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree to be useful')
@@ -1240,6 +1240,7 @@ def main():
              smarty=str(options.smarty),
              fontPath=fpath,
              stylePath=spath).createPdf(text=infile.read(),
+                                        source_path=infile.name,
                                         output=outfile,
                                         compressed=options.compressed)
 
