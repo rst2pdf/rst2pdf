@@ -78,8 +78,8 @@ except ImportError:
 class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US',
-                 inlinelinks=False,breaklevel=1,fontPath=[],stylePath=[],
-                 fitMode='shrink',sphinx=False,smarty='0',baseurl=None):
+                 inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
+                 fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
@@ -94,7 +94,7 @@ class RstToPdf(object):
         self.to_unlink=[]
         self.smarty=smarty
         self.baseurl=baseurl
-
+        self.repeatTableRows=repeatTableRows
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
         # I can' t just try to import it outside. I need
@@ -416,8 +416,10 @@ class RstToPdf(object):
             if hasHead:
                 st+=self.styles.tstyleHead(headRows)
 
+            rtr = self.repeatTableRows
+
             #node.elements=[Table(data,colWidths=colwidths,style=TableStyle(st))]
-            node.elements=[DelayedTable(data,colwidths,st)]
+            node.elements=[DelayedTable(data,colwidths,st,rtr)]
 
         elif isinstance (node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
@@ -1171,6 +1173,8 @@ def main():
                       help='Maximum section level that starts in a new page. Default: %d'%def_break)
     parser.add_option('--inline-links',action="store_true",dest='inlinelinks',default=False,
                       help='shows target between parenthesis instead of active link')
+    parser.add_option('--repeat-table-rows',action="store_true",dest='repeattablerows',default=False,
+                      help='Repeats header row for each splitted table')
     parser.add_option('-q','--quiet',action="store_true",dest='quiet',default=False,
                       help='Print less information.')
     parser.add_option('-v','--verbose',action="store_true",dest='verbose',default=False,
@@ -1238,18 +1242,21 @@ def main():
     if options.stylepath:
         spath=options.stylepath.split(':')
 
-    RstToPdf(stylesheets = ssheet,
-             language=options.language,
-             breaklevel=int(options.breaklevel),
-             inlinelinks = options.inlinelinks,
-             baseurl = options.baseurl,
-             fitMode=options.fitMode,
-             smarty=str(options.smarty),
-             fontPath=fpath,
-             stylePath=spath).createPdf(text=infile.read(),
-                                        source_path=infile.name,
-                                        output=outfile,
-                                        compressed=options.compressed)
+    RstToPdf(
+        stylesheets = ssheet,
+        language=options.language,
+        breaklevel=int(options.breaklevel),
+        inlinelinks = options.inlinelinks,
+        baseurl = options.baseurl,
+        fitMode=options.fitMode,
+        smarty=str(options.smarty),
+        fontPath=fpath,
+        stylePath=spath,
+        repeatTableRows=options.repeattablerows,
+    ).createPdf(text=infile.read(),
+                source_path=infile.name,
+                output=outfile,
+                compressed=options.compressed)
 
 if __name__ == "__main__":
     main()
