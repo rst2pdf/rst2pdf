@@ -72,7 +72,8 @@ Command line Options
                     Maximum section level that starts in a new page.
                     Default: 0
 --inline-links        Shows target between parenthesis instead of active
-                        link
+                      link
+--repeat-table-rows   Repeats header row for each splitted table
 -q, --quiet           Print less information.
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.

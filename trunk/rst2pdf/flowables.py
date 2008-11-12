@@ -85,11 +85,12 @@ class DelayedTable(Flowable):
     Needed so column widths can be determined after we know on what
     frame the table will be inserted, thus making the overal table width
     correct'''
-    def __init__(self,data,colwidths,style):
+    def __init__(self,data,colwidths,style,repeatrows=False):
         self.data=data
         self.colwidths=colwidths
         self.style=style
         self.t=None
+        self.repeatrows=repeatrows
     def wrap(self,w,h):
         # First create the table, with the widths from colwidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
@@ -102,7 +103,7 @@ class DelayedTable(Flowable):
         _tw=w/sum(self.colwidths)
         colwidths=[ _w*_tw for _w in self.colwidths ]
         
-        self.t=Table(self.data,colWidths=colwidths,style=TableStyle(self.style))
+        self.t=Table(self.data,colWidths=colwidths,style=TableStyle(self.style), repeatRows=self.repeatrows)
         return self.t.wrap(w,h)
 
     def split(self,w,h):
