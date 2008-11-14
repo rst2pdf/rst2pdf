@@ -247,6 +247,8 @@ class Sidebar(FrameActionFlowable):
         self.flowables=flowables
 
     def frameAction(self,frame):
+        if self.style.float not in ('left','right'):
+            return
         if frame.onSidebar: #We are still on the frame next to a sidebar!
             frame._generated_content = [FrameBreak(),self]
         else:
@@ -331,7 +333,7 @@ class BoundByWidth(Flowable):
         maxWidth = float(min(styles.adjustUnits(self.maxWidth,availWidth) or availWidth,availWidth))
         self.maxWidth=maxWidth
         maxWidth -= 2*self.pad
-        self.width, self.height = _listWrapOn(self.content,maxWidth,self.canv)
+        self.width, self.height = _listWrapOn(self.content,maxWidth,None)
         self.scale=1.0
         if self.width > maxWidth:
             log.warning("BoundByWidth too wide to fit in frame: %s",self.identity())
@@ -395,7 +397,7 @@ class BoxedContainer(BoundByWidth):
         self.mode=mode
 
     def identity(self,maxLen=None):
-        return u"BoxedContainer containing: ",[c.identity() for c in self.content]
+        return unicode([u"BoxedContainer containing: ",[c.identity() for c in self.content]])
 
     def draw(self):
         canv=self.canv
@@ -410,8 +412,8 @@ class BoxedContainer(BoundByWidth):
             canv.setStrokeColor(self.style.borderColor)
         if self.style and self.style.backColor:
             canv.setFillColor(self.style.backColor)
-        if self.style and self.style.padding:
-            self.padding=self.style.padding
+        if self.style:
+            self.padding=self.style.__dict__.get('padding',8)
         else:
             self.padding=0
         self.padding+=lw
@@ -422,12 +424,28 @@ class BoxedContainer(BoundByWidth):
         BoundByWidth.draw(self)
         
     def split(self,availWidth,availHeight):
-        if len(self.content)>1:
-            # Try splitting in our individual elements
-            return [ BoxedContainer([f],self.style,self.mode) for f in self.content ]
-        else: # We need to split the only element we have
-            return [ BoxedContainer([f],self.style,self.mode) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
-
+        padding=2*self.pad*self.scale
+        if self.height+padding<=availHeight:
+            return [self]
+        else:
+            # Try to figure out how many elements we can put in the available space
+            candidate=None
+            remainder=None
+            for p in range (1,len(self.content)):
+                b=BoxedContainer(self.content[:p],self.style,self.mode)
+                w,h=b.wrap(availWidth,availHeight)
+                if h<availHeight:
+                    candidate=b
+                    if self.content[p:]:
+                        remainder=BoxedContainer(self.content[p:],self.style,self.mode)
+                else:
+                    break
+            if not candidate: # Nothing fits, break page
+                return [FrameBreak(),self]
+            if not remainder: # Everything fits?
+                return [self]
+            return [candidate,remainder]
+                
 if reportlab.Version == '2.1':
 
     import reportlab.platypus.paragraph as pla_para
