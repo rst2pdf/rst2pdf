@@ -178,8 +178,8 @@
       "parent": "heading4"
     }],
     ["sidebar" , {
-      "float": "left",
-      "width": "30%",
+      "float": "none",
+      "width": "100%",
       "parent": "normal",
       "backColor": "beige",
       "borderColor": "darkgray",
