@@ -394,6 +394,9 @@ class BoxedContainer(BoundByWidth):
         self.style=style
         self.mode=mode
 
+    def identity(self,maxLen=None):
+        return u"BoxedContainer containing: ",[c.identity() for c in self.content]
+
     def draw(self):
         canv=self.canv
         canv.saveState()
