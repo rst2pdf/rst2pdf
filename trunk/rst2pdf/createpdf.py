@@ -785,9 +785,8 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=self.gather_elements(node,depth,style=None)
-            style=self.styles['sidebar']
-
+            node.elements=[BoxedContainer(self.gather_elements(node,depth,style=None),self.styles['sidebar'])]
+            
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
 
@@ -875,9 +874,11 @@ class RstToPdf(object):
         except TypeError: #Hapens with docutils.node.Text
             pass
 
-        if 'float' in style.__dict__:
-            node.elements=[Sidebar(node.elements,style)]
-        elif 'width' in style.__dict__:
+        # Make all the sidebar cruft unreachable
+        #if style.__dict__.get('float','None').lower()<>'none':
+            #node.elements=[Sidebar(node.elements,style)]
+        #elif 'width' in style.__dict__:
+        if 'width' in style.__dict__:
             node.elements=[BoundByWidth(style.width,node.elements,style,mode="shrink")]
         try:
             log.debug("gen_elements: %s", node.elements)
