@@ -1078,18 +1078,18 @@ class FancyPage(PageTemplate):
         for e in elems:
             i=elems.index(e)
             if isinstance(e,Paragraph):
-                text=e.text
-                text=text.replace('###Page###',str(doc.page))
-                text=text.replace("###Title###",doc.title)
+                text=unicode(e.text,e.encoding)
+                text=text.replace(u'###Page###',unicode(doc.page))
+                text=text.replace(u"###Title###",doc.title)
                 # FIXME: make this nicer
                 try:
-                    text=text.replace("###Section###",canv.sectName)
+                    text=text.replace(u"###Section###",canv.sectName)
                 except AttributeError:
-                    text=text.replace("###Section###",'')
+                    text=text.replace(u"###Section###",'')
                 try:
-                    text=text.replace("###SectNum###",canv.sectNum)
+                    text=text.replace(u"###SectNum###",canv.sectNum)
                 except AttributeError:
-                    text=text.replace("###SectNum###",'')
+                    text=text.replace(u"###SectNum###",'')
                 text=smartyPants(text,self.smarty)
                 elems[i]=Paragraph(text,e.style)
 
