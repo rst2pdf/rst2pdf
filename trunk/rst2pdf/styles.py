@@ -129,19 +129,27 @@ class StyleSheet(object):
         for data, ssname in zip(ssdata, flist):
             self.fontsAlias.update(data.get('fontsAlias',{}))
 
-        self.embedded=[]
+        embedded_fontnames = []
+        self.embedded=[] 
         # Embed all fonts indicated in all stylesheets
         for data, ssname in zip(ssdata, flist):
             embedded=data.get('embeddedFonts',[])
-
             for font in embedded:
                 try:
                     if isinstance(font,unicode): # Just a font name, try to embed it
                         # See if we can find the font
                         fname,pos=findfonts.guessFont(font)
-                        fontList=findfonts.autoEmbed(font)
+                        if font in embedded_fontnames:
+                            pass
+                        else:
+                            fontList=findfonts.autoEmbed(font)
+                            if fontList:
+                                embedded_fontnames.append(font)
                         if not fontList:
-                            fontList=findfonts.autoEmbed(fname)
+                            if (fname, pos) in embedded_fontnames:
+                                fontList=None
+                            else:
+                                fontList=findfonts.autoEmbed(fname)
                         if fontList is not None:
                             self.embedded+=fontList
                             # Maybe the font we got is not called the same as the one we gave
@@ -152,7 +160,6 @@ class StyleSheet(object):
                                 for fname,aliasname in zip(fontList,[font+suffix for suffix in suff]):
                                     self.fontsAlias[aliasname]=fname
                         continue
-                    
                     # Each "font" is a list of four files, which will be used for
                     # regular / bold / italic / bold+italic versions of the font.
                     # If your font doesn't have one of them, just repeat the regular
@@ -189,8 +196,11 @@ class StyleSheet(object):
                         
                 except Exception, e:
                     try:
-                        fname=font[0].split('.')[0]
-                        log.error("Error processing font %s: %s",fname,str(e))
+                        if isinstance(font, list):
+                            fname=font[0]
+                        else:
+                            fname=font
+                        log.error("Error processing font %s: %s", os.path.splitext(fname)[0],str(e))
                         log.error("Registering %s as Helvetica alias",fname)
                         self.fontsAlias[fname]='Helvetica'
                     except Exception,e:
@@ -227,9 +237,19 @@ class StyleSheet(object):
                         # Now we need to do something
                         # See if we can find the font
                         fname,pos=findfonts.guessFont(style[key])
-                        fontList=findfonts.autoEmbed(style[key])
+                        if style[key] in embedded_fontnames:
+                            pass
+                        else:
+                            fontList=findfonts.autoEmbed(style[key])
+                            if fontList:
+                                embedded_fontnames.append(style[key])
                         if not fontList:
-                            fontList=findfonts.autoEmbed(fname)                            
+                            if (fname, pos) in embedded_fontnames:
+                                fontList=None
+                            else:
+                                fontList=findfonts.autoEmbed(fname)
+                            if fontList:
+                                embedded_fontnames.append((fname, pos))
                         if fontList is not None:
                             self.embedded+=fontList
                             # Maybe the font we got is not called the same as the one we gave
