@@ -1187,7 +1187,7 @@ def main():
     (options,args)=parser.parse_args()
 
     if options.version:
-        print "0.9.$LastChangedRevision$"
+        print "0.9-r%s"%("$LastChangedRevision$".split(" ")[1])
         sys.exit(0)
 
     if options.quiet:
