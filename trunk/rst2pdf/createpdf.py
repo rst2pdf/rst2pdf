@@ -1182,7 +1182,13 @@ def main():
                       help='Print debug information.')
     parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,
                       help='Print even more debug information.')
+    parser.add_option('--version',action="store_true",dest='version',default=False,
+                      help='Print version number and exit.')
     (options,args)=parser.parse_args()
+
+    if options.version:
+        print "0.9.$LastChangedRevision$"
+        sys.exit(0)
 
     if options.quiet:
         log.setLevel(logging.CRITICAL)
