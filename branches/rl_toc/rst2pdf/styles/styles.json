@@ -204,6 +204,9 @@
       "alignment" : "TA_CENTER",
       "valign" : "BOTTOM"
     }],
+    ["tableofcontents" , {
+      "fontName" : "stdFont"
+    }],
     ["code" , {
       "parent": "literal",
       "leftIndent": 0,
