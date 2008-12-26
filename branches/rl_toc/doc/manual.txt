@@ -889,7 +889,7 @@ If you want good looking documents, you want to enable hyphenation.
 
 To do it, you need to install Wordaxe [#]_.
 
-.. [#] You can get Wordaxe from htp://deco-cow.sf.net. Version 0.2.6 or later is
+.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 0.2.6 or later is
        recommended.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
