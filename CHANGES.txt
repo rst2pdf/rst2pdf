@@ -2,6 +2,8 @@ New in SVN (will be 0.10)
 -------------------------
 
 * Table headers can be repeated in each page (thanks to Yasushi Masuda)
+* Line number support for code blocks (:linenos: true)
+
 
 New in 0.9
 ----------

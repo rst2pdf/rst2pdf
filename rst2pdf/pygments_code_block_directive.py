@@ -187,13 +187,36 @@ def code_block_directive(name, arguments, options, content, lineno,
     else:
         content=u'\n'.join(content)
 
+    if "linenos" in options:
+        withln=True
+    else:
+        withln=False
+
     language = arguments[0]
     # create a literal block element and set class argument
     code_block = nodes.literal_block(classes=["code", language])
-    
+
+    if withln:
+        lineno = 1
+        lnwidth=len(str(content.count("\n")+1))
+        fstr="\n%%%dd "%lnwidth
+        code_block += nodes.Text(fstr[1:]%lineno,fstr[1:]%lineno)
+        
     # parse content with pygments and add to code_block element
     for cls, value in DocutilsInterface(content, language):
-        if cls in unstyled_tokens:
+        if withln and "\n" in value:
+            # Split on the "\n"s
+            values=value.split("\n")
+            # The first piece, pass as-is
+            code_block += nodes.Text(values[0], values[0])
+            # On the second and later pieces, insert \n and linenos
+            linenos=range(lineno,lineno+len(values))
+            for chunk,ln in zip(values,linenos)[1:]:
+                code_block += nodes.Text(fstr%ln,fstr%ln)
+                code_block += nodes.Text(chunk, chunk)
+            lineno+=len(values)-1
+            
+        elif cls in unstyled_tokens:
             # insert as Text to decrease the verbosity of the output.
             code_block += nodes.Text(value, value)
         else:
@@ -213,6 +236,7 @@ code_block_directive.options = { 'include' : directives.unchanged_required,
                                  'end-at' : directives.unchanged_required,
                                  'start-after' : directives.unchanged_required,
                                  'end-before' : directives.unchanged_required,
+                                 'linenos' : directives.unchanged_required,
                                  }
 
 directives.register_directive('code-block', code_block_directive)
