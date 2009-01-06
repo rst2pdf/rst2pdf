@@ -2,3 +2,4 @@
 * Nicolas Laurance <nlaurance at zindep dot com>
 * Christoph Zwerschke 
 * Yasushi Masuda
+* Josh VanderLinden
