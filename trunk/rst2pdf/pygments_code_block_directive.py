@@ -187,10 +187,7 @@ def code_block_directive(name, arguments, options, content, lineno,
     else:
         content=u'\n'.join(content)
 
-    if "linenos" in options:
-        withln=True
-    else:
-        withln=False
+    withln = "linenos" in options
 
     language = arguments[0]
     # create a literal block element and set class argument
@@ -198,7 +195,8 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     if withln:
         lineno = 1
-        lnwidth=len(str(content.count("\n")+1))
+        total_lines = content.count('\n') + 1
+        lnwidth = len(str(total_lines))
         fstr="\n%%%dd "%lnwidth
         code_block += nodes.Text(fstr[1:]%lineno,fstr[1:]%lineno)
         
@@ -212,8 +210,9 @@ def code_block_directive(name, arguments, options, content, lineno,
             # On the second and later pieces, insert \n and linenos
             linenos=range(lineno,lineno+len(values))
             for chunk,ln in zip(values,linenos)[1:]:
-                code_block += nodes.Text(fstr%ln,fstr%ln)
-                code_block += nodes.Text(chunk, chunk)
+                if ln <= total_lines:
+                    code_block += nodes.Text(fstr%ln,fstr%ln)
+                    code_block += nodes.Text(chunk, chunk)
             lineno+=len(values)-1
             
         elif cls in unstyled_tokens:
@@ -222,9 +221,6 @@ def code_block_directive(name, arguments, options, content, lineno,
         else:
             code_block += nodes.inline(value, value, classes=["pygments-"+cls])
 
-    # FIXME: This is pretty ugly.
-    if withln:
-        code_block.children=code_block.children[:-2]
     return [code_block]
 
 
