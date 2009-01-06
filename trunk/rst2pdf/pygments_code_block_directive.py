@@ -236,7 +236,7 @@ code_block_directive.options = { 'include' : directives.unchanged_required,
                                  'end-at' : directives.unchanged_required,
                                  'start-after' : directives.unchanged_required,
                                  'end-before' : directives.unchanged_required,
-                                 'linenos' : directives.unchanged_required,
+                                 'linenos' : directives.unchanged,
                                  }
 
 directives.register_directive('code-block', code_block_directive)

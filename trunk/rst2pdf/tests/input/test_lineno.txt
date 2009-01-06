@@ -12,7 +12,7 @@
 	"line 10"
 
 .. code-block:: python
-	:linenos: true
+	:linenos: 
 
 	"line 1"
 	"line 2"
