@@ -222,6 +222,9 @@ def code_block_directive(name, arguments, options, content, lineno,
         else:
             code_block += nodes.inline(value, value, classes=["pygments-"+cls])
 
+    # FIXME: This is pretty ugly.
+    if withln:
+        code_block.children=code_block.children[:-2]
     return [code_block]
 
 
