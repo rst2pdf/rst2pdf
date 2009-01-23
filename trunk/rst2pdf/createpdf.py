@@ -662,7 +662,6 @@ class RstToPdf(object):
                     node.elements+=e
                 else:
                     node.elements.append(e)
-            print node.elements
             #node.elements=el
 
         elif isinstance (node, docutils.nodes.transition):
@@ -701,16 +700,18 @@ class RstToPdf(object):
             node.elements=[self.PreformattedFit(self.gather_pdftext(node,depth,replaceEnt=True),self.styles['code'])]
 
         elif isinstance (node, docutils.nodes.attention)        \
-            or isinstance (node, docutils.nodes.caution)            \
-            or isinstance (node, docutils.nodes.danger)             \
-            or isinstance (node, docutils.nodes.error)                \
-            or isinstance (node, docutils.nodes.hint)                 \
-            or isinstance (node, docutils.nodes.important)        \
-            or isinstance (node, docutils.nodes.note)                 \
-            or isinstance (node, docutils.nodes.tip)                    \
-            or isinstance (node, docutils.nodes.warning)            \
+            or isinstance (node, docutils.nodes.caution)        \
+            or isinstance (node, docutils.nodes.danger)         \
+            or isinstance (node, docutils.nodes.error)          \
+            or isinstance (node, docutils.nodes.hint)           \
+            or isinstance (node, docutils.nodes.important)      \
+            or isinstance (node, docutils.nodes.note)           \
+            or isinstance (node, docutils.nodes.tip)            \
+            or isinstance (node, docutils.nodes.warning)        \
             or isinstance (node, docutils.nodes.admonition):
-            node.elements=[Paragraph(node.tagname.title(),style=self.styles['heading3'])]+self.gather_elements(node,depth,style=style)
+            #node.elements=[Paragraph(node.tagname.title(),style=self.styles['heading3'])]+self.gather_elements(node,depth,style=style)
+                rows=[Paragraph(node.tagname.title(),style=self.styles['heading3'])]+self.gather_elements(node,depth,style=style)
+                node.elements=[BoxedContainer(rows,self.styles['admonition'])]
 
         elif isinstance (node, docutils.nodes.image):
             # FIXME: handle all the other attributes
