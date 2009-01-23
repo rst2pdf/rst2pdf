@@ -1,5 +1,7 @@
 13. On MMS Settings window - fill data
 
+    This should be indented and aligned with the table
+
     =========================================== ====================================================
     MMS Server URL                              http://mms.itelcel.com/servlets/mms
     Use Specific Network Connection(GPRS Modem)  <check it>
@@ -10,3 +12,5 @@
     Login name                                   mmsgprs
     Password                                     mmsgprs2003
     =========================================== ====================================================
+
+    This should be indented and aligned with the table
