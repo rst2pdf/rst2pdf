@@ -1,6 +1,9 @@
-__import__('pkg_resources').declare_namespace(__name__)
 
-VERSION = (0, 9, 0, 'svn')
-
-def version():
-    return '%s.%s.%s-%s' % VERSION
+try:
+    import pkg_resources
+    try:
+        version = pkg_resources.get_distribution('rst2pdf').version
+    except pkg_resources.ResolutionError:
+        version = None
+except ImportError:
+    version = None

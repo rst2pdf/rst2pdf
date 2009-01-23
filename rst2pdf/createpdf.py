@@ -83,8 +83,8 @@ class RstToPdf(object):
         global HAS_SPHINX
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
-        self.doc_title="" 
-        self.doc_author="" 
+        self.doc_title=""
+        self.doc_author=""
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath,stylePath)
@@ -273,7 +273,7 @@ class RstToPdf(object):
             img=mf.genImage()
             self.to_unlink.append(img)
             node.pdftext='<img src="%s" width=%f height=%f valign=%f/>'%(img,w,h,-descent)
-        
+
         elif isinstance (node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
             anchors=''.join(['<a name="%s"/>'%i for i in node['ids'] ])
@@ -318,7 +318,7 @@ class RstToPdf(object):
                               docutils.nodes.title
                               ]:
             node.pdftext=smartyPants(node.pdftext,self.smarty)
-        
+
         return node.pdftext
 
     def gen_elements(self, node, depth, style=None):
@@ -350,7 +350,7 @@ class RstToPdf(object):
 
         elif isinstance (node,math_node):
             node.elements=[Math(node.math_data)]
-          
+
         #######################
         ## Tables
         #######################
@@ -402,7 +402,7 @@ class RstToPdf(object):
                             # Experiment: if the cell has a single element, extract its
                             # class and use it for the cell. That way, you can have cells
                             # with specific background colors, at least
-                            
+
                             try:
                                 cellStyles+=self.styles.pStyleToTStyle(ell[0].style,j,i)
                             except AttributeError: # Fix for issue 85: only do it if it has a style.
@@ -563,7 +563,7 @@ class RstToPdf(object):
             or isinstance (node, docutils.nodes.field_list):
 
             node.elements=self.gather_elements(node,depth,style=style)
-            
+
         elif isinstance (node, docutils.nodes.definition):
             node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
 
@@ -604,7 +604,7 @@ class RstToPdf(object):
                 start=int(node.parent.get('start'))
             else:
                 start=1
-                
+
             if node.parent.get('bullet') or isinstance(node.parent,docutils.nodes.bullet_list):
                 b=node.parent.get('bullet')
                 if b=="None":
@@ -654,7 +654,7 @@ class RstToPdf(object):
                     else: # Paragraph style
                         e.style.leftIndent=e.style.bulletIndent+indentation
             node.elements=el
-            
+
         elif isinstance (node, docutils.nodes.transition):
             node.elements=[Separation()]
 
@@ -777,7 +777,7 @@ class RstToPdf(object):
             except IOError,e: #No image, or no permissions
                 log.error('Error opening "%s": %s'%(imgname,str(e)))
                 node.elements=[]
-                
+
 
         elif isinstance (node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if
@@ -794,7 +794,7 @@ class RstToPdf(object):
 
         elif isinstance (node, docutils.nodes.sidebar):
             node.elements=[BoxedContainer(self.gather_elements(node,depth,style=None),self.styles['sidebar'])]
-            
+
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
 
@@ -1041,7 +1041,7 @@ class FancyPage(PageTemplate):
            * Gutter margins on left or right as needed
 
         '''
-        
+
         self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
         # What page template to use?
         tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
@@ -1135,12 +1135,12 @@ def main():
     parser = OptionParser()
     parser.add_option('-o', '--output',dest='output',metavar='FILE'
                       ,help='Write the PDF to FILE')
-                      
+
     def_ssheets=','.join([ os.path.expanduser(p) for p in \
-    config.getValue("general","stylesheets","").split(',')])    
+    config.getValue("general","stylesheets","").split(',')])
     parser.add_option('-s', '--stylesheets',dest='style',metavar='STYLESHEETS',default=def_ssheets,
                       help='A comma-separated list of custom stylesheets. Default="%s"'%def_ssheets)
-                      
+
     def_sheetpath=':'.join([ os.path.expanduser(p) for p in \
         config.getValue("general","stylesheet_path","").split(':')])
     parser.add_option('--stylesheet-path',dest='stylepath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_sheetpath,
@@ -1149,17 +1149,17 @@ def main():
     def_compressed=config.getValue("general","compressed",False)
     parser.add_option('-c', '--compressed',dest='compressed',action="store_true",default=def_compressed,
                       help='Create a compressed PDF. Default=%s'%def_compressed)
-                      
+
     parser.add_option('--print-stylesheet',dest='printssheet',action="store_true",default=False,
                       help='Print the default stylesheet and exit')
 
     parser.add_option('--font-folder',dest='ffolder',metavar='FOLDER',
                       help='Search this folder for fonts. (Deprecated)')
-                  
+
     def_fontpath=':'.join([ os.path.expanduser(p) for p in \
         config.getValue("general","font_path","").split(':')])
     parser.add_option('--font-path',dest='fpath',metavar='FOLDER:FOLDER:...:FOLDER',default=def_fontpath,
-                      help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)   
+                      help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)
 
     def_baseurl=None
     parser.add_option('--baseurl',dest='baseurl',metavar='URL',default=def_baseurl,
@@ -1172,11 +1172,11 @@ def main():
     def_smartquotes=config.getValue("general","smartquotes","0")
     parser.add_option("--smart-quotes",metavar="VALUE",default=def_smartquotes,dest="smarty",
                       help='Try to convert ASCII quotes, ellipsis and dashes to the typographically correct equivalent. For details, read the man page or the manual. Default="%s"'%def_smartquotes)
-                      
+
     def_fit=config.getValue("general","fit_mode","shrink")
     parser.add_option('--fit-literal-mode',metavar='MODE',default=def_fit,dest='fitMode',
                       help='What todo when a literal is too wide. One of error,overflow,shrink,truncate. Default="%s"'%def_fit)
-                      
+
     def_break=config.getValue("general","break_level",0)
     parser.add_option('-b','--break-level',dest='breaklevel',metavar='LEVEL',default=def_break,
                       help='Maximum section level that starts in a new page. Default: %d'%def_break)
@@ -1195,7 +1195,8 @@ def main():
     (options,args)=parser.parse_args()
 
     if options.version:
-        print "0.9-r%s"%("$LastChangedRevision$".split(" ")[1])
+        from rst2pdf import version
+        print version
         sys.exit(0)
 
     if options.quiet:
@@ -1212,7 +1213,7 @@ def main():
         sys.exit(0)
 
     filename = False
-        
+
     if len(args) == 0 or args[0]=='-':
         infile = sys.stdin
     elif len(args) > 1:
@@ -1221,7 +1222,7 @@ def main():
     else:
         filename = args[0]
         infile=open(filename)
-    
+
     if options.output:
         outfile=options.output
         if outfile =='-':
@@ -1240,13 +1241,13 @@ def main():
             options.compressed = False
             #we must stay quiet
             log.setLevel(logging.CRITICAL)
-            #/reportlab/pdfbase/pdfdoc.py output can be a callable (stringio, stdout ...)            
+            #/reportlab/pdfbase/pdfdoc.py output can be a callable (stringio, stdout ...)
 
     if options.style:
         ssheet=options.style.split(',')
     else:
         ssheet=[]
-        
+
     fpath=[]
     if options.fpath:
         fpath=options.fpath.split(':')
