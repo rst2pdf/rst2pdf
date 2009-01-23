@@ -627,33 +627,43 @@ class RstToPdf(object):
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
                 b=u'\u2022'
+            el[0].bulletText = b
 
             # FIXME: this is really really not good code
             if not el:
                 el=[Paragraph(u"\xa0",self.styles["bodytext"])]
+
+            # Try to figure out how much space to reserve for the bullet
             if "style" in el[0].__dict__:
                 indentation=el[0].style.leading
             else:
                 indentation=12
-            el[0].bulletText = b
+                
+
+            # Indent all elements inside the list
             for e in el:
                 if "style" in e.__dict__:
                     if isinstance(e.style,list): # Table style
-                        # FIXME: find a way to indent this
-                        pass
+                        # Add pre/post indenters. Later these sublists are flattened in node.elements
+                        el[el.index(e)]=[MyIndenter(left=2*indentation),e,MyIndenter(left=-2*indentation)]
                     else: # Paragraph style
                         indentedStyle=copy(e.style)
                         indentedStyle.leftIndent+=indentation
                         indentedStyle.bulletIndent+=indentation
                         e.style=indentedStyle
             for e in el:
-                if 'style' in e.__dict__:
-                    if isinstance(e.style,list): # Table style
-                        # FIXME: find a way to indent this
-                        pass
-                    else: # Paragraph style
-                        e.style.leftIndent=e.style.bulletIndent+indentation
-            node.elements=el
+                if not isinstance(e,list) and 'style' in e.__dict__:
+                    e.style.leftIndent=e.style.bulletIndent+indentation
+
+            # "Flatten" el
+            node.elements=[]
+            for e in el:
+                if isinstance(e,list):
+                    node.elements+=e
+                else:
+                    node.elements.append(e)
+            print node.elements
+            #node.elements=el
 
         elif isinstance (node, docutils.nodes.transition):
             node.elements=[Separation()]
