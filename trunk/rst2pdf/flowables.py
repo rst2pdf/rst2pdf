@@ -409,7 +409,8 @@ class BoxedContainer(BoundByWidth):
         if self.style and self.style.borderWidth >0:
             lw=self.style.borderWidth
             canv.setLineWidth(self.style.borderWidth)
-            canv.setStrokeColor(self.style.borderColor)
+            if self.style.borderColor: # This could be None :-(
+                canv.setStrokeColor(self.style.borderColor)
         if self.style and self.style.backColor:
             canv.setFillColor(self.style.backColor)
         if self.style:
