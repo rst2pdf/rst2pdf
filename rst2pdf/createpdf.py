@@ -638,13 +638,21 @@ class RstToPdf(object):
             el[0].bulletText = b
             for e in el:
                 if "style" in e.__dict__:
-                    indentedStyle=copy(e.style)
-                    indentedStyle.leftIndent+=indentation
-                    indentedStyle.bulletIndent+=indentation
-                    e.style=indentedStyle
+                    if isinstance(e.style,list): # Table style
+                        # FIXME: find a way to indent this
+                        pass
+                    else: # Paragraph style
+                        indentedStyle=copy(e.style)
+                        indentedStyle.leftIndent+=indentation
+                        indentedStyle.bulletIndent+=indentation
+                        e.style=indentedStyle
             for e in el:
                 if 'style' in e.__dict__:
-                    e.style.leftIndent=e.style.bulletIndent+indentation
+                    if isinstance(e.style,list): # Table style
+                        # FIXME: find a way to indent this
+                        pass
+                    else: # Paragraph style
+                        e.style.leftIndent=e.style.bulletIndent+indentation
             node.elements=el
             
         elif isinstance (node, docutils.nodes.transition):
