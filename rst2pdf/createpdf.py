@@ -447,7 +447,7 @@ class RstToPdf(object):
                 key=node.get('refid')
                 elem = OutlineEntry(key,text,depth-1,snum)
                 elem.parent_id = node.parent.get('ids', [None])[0]
-                node.elements=[elem, Paragraph(text, self.styles['heading%d' % min(depth,3)])]
+                node.elements=[KeepTogether([elem, Paragraph(text, self.styles['heading%d' % min(depth,3)])])]
                 if depth <=self.breaklevel:
                     node.elements.insert(0,MyPageBreak())
 
