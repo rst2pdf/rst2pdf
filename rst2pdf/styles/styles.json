@@ -186,6 +186,17 @@
       "borderPadding": 8,
       "borderWidth": 0.5
     }],
+    ["admonition" , {
+      "float": "none",
+      "width": "100%",
+      "parent": "normal",
+      "backColor": "beige",
+      "borderColor": "darkgray",
+      "borderPadding": 8,
+      "borderWidth": 0.5,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
     ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",
