@@ -201,7 +201,7 @@ class StyleSheet(object):
                         if isinstance(font, list):
                             fname=font[0]
                         else:
-                            log.fname=font
+                            fname=font
                         log.error("Error processing font %s: %s", os.path.splitext(fname)[0],str(e))
                         log.error("Registering %s as Helvetica alias",fname)
                         self.fontsAlias[fname]='Helvetica'
