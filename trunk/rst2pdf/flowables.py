@@ -6,21 +6,24 @@ __docformat__ = 'reStructuredText'
 
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
+from reportlab.lib.enums import *
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+from reportlab.platypus.tableofcontents import TableOfContents
 
 from log import log
 import styles
 
 class MyIndenter(Indenter):
-    '''I can't remember why this exists'''
+    """I can't remember why this exists"""
     def draw(self):
         pass
     width=0
     height=0
 
 class OutlineEntry(Flowable):
-    '''Creates outline entries in the PDF TOC'''
+    """Creates outline entries in the PDF TOC"""
     def __init__(self,label,text,level=0,snum=None):
         '''* label is a unique label.
            * text is the text to be displayed in the outline tree
@@ -37,7 +40,7 @@ class OutlineEntry(Flowable):
         Flowable.__init__(self)
 
     def wrap(self,w,h):
-        '''This takes no space'''
+        """This takes no space"""
         return (0,0)
 
     def draw(self):
@@ -65,13 +68,13 @@ class Separation(Flowable):
         self.canv.line(0,0.5*cm,self.w,0.5*cm)
 
 class Reference(Flowable):
-    '''A flowable to insert an anchor without taking space'''
+    """A flowable to insert an anchor without taking space"""
     def __init__(self,refid):
         self.refid=refid
         Flowable.__init__(self)
         
     def wrap(self,w,h):
-        '''This takes no space'''
+        """This takes no space"""
         return (0,0)
 
     def draw(self):
@@ -81,10 +84,10 @@ class Reference(Flowable):
         return "Anchor: %s"%self.refid
 
 class DelayedTable(Flowable):
-    '''A flowable that inserts a table for which it has the data.
+    """A flowable that inserts a table for which it has the data.
     Needed so column widths can be determined after we know on what
     frame the table will be inserted, thus making the overal table width
-    correct'''
+    correct"""
     def __init__(self,data,colwidths,style,repeatrows=False):
         self.data=data
         self.colwidths=colwidths
@@ -179,8 +182,8 @@ class Transition(Flowable):
         self.canv.setPageTransition(**kwargs)
 
 class SmartFrame(Frame):
-    '''A (Hopefully) smarter frame object that knows how to
-    handle a two-pass layout procedure (someday)'''
+    """A (Hopefully) smarter frame object that knows how to
+    handle a two-pass layout procedure (someday)"""
 
     def __init__(self, container,x1, y1, width,height, leftPadding=6, bottomPadding=6,
             rightPadding=6, topPadding=6, id=None, showBoundary=0,
@@ -302,8 +305,8 @@ class Sidebar(FrameActionFlowable):
 
 
 class BoundByWidth(Flowable):
-    '''Limits a list of flowables by width, but still lets them break
-    over pages and frames'''
+    """Limits a list of flowables by width, but still lets them break
+    over pages and frames"""
     
     def __init__(self, maxWidth, content=[], style=None, mode=None):
         self.maxWidth=maxWidth
@@ -323,7 +326,7 @@ class BoundByWidth(Flowable):
                 getattr(self,'maxHeight','')and (' maxHeight=%s' % str(getattr(self,'maxHeight')))or '')
 
     def wrap(self,availWidth,availHeight):
-        '''If we need more width than we have, complain, keep a scale'''
+        """If we need more width than we have, complain, keep a scale"""
         if self.style:
             bp=self.style.__dict__.get("borderPadding",0)
             bw=self.style.__dict__.get("borderWidth",0)
@@ -354,7 +357,7 @@ class BoundByWidth(Flowable):
             return [ BoundByWidth(self.maxWidth,[f],self.style,self.mode) for f in self.content[0].split(availWidth-2*self.pad,availHeight-2*self.pad) ]
 
     def draw(self):
-        '''we simulate being added to a frame'''
+        """we simulate being added to a frame"""
         canv=self.canv
         canv.saveState()
         x=canv._x
@@ -447,7 +450,7 @@ class BoxedContainer(BoundByWidth):
             if not remainder: # Everything fits?
                 return [self]
             return [candidate,remainder]
-                
+
 if reportlab.Version == '2.1':
 
     import reportlab.platypus.paragraph as pla_para
@@ -455,7 +458,7 @@ if reportlab.Version == '2.1':
     ################Ugly stuff below
 
     def _do_post_text(i, t_off, tx):
-        '''From reportlab's paragraph.py, patched to avoid underlined links'''
+        """From reportlab's paragraph.py, patched to avoid underlined links"""
         xs = tx.XtraState
         leading = xs.style.leading
         ff = 0.125*xs.f.fontSize
@@ -494,3 +497,70 @@ if reportlab.Version == '2.1':
     pla_para._do_post_text.func_code = _do_post_text.func_code
 
     ############### End of the ugly
+
+
+class MyTableOfContents(TableOfContents):
+    """
+    Subclass of reportlab.platypus.tableofcontents.TableOfContents which supports
+    hyperlinks to corresponding sections.
+    """
+
+    def __init__(self, *args, **kwargs):
+        TableOfContents.__init__(self, *args, **kwargs)
+        # reference ids for which this TOC should be notified
+        self.refids = []
+        # revese lookup table from (level, text) to refid
+        self.refid_lut = {}
+        self.linkColor="#0000ff"
+
+    def notify(self, kind, stuff):
+        # stuff includes (level, text, pagenum, label)
+        level, text, pageNum, label= stuff
+        if label in self.refids:
+            self.addEntry(level, text, pageNum)
+            self.refid_lut[(level, text)] = label
+        else:
+            pass
+        
+    def wrap(self, availWidth, availHeight):
+        """Adds hyperlink to toc entry."""
+
+        widths = (availWidth - self.rightColumnWidth,
+                  self.rightColumnWidth)
+
+        # makes an internal table which does all the work.
+        # we draw the LAST RUN's entries!  If there are
+        # none, we make some dummy data to keep the table
+        # from complaining
+        if len(self._lastEntries) == 0:
+            _tempEntries = [(0,'Placeholder for table of contents',0)]
+        else:
+            _tempEntries = self._lastEntries
+
+        if _tempEntries:
+            base_level = _tempEntries[0][0]
+        else:
+            base_level = 0
+        tableData = []
+        for (level, text, pageNum) in _tempEntries:
+            left_col_level = level - base_level
+            leftColStyle = self.levelStyles[left_col_level]
+            label = self.refid_lut.get((level, text), None)
+            if label:
+                pre = '<a href="%s" color="%s">' %(label, self.linkColor)
+                post = '</a>'
+                text = pre+text+post
+            #right col style is right aligned
+            rightColStyle = ParagraphStyle(name='leftColLevel%d' % left_col_level,
+                                           parent=leftColStyle,
+                                           leftIndent=0,
+                                           alignment=TA_RIGHT)
+            leftPara = Paragraph(text, leftColStyle)
+            rightPara = Paragraph(str(pageNum), rightColStyle)
+            tableData.append([leftPara, rightPara])
+
+        self._table = Table(tableData, colWidths=widths,
+                            style=self.tableStyle)
+
+        self.width, self.height = self._table.wrapOn(self.canv,availWidth, availHeight)
+        return (self.width, self.height)
