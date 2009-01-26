@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #$HeadURL$
 #$LastChangedDate$
 #$LastChangedRevision$
@@ -823,8 +823,7 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.sidebar):
-            node.elements=self.gather_elements(node,depth,style=None)
-            style=self.styles['sidebar']
+            node.elements=[BoxedContainer(self.gather_elements(node,depth,style=None),self.styles['sidebar'])]
 
         elif isinstance (node, docutils.nodes.rubric):
             node.elements=[Paragraph(self.gather_pdftext(node,depth),self.styles['rubric'])]
@@ -913,9 +912,11 @@ class RstToPdf(object):
         except TypeError: #Hapens with docutils.node.Text
             pass
 
-        if 'float' in style.__dict__:
-            node.elements=[Sidebar(node.elements,style)]
-        elif 'width' in style.__dict__:
+        # Make all the sidebar cruft unreachable
+        #if style.__dict__.get('float','None').lower()<>'none':
+            #node.elements=[Sidebar(node.elements,style)]
+        #elif 'width' in style.__dict__:
+        if 'width' in style.__dict__:
             node.elements=[BoundByWidth(style.width,node.elements,style,mode="shrink")]
         try:
             log.debug("gen_elements: %s", node.elements)
@@ -1020,6 +1021,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree to be useful')
                 return
         elements=self.gen_elements(doctree,0)
+        
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
@@ -1134,18 +1136,18 @@ class FancyPage(PageTemplate):
         for e in elems:
             i=elems.index(e)
             if isinstance(e,Paragraph):
-                text=e.text
-                text=text.replace('###Page###',str(doc.page))
-                text=text.replace("###Title###",doc.title)
+                text=unicode(e.text,e.encoding)
+                text=text.replace(u'###Page###',unicode(doc.page))
+                text=text.replace(u"###Title###",doc.title)
                 # FIXME: make this nicer
                 try:
-                    text=text.replace("###Section###",canv.sectName)
+                    text=text.replace(u"###Section###",canv.sectName)
                 except AttributeError:
-                    text=text.replace("###Section###",'')
+                    text=text.replace(u"###Section###",'')
                 try:
-                    text=text.replace("###SectNum###",canv.sectNum)
+                    text=text.replace(u"###SectNum###",canv.sectNum)
                 except AttributeError:
-                    text=text.replace("###SectNum###",'')
+                    text=text.replace(u"###SectNum###",'')
                 text=smartyPants(text,self.smarty)
                 elems[i]=Paragraph(text,e.style)
 
@@ -1238,6 +1240,8 @@ def main():
                       help='Print debug information.')
     parser.add_option('--very-verbose',action="store_true",dest='vverbose',default=False,
                       help='Print even more debug information.')
+    parser.add_option('--version',action="store_true",dest='version',default=False,
+                      help='Print version number and exit.')
     (options,args)=parser.parse_args()
 
     if options.version:
