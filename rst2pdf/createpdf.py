@@ -445,8 +445,9 @@ class RstToPdf(object):
                 else:
                     snum=None
                 key=node.get('refid')
-                node.elements=[OutlineEntry(key,text,depth-1,snum),
-                               Paragraph(text, self.styles['heading%d' % min(depth,3)])]
+                elem = OutlineEntry(key,text,depth-1,snum)
+                elem.parent_id = node.parent.get('ids', [None])[0]
+                node.elements=[KeepTogether([elem, Paragraph(text, self.styles['heading%d' % min(depth,3)])])]
                 if depth <=self.breaklevel:
                     node.elements.insert(0,MyPageBreak())
 
@@ -549,8 +550,26 @@ class RstToPdf(object):
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
 
-        elif isinstance (node, docutils.nodes.topic)                                \
-            or isinstance (node, docutils.nodes.field_body):
+        elif isinstance (node, docutils.nodes.topic):
+            # toc
+            node_classes = node.attributes.get('classes', [])
+            if 'contents' in node_classes:
+                toc_visitor = TocBuilderVisitor(node.document)
+                toc_visitor.toc = MyTableOfContents()
+                toc_visitor.toc.linkColor = self.styles.linkColor
+                node.walk(toc_visitor)
+                toc = toc_visitor.toc
+                # Override fontnames (defaults to Times-Roman)
+                for levelStyle in toc.levelStyles:
+                    levelStyle.__dict__['fontName'] = self.styles['tableofcontents'].fontName
+                if 'local' in node_classes:
+                    node.elements = [toc]
+                else:
+                    node.elements = [Paragraph(self.gen_pdftext(node.children[0],depth), self.styles['title']), toc]
+            else:
+                node.elements = self.gather_elements(node, depth, style=style)
+
+        elif isinstance (node, docutils.nodes.field_body):
             node.elements=self.gather_elements(node,depth,style=style)
 
         elif isinstance (node, docutils.nodes.section):
@@ -1002,7 +1021,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree to be useful')
                 return
         elements=self.gen_elements(doctree,0)
-
+        
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
@@ -1028,12 +1047,32 @@ class RstToPdf(object):
                                  author=self.doc_author,
                                  pageCompression=compressed
                                  )
-        pdfdoc.build(elements)
+        pdfdoc.multiBuild(elements)
         for fn in self.to_unlink:
             os.unlink(fn)
 
+class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
+
+    def __init__(self, document):
+        docutils.nodes.SparseNodeVisitor.__init__(self, document)
+        self.toc = None
+    
+    def visit_reference(self, node):
+        refid = node.attributes.get('refid')
+        if refid:
+            self.toc.refids.append(refid)
+
+
 class FancyDocTemplate(BaseDocTemplate):
-    pass
+    def afterFlowable(self, flowable):
+        if isinstance(flowable, OutlineEntry):
+            # Notify TOC entry for headings/abstracts/dedications.
+            level, text = flowable.level, flowable.text
+            if hasattr(flowable, 'parent_id'):
+                parent_id =  flowable.parent_id
+            pagenum = self.page
+            self.notify('TOCEntry', (level, text, pagenum, parent_id))
+
 
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.

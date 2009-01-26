@@ -130,10 +130,11 @@ class StyleSheet(object):
             self.fontsAlias.update(data.get('fontsAlias',{}))
 
         embedded_fontnames = []
-        self.embedded=[] 
+        self.embedded=[]
         # Embed all fonts indicated in all stylesheets
         for data, ssname in zip(ssdata, flist):
             embedded=data.get('embeddedFonts',[])
+
             for font in embedded:
                 try:
                     if isinstance(font,unicode): # Just a font name, try to embed it
@@ -160,6 +161,7 @@ class StyleSheet(object):
                                 for fname,aliasname in zip(fontList,[font+suffix for suffix in suff]):
                                     self.fontsAlias[aliasname]=fname
                         continue
+                    
                     # Each "font" is a list of four files, which will be used for
                     # regular / bold / italic / bold+italic versions of the font.
                     # If your font doesn't have one of them, just repeat the regular
@@ -237,6 +239,7 @@ class StyleSheet(object):
                         # Now we need to do something
                         # See if we can find the font
                         fname,pos=findfonts.guessFont(style[key])
+
                         if style[key] in embedded_fontnames:
                             pass
                         else:
