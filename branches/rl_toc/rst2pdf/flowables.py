@@ -514,16 +514,21 @@ class MyTableOfContents(TableOfContents):
         else:
             _tempEntries = self._lastEntries
 
+        if _tempEntries:
+            base_level = _tempEntries[0][0]
+        else:
+            base_level = 0
         tableData = []
         for (level, text, pageNum) in _tempEntries:
-            leftColStyle = self.levelStyles[level]
+            left_col_level = level - base_level
+            leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
             if label:
                 pre = '<a href="%s" color="%s">' %(label, self.linkColor)
                 post = '</a>'
                 text = pre+text+post
             #right col style is right aligned
-            rightColStyle = ParagraphStyle(name='leftColLevel%d' % level,
+            rightColStyle = ParagraphStyle(name='leftColLevel%d' % left_col_level,
                                            parent=leftColStyle,
                                            leftIndent=0,
                                            alignment=TA_RIGHT)
