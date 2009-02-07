@@ -533,7 +533,10 @@ class MyTableOfContents(TableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            _tempEntries = [(0,'Placeholder for table of contents',0)]
+            if reportlab.Version <= '2.3':
+                _tempEntries = [(0,'Placeholder for table of contents',0)]
+            else:
+                _tempEntries = [(0,'Placeholder for table of contents',0,None)]
         else:
             _tempEntries = self._lastEntries
 
@@ -542,7 +545,7 @@ class MyTableOfContents(TableOfContents):
         else:
             base_level = 0
         tableData = []
-        for (level, text, pageNum) in _tempEntries:
+        for (level, text, pageNum) in _tempEntries[0:3]:
             left_col_level = level - base_level
             leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
