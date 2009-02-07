@@ -62,6 +62,7 @@ try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    from wordaxe.DCWHyphenator import DCWHyphenator
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     haveWordaxe=True
     from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
@@ -112,10 +113,13 @@ class RstToPdf(object):
             for lang in self.styles.languages:
                 try:
                     wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
-                    continue
-                except:
-                    log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
-                wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
+                except Exception:
+                    if lang in ('de', 'de_DE'):
+                        log.warning("Can't load PyHyphen hyphenator for language %s, trying DCW hyphenator",lang)
+                        wordaxe.hyphRegistry[lang] = DCWHyphenator('de',5)
+                    else:
+                        log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
+                        wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language, ','.join(self.styles.languages))
 
@@ -657,7 +661,7 @@ class RstToPdf(object):
                 indentation=el[0].style.leading
             else:
                 indentation=12
-                
+
 
             # Indent all elements inside the list
             for e in el:
@@ -1021,7 +1025,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree to be useful')
                 return
         elements=self.gen_elements(doctree,0)
-        
+
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
@@ -1056,7 +1060,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
     def __init__(self, document):
         docutils.nodes.SparseNodeVisitor.__init__(self, document)
         self.toc = None
-    
+
     def visit_reference(self, node):
         refid = node.attributes.get('refid')
         if refid:
