@@ -18,6 +18,7 @@ import logging
 from optparse import OptionParser
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
+from docutils.languages import get_language
 from docutils.transforms import Transformer
 import docutils.readers.doctree
 import docutils.core
@@ -89,6 +90,7 @@ class RstToPdf(object):
         self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath,stylePath)
+        self.docutils_languages={}
         self.inlinelinks=inlinelinks
         self.breaklevel=breaklevel
         self.fitMode=fitMode
@@ -105,11 +107,22 @@ class RstToPdf(object):
         else:
             HAS_SPHINX=False
 
+        if not self.styles.languages:
+            self.styles.languages=[language]
+            self.styles['bodytext'].language=language
+
+        # Load the docutils language modules for all required languages
+        for lang in self.styles.languages:
+            try:
+                self.docutils_languages[lang] = get_language(lang)
+            except ImportError:
+                try:
+                    self.docutils_languages[lang] = get_language(lang.split('_',1)[0])
+                except ImportError:
+                    log.warning("Can't load Docutils module for language %s",lang)
+
         # Load the hyphenators for all required languages
         if haveWordaxe:
-            if not self.styles.languages:
-                self.styles.languages=[language]
-                self.styles['bodytext'].language=language
             for lang in self.styles.languages:
                 try:
                     wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
@@ -122,6 +135,37 @@ class RstToPdf(object):
                         wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language, ','.join(self.styles.languages))
+
+    def style_language(self, style):
+        """Return language corresponding to this style."""
+        try:
+            return style.language
+        except AttributeError:
+            return self.styles['bodytext'].language
+
+    def text_for_label(self, label, style):
+        """Translate text for label."""
+        try:
+            text = self.docutils_languages[self.style_language(style)].labels[label]
+        except KeyError:
+            text = label.capitalize()
+        return text + ":"
+
+    def text_for_bib_field(self, field, style):
+        """Translate text for bibliographic fields."""
+        try:
+            text = self.docutils_languages[self.style_language(style)].bibliographic_fields[field]
+        except KeyError:
+            text = field
+        return text + ":"
+
+    def author_separator(self, style):
+        """Return separator string for authors."""
+        try:
+            sep = self.docutils_languages[self.style_language(style)].author_separators[0]
+        except KeyError:
+            sep = ';'
+        return sep + " "
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -498,59 +542,60 @@ class RstToPdf(object):
                 # Is only one of multiple authors. Return a paragraph
                 node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
                 if self.doc_author:
-                    self.doc_author+="; "+node.astext().strip()
+                    self.doc_author+=self.author_separator+node.astext().strip()
                 else:
                     self.doc_author=node.astext().strip()
             else:
                 # A single author: works like a field
                 fb=self.gather_pdftext(node,depth)
-                node.elements=[Table([[Paragraph("Author:",style=self.styles['fieldname']),
+                node.elements=[Table([[Paragraph(self.text_for_label("author",style) ,style=self.styles['fieldname']),
                                     Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
                 self.doc_author=node.astext().strip()
 
         elif isinstance (node, docutils.nodes.authors):
             # Multiple authors. Create a two-column table. Author references on the right.
-            td=[[Paragraph("Authors:",style=self.styles['fieldname']),self.gather_elements(node,depth,style=style)]]
+            td=[[Paragraph(self.text_for_label("authors",style),style=self.styles['fieldname']),
+                self.gather_elements(node,depth,style=style)]]
             node.elements=[Table(td,style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
         elif isinstance (node, docutils.nodes.organization):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[Paragraph("Organization:",style=self.styles['fieldname']),
+            t=Table([[Paragraph(self.text_for_label("organization",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.contact):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Contact:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("contact",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.address):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Address:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("address",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.version):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Version:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("version",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.revision):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Revision:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("revision",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.status):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Status:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("status",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.date):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Date:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("date",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.copyright):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[Paragraph("Copyright:",style=self.styles['fieldname']),
+            t=Table([[Paragraph(self.text_for_label("copyright",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
 
