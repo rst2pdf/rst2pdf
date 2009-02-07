@@ -545,7 +545,11 @@ class MyTableOfContents(TableOfContents):
         else:
             base_level = 0
         tableData = []
-        for (level, text, pageNum) in _tempEntries[0:3]:
+        for entry in _tempEntries:
+            if len(entry) < 4:
+                level, text, pageNum = entry
+            else:
+                level, text, pageNum, key = entry
             left_col_level = level - base_level
             leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
