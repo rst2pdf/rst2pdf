@@ -227,7 +227,7 @@ class RstToPdf(object):
             node.pdftext=pre+node.pdftext+post
 
         elif isinstance (node, docutils.nodes.literal):
-            pre='<font face="%s">'%self.styles['code'].fontName
+            pre='<font face="%s">'%self.styles['literal'].fontName
             post="</font>"
             node.pdftext=self.gather_pdftext(node,depth)
             #if replaceEnt:
