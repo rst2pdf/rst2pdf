@@ -124,7 +124,7 @@ class RstToPdf(object):
         # Load the hyphenators for all required languages
         if haveWordaxe:
             for lang in self.styles.languages:
-                if lang in ('de', 'de_DE'):
+                if lang.split('_', 1)[0] == 'de':
                     wordaxe.hyphRegistry[lang] = DCWHyphenator('de',5)
                 else:
                     try:
