@@ -124,13 +124,12 @@ class RstToPdf(object):
         # Load the hyphenators for all required languages
         if haveWordaxe:
             for lang in self.styles.languages:
-                try:
-                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
-                except Exception:
-                    if lang in ('de', 'de_DE'):
-                        log.warning("Can't load PyHyphen hyphenator for language %s, trying DCW hyphenator",lang)
-                        wordaxe.hyphRegistry[lang] = DCWHyphenator('de',5)
-                    else:
+                if lang in ('de', 'de_DE'):
+                    wordaxe.hyphRegistry[lang] = DCWHyphenator('de',5)
+                else:
+                    try:
+                        wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
+                    except Exception:
                         log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
                         wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
