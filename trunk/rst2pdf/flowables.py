@@ -72,7 +72,7 @@ class Reference(Flowable):
     def __init__(self,refid):
         self.refid=refid
         Flowable.__init__(self)
-        
+
     def wrap(self,w,h):
         """This takes no space"""
         return (0,0)
@@ -105,7 +105,7 @@ class DelayedTable(Flowable):
         # FIXME: make it work for multicolumn pages. No idea how, yet.
         _tw=w/sum(self.colwidths)
         colwidths=[ _w*_tw for _w in self.colwidths ]
-        
+
         self.t=Table(self.data,colWidths=colwidths,style=TableStyle(self.style), repeatRows=self.repeatrows)
         return self.t.wrap(w,h)
 
@@ -135,7 +135,7 @@ class SetNextTemplate(Flowable):
     def __init__(self, templateName=None):
         self.templateName=templateName
         Flowable.__init__(self)
-        
+
     def draw(self):
         if self.templateName:
             self.canv.templateName=self.templateName
@@ -151,10 +151,10 @@ class Transition(Flowable):
         'Dissolve' : [],
         'Glitter':['direction']
         }
-        
+
     def __init__(self,*args):
         if len(args)<1:
-            args=[None,1] # No transition            
+            args=[None,1] # No transition
         # See if we got a valid transition effect name
         if args[0] not in self.PageTransitionEffects:
             log.error('Unknown transition effect name: %s'%args[0])
@@ -173,7 +173,7 @@ class Transition(Flowable):
                 'direction':0,
                 'dimension':'H',
                 'motion':'I' }
-                
+
         ceff=['effectname','duration']+self.PageTransitionEffects[self.args[0]]
         for argname,argvalue in zip(ceff,self.args):
             kwargs[argname]=argvalue
@@ -242,7 +242,7 @@ class FrameCutter(FrameActionFlowable):
                     self.width+self.dx,
                     frame._height-self.f.height-2*self.padding,
                     topPadding=0))
-                    
+
 class Sidebar(FrameActionFlowable):
     def __init__(self,flowables,style):
         self.style=style
@@ -307,7 +307,7 @@ class Sidebar(FrameActionFlowable):
 class BoundByWidth(Flowable):
     """Limits a list of flowables by width, but still lets them break
     over pages and frames"""
-    
+
     def __init__(self, maxWidth, content=[], style=None, mode=None):
         self.maxWidth=maxWidth
         self.content=content
@@ -426,7 +426,7 @@ class BoxedContainer(BoundByWidth):
         canv.drawPath(p,stroke=1,fill=1)
         canv.restoreState()
         BoundByWidth.draw(self)
-        
+
     def split(self,availWidth,availHeight):
         self.wrap(availWidth,availHeight)
         padding=2*self.pad*self.scale
@@ -521,7 +521,7 @@ class MyTableOfContents(TableOfContents):
             self.refid_lut[(level, text)] = label
         else:
             pass
-        
+
     def wrap(self, availWidth, availHeight):
         """Adds hyperlink to toc entry."""
 
@@ -546,10 +546,7 @@ class MyTableOfContents(TableOfContents):
             base_level = 0
         tableData = []
         for entry in _tempEntries:
-            if len(entry) < 4:
-                level, text, pageNum = entry
-            else:
-                level, text, pageNum, key = entry
+            level, text, pageNum = entry[:3]
             left_col_level = level - base_level
             leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
