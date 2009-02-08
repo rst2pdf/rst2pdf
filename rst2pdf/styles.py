@@ -161,7 +161,7 @@ class StyleSheet(object):
                                 for fname,aliasname in zip(fontList,[font+suffix for suffix in suff]):
                                     self.fontsAlias[aliasname]=fname
                         continue
-                    
+
                     # Each "font" is a list of four files, which will be used for
                     # regular / bold / italic / bold+italic versions of the font.
                     # If your font doesn't have one of them, just repeat the regular
@@ -195,7 +195,7 @@ class StyleSheet(object):
                         italic=pdfmetrics.EmbeddedType1Face(*font[2])
                         bold=pdfmetrics.EmbeddedType1Face(*font[3])
                         bolditalic=pdfmetrics.EmbeddedType1Face(*font[4])
-                        
+
                 except Exception, e:
                     try:
                         if isinstance(font, list):
@@ -266,7 +266,7 @@ class StyleSheet(object):
                         else:
                             log.error("Unknown font: \"%s\", replacing with Helvetica",style[key])
                             style[key]="Helvetica"
-                            
+
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles=[]
@@ -340,7 +340,7 @@ class StyleSheet(object):
                 s['bulletFontSize'] = s['fontSize']
 
             self.StyleSheet.add(ParagraphStyle(**s))
-            
+
     def __getitem__(self,key):
         return self.StyleSheet[key]
 
@@ -386,7 +386,7 @@ class StyleSheet(object):
                                           self['table-heading'].leading),
                 ('VALIGN',(0,0),(-1,rows-1),self['table-heading'].valign)
                ]
-               
+
     def tstyleBody(self,rows=1):
         '''Returns a table style spec for a table of any size based on the
         table style from the stylesheet'''
@@ -415,7 +415,7 @@ class StyleSheet(object):
         if total is None:
             total = self.pw
         return adjustUnits(v,total)
-        
+
 def adjustUnits(v,total=None):
     '''Takes something like 2cm and returns 2*cm.
     If you use % as a unit, it returns the percentage
@@ -443,7 +443,7 @@ def adjustUnits(v,total=None):
         log.error('Unknown unit "%s"' % u)
     return float(n)
 
-               
+
 # Some table styles used for pieces of the document
 
 tstyles={}
@@ -464,6 +464,7 @@ tstyles['normal']=TableStyle(tstyleNorm)
 
 tstyles['field']=TableStyle([ ('VALIGN',(0,0),(-1,-1),'TOP'),
                               ('ALIGNMENT',(0,0),(1,-1),'RIGHT'),
+                              ('TOPPADDING', (0,0), (-1,-1), 0),
                             ])
 fieldlist_lwidth=3*units.cm
 
