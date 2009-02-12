@@ -1099,6 +1099,7 @@ class RstToPdf(object):
         for fn in self.to_unlink:
             os.unlink(fn)
 
+
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
     def __init__(self, document):
@@ -1112,6 +1113,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 
 class FancyDocTemplate(BaseDocTemplate):
+
     def afterFlowable(self, flowable):
         if isinstance(flowable, OutlineEntry):
             # Notify TOC entry for headings/abstracts/dedications.
@@ -1125,8 +1127,8 @@ class FancyDocTemplate(BaseDocTemplate):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,head,foot,styles,smarty="0"):
 
+    def __init__(self,_id,head,foot,styles,smarty="0"):
         self.styles=styles
         self.head=head
         self.foot=foot
@@ -1139,13 +1141,15 @@ class FancyPage(PageTemplate):
            * Gutter margins on left or right as needed
 
         """
-
         self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
         # What page template to use?
         tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
         self.template=self.styles.pageTemplates[tname]
-        # Adjust text space accounting for header/footer
 
+        doct = getattr(canv,'_doctemplate',None)
+        canv._doctemplate = None # to make _listWrapOn work
+
+        # Adjust text space accounting for header/footer
         if self.head and self.template.get('showHeader',True):
             _,self.hh=_listWrapOn(self.head,self.tw,canv)
         else:
@@ -1155,13 +1159,14 @@ class FancyPage(PageTemplate):
         else:
             self.fh=0
 
+        canv._doctemplate = doct
+
         self.hx=self.styles.lm
         self.hy=self.styles.ph-self.styles.tm
 
         self.fx=self.styles.lm
         self.fy=self.styles.bm
         self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
-
 
         # Adjust gutter margins
         if doc.page%2: # Left page
