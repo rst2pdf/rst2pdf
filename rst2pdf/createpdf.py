@@ -1134,11 +1134,11 @@ class FancyPage(PageTemplate):
         PageTemplate.__init__(self,_id,[])
 
     def beforeDrawPage(self,canv,doc):
-        '''Do adjustments to the page according to where we are in the document.
+        """Do adjustments to the page according to where we are in the document.
 
            * Gutter margins on left or right as needed
 
-        '''
+        """
 
         self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
         # What page template to use?
@@ -1179,29 +1179,25 @@ class FancyPage(PageTemplate):
                                           self.styles.adjustUnits(frame[3],self.th)))
 
     def replaceTokens(self,elems,canv,doc):
-        ''' Put doc_title/page number/etc in text of header/footer'''
-
+        """Put doc_title/page number/etc in text of header/footer."""
         for e in elems:
             i=elems.index(e)
             if isinstance(e,Paragraph):
-                text=unicode(e.text,e.encoding)
+                text=e.text
+                if not isinstance(text, unicode):
+                    try:
+                        text=unicode(text,e.encoding)
+                    except AttributeError:
+                        text=unicode(text,'utf-8')
                 text=text.replace(u'###Page###',unicode(doc.page))
                 text=text.replace(u"###Title###",doc.title)
-                # FIXME: make this nicer
-                try:
-                    text=text.replace(u"###Section###",canv.sectName)
-                except AttributeError:
-                    text=text.replace(u"###Section###",'')
-                try:
-                    text=text.replace(u"###SectNum###",canv.sectNum)
-                except AttributeError:
-                    text=text.replace(u"###SectNum###",'')
+                text=text.replace(u"###Section###",getattr(canv, 'sectName', ''))
+                text=text.replace(u"###SectNum###",getattr(canv, 'sectNum', ''))
                 text=smartyPants(text,self.smarty)
                 elems[i]=Paragraph(text,e.style)
 
-
     def afterDrawPage(self,canv,doc):
-        '''Draw header/footer'''
+        """Draw header/footer."""
         # Adjust for gutter margin
         if doc.page%2: # Left page
             hx=self.hx
@@ -1374,4 +1370,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
