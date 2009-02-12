@@ -253,7 +253,7 @@ class StyleSheet(object):
                                 fontList=findfonts.autoEmbed(fname)
                             if fontList:
                                 embedded_fontnames.append((fname, pos))
-                        if fontList is not None:
+                        if fontList:
                             self.embedded+=fontList
                             # Maybe the font we got is not called the same as the one we gave
                             # so check that out
