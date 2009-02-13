@@ -11,33 +11,39 @@ DESCRIPTION
 
 OPTIONS
 
--h, --help  
+-h, --help
                     Show this help message and exit
--o FILE, --output=FILE  
+-o FILE, --output=FILE
                     Write the PDF to FILE
--s STYLESHEETS  
+-s STYLESHEETS,  --stylesheets=STYLESHEETS
                     A comma-separated list of custom stylesheets.
                     Default=""
 --stylesheet-path=FOLDERLIST
                     A colon-separated list of folders to search for
                     stylesheets. Default=""
--c, --compressed  
+-c, --compressed
                     Create a compressed PDF. Default=False
---print-stylesheet  
+--print-stylesheet
                     Print the default stylesheet and exit
---font-folder=FOLDER  
+--font-folder=FOLDER
                     Search this folder for fonts. (Deprecated)
---font-path=FOLDERLIST  
+--font-path=FOLDERLIST
                     A colon-separated list of folders to search for fonts.
                     Default=""
--l LANG, --language=LANG  
+ --baseurl=URL
+                    The base URL for relative URLs.
+-l LANG, --language=LANG
                     Language to be used for hyphenation. Default="en_US"
+--header=HEADER
+                    Page header if not specified in the document.
+--footer=FOOTER
+                    Page footer if not specified in the document.
 
 --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
                       the typographically correct equivalent. Default=0
 
 The possible values are:
-    
+
     0
         Suppress all transformations. (Do nothing.)
     1
@@ -47,21 +53,25 @@ The possible values are:
     3
         Same as --smart-quotes=2, but inverts the shorthand for dashes: "--" (dash dash) for em-dashes, and "---" (dash dash dash) for en-dashes.
 
-
 --fit-literal-mode=MODE
-                    What todo when a literal is too wide. One of
-                    error,overflow,shrink,truncate.
--b LEVEL, --break-level=LEVEL  
+                    What todo when a literal is too wide.
+                    One of error,overflow,shrink,truncate.
+-b LEVEL, --break-level=LEVEL
                     Maximum section level that starts in a new page.
                     Default: 0
---inline-links      Shows target between parenthesis instead of active
-                    link
--q, --quiet  
+--inline-links
+                    Shows target between parenthesis instead of active link
+--repeat-table-rows
+                    Repeats header row for each splitted table
+
+-q, --quiet
                     Print less information.
--v, --verbose  
+-v, --verbose
                     Print debug information.
---very-verbose  
+--very-verbose
                     Print even more debug information.
+--version
+                    Print version number and exit.
 
 
 EXAMPLES

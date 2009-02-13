@@ -79,7 +79,7 @@ except ImportError:
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets = [], language = 'en_US',
+    def __init__(self, stylesheets = [], language = 'en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False):
         global HAS_SPHINX
@@ -87,7 +87,7 @@ class RstToPdf(object):
         self.loweralpha=string.ascii_lowercase
         self.doc_title=""
         self.doc_author=""
-        self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
+        self.decoration = {'header':header, 'footer':footer, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath,stylePath)
         self.docutils_languages={}
@@ -353,7 +353,6 @@ class RstToPdf(object):
             except (UnicodeDecodeError, UnicodeEncodeError):
                 log.debug(repr(node))
             node.pdftext=self.gather_pdftext(node,depth)
-            #print node.transform
 
         try:
             log.debug("self.gen_pdftext: %s" % node.pdftext)
@@ -1150,14 +1149,28 @@ class FancyPage(PageTemplate):
         canv._doctemplate = None # to make _listWrapOn work
 
         # Adjust text space accounting for header/footer
-        if self.head and self.template.get('showHeader',True):
-            _,self.hh=_listWrapOn(self.head,self.tw,canv)
+        head = self.template.get('showHeader',True) and (
+            self.head or self.template.get('defaultHeader'))
+        if head:
+            if isinstance(head, list):
+                head = head[:]
+            else:
+                head = [Paragraph(head,self.styles['header'])]
+            _,self.hh=_listWrapOn(head,self.tw,canv)
         else:
             self.hh=0
-        if self.foot and self.template.get('showFooter',True):
-            _,self.fh=_listWrapOn(self.foot,self.tw,canv)
+        self.curHead = head
+        foot = self.template.get('showFooter',True) and (
+            self.foot or self.template.get('defaultFooter'))
+        if foot:
+            if isinstance(foot, list):
+                foot = foot[:]
+            else:
+                foot = [Paragraph(foot,self.styles['footer'])]
+            _,self.fh=_listWrapOn(foot,self.tw,canv)
         else:
             self.fh=0
+        self.curFoot = foot
 
         canv._doctemplate = doct
 
@@ -1211,19 +1224,19 @@ class FancyPage(PageTemplate):
             hx=self.hx+self.styles.gm
             fx=self.fx+self.styles.gm
 
-        if self.head and self.template.get('showHeader',True):
-            curHead=copy(self.head)
-            self.replaceTokens(curHead,canv,doc)
+        head = self.curHead
+        if head:
+            self.replaceTokens(head,canv,doc)
             container=_Container()
-            container._content=curHead
+            container._content=head
             container.width=self.tw
             container.height=self.hh
             container.drawOn(canv,hx,self.hy)
-        if self.foot and self.template.get('showFooter',True):
-            curFoot=copy(self.foot)
-            self.replaceTokens(curFoot,canv,doc)
+        foot = self.curFoot
+        if foot:
+            self.replaceTokens(foot,canv,doc)
             container=_Container()
-            container._content=curFoot
+            container._content=foot
             container.width=self.tw
             container.height=self.fh
             container.drawOn(canv,fx,self.fy)
@@ -1267,6 +1280,14 @@ def main():
     def_lang=config.getValue("general","language","en_US")
     parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
                       help='Language to be used for hyphenation. Default="%s"'%def_lang)
+
+    def_header=config.getValue("general","header")
+    parser.add_option('--header',metavar='HEADER',default=def_header,dest='header',
+                      help='Page header if not specified in the document. Default="%s"'%def_header)
+    def_footer=config.getValue("general","footer")
+    parser.add_option('--footer',metavar='FOOTER',default=def_footer,dest='footer',
+                      help='Page footer if not specified in the document. Default="%s"'%def_footer)
+
 
     def_smartquotes=config.getValue("general","smartquotes","0")
     parser.add_option("--smart-quotes",metavar="VALUE",default=def_smartquotes,dest="smarty",
@@ -1358,11 +1379,12 @@ def main():
         spath=options.stylepath.split(':')
 
     RstToPdf(
-        stylesheets = ssheet,
+        stylesheets=ssheet,
         language=options.language,
+        header=options.header, footer=options.footer,
+        inlinelinks=options.inlinelinks,
         breaklevel=int(options.breaklevel),
-        inlinelinks = options.inlinelinks,
-        baseurl = options.baseurl,
+        baseurl=options.baseurl,
         fitMode=options.fitMode,
         smarty=str(options.smarty),
         fontPath=fpath,
