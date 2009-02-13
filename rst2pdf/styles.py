@@ -102,6 +102,10 @@ class StyleSheet(object):
                     self.bm=self.adjustUnits(page['margin-bottom'])
                 if 'margin-gutter' in page:
                     self.gm=self.adjustUnits(page['margin-gutter'])
+                if 'spacing-header' in page:
+                    self.ts=self.adjustUnits(page['spacing-header'])
+                if 'spacing-footer' in page:
+                    self.bs=self.adjustUnits(page['spacing-footer'])
                 if 'firstTemplate' in page:
                     self.firstTemplate=page['firstTemplate']
 

@@ -1175,10 +1175,10 @@ class FancyPage(PageTemplate):
         canv._doctemplate = doct
 
         self.hx=self.styles.lm
-        self.hy=self.styles.ph-self.styles.tm
+        self.hy=self.styles.ph-self.styles.tm+self.styles.ts
 
         self.fx=self.styles.lm
-        self.fy=self.styles.bm
+        self.fy=self.styles.bm-self.styles.bs
         self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
 
         # Adjust gutter margins
