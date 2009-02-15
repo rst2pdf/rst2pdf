@@ -564,6 +564,8 @@ Here's the default stylesheet's::
     "margin-bottom": "2cm",
     "margin-left": "2cm",
     "margin-right": "2cm",
+    "spacing-header": "5mm",
+    "spacing-footer": "5mm",
     "margin-gutter": "0cm"
   },
 
