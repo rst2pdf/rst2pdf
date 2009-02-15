@@ -15,7 +15,7 @@ How to use rst2pdf
    Page ###Page###
 
 .. contents::
-    
+
 .. section-numbering::
 
 .. raw:: pdf
@@ -29,19 +29,19 @@ This document explains how to use rst2pdf. Here is the very short version::
 
     rst2pdf.py mydocument.txt -o mydocument.pdf
 
-That will, as long as mydocument.txt is a valid Restructured Text (ReST) 
-document, produce a file called mydocument.pdf which is a PDF 
+That will, as long as mydocument.txt is a valid Restructured Text (ReST)
+document, produce a file called mydocument.pdf which is a PDF
 version of your document.
 
-Of course, that means you just used default styles and settings. If it 
-looks good enough for you, then you may stop reading this document, 
+Of course, that means you just used default styles and settings. If it
+looks good enough for you, then you may stop reading this document,
 because you are done with it. If you are reading this in a PDF,
 it was generated using those default settings.
 
 However, if you want to customize the output, or are just curious to see
 what can be done, let´s continue.
 
-Command line Options
+Command line options
 ====================
 
 -h, --help            show this help message and exit
@@ -59,9 +59,13 @@ Command line Options
 --font-path=FOLDERLIST
                       A colon-separated list of folders to search for fonts.
                       Default=""
---baseurl=URL         The base URL for relative URLs. Default="None"
+--baseurl=URL         The base URL for relative URLs.
 -l LANG, --language=LANG
                     Language to be used for hyphenation. Default="en_US"
+--header=HEADER
+                    Page header if not specified in the document.
+--footer=FOOTER
+                    Page footer if not specified in the document.
 --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
                       the typographically correct equivalent. For details,
                       read `Smart quotes`_. Default="0"
@@ -77,6 +81,7 @@ Command line Options
 -q, --quiet           Print less information.
 -v, --verbose         Print debug information.
 --very-verbose        Print even more debug information.
+--version             Print version number and exit.
 
 Some of these options' defaults can be changed by creating a `configuration file`_
 
@@ -100,7 +105,7 @@ Here's an example file showing all the currently available options:
 .. code-block:: ini
 
     # This is an example config file. Modify and place in ~/.rst2pdf/config
-    
+
     [general]
     # A comma-separated list of custom stylesheets. Example:
     # stylesheets="fruity.json,a4paper.json,verasans.json"
@@ -117,6 +122,10 @@ Here's an example file showing all the currently available options:
 
     # Language to be used for hyphenation support
     language="en_US"
+
+    # Default page header and footer
+    header=None
+    footer=None
 
     # What to do if a literal block is too large. Can be
     # shrink/truncate/overflow
@@ -135,11 +144,11 @@ If no input nor output are provided, stdin and stdout will be used respectively
 You may want to use rst2pdf in a linux pipe as such::
 
     cat readme.txt | rst2pdf | gzip -c > readme.pdf.gz
-    
+
 or::
 
     curl http://docutils.sourceforge.net/docs/user/rst/quickstart.txt | rst2pdf > quickstart.pdf
-    
+
 If no input argument is provided, stdin will be used::
 
     cat readme.txt | rst2pdf -o readme.pdf
@@ -171,8 +180,9 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
 
 Headers and footers are visible by default but they can be disabled by specific
-`Page Templates`_ for example, cover pages.
-    
+`Page Templates`_ for example, cover pages. You can also set headers and footers
+via `command line options` or the `configuration file`_.
+
 Footnotes
 =========
 
@@ -256,13 +266,13 @@ Or inline styles using custom interpreted roles::
 For more information about this, please check the ReST docs.
 
 The only special thing about using rst2pdf here is the syntax of
-the stylesheet. 
+the stylesheet.
 
 You can make rst2pdf print the default stylesheet::
 
   rst2pdf --print-stylesheet
 
-If you want to add styles, just take the standard stylesheet, 
+If you want to add styles, just take the standard stylesheet,
 modify it and pass it with the -s option::
 
   rst2pdf mydoc.txt -s mystyles.txt
@@ -297,7 +307,7 @@ This is the fontsAlias element. By default, it uses some of the standard PDF fon
     "stdMono": "Courier"
   },
 
-This defines the fonts used in the styles. You can use, for example, Helvetica 
+This defines the fonts used in the styles. You can use, for example, Helvetica
 directly in a style, but if later you want to use another font all through
 your document, you will haveto change it in each style. So, I suggest you
 use aliases.
@@ -328,13 +338,13 @@ Then you have a 'styles' which is a list of [ stylename, styleproperties ]. For 
       "parent": "base"
     }],
 
-This means that the style called "normal" inherits style "base". So, each property 
+This means that the style called "normal" inherits style "base". So, each property
 not defined in the normal style will be taken from the base style.
 
 I suggest you do not remove any style from the default stylesheet. Add or modify at
 will, though.
 
-If your document requires a style that is not defined in your styleheet, it will 
+If your document requires a style that is not defined in your styleheet, it will
 print a warning and use bodytext instead.
 
 Also, the order of the styles is important: if styleA is the parent of styleB,
@@ -376,7 +386,7 @@ The following are the only attributes that work on styles when used for interpre
 * textColor
 
 Notice that backColor is **not** in that list.
-    
+
 
 Font Embedding
 --------------
@@ -566,7 +576,7 @@ If you want a non-standard size, set size to null and use width and height.
 
 When specifying width, height or margins, you need to use units, like
 inch (inches) or cm (centimeters).
- 
+
 When both width/height and size are specified, size will be used, and
 width/height ignored.
 
@@ -626,7 +636,7 @@ For example, if you want to include a python fragment::
 
         def myFun(x,y):
             print x+y
-       
+
 .. code-block:: python
 
    def myFun(x,y):
@@ -711,7 +721,7 @@ the options are:
 * :start-at: string
 
     will include file beginning at the first occurence of string, string **included**
-    
+
 * :start-after: string
 
     will include file beginning at the first occurence of string, string **excluded**
@@ -725,20 +735,20 @@ the options are:
     will include file up to the first occurence of string, string **included**
 
 Let's display a class from rst2pdf::
-    
+
       .. code-block:: python
          :include: ../rst2pdf/flowables.py
          :start-at: class Separation(Flowable):
          :end-before: class Reference(Flowable):
 
 this command gives
-         
+
 .. code-block:: python
     :include: ../rst2pdf/flowables.py
     :start-at: class Separation(Flowable):
     :end-before: class Reference(Flowable):
 
-    
+
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
@@ -987,7 +997,7 @@ between the margins. You can change that, though, in fact you can do so even in
 the middle of your document!
 
 .. _page templates:
-    
+
 To do it, you need to define *Page Templates* in your stylesheet. The default
 stylesheet already has 3 of them::
 
@@ -1058,7 +1068,11 @@ The supported page template options and their defaults are:
 
 * showHeader : True
 
+* defaultHeader : None
+
 * showFooter : True
+
+* defaultFooter : None
 
 
 
