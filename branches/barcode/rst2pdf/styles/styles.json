@@ -9,6 +9,8 @@
     "margin-left": "2cm",
     "margin-right": "2cm",
     "margin-gutter": "0cm",
+    "spacing-header": "5mm",
+    "spacing-footer": "5mm",
     "firstTemplate": "oneColumn"
   },
   "pageTemplates" : {

@@ -18,6 +18,7 @@ import logging
 from optparse import OptionParser
 from docutils import __version__, __version_details__, SettingsSpec
 from docutils import frontend, io, utils, readers, writers
+from docutils.languages import get_language
 from docutils.transforms import Transformer
 import docutils.readers.doctree
 import docutils.core
@@ -62,6 +63,7 @@ try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    from wordaxe.DCWHyphenator import DCWHyphenator
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     haveWordaxe=True
     from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
@@ -77,7 +79,7 @@ except ImportError:
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets = [], language = 'en_US',
+    def __init__(self, stylesheets = [], language = 'en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False):
         global HAS_SPHINX
@@ -85,9 +87,10 @@ class RstToPdf(object):
         self.loweralpha=string.ascii_lowercase
         self.doc_title=""
         self.doc_author=""
-        self.decoration = {'header':None, 'footer':None, 'endnotes':[]}
+        self.decoration = {'header':header, 'footer':footer, 'endnotes':[]}
         stylesheets = [os.path.join(abspath(dirname(__file__)),'styles','styles.json')]+stylesheets
         self.styles=sty.StyleSheet(stylesheets,fontPath,stylePath)
+        self.docutils_languages={}
         self.inlinelinks=inlinelinks
         self.breaklevel=breaklevel
         self.fitMode=fitMode
@@ -104,20 +107,64 @@ class RstToPdf(object):
         else:
             HAS_SPHINX=False
 
+        if not self.styles.languages:
+            self.styles.languages=[language]
+            self.styles['bodytext'].language=language
+
+        # Load the docutils language modules for all required languages
+        for lang in self.styles.languages:
+            try:
+                self.docutils_languages[lang] = get_language(lang)
+            except ImportError:
+                try:
+                    self.docutils_languages[lang] = get_language(lang.split('_',1)[0])
+                except ImportError:
+                    log.warning("Can't load Docutils module for language %s",lang)
+
         # Load the hyphenators for all required languages
         if haveWordaxe:
-            if not self.styles.languages:
-                self.styles.languages=[language]
-                self.styles['bodytext'].language=language
             for lang in self.styles.languages:
-                try:
-                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
-                    continue
-                except:
-                    log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
-                wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
+                if lang.split('_', 1)[0] == 'de':
+                    wordaxe.hyphRegistry[lang] = DCWHyphenator('de',5)
+                else:
+                    try:
+                        wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
+                    except Exception:
+                        log.warning("Can't load PyHyphen hyphenator for language %s, trying PyHnj hyphenator",lang)
+                        wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang,5,purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language, ','.join(self.styles.languages))
+
+    def style_language(self, style):
+        """Return language corresponding to this style."""
+        try:
+            return style.language
+        except AttributeError:
+            return self.styles['bodytext'].language
+
+    def text_for_label(self, label, style):
+        """Translate text for label."""
+        try:
+            text = self.docutils_languages[self.style_language(style)].labels[label]
+        except KeyError:
+            text = label.capitalize()
+        return text + ":"
+
+    def text_for_bib_field(self, field, style):
+        """Translate text for bibliographic fields."""
+        try:
+            text = self.docutils_languages[self.style_language(style)].bibliographic_fields[field]
+        except KeyError:
+            text = field
+        return text + ":"
+
+    def author_separator(self, style):
+        """Return separator string for authors."""
+        try:
+            sep = self.docutils_languages[self.style_language(style)].author_separators[0]
+        except KeyError:
+            sep = ';'
+        return sep + " "
 
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
@@ -180,7 +227,7 @@ class RstToPdf(object):
             node.pdftext=pre+node.pdftext+post
 
         elif isinstance (node, docutils.nodes.literal):
-            pre='<font face="%s">'%self.styles['code'].fontName
+            pre='<font face="%s">'%self.styles['literal'].fontName
             post="</font>"
             node.pdftext=self.gather_pdftext(node,depth)
             #if replaceEnt:
@@ -306,7 +353,6 @@ class RstToPdf(object):
             except (UnicodeDecodeError, UnicodeEncodeError):
                 log.debug(repr(node))
             node.pdftext=self.gather_pdftext(node,depth)
-            #print node.transform
 
         try:
             log.debug("self.gen_pdftext: %s" % node.pdftext)
@@ -494,59 +540,60 @@ class RstToPdf(object):
                 # Is only one of multiple authors. Return a paragraph
                 node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
                 if self.doc_author:
-                    self.doc_author+="; "+node.astext().strip()
+                    self.doc_author+=self.author_separator+node.astext().strip()
                 else:
                     self.doc_author=node.astext().strip()
             else:
                 # A single author: works like a field
                 fb=self.gather_pdftext(node,depth)
-                node.elements=[Table([[Paragraph("Author:",style=self.styles['fieldname']),
+                node.elements=[Table([[Paragraph(self.text_for_label("author",style) ,style=self.styles['fieldname']),
                                     Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
                 self.doc_author=node.astext().strip()
 
         elif isinstance (node, docutils.nodes.authors):
             # Multiple authors. Create a two-column table. Author references on the right.
-            td=[[Paragraph("Authors:",style=self.styles['fieldname']),self.gather_elements(node,depth,style=style)]]
+            td=[[Paragraph(self.text_for_label("authors",style),style=self.styles['fieldname']),
+                self.gather_elements(node,depth,style=style)]]
             node.elements=[Table(td,style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])]
 
         elif isinstance (node, docutils.nodes.organization):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[Paragraph("Organization:",style=self.styles['fieldname']),
+            t=Table([[Paragraph(self.text_for_label("organization",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.contact):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Contact:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("contact",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.address):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Address:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("address",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.version):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Version:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("version",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.revision):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Revision:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("revision",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.status):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Status:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("status",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.date):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[ Paragraph("Date:",style=self.styles['fieldname']),
+            t=Table([[ Paragraph(self.text_for_label("date",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
         elif isinstance (node, docutils.nodes.copyright):
             fb=self.gather_pdftext(node,depth)
-            t=Table([[Paragraph("Copyright:",style=self.styles['fieldname']),
+            t=Table([[Paragraph(self.text_for_label("copyright",style),style=self.styles['fieldname']),
                                 Paragraph(fb,style) ]],style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth,None])
             node.elements=[t]
 
@@ -657,7 +704,7 @@ class RstToPdf(object):
                 indentation=el[0].style.leading
             else:
                 indentation=12
-                
+
 
             # Indent all elements inside the list
             for e in el:
@@ -1021,7 +1068,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree to be useful')
                 return
         elements=self.gen_elements(doctree,0)
-        
+
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
@@ -1051,12 +1098,13 @@ class RstToPdf(object):
         for fn in self.to_unlink:
             os.unlink(fn)
 
+
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
     def __init__(self, document):
         docutils.nodes.SparseNodeVisitor.__init__(self, document)
         self.toc = None
-    
+
     def visit_reference(self, node):
         refid = node.attributes.get('refid')
         if refid:
@@ -1064,6 +1112,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 
 class FancyDocTemplate(BaseDocTemplate):
+
     def afterFlowable(self, flowable):
         if isinstance(flowable, OutlineEntry):
             # Notify TOC entry for headings/abstracts/dedications.
@@ -1077,8 +1126,8 @@ class FancyDocTemplate(BaseDocTemplate):
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
-    def __init__(self,_id,head,foot,styles,smarty="0"):
 
+    def __init__(self,_id,head,foot,styles,smarty="0"):
         self.styles=styles
         self.head=head
         self.foot=foot
@@ -1086,34 +1135,51 @@ class FancyPage(PageTemplate):
         PageTemplate.__init__(self,_id,[])
 
     def beforeDrawPage(self,canv,doc):
-        '''Do adjustments to the page according to where we are in the document.
+        """Do adjustments to the page according to where we are in the document.
 
            * Gutter margins on left or right as needed
 
-        '''
-
+        """
         self.tw=self.styles.pw-self.styles.lm-self.styles.rm-self.styles.gm
         # What page template to use?
         tname=canv.__dict__.get('templateName',self.styles.firstTemplate)
         self.template=self.styles.pageTemplates[tname]
-        # Adjust text space accounting for header/footer
 
-        if self.head and self.template.get('showHeader',True):
-            _,self.hh=_listWrapOn(self.head,self.tw,canv)
+        doct = getattr(canv,'_doctemplate',None)
+        canv._doctemplate = None # to make _listWrapOn work
+
+        # Adjust text space accounting for header/footer
+        head = self.template.get('showHeader',True) and (
+            self.head or self.template.get('defaultHeader'))
+        if head:
+            if isinstance(head, list):
+                head = head[:]
+            else:
+                head = [Paragraph(head,self.styles['header'])]
+            _,self.hh=_listWrapOn(head,self.tw,canv)
         else:
             self.hh=0
-        if self.foot and self.template.get('showFooter',True):
-            _,self.fh=_listWrapOn(self.foot,self.tw,canv)
+        self.curHead = head
+        foot = self.template.get('showFooter',True) and (
+            self.foot or self.template.get('defaultFooter'))
+        if foot:
+            if isinstance(foot, list):
+                foot = foot[:]
+            else:
+                foot = [Paragraph(foot,self.styles['footer'])]
+            _,self.fh=_listWrapOn(foot,self.tw,canv)
         else:
             self.fh=0
+        self.curFoot = foot
+
+        canv._doctemplate = doct
 
         self.hx=self.styles.lm
-        self.hy=self.styles.ph-self.styles.tm
+        self.hy=self.styles.ph-self.styles.tm+self.styles.ts
 
         self.fx=self.styles.lm
-        self.fy=self.styles.bm
+        self.fy=self.styles.bm-self.styles.bs
         self.th=self.styles.ph-self.styles.tm-self.styles.bm-self.hh-self.fh
-
 
         # Adjust gutter margins
         if doc.page%2: # Left page
@@ -1131,29 +1197,25 @@ class FancyPage(PageTemplate):
                                           self.styles.adjustUnits(frame[3],self.th)))
 
     def replaceTokens(self,elems,canv,doc):
-        ''' Put doc_title/page number/etc in text of header/footer'''
-
+        """Put doc_title/page number/etc in text of header/footer."""
         for e in elems:
             i=elems.index(e)
             if isinstance(e,Paragraph):
-                text=unicode(e.text,e.encoding)
+                text=e.text
+                if not isinstance(text, unicode):
+                    try:
+                        text=unicode(text,e.encoding)
+                    except AttributeError:
+                        text=unicode(text,'utf-8')
                 text=text.replace(u'###Page###',unicode(doc.page))
                 text=text.replace(u"###Title###",doc.title)
-                # FIXME: make this nicer
-                try:
-                    text=text.replace(u"###Section###",canv.sectName)
-                except AttributeError:
-                    text=text.replace(u"###Section###",'')
-                try:
-                    text=text.replace(u"###SectNum###",canv.sectNum)
-                except AttributeError:
-                    text=text.replace(u"###SectNum###",'')
+                text=text.replace(u"###Section###",getattr(canv, 'sectName', ''))
+                text=text.replace(u"###SectNum###",getattr(canv, 'sectNum', ''))
                 text=smartyPants(text,self.smarty)
                 elems[i]=Paragraph(text,e.style)
 
-
     def afterDrawPage(self,canv,doc):
-        '''Draw header/footer'''
+        """Draw header/footer."""
         # Adjust for gutter margin
         if doc.page%2: # Left page
             hx=self.hx
@@ -1162,19 +1224,19 @@ class FancyPage(PageTemplate):
             hx=self.hx+self.styles.gm
             fx=self.fx+self.styles.gm
 
-        if self.head and self.template.get('showHeader',True):
-            curHead=copy(self.head)
-            self.replaceTokens(curHead,canv,doc)
+        head = self.curHead
+        if head:
+            self.replaceTokens(head,canv,doc)
             container=_Container()
-            container._content=curHead
+            container._content=head
             container.width=self.tw
             container.height=self.hh
             container.drawOn(canv,hx,self.hy)
-        if self.foot and self.template.get('showFooter',True):
-            curFoot=copy(self.foot)
-            self.replaceTokens(curFoot,canv,doc)
+        foot = self.curFoot
+        if foot:
+            self.replaceTokens(foot,canv,doc)
             container=_Container()
-            container._content=curFoot
+            container._content=foot
             container.width=self.tw
             container.height=self.fh
             container.drawOn(canv,fx,self.fy)
@@ -1218,6 +1280,14 @@ def main():
     def_lang=config.getValue("general","language","en_US")
     parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
                       help='Language to be used for hyphenation. Default="%s"'%def_lang)
+
+    def_header=config.getValue("general","header")
+    parser.add_option('--header',metavar='HEADER',default=def_header,dest='header',
+                      help='Page header if not specified in the document. Default="%s"'%def_header)
+    def_footer=config.getValue("general","footer")
+    parser.add_option('--footer',metavar='FOOTER',default=def_footer,dest='footer',
+                      help='Page footer if not specified in the document. Default="%s"'%def_footer)
+
 
     def_smartquotes=config.getValue("general","smartquotes","0")
     parser.add_option("--smart-quotes",metavar="VALUE",default=def_smartquotes,dest="smarty",
@@ -1309,11 +1379,12 @@ def main():
         spath=options.stylepath.split(':')
 
     RstToPdf(
-        stylesheets = ssheet,
+        stylesheets=ssheet,
         language=options.language,
+        header=options.header, footer=options.footer,
+        inlinelinks=options.inlinelinks,
         breaklevel=int(options.breaklevel),
-        inlinelinks = options.inlinelinks,
-        baseurl = options.baseurl,
+        baseurl=options.baseurl,
         fitMode=options.fitMode,
         smarty=str(options.smarty),
         fontPath=fpath,
@@ -1326,4 +1397,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

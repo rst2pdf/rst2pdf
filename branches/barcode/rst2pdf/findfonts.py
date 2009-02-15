@@ -5,7 +5,7 @@
 import os,sys
 from log import log
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.ttfonts import TTFont, TTFError
 from reportlab.lib.fonts import addMapping
 
 flist=[]
@@ -34,7 +34,7 @@ fontMappings={}
 
 def loadFonts():
     '''Given a font name, returns the actual font files. If the font name is not valid, it will treat it as a
-    font family name, and return the value of searching for the regular font of said family.'''    
+    font family name, and return the value of searching for the regular font of said family.'''
     if not afmList or not pfbList:
         # Find all ".afm" and ".pfb" files files
         def findFontFiles(_,folder,names):
@@ -140,7 +140,7 @@ def findTTFont(fname):
         if variants[0].endswith('.pfb') or variants[0].endswith('.gz') :
             return None
         return variants
-        
+
     family=get_family(fname)
     if not family:
         log.error("Unknown font: %s",fname)
@@ -183,8 +183,12 @@ def autoEmbed(fname):
     if variants: #It is a TT Font and we found it using fc-match (or found *something*)
         for variant in variants:
             vname=os.path.basename(variant)[:-4]
-            pdfmetrics.registerFont(TTFont(vname,variant))
-            fontList.append(vname)
+            try:
+                pdfmetrics.registerFont(TTFont(vname,variant))
+            except TTFError:
+                pass
+            else:
+                fontList.append(vname)
         ## Also register "standard" aliases for the variants
         #for variant,name in zip(variants,[fname+suffix for suffix in ["","-Oblique","-Bold","-BoldOblique"]]):
             #fontList.append(name)
@@ -222,7 +226,7 @@ def guessFont(fname):
     if "bold" in mod or "black" in mod:
         bold=1
     return family,2*bold+italic
-            
+
 
 def main():
     global flist
