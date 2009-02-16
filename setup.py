@@ -37,7 +37,6 @@ long_description = (
 install_requires = [
         'setuptools',
         'docutils',
-        'PIL',
         'reportlab>=2.1',
         'Pygments',
         'simplejson'
@@ -47,6 +46,7 @@ tests_require = ['pyPdf',]
 hyphenation_require = ['wordaxe',]
 svgsupport_require = ['uniconvertor',]
 sphinx_require = ['sphinx',]
+images_require = ['PIL',]
 
 setup(
     name="rst2pdf",
@@ -60,8 +60,6 @@ setup(
        "http://ftp.schooltool.org/schooltool/eggs/3.4",
        #wordaxe
        "http://sourceforge.net/project/platformdownload.php?group_id=105867",
-       #PIL as egg
-       "http://dist.repoze.org",
        # uniconvertor
        "http://sk1project.org/downloads/uniconvertor/v1.1.3/uniconvertor-1.1.3.tar.gz",
     ],
@@ -71,6 +69,7 @@ setup(
                         hyphenation = hyphenation_require,
                         svgsupport = svgsupport_require,
                         sphinx = sphinx_require,
+			images = images_require,
                         ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
