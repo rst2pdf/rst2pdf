@@ -660,9 +660,6 @@ class RstToPdf(object):
                            MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
 
         elif isinstance (node, docutils.nodes.list_item):
-            # A list_item is a table of two columns.
-            # The left one is the bullet itself, the right is the
-            # item content. This way we can nest them.
 
             el=self.gather_elements(node,depth,style=style)
             b=""
