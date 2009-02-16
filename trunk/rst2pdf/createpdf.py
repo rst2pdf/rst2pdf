@@ -622,13 +622,18 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.section):
             node.elements=self.gather_elements(node,depth+1)
 
-        elif isinstance (node, docutils.nodes.bullet_list)                   \
-            or isinstance (node, docutils.nodes.enumerated_list)            \
-            or isinstance (node, docutils.nodes.definition_list)            \
-            or isinstance (node, docutils.nodes.option_list)                \
+        elif isinstance (node, docutils.nodes.bullet_list):
+            node.elements=self.gather_elements(node,depth,style=self.styles["bullet_list"])
+            
+        elif isinstance (node, docutils.nodes.definition_list)\
+            or isinstance (node, docutils.nodes.option_list)  \
             or isinstance (node, docutils.nodes.field_list):
 
             node.elements=self.gather_elements(node,depth,style=style)
+
+
+        elif isinstance (node, docutils.nodes.enumerated_list):
+            node.elements=self.gather_elements(node,depth,style=self.styles["enumerated_list"])
 
         elif isinstance (node, docutils.nodes.definition):
             node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
