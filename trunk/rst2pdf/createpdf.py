@@ -623,12 +623,13 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth+1)
 
         elif isinstance (node, docutils.nodes.bullet_list):
-            sb=self.styles["bullet_list"].spaceBefore
-            sa=self.styles["bullet_list"].spaceAfter
-            node.elements=[Spacer(0,sb),]+\
-                           self.gather_elements(node,depth,style=self.styles["bullet_list_item"])+\
-                          [Spacer(0,sa),]
-            
+            node.elements=self.gather_elements(node,depth,style=self.styles["bullet_list_item"])
+            s = self.styles["bullet_list"]
+            if s.spaceBefore:
+                node.elements.insert(0, Spacer(0,s.spaceBefore))
+            if s.spaceAfter:
+                node.elements.append(Spacer(0,s.spaceAfter))
+
         elif isinstance (node, docutils.nodes.definition_list)\
             or isinstance (node, docutils.nodes.option_list)  \
             or isinstance (node, docutils.nodes.field_list):
@@ -637,11 +638,12 @@ class RstToPdf(object):
 
 
         elif isinstance (node, docutils.nodes.enumerated_list):
-            sb=self.styles["enumerated_list"].spaceBefore
-            sa=self.styles["enumerated_list"].spaceAfter
-            node.elements=[Spacer(0,sb),]+\
-                           self.gather_elements(node,depth,style=self.styles["enumerated_list_item"])+\
-                          [Spacer(0,sa),]
+            node.elements=self.gather_elements(node,depth,style=self.styles["enumerated_list_item"])
+            s = self.styles["enumerated_list"]
+            if s.spaceBefore:
+                node.elements.insert(0, Spacer(0,s.spaceBefore))
+            if s.spaceAfter:
+                node.elements.append(Spacer(0,s.spaceAfter))
 
         elif isinstance (node, docutils.nodes.definition):
             node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
