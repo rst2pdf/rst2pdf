@@ -540,7 +540,7 @@ class RstToPdf(object):
                 # Is only one of multiple authors. Return a paragraph
                 node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
                 if self.doc_author:
-                    self.doc_author+=self.author_separator+node.astext().strip()
+                    self.doc_author+=self.author_separator(style=style)+node.astext().strip()
                 else:
                     self.doc_author=node.astext().strip()
             else:
@@ -623,7 +623,11 @@ class RstToPdf(object):
             node.elements=self.gather_elements(node,depth+1)
 
         elif isinstance (node, docutils.nodes.bullet_list):
-            node.elements=self.gather_elements(node,depth,style=self.styles["bullet_list"])
+            sb=self.styles["bullet_list"].spaceBefore
+            sa=self.styles["bullet_list"].spaceAfter
+            node.elements=[Spacer(0,sb),]+\
+                           self.gather_elements(node,depth,style=self.styles["bullet_list_item"])+\
+                          [Spacer(0,sa),]
             
         elif isinstance (node, docutils.nodes.definition_list)\
             or isinstance (node, docutils.nodes.option_list)  \
@@ -633,7 +637,11 @@ class RstToPdf(object):
 
 
         elif isinstance (node, docutils.nodes.enumerated_list):
-            node.elements=self.gather_elements(node,depth,style=self.styles["enumerated_list"])
+            sb=self.styles["enumerated_list"].spaceBefore
+            sa=self.styles["enumerated_list"].spaceAfter
+            node.elements=[Spacer(0,sb),]+\
+                           self.gather_elements(node,depth,style=self.styles["enumerated_list_item"])+\
+                          [Spacer(0,sa),]
 
         elif isinstance (node, docutils.nodes.definition):
             node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
