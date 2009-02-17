@@ -342,6 +342,10 @@ class StyleSheet(object):
             # If the bullet font size is not set, set it as fontSize
             if ('bulletFontSize' not in s) and ('fontSize' in s):
                 s['bulletFontSize'] = s['fontSize']
+                
+            # If the borderPadding is a number, convert it to a list
+            #if 'borderPadding' in s and isinstance(s['borderPadding'],int):
+                #s['borderPadding']=[s['borderPadding'],]*4
 
             self.StyleSheet.add(ParagraphStyle(**s))
 
