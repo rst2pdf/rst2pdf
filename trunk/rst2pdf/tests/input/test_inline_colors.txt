@@ -4,4 +4,4 @@
 
 This is :red:`red text` and this is :white_on_red:`white on red`
 
-The background color fails, reportlab limitation
+If the background color fails, that´s a reportlab limitation. It works on 2.3.
