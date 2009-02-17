@@ -101,10 +101,24 @@
       "alignment": "TA_CENTER"
     }],
     ["bullet_list" , {
-      "parent": "bodytext"
+      "parent": "bodytext",
+      "spaceBefore": 2,
+      "spaceAfter": 2
+    }],
+    ["bullet_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 4,
+      "spaceAfter": 4
     }],
     ["enumerated_list" , {
-      "parent": "bodytext"
+      "parent": "bodytext",
+      "spaceBefore": 2,
+      "spaceAfter": 2
+    }],
+    ["enumerated_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 4,
+      "spaceAfter": 4
     }],
     ["definition_list_term" , {
       "parent": "normal",
