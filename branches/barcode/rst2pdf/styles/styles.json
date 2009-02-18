@@ -100,6 +100,22 @@
       "parent": "bodytext",
       "alignment": "TA_CENTER"
     }],
+    ["bullet_list" , {
+      "parent": "bodytext",
+      "spaceBefore": 2
+    }],
+    ["bullet_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 4
+    }],
+    ["enumerated_list" , {
+      "parent": "bodytext",
+      "spaceBefore": 2
+    }],
+    ["enumerated_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 4
+    }],
     ["definition_list_term" , {
       "parent": "normal",
       "fontName": "stdBold",
