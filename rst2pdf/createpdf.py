@@ -540,7 +540,7 @@ class RstToPdf(object):
                 # Is only one of multiple authors. Return a paragraph
                 node.elements=[Paragraph(self.gather_pdftext(node,depth), style=style)]
                 if self.doc_author:
-                    self.doc_author+=self.author_separator+node.astext().strip()
+                    self.doc_author+=self.author_separator(style=style)+node.astext().strip()
                 else:
                     self.doc_author=node.astext().strip()
             else:
@@ -622,13 +622,28 @@ class RstToPdf(object):
         elif isinstance (node, docutils.nodes.section):
             node.elements=self.gather_elements(node,depth+1)
 
-        elif isinstance (node, docutils.nodes.bullet_list)                   \
-            or isinstance (node, docutils.nodes.enumerated_list)            \
-            or isinstance (node, docutils.nodes.definition_list)            \
-            or isinstance (node, docutils.nodes.option_list)                \
+        elif isinstance (node, docutils.nodes.bullet_list):
+            node.elements=self.gather_elements(node,depth,style=self.styles["bullet_list_item"])
+            s = self.styles["bullet_list"]
+            if s.spaceBefore:
+                node.elements.insert(0, Spacer(0,s.spaceBefore))
+            if s.spaceAfter:
+                node.elements.append(Spacer(0,s.spaceAfter))
+
+        elif isinstance (node, docutils.nodes.definition_list)\
+            or isinstance (node, docutils.nodes.option_list)  \
             or isinstance (node, docutils.nodes.field_list):
 
             node.elements=self.gather_elements(node,depth,style=style)
+
+
+        elif isinstance (node, docutils.nodes.enumerated_list):
+            node.elements=self.gather_elements(node,depth,style=self.styles["enumerated_list_item"])
+            s = self.styles["enumerated_list"]
+            if s.spaceBefore:
+                node.elements.insert(0, Spacer(0,s.spaceBefore))
+            if s.spaceAfter:
+                node.elements.append(Spacer(0,s.spaceAfter))
 
         elif isinstance (node, docutils.nodes.definition):
             node.elements=self.gather_elements(node,depth,style=self.styles["definition"])
@@ -660,9 +675,6 @@ class RstToPdf(object):
                            MyIndenter(left=10)]+dt+[MyIndenter(left=-10)]
 
         elif isinstance (node, docutils.nodes.list_item):
-            # A list_item is a table of two columns.
-            # The left one is the bullet itself, the right is the
-            # item content. This way we can nest them.
 
             el=self.gather_elements(node,depth,style=style)
             b=""

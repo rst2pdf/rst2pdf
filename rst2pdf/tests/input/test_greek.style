@@ -1,9 +1,5 @@
 {
-  "embeddedFonts" : [ ["DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "DejaVuSans-Oblique.ttf", "DejaVuSans-BoldOblique.ttf"] ],
   "fontsAlias" : {
-    "stdFont": "DejaVuSans",
-    "stdBold": "DejaVuSans-Bold",
-    "stdItalic": "DejaVuSans-Oblique",
-    "stdBoldItalic": "DejaVuSans-BoldOblique"
+    "stdFont": "DejaVu Sans"
     }
 }
