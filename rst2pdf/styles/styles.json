@@ -218,7 +218,8 @@
     ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",
-      "firstLineIndent": 0
+      "firstLineIndent": 0,
+      "hyphenation": false
     }],
     ["table" , {
       "rowBackgrounds" : ["white","#E0E0E0"]
