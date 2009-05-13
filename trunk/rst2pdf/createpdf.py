@@ -705,15 +705,16 @@ class RstToPdf(object):
             else:
                 log.critical("Unknown kind of list_item %s", node.parent)
                 sys.exit(1)
-            # FIXME: use different unicode bullets depending on b
-            if b and b in "*+-":
-                b=u'\u2022'
-            el[0].bulletText = b
 
             # FIXME: this is really really not good code
             if not el:
                 el=[Paragraph(u"\xa0",self.styles["bodytext"])]
 
+            # FIXME: use different unicode bullets depending on b
+            if b and b in "*+-":
+                b=u'\u2022'
+            el[0].bulletText = b
+            
             # Try to figure out how much space to reserve for the bullet
             if "style" in el[0].__dict__:
                 indentation=el[0].style.leading
