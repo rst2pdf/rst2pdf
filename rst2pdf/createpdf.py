@@ -1331,6 +1331,10 @@ def main():
                       help='Print even more debug information.')
     parser.add_option('--version',action="store_true",dest='version',default=False,
                       help='Print version number and exit.')
+                      
+    parser.add_option('--no-footnote-backlinks',action='store_false',dest='footnote_backlinks',
+                      default=True,help='Disable footnote backlinks. Default=False')
+                      
     (options,args)=parser.parse_args()
 
     if options.version:
