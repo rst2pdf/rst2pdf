@@ -1081,7 +1081,7 @@ class RstToPdf(object):
         if doctree is None:
             if text is not None:
                 doctree=docutils.core.publish_doctree(text,source_path=source_path,
-                             settings_overrides={'language_code':self.language})
+                             settings_overrides={'language_code':self.language[:2]})
                 log.debug(doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree to be useful')
