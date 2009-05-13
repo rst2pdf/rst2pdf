@@ -83,6 +83,7 @@ class RstToPdf(object):
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False):
         global HAS_SPHINX
+        self.language=language
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
         self.loweralpha=string.ascii_lowercase
         self.doc_title=""
@@ -1066,7 +1067,8 @@ class RstToPdf(object):
         # in the frame
         return BoundByWidth(2000*cm,content=[XPreformatted(text,style)],mode=self.fitMode,style=style)
 
-    def createPdf(self,text=None,source_path=None,output=None,doctree=None,compressed=False):
+    def createPdf(self,text=None,source_path=None,output=None,doctree=None,
+                  compressed=False):
         '''Create a PDF from text (ReST input), or doctree (docutil nodes)
         and save it in outfile.
 
@@ -1078,7 +1080,8 @@ class RstToPdf(object):
 
         if doctree is None:
             if text is not None:
-                doctree=docutils.core.publish_doctree(text,source_path=source_path)
+                doctree=docutils.core.publish_doctree(text,source_path=source_path,
+                             settings_overrides={'language_code':self.language})
                 log.debug(doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree to be useful')
@@ -1239,7 +1242,6 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx=self.hx+self.styles.gm
             fx=self.fx+self.styles.gm
-
         head = self.curHead
         if head:
             self.replaceTokens(head,canv,doc)
@@ -1295,7 +1297,8 @@ def main():
 
     def_lang=config.getValue("general","language","en_US")
     parser.add_option('-l','--language',metavar='LANG',default=def_lang,dest='language',
-                      help='Language to be used for hyphenation. Default="%s"'%def_lang)
+                      help='Language to be used for hyphenation and docutils localizations.\
+                      Default="%s"'%def_lang)
 
     def_header=config.getValue("general","header")
     parser.add_option('--header',metavar='HEADER',default=def_header,dest='header',
