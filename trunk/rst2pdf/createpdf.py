@@ -81,7 +81,8 @@ class RstToPdf(object):
 
     def __init__(self, stylesheets = [], language = 'en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
-                 fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False):
+                 fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False,
+                 footnote_backlinks=True):
         global HAS_SPHINX
         self.language=language
         self.lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
@@ -99,6 +100,8 @@ class RstToPdf(object):
         self.smarty=smarty
         self.baseurl=baseurl
         self.repeatTableRows=repeatTableRows
+        self.footnote_backlinks=footnote_backlinks
+        
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
         # I can' t just try to import it outside. I need
@@ -916,7 +919,7 @@ class RstToPdf(object):
             isinstance (node, docutils.nodes.citation):
             # It seems a footnote contains a label and a series of elements
             ltext=self.gather_pdftext(node.children[0],depth)
-            if len(node['backrefs'])>1:
+            if len(node['backrefs'])>1 and self.footnote_backlinks:
                 backrefs=[]
                 i=1
                 for r in node['backrefs']:
@@ -925,7 +928,7 @@ class RstToPdf(object):
                     i+=1
                 backrefs='(%s)'%', '.join(backrefs)
                 label=Paragraph('<a name="%s"/>%s'%(ltext,ltext+backrefs),self.styles["normal"])
-            elif len(node['backrefs'])==1:
+            elif len(node['backrefs'])==1 and self.footnote_backlinks:
                 label=Paragraph('<a name="%s"/><a href="%s" color="%s">%s</a>'%(
                     ltext,node['backrefs'][0],self.styles.linkColor,ltext),self.styles["normal"])
             else:
@@ -1332,8 +1335,10 @@ def main():
     parser.add_option('--version',action="store_true",dest='version',default=False,
                       help='Print version number and exit.')
                       
+    def_footnote_backlinks=config.getValue("general","footnote_backlinks",True)
     parser.add_option('--no-footnote-backlinks',action='store_false',dest='footnote_backlinks',
-                      default=True,help='Disable footnote backlinks. Default=False')
+                      default=def_footnote_backlinks,
+                      help='Disable footnote backlinks. Default=%s'%str(not def_footnote_backlinks))
                       
     (options,args)=parser.parse_args()
 
@@ -1413,6 +1418,7 @@ def main():
         fontPath=fpath,
         stylePath=spath,
         repeatTableRows=options.repeattablerows,
+        footnote_backlinks=options.footnote_backlinks,
     ).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
