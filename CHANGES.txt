@@ -1,8 +1,35 @@
 New in SVN (will be 0.10)
 -------------------------
 
-* Table headers can be repeated in each page (thanks to Yasushi Masuda)
-* Line number support for code blocks (:linenos: true)
+* Issue 87: Table headers can be repeated in each page (thanks to Yasushi Masuda)
+* Issue 93: Line number support for code blocks (:linenos: true)
+* Issue 111: Added --no-footnote-backlinks option
+* Issue 107: Support localized directives/roles (example: sommaire instead of contents)
+* Issue 112: Fixed crash when processing empty list items
+* Issue 98: Nobreak support, and set as default for inline-literals so they don't hyphenate.
+* Slightly better tests
+* Background colors in text styles work with reportlab 2.3
+* Issue 99: Fixed hyphenation in headers/footers (requires wordaxe 0.3.2)
+* Issue 106: Crash on demo.txt fixed (requires wordxe 0.3.2)
+* Issue 102: Implemented styles for bulleted and numbered lists
+* Issue 38: Default headers/footers via options, config file or stylesheet
+* Issue 88: Implemented much better book-style TOCs
+* Issue 100: Fixed bug with headers/footers and Reportlab 2.3
+* Issue 95: Fixed bug with indented tables
+* Issue 89: Implemented --version
+* Issue 84: Fixed bug with relative include paths
+* Issue 85: Fixed bug with table cell styles
+* Issue 83: Fixed bug with numeric colors in backColor attribute
+* Issue 44: Support for stdin and stdout
+* Issue 79: Added --stylesheet-path option
+* Issue 80: Send warnings to stderr, not stdout
+* Issue 66: Implemented "smart quotes"
+* Issue 39: Implemented Inline external links
+* Issue 77: Work around missing matplotlib
+* Proper translation of labels (such as "Author", "Version" etc.) using the 
+  docutils languages package. (r473)
+* Fixed problems with wrong or non-existing fonts. (r484)
+* Page transition effect support for presentations (r423)
 
 
 New in 0.9
