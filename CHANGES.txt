@@ -24,7 +24,6 @@ New in SVN (will be 0.10)
 * Issue 79: Added --stylesheet-path option
 * Issue 80: Send warnings to stderr, not stdout
 * Issue 66: Implemented "smart quotes"
-* Issue 39: Implemented Inline external links
 * Issue 77: Work around missing matplotlib
 * Proper translation of labels (such as "Author", "Version" etc.) using the 
   docutils languages package. (r473)
