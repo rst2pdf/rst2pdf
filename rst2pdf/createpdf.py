@@ -42,6 +42,9 @@ from math_flowable import Math
 from log import log
 from smartypants import smartyPants
 
+# Is this really the best unescape in the stdlib for '&amp;' => '&'????
+from xml.sax.saxutils import unescape
+
 import config
 
 #def escape (x,y):
@@ -498,7 +501,8 @@ class RstToPdf(object):
                 else:
                     snum=None
                 key=node.get('refid')
-                elem = OutlineEntry(key,text,depth-1,snum)
+                # Issue 114: neet to conver "&amp;" to "&" and such
+                elem = OutlineEntry(key,unescape(text),depth-1,snum)
                 elem.parent_id = node.parent.get('ids', [None])[0]
                 node.elements=[KeepTogether([elem, Paragraph(text, self.styles['heading%d' % min(depth,3)])])]
                 if depth <=self.breaklevel:
