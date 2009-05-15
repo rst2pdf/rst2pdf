@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from rst2pdf import createpdf
-from docutils import writers
 from StringIO import StringIO
-import sys
-from tempfile import mkstemp
-import codecs
+
+from docutils import writers
+
+from rst2pdf import createpdf
+
 
 class PdfWriter(writers.Writer):
 
@@ -19,13 +19,13 @@ class PdfWriter(writers.Writer):
 
     config_section = 'pdf writer'
     config_section_dependencies = ('writers',)
-
     """Final translated form of `document`."""
 
     def translate(self):
-        sio=StringIO('')
-        createpdf.RstToPdf(sphinx=True).createPdf(doctree=self.document,output=sio,compressed=False)
-        self.output=unicode(sio.getvalue(),'utf-8','ignore')
+        sio = StringIO('')
+        createpdf.RstToPdf(sphinx=True).createPdf(
+            doctree=self.document, output=sio, compressed=False)
+        self.output = unicode(sio.getvalue(), 'utf-8', 'ignore')
 
     def supports(self, format):
         """This writer supports all format-specific elements."""
