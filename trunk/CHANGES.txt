@@ -1,5 +1,5 @@
-New in SVN (will be 0.10)
--------------------------
+New in 0.10
+-----------
 
 * Issue 87: Table headers can be repeated in each page (thanks to Yasushi Masuda)
 * Issue 93: Line number support for code blocks (:linenos: true)
