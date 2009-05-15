@@ -1,0 +1,11 @@
+{
+  "embeddedFonts" : ["Palatino"],
+  "pageSetup" : {
+   "size" : "A5",
+   "firstTemplate": "coverPage"
+  }, 
+  "styles" : [
+    ["palatino" , { "parent": "bodytext","fontName": "Palatino"} ],
+    ["redpalatino" , {"parent": "normal","fontName": "Palatino", "textColor": "red"} ]
+  ]
+}
