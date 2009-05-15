@@ -2,10 +2,11 @@
 #$HeadURL$
 #$LastChangedDate$
 #$LastChangedRevision$
+
 import os
 from setuptools import setup, find_packages
 
-version = '0.10'
+version = '0.10.1'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -42,20 +43,20 @@ install_requires = [
         'simplejson'
         ]
 
-tests_require = ['pyPdf',]
-hyphenation_require = ['wordaxe',]
-svgsupport_require = ['uniconvertor',]
-sphinx_require = ['sphinx',]
-images_require = ['PIL',]
+tests_require = ['pyPdf']
+hyphenation_require = ['wordaxe']
+svgsupport_require = ['uniconvertor']
+sphinx_require = ['sphinx']
+images_require = ['PIL']
 
 setup(
     name="rst2pdf",
     version=version,
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-    package_data = {'rst2pdf': ['*.json']},
+    package_data=dict(rst2pdf=['styles/*.json']),
     include_package_data=True,
     # place to find an egg distrib of reportlab 2.1
-    dependency_links = [
+    dependency_links=[
        #reportlab as egg
        "http://ftp.schooltool.org/schooltool/eggs/3.4",
        #wordaxe
@@ -63,14 +64,15 @@ setup(
        # uniconvertor
        "http://sk1project.org/downloads/uniconvertor/v1.1.3/uniconvertor-1.1.3.tar.gz",
     ],
-    install_requires = install_requires,
+    install_requires=install_requires,
     tests_require=tests_require,
-    extras_require=dict(tests = tests_require,
-                        hyphenation = hyphenation_require,
-                        svgsupport = svgsupport_require,
-                        sphinx = sphinx_require,
-			images = images_require,
-                        ),
+    extras_require=dict(
+        tests=tests_require,
+        hyphenation=hyphenation_require,
+        svgsupport=svgsupport_require,
+        sphinx=sphinx_require,
+        images=images_require,
+    ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
@@ -85,14 +87,14 @@ setup(
         'Topic :: Text Processing',
         'Topic :: Utilities',
     ],
-    author = "Roberto Alsina",
-    author_email = "ralsina at netmanagers dot com dot ar",
-    description = "Convert restructured text to PDF via reportlab.",
+    author="Roberto Alsina",
+    author_email="ralsina at netmanagers dot com dot ar",
+    description="Convert restructured text to PDF via reportlab.",
     long_description=long_description,
-    license = "MIT",
-    keywords = "restructured convert rst pdf docutils pygments reportlab",
-    url = "http://rst2pdf.googlecode.com",
-    download_url = "http://code.google.com/p/rst2pdf/downloads/list",
-    entry_points = {'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
-    test_suite = 'rst2pdf.tests.test_rst2pdf.test_suite',
+    license="MIT",
+    keywords="restructured convert rst pdf docutils pygments reportlab",
+    url="http://rst2pdf.googlecode.com",
+    download_url="http://code.google.com/p/rst2pdf/downloads/list",
+    entry_points={'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
+    test_suite='rst2pdf.tests.test_rst2pdf.test_suite',
 )
