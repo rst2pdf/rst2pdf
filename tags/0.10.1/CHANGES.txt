@@ -1,0 +1,136 @@
+New in 0.10
+-----------
+
+* Issue 87: Table headers can be repeated in each page (thanks to Yasushi Masuda)
+* Issue 93: Line number support for code blocks (:linenos: true)
+* Issue 111: Added --no-footnote-backlinks option
+* Issue 107: Support localized directives/roles (example: sommaire instead of contents)
+* Issue 112: Fixed crash when processing empty list items
+* Issue 98: Nobreak support, and set as default for inline-literals so they don't hyphenate.
+* Slightly better tests
+* Background colors in text styles work with reportlab 2.3
+* Issue 99: Fixed hyphenation in headers/footers (requires wordaxe 0.3.2)
+* Issue 106: Crash on demo.txt fixed (requires wordxe 0.3.2)
+* Issue 102: Implemented styles for bulleted and numbered lists
+* Issue 38: Default headers/footers via options, config file or stylesheet
+* Issue 88: Implemented much better book-style TOCs
+* Issue 100: Fixed bug with headers/footers and Reportlab 2.3
+* Issue 95: Fixed bug with indented tables
+* Issue 89: Implemented --version
+* Issue 84: Fixed bug with relative include paths
+* Issue 85: Fixed bug with table cell styles
+* Issue 83: Fixed bug with numeric colors in backColor attribute
+* Issue 44: Support for stdin and stdout
+* Issue 79: Added --stylesheet-path option
+* Issue 80: Send warnings to stderr, not stdout
+* Issue 66: Implemented "smart quotes"
+* Issue 77: Work around missing matplotlib
+* Proper translation of labels (such as "Author", "Version" etc.) using the 
+  docutils languages package. (r473)
+* Fixed problems with wrong or non-existing fonts. (r484)
+* Page transition effect support for presentations (r423)
+
+
+New in 0.9
+----------
+
+* Math support via Mathplotlib
+* Huge bug in header/footer page numbers/section names fixed
+* Several bugs in nested lists fixed (not 100% correct yet, but better)
+* Lists that don't start at 1 work now
+* Nicer definition lists
+
+New in 0.8.1
+------------
+
+* Support for more complex headers and footers 
+  (including image directives and tables)
+* Optional inline links
+* Wordaxe 0.2.6 support
+* Several bugs fixed (issues 48,68,41,60,58,64,67)
+* Support for system-wide config file
+* Better author metadata
+
+New in 0.8
+----------
+
+* Support for vector graphics: SVG, EPS, PS, CDR and others (requires uniconvertor)
+* Support for stdin and stdout, so you can use rst2pdf in pipes.
+* Works with reportlab 2.1 and 2.2
+* Simpler stylesheets (guess bulletFontName, leading, bulletFontSize from other parameters)
+* Some support for sphinx
+* Fixed the docutils Writer interface
+* Continue processing when an image is missing
+* Support for user config file
+* Font sizes can be expressed in units or % of parent style's size
+* Larger font size in the default stylesheet
+
+New in 0.7
+----------
+
+* Automatic Type1 and True Type font embedding. Just use the font or family name, and (with a little luck), it will be embedded for you.
+* width attribute in styles, to create narrow paragraphs/tables
+* Styles for table headers and table cells
+* "Zebra tables"
+* Improvements in the handling of overflowing literal blocks (code, for instance)
+* Different modes to handle too-large literal blocks: overflow/truncate/shrink.
+* Real sidebars and "floating" elements.
+* Fixed link style (no ugly black underlining!)
+
+New in 0.6
+----------
+
+* Stylesheet-defined page layout (For example, multicolumn) and layout switching
+* Cascading Stylesheets (change exactly what you need changed)
+* PDF table of contents
+* Current section names and numbers in headers/footers
+* Support for compressed PDF files
+* Link color is configurable
+* Fixed bugs in color handling
+* Multilingual hyphenation
+* Auto-guessing image size, support for sizes in %
+* Gutter margins
+* Big refactoring
+* More tolerant of minor problems
+* Limited _raw_ directive (you can insert pagebreaks and vertical space)
+* Implemented a "traditional" docutils writer
+* Offer a reasonable API for use as a library
+* Fixed copyright/licensing
+* code-block now supports including files (whole or in part) so you can highlight external code.
+
+
+New in 0.5
+----------
+
+* Support for :widths: in tables
+* Support for captions in tables
+* Support for multi-row headers in tables
+* Improved definition lists
+* Fixed bug in image directive 
+* Whitespace conforming to PEP8
+* Fixed bug in text size on code-block
+* Package is more setuptools compliant
+* Fix for option groups in option lists
+* Citations support
+* Title reference role fix
+
+New in 0.4
+----------
+
+* Fixed bullet and item lists indentation/nesting. 
+* Implemented citations 
+* Working links between footnotes and its references 
+* Justification enabled by default 
+* Fixed table bug (demo.txt works now) 
+* Title and author support in PDF properties 
+* Support for document title in header/footer 
+* Custom page sizes and margins 
+
+New in 0.3
+----------
+
+* Font embedding (use any True Type font in your PDFs) 
+* Syntax highlighter using Pygments 
+* User's manual 
+* External/custom stylesheets 
+* Support for page numbers in header/footer 
