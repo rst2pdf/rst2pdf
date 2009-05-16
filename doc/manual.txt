@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.10
+:version: 0.10.1
 :revision: $LastChangedRevision$
 
 .. header::
@@ -45,11 +45,11 @@ Command line options
 ====================
 
 -h, --help            show this help message and exit
--o FILE, --output=FILE                               
-                    Write the PDF to FILE          
--s STYLESHEETS, --stylesheets=STYLESHEETS            
+-o FILE, --output=FILE
+                    Write the PDF to FILE
+-s STYLESHEETS, --stylesheets=STYLESHEETS
                     A comma-separated list of custom stylesheets.
-                    Default=""                                   
+                    Default=""
 --stylesheet-path=FOLDERS
                     A colon-separated list of folders to search for
                     stylesheets. Default=""
