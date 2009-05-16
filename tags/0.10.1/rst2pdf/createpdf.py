@@ -12,13 +12,15 @@ from string import ascii_lowercase
 from urlparse import urljoin, urlparse
 from copy import copy
 from cgi import escape
-import logging
 from optparse import OptionParser
+import logging
 
 from docutils.languages import get_language
 import docutils.readers.doctree
 import docutils.core
 import docutils.nodes
+
+import pygments_code_block_directive # install code-block directive
 
 from reportlab.platypus import *
 from reportlab.platypus.flowables import _listWrapOn, _Container
@@ -26,13 +28,15 @@ from reportlab.lib.enums import *
 from reportlab.lib.units import *
 from reportlab.lib.pagesizes import *
 
-from smartypants import smartyPants
+from flowables import * # our own reportlab flowables
 
-from flowables import *
 from svgimage import SVGImage
 from math_directive import math_node
 from math_flowable import Math
+
 from log import log
+
+from smartypants import smartyPants
 
 # Is this really the best unescape in the stdlib for '&amp;' => '&'????
 from xml.sax.saxutils import unescape
