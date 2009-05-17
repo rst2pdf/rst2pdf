@@ -363,7 +363,11 @@ class StyleSheet(object):
             self.StyleSheet.add(ParagraphStyle(**s))
 
     def __getitem__(self, key):
-        return self.StyleSheet[key]
+        try:
+            return self.StyleSheet[key]
+        except KeyError: # Using an undefined style
+            log.warning("Using undefined style '%s', got style 'normal' instead"%key)
+            return self.StyleSheet['normal']
 
     def findStyle(self, fn):
         """Find the absolute file name for a given style filename.

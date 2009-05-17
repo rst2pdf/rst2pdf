@@ -1,6 +1,8 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Issue 109: Separate styles for each kind of admonition
+* To do Issue 109: missing styles are not a fatal error
 * Issue 117: TOCs with more than 6 levels now supported (raised limit to 9, which 
   is silly deep)
 

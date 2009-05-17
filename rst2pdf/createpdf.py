@@ -822,7 +822,7 @@ class RstToPdf(object):
             #   + self.gather_elements(node, depth, style=style)
             rows = [Paragraph(node.tagname.title(), style=self.styles['heading3'])] \
                 + self.gather_elements(node, depth, style=style)
-            node.elements = [BoxedContainer(rows, self.styles['admonition'])]
+            node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
 
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle all the other attributes
