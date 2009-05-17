@@ -1,0 +1,8 @@
+{
+    "styles" : [
+    [ "danger" , { 
+        "textColor": "red",
+        "backColor": "yellow"
+      }]
+   ]
+}
