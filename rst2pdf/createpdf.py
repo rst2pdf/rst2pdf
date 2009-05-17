@@ -623,6 +623,15 @@ class RstToPdf(object):
                 toc_visitor.toc.linkColor = self.styles.linkColor
                 node.walk(toc_visitor)
                 toc = toc_visitor.toc
+                # Issue 117: add extra TOC levelStyles. 9-deep should be enough.
+                for i in range(4):
+                    ps=toc.levelStyles[2].__class__(name='Level%d'%(i+5),
+                                      parent=toc.levelStyles[2],
+                                      leading=toc.levelStyles[2].leading,
+                                      firstlineIndent=toc.levelStyles[2].firstLineIndent,
+                                      leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
+                    toc.levelStyles.append(ps)
+                    
                 # Override fontnames (defaults to Times-Roman)
                 for levelStyle in toc.levelStyles:
                     levelStyle.__dict__['fontName'] = self.styles['tableofcontents'].fontName
