@@ -1,3 +1,14 @@
+New in SVN (will be 0.11)
+-------------------------
+
+* Issue 117: TOCs with more than 6 levels now supported (raised limit to 9, which 
+  is silly deep)
+
+New in 0.10.1
+-------------
+
+* Issue 114: Fixed bug in PDF TOC for sections containing ampersands
+
 New in 0.10
 -----------
 
