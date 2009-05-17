@@ -215,6 +215,33 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["attention" , {
+      "parent": "admonition"
+    }],
+    ["caution" , {
+      "parent": "admonition"
+    }],
+    ["danger" , {
+      "parent": "admonition"
+    }],
+    ["error" , {
+      "parent": "admonition"
+    }],
+    ["hint" , {
+      "parent": "admonition"
+    }],
+    ["important" , {
+      "parent": "admonition"
+    }],
+    ["note" , {
+      "parent": "admonition"
+    }],
+    ["tip" , {
+      "parent": "admonition"
+    }],
+    ["warning" , {
+      "parent": "admonition"
+    }],
     ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",

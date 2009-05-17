@@ -444,7 +444,11 @@ class BoundByWidth(Flowable):
 
 class BoxedContainer(BoundByWidth):
     def __init__(self, content, style, mode='shrink'):
-        BoundByWidth.__init__(self, style.width, content, mode=mode, style=None)
+        try:
+            w=style.width
+        except AttributeError:
+            w='100%'
+        BoundByWidth.__init__(self, w, content, mode=mode, style=None)
         self.style = style
         self.mode = mode
 
