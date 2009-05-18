@@ -839,7 +839,6 @@ class RstToPdf(object):
             # Find the image size in pixels:
 
             try:
-                # FIXME find extensions uniconvertor supports
                 if imgname.split('.')[-1].lower() in [
                         "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
                     iw, ih = SVGImage(imgname).wrap(0, 0)

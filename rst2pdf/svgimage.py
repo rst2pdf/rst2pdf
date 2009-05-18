@@ -25,12 +25,31 @@ try:
 except ImportError:
     pass
 
+try:
+    from svglib import svglib
+except ImportError:
+    svglib = None
+
 
 class SVGImage(Flowable):
 
     def __init__(self, filename, width=None, height=None):
         Flowable.__init__(self)
-        if HAS_UNICONVERTOR:
+        ext = os.path.splitext(filename)[-1]
+        self._mode=None
+        # Prefer svglib for SVG, as it works better
+        if ext in ('.svg', '.svgz') and svglib is not None:
+            self.doc = svglib.svg2rlg(filename)
+            self.width=width
+            self.height=height
+            _,_,self._w,self._h=self.doc.getBounds()
+            if not self.width: 
+                self.width=self._w
+            if not self.height: 
+                self.height=self._h
+            self._mode='svglib'
+        # Use uniconvertor for the rest
+        elif HAS_UNICONVERTOR:
             self.doc = load.load_drawing(filename)
             self.saver = plugins.find_export_plugin(plugins.guess_export_plugin(".pdf"))
             self.width = width
@@ -39,17 +58,18 @@ class SVGImage(Flowable):
             if not self.width:
                 self.width = self._w
             if not self.height:
-                self.height = self._h
+                self.height = self._h                
+            self._mode='uniconvertor'
         else:
-            log.error("SVG image support not enabled, install uniconvertor")
+            log.error("Vector image support not enabled, install svglib or uniconvertor")
 
     def wrap(self, aW, aH):
-        if HAS_UNICONVERTOR:
+        if self._mode:
             return self.width, self.height
         return 0, 0
 
     def drawOn(self, canv, x, y, _sW=0):
-        if HAS_UNICONVERTOR:
+        if self._mode:
             if _sW and hasattr(self,'hAlign'):
                 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
                 a = self.hAlign
@@ -62,8 +82,11 @@ class SVGImage(Flowable):
             canv.saveState()
             canv.translate(x, y)
             canv.scale(self.width/self._w, self.height/self._h)
-            save(self.doc, open(".ignoreme.pdf","w"), ".ignoreme.pdf", options={'pdfgen_canvas': canv})
-            os.unlink(".ignoreme.pdf")
+            if self._mode=='uniconvertor':
+                save(self.doc, open(".ignoreme.pdf","w"), ".ignoreme.pdf", options={'pdfgen_canvas': canv})
+                os.unlink(".ignoreme.pdf")
+            elif self._mode=='svglib':
+                self.doc._drawOn(canv)
             canv.restoreState()
 
 
