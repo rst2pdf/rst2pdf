@@ -242,6 +242,36 @@
     ["warning" , {
       "parent": "admonition"
     }],
+    ["admonition-heading" , {
+      "parent": "heading3"
+    }],
+    ["attention-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["caution-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["danger-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["error-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["hint-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["important-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["note-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["tip-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["warning-heading" , {
+      "parent": "admonition-heading"
+    }],
     ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",

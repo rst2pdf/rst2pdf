@@ -820,7 +820,7 @@ class RstToPdf(object):
                 docutils.nodes.admonition)):
             # node.elements = [Paragraph(node.tagname.title(), style=self.styles['heading3'])] \
             #   + self.gather_elements(node, depth, style=style)
-            rows = [Paragraph(node.tagname.title(), style=self.styles['heading3'])] \
+            rows = [Paragraph(node.tagname.title(), style=self.styles['%s-heading'%node.tagname])] \
                 + self.gather_elements(node, depth, style=style)
             node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
 

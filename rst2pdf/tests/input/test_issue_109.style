@@ -1,6 +1,9 @@
 {
     "styles" : [
     [ "danger" , { 
+        "backColor": "yellow"
+      }],
+    [ "danger-heading" , { 
         "textColor": "red",
         "backColor": "yellow"
       }]
