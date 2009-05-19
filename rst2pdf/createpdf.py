@@ -624,16 +624,13 @@ class RstToPdf(object):
                 node.walk(toc_visitor)
                 toc = toc_visitor.toc
                 # Issue 117: add extra TOC levelStyles. 9-deep should be enough.
-                try:
-                    for i in range(4):
-                        ps=toc.levelStyles[2].__class__(name='Level%d'%(i+5),
-                                        parent=toc.levelStyles[2],
-                                        leading=toc.levelStyles[2].leading,
-                                        firstlineIndent=toc.levelStyles[2].firstLineIndent,
-                                        leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
-                        toc.levelStyles.append(ps)
-                except IndexError: # just for SVN RL post-2.3
-                    pass
+                for i in range(4):
+                    ps=toc.levelStyles[-1].__class__(name='Level%d'%(i+5),
+                                    parent=toc.levelStyles[-1],
+                                    leading=toc.levelStyles[-1].leading,
+                                    firstlineIndent=toc.levelStyles[-1].firstLineIndent,
+                                    leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
+                    toc.levelStyles.append(ps)
                     
                 # Override fontnames (defaults to Times-Roman)
                 for levelStyle in toc.levelStyles:
