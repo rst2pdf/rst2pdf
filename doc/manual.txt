@@ -250,6 +250,40 @@ when used in your documents.
 If you can choose between raster and vectorial images, for non-photographic images,
 vector files are usually smaller and look better, specially when printed.
 
+Image Size
+----------
+
+PDFs are meant to reflect paper. A PDF has a specific size in centimeters or inches. 
+For that reason, to achieve a nice layout of the page, it's usually a good idea 
+to specify the size of your images in those units, or as a percentage of the vailable width.
+
+Examples::
+    
+  .. image:: home.png
+     :width: 3in
+     
+  .. image:: home.png
+     :width: 80%
+  
+  .. image:: home.png
+     :width: 7cm
+  
+If you don't, rst2pdf will do its best to figure out what it should do:
+    
+Raster images have a size in pixels. To decide how many pixels fit in one inch, 
+there is something called DPI (dots-per-inch).
+
+This parameter can be taken from the image itself, where you can set it using most image 
+editors. For example, using Gimp, it's in the Image -> Print Size menu.
+
+So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5 inches wide.
+
+If your image doesn't have a DPI property set, and doesn't have it's desired size specified,
+rst2pdf will arbitrarily decide it should use 300DPI.
+
+As of 0.10.1, images taller than the page will not work (rst2pdf will fail to run), and 
+images wider than the page will be cropped.
+
 Styles
 ======
 

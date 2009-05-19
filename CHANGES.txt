@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Issue 116: respect images DPI property
 * Issue 110: New --inline-footnotes option
 * Tested with reportlab from SVN trunk
 * Support for Dinu Gherman's svglib. If both svglib and uniconvertor are available,
