@@ -52,3 +52,7 @@ smartquotes=0
 # Footnote backlinks enabled or not (default: enabled)
 
 footnote_backlinks=True
+
+# Show footnotes inline instead of at the end of the document
+
+inline_footnotes=False

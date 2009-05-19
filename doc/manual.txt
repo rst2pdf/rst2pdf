@@ -85,6 +85,7 @@ Command line options
 --version             Print version number and exit.
 --no-footnote-backlinks
                     Disable footnote backlinks. Default=False
+--inline-footnotes    Show footnotes inline. Default=True
 
 Some of these options' defaults can be changed by creating a `configuration file`_
 
@@ -193,9 +194,9 @@ Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
 There is a real complicated technical reason for this: I can't figure out a
 clean way to do it right.
 
-I could go the HTML path and just render them where you put them, but then they
-wouldn't be footnotes either, would they? They would be
-"in-the-middle-of-text-notes" or just plain notes.
+You can get the same behaviour as with rst2html by specifying --inline-footnotes, 
+and then the footnotes will appear where you put them (in other words, not footnotes,
+but "in-the-middle-of-text-notes" or just plain notes.)
 
 Images
 ======

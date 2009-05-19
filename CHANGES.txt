@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Issue 110: New --inline-footnotes option
 * Tested with reportlab from SVN trunk
 * Support for Dinu Gherman's svglib. If both svglib and uniconvertor are available,
   svglib is preferred (for SVG, of course). Patch originally by rute.

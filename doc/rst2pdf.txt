@@ -92,6 +92,8 @@ The possible values are:
 
 --no-footnote-backlinks   Disable footnote backlinks. Default: False             
 
+--inline-footnotes    Show footnotes inline. Default: True
+
 EXAMPLES
 
     $ rst2pdf rest.txt -o out.pdf
