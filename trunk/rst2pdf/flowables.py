@@ -603,9 +603,9 @@ class MyTableOfContents(TableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            try: # For ReportLab post-2.3
+            if reportlab.Version > '2.3': # For ReportLab post-2.3
                 leftColStyle=self.getLevelStyle(left_col_level)
-            except AttributeError: # For ReportLab <= 2.3
+            else: # For ReportLab <= 2.3
                 leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
             if label:
