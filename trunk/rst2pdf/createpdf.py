@@ -82,7 +82,7 @@ class RstToPdf(object):
     def __init__(self, stylesheets=[], language='en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False,
-                 footnote_backlinks=True):
+                 footnote_backlinks=True,inline_footnotes=False):
         global HAS_SPHINX
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
@@ -101,6 +101,7 @@ class RstToPdf(object):
         self.baseurl = baseurl
         self.repeatTableRows = repeatTableRows
         self.footnote_backlinks = footnote_backlinks
+        self.inline_footnotes = inline_footnotes
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -954,8 +955,12 @@ class RstToPdf(object):
             else:
                 label = Paragraph('<a name="%s"/>%s' % (ltext, ltext), self.styles["normal"])
             contents = self.gather_elements(node, depth, style)[1:]
-            self.decoration['endnotes'].append([label, contents])
-            node.elements = []
+            if self.inline_footnotes:
+                node.elements = [Table([[label, contents]],
+                    style=sty.tstyles['endnote'], colWidths=[sty.endnote_lwidth, None])]
+            else:
+                self.decoration['endnotes'].append([label, contents])
+                node.elements = []
 
         elif isinstance(node, docutils.nodes.label):
             node.elements = [Paragraph(self.gather_pdftext(node, depth), style)]
@@ -1361,6 +1366,11 @@ def main():
     parser.add_option('--no-footnote-backlinks', action='store_false',
         dest='footnote_backlinks', default=def_footnote_backlinks,
         help='Disable footnote backlinks. Default=%s' % str(not def_footnote_backlinks))
+        
+    def_inline_footnotes = config.getValue("general", "inline_footnotes", False)
+    parser.add_option('--inline-footnotes', action='store_true',
+        dest='inline_footnotes', default=def_inline_footnotes,
+        help='Show footnotes inline. Default=%s' % str(not def_inline_footnotes))
 
     options, args = parser.parse_args()
 
@@ -1441,6 +1451,7 @@ def main():
         stylePath=spath,
         repeatTableRows=options.repeattablerows,
         footnote_backlinks=options.footnote_backlinks,
+        inline_footnotes=options.inline_footnotes
     ).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
