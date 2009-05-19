@@ -846,30 +846,38 @@ class RstToPdf(object):
                 else:
                     img = PILImage.open(imgname)
                     iw, ih = img.size
-                # Assume a DPI of 300, which is pretty much made up,
+                    
+                # Try to get the print resolution from the image itself via PIL.
+                # If it fails, assume a DPI of 300, which is pretty much made up,
                 # and then a 100% size would be iw*inch/300, so we pass
                 # that as the second parameter to adjustUnits
+                #
+                # Some say the default DPI should be 72. That would mean 
+                # the largest printable image in A4 paper would be something 
+                # like 480x640. That would be awful.
+                #
+                xdpi,ydpi=img.info.get('dpi',(300,300))
 
                 w = node.get('width')
                 if w is not None:
                     if iw:
-                        w = self.styles.adjustUnits(w, iw*inch/300)
+                        w = self.styles.adjustUnits(w, iw*inch/xdpi)
                     else:
                         w = self.styles.adjustUnits(w, self.styles.pw*.5)
                 else:
                     log.warning("Using image %s without specifying size."
-                        "Calculating based on 300dpi", imgname)
+                        "Calculating based on %ddpi", imgname,xdpi)
                     # No width specified at all. Make it up
                     # as if we knew what we're doing
                     if iw:
-                        w = iw*inch/300
+                        w = iw*inch/xdpi
                     else:
                         w = 2*inch # We are getting desperate here ;-)
 
                 h = node.get('height')
                 if h is not None:
                     if ih:
-                        h = self.styles.adjustUnits(h, ih*inch/300)
+                        h = self.styles.adjustUnits(h, ih*inch/ydpi)
                     else:
                         h = self.styles.adjustUnits(h, self.styles.ph*.5)
                 else:
