@@ -603,7 +603,10 @@ class MyTableOfContents(TableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            leftColStyle = self.levelStyles[left_col_level]
+            try: # For ReportLab post-2.3
+                leftColStyle=self.getLevelStyle(left_col_level)
+            except AttributeError: # For ReportLab <= 2.3
+                leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
             if label:
                 pre = '<a href="%s" color="%s">' % (label, self.linkColor)
