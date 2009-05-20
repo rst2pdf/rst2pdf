@@ -34,8 +34,9 @@ unit_separator = re.compile('(-?[0-9\.]*)')
 
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
-    def __init__(self, flist, fontPath=[], stylePath=None):
+    def __init__(self, flist, fontPath=[], stylePath=None,def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
+        self.def_dpi=def_dpi
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         self.FontSearchPath = fontPath + [
@@ -460,10 +461,10 @@ class StyleSheet(object):
             results.append(('BOX', (x, y), (x, y), bw, bc))
         return results
 
-    def adjustUnits(self, v, total=None,dpi=300,default_unit='pt'):
+    def adjustUnits(self, v, total=None,default_unit='pt'):
         if total is None:
             total = self.tw
-        return adjustUnits(v, total,dpi,default_unit,emsize=self.emsize)
+        return adjustUnits(v, total,self.def_dpi,default_unit,emsize=self.emsize)
         
 def adjustUnits(v, total=None,dpi=300,default_unit='pt',emsize=10):
     """Takes something like 2cm and returns 2*cm.
