@@ -1,2 +1,0 @@
-.. image:: images/biohazard.png
-   :width: 300px

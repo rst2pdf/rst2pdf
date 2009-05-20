@@ -835,7 +835,8 @@ class RstToPdf(object):
             # will return it in points and we're done.
 
             # However, often the unit wil be "%" (specially if it's meant for
-            # HTML originally.In which case, we will use the following:
+            # HTML originally.In which case, we will use a percentage of self.styles.tw
+            # which may or may not be correct.
 
             # Find the image size in pixels:
 
@@ -861,34 +862,23 @@ class RstToPdf(object):
 
                 w = node.get('width')
                 if w is not None:
-                    if iw:
-                        w = self.styles.adjustUnits(w, iw*inch/xdpi)
-                    else:
-                        w = self.styles.adjustUnits(w, self.styles.pw*.5)
+                    # In this particular case, we want the default unit to be pixels
+                    # so we work like rst2html
+                    w = self.styles.adjustUnits(w, self.styles.tw,default_unit='px')
                 else:
                     log.warning("Using image %s without specifying size."
                         "Calculating based on %ddpi", imgname,xdpi)
-                    # No width specified at all. Make it up
-                    # as if we knew what we're doing
-                    if iw:
-                        w = iw*inch/xdpi
-                    else:
-                        w = 2*inch # We are getting desperate here ;-)
+                    # No width specified at all, use w in px
+                    w = iw*inch/xdpi
 
                 h = node.get('height')
                 if h is not None:
-                    if ih:
-                        h = self.styles.adjustUnits(h, ih*inch/ydpi)
-                    else:
-                        h = self.styles.adjustUnits(h, self.styles.ph*.5)
+                    h = self.styles.adjustUnits(h, ih*inch/ydpi)
                 else:
                     # Now, often, only the width is specified!
                     # if we don't have a height, we need to keep the
                     # aspect ratio, or else it will look ugly
-                    if iw:
-                        h = w*ih/iw
-                    else:
-                        h = 2*inch # We are getting desperate here ;-)
+                    h = w*ih/iw
 
                 # And now we have this probably completely bogus size!
                 log.info("Image %s size calculated:  %fcm by %fcm",
