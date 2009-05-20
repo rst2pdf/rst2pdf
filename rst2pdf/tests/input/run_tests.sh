@@ -43,7 +43,7 @@ run_test() {
             then
                 echo "$page is OK"
             else
-                echo "$page has ERRORs, see diff$page"
+                echo "$page has ERRORs, see temp-$bn/diff$page"
             fi
         done
         cd ..        
