@@ -22,8 +22,8 @@ run_test() {
         style="-s $st"
     fi
     echo "Processing $1"
-    python ../../createpdf.py $1 $style 2> $1.err
-    if [ ! $? ]
+    
+    if python ../../createpdf.py $1 $style 2> $1.err
     then
         compare_pdfinfo $bn.pdf correct/$bn.pdf
         if [ ! -d temp-$bn ]
