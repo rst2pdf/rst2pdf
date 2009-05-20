@@ -840,12 +840,14 @@ class RstToPdf(object):
             # Find the image size in pixels:
 
             try:
+                xdpi,ydpi=300,300
                 if imgname.split('.')[-1].lower() in [
                         "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
                     iw, ih = SVGImage(imgname).wrap(0, 0)
                 else:
                     img = PILImage.open(imgname)
                     iw, ih = img.size
+                    xdpi,ydpi=img.info.get('dpi',(300,300))
                     
                 # Try to get the print resolution from the image itself via PIL.
                 # If it fails, assume a DPI of 300, which is pretty much made up,
@@ -856,7 +858,6 @@ class RstToPdf(object):
                 # the largest printable image in A4 paper would be something 
                 # like 480x640. That would be awful.
                 #
-                xdpi,ydpi=img.info.get('dpi',(300,300))
 
                 w = node.get('width')
                 if w is not None:
