@@ -254,10 +254,21 @@ Image Size
 ----------
 
 PDFs are meant to reflect paper. A PDF has a specific size in centimeters or inches. 
-For that reason, to achieve a nice layout of the page, it's usually a good idea 
-to specify the size of your images in those units, or as a percentage of the vailable width.
 
-Examples::
+Images usually are measured in pixels, which are meaningless in a PDF. To convert 
+between pixels and inches or centimeters, we use a DPI (dots-per-inch) value.
+
+For example, 300 pixels, with a 300DPI, are exactly one inch. 300 pixels at 100DPI
+are 3 inches.
+
+For that reason, to achieve a nice layout of the page, it's usually a good idea 
+to specify the size of your images in those units, or as a percentage of the 
+available width and you can ignore all this DPI nonsense ;-)
+
+The rst2pdf default is 300DPI, but you can change it using the --default-dpi option
+or the default_dpi setting in the config file.
+
+Examples of images with specified sizes::
     
   .. image:: home.png
      :width: 3in
@@ -267,22 +278,51 @@ Examples::
   
   .. image:: home.png
      :width: 7cm
+ 
   
-If you don't, rst2pdf will do its best to figure out what it should do:
-    
-Raster images have a size in pixels. To decide how many pixels fit in one inch, 
-there is something called DPI (dots-per-inch).
+The valid units you can use are:
 
-This parameter can be taken from the image itself, where you can set it using most image 
-editors. For example, using Gimp, it's in the Image -> Print Size menu.
+"em" "ex" "px" "in" "cm" "mm" "pt" "pc" "%" "".
+
+
+* px: Pixels. If you specify the size using this unit, rst2pdf will convert it to
+  inches using the default DPI explained above.
+  
+* No unit. If you just use a number, it will be considered as pixels. (**IMPORTANT:** 
+  this used to default to points. It was changed to be more compatible with rst2html)
+  
+* em: This is the same as your base style's font size. By default: 10 points.
+
+* ex: rst2pdf will use the same broken definition as IE: em/2. In truth this should
+  be the height of the lower-case x character in your base style.
+  
+* in: Inches (1 inch = 2.54 cm).
+
+* cm: centimeters (1cm = 0.39 inches)
+  
+* mm: millimeters (10mm = 1cm)
+
+* pt: 1/72 inch
+
+* pc: 1/6 inch
+
+* %: percentage of available width
+  
+If you don't specify a size at all, rst2pdf will do its best to figure out what it should do:
+    
+Since there is no specified size, rst2pdf will try to convert the image's pixel size to
+inches using the DPI information available in the image itself. You can set that value 
+using most image editors. For example, using Gimp, it's in the Image -> Print Size menu.
 
 So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5 inches wide.
 
 If your image doesn't have a DPI property set, and doesn't have it's desired size specified,
-rst2pdf will arbitrarily decide it should use 300DPI.
+rst2pdf will arbitrarily decide it should use 300DPI (or whatever you choose with 
+the --default-dpi option).
 
 As of 0.10.1, images taller than the page will not work (rst2pdf will fail to run), and 
 images wider than the page will be cropped.
+
 
 Styles
 ======

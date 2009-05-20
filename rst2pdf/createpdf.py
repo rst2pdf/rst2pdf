@@ -82,7 +82,7 @@ class RstToPdf(object):
     def __init__(self, stylesheets=[], language='en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False,
-                 footnote_backlinks=True,inline_footnotes=False):
+                 footnote_backlinks=True,inline_footnotes=False,def_dpi=300):
         global HAS_SPHINX
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
@@ -91,7 +91,7 @@ class RstToPdf(object):
         self.doc_author = ""
         self.decoration = {'header': header, 'footer': footer, 'endnotes': []}
         stylesheets = [join(abspath(dirname(__file__)), 'styles', 'styles.json')] + stylesheets
-        self.styles = sty.StyleSheet(stylesheets, fontPath, stylePath)
+        self.styles = sty.StyleSheet(stylesheets, fontPath, stylePath,def_dpi=def_dpi)
         self.docutils_languages = {}
         self.inlinelinks = inlinelinks
         self.breaklevel = breaklevel
@@ -102,6 +102,7 @@ class RstToPdf(object):
         self.repeatTableRows = repeatTableRows
         self.footnote_backlinks = footnote_backlinks
         self.inline_footnotes = inline_footnotes
+        self.def_dpi=def_dpi
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -841,7 +842,7 @@ class RstToPdf(object):
             # Find the image size in pixels:
 
             try:
-                xdpi,ydpi=300,300
+                xdpi,ydpi=self.styles.def_dpi,self.styles.def_dpi
                 if imgname.split('.')[-1].lower() in [
                         "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
                     iw, ih = SVGImage(imgname).wrap(0, 0)
@@ -1370,6 +1371,11 @@ def main():
     parser.add_option('--inline-footnotes', action='store_true',
         dest='inline_footnotes', default=def_inline_footnotes,
         help='Show footnotes inline. Default=%s' % str(not def_inline_footnotes))
+        
+    def_dpi = config.getValue("general", "default_dpi", 300)
+    parser.add_option('--default-dpi',dest='def_dpi',metavar='NUMBER',default=def_dpi,
+        help='DPI for objects sized in pixels. Default=%d'%def_dpi)
+        
 
     options, args = parser.parse_args()
 
@@ -1450,7 +1456,8 @@ def main():
         stylePath=spath,
         repeatTableRows=options.repeattablerows,
         footnote_backlinks=options.footnote_backlinks,
-        inline_footnotes=options.inline_footnotes
+        inline_footnotes=options.inline_footnotes,
+        def_dpi=int(options.def_dpi)
     ).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
