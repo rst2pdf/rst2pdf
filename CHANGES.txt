@@ -1,6 +1,9 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Default to px for image width specifications instead of pt
+* Support all required measurement units ("em" "ex" "px" "in" "cm" 
+  "mm" "pt" "pc" "%" "")
 * New automated scripts to check test cases for "visual differences"
 * Issue 116: respect images DPI property
 * Issue 110: New --inline-footnotes option

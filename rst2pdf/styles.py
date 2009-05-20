@@ -62,6 +62,9 @@ class StyleSheet(object):
 
         #text width
         self.tw = 0
+        
+        # Default emsize, later it will be the fontSize of the base style
+        self.emsize=10
 
         self.languages = []
         ssdata = []
@@ -361,6 +364,7 @@ class StyleSheet(object):
                 #s['borderPadding']=[s['borderPadding'],]*4
 
             self.StyleSheet.add(ParagraphStyle(**s))
+        self.emsize=self['base'].fontSize
 
     def __getitem__(self, key):
         try:
@@ -456,12 +460,12 @@ class StyleSheet(object):
             results.append(('BOX', (x, y), (x, y), bw, bc))
         return results
 
-    def adjustUnits(self, v, total=None):
+    def adjustUnits(self, v, total=None,dpi=300,default_unit='pt'):
         if total is None:
-            total = self.pw
-        return adjustUnits(v, total)
-
-def adjustUnits(v, total=None):
+            total = self.tw
+        return adjustUnits(v, total,dpi,default_unit,emsize=self.emsize)
+        
+def adjustUnits(v, total=None,dpi=300,default_unit='pt',emsize=10):
     """Takes something like 2cm and returns 2*cm.
 
     If you use % as a unit, it returns the percentage of "total".
@@ -479,12 +483,24 @@ def adjustUnits(v, total=None):
     v = str(v)
     _, n, u = re.split('(-?[0-9\.]*)', v)
     if not u:
-        return float(n) # assume points
+        u=default_unit
     if u in units.__dict__:
         return float(n) * units.__dict__[u]
     else:
         if u == '%':
             return float(n) * total/100
+        elif u=='px':
+            return float(n) * units.inch / dpi
+        elif u=='pt':
+            return float(n)
+        elif u=='in':
+            return float(n) * units.inch
+        elif u=='em':
+            return float(n) * emsize
+        elif u=='ex':
+            return float(n) * emsize /2
+        elif u=='pc': # picas!
+            return float(n) * 12
         log.error('Unknown unit "%s"' % u)
     return float(n)
 
