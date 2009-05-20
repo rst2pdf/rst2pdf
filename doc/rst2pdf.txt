@@ -94,6 +94,9 @@ The possible values are:
 
 --inline-footnotes    Show footnotes inline. Default: True
 
+--default-dpi=NUMBER   DPI for objects sized in pixels. Default=300
+
+
 EXAMPLES
 
     $ rst2pdf rest.txt -o out.pdf
