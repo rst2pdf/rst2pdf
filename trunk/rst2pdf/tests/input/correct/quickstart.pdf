@@ -1,0 +1,1793 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R
+ /F4 14 0 R
+ /F5 15 0 R
+ /F6 18 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-Bold
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F3': class PDFType1Font 
+4 0 obj
+% Font Times-Roman
+<< /BaseFont /Times-Roman
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Annot.NUMBER1': class LinkAnnotation 
+5 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 16 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 642.7669
+ 117.4361
+ 653.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER2': class LinkAnnotation 
+6 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 16 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 625.7669
+ 124.6561
+ 636.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER3': class LinkAnnotation 
+7 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 17 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 608.7669
+ 97.42614
+ 619.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER4': class LinkAnnotation 
+8 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 19 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 591.7669
+ 208.0161
+ 602.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER5': class LinkAnnotation 
+9 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 20 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 574.7669
+ 115.2161
+ 585.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER6': class LinkAnnotation 
+10 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 24 0 R
+ /Fit ]
+ /Rect [ 105.2126
+ 557.7669
+ 214.1426
+ 568.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER7': class LinkAnnotation 
+11 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 24 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 540.7669
+ 109.6561
+ 551.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER8': class LinkAnnotation 
+12 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 28 0 R
+ /Fit ]
+ /Rect [ 76.86614
+ 523.7669
+ 129.1061
+ 534.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER9': class PDFDictionary 
+13 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://docutils.sourceforge.net/docs/user/rst/quickref.html) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 426.8327
+ 491.7669
+ 530.5577
+ 503.7669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'F4': class PDFType1Font 
+14 0 obj
+% Font Courier
+<< /BaseFont /Courier
+ /Encoding /WinAnsiEncoding
+ /Name /F4
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F5': class PDFType1Font 
+15 0 obj
+% Font Helvetica-Oblique
+<< /BaseFont /Helvetica-Oblique
+ /Encoding /WinAnsiEncoding
+ /Name /F5
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+16 0 obj
+% Page dictionary
+<< /Annots [ 5 0 R
+ 6 0 R
+ 7 0 R
+ 8 0 R
+ 9 0 R
+ 10 0 R
+ 11 0 R
+ 12 0 R
+ 13 0 R ]
+ /Contents 41 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page2': class PDFPage 
+17 0 obj
+% Page dictionary
+<< /Contents 42 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'F6': class PDFType1Font 
+18 0 obj
+% Font Helvetica-BoldOblique
+<< /BaseFont /Helvetica-BoldOblique
+ /Encoding /WinAnsiEncoding
+ /Name /F6
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page3': class PDFPage 
+19 0 obj
+% Page dictionary
+<< /Contents 43 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page4': class PDFPage 
+20 0 obj
+% Page dictionary
+<< /Contents 44 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER10': class LinkAnnotation 
+21 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 17 0 R
+ /Fit ]
+ /Rect [ 465.1827
+ 623.5669
+ 485.7427
+ 635.5669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER11': class LinkAnnotation 
+22 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 16 0 R
+ /Fit ]
+ /Rect [ 304.7759
+ 611.5669
+ 350.448
+ 623.5669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'FormXob.c8d097da4771654d12a9611e9af76669': class PDFImageXObject 
+23 0 obj
+<< /BitsPerComponent 8
+ /ColorSpace /DeviceRGB
+ /Filter [ /ASCII85Decode
+ /FlateDecode ]
+ /Height 16
+ /Length 99
+ /Mask [ 255
+ 255
+ 255
+ 255
+ 255
+ 255 ]
+ /Subtype /Image
+ /Type /XObject
+ /Width 16 >>
+stream
+Gatmt9+h4I#XZ*%V/<(u@uBmr=V8?K0\Z^q/;*/(FTbVb3Ll+WIX_`d$OKqrhCOVS4K[m&h"\hN?W/1;46b`nm1lV<!HV&h2?~>endstream
+
+endobj
+% 'Page5': class PDFPage 
+24 0 obj
+% Page dictionary
+<< /Annots [ 21 0 R
+ 22 0 R ]
+ /Contents 45 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ]
+ /XObject << /FormXob.c8d097da4771654d12a9611e9af76669 23 0 R >> >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Annot.NUMBER12': class LinkAnnotation 
+25 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 28 0 R
+ /XYZ
+ 68.69291
+ 545.7775
+ 0 ]
+ /Rect [ 313.9129
+ 662.5669
+ 318.3609
+ 674.5669 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER13': class LinkAnnotation 
+26 0 obj
+<< /Border [ 0
+ 0
+ 0 ]
+ /Contents ()
+ /Dest [ 28 0 R
+ /XYZ
+ 313.9129
+ 675.8169
+ 0 ]
+ /Rect [ 68.69291
+ 532.5275
+ 74.25291
+ 544.5275 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Annot.NUMBER14': class PDFDictionary 
+27 0 obj
+<< /A << /S /URI
+ /Type /Action
+ /URI (http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html) >>
+ /Border [ 0
+ 0
+ 0 ]
+ /Rect [ 125.3858
+ 520.5275
+ 402.7258
+ 532.5275 ]
+ /Subtype /Link
+ /Type /Annot >>
+endobj
+% 'Page6': class PDFPage 
+28 0 obj
+% Page dictionary
+<< /Annots [ 25 0 R
+ 26 0 R
+ 27 0 R ]
+ /Contents 46 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 40 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R29': class PDFCatalog 
+29 0 obj
+% Document Root
+<< /Outlines 31 0 R
+ /PageMode /UseNone
+ /Pages 40 0 R
+ /Type /Catalog >>
+endobj
+% 'R30': class PDFInfo 
+30 0 obj
+<< /Author (Richard Jones)
+ /CreationDate (D:20090519094134+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title (A ReStructuredText Primer) >>
+endobj
+% 'R31': class PDFOutlines 
+31 0 obj
+<< /Count 9
+ /First 32 0 R
+ /Last 39 0 R
+ /Type /Outlines >>
+endobj
+% 'Outline.0': class OutlineEntryObject 
+32 0 obj
+<< /Dest [ 16 0 R
+ /Fit ]
+ /Next 33 0 R
+ /Parent 31 0 R
+ /Title (Structure) >>
+endobj
+% 'Outline.1': class OutlineEntryObject 
+33 0 obj
+<< /Dest [ 16 0 R
+ /Fit ]
+ /Next 34 0 R
+ /Parent 31 0 R
+ /Prev 32 0 R
+ /Title (Text styles) >>
+endobj
+% 'Outline.2': class OutlineEntryObject 
+34 0 obj
+<< /Dest [ 17 0 R
+ /Fit ]
+ /Next 35 0 R
+ /Parent 31 0 R
+ /Prev 33 0 R
+ /Title (Lists) >>
+endobj
+% 'Outline.3': class OutlineEntryObject 
+35 0 obj
+<< /Dest [ 19 0 R
+ /Fit ]
+ /Next 36 0 R
+ /Parent 31 0 R
+ /Prev 34 0 R
+ /Title (Preformatting \(code samples\)) >>
+endobj
+% 'Outline.4': class OutlineEntryObject 
+36 0 obj
+<< /Count 1
+ /Dest [ 20 0 R
+ /Fit ]
+ /First 37 0 R
+ /Last 37 0 R
+ /Next 38 0 R
+ /Parent 31 0 R
+ /Prev 35 0 R
+ /Title (Sections) >>
+endobj
+% 'Outline.9.0': class OutlineEntryObject 
+37 0 obj
+<< /Dest [ 24 0 R
+ /Fit ]
+ /Parent 36 0 R
+ /Title (Document Title / Subtitle) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+38 0 obj
+<< /Dest [ 24 0 R
+ /Fit ]
+ /Next 39 0 R
+ /Parent 31 0 R
+ /Prev 36 0 R
+ /Title (Images) >>
+endobj
+% 'Outline.6': class OutlineEntryObject 
+39 0 obj
+<< /Dest [ 28 0 R
+ /Fit ]
+ /Parent 31 0 R
+ /Prev 38 0 R
+ /Title (What Next?) >>
+endobj
+% 'R40': class PDFPages 
+40 0 obj
+% page tree
+<< /Count 6
+ /Kids [ 16 0 R
+ 17 0 R
+ 19 0 R
+ 20 0 R
+ 24 0 R
+ 28 0 R ]
+ /Type /Pages >>
+endobj
+% 'R41': class PDFStream 
+41 0 obj
+% page stream
+<< /Length 7347 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 755.1969 cm
+q
+BT 1 0 0 1 0 9.64 Tm 106.5849 0 Td 24 TL /F2 20 Tf 0 0 0 rg (A ReStructuredText Primer) Tj T* -106.5849 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 730.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 36.93937 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Author:) Tj T* -36.93937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Richard Jones) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 715.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 33.02937 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Version:) Tj T* -33.02937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (4350) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 700.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 22.48937 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Copyright:) Tj T* -22.48937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (This document has been placed in the public domain.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 700.1969 cm
+Q
+q
+1 0 0 1 62.69291 664.1969 cm
+q
+BT 1 0 0 1 0 9.64 Tm 191.6149 0 Td 24 TL /F2 20 Tf 0 0 0 rg (Contents) Tj T* -191.6149 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 518.1969 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 0 122 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Structure) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 122 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 105 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Text styles) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 105 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 88 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Lists) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 88 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (2) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 71 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Preformatting \(code samples\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 71 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (3) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 54 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Sections) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 54 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (4) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 37 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 42.51969 3.82 Tm /F1 10 Tf 11 TL (Document Title / Subtitle) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 37 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (5) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 20 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (Images) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 20 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (5) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+1 0 0 1 0 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 14.17323 3.82 Tm /F1 10 Tf 11 TL (What Next?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 397.8898 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.82 Tm /F1 10 Tf 11 TL 66.44 0 Td (6) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+q
+BT 1 0 0 1 0 28.82 Tm 1.39528 Tw 12 TL /F1 10 Tf 0 0 0 rg (The text below contains links that look like ) Tj (") Tj (\(quickref\)) Tj (") Tj (. These are relative links that point to the Quick) Tj T* 0 Tw 2.024983 Tw (reStructuredText user reference. If these links don't work, please refer to the ) Tj 0 0 .501961 rg (master quick reference) Tj T* 0 Tw 0 0 0 rg (document.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+Q
+q
+1 0 0 1 62.69291 476.1969 cm
+Q
+q
+1 0 0 1 62.69291 443.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Structure) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 401.1969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .405777 Tw 12 TL /F1 10 Tf 0 0 0 rg (From the outset, let me say that ) Tj (") Tj (Structured Text) Tj (") Tj ( is probably a bit of a misnomer. It's more like ) Tj (") Tj (Relaxed) Tj T* 0 Tw 2.621412 Tw (Text) Tj (") Tj ( that uses certain consistent patterns. These patterns are interpreted by a HTML converter to) Tj T* 0 Tw (produce ) Tj (") Tj (Very Structured Text) Tj (") Tj ( that can be used by a web browser.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 359.1969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .686457 Tw 12 TL /F1 10 Tf 0 0 0 rg (The most basic pattern recognised is a ) Tj /F2 10 Tf (paragraph) Tj /F1 10 Tf ( \(quickref\). That's a chunk of text that is separated by) Tj T* 0 Tw 1.401654 Tw (blank lines \(one is enough\). Paragraphs must have the same indentation -- that is, line up at their left) Tj T* 0 Tw (edge. Paragraphs that start indented will result in indented quote paragraphs. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 253.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 96 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 77.71 Tm /F4 10 Tf 12 TL (This is a paragraph.  It's quite) Tj T* (short.) Tj T*  T* (   This paragraph will result in an indented block of) Tj T* (   text, typically used for quoting other text.) Tj T*  T* (This is another one.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 233.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 215.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (This is a paragraph. It's quite short.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 102.6929 197.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (This paragraph will result in an indented block of text, typically used for quoting other text.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 179.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (This is another one.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 179.9969 cm
+Q
+q
+1 0 0 1 62.69291 179.9969 cm
+Q
+q
+1 0 0 1 62.69291 179.9969 cm
+Q
+q
+1 0 0 1 62.69291 146.9969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Text styles) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 128.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (\(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 128.9969 cm
+Q
+q
+1 0 0 1 62.69291 98.99685 cm
+q
+BT 1 0 0 1 0 16.82 Tm .26061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Inside paragraphs and other bodies of text, you may additionally mark text for ) Tj /F5 10 Tf (italics) Tj /F1 10 Tf ( with ) Tj (") Tj /F4 10 Tf (*italics*) Tj /F1 10 Tf (") Tj ( or) Tj T* 0 Tw /F2 10 Tf (bold) Tj /F1 10 Tf ( with ) Tj (") Tj /F4 10 Tf (**bold**) Tj /F1 10 Tf (") Tj (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 68.99685 cm
+q
+BT 1 0 0 1 0 16.82 Tm .115318 Tw 12 TL /F1 10 Tf 0 0 0 rg (If you want something to appear as a fixed-space literal, use ) Tj (") Tj /F4 10 Tf (``double back-quotes``) Tj /F1 10 Tf (") Tj (. Note that no) Tj T* 0 Tw (further fiddling is done inside the double back-quotes -- so asterisks ) Tj (") Tj /F4 10 Tf (*) Tj /F1 10 Tf (") Tj ( etc. are left alone.) Tj T* ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R42': class PDFStream 
+42 0 obj
+% page stream
+<< /Length 5997 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 719.1969 cm
+q
+BT 1 0 0 1 0 52.82 Tm 2.796488 Tw 12 TL /F1 10 Tf 0 0 0 rg (If you find that you want to use one of the ) Tj (") Tj (special) Tj (") Tj ( characters in text, it will generally be OK --) Tj T* 0 Tw .505868 Tw (reStructuredText is pretty smart. For example, this * asterisk is handled just fine. If you actually want text) Tj T* 0 Tw 1.027045 Tw (*surrounded by asterisks* to ) Tj /F2 10 Tf (not) Tj /F1 10 Tf ( be italicised, then you need to indicate that the asterisk is not special.) Tj T* 0 Tw 1.844724 Tw (You do this by placing a backslash just before it, like so ) Tj (") Tj /F4 10 Tf (\\*) Tj /F1 10 Tf (") Tj ( \(quickref\), or by enclosing it in double) Tj T* 0 Tw (back-quotes \(inline literals\), like this:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 685.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 5.71 Tm /F4 10 Tf 12 TL (``\\*``) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 677.9969 cm
+Q
+q
+1 0 0 1 62.69291 677.9969 cm
+Q
+q
+1 0 0 1 62.69291 677.9969 cm
+Q
+q
+1 0 0 1 62.69291 644.9969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Lists) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 602.9969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .921235 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lists of items come in three main flavours: ) Tj /F2 10 Tf (enumerated) Tj /F1 10 Tf (, ) Tj /F2 10 Tf (bulleted) Tj /F1 10 Tf ( and ) Tj /F2 10 Tf (definitions) Tj /F1 10 Tf (. In all list cases, you) Tj T* 0 Tw .505542 Tw (may have as many paragraphs, sublists, etc. as you want, as long as the left-hand side of the paragraph) Tj T* 0 Tw (or whatever aligns with the first line of text in the list item.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 584.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Lists must always start a new paragraph -- that is, they must appear after a blank line.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 568.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F2 10 Tf 0 0 0 rg (enumerated) Tj ( lists \(numbers, letters or roman numerals; quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 568.9969 cm
+Q
+q
+1 0 0 1 72.69291 544.9969 cm
+q
+BT 1 0 0 1 0 16.82 Tm 2.073672 Tw 12 TL /F1 10 Tf 0 0 0 rg (Start a line off with a number or letter followed by a period ) Tj (") Tj (.) Tj (") Tj (, right bracket ) Tj (") Tj (\)) Tj (") Tj ( or surrounded by) Tj T* 0 Tw (brackets ) Tj (") Tj (\( \)) Tj (") Tj ( -- whatever you're comfortable with. All of the following forms are recognised:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 295.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 458.6898 240 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 221.71 Tm /F4 10 Tf 12 TL (1. numbers) Tj T*  T* (A. upper-case letters) Tj T* (   and it goes over many lines) Tj T*  T* (   with two paragraphs and all!) Tj T*  T* (a. lower-case letters) Tj T*  T* (   3. with a sub-list starting at a different number) Tj T* (   4. make sure the numbers are in the correct sequence though!) Tj T*  T* (I. upper-case roman numerals) Tj T*  T* (i. lower-case roman numerals) Tj T*  T* (\(1\) numbers again) Tj T*  T* (1\) and again) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 72.69291 263.7969 cm
+q
+BT 1 0 0 1 0 16.82 Tm .119985 Tw 12 TL /F1 10 Tf 0 0 0 rg (Results in \(note: the different enumerated list styles are not always supported by every web browser, so) Tj T* 0 Tw (you may not get the full effect here\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 261.7969 cm
+Q
+q
+1 0 0 1 72.69291 245.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (1.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (numbers) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 243.7969 cm
+Q
+q
+1 0 0 1 72.69291 227.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (A.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 3.45 0 Td 12 TL /F1 10 Tf 0 0 0 rg (upper-case letters and it goes over many lines) Tj T* -3.45 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 211.7969 cm
+q
+BT 1 0 0 1 24 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (with two paragraphs and all!) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 209.7969 cm
+Q
+q
+1 0 0 1 72.69291 193.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (a.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (lower-case letters) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 191.7969 cm
+Q
+q
+1 0 0 1 72.69291 175.7969 cm
+q
+BT 1 0 0 1 24 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (3.) Tj ET
+BT 1 0 0 1 36 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (with a sub-list starting at a different number) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 159.7969 cm
+q
+BT 1 0 0 1 24 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (4.) Tj ET
+BT 1 0 0 1 36 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (make sure the numbers are in the correct sequence though!) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 157.7969 cm
+Q
+q
+1 0 0 1 72.69291 141.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (I.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (upper-case roman numerals) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 139.7969 cm
+Q
+q
+1 0 0 1 72.69291 123.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (i.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (lower-case roman numerals) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 121.7969 cm
+Q
+q
+1 0 0 1 72.69291 105.7969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (1.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (numbers again) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 72.69291 103.7969 cm
+Q
+q
+1 0 0 1 72.69291 87.79685 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (1.) Tj ET
+BT 1 0 0 1 24 4.82 Tm 2.34 0 Td 12 TL /F1 10 Tf 0 0 0 rg (and again) Tj T* -2.34 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 71.79685 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F2 10 Tf 0 0 0 rg (bulleted) Tj ( lists \(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 71.79685 cm
+Q
+ 
+endstream
+
+endobj
+% 'R43': class PDFStream 
+43 0 obj
+% page stream
+<< /Length 5043 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 72.69291 767.1969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Just like enumerated lists, start the line off with a bullet point character - either ) Tj (") Tj (-) Tj (") Tj (, ) Tj (") Tj (+) Tj (") Tj ( or ) Tj (") Tj (*) Tj (") Tj (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 661.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 458.6898 96 re B*
+Q
+q
+BT 1 0 0 1 0 77.71 Tm 12 TL /F4 10 Tf 0 0 0 rg (* a bullet point using ) Tj (") Tj (*) Tj (") Tj  T*  T* (  - a sub-list using ) Tj (") Tj (-) Tj (") Tj  T*  T* (    + yet another sub-list) Tj T*  T* (  - another item) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 72.69291 641.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 639.9969 cm
+Q
+q
+1 0 0 1 72.69291 623.9969 cm
+q
+BT 1 0 0 1 12 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (\177) Tj ET
+BT 1 0 0 1 24 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (a bullet point using ) Tj (") Tj (*) Tj (") Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 621.9969 cm
+Q
+q
+1 0 0 1 72.69291 605.9969 cm
+q
+BT 1 0 0 1 24 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (\177) Tj ET
+BT 1 0 0 1 36 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (a sub-list using ) Tj (") Tj (-) Tj (") Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 603.9969 cm
+Q
+q
+1 0 0 1 72.69291 587.9969 cm
+q
+BT 1 0 0 1 36 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (\177) Tj ET
+BT 1 0 0 1 48 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (yet another sub-list) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 571.9969 cm
+q
+BT 1 0 0 1 24 4.82 Tm /F1 10 Tf 12 TL 0 0 0 rg (\177) Tj ET
+BT 1 0 0 1 36 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (another item) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 555.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F2 10 Tf 0 0 0 rg (definition) Tj ( lists \(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 555.9969 cm
+Q
+q
+1 0 0 1 72.69291 531.9969 cm
+q
+BT 1 0 0 1 0 16.82 Tm .233488 Tw 12 TL /F1 10 Tf 0 0 0 rg (Unlike the other two, the definition lists consist of a term, and the definition of that term. The format of a) Tj T* 0 Tw (definition list is:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 426.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 458.6898 96 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 77.71 Tm /F4 10 Tf 12 TL (what) Tj T* (  Definition lists associate a term with a definition.) Tj T*  T* (*how*) Tj T* (  The term is a one-line phrase, and the definition is one or more) Tj T* (  paragraphs or body elements, indented relative to the term.) Tj T* (  Blank lines are not allowed between term and definition.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 72.69291 406.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 390.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F2 10 Tf 0 0 0 rg (what) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 378.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Definition lists associate a term with a definition.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 72.69291 362.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F6 10 Tf 0 0 0 rg (how) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 338.7969 cm
+q
+BT 1 0 0 1 0 16.82 Tm 2.23811 Tw 12 TL /F1 10 Tf 0 0 0 rg (The term is a one-line phrase, and the definition is one or more paragraphs or body elements,) Tj T* 0 Tw (indented relative to the term. Blank lines are not allowed between term and definition.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 338.7969 cm
+Q
+q
+1 0 0 1 62.69291 338.7969 cm
+Q
+q
+1 0 0 1 62.69291 305.7969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Preformatting \(code samples\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 287.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (\(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 287.7969 cm
+Q
+q
+1 0 0 1 62.69291 245.7969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .399983 Tw 12 TL /F1 10 Tf 0 0 0 rg (To just include a chunk of preformatted, never-to-be-fiddled-with text, finish the prior paragraph with ) Tj (") Tj /F4 10 Tf (::) Tj /F1 10 Tf (") Tj (.) Tj T* 0 Tw .764692 Tw (The preformatted block is finished when the text falls back to the same indentation level as a paragraph) Tj T* 0 Tw (prior to the preformatted block. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 128.5969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F4 10 Tf 12 TL (An example::) Tj T*  T* (    Whitespace, newlines, blank lines, and all kinds of markup) Tj T* (      \(like *this* or \\this\) is preserved by literal blocks.) Tj T* (  Lookie here, I've dropped an indentation level) Tj T* (  \(but not far enough\)) Tj T*  T* (no more example) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 108.5969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 82.69291 90.59685 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (An example:) Tj T* ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R44': class PDFStream 
+44 0 obj
+% page stream
+<< /Length 4376 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 82.69291 717.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 448.6898 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 41.71 Tm /F4 10 Tf 12 TL (  Whitespace, newlines, blank lines, and all kinds of markup) Tj T* (    \(like *this* or \\this\) is preserved by literal blocks.) Tj T* (Lookie here, I've dropped an indentation level) Tj T* (\(but not far enough\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 82.69291 697.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (no more example) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 679.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Note that if a paragraph consists only of ) Tj (") Tj /F4 10 Tf (::) Tj /F1 10 Tf (") Tj (, then it's removed from the output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 610.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 41.71 Tm 12 TL /F4 10 Tf 0 0 0 rg (::) Tj T*  T* (    This is preformatted text, and the) Tj T* (    last ) Tj (") Tj (::) Tj (") Tj ( paragraph is removed) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 590.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 545.5969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 17.71 Tm 12 TL /F4 10 Tf 0 0 0 rg (This is preformatted text, and the) Tj T* (last ) Tj (") Tj (::) Tj (") Tj ( paragraph is removed) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 537.5969 cm
+Q
+q
+1 0 0 1 62.69291 537.5969 cm
+Q
+q
+1 0 0 1 62.69291 504.5969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Sections) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 486.5969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (\(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 486.5969 cm
+Q
+q
+1 0 0 1 62.69291 396.5969 cm
+q
+BT 1 0 0 1 0 76.82 Tm .97683 Tw 12 TL /F1 10 Tf 0 0 0 rg (To break longer text up into sections, you use ) Tj /F2 10 Tf (section headers) Tj /F1 10 Tf (. These are a single line of text \(one or) Tj T* 0 Tw 1.607984 Tw (more words\) with adornment: an underline alone, or an underline and an overline together, in dashes) Tj T* 0 Tw .334692 Tw (") Tj /F4 10 Tf (-----) Tj /F1 10 Tf (") Tj (, equals ) Tj (") Tj /F4 10 Tf (======) Tj /F1 10 Tf (") Tj (, tildes ) Tj (") Tj /F4 10 Tf (~~~~~~) Tj /F1 10 Tf (") Tj ( or any of the non-alphanumeric characters ) Tj /F4 10 Tf (= - ` : ' ) Tj (") Tj ( ~) Tj T* 0 Tw 2.47332 Tw (^ _ * + # ) Tj (<) Tj ( ) Tj (>) Tj /F1 10 Tf ( that you feel comfortable with. An underline-only adornment is distinct from an) Tj T* 0 Tw 1.131647 Tw (overline-and-underline adornment using the same character. The underline/overline must be at least as) Tj T* 0 Tw .373516 Tw (long as the title text. Be consistent, since all sections marked with the same adornment style are deemed) Tj T* 0 Tw (to be at the same level:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 207.3969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 180 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 161.71 Tm /F4 10 Tf 12 TL (Chapter 1 Title) Tj T* (===============) Tj T*  T* (Section 1.1 Title) Tj T* (-----------------) Tj T*  T* (Subsection 1.1.1 Title) Tj T* (~~~~~~~~~~~~~~~~~~~~~~) Tj T*  T* (Section 1.2 Title) Tj T* (-----------------) Tj T*  T* (Chapter 2 Title) Tj T* (===============) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 187.3969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (This results in the following structure, illustrated by simplified pseudo-XML:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 70.19685 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 108 re B*
+Q
+q
+BT 1 0 0 1 0 89.71 Tm 12 TL /F4 10 Tf 0 0 0 rg (<) Tj (section) Tj (>) Tj  T* (    ) Tj (<) Tj (title) Tj (>) Tj  T* (        Chapter 1 Title) Tj T* (    ) Tj (<) Tj (section) Tj (>) Tj  T* (        ) Tj (<) Tj (title) Tj (>) Tj  T* (            Section 1.1 Title) Tj T* (        ) Tj (<) Tj (section) Tj (>) Tj  T* (            ) Tj (<) Tj (title) Tj (>) Tj  T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R45': class PDFStream 
+45 0 obj
+% page stream
+<< /Length 5092 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 681.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 96 re B*
+Q
+q
+BT 1 0 0 1 0 77.71 Tm 12 TL /F4 10 Tf 0 0 0 rg (                Subsection 1.1.1 Title) Tj T* (    ) Tj (<) Tj (section) Tj (>) Tj  T* (        ) Tj (<) Tj (title) Tj (>) Tj  T* (            Section 1.2 Title) Tj T* (<) Tj (section) Tj (>) Tj  T* (    ) Tj (<) Tj (title) Tj (>) Tj  T* (        Chapter 2 Title) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 637.9969 cm
+q
+BT 1 0 0 1 0 28.82 Tm 3.490697 Tw 12 TL /F1 10 Tf 0 0 0 rg (\(Pseudo-XML uses indentation for nesting and has no end-tags. It's not possible to show actual) Tj T* 0 Tw 1.533318 Tw (processed output, as in the other examples, because sections cannot exist inside block quotes. For a) Tj T* 0 Tw (concrete example, compare the section structure of this document's source text and processed output.\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 595.9969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .069988 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that section headers are available as link targets, just using their name. To link to the ) Tj 0 0 .501961 rg (Lists) Tj 0 0 0 rg ( heading, I) Tj T* 0 Tw 1.212093 Tw (write ) Tj (") Tj /F4 10 Tf (Lists_) Tj /F1 10 Tf (") Tj (. If the heading has a space in it like ) Tj 0 0 .501961 rg (text styles) Tj 0 0 0 rg (, we need to quote the heading ) Tj (") Tj /F4 10 Tf (`text) Tj T* 0 Tw (styles`_) Tj /F1 10 Tf (") Tj (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 595.9969 cm
+Q
+q
+1 0 0 1 62.69291 595.9969 cm
+Q
+q
+1 0 0 1 62.69291 565.9969 cm
+q
+BT 1 0 0 1 0 7.23 Tm 18 TL /F2 15 Tf 0 0 0 rg (Document Title / Subtitle) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 535.9969 cm
+q
+BT 1 0 0 1 0 16.82 Tm .744985 Tw 12 TL /F1 10 Tf 0 0 0 rg (The title of the whole document is distinct from section titles and may be formatted somewhat differently) Tj T* 0 Tw (\(e.g. the HTML writer by default shows it as a centered heading\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 493.9969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .811235 Tw 12 TL /F1 10 Tf 0 0 0 rg (To indicate the document title in reStructuredText, use a unique adornment style at the beginning of the) Tj T* 0 Tw .999982 Tw (document. To indicate the document subtitle, use another unique adornment style immediately after the) Tj T* 0 Tw (document title. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 340.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 144 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 125.71 Tm /F4 10 Tf 12 TL (================) Tj T* ( Document Title) Tj T* (================) Tj T* (----------) Tj T* ( Subtitle) Tj T* (----------) Tj T*  T* (Section Title) Tj T* (=============) Tj T*  T* (...) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 308.7969 cm
+q
+BT 1 0 0 1 0 16.82 Tm .58436 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that ) Tj (") Tj (Document Title) Tj (") Tj ( and ) Tj (") Tj (Section Title) Tj (") Tj ( above both use equals signs, but are distict and unrelated) Tj T* 0 Tw (styles. The text of overline-and-underlined titles \(but not underlined-only\) may be inset for aesthetics.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 308.7969 cm
+Q
+q
+1 0 0 1 62.69291 308.7969 cm
+Q
+q
+1 0 0 1 62.69291 275.7969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Images) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 257.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (\(quickref\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 257.7969 cm
+Q
+q
+1 0 0 1 62.69291 239.7969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (To include an image in your document, you use the the ) Tj /F4 10 Tf (image) Tj /F1 10 Tf ( directive. For example:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 206.5969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 5.71 Tm /F4 10 Tf 12 TL (.. image:: images/biohazard.png) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 186.5969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (results in:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 295.7178 182.7569 cm
+q
+3.84 0 0 3.84 0 0 cm
+/FormXob.c8d097da4771654d12a9611e9af76669 Do
+Q
+Q
+q
+1 0 0 1 62.69291 140.7569 cm
+q
+BT 1 0 0 1 0 28.82 Tm 2.758555 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F4 10 Tf (images/biohazard.png) Tj /F1 10 Tf ( part indicates the filename of the image you wish to appear in the) Tj T* 0 Tw .216654 Tw (document. There's no restriction placed on the image \(format, size etc\). If the image is to appear in HTML) Tj T* 0 Tw (and you wish to supply additional information, you may:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 71.55685 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 41.71 Tm /F4 10 Tf 12 TL (.. image:: images/biohazard.png) Tj T* (   :height: 100) Tj T* (   :width: 200) Tj T* (   :scale: 50) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R46': class PDFStream 
+46 0 obj
+% page stream
+<< /Length 2173 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 5.71 Tm /F4 10 Tf 12 TL (   :alt: alternate text) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 733.9969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (See the full image directive documentation for more info.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 733.9969 cm
+Q
+q
+1 0 0 1 62.69291 733.9969 cm
+Q
+q
+1 0 0 1 62.69291 733.9969 cm
+Q
+q
+1 0 0 1 62.69291 733.9969 cm
+Q
+q
+1 0 0 1 62.69291 700.9969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (What Next?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 658.9969 cm
+q
+BT 1 0 0 1 0 28.82 Tm .154985 Tw 12 TL /F1 10 Tf 0 0 0 rg (This primer introduces the most common features of reStructuredText, but there are a lot more to explore.) Tj T* 0 Tw 3.201984 Tw (The Quick reStructuredText user reference is a good place to go next. For complete details, the) Tj T* 0 Tw (reStructuredText Markup Specification is the place to go ) Tj /F1 8 Tf 0 0 .501961 rg 5 Ts (1) Tj /F1 10 Tf 0 0 0 rg 0 Ts (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 628.9969 cm
+q
+BT 1 0 0 1 0 16.82 Tm .090651 Tw 12 TL /F1 10 Tf 0 0 0 rg (Users who have questions or need assistance with Docutils or reStructuredText should post a message to) Tj T* 0 Tw (the Docutils-users mailing list.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 628.9969 cm
+Q
+q
+1 0 0 1 62.69291 628.9969 cm
+Q
+q
+1 0 0 1 62.69291 628.9969 cm
+Q
+q
+1 0 0 1 62.69291 628.9969 cm
+Q
+q
+1 0 0 1 62.69291 572.3039 cm
+Q
+q
+1 0 0 1 62.69291 543.9575 cm
+n 0 14.17323 m 469.8898 14.17323 l S
+Q
+q
+1 0 0 1 62.69291 513.9575 cm
+0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 15 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 3 cm
+q
+BT 1 0 0 1 0 16.82 Tm 16.51409 Tw 12 TL /F1 10 Tf 0 0 0 rg (If that relative link doesn't work, try the master document:) Tj T* 0 Tw 0 0 .501961 rg (http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+
+endobj
+xref
+0 47
+0000000000 65535 f
+0000000113 00000 n
+0000000272 00000 n
+0000000437 00000 n
+0000000612 00000 n
+0000000794 00000 n
+0000001009 00000 n
+0000001224 00000 n
+0000001439 00000 n
+0000001654 00000 n
+0000001869 00000 n
+0000002085 00000 n
+0000002301 00000 n
+0000002516 00000 n
+0000002782 00000 n
+0000002944 00000 n
+0000003124 00000 n
+0000003492 00000 n
+0000003774 00000 n
+0000003962 00000 n
+0000004242 00000 n
+0000004538 00000 n
+0000004755 00000 n
+0000004998 00000 n
+0000005378 00000 n
+0000005770 00000 n
+0000006013 00000 n
+0000006255 00000 n
+0000006526 00000 n
+0000006846 00000 n
+0000006984 00000 n
+0000007234 00000 n
+0000007359 00000 n
+0000007503 00000 n
+0000007664 00000 n
+0000007819 00000 n
+0000007999 00000 n
+0000008201 00000 n
+0000008346 00000 n
+0000008502 00000 n
+0000008631 00000 n
+0000008784 00000 n
+0000016232 00000 n
+0000022330 00000 n
+0000027474 00000 n
+0000031951 00000 n
+0000037144 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\230\314\022\240\330\314\354\013\016\3766Ap^2\271) (\230\314\022\240\330\314\354\013\016\3766Ap^2\271)] 
+
+ /Info 30 0 R
+ /Root 29 0 R
+ /Size 47 >>
+startxref
+39391
+%%EOF
