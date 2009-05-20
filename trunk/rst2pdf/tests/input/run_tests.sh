@@ -25,8 +25,6 @@ run_test() {
     python ../../createpdf.py $1 $style 2> $1.err
     if [ ! $? ]
     then
-        echo ERROR processing $1, see $1.err
-    else
         compare_pdfinfo $bn.pdf correct/$bn.pdf
         if [ ! -d temp-$bn ]
         then
@@ -47,6 +45,8 @@ run_test() {
             fi
         done
         cd ..        
+    else
+        echo ERROR processing $1, see $1.err
     fi
 }
 
