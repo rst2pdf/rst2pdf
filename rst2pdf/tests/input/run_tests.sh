@@ -1,12 +1,52 @@
 #!/bin/sh
 
+compare_pdfinfo() {
+    # Given two PDF files $1 and $2, compare the output of pdfinfo except for 
+    # creation date.
+    pdfinfo $1 | grep -v CreationDate | grep -v "File size"> $1.info
+    pdfinfo $2 | grep -v CreationDate | grep -v "File size"> $2.info
+    if cmp -s $1.info $2.info 
+    then
+        echo "PDF metadata is correct"
+    else
+        echo "PDF metadata for $1 is wrong"
+    fi
+    #rm $1.info $2.info
+}
+
 run_test() {
-    st=`basename $1 .txt`.style
+    bn=`basename $1 .txt`
+    st="$bn.style"
 	if [ -f "$st" ]
     then
-        python ../../createpdf.py $1 -s $st 2> $1.err || echo ERROR processing $1
+        style="-s $st"
+    fi
+    echo "Processing $1"
+    python ../../createpdf.py $1 $style 2> $1.err
+    if [ ! $? ]
+    then
+        echo ERROR processing $1, see $1.err
     else
-        python ../../createpdf.py $1 2> $1.err || echo ERROR processing $1
+        compare_pdfinfo $bn.pdf correct/$bn.pdf
+        if [ ! -d temp-$bn ]
+        then
+            mkdir temp-$bn
+        fi
+        rm -f temp-$bn/*
+        convert $bn.pdf temp-$bn/page.png
+        convert correct/$bn.pdf temp-$bn/correctpage.png
+        cd temp-$bn
+        for page in page*png
+        do
+            result=`compare -metric PSNR $page correct$page diff$page 2>&1`
+            if [ "$result" = "inf" ]
+            then
+                echo "$page is OK"
+            else
+                echo "$page has ERRORs, see diff$page"
+            fi
+        done
+        cd ..        
     fi
 }
 

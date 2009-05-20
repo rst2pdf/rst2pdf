@@ -1,0 +1,552 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-Bold
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+4 0 obj
+% Page dictionary
+<< /Contents 22 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 1
+ /S /Dissolve
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page2': class PDFPage 
+5 0 obj
+% Page dictionary
+<< /Contents 23 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 1
+ /Di /90
+ /M /I
+ /S /Split
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page3': class PDFPage 
+6 0 obj
+% Page dictionary
+<< /Contents 24 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 1
+ /Dm /H
+ /S /Blinds
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page4': class PDFPage 
+7 0 obj
+% Page dictionary
+<< /Contents 25 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 2
+ /M /I
+ /S /Box
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page5': class PDFPage 
+8 0 obj
+% Page dictionary
+<< /Contents 26 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 3
+ /Di /180
+ /S /Wipe
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page6': class PDFPage 
+9 0 obj
+% Page dictionary
+<< /Contents 27 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 2
+ /Di /270
+ /S /Glitter
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'Page7': class PDFPage 
+10 0 obj
+% Page dictionary
+<< /Contents 28 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 21 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans << /D 2
+ /Di /270
+ /S /Glitter
+ /Type /Trans >>
+ /Type /Page >>
+endobj
+% 'R11': class PDFCatalog 
+11 0 obj
+% Document Root
+<< /Outlines 13 0 R
+ /PageMode /UseNone
+ /Pages 21 0 R
+ /Type /Catalog >>
+endobj
+% 'R12': class PDFInfo 
+12 0 obj
+<< /Author ()
+ /CreationDate (D:20090519094336+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+% 'R13': class PDFOutlines 
+13 0 obj
+<< /Count 7
+ /First 14 0 R
+ /Last 20 0 R
+ /Type /Outlines >>
+endobj
+% 'Outline.0': class OutlineEntryObject 
+14 0 obj
+<< /Dest [ 4 0 R
+ /Fit ]
+ /Next 15 0 R
+ /Parent 13 0 R
+ /Title (Page 1) >>
+endobj
+% 'Outline.1': class OutlineEntryObject 
+15 0 obj
+<< /Dest [ 5 0 R
+ /Fit ]
+ /Next 16 0 R
+ /Parent 13 0 R
+ /Prev 14 0 R
+ /Title (Page 2) >>
+endobj
+% 'Outline.2': class OutlineEntryObject 
+16 0 obj
+<< /Dest [ 6 0 R
+ /Fit ]
+ /Next 17 0 R
+ /Parent 13 0 R
+ /Prev 15 0 R
+ /Title (Page 3) >>
+endobj
+% 'Outline.3': class OutlineEntryObject 
+17 0 obj
+<< /Dest [ 7 0 R
+ /Fit ]
+ /Next 18 0 R
+ /Parent 13 0 R
+ /Prev 16 0 R
+ /Title (Page 4) >>
+endobj
+% 'Outline.4': class OutlineEntryObject 
+18 0 obj
+<< /Dest [ 8 0 R
+ /Fit ]
+ /Next 19 0 R
+ /Parent 13 0 R
+ /Prev 17 0 R
+ /Title (Page 5) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+19 0 obj
+<< /Dest [ 9 0 R
+ /Fit ]
+ /Next 20 0 R
+ /Parent 13 0 R
+ /Prev 18 0 R
+ /Title (Page 6) >>
+endobj
+% 'Outline.6': class OutlineEntryObject 
+20 0 obj
+<< /Dest [ 10 0 R
+ /Fit ]
+ /Parent 13 0 R
+ /Prev 19 0 R
+ /Title (Page 7) >>
+endobj
+% 'R21': class PDFPages 
+21 0 obj
+% page tree
+<< /Count 7
+ /Kids [ 4 0 R
+ 5 0 R
+ 6 0 R
+ 7 0 R
+ 8 0 R
+ 9 0 R
+ 10 0 R ]
+ /Type /Pages >>
+endobj
+% 'R22': class PDFStream 
+22 0 obj
+% page stream
+<< /Length 1096 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R23': class PDFStream 
+23 0 obj
+% page stream
+<< /Length 1090 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 2) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R24': class PDFStream 
+24 0 obj
+% page stream
+<< /Length 1096 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 3) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R25': class PDFStream 
+25 0 obj
+% page stream
+<< /Length 1090 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 4) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R26': class PDFStream 
+26 0 obj
+% page stream
+<< /Length 1096 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 5) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R27': class PDFStream 
+27 0 obj
+% page stream
+<< /Length 1090 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 6) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+Q
+ 
+endstream
+
+endobj
+% 'R28': class PDFStream 
+28 0 obj
+% page stream
+<< /Length 1024 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 779.1969 cm
+Q
+q
+1 0 0 1 62.69291 758.1969 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 7) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 680.1969 cm
+q
+BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+ 
+endstream
+
+endobj
+xref
+0 29
+0000000000 65535 f
+0000000113 00000 n
+0000000221 00000 n
+0000000386 00000 n
+0000000559 00000 n
+0000000872 00000 n
+0000001200 00000 n
+0000001520 00000 n
+0000001836 00000 n
+0000002156 00000 n
+0000002479 00000 n
+0000002804 00000 n
+0000002942 00000 n
+0000003154 00000 n
+0000003279 00000 n
+0000003419 00000 n
+0000003574 00000 n
+0000003729 00000 n
+0000003884 00000 n
+0000004039 00000 n
+0000004194 00000 n
+0000004319 00000 n
+0000004475 00000 n
+0000005672 00000 n
+0000006863 00000 n
+0000008060 00000 n
+0000009251 00000 n
+0000010448 00000 n
+0000011639 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\335O\317V\246\036\323\205\306\240\225& \372\):) (\335O\317V\246\036\323\205\306\240\225& \372\):)] 
+
+ /Info 12 0 R
+ /Root 11 0 R
+ /Size 29 >>
+startxref
+12737
+%%EOF
