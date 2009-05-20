@@ -7,7 +7,8 @@ compare_pdfinfo() {
     pdfinfo $2 | grep -v CreationDate | grep -v "File size"> $2.info
     if cmp -s $1.info $2.info 
     then
-        echo "PDF metadata is correct"
+	true
+        #echo "PDF metadata is correct"
     else
         echo "PDF metadata for $1 is wrong"
     fi
@@ -23,7 +24,7 @@ run_test() {
     fi
     echo "Processing $1"
     
-    if python ../../createpdf.py $1 $style 2> $1.err
+    if python ../../createpdf.py -v $1 $style 2> $1.err
     then
         compare_pdfinfo $bn.pdf correct/$bn.pdf
         if [ ! -d temp-$bn ]
@@ -39,7 +40,8 @@ run_test() {
             result=`compare -metric PSNR $page correct$page diff$page 2>&1`
             if [ "$result" = "inf" ]
             then
-                echo "$page is OK"
+                #echo "$page is OK"
+		true
             else
                 echo "$page has ERRORs, see temp-$bn/diff$page"
             fi
