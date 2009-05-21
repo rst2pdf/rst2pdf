@@ -1192,7 +1192,7 @@ class FancyPage(PageTemplate):
         # What page template to use?
         tname = canv.__dict__.get('templateName', self.styles.firstTemplate)
         self.template = self.styles.pageTemplates[tname]
-
+        
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
 
@@ -1237,6 +1237,15 @@ class FancyPage(PageTemplate):
             x1 = self.styles.lm + self.styles.gm
             y1 = self.styles.tm + self.hh
 
+        # If there is a background parameter for this page Template, draw it
+        if 'background' in self.template:
+            if self.template['background'].split('.')[-1].lower() in [
+                    "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
+                bg=SVGImage(self.template['background'],self.tw,self.th)
+            else:
+                bg = Image(self.template['background'],self.tw,self.th)
+            bg.drawOn(canv,0,0)
+            
         self.frames = []
         for frame in self.template['frames']:
             self.frames.append(SmartFrame(self,
