@@ -30,8 +30,8 @@ endobj
 << /Contents 22 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -51,8 +51,8 @@ endobj
 << /Contents 23 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -74,8 +74,8 @@ endobj
 << /Contents 24 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -96,8 +96,8 @@ endobj
 << /Contents 25 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -118,8 +118,8 @@ endobj
 << /Contents 26 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -140,8 +140,8 @@ endobj
 << /Contents 27 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -162,8 +162,8 @@ endobj
 << /Contents 28 0 R
  /MediaBox [ 0
  0
- 595.2756
- 841.8898 ]
+ 453.5433
+ 255.1181 ]
  /Parent 21 0 R
  /Resources << /Font 1 0 R
  /ProcSet [ /PDF
@@ -189,7 +189,7 @@ endobj
 % 'R12': class PDFInfo 
 12 0 obj
 << /Author ()
- /CreationDate (D:20090519094336+03'00')
+ /CreationDate (D:20090520221556+03'00')
  /Keywords ()
  /Producer (ReportLab http://www.reportlab.com)
  /Subject (\(unspecified\))
@@ -279,32 +279,44 @@ endobj
 % 'R22': class PDFStream 
 22 0 obj
 % page stream
-<< /Length 1096 >>
+<< /Length 1412 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 1) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.590036 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a) Tj T* 0 Tw 1.780866 Tw (placerat fermentum, lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi) Tj T* 0 Tw .205866 Tw (elementum leo sed sapien. Aliquam erat volutpat. Praesent mollis sapien et felis. Nulla) Tj T* 0 Tw .575415 Tw (ultricies odio id elit. Ut non quam eget nulla blandit iaculis. Phasellus convallis tempor) Tj T* 0 Tw .530033 Tw (enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor vitae lacus.) Tj T* 0 Tw .62549 Tw (Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue) Tj T* 0 Tw (orci, pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -313,32 +325,44 @@ endobj
 % 'R23': class PDFStream 
 23 0 obj
 % page stream
-<< /Length 1090 >>
+<< /Length 1409 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 2) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.902338 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem) Tj T* 0 Tw 4.013672 Tw (placerat rutrum. Donec dui elit, blandit at, eleifend sagittis, rhoncus quis, orci.) Tj T* 0 Tw .582763 Tw (Vestibulum rutrum semper turpis. Nam pretium, mauris in varius venenatis, arcu dolor) Tj T* 0 Tw 2.638039 Tw (molestie justo, vitae suscipit elit diam eget dui. Phasellus elementum. Vestibulum) Tj T* 0 Tw 1.223366 Tw (ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo eget) Tj T* 0 Tw .188492 Tw (lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi) Tj T* 0 Tw (tristique senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -347,32 +371,44 @@ endobj
 % 'R24': class PDFStream 
 24 0 obj
 % page stream
-<< /Length 1096 >>
+<< /Length 1412 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 3) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.590036 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a) Tj T* 0 Tw 1.780866 Tw (placerat fermentum, lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi) Tj T* 0 Tw .205866 Tw (elementum leo sed sapien. Aliquam erat volutpat. Praesent mollis sapien et felis. Nulla) Tj T* 0 Tw .575415 Tw (ultricies odio id elit. Ut non quam eget nulla blandit iaculis. Phasellus convallis tempor) Tj T* 0 Tw .530033 Tw (enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor vitae lacus.) Tj T* 0 Tw .62549 Tw (Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue) Tj T* 0 Tw (orci, pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -381,32 +417,44 @@ endobj
 % 'R25': class PDFStream 
 25 0 obj
 % page stream
-<< /Length 1090 >>
+<< /Length 1409 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 4) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.902338 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem) Tj T* 0 Tw 4.013672 Tw (placerat rutrum. Donec dui elit, blandit at, eleifend sagittis, rhoncus quis, orci.) Tj T* 0 Tw .582763 Tw (Vestibulum rutrum semper turpis. Nam pretium, mauris in varius venenatis, arcu dolor) Tj T* 0 Tw 2.638039 Tw (molestie justo, vitae suscipit elit diam eget dui. Phasellus elementum. Vestibulum) Tj T* 0 Tw 1.223366 Tw (ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo eget) Tj T* 0 Tw .188492 Tw (lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi) Tj T* 0 Tw (tristique senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -415,32 +463,44 @@ endobj
 % 'R26': class PDFStream 
 26 0 obj
 % page stream
-<< /Length 1096 >>
+<< /Length 1412 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 5) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.590036 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a) Tj T* 0 Tw 1.780866 Tw (placerat fermentum, lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi) Tj T* 0 Tw .205866 Tw (elementum leo sed sapien. Aliquam erat volutpat. Praesent mollis sapien et felis. Nulla) Tj T* 0 Tw .575415 Tw (ultricies odio id elit. Ut non quam eget nulla blandit iaculis. Phasellus convallis tempor) Tj T* 0 Tw .530033 Tw (enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor vitae lacus.) Tj T* 0 Tw .62549 Tw (Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue) Tj T* 0 Tw (orci, pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -449,32 +509,44 @@ endobj
 % 'R27': class PDFStream 
 27 0 obj
 % page stream
-<< /Length 1090 >>
+<< /Length 1409 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 6) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .33061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem placerat rutrum. Donec) Tj T* 0 Tw 1.488555 Tw (dui elit, blandit at, eleifend sagittis, rhoncus quis, orci. Vestibulum rutrum semper turpis. Nam pretium,) Tj T* 0 Tw 3.592126 Tw (mauris in varius venenatis, arcu dolor molestie justo, vitae suscipit elit diam eget dui. Phasellus) Tj T* 0 Tw 1.130751 Tw (elementum. Vestibulum ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo) Tj T* 0 Tw 1.830651 Tw (eget lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi tristique) Tj T* 0 Tw (senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.902338 Tw 12 TL /F1 10 Tf 0 0 0 rg (Quisque dignissim. Duis in velit vel augue rhoncus pretium. Duis non nisl in lorem) Tj T* 0 Tw 4.013672 Tw (placerat rutrum. Donec dui elit, blandit at, eleifend sagittis, rhoncus quis, orci.) Tj T* 0 Tw .582763 Tw (Vestibulum rutrum semper turpis. Nam pretium, mauris in varius venenatis, arcu dolor) Tj T* 0 Tw 2.638039 Tw (molestie justo, vitae suscipit elit diam eget dui. Phasellus elementum. Vestibulum) Tj T* 0 Tw 1.223366 Tw (ligula. Nunc quis enim. Sed eget augue. Maecenas convallis. Nunc pretium leo eget) Tj T* 0 Tw .188492 Tw (lectus. Ut a urna. Ut vel nunc eget leo vehicula commodo. Pellentesque habitant morbi) Tj T* 0 Tw (tristique senectus et netus et malesuada fames ac turpis egestas.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
+Q
 Q
  
 endstream
@@ -483,25 +555,37 @@ endobj
 % 'R28': class PDFStream 
 28 0 obj
 % page stream
-<< /Length 1024 >>
+<< /Length 1340 >>
 stream
 1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 779.1969 cm
+1 0 0 1 34.34646 208.7717 cm
 Q
 q
-1 0 0 1 62.69291 758.1969 cm
+1 0 0 1 34.34646 187.7717 cm
 q
 BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Page 7) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.1969 cm
+1 0 0 1 34.34646 97.77165 cm
 q
-BT 1 0 0 1 0 64.82 Tm .833059 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum,) Tj T* 0 Tw 1.057485 Tw (lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat) Tj T* 0 Tw .570574 Tw (volutpat. Praesent mollis sapien et felis. Nulla ultricies odio id elit. Ut non quam eget nulla blandit iaculis.) Tj T* 0 Tw 1.773059 Tw (Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor) Tj T* 0 Tw 1.246412 Tw (vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+BT 1 0 0 1 0 76.82 Tm 1.590036 Tw 12 TL /F1 10 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a) Tj T* 0 Tw 1.780866 Tw (placerat fermentum, lacus nisl eleifend nisl, vel laoreet metus neque id nibh. Morbi) Tj T* 0 Tw .205866 Tw (elementum leo sed sapien. Aliquam erat volutpat. Praesent mollis sapien et felis. Nulla) Tj T* 0 Tw .575415 Tw (ultricies odio id elit. Ut non quam eget nulla blandit iaculis. Phasellus convallis tempor) Tj T* 0 Tw .530033 Tw (enim. Nunc nec arcu. Sed hendrerit congue quam. Nulla fermentum tortor vitae lacus.) Tj T* 0 Tw .62549 Tw (Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue) Tj T* 0 Tw (orci, pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 28.34646 240.9449 cm
+q
+BT 1 0 0 1 0 4.82 Tm 150.9052 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is a presentation) Tj T* -150.9052 0 Td ET
+Q
+Q
+q
+1 0 0 1 28.34646 14.17323 cm
+q
+BT 1 0 0 1 0 4.82 Tm 173.6952 0 Td 12 TL /F1 10 Tf 0 0 0 rg (Yes, really!) Tj T* -173.6952 0 Td ET
 Q
 Q
  
@@ -533,20 +617,20 @@ xref
 0000004194 00000 n
 0000004319 00000 n
 0000004475 00000 n
-0000005672 00000 n
-0000006863 00000 n
-0000008060 00000 n
-0000009251 00000 n
-0000010448 00000 n
-0000011639 00000 n
+0000005988 00000 n
+0000007498 00000 n
+0000009011 00000 n
+0000010521 00000 n
+0000012034 00000 n
+0000013544 00000 n
 trailer
 << /ID 
  % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
- [(\335O\317V\246\036\323\205\306\240\225& \372\):) (\335O\317V\246\036\323\205\306\240\225& \372\):)] 
+ [(\024\302\375\006+\251|a\362\206\012U\317\375\330b) (\024\302\375\006+\251|a\362\206\012U\317\375\330b)] 
 
  /Info 12 0 R
  /Root 11 0 R
  /Size 29 >>
 startxref
-12737
+14958
 %%EOF
