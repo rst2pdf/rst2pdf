@@ -1241,9 +1241,9 @@ class FancyPage(PageTemplate):
         if 'background' in self.template:
             if self.template['background'].split('.')[-1].lower() in [
                     "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
-                bg=SVGImage(self.template['background'],self.tw,self.th)
+                bg=SVGImage(self.template['background'],self.styles.pw,self.styles.ph)
             else:
-                bg = Image(self.template['background'],self.tw,self.th)
+                bg = Image(self.template['background'],self.styles.pw,self.styles.ph)
             bg.drawOn(canv,0,0)
             
         self.frames = []
