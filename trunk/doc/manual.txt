@@ -1104,7 +1104,7 @@ stylesheet already has 3 of them::
     }
   }
 
-A page template has a name (oneColumn, twoColumn) some options, and a list of frames.
+A page template has a name (oneColumn, twoColumn), some options, and a list of frames.
 A frame is a list containing this::
 
     [ left position, top position, width, height ]
@@ -1152,10 +1152,18 @@ The supported page template options and their defaults are:
 
 * defaultHeader : None
 
+  Has the same effect as the header directive in the document.
+
 * showFooter : True
 
 * defaultFooter : None
 
+  Has the same effect as the footer directive in the document.
+
+* background: None
+
+  The background should be an image, which will be stretched to match your page, 
+  so use with caution.
 
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
