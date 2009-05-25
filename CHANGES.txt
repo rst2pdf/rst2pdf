@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Issue 119: Fix placement of headers and footers
 * New background property for page templates (nice for presentations, for example)
 * Default to px for image width specifications instead of pt
 * Support all required measurement units ("em" "ex" "px" "in" "cm" 

@@ -1225,7 +1225,7 @@ class FancyPage(PageTemplate):
         canv._doctemplate = doct
 
         self.hx = self.styles.lm
-        self.hy = self.styles.ph - self.styles.tm + self.styles.ts
+        self.hy = self.styles.ph - self.styles.tm -self.hh + self.styles.ts
 
         self.fx = self.styles.lm
         self.fy = self.styles.bm - self.styles.bs
