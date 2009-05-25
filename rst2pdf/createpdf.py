@@ -552,7 +552,7 @@ class RstToPdf(object):
                 self.doc_title = unicode(self.gen_pdftext(node, depth)).strip()
             elif isinstance(node.parent, docutils.nodes.topic):
                 # FIXME style correctly
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['heading3'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['topic-title'])]
             elif isinstance(node.parent, docutils.nodes.admonition):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['heading3'])]
             elif isinstance(node.parent, docutils.nodes.table):
