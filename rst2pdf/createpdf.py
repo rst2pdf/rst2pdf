@@ -1225,19 +1225,18 @@ class FancyPage(PageTemplate):
         canv._doctemplate = doct
 
         self.hx = self.styles.lm
-        self.hy = self.styles.ph - self.styles.tm -self.hh + self.styles.ts
+        self.hy = self.styles.ph - self.styles.tm -self.hh
 
         self.fx = self.styles.lm
-        self.fy = self.styles.bm - self.styles.bs
-        self.th = self.styles.ph - self.styles.tm - self.styles.bm - self.hh - self.fh
+        self.fy = self.styles.bm
+        self.th = self.styles.ph - self.styles.tm - self.styles.bm - self.hh - self.fh - self.styles.ts - self.styles.bs
 
         # Adjust gutter margins
         if doc.page % 2: # Left page
             x1 = self.styles.lm
-            y1 = self.styles.tm + self.hh
         else: # Right page
             x1 = self.styles.lm + self.styles.gm
-            y1 = self.styles.tm + self.hh
+        y1 = self.styles.tm + self.hh + self.styles.bs
 
         # If there is a background parameter for this page Template, draw it
         if 'background' in self.template:
