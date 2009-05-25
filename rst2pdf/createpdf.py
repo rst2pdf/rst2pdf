@@ -548,7 +548,6 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
-                # FIXME maybe make it a coverpage?
                 node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['title'])]
                 self.doc_title = unicode(self.gen_pdftext(node, depth)).strip()
             elif isinstance(node.parent, docutils.nodes.topic):
