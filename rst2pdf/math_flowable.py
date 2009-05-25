@@ -1,3 +1,4 @@
+# See LICENSE.txt for licensing terms
 
 import tempfile
 import os

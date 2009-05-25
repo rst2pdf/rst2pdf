@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# See LICENSE.txt for licensing terms
 
 # Singleton config object
+
 
 import ConfigParser
 import os

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# See LICENSE.txt for licensing terms
 
 """
 
