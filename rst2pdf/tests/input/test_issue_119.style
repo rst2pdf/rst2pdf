@@ -1,6 +1,8 @@
 {"pageSetup": {
-    "margin-top": "2cm",
-    "margin-bottom": "2cm"
+    "margin-top": "0cm",
+    "margin-bottom": "0cm",
+    "spacing-header": "0cm",
+    "spacing-footer": "0cm"    
   },
   "styles" : [
     ["header" , {
