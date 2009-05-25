@@ -385,7 +385,14 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.image):
             w,h=self.size_for_image_node(node)
-            node.pdftext = '<img src="%s" width="%f" height="%f"/>' % (node.get('uri'),w,h)
+            alignment=node.get('align','CENTER').lower()
+            if alignment in ('top','middle','bottom'):
+                align='valign="%s"'%alignment
+            else:
+                align=''
+
+            node.pdftext = '<img src="%s" width="%f" height="%f" %s/>' % (node.get('uri'),w,h,align)
+            print node.pdftext
 
         elif isinstance(node, math_node):
             # FIXME: implement this using inline images
@@ -906,10 +913,12 @@ class RstToPdf(object):
             else:
                 node.elements = [Image(filename=imgname, height=h, width=w)]
             i = node.elements[0]
-            if node.get('align'):
-                i.hAlign = node.get('align').upper()
-            else:
-                i.hAlign = 'CENTER'
+            alignment=node.get('align','CENTER').upper()
+            if alignment in ('LEFT','CENTER','RIGHT'):
+                i.hAlign = alignment
+            # Image flowables don't support valign (makes no sense for them?)
+            # elif alignment in ('TOP','MIDDLE','BOTTOM'):
+            #    i.vAlign = alignment
 
         elif isinstance(node, docutils.nodes.figure):
             # The sub-elements are the figure and the caption, and't ugly if they separate
