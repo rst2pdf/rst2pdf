@@ -1,3 +1,4 @@
+# See LICENSE.txt for licensing terms
 '''Convert a pygments' generated CSS file into a rst2pdf stylesheet.
 
 You can generate a pygments CSS file like this (replace murphy with whatever style you want)::

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# See LICENSE.txt for licensing terms
 #$HeadURL$
 #$LastChangedDate$
 #$LastChangedRevision$

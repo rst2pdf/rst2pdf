@@ -1,4 +1,4 @@
-
+# See LICENSE.txt for licensing terms
 try:
     import pkg_resources
     try:
