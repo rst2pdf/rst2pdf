@@ -82,7 +82,7 @@ class RstToPdf(object):
     def __init__(self, stylesheets=[], language='en_US', header=None, footer=None,
                  inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
                  fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False,
-                 footnote_backlinks=True,inline_footnotes=False,def_dpi=300):
+                 footnote_backlinks=True,inline_footnotes=False,def_dpi=300,show_frame=False):
         global HAS_SPHINX
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
@@ -103,6 +103,7 @@ class RstToPdf(object):
         self.footnote_backlinks = footnote_backlinks
         self.inline_footnotes = inline_footnotes
         self.def_dpi=def_dpi
+        self.show_frame=show_frame
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -1131,7 +1132,7 @@ class RstToPdf(object):
         foot = self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP = FancyPage("fancypage", head, foot, self.styles, smarty=self.smarty)
+        FP = FancyPage("fancypage", head, foot, self.styles, smarty=self.smarty,show_frame=self.show_frame)
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -1175,11 +1176,12 @@ class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
 
-    def __init__(self, _id, head, foot, styles, smarty="0"):
+    def __init__(self, _id, head, foot, styles, smarty="0", show_frame=False):
         self.styles = styles
         self.head = head
         self.foot = foot
         self.smarty = smarty
+        self.show_frame=show_frame
         PageTemplate.__init__(self, _id, [])
 
     def beforeDrawPage(self, canv, doc):
@@ -1252,7 +1254,7 @@ class FancyPage(PageTemplate):
                 self.styles.adjustUnits(frame[0], self.tw) + x1,
                 self.styles.adjustUnits(frame[1], self.th) + y1,
                 self.styles.adjustUnits(frame[2], self.tw),
-                self.styles.adjustUnits(frame[3], self.th)))
+                self.styles.adjustUnits(frame[3], self.th),showBoundary=self.show_frame))
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
@@ -1385,6 +1387,8 @@ def main():
     parser.add_option('--default-dpi',dest='def_dpi',metavar='NUMBER',default=def_dpi,
         help='DPI for objects sized in pixels. Default=%d'%def_dpi)
         
+    parser.add_option('--show-frame-boundary',dest='show_frame',action='store_true',default=False,
+                      help='Show frame borders (only useful for debugging), default=False')
 
     options, args = parser.parse_args()
 
@@ -1466,7 +1470,8 @@ def main():
         repeatTableRows=options.repeattablerows,
         footnote_backlinks=options.footnote_backlinks,
         inline_footnotes=options.inline_footnotes,
-        def_dpi=int(options.def_dpi)
+        def_dpi=int(options.def_dpi),
+        show_frame=options.show_frame
     ).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
