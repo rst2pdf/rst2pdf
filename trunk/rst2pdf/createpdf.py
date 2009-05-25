@@ -831,6 +831,7 @@ class RstToPdf(object):
             # FIXME: handle all the other attributes
 
             imgname = str(node.get("uri"))
+            scale =float(node.get('scale',100))/100
 
             # Figuring out the size to display of an image is ... annoying.
             # If the user provides a size with a unit, it's simple, adjustUnits
@@ -881,6 +882,10 @@ class RstToPdf(object):
                     # if we don't have a height, we need to keep the
                     # aspect ratio, or else it will look ugly
                     h = w*ih/iw
+
+                # Apply scale factor
+                w=w*scale
+                h=h*scale
 
                 # And now we have this probably completely bogus size!
                 log.info("Image %s size calculated:  %fcm by %fcm",
