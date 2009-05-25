@@ -189,6 +189,9 @@
       "fontName": "stdBoldItalic",
       "keepWithNext": true
     }],
+    ["topic-title" , {
+      "parent": "heading3"
+    }],
     ["sidebar-title" , {
       "parent": "heading3"
     }],
