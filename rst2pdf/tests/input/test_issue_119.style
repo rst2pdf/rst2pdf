@@ -1,5 +1,19 @@
 {"pageSetup": {
-    "margin-top": "0cm",
-    "margin-bottom": "0cm"
-  }
+    "margin-top": "2cm",
+    "margin-bottom": "2cm"
+  },
+  "styles" : [
+    ["header" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER",
+      "borderWidth": 1,
+      "borderColor": "black"
+    }],
+    ["footer" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER",
+      "borderWidth": 1,
+      "borderColor": "black"
+    }]
+  ]
 }
