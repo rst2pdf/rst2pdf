@@ -420,7 +420,6 @@ class RstToPdf(object):
 
             node.pdftext = '<img src="%s" width="%f" height="%f" %s/>'%\
                 (node.get('uri'), w, h, align)
-            print node.pdftext
 
         elif isinstance(node, math_node):
             mf = Math(node.math_data)
