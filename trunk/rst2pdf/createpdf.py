@@ -239,7 +239,8 @@ class RstToPdf(object):
     def text_for_label(self, label, style):
         """Translate text for label."""
         try:
-            text = self.docutils_languages[self.style_language(style)].labels[label]
+            text = self.docutils_languages[self.style_language(style)]\
+                    .labels[label]
         except KeyError:
             text = label.capitalize()
         return text + ":"
@@ -247,7 +248,8 @@ class RstToPdf(object):
     def text_for_bib_field(self, field, style):
         """Translate text for bibliographic fields."""
         try:
-            text = self.docutils_languages[self.style_language(style)].bibliographic_fields[field]
+            text = self.docutils_languages[self.style_language(style)]\
+                    .bibliographic_fields[field]
         except KeyError:
             text = field
         return text + ":"
@@ -255,7 +257,8 @@ class RstToPdf(object):
     def author_separator(self, style):
         """Return separator string for authors."""
         try:
-            sep = self.docutils_languages[self.style_language(style)].author_separators[0]
+            sep = self.docutils_languages[self.style_language(style)]\
+                    .author_separators[0]
         except KeyError:
             sep = ';'
         return sep + " "
@@ -269,8 +272,9 @@ class RstToPdf(object):
             s = self.styles[style]
             bc = s.backColor
             if bc:
-                r = '<font face="%s" size="%d" color="#%s" backColor="#%s">' % (
-                    s.fontName, s.fontSize, s.textColor.hexval()[2:], bc.hexval()[2:])
+                r = '<font face="%s" size="%d" color="#%s" backColor="#%s">'\
+                    %(s.fontName, s.fontSize,
+                      s.textColor.hexval()[2:], bc.hexval()[2:])
             else:
                 r = '<font face="%s" size="%d" color="#%s">' % (
                     s.fontName, s.fontSize, s.textColor.hexval()[2:])
@@ -279,9 +283,9 @@ class RstToPdf(object):
             log.warning('Unknown class %s', style)
             return None
 
-
-    def gather_pdftext (self, node, depth, replaceEnt=True):
-        return ''.join([self.gen_pdftext(n, depth, replaceEnt) for n in node.children])
+    def gather_pdftext(self, node, depth, replaceEnt=True):
+        return ''.join([self.gen_pdftext(n, depth, replaceEnt)
+            for n in node.children])
 
     def gen_pdftext(self, node, depth, replaceEnt=True):
         pre = ""
@@ -354,7 +358,7 @@ class RstToPdf(object):
                 node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
 
-        elif isinstance(node, docutils.nodes.reference) :
+        elif isinstance(node, docutils.nodes.reference):
             uri = node.get('refuri')
             if uri:
                 if self.baseurl: # Need to join the uri with the base url
