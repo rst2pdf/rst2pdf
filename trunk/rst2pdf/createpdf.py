@@ -368,19 +368,22 @@ class RstToPdf(object):
                         #import pdb; pdb.set_trace()
                         post = u' (%s)' % uri
                     else:
-                        pre += u'<a href="%s" color="%s">' % (uri, self.styles.linkColor)
+                        pre += u'<a href="%s" color="%s">' %\
+                            (uri, self.styles.linkColor)
                         post = '</a>' + post
             else:
                 uri = node.get('refid')
                 if uri:
-                    pre += u'<a href="#%s" color="%s">' % (uri, self.styles.linkColor)
+                    pre += u'<a href="#%s" color="%s">' %\
+                        (uri, self.styles.linkColor)
                     post = '</a>' + post
             node.pdftext = self.gather_pdftext(node, depth)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
             node.pdftext = pre + node.pdftext + post
 
-        elif isinstance(node, (docutils.nodes.option_string, docutils.nodes.option_argument)):
+        elif isinstance(node, (docutils.nodes.option_string,
+                               docutils.nodes.option_argument)):
             node.pdftext = node.astext()
             if replaceEnt:
                 node.pdftext = escape(node.pdftext, True)
@@ -392,7 +395,8 @@ class RstToPdf(object):
 
             node.pdftext = pre + node.pdftext + post
 
-        elif isinstance(node, (docutils.nodes.system_message, docutils.nodes.problematic)):
+        elif isinstance(node, (docutils.nodes.system_message,
+                               docutils.nodes.problematic)):
             pre = '<font color="red">'
             post = "</font>"
             node.pdftext = self.gather_pdftext(node, depth)
@@ -407,14 +411,15 @@ class RstToPdf(object):
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.image):
-            w,h=self.size_for_image_node(node)
-            alignment=node.get('align','CENTER').lower()
-            if alignment in ('top','middle','bottom'):
+            w, h=self.size_for_image_node(node)
+            alignment=node.get('align', 'CENTER').lower()
+            if alignment in ('top', 'middle', 'bottom'):
                 align='valign="%s"'%alignment
             else:
                 align=''
 
-            node.pdftext = '<img src="%s" width="%f" height="%f" %s/>' % (node.get('uri'),w,h,align)
+            node.pdftext = '<img src="%s" width="%f" height="%f" %s/>'%\
+                (node.get('uri'), w, h, align)
             print node.pdftext
 
         elif isinstance(node, math_node):
@@ -429,13 +434,15 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.footnote_reference):
             # Fixme link to the right place
             anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
-            node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>' % (
-                anchors, '#' + node.astext(), self.styles.linkColor, node.astext())
+            node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>'%\
+                (anchors, '#' + node.astext(),
+                 self.styles.linkColor, node.astext())
         elif isinstance(node, docutils.nodes.citation_reference):
             # Fixme link to the right place
             anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
-            node.pdftext = u'%s[<a href="%s" color="%s">%s</a>]' % (
-                anchors, '#' + node.astext(), self.styles.linkColor, node.astext())
+            node.pdftext = u'%s[<a href="%s" color="%s">%s</a>]'%\
+                (anchors, '#' + node.astext(),
+                 self.styles.linkColor, node.astext())
 
         elif isinstance(node, docutils.nodes.target):
             pre = u'<a name="%s"/>' % node['ids'][0]
