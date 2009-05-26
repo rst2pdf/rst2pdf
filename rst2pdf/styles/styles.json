@@ -296,8 +296,17 @@
       "alignment" : "TA_CENTER",
       "valign" : "BOTTOM"
     }],
+    ["dedication" , {
+      "parent" : "normal"
+    }],
+    ["abstract" , {
+      "parent" : "normal"
+    }],
+    ["contents" , {
+      "parent" : "normal"
+    }],
     ["tableofcontents" , {
-      "fontName" : "stdFont"
+      "parent" : "normal"
     }],
     ["code" , {
       "parent": "literal",
