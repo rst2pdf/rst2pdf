@@ -485,7 +485,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.table):
             node.elements = [Spacer(0, self.styles['table'].spaceBefore)] + \
                             self.gather_elements(node, depth) +\
-                            [Spacer(0, self.styles['table'].spaceAfter)] + \
+                            [Spacer(0, self.styles['table'].spaceAfter)] 
 
         elif isinstance(node, docutils.nodes.tgroup):
             rows = []
