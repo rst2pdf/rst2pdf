@@ -282,6 +282,8 @@
       "hyphenation": false
     }],
     ["table" , {
+      "spaceBefore":6,
+      "spaceAfter":0,
       "rowBackgrounds" : ["white","#E0E0E0"]
     }],
     ["table-title" , {
