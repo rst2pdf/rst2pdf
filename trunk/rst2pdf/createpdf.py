@@ -483,8 +483,9 @@ class RstToPdf(object):
         #######################
 
         elif isinstance(node, docutils.nodes.table):
-            # FIXME: make spacing configurable
-            node.elements = [Spacer(0, 6)] + self.gather_elements(node, depth)
+            node.elements = [Spacer(0, self.styles['table'].spaceBefore)] + \
+                            self.gather_elements(node, depth) +\
+                            [Spacer(0, self.styles['table'].spaceAfter)] + \
 
         elif isinstance(node, docutils.nodes.tgroup):
             rows = []
