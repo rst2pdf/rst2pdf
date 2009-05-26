@@ -161,48 +161,50 @@ class RstToPdf(object):
                 self.styles['bodytext'].language,
                 ','.join(self.styles.languages))
 
-    def size_for_image_node(self,node):
+    def size_for_image_node(self, node):
         imgname = str(node.get("uri"))
-        scale =float(node.get('scale',100))/100
+        scale =float(node.get('scale', 100))/100
 
         # Figuring out the size to display of an image is ... annoying.
         # If the user provides a size with a unit, it's simple, adjustUnits
         # will return it in points and we're done.
 
         # However, often the unit wil be "%" (specially if it's meant for
-        # HTML originally.In which case, we will use a percentage of self.styles.tw
-        # which may or may not be correct.
+        # HTML originally.In which case, we will use a percentage of
+        # self.styles.tw which may or may not be correct.
 
         # Find the image size in pixels:
 
         try:
-            xdpi,ydpi=self.styles.def_dpi,self.styles.def_dpi
+            xdpi, ydpi=self.styles.def_dpi, self.styles.def_dpi
             if imgname.split('.')[-1].lower() in [
-                    "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
+                    "ai", "ccx", "cdr", "cgm", "cmx",
+                    "sk1", "sk", "svg", "xml", "wmf", "fig"]:
                 iw, ih = SVGImage(imgname).wrap(0, 0)
             else:
                 img = PILImage.open(imgname)
                 iw, ih = img.size
-                xdpi,ydpi=img.info.get('dpi',(300,300))
-                
+                xdpi, ydpi=img.info.get('dpi', (300, 300))
+
             # Try to get the print resolution from the image itself via PIL.
             # If it fails, assume a DPI of 300, which is pretty much made up,
             # and then a 100% size would be iw*inch/300, so we pass
             # that as the second parameter to adjustUnits
             #
-            # Some say the default DPI should be 72. That would mean 
-            # the largest printable image in A4 paper would be something 
+            # Some say the default DPI should be 72. That would mean
+            # the largest printable image in A4 paper would be something
             # like 480x640. That would be awful.
             #
 
             w = node.get('width')
             if w is not None:
-                # In this particular case, we want the default unit to be pixels
-                # so we work like rst2html
-                w = self.styles.adjustUnits(w, self.styles.tw,default_unit='px')
+                # In this particular case, we want the default unit
+                # to be pixels so we work like rst2html
+                w = self.styles.adjustUnits(w, self.styles.tw,
+                                            default_unit='px')
             else:
                 log.warning("Using image %s without specifying size."
-                    "Calculating based on %ddpi", imgname,xdpi)
+                    "Calculating based on %ddpi", imgname, xdpi)
                 # No width specified at all, use w in px
                 w = iw*inch/xdpi
 
@@ -225,8 +227,7 @@ class RstToPdf(object):
         except IOError, e: #No image, or no permissions
             log.error('Error opening "%s": %s' % (imgname, str(e)))
             node.elements = []
-        return w,h
-
+        return w, h
 
     def style_language(self, style):
         """Return language corresponding to this style."""
