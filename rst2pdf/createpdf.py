@@ -995,8 +995,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.raw):
             # Not really raw, but what the heck
             node.elements = parseRaw(str(node.astext()))
-
-        # FIXME nodes we are ignoring for the moment
+            
         elif isinstance(node, docutils.nodes.citation):
             node.elements = []
         else:
