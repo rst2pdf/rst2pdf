@@ -117,7 +117,7 @@ class RstToPdf(object):
         self.inline_footnotes = inline_footnotes
         self.def_dpi=def_dpi
         self.show_frame=show_frame
-        self.img_dir=os.path.join(abspath(dirname(__file__)),'images')
+        self.img_dir=os.path.join(abspath(dirname(__file__)), 'images')
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -221,9 +221,9 @@ class RstToPdf(object):
             h = w*ih/iw
 
         # Apply scale factor
-        w=w*scale
-        h=h*scale
-        
+        w = w*scale
+        h = h*scale
+
         # And now we have this probably completely bogus size!
         log.info("Image %s size calculated:  %fcm by %fcm",
             imgname, w/cm, h/cm)
@@ -411,13 +411,12 @@ class RstToPdf(object):
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.image):
-            
-            # First see if the image file exists, or else, 
+            # First see if the image file exists, or else,
             # use image-missing.png
             uri=node.get('uri')
             if not os.path.exists(uri):
                 log.error("Missing image file: %s"%uri)
-                uri=os.path.join(self.img_dir,'image-missing.png')
+                uri=os.path.join(self.img_dir, 'image-missing.png')
                 w, h = 1*cm, 1*cm
             else:
                 w, h=self.size_for_image_node(node)
@@ -946,11 +945,11 @@ class RstToPdf(object):
             imgname = str(node.get("uri"))
             if not os.path.exists(imgname):
                 log.error("Missing image file: %s"%imgname)
-                imgname=os.path.join(self.img_dir,'image-missing.png')
+                imgname=os.path.join(self.img_dir, 'image-missing.png')
                 w, h = 1*cm, 1*cm
             else:
                 w, h=self.size_for_image_node(node)
-            
+
             if imgname.split('.')[-1].lower() in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
