@@ -819,7 +819,6 @@ class RstToPdf(object):
                 MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
 
         elif isinstance(node, docutils.nodes.list_item):
-
             el = self.gather_elements(node, depth, style=style)
             b = ""
             if node.parent.get('start'):
@@ -894,7 +893,7 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.system_message, docutils.nodes.problematic)):
             # FIXME show the error in the document, red, whatever
             # log.warning("Problematic node %s", node.astext())
-            pass
+            node.elements = []
 
         elif isinstance(node, docutils.nodes.block_quote):
             node.elements = [MyIndenter(left=20)] + self.gather_elements(
