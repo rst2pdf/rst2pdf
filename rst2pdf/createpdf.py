@@ -117,6 +117,7 @@ class RstToPdf(object):
         self.inline_footnotes = inline_footnotes
         self.def_dpi=def_dpi
         self.show_frame=show_frame
+        self.img_dir=os.path.join(abspath(dirname(__file__)),'images')
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -163,6 +164,7 @@ class RstToPdf(object):
 
     def size_for_image_node(self, node):
         imgname = str(node.get("uri"))
+        print imgname
         scale =float(node.get('scale', 100))/100
 
         # Figuring out the size to display of an image is ... annoying.
@@ -175,58 +177,54 @@ class RstToPdf(object):
 
         # Find the image size in pixels:
 
-        try:
-            xdpi, ydpi=self.styles.def_dpi, self.styles.def_dpi
-            if imgname.split('.')[-1].lower() in [
-                    "ai", "ccx", "cdr", "cgm", "cmx",
-                    "sk1", "sk", "svg", "xml", "wmf", "fig"]:
-                iw, ih = SVGImage(imgname).wrap(0, 0)
-            else:
-                img = PILImage.open(imgname)
-                iw, ih = img.size
-                xdpi, ydpi=img.info.get('dpi', (300, 300))
+        xdpi, ydpi=self.styles.def_dpi, self.styles.def_dpi
+        if imgname.split('.')[-1].lower() in [
+                "ai", "ccx", "cdr", "cgm", "cmx",
+                "sk1", "sk", "svg", "xml", "wmf", "fig"]:
+            iw, ih = SVGImage(imgname).wrap(0, 0)
+        else:
+            img = PILImage.open(imgname)
+            iw, ih = img.size
+            xdpi, ydpi=img.info.get('dpi', (300, 300))
 
-            # Try to get the print resolution from the image itself via PIL.
-            # If it fails, assume a DPI of 300, which is pretty much made up,
-            # and then a 100% size would be iw*inch/300, so we pass
-            # that as the second parameter to adjustUnits
-            #
-            # Some say the default DPI should be 72. That would mean
-            # the largest printable image in A4 paper would be something
-            # like 480x640. That would be awful.
-            #
+        # Try to get the print resolution from the image itself via PIL.
+        # If it fails, assume a DPI of 300, which is pretty much made up,
+        # and then a 100% size would be iw*inch/300, so we pass
+        # that as the second parameter to adjustUnits
+        #
+        # Some say the default DPI should be 72. That would mean
+        # the largest printable image in A4 paper would be something
+        # like 480x640. That would be awful.
+        #
 
-            w = node.get('width')
-            if w is not None:
-                # In this particular case, we want the default unit
-                # to be pixels so we work like rst2html
-                w = self.styles.adjustUnits(w, self.styles.tw,
-                                            default_unit='px')
-            else:
-                log.warning("Using image %s without specifying size."
-                    "Calculating based on %ddpi", imgname, xdpi)
-                # No width specified at all, use w in px
-                w = iw*inch/xdpi
+        w = node.get('width')
+        if w is not None:
+            # In this particular case, we want the default unit
+            # to be pixels so we work like rst2html
+            w = self.styles.adjustUnits(w, self.styles.tw,
+                                        default_unit='px')
+        else:
+            log.warning("Using image %s without specifying size."
+                "Calculating based on %ddpi", imgname, xdpi)
+            # No width specified at all, use w in px
+            w = iw*inch/xdpi
 
-            h = node.get('height')
-            if h is not None:
-                h = self.styles.adjustUnits(h, ih*inch/ydpi)
-            else:
-                # Now, often, only the width is specified!
-                # if we don't have a height, we need to keep the
-                # aspect ratio, or else it will look ugly
-                h = w*ih/iw
+        h = node.get('height')
+        if h is not None:
+            h = self.styles.adjustUnits(h, ih*inch/ydpi)
+        else:
+            # Now, often, only the width is specified!
+            # if we don't have a height, we need to keep the
+            # aspect ratio, or else it will look ugly
+            h = w*ih/iw
 
-            # Apply scale factor
-            w=w*scale
-            h=h*scale
+        # Apply scale factor
+        w=w*scale
+        h=h*scale
 
-            # And now we have this probably completely bogus size!
-            log.info("Image %s size calculated:  %fcm by %fcm",
-                imgname, w/cm, h/cm)
-        except IOError, e: #No image, or no permissions
-            log.error('Error opening "%s": %s' % (imgname, str(e)))
-            node.elements = []
+        # And now we have this probably completely bogus size!
+        log.info("Image %s size calculated:  %fcm by %fcm",
+            imgname, w/cm, h/cm)
         return w, h
 
     def style_language(self, style):
@@ -411,7 +409,16 @@ class RstToPdf(object):
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.image):
-            w, h=self.size_for_image_node(node)
+            
+            # First see if the image file exists, or else, 
+            # use image-missing.png
+            uri=node.get('uri')
+            if not os.path.exists(uri):
+                log.error("Missing image file: %s"%uri)
+                uri=os.path.join(self.img_dir,'image-missing.png')
+                w, h = 1*cm, 1*cm
+            else:
+                w, h=self.size_for_image_node(node)
             alignment=node.get('align', 'CENTER').lower()
             if alignment in ('top', 'middle', 'bottom'):
                 align='valign="%s"'%alignment
@@ -419,7 +426,7 @@ class RstToPdf(object):
                 align=''
 
             node.pdftext = '<img src="%s" width="%f" height="%f" %s/>'%\
-                (node.get('uri'), w, h, align)
+                (uri, w, h, align)
 
         elif isinstance(node, math_node):
             mf = Math(node.math_data)
@@ -934,8 +941,14 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle class,target,alt, check align
-            w, h=self.size_for_image_node(node)
             imgname = str(node.get("uri"))
+            if not os.path.exists(imgname):
+                log.error("Missing image file: %s"%imgname)
+                imgname=os.path.join(self.img_dir,'image-missing.png')
+                w, h = 1*cm, 1*cm
+            else:
+                w, h=self.size_for_image_node(node)
+            
             if imgname.split('.')[-1].lower() in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
