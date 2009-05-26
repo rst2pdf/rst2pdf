@@ -26,27 +26,30 @@ run_test() {
     
     if python ../../createpdf.py -v $1 $style 2> $1.err
     then
-        compare_pdfinfo $bn.pdf correct/$bn.pdf
-        if [ ! -d temp-$bn ]
-        then
-            mkdir temp-$bn
-        fi
-        rm -f temp-$bn/*
-        convert $bn.pdf temp-$bn/page.png
-        convert correct/$bn.pdf temp-$bn/correctpage.png
-        cd temp-$bn
-        for page in page*png
-        do
-            result=`compare -metric PSNR $page correct$page diff$page 2>&1`
-            if [ "$result" = "inf" ]
-            then
-                #echo "$page is OK"
-		true
-            else
-                echo "$page has ERRORs, see temp-$bn/diff$page"
-            fi
-        done
-        cd ..        
+	if [ -f "correct/$bn.pdf" ]
+	then
+        	compare_pdfinfo $bn.pdf correct/$bn.pdf
+        	if [ ! -d temp-$bn ]
+       		then
+            		mkdir temp-$bn
+        	fi
+        	rm -f temp-$bn/*
+        	convert $bn.pdf temp-$bn/page.png
+        	convert correct/$bn.pdf temp-$bn/correctpage.png
+        	cd temp-$bn
+        	for page in page*png
+        	do
+            		result=`compare -metric PSNR $page correct$page diff$page 2>&1`
+            		if [ "$result" = "inf" ]
+            		then
+                		#echo "$page is OK"
+				true
+            		else
+                		echo "$page has ERRORs, see temp-$bn/diff$page"
+            		fi
+        	done
+        	cd ..
+	fi	
     else
         echo ERROR processing $1, see $1.err
     fi
