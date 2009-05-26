@@ -454,7 +454,8 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.inline):
             ftag = self.styleToFont(node['classes'][0])
             if ftag:
-                node.pdftext = "%s%s</font>" % (ftag, self.gather_pdftext(node, depth))
+                node.pdftext = "%s%s</font>"%\
+                    (ftag, self.gather_pdftext(node, depth))
             else:
                 node.pdftext = self.gather_pdftext(node, depth)
 
@@ -494,7 +495,8 @@ class RstToPdf(object):
                 try:
                     style = self.styles[node['classes'][0]]
                 except KeyError:
-                    log.info("Unknown class %s, using class bodytext.", node['classes'][0])
+                    log.info("Unknown class %s, using class bodytext.",
+                        node['classes'][0])
         except TypeError: # Happens when a docutils.node.Text reaches here
             pass
 
@@ -514,7 +516,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.table):
             node.elements = [Spacer(0, self.styles['table'].spaceBefore)] + \
                             self.gather_elements(node, depth) +\
-                            [Spacer(0, self.styles['table'].spaceAfter)] 
+                            [Spacer(0, self.styles['table'].spaceAfter)]
 
         elif isinstance(node, docutils.nodes.tgroup):
             rows = []
@@ -539,7 +541,7 @@ class RstToPdf(object):
                 elif isinstance(n, docutils.nodes.colspec):
                     colwidths.append(int(n['colwidth']))
 
-            spans = self.filltable (rows)
+            spans = self.filltable(rows)
 
             data = []
             cellStyles = []
@@ -551,8 +553,11 @@ class RstToPdf(object):
                     if isinstance(cell, str):
                         r.append("")
                     else:
+                        # I honestly have no idea what the next line does 
+                        # (Roberto Alsina, May 25th, 2009)
                         ell = self.gather_elements(cell, depth, style=
-                            i < headRows and self.styles['table-heading'] or style)
+                            i < headRows and self.styles['table-heading'] \
+                            or style)
                         if len(ell) == 1:
                             # Experiment: if the cell has a single element, extract its
                             # class and use it for the cell. That way, you can have cells
