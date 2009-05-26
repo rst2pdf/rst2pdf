@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Tables style support spaceBefore and spaceAfter
 * New topic-title style for topic titles (obvious ;-)
 * Vertical alignment for inline images (:align: parameter)
 * Issue 118: Support for :scale: in images and handle resizing of inline images
