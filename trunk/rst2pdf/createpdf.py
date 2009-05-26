@@ -860,7 +860,6 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.system_message, docutils.nodes.problematic)):
             # FIXME show the error in the document, red, whatever
             # log.warning("Problematic node %s", node.astext())
-            node.elements = []
 
         elif isinstance(node, docutils.nodes.block_quote):
             node.elements = [MyIndenter(left=20)] + self.gather_elements(
@@ -875,8 +874,6 @@ class RstToPdf(object):
             node.elements = []
 
         elif isinstance(node, docutils.nodes.line_block):
-            # Obsolete? Let's do something anyway.
-            # FIXME: indent or not?
             qstyle = copy(style)
             qstyle.leftIndent += 30
             node.elements = self.gather_elements(node, depth, style=qstyle)
