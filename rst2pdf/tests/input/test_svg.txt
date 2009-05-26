@@ -1,40 +1,7 @@
 .. image:: warning.svg
 
-.. image:: warning.svg
-   :width: 200%
+The second image is 3x the first
 
 .. image:: warning.svg
-   :width: 300%
+   :scale: 300
 
-.. image:: warning.svg
-   :width: 400%
-
-.. image:: warning.svg
-   :width: 500%
-
-.. image:: warning.svg
-   :width: 600%
-
-.. image:: warning.svg
-   :width: 700%
-
-.. image:: warning.svg
-   :width: 600%
-
-.. image:: warning.svg
-   :width: 500%
-
-.. image:: warning.svg
-   :width: 400%
-
-.. image:: warning.svg
-   :width: 300%
-
-.. image:: warning.svg
-   :width: 200%
-
-.. image:: warning.svg
-   :width: 100%
-
-.. image:: warning.svg
-   :width: 50%
