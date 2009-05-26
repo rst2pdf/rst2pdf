@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Better handling of missing images
 * Added missing styles abstract, contents, dedication to the default stylesheet
 * Tables style support spaceBefore and spaceAfter
 * New topic-title style for topic titles (obvious ;-)

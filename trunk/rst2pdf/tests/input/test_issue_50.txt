@@ -1,3 +1,5 @@
 .. image:: notthere.jpg
 
-Added so there is a pagein the resulting PDF
+.. |inline| image:: notthere.jpg
+
+There should be a "missing" image above, and one at the right: |inline|
