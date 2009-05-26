@@ -456,13 +456,28 @@ class StyleSheet(object):
         alignment = {0: 'LEFT', 1: 'CENTER', 1: 'CENTRE', 2: 'RIGHT',
             4: 'JUSTIFY', 8: 'DECIMAL'}[self['table-heading'].alignment]
         return [
-            ('BACKGROUND', (0, 0), (-1, rows - 1), self['table-heading'].backColor),
-            ('ALIGN', (0, 0), (-1, rows - 1), alignment),
-            ('TEXTCOLOR', (0, 0), (-1, rows - 1), self['table-heading'].textColor),
-            ('FONT', (0, 0), (-1, rows - 1), self['table-heading'].fontName,
-                self['table-heading'].fontSize, self['table-heading'].leading),
-            ('VALIGN', (0, 0), (-1, rows - 1), self['table-heading'].valign)
-        ]
+            ('BACKGROUND',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].backColor),
+            ('ALIGN',
+                (0, 0),
+                (-1, rows - 1),
+                alignment),
+            ('TEXTCOLOR',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].textColor),
+            ('FONT',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].fontName,
+                self['table-heading'].fontSize,
+                self['table-heading'].leading),
+            ('VALIGN',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].valign)]
 
     def tstyleBody(self, rows=1):
         """Return a table style spec for a table of any size.
@@ -471,7 +486,8 @@ class StyleSheet(object):
 
         """
         return [("ROWBACKGROUNDS", (0, 0), (-1, -1),
-            [formatColor(c, numeric=False) for c in self['table'].rowBackgrounds])]
+            [formatColor(c, numeric=False) for c in \
+                self['table'].rowBackgrounds])]
 
     def pStyleToTStyle(self, style, x, y):
         """Return a table style similar to a given paragraph style.
@@ -494,12 +510,16 @@ class StyleSheet(object):
             results.append(('BOX', (x, y), (x, y), bw, bc))
         return results
 
-    def adjustUnits(self, v, total=None,default_unit='pt'):
+    def adjustUnits(self, v, total=None, default_unit='pt'):
         if total is None:
             total = self.tw
-        return adjustUnits(v, total,self.def_dpi,default_unit,emsize=self.emsize)
-        
-def adjustUnits(v, total=None,dpi=300,default_unit='pt',emsize=10):
+        return adjustUnits(v, total,
+                           self.def_dpi,
+                           default_unit,
+                           emsize=self.emsize)
+
+
+def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
     """Takes something like 2cm and returns 2*cm.
 
     If you use % as a unit, it returns the percentage of "total".
@@ -552,12 +572,9 @@ tstyleNorm = [
 ]
 
 # Header row in tables
-
-
 tstyles['normal'] = TableStyle(tstyleNorm)
 
 # Used for field lists
-
 tstyles['field'] = TableStyle([
     ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
@@ -567,7 +584,6 @@ tstyles['field'] = TableStyle([
 fieldlist_lwidth = 3*units.cm
 
 # Used for endnotes
-
 tstyles['endnote'] = TableStyle([
     ('VALIGN', (0, 0), (-1, -1), 'TOP'),
     ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
@@ -590,7 +606,8 @@ tstyles['bullet'] = TableStyle([
 
 
 def formatColor(value, numeric=True):
-    """Convert a color like "gray" or "0xf" or "ffff" to something ReportLab will like."""
+    """Convert a color like "gray" or "0xf" or "ffff"
+    to something ReportLab will like."""
     if value in colors.__dict__:
         return colors.__dict__[value]
     else: # Hopefully, a hex color:
