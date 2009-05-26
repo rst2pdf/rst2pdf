@@ -78,21 +78,33 @@ try:
 except ImportError:
     HAS_SPHINX = False
 
+
 class RstToPdf(object):
 
-    def __init__(self, stylesheets=[], language='en_US', header=None, footer=None,
-                 inlinelinks=False, breaklevel=1, fontPath=[], stylePath=[],
-                 fitMode='shrink' ,sphinx=False, smarty='0', baseurl=None, repeatTableRows=False,
-                 footnote_backlinks=True,inline_footnotes=False,def_dpi=300,show_frame=False):
+    def __init__(self, stylesheets=[], language='en_US',
+                 header=None, footer=None,
+                 inlinelinks=False, breaklevel=1,
+                 fontPath=[], stylePath=[],
+                 fitMode='shrink', sphinx=False,
+                 smarty='0', baseurl=None,
+                 repeatTableRows=False,
+                 footnote_backlinks=True, inline_footnotes=False,
+                 def_dpi=300, show_frame=False):
         global HAS_SPHINX
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
         self.loweralpha = ascii_lowercase
         self.doc_title = ""
         self.doc_author = ""
-        self.decoration = {'header': header, 'footer': footer, 'endnotes': []}
-        stylesheets = [join(abspath(dirname(__file__)), 'styles', 'styles.json')] + stylesheets
-        self.styles = sty.StyleSheet(stylesheets, fontPath, stylePath,def_dpi=def_dpi)
+        self.decoration = {'header': header,
+                           'footer': footer,
+                           'endnotes': []}
+        stylesheets = [join(abspath(dirname(__file__)),
+                       'styles', 'styles.json')] + stylesheets
+        self.styles = sty.StyleSheet(stylesheets,
+                                     fontPath,
+                                     stylePath,
+                                     def_dpi=def_dpi)
         self.docutils_languages = {}
         self.inlinelinks = inlinelinks
         self.breaklevel = breaklevel
@@ -125,9 +137,11 @@ class RstToPdf(object):
                 self.docutils_languages[lang] = get_language(lang)
             except ImportError:
                 try:
-                    self.docutils_languages[lang] = get_language(lang.split('_', 1)[0])
+                    self.docutils_languages[lang] = \
+                         get_language(lang.split('_', 1)[0])
                 except ImportError:
-                    log.warning("Can't load Docutils module for language %s", lang)
+                    log.warning("Can't load Docutils module \
+                        for language %s", lang)
 
         # Load the hyphenators for all required languages
         if haveWordaxe:
@@ -138,11 +152,14 @@ class RstToPdf(object):
                     try:
                         wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
                     except Exception:
-                        log.warning("Can't load PyHyphen hyphenator for language %s,"
+                        log.warning("Can't load PyHyphen "
+                            "hyphenator for language %s,"
                             " trying PyHnj hyphenator", lang)
-                        wordaxe.hyphRegistry[lang] = PyHnjHyphenator(lang, 5, purePython=True)
+                        wordaxe.hyphRegistry[lang] = \
+                            PyHnjHyphenator(lang, 5, purePython=True)
             log.info('hyphenation by default in %s , loaded %s',
-                self.styles['bodytext'].language, ','.join(self.styles.languages))
+                self.styles['bodytext'].language,
+                ','.join(self.styles.languages))
 
     def size_for_image_node(self,node):
         imgname = str(node.get("uri"))
