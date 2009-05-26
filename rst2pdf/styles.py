@@ -207,7 +207,8 @@ class StyleSheet(object):
                     if font[0].lower().endswith('.ttf'): # A True Type font
                         for variant in font:
                             pdfmetrics.registerFont(
-                                TTFont(str(variant.split('.')[0]), self.findFont(variant)))
+                                TTFont(str(variant.split('.')[0]),
+                                self.findFont(variant)))
                             self.embedded.append(str(variant.split('.')[0]))
 
                         # And map them all together
@@ -218,10 +219,14 @@ class StyleSheet(object):
                         addMapping(regular, 1, 0, bold)
                         addMapping(regular, 1, 1, bolditalic)
                     else: # A Type 1 font
-                        # For type 1 fonts we require [FontName,regular,italic,bold,bolditalic]
+                        # For type 1 fonts we require
+                        # [FontName,regular,italic,bold,bolditalic]
                         # where each variant is a (pfbfile,afmfile) pair.
                         # For example, for the URW palladio from TeX:
-                        # ["Palatino",("uplr8a.pfb","uplr8a.afm"),("uplri8a.pfb","uplri8a.afm"),("uplb8a.pfb","uplb8a.afm"),("uplbi8a.pfb","uplbi8a.afm")]
+                        # ["Palatino",("uplr8a.pfb","uplr8a.afm"),
+                        #             ("uplri8a.pfb","uplri8a.afm"),
+                        #             ("uplb8a.pfb","uplb8a.afm"),
+                        #             ("uplbi8a.pfb","uplbi8a.afm")]
                         faceName = font[0]
                         regular = pdfmetrics.EmbeddedType1Face(*font[1])
                         italic = pdfmetrics.EmbeddedType1Face(*font[2])
@@ -239,7 +244,8 @@ class StyleSheet(object):
                         log.error("Registering %s as Helvetica alias", fname)
                         self.fontsAlias[fname] = 'Helvetica'
                     except Exception, e:
-                        log.critical("Error processing font %s: %s", fname, str(e))
+                        log.critical("Error processing font %s: %s",
+                            fname, str(e))
                         sys.exit(1)
 
         # Go though all styles in all stylesheets and find all fontNames.
@@ -249,10 +255,13 @@ class StyleSheet(object):
             for [skey, style] in styles:
                 for key in style:
                     if key == 'fontName' or key.endswith('FontName'):
-                        if style[key] in self.fontsAlias: # It's an alias, replace it
+                        # It's an alias, replace it
+                        if style[key] in self.fontsAlias:
                             style[key] = self.fontsAlias[style[key]]
-                        if style[key] in self.embedded: # Embedded already, nothing to do
+                        # Embedded already, nothing to do
+                        if style[key] in self.embedded:
                             continue
+                        # Standard font, nothing to do
                         if style[key] in (
                                     "Courier",
                                     "Courier-Bold",
@@ -267,8 +276,7 @@ class StyleSheet(object):
                                     "Times-BoldItalic",
                                     "Times-Italic",
                                     "Times-Roman",
-                                    "ZapfDingbats"
-                                ): # Standard font, nothing to do
+                                    "ZapfDingbats"):
                             continue
 
                         # Now we need to do something
@@ -290,17 +298,21 @@ class StyleSheet(object):
                                 embedded_fontnames.append((fname, pos))
                         if fontList:
                             self.embedded += fontList
-                            # Maybe the font we got is not called the same as the one we gave
-                            # so check that out
+                            # Maybe the font we got is not called
+                            # the same as the one we gave so check that out
                             suff = ["", "-Oblique", "-Bold", "-BoldOblique"]
                             if not fontList[0].startswith(style[key]):
                                 # We need to create font aliases, and use them
                                 for fname, aliasname in zip(
-                                        fontList, [style[key] + suffix for suffix in suff]):
+                                        fontList,
+                                        [style[key] + suffix for
+                                        suffix in suff]):
                                     self.fontsAlias[aliasname] = fname
-                                style[key] = self.fontsAlias[style[key] + suff[pos]]
+                                style[key] = self.fontsAlias[style[key] +\
+                                             suff[pos]]
                         else:
-                            log.error("Unknown font: \"%s\", replacing with Helvetica", style[key])
+                            log.error("Unknown font: \"%s\","
+                                      "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
 
         # Get styles from all stylesheets in order
@@ -360,12 +372,15 @@ class StyleSheet(object):
                 s['fontSize'] = s['parent'].fontSize
                 hasFS = False
             elif 'parent' in s:
-                # This means you can set the fontSize to "2cm" or to "150%" which
-                # will be calculated relative to the parent style
-                s['fontSize'] = self.adjustUnits(s['fontSize'], s['parent'].fontSize)
+                # This means you can set the fontSize to
+                # "2cm" or to "150%" which will be calculated
+                # relative to the parent style
+                s['fontSize'] = self.adjustUnits(s['fontSize'],
+                                    s['parent'].fontSize)
             else:
-                # If s has no parent, it's base, which has an explicit point size
-                # by default and % makes no sense, but guess it as % of 10pt
+                # If s has no parent, it's base, which has
+                # an explicit point size by default and %
+                # makes no sense, but guess it as % of 10pt
                 s['fontSize'] = self.adjustUnits(s['fontSize'], 10)
 
             # If the leading is not set, but the size is, set it
@@ -387,7 +402,8 @@ class StyleSheet(object):
         try:
             return self.StyleSheet[key]
         except KeyError: # Using an undefined style
-            log.warning("Using undefined style '%s', got style 'normal' instead"%key)
+            log.warning("Using undefined style '%s'"
+                        ", got style 'normal' instead"%key)
             return self.StyleSheet['normal']
 
     def findStyle(self, fn):
@@ -435,7 +451,8 @@ class StyleSheet(object):
         The style will be based on the table-heading style from the stylesheet.
 
         """
-        # This alignment thing is exactly backwards from the alignment for paragraphstyles
+        # This alignment thing is exactly backwards from
+        # the alignment for paragraphstyles
         alignment = {0: 'LEFT', 1: 'CENTER', 1: 'CENTRE', 2: 'RIGHT',
             4: 'JUSTIFY', 8: 'DECIMAL'}[self['table-heading'].alignment]
         return [
