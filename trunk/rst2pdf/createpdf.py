@@ -181,10 +181,13 @@ class RstToPdf(object):
                 "ai", "ccx", "cdr", "cgm", "cmx",
                 "sk1", "sk", "svg", "xml", "wmf", "fig"]:
             iw, ih = SVGImage(imgname).wrap(0, 0)
+            # These are in pt, so convert to px
+            iw = iw * xdpi / 72
+            ih = ih * ydpi / 72
         else:
             img = PILImage.open(imgname)
             iw, ih = img.size
-            xdpi, ydpi=img.info.get('dpi', (300, 300))
+            xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
 
         # Try to get the print resolution from the image itself via PIL.
         # If it fails, assume a DPI of 300, which is pretty much made up,
@@ -220,7 +223,7 @@ class RstToPdf(object):
         # Apply scale factor
         w=w*scale
         h=h*scale
-
+        
         # And now we have this probably completely bogus size!
         log.info("Image %s size calculated:  %fcm by %fcm",
             imgname, w/cm, h/cm)
