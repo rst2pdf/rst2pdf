@@ -164,7 +164,6 @@ class RstToPdf(object):
 
     def size_for_image_node(self, node):
         imgname = str(node.get("uri"))
-        print imgname
         scale =float(node.get('scale', 100))/100
 
         # Figuring out the size to display of an image is ... annoying.
