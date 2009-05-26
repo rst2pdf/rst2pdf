@@ -33,18 +33,21 @@ except ImportError:
 
 unit_separator = re.compile('(-?[0-9\.]*)')
 
+
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
-    def __init__(self, flist, fontPath=[], stylePath=None,def_dpi=300):
+
+    def __init__(self, flist, fontPath=[], stylePath=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
         self.def_dpi=def_dpi
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
+        dirn=os.path.dirname(__file__)
         self.FontSearchPath = fontPath + [
-            '.', os.path.join(os.path.abspath(os.path.dirname(__file__)), 'fonts')]
+            '.', os.path.join(os.path.abspath(dirn), 'fonts')]
         if stylePath is None:
-            stylePath = ['.', os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                'styles'),'~/.rst2pdf/styles']
+            stylePath = ['.', os.path.join(os.path.abspath(dirn),
+                'styles'), '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, stylePath)
 
         findfonts.flist = self.FontSearchPath
@@ -64,7 +67,7 @@ class StyleSheet(object):
 
         #text width
         self.tw = 0
-        
+
         # Default emsize, later it will be the fontSize of the base style
         self.emsize=10
 
@@ -76,10 +79,12 @@ class StyleSheet(object):
             try:
                 ssdata.append(loads(open(fname).read()))
             except ValueError, e: # Error parsing the JSON data
-                log.critical('Error parsing stylesheet "%s": %s' % (fname, str(e)))
+                log.critical('Error parsing stylesheet "%s": %s'%\
+                    (fname, str(e)))
                 sys.exit(1)
             except IOError, e: #Error opening the ssheet
-                log.critical('Error opening stylesheet "%s": %s' % (fname, str(e)))
+                log.critical('Error opening stylesheet "%s": %s'%\
+                    (fname, str(e)))
                 sys.exit(1)
 
         # Get pageSetup data from all stylessheets in order:
@@ -91,7 +96,8 @@ class StyleSheet(object):
                     if page['size'] in pagesizes.__dict__:
                         self.ps = list(pagesizes.__dict__[page['size']])
                     else:
-                        log.critical('Unknown page size %s in stylesheet %s' % (page['size'], ssname))
+                        log.critical('Unknown page size %s in stylesheet %s'%\
+                            (page['size'], ssname))
                         sys.exit(1)
                 else: #A custom size
                     # The sizes are expressed in some unit.
@@ -151,7 +157,8 @@ class StyleSheet(object):
 
             for font in embedded:
                 try:
-                    if isinstance(font, unicode): # Just a font name, try to embed it
+                    # Just a font name, try to embed it
+                    if isinstance(font, unicode):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:
@@ -167,27 +174,35 @@ class StyleSheet(object):
                                 fontList = findfonts.autoEmbed(fname)
                         if fontList is not None:
                             self.embedded += fontList
-                            # Maybe the font we got is not called the same as the one we gave
+                            # Maybe the font we got is not called
+                            # the same as the one we gave
                             # so check that out
                             suff = ["", "-Oblique", "-Bold", "-BoldOblique"]
                             if not fontList[0].startswith(font):
                                 # We need to create font aliases, and use them
                                 for fname, aliasname in zip(
-                                        fontList, [font + suffix for suffix in suff]):
+                                        fontList,
+                                        [font + suffix for suffix in suff]):
                                     self.fontsAlias[aliasname] = fname
                         continue
 
-                    # Each "font" is a list of four files, which will be used for
-                    # regular / bold / italic / bold+italic versions of the font.
-                    # If your font doesn't have one of them, just repeat the regular
-                    # font.
+                    # Each "font" is a list of four files, which will be
+                    # used for regular / bold / italic / bold+italic
+                    # versions of the font.
+                    # If your font doesn't have one of them, just repeat
+                    # the regular font.
 
-                    # Example, using the Tuffy font from http://tulrich.com/fonts/
+                    # Example, using the Tuffy font from
+                    # http://tulrich.com/fonts/
                     # "embeddedFonts" : [
-                    #                    ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"]
+                    #                    ["Tuffy.ttf",
+                    #                     "Tuffy_Bold.ttf",
+                    #                     "Tuffy_Italic.ttf",
+                    #                     "Tuffy_Bold_Italic.ttf"]
                     #                   ],
 
-                    # The fonts will be registered with the file name, minus the extension.
+                    # The fonts will be registered with the file name,
+                    # minus the extension.
 
                     if font[0].lower().endswith('.ttf'): # A True Type font
                         for variant in font:
