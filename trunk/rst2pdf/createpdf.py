@@ -396,7 +396,6 @@ class RstToPdf(object):
             print node.pdftext
 
         elif isinstance(node, math_node):
-            # FIXME: implement this using inline images
             mf = Math(node.math_data)
             w, h = mf.wrap(0, 0)
             descent = mf.descent()
