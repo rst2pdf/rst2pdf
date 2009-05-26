@@ -553,18 +553,20 @@ class RstToPdf(object):
                     if isinstance(cell, str):
                         r.append("")
                     else:
-                        # I honestly have no idea what the next line does 
+                        # I honestly have no idea what the next line does
                         # (Roberto Alsina, May 25th, 2009)
                         ell = self.gather_elements(cell, depth, style=
                             i < headRows and self.styles['table-heading'] \
                             or style)
                         if len(ell) == 1:
-                            # Experiment: if the cell has a single element, extract its
-                            # class and use it for the cell. That way, you can have cells
-                            # with specific background colors, at least
+                            # Experiment: if the cell has a single element,
+                            # extract its  class and use it for the cell.
+                            # That way, you can have cells with specific
+                            # background colors, at least.
                             try:
                                 cellStyles += self.styles.pStyleToTStyle(ell[0].style, j, i)
-                            except AttributeError: # Fix for issue 85: only do it if it has a style.
+                            # Fix for issue 85: only do it if it has a style.
+                            except AttributeError:
                                 pass
                         r.append(ell)
                     j += 1
@@ -679,50 +681,50 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.organization):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("organization", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
-                style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth,None])
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
+                style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.contact):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("contact", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
                 style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.address):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("address", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
                 style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.version):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("version", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
                 style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.revision):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("revision", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
                 style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.status):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("status", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
                 style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.date):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("date", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
-                style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth, None])
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
+                style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.copyright):
             fb = self.gather_pdftext(node, depth)
             t = Table([[Paragraph(self.text_for_label("copyright", style),
-                style=self.styles['fieldname']), Paragraph(fb,style)]],
-                style=sty.tstyles['field'],colWidths=[sty.fieldlist_lwidth, None])
+                style=self.styles['fieldname']), Paragraph(fb, style)]],
+                style=sty.tstyles['field'], colWidths=[sty.fieldlist_lwidth, None])
             node.elements = [t]
 
         elif isinstance(node, docutils.nodes.topic):
@@ -742,7 +744,7 @@ class RstToPdf(object):
                                     firstlineIndent=toc.levelStyles[-1].firstLineIndent,
                                     leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
                     toc.levelStyles.append(ps)
-                    
+
                 # Override fontnames (defaults to Times-Roman)
                 for levelStyle in toc.levelStyles:
                     levelStyle.__dict__['fontName'] = self.styles['tableofcontents'].fontName
@@ -807,7 +809,7 @@ class RstToPdf(object):
                         tt.append('<a name="%s"/>' % i)
                     tt.append(self.styleToFont("definition_list_term")
                         + self.gather_pdftext(n, depth, style) + "</font>")
-                elif isinstance(n, docutils.nodes.classifier) :
+                elif isinstance(n, docutils.nodes.classifier):
                     tt.append(self.styleToFont("definition_list_classifier")
                         + self.gather_pdftext(n, depth, style) + "</font>")
                 else:
@@ -831,7 +833,7 @@ class RstToPdf(object):
                 if b == "None":
                     b = ""
 
-            elif node.parent.get ('enumtype')=='arabic':
+            elif node.parent.get('enumtype')=='arabic':
                 b = str(node.parent.children.index(node) + start) + '.'
 
             elif node.parent.get('enumtype') == 'lowerroman':
@@ -860,7 +862,6 @@ class RstToPdf(object):
                 indentation = el[0].style.leading
             else:
                 indentation = 12
-
 
             # Indent all elements inside the list
             for e in el:
@@ -894,6 +895,7 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.system_message, docutils.nodes.problematic)):
             # FIXME show the error in the document, red, whatever
             # log.warning("Problematic node %s", node.astext())
+            pass
 
         elif isinstance(node, docutils.nodes.block_quote):
             node.elements = [MyIndenter(left=20)] + self.gather_elements(
@@ -934,7 +936,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle class,target,alt, check align
-            w,h=self.size_for_image_node(node)
+            w, h=self.size_for_image_node(node)
             imgname = str(node.get("uri"))
             if imgname.split('.')[-1].lower() in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
