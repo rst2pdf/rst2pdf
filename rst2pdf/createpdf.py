@@ -945,8 +945,8 @@ class RstToPdf(object):
             else:
                 node.elements = [Image(filename=imgname, height=h, width=w)]
             i = node.elements[0]
-            alignment=node.get('align','CENTER').upper()
-            if alignment in ('LEFT','CENTER','RIGHT'):
+            alignment=node.get('align', 'CENTER').upper()
+            if alignment in ('LEFT', 'CENTER', 'RIGHT'):
                 i.hAlign = alignment
             # Image flowables don't support valign (makes no sense for them?)
             # elif alignment in ('TOP','MIDDLE','BOTTOM'):
@@ -998,7 +998,7 @@ class RstToPdf(object):
                 i = 1
                 for r in node['backrefs']:
                     backrefs.append('<a href="#%s" color="%s">%d</a>' % (
-                        r,self.styles.linkColor, i))
+                        r, self.styles.linkColor, i))
                     i += 1
                 backrefs = '(%s)' % ', '.join(backrefs)
                 label = Paragraph('<a name="%s"/>%s' % (ltext, ltext + backrefs), self.styles["normal"])
@@ -1031,7 +1031,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.raw):
             # Not really raw, but what the heck
             node.elements = parseRaw(str(node.astext()))
-            
+
         elif isinstance(node, docutils.nodes.citation):
             node.elements = []
         else:
@@ -1068,7 +1068,7 @@ class RstToPdf(object):
             pass
         return node.elements
 
-    def gather_elements (self, node, depth, style=None):
+    def gather_elements(self, node, depth, style=None):
         if style is None:
             style = self.styles.styleForNode(node)
         r = []
@@ -1079,7 +1079,7 @@ class RstToPdf(object):
             r.extend(self.gen_elements(n, depth, style=style))
         return r
 
-    def filltable (self, rows):
+    def filltable(self, rows):
         """
         Takes a list of rows, consisting of cells and performs the following fixes:
 
@@ -1100,7 +1100,7 @@ class RstToPdf(object):
         # to make all rows the same length
 
         for y in range(0, len(rows)):
-            for x in range (0, len(rows[y])):
+            for x in range(0, len(rows[y])):
                 cell = rows[y][x]
                 if isinstance(cell, str):
                     continue
@@ -1109,7 +1109,7 @@ class RstToPdf(object):
                         rows[y].insert(x + 1, "")
 
         for y in range(0, len(rows)):
-            for x in range (0, len(rows[y])):
+            for x in range(0, len(rows[y])):
                 cell = rows[y][x]
                 if isinstance(cell, str):
                     continue
@@ -1127,7 +1127,7 @@ class RstToPdf(object):
         # Create spans list for reportlab's table style
         spans = []
         for y in range(0, len(rows)):
-            for x in range (0, len(rows[y])):
+            for x in range(0, len(rows[y])):
                 cell = rows[y][x]
                 if isinstance(cell, str):
                     continue
@@ -1183,7 +1183,8 @@ class RstToPdf(object):
         foot = self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP = FancyPage("fancypage", head, foot, self.styles, smarty=self.smarty,show_frame=self.show_frame)
+        FP = FancyPage("fancypage", head, foot, self.styles,
+                       smarty=self.smarty, show_frame=self.show_frame)
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -1192,8 +1193,7 @@ class RstToPdf(object):
             pagesize=self.styles.ps,
             title=self.doc_title,
             author=self.doc_author,
-            pageCompression=compressed
-        )
+            pageCompression=compressed)
         pdfdoc.multiBuild(elements)
         for fn in self.to_unlink:
             os.unlink(fn)
@@ -1218,7 +1218,7 @@ class FancyDocTemplate(BaseDocTemplate):
             # Notify TOC entry for headings/abstracts/dedications.
             level, text = flowable.level, flowable.text
             if hasattr(flowable, 'parent_id'):
-                parent_id =  flowable.parent_id
+                parent_id = flowable.parent_id
             pagenum = self.page
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
 
@@ -1245,7 +1245,7 @@ class FancyPage(PageTemplate):
         # What page template to use?
         tname = canv.__dict__.get('templateName', self.styles.firstTemplate)
         self.template = self.styles.pageTemplates[tname]
-        
+
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
 
@@ -1292,19 +1292,23 @@ class FancyPage(PageTemplate):
         # If there is a background parameter for this page Template, draw it
         if 'background' in self.template:
             if self.template['background'].split('.')[-1].lower() in [
-                    "ai","ccx","cdr","cgm","cmx","sk1","sk","svg","xml","wmf","fig"]:
-                bg=SVGImage(self.template['background'],self.styles.pw,self.styles.ph)
+                    "ai", "ccx", "cdr", "cgm", "cmx",
+                    "sk1", "sk", "svg", "xml", "wmf", "fig"]:
+                bg = SVGImage(self.template['background'],
+                    self.styles.pw, self.styles.ph)
             else:
-                bg = Image(self.template['background'],self.styles.pw,self.styles.ph)
-            bg.drawOn(canv,0,0)
-            
+                bg = Image(self.template['background'],
+                    self.styles.pw, self.styles.ph)
+            bg.drawOn(canv, 0, 0)
+
         self.frames = []
         for frame in self.template['frames']:
             self.frames.append(SmartFrame(self,
                 self.styles.adjustUnits(frame[0], self.tw) + x1,
                 self.styles.adjustUnits(frame[1], self.th) + y1,
                 self.styles.adjustUnits(frame[2], self.tw),
-                self.styles.adjustUnits(frame[3], self.th),showBoundary=self.show_frame))
+                self.styles.adjustUnits(frame[3], self.th),
+                    showBoundary=self.show_frame))
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
@@ -1316,7 +1320,7 @@ class FancyPage(PageTemplate):
                     try:
                         text = unicode(text, e.encoding)
                     except AttributeError:
-                        text = unicode(text,'utf-8')
+                        text = unicode(text, 'utf-8')
                 text = text.replace(u'###Page###', unicode(doc.page))
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###", getattr(canv, 'sectName', ''))
@@ -1350,6 +1354,7 @@ class FancyPage(PageTemplate):
             container.height = self.fh
             container.drawOn(canv, fx, self.fy)
 
+
 def main():
     """Parse command line and call createPdf with the correct data."""
 
@@ -1380,7 +1385,7 @@ def main():
         help='Search this folder for fonts. (Deprecated)')
 
     def_fontpath = ':'.join([expanduser(p) for p in
-        config.getValue("general","font_path","").split(':')])
+        config.getValue("general", "font_path", "").split(':')])
     parser.add_option('--font-path', dest='fpath', metavar='FOLDER:FOLDER:...:FOLDER', default=def_fontpath,
         help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)
 
@@ -1427,17 +1432,19 @@ def main():
     parser.add_option('--no-footnote-backlinks', action='store_false',
         dest='footnote_backlinks', default=def_footnote_backlinks,
         help='Disable footnote backlinks. Default=%s' % str(not def_footnote_backlinks))
-        
+
     def_inline_footnotes = config.getValue("general", "inline_footnotes", False)
     parser.add_option('--inline-footnotes', action='store_true',
         dest='inline_footnotes', default=def_inline_footnotes,
         help='Show footnotes inline. Default=%s' % str(not def_inline_footnotes))
-        
+
     def_dpi = config.getValue("general", "default_dpi", 300)
-    parser.add_option('--default-dpi',dest='def_dpi',metavar='NUMBER',default=def_dpi,
+    parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
+        default=def_dpi,
         help='DPI for objects sized in pixels. Default=%d'%def_dpi)
-        
-    parser.add_option('--show-frame-boundary',dest='show_frame',action='store_true',default=False,
+
+    parser.add_option('--show-frame-boundary', dest='show_frame',
+                      action='store_true', default=False,
                       help='Show frame borders (only useful for debugging), default=False')
 
     options, args = parser.parse_args()
@@ -1521,13 +1528,10 @@ def main():
         footnote_backlinks=options.footnote_backlinks,
         inline_footnotes=options.inline_footnotes,
         def_dpi=int(options.def_dpi),
-        show_frame=options.show_frame
-    ).createPdf(text=infile.read(),
+        show_frame=options.show_frame).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
                 compressed=options.compressed)
-
-
 
 
 if __name__ == "__main__":
