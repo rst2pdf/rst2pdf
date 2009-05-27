@@ -207,6 +207,10 @@ class RstToPdf(object):
                 kind='percentage_of_container'
                 w=int(w[:-1])
             else:
+                # This uses default DPI setting because we
+                # are not using the image's "natural size"
+                # this is what LaTeX does, according to the
+                # docutils mailing list discussion
                 w = self.styles.adjustUnits(w, self.styles.tw,
                                             default_unit='px')
         else:
