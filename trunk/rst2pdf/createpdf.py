@@ -779,6 +779,7 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth+1)
 
         elif isinstance(node, docutils.nodes.bullet_list):
+            node._bullSize=self.styles["enumerated_list_item"].leading
             node.elements = self.gather_elements(node, depth,
                 style=self.styles["bullet_list_item"])
             s = self.styles["bullet_list"]
@@ -794,6 +795,10 @@ class RstToPdf(object):
 
 
         elif isinstance(node, docutils.nodes.enumerated_list):
+            node._bullSize=self.styles["enumerated_list_item"].leading*\
+                max([len(self.bullet_for_node(x)) for x in node.children])
+            print 'BS',node._bullSize
+            print [self.bullet_for_node(x) for x in node.children]
             node.elements = self.gather_elements(node, depth,
                 style=self.styles["enumerated_list_item"])
             s = self.styles["enumerated_list"]
@@ -837,31 +842,8 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.list_item):
             el = self.gather_elements(node, depth, style=style)
-            b = ""
-            if node.parent.get('start'):
-                start = int(node.parent.get('start'))
-            else:
-                start = 1
 
-            if node.parent.get('bullet') or isinstance(node.parent, docutils.nodes.bullet_list):
-                b = node.parent.get('bullet')
-                if b == "None":
-                    b = ""
-
-            elif node.parent.get('enumtype')=='arabic':
-                b = str(node.parent.children.index(node) + start) + '.'
-
-            elif node.parent.get('enumtype') == 'lowerroman':
-                b = str(self.lowerroman[node.parent.children.index(node) + start - 1]) + '.'
-            elif node.parent.get('enumtype') == 'upperroman':
-                b = str(self.lowerroman[node.parent.children.index(node) + start - 1].upper()) + '.'
-            elif node.parent.get('enumtype') == 'loweralpha':
-                b = str(self.loweralpha[node.parent.children.index(node) + start - 1]) + '.'
-            elif node.parent.get('enumtype') == 'upperalpha':
-                b = str(self.loweralpha[node.parent.children.index(node) + start - 1].upper()) + '.'
-            else:
-                log.critical("Unknown kind of list_item %s", node.parent)
-                sys.exit(1)
+            b = self.bullet_for_node(node)
 
             # FIXME: this is really really not good code
             if not el:
@@ -870,38 +852,47 @@ class RstToPdf(object):
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
                 b = u'\u2022'
-            el[0].bulletText = b
+            #el[0].bulletText = b
 
-            # Try to figure out how much space to reserve for the bullet
-            if "style" in el[0].__dict__:
-                indentation = el[0].style.leading
-            else:
-                indentation = 12
+            ## Try to figure out how much space to reserve for the bullet
+            #if "style" in el[0].__dict__:
+                #indentation = el[0].style.leading
+            #else:
+                #indentation = 12
+            #indentation=node.parent._bullSize
+            
+            bStyle=copy(style)
+            print bStyle.alignment
+            bStyle.alignment=2
+            
+            node.elements=[Table([[Paragraph(b,style=bStyle), el]], 
+                           style=sty.tstyles['item_list'],
+                           colWidths=[2*style.leading, None])]
+           
+            ## Indent all elements inside the list
+            #for e in el:
+                #if "style" in e.__dict__:
+                    #if isinstance(e.style, list): # Table style
+                        ## Add pre/post indenters. Later these sublists are flattened in node.elements
+                        #el[el.index(e)] = [
+                            #MyIndenter(left=2*indentation), e, MyIndenter(left=-2*indentation)]
+                    #else: # Paragraph style
+                        #indentedStyle = copy(e.style)
+                        #indentedStyle.leftIndent += indentation
+                        #indentedStyle.bulletIndent += indentation
+                        #e.style = indentedStyle
+            #for e in el:
+                #if not isinstance(e, list) and 'style' in e.__dict__:
+                    #e.style.leftIndent = e.style.bulletIndent + indentation
 
-            # Indent all elements inside the list
-            for e in el:
-                if "style" in e.__dict__:
-                    if isinstance(e.style, list): # Table style
-                        # Add pre/post indenters. Later these sublists are flattened in node.elements
-                        el[el.index(e)] = [
-                            MyIndenter(left=2*indentation), e, MyIndenter(left=-2*indentation)]
-                    else: # Paragraph style
-                        indentedStyle = copy(e.style)
-                        indentedStyle.leftIndent += indentation
-                        indentedStyle.bulletIndent += indentation
-                        e.style = indentedStyle
-            for e in el:
-                if not isinstance(e, list) and 'style' in e.__dict__:
-                    e.style.leftIndent = e.style.bulletIndent + indentation
-
-            # "Flatten" el
-            node.elements = []
-            for e in el:
-                if isinstance(e, list):
-                    node.elements += e
-                else:
-                    node.elements.append(e)
-            #node.elements=el
+            ## "Flatten" el
+            #node.elements = []
+            #for e in el:
+                #if isinstance(e, list):
+                    #node.elements += e
+                #else:
+                    #node.elements.append(e)
+            ##node.elements=el
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
@@ -1100,6 +1091,36 @@ class RstToPdf(object):
             # import pdb; pdb.set_trace()
             r.extend(self.gen_elements(n, depth, style=style))
         return r
+
+    def bullet_for_node(self, node):
+        """Takes a node, assumes it's some sort of item whose parent is a list, and
+        returns the bullet text it should have"""
+        b = ""
+        if node.parent.get('start'):
+            start = int(node.parent.get('start'))
+        else:
+            start = 1
+
+        if node.parent.get('bullet') or isinstance(node.parent, docutils.nodes.bullet_list):
+            b = node.parent.get('bullet')
+            if b == "None":
+                b = ""
+
+        elif node.parent.get('enumtype')=='arabic':
+            b = str(node.parent.children.index(node) + start) + '.'
+
+        elif node.parent.get('enumtype') == 'lowerroman':
+            b = str(self.lowerroman[node.parent.children.index(node) + start - 1]) + '.'
+        elif node.parent.get('enumtype') == 'upperroman':
+            b = str(self.lowerroman[node.parent.children.index(node) + start - 1].upper()) + '.'
+        elif node.parent.get('enumtype') == 'loweralpha':
+            b = str(self.loweralpha[node.parent.children.index(node) + start - 1]) + '.'
+        elif node.parent.get('enumtype') == 'upperalpha':
+            b = str(self.loweralpha[node.parent.children.index(node) + start - 1].upper()) + '.'
+        else:
+            log.critical("Unknown kind of list_item %s", node.parent)
+            sys.exit(1)
+        return b
 
     def filltable(self, rows):
         """
