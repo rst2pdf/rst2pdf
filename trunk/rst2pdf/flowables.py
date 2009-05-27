@@ -21,7 +21,13 @@ from log import log
 class MyImage(Image):
     """A Image subclass that can take a 'percentage_of_container' kind,
     which resizes it on wrap() to use... well, a percentage of the 
-    container's width."""
+    container's width.
+    
+    This whole class is a huge ungainly hack that deserves flaming death.
+    However, I have asked in the reportlab list for this feature. If they
+    implement it ... hey, I kill this in a jiffie.
+    
+    """
     def __init__(self, filename, width=None, height=None, 
                  kind='direct', mask="auto", lazy=1):
         self.__kind=kind
@@ -32,11 +38,12 @@ class MyImage(Image):
             self.drawHeight=height
             self.__width=width
             self.__height=height
-            self.__ratio=self.imageWidth/self.imageHeight
         else:
             Image.__init__(self, filename, width, height,
                 kind, mask, lazy)
-            
+        self.__ratio=float(self.imageWidth)/self.imageHeight
+        self.__wrappedonce=False
+
     def wrap(self, availWidth, availHeight):
         if self.__kind=='percentage_of_container':
             w, h= self.__width, self.__height
@@ -50,6 +57,22 @@ class MyImage(Image):
             self.drawWidth, self.drawHeight = w, h
             return w, h
         else:
+            if self.drawHeight > availHeight:
+                if not self.__wrappedonce:
+                    self.__wrappedonce = True
+                    return Image.wrap(self, availWidth, availHeight)
+                else: # Adjust by height
+                    # FIXME get rst file info (line number) here for better error
+                    # message
+                    log.warning('image %s is too tall for the frame, rescaling'%\
+                                self.filename)
+                    self.drawHeight = availHeight
+                    self.drawWidth = availHeight*self.__ratio
+            elif self.drawWidth > availWidth:
+                log.warning('image %s is too wide for the frame, rescaling'%\
+                            self.filename)
+                self.drawWidth = availWidth
+                self.drawHeight = availWidth / self.__ratio
             return Image.wrap(self, availWidth, availHeight)
 
 class MyIndenter(Indenter):
