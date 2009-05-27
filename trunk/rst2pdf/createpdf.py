@@ -797,8 +797,6 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.enumerated_list):
             node._bullSize=self.styles["enumerated_list_item"].leading*\
                 max([len(self.bullet_for_node(x)) for x in node.children])
-            print 'BS',node._bullSize
-            print [self.bullet_for_node(x) for x in node.children]
             node.elements = self.gather_elements(node, depth,
                 style=self.styles["enumerated_list_item"])
             s = self.styles["enumerated_list"]
@@ -862,7 +860,6 @@ class RstToPdf(object):
             #indentation=node.parent._bullSize
             
             bStyle=copy(style)
-            print bStyle.alignment
             bStyle.alignment=2
             
             node.elements=[Table([[Paragraph(b,style=bStyle), el]], 
