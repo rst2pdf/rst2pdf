@@ -952,8 +952,7 @@ class RstToPdf(object):
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
                 node.elements = [SVGImage(filename=imgname, height=h, width=w)]
             else:
-                node.elements = [MyImage(filename=imgname, height=h, width=w, 
-                                         kind=kind)]
+                node.elements = [MyImage(filename=imgname, height=h, width=w)]
             i = node.elements[0]
             alignment=node.get('align', 'CENTER').upper()
             if alignment in ('LEFT', 'CENTER', 'RIGHT'):
