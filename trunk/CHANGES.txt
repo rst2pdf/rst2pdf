@@ -1,6 +1,8 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Better support for %width in images, now it's % of the container frame's
+  width, not of the text area.
 * Fixed bug in SVG scaling
 * Better handling of missing images
 * Added missing styles abstract, contents, dedication to the default stylesheet

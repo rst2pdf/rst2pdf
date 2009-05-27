@@ -18,6 +18,40 @@ import styles
 from log import log
 
 
+class MyImage(Image):
+    """A Image subclass that can take a 'percentage_of_container' kind,
+    which resizes it on wrap() to use... well, a percentage of the 
+    container's width."""
+    def __init__(self, filename, width=None, height=None, 
+                 kind='direct', mask="auto", lazy=1):
+        self.__kind=kind
+        if kind == 'percentage_of_container':
+            Image.__init__(self, filename, width, height,
+                'direct', mask, lazy)
+            self.drawWidth=width
+            self.drawHeight=height
+            self.__width=width
+            self.__height=height
+            self.__ratio=self.imageWidth/self.imageHeight
+        else:
+            Image.__init__(self, filename, width, height,
+                kind, mask, lazy)
+            
+    def wrap(self, availWidth, availHeight):
+        if self.__kind=='percentage_of_container':
+            w, h= self.__width, self.__height
+            if not w:
+                log.warning('Scaling image as % of container with w unset.'
+                'This should not happen, setting to 100')
+                w = 100
+            scale=w/100.
+            w = availWidth*scale
+            h = w/self.__ratio
+            self.drawWidth, self.drawHeight = w, h
+            return w, h
+        else:
+            return Image.wrap(self, availWidth, availHeight)
+
 class MyIndenter(Indenter):
     """I can't remember why this exists."""
 
