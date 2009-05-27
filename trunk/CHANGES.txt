@@ -1,7 +1,8 @@
 New in SVN (will be 0.11)
 -------------------------
 
-* Better support for %width in images, now it's % of the container frame's
+* Fixed Issue 116: crashes caused by huge images
+* Better support for %width in images, n2ow it's % of the container frame's
   width, not of the text area.
 * Fixed bug in SVG scaling
 * Better handling of missing images
@@ -16,7 +17,7 @@ New in SVN (will be 0.11)
 * Support all required measurement units ("em" "ex" "px" "in" "cm" 
   "mm" "pt" "pc" "%" "")
 * New automated scripts to check test cases for "visual differences"
-* Issue 116: respect images DPI property
+* Respect images DPI property a bit like rst2latex does.
 * Issue 110: New --inline-footnotes option
 * Tested with reportlab from SVN trunk
 * Support for Dinu Gherman's svglib. If both svglib and uniconvertor are available,
