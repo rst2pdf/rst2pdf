@@ -583,6 +583,18 @@ tstyles['field'] = TableStyle([
 
 fieldlist_lwidth = 3*units.cm
 
+# Used for itemized lists
+tstyles['item_list'] = TableStyle([
+    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+    ('TOPPADDING', (0, 0), (-1, -1), 0),
+    ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+    ('RIGHTPADDING', (0, 0), (1, -1), 0),
+    #('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+    #('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+])
+
+
 # Used for endnotes
 tstyles['endnote'] = TableStyle([
     ('VALIGN', (0, 0), (-1, -1), 'TOP'),
