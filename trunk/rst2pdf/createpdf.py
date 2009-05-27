@@ -187,7 +187,6 @@ class RstToPdf(object):
         else:
             img = PILImage.open(imgname)
             iw, ih = img.size
-            xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
 
         # Try to get the print resolution from the image itself via PIL.
         # If it fails, assume a DPI of 300, which is pretty much made up,
@@ -206,8 +205,9 @@ class RstToPdf(object):
             w = self.styles.adjustUnits(w, self.styles.tw,
                                         default_unit='px')
         else:
+            xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
             log.warning("Using image %s without specifying size."
-                "Calculating based on %ddpi", imgname, xdpi)
+                "Calculating based on image size at %ddpi", imgname, xdpi)
             # No width specified at all, use w in px
             w = iw*inch/xdpi
 

@@ -2,12 +2,11 @@ The valid units are:
 
 "em" "ex" "px" "in" "cm" "mm" "pt" "pc" "%" "".
 
-300px with default 300DPI == 1 inch
+16px with 16DPI (defined in the image) == 1 inch
 
-.. image:: images/biohazard.png
-   :width: 300px
+.. image:: images/biohazard_16dpi.png
 
-300, no unit == 300px
+300, no unit == 300px at 300DPI == 1 inch
 
 .. image:: images/biohazard.png
    :width: 300
