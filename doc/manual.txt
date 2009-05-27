@@ -308,7 +308,8 @@ The valid units you can use are:
 
 * pc: 1/6 inch
 
-* %: percentage of available width
+* %: percentage of available width in the frame. Setting a percentage as a height 
+  does **not** work and probably never will.
   
 If you don't specify a size at all, rst2pdf will do its best to figure out what it should do:
     

@@ -171,11 +171,11 @@ class RstToPdf(object):
         # will return it in points and we're done.
 
         # However, often the unit wil be "%" (specially if it's meant for
-        # HTML originally.In which case, we will use a percentage of
-        # self.styles.tw which may or may not be correct.
+        # HTML originally. In which case, we will use a percentage of
+        # the containing frame.
 
         # Find the image size in pixels:
-
+        kind = 'direct'
         xdpi, ydpi=self.styles.def_dpi, self.styles.def_dpi
         if imgname.split('.')[-1].lower() in [
                 "ai", "ccx", "cdr", "cgm", "cmx",
@@ -202,8 +202,12 @@ class RstToPdf(object):
         if w is not None:
             # In this particular case, we want the default unit
             # to be pixels so we work like rst2html
-            w = self.styles.adjustUnits(w, self.styles.tw,
-                                        default_unit='px')
+            if w[-1]=='%':
+                kind='percentage_of_container'
+                w=int(w[:-1])
+            else:
+                w = self.styles.adjustUnits(w, self.styles.tw,
+                                            default_unit='px')
         else:
             xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
             log.warning("Using image %s without specifying size."
@@ -212,12 +216,15 @@ class RstToPdf(object):
             w = iw*inch/xdpi
 
         h = node.get('height')
-        if h is not None:
+        if h is not None and h[-1] <> '%':
             h = self.styles.adjustUnits(h, ih*inch/ydpi)
         else:
             # Now, often, only the width is specified!
             # if we don't have a height, we need to keep the
             # aspect ratio, or else it will look ugly
+            if h and h[-1]=='%':
+                log.error('Setting height as a percentage does **not** work. '\
+                          'ignoring height parameter')
             h = w*ih/iw
 
         # Apply scale factor
@@ -227,7 +234,8 @@ class RstToPdf(object):
         # And now we have this probably completely bogus size!
         log.info("Image %s size calculated:  %fcm by %fcm",
             imgname, w/cm, h/cm)
-        return w, h
+
+        return w, h, kind
 
     def style_language(self, style):
         """Return language corresponding to this style."""
@@ -419,7 +427,8 @@ class RstToPdf(object):
                 uri=os.path.join(self.img_dir, 'image-missing.png')
                 w, h = 1*cm, 1*cm
             else:
-                w, h=self.size_for_image_node(node)
+                w, h, kind = self.size_for_image_node(node)
+                                
             alignment=node.get('align', 'CENTER').lower()
             if alignment in ('top', 'middle', 'bottom'):
                 align='valign="%s"'%alignment
@@ -948,14 +957,15 @@ class RstToPdf(object):
                 imgname=os.path.join(self.img_dir, 'image-missing.png')
                 w, h = 1*cm, 1*cm
             else:
-                w, h=self.size_for_image_node(node)
+                w, h, kind = self.size_for_image_node(node)
 
             if imgname.split('.')[-1].lower() in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
                 node.elements = [SVGImage(filename=imgname, height=h, width=w)]
             else:
-                node.elements = [Image(filename=imgname, height=h, width=w)]
+                node.elements = [MyImage(filename=imgname, height=h, width=w, 
+                                         kind=kind)]
             i = node.elements[0]
             alignment=node.get('align', 'CENTER').upper()
             if alignment in ('LEFT', 'CENTER', 'RIGHT'):
