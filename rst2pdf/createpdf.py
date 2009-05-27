@@ -844,10 +844,8 @@ class RstToPdf(object):
             b = self.bullet_for_node(node)
 
             # FIXME: this is really really not good code
-            print el
             if not el:
                 el = [Paragraph(u"<nobr>\xa0</nobr>", self.styles["bodytext"])]
-            print el[0].text
 
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
