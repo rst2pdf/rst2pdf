@@ -43,14 +43,19 @@ class StyleSheet(object):
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         dirn=os.path.dirname(__file__)
-	if fontPath is None:
-		fontPath=[]
-        self.FontSearchPath = fontPath + [
-            '.', os.path.join(os.path.abspath(dirn), 'fonts')]
+        if fontPath is None:
+            fontPath=[]            
+        fontPath+=['.', os.path.join(os.path.abspath(dirn), 'fonts')]
+        self.FontSearchPath = map(os.path.expanduser, fontPath)
+        
         if stylePath is None:
-            stylePath = ['.', os.path.join(os.path.abspath(dirn),
-                'styles'), '~/.rst2pdf/styles']
+            stylePath=[]
+        stylePath+=['.', os.path.join(os.path.abspath(dirn), 'styles'), 
+                      '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, stylePath)
+
+        log.info('FontPath:%s'%self.FontSearchPath)
+        log.info('StylePath:%s'%self.StyleSearchPath)
 
         findfonts.flist = self.FontSearchPath
         # Page width, height
