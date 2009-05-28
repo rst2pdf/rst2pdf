@@ -37,12 +37,14 @@ unit_separator = re.compile('(-?[0-9\.]*)')
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
 
-    def __init__(self, flist, fontPath=[], stylePath=None, def_dpi=300):
+    def __init__(self, flist, fontPath=None, stylePath=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
         self.def_dpi=def_dpi
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         dirn=os.path.dirname(__file__)
+	if fontPath is None:
+		fontPath=[]
         self.FontSearchPath = fontPath + [
             '.', os.path.join(os.path.abspath(dirn), 'fonts')]
         if stylePath is None:
