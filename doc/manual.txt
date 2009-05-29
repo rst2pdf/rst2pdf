@@ -354,8 +354,8 @@ You can make rst2pdf print the default stylesheet::
 
   rst2pdf --print-stylesheet
 
-If you want to add styles, just take the standard stylesheet,
-modify it and pass it with the -s option::
+If you want to add styles, just create a stylesheet, (or take the standard 
+stylesheet and modify it) and pass it with the -s option::
 
   rst2pdf mydoc.txt -s mystyles.txt
 
@@ -370,6 +370,63 @@ Those styles will always be searched in these places, in order:
 * ~/.rst2pdf/styles
 
 * The styles folder within rst2pdf's installation folder.
+
+You can use multiple -s options, or pass more than one stylesheet
+separated with commas. They are processed in the order you give them
+so the *last* one has priority.
+
+Included StyleSheets
+--------------------
+
+To make some of the more common adjustments easier, rst2pdf includes a 
+collection of stylesheets you can use:
+
+Font styles
+    These stylesheets modfy your font settings.
+    
+    * ``serif`` uses the PDF serif font (Times) instead of the default Sans 
+      Serif (Arial)
+    * ``freetype-sans`` uses your system's default TrueType Sans Serif font
+    * ``freetype-serif`` uses your system's default TrueType Serif font
+    * ``twelvepoint``
+    
+Page layout styles
+    These stylesheets modify your page layout.
+    
+    * ``twocolumn`` uses the twoColumn layout as the initial page layout.
+    * ``double-sided`` adds a gutter margin (margin at the "in side" of the pages)
+
+Page size styles
+    Stylesheets that change the paper size.
+    
+    The usual standard paper sizes are supported:
+        
+    * A0
+    * A1
+    * A2
+    * A3
+    * A4 (default)
+    * A5
+    * A6
+    * B0
+    * B1
+    * B2
+    * B3
+    * B4
+    * B5
+    * B6
+    * Letter
+    * Legal
+    * 11x17
+
+    The name of the stylesheet is lowercase.
+
+Code block styles
+    See `Syntax Highlighting`_
+
+So, if you want to have a two-column, legal size, serif document with code in murphy style::
+    
+    rst2pdf mydoc.txt -s twocolumn,serif,murphy,legal
 
 StyleSheet Syntax
 -----------------
@@ -731,30 +788,33 @@ the currently supported_.
 
 Rst2pdf includes several stylesheets for highlighting code:
 
-* autumn.json
-* borland.json
-* bw.json
-* colorful.json
-* default.json
-* emacs.json
-* friendly.json
-* fruity.json
-* manni.json
-* murphy.json
-* native.json
-* pastie.json
-* perldoc.json
-* trac.json
-* vs.json
+* autumn
+* borland
+* bw
+* colorful
+* emacs
+* friendly
+* fruity
+* manni
+* murphy
+* native
+* pastie
+* perldoc
+* trac
+* vs
 
-You can use any of them instead of the default by adding, for example, a ``-s murphy.json`` to
+You can use any of them instead of the default by adding, for example, a ``-s murphy`` to
 the command line.
 
 If you already are using a custom stylesheet, use both::
 
-    rst2pdf mydoc.rst -o mydoc.pdf -s mystyle.json,murphy.json
+    rst2pdf mydoc.rst -o mydoc.pdf -s mystyle.json,murphy
 
 The default is the same as "emacs".
+
+There is an online demo of pygments showing these styles:
+    
+    http://pygments.org/demo/1817/
 
 Examples
 ~~~~~~~~
