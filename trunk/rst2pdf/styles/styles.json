@@ -160,8 +160,11 @@
       "spaceBefore": 12,
       "fontSize": "75%"
     }],
+    ["heading" , {
+      "parent": "normal"
+    }],
     ["heading1" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBold",
       "fontSize": "175%",
       "keepWithNext": true,
@@ -169,7 +172,7 @@
       "spaceAfter": 6
     }],
     ["heading2" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBold",
       "fontSize": "150%",
       "keepWithNext": true,
@@ -177,7 +180,7 @@
       "spaceAfter": 6
     }],
     ["heading3" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBoldItalic",
       "fontSize": "125%",
       "keepWithNext": true,
@@ -185,7 +188,7 @@
       "spaceAfter": 6
     }],
     ["heading4" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBoldItalic",
       "keepWithNext": true
     }],
