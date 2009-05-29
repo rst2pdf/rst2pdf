@@ -433,7 +433,6 @@ class StyleSheet(object):
             return None
         for ext in ['','.style','.json']:
             result = innerFind(self.StyleSearchPath,fn+ext)
-            print "searching %s, got %s"%(fn+ext,result)
             if result:
                 break
         if result is None:
