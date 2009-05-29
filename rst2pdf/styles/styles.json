@@ -147,24 +147,23 @@
       "parent": "bodytext",
       "fontName": "stdItalic"
     }],
-    ["title" , {
+    ["heading" , {
       "parent": "normal",
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["title" , {
+      "parent": "heading",
       "fontName": "stdBold",
       "fontSize": "200%",
       "alignment": "TA_CENTER",
-      "spaceBefore": 12,
       "spaceAfter": 10
     }],
     ["subtitle" , {
       "parent": "title",
       "spaceBefore": 12,
       "fontSize": "75%"
-    }],
-    ["heading" , {
-      "parent": "normal",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
     }],
     ["heading1" , {
       "parent": "heading",
