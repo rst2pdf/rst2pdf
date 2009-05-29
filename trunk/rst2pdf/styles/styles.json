@@ -161,36 +161,29 @@
       "fontSize": "75%"
     }],
     ["heading" , {
-      "parent": "normal"
+      "parent": "normal",
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
     }],
     ["heading1" , {
       "parent": "heading",
       "fontName": "stdBold",
-      "fontSize": "175%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "175%"
     }],
     ["heading2" , {
       "parent": "heading",
       "fontName": "stdBold",
-      "fontSize": "150%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "150%"
     }],
     ["heading3" , {
       "parent": "heading",
       "fontName": "stdBoldItalic",
-      "fontSize": "125%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "125%"
     }],
     ["heading4" , {
       "parent": "heading",
-      "fontName": "stdBoldItalic",
-      "keepWithNext": true
+      "fontName": "stdBoldItalic"
     }],
     ["topic-title" , {
       "parent": "heading3"
@@ -294,10 +287,11 @@
       "alignment" : "TA_CENTER"
     }],
     ["table-heading" , {
-      "parent" : "heading4",
+      "parent" : "heading",
       "backColor" : "beige",
       "alignment" : "TA_CENTER",
-      "valign" : "BOTTOM"
+      "valign" : "BOTTOM",
+      "borderPadding" : 0
     }],
     ["dedication" , {
       "parent" : "normal"
