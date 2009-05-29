@@ -610,7 +610,7 @@ class RstToPdf(object):
             elif isinstance(node.parent, docutils.nodes.topic):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['topic-title'])]
             elif isinstance(node.parent, docutils.nodes.admonition):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['heading3'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['admonition-title'])]
             elif isinstance(node.parent, docutils.nodes.table):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['table-title'])]
             elif isinstance(node.parent, docutils.nodes.sidebar):

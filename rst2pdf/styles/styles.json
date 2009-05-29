@@ -241,6 +241,9 @@
     ["warning" , {
       "parent": "admonition"
     }],
+    ["admonition-title" , {
+      "parent": "heading3"
+    }],
     ["admonition-heading" , {
       "parent": "heading3"
     }],
