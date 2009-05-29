@@ -659,7 +659,8 @@ class RstToPdf(object):
 
             fn = Paragraph(self.gather_pdftext(node.children[0], depth) + ":",
                 style=self.styles['fieldname'])
-            fb = self.gen_elements(node.children[1], depth)
+            fb = self.gen_elements(node.children[1], 
+                depth,style=self.styles['fieldvalue'])
             node.elements = [Table([[fn, fb]], style=sty.tstyles['field'],
                 colWidths=[sty.fieldlist_lwidth, None])]
 
@@ -818,7 +819,7 @@ class RstToPdf(object):
             desc = self.gather_elements(node.children[1], depth, style)
 
             node.elements = [Table([[self.PreformattedFit(
-                optext, self.styles["literal"]), desc]], style=sty.tstyles['field'])]
+                optext, self.styles["literal"]), desc]], style=sty.tstyles['optionlist'])]
 
 
         elif isinstance(node, docutils.nodes.definition_list_item):
