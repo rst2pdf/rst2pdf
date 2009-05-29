@@ -1407,8 +1407,8 @@ def main():
 
     def_ssheets = ','.join([expanduser(p) for p in
         config.getValue("general", "stylesheets", "").split(',')])
-    parser.add_option('-s', '--stylesheets', dest='style',
-        metavar='STYLESHEETS', default=def_ssheets,
+    parser.add_option('-s', '--stylesheets', dest='style',type='string', action='append',
+        metavar='STYLESHEETS', default=[def_ssheets],
         help='A comma-separated list of custom stylesheets. Default="%s"' % def_ssheets)
 
     def_sheetpath = ':'.join([expanduser(p) for p in
@@ -1541,10 +1541,13 @@ def main():
             log.setLevel(logging.CRITICAL)
             #/reportlab/pdfbase/pdfdoc.py output can be a callable (stringio, stdout ...)
 
+    ssheet=[]
     if options.style:
-        ssheet = options.style.split(',')
+        for l in options.style:
+            ssheet += l.split(',')
     else:
         ssheet = []
+    ssheet = [x for x in ssheet if x]
 
     fpath = []
     if options.fpath:
