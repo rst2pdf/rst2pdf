@@ -529,6 +529,18 @@ class StyleSheet(object):
             else:
                 bc = colors.black
             results.append(('BOX', (x, y), (x, y), bw, bc))
+        if style.padding:
+            if instance(style.padding,list):
+                results.append(('TOPPADDING', (x, y), (x, y), style.padding[0]))
+                results.append(('RIGHTPADDING', (x, y), (x, y), style.padding[1]))
+                results.append(('BOTTOMPADDING', (x, y), (x, y), style.padding[2]))
+                results.append(('LEFTPADDING', (x, y), (x, y), style.padding[3]))
+            else:                 
+                results.append(('TOPPADDING', (x, y), (x, y), style.padding))
+                results.append(('RIGHTPADDING', (x, y), (x, y), style.padding))
+                results.append(('BOTTOMPADDING', (x, y), (x, y), style.padding))
+                results.append(('LEFTPADDING', (x, y), (x, y), style.padding))
+                 
         return results
 
     def adjustUnits(self, v, total=None, default_unit='pt'):
