@@ -1,0 +1,80 @@
+{"styles": [
+    ["base", {
+        "fontSize": 12
+    }],
+    ["heading", {
+        "backColor": "#F2F2F2",
+        "textColor": "#20435C",
+        "borderWidth": 0.3,
+        "borderColor": "#CCCCCC",
+        "leading": 10,
+        "spaceBefore": 16,
+        "borderPadding": [10,0,0,10],
+        "leftIndent": 10
+    }],
+    ["code", {
+        "backColor": "#EEFFCC",
+        "borderWidth": 0.3,
+        "borderColor": "#AACC99"
+    }],
+    ["admonition" , {
+      "borderColor": "#AACC99",
+      "backColor": "#EEFFCC",
+      "borderPadding": 8,
+      "borderWidth": 0.5,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["sidebar", {
+      "borderColor": "#AACC99",
+      "backColor": "#EEFFCC",
+      "borderPadding": 8,
+      "borderWidth": 0.5,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["admonition-heading" , {
+      "parent": "heading3",
+      "borderPadding": 0,
+      "borderWidth": 0,      
+      "borderColor": null,
+      "backColor": null,
+      "leftIndent": 0
+    }],
+    ["admonition-title" , {
+      "parent": "heading3",
+      "borderPadding": 0,
+      "borderWidth": 0,      
+      "borderColor": null,
+      "backColor": null,
+      "leftIndent": 0
+    }],
+    ["sidebar-title" , {
+      "parent": "heading3",
+      "borderPadding": 0,
+      "borderWidth": 0,      
+      "borderColor": null,
+      "backColor": null,
+      "leftIndent": 0
+    }],
+    ["sidebar-subtitle" , {
+      "parent": "heading4",
+      "borderPadding": 0,
+      "borderWidth": 0,      
+      "borderColor": null,
+      "backColor": null,
+      "spaceBefore": 0,
+      "leftIndent": 0
+    }],
+    ["fieldname" , {
+      "parent": "bodytext",
+      "alignment": "TA_RIGHT",
+      "fontName": "stdBold",
+      "backColor": "#EEDEEE",
+      "borderPadding": 3
+    }],
+    ["fieldvalue" , {
+      "backColor": "#EEEEFF",
+      "borderPadding": 3
+    }]
+]}
