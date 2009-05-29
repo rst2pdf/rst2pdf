@@ -99,8 +99,12 @@ class RstToPdf(object):
         self.decoration = {'header': header,
                            'footer': footer,
                            'endnotes': []}
-        stylesheets = [join(abspath(dirname(__file__)),
-                       'styles', 'styles.json')] + stylesheets
+         # find base path
+         if hasattr(sys, 'frozen'):
+             PATH = abspath(dirname(sys.executable))
+         else:
+             PATH = abspath(dirname(__file__))        
+        stylesheets = [join(PATH,'styles', 'styles.json')] + stylesheets
         self.styles = sty.StyleSheet(stylesheets,
                                      fontPath,
                                      stylePath,
