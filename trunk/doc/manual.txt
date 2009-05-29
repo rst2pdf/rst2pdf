@@ -106,7 +106,7 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
 
 
 
-Here's an example file showing all the currently available options:
+Here's an example file showing some of the currently available options:
 
 .. code-block:: ini
 
@@ -141,6 +141,7 @@ Here's an example file showing all the currently available options:
     # 0 means no level starts in a new page.
     break_level=0
 
+Included with rst2pdf is an example file with every option in it.
 
 Pipe usage
 ==========
