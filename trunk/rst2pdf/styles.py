@@ -100,9 +100,11 @@ class StyleSheet(object):
         for data, ssname in zip(ssdata, flist):
             page = data.get('pageSetup', {})
             if page:
-                if page.get('size', None): # A standard size
-                    if page['size'] in pagesizes.__dict__:
-                        self.ps = list(pagesizes.__dict__[page['size']])
+                pgs=page.get('size', None)
+                if pgs: # A standard size
+                    pgs=pgs.upper()
+                    if pgs in pagesizes.__dict__:
+                        self.ps = list(pagesizes.__dict__[pgs])
                     else:
                         log.critical('Unknown page size %s in stylesheet %s'%\
                             (page['size'], ssname))
