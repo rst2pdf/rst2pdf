@@ -84,7 +84,8 @@ class StyleSheet(object):
         for fname in flist:
             fname = self.findStyle(fname)
             try:
-                ssdata.append(loads(open(fname).read()))
+                if fname:
+                    ssdata.append(loads(open(fname).read()))
             except ValueError, e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\
                     (fname, str(e)))
@@ -420,13 +421,25 @@ class StyleSheet(object):
         and returns the real file name.
 
         """
-        if not os.path.isabs(fn):
-            for D in self.StyleSearchPath:
-                tfn = os.path.join(D, fn)
-                if os.path.isfile(tfn):
-                    return str(tfn)
-        return str(fn)
-
+        def innerFind(path,fn):
+            if os.path.isabs(fn):
+                if os.path.isfile(fn):
+                    return fn
+            else:
+                for D in path:
+                    tfn = os.path.join(D, fn)
+                    if os.path.isfile(tfn):
+                        return tfn
+            return None
+        for ext in ['','.style','.json']:
+            result = innerFind(self.StyleSearchPath,fn+ext)
+            print "searching %s, got %s"%(fn+ext,result)
+            if result:
+                break
+        if result is None:
+            log.warning("Can't find stylesheet %s"%fn)
+        return result
+    
     def findFont(self, fn):
         """Find the absolute font name for a given font filename.
 
