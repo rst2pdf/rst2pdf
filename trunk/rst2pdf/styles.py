@@ -28,8 +28,10 @@ from log import log
 try:
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    from wordaxe import version as wordaxe_version
+    HAS_WORDAXE=True
 except ImportError:
-    pass # log.warning("No hyphenation support, install wordaxe")
+    HAS_WORDAXE=False
 
 unit_separator = re.compile('(-?[0-9\.]*)')
 
@@ -401,12 +403,21 @@ class StyleSheet(object):
             if ('bulletFontSize' not in s) and ('fontSize' in s):
                 s['bulletFontSize'] = s['fontSize']
 
-            # If the borderPadding is a number, convert it to a list
-            #if 'borderPadding' in s and isinstance(s['borderPadding'],int):
-                #s['borderPadding']=[s['borderPadding'],]*4
+            # If the borderPadding is a list and wordaxe <=0.3.2, 
+            # convert it to an integer. Workaround for Issue 
+            if HAS_WORDAXE and \
+                    wordaxe_version <='wordaxe 0.3.2' \
+                    and 'borderPadding' in s \
+                    and isinstance(s['borderPadding'],list):
+                log.warning('Using a borderPadding list in '\
+                    'style %s with wordaxe <= 0.3.2. That is not '\
+                    'supported, so it will probably look wrong'%s['name'])
+                s['borderPadding']=s['borderPadding'][0]
 
             self.StyleSheet.add(ParagraphStyle(**s))
         self.emsize=self['base'].fontSize
+
+        self.adjustFieldStyle()
 
     def __getitem__(self, key):
         try:
@@ -509,6 +520,15 @@ class StyleSheet(object):
         return [("ROWBACKGROUNDS", (0, 0), (-1, -1),
             [formatColor(c, numeric=False) for c in \
                 self['table'].rowBackgrounds])]
+                
+    def adjustFieldStyle(self):
+        """Merges fieldname and fieldvalue styles into the field table style"""
+        tstyle=tstyles['field']
+        extras=self.pStyleToTStyle(self['fieldname'],0,0)+\
+                self.pStyleToTStyle(self['fieldvalue'],1,0) 
+        for e in extras:
+            tstyle.add(*e)
+        return tstyle
 
     def pStyleToTStyle(self, style, x, y):
         """Return a table style similar to a given paragraph style.
@@ -529,18 +549,17 @@ class StyleSheet(object):
             else:
                 bc = colors.black
             results.append(('BOX', (x, y), (x, y), bw, bc))
-        if style.padding:
-            if instance(style.padding,list):
-                results.append(('TOPPADDING', (x, y), (x, y), style.padding[0]))
-                results.append(('RIGHTPADDING', (x, y), (x, y), style.padding[1]))
-                results.append(('BOTTOMPADDING', (x, y), (x, y), style.padding[2]))
-                results.append(('LEFTPADDING', (x, y), (x, y), style.padding[3]))
+        if style.borderPadding:
+            if isinstance(style.borderPadding,list):
+                results.append(('TOPPADDING', (x, y), (x, y), style.borderPadding[0]))
+                results.append(('RIGHTPADDING', (x, y), (x, y), style.borderPadding[1]))
+                results.append(('BOTTOMPADDING', (x, y), (x, y), style.borderPadding[2]))
+                results.append(('LEFTPADDING', (x, y), (x, y), style.borderPadding[3]))
             else:                 
-                results.append(('TOPPADDING', (x, y), (x, y), style.padding))
-                results.append(('RIGHTPADDING', (x, y), (x, y), style.padding))
-                results.append(('BOTTOMPADDING', (x, y), (x, y), style.padding))
-                results.append(('LEFTPADDING', (x, y), (x, y), style.padding))
-                 
+                results.append(('TOPPADDING', (x, y), (x, y), style.borderPadding))
+                results.append(('RIGHTPADDING', (x, y), (x, y), style.borderPadding))
+                results.append(('BOTTOMPADDING', (x, y), (x, y), style.borderPadding))
+                results.append(('LEFTPADDING', (x, y), (x, y), style.borderPadding))
         return results
 
     def adjustUnits(self, v, total=None, default_unit='pt'):
@@ -615,6 +634,14 @@ tstyles['field'] = TableStyle([
 ])
 
 fieldlist_lwidth = 3*units.cm
+
+# Used for field lists
+tstyles['optionlist'] = TableStyle([
+    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+    ('TOPPADDING', (0, 0), (-1, -1), 0),
+])
+
 
 # Used for itemized lists
 tstyles['item_list'] = TableStyle([

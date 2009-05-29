@@ -138,6 +138,9 @@
       "alignment": "TA_RIGHT",
       "fontName": "stdBold"
     }],
+    ["fieldvalue" , {
+      "parent": "normal"
+    }],
     ["rubric" , {
       "parent": "bodytext",
       "textColor": "darkred",
