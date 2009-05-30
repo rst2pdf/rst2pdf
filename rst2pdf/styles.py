@@ -142,6 +142,22 @@ class StyleSheet(object):
                 # and compress literal blocks.
                 self.tw = self.pw - self.lm - self.rm - self.gm
 
+
+        # Get table styles from all stylesheets in order
+        self.tstyles = {}
+        for data, ssname in zip(ssdata, flist):
+            tstyles = data.get('tstyles', {})
+            #tstyles is a dictionary of tstyles
+            print tstyles
+            for key in tstyles:
+                tstyle=tstyles[key]
+                if isinstance(tstyle,list): #It's a table style
+                    self.tstyles[key]=TableStyle(tstyle)
+                else: #It's a constant
+                    self.tstyles[key]=self.adjustUnits(tstyles[key])
+            print self.tstyles
+
+
         # Get page templates from all stylesheets
         self.pageTemplates = {}
         for data, ssname in zip(ssdata, flist):
@@ -523,7 +539,7 @@ class StyleSheet(object):
                 
     def adjustFieldStyle(self):
         """Merges fieldname and fieldvalue styles into the field table style"""
-        tstyle=tstyles['field']
+        tstyle=self.tstyles['field']
         extras=self.pStyleToTStyle(self['fieldname'],0,0)+\
                 self.pStyleToTStyle(self['fieldvalue'],1,0) 
         for e in extras:
