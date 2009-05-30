@@ -148,14 +148,12 @@ class StyleSheet(object):
         for data, ssname in zip(ssdata, flist):
             tstyles = data.get('tstyles', {})
             #tstyles is a dictionary of tstyles
-            print tstyles
             for key in tstyles:
                 tstyle=tstyles[key]
                 if isinstance(tstyle,list): #It's a table style
                     self.tstyles[key]=TableStyle(tstyle)
                 else: #It's a constant
                     self.tstyles[key]=self.adjustUnits(tstyles[key])
-            print self.tstyles
 
 
         # Get page templates from all stylesheets
