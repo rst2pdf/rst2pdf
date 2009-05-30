@@ -104,7 +104,7 @@ class RstToPdf(object):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))        
-        stylesheets = [join(PATH,'styles', 'styles.json')] + stylesheets
+        stylesheets = [join(PATH,'styles', 'styles.json'),join(PATH,'styles', 'default.json')] + stylesheets
         self.styles = sty.StyleSheet(stylesheets,
                                      fontPath,
                                      stylePath,

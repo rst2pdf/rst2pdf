@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Better syntax highlighting (supports bold/italic)
 * Workaround for issue 103 so you can use borderPadding as a list (but it will look wrong
   if you are using wordaxe <= 0.3.2) 
 * Added fieldvalue style for field lists
