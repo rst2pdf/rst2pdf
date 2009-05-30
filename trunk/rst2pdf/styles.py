@@ -627,9 +627,9 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
     return float(n)
 
 
-# Some table styles used for pieces of the document
+## Some table styles used for pieces of the document
 
-tstyles = {}
+#tstyles = {}
 
 # Used for regular tables
 
@@ -639,58 +639,58 @@ tstyleNorm = [
     ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
 ]
 
-# Header row in tables
-tstyles['normal'] = TableStyle(tstyleNorm)
+## Header row in tables
+#tstyles['normal'] = TableStyle(tstyleNorm)
 
-# Used for field lists
-tstyles['field'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    ('TOPPADDING', (0, 0), (-1, -1), 0),
-])
+## Used for field lists
+#tstyles['field'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+    #('TOPPADDING', (0, 0), (-1, -1), 0),
+#])
 
-fieldlist_lwidth = 3*units.cm
+#fieldlist_lwidth = 3*units.cm
 
-# Used for field lists
-tstyles['optionlist'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    ('TOPPADDING', (0, 0), (-1, -1), 0),
-])
-
-
-# Used for itemized lists
-tstyles['item_list'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    ('TOPPADDING', (0, 0), (-1, -1), 0),
-    ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
-    ('RIGHTPADDING', (0, 0), (1, -1), 0),
-    #('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-    #('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-])
+## Used for field lists
+#tstyles['optionlist'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+    #('TOPPADDING', (0, 0), (-1, -1), 0),
+#])
 
 
-# Used for endnotes
-tstyles['endnote'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-])
+## Used for itemized lists
+#tstyles['item_list'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+    #('TOPPADDING', (0, 0), (-1, -1), 0),
+    #('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+    #('RIGHTPADDING', (0, 0), (1, -1), 0),
+    ##('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+    ##('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+#])
 
-# Left column of the endnote. The content of the note takes the rest of
-# the available space
-endnote_lwidth = 2*units.cm
 
-# Used for sidebars
+## Used for endnotes
+#tstyles['endnote'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
+#])
 
-tstyles['sidebar'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('BACKGROUND', (0, 0), (-1, -1), colors.lightyellow),
-])
+## Left column of the endnote. The content of the note takes the rest of
+## the available space
+#endnote_lwidth = 2*units.cm
 
-tstyles['bullet'] = TableStyle([
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-])
+## Used for sidebars
+
+#tstyles['sidebar'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('BACKGROUND', (0, 0), (-1, -1), colors.lightyellow),
+#])
+
+#tstyles['bullet'] = TableStyle([
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+#])
 
 
 def formatColor(value, numeric=True):

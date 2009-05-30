@@ -180,7 +180,7 @@ class DelayedTable(Flowable):
         _tw = w/sum(self.colwidths)
         colwidths = [_w * _tw for _w in self.colwidths]
         self.t = Table(self.data, colWidths=colwidths,
-            style=TableStyle(self.style), repeatRows=self.repeatrows)
+            style=self.style, repeatRows=self.repeatrows)
         return self.t.wrap(w, h)
 
     def split(self, w, h):
