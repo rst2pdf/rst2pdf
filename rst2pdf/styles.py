@@ -631,11 +631,11 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
 # Used for regular tables
 
-tstyleNorm = [
-    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-    ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-]
+#tstyleNorm = [
+    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    #('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+    #('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+#]
 
 ## Header row in tables
 #tstyles['normal'] = TableStyle(tstyleNorm)
