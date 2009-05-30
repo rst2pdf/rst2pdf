@@ -7,7 +7,33 @@
         "leading": 10,
         "spaceBefore": 16,
         "borderPadding": [10,0,0,10],
-        "leftIndent": 10
+        "leftIndent": 10,
+        "fontSize": 10,
+        "fontName": "stdSans"
+    }],
+    ["heading1", {
+        "fontSize": "200%",
+        "fontName": "stdSans"
+    }],
+    ["heading2", {
+        "fontSize": "160%",
+        "fontName": "stdSans"
+    }],
+    ["heading3", {
+        "fontSize": "140%",
+        "fontName": "stdSans"
+    }],
+    ["heading4", {
+        "fontSize": "120%",
+        "fontName": "stdSans"
+    }],
+    ["heading5", {
+        "fontSize": "110%",
+        "fontName": "stdSans"
+    }],
+    ["heading6", {
+        "fontSize": "100%",
+        "fontName": "stdSans"
     }],
     ["code", {
         "backColor": "#EEFFCC",
