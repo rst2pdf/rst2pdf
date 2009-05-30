@@ -388,5 +388,101 @@
     ["pygments-vg", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-vi", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-il", {"textColor": "#666666", "parent": "code"}]
-  ]
+  ],
+ "tstyles": {
+    "item_list": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "ALIGNMENT", 
+            [ 0, 0 ], 
+            [ 1, -1 ], 
+            "RIGHT" ], 
+        [ "TOPPADDING", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0 ], 
+        [ "BOTTOMPADDING", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0 ], 
+        [ "RIGHTPADDING", 
+            [ 0, 0 ], 
+            [ 1, -1 ], 
+            0 ]
+    ], 
+    "bullet": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ]
+    ], 
+    "normal": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "INNERGRID", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0.25, 
+            "black" ], 
+        [ "BOX", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0.25, 
+            "black" ]
+    ], 
+    "endnote_lwidth": "3cm",
+    "endnote": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "ALIGNMENT", 
+            [ 0, 0 ], 
+            [ 1, -1 ], 
+            "RIGHT" ]
+    ], 
+    "fieldlist_lwidth": "3cm",
+    "field": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "ALIGNMENT", 
+            [ 0, 0 ], 
+            [ 1, -1 ], 
+            "RIGHT" ], 
+        [ "TOPPADDING", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0 ]
+    ], 
+    "sidebar": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "BACKGROUND", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "lightyellow" ]
+    ], 
+    "optionlist": [
+        [ "VALIGN", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            "TOP" ], 
+        [ "ALIGNMENT", 
+            [ 0, 0 ], 
+            [ 1, -1 ], 
+            "RIGHT" ], 
+        [ "TOPPADDING", 
+            [ 0, 0 ], 
+            [ -1, -1 ], 
+            0 ]
+    ]
+  }
 }
