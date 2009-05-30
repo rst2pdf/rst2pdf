@@ -598,8 +598,7 @@ class RstToPdf(object):
 
             #st = spans + sty.tstyleNorm + self.styles.tstyleBody() + cellStyles
             st = TableStyle(spans)
-            # This is using the non-public _cmds
-            for cmd in self.styles.tstyles['normal']._cmds:
+            for cmd in self.styles.tstyles['normal'].getCommands():
                 st.add (*cmd)
             for cmd in cellStyles: 
                 st.add (*cmd)

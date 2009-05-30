@@ -734,6 +734,59 @@ If you intend to bound a printed copy, you may need extra space there. OTOH,
 if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
+Advanced: the tstyles section
+-----------------------------
+
+This is new in 0.12, and usually you don't need to touch it. If you feel adventurous,
+here's what's in it.
+
+There are two kinds of elements:
+    
+Lengths
+   They are used to layout part of the document that are implemented using tables.
+   for example, "bullet_lwidth" is the space reserved for bullets in the left side 
+   of lists, and "endnote_lwidth" is the space reserved for the left part of 
+   endnotes/footnotes.
+   
+Table commands
+   For a full reference of these, please check the Reportlab User Guide 
+   specifically the TableStyle Commands section (section 7.4 in the manual 
+   for version 2.3)
+    
+   Here, however, is a list of the possible commands::
+       
+        BOX (or OUTLINE)
+        FONT
+        FONTNAME (or FACE)
+        FONTSIZE (or SIZE)
+        GRID
+        INNERGRID
+        LEADING
+        LINEBELOW
+        LINEABOVE
+        LINEBEFORE
+        LINEAFTER
+        TEXTCOLOR
+        ALIGNMENT (or ALIGN)
+        LEFTPADDING
+        RIGHTPADDING
+        BOTTOMPADDING
+        TOPPADDING
+        BACKGROUND
+        ROWBACKGROUNDS
+        COLBACKGROUNDS
+        VALIGN
+
+   Each takes as argument a couple of coordinates, where (0,0) is top-left, and (-1,-1) is 
+   bottom-right, and 0 or more extra arguments.
+   
+   For example, INNERGRID takes a linewidth and a color::
+       
+       [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+
+   That would mean "draw all lines inside the table with .25pt black"
+
+
 Multiple Stylesheets
 --------------------
 
@@ -1045,7 +1098,7 @@ If you want good looking documents, you want to enable hyphenation.
 
 To do it, you need to install Wordaxe [#]_.
 
-.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 0.2.6 or later is
+.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 0.3.2 or later is
        recommended.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
