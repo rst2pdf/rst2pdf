@@ -606,11 +606,6 @@ class RstToPdf(object):
             if hasHead:
                 for cmd in self.styles.tstyleHead(headRows): 
                     st.add(*cmd)
-
-            print '--------------------'
-            print st
-            print '--------------------'
-
             rtr = self.repeatTableRows
 
             # node.elements = [Table(data, colWidths=colwidths, style=TableStyle(st))]
