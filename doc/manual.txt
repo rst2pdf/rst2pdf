@@ -388,7 +388,9 @@ Font styles
       Serif (Arial)
     * ``freetype-sans`` uses your system's default TrueType Sans Serif font
     * ``freetype-serif`` uses your system's default TrueType Serif font
-    * ``twelvepoint``
+    * ``twelvepoint`` makes the base font 12pt (default is 10pt)
+    * ``tenpoint`` makes the base font 10pt
+    * ``eightpoint`` makes the base font 8pt
     
 Page layout styles
     These stylesheets modify your page layout.
