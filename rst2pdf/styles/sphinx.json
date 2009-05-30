@@ -1,7 +1,4 @@
 {"styles": [
-    ["base", {
-        "fontSize": 12
-    }],
     ["heading", {
         "backColor": "#F2F2F2",
         "textColor": "#20435C",
