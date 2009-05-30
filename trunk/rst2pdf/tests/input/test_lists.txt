@@ -56,3 +56,8 @@ And a list with different item lengths:
 9. The 9th
 
 10. The 10th
+
+* And some bullets for good measure
+
+* And some bullets for good measure
+

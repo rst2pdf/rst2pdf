@@ -873,7 +873,7 @@ class RstToPdf(object):
             
             node.elements=[Table([[Paragraph(b,style=bStyle), el]], 
                            style=sty.tstyles['item_list'],
-                           colWidths=[2*style.leading, None])]
+                           colWidths=[self.styles.tstyles['bullet_lwidth'], None])]
            
             ## Indent all elements inside the list
             #for e in el:
