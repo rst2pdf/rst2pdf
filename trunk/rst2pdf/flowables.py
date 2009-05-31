@@ -174,9 +174,8 @@ class DelayedTable(Flowable):
 
         # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
         # So, we need to calculate them relative to something
-        # and we use the text width of the page. That sucks for
-        # multicolumn pages
-        # FIXME: make it work for multicolumn pages. No idea how, yet.
+        # and we use the width provided.
+        
         _tw = w/sum(self.colwidths)
         colwidths = [_w * _tw for _w in self.colwidths]
         self.t = Table(self.data, colWidths=colwidths,
