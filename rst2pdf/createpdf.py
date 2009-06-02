@@ -1276,14 +1276,18 @@ class FancyDocTemplate(BaseDocTemplate):
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
 
 
+head=None
+foot=None
+
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
 
-    def __init__(self, _id, head, foot, styles, smarty="0", show_frame=False):
+    def __init__(self, _id, _head, _foot, styles, smarty="0", show_frame=False):
+        global head,foot
         self.styles = styles
-        self.head = head
-        self.foot = foot
+        head = _head
+        foot = _foot
         self.smarty = smarty
         self.show_frame=show_frame
         PageTemplate.__init__(self, _id, [])
@@ -1294,6 +1298,9 @@ class FancyPage(PageTemplate):
            * Gutter margins on left or right as needed
 
         """
+
+        global curHead,curFoot,head,foot
+
         self.tw = self.styles.pw - self.styles.lm - self.styles.rm - self.styles.gm
         # What page template to use?
         tname = canv.__dict__.get('templateName', self.styles.firstTemplate)
@@ -1304,7 +1311,7 @@ class FancyPage(PageTemplate):
 
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
-            self.head or self.template.get('defaultHeader'))
+            head or self.template.get('defaultHeader'))
         if head:
             if isinstance(head, list):
                 head = head[:]
@@ -1313,9 +1320,9 @@ class FancyPage(PageTemplate):
             _, self.hh = _listWrapOn(head, self.tw, canv)
         else:
             self.hh = 0
-        self.curHead = head
+        curHead = head
         foot = self.template.get('showFooter', True) and (
-            self.foot or self.template.get('defaultFooter'))
+            foot or self.template.get('defaultFooter'))
         if foot:
             if isinstance(foot, list):
                 foot = foot[:]
@@ -1324,7 +1331,7 @@ class FancyPage(PageTemplate):
             _, self.fh = _listWrapOn(foot, self.tw, canv)
         else:
             self.fh = 0
-        self.curFoot = foot
+        curFoot = foot
 
         canv._doctemplate = doct
 
@@ -1390,7 +1397,7 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
-        head = self.curHead
+        head = curHead
         if head:
             self.replaceTokens(head, canv, doc)
             container = _Container()
@@ -1398,7 +1405,7 @@ class FancyPage(PageTemplate):
             container.width = self.tw
             container.height = self.hh
             container.drawOn(canv, hx, self.hy)
-        foot = self.curFoot
+        foot = curFoot
         if foot:
             self.replaceTokens(foot, canv, doc)
             container = _Container()
