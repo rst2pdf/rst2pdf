@@ -1299,7 +1299,7 @@ class FancyPage(PageTemplate):
 
         """
 
-        global curHead,curFoot,head,foot
+        global head,foot
 
         self.tw = self.styles.pw - self.styles.lm - self.styles.rm - self.styles.gm
         # What page template to use?
@@ -1320,7 +1320,6 @@ class FancyPage(PageTemplate):
             _, self.hh = _listWrapOn(head, self.tw, canv)
         else:
             self.hh = 0
-        curHead = head
         foot = self.template.get('showFooter', True) and (
             foot or self.template.get('defaultFooter'))
         if foot:
@@ -1331,7 +1330,6 @@ class FancyPage(PageTemplate):
             _, self.fh = _listWrapOn(foot, self.tw, canv)
         else:
             self.fh = 0
-        curFoot = foot
 
         canv._doctemplate = doct
 
@@ -1397,7 +1395,6 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
-        head = curHead
         if head:
             self.replaceTokens(head, canv, doc)
             container = _Container()
@@ -1405,7 +1402,6 @@ class FancyPage(PageTemplate):
             container.width = self.tw
             container.height = self.hh
             container.drawOn(canv, hx, self.hy)
-        foot = curFoot
         if foot:
             self.replaceTokens(foot, canv, doc)
             container = _Container()
