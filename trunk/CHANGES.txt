@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Ugly bugfix for Issue 127: crashes when using images in header + TOC
 * New tstyles section in the stylesheet provides more configurable list layouts 
   and more powerful table styling.
 * Better syntax highlighting (supports bold/italic)
