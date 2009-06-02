@@ -1275,7 +1275,7 @@ class FancyDocTemplate(BaseDocTemplate):
             pagenum = self.page
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
 
-
+#FIXME: these should not be global, but look at issue 126
 head=None
 foot=None
 
