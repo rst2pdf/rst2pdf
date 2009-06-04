@@ -1,0 +1,248 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-BoldOblique
+<< /BaseFont /Helvetica-BoldOblique
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F3': class PDFType1Font 
+4 0 obj
+% Font Times-Roman
+<< /BaseFont /Times-Roman
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+5 0 obj
+% Page dictionary
+<< /Contents 9 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 8 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R6': class PDFCatalog 
+6 0 obj
+% Document Root
+<< /Outlines 10 0 R
+ /PageMode /UseNone
+ /Pages 8 0 R
+ /Type /Catalog >>
+endobj
+% 'R7': class PDFInfo 
+7 0 obj
+<< /Author ()
+ /CreationDate (D:20090519094259+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+% 'R8': class PDFPages 
+8 0 obj
+% page tree
+<< /Count 1
+ /Kids [ 5 0 R ]
+ /Type /Pages >>
+endobj
+% 'R9': class PDFStream 
+9 0 obj
+% page stream
+<< /Length 2562 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 773.1969 cm
+Q
+q
+1 0 0 1 62.69291 761.1969 cm
+q
+BT 1 0 0 1 0 4.82 Tm 195.7749 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Frozen Delights!) Tj T* -195.7749 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 677.1969 cm
+1 1 1 rg
+n 0 84 469.8898 -18 re f*
+.878431 .878431 .878431 rg
+n 0 66 469.8898 -18 re f*
+1 1 1 rg
+n 0 48 469.8898 -30 re f*
+.878431 .878431 .878431 rg
+n 0 18 469.8898 -18 re f*
+.960784 .960784 .862745 rg
+n 0 84 128.1518 -18 re f*
+.960784 .960784 .862745 rg
+n 128.1518 84 85.4345 -18 re f*
+.960784 .960784 .862745 rg
+n 213.5863 84 256.3035 -18 re f*
+.960784 .960784 .862745 rg
+n 0 84 469.8898 -18 re f*
+0 0 0 rg
+BT /F2 10 Tf 12 TL ET
+q
+1 0 0 1 6 69 cm
+q
+.960784 .960784 .862745 rg
+n 0 0 116.1518 12 re f*
+Q
+q
+BT 1 0 0 1 0 4.82 Tm 45.85088 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Treat) Tj T* -45.85088 0 Td ET
+Q
+Q
+q
+1 0 0 1 134.1518 69 cm
+q
+.960784 .960784 .862745 rg
+n 0 0 73.4345 12 re f*
+Q
+q
+BT 1 0 0 1 0 4.82 Tm 16.43725 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Quantity) Tj T* -16.43725 0 Td ET
+Q
+Q
+q
+1 0 0 1 219.5863 69 cm
+q
+.960784 .960784 .862745 rg
+n 0 0 244.3035 12 re f*
+Q
+q
+BT 1 0 0 1 0 4.82 Tm 94.64675 0 Td 12 TL /F2 10 Tf 0 0 0 rg (Description) Tj T* -94.64675 0 Td ET
+Q
+Q
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 51 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Albatross) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.1518 51 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.99) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.5863 51 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (On a stick!) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 33 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Crunchy Frog) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.1518 33 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (1.49) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.5863 21 cm
+q
+BT 1 0 0 1 0 16.82 Tm 1.282351 Tw 12 TL /F1 10 Tf 0 0 0 rg (If we took the bones out, it wouldn't be crunchy, now) Tj T* 0 Tw (would it?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Gannet Ripple) Tj T* ET
+Q
+Q
+q
+1 0 0 1 134.1518 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (1.99) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.5863 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (On a stick!) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 0 66 m 469.8898 66 l S
+n 0 48 m 469.8898 48 l S
+n 0 18 m 469.8898 18 l S
+n 128.1518 0 m 128.1518 84 l S
+n 213.5863 0 m 213.5863 84 l S
+n 0 84 m 469.8898 84 l S
+n 0 0 m 469.8898 0 l S
+n 0 0 m 0 84 l S
+n 469.8898 0 m 469.8898 84 l S
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R10': class PDFOutlines 
+10 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+xref
+0 11
+0000000000 65535 f
+0000000113 00000 n
+0000000233 00000 n
+0000000398 00000 n
+0000000587 00000 n
+0000000754 00000 n
+0000001031 00000 n
+0000001166 00000 n
+0000001373 00000 n
+0000001478 00000 n
+0000004142 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(u\320\277\307A\011\355G\001\3528\222\231\317\345$) (u\320\277\307A\011\355G\001\3528\222\231\317\345$)] 
+
+ /Info 7 0 R
+ /Root 6 0 R
+ /Size 11 >>
+startxref
+4194
+%%EOF
