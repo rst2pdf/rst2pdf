@@ -11,7 +11,7 @@ import os
 from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
-from copy import copy
+from copy import copy,deepcopy
 from cgi import escape
 from optparse import OptionParser
 import logging
@@ -387,12 +387,15 @@ class RstToPdf(object):
                         pre += u'<a href="%s" color="%s">' %\
                             (uri, self.styles.linkColor)
                         post = '</a>' + post
-            else:
+            else: # An internal link
                 uri = node.get('refid')
-                if uri:
-                    pre += u'<a href="#%s" color="%s">' %\
-                        (uri, self.styles.linkColor)
-                    post = '</a>' + post
+                if self.inlinelinks:
+                    post = u' (Page %%(%s)s)'%('%s'%uri)
+                else:
+                    if uri:
+                        pre += u'<a href="#%s" color="%s">' %\
+                            (uri, self.styles.linkColor)
+                        post = '</a>' + post
             node.pdftext = self.gather_pdftext(node, depth)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
@@ -614,16 +617,16 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['title'])]
+                node.elements = [paraFactory(self.gen_pdftext(node, depth), self.styles['title'])]
                 self.doc_title = unicode(self.gen_pdftext(node, depth)).strip()
             elif isinstance(node.parent, docutils.nodes.topic):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['topic-title'])]
+                node.elements = [paraFactory(self.gen_pdftext(node, depth), self.styles['topic-title'])]
             elif isinstance(node.parent, docutils.nodes.admonition):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['admonition-title'])]
+                node.elements = [paraFactory(self.gen_pdftext(node, depth), self.styles['admonition-title'])]
             elif isinstance(node.parent, docutils.nodes.table):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['table-title'])]
+                node.elements = [paraFactory(self.gen_pdftext(node, depth), self.styles['table-title'])]
             elif isinstance(node.parent, docutils.nodes.sidebar):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['sidebar-title'])]
+                node.elements = [paraFactory(self.gen_pdftext(node, depth), self.styles['sidebar-title'])]
             else:
                 # Section/Subsection/etc.
                 text = self.gen_pdftext(node, depth)
@@ -637,23 +640,23 @@ class RstToPdf(object):
                 elem = OutlineEntry(key, unescape(text), depth - 1, snum)
                 elem.parent_id = node.parent.get('ids', [None])[0]
                 node.elements = [KeepTogether([elem,
-                    Paragraph(text, self.styles['heading%d' % min(depth, 3)])])]
+                    paraFactory(text, self.styles['heading%d' % min(depth, 3)])])]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
         elif isinstance(node, docutils.nodes.subtitle):
             if isinstance(node.parent, docutils.nodes.sidebar):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [paraFactory(self.gen_pdftext(node, depth),
                     self.styles['sidebar-subtitle'])]
             elif isinstance(node.parent, docutils.nodes.document):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [paraFactory(self.gen_pdftext(node, depth),
                     self.styles['subtitle'])]
 
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.compact_paragraph):
             node.elements = self.gather_elements(node, depth, style=style)
 
         elif isinstance(node, docutils.nodes.paragraph):
-            node.elements = [Paragraph(self.gen_pdftext(node, depth), style)]
+            node.elements = [paraFactory(self.gen_pdftext(node, depth), style)]
 
         elif isinstance(node, docutils.nodes.docinfo):
             # A docinfo usually contains several fields.
@@ -666,7 +669,7 @@ class RstToPdf(object):
             # We render as a two-column table, left-column is right-aligned,
             # bold, and much smaller
 
-            fn = Paragraph(self.gather_pdftext(node.children[0], depth) + ":",
+            fn = paraFactory(self.gather_pdftext(node.children[0], depth) + ":",
                 style=self.styles['fieldname'])
             fb = self.gen_elements(node.children[1], 
                 depth,style=self.styles['fieldvalue'])
@@ -688,7 +691,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.author):
             if isinstance(node.parent, docutils.nodes.authors):
                 # Is only one of multiple authors. Return a paragraph
-                node.elements = [Paragraph(self.gather_pdftext(node, depth), style=style)]
+                node.elements = [paraFactory(self.gather_pdftext(node, depth), style=style)]
                 if self.doc_author:
                     self.doc_author += self.author_separator(style=style) + node.astext().strip()
                 else:
@@ -696,64 +699,64 @@ class RstToPdf(object):
             else:
                 # A single author: works like a field
                 fb = self.gather_pdftext(node, depth)
-                node.elements = [Table([[Paragraph(self.text_for_label("author", style),
-                    style=self.styles['fieldname']), Paragraph(fb, style)]],
+                node.elements = [Table([[paraFactory(self.text_for_label("author", style),
+                    style=self.styles['fieldname']), paraFactory(fb, style)]],
                     style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
                 self.doc_author = node.astext().strip()
 
         elif isinstance(node, docutils.nodes.authors):
             # Multiple authors. Create a two-column table. Author references on the right.
-            td = [[Paragraph(self.text_for_label("authors", style), style=self.styles['fieldname']),
+            td = [[paraFactory(self.text_for_label("authors", style), style=self.styles['fieldname']),
                 self.gather_elements(node, depth, style=style)]]
             node.elements = [Table(td, style=self.styles.tstyles['field'],
                 colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
 
         elif isinstance(node, docutils.nodes.organization):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("organization", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("organization", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.contact):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("contact", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("contact", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.address):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("address", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("address", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.version):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("version", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("version", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.revision):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("revision", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("revision", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.status):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("status", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("status", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.date):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("date", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("date", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
         elif isinstance(node, docutils.nodes.copyright):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("copyright", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
+            t = Table([[paraFactory(self.text_for_label("copyright", style),
+                style=self.styles['fieldname']), paraFactory(fb, style)]],
                 style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
             node.elements = [t]
 
@@ -781,7 +784,7 @@ class RstToPdf(object):
                 if 'local' in node_classes:
                     node.elements = [toc]
                 else:
-                    node.elements = [Paragraph(self.gen_pdftext(node.children[0], depth),
+                    node.elements = [paraFactory(self.gen_pdftext(node.children[0], depth),
                         self.styles['title']), toc]
             else:
                 node.elements = self.gather_elements(node, depth, style=style)
@@ -848,7 +851,7 @@ class RstToPdf(object):
                 else:
                     dt.extend(self.gen_elements(n, depth, style))
 
-            node.elements = [Paragraph(' : '.join(tt),
+            node.elements = [paraFactory(' : '.join(tt),
                 self.styles['definition_list_term']),
                 MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
 
@@ -859,7 +862,7 @@ class RstToPdf(object):
 
             # FIXME: this is really really not good code
             if not el:
-                el = [Paragraph(u"<nobr>\xa0</nobr>", self.styles["bodytext"])]
+                el = [paraFactory(u"<nobr>\xa0</nobr>", self.styles["bodytext"])]
 
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
@@ -876,7 +879,7 @@ class RstToPdf(object):
             bStyle=copy(style)
             bStyle.alignment=2
             
-            node.elements=[Table([[Paragraph(b,style=bStyle), el]], 
+            node.elements=[Table([[paraFactory(b,style=bStyle), el]], 
                            style=self.styles.tstyles['item_list'],
                            colWidths=[self.styles.tstyles['bullet_lwidth'], None])]
            
@@ -920,7 +923,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
-                Paragraph(self.gather_pdftext(node, depth), self.styles['attribution'])]
+                paraFactory(self.gather_pdftext(node, depth), self.styles['attribution'])]
 
         elif isinstance(node, docutils.nodes.comment):
             # Class that generates no output
@@ -933,7 +936,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.line):
             # All elements in one line
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), style=style)]
+            node.elements = [paraFactory(self.gather_pdftext(node, depth), style=style)]
 
         elif isinstance(node, (docutils.nodes.literal_block, docutils.nodes.doctest_block)):
             node.elements = [self.PreformattedFit(
@@ -945,9 +948,9 @@ class RstToPdf(object):
                 docutils.nodes.important, docutils.nodes.note,
                 docutils.nodes.tip, docutils.nodes.warning,
                 docutils.nodes.admonition)):
-            # node.elements = [Paragraph(node.tagname.title(), style=self.styles['heading3'])] \
+            # node.elements = [paraFactory(node.tagname.title(), style=self.styles['heading3'])] \
             #   + self.gather_elements(node, depth, style=style)
-            rows = [Paragraph(node.tagname.title(), style=self.styles['%s-heading'%node.tagname])] \
+            rows = [paraFactory(node.tagname.title(), style=self.styles['%s-heading'%node.tagname])] \
                 + self.gather_elements(node, depth, style=style)
             node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
 
@@ -982,7 +985,7 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style=self.styles["figure"])
 
         elif isinstance(node, docutils.nodes.caption):
-            node.elements = [Paragraph('<i>'+self.gather_pdftext(node, depth)+'</i>', style=style)]
+            node.elements = [paraFactory('<i>'+self.gather_pdftext(node, depth)+'</i>', style=style)]
 
         elif isinstance(node, docutils.nodes.legend):
             node.elements = self.gather_elements(node, depth, style=style)
@@ -991,7 +994,7 @@ class RstToPdf(object):
             node.elements = [BoxedContainer(self.gather_elements(node, depth, style=None), self.styles['sidebar'])]
 
         elif isinstance(node, docutils.nodes.rubric):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), self.styles['rubric'])]
+            node.elements = [paraFactory(self.gather_pdftext(node, depth), self.styles['rubric'])]
 
         elif isinstance(node, docutils.nodes.compound):
             # FIXME think if this is even implementable
@@ -1024,12 +1027,12 @@ class RstToPdf(object):
                         r, self.styles.linkColor, i))
                     i += 1
                 backrefs = '(%s)' % ', '.join(backrefs)
-                label = Paragraph('<a name="%s"/>%s' % (ltext, ltext + backrefs), self.styles["normal"])
+                label = paraFactory('<a name="%s"/>%s' % (ltext, ltext + backrefs), self.styles["normal"])
             elif len(node['backrefs'])==1 and self.footnote_backlinks:
-                label = Paragraph('<a name="%s"/><a href="%s" color="%s">%s</a>' % (
+                label = paraFactory('<a name="%s"/><a href="%s" color="%s">%s</a>' % (
                     ltext, node['backrefs'][0], self.styles.linkColor, ltext), self.styles["normal"])
             else:
-                label = Paragraph('<a name="%s"/>%s' % (ltext, ltext), self.styles["normal"])
+                label = paraFactory('<a name="%s"/>%s' % (ltext, ltext), self.styles["normal"])
             contents = self.gather_elements(node, depth, style)[1:]
             if self.inline_footnotes:
                 node.elements = [Table([[label, contents]],
@@ -1039,9 +1042,9 @@ class RstToPdf(object):
                 node.elements = []
 
         elif isinstance(node, docutils.nodes.label):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), style)]
+            node.elements = [paraFactory(self.gather_pdftext(node, depth), style)]
         elif isinstance(node, docutils.nodes.Text):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), style)]
+            node.elements = [paraFactory(self.gather_pdftext(node, depth), style)]
         elif isinstance(node, docutils.nodes.entry):
             node.elements = self.gather_elements(node, depth, style)
 
@@ -1265,6 +1268,11 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 
 class FancyDocTemplate(BaseDocTemplate):
+    
+    def __init__(self,*args,**kwargs):
+        self.__refids={}
+        self.__oldrefs={}
+        BaseDocTemplate.__init__(self,*args,**kwargs)
 
     def afterFlowable(self, flowable):
         if isinstance(flowable, OutlineEntry):
@@ -1274,6 +1282,32 @@ class FancyDocTemplate(BaseDocTemplate):
                 parent_id = flowable.parent_id
             pagenum = self.page
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
+        elif isinstance(flowable, Reference):
+            # Notify reference so DelayedParagraphs can use it
+            self.__refids[flowable.refid]=self.page
+            # Notify the previous pass' references.
+            # If they are wrong, that's ok, they will
+            # be correct the next time
+            self.notify('Reference',(self.__oldrefs))
+            
+    def multiBuild(self, story,
+                   filename=None,
+                   canvasmaker=canvas.Canvas,
+                   maxPasses = 10):
+        passes=1
+        while True:
+            # FIXME this probably makes one or more redundant passes
+            log.info('FancyDocTemplate pass number %d'%passes)
+            print story
+            tmpStory=deepcopy(story)
+            result=BaseDocTemplate.multiBuild(self,tmpStory,None,canvasmaker,maxPasses)
+            if self.__oldrefs==self.__refids:
+                return BaseDocTemplate.multiBuild(self,story,filename,canvasmaker,maxPasses)
+            if passes>maxPasses:
+                return result
+            passes+=1
+            self.__oldrefs=deepcopy(self.__refids)
+        
 
 #FIXME: these should not be global, but look at issue 126
 head=None
@@ -1316,7 +1350,7 @@ class FancyPage(PageTemplate):
             if isinstance(head, list):
                 head = head[:]
             else:
-                head = [Paragraph(head, self.styles['header'])]
+                head = [paraFactory(head, self.styles['header'])]
             _, self.hh = _listWrapOn(head, self.tw, canv)
         else:
             self.hh = 0
@@ -1326,7 +1360,7 @@ class FancyPage(PageTemplate):
             if isinstance(foot, list):
                 foot = foot[:]
             else:
-                foot = [Paragraph(foot, self.styles['footer'])]
+                foot = [paraFactory(foot, self.styles['footer'])]
             _, self.fh = _listWrapOn(foot, self.tw, canv)
         else:
             self.fh = 0
@@ -1384,7 +1418,7 @@ class FancyPage(PageTemplate):
                 text = text.replace(u"###Section###", getattr(canv, 'sectName', ''))
                 text = text.replace(u"###SectNum###", getattr(canv, 'sectNum', ''))
                 text = smartyPants(text, self.smarty)
-                elems[i] = Paragraph(text, e.style)
+                elems[i] = paraFactory(text, e.style)
 
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
