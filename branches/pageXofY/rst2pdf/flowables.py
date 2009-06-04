@@ -16,7 +16,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 
 import styles
 from log import log
-
+import re
 
 class MyImage(Image):
     """A Image subclass that can take a 'percentage_of_container' kind,
@@ -152,7 +152,66 @@ class Reference(Flowable):
     def repr(self):
         return "Anchor: %s" % self.refid
 
+perc=re.compile(r'.*[^%]%[^%]')
 
+def paraFactory(text,style,
+        bulletText = None, frags=None, caseSensitive=1, encoding='utf8'):
+    """Examine the text. If it contains unresolved references, create a DelayedParagraph.
+    If it doesn't create a regular paragraph"""
+    if perc.match(text): # Single % which needs to be expanded
+        return DelayedParagraph(text,style,
+            bulletText, frags, caseSensitive, encoding)
+    else:
+        return Paragraph(text,style,
+            bulletText, frags, caseSensitive, encoding)
+
+class DelayedParagraph(IndexingFlowable):
+    """A flowable that inserts a paragraph, but will only do so and be satisfied 
+    when it has some required data, such as page numbers"""
+    def __init__(self, text, style,
+        bulletText = None, frags=None, caseSensitive=1, encoding='utf8'):
+        self.text=text
+        self.style=style
+        self.bulletText=bulletText
+        self.frags=frags
+        self.caseSensitive=caseSensitive
+        self.encoding=encoding
+        self._satisfied=False
+        self.refs={}
+        self.para=Paragraph(self.text,self.style,self.bulletText,self.frags,self.
+                    caseSensitive,self.encoding)
+        
+    def isSatisfied(self):
+        return self._satisfied
+        
+    def wrap(self, w, h):
+        w,h=self.para.wrap(w,h)
+        return (w-1,h)
+
+    def split(self, w, h):
+        return self.para.split(w, h)
+
+    def drawOn(self, canvas, x, y, _sW=0):
+        self.para.drawOn(canvas, x, y, _sW)
+        
+    def notify(self,kind,stuff):
+        if kind=='Reference':
+            self.refs=stuff
+            # Try to resolve page references
+            try:
+                # Text wil be something like 
+                #'Go see A title (Page %(a-title)s)'
+                # and self.refs would be
+                # {'a-title': 2}
+                self.text=self.text%self.refs
+                self.para=Paragraph(self.text,self.style,self.bulletText,self.frags,self.
+                    caseSensitive,self.encoding)
+                self._satisfied=True
+            except:
+                self._satisfied=True
+        
+        
+        
 class DelayedTable(Flowable):
     """A flowable that inserts a table for which it has the data.
 
@@ -627,12 +686,11 @@ class MyTableOfContents(TableOfContents):
 
     def notify(self, kind, stuff):
         # stuff includes (level, text, pagenum, label)
-        level, text, pageNum, label = stuff
-        if label in self.refids:
-            self.addEntry(level, text, pageNum)
-            self.refid_lut[(level, text)] = label
-        else:
-            pass
+        if kind == 'TOCEntry':
+            level, text, pageNum, label = stuff
+            if label in self.refids:
+                self.addEntry(level, text, pageNum)
+                self.refid_lut[(level, text)] = label
 
     def wrap(self, availWidth, availHeight):
         """Adds hyperlink to toc entry."""
