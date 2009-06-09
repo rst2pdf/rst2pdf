@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Fixed issue 128: headings level 3+ all looked the same
 * Ugly bugfix for Issue 127: crashes when using images in header + TOC
 * New tstyles section in the stylesheet provides more configurable list layouts 
   and more powerful table styling.
