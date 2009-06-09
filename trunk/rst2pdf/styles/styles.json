@@ -191,6 +191,14 @@
       "parent": "heading",
       "fontName": "stdBoldItalic"
     }],
+    ["heading5" , {
+      "parent": "heading",
+      "fontName": "stdBoldItalic"
+    }],
+    ["heading6" , {
+      "parent": "heading",
+      "fontName": "stdBoldItalic"
+    }],
     ["topic-title" , {
       "parent": "heading3"
     }],
