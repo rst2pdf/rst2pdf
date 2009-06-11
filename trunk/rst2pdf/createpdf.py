@@ -181,13 +181,15 @@ class RstToPdf(object):
         # Find the image size in pixels:
         kind = 'direct'
         xdpi, ydpi=self.styles.def_dpi, self.styles.def_dpi
-        if imgname.split('.')[-1].lower() in [
+        extension=imgname.split('.')[-1].lower()
+        if extension in [
                 "ai", "ccx", "cdr", "cgm", "cmx",
                 "sk1", "sk", "svg", "xml", "wmf", "fig"]:
             iw, ih = SVGImage(imgname).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
+            
         else:
             img = PILImage.open(imgname)
             iw, ih = img.size
@@ -957,7 +959,7 @@ class RstToPdf(object):
             if not os.path.exists(imgname):
                 log.error("Missing image file: %s"%imgname)
                 imgname=os.path.join(self.img_dir, 'image-missing.png')
-                w, h = 1*cm, 1*cm
+                w, h, kind = 1*cm, 1*cm, 'direct'
             else:
                 w, h, kind = self.size_for_image_node(node)
 
@@ -966,7 +968,8 @@ class RstToPdf(object):
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
                 node.elements = [SVGImage(filename=imgname, height=h, width=w)]
             else:
-                node.elements = [MyImage(filename=imgname, height=h, width=w)]
+                node.elements = [MyImage(filename=imgname, height=h, width=w,
+                    kind=kind)]
             i = node.elements[0]
             alignment=node.get('align', 'CENTER').upper()
             if alignment in ('LEFT', 'CENTER', 'RIGHT'):
