@@ -11,7 +11,7 @@ import os
 from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
-from copy import copy
+from copy import copy,deepcopy
 from cgi import escape
 from optparse import OptionParser
 import logging
@@ -1399,16 +1399,18 @@ class FancyPage(PageTemplate):
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
         if head:
-            self.replaceTokens(head, canv, doc)
+            _head=copy(head)
+            self.replaceTokens(_head, canv, doc)
             container = _Container()
-            container._content = head
+            container._content = _head
             container.width = self.tw
             container.height = self.hh
             container.drawOn(canv, hx, self.hy)
         if foot:
-            self.replaceTokens(foot, canv, doc)
+            _foot=copy(foot)
+            self.replaceTokens(_foot, canv, doc)
             container = _Container()
-            container._content = foot
+            container._content = _foot
             container.width = self.tw
             container.height = self.fh
             container.drawOn(canv, fx, self.fy)
