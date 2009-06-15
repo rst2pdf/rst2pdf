@@ -1250,7 +1250,8 @@ class RstToPdf(object):
             title=self.doc_title,
             author=self.doc_author,
             pageCompression=compressed)
-        pdfdoc.multiBuild(elements)
+        pdfdoc.multiBuild(copy(elements))
+        pdfdoc._multiBuild(elements)
         for fn in self.to_unlink:
             os.unlink(fn)
 
@@ -1289,7 +1290,59 @@ class FancyDocTemplate(BaseDocTemplate):
             # If they are wrong, that's ok, they will
             # be correct the next time
             self.notify('Reference',(self.__oldrefs))
-            
+
+    def _multiBuild(self, story,
+                   filename=None,
+                   canvasmaker=canvas.Canvas,
+                   maxPasses = 10):
+        """This is really reportlab's mutibuild"""
+        """Makes multiple passes until all indexing flowables
+        are happy."""
+        self._indexingFlowables = []
+        #scan the story and keep a copy
+        for thing in story:
+            if thing.isIndexing():
+                self._indexingFlowables.append(thing)
+
+        #better fix for filename is a 'file' problem
+        self._doSave = 0
+        passes = 0
+        mbe = []
+        self._multiBuildEdits = mbe.append
+        while 1:
+            passes += 1
+            if self._onProgress:
+                self._onProgress('PASS', passes)
+            if verbose: print 'building pass '+str(passes) + '...',
+
+            for fl in self._indexingFlowables:
+                fl.beforeBuild()
+
+            # work with a copy of the story, since it is consumed
+            tempStory = story[:]
+            self.build(tempStory, filename, canvasmaker)
+            #self.notify('debug',None)
+
+            for fl in self._indexingFlowables:
+                fl.afterBuild()
+
+            happy = self._allSatisfied()
+
+            if happy:
+                self._doSave = 0
+                self.canv.save()
+                break
+            if passes > maxPasses:
+                raise IndexError, "Index entries not resolved after %d passes" % maxPasses
+
+            #work through any edits
+            while mbe:
+                e = mbe.pop(0)
+                e[0](*e[1:])
+
+        del self._multiBuildEdits
+        if verbose: print 'saved'
+
     def multiBuild(self, story,
                    filename=None,
                    canvasmaker=canvas.Canvas,
@@ -1298,16 +1351,13 @@ class FancyDocTemplate(BaseDocTemplate):
         while True:
             # FIXME this probably makes one or more redundant passes
             log.info('FancyDocTemplate pass number %d'%passes)
-            print story
-            tmpStory=deepcopy(story)
-            result=BaseDocTemplate.multiBuild(self,tmpStory,None,canvasmaker,maxPasses)
+            result=self._multiBuild(story,None,canvasmaker,maxPasses)
             if self.__oldrefs==self.__refids:
-                return BaseDocTemplate.multiBuild(self,story,filename,canvasmaker,maxPasses)
+                return result
             if passes>maxPasses:
                 return result
             passes+=1
             self.__oldrefs=deepcopy(self.__refids)
-        
 
 #FIXME: these should not be global, but look at issue 126
 head=None
@@ -1430,14 +1480,14 @@ class FancyPage(PageTemplate):
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
         if head:
-            self.replaceTokens(head, canv, doc)
+            self.replaceTokens(copy(head), canv, doc)
             container = _Container()
             container._content = head
             container.width = self.tw
             container.height = self.hh
             container.drawOn(canv, hx, self.hy)
         if foot:
-            self.replaceTokens(foot, canv, doc)
+            self.replaceTokens(copy(foot), canv, doc)
             container = _Container()
             container._content = foot
             container.width = self.tw

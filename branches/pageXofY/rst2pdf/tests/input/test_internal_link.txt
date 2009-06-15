@@ -1,5 +1,13 @@
-One paragraph.
+.. header::
+
+   header ###Page###
+
+
+One paragraph. See `internal link`_
 
 .. _internal link:
 
-The above internal link should not use any space in the page.
+The above internal link should not use any space in the page. See `internal link`_
+
+
+.. image:: images/biohazard.png
