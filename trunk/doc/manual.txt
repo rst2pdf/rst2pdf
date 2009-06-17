@@ -51,18 +51,18 @@ Command line options
                     A comma-separated list of custom stylesheets.
                     Default=""
 --stylesheet-path=FOLDERS
-                    A colon-separated list of folders to search for
-                    stylesheets. Default=""
+                    A list of folders to search for stylesheets, separated
+                    using ":". Default=""
 -c, --compressed      Create a compressed PDF. Default=False
 --print-stylesheet    Print the default stylesheet and exit
 --font-folder=FOLDER  Search this folder for fonts. (Deprecated)
 --font-path=FOLDERS
-                    A colon-separated list of folders to search for fonts.
-                    Default=""
+                    A list of folders to search for fonts, separated using
+                    ":". Default=""
 --baseurl=URL         The base URL for relative URLs. Default="None"
 -l LANG, --language=LANG
                     Language to be used for hyphenation and docutils
-                    localizations.                      Default="en_US"
+                    localizations. Default="en_US"
 --header=HEADER       Page header if not specified in the document.
                     Default="None"
 --footer=FOOTER       Page footer if not specified in the document.
@@ -87,7 +87,13 @@ Command line options
                     Disable footnote backlinks. Default=False
 --inline-footnotes    Show footnotes inline. Default=True
 --default-dpi=NUMBER  DPI for objects sized in pixels. Default=300
+--show-frame-boundary
+                    Show frame borders (only useful for debugging),
+                    default=False
 
+For the options that take a folder list, like --stylesheet-path, the separator used will
+depend on your platform. On unix-like OSs, it's ":", on Windows it's "%". Don't blame me,
+blame DOS.
 
 Some of these options' defaults can be changed by creating a `configuration file`_
 

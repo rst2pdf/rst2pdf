@@ -1,6 +1,8 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Fixed issue 130: use os.pathsep instead of ":" since ":" in windows is used
+  in disk names (and we still pay for DOS idiocy, in 2009)
 * Fixed issue 128: headings level 3+ all looked the same
 * Ugly bugfix for Issue 127: crashes when using images in header + TOC
 * New tstyles section in the stylesheet provides more configurable list layouts 

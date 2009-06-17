@@ -1429,11 +1429,11 @@ def main():
         metavar='STYLESHEETS', default=[def_ssheets],
         help='A comma-separated list of custom stylesheets. Default="%s"' % def_ssheets)
 
-    def_sheetpath = ':'.join([expanduser(p) for p in
-        config.getValue("general", "stylesheet_path", "").split(':')])
+    def_sheetpath = os.pathsep.join([expanduser(p) for p in
+        config.getValue("general", "stylesheet_path", "").split(os.pathsep)])
     parser.add_option('--stylesheet-path', dest='stylepath',
-        metavar='FOLDER:FOLDER:...:FOLDER', default=def_sheetpath,
-        help='A colon-separated list of folders to search for stylesheets. Default="%s"' % def_sheetpath)
+        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep,)*3), default=def_sheetpath,
+        help='A list of folders to search for stylesheets, separated using "%s". Default="%s"' %(os.pathsep, def_sheetpath))
 
     def_compressed = config.getValue("general", "compressed", False)
     parser.add_option('-c', '--compressed', dest='compressed', action="store_true", default=def_compressed,
@@ -1445,10 +1445,10 @@ def main():
     parser.add_option('--font-folder', dest='ffolder', metavar='FOLDER',
         help='Search this folder for fonts. (Deprecated)')
 
-    def_fontpath = ':'.join([expanduser(p) for p in
-        config.getValue("general", "font_path", "").split(':')])
-    parser.add_option('--font-path', dest='fpath', metavar='FOLDER:FOLDER:...:FOLDER', default=def_fontpath,
-        help='A colon-separated list of folders to search for fonts. Default="%s"'%def_fontpath)
+    def_fontpath = os.pathsep.join([expanduser(p) for p in
+        config.getValue("general", "font_path", "").split(os.pathsep)])
+    parser.add_option('--font-path', dest='fpath', metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep,)*3), default=def_fontpath,
+        help='A list of folders to search for fonts, separated using "%s". Default="%s"'%(os.pathsep,def_fontpath))
 
     def_baseurl = None
     parser.add_option('--baseurl', dest='baseurl', metavar='URL', default=def_baseurl,
@@ -1569,13 +1569,13 @@ def main():
 
     fpath = []
     if options.fpath:
-        fpath = options.fpath.split(':')
+        fpath = options.fpath.split(os.pathsep)
     if options.ffolder:
         fpath.append(options.ffolder)
 
     spath = []
     if options.stylepath:
-        spath = options.stylepath.split(':')
+        spath = options.stylepath.split(os.pathsep)
 
     RstToPdf(
         stylesheets=ssheet,
