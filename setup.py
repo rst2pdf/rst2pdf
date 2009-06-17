@@ -44,10 +44,12 @@ install_requires = [
         ]
 
 tests_require = ['pyPdf']
-hyphenation_require = ['wordaxe']
-svgsupport_require = ['uniconvertor']
 sphinx_require = ['sphinx']
+hyphenation_require = ['wordaxe']
 images_require = ['PIL']
+pdfimages_require = ['PythonMagick']
+svgsupport_require = ['svglib']
+sk1support_require = ['uniconvertor']
 
 setup(
     name="rst2pdf",
@@ -68,10 +70,12 @@ setup(
     tests_require=tests_require,
     extras_require=dict(
         tests=tests_require,
-        hyphenation=hyphenation_require,
-        svgsupport=svgsupport_require,
         sphinx=sphinx_require,
+        hyphenation=hyphenation_require,
         images=images_require,
+        pdfimages=pdfimages_require,
+        svgsupport=svgsupport_require,
+        sk1support=sk1support_require,
     ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
