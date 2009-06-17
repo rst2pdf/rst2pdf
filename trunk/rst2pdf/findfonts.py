@@ -1,11 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
 """
-
 Scan a list of folders and find all .afm files,
 then create rst2pdf-ready font-aliases.
-
 """
 
 import os
@@ -24,12 +23,11 @@ pfbList = {}
 # Aliases defined by GhostScript, so if you use Palatino or whatever you
 # may get **something**. They are family name aliases.
 Alias = {
-    'ITC Bookman'            : 'URW Bookman L',
-    'ITC Avant Garde Gothic' : 'URW Gothic L',
-    'Palatino'               : 'URW Palladio L',
-    'New Century Schoolbook' : 'Century Schoolbook L',
-    'ITC Zapf Chancery'      : 'URW Chancery L'
-    }
+    'ITC Bookman': 'URW Bookman L',
+    'ITC Avant Garde Gothic': 'URW Gothic L',
+    'Palatino': 'URW Palladio L',
+    'New Century Schoolbook': 'Century Schoolbook L',
+    'ITC Zapf Chancery': 'URW Chancery L'}
 
 # Standard PDF fonts, so no need to embed them
 Ignored = ['Times', 'ITC Zapf Dingbats', 'Symbol', 'Helvetica', 'Courier']
@@ -49,7 +47,6 @@ def loadFonts():
     """
     if not afmList or not pfbList:
         # Find all ".afm" and ".pfb" files files
-
         def findFontFiles(_, folder, names):
             for f in os.listdir(folder):
                 if f.lower().endswith('.afm'):
@@ -60,8 +57,9 @@ def loadFonts():
         for folder in flist:
             os.path.walk(folder, findFontFiles, None)
 
-        # Now we have full afm and pbf lists, process the afm list to figure out
-        # family name weight and if it's italic or not, as well as where the
+        # Now we have full afm and pbf lists, process the
+        # afm list to figure out family name weight and if
+        # it's italic or not, as well as where the
         # matching pfb file is
 
         for afm in afmList:
@@ -91,7 +89,7 @@ def loadFonts():
             if family in Alias:
                 continue
             if baseName not in pfbList:
-                # print "Warning: afm file without matching pfb file: %s" % baseName
+                log.warning("afm file without matching pfb file: %s"% baseName)
                 continue
 
             # So now we have a font we knopw we can embed.
@@ -106,14 +104,16 @@ def loadFonts():
                 families[family][2] = fontName
             elif italic:
                 families[family][1] = fontName
-            # FIXME: what happens if there are Demi and Medium weights? We get a random one.
+            # FIXME: what happens if there are Demi and Medium
+            # weights? We get a random one.
             else:
                 families[family][0] = fontName
 
 
 def findFont(fname):
     loadFonts()
-    # So now we are sure we know the families and font names. Well, return some data!
+    # So now we are sure we know the families and font
+    # names. Well, return some data!
     if fname in fonts:
         font = fonts[fname]
     else:
@@ -135,7 +135,7 @@ def findTTFont(fname):
             if not line:
                 continue
             fname, family, _, variant = line.split('"')[:4]
-            family = family.replace('"','')
+            family = family.replace('"', '')
             if family:
                 return family
         return None
@@ -153,13 +153,12 @@ def findTTFont(fname):
             get_fname(family + ":style=Roman"),
             get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold"),
-            get_fname(family + ":style=Bold Oblique")
-        ]
+            get_fname(family + ":style=Bold Oblique")]
         if variants[1] == variants[0]:
             variants[1] = get_fname(family + ":style=Italic")
         if variants[3] == variants[0]:
             variants[3] = get_fname(family + ":style=Bold Italic")
-        if variants[0].endswith('.pfb') or variants[0].endswith('.gz') :
+        if variants[0].endswith('.pfb') or variants[0].endswith('.gz'):
             return None
         return variants
 
@@ -171,7 +170,8 @@ def findTTFont(fname):
 
 
 def autoEmbed(fname):
-    """Given a font name, does a best-effort of embedding said font and its variants.
+    """Given a font name, does a best-effort of embedding
+    said font and its variants.
 
     Returns a list of the font names it registered with ReportLab.
 
@@ -204,7 +204,8 @@ def autoEmbed(fname):
         return fontList
 
     variants = findTTFont(fname)
-    if variants: # It is a TT Font and we found it using fc-match (or found *something*)
+    # It is a TT Font and we found it using fc-match (or found *something*)
+    if variants:
         for variant in variants:
             vname = os.path.basename(variant)[:-4]
             try:
@@ -213,13 +214,6 @@ def autoEmbed(fname):
                 pass
             else:
                 fontList.append(vname)
-        # Also register "standard" aliases for the variants
-        # for variant, name in zip(variants,
-        #      [fname+suffix for suffix in ["", "-Oblique", "-Bold", "-BoldOblique"]]):
-        #   fontList.append(name)
-        #   pdfmetrics.registerFont(TTFont(name,v ariant))
-
-        # And map them all together
         regular, bold, italic, bolditalic = [
             os.path.basename(variant)[:-4] for variant in variants]
         addMapping(regular, 0, 0, regular)
