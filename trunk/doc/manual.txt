@@ -92,7 +92,7 @@ Command line options
                     default=False
 
 For the options that take a folder list, like --stylesheet-path, the separator used will
-depend on your platform. On unix-like OSs, it's ":", on Windows it's "%". Don't blame me,
+depend on your platform. On unix-like OSs, it's ":", on Windows it's ";". Don't blame me,
 blame DOS.
 
 Some of these options' defaults can be changed by creating a `configuration file`_
