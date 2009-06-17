@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
 import tempfile
@@ -33,7 +34,8 @@ class Math(Flowable):
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            width, height, descent, glyphs, \
+            rects, used_characters = self.parser.parse(
                 '$%s$' % self.s, 72)
             return width, height
         return 10, 10
@@ -41,7 +43,8 @@ class Math(Flowable):
     def drawOn(self, canv, x, y, _sW=0):
         if HAS_MATPLOTLIB:
             global fonts
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            width, height, descent, glyphs, \
+            rects, used_characters = self.parser.parse(
                 '$%s$' % self.s, 72)
             canv.saveState()
             canv.translate(x, y)
@@ -63,7 +66,8 @@ class Math(Flowable):
             canv.restoreState()
 
     def descent(self):
-        """Return the descent of this flowable, useful to align it when used inline."""
+        """Return the descent of this flowable,
+        useful to align it when used inline."""
         if HAS_MATPLOTLIB:
             width, height, descent, glyphs, rects, used_characters = \
             self.parser.parse('$%s$'%self.s, 72)
@@ -73,7 +77,8 @@ class Math(Flowable):
     def genImage(self):
         """Create a PNG from the contents of this flowable.
 
-        Required so we can put inline math in paragraphs. Returns the file name.
+        Required so we can put inline math in paragraphs.
+        Returns the file name.
         The file is caller's responsability.
 
         """
@@ -81,12 +86,16 @@ class Math(Flowable):
         dpi = 72
         scale = 10
 
-        import Image, ImageFont, ImageDraw, ImageColor
+        import Image
+        import ImageFont
+        import ImageDraw
+        import ImageColor
 
         if not HAS_MATPLOTLIB:
             img = Image.new('L', (120, 120), ImageColor.getcolor("black", "L"))
         else:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            width, height, descent, glyphs,
+            rects, used_characters = self.parser.parse(
                 '$%s$' % self.s, dpi)
             img = Image.new('L', (int(width*scale), int(height*scale)),
                 ImageColor.getcolor("white", "L"))
@@ -94,15 +103,18 @@ class Math(Flowable):
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 font = ImageFont.truetype(fontname, int(fontsize*scale))
                 tw, th = draw.textsize(unichr(num), font=font)
-                # No, I don't understand why that 4 is there. As we used to say in the pure math
+                # No, I don't understand why that 4 is there.
+                # As we used to say in the pure math
                 # department, that was a numerical solution.
-                draw.text((ox*scale, (height - oy - fontsize + 4)*scale), unichr(num), font=font)
+                draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
+                           unichr(num), font=font)
             for ox, oy, w, h in rects:
                 x1 = ox*scale
                 x2 = x1 + w*scale
                 y1 = (height - oy)*scale
                 y2 = y1 + h*scale
-                draw.rectangle([x1, y1, x2, y2], fill=ImageColor.getcolor("black", "L"))
+                draw.rectangle([x1, y1, x2, y2],
+                               fill=ImageColor.getcolor("black", "L"))
 
         fh, fn = tempfile.mkstemp(suffix=".png")
         os.close(fh)
@@ -112,5 +124,6 @@ class Math(Flowable):
 
 if __name__ == "__main__":
     doc = SimpleDocTemplate("mathtest.pdf")
-    Story = [Math(r'$\mathcal{R}\prod_{i=\alpha\mathcal{B}}^\infty a_i\sin(2 \pi f x_i)$')]
+    Story = [Math(r'\mathcal{R}\prod_{i=\alpha\mathcal{B}}'\
+                  r'^\infty a_i\sin(2 \pi f x_i)')]
     doc.build(Story)
