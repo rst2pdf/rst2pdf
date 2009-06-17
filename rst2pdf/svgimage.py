@@ -4,11 +4,10 @@
 import sys
 import os
 
-from reportlab.platypus import *
+from reportlab.platypus import Flowable, Paragraph
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 from log import log
-
-HAS_UNICONVERTOR = False
 
 try:
     for p in sys.path:
@@ -21,10 +20,11 @@ try:
             from uniconvsaver import save
             app.init_lib()
             plugins.load_plugin_configuration()
-            HAS_UNICONVERTOR = True
             break
+    else:
+        raise ImportError
 except ImportError:
-    pass
+    load = None
 
 try:
     from svglib import svglib
@@ -37,48 +37,51 @@ class SVGImage(Flowable):
     def __init__(self, filename, width=None, height=None, kind='direct'):
         Flowable.__init__(self)
         ext = os.path.splitext(filename)[-1]
-        self._mode=None
-        self._kind=kind
+        self._kind = kind
         # Prefer svglib for SVG, as it works better
         if ext in ('.svg', '.svgz') and svglib is not None:
+            self._mode = 'svglib'
             self.doc = svglib.svg2rlg(filename)
-            self.width=width
-            self.height=height
-            _,_,self._w,self._h=self.doc.getBounds()
-            if not self.width: 
-                self.width=self._w
-            if not self.height: 
-                self.height=self._h
-            self._mode='svglib'
+            self.width = width
+            self.height = height
+            _, _, self._w, self._h = self.doc.getBounds()
+            if not self.width:
+                self.width = self._w
+            if not self.height:
+                self.height = self._h
         # Use uniconvertor for the rest
-        elif HAS_UNICONVERTOR:
+        elif load is not None:
+            self._mode = 'uniconvertor'
             self.doc = load.load_drawing(filename)
-            self.saver = plugins.find_export_plugin(plugins.guess_export_plugin(".pdf"))
+            self.saver = plugins.find_export_plugin(
+                plugins.guess_export_plugin('.pdf'))
             self.width = width
             self.height = height
             _, _, self._w, self._h = self.doc.BoundingRect()
             if not self.width:
                 self.width = self._w
             if not self.height:
-                self.height = self._h                
-            self._mode='uniconvertor'
+                self.height = self._h
         else:
-            log.error("Vector image support not enabled, install svglib or uniconvertor")
-        self.__ratio=float(self.width)/self.height
+            self._mode = None
+            log.error("Vector image support not enabled,"
+                " please install svglib and/or uniconvertor.")
+        if self._mode:
+            self.__ratio = float(self.width)/self.height
 
     def wrap(self, aW, aH):
         if self._mode:
-            if self._kind=='percentage_of_container':
-                w, h= self.width, self.height
+            if self._kind == 'percentage_of_container':
+                w, h = self.width, self.height
                 if not w:
                     log.warning('Scaling image as % of container with w unset.'
                     'This should not happen, setting to 100')
                     w = 100
-                scale=w/100.
+                scale = w/100.
                 w = aW*scale
                 h = w/self.__ratio
                 self.width, self.height = w, h
-                return w, h                
+                return w, h
             else:
                 return self.width, self.height
         return 0, 0
@@ -86,7 +89,6 @@ class SVGImage(Flowable):
     def drawOn(self, canv, x, y, _sW=0):
         if self._mode:
             if _sW and hasattr(self,'hAlign'):
-                from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
                 a = self.hAlign
                 if a in ('CENTER', 'CENTRE', TA_CENTER):
                     x += 0.5*_sW
@@ -97,19 +99,21 @@ class SVGImage(Flowable):
             canv.saveState()
             canv.translate(x, y)
             canv.scale(self.width/self._w, self.height/self._h)
-            if self._mode=='uniconvertor':
-                save(self.doc, open(".ignoreme.pdf","w"), ".ignoreme.pdf", options={'pdfgen_canvas': canv})
-                os.unlink(".ignoreme.pdf")
-            elif self._mode=='svglib':
+            if self._mode == 'uniconvertor':
+                save(self.doc, open('.ignoreme.pdf', 'w'), '.ignoreme.pdf',
+                    options=dict(pdfgen_canvas=canv))
+                os.unlink('.ignoreme.pdf')
+            elif self._mode == 'svglib':
                 self.doc._drawOn(canv)
             canv.restoreState()
 
 
 if __name__ == "__main__":
+    from reportlab.platypus import SimpleDocTemplate
     from reportlab.lib.styles import getSampleStyleSheet
-    doc = SimpleDocTemplate("svgtest.pdf")
+    doc = SimpleDocTemplate('svgtest.pdf')
     styles = getSampleStyleSheet()
-    style = styles["Normal"]
+    style = styles['Normal']
     Story = [Paragraph("Before the image", style),
              SVGImage(sys.argv[1]),
              Paragraph("After the image", style)]
