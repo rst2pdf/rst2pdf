@@ -189,7 +189,18 @@ class RstToPdf(object):
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
-            
+        elif extension == 'pdf':
+            try:
+                from pyPdf import pdf
+            except:
+                log.warning('PDF images are not supported without pypdf')
+                return 0,0,'direct'
+            finally:
+                reader=pdf.PdfFileReader(open(imgname))
+                x1,y1,x2,y2=reader.getPage(0)['/MediaBox']
+                # These are in pt, so convert to px
+                iw = float((x2-x1) * xdpi / 72)
+                ih = float((y2-y1) * ydpi / 72)
         else:
             img = PILImage.open(imgname)
             iw, ih = img.size
@@ -642,7 +653,8 @@ class RstToPdf(object):
                     node.elements = [KeepTogether([elem,
                         Paragraph(text, self.styles['heading%d' % min(depth, 6)])])]
                 else:
-                    node.elements = [Paragraph(text, self.styles['heading%d' % min(depth, 6)])]
+                    node.elements = [KeepTogether([elem,
+                        Paragraph(text, self.styles['heading%d' % min(depth, 4)])])]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
@@ -965,11 +977,20 @@ class RstToPdf(object):
                 w, h, kind = 1*cm, 1*cm, 'direct'
             else:
                 w, h, kind = self.size_for_image_node(node)
-
-            if imgname.split('.')[-1].lower() in (
+            extension=imgname.split('.')[-1].lower()
+            if extension in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
                 node.elements = [SVGImage(filename=imgname, height=h, width=w)]
+            elif extension == 'pdf':
+                try:
+                    import rlextra.pageCatcher.pageCatcher as pageCatcher
+                except:
+                    log.warning("PDF images require pageCatcher")
+                    imgname=os.path.join(self.img_dir, 'image-missing.png')
+                    w, h, kind = 1*cm, 1*cm, 'direct'
+                finally:
+                    node.elements = [pageCatcher.PDFImageFlowable(imgname,w,h)]
             else:
                 node.elements = [MyImage(filename=imgname, height=h, width=w,
                     kind=kind)]
