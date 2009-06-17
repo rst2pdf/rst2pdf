@@ -654,8 +654,8 @@ class RstToPdf(object):
                     node.elements = [KeepTogether([elem,
                         Paragraph(text, self.styles['heading%d' % min(depth, 6)])])]
                 else:
-                    node.elements = [KeepTogether([elem,
-                        Paragraph(text, self.styles['heading%d' % min(depth, 4)])])]
+                    node.elements = [elem,
+                        Paragraph(text, self.styles['heading%d' % min(depth, 4)])]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
