@@ -12,7 +12,7 @@ import tempfile
 from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
-from copy import copy,deepcopy
+from copy import copy, deepcopy
 from cgi import escape
 from optparse import OptionParser
 import logging
@@ -104,8 +104,9 @@ class RstToPdf(object):
         if hasattr(sys, 'frozen'):
             PATH = abspath(dirname(sys.executable))
         else:
-            PATH = abspath(dirname(__file__))        
-        stylesheets = [join(PATH,'styles', 'styles.json'),join(PATH,'styles', 'default.json')] + stylesheets
+            PATH = abspath(dirname(__file__))
+        stylesheets = [join(PATH, 'styles', 'styles.json'),
+                       join(PATH, 'styles', 'default.json')] + stylesheets
         self.styles = sty.StyleSheet(stylesheets,
                                      fontPath,
                                      stylePath,
@@ -195,10 +196,10 @@ class RstToPdf(object):
                 from pyPdf import pdf
             except:
                 log.warning('PDF images are not supported without pypdf')
-                return 0,0,'direct'
+                return 0, 0, 'direct'
             finally:
                 reader=pdf.PdfFileReader(open(imgname))
-                x1,y1,x2,y2=reader.getPage(0)['/MediaBox']
+                x1, y1, x2, y2=reader.getPage(0)['/MediaBox']
                 # These are in pt, so convert to px
                 iw = float((x2-x1) * xdpi / 72)
                 ih = float((y2-y1) * ydpi / 72)
@@ -450,7 +451,6 @@ class RstToPdf(object):
                 w, h = 1*cm, 1*cm
             else:
                 w, h, kind = self.size_for_image_node(node)
-                                
             alignment=node.get('align', 'CENTER').lower()
             if alignment in ('top', 'middle', 'bottom'):
                 align='valign="%s"'%alignment
@@ -602,7 +602,9 @@ class RstToPdf(object):
                             # That way, you can have cells with specific
                             # background colors, at least.
                             try:
-                                cellStyles += self.styles.pStyleToTStyle(ell[0].style, j, i)
+                                cellStyles += \
+                                    self.styles.pStyleToTStyle(ell[0].style,
+                                                               j, i)
                             # Fix for issue 85: only do it if it has a style.
                             except AttributeError:
                                 pass
@@ -610,39 +612,43 @@ class RstToPdf(object):
                     j += 1
                 data.append(r)
 
-            #st = spans + sty.tstyleNorm + self.styles.tstyleBody() + cellStyles
             st = TableStyle(spans)
             for cmd in self.styles.tstyles['normal'].getCommands():
-                st.add (*cmd)
-            for cmd in cellStyles: 
-                st.add (*cmd)
+                st.add(*cmd)
+            for cmd in cellStyles:
+                st.add(*cmd)
 
             if hasHead:
-                for cmd in self.styles.tstyleHead(headRows): 
+                for cmd in self.styles.tstyleHead(headRows):
                     st.add(*cmd)
             rtr = self.repeatTableRows
 
-            # node.elements = [Table(data, colWidths=colwidths, style=TableStyle(st))]
             node.elements = [DelayedTable(data, colwidths, st, rtr)]
 
         elif isinstance(node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['title'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                                           self.styles['title'])]
                 self.doc_title = unicode(self.gen_pdftext(node, depth)).strip()
             elif isinstance(node.parent, docutils.nodes.topic):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['topic-title'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                                           self.styles['topic-title'])]
             elif isinstance(node.parent, docutils.nodes.admonition):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['admonition-title'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                                           self.styles['admonition-title'])]
             elif isinstance(node.parent, docutils.nodes.table):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['table-title'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                                           self.styles['table-title'])]
             elif isinstance(node.parent, docutils.nodes.sidebar):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth), self.styles['sidebar-title'])]
+                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                                           self.styles['sidebar-title'])]
             else:
                 # Section/Subsection/etc.
                 text = self.gen_pdftext(node, depth)
                 fch = node.children[0]
-                if isinstance(fch, docutils.nodes.generated) and fch['classes'] == ['sectnum']:
+                if isinstance(fch, docutils.nodes.generated) and \
+                    fch['classes'] == ['sectnum']:
                     snum = fch.astext()
                 else:
                     snum = None
@@ -686,8 +692,8 @@ class RstToPdf(object):
 
             fn = Paragraph(self.gather_pdftext(node.children[0], depth) + ":",
                 style=self.styles['fieldname'])
-            fb = self.gen_elements(node.children[1], 
-                depth,style=self.styles['fieldvalue'])
+            fb = self.gen_elements(node.children[1],
+                depth, style=self.styles['fieldvalue'])
             node.elements = [Table([[fn, fb]], style=self.styles.tstyles['field'],
                 colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
 
@@ -882,46 +888,13 @@ class RstToPdf(object):
             # FIXME: use different unicode bullets depending on b
             if b and b in "*+-":
                 b = u'\u2022'
-            #el[0].bulletText = b
 
-            ## Try to figure out how much space to reserve for the bullet
-            #if "style" in el[0].__dict__:
-                #indentation = el[0].style.leading
-            #else:
-                #indentation = 12
-            #indentation=node.parent._bullSize
-            
             bStyle=copy(style)
             bStyle.alignment=2
-            
-            node.elements=[Table([[Paragraph(b,style=bStyle), el]], 
+
+            node.elements=[Table([[Paragraph(b, style=bStyle), el]],
                            style=self.styles.tstyles['item_list'],
                            colWidths=[self.styles.tstyles['bullet_lwidth'], None])]
-           
-            ## Indent all elements inside the list
-            #for e in el:
-                #if "style" in e.__dict__:
-                    #if isinstance(e.style, list): # Table style
-                        ## Add pre/post indenters. Later these sublists are flattened in node.elements
-                        #el[el.index(e)] = [
-                            #MyIndenter(left=2*indentation), e, MyIndenter(left=-2*indentation)]
-                    #else: # Paragraph style
-                        #indentedStyle = copy(e.style)
-                        #indentedStyle.leftIndent += indentation
-                        #indentedStyle.bulletIndent += indentation
-                        #e.style = indentedStyle
-            #for e in el:
-                #if not isinstance(e, list) and 'style' in e.__dict__:
-                    #e.style.leftIndent = e.style.bulletIndent + indentation
-
-            ## "Flatten" el
-            #node.elements = []
-            #for e in el:
-                #if isinstance(e, list):
-                    #node.elements += e
-                #else:
-                    #node.elements.append(e)
-            ##node.elements=el
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
@@ -987,7 +960,7 @@ class RstToPdf(object):
                 try:
                     #import rlextra.pageCatcher.pageCatcher as pageCatcher
                     raise Exception("Broken")
-                    node.elements = [pageCatcher.PDFImageFlowable(imgname,w,h)]
+                    node.elements = [pageCatcher.PDFImageFlowable(imgname, w, h)]
                 except:
                     log.warning("Proper PDF images require pageCatcher (but doesn't work yet)")
                     try:
@@ -997,7 +970,7 @@ class RstToPdf(object):
                         img=PMImage()
                         img.density("%s"%self.styles.def_dpi)
                         img.read(imgname)
-                        _,tmpname=tempfile.mkstemp(suffix='.png')
+                        _, tmpname=tempfile.mkstemp(suffix='.png')
                         img.write(tmpname)
                         self.to_unlink.append(tmpname)
                         node.elements = [MyImage(filename=tmpname, height=h, width=w,
@@ -1321,12 +1294,13 @@ class FancyDocTemplate(BaseDocTemplate):
 head=None
 foot=None
 
+
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
 
     def __init__(self, _id, _head, _foot, styles, smarty="0", show_frame=False):
-        global head,foot
+        global head, foot
         self.styles = styles
         head = _head
         foot = _foot
@@ -1341,7 +1315,7 @@ class FancyPage(PageTemplate):
 
         """
 
-        global head,foot
+        global head, foot
 
         self.tw = self.styles.pw - self.styles.lm - self.styles.rm - self.styles.gm
         # What page template to use?
@@ -1464,15 +1438,17 @@ def main():
 
     def_ssheets = ','.join([expanduser(p) for p in
         config.getValue("general", "stylesheets", "").split(',')])
-    parser.add_option('-s', '--stylesheets', dest='style',type='string', action='append',
+    parser.add_option('-s', '--stylesheets', dest='style',
+        type='string', action='append',
         metavar='STYLESHEETS', default=[def_ssheets],
         help='A comma-separated list of custom stylesheets. Default="%s"' % def_ssheets)
 
     def_sheetpath = os.pathsep.join([expanduser(p) for p in
         config.getValue("general", "stylesheet_path", "").split(os.pathsep)])
     parser.add_option('--stylesheet-path', dest='stylepath',
-        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep,)*3), default=def_sheetpath,
-        help='A list of folders to search for stylesheets, separated using "%s". Default="%s"' %(os.pathsep, def_sheetpath))
+        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep, )*3), default=def_sheetpath,
+        help='A list of folders to search for stylesheets,"\
+        " separated using "%s". Default="%s"' %(os.pathsep, def_sheetpath))
 
     def_compressed = config.getValue("general", "compressed", False)
     parser.add_option('-c', '--compressed', dest='compressed', action="store_true", default=def_compressed,
@@ -1486,8 +1462,10 @@ def main():
 
     def_fontpath = os.pathsep.join([expanduser(p) for p in
         config.getValue("general", "font_path", "").split(os.pathsep)])
-    parser.add_option('--font-path', dest='fpath', metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep,)*3), default=def_fontpath,
-        help='A list of folders to search for fonts, separated using "%s". Default="%s"'%(os.pathsep,def_fontpath))
+    parser.add_option('--font-path', dest='fpath',
+        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep, )*3), default=def_fontpath,
+        help='A list of folders to search for fonts,'\
+             ' separated using "%s". Default="%s"'%(os.pathsep, def_fontpath))
 
     def_baseurl = None
     parser.add_option('--baseurl', dest='baseurl', metavar='URL', default=def_baseurl,
@@ -1615,7 +1593,7 @@ def main():
     spath = []
     if options.stylepath:
         spath = options.stylepath.split(os.pathsep)
-        
+
     if reportlab.Version < '2.3':
         log.warning('You are using Reportlab version %s. The suggested version '\
                     'is 2.3 or higher'%reportlab.Version)
