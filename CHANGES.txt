@@ -1,6 +1,9 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Fixed issue 129: make it work around a prblem with KeepTogether in RL 2.1
+  it probably makes the output look worse in some cases when using that.
+  RL 2.1 is not really supported, so added a warning.
 * Fixed issue 130: use os.pathsep instead of ":" since ":" in windows is used
   in disk names (and we still pay for DOS idiocy, in 2009)
 * Fixed issue 128: headings level 3+ all looked the same
