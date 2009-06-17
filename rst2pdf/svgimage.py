@@ -34,10 +34,11 @@ except ImportError:
 
 class SVGImage(Flowable):
 
-    def __init__(self, filename, width=None, height=None):
+    def __init__(self, filename, width=None, height=None, kind='direct'):
         Flowable.__init__(self)
         ext = os.path.splitext(filename)[-1]
         self._mode=None
+        self._kind=kind
         # Prefer svglib for SVG, as it works better
         if ext in ('.svg', '.svgz') and svglib is not None:
             self.doc = svglib.svg2rlg(filename)
@@ -63,10 +64,23 @@ class SVGImage(Flowable):
             self._mode='uniconvertor'
         else:
             log.error("Vector image support not enabled, install svglib or uniconvertor")
+        self.__ratio=float(self.width)/self.height
 
     def wrap(self, aW, aH):
         if self._mode:
-            return self.width, self.height
+            if self._kind=='percentage_of_container':
+                w, h= self.width, self.height
+                if not w:
+                    log.warning('Scaling image as % of container with w unset.'
+                    'This should not happen, setting to 100')
+                    w = 100
+                scale=w/100.
+                w = aW*scale
+                h = w/self.__ratio
+                self.width, self.height = w, h
+                return w, h                
+            else:
+                return self.width, self.height
         return 0, 0
 
     def drawOn(self, canv, x, y, _sW=0):
