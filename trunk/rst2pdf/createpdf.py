@@ -638,8 +638,11 @@ class RstToPdf(object):
                 # Issue 114: neet to conver "&amp;" to "&" and such
                 elem = OutlineEntry(key, unescape(text), depth - 1, snum)
                 elem.parent_id = node.parent.get('ids', [None])[0]
-                node.elements = [KeepTogether([elem,
-                    Paragraph(text, self.styles['heading%d' % min(depth, 6)])])]
+                if reportlab.Version > '2.1':
+                    node.elements = [KeepTogether([elem,
+                        Paragraph(text, self.styles['heading%d' % min(depth, 6)])])]
+                else:
+                    node.elements = [Paragraph(text, self.styles['heading%d' % min(depth, 6)])]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
@@ -1576,6 +1579,10 @@ def main():
     spath = []
     if options.stylepath:
         spath = options.stylepath.split(os.pathsep)
+        
+    if reportlab.Version < '2.3':
+        log.warning('You are using Reportlab version %s. The suggested version '\
+                    'is 2.3 or higher'%reportlab.Version)
 
     RstToPdf(
         stylesheets=ssheet,
