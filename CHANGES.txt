@@ -1,6 +1,9 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* Implemented issue 127: support images in PDF format. Right now they 
+  are rasterized, so it's not ideal. Perhaps something better will come up
+  later.
 * Fixed issue 129: make it work around a prblem with KeepTogether in RL 2.1
   it probably makes the output look worse in some cases when using that.
   RL 2.1 is not really supported, so added a warning.

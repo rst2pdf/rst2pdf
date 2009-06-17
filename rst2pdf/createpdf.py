@@ -8,6 +8,7 @@ __docformat__ = 'reStructuredText'
 
 import sys
 import os
+import tempfile
 from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
@@ -984,13 +985,27 @@ class RstToPdf(object):
                 node.elements = [SVGImage(filename=imgname, height=h, width=w)]
             elif extension == 'pdf':
                 try:
-                    import rlextra.pageCatcher.pageCatcher as pageCatcher
-                except:
-                    log.warning("PDF images require pageCatcher")
-                    imgname=os.path.join(self.img_dir, 'image-missing.png')
-                    w, h, kind = 1*cm, 1*cm, 'direct'
-                finally:
+                    #import rlextra.pageCatcher.pageCatcher as pageCatcher
+                    raise Exception("Broken")
                     node.elements = [pageCatcher.PDFImageFlowable(imgname,w,h)]
+                except:
+                    log.warning("Proper PDF images require pageCatcher (but doesn't work yet)")
+                    try:
+                        from PythonMagick import Image as PMImage
+                        # w,h are in pixels. I need to set the density of the image to
+                        # the right dpi so this looks decent
+                        img=PMImage()
+                        img.density("%s"%self.styles.def_dpi)
+                        img.read(imgname)
+                        _,tmpname=tempfile.mkstemp(suffix='.png')
+                        img.write(tmpname)
+                        self.to_unlink.append(tmpname)
+                        node.elements = [MyImage(filename=tmpname, height=h, width=w,
+                            kind=kind)]
+                    except ImportError:
+                        log.warning("Minimal PDF image support requires PythonMagick")
+                        imgname=os.path.join(self.img_dir, 'image-missing.png')
+                        w, h, kind = 1*cm, 1*cm, 'direct'
             else:
                 node.elements = [MyImage(filename=imgname, height=h, width=w,
                     kind=kind)]
