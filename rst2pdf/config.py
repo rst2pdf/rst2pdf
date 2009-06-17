@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-
-# Singleton config object
+"""Singleton config object"""
 
 
 import ConfigParser
@@ -9,14 +8,14 @@ import os
 from simplejson import loads
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
-cfname = os.path.join(cfdir,'config')
+cfname = os.path.join(cfdir, 'config')
 
 
-def getValue(section,key, default=None):
+def getValue(section, key, default=None):
     section = section.lower()
     key = key.lower()
     try:
-        return loads(conf.get (section, key))
+        return loads(conf.get(section, key))
     except Exception:
         return default
 
