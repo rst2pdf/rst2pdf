@@ -982,7 +982,7 @@ class RstToPdf(object):
             if extension in (
                     'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                     'sk1', 'sk', 'svg', 'xml', 'wmf'):
-                node.elements = [SVGImage(filename=imgname, height=h, width=w)]
+                node.elements = [SVGImage(filename=imgname, height=h, width=w, kind=kind)]
             elif extension == 'pdf':
                 try:
                     #import rlextra.pageCatcher.pageCatcher as pageCatcher

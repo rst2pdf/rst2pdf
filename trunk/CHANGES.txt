@@ -1,6 +1,7 @@
 New in SVN (will be 0.11)
 -------------------------
 
+* SVG images now handle % as a width unit correctly.
 * Implemented issue 127: support images in PDF format. Right now they 
   are rasterized, so it's not ideal. Perhaps something better will come up
   later.
