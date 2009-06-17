@@ -233,7 +233,8 @@ Supported Image Types
 For raster images, rst2pdf supports anything PIL (The Python Imaging Library) supports.
 The exact list of supported formats varies according to your PIL version and system.
 
-For vector image support, you need to install Uniconvertor from http://sk1project.org
+For vector image support, you need to install Dinu Gherman's svglib 
+(http://pypi.python.org/pypi/svglib/) or Uniconvertor from http://sk1project.org 
 version 1.1.3 or later.
 
 It provides support for these formats:
@@ -258,6 +259,20 @@ when used in your documents.
 
 If you can choose between raster and vectorial images, for non-photographic images,
 vector files are usually smaller and look better, specially when printed.
+
+If you want to use PDF files as images, you need to install PythonMagick
+(http://www.imagemagick.org), which will be used to convert it to PNG and
+then inserted in your document. If the quality is not good enough, try something like
+``--default-dpi 1200``
+
+This only works for one-page PDF files, and has several drawbacks, such as
+inability to copy text from the embedded image.
+
+In the future, rst2pdf will support ReportLab's PageCatcher to properly embed PDFs. That
+is not implemented yet, though.
+
+If there is any other image format you need supported, please report it as a feature
+request in rst2pdf's site.
 
 Image Size
 ----------
