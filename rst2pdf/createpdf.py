@@ -197,12 +197,11 @@ class RstToPdf(object):
             except:
                 log.warning('PDF images are not supported without pypdf')
                 return 0, 0, 'direct'
-            finally:
-                reader=pdf.PdfFileReader(open(imgname))
-                x1, y1, x2, y2=reader.getPage(0)['/MediaBox']
-                # These are in pt, so convert to px
-                iw = float((x2-x1) * xdpi / 72)
-                ih = float((y2-y1) * ydpi / 72)
+            reader = pdf.PdfFileReader(open(imgname))
+            x1, y1, x2, y2=reader.getPage(0)['/MediaBox']
+            # These are in pt, so convert to px
+            iw = float((x2-x1) * xdpi / 72)
+            ih = float((y2-y1) * ydpi / 72)
         else:
             img = PILImage.open(imgname)
             iw, ih = img.size
