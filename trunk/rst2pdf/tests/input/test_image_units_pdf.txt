@@ -54,3 +54,8 @@ All the above images should be exactly 1 inch wide.
 
 The above image should be exactly the width of the text area
 
+.. image:: images/biohazard.pdf
+   :width: 50%
+
+The above image should be exactly half the width of the text area
+
