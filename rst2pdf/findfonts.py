@@ -89,7 +89,7 @@ def loadFonts():
             if family in Alias:
                 continue
             if baseName not in pfbList:
-                log.warning("afm file without matching pfb file: %s"% baseName)
+                log.info("afm file without matching pfb file: %s"% baseName)
                 continue
 
             # So now we have a font we knopw we can embed.
@@ -231,8 +231,6 @@ def guessFont(fname):
         1: italic
         2: bold
         3: bolditalic
-
-    May be useful someday.
 
     """
     if '-' not in fname:
