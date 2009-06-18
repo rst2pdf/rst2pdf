@@ -165,6 +165,7 @@
       "fontName": "stdBold",
       "fontSize": "200%",
       "alignment": "TA_CENTER",
+      "keepWithNext": false,
       "spaceAfter": 10
     }],
     ["subtitle" , {
