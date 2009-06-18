@@ -94,7 +94,7 @@ class Math(Flowable):
         if not HAS_MATPLOTLIB:
             img = Image.new('L', (120, 120), ImageColor.getcolor("black", "L"))
         else:
-            width, height, descent, glyphs,
+            width, height, descent, glyphs,\
             rects, used_characters = self.parser.parse(
                 '$%s$' % self.s, dpi)
             img = Image.new('L', (int(width*scale), int(height*scale)),
