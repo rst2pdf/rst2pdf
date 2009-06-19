@@ -109,16 +109,14 @@
       "spaceBefore": 2
     }],
     ["bullet_list_item" , {
-      "parent": "bodytext",
-      "spaceBefore": 4
+      "parent": "bodytext"
     }],
     ["enumerated_list" , {
       "parent": "bodytext",
       "spaceBefore": 2
     }],
     ["enumerated_list_item" , {
-      "parent": "bodytext",
-      "spaceBefore": 4
+      "parent": "bodytext"
     }],
     ["definition_list_term" , {
       "parent": "normal",
