@@ -65,10 +65,21 @@ try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    from wordaxe.DCWHyphenator import DCWHyphenator
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    haveWordaxe = True
     from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
+    haveWordaxe = True
+    # Workaround to issue 2809074 in wordaxe:
+    # http://is.gd/16lqs
+    try:
+        from wordaxe.DCWHyphenator import DCWHyphenator
+    except ImportError:
+        log.warning("Can't load DCW hyphenator, trying PyHyphen instead")
+        try:
+            from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator as DCWHyphenator
+        except ImportError:
+            log.warning("Can't load DCW or PyHyphen hyphenators, so "\
+            "some languages will not hyphenate correctly")
+        from wordaxe.BaseHyphenator import BaseHyphenator as DCWHyphenator
 except ImportError:
     #log.warning("No support for hyphenation, install wordaxe")
     pass
@@ -264,7 +275,18 @@ class RstToPdf(object):
         try:
             return style.language
         except AttributeError:
+            pass
+        try:
             return self.styles['bodytext'].language
+        except AttributeError:
+            # FIXME: this is pretty arbitrary, and will
+            # probably not do what you want.
+            # however, it should only happen if:
+            # * You specified the language of a style
+            # * Have no wordaxe installed.
+            # Since it only affects hyphenation, and wordaxe is
+            # not installed, t should have no effect whatsoever
+            return os.environ['LANG'] or 'en'
 
     def text_for_label(self, label, style):
         """Translate text for label."""

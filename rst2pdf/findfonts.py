@@ -101,9 +101,9 @@ def loadFonts():
             if bold and italic:
                 families[family][3] = fontName
             elif bold:
-                families[family][2] = fontName
-            elif italic:
                 families[family][1] = fontName
+            elif italic:
+                families[family][2] = fontName
             # FIXME: what happens if there are Demi and Medium
             # weights? We get a random one.
             else:
@@ -151,8 +151,8 @@ def findTTFont(fname):
     def get_variants(family):
         variants = [
             get_fname(family + ":style=Roman"),
-            get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold"),
+            get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold Oblique")]
         if variants[1] == variants[0]:
             variants[1] = get_fname(family + ":style=Italic")
@@ -243,7 +243,7 @@ def guessFont(fname):
         italic = 1
     if "bold" in mod or "black" in mod:
         bold = 1
-    return family, 2*bold + italic
+    return family, bold + 2*italic
 
 
 def main():
