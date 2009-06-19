@@ -1166,35 +1166,36 @@ For example, this will enable german hyphenation globally:
     rst2pdf -l de_DE mydocument.txt
 
 If you are creating a multilingual document, you can declare styles with specific languages.
-For example, you could inherit bodytext for german::
+For example, you could inherit bodytext for spanish::
 
-    ["bodytext_de" , {
+    ["bodytext_es" , {
       "parent": "bodytext",
       "alignment": "TA_JUSTIFY",
       "hyphenation": true,
-      "language": "de_DE"
+      "language": "es_ES"
     }],
 
-And all paragraps declared of bodytext_de style would have german hyphenation::
+And all paragraps declared of bodytext_de style would have spanish hyphenation::
 
-    .. class:: bodytext_de
+    .. class:: bodytext_es
 
-    Ein Vierteljahrhundert hindurch hatte ich Kopf, Herz, Hand und--Füße der
-    Schilderung der Alpenwelt und ihrer Bewohner gewidmet mit dem
-    erfreulichen Erfolg, daß die deutsche Leserwelt es gewöhnt geworden war,
-    beim Anblick meines Namens auf Büchern sofort an die--Alpen zu denken.
-
+    Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar. 
+    El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona, 
+    en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
+    (New York, 1917) y es una reimpresión literal, pero también morosa, de la 
+    *Encyclopaedia Britannica* de 1902.
+    
 Here is the result (made thinner to force hyphenation):
 
 .. class:: thin
 
-Ein Vierteljahrhundert hindurch hatte ich Kopf, Herz, Hand und--Füße der
-Schilderung der Alpenwelt und ihrer Bewohner gewidmet mit dem
-erfreulichen Erfolg, daß die deutsche Leserwelt es gewöhnt geworden war,
-beim Anblick meines Namens auf Büchern sofort an die--Alpen zu denken.
+Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar. 
+El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona, 
+en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
+(New York, 1917) y es una reimpresión literal, pero también morosa, de la 
+*Encyclopaedia Britannica* de 1902.
 
-BTW: I have no idea what that says, I just copied it from project Gutenberg.
-Hopefully it's not offensive :-)
+BTW: That's the beginning of "Tlön, Uqbar, Orbis Tertius", read it, it's cool.
 
 If you explicitly configure a language in a paragraph style and also pass a
 language in the command line, the style has priority, so remember:
