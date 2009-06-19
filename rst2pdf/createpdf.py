@@ -264,7 +264,18 @@ class RstToPdf(object):
         try:
             return style.language
         except AttributeError:
+            pass
+        try:
             return self.styles['bodytext'].language
+        except AttributeError:
+            # FIXME: this is pretty arbitrary, and will
+            # probably not do what you want.
+            # however, it should only happen if:
+            # * You specified the language of a style
+            # * Have no wordaxe installed.
+            # Since it only affects hyphenation, and wordaxe is
+            # not installed, t should have no effect whatsoever
+            return os.environ['LANG'] or 'en'
 
     def text_for_label(self, label, style):
         """Translate text for label."""
