@@ -1,0 +1,241 @@
+{
+  "styles": [
+    [
+      "pygments-hll", 
+      {
+        "parent": "code", 
+        "backColor": "#ffffcc"
+      }
+    ], 
+    [
+      "pygments-c", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-err", 
+      {
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-k", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cm", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-c1", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cs", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ge", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gh", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gp", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gs", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gu", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kc", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kd", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kn", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kr", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nc", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ni", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ne", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nn", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nt", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ow", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sb", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sc", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sd", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s2", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-se", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sh", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-si", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sx", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sr", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s1", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ss", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ]
+  ]
+}

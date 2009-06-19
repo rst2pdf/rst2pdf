@@ -1,0 +1,102 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+3 0 obj
+% Page dictionary
+<< /Contents 7 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 6 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R4': class PDFCatalog 
+4 0 obj
+% Document Root
+<< /Outlines 8 0 R
+ /PageMode /UseNone
+ /Pages 6 0 R
+ /Type /Catalog >>
+endobj
+% 'R5': class PDFInfo 
+5 0 obj
+<< /Author ()
+ /CreationDate (D:20090519094141+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+% 'R6': class PDFPages 
+6 0 obj
+% page tree
+<< /Count 1
+ /Kids [ 3 0 R ]
+ /Type /Pages >>
+endobj
+% 'R7': class PDFStream 
+7 0 obj
+% page stream
+<< /Length 817 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 731.1969 cm
+q
+BT 1 0 0 1 0 42.256 Tm .465876 Tw 9.6 TL /F1 8 Tf 0 0 0 rg (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam condimentum, est a placerat fermentum, lacus nisl eleifend nisl, vel) Tj T* 0 Tw .487251 Tw (laoreet metus neque id nibh. Morbi elementum leo sed sapien. Aliquam erat volutpat. Praesent mollis sapien et felis. Nulla ultricies) Tj T* 0 Tw .817688 Tw (odio id elit. Ut non quam eget nulla blandit iaculis. Phasellus convallis tempor enim. Nunc nec arcu. Sed hendrerit congue quam.) Tj T* 0 Tw 1.537516 Tw (Nulla fermentum tortor vitae lacus. Pellentesque a ante. Pellentesque sed justo. Proin facilisis mattis pede. Donec augue orci,) Tj T* 0 Tw (pellentesque id, suscipit quis, placerat id, purus.) Tj T* ET
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R8': class PDFOutlines 
+8 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+xref
+0 9
+0000000000 65535 f
+0000000113 00000 n
+0000000209 00000 n
+0000000372 00000 n
+0000000649 00000 n
+0000000783 00000 n
+0000000990 00000 n
+0000001095 00000 n
+0000002012 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\355\247QJ\352V\022\002\331`\330DM \263\021) (\355\247QJ\352V\022\002\331`\330DM \263\021)] 
+
+ /Info 5 0 R
+ /Root 4 0 R
+ /Size 9 >>
+startxref
+2063
+%%EOF

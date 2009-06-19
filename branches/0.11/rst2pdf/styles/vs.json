@@ -1,0 +1,234 @@
+{
+  "styles": [
+    [
+      "pygments-hll", 
+      {
+        "parent": "code", 
+        "backColor": "#ffffcc"
+      }
+    ], 
+    [
+      "pygments-c", 
+      {
+        "textColor": "#008000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-err", 
+      {
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-k", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cm", 
+      {
+        "textColor": "#008000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cp", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-c1", 
+      {
+        "textColor": "#008000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cs", 
+      {
+        "textColor": "#008000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ge", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gh", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gp", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gs", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gu", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kc", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kd", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kn", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kp", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kr", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kt", 
+      {
+        "textColor": "#2b91af", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nc", 
+      {
+        "textColor": "#2b91af", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ow", 
+      {
+        "textColor": "#0000ff", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sb", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sc", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sd", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s2", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-se", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sh", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-si", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sx", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sr", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s1", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ss", 
+      {
+        "textColor": "#a31515", 
+        "parent": "code"
+      }
+    ]
+  ]
+}
