@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.10.1
+:version: 0.11
 :revision: $LastChangedRevision$
 
 .. header::
@@ -653,10 +653,8 @@ above. Example::
 Or you can be explicit and tell rst2pdf the files that contain each variant of the
 font.
 
-Suppose you want to use the nice public domain `Tuffy font`_ (included in rst2pdf's
-source distribution).
-
-You need to give the filenames of all variants::
+Suppose you want to use the nice public domain `Tuffy font`_, then you need to give the 
+filenames of all variants::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
 
@@ -666,8 +664,10 @@ aliases similar to those of the standard PDF fonts (Tuffy-Bold/Tuffy-Oblique/Tuf
 
 Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it will use
 Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and
-that is the order in which you should put them. If your font lacks a variant, use the
-"normal" variant instead. For example, if you only had Tuffy.ttf::
+you should put them in **that** order. If your font lacks a variant, use the
+"normal" variant instead. 
+
+For example, if you only had Tuffy.ttf::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy.ttf","Tuffy.ttf","Tuffy.ttf"] ],
 
@@ -938,20 +938,16 @@ Include with Boundaries
 you can add selectors to limit the inclusion to a portion of the file.
 the options are:
 
-* :start-at: string
-
+:start-at: string
     will include file beginning at the first occurence of string, string **included**
 
-* :start-after: string
-
+:start-after: string
     will include file beginning at the first occurence of string, string **excluded**
 
-* :end-before: string
-
+:end-before: string
     will include file up to the first occurence of string, string **excluded**
 
-* :end-at: string
-
+:end-at: string
     will include file up to the first occurence of string, string **included**
 
 Let's display a class from rst2pdf::
@@ -1175,7 +1171,7 @@ For example, you could inherit bodytext for spanish::
       "language": "es_ES"
     }],
 
-And all paragraps declared of bodytext_de style would have spanish hyphenation::
+And all paragraps declared of bodytext_es style would have spanish hyphenation::
 
     .. class:: bodytext_es
 
