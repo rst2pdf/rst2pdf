@@ -7,6 +7,7 @@
 import os
 import sys
 import re
+from copy import copy
 
 import docutils.nodes
 
@@ -279,6 +280,7 @@ class StyleSheet(object):
         for data, ssname in zip(ssdata, flist):
             styles = data.get('styles', {})
             for [skey, style] in styles:
+
                 for key in style:
                     if key == 'fontName' or key.endswith('FontName'):
                         # It's an alias, replace it
@@ -326,21 +328,21 @@ class StyleSheet(object):
                             self.embedded += fontList
                             # Maybe the font we got is not called
                             # the same as the one we gave so check that out
-                            suff = ["", "-Oblique", "-Bold", "-BoldOblique"]
+                            suff = ["", "-Bold", "-Oblique", "-BoldOblique"]
                             if not fontList[0].startswith(style[key]):
                                 # We need to create font aliases, and use them
+                                basefname=style[key].split('-')[0]
                                 for fname, aliasname in zip(
                                         fontList,
-                                        [style[key] + suffix for
+                                        [basefname + suffix for
                                         suffix in suff]):
                                     self.fontsAlias[aliasname] = fname
-                                style[key] = self.fontsAlias[style[key] +\
+                                style[key] = self.fontsAlias[basefname +\
                                              suff[pos]]
                         else:
                             log.error("Unknown font: \"%s\","
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
-
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles = []
@@ -373,6 +375,7 @@ class StyleSheet(object):
                 else: # New style
                     self.stylesheet[skey] = sdict
                     self.styles.append(sdict)
+                    
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
         for s in self.styles:
