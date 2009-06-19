@@ -60,29 +60,17 @@ except ImportError:
         log.warning("No support for images other than JPG,"
             " and limited support for image size. Please install PIL.")
 
-haveWordaxe = False
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
-    haveWordaxe = True
-    # Workaround to issue 2809074 in wordaxe:
-    # http://is.gd/16lqs
-    try:
-        from wordaxe.DCWHyphenator import DCWHyphenator
-    except ImportError:
-        log.warning("Can't load DCW hyphenator, trying PyHyphen instead")
-        try:
-            from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator as DCWHyphenator
-        except ImportError:
-            log.warning("Can't load DCW or PyHyphen hyphenators, so "\
-            "some languages will not hyphenate correctly")
-        from wordaxe.BaseHyphenator import BaseHyphenator as DCWHyphenator
 except ImportError:
-    #log.warning("No support for hyphenation, install wordaxe")
-    pass
+    # log.warning("No support for hyphenation, install wordaxe")
+    haveWordaxe = False
+else:
+    haveWordaxe = True
 
 try:
     import sphinx
@@ -165,16 +153,39 @@ class RstToPdf(object):
         if haveWordaxe:
             for lang in self.styles.languages:
                 if lang.split('_', 1)[0] == 'de':
-                    wordaxe.hyphRegistry[lang] = DCWHyphenator('de', 5)
-                else:
                     try:
-                        wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
+                        from wordaxe.DCWHyphenator import DCWHyphenator
+                        wordaxe.hyphRegistry[lang] = DCWHyphenator('de', 5)
+                        continue
                     except Exception:
-                        log.warning("Can't load PyHyphen "
-                            "hyphenator for language %s,"
-                            " trying PyHnj hyphenator", lang)
-                        wordaxe.hyphRegistry[lang] = \
-                            PyHnjHyphenator(lang, 5, purePython=True)
+                        # hyphenators may not always be available or crash,
+                        # e.g. wordaxe issue 2809074 (http://is.gd/16lqs)
+                        log.warning("Can't load wordaxe DCW hyphenator"
+                            " for German language, trying Py hyphenator instead")
+                    else:
+                        continue
+                try:
+                    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
+                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
+                except Exception:
+                    log.warning("Can't load wordaxe Py hyphenator"
+                        " for language %s, trying PyHnj hyphenator", lang)
+                else:
+                    continue
+                try:
+                    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(
+                        lang, 5, purePython=True)
+                except Exception:
+                    log.warning("Can't load wordaxe PyHnj hyphenator"
+                        " for language %s, trying base hyphenator", lang)
+                else:
+                    continue
+                try:
+                    from wordaxe.BaseHyphenator import BaseHyphenator
+                    wordaxe.hyphRegistry[lang] = BaseHyphenator(lang)
+                except Exception:
+                    log.warning("Can't even load wordaxe base hyphenator")
             log.info('hyphenation by default in %s , loaded %s',
                 self.styles['bodytext'].language,
                 ','.join(self.styles.languages))
