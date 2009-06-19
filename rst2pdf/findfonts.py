@@ -151,8 +151,8 @@ def findTTFont(fname):
     def get_variants(family):
         variants = [
             get_fname(family + ":style=Roman"),
-            get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold"),
+            get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold Oblique")]
         if variants[1] == variants[0]:
             variants[1] = get_fname(family + ":style=Italic")
