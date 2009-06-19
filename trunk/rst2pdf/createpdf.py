@@ -65,10 +65,20 @@ try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    from wordaxe.DCWHyphenator import DCWHyphenator
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     haveWordaxe = True
-    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
+    # Workaround to issue 2809074 in wordaxe:
+    # http://is.gd/16lqs
+    try:
+        from wordaxe.DCWHyphenator import DCWHyphenator
+    except ImportError:
+        log.warning("Can't load DCW hyphenator, trying PyHyphen instead")
+        try:
+            from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator as DCWHyphenator
+        except ImportError:
+            log.warning("Can't load DCW or PyHyphen hyphenators, so "\
+            "some languages will not hyphenate correctly")
+        from wordaxe.BaseHyphenator import BaseHyphenator as DCWHyphenator
 except ImportError:
     #log.warning("No support for hyphenation, install wordaxe")
     pass
