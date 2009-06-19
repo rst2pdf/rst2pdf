@@ -1,5 +1,8 @@
-New in SVN (will be 0.11)
+New in SVN (will be 0.12)
 -------------------------
+
+New in 0.11
+-----------
 
 * Degrade more gracefully when one or more wordaxe hyphenators are
   broken (currently DWC is the broken one)
