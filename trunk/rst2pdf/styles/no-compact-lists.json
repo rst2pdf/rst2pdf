@@ -1,0 +1,12 @@
+{
+  "styles" : [
+    ["bullet_list" , {
+      "parent": "bodytext",
+      "spaceBefore": 8
+    }],
+    ["enumerated_list" , {
+      "parent": "bodytext",
+      "spaceBefore": 8
+    }]
+  ]
+}
