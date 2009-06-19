@@ -66,6 +66,7 @@ try:
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
     from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
     haveWordaxe = True
     # Workaround to issue 2809074 in wordaxe:
     # http://is.gd/16lqs
