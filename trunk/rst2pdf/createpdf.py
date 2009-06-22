@@ -65,7 +65,10 @@ try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    # PyHnjHyphenator is broken for non-ascii characters, so
+    # let's not use it and avoid useless crashes (http://is.gd/19efQ)
+    
+    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
 except ImportError:
     # log.warning("No support for hyphenation, install wordaxe")
@@ -170,18 +173,18 @@ class RstToPdf(object):
                     wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
                 except Exception:
                     log.warning("Can't load wordaxe Py hyphenator"
-                        " for language %s, trying PyHnj hyphenator", lang)
-                else:
-                    continue
-                try:
-                    from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-                    wordaxe.hyphRegistry[lang] = PyHnjHyphenator(
-                        lang, 5, purePython=True)
-                except Exception:
-                    log.warning("Can't load wordaxe PyHnj hyphenator"
                         " for language %s, trying base hyphenator", lang)
                 else:
                     continue
+                #try:
+                    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+                    #wordaxe.hyphRegistry[lang] = PyHnjHyphenator(
+                        #lang, 5, purePython=True)
+                #except Exception:
+                    #log.warning("Can't load wordaxe PyHnj hyphenator"
+                        #" for language %s, trying base hyphenator", lang)
+                #else:
+                    #continue
                 try:
                     from wordaxe.BaseHyphenator import BaseHyphenator
                     wordaxe.hyphRegistry[lang] = BaseHyphenator(lang)
