@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Support for aafigure (http://launchpad.net/aafigure)
+
 New in 0.11
 -----------
 

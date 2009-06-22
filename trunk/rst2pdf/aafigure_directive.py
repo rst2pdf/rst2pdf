@@ -26,12 +26,24 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import aafigure
+import aafigure.pdf
 from docutils import nodes
+from docutils.nodes import General, Inline, Element
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
+from docutils.parsers import rst
 
-class Aafig(object):
+class Aanode(General, Inline, Element):
+    children = ()
+
+    def __init__(self, flowable, rawsource='', *children, **attributes):
+        self.rawsource = rawsource
+        self.flowable=flowable
+        Element.__init__(self, rawsource, *children, **attributes)
+    
+
+class Aafig(rst.Directive):
     """
     Directive to insert an ASCII art figure to be rendered by aafigure.
     """
@@ -51,13 +63,17 @@ class Aafig(object):
     )
 
     def run(self):
-        node = 
-        node['text'] = '\n'.join(self.content)
+
         if 'textual' in self.options:
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
-        node['options'] = self.options
-        return [node]
+        visitor = aafigure.process(
+            '\n'.join(self.content),
+            aafigure.pdf.PDFOutputVisitor,
+            options=self.options
+        )
+        return [Aanode(renderPDF.GraphicsFlowable(visitor.drawing))]
         
 directives.register_directive('aafig', Aafig)
+directives.register_directive('aafigure', Aafig)
