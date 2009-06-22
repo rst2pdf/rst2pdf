@@ -35,6 +35,7 @@ from flowables import * # our own reportlab flowables
 from svgimage import SVGImage
 from math_directive import math_node
 from math_flowable import Math
+from aafigure_directive import Aanode
 
 from log import log
 
@@ -1104,6 +1105,8 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.citation):
             node.elements = []
+        elif isinstance(node, Aanode):
+            node.elements=[node.flowable]
         else:
             log.error("Unkn. node (gen_elements): %s", str(node.__class__))
             # Why fail? Just log it and do our best.
