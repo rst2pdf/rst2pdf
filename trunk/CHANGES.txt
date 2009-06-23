@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed issue 134: entities were replaced in interpreted roles 
+  (not needed)
 * Support for aafigure (http://launchpad.net/aafigure)
 
 New in 0.11
