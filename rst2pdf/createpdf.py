@@ -421,8 +421,9 @@ class RstToPdf(object):
             pre = self.styleToFont("title_reference")
             post = "</font>"
             node.pdftext = self.gather_pdftext(node, depth)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+            # Fix issue 134
+            #if replaceEnt:
+                #node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.reference):
