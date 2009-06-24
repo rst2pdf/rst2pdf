@@ -1,6 +1,9 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Make it work (in a slightly degraded mode) without PIL, as
+  long as you are only using JPGs or have PythonMagick installed.
+  This is good for OS X, where "installing PIL is a PITA"
 * Fixed issue 134: entities were replaced in interpreted roles 
   (not needed)
 * Support for aafigure (http://launchpad.net/aafigure)

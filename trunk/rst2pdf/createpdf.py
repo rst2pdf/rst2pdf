@@ -52,14 +52,23 @@ import config
 from utils import log, parseRaw
 import styles as sty
 
+HAS_PIL=True
 try:
     from PIL import Image as PILImage
 except ImportError:
     try:
         import Image as PILImage
     except ImportError:
-        log.warning("No support for images other than JPG,"
-            " and limited support for image size. Please install PIL.")
+        log.warning("Support for images other than JPG,"
+            " is now limited. Please install PIL.")
+        HAS_PIL=False
+
+try:
+    from PythonMagick import Image as PMImage
+    HAS_MAGICK=True
+except ImportError:
+    HAS_MAGICK=False
+
 
 try:
     import wordaxe
@@ -229,10 +238,20 @@ class RstToPdf(object):
             iw = float((x2-x1) * xdpi / 72)
             ih = float((y2-y1) * ydpi / 72)
         else:
-            img = PILImage.open(imgname)
-            iw, ih = img.size
-            xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
-
+            if HAS_PIL:
+                img = PILImage.open(imgname)
+                iw, ih = img.size
+                xdpi, ydpi=img.info.get('dpi', (xdpi, ydpi))
+            elif HAS_MAGICK:
+                img=PMImage(imgname)
+                iw = img.size().width()
+                ih = img.size().height()
+                # FIXME: need to figure out how to get the DPI
+                # xdpi, ydpi=img.density().???
+            else:
+                log.warning("Sizing images without PIL or PythonMagick, using 100x100")
+                iw, ih = 100., 100.
+                
         # Try to get the print resolution from the image itself via PIL.
         # If it fails, assume a DPI of 300, which is pretty much made up,
         # and then a 100% size would be iw*inch/300, so we pass
@@ -1000,8 +1019,7 @@ class RstToPdf(object):
                     node.elements = [pageCatcher.PDFImageFlowable(imgname, w, h)]
                 except:
                     log.warning("Proper PDF images require pageCatcher (but doesn't work yet)")
-                    try:
-                        from PythonMagick import Image as PMImage
+                    if HAS_MAGICK:
                         # w,h are in pixels. I need to set the density of the image to
                         # the right dpi so this looks decent
                         img=PMImage()
@@ -1012,17 +1030,31 @@ class RstToPdf(object):
                         self.to_unlink.append(tmpname)
                         node.elements = [MyImage(filename=tmpname, height=h, width=w,
                             kind=kind)]
-                    except ImportError:
+                    else:
                         log.warning("Minimal PDF image support requires PythonMagick")
                         imgname=os.path.join(self.img_dir, 'image-missing.png')
                         w, h, kind = 1*cm, 1*cm, 'direct'
-            else:
+            elif not HAS_PIL and HAS_MAGICK and extension <> 'jpg': 
+                # Need to convert to JPG via PythonMagick
+                img=PMImage(imgname)
+                _, tmpname=tempfile.mkstemp(suffix='.jpg')
+                img.write(tmpname)
+                self.to_unlink.append(tmpname)
+                node.elements = [MyImage(filename=tmpname, height=h, width=w,
+                            kind=kind)]
+                            
+            elif HAS_PIL or extension == 'jpg':
                 node.elements = [MyImage(filename=imgname, height=h, width=w,
                     kind=kind)]
-            i = node.elements[0]
-            alignment=node.get('align', 'CENTER').upper()
-            if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-                i.hAlign = alignment
+            else:
+                # No way to make this work
+                log.error('To use a %s image you need PIL installed'%extension)
+                node.elements=[]
+            if node.elements:
+                i = node.elements[0]
+                alignment=node.get('align', 'CENTER').upper()
+                if alignment in ('LEFT', 'CENTER', 'RIGHT'):
+                    i.hAlign = alignment
             # Image flowables don't support valign (makes no sense for them?)
             # elif alignment in ('TOP','MIDDLE','BOTTOM'):
             #    i.vAlign = alignment
