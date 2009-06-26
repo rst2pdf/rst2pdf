@@ -424,16 +424,16 @@ class RstToPdf(object):
             pre = '<super>'
             post = "</super>"
             node.pdftext = self.gather_pdftext(node, depth)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+            #if replaceEnt:
+                #node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.subscript):
             pre = '<sub>'
             post = "</sub>"
             node.pdftext = self.gather_pdftext(node, depth)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+            #if replaceEnt:
+                #node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.title_reference):
