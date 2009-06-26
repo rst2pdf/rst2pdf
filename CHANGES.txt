@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 137: bugs in escaping characters in interpreted roles
 * Make it work (in a slightly degraded mode) without PIL, as
   long as you are only using JPGs or have PythonMagick installed.
   This is good for OS X, where "installing PIL is a PITA"
