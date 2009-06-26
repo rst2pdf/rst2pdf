@@ -145,16 +145,16 @@ class StyleSheet(object):
 
 
         # Get table styles from all stylesheets in order
-        self.tstyles = {}
-        for data, ssname in zip(ssdata, flist):
-            tstyles = data.get('tstyles', {})
-            #tstyles is a dictionary of tstyles
-            for key in tstyles:
-                tstyle=tstyles[key]
-                if isinstance(tstyle,list): #It's a table style
-                    self.tstyles[key]=TableStyle(tstyle)
-                else: #It's a constant
-                    self.tstyles[key]=self.adjustUnits(tstyles[key])
+        #self.tstyles = {}
+        #for data, ssname in zip(ssdata, flist):
+            #tstyles = data.get('tstyles', {})
+            ##tstyles is a dictionary of tstyles
+            #for key in tstyles:
+                #tstyle=tstyles[key]
+                #if isinstance(tstyle,list): #It's a table style
+                    #self.tstyles[key]=TableStyle(tstyle)
+                #else: #It's a constant
+                    #self.tstyles[key]=self.adjustUnits(tstyles[key])
 
 
         # Get page templates from all stylesheets
@@ -434,7 +434,8 @@ class StyleSheet(object):
             self.StyleSheet.add(ParagraphStyle(**s))
         self.emsize=self['base'].fontSize
 
-        self.adjustFieldStyle()
+        # Not neded anymore
+        #self.adjustFieldStyle()
 
     def __getitem__(self, key):
         try:
@@ -606,6 +607,9 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
     """
 
+    if v is None:
+        return None
+
     v = str(v)
     _, n, u = re.split('(-?[0-9\.]*)', v)
     if not u:
@@ -629,72 +633,6 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
             return float(n) * 12
         log.error('Unknown unit "%s"' % u)
     return float(n)
-
-
-## Some table styles used for pieces of the document
-
-#tstyles = {}
-
-# Used for regular tables
-
-#tstyleNorm = [
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-    #('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-#]
-
-## Header row in tables
-#tstyles['normal'] = TableStyle(tstyleNorm)
-
-## Used for field lists
-#tstyles['field'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    #('TOPPADDING', (0, 0), (-1, -1), 0),
-#])
-
-#fieldlist_lwidth = 3*units.cm
-
-## Used for field lists
-#tstyles['optionlist'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    #('TOPPADDING', (0, 0), (-1, -1), 0),
-#])
-
-
-## Used for itemized lists
-#tstyles['item_list'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-    #('TOPPADDING', (0, 0), (-1, -1), 0),
-    #('BOTTOMPADDING', (0, 0), (-1, -1), 0),
-    #('RIGHTPADDING', (0, 0), (1, -1), 0),
-    ##('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-    ##('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-#])
-
-
-## Used for endnotes
-#tstyles['endnote'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('ALIGNMENT', (0, 0), (1, -1), 'RIGHT'),
-#])
-
-## Left column of the endnote. The content of the note takes the rest of
-## the available space
-#endnote_lwidth = 2*units.cm
-
-## Used for sidebars
-
-#tstyles['sidebar'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-    #('BACKGROUND', (0, 0), (-1, -1), colors.lightyellow),
-#])
-
-#tstyles['bullet'] = TableStyle([
-    #('VALIGN', (0, 0), (-1, -1), 'TOP'),
-#])
 
 
 def formatColor(value, numeric=True):
