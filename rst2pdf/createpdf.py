@@ -579,19 +579,23 @@ class RstToPdf(object):
         except (UnicodeDecodeError, UnicodeEncodeError):
             log.debug("gen_elements: %r", node)
 
-        if style is None:
-            style = self.styles.styleForNode(node)
-
         try:
             if node['classes']:
-                # Supports only one class, sorry ;-)
+                # FIXME: Supports only one class, sorry ;-)
                 try:
                     style = self.styles[node['classes'][0]]
                 except KeyError:
-                    log.info("Unknown class %s, using class bodytext.",
+                    log.info("Unknown class %s, ignoring.",
                         node['classes'][0])
         except TypeError: # Happens when a docutils.node.Text reaches here
             pass
+
+        print "AA1",node
+        print "AA2",style
+
+        if style is None or style == self.styles['bodytext']:
+            style = self.styles.styleForNode(node)
+        print "AA3",style
 
         if isinstance(node, docutils.nodes.document):
             node.elements = self.gather_elements(node, depth, style=style)
@@ -1059,16 +1063,18 @@ class RstToPdf(object):
             #    i.vAlign = alignment
 
         elif isinstance(node, docutils.nodes.figure):
-            # The sub-elements are the figure and the caption, and't ugly if they separate
-            # node.elements = [KeepTogether(self.gather_elements(node, depth, style=self.styles["figure"]))]
-            # FIXME: using KeepTogether as a container fails inside a float.
-            node.elements = self.gather_elements(node, depth, style=self.styles["figure"])
+            
+            print "XX",style or self.styles["figure"]
+            sub_elems=self.gather_elements(node, depth, style=None)
+            node.elements = [BoxedContainer(sub_elems,
+                             style or self.styles["figure"])]
 
         elif isinstance(node, docutils.nodes.caption):
-            node.elements = [Paragraph('<i>'+self.gather_pdftext(node, depth)+'</i>', style=style)]
+            node.elements = [Paragraph(self.gather_pdftext(node, depth), 
+                                       style=self.styles['figure-caption'])]
 
         elif isinstance(node, docutils.nodes.legend):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, depth, style=self.styles['figure-legend'])
 
         elif isinstance(node, docutils.nodes.sidebar):
             node.elements = [BoxedContainer(self.gather_elements(node, depth, style=None), self.styles['sidebar'])]
