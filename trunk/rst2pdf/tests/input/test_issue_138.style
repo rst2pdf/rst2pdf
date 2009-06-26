@@ -1,0 +1,6 @@
+{
+ "styles" : [
+        [ "with-border", {"parent":null, "borderWidth": 0.5, "borderColor":
+"black"} ]
+ ]
+} 

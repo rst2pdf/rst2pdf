@@ -1,0 +1,6 @@
+.. figure:: images/biohazard.png
+   :class: with-border 
+
+   This is the caption.
+
+   And a bit more text.
