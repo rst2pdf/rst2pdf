@@ -13,7 +13,6 @@ from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
 from copy import copy, deepcopy
-from cgi import escape
 from optparse import OptionParser
 import logging
 
@@ -42,9 +41,12 @@ from log import log
 from smartypants import smartyPants
 
 # Is this really the best unescape in the stdlib for '&amp;' => '&'????
-from xml.sax.saxutils import unescape
+from xml.sax.saxutils import unescape, quoteattr
 
 import config
+
+def escape (s):
+    return quoteattr(s)[1:-1]
 
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
@@ -390,7 +392,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.Text):
             node.pdftext = node.astext()
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.strong):
@@ -473,12 +475,12 @@ class RstToPdf(object):
                                docutils.nodes.option_argument)):
             node.pdftext = node.astext()
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
 
         elif isinstance(node, (docutils.nodes.header, docutils.nodes.footer)):
             node.pdftext = self.gather_pdftext(node, depth)
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
 
             node.pdftext = pre + node.pdftext + post
 
@@ -488,13 +490,13 @@ class RstToPdf(object):
             post = "</font>"
             node.pdftext = self.gather_pdftext(node, depth)
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.generated):
             node.pdftext = self.gather_pdftext(node, depth)
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.image):
@@ -542,7 +544,7 @@ class RstToPdf(object):
             pre = u'<a name="%s"/>' % node['ids'][0]
             node.pdftext = self.gather_pdftext(node, depth)
             if replaceEnt:
-                node.pdftext = escape(node.pdftext, True)
+                node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext
 
         elif isinstance(node, docutils.nodes.inline):
