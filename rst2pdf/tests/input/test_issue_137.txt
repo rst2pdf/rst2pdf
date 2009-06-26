@@ -1,3 +1,6 @@
 :subscript:`< >`
 :superscript:`< >`
 :literal:`< >`
+:strong:`< >`
+:emphasis:`< >`
+:title-reference:`< >`
