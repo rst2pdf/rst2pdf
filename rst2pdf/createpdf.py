@@ -590,12 +590,8 @@ class RstToPdf(object):
         except TypeError: # Happens when a docutils.node.Text reaches here
             pass
 
-        print "AA1",node
-        print "AA2",style
-
         if style is None or style == self.styles['bodytext']:
             style = self.styles.styleForNode(node)
-        print "AA3",style
 
         if isinstance(node, docutils.nodes.document):
             node.elements = self.gather_elements(node, depth, style=style)
@@ -1064,7 +1060,6 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.figure):
             
-            print "XX",style or self.styles["figure"]
             sub_elems=self.gather_elements(node, depth, style=None)
             node.elements = [BoxedContainer(sub_elems,
                              style or self.styles["figure"])]
