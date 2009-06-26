@@ -1,6 +1,8 @@
 {
  "styles" : [
-        [ "with-border", {"parent":null, "borderWidth": 0.5, "borderColor":
-"black"} ]
- ]
-} 
+        [ "with-border", {"parent": "figure", 
+                          "borderWidth": 0.5, 
+                          "borderColor": "black",
+                          "backColor": "white",
+                          "borderPadding": 8
+} ] ] } 

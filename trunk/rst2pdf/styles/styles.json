@@ -104,6 +104,15 @@
       "parent": "bodytext",
       "alignment": "TA_CENTER"
     }],
+    ["figure-caption" , {
+      "parent": "bodytext",
+      "fontName": "stdItalic",
+      "alignment": "TA_CENTER"
+    }],
+    ["figure-legend" , {
+      "parent": "bodytext",
+      "alignment": "TA_CENTER"
+    }],
     ["bullet_list" , {
       "parent": "bodytext",
       "spaceBefore": 2

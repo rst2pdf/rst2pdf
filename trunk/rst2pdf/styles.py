@@ -492,6 +492,8 @@ class StyleSheet(object):
         """
         if isinstance(node, docutils.nodes.sidebar):
             return self['sidebar']
+        elif isinstance(node, docutils.nodes.figure):
+            return self['figure']
         return self['bodytext']
 
     def tstyleHead(self, rows=1):

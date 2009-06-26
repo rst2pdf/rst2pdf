@@ -525,8 +525,16 @@ class BoxedContainer(BoundByWidth):
             canv.setLineWidth(self.style.borderWidth)
             if self.style.borderColor: # This could be None :-(
                 canv.setStrokeColor(self.style.borderColor)
+                stroke=1
+            else:
+                stroke=0
+        else:
+            stroke=0
         if self.style and self.style.backColor:
             canv.setFillColor(self.style.backColor)
+            fill=1
+        else:
+            fill=0
         if self.style:
             self.padding = self.style.__dict__.get('padding', 8)
         else:
@@ -534,7 +542,7 @@ class BoxedContainer(BoundByWidth):
         self.padding += lw
         p = canv.beginPath()
         p.rect(x, y, self.width + 2*self.padding, self.height + 2*self.padding)
-        canv.drawPath(p, stroke=1, fill=1)
+        canv.drawPath(p, stroke=stroke, fill=fill)
         canv.restoreState()
         BoundByWidth.draw(self)
 
