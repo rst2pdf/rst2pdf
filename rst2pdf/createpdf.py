@@ -41,12 +41,9 @@ from log import log
 from smartypants import smartyPants
 
 # Is this really the best unescape in the stdlib for '&amp;' => '&'????
-from xml.sax.saxutils import unescape, quoteattr
+from xml.sax.saxutils import unescape, escape
 
 import config
-
-def escape (s):
-    return quoteattr(s)[1:-1]
 
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
