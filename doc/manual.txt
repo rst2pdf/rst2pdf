@@ -1315,22 +1315,31 @@ Quoted from the smartypants_ documentation:
     Backticks-style quotes (\`\`like this'') into "curly" quote HTML entities
     Dashes (-- and ---) into en- and em-dash entities
     Three consecutive dots (... or . . .) into an ellipsis entity
-    This means you can write, edit, and save your posts using plain old ASCII straight quotes, plain dashes, and plain dots, but your published posts (and final PDF output) will appear with smart quotes, em-dashes, and proper ellipses.
+    This means you can write, edit, and save your posts using plain old ASCII straight 
+    quotes, plain dashes, and plain dots, but your published posts (and final PDF 
+    output) will appear with smart quotes, em-dashes, and proper ellipses.
 
-You can enable this by passing the ``--smart-quotes`` option in the command line. By default, it's disabled.
+You can enable this by passing the ``--smart-quotes`` option in the command line. 
+By default, it's disabled.
 Here are the different values you can use (again, from the smartypants docs):
 
     0
         Suppress all transformations. (Do nothing.)
     1
-        Performs default SmartyPants transformations: quotes (including \`\`backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
+        Performs default SmartyPants transformations: quotes 
+        (including \`\`backticks'' -style), em-dashes, and ellipses. 
+        "--" (dash dash) is used to signify an em-dash; there is no 
+        support for en-dashes.
     2
-        Same as smarty_pants="1", except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
+        Same as smarty_pants="1", except that it uses the old-school 
+        typewriter shorthand for dashes: "--" (dash dash) for en-dashes,
+        "---" (dash dash dash) for em-dashes.
     3
-        Same as smarty_pants="2", but inverts the shorthand for dashes: "--" (dash dash) for em-dashes, and "---" (dash dash dash) for en-dashes.
+        Same as smarty_pants="2", but inverts the shorthand for dashes: 
+        "--" (dash dash) for em-dashes, and "---" (dash dash dash) 
+        for en-dashes.
 
-Currently, even if you enable it, this transformation will only take place in regular paragraphs, titles, headers, footers and block quotes.
-
-In addition, there is currently an incompatibility between this and wordaxe's pyhyphen plugin, so it's not really usable in some cases.
+Currently, even if you enable it, this transformation will only take place in 
+regular paragraphs, titles, headers, footers and block quotes.
 
 .. _smartypants: http://web.chad.org/projects/smartypants.py/
