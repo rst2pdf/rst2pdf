@@ -21,6 +21,8 @@ run_test() {
 	if [ -f "$st" ]
     then
         style="-s $st"
+    else
+	style=""
     fi
     echo "Processing $1"
     
