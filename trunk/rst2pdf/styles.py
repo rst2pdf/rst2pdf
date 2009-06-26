@@ -490,12 +490,13 @@ class StyleSheet(object):
         example, it's sidebar.
 
         """
-        if isinstance(node, docutils.nodes.sidebar):
-            return self['sidebar']
-        elif isinstance(node, docutils.nodes.figure):
-            return self['figure']
-        return self['bodytext']
-
+        n= docutils.nodes
+        styles={ n.sidebar: 'sidebar',
+                 n.figure: 'figure'
+        }
+        
+        return self[styles.get(node.__class__,'bodytext')]
+        
     def tstyleHead(self, rows=1):
         """Return a table style spec for a table header of `rows`.
 
