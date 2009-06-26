@@ -668,7 +668,7 @@ class RstToPdf(object):
                 data.append(r)
 
             st = TableStyle(spans)
-            for cmd in self.styles.tstyles['normal'].getCommands():
+            for cmd in self.styles['table'].commands:
                 st.add(*cmd)
             for cmd in cellStyles:
                 st.add(*cmd)
@@ -749,8 +749,10 @@ class RstToPdf(object):
                 style=self.styles['fieldname'])
             fb = self.gen_elements(node.children[1],
                 depth, style=self.styles['fieldvalue'])
-            node.elements = [Table([[fn, fb]], style=self.styles.tstyles['field'],
-                colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            node.elements = [Table([[fn, fb]], style=t_style,
+                colWidths=colWidths)]
 
         elif isinstance(node, docutils.nodes.decoration):
             node.elements = self.gather_elements(node, depth, style=style)
@@ -775,67 +777,98 @@ class RstToPdf(object):
             else:
                 # A single author: works like a field
                 fb = self.gather_pdftext(node, depth)
+                
+                t_style=TableStyle(self.styles['field_list'].commands)
+                colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+                
                 node.elements = [Table([[Paragraph(self.text_for_label("author", style),
                     style=self.styles['fieldname']), Paragraph(fb, style)]],
-                    style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
+                    style=t_style, colWidths=colWidths)]
                 self.doc_author = node.astext().strip()
 
         elif isinstance(node, docutils.nodes.authors):
             # Multiple authors. Create a two-column table. Author references on the right.
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            
             td = [[Paragraph(self.text_for_label("authors", style), style=self.styles['fieldname']),
                 self.gather_elements(node, depth, style=style)]]
-            node.elements = [Table(td, style=self.styles.tstyles['field'],
-                colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])]
+            node.elements = [Table(td, style=t_style,
+                colWidths=colWidths)]
 
         elif isinstance(node, docutils.nodes.organization):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("organization", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("organization", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.contact):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("contact", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("contact", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.address):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("address", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("address", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.version):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("version", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("version", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.revision):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("revision", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("revision", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.status):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("status", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("status", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.date):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("date", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("date", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.copyright):
             fb = self.gather_pdftext(node, depth)
-            t = Table([[Paragraph(self.text_for_label("copyright", style),
-                style=self.styles['fieldname']), Paragraph(fb, style)]],
-                style=self.styles.tstyles['field'], colWidths=[self.styles.tstyles['fieldlist_lwidth'], None])
+            t_style=TableStyle(self.styles['field_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['field_list'].colWidths)
+            label=self.text_for_label("copyright", style)
+            t = Table([[Paragraph(label, style=self.styles['fieldname']), 
+                        Paragraph(fb, style)]],
+                        style=t_style, colWidths=colWidths)
             node.elements = [t]
-
+            
         elif isinstance(node, docutils.nodes.topic):
             # toc
             node_classes = node.attributes.get('classes', [])
@@ -906,8 +939,11 @@ class RstToPdf(object):
             optext = ', '.join([self.gather_pdftext(child, depth) for child in node.children[0].children])
             desc = self.gather_elements(node.children[1], depth, style)
 
+            t_style=TableStyle(self.styles['option_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['option_list'].colWidths)
             node.elements = [Table([[self.PreformattedFit(
-                optext, self.styles["literal"]), desc]], style=self.styles.tstyles['optionlist'])]
+                optext, self.styles["literal"]), desc]], style=t_style, 
+                colWidths=colWidths)]
 
 
         elif isinstance(node, docutils.nodes.definition_list_item):
@@ -946,10 +982,13 @@ class RstToPdf(object):
 
             bStyle=copy(style)
             bStyle.alignment=2
+            
+            t_style=TableStyle(self.styles['item_list'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['item_list'].colWidths)
 
             node.elements=[Table([[Paragraph(b, style=bStyle), el]],
-                           style=self.styles.tstyles['item_list'],
-                           colWidths=[self.styles.tstyles['bullet_lwidth'], None])]
+                           style=t_style,
+                           colWidths=colWidths)]
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
@@ -1059,10 +1098,8 @@ class RstToPdf(object):
             #    i.vAlign = alignment
 
         elif isinstance(node, docutils.nodes.figure):
-            
             sub_elems=self.gather_elements(node, depth, style=None)
-            node.elements = [BoxedContainer(sub_elems,
-                             style or self.styles["figure"])]
+            node.elements = [BoxedContainer(sub_elems, style)]
 
         elif isinstance(node, docutils.nodes.caption):
             node.elements = [Paragraph(self.gather_pdftext(node, depth), 
@@ -1095,7 +1132,9 @@ class RstToPdf(object):
                 if not r:
                     continue
                 t.append(r)
-            node.elements = [Table(t, style=self.styles.tstyles['normal'])]
+            t_style=TableStyle(self.styles['table'].commands)
+            colWidths=map(self.styles.adjustUnits,self.styles['table'].colWidths)
+            node.elements = [Table(t, style=t_style, colWidths=colWidths)]
 
         elif isinstance(node, (docutils.nodes.footnote, docutils.nodes.citation)):
             # It seems a footnote contains a label and a series of elements
@@ -1116,8 +1155,10 @@ class RstToPdf(object):
                 label = Paragraph('<a name="%s"/>%s' % (ltext, ltext), self.styles["normal"])
             contents = self.gather_elements(node, depth, style)[1:]
             if self.inline_footnotes:
+                t_style=TableStyle(self.styles['endnote'].commands)
+                colWidths=map(self.styles.adjustUnits,self.styles['endnote'].colWidths)
                 node.elements = [Table([[label, contents]],
-                    style=self.styles.tstyles['endnote'], colWidths=[self.styles.tstyles['endnote_lwidth'], None])]
+                                 style=t_style, colWidths=colWidths)]
             else:
                 self.decoration['endnotes'].append([label, contents])
                 node.elements = []
@@ -1313,10 +1354,11 @@ class RstToPdf(object):
         if endnotes:
             elements.append(Spacer(1, 2*cm))
             elements.append(Separation())
-            # FIXME: the width of the left column should not be fixed
             for n in self.decoration['endnotes']:
+                t_style=TableStyle(self.styles['endnote'].commands)
+                colWidths=map(self.styles.adjustUnits,self.styles['endnote'].colWidths)
                 elements.append(Table([[n[0], n[1]]],
-                    style=self.styles.tstyles['endnote'], colWidths=[self.styles.tstyles['endnote_lwidth'], None]))
+                    style=t_style, colWidths=colWidths))
 
         head = self.decoration['header']
         foot = self.decoration['footer']

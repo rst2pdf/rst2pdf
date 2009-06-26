@@ -1,17 +1,11 @@
 {
-  "tstyles": {
-    "thick": [
-        [ "INNERGRID",
-            [ 0, 0 ],
-            [ -1, -1 ],
-            2,
-            "black" ],
-        [ "BOX",
-            [ 0, 0 ],
-            [ -1, -1 ],
-            2,
-            "black" ]
+  "styles": [
+    [ "thick", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
+        ]}
     ]
-  }
+  ]
 }
 
