@@ -9,6 +9,7 @@ __docformat__ = 'reStructuredText'
 import sys
 import os
 import tempfile
+import re
 from os.path import abspath, dirname, expanduser, join
 from string import ascii_lowercase
 from urlparse import urljoin, urlparse
@@ -710,8 +711,11 @@ class RstToPdf(object):
                 else:
                     snum = None
                 key = node.get('refid')
-                # Issue 114: neet to convert "&amp;" to "&" and such
-                elem = OutlineEntry(key, unescape(text), depth - 1, snum)
+                # Issue 114: need to convert "&amp;" to "&" and such.
+                elemtext=unescape(text)
+                # Issue 140: need to make it plain text
+                elemtext=re.sub(r'<[^>]*?>', '', elemtext)
+                elem = OutlineEntry(key, elemtext, depth - 1, snum)
                 p_ids=node.parent.get('ids', [None]) or [None]
                 elem.parent_id = p_ids[0]
                 if reportlab.Version > '2.1':
