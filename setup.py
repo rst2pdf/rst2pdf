@@ -57,14 +57,13 @@ setup(
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data=dict(rst2pdf=['styles/*.json','images/*png']),
     include_package_data=True,
-    # place to find an egg distrib of reportlab 2.1
     dependency_links=[
-       #reportlab as egg
-       "http://ftp.schooltool.org/schooltool/eggs/3.4",
-       #wordaxe
-       "http://sourceforge.net/project/platformdownload.php?group_id=105867",
-       # uniconvertor
-       "http://sk1project.org/downloads/uniconvertor/v1.1.3/uniconvertor-1.1.3.tar.gz",
+       # Reportlab (now on PyPI)
+       #"http://ftp.schooltool.org/schooltool/eggs/3.4",
+       # Wordaxe (now on PyPI)
+       # "http://sourceforge.net/project/platformdownload.php?group_id=105867",
+       # UniConvertor
+       "http://sk1project.org/downloads/uniconvertor/v1.1.4/uniconvertor-1.1.4.tar.gz",
     ],
     install_requires=install_requires,
     tests_require=tests_require,
