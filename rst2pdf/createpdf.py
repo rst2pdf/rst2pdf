@@ -553,7 +553,9 @@ class RstToPdf(object):
                 node.pdftext = self.gather_pdftext(node, depth)
 
         else:
-            log.warning("Unkn. node (self.gen_pdftext): %s", node.__class__)
+            # With sphinx you will get hundreds of these
+            if not HAS_SPHINX: 
+                log.warning("Unkn. node (self.gen_pdftext): %s", node.__class__)
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
@@ -708,9 +710,10 @@ class RstToPdf(object):
                 else:
                     snum = None
                 key = node.get('refid')
-                # Issue 114: neet to conver "&amp;" to "&" and such
+                # Issue 114: neet to convert "&amp;" to "&" and such
                 elem = OutlineEntry(key, unescape(text), depth - 1, snum)
-                elem.parent_id = node.parent.get('ids', [None])[0]
+                p_ids=node.parent.get('ids', [None]) or [None]
+                elem.parent_id = p_ids[0]
                 if reportlab.Version > '2.1':
                     node.elements = [KeepTogether([elem,
                         Paragraph(text, self.styles['heading%d' % min(depth, 6)])])]
@@ -1021,6 +1024,20 @@ class RstToPdf(object):
             node.elements = [Paragraph(self.gather_pdftext(node, depth), style=style)]
 
         elif isinstance(node, (docutils.nodes.literal_block, docutils.nodes.doctest_block)):
+            if HAS_SPHINX: # SPHINX wants to auto-highlights all literal blocks
+                #from pygments_code_block_directive import code_block_directive
+                #node.children=code_block_directive(
+                                        #name=None,
+                                        #arguments=['null'],
+                                        #options={},
+                                        #content=node.astext(),
+                                        #lineno=False,
+                                        #content_offset=None,
+                                        #block_text=None,
+                                        #state=None,
+                                        #state_machine=None
+                                        #)
+                pass
             node.elements = [self.PreformattedFit(
                 self.gather_pdftext(node, depth, replaceEnt=True), self.styles['code'])]
 
@@ -1185,12 +1202,14 @@ class RstToPdf(object):
         elif isinstance(node, Aanode):
             node.elements=[node.flowable]
         else:
-            log.error("Unkn. node (gen_elements): %s", str(node.__class__))
-            # Why fail? Just log it and do our best.
-            try:
-                log.debug(node)
-            except (UnicodeDecodeError, UnicodeEncodeError):
-                log.debug(repr(node))
+            # With sphinx you will have hundreds of these
+            if not HAS_SPHINX:
+                log.error("Unkn. node (gen_elements): %s", str(node.__class__))
+                # Why fail? Just log it and do our best.
+                try:
+                    log.debug(node)
+                except (UnicodeDecodeError, UnicodeEncodeError):
+                    log.debug(repr(node))
             node.elements = self.gather_elements(node, depth, style)
             #sys.exit(1)
 
