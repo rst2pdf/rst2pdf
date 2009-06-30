@@ -755,21 +755,33 @@ If you intend to bound a printed copy, you may need extra space there. OTOH,
 if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
-Advanced: the tstyles section
------------------------------
+Advanced: table styles
+----------------------
 
-This is new in 0.12, and usually you don't need to touch it. If you feel adventurous,
-here's what's in it.
+This is new in 0.12.
 
-There are two kinds of elements:
+These are a few extra options in styles that are only used when the style is applied to a table.
+This happens in two cases:
     
-Lengths
-   They are used to layout part of the document that are implemented using tables.
-   for example, "bullet_lwidth" is the space reserved for bullets in the left side 
-   of lists, and "endnote_lwidth" is the space reserved for the left part of 
-   endnotes/footnotes.
+1) You are using the class directive on a table:
+    
+.. code-block:: rest
+
+   .. class:: thick
    
-Table commands
+   +-------+---------+
+   |   A   |   B     |
+   +-----------------+
+   
+2) It's a style that automatically applies to something that is *drawn* using a table. 
+   Currently these include:
+       
+   * Footnotes / endnotes (endnote style)
+   * Lists (item_list, bullet_list option_list and field_list styles)
+   
+The options are:   
+
+Commands   
    For a full reference of these, please check the Reportlab User Guide 
    specifically the TableStyle Commands section (section 7.4 in the manual 
    for version 2.3)
@@ -806,6 +818,19 @@ Table commands
        [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
 
    That would mean "draw all lines inside the table with .25pt black"
+
+colWidths
+   A list of the column widths you want, in the unit you prefer (default unit is pt).
+   
+   Example::
+       
+       "colWidths": ["3cm",null]
+
+   If your colWidths has fewer values than columns in your table, the rest are autocalculated.
+   A column width of null means "guess".
+   
+   If you don't specify column widths, the table will try to look proportional to the restructured 
+   text source.
 
 
 Multiple Stylesheets
