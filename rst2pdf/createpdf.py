@@ -615,7 +615,6 @@ class RstToPdf(object):
                             [Spacer(0, self.styles['table'].spaceAfter)]
 
         elif isinstance(node, docutils.nodes.tgroup):
-            print node
             rows = []
             colwidths = []
             hasHead = False
@@ -645,15 +644,10 @@ class RstToPdf(object):
             colwidths=["%s%%"%((100.*w)/tot) for w in colwidths]
             
             if 'colWidths' in style.__dict__:
-                print style.colWidths
                 colwidths[:len(style.colWidths)]=style.colWidths
 
             colwidths=map(self.styles.adjustUnits,colwidths)
             
-
-            print style,colwidths
-            print "-----------------------"
-
             spans = self.filltable(rows)
 
             data = []
