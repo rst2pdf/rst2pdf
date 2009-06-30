@@ -17,7 +17,11 @@
             [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
             [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
         ]}
-    ]
+    ],
+    [ "bigsmall", { "colWidths": ["20%","80%"] } ],
+    [ "smallbig", { "colWidths": ["80%","20%"] } ],
+    [ "onesmall", { "colWidths": ["20%"] } ],
+    [ "toomany", { "colWidths": ["30%","30%","30%"] } ]
   ]
 }
 
