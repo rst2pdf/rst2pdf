@@ -18,8 +18,8 @@
             [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
         ]}
     ],
-    [ "bigsmall", { "colWidths": ["20%","80%"] } ],
-    [ "smallbig", { "colWidths": ["80%","20%"] } ],
+    [ "bigsmall", { "colWidths": ["80%","20%"] } ],
+    [ "smallbig", { "colWidths": ["20%","80%"] } ],
     [ "onesmall", { "colWidths": ["20%"] } ],
     [ "toomany", { "colWidths": ["30%","30%","30%"] } ],
     [ "twosmall", { "colWidths": ["20%","20%"] } ]

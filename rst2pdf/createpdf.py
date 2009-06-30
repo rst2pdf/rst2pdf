@@ -615,6 +615,7 @@ class RstToPdf(object):
                             [Spacer(0, self.styles['table'].spaceAfter)]
 
         elif isinstance(node, docutils.nodes.tgroup):
+            print node
             rows = []
             colwidths = []
             hasHead = False
@@ -636,14 +637,19 @@ class RstToPdf(object):
                         rows.append(r)
                 elif isinstance(n, docutils.nodes.colspec):
                     colwidths.append(int(n['colwidth']))
-
-
-            print style,colwidths
+                    
+            # colWidths are in no specific unit, really. Maybe ems.
+            # Convert them to %
+            colwidths=map(int,colwidths)
+            tot=sum(colwidths)
+            colwidths=["%s%%"%((100.*w)/tot) for w in colwidths]
             
             if 'colWidths' in style.__dict__:
                 print style.colWidths
-                colwidths[:len(style.colWidths)]=map(self.styles.adjustUnits,style.colWidths)
+                colwidths[:len(style.colWidths)]=style.colWidths
 
+            colwidths=map(self.styles.adjustUnits,colwidths)
+            
 
             print style,colwidths
             print "-----------------------"

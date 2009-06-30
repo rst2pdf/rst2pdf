@@ -17,6 +17,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 import styles
 from log import log
 
+import functools
 
 class MyImage(Image):
     """A Image subclass that can take a 'percentage_of_container' kind,
@@ -169,15 +170,13 @@ class DelayedTable(Flowable):
         self.repeatrows = repeatrows
 
     def wrap(self, w, h):
-        # First create the table, with the widths from colwidths reinterpreted
+        # Create the table, with the widths from colwidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
 
-        # Colwidths in ReST are relative: 10,10,10 means 33%,33%,33%
-        # So, we need to calculate them relative to something
-        # and we use the width provided.
-        
-        _tw = w/sum(self.colwidths)
-        colwidths = [_w * _tw for _w in self.colwidths]
+        #_tw = w/sum(self.colwidths)
+        adjust=functools.partial(styles.adjustUnits,total=w)
+        colwidths=map(adjust,self.colwidths)
+        #colwidths = [_w * _tw for _w in self.colwidths]
         self.t = Table(self.data, colWidths=colwidths,
             style=self.style, repeatRows=self.repeatrows)
         return self.t.wrap(w, h)
