@@ -62,6 +62,7 @@ class Aafig(rst.Directive):
         background   = str,
         foreground   = str,
         fill         = str,
+        name         = str,
         aspect       = float,
         textual      = directives.flag,
         proportional = directives.flag,
