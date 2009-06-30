@@ -637,14 +637,13 @@ class RstToPdf(object):
                 elif isinstance(n, docutils.nodes.colspec):
                     colwidths.append(int(n['colwidth']))
 
+
             print style,colwidths
-
-
+            
             if 'colWidths' in style.__dict__:
-                cw=style.colWidths[:len(colwidths)]
-                for i,x in enumerate(cw):
-                    print i,x
-                    colwidths[i]=self.styles.adjustUnits(x)
+                print style.colWidths
+                colwidths[:len(style.colWidths)]=map(self.styles.adjustUnits,style.colWidths)
+
 
             print style,colwidths
             print "-----------------------"
