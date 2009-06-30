@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* New table styles code, also make class directive work for tables 
+  (not colWidths yet).
 * Fixed Issue 140: html-like markup in titles was kept in the PDF TOC
 * For Issue 138: Redid figure styling. Also fixed bugs in BoxedContainer
 * Fixed Issue 137: bugs in escaping characters in interpreted roles

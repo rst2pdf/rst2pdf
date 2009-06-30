@@ -611,7 +611,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.table):
             node.elements = [Spacer(0, self.styles['table'].spaceBefore)] + \
-                            self.gather_elements(node, depth) +\
+                            self.gather_elements(node, depth, style=style) +\
                             [Spacer(0, self.styles['table'].spaceAfter)]
 
         elif isinstance(node, docutils.nodes.tgroup):
@@ -671,11 +671,15 @@ class RstToPdf(object):
                 data.append(r)
 
             st = TableStyle(spans)
-            for cmd in self.styles['table'].commands:
-                st.add(*cmd)
+            if 'commands' in self.styles['table'].__dict__:
+                for cmd in self.styles['table'].commands:
+                    st.add(*cmd)
+            if 'commands' in style.__dict__:
+                for cmd in style.commands:
+                    st.add(*cmd)
             for cmd in cellStyles:
                 st.add(*cmd)
-
+                
             if hasHead:
                 for cmd in self.styles.tstyleHead(headRows):
                     st.add(*cmd)

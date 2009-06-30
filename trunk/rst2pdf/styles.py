@@ -493,7 +493,9 @@ class StyleSheet(object):
         """
         n= docutils.nodes
         styles={ n.sidebar: 'sidebar',
-                 n.figure: 'figure'
+                 n.figure: 'figure',
+                 n.tgroup: 'table',
+                 n.table: 'table',
         }
         
         return self[styles.get(node.__class__,'bodytext')]

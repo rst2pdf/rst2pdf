@@ -1,5 +1,17 @@
 {
   "styles": [
+    [ "justgrid", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0, "white" ]
+        ]}
+    ],
+    [ "thin", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ]
+        ]}
+    ],
     [ "thick", {
         "commands": [ 
             [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
