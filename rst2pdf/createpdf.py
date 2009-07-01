@@ -285,7 +285,7 @@ class RstToPdf(object):
             w = iw*inch/xdpi
 
         h = node.get('height')
-        if h is not None and h[-1] <> '%':
+        if h is not None and h[-1] != '%':
             h = self.styles.adjustUnits(h, ih*inch/ydpi)
         else:
             # Now, often, only the width is specified!
@@ -1153,7 +1153,7 @@ class RstToPdf(object):
                             "requires PythonMagick")
                         imgname=os.path.join(self.img_dir, 'image-missing.png')
                         w, h, kind = 1*cm, 1*cm, 'direct'
-            elif not HAS_PIL and HAS_MAGICK and extension <> 'jpg':
+            elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
                 # Need to convert to JPG via PythonMagick
                 img=PMImage(imgname)
                 _, tmpname=tempfile.mkstemp(suffix='.jpg')
@@ -1300,7 +1300,7 @@ class RstToPdf(object):
             pass
 
         # Make all the sidebar cruft unreachable
-        #if style.__dict__.get('float','None').lower()<>'none':
+        #if style.__dict__.get('float','None').lower() !='none':
             #node.elements=[Sidebar(node.elements,style)]
         #elif 'width' in style.__dict__:
         if 'width' in style.__dict__:
