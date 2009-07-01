@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* More sphinx compatibility
 * New table styles code, also make class directive work for tables
 * Fixed Issue 140: html-like markup in titles was kept in the PDF TOC
 * For Issue 138: Redid figure styling. Also fixed bugs in BoxedContainer
