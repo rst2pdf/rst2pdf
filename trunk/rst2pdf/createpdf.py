@@ -1080,21 +1080,25 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.literal_block,
                                docutils.nodes.doctest_block)):
             if HAS_SPHINX: # SPHINX wants to auto-highlights all literal blocks
-                #from pygments_code_block_directive import code_block_directive
-                #node.children=code_block_directive(
-                                        #name=None,
-                                        #arguments=['null'],
-                                        #options={},
-                                        #content=node.astext(),
-                                        #lineno=False,
-                                        #content_offset=None,
-                                        #block_text=None,
-                                        #state=None,
-                                        #state_machine=None
-                                        #)
-                pass
-            node.elements = [self.PreformattedFit(
-                self.gather_pdftext(node, depth, replaceEnt=True),
+                idx=node.parent.children.index(node)
+                replacement=docutils.nodes.literal_block()
+                replacement.children=\
+                    pygments_code_block_directive.code_block_directive(
+                                        name=None,
+                                        arguments=['python'],
+                                        options={},
+                                        content=node.astext().splitlines(),
+                                        lineno=False,
+                                        content_offset=None,
+                                        block_text=None,
+                                        state=None,
+                                        state_machine=None,
+                                        )
+                text=self.gather_pdftext(replacement, depth, replaceEnt=True)
+                node.elements = [self.PreformattedFit(text,self.styles['code'])]
+            else:
+                node.elements = [self.PreformattedFit(
+                    self.gather_pdftext(node, depth, replaceEnt=True),
                                     self.styles['code'])]
 
         elif isinstance(node, (docutils.nodes.attention,
