@@ -32,9 +32,7 @@
 # ------------
 # ::
 
-
 import codecs
-
 from docutils import nodes
 from docutils.parsers.rst import directives
 
@@ -91,11 +89,11 @@ class DocutilsInterface(object):
         try:
             lexer = get_lexer_by_name(self.language)
         except ValueError:
-            log.info( "no pygments lexer for %s, using 'text'" % self.language)
+            log.info("no pygments lexer for %s, using 'text'" \
+                % self.language)
             # what happens if pygment isn't present ?
             lexer = get_lexer_by_name('text')
         return pygments.lex(self.code, lexer)
-
 
     def join(self, tokens):
         """join subsequent tokens of same token-type
@@ -233,13 +231,13 @@ def code_block_directive(name, arguments, options, content, lineno,
 
 code_block_directive.arguments = (1, 0, 1)
 code_block_directive.content = 1
-code_block_directive.options = { 'include' : directives.unchanged_required,
-                                 'start-at' : directives.unchanged_required,
-                                 'end-at' : directives.unchanged_required,
-                                 'start-after' : directives.unchanged_required,
-                                 'end-before' : directives.unchanged_required,
-                                 'linenos' : directives.unchanged,
-                                 }
+code_block_directive.options = {'include': directives.unchanged_required,
+                                'start-at': directives.unchanged_required,
+                                'end-at': directives.unchanged_required,
+                                'start-after': directives.unchanged_required,
+                                'end-before': directives.unchanged_required,
+                                'linenos': directives.unchanged,
+                                }
 
 directives.register_directive('code-block', code_block_directive)
 

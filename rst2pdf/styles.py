@@ -47,13 +47,13 @@ class StyleSheet(object):
         # They will be loaded and merged in order.
         dirn=os.path.dirname(__file__)
         if fontPath is None:
-            fontPath=[]            
+            fontPath=[]
         fontPath+=['.', os.path.join(os.path.abspath(dirn), 'fonts')]
         self.FontSearchPath = map(os.path.expanduser, fontPath)
-        
+
         if stylePath is None:
             stylePath=[]
-        stylePath+=['.', os.path.join(os.path.abspath(dirn), 'styles'), 
+        stylePath+=['.', os.path.join(os.path.abspath(dirn), 'styles'),
                       '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, stylePath)
 
@@ -375,7 +375,7 @@ class StyleSheet(object):
                 else: # New style
                     self.stylesheet[skey] = sdict
                     self.styles.append(sdict)
-                    
+
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
         for s in self.styles:
@@ -420,12 +420,12 @@ class StyleSheet(object):
             if ('bulletFontSize' not in s) and ('fontSize' in s):
                 s['bulletFontSize'] = s['fontSize']
 
-            # If the borderPadding is a list and wordaxe <=0.3.2, 
-            # convert it to an integer. Workaround for Issue 
+            # If the borderPadding is a list and wordaxe <=0.3.2,
+            # convert it to an integer. Workaround for Issue
             if HAS_WORDAXE and \
                     wordaxe_version <='wordaxe 0.3.2' \
                     and 'borderPadding' in s \
-                    and isinstance(s['borderPadding'],list):
+                    and isinstance(s['borderPadding'], list):
                 log.warning('Using a borderPadding list in '\
                     'style %s with wordaxe <= 0.3.2. That is not '\
                     'supported, so it will probably look wrong'%s['name'])
@@ -433,9 +433,6 @@ class StyleSheet(object):
 
             self.StyleSheet.add(ParagraphStyle(**s))
         self.emsize=self['base'].fontSize
-
-        # Not neded anymore
-        #self.adjustFieldStyle()
 
     def __getitem__(self, key):
         try:
@@ -452,7 +449,8 @@ class StyleSheet(object):
         and returns the real file name.
 
         """
-        def innerFind(path,fn):
+
+        def innerFind(path, fn):
             if os.path.isabs(fn):
                 if os.path.isfile(fn):
                     return fn
@@ -462,14 +460,14 @@ class StyleSheet(object):
                     if os.path.isfile(tfn):
                         return tfn
             return None
-        for ext in ['','.style','.json']:
-            result = innerFind(self.StyleSearchPath,fn+ext)
+        for ext in ['', '.style', '.json']:
+            result = innerFind(self.StyleSearchPath, fn+ext)
             if result:
                 break
         if result is None:
             log.warning("Can't find stylesheet %s"%fn)
         return result
-    
+
     def findFont(self, fn):
         """Find the absolute font name for a given font filename.
 
@@ -492,14 +490,14 @@ class StyleSheet(object):
 
         """
         n= docutils.nodes
-        styles={ n.sidebar: 'sidebar',
-                 n.figure: 'figure',
-                 n.tgroup: 'table',
-                 n.table: 'table',
+        styles={n.sidebar: 'sidebar',
+                n.figure: 'figure',
+                n.tgroup: 'table',
+                n.table: 'table',
         }
-        
-        return self[styles.get(node.__class__,'bodytext')]
-        
+
+        return self[styles.get(node.__class__, 'bodytext')]
+
     def tstyleHead(self, rows=1):
         """Return a table style spec for a table header of `rows`.
 
@@ -543,12 +541,12 @@ class StyleSheet(object):
         return [("ROWBACKGROUNDS", (0, 0), (-1, -1),
             [formatColor(c, numeric=False) for c in \
                 self['table'].rowBackgrounds])]
-                
+
     def adjustFieldStyle(self):
         """Merges fieldname and fieldvalue styles into the field table style"""
         tstyle=self.tstyles['field']
-        extras=self.pStyleToTStyle(self['fieldname'],0,0)+\
-                self.pStyleToTStyle(self['fieldvalue'],1,0) 
+        extras=self.pStyleToTStyle(self['fieldname'], 0, 0)+\
+                self.pStyleToTStyle(self['fieldvalue'], 1, 0)
         for e in extras:
             tstyle.add(*e)
         return tstyle
@@ -573,16 +571,40 @@ class StyleSheet(object):
                 bc = colors.black
             results.append(('BOX', (x, y), (x, y), bw, bc))
         if style.borderPadding:
-            if isinstance(style.borderPadding,list):
-                results.append(('TOPPADDING', (x, y), (x, y), style.borderPadding[0]))
-                results.append(('RIGHTPADDING', (x, y), (x, y), style.borderPadding[1]))
-                results.append(('BOTTOMPADDING', (x, y), (x, y), style.borderPadding[2]))
-                results.append(('LEFTPADDING', (x, y), (x, y), style.borderPadding[3]))
-            else:                 
-                results.append(('TOPPADDING', (x, y), (x, y), style.borderPadding))
-                results.append(('RIGHTPADDING', (x, y), (x, y), style.borderPadding))
-                results.append(('BOTTOMPADDING', (x, y), (x, y), style.borderPadding))
-                results.append(('LEFTPADDING', (x, y), (x, y), style.borderPadding))
+            if isinstance(style.borderPadding, list):
+                results.append(('TOPPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding[0]))
+                results.append(('RIGHTPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding[1]))
+                results.append(('BOTTOMPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding[2]))
+                results.append(('LEFTPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding[3]))
+            else:
+                results.append(('TOPPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding))
+                results.append(('RIGHTPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding))
+                results.append(('BOTTOMPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding))
+                results.append(('LEFTPADDING',
+                    (x, y),
+                    (x, y),
+                    style.borderPadding))
         return results
 
     def adjustUnits(self, v, total=None, default_unit='pt'):

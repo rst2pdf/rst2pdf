@@ -19,17 +19,19 @@ from log import log
 
 import functools
 
+
 class MyImage(Image):
     """A Image subclass that can take a 'percentage_of_container' kind,
-    which resizes it on wrap() to use... well, a percentage of the 
+    which resizes it on wrap() to use... well, a percentage of the
     container's width.
-    
+
     This whole class is a huge ungainly hack that deserves flaming death.
     However, I have asked in the reportlab list for this feature. If they
     implement it ... hey, I kill this in a jiffie.
-    
+
     """
-    def __init__(self, filename, width=None, height=None, 
+
+    def __init__(self, filename, width=None, height=None,
                  kind='direct', mask="auto", lazy=1):
         self.__kind=kind
         if kind == 'percentage_of_container':
@@ -63,9 +65,10 @@ class MyImage(Image):
                     self.__wrappedonce = True
                     return Image.wrap(self, availWidth, availHeight)
                 else: # Adjust by height
-                    # FIXME get rst file info (line number) here for better error
-                    # message
-                    log.warning('image %s is too tall for the frame, rescaling'%\
+                    # FIXME get rst file info (line number)
+                    # here for better error message
+                    log.warning('image %s is too tall for the '\
+                                'frame, rescaling'%\
                                 self.filename)
                     self.drawHeight = availHeight
                     self.drawWidth = availHeight*self.__ratio
@@ -75,6 +78,7 @@ class MyImage(Image):
                 self.drawWidth = availWidth
                 self.drawHeight = availWidth / self.__ratio
             return Image.wrap(self, availWidth, availHeight)
+
 
 class MyIndenter(Indenter):
     """I can't remember why this exists."""
@@ -143,7 +147,7 @@ class Reference(Flowable):
         self.refid = refid
         Flowable.__init__(self)
 
-    def wrap(self,w,h):
+    def wrap(self, w, h):
         """This takes no space"""
         return 0, 0
 
@@ -174,8 +178,8 @@ class DelayedTable(Flowable):
         # if needed as percentages of frame/cell/whatever width w is.
 
         #_tw = w/sum(self.colwidths)
-        adjust=functools.partial(styles.adjustUnits,total=w)
-        colwidths=map(adjust,self.colwidths)
+        adjust=functools.partial(styles.adjustUnits, total=w)
+        colwidths=map(adjust, self.colwidths)
         #colwidths = [_w * _tw for _w in self.colwidths]
         self.t = Table(self.data, colWidths=colwidths,
             style=self.style, repeatRows=self.repeatrows)
@@ -228,8 +232,7 @@ class Transition(Flowable):
         Box=['motion'],
         Wipe=['direction'],
         Dissolve=[],
-        Glitter=['direction']
-        )
+        Glitter=['direction'])
 
     def __init__(self, *args):
         if len(args) < 1:
@@ -249,8 +252,13 @@ class Transition(Flowable):
 
     def draw(self):
         kwargs = dict(
-            effectname=None, duration=1, direction=0, dimension='H', motion='I')
-        ceff = ['effectname', 'duration'] + self.PageTransitionEffects[self.args[0]]
+            effectname=None,
+            duration=1,
+            direction=0,
+            dimension='H',
+            motion='I')
+        ceff = ['effectname', 'duration'] +\
+            self.PageTransitionEffects[self.args[0]]
         for argname, argvalue in zip(ceff, self.args):
             kwargs[argname] = argvalue
         kwargs['duration'] = int(kwargs['duration'])
@@ -261,7 +269,8 @@ class Transition(Flowable):
 class SmartFrame(Frame):
     """A (Hopefully) smarter frame object.
 
-    This frame object knows how to handle a two-pass layout procedure (someday).
+    This frame object knows how to handle a two-pass
+    layout procedure (someday).
 
     """
 
@@ -288,7 +297,8 @@ class FrameCutter(FrameActionFlowable):
     def frameAction(self, frame):
         idx = frame.container.frames.index(frame)
         if self.floatLeft:
-            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+            # Don´ t bother inserting a silly thin frame
+            if self.width-self.padding > 30:
                 f1 = SmartFrame(frame.container,
                     frame._x1 + self.dx - 2*self.padding,
                     frame._y2 - self.f.height - 3*self.padding,
@@ -299,8 +309,8 @@ class FrameCutter(FrameActionFlowable):
                 # This is a frame next to a sidebar.
                 f1.onSidebar = True
                 frame.container.frames.insert(idx + 1, f1)
-
-            if frame._height-self.f.height - 2*self.padding > 30: # Don't add silly thin frame
+            # Don't add silly thin frame
+            if frame._height-self.f.height - 2*self.padding > 30:
                 frame.container.frames.insert(idx + 2,
                     SmartFrame(frame.container,
                         frame._x1,
@@ -309,7 +319,8 @@ class FrameCutter(FrameActionFlowable):
                         frame._height - self.f.height - 3*self.padding,
                         topPadding=0))
         else:
-            if self.width-self.padding > 30: # Don´ t bother inserting a silly thin frame
+            # Don´ t bother inserting a silly thin frame
+            if self.width-self.padding > 30:
                 f1 = SmartFrame(frame.container,
                     frame._x1 - self.width,
                     frame._y2 - self.f.height - 2*self.padding,
@@ -372,8 +383,7 @@ class Sidebar(FrameActionFlowable):
                         padding,
                         self.style.lpad,
                         True),
-                    FrameBreak()
-                ]
+                    FrameBreak()]
             elif self.style.float == 'right':
                 self.style.lpad = frame.rightPadding
                 frame.container.frames.insert(idx + 1,
@@ -392,8 +402,7 @@ class Sidebar(FrameActionFlowable):
                         padding,
                         self.style.lpad,
                         False),
-                    FrameBreak()
-                ]
+                    FrameBreak()]
 
 
 class BoundByWidth(Flowable):
@@ -420,7 +429,7 @@ class BoundByWidth(Flowable):
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
             getattr(self, 'maxWidth', '')
-                and (' maxWidth=%s' % str(getattr(self,' maxWidth', 0))) or '',
+                and (' maxWidth=%s' % str(getattr(self, 'maxWidth', 0))) or '',
             getattr(self, 'maxHeight', '')
                 and (' maxHeight=%s' % str(getattr(self, 'maxHeight'))) or '')
 
@@ -433,20 +442,18 @@ class BoundByWidth(Flowable):
         else:
             self.pad = 0
         maxWidth = float(min(
-            styles.adjustUnits(self.maxWidth,availWidth) or availWidth, availWidth))
+            styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
+                               availWidth))
         self.maxWidth = maxWidth
         maxWidth -= 2*self.pad
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         self.scale = 1.0
         if self.width > maxWidth:
-            log.warning("BoundByWidth too wide to fit in frame: %s", self.identity())
+            log.warning("BoundByWidth too wide to fit in frame: %s",
+                self.identity())
             if self.mode == 'shrink':
                 self.scale = (maxWidth + 2*self.pad)/(self.width + 2*self.pad)
                 self.height *= self.scale
-            # self.width = maxWidth
-        # No need to warn here, it will just split
-        # if self.height + 2*self.pad*self.scale > availHeight:
-        #   log.warning("BoundByWidth too tall to fit in frame: %s", self.identity())
         return self.width, self.height + 2*self.pad*self.scale
 
     def split(self, availWidth, availHeight):
@@ -456,7 +463,8 @@ class BoundByWidth(Flowable):
             content = content[0].split(
                 availWidth - 2*self.pad, availHeight - 2*self.pad)
             # Try splitting in our individual elements
-        return [BoundByWidth(self.maxWidth, [f], self.style, self.mode) for f in content]
+        return [BoundByWidth(self.maxWidth, [f],
+                             self.style, self.mode) for f in content]
 
     def draw(self):
         """we simulate being added to a frame"""
@@ -489,7 +497,10 @@ class BoundByWidth(Flowable):
                 canv.scale(scale, scale)
             elif self.mode == 'truncate':
                 p = canv.beginPath()
-                p.rect(x-self.pad, y-self.pad, self.maxWidth, self.height + 2*self.pad)
+                p.rect(x-self.pad,
+                       y-self.pad,
+                       self.maxWidth,
+                       self.height + 2*self.pad)
                 canv.clipPath(p, stroke=0)
             c.drawOn(canv, x, y, _sW=aW - w)
             canv.restoreState()
@@ -498,7 +509,9 @@ class BoundByWidth(Flowable):
                 y -= pS
         canv.restoreState()
 
+
 class BoxedContainer(BoundByWidth):
+
     def __init__(self, content, style, mode='shrink'):
         try:
             w=style.width
@@ -551,16 +564,19 @@ class BoxedContainer(BoundByWidth):
         if self.height + padding <= availHeight:
             return [self]
         else:
-            # Try to figure out how many elements we can put in the available space
+            # Try to figure out how many elements
+            # we can put in the available space
             candidate = None
             remainder = None
-            for p in range (1, len(self.content)):
+            for p in range(1, len(self.content)):
                 b = BoxedContainer(self.content[:p], self.style, self.mode)
                 w, h = b.wrap(availWidth, availHeight)
                 if h < availHeight:
                     candidate = b
                     if self.content[p:]:
-                        remainder = BoxedContainer(self.content[p:], self.style, self.mode)
+                        remainder = BoxedContainer(self.content[p:],
+                                                   self.style,
+                                                   self.mode)
                 else:
                     break
             if not candidate: # Nothing fits, break page
@@ -571,11 +587,9 @@ class BoxedContainer(BoundByWidth):
 
 
 if reportlab.Version == '2.1':
-
     import reportlab.platypus.paragraph as pla_para
 
     ################Ugly stuff below
-
     def _do_post_text(i, t_off, tx):
         """From reportlab's paragraph.py, patched to avoid underlined links"""
         xs = tx.XtraState
@@ -614,14 +628,12 @@ if reportlab.Version == '2.1':
 
     # Look behind you! A three-headed monkey!
     pla_para._do_post_text.func_code = _do_post_text.func_code
-
     ############### End of the ugly
-
 
 class MyTableOfContents(TableOfContents):
     """
-    Subclass of reportlab.platypus.tableofcontents.TableOfContents which supports
-    hyperlinks to corresponding sections.
+    Subclass of reportlab.platypus.tableofcontents.TableOfContents
+    which supports hyperlinks to corresponding sections.
     """
 
     def __init__(self, *args, **kwargs):
@@ -655,7 +667,8 @@ class MyTableOfContents(TableOfContents):
             if reportlab.Version <= '2.3':
                 _tempEntries = [(0, 'Placeholder for table of contents', 0)]
             else:
-                _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
+                _tempEntries = [(0, 'Placeholder for table of contents',
+                                 0, None)]
         else:
             _tempEntries = self._lastEntries
 

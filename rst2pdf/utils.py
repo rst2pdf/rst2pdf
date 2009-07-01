@@ -11,7 +11,7 @@ from reportlab.platypus import Spacer
 from flowables import *
 
 
-def parseRaw (data):
+def parseRaw(data):
     """Parse and process a simple DSL to handle creation of flowables.
 
     Supported (can add others on request):

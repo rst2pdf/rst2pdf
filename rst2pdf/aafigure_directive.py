@@ -31,13 +31,14 @@ try:
     HAS_AAFIG=True
 except ImportError:
     HAS_AAFIG=False
-    
+
 from docutils import nodes
 from docutils.nodes import General, Inline, Element, literal_block
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
+
 
 class Aanode(General, Inline, Element):
     children = ()
@@ -46,7 +47,7 @@ class Aanode(General, Inline, Element):
         self.rawsource = rawsource
         self.flowable=flowable
         Element.__init__(self, rawsource, *children, **attributes)
-    
+
 
 class Aafig(rst.Directive):
     """
@@ -57,14 +58,14 @@ class Aafig(rst.Directive):
     optional_arguments = 0
     final_argument_whitespace = False
     option_spec = dict(
-        scale        = float,
-        line_width   = float,
-        background   = str,
-        foreground   = str,
-        fill         = str,
-        name         = str,
-        aspect       = float,
-        textual      = directives.flag,
+        scale = float,
+        line_width = float,
+        background = str,
+        foreground = str,
+        fill = str,
+        name = str,
+        aspect = float,
+        textual = directives.flag,
         proportional = directives.flag,
     )
 
@@ -79,12 +80,11 @@ class Aafig(rst.Directive):
                 visitor = aafigure.process(
                     '\n'.join(self.content),
                     aafigure.pdf.PDFOutputVisitor,
-                    options=self.options
-                )
+                    options=self.options)
                 return [Aanode(renderPDF.GraphicsFlowable(visitor.drawing))]
         except:
             pass
         return [literal_block(text='\n'.join(self.content))]
-        
+
 directives.register_directive('aafig', Aafig)
 directives.register_directive('aafigure', Aafig)
