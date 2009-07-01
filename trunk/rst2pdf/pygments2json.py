@@ -4,7 +4,8 @@
 Creates a rst2pdf stylesheet for each pygments style.
 '''
 
-import sys,os
+import sys
+import os
 import simplejson
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
@@ -34,7 +35,8 @@ def css2rl(css):
 
             # These two can come in any order
             if option == 'font-weight' and argument == 'bold':
-                if 'fontName' in style and style['fontName'] == 'stdMonoItalic':
+                if 'fontName' in style and \
+                    style['fontName'] == 'stdMonoItalic':
                     style['fontName'] = 'stdMonoBoldItalic'
                 else:
                     style['fontName'] = 'stdMonoBold'
@@ -45,8 +47,8 @@ def css2rl(css):
                     style['fontName'] = 'stdMonoItalic'
         styles.append([sname, style])
 
-    return simplejson.dumps({'styles': styles},indent=2)
+    return simplejson.dumps({'styles': styles}, indent=2)
 
 for name in list(pstyles.get_all_styles()):
-    css=os.popen('pygmentize -S %s -f html'%name,'r').read()
-    open(name+'.json','w').write(css2rl(css))
+    css=os.popen('pygmentize -S %s -f html'%name, 'r').read()
+    open(name+'.json', 'w').write(css2rl(css))

@@ -11,7 +11,7 @@ from log import log
 
 try:
     for p in sys.path:
-        d = os.path.join(p,'uniconvertor')
+        d = os.path.join(p, 'uniconvertor')
         if os.path.isdir(d):
             sys.path.append(d)
             from app.io import load
@@ -88,14 +88,14 @@ class SVGImage(Flowable):
 
     def drawOn(self, canv, x, y, _sW=0):
         if self._mode:
-            if _sW and hasattr(self,'hAlign'):
+            if _sW and hasattr(self, 'hAlign'):
                 a = self.hAlign
                 if a in ('CENTER', 'CENTRE', TA_CENTER):
                     x += 0.5*_sW
                 elif a in ('RIGHT', TA_RIGHT):
                     x += _sW
                 elif a not in ('LEFT', TA_LEFT):
-                    raise ValueError, "Bad hAlign value " + str(a)
+                    raise ValueError("Bad hAlign value " + str(a))
             canv.saveState()
             canv.translate(x, y)
             canv.scale(self.width/self._w, self.height/self._h)

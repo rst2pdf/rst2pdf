@@ -19,7 +19,7 @@ class PdfWriter(writers.Writer):
     """Formats this writer supports."""
 
     config_section = 'pdf writer'
-    config_section_dependencies = ('writers',)
+    config_section_dependencies = ('writers')
     """Final translated form of `document`."""
 
     def translate(self):
