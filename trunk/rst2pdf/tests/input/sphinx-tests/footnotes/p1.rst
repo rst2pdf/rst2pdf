@@ -1,0 +1,7 @@
+P1
+==
+
+This is footnote 1 [#]_
+
+
+.. [#] Footnote 1
