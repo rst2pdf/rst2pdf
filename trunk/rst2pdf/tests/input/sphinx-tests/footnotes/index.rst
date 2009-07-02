@@ -6,6 +6,10 @@
 Welcome to test_footnotes's documentation!
 ==========================================
 
+Sphinx seems to use a per-file footnote counter.
+I would much prefer to use a per-project one.
+So, created a test and posted in sphin-dev, we'll see what happens.
+
 Contents:
 
 .. toctree::
