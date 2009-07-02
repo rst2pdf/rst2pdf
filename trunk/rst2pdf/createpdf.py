@@ -387,7 +387,10 @@ class RstToPdf(object):
 
         if isinstance(node, (docutils.nodes.paragraph,
                 docutils.nodes.title, docutils.nodes.subtitle)):
-            node.pdftext = self.gather_pdftext(node, depth) + "\n"
+            pre=''
+            for _id in node.get('ids',[]):
+                pre+='<a name="%s"/>'%_id
+            node.pdftext = pre+self.gather_pdftext(node, depth) + "\n"
 
         elif isinstance(node, docutils.nodes.Text):
             node.pdftext = node.astext()
@@ -452,14 +455,15 @@ class RstToPdf(object):
             if uri:
                 if self.baseurl: # Need to join the uri with the base url
                     uri = urljoin(self.baseurl, uri)
-                if urlparse(uri)[0]:
-                    if self.inlinelinks:
-                        #import pdb; pdb.set_trace()
-                        post = u' (%s)' % uri
-                    else:
-                        pre += u'<a href="%s" color="%s">' %\
-                            (uri, self.styles.linkColor)
-                        post = '</a>' + post
+                
+                if urlparse(uri)[0] and self.inlinelinks:
+                    # external inline reference
+                    post = u' (%s)' % uri
+                else:
+                    # A plain old link
+                    pre += u'<a href="%s" color="%s">' %\
+                        (uri, self.styles.linkColor)
+                    post = '</a>' + post
             else:
                 uri = node.get('refid')
                 if uri:
@@ -528,13 +532,13 @@ class RstToPdf(object):
                 img, w, h, -descent)
 
         elif isinstance(node, docutils.nodes.footnote_reference):
-            # Fixme link to the right place
+            # TODO: when used in Sphinx, all footnotes are autonumbered
             anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
             node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>'%\
                 (anchors, '#' + node.astext(),
                  self.styles.linkColor, node.astext())
+                 
         elif isinstance(node, docutils.nodes.citation_reference):
-            # Fixme link to the right place
             anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
             node.pdftext = u'%s[<a href="%s" color="%s">%s</a>]'%\
                 (anchors, '#' + node.astext(),
@@ -557,8 +561,8 @@ class RstToPdf(object):
 
         else:
             # With sphinx you will get hundreds of these
-            #if not HAS_SPHINX:
-            log.warning("Unkn. node (self.gen_pdftext): %s",
+            if not HAS_SPHINX:
+                log.warning("Unkn. node (self.gen_pdftext): %s",
                     node.__class__)
             try:
                 log.debug(node)

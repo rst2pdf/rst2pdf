@@ -216,3 +216,4 @@ latex_documents = [
 
 # Language to be used for hyphenation support
 #pdf_language="en_EN"
+pdf_verbosity=2
