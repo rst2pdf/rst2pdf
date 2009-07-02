@@ -737,13 +737,12 @@ class RstToPdf(object):
                 p_ids=node.parent.get('ids', [None]) or [None]
                 elem.parent_id = p_ids[0]
                 if reportlab.Version > '2.1':
-                    node.elements = [KeepTogether([elem,
-                        Paragraph(text,
-                            self.styles['heading%d'%min(depth, 6)])])]
+                    node.elements = [KeepTogether([Paragraph(text,
+                            self.styles['heading%d'%min(depth, 6)])]),
+                            elem]
                 else:
-                    node.elements = [elem,
-                        Paragraph(text,
-                            self.styles['heading%d'%min(depth, 4)])]
+                    node.elements = [Paragraph(text,
+                            self.styles['heading%d'%min(depth, 4)]), elem]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
