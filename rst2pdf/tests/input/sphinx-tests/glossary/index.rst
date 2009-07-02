@@ -19,15 +19,11 @@ Contents:
          after the parsing stage, so that successive runs only need to read
          and parse new and changed documents.
 
-   source directory
-         The directory which, including its subdirectories, contains all
-         source files for one Sphinx project.
-
 .. raw:: pdf
 
    PageBreak
 
-These should link back to the glossary: :term:`environment` :term:`source directory`
+This should link back to the glossary: :term:`environment`
 
 Indices and tables
 ==================
