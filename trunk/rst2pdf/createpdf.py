@@ -999,7 +999,6 @@ class RstToPdf(object):
 
 
         elif isinstance(node, docutils.nodes.definition_list_item):
-            print node
             # I need to catch the classifiers here
             tt = []
             dt = []
@@ -1015,8 +1014,6 @@ class RstToPdf(object):
                         + self.gather_pdftext(n, depth, style) + "</font>")
                 else:
                     dt.extend(self.gen_elements(n, depth, style))
-            print "TT:",tt
-            print "DT:",dt
             node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
                 self.styles['definition_list_term']),
                 MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
