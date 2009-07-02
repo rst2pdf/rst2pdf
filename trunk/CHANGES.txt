@@ -1,11 +1,13 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed bug: paragraphs with ids should have the matching anchors
+* Fixed bug: internal references were not linked correctly
 * Fixed Issue 144: PDF TOC had wrong page numbers in some cases
 * More sphinx compatibility
 * New table styles code, also make class directive work for tables
 * Fixed Issue 140: html-like markup in titles was kept in the PDF TOC
-* For Issue 138: Redid figure styling. Also fixed bugs in BoxedContainer
+* Fixed Issue 138: Redid figure styling. Also fixed bugs in BoxedContainer
 * Fixed Issue 137: bugs in escaping characters in interpreted roles
 * Make it work (in a slightly degraded mode) without PIL, as
   long as you are only using JPGs or have PythonMagick installed.
