@@ -13,8 +13,8 @@ So, created a test and posted in sphin-dev, we'll see what happens.
 Contents:
 
 .. toctree::
-   :maxdepth: 2
 
+   p3.rst
    p1.rst
    p2.rst
 
