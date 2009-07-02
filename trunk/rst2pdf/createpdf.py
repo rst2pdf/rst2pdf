@@ -557,8 +557,8 @@ class RstToPdf(object):
 
         else:
             # With sphinx you will get hundreds of these
-            if not HAS_SPHINX:
-                log.warning("Unkn. node (self.gen_pdftext): %s",
+            #if not HAS_SPHINX:
+            log.warning("Unkn. node (self.gen_pdftext): %s",
                     node.__class__)
             try:
                 log.debug(node)
@@ -999,14 +999,15 @@ class RstToPdf(object):
 
 
         elif isinstance(node, docutils.nodes.definition_list_item):
-
+            print node
             # I need to catch the classifiers here
             tt = []
             dt = []
+            ids= []
             for n in node.children:
                 if isinstance(n, docutils.nodes.term):
                     for i in n['ids']: # Used by sphinx glossary lists
-                        tt.append('<a name="%s"/>' % i)
+                        ids.append('<a name="%s"/>' % i)
                     tt.append(self.styleToFont("definition_list_term")
                         + self.gather_pdftext(n, depth, style) + "</font>")
                 elif isinstance(n, docutils.nodes.classifier):
@@ -1014,8 +1015,9 @@ class RstToPdf(object):
                         + self.gather_pdftext(n, depth, style) + "</font>")
                 else:
                     dt.extend(self.gen_elements(n, depth, style))
-
-            node.elements = [Paragraph(' : '.join(tt),
+            print "TT:",tt
+            print "DT:",dt
+            node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
                 self.styles['definition_list_term']),
                 MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
 
