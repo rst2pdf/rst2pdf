@@ -424,14 +424,10 @@ class BoundByWidth(Flowable):
         Flowable.__init__(self)
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s> size=%sx%s" % (self.__class__.__name__,
+        return "<%s at %s%s%s>" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', '')) or '',
-            getattr(self, 'maxWidth', '')
-                and (' maxWidth=%s' % str(getattr(self, 'maxWidth', 0))) or '',
-            getattr(self, 'maxHeight', '')
-                and (' maxHeight=%s' % str(getattr(self, 'maxHeight'))) or '')
+                and (' name="%s"' % getattr(self, 'name', '')) or '')
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
@@ -449,8 +445,8 @@ class BoundByWidth(Flowable):
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         self.scale = 1.0
         if self.width > maxWidth:
-            log.warning("BoundByWidth too wide to fit in frame: %s",
-                self.identity())
+            log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
+                self.width,maxWidth,self.identity())
             if self.mode == 'shrink':
                 self.scale = (maxWidth + 2*self.pad)/(self.width + 2*self.pad)
                 self.height *= self.scale
