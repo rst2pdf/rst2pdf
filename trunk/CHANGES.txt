@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 145: padding of literal blocks was broken.
 * Fixed bug: paragraphs with ids should have the matching anchors
 * Fixed bug: internal references were not linked correctly
 * Fixed Issue 144: PDF TOC had wrong page numbers in some cases
