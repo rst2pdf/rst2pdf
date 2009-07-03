@@ -6,7 +6,7 @@
         "borderColor": "#CCCCCC",
         "leading": 10,
         "spaceBefore": 16,
-        "borderPadding": [12,0,0,10],
+        "borderPadding": [6,0,0,10],
         "leftIndent": 0,
         "fontSize": 10,
         "fontName": "stdSansBold"
