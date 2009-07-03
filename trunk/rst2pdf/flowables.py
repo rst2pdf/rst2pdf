@@ -578,7 +578,7 @@ class BoxedContainer(BoundByWidth):
 
     def split(self, availWidth, availHeight):
         self.wrap(availWidth, availHeight)
-        padding = 2*self.pad*self.scale
+        padding = (self.pad[1]+self.pad[3])*self.scale
         if self.height + padding <= availHeight:
             return [self]
         else:
