@@ -6,39 +6,35 @@
         "borderColor": "#CCCCCC",
         "leading": 10,
         "spaceBefore": 16,
-        "borderPadding": [10,0,0,10],
-        "leftIndent": 10,
+        "borderPadding": [12,0,0,10],
+        "leftIndent": 0,
         "fontSize": 10,
-        "fontName": "stdSans"
+        "fontName": "stdSansBold"
     }],
     ["heading1", {
-        "fontSize": "200%",
-        "fontName": "stdSans"
+        "fontSize": "200%"
     }],
     ["heading2", {
-        "fontSize": "160%",
-        "fontName": "stdSans"
+        "fontSize": "160%"
     }],
     ["heading3", {
-        "fontSize": "140%",
-        "fontName": "stdSans"
+        "fontSize": "140%"
     }],
     ["heading4", {
-        "fontSize": "120%",
-        "fontName": "stdSans"
+        "fontSize": "120%"
     }],
     ["heading5", {
-        "fontSize": "110%",
-        "fontName": "stdSans"
+        "fontSize": "110%"
     }],
     ["heading6", {
-        "fontSize": "100%",
-        "fontName": "stdSans"
+        "fontSize": "100%"
     }],
     ["code", {
         "backColor": "#EEFFCC",
         "borderWidth": 0.3,
-        "borderColor": "#AACC99"
+        "borderColor": "#AACC99",
+        "allowOrphans": false,
+        "allowWidows": false
     }],
     ["admonition" , {
       "borderColor": "#AACC99",
