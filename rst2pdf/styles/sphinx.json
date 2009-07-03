@@ -34,6 +34,7 @@
         "borderWidth": 0.3,
         "borderColor": "#AACC99",
         "borderPadding": [6,0,0,4],
+        "spaceBefore": 0,
         "allowOrphans": false,
         "allowWidows": false
     }],
