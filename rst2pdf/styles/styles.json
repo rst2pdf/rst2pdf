@@ -410,6 +410,10 @@
     ["pygments-vi", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-il", {"textColor": "#666666", "parent": "code"}],
     
+    ["descclassname", {"parent": "literal"}],
+    ["descname", {"parent": "literal"}],
+    ["optional", {"parent": "literal"}],
+    
     ["item_list", { 
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
