@@ -1081,7 +1081,7 @@ class RstToPdf(object):
 
         elif isinstance(node, (docutils.nodes.literal_block,
                                docutils.nodes.doctest_block)):
-            if HAS_SPHINX and:
+            if HAS_SPHINX:
                 # FIXME: sphinx decides whether to highlight or not based on
                 # node.rawsource==node.astext()
                 # but my rawsource is empty!
