@@ -40,22 +40,22 @@ unit_separator = re.compile('(-?[0-9\.]*)')
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
 
-    def __init__(self, flist, fontPath=None, stylePath=None, def_dpi=300):
+    def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
         self.def_dpi=def_dpi
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         dirn=os.path.dirname(__file__)
-        if fontPath is None:
-            fontPath=[]
-        fontPath+=['.', os.path.join(os.path.abspath(dirn), 'fonts')]
-        self.FontSearchPath = map(os.path.expanduser, fontPath)
+        if font_path is None:
+            font_path=[]
+        font_path+=['.', os.path.join(os.path.abspath(dirn), 'fonts')]
+        self.FontSearchPath = map(os.path.expanduser, font_path)
 
-        if stylePath is None:
-            stylePath=[]
-        stylePath+=['.', os.path.join(os.path.abspath(dirn), 'styles'),
+        if style_path is None:
+            style_path=[]
+        style_path+=['.', os.path.join(os.path.abspath(dirn), 'styles'),
                       '~/.rst2pdf/styles']
-        self.StyleSearchPath = map(os.path.expanduser, stylePath)
+        self.StyleSearchPath = map(os.path.expanduser, style_path)
 
         log.info('FontPath:%s'%self.FontSearchPath)
         log.info('StylePath:%s'%self.StyleSearchPath)
