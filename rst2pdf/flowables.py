@@ -418,9 +418,20 @@ class BoundByWidth(Flowable):
         self.style = style
         self.mode = mode
         if self.style:
-            self.pad = self.style.borderPadding + self.style.borderWidth + .1
+            bp = self.style.__dict__.get("borderPadding", 0)
+            bw = self.style.__dict__.get("borderWidth", 0)
+            if isinstance(bp,list):
+                self.pad = [bp[0] + bw + .1,
+                            bp[1] + bw + .1,
+                            bp[2] + bw + .1,
+                            bp[3] + bw + .1]
+            else:
+                self.pad = [bp + bw + .1,
+                            bp + bw + .1,
+                            bp + bw + .1,
+                            bp + bw + .1]
         else:
-            self.pad = 0
+            self.pad = [0,0,0,0]
         Flowable.__init__(self)
 
     def identity(self, maxLen=None):
@@ -434,30 +445,41 @@ class BoundByWidth(Flowable):
         if self.style:
             bp = self.style.__dict__.get("borderPadding", 0)
             bw = self.style.__dict__.get("borderWidth", 0)
-            self.pad = bp + bw + .1
+            if isinstance(bp,list):
+                self.pad = [bp[0] + bw + .1,
+                            bp[1] + bw + .1,
+                            bp[2] + bw + .1,
+                            bp[3] + bw + .1]
+            else:
+                self.pad = [bp + bw + .1,
+                            bp + bw + .1,
+                            bp + bw + .1,
+                            bp + bw + .1]
         else:
-            self.pad = 0
+            self.pad = [0,0,0,0]
         maxWidth = float(min(
             styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
                                availWidth))
         self.maxWidth = maxWidth
-        maxWidth -= 2*self.pad
+        maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         self.scale = 1.0
         if self.width > maxWidth:
             log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                 self.width,maxWidth,self.identity())
             if self.mode == 'shrink':
-                self.scale = (maxWidth + 2*self.pad)/(self.width + 2*self.pad)
+                self.scale = (maxWidth + self.pad[1]+self.pad[3])/\
+                    (self.width + self.pad[1]+self.pad[3])
                 self.height *= self.scale
-        return self.width, self.height + 2*self.pad*self.scale
+        return self.width, self.height + (self.pad[0]+self.pad[2])*self.scale
 
     def split(self, availWidth, availHeight):
         content = self.content
         if len(self.content) == 1:
             # We need to split the only element we have
             content = content[0].split(
-                availWidth - 2*self.pad, availHeight - 2*self.pad)
+                availWidth - (self.pad[1]+self.pad[3]),
+                availHeight - (self.pad[0]+self.pad[2]))
             # Try splitting in our individual elements
         return [BoundByWidth(self.maxWidth, [f],
                              self.style, self.mode) for f in content]
@@ -479,8 +501,8 @@ class BoundByWidth(Flowable):
         aW = scale*(aW + _sW)
         if content is None:
             content = self.content
-        y += (self.height + self.pad)/scale
-        x += self.pad
+        y += (self.height + self.pad[2])/scale
+        x += self.pad[3]
         for c in content:
             w, h = c.wrapOn(canv, aW, 0xfffffff)
             if (w < _FUZZ or h < _FUZZ) and not getattr(c, '_ZEROSIZE', None):
@@ -493,10 +515,10 @@ class BoundByWidth(Flowable):
                 canv.scale(scale, scale)
             elif self.mode == 'truncate':
                 p = canv.beginPath()
-                p.rect(x-self.pad,
-                       y-self.pad,
+                p.rect(x-self.pad[3],
+                       y-self.pad[2],
                        self.maxWidth,
-                       self.height + 2*self.pad)
+                       self.height + self.pad[0]+self.pad[2])
                 canv.clipPath(p, stroke=0)
             c.drawOn(canv, x, y, _sW=aW - w)
             canv.restoreState()
