@@ -569,12 +569,56 @@ class RstToPdf(object):
                     (ftag, self.gather_pdftext(node, depth))
             else:
                 node.pdftext = self.gather_pdftext(node, depth)
+        #########################################################
+        # SPHINX nodes
+        #########################################################
+        elif isinstance(node,sphinx.addnodes.desc_signature):
+            node.pdftext = self.gather_pdftext(node, depth)
+            
+        elif isinstance(node,sphinx.addnodes.desc_addname):
+            pre = self.styleToFont("descclassname")
+            post = "</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif isinstance(node,sphinx.addnodes.desc_name):
+            pre = self.styleToFont("descname")
+            post = "</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif isinstance(node,sphinx.addnodes.desc_parameterlist):
+            pre='('
+            post=')'
+            node.pdftext = pre+self.gather_pdftext(node, depth)[1:]+post
+            
+        elif isinstance(node,sphinx.addnodes.desc_parameter):
+            if node.hasattr('noemph'):
+                pre = ','
+                post = ''
+            else:
+                pre = ',<i>'
+                post = '</i>'
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif isinstance(node,sphinx.addnodes.desc_returns):
+            node.pdftext=' &rarr; '
+            
+        elif isinstance(node,sphinx.addnodes.desc_optional):
+            pre = self.styleToFont("optional")+'['
+            post = "]</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
 
+        elif isinstance(node,sphinx.addnodes.desc_annotation):
+            node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
+
+        #########################################################
+        # End of SPHINX nodes
+        #########################################################
+            
         else:
             # With sphinx you will get hundreds of these
-            if not HAS_SPHINX:
-                log.warning("Unkn. node (self.gen_pdftext): %s",
-                    node.__class__)
+            #if not HAS_SPHINX:
+            log.warning("Unkn. node (self.gen_pdftext): %s",
+                node.__class__)
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
@@ -1306,17 +1350,27 @@ class RstToPdf(object):
             node.elements = []
         elif isinstance(node, Aanode):
             node.elements = [node.flowable]
+
+        # custom SPHINX nodes.
+        # FIXME: make sure they are all here, and keep them all together
+        elif isinstance(node, sphinx.addnodes.desc):
+            print "DESC:",node
+            node.elements = self.gather_elements(node,
+                depth, self.styles[node['desctype']])
+        elif isinstance(node, sphinx.addnodes.desc_signature):
+            node.elements = [Paragraph(self.gather_pdftext(node,depth),style)]
+        elif isinstance(node, sphinx.addnodes.desc_content):
+            node.elements = [MyIndenter(left=10)] +\
+                self.gather_elements(node,
+                    depth, self.styles["definition"]) +\
+                [MyIndenter(left=-10)]
+            print "DESC:",node.elements
         else:
             # With sphinx you will have hundreds of these
             if not HAS_SPHINX:
                 log.error("Unkn. node (gen_elements): %s", str(node.__class__))
                 # Why fail? Just log it and do our best.
-                try:
-                    log.debug(node)
-                except (UnicodeDecodeError, UnicodeEncodeError):
-                    log.debug(repr(node))
             node.elements = self.gather_elements(node, depth, style)
-            #sys.exit(1)
 
         # set anchors for internal references
         try:
@@ -1338,10 +1392,6 @@ class RstToPdf(object):
         if 'width' in style.__dict__:
             node.elements = [BoundByWidth(style.width,
                 node.elements, style, mode="shrink")]
-        try:
-            log.debug("gen_elements: %s", node.elements)
-        except UnicodeError: # unicode problems FIXME: explicit error
-            pass
         return node.elements
 
     def gather_elements(self, node, depth, style=None):
