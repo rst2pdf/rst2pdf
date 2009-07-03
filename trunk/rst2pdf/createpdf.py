@@ -1081,13 +1081,21 @@ class RstToPdf(object):
 
         elif isinstance(node, (docutils.nodes.literal_block,
                                docutils.nodes.doctest_block)):
-            if HAS_SPHINX: # SPHINX wants to auto-highlights all literal blocks
+            if HAS_SPHINX and:
+                # FIXME: sphinx decides whether to highlight or not based on
+                # node.rawsource==node.astext()
+                # but my rawsource is empty!
+                lang = self.highlightlang
+                if node.has_key('language'):
+                    # code-block directives
+                    lang = node['language']
+                # SPHINX wants to auto-highlights all literal blocks
                 idx=node.parent.children.index(node)
                 replacement=docutils.nodes.literal_block()
                 replacement.children=\
                     pygments_code_block_directive.code_block_directive(
                                         name=None,
-                                        arguments=['python'],
+                                        arguments=[lang],
                                         options={},
                                         content=node.astext().splitlines(),
                                         lineno=False,
