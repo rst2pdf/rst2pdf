@@ -102,7 +102,9 @@ class RstToPdf(object):
                  smarty='0', baseurl=None,
                  repeatTableRows=False,
                  footnote_backlinks=True, inline_footnotes=False,
-                 def_dpi=300, show_frame=False):
+                 def_dpi=300, show_frame=False,
+                 highlightlang='python' #This one is only used by sphinx
+                 ):
         global HAS_SPHINX
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
@@ -143,6 +145,7 @@ class RstToPdf(object):
         # to do it only if it's requested
         if HAS_SPHINX and sphinx:
             import sphinx.roles
+            self.highlightlang=highlightlang
         else:
             HAS_SPHINX = False
 
