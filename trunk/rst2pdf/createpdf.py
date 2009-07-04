@@ -215,6 +215,8 @@ class RstToPdf(object):
                 self.styles['bodytext'].language,
                 ','.join(self.styles.languages))
 
+        self.pending_targets=[]
+
     def size_for_image_node(self, node):
         imgname = str(node.get("uri"))
         scale = float(node.get('scale', 100))/100
@@ -399,7 +401,9 @@ class RstToPdf(object):
         if isinstance(node, (docutils.nodes.paragraph,
                 docutils.nodes.title, docutils.nodes.subtitle)):
             pre=''
-            for _id in node.get('ids',[]):
+            targets=set(node.get('ids',[])+self.pending_targets)
+            self.pending_targets=[]
+            for _id in targets:
                 pre+='<a name="%s"/>'%_id
             node.pdftext = pre+self.gather_pdftext(node, depth) + "\n"
 
@@ -466,7 +470,7 @@ class RstToPdf(object):
             if uri:
                 if self.baseurl: # Need to join the uri with the base url
                     uri = urljoin(self.baseurl, uri)
-                
+                    
                 if urlparse(uri)[0] and self.inlinelinks:
                     # external inline reference
                     post = u' (%s)' % uri
@@ -569,28 +573,32 @@ class RstToPdf(object):
                     (ftag, self.gather_pdftext(node, depth))
             else:
                 node.pdftext = self.gather_pdftext(node, depth)
+                
+        elif isinstance(node,docutils.nodes.literal_block):
+            node.pdftext = self.gather_pdftext(node, depth)
+
         #########################################################
         # SPHINX nodes
         #########################################################
-        elif isinstance(node,sphinx.addnodes.desc_signature):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
             node.pdftext = self.gather_pdftext(node, depth)
             
-        elif isinstance(node,sphinx.addnodes.desc_addname):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
-        elif isinstance(node,sphinx.addnodes.desc_name):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
             pre = self.styleToFont("descname")
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
-        elif isinstance(node,sphinx.addnodes.desc_parameterlist):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
             pre='('
             post=')'
             node.pdftext = pre+self.gather_pdftext(node, depth)[1:]+post
             
-        elif isinstance(node,sphinx.addnodes.desc_parameter):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
             if node.hasattr('noemph'):
                 pre = ','
                 post = ''
@@ -599,16 +607,19 @@ class RstToPdf(object):
                 post = '</i>'
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
-        elif isinstance(node,sphinx.addnodes.desc_returns):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
             node.pdftext=' &rarr; '
             
-        elif isinstance(node,sphinx.addnodes.desc_optional):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
             pre = self.styleToFont("optional")+'['
             post = "]</font>"
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
 
-        elif isinstance(node,sphinx.addnodes.desc_annotation):
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
             node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
+
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.pending_xref):
+            node.pdftext = self.gather_pdftext(node, depth)
 
         #########################################################
         # End of SPHINX nodes
@@ -618,7 +629,7 @@ class RstToPdf(object):
             # With sphinx you will get hundreds of these
             #if not HAS_SPHINX:
             log.warning("Unkn. node (self.gen_pdftext): %s",
-                node.__class__)
+                    node.__class__)
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
@@ -1337,6 +1348,7 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style)
 
         elif isinstance(node, docutils.nodes.target):
+            self.pending_targets.append(node['refid'])
             node.elements = self.gather_elements(node, depth, style)
 
         elif isinstance(node, docutils.nodes.reference):
@@ -1353,22 +1365,20 @@ class RstToPdf(object):
 
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
-        elif isinstance(node, sphinx.addnodes.desc):
-            print "DESC:",node
+        elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
             node.elements = self.gather_elements(node,
                 depth, self.styles[node['desctype']])
-        elif isinstance(node, sphinx.addnodes.desc_signature):
+        elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_signature):
             node.elements = [Paragraph(self.gather_pdftext(node,depth),style)]
-        elif isinstance(node, sphinx.addnodes.desc_content):
+        elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_content):
             node.elements = [MyIndenter(left=10)] +\
                 self.gather_elements(node,
                     depth, self.styles["definition"]) +\
                 [MyIndenter(left=-10)]
-            print "DESC:",node.elements
         else:
             # With sphinx you will have hundreds of these
-            if not HAS_SPHINX:
-                log.error("Unkn. node (gen_elements): %s", str(node.__class__))
+            #if not HAS_SPHINX:
+            log.error("Unkn. node (gen_elements): %s", str(node.__class__))
                 # Why fail? Just log it and do our best.
             node.elements = self.gather_elements(node, depth, style)
 
