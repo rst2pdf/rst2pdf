@@ -1,8 +1,0 @@
-P2
-==
-
-
-This is footnote 2 [#]_
-
-
-.. [#] Footnote 2
