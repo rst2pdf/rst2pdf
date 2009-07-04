@@ -1348,7 +1348,8 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style)
 
         elif isinstance(node, docutils.nodes.target):
-            self.pending_targets.append(node['refid'])
+            if 'refid' in node:
+                self.pending_targets.append(node['refid'])
             node.elements = self.gather_elements(node, depth, style)
 
         elif isinstance(node, docutils.nodes.reference):
