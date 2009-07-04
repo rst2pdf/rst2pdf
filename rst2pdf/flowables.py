@@ -718,3 +718,10 @@ class MyTableOfContents(TableOfContents):
 
         self.width, self.height = self._table.wrapOn(self.canv, availWidth, availHeight)
         return self.width, self.height
+
+    def split(self, aW, aH):
+        # Make sure _table exists before splitting.
+        # This was only triggered in rare cases using sphinx.
+        if not self._table:
+            self.wrap(aW,aH)
+        return TableOfContents.split(self, aW, aH)
