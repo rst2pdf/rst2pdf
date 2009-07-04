@@ -1572,6 +1572,11 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
     def __init__(self, document):
         docutils.nodes.SparseNodeVisitor.__init__(self, document)
         self.toc = None
+        # For some reason, when called via sphinx,
+        # .. contents:: ends up trying to call
+        # visitor.document.reporter.debug
+        # so we need a valid document here.
+        self.document=docutils.utils.new_document('')
 
     def visit_reference(self, node):
         refid = node.attributes.get('refid')
