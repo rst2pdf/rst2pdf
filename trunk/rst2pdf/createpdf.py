@@ -1433,7 +1433,7 @@ class RstToPdf(object):
 
         if node.parent.get('bullet') or \
             isinstance(node.parent, docutils.nodes.bullet_list):
-            b = node.parent.get('bullet')
+            b = node.parent.get('bullet','*')
             if b == "None":
                 b = ""
 
