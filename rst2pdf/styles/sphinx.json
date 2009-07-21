@@ -38,6 +38,10 @@
         "allowOrphans": false,
         "allowWidows": false
     }],
+    ["method", {
+        "parent": "bodytext"
+    }],
+        
     ["admonition" , {
       "borderColor": "#AACC99",
       "backColor": "#EEFFCC",

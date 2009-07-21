@@ -583,6 +583,9 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
             node.pdftext = self.gather_pdftext(node, depth)
             
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.index):
+            node.pdftext = self.gather_pdftext(node, depth)
+            
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
             post = "</font>"
@@ -672,7 +675,9 @@ class RstToPdf(object):
         if isinstance(node, docutils.nodes.document):
             node.elements = self.gather_elements(node, depth, style=style)
 
-        elif HAS_SPHINX and isinstance(node, sphinx.addnodes.glossary):
+        elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.glossary,
+                                              sphinx.addnodes.start_of_file,
+                                              sphinx.addnodes.index)):
             node.elements = self.gather_elements(node, depth, style=style)
 
         elif isinstance(node, math_node):
