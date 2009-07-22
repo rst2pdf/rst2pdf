@@ -162,9 +162,9 @@ class RstToPdf(object):
             HAS_SPHINX = False
 
         if not self.styles.languages:
-            self.styles.languages = [language]
-            self.styles['bodytext'].language = language
-
+            self.styles.languages = [self.language]
+            self.styles['bodytext'].language = self.language
+        
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
             try:
