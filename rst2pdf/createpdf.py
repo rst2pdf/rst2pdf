@@ -1152,36 +1152,9 @@ class RstToPdf(object):
 
         elif isinstance(node, (docutils.nodes.literal_block,
                                docutils.nodes.doctest_block)):
-            if HAS_SPHINX:
-                # FIXME: sphinx decides whether to highlight or not based on
-                # node.rawsource==node.astext()
-                # but my rawsource is empty!
-                lang = self.highlightlang
-                if node.has_key('language'):
-                    # code-block directives
-                    lang = node['language']
-                # SPHINX wants to auto-highlights all literal blocks
-                idx = node.parent.children.index(node)
-                replacement = docutils.nodes.literal_block()
-                replacement.children = \
-                    pygments_code_block_directive.code_block_directive(
-                                        name = None,
-                                        arguments = [lang],
-                                        options = {},
-                                        content = node.astext().splitlines(),
-                                        lineno = False,
-                                        content_offset = None,
-                                        block_text = None,
-                                        state = None,
-                                        state_machine = None,
-                                        )
-                text=self.gather_pdftext(replacement, depth, replaceEnt = True)
-                node.elements = [self.PreformattedFit(text,
-                    self.styles['code'])]
-            else:
-                node.elements = [self.PreformattedFit(
-                    self.gather_pdftext(node, depth, replaceEnt = True),
-                                    self.styles['code'])]
+            node.elements = [self.PreformattedFit(
+                self.gather_pdftext(node, depth, replaceEnt = True),
+                                self.styles['code'])]
 
         elif isinstance(node, (docutils.nodes.attention,
                 docutils.nodes.caution, docutils.nodes.danger,
@@ -1283,7 +1256,12 @@ class RstToPdf(object):
                                             self.styles['sidebar'])]
 
         elif isinstance(node, docutils.nodes.rubric):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth),
+            # Sphinx uses a rubric as footnote container
+            if HAS_SPHINX and len(node.children) == 1 \
+                and node.children[0].astext() == 'Footnotes':
+                    node.elements=[Separation(),]
+            else:
+                node.elements = [Paragraph(self.gather_pdftext(node, depth),
                                        self.styles['rubric'])]
 
         elif isinstance(node, docutils.nodes.compound):
