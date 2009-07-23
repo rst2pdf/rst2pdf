@@ -997,26 +997,30 @@ class RstToPdf(object):
                 toc_visitor.toc.linkColor = self.styles.linkColor
                 node.walk(toc_visitor)
                 toc = toc_visitor.toc
-                # Issue 117: add extra TOC levelStyles.
-                # 9-deep should be enough.
-                for i in range(4):
-                    ps = toc.levelStyles[-1].__class__(name='Level%d'%(i+5),
-                         parent=toc.levelStyles[-1],
-                         leading=toc.levelStyles[-1].leading,
-                         firstlineIndent=toc.levelStyles[-1].firstLineIndent,
-                         leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
-                    toc.levelStyles.append(ps)
+                toc.levelStyles=[self.styles['toc%d'%l] for l in range(1,9)]
+                for s in toc.levelStyles:
+                    s.__class__=reportlab.lib.styles.ParagraphStyle
+                print [ (s.__class__, s.parent.__class__) for s in toc.levelStyles]
+                ## Issue 117: add extra TOC levelStyles.
+                ## 9-deep should be enough.
+                #for i in range(4):
+                    #ps = toc.levelStyles[-1].__class__(name='Level%d'%(i+5),
+                         #parent=toc.levelStyles[-1],
+                         #leading=toc.levelStyles[-1].leading,
+                         #firstlineIndent=toc.levelStyles[-1].firstLineIndent,
+                         #leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
+                    #toc.levelStyles.append(ps)
 
-                # Override fontnames (defaults to Times-Roman)
-                for levelStyle in toc.levelStyles:
-                    levelStyle.__dict__['fontName'] = \
-                        self.styles['tableofcontents'].fontName
+                ## Override fontnames (defaults to Times-Roman)
+                #for levelStyle in toc.levelStyles:
+                    #levelStyle.__dict__['fontName'] = \
+                        #self.styles['tableofcontents'].fontName
                 if 'local' in node_classes:
                     node.elements = [toc]
                 else:
                     node.elements = \
                         [Paragraph(self.gen_pdftext(node.children[0], depth),
-                        self.styles['title']), toc]
+                        self.styles['heading1']), toc]
             else:
                 node.elements = self.gather_elements(node, depth, style=style)
 

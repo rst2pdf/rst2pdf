@@ -29,6 +29,12 @@
     ["heading6", {
         "fontSize": "100%"
     }],
+    ["author", {
+        "parent": "bodytext",
+        "alignment": "TA_CENTER",
+        "fontSize": "120%",
+        "fontName": "stdSansBold"
+    }],
     ["code", {
         "backColor": "#EEFFCC",
         "borderWidth": 0.3,
