@@ -999,6 +999,7 @@ class RstToPdf(object):
                 toc = toc_visitor.toc
                 toc.levelStyles=[self.styles['toc%d'%l] for l in range(1,9)]
                 for s in toc.levelStyles:
+                    # FIXME: awful slimy hack!
                     s.__class__=reportlab.lib.styles.ParagraphStyle
                 print [ (s.__class__, s.parent.__class__) for s in toc.levelStyles]
                 ## Issue 117: add extra TOC levelStyles.
