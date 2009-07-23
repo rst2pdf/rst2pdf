@@ -88,6 +88,45 @@
       "alignment": "TA_JUSTIFY",
       "hyphenation": true
     }],
+    ["toc" , {
+      "parent": "normal"
+    }],
+    ["toc1" , {
+      "parent": "toc",
+      "fontName": "stdBold"
+    }],
+    ["toc2" , {
+      "parent": "toc",
+      "leftIndent": 20
+    }],
+    ["toc3" , {
+      "parent": "toc",
+      "leftIndent": 40
+    }],
+    ["toc4" , {
+      "parent": "toc",
+      "leftIndent": 60
+    }],
+    ["toc5" , {
+      "parent": "toc",
+      "leftIndent": 80
+    }],
+    ["toc6" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc7" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc8" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc9" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
     ["footer" , {
       "parent": "normal",
       "alignment": "TA_CENTER"
