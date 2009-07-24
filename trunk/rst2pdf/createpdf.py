@@ -1364,7 +1364,6 @@ class RstToPdf(object):
             # django docs extensions
             
             pre=''.join(['<a name="%s" />'%i.replace(' ','') for i in node['ids']])
-            print 'PRE:',pre
             node.elements = [Paragraph(pre+self.gather_pdftext(node,depth),style)]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_content):
             node.elements = [MyIndenter(left=10)] +\
