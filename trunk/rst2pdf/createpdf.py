@@ -997,7 +997,7 @@ class RstToPdf(object):
                 toc_visitor.toc.linkColor = self.styles.linkColor
                 node.walk(toc_visitor)
                 toc = toc_visitor.toc
-                toc.levelStyles=[self.styles['toc%d'%l] for l in range(1,10)]
+                toc.levelStyles=[self.styles['toc%d'%l] for l in range(1,15)]
                 for s in toc.levelStyles:
                     # FIXME: awful slimy hack!
                     s.__class__=reportlab.lib.styles.ParagraphStyle
