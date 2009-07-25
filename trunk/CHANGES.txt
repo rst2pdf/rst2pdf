@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed section names in headers/footers: FIRST section on the page
+  is used, not LAST.
 * Fixed Issue 145: padding of literal blocks was broken.
 * Fixed bug: paragraphs with ids should have the matching anchors
 * Fixed bug: internal references were not linked correctly

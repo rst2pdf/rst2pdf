@@ -1703,6 +1703,7 @@ class FancyPage(PageTemplate):
                 self.styles.adjustUnits(frame[2], self.tw),
                 self.styles.adjustUnits(frame[3], self.th),
                     showBoundary=self.show_frame))
+        canv.firstSect=True
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
