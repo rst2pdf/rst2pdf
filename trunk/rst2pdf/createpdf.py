@@ -421,7 +421,7 @@ class RstToPdf(object):
             pre='('
             post=')'
             t=self.gather_pdftext(node, depth)
-            while t[0]==',':
+            while t and t[0]==',':
                 t=t[1:]
             node.pdftext = pre+t+post
             
@@ -443,7 +443,7 @@ class RstToPdf(object):
             pre = self.styleToFont("optional")+'['
             post = "]</font>"
             t=self.gather_pdftext(node, depth)
-            while t[0]==',':
+            while t and t[0]==',':
                 t=t[1:]
             node.pdftext = pre+t+post
 
