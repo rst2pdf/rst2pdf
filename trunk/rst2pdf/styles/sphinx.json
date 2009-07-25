@@ -5,17 +5,7 @@
     "margin-left": "12mm",
     "margin-right": "12mm"
   },
-  "pageTemplates" : {
-    "cutePage": {
-        "frames": [
-            ["0%", "0%", "100%", "100%"]
-        ],
-        "showHeader" : true,
-        "showFooter" : true,
-        "defaultFooter" : "###Page###",
-        "defaultHeader" : "###Section###"
-    }
-  },"styles": [
+  "styles": [
     ["heading", {
         "backColor": "#F2F2F2",
         "textColor": "#20435C",

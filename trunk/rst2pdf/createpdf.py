@@ -401,57 +401,56 @@ class RstToPdf(object):
         #########################################################
         # SPHINX nodes
         #########################################################
-        if HAS_SPHINX:
+        if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
+            node.pdftext = self.gather_pdftext(node, depth)
             
-            if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
-                node.pdftext = self.gather_pdftext(node, depth)
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.index):
-                node.pdftext = self.gather_pdftext(node, depth)
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
-                pre = self.styleToFont("descclassname")
-                post = "</font>"
-                node.pdftext = pre+self.gather_pdftext(node, depth)+post
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
-                pre = self.styleToFont("descname")
-                post = "</font>"
-                node.pdftext = pre+self.gather_pdftext(node, depth)+post
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
-                pre='('
-                post=')'
-                node.pdftext = pre+self.gather_pdftext(node, depth)[1:]+post
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
-                if node.hasattr('noemph'):
-                    pre = ','
-                    post = ''
-                else:
-                    pre = ',<i>'
-                    post = '</i>'
-                node.pdftext = pre+self.gather_pdftext(node, depth)+post
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
-                node.pdftext=' &rarr; '
-                
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
-                pre = self.styleToFont("optional")+'['
-                post = "]</font>"
-                node.pdftext = pre+self.gather_pdftext(node, depth)+post
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.index):
+            node.pdftext = self.gather_pdftext(node, depth)
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
+            pre = self.styleToFont("descclassname")
+            post = "</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
+            pre = self.styleToFont("descname")
+            post = "</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
+            print node
+            pre='('
+            post=')'
+            node.pdftext = pre+self.gather_pdftext(node, depth)[1:]+post
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
+            if node.hasattr('noemph'):
+                pre = ','
+                post = ''
+            else:
+                pre = ',<i>'
+                post = '</i>'
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
+            node.pdftext=' &rarr; '
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
+            pre = self.styleToFont("optional")+'['
+            post = "]</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
 
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
-                node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
+            node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
 
-            elif HAS_SPHINX and isinstance(node,sphinx.addnodes.pending_xref):
-                node.pdftext = self.gather_pdftext(node, depth)
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.pending_xref):
+            node.pdftext = self.gather_pdftext(node, depth)
 
         #########################################################
         # End of SPHINX nodes
         #########################################################
         
-        if isinstance(node, (docutils.nodes.paragraph,
+        elif isinstance(node, (docutils.nodes.paragraph,
                docutils.nodes.title, docutils.nodes.subtitle)):
             pre=''
             targets=set(node.get('ids',[])+self.pending_targets)
