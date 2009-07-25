@@ -31,6 +31,15 @@
             ["0cm", "0cm", "49%", "100%"],
             ["51%", "0cm", "49%", "100%"]
         ]
+    },
+    "cutePage": {
+        "frames": [
+            ["0%", "0%", "100%", "100%"]
+        ],
+        "showHeader" : true,
+        "showFooter" : true,
+        "defaultFooter" : "###Page###",
+        "defaultHeader" : "###Section###"
     }
   },
   "fontsAlias" : {
