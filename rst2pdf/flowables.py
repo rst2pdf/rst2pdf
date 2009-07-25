@@ -117,11 +117,13 @@ class OutlineEntry(Flowable):
 
     def draw(self):
         self.canv.bookmarkPage(self.label)
-        self.canv.sectName = self.text
-        if self.snum is not None:
-            self.canv.sectNum = self.snum
-        else:
-            self.canv.sectNum = ""
+        if self.canv.firstSect:
+            self.canv.sectName = self.text
+            self.canv.firstSect=False
+            if self.snum is not None:
+                self.canv.sectNum = self.snum
+            else:
+                self.canv.sectNum = ""
         self.canv.addOutlineEntry(self.text, self.label, self.level, False)
 
     def __repr__(self):
