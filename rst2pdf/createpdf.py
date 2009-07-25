@@ -420,7 +420,10 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
             pre='('
             post=')'
-            node.pdftext = pre+self.gather_pdftext(node, depth)[1:]+post
+            t=self.gather_pdftext(node, depth)
+            while t[0]==',':
+                t=t[1:]
+            node.pdftext = pre+t+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
             if node.hasattr('noemph'):
@@ -434,12 +437,15 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
             pre = self.styleToFont("returns")
             post = "</font>"
-            node.pdftext=' &rarr; ' + self.gather_pdftext(node, depth)
+            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
             pre = self.styleToFont("optional")+'['
             post = "]</font>"
-            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            t=self.gather_pdftext(node, depth)
+            while t[0]==',':
+                t=t[1:]
+            node.pdftext = pre+t+post
 
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
             node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
@@ -1149,7 +1155,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.line_block):
             qstyle = copy(style)
-            qstyle.leftIndent += 30
+            #qstyle.leftIndent += 30
             node.elements = self.gather_elements(node, depth, style=qstyle)
 
         elif isinstance(node, docutils.nodes.line):
