@@ -69,6 +69,15 @@
     ["class", {
         "parent": "bodytext"
     }],
+    ["directive", {
+        "parent": "bodytext"
+    }],
+    ["confval", {
+        "parent": "bodytext"
+    }],
+    ["role", {
+        "parent": "bodytext"
+    }],
     ["admonition" , {
       "borderColor": "#AACC99",
       "backColor": "#EEFFCC",

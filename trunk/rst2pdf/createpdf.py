@@ -409,6 +409,7 @@ class RstToPdf(object):
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.pdftext = self.gather_pdftext(node, depth)
+            print 'MODULE:',node.pdftext
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
@@ -846,7 +847,7 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style=style)
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = [Reference('module-'+node['modname'])]
 
         elif isinstance(node, docutils.nodes.paragraph):
             node.elements = [Paragraph(self.gen_pdftext(node, depth), style)]
