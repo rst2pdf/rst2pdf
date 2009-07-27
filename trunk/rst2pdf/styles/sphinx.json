@@ -57,6 +57,18 @@
     ["exception", {
         "parent": "bodytext"
     }],
+    ["data", {
+        "parent": "bodytext"
+    }],
+    ["returns", {
+        "parent": "bodytext"
+    }],
+    ["attribute", {
+        "parent": "bodytext"
+    }],
+    ["class", {
+        "parent": "bodytext"
+    }],
     ["admonition" , {
       "borderColor": "#AACC99",
       "backColor": "#EEFFCC",
