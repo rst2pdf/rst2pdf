@@ -403,8 +403,11 @@ class RstToPdf(object):
         #########################################################
         if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
             node.pdftext = self.gather_pdftext(node, depth)
-            
+                        
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.index):
+            node.pdftext = self.gather_pdftext(node, depth)
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.pdftext = self.gather_pdftext(node, depth)
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
@@ -840,6 +843,9 @@ class RstToPdf(object):
 
         elif HAS_SPHINX and isinstance(node,
                 sphinx.addnodes.compact_paragraph):
+            node.elements = self.gather_elements(node, depth, style=style)
+            
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.elements = self.gather_elements(node, depth, style=style)
 
         elif isinstance(node, docutils.nodes.paragraph):
