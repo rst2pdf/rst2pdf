@@ -1182,9 +1182,13 @@ class RstToPdf(object):
                 docutils.nodes.important, docutils.nodes.note,
                 docutils.nodes.tip, docutils.nodes.warning,
                 docutils.nodes.admonition)):
-            rows = [Paragraph(node.tagname.title(),
-                    style=self.styles['%s-heading'%node.tagname])] \
-                    + self.gather_elements(node, depth, style=style)
+
+	    if isinstance(node.children[0], docutils.nodes.title):
+                title=[]
+            else:
+		title= [Paragraph(node.tagname.title(),
+                    style=self.styles['%s-heading'%node.tagname])] 
+            rows=title + self.gather_elements(node, depth, style=style)
             node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
 
         elif isinstance(node, docutils.nodes.image):
