@@ -61,10 +61,12 @@ class MyImage(Image):
             return w, h
         else:
             if self.drawHeight > availHeight:
-                if not self.__wrappedonce:
-                    self.__wrappedonce = True
+                if not self._atTop:
                     return Image.wrap(self, availWidth, availHeight)
-                else: # Adjust by height
+                else: 
+                    # It's the first thing in the frame, probably
+                    # Wrapping it will not make it work, so we 
+                    # adjust by height
                     # FIXME get rst file info (line number)
                     # here for better error message
                     log.warning('image %s is too tall for the '\
@@ -285,6 +287,12 @@ class SmartFrame(Frame):
             leftPadding, bottomPadding, rightPadding, topPadding,
             id, showBoundary, overlapAttachedSpace, _debug)
 
+    def add (self, flowable, canv, trySplit=0):
+        if self._atTop:
+            flowable._atTop=True
+        else:
+            flowable._atTop=False
+        return Frame.add(self, flowable, canv, trySplit)
 
 class FrameCutter(FrameActionFlowable):
 

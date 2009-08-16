@@ -1,4 +1,4 @@
-A title with a ``literal``
---------------------------
+A title with ``literal``
+------------------------
 
 The literal should be in courier bold.

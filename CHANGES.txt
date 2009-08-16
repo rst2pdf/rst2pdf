@@ -1,6 +1,9 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 151 and behaviour on Issue 116, about images too large
+  for available space / the full frame height.
+* Fixed problem in admonition titles.
 * Fixed section names in headers/footers: FIRST section on the page
   is used, not LAST.
 * Fixed Issue 145: padding of literal blocks was broken.
