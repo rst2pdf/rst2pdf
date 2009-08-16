@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Kerning support for true type fonts (thanks to wordaxe!), added
+  to the docs, added convenience stylesheet.
 * Fixed Issue 151 and behaviour on Issue 116, about images too large
   for available space / the full frame height.
 * Fixed problem in admonition titles.

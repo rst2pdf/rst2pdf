@@ -1,0 +1,23 @@
+{
+  "fontsAlias" : {
+    "stdFont": "DejaVu Sans",
+    "stdBold": "DejaVu Sans-Bold",
+    "stdItalic": "DejaVu Sans-Oblique",
+    "stdBoldItalic": "DejaVu Sans-BoldOblique",
+    "stdSans": "DejaVu Sans",
+    "stdSansBold": "DejaVu Sans-Bold",
+    "stdSansItalic": "DejaVu Sans-Oblique",
+    "stdSansBoldItalic": "DejaVu Sans-BoldOblique",
+    "stdMono": "DejaVu Sans Mono",
+    "stdMonoItalic": "DejaVu Sans Mono-Oblique",
+    "stdMonoBold": "DejaVu Sans Mono-Bold",
+    "stdMonoBoldItalic": "DejaVu Sans Mono-BoldOblique",
+    "stdSerif": "DejaVu Serif"
+    },
+ "styles" : [
+  [ "base", {
+    "kerning" : true
+    }
+  ]
+ ]
+}

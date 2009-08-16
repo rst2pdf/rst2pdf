@@ -82,7 +82,8 @@
       "borderRadius": null,
       "allowWidows": false,
       "allowOrphans": false,
-      "hyphenation": false
+      "hyphenation": false,
+      "kerning": false
     }] ,
     ["normal" , {
       "parent": "base"
