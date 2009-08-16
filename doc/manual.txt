@@ -412,6 +412,7 @@ Font styles
     * ``twelvepoint`` makes the base font 12pt (default is 10pt)
     * ``tenpoint`` makes the base font 10pt
     * ``eightpoint`` makes the base font 8pt
+    * ``kerning`` switches to document to DejaVu Sans font and enables kerning.
     
 Page layout styles
     These stylesheets modify your page layout.
@@ -506,7 +507,7 @@ not defined in the normal style will be taken from the base style.
 I suggest you do not remove any style from the default stylesheet. Add or modify at
 will, though.
 
-If your document requires a style that is not defined in your styleheet, it will
+If your document requires a style that is not defined in your stylesheet, it will
 print a warning and use bodytext instead.
 
 Also, the order of the styles is important: if styleA is the parent of styleB,
@@ -1368,3 +1369,25 @@ Currently, even if you enable it, this transformation will only take place in
 regular paragraphs, titles, headers, footers and block quotes.
 
 .. _smartypants: http://web.chad.org/projects/smartypants.py/
+
+Kerning
+=======
+
+Kerning is the process of adjusting letter spacing. It is usually accepted that
+kerning makes your text look better.
+
+For example, if you are using proper kerning, the As and Ws in AWAWA will overlap 
+slightly.
+
+If you want kerning in your PDFs, you need to do the following:
+    
+* Use wordaxe newer than 0.3 (r87 or later from SVN will work)
+
+* Use a TrueType font_path
+
+* Set kerning to true in your style. For example, if you want **all**
+  text to be kerned, you can set it in the "base" style.
+  
+For convenience, a stylesheet that uses DejaVu fonts with kerning is provided
+as kerning.json, so you can copy and adapt to your needs, or just use it
+with the ``-s`` option.
