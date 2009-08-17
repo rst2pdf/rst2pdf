@@ -147,10 +147,10 @@ class PDFBuilder(Builder):
             tree.append(index_nodes)
 
         # This is stolen from the HTML builder
-        moduleindex = self.env.domaindata['py']['modules']
-        if self.config.pdf_use_modindex and moduleindex:
+        #moduleindex = self.env.domaindata['py']['modules']
+        if self.config.pdf_use_modindex and self.env.modules:
             modules = sorted(((mn, ('#module-' + mn, sy, pl, dep)) 
-                for (mn, (fn, sy, pl, dep)) in moduleindex.iteritems()),
+                for (mn, (fn, sy, pl, dep)) in self.env.modules.iteritems()),
                 key=lambda x: x[0].lower())
             # collect all platforms
             platforms = set()
