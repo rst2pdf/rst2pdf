@@ -1391,3 +1391,69 @@ If you want kerning in your PDFs, you need to do the following:
 For convenience, a stylesheet that uses DejaVu fonts with kerning is provided
 as kerning.json, so you can copy and adapt to your needs, or just use it
 with the ``-s`` option.
+
+Sphinx
+======
+
+Sphinx_ is a very popular tool. This is the description from its website:
+    
+    Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, 
+    written by Georg Brandl and licensed under the BSD license.
+
+    It was originally created to translate the new Python documentation, and it 
+    has excellent support for the documentation of Python projects, but other 
+    documents can be written with it too.
+    
+Rst2pdf includes an experimental PDF extension for sphinx.
+
+To use it in your existing sphinx project you need to do the following:
+    
+1. Add rst2pdf.createpdf in your conf.py's extensions. For example::
+    
+    extensions = ['sphinx.ext.autodoc','rst2pdf.pdfbuilder']
+
+2. Add the PDF options at the end of conf.py, adapted to your project::
+    
+    # -- Options for PDF output --------------------------------------------------
+
+    # Grouping the document tree into PDF files. List of tuples
+    # (source start file, target name, title, author).
+    pdf_documents = [ 
+        ('index', u'MyProject', u'My Project', u'Author Name'),
+    ]
+
+    # A comma-separated list of custom stylesheets. Example:
+    pdf_stylesheets = ['sphinx','kerning','a4']
+
+    # Create a compressed PDF
+    # Use True/False or 1/0
+    # Example: compressed=True
+    #pdf_compressed=False
+
+    # A colon-separated list of folders to search for fonts. Example:
+    # pdf_font_path=['/usr/share/fonts', '/usr/share/texmf-dist/fonts/']
+    #pdf_font_path= ['/usr/share/fonts', '/usr/share/texmf-dist/fonts/']
+
+    # Language to be used for hyphenation support
+    #pdf_language="en_EN"
+
+    # If false, no index is generated.
+    #pdf_use_index = True
+
+    # If false, no modindex is generated.
+    #pdf_use_modindex = True
+
+    # If false, no coverpage is generated.
+    #pdf_use_coverpage = True
+    
+3. (Maybe) add this in your Makefile::
+    
+    pdf:
+        $(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) _build/pdf
+        @echo
+        @echo "Build finished. The PDF files are in _build/pdf."
+
+Then you can run ``make pdf`` or ``sphinx-build -b pdf ...`` similar 
+to how you did it before.
+
+.. _sphinx: http://sphinx.pocoo.org
