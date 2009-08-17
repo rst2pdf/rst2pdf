@@ -1,0 +1,7 @@
+1. This is a literal block. If it looks badly misaligned, runs off margins, etc, isue 152 is not fixed::
+
+        This is the literal block.
+
+::
+
+    This is a literal block outside the list
