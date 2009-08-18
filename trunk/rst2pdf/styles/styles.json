@@ -506,8 +506,7 @@
      [ "endnote", {
          "parent": "bodytext",
          "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "ALIGNMENT", [ 0, 0 ], [ 1, -1 ], "RIGHT" ]
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ] 
         ], 
         "colWidths": ["3cm",null]
     }],
@@ -515,7 +514,6 @@
          "parent": "bodytext",
          "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "ALIGNMENT", [ 0, 0 ], [ 1, -1 ], "RIGHT" ], 
             [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ]
         ], 
         "colWidths": ["3cm",null]
@@ -523,7 +521,6 @@
     [ "option_list", {
          "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "ALIGNMENT", [ 0, 0 ], [ 1, -1 ], "RIGHT" ], 
             [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ]
         ],
         "colWidths": [null,null]
