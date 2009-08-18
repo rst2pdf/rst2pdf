@@ -2,7 +2,6 @@ New in SVN (will be 0.12)
 -------------------------
 
 * Fixed Issue 155 (crash when sidebars split in a certain way)
-  or at least it has gone away for some reason.
 * Fixed issue 152 (padding and alignment of table styles, like 
   when using literal blocks inside lists)
 * Integrated pdfbuilder sphinx extension (more work needed)
