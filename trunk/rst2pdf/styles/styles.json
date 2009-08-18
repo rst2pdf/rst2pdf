@@ -491,7 +491,6 @@
     ["item_list", { 
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "ALIGNMENT", [ 0, 0 ], [ 1, -1 ], "RIGHT" ], 
             [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
             [ "BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
             [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 

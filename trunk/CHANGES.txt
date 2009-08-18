@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed issue 152 (padding and alignment of table styles, like 
+  when using literal blocks inside lists)
 * Integrated pdfbuilder sphinx extension (more work needed)
 * Kerning support for true type fonts (thanks to wordaxe!), added
   to the docs, added convenience stylesheet.
