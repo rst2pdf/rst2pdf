@@ -143,20 +143,6 @@ class StyleSheet(object):
                 # and compress literal blocks.
                 self.tw = self.pw - self.lm - self.rm - self.gm
 
-
-        # Get table styles from all stylesheets in order
-        #self.tstyles = {}
-        #for data, ssname in zip(ssdata, flist):
-            #tstyles = data.get('tstyles', {})
-            ##tstyles is a dictionary of tstyles
-            #for key in tstyles:
-                #tstyle=tstyles[key]
-                #if isinstance(tstyle,list): #It's a table style
-                    #self.tstyles[key]=TableStyle(tstyle)
-                #else: #It's a constant
-                    #self.tstyles[key]=self.adjustUnits(tstyles[key])
-
-
         # Get page templates from all stylesheets
         self.pageTemplates = {}
         for data, ssname in zip(ssdata, flist):
@@ -366,6 +352,7 @@ class StyleSheet(object):
                     elif key == 'language':
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
+                            
                     # Make keys str instead of unicode (required by reportlab)
                     sdict[str(key)] = style[key]
                     sdict['name'] = skey
