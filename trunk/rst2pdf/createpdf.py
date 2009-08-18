@@ -216,6 +216,7 @@ class RstToPdf(object):
                 ','.join(self.styles.languages))
 
         self.pending_targets=[]
+        self.targets=[]
 
     def size_for_image_node(self, node):
         imgname = str(node.get("uri"))
@@ -467,7 +468,9 @@ class RstToPdf(object):
             targets=set(node.get('ids',[])+self.pending_targets)
             self.pending_targets=[]
             for _id in targets:
-                pre+='<a name="%s"/>'%_id
+                if _id not in self.targets:
+                    pre+='<a name="%s"/>'%_id
+                    self.targets.append(_id)
             node.pdftext = pre+self.gather_pdftext(node, depth) + "\n"
 
         elif isinstance(node, docutils.nodes.Text):
@@ -611,19 +614,29 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.footnote_reference):
             # TODO: when used in Sphinx, all footnotes are autonumbered
-            anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
+            anchors=''
+            for i in node['ids']:
+                if i not in self.targets:
+                    anchors+='<a name="%s"/>' % i
+                    self.targets.append(i)
             node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>'%\
                 (anchors, '#' + node.astext(),
                  self.styles.linkColor, node.astext())
                  
         elif isinstance(node, docutils.nodes.citation_reference):
-            anchors = ''.join(['<a name="%s"/>' % i for i in node['ids']])
+            anchors=''
+            for i in node['ids']:
+                if i not in self.targets:
+                    anchors +='<a name="%s"/>' % i
+                    self.targets.append(i)
             node.pdftext = u'%s[<a href="%s" color="%s">%s</a>]'%\
                 (anchors, '#' + node.astext(),
                  self.styles.linkColor, node.astext())
 
         elif isinstance(node, docutils.nodes.target):
-            pre = u'<a name="%s"/>' % node['ids'][0]
+            if node['ids'][0] not in self.targets:
+                pre = u'<a name="%s"/>' % node['ids'][0]
+                self.targets.append(node['ids'][0])
             node.pdftext = self.gather_pdftext(node, depth)
             if replaceEnt:
                 node.pdftext = escape(node.pdftext)
@@ -1101,7 +1114,9 @@ class RstToPdf(object):
             for n in node.children:
                 if isinstance(n, docutils.nodes.term):
                     for i in n['ids']: # Used by sphinx glossary lists
-                        ids.append('<a name="%s"/>' % i)
+                        if i not in self.targets:
+                            ids.append('<a name="%s"/>' % i)
+                            self.targets.append(i)
                     tt.append(self.styleToFont("definition_list_term")
                         + self.gather_pdftext(n, depth, style) + "</font>")
                 elif isinstance(n, docutils.nodes.classifier):
@@ -1323,19 +1338,25 @@ class RstToPdf(object):
                         r, self.styles.linkColor, i))
                     i += 1
                 backrefs = '(%s)' % ', '.join(backrefs)
-                label = Paragraph('<a name="%s"/>%s'%(ltext,
+                if ltext not in self.targets:
+                    label = Paragraph('<a name="%s"/>%s'%(ltext,
                                                       ltext + backrefs),
                                   self.styles["normal"])
+                    self.targets.append(ltext)
             elif len(node['backrefs'])==1 and self.footnote_backlinks:
-                label = Paragraph('<a name="%s"/>'\
+                if ltext not in self.targets:
+                    label = Paragraph('<a name="%s"/>'\
                                   '<a href="%s" color="%s">%s</a>' % (
                                         ltext,
                                         node['backrefs'][0],
                                         self.styles.linkColor,
                                         ltext), self.styles["normal"])
+                    self.targets.append(ltext)
             else:
-                label = Paragraph('<a name="%s"/>%s' % (ltext, ltext),
-                    self.styles["normal"])
+                if ltext not in self.targets:
+                    label = Paragraph('<a name="%s"/>%s' % (ltext, ltext),
+                        self.styles["normal"])
+                    self.targets.append(ltext)
             contents = self.gather_elements(node, depth, style)[1:]
             if self.inline_footnotes:
                 t_style = TableStyle(self.styles['endnote'].commands)
@@ -1379,8 +1400,12 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_signature):
             # Need to add ids as targets, found this when using one of the
             # django docs extensions
-            
-            pre=''.join(['<a name="%s" />'%i.replace(' ','') for i in node['ids']])
+            targets=[i.replace(' ','') for i in node['ids']]
+            pre=''
+            for i in targets:
+                if i not in self.targets:
+                    pre+='<a name="%s" />'% i
+                    self.targets.append(i)
             node.elements = [Paragraph(pre+self.gather_pdftext(node,depth),style)]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_content):
             node.elements = [MyIndenter(left=10)] +\
