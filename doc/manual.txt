@@ -548,8 +548,7 @@ The following are the only attributes that work on styles when used for interpre
 
 * textColor
 
-Notice that backColor is **not** in that list.
-
+* backColor (if your reportlab is version 2.3 or newer)
 
 Font Embedding
 --------------
@@ -780,7 +779,7 @@ This happens in two cases:
    * Footnotes / endnotes (endnote style)
    * Lists (item_list, bullet_list option_list and field_list styles)
    
-The options are:   
+The options are as follows:
 
 Commands   
    For a full reference of these, please check the Reportlab User Guide 
@@ -833,7 +832,6 @@ colWidths
    If you don't specify column widths, the table will try to look proportional to the restructured 
    text source.
 
-
 Multiple Stylesheets
 --------------------
 
@@ -858,6 +856,27 @@ be enough:
         ]
     }
 
+.. Note::
+    
+    The ``command`` option used for table styles is not kept across stylesheets.
+    For example, the default stylesheet defines endnote with this command list::
+        
+        "commands": [ [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ] ]
+
+
+    If you redefine endnote in another stylesheet and use this to create a vertical line between
+    the endnote's columns::
+
+        "commands": [ [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ] ]
+        
+    Then the footnotes will **not** have VALIGN TOP!
+    
+    To do that, you **MUST** use all commands in your stylesheet::
+
+        "commands": [ 
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ] 
+        ]
 
 .. raw:: pdf
 
