@@ -1,0 +1,9 @@
+{
+  "embeddedFonts" : [["tuffy.ttf", "tuffy.ttf", "tuffy.ttf", "tuffy.ttf"]],
+  "styles" : [
+    ["tuffy" , {
+      "parent": "normal",
+      "fontName": "tuffy"
+    }]
+  ]
+}
