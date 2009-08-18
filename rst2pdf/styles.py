@@ -11,6 +11,7 @@ from copy import copy
 
 import docutils.nodes
 
+import reportlab
 from reportlab.platypus import *
 import reportlab.lib.colors as colors
 import reportlab.lib.units as units
@@ -409,12 +410,12 @@ class StyleSheet(object):
 
             # If the borderPadding is a list and wordaxe <=0.3.2,
             # convert it to an integer. Workaround for Issue
-            if HAS_WORDAXE and \
-                    wordaxe_version <='wordaxe 0.3.2' \
-                    and 'borderPadding' in s \
+            if 'borderPadding' in s and ((HAS_WORDAXE and \
+                    wordaxe_version <='wordaxe 0.3.2') or 
+                    reportlab.Version < "2.3" )\
                     and isinstance(s['borderPadding'], list):
                 log.warning('Using a borderPadding list in '\
-                    'style %s with wordaxe <= 0.3.2. That is not '\
+                    'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '\
                     'supported, so it will probably look wrong'%s['name'])
                 s['borderPadding']=s['borderPadding'][0]
 
