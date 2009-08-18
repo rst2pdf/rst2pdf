@@ -445,10 +445,11 @@ class BoundByWidth(Flowable):
         Flowable.__init__(self)
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s>" % (self.__class__.__name__,
+        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', '')) or '')
+                and (' name="%s"' % getattr(self, 'name', '')) or '',
+                unicode([c.identity() for c in self.content]))
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
@@ -490,7 +491,15 @@ class BoundByWidth(Flowable):
             content = content[0].split(
                 availWidth - (self.pad[1]+self.pad[3]),
                 availHeight - (self.pad[0]+self.pad[2]))
-            # Try splitting in our individual elements
+        # Try splitting in our individual elements
+        #split=[]
+        #for f in content:
+            #if split and (isinstance(f,ActionFlowable) or \
+               #(len(split[-1])==1 and 
+                #isinstance(split[-1][0],ActionFlowable))):
+                #split[-1].append(f)
+            #else:
+                #split.append([f,])                
         return [BoundByWidth(self.maxWidth, [f],
                              self.style, self.mode) for f in content]
 
@@ -607,8 +616,8 @@ class BoxedContainer(BoundByWidth):
                                                    self.mode)
                 else:
                     break
-            if not candidate: # Nothing fits, break page
-                return [FrameBreak(), self]
+            if not candidate or not remainder: # Nothing fits, break page
+                return []
             if not remainder: # Everything fits?
                 return [self]
             return [candidate, remainder]
