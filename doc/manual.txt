@@ -1453,7 +1453,7 @@ To use it in your existing sphinx project you need to do the following:
     # pdf_font_path=['/usr/share/fonts', '/usr/share/texmf-dist/fonts/']
 
     # Language to be used for hyphenation support
-    #pdf_language="en_EN"
+    #pdf_language="en_US"
 
     # If false, no index is generated.
     #pdf_use_index = True
