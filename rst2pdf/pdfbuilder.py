@@ -63,6 +63,7 @@ class PDFBuilder(Builder):
     
         for entry in self.document_data:
             docname, targetname, title, author = entry[:4]
+            self.info("processing " + targetname + "... ", nonl=1)
             docwriter = PDFWriter(self,
                             stylesheets=self.config.pdf_stylesheets,
                             language=self.config.pdf_language,
@@ -75,7 +76,10 @@ class PDFBuilder(Builder):
             tgt_file = path.join(self.outdir, targetname + self.out_suffix)
             destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
             doctree = self.assemble_doctree(docname,title,author)
+            self.info("done")
+            self.info("writing " + targetname + "... ", nonl=1)
             docwriter.write(doctree, destination)
+            self.info("done")
         
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
