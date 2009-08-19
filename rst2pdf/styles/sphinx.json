@@ -87,7 +87,7 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
-    ["admonition-see-also", {
+    ["seealso", {
       "parent": "admonition"
     }],
     ["sidebar", {
