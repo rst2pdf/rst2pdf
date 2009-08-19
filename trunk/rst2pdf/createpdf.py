@@ -410,7 +410,6 @@ class RstToPdf(object):
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.pdftext = self.gather_pdftext(node, depth)
-            print 'MODULE:',node.pdftext
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
@@ -803,6 +802,7 @@ class RstToPdf(object):
             node.elements = [DelayedTable(data, colwidths, st, rtr)]
 
         elif isinstance(node, docutils.nodes.title):
+            print node.parent, node.parent.__class__
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth),
@@ -811,7 +811,7 @@ class RstToPdf(object):
             elif isinstance(node.parent, docutils.nodes.topic):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth),
                                            self.styles['topic-title'])]
-            elif isinstance(node.parent, docutils.nodes.admonition):
+            elif isinstance(node.parent, docutils.nodes.Admonition):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth),
                                            self.styles['admonition-title'])]
             elif isinstance(node.parent, docutils.nodes.table):
@@ -1196,8 +1196,7 @@ class RstToPdf(object):
                 docutils.nodes.error, docutils.nodes.hint,
                 docutils.nodes.important, docutils.nodes.note,
                 docutils.nodes.tip, docutils.nodes.warning,
-                docutils.nodes.admonition)):
-
+                docutils.nodes.Admonition)):
 	    if isinstance(node.children[0], docutils.nodes.title):
                 title=[]
             else:
