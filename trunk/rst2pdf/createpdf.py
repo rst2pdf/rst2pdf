@@ -106,7 +106,7 @@ except ImportError:
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets=[], language='en_US',
+    def __init__(self, stylesheets=[], language=None,
                  header=None, footer=None,
                  inlinelinks=False, breaklevel=1,
                  font_path=[], style_path=[],
@@ -164,8 +164,10 @@ class RstToPdf(object):
             HAS_SPHINX = False
 
         if not self.styles.languages:
-            self.styles.languages = [self.language]
-            self.styles['bodytext'].language = self.language
+            self.styles.languages=[]
+            if self.language:
+                self.styles.languages.append(self.language)
+                self.styles['bodytext'].language = self.language
         
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
@@ -1573,9 +1575,13 @@ class RstToPdf(object):
 
         if doctree is None:
             if text is not None:
+                if self.language:
+                    settings_overrides={'language_code': self.language[:2]}
+                else:
+                    settings_overrides={}
                 doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
-                    settings_overrides={'language_code': self.language[:2]})
+                    settings_overrides=settings_overrides)
                 log.debug(doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
@@ -1836,7 +1842,7 @@ def main():
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)
 
-    def_lang = config.getValue("general", "language", "en_US")
+    def_lang = config.getValue("general", "language", None)
     parser.add_option('-l', '--language', metavar='LANG',
         default=def_lang, dest='language',
         help='Language to be used for hyphenation and '\
