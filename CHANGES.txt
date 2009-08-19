@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Changed default language policy as described in Issue 53
 * Fixed Issue 148 (Images should be looked for relative to source document)
 * Fixed Issue 158 (Some admonitions crashed pdfbuilder)
 * Fixed Issue 154 (incompatibility with RL 2.1)
