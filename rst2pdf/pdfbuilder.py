@@ -72,6 +72,7 @@ class PDFBuilder(Builder):
                             fitmode=self.config.pdf_fit_mode,
                             compressed=self.config.pdf_compressed,
                             inline_footnotes=self.config.pdf_inline_footnotes,
+                            srcdir=self.srcdir
                             )
             tgt_file = path.join(self.outdir, targetname + self.out_suffix)
             destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
@@ -399,7 +400,8 @@ class PDFWriter(writers.Writer):
                 fontpath = [],
                 fitmode = 'shrink',
                 compressed = False,
-                inline_footnotes = False):
+                inline_footnotes = False,
+                srcdir = '.'):
         writers.Writer.__init__(self)
         self.builder = builder
         self.output = ''
@@ -411,6 +413,7 @@ class PDFWriter(writers.Writer):
         self.compressed = compressed
         self.inline_footnotes = inline_footnotes
         self.highlightlang = builder.config.highlight_language
+        self.srcdir = srcdir
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -428,6 +431,7 @@ class PDFWriter(writers.Writer):
                  #font_path=self.fontpath,
                  inline_footnotes=self.inline_footnotes,
                  #highlightlang=self.highlightlang,
+                 style_path=[self.srcdir],
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
