@@ -802,7 +802,6 @@ class RstToPdf(object):
             node.elements = [DelayedTable(data, colwidths, st, rtr)]
 
         elif isinstance(node, docutils.nodes.title):
-            print node.parent, node.parent.__class__
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
                 node.elements = [Paragraph(self.gen_pdftext(node, depth),
