@@ -4,4 +4,4 @@
 
 .. seealso::
     
-    * Stuff
+    Stuff
