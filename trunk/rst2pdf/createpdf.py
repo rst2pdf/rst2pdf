@@ -1209,7 +1209,6 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle class,target,alt, check align
             imgname = os.path.join(self.basedir,str(node.get("uri")))
-            print 'IMG',imgname
             if not os.path.exists(imgname):
                 log.error("Missing image file: %s"%imgname)
                 imgname = os.path.join(self.img_dir, 'image-missing.png')
