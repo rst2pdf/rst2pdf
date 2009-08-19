@@ -684,7 +684,7 @@ class RstToPdf(object):
             log.debug("gen_elements: %r", node)
 
         try:
-            if node['classes']:
+            if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
                 if self.styles.StyleSheet.has_key(node['classes'][0]):
                     style = self.styles[node['classes'][0]]
