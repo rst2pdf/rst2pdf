@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 148 (Images should be looked for relative to source document)
 * Fixed Issue 158 (Some admonitions crashed pdfbuilder)
 * Fixed Issue 154 (incompatibility with RL 2.1)
 * Fixed Issue 155 (crash when sidebars split in a certain way)

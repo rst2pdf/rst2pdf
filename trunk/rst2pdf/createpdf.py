@@ -115,9 +115,11 @@ class RstToPdf(object):
                  repeat_table_rows=False,
                  footnote_backlinks=True, inline_footnotes=False,
                  def_dpi=300, show_frame=False,
-                 highlightlang='python' #This one is only used by sphinx
+                 highlightlang='python', #This one is only used by sphinx
+                 basedir=os.getcwd()
                  ):
         global HAS_SPHINX
+        self.basedir=basedir
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
         self.loweralpha = 'abcdefghijklmopqrstuvwxyz'
@@ -219,7 +221,7 @@ class RstToPdf(object):
         self.targets=[]
 
     def size_for_image_node(self, node):
-        imgname = str(node.get("uri"))
+        imgname = os.path.join(self.basedir,str(node.get("uri")))
         scale = float(node.get('scale', 100))/100
 
         # Figuring out the size to display of an image is ... annoying.
@@ -1206,7 +1208,8 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle class,target,alt, check align
-            imgname = str(node.get("uri"))
+            imgname = os.path.join(self.basedir,str(node.get("uri")))
+            print 'IMG',imgname
             if not os.path.exists(imgname):
                 log.error("Missing image file: %s"%imgname)
                 imgname = os.path.join(self.img_dir, 'image-missing.png')
@@ -1943,11 +1946,13 @@ def main():
 
     if len(args) == 0 or args[0] == '-':
         infile = sys.stdin
+        basedir=os.getcwd()
     elif len(args) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
     else:
         filename = args[0]
+        basedir=os.path.dirname(os.path.abspath(filename))
         infile = open(filename)
 
     if options.output:
@@ -2009,6 +2014,7 @@ def main():
         footnote_backlinks=options.footnote_backlinks,
         inline_footnotes=options.inline_footnotes,
         def_dpi=int(options.def_dpi),
+        basedir=basedir,
         show_frame=options.show_frame).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
