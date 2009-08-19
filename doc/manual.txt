@@ -62,7 +62,7 @@ Command line options
 --baseurl=URL         The base URL for relative URLs. Default="None"
 -l LANG, --language=LANG
                     Language to be used for hyphenation and docutils
-                    localizations. Default="en_US"
+                    localizations. Default=None
 --header=HEADER       Page header if not specified in the document.
                     Default="None"
 --footer=FOOTER       Page footer if not specified in the document.

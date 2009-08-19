@@ -43,7 +43,7 @@ OPTIONS
 
 -l LANG, --language=LANG
                     Language to be used for hyphenation and docutils localization. 
-                    Default="en_US"
+                    Default=None
 
 --header=HEADER
                     Page header if not specified in the document.
