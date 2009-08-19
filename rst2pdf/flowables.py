@@ -475,9 +475,10 @@ class BoundByWidth(Flowable):
         maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         self.scale = 1.0
-        if self.width > maxWidth and self.mode <> 'shrink':
-            log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
-                self.width,maxWidth,self.identity())
+        if self.width > maxWidth: 
+            if self.mode <> 'shrink':
+                log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
+                    self.width,maxWidth,self.identity())
             if self.mode == 'shrink':
                 self.scale = (maxWidth + self.pad[1]+self.pad[3])/\
                     (self.width + self.pad[1]+self.pad[3])
