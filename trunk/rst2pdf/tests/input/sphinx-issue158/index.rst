@@ -1,7 +1,7 @@
 .. raw:: pdf
 
-   Spacer 0 23cm
+   Spacer 0 26cm
 
-.. note:: TITLE
+.. seealso::
     
     * Stuff
