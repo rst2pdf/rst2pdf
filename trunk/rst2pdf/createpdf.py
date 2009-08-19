@@ -1196,7 +1196,7 @@ class RstToPdf(object):
                 docutils.nodes.important, docutils.nodes.note,
                 docutils.nodes.tip, docutils.nodes.warning,
                 docutils.nodes.Admonition)):
-	    if isinstance(node.children[0], docutils.nodes.title):
+	    if node.children and isinstance(node.children[0], docutils.nodes.title):
                 title=[]
             else:
 		title= [Paragraph(node.tagname.title(),
