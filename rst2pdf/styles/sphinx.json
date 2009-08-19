@@ -87,6 +87,9 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["admonition-see-also", {
+      "parent": "admonition"
+    }],
     ["sidebar", {
       "borderColor": "#AACC99",
       "backColor": "#EEFFCC",
