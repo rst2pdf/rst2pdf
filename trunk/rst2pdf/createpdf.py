@@ -686,9 +686,9 @@ class RstToPdf(object):
         try:
             if node['classes']:
                 # FIXME: Supports only one class, sorry ;-)
-                try:
+                if self.styles.StyleSheet.has_key(node['classes'][0]):
                     style = self.styles[node['classes'][0]]
-                except KeyError:
+                else:
                     log.info("Unknown class %s, ignoring.",
                         node['classes'][0])
         except TypeError: # Happens when a docutils.node.Text reaches here

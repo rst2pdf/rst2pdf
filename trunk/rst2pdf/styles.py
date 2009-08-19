@@ -423,9 +423,9 @@ class StyleSheet(object):
         self.emsize=self['base'].fontSize
 
     def __getitem__(self, key):
-        try:
+        if self.StyleSheet.has_key(key):
             return self.StyleSheet[key]
-        except KeyError: # Using an undefined style
+        else:
             log.warning("Using undefined style '%s'"
                         ", got style 'normal' instead"%key)
             return self.StyleSheet['normal']
@@ -482,6 +482,7 @@ class StyleSheet(object):
                 n.figure: 'figure',
                 n.tgroup: 'table',
                 n.table: 'table',
+                n.Admonition: 'admonition'
         }
 
         return self[styles.get(node.__class__, 'bodytext')]
