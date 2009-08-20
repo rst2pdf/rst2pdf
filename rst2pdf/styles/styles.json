@@ -31,6 +31,15 @@
             ["0cm", "0cm", "49%", "100%"],
             ["51%", "0cm", "49%", "100%"]
         ]
+    },
+    "cutePage": {
+        "frames": [
+            ["0%", "0%", "100%", "100%"]
+        ],
+        "showHeader" : true,
+        "showFooter" : true,
+        "defaultFooter" : "###Page###",
+        "defaultHeader" : "###Section###"
     }
   },
   "fontsAlias" : {
@@ -38,6 +47,10 @@
     "stdBold": "Helvetica-Bold",
     "stdItalic": "Helvetica-Oblique",
     "stdBoldItalic": "Helvetica-BoldOblique",
+    "stdSans": "Helvetica",
+    "stdSansBold": "Helvetica-Bold",
+    "stdSansItalic": "Helvetica-Oblique",
+    "stdSansBoldItalic": "Helvetica-BoldOblique",
     "stdMono": "Courier",
     "stdMonoItalic": "Courier-Oblique",
     "stdMonoBold": "Courier-Bold",
@@ -51,6 +64,7 @@
       "fontName": "stdFont",
       "fontSize":10,
       "leading":12,
+      "autoLeading": "max",
       "leftIndent":0,
       "rightIndent":0,
       "firstLineIndent":0,
@@ -69,7 +83,8 @@
       "borderRadius": null,
       "allowWidows": false,
       "allowOrphans": false,
-      "hyphenation": false
+      "hyphenation": false,
+      "kerning": false
     }] ,
     ["normal" , {
       "parent": "base"
@@ -83,6 +98,69 @@
       "spaceBefore":6,
       "alignment": "TA_JUSTIFY",
       "hyphenation": true
+    }],
+    ["toc" , {
+      "parent": "normal"
+    }],
+    ["toc1" , {
+      "parent": "toc",
+      "fontName": "stdBold"
+    }],
+    ["toc2" , {
+      "parent": "toc",
+      "leftIndent": 20
+    }],
+    ["toc3" , {
+      "parent": "toc",
+      "leftIndent": 40
+    }],
+    ["toc4" , {
+      "parent": "toc",
+      "leftIndent": 60
+    }],
+    ["toc5" , {
+      "parent": "toc",
+      "leftIndent": 80
+    }],
+    ["toc6" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc7" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc8" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc9" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc10" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc11" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc12" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc13" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc14" , {
+      "parent": "toc",
+      "leftIndent": 100
+    }],
+    ["toc15" , {
+      "parent": "toc",
+      "leftIndent": 100
     }],
     ["footer" , {
       "parent": "normal",
@@ -100,21 +178,28 @@
       "parent": "bodytext",
       "alignment": "TA_CENTER"
     }],
+    ["figure-caption" , {
+      "parent": "bodytext",
+      "fontName": "stdItalic",
+      "alignment": "TA_CENTER"
+    }],
+    ["figure-legend" , {
+      "parent": "bodytext",
+      "alignment": "TA_CENTER"
+    }],
     ["bullet_list" , {
       "parent": "bodytext",
       "spaceBefore": 2
     }],
     ["bullet_list_item" , {
-      "parent": "bodytext",
-      "spaceBefore": 4
+      "parent": "bodytext"
     }],
     ["enumerated_list" , {
       "parent": "bodytext",
       "spaceBefore": 2
     }],
     ["enumerated_list_item" , {
-      "parent": "bodytext",
-      "spaceBefore": 4
+      "parent": "bodytext"
     }],
     ["definition_list_term" , {
       "parent": "normal",
@@ -138,6 +223,9 @@
       "alignment": "TA_RIGHT",
       "fontName": "stdBold"
     }],
+    ["fieldvalue" , {
+      "parent": "normal"
+    }],
     ["rubric" , {
       "parent": "bodytext",
       "textColor": "darkred",
@@ -147,12 +235,18 @@
       "parent": "bodytext",
       "fontName": "stdItalic"
     }],
-    ["title" , {
+    ["heading" , {
       "parent": "normal",
+      "keepWithNext": true,
+      "spaceBefore": 12,
+      "spaceAfter": 6
+    }],
+    ["title" , {
+      "parent": "heading",
       "fontName": "stdBold",
       "fontSize": "200%",
       "alignment": "TA_CENTER",
-      "spaceBefore": 12,
+      "keepWithNext": false,
       "spaceAfter": 10
     }],
     ["subtitle" , {
@@ -161,33 +255,34 @@
       "fontSize": "75%"
     }],
     ["heading1" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBold",
-      "fontSize": "175%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "175%"
     }],
     ["heading2" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBold",
-      "fontSize": "150%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "150%"
     }],
     ["heading3" , {
-      "parent": "normal",
+      "parent": "heading",
       "fontName": "stdBoldItalic",
-      "fontSize": "125%",
-      "keepWithNext": true,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "fontSize": "125%"
     }],
     ["heading4" , {
-      "parent": "normal",
-      "fontName": "stdBoldItalic",
-      "keepWithNext": true
+      "parent": "heading",
+      "fontName": "stdBoldItalic"
+    }],
+    ["heading5" , {
+      "parent": "heading",
+      "fontName": "stdBoldItalic"
+    }],
+    ["heading6" , {
+      "parent": "heading",
+      "fontName": "stdBoldItalic"
+    }],
+    ["topic-title" , {
+      "parent": "heading3"
     }],
     ["sidebar-title" , {
       "parent": "heading3"
@@ -215,26 +310,107 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["attention" , {
+      "parent": "admonition"
+    }],
+    ["caution" , {
+      "parent": "admonition"
+    }],
+    ["danger" , {
+      "parent": "admonition"
+    }],
+    ["error" , {
+      "parent": "admonition"
+    }],
+    ["hint" , {
+      "parent": "admonition"
+    }],
+    ["important" , {
+      "parent": "admonition"
+    }],
+    ["note" , {
+      "parent": "admonition"
+    }],
+    ["tip" , {
+      "parent": "admonition"
+    }],
+    ["warning" , {
+      "parent": "admonition"
+    }],
+    ["admonition-title" , {
+      "parent": "heading3"
+    }],
+    ["admonition-heading" , {
+      "parent": "heading3"
+    }],
+    ["attention-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["caution-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["danger-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["error-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["hint-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["important-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["note-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["tip-heading" , {
+      "parent": "admonition-heading"
+    }],
+    ["warning-heading" , {
+      "parent": "admonition-heading"
+    }],
     ["literal" , {
       "parent": "normal",
       "fontName": "stdMono",
-      "firstLineIndent": 0
+      "firstLineIndent": 0,
+      "hyphenation": false
+    }],
+    ["aafigure" , {
+      "parent": "literal"
     }],
     ["table" , {
-      "rowBackgrounds" : ["white","#E0E0E0"]
+      "spaceBefore":6,
+      "spaceAfter":0,
+      "rowBackgrounds" : ["white","#E0E0E0"],
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+      ]
     }],
     ["table-title" , {
       "parent" : "heading4",
       "alignment" : "TA_CENTER"
     }],
     ["table-heading" , {
-      "parent" : "heading4",
+      "parent" : "heading",
       "backColor" : "beige",
       "alignment" : "TA_CENTER",
-      "valign" : "BOTTOM"
+      "valign" : "BOTTOM",
+      "borderPadding" : 0
+    }],
+    ["dedication" , {
+      "parent" : "normal"
+    }],
+    ["abstract" , {
+      "parent" : "normal"
+    }],
+    ["contents" , {
+      "parent" : "normal"
     }],
     ["tableofcontents" , {
-      "fontName" : "stdFont"
+      "parent" : "normal"
     }],
     ["code" , {
       "parent": "literal",
@@ -309,6 +485,48 @@
     ["pygments-vc", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-vg", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-vi", {"textColor": "#B8860B", "parent": "code"}],
-    ["pygments-il", {"textColor": "#666666", "parent": "code"}]
+    ["pygments-il", {"textColor": "#666666", "parent": "code"}],
+    
+    ["descclassname", {"parent": "literal"}],
+    ["descname", {"parent": "literal"}],
+    ["optional", {"parent": "literal"}],
+    
+    ["item_list", { 
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
+            [ "BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+        ],
+        "colWidths": ["20pt",null]
+    }],
+    ["bullet_list", {
+       "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ]
+        ], 
+        "colWidths": ["20",null]
+    }],
+     [ "endnote", {
+         "parent": "bodytext",
+         "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ] 
+        ], 
+        "colWidths": ["3cm",null]
+    }],
+    [ "field_list", {
+         "parent": "bodytext",
+         "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ]
+        ], 
+        "colWidths": ["3cm",null]
+    }],
+    [ "option_list", {
+         "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ]
+        ],
+        "colWidths": [null,null]
+    }]
   ]
 }

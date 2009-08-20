@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+# See LICENSE.txt for licensing terms
 
-import logging,sys
-logging.basicConfig(format='[%(levelname)s] %(filename)s:%(lineno)d %(message)s',level=logging.WARNING)
+import logging
+import sys
+
+logging.basicConfig(
+    format='[%(levelname)s] %(filename)s:%(lineno)d %(message)s',
+    level=logging.WARNING)
+
 log = logging.getLogger('rst2pdf')
-#hdlr = logging.StreamHandler()
-#formatter = logging.Formatter('[%(levelname)s] %(filename)s:%(lineno)d %(message)s')
-#hdlr.setFormatter(formatter)
-#log.addHandler(hdlr)
-#log.setLevel(logging.WARNING)

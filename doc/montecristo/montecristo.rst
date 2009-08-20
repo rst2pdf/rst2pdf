@@ -22,28 +22,26 @@ by Alexandre Dumas, Pere
 
    PageBreak
 
-::
+Project Gutenberg's The Count of Monte Cristo, by Alexandre Dumas, Pere
 
-  Project Gutenberg's The Count of Monte Cristo, by Alexandre Dumas, Pere
-  
-  This eBook is for the use of anyone anywhere at no cost and with
-  almost no restrictions whatsoever.  You may copy it, give it away or
-  re-use it under the terms of the Project Gutenberg License included
-  with this eBook or online at www.gutenberg.org
-  
-  
-  Title: The Count of Monte Cristo
-  
-  Author: Alexandre Dumas, Pere
-  
-  Posting Datd: August 15, 2008 [EBook #1184]
-  Release Date: January, 1998
-  
-  Language: English
-  
-  Character set encoding: ASCII
-  
-  *** START OF THIS PROJECT GUTENBERG EBOOK THE COUNT OF MONTE CRISTO ***
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+
+Title: The Count of Monte Cristo
+
+Author: Alexandre Dumas, Pere
+
+Posting Datd: August 15, 2008 [EBook #1184]
+Release Date: January, 1998
+
+Language: English
+
+Character set encoding: ASCII
+
+*** START OF THIS PROJECT GUTENBERG EBOOK THE COUNT OF MONTE CRISTO ***
   
 .. class:: attribution
 
@@ -57,10 +55,7 @@ Produced by Anonymous Project Gutenberg Volunteers
 
 .. raw:: pdf
 
-   PageBreak twoColumn
-   
-
-
+   PageBreak
 
 Chapter 1. Marseilles--The Arrival.
 ------------------------------------

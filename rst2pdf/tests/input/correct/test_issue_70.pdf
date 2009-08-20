@@ -1,0 +1,181 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-BoldOblique
+<< /BaseFont /Helvetica-BoldOblique
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F3': class PDFType1Font 
+4 0 obj
+% Font Times-Roman
+<< /BaseFont /Times-Roman
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+5 0 obj
+% Page dictionary
+<< /Contents 9 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 8 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R6': class PDFCatalog 
+6 0 obj
+% Document Root
+<< /Outlines 10 0 R
+ /PageMode /UseNone
+ /Pages 8 0 R
+ /Type /Catalog >>
+endobj
+% 'R7': class PDFInfo 
+7 0 obj
+<< /Author ()
+ /CreationDate (D:20090519094240+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+% 'R8': class PDFPages 
+8 0 obj
+% page tree
+<< /Count 1
+ /Kids [ 5 0 R ]
+ /Type /Pages >>
+endobj
+% 'R9': class PDFStream 
+9 0 obj
+% page stream
+<< /Length 1170 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 773.1969 cm
+Q
+q
+1 0 0 1 62.69291 737.1969 cm
+1 1 1 rg
+n 0 36 469.8898 -18 re f*
+.878431 .878431 .878431 rg
+n 0 18 469.8898 -18 re f*
+.960784 .960784 .862745 rg
+n 0 36 234.9449 -18 re f*
+.960784 .960784 .862745 rg
+n 234.9449 36 234.9449 -18 re f*
+.960784 .960784 .862745 rg
+n 0 36 469.8898 -18 re f*
+0 0 0 rg
+BT /F2 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+.960784 .960784 .862745 rg
+n 0 0 222.9449 12 re f*
+Q
+q
+BT 1 0 0 1 0 4.82 Tm 108.4174 0 Td 12 TL /F2 10 Tf 0 0 0 rg (?) Tj T* -108.4174 0 Td ET
+Q
+Q
+q
+1 0 0 1 240.9449 21 cm
+q
+.960784 .960784 .862745 rg
+n 0 0 222.9449 12 re f*
+Q
+q
+BT 1 0 0 1 0 4.82 Tm 108.4174 0 Td 12 TL /F2 10 Tf 0 0 0 rg (?) Tj T* -108.4174 0 Td ET
+Q
+Q
+BT /F3 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (?) Tj T* ET
+Q
+Q
+q
+1 0 0 1 240.9449 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (?) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 0 18 m 469.8898 18 l S
+n 234.9449 0 m 234.9449 36 l S
+n 0 36 m 469.8898 36 l S
+n 0 0 m 469.8898 0 l S
+n 0 0 m 0 36 l S
+n 469.8898 0 m 469.8898 36 l S
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R10': class PDFOutlines 
+10 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+xref
+0 11
+0000000000 65535 f
+0000000113 00000 n
+0000000233 00000 n
+0000000398 00000 n
+0000000587 00000 n
+0000000754 00000 n
+0000001031 00000 n
+0000001166 00000 n
+0000001373 00000 n
+0000001478 00000 n
+0000002750 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\330\310^\012y\213\\\020\357V\242\314\252\306\247\035) (\330\310^\012y\213\\\020\357V\242\314\252\306\247\035)] 
+
+ /Info 7 0 R
+ /Root 6 0 R
+ /Size 11 >>
+startxref
+2802
+%%EOF

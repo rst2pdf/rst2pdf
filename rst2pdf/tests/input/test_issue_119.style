@@ -1,0 +1,23 @@
+{"pageSetup": {
+    "width": "16cm",
+    "height": "9cm",
+    "margin-top": "0cm",
+    "margin-bottom": "0cm",
+    "spacing-header": "0cm",
+    "spacing-footer": "0cm"    
+  },
+  "styles" : [
+    ["header" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER",
+      "borderWidth": 1,
+      "borderColor": "black"
+    }],
+    ["footer" , {
+      "parent": "normal",
+      "alignment": "TA_CENTER",
+      "borderWidth": 1,
+      "borderColor": "black"
+    }]
+  ]
+}
