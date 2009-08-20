@@ -43,11 +43,21 @@ from docutils.parsers import rst
 class Aanode(General, Inline, Element):
     children = ()
 
-    def __init__(self, flowable, rawsource='', *children, **attributes):
-        self.rawsource = rawsource
-        self.flowable=flowable
+    def __init__(self, content, options, rawsource='', *children, **attributes):
+        self.content = content
+        self.options = options
         Element.__init__(self, rawsource, *children, **attributes)
 
+    def gen_flowable(self, style_options):
+        options = dict(style_options)
+        # explicit :option: always precedes
+        options.update(self.options)
+        visitor = aafigure.process(
+            '\n'.join(self.content),
+            aafigure.pdf.PDFOutputVisitor,
+            options=options)
+        return renderPDF.GraphicsFlowable(visitor.drawing)
+        
 
 class Aafig(rst.Directive):
     """
@@ -70,21 +80,14 @@ class Aafig(rst.Directive):
     )
 
     def run(self):
-
         if 'textual' in self.options:
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
-        try:
-            if HAS_AAFIG:
-                visitor = aafigure.process(
-                    '\n'.join(self.content),
-                    aafigure.pdf.PDFOutputVisitor,
-                    options=self.options)
-                return [Aanode(renderPDF.GraphicsFlowable(visitor.drawing))]
-        except:
-            pass
+        if HAS_AAFIG:
+            return [Aanode(self.content, self.options)]
         return [literal_block(text='\n'.join(self.content))]
+
 
 directives.register_directive('aafig', Aafig)
 directives.register_directive('aafigure', Aafig)

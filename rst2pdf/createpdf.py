@@ -1391,8 +1391,12 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.citation):
             node.elements = []
+
         elif isinstance(node, Aanode):
-            node.elements = [node.flowable]
+            style_options = {
+                'font': self.styles['aafigure'].fontName,
+                }
+            node.elements = [node.gen_flowable(style_options)]
 
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
