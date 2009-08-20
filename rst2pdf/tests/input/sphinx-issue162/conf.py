@@ -202,7 +202,7 @@ pdf_documents = [
 ]
 
 # A comma-separated list of custom stylesheets. Example:
-pdf_stylesheets = ['sphinx']
+pdf_stylesheets = ['borland']
 
 # Create a compressed PDF
 # Use True/False or 1/0
@@ -224,4 +224,4 @@ pdf_use_modindex = False
 # If false, no coverpage is generated.
 pdf_use_coverpage = False
 
-pdf_verbosity=2
+pdf_verbosity=0

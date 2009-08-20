@@ -473,21 +473,24 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         raise nodes.SkipNode
     
     def visit_literal_block(self, node):
-        lang=lang_for_block(node.astext(),node.get('lang',self.highlightlang))
-        replacement = nodes.literal_block()
-        replacement.children = \
-            pygments_code_block_directive.code_block_directive(
-                                name = None,
-                                arguments = [lang],
-                                options = {},
-                                content = node.astext().splitlines(),
-                                lineno = False,
-                                content_offset = None,
-                                block_text = None,
-                                state = None,
-                                state_machine = None,
-                                )
-        node.parent.replace(node,replacement)
+        if 'code' in node['classes']: #Probably a processed code-block
+            pass
+        else:
+            lang=lang_for_block(node.astext(),node.get('language',self.highlightlang))
+            replacement = nodes.literal_block()
+            replacement.children = \
+                pygments_code_block_directive.code_block_directive(
+                                    name = None,
+                                    arguments = [lang],
+                                    options = {},
+                                    content = node.astext().splitlines(),
+                                    lineno = False,
+                                    content_offset = None,
+                                    block_text = None,
+                                    state = None,
+                                    state_machine = None,
+                                    )
+            node.parent.replace(node,replacement)
         
     def visit_footnote(self, node):
         node['backrefs']=[ '%s_%s'%(self.footnotestack[-1],x) for x in node['backrefs']]
@@ -519,15 +522,16 @@ def lang_for_block(source,lang):
             # maybe Python -- try parsing it
             if try_parse(source):
                 return 'python'
-            else:
-                return 'text'
+            else: # Guess
+                return lang_for_block(source,'guess')
     elif lang in ('python3', 'py3') and source.startswith('>>>'):
         # for py3, recognize interactive sessions, but do not try parsing...
         return 'pycon3'
     elif lang == 'guess':
         try:
             #return 'python'
-            return guess_lexer(source).name
+            lexer=guess_lexer(source)
+            return lexer.aliases[0]
         except Exception:
             return None
     else:
