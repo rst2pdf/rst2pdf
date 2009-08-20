@@ -48,3 +48,11 @@ break_level=0
 # em-dashes,  and "---" (dash dash dash) for en-dashes.
 
 smartquotes=0
+
+# Footnote backlinks enabled or not (default: enabled)
+
+footnote_backlinks=True
+
+# Show footnotes inline instead of at the end of the document
+
+inline_footnotes=False

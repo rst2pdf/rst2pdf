@@ -16,11 +16,10 @@
   "styles" : [
     ["thin" , {
     "parent" : "bodytext",
-    "width" : "55%",
+    "width" : "35%",
     "alignment": "TA_JUSTIFY",
     "hyphenation": true,
-    "language": "de_DE"
-
+    "language": "es_ES"
     }
     ]
    ]

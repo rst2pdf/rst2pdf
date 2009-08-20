@@ -1,1 +1,241 @@
-{"styles": [["pygments-hll", {"parent": "code", "backColor": "#ffffcc"}], ["pygments-c", {"parent": "code"}], ["pygments-err", {"parent": "code"}], ["pygments-k", {"parent": "code"}], ["pygments-cm", {"parent": "code"}], ["pygments-c1", {"parent": "code"}], ["pygments-cs", {"parent": "code"}], ["pygments-ge", {"parent": "code"}], ["pygments-gh", {"parent": "code"}], ["pygments-gp", {"parent": "code"}], ["pygments-gs", {"parent": "code"}], ["pygments-gu", {"parent": "code"}], ["pygments-kc", {"parent": "code"}], ["pygments-kd", {"parent": "code"}], ["pygments-kn", {"parent": "code"}], ["pygments-kr", {"parent": "code"}], ["pygments-s", {"parent": "code"}], ["pygments-nc", {"parent": "code"}], ["pygments-ni", {"parent": "code"}], ["pygments-ne", {"parent": "code"}], ["pygments-nn", {"parent": "code"}], ["pygments-nt", {"parent": "code"}], ["pygments-ow", {"parent": "code"}], ["pygments-sb", {"parent": "code"}], ["pygments-sc", {"parent": "code"}], ["pygments-sd", {"parent": "code"}], ["pygments-s2", {"parent": "code"}], ["pygments-se", {"parent": "code"}], ["pygments-sh", {"parent": "code"}], ["pygments-si", {"parent": "code"}], ["pygments-sx", {"parent": "code"}], ["pygments-sr", {"parent": "code"}], ["pygments-s1", {"parent": "code"}], ["pygments-ss", {"parent": "code"}]]}
+{
+  "styles": [
+    [
+      "pygments-hll", 
+      {
+        "parent": "code", 
+        "backColor": "#ffffcc"
+      }
+    ], 
+    [
+      "pygments-c", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-err", 
+      {
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-k", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cm", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-c1", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cs", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ge", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gh", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gp", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gs", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gu", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kc", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kd", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kn", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kr", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nc", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ni", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ne", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nn", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nt", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ow", 
+      {
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sb", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sc", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sd", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s2", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-se", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sh", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-si", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sx", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sr", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s1", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ss", 
+      {
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "styles": [
+    [ "justgrid", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0, "white" ]
+        ]}
+    ],
+    [ "thin", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ]
+        ]}
+    ],
+    [ "thick", {
+        "commands": [ 
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
+        ]}
+    ],
+    [ "bigsmall", { "colWidths": ["80%","20%"] } ],
+    [ "smallbig", { "colWidths": ["20%","80%"] } ],
+    [ "onesmall", { "colWidths": ["20%"] } ],
+    [ "toomany", { "colWidths": ["30%","30%","30%"] } ],
+    [ "twosmall", { "colWidths": ["20%","20%"] } ]
+  ]
+}
+

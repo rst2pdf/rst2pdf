@@ -1,0 +1,173 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Times-Roman
+<< /BaseFont /Times-Roman
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+4 0 obj
+% Page dictionary
+<< /Contents 8 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 7 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R5': class PDFCatalog 
+5 0 obj
+% Document Root
+<< /Outlines 9 0 R
+ /PageMode /UseNone
+ /Pages 7 0 R
+ /Type /Catalog >>
+endobj
+% 'R6': class PDFInfo 
+6 0 obj
+<< /Author ()
+ /CreationDate (D:20090519094314+03'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+% 'R7': class PDFPages 
+7 0 obj
+% page tree
+<< /Count 1
+ /Kids [ 4 0 R ]
+ /Type /Pages >>
+endobj
+% 'R8': class PDFStream 
+8 0 obj
+% page stream
+<< /Length 1816 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 760.9969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+1 1 1 rg
+n 0 18 234.7449 -18 re f*
+0 0 0 rg
+BT /F2 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (50% width) Tj T* ET
+Q
+Q
+q
+1 0 0 1 123.3724 3 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (50% width) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 117.3724 0 m 117.3724 18 l S
+n 0 18 m 234.7449 18 l S
+n 0 0 m 234.7449 0 l S
+n 0 0 m 0 18 l S
+n 234.7449 0 m 234.7449 18 l S
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 670.7969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+q
+BT 1 0 0 1 0 76.82 Tm 1.62061 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw (This is a paragraph that should be half-page wide.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 604.5969 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+q
+BT 1 0 0 1 0 52.82 Tm .802488 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is a paragraph that should be 3/4ths of a page wide. This is a paragraph) Tj T* 0 Tw .319155 Tw (that should be 3/4ths of a page wide. This is a paragraph that should be 3/4ths) Tj T* 0 Tw .508583 Tw (of a page wide. This is a paragraph that should be 3/4ths of a page wide. This) Tj T* 0 Tw .949822 Tw (is a paragraph that should be 3/4ths of a page wide. This is a paragraph that) Tj T* 0 Tw (should be 3/4ths of a page wide.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+
+endobj
+% 'R9': class PDFOutlines 
+9 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+xref
+0 10
+0000000000 65535 f
+0000000113 00000 n
+0000000221 00000 n
+0000000386 00000 n
+0000000553 00000 n
+0000000830 00000 n
+0000000964 00000 n
+0000001171 00000 n
+0000001276 00000 n
+0000003193 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(,\020<\001}\036\347\035\366}\212\325\237\351f\215) (,\020<\001}\036\347\035\366}\212\325\237\351f\215)] 
+
+ /Info 6 0 R
+ /Root 5 0 R
+ /Size 10 >>
+startxref
+3244
+%%EOF
