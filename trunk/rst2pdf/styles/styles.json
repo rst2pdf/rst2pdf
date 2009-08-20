@@ -376,6 +376,9 @@
       "firstLineIndent": 0,
       "hyphenation": false
     }],
+    ["aafigure" , {
+      "parent": "literal"
+    }],
     ["table" , {
       "spaceBefore":6,
       "spaceAfter":0,
