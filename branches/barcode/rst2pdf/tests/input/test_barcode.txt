@@ -1,0 +1,38 @@
+Barcode example
+===============
+
+.. ean13:: 4909411033538
+    :font_name: Helvetica
+    :font_size: 8
+    :bar_fill_color: #000000
+    :bar_height: 76.2
+    :bar_width: 0.935433
+    :bar_stroke_color: #000000
+    :text_color: #000000
+    :human_readable:
+    :quiet:
+    :lquiet:
+    :rquiet:
+
+.. ean8:: 12345678
+    :font_name: Helvetica
+    :font_size: 8
+    :bar_fill_color: #000000
+    :bar_height: 76.2
+    :bar_width: 0.935433
+    :bar_stroke_color: #000000
+    :text_color: #000000
+    :human_readable:
+    :quiet:
+    :lquiet:
+    :rquiet:
+
+.. i2of5:: 1234
+    :bar_width: 0.0075in
+    :ratio: 2.2
+    :checksum:
+    :bearers: 3.0
+    :stop:
+    :quiet:
+    :lquiet: 2.0
+    :rquiet: 2.0

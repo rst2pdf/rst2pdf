@@ -35,6 +35,7 @@ from svgimage import SVGImage
 from math_directive import math_node
 from math_flowable import Math
 from aafigure_directive import Aanode
+from barcode_directive import Barcode, barcode_node
 
 from log import log
 
@@ -1397,6 +1398,9 @@ class RstToPdf(object):
                 'font': self.styles['aafigure'].fontName,
                 }
             node.elements = [node.gen_flowable(style_options)]
+
+        elif isinstance(node, barcode_node):
+            node.elements = [node.gen_flowable()]
 
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
