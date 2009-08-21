@@ -558,6 +558,7 @@ class StyleSheet(object):
                 del style.__dict__['borderColor']
             else:
                 bc = colors.black
+            bc=str(bc)
             results.append(('BOX', (x, y), (x, y), bw, bc))
         if style.borderPadding:
             if isinstance(style.borderPadding, list):
