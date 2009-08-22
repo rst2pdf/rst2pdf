@@ -427,6 +427,17 @@ class BoundByWidth(Flowable):
         self.content = content
         self.style = style
         self.mode = mode
+        Flowable.__init__(self)
+
+    def identity(self, maxLen=None):
+        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
+            hex(id(self)), self._frameName(),
+            getattr(self, 'name', '')
+                and (' name="%s"' % getattr(self, 'name', '')) or '',
+                unicode([c.identity() for c in self.content])[:80])
+
+    def wrap(self, availWidth, availHeight):
+        """If we need more width than we have, complain, keep a scale"""
         if self.style:
             bp = self.style.__dict__.get("borderPadding", 0)
             bw = self.style.__dict__.get("borderWidth", 0)
@@ -442,17 +453,6 @@ class BoundByWidth(Flowable):
                             bp + bw + .1]
         else:
             self.pad = [0,0,0,0]
-        Flowable.__init__(self)
-
-    def identity(self, maxLen=None):
-        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
-            hex(id(self)), self._frameName(),
-            getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode([c.identity() for c in self.content])[:80])
-
-    def wrap(self, availWidth, availHeight):
-        """If we need more width than we have, complain, keep a scale"""
         maxWidth = float(min(
             styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
                                availWidth))

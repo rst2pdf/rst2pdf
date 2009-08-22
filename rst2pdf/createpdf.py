@@ -753,8 +753,6 @@ class RstToPdf(object):
             if 'colWidths' in style.__dict__:
                 colwidths[:len(style.colWidths)]=style.colWidths
 
-            colwidths=map(self.styles.adjustUnits, colwidths)
-
             spans = self.filltable(rows)
 
             data = []
