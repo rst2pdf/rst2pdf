@@ -453,21 +453,6 @@ class BoundByWidth(Flowable):
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
-        if self.style:
-            bp = self.style.__dict__.get("borderPadding", 0)
-            bw = self.style.__dict__.get("borderWidth", 0)
-            if isinstance(bp,list):
-                self.pad = [bp[0] + bw + .1,
-                            bp[1] + bw + .1,
-                            bp[2] + bw + .1,
-                            bp[3] + bw + .1]
-            else:
-                self.pad = [bp + bw + .1,
-                            bp + bw + .1,
-                            bp + bw + .1,
-                            bp + bw + .1]
-        else:
-            self.pad = [0,0,0,0]
         maxWidth = float(min(
             styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
                                availWidth))
@@ -492,15 +477,6 @@ class BoundByWidth(Flowable):
             content = content[0].split(
                 availWidth - (self.pad[1]+self.pad[3]),
                 availHeight - (self.pad[0]+self.pad[2]))
-        # Try splitting in our individual elements
-        #split=[]
-        #for f in content:
-            #if split and (isinstance(f,ActionFlowable) or \
-               #(len(split[-1])==1 and 
-                #isinstance(split[-1][0],ActionFlowable))):
-                #split[-1].append(f)
-            #else:
-                #split.append([f,])                
         return [BoundByWidth(self.maxWidth, [f],
                              self.style, self.mode) for f in content]
 
