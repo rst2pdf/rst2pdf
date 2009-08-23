@@ -39,6 +39,8 @@ from sphinx.builders import Builder
 from sphinx.util.console import darkgreen
 from sphinx.util import SEP
 from sphinx.util import ustrftime, texescape
+from sphinx.environment import NoUri
+
 import rst2pdf.log
 import logging
 from pprint import pprint
@@ -233,7 +235,7 @@ class PDFBuilder(Builder):
                     output.append('.. cssclass:: heading4\n\n%s\n\n'%fname)
                 else: # A module
                     if fname:
-                        output.append('`%s <%s>`_'%(stripped+modname,fname))
+                        output.append('`%s <%s>`_ '%(stripped+modname,fname))
                         if pform and pform[0]:
                             output[-1]+='*(%s)*'%' '.join(pform)
                         if synops:
@@ -241,7 +243,7 @@ class PDFBuilder(Builder):
                         if dep:
                             output[-1]+=' **%s**'%_('Deprecated')
                 output.append('')
-            
+                
             dt = docutils.core.publish_doctree('\n'.join(output))
             tree.append(pb_twoColumn)
             tree.extend(dt[1:])
@@ -283,6 +285,9 @@ class PDFBuilder(Builder):
             tree.insert(0,docsubtitle)
             tree.insert(0,doctitle)
         
+        self.info()
+        self.info("resolving references...")
+        self.env.resolve_references(tree, docname, self)
         for pendingnode in tree.traverse(addnodes.pending_xref):
             # This needs work, need to keep track of all targets
             # so I don't replace and create hanging refs, which
@@ -296,13 +301,42 @@ class PDFBuilder(Builder):
                 pendingnode.replace_self(nodes.reference(text=pendingnode.astext(),
                     refuri=pendingnode['reftarget']))
             else:
-                pass
+                # FIXME: This is from the LaTeX builder and I dtill don't understand it
+                # well, and doesn't seem to work
+                
+                # resolve :ref:s to distant tex files -- we can't add a cross-reference,
+                # but append the document name
+                docname = pendingnode['refdocname']
+                sectname = pendingnode['refsectname']
+                newnodes = [nodes.emphasis(sectname, sectname)]
+                for subdir, title in self.titles:
+                    if docname.startswith(subdir):
+                        newnodes.append(nodes.Text(_(' (in '), _(' (in ')))
+                        newnodes.append(nodes.emphasis(title, title))
+                        newnodes.append(nodes.Text(')', ')'))
+                        break
+                else:
+                    pass
+                pendingnode.replace_self(newnodes)
+            #else:
+                #pass
         return tree
     
 
     def get_target_uri(self, docname, typ=None):
-        return ''
+        if typ == 'token':
+            # token references are always inside production lists and must be
+            # replaced by \token{} in LaTeX
+            return '@token'
+        if docname not in self.docnames:
+            raise NoUri
+        else:
+            return 'pdf://' + docname
 
+    def get_relative_uri(self, from_, to, typ=None):
+        # ignore source path
+        return self.get_target_uri(to, typ)
+        
     def get_outdated_docs(self):
         for docname in self.env.found_docs:
             if docname not in self.env.all_docs:
@@ -338,10 +372,15 @@ def genindex_nodes(genindexentries):
                 output.append(entryname)
             if subitems:
                 for subentryname, subentrylinks in subitems:
-                    output.append('    `%s <%s>`_'%(subentryname,subentrylinks[0]))
-                    for i,link in enumerate(subentrylinks[1:]):
-                        output[-1]+=(' `[%s] <%s>`_ '%(i+1,link))
-                    output.append('')
+                    if subentrylinks:
+                        output.append('    `%s <%s>`_'%(subentryname,subentrylinks[0]))
+                        for i,link in enumerate(subentrylinks[1:]):
+                            output[-1]+=(' `[%s] <%s>`_ '%(i+1,link))
+                        output.append('')
+                    else:
+                        output.append(subentryname)
+                        output.append('')
+                        
 
     doctree = docutils.core.publish_doctree('\n'.join(output))
     return doctree[0][1],doctree[1]
