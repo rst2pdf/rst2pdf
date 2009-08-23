@@ -427,6 +427,7 @@ class BoundByWidth(Flowable):
         self.content = content
         self.style = style
         self.mode = mode
+        self.pad = None
         Flowable.__init__(self)
 
     def identity(self, maxLen=None):
@@ -471,6 +472,8 @@ class BoundByWidth(Flowable):
         return self.width, self.height + (self.pad[0]+self.pad[2])*self.scale
 
     def split(self, availWidth, availHeight):
+        if not self.pad:
+            self.wrap(availWidth, availHeight)
         content = self.content
         if len(self.content) == 1:
             # We need to split the only element we have
