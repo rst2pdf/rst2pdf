@@ -473,13 +473,11 @@ class RstToPdf(object):
                docutils.nodes.title, docutils.nodes.subtitle)):
             pre=''
             targets=set(node.get('ids',[])+self.pending_targets)
-            print 'CONSINDEX',targets,self.targets
             self.pending_targets=[]
             for _id in targets:
                 if _id not in self.targets:
                     pre+='<a name="%s"/>'%_id
                     self.targets.append(_id)
-            print 'GENINDEX',pre
             node.pdftext = pre+self.gather_pdftext(node, depth) + "\n"
 
         elif isinstance(node, docutils.nodes.Text):
@@ -716,7 +714,6 @@ class RstToPdf(object):
             
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.index)):
             self.pending_targets.append(node['entries'][0][2])
-            print 'INDEX:',self.pending_targets
             node.elements = []
 
         elif isinstance(node, math_node):
