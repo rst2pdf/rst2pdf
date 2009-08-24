@@ -12,7 +12,6 @@ The rst2pdf output should be a hybrid between the LaTeX and HTML outputs.
 
 .. function:: spam(eggs)
               ham(eggs)
-   :noindex:
 
    Spam or ham the foo.
    
