@@ -1079,10 +1079,15 @@ class RstToPdf(object):
                 node.elements.append(Spacer(0, s.spaceAfter))
 
         elif isinstance(node, (docutils.nodes.definition_list,
-                docutils.nodes.option_list, docutils.nodes.field_list)):
+                docutils.nodes.option_list)):
 
             node.elements = self.gather_elements(node, depth, style=style)
 
+
+        elif isinstance(node, docutils.nodes.field_list):
+            
+            node.elements = [Spacer(0,self.styles['field_list'].spaceBefore)]+\
+                self.gather_elements(node, depth, style=style)
 
         elif isinstance(node, docutils.nodes.enumerated_list):
             node._bullSize = self.styles["enumerated_list_item"].leading*\
