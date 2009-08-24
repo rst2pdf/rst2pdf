@@ -626,5 +626,8 @@
     ["centered", {"parent": "bodytext",
         "alignment":"TA_CENTER",
         "fontName": "stdBold"
+    }],
+    ["versionmodified", {"parent": "bodytext",
+        "fontName": "stdItalic"
     }]
 ]}
