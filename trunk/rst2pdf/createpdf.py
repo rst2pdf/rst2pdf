@@ -1397,6 +1397,9 @@ class RstToPdf(object):
 
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
+        elif HAS_SPHINX and isinstance(node, sphinx.addnodes.centered):
+            node.elements=[Paragraph(self.gather_pdftext(node,depth),
+                self.styles['centered'])]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
             
             st=self.styles[node['desctype']]
