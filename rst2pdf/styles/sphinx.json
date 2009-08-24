@@ -614,5 +614,9 @@
     }],
     ["optional", {"parent": "literal",
         "fontName": "stdMonoBold"
+    }],
+    ["centered", {"parent": "bodytext",
+        "alignment":"TA_CENTER",
+        "fontName": "stdBold"
     }]
 ]}
