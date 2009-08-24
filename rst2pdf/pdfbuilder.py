@@ -520,7 +520,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             text += '.'
         replacement=nodes.paragraph()
         replacement+=nodes.Text(text)
-        replacement.extend(nodes.children)
+        replacement.extend(node.children)
         node.parent.replace(node,replacement)
                 
     def depart_versionmodified(self, node):
