@@ -5,6 +5,7 @@
    paragraph
    code
    misc
+   index-gen
 
 Indices and tables
 ==================

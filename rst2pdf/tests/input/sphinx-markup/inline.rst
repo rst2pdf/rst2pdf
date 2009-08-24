@@ -25,6 +25,8 @@ start and programs, your font doesn't have \u2023
 :program:`notepad`
 
 :regexp:`^ERR`
+        
+:term:`term1` and :term:`term2` link to the glossary
 
 Substitutions
 =============
