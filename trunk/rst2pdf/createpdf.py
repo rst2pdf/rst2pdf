@@ -1645,6 +1645,8 @@ class RstToPdf(object):
             author=self.doc_author,
             pageCompression=compressed)
         pdfdoc.multiBuild(elements)
+        #doc = SimpleDocTemplate("phello.pdf")
+        #doc.build(elements)
         for fn in self.to_unlink:
             os.unlink(fn)
 
