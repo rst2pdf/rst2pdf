@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Added tests for (almost) all of sphinx's custom markup
 * Fixed Issue 170 (Wrong font embedding)
 * Fixed Issue 171 (Damaged xref table)
 * Fixed Issue 159 (Admonition and table widths were miscalculated)
