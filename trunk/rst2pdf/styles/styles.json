@@ -487,8 +487,22 @@
     ["pygments-vi", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-il", {"textColor": "#666666", "parent": "code"}],
     
-    ["descclassname", {"parent": "literal"}],
-    ["descname", {"parent": "literal"}],
+    ["desc", {"parent": "bodytext",
+        "spaceBefore": 6 
+    }],
+    
+    ["descclassname", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["desctype", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["descparameter", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["descname", {"parent": "literal",
+        "fontName": "stdMonoBold"
+    }],
     ["optional", {"parent": "literal"}],
     
     ["item_list", { 
