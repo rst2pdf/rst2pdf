@@ -292,6 +292,7 @@ class PDFBuilder(Builder):
         self.info()
         self.info("resolving references...")
         self.env.resolve_references(tree, docname, self)
+
         for pendingnode in tree.traverse(addnodes.pending_xref):
             # This needs work, need to keep track of all targets
             # so I don't replace and create hanging refs, which
@@ -328,18 +329,7 @@ class PDFBuilder(Builder):
     
 
     def get_target_uri(self, docname, typ=None):
-        if typ == 'token':
-            # token references are always inside production lists and must be
-            # replaced by \token{} in LaTeX
-            return '@token'
-        if docname not in self.docnames:
-            raise NoUri
-        else:
-            return 'pdf://' + docname
-
-    def get_relative_uri(self, from_, to, typ=None):
-        # ignore source path
-        return self.get_target_uri(to, typ)
+        return ""
         
     def get_outdated_docs(self):
         for docname in self.env.found_docs:
