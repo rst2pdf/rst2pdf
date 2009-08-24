@@ -429,7 +429,6 @@ class RstToPdf(object):
             pre = self.styleToFont("returns")
             post = "</font>"
             node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
-            print 'RR:',node.pdftext
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
             pre = self.styleToFont("desctype")
@@ -1104,7 +1103,6 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node,
                                 depth,
                                 style = self.styles["definition"])
-            print 'ELEM:',node.elements
 
         elif isinstance(node, docutils.nodes.option_list_item):
 
