@@ -216,7 +216,7 @@ pdf_stylesheets = ['sphinx','kerning']
 pdf_language="en_US"
 
 # If false, no index is generated.
-pdf_use_index = False
+pdf_use_index = True
 
 # If false, no modindex is generated.
 pdf_use_modindex = True
