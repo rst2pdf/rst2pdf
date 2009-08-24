@@ -1192,20 +1192,6 @@ class RstToPdf(object):
                 self.gather_pdftext(node, depth, replaceEnt = True),
                                 self.styles['code'])]
 
-        elif isinstance(node, (docutils.nodes.attention,
-                docutils.nodes.caution, docutils.nodes.danger,
-                docutils.nodes.error, docutils.nodes.hint,
-                docutils.nodes.important, docutils.nodes.note,
-                docutils.nodes.tip, docutils.nodes.warning,
-                docutils.nodes.Admonition)):
-	    if node.children and isinstance(node.children[0], docutils.nodes.title):
-                title=[]
-            else:
-		title= [Paragraph(node.tagname.title(),
-                    style=self.styles['%s-heading'%node.tagname])] 
-            rows=title + self.gather_elements(node, depth, style=style)
-            node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
-
         elif isinstance(node, docutils.nodes.image):
             # FIXME: handle class,target,alt, check align
             imgname = os.path.join(self.basedir,str(node.get("uri")))
@@ -1416,6 +1402,24 @@ class RstToPdf(object):
                 self.gather_elements(node,
                     depth, self.styles["definition"]) +\
                 [MyIndenter(left=-10)]
+                
+        # These are here because sphinx.addnodes.desc inherits Admonition
+        elif isinstance(node, (docutils.nodes.attention,
+                docutils.nodes.caution, docutils.nodes.danger,
+                docutils.nodes.error, docutils.nodes.hint,
+                docutils.nodes.important, docutils.nodes.note,
+                docutils.nodes.tip, docutils.nodes.warning,
+                docutils.nodes.Admonition)):
+            if node.children and isinstance(node.children[0], docutils.nodes.title):
+                title=[]
+            else:
+                title= [Paragraph(node.tagname.title(),
+                    style=self.styles['%s-heading'%node.tagname])] 
+            rows=title + self.gather_elements(node, depth, style=style)
+            node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
+                
+                
+                
         else:
             # With sphinx you will have hundreds of these
             #if not HAS_SPHINX:
