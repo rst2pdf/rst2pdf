@@ -202,7 +202,7 @@ pdf_documents = [
 ]
 
 # A comma-separated list of custom stylesheets. Example:
-pdf_stylesheets = ['buggy']
+#pdf_stylesheets = ['buggy']
 
 # Create a compressed PDF
 # Use True/False or 1/0
