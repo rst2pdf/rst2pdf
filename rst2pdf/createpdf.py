@@ -425,21 +425,28 @@ class RstToPdf(object):
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
+            pre = self.styleToFont("desctype")
+            post = "</font>"
+            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
             pre=' ('
             post=')'
             t=self.gather_pdftext(node, depth)
-            while t and t[0]==',':
+            while t and t[0] in ', ':
                 t=t[1:]
             node.pdftext = pre+t+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
             if node.hasattr('noemph'):
-                pre = ','
+                pre = ', '
                 post = ''
             else:
                 pre = ',<i>'
                 post = '</i>'
+            pre += self.styleToFont("descparameter")
+            post = "</font>"+post
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
@@ -1385,8 +1392,16 @@ class RstToPdf(object):
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
-            node.elements = self.gather_elements(node,
-                depth, self.styles[node['desctype']])
+            
+            st=self.styles[node['desctype']]
+            if st==self.styles['normal']:
+                st=copy(self.styles['desc'])
+                st.spaceBefore=0
+           
+            pre=[Spacer(0,self.styles['desc'].spaceBefore)]
+            node.elements = pre+\
+                self.gather_elements(node, depth, st)
+                
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_signature):
             # Need to add ids as targets, found this when using one of the
             # django docs extensions
