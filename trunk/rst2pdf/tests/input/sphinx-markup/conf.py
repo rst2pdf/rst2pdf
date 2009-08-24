@@ -224,4 +224,6 @@ pdf_use_modindex = False
 # If false, no coverpage is generated.
 pdf_use_coverpage = False
 
+pdf_break_level = 1
+
 pdf_verbosity=2
