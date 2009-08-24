@@ -220,9 +220,12 @@ class StyleSheet(object):
 
                     if font[0].lower().endswith('.ttf'): # A True Type font
                         for variant in font:
+                            location=self.findFont(variant)
                             pdfmetrics.registerFont(
                                 TTFont(str(variant.split('.')[0]),
-                                self.findFont(variant)))
+                                location))
+                            log.info('Registering font: %s from %s'%\
+                                (str(variant.split('.')[0],location)))
                             self.embedded.append(str(variant.split('.')[0]))
 
                         # And map them all together
@@ -293,7 +296,6 @@ class StyleSheet(object):
                                     "Times-Roman",
                                     "ZapfDingbats"):
                             continue
-
                         # Now we need to do something
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(style[key])
@@ -330,6 +332,8 @@ class StyleSheet(object):
                             log.error("Unknown font: \"%s\","
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
+        #log.info('FontList: %s'%self.embedded)
+        #log.info('FontAlias: %s'%self.fontsAlias)        
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles = []

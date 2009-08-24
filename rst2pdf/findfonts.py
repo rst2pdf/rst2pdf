@@ -176,6 +176,7 @@ def autoEmbed(fname):
     Returns a list of the font names it registered with ReportLab.
 
     """
+    log.info('Trying to embed %s'%fname)
     fontList = []
     f = findFont(fname)
     if f: # It's a Type 1 font, and we have it
@@ -189,6 +190,8 @@ def autoEmbed(fname):
         for face, name in zip(faces, family):
             fontList.append(name)
             font = pdfmetrics.Font(face, name, "WinAnsiEncoding")
+            log.info('Registering font: %s from %s'%\
+                        (face,name))
             pdfmetrics.registerFont(font)
 
         # Map the variants
@@ -201,6 +204,7 @@ def autoEmbed(fname):
         addMapping(regular, 0, 1, italic)
         addMapping(regular, 1, 0, bold)
         addMapping(regular, 1, 1, bolditalic)
+        log.info('Embedding as %s'%fontList)
         return fontList
 
     variants = findTTFont(fname)
@@ -209,9 +213,12 @@ def autoEmbed(fname):
         for variant in variants:
             vname = os.path.basename(variant)[:-4]
             try:
-                pdfmetrics.registerFont(TTFont(vname, variant))
+                if vname not in pdfmetrics._fonts:
+                    log.info('Registering font: %s from %s'%\
+                            (vname,variant))
+                    pdfmetrics.registerFont(TTFont(vname, variant))
             except TTFError:
-                pass
+                log.error('Error registering font: %s from %s'%(vname,variant))
             else:
                 fontList.append(vname)
         regular, bold, italic, bolditalic = [
@@ -220,6 +227,7 @@ def autoEmbed(fname):
         addMapping(regular, 0, 1, italic)
         addMapping(regular, 1, 0, bold)
         addMapping(regular, 1, 1, bolditalic)
+        log.info('Embedding via findTTFont as %s'%fontList)
     return fontList
 
 
