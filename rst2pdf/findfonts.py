@@ -214,9 +214,10 @@ def autoEmbed(fname):
             vname = os.path.basename(variant)[:-4]
             try:
                 if vname not in pdfmetrics._fonts:
+                    _font=TTFont(vname, variant, validate = 1)
                     log.info('Registering font: %s from %s'%\
                             (vname,variant))
-                    pdfmetrics.registerFont(TTFont(vname, variant))
+                    pdfmetrics.registerFont(_font)
             except TTFError:
                 log.error('Error registering font: %s from %s'%(vname,variant))
             else:

@@ -21,6 +21,7 @@ import parser
 import re
 import sys
 from os import path
+import os
 
 from StringIO import StringIO
 from rst2pdf import createpdf
@@ -46,6 +47,8 @@ import rst2pdf.log
 import logging
 from pprint import pprint
 
+import codecs
+import tempfile
 
 class PDFBuilder(Builder):
     name = 'pdf'
@@ -462,7 +465,7 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
-        sio=StringIO('')
+        tmpname=tempfile.mktemp()
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
                  language=self.__language,
@@ -473,9 +476,10 @@ class PDFWriter(writers.Writer):
                  #highlightlang=self.highlightlang,
                  style_path=[self.srcdir],
                 ).createPdf(doctree=self.document,
-                    output=sio,
+                    output=tmpname,
                     compressed=self.compressed)
-        self.output=unicode(sio.getvalue(),'utf-8','ignore')
+        self.output=open(tmpname).read()
+        os.unlink(tmpname)
 
     def supports(self, format):
         """This writer supports all format-specific elements."""
