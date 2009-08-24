@@ -131,17 +131,6 @@
       "spaceBefore": 0,
       "leftIndent": 0
     }],
-    ["fieldname" , {
-      "parent": "bodytext",
-      "alignment": "TA_RIGHT",
-      "fontName": "stdBold",
-      "backColor": "#EEDEEE",
-      "borderPadding": 3
-    }],
-    ["fieldvalue" , {
-      "backColor": "#EEEEFF",
-      "borderPadding": 3
-    }],
     [
       "pygments-hll", 
       {

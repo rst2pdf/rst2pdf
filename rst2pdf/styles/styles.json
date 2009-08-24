@@ -189,14 +189,14 @@
     }],
     ["bullet_list" , {
       "parent": "bodytext",
-      "spaceBefore": 2
+      "spaceBefore": 0
     }],
     ["bullet_list_item" , {
       "parent": "bodytext"
     }],
     ["enumerated_list" , {
       "parent": "bodytext",
-      "spaceBefore": 2
+      "spaceBefore": 0
     }],
     ["enumerated_list_item" , {
       "parent": "bodytext"
