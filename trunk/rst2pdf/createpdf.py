@@ -426,7 +426,7 @@ class RstToPdf(object):
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
-            pre='('
+            pre=' ('
             post=')'
             t=self.gather_pdftext(node, depth)
             while t and t[0]==',':
