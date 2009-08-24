@@ -53,7 +53,7 @@
     }],
     ["method", {
         "parent": "bodytext",
-        "fontName": "stdiSansBold"
+        "fontName": "stdSansBold"
     }],
     ["exception", {
         "parent": "bodytext"
@@ -606,5 +606,24 @@
         "textColor": "#0000D0", 
         "parent": "code"
       }
-    ]
+    ],
+    ["desc", {"parent": "bodytext",
+        "spaceBefore": 6 
+    }],
+    
+    ["descclassname", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["desctype", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["descparameter", {"parent": "literal",
+        "fontName": "stdMono"
+    }],
+    ["descname", {"parent": "literal",
+        "fontName": "stdMonoBold"
+    }],
+    ["optional", {"parent": "literal",
+        "fontName": "stdMonoBold"
+    }]
 ]}
