@@ -40,6 +40,7 @@ from sphinx.util.console import darkgreen
 from sphinx.util import SEP
 from sphinx.util import ustrftime, texescape
 from sphinx.environment import NoUri
+from sphinx.locale import admonitionlabels, versionlabels
 
 import rst2pdf.log
 import logging
@@ -510,6 +511,20 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         self.highlightlang = node['lang']
         self.highlightlinenothreshold = node['linenothreshold']
         raise nodes.SkipNode
+    
+    def visit_versionmodified(self, node):
+        text = versionlabels[node['type']] % node['version']
+        if len(node):
+            text += ': '
+        else:
+            text += '.'
+        replacement=nodes.paragraph()
+        replacement+=nodes.Text(text)
+        replacement.extend(nodes.children)
+        node.parent.replace(node,replacement)
+                
+    def depart_versionmodified(self, node):
+        pass
     
     def visit_literal_block(self, node):
         if 'code' in node['classes']: #Probably a processed code-block

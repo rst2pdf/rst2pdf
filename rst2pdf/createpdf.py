@@ -1104,6 +1104,7 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node,
                                 depth,
                                 style = self.styles["definition"])
+            print 'ELEM:',node.elements
 
         elif isinstance(node, docutils.nodes.option_list_item):
 
