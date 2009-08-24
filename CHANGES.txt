@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 170 (Wrong font embedding)
+* Fixed Issue 171 (Damaged xref table)
 * Fixed Issue 159 (Admonition and table widths were miscalculated)
 * Fixed Issue 162 (wrong highlighting using sphinx)
 * Changed default language policy as described in Issue 53
