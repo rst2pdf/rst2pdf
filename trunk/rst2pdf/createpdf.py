@@ -425,6 +425,12 @@ class RstToPdf(object):
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
+        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
+            pre = self.styleToFont("returns")
+            post = "</font>"
+            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
+            print 'RR:',node.pdftext
+            
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
             pre = self.styleToFont("desctype")
             post = "</font>"
@@ -443,19 +449,14 @@ class RstToPdf(object):
                 pre = ', '
                 post = ''
             else:
-                pre = ',<i>'
+                pre = ', <i>'
                 post = '</i>'
             pre += self.styleToFont("descparameter")
             post = "</font>"+post
             node.pdftext = pre+self.gather_pdftext(node, depth)+post
             
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
-            pre = self.styleToFont("returns")
-            post = "</font>"
-            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
-            
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
-            pre =','+self.styleToFont("optional")+'[</font>'
+            pre =self.styleToFont("optional")+'[</font>, '
             post = self.styleToFont("optional")+']</font>'
             t=self.gather_pdftext(node, depth)
             while t and t[0]in ', ':
