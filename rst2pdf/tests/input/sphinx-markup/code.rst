@@ -1,3 +1,5 @@
+Syntax Highlighting
+===================
 
 .. highlight:: python
    :linenothreshold: 5

@@ -1,3 +1,6 @@
+Paragraph-level markup
+======================
+
 .. note::
 
    This function is not suitable for sending spam e-mails.
