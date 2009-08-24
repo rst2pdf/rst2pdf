@@ -503,7 +503,9 @@
     ["descname", {"parent": "literal",
         "fontName": "stdMonoBold"
     }],
-    ["optional", {"parent": "literal"}],
+    ["optional", {"parent": "literal",
+        "fontName": "stdMonoBold"
+    }],
     
     ["item_list", { 
       "commands": [

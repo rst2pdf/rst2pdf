@@ -455,10 +455,10 @@ class RstToPdf(object):
             node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
-            pre = self.styleToFont("optional")+'['
-            post = "]</font>"
+            pre =','+self.styleToFont("optional")+'[</font>'
+            post = self.styleToFont("optional")+']</font>'
             t=self.gather_pdftext(node, depth)
-            while t and t[0]==',':
+            while t and t[0]in ', ':
                 t=t[1:]
             node.pdftext = pre+t+post
 
