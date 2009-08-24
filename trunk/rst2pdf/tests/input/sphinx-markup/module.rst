@@ -71,3 +71,4 @@ The rst2pdf output should be a hybrid between the LaTeX and HTML outputs.
 .. describe:: opcode
 
    Describes a Python bytecode instruction.
+
