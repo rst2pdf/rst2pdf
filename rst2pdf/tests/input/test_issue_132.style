@@ -1,9 +1,9 @@
 {
   "fontsAlias" : {
     "stdFont": "Vera",
-    "stdBold": "Vera-Bold",
-    "stdItalic": "Vera-Oblique",
-    "stdBoldItalic": "Vera-BoldOblique"
+    "stdBold": "Vera Bold",
+    "stdItalic": "Vera Oblique",
+    "stdBoldItalic": "Vera BoldOblique"
   }
 }
 

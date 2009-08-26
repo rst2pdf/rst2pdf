@@ -47,9 +47,6 @@ import rst2pdf.log
 import logging
 from pprint import pprint
 
-import codecs
-import tempfile
-
 class PDFBuilder(Builder):
     name = 'pdf'
     out_suffix = '.pdf'
@@ -455,7 +452,7 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
-        tmpname=tempfile.mktemp()
+        sio=StringIO('')
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
                  language=self.__language,
@@ -466,10 +463,9 @@ class PDFWriter(writers.Writer):
                  #highlightlang=self.highlightlang,
                  style_path=[self.srcdir],
                 ).createPdf(doctree=self.document,
-                    output=tmpname,
+                    output=sio,
                     compressed=self.compressed)
-        self.output=open(tmpname).read()
-        os.unlink(tmpname)
+        self.output=sio.getvalue()
 
     def supports(self, format):
         """This writer supports all format-specific elements."""
