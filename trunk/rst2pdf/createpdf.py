@@ -713,7 +713,11 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style=style)
             
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.index)):
-            self.pending_targets.append(node['entries'][0][2])
+            try:
+                self.pending_targets.append(node['entries'][0][2])
+            except IndexError:
+                if node['entries']:
+                    log.error("Can't process index entry: %s",node['entries'])
             node.elements = []
 
         elif isinstance(node, math_node):
