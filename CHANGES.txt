@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Worked around Issue 173 (quotes didn't indent inside table cells)
 * Respect spaceBefore and spaceAfter for footnotes/endnotes
 * Added tests for (almost) all of sphinx's custom markup
 * Fixed Issue 170 (Wrong font embedding)

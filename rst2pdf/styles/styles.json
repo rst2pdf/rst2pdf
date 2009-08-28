@@ -109,6 +109,10 @@
     ["toc" , {
       "parent": "normal"
     }],
+    ["blockquote" , {
+      "parent": "bodytext",
+      "leftIndent": 20
+    }],
     ["toc1" , {
       "parent": "toc",
       "fontName": "stdBold"

@@ -1183,8 +1183,21 @@ class RstToPdf(object):
             node.elements = []
 
         elif isinstance(node, docutils.nodes.block_quote):
-            node.elements = [MyIndenter(left=20)] + self.gather_elements(
-                node, depth, style) + [MyIndenter(left=-20)]
+            # This should work, but doesn't look good inside of
+            # table cells (see Issue 173)
+            #node.elements = [MyIndenter(left=self.styles['blockquote'].leftIndent)]\
+                #+ self.gather_elements( node, depth, style) + \
+                #[MyIndenter(left=-self.styles['blockquote'].leftIndent)]
+            # Workaround for Issue 173 using tables
+            leftIndent=self.styles['blockquote'].leftIndent
+            rightIndent=self.styles['blockquote'].rightIndent
+            data=[[self.gather_elements( node, depth, style)]]
+            node.elements=[Table(data,
+                style=[["TOPPADDING",[0,0],[-1,-1],0],
+                       ["LEFTPADDING",[0,0],[-1,-1],leftIndent],
+                       ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
+                       ["BOTTOMPADDING",[0,0],[-1,-1],0],
+                ])]
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
