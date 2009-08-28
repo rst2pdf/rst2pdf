@@ -1,0 +1,9 @@
++---------------------------+
+| This is a quote:          |
+|                           |
+|    I think therefore I am |
++---------------------------+
+
+This is a quote:          
+                          
+   I think therefore I am 
