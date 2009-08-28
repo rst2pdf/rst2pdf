@@ -525,16 +525,6 @@ class StyleSheet(object):
                 (-1, rows - 1),
                 self['table-heading'].valign)]
 
-    def tstyleBody(self, rows=1):
-        """Return a table style spec for a table of any size.
-
-        The style will be based on the table style from the stylesheet.
-
-        """
-        return [("ROWBACKGROUNDS", (0, 0), (-1, -1),
-            [formatColor(c, numeric=False) for c in \
-                self['table'].rowBackgrounds])]
-
     def adjustFieldStyle(self):
         """Merges fieldname and fieldvalue styles into the field table style"""
         tstyle=self.tstyles['field']
