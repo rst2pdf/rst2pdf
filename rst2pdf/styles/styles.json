@@ -113,6 +113,9 @@
       "parent": "bodytext",
       "leftIndent": 20
     }],
+    ["lineblock" , {
+      "parent": "bodytext"
+    }],
     ["toc1" , {
       "parent": "toc",
       "fontName": "stdBold"

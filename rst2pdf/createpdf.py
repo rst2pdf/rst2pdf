@@ -1209,9 +1209,11 @@ class RstToPdf(object):
             node.elements = []
 
         elif isinstance(node, docutils.nodes.line_block):
-            qstyle = copy(style)
-            if isinstance(node.parent, docutils.nodes.line_block):
+            if isinstance(node.parent,docutils.nodes.line_block):
+                qstyle = copy(style)
                 qstyle.leftIndent += self.styles.adjustUnits("1.5em")
+            else:
+                qstyle = copy(self.styles['lineblock'])
             node.elements = self.gather_elements(node, depth, style=qstyle)
 
         elif isinstance(node, docutils.nodes.line):
