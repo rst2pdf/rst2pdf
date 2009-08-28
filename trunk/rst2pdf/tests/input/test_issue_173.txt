@@ -1,4 +1,9 @@
-.. image:: _images/middleware.png
-   :width: 502
-   :height: 417
++---------------------------+
+| This is a quote:          |
+|                           |
+|    I think therefore I am |
++---------------------------+
 
+This is a quote:          
+                          
+   I think therefore I am 
