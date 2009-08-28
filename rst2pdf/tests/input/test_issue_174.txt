@@ -1,0 +1,12 @@
++---------------------------+
+| This is a line block:     |
+|                           |
+| | Not indented            |
+| |                         |
+| |   Indented              |
+|                           |
++---------------------------+
+
+| Not indented            
+|                         
+|   Indented              
