@@ -781,18 +781,21 @@ class RstToPdf(object):
                         ell = self.gather_elements(cell, depth, style=
                             i < headRows and self.styles['table-heading'] \
                             or style)
-                        if len(ell) == 1:
+                        #if len(ell) == 1:
                             # Experiment: if the cell has a single element,
                             # extract its  class and use it for the cell.
                             # That way, you can have cells with specific
                             # background colors, at least.
-                            try:
-                                cellStyles += \
-                                    self.styles.pStyleToTStyle(ell[0].style,
-                                                               j, i)
-                            # Fix for issue 85: only do it if it has a style.
-                            except AttributeError:
-                                pass
+                            #
+                            # Experiment killed ;-)
+                            # You can do that and more using table styles now!
+                            #try:
+                                #cellStyles += \
+                                    #self.styles.pStyleToTStyle(ell[0].style,
+                                                               #j, i)
+                            ## Fix for issue 85: only do it if it has a style.
+                            #except AttributeError:
+                                #pass
                         r.append(ell)
                     j += 1
                 data.append(r)
