@@ -1364,11 +1364,14 @@ class RstToPdf(object):
                     self.targets.append(ltext)
             contents = self.gather_elements(node, depth, style)[1:]
             if self.inline_footnotes:
-                t_style = TableStyle(self.styles['endnote'].commands)
+                st=self.styles['endnote']
+                t_style = TableStyle(st.commands)
                 colWidths = map(self.styles.adjustUnits,
                     self.styles['endnote'].colWidths)
-                node.elements = [Table([[label, contents]],
-                                 style=t_style, colWidths=colWidths)]
+                node.elements = [Spacer(0, st.spaceBefore),
+                                 Table([[label, contents]],
+                                 style=t_style, colWidths=colWidths),
+                                 Spacer(0, st.spaceAfter)]
             else:
                 self.decoration['endnotes'].append([label, contents])
                 node.elements = []
