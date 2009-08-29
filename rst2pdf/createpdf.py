@@ -853,9 +853,8 @@ class RstToPdf(object):
                 p_ids=node.parent.get('ids', [None]) or [None]
                 elem.parent_id = p_ids[0]
                 if reportlab.Version > '2.1':
-                    node.elements = [KeepTogether([Paragraph(text,
-                            self.styles['heading%d'%min(depth, 6)])]),
-                            elem]
+                    node.elements = [KeepTogether([ elem, 
+                        Paragraph(text, self.styles['heading%d'%min(depth, 6)])])]
                 else:
                     node.elements = [Paragraph(text,
                             self.styles['heading%d'%min(depth, 4)]), elem]
