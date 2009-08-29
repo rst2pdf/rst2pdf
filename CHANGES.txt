@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fix for Issue 175 (widow/orphan titles)
 * Fix for Issue 174 (line blocks didn't respect indentation)
 * Worked around Issue 173 (quotes didn't indent inside table cells)
 * Respect spaceBefore and spaceAfter for footnotes/endnotes
