@@ -1,0 +1,11 @@
+A title
+-------
+
+.. raw:: pdf
+
+   Spacer 0 22cm
+   
+Another title
+-------------
+
+The content should be in the same page as the title
