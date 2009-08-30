@@ -9,7 +9,35 @@ __docformat__ = 'reStructuredText'
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
-from reportlab.lib.styles import ParagraphStyle
+
+try:
+    import wordaxe
+    from wordaxe.rl.paragraph import Paragraph
+    from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    # PyHnjHyphenator is broken for non-ascii characters, so
+    # let's not use it and avoid useless crashes (http://is.gd/19efQ)
+
+    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    # If basehyphenator doesn't load, wordaxe is broken
+    # pyhyphenator and DCW *may* not load.
+    
+    from wordaxe.BaseHyphenator import BaseHyphenator
+    try:
+        from wordaxe.plugins.PyHyphenHyphenator \
+            import PyHyphenHyphenator
+    except:
+        pass
+    try:
+        from wordaxe.DCWHyphenator import DCWHyphenator
+    except:
+        pass
+
+except ImportError:
+    # log.warning("No support for hyphenation, install wordaxe")
+    HAS_WORDAXE = False
+else:
+    HAS_WORDAXE = True
+    
 from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
@@ -18,6 +46,9 @@ import styles
 from log import log
 
 import functools
+import re
+from xml.sax.saxutils import unescape, escape
+
 
 
 class MyImage(Image):
@@ -90,47 +121,41 @@ class MyIndenter(Indenter):
 
     def draw(self):
         pass
+    
 
-
-class OutlineEntry(Flowable):
-    """Creates outline entries in the PDF TOC."""
-
-    def __init__(self, label, text, level=0, snum=None):
-        """Initialize outline entries.
-
-            * label is a unique label.
-            * text is the text to be displayed in the outline tree
-            * level is the level, 0 is outermost, 1 is child of 0, etc.
-
-        """
+class Heading(Paragraph):
+    """A paragraph that also adds an outline entry in
+    the PDF TOC."""
+    
+    def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
+                 snum=None, label=None, parent_id=None):
         if label is None: # it happens
             self.label = text.replace(u'\xa0', ' ').strip(
                 ).replace(' ', '_').encode('ascii', 'replace')
         else:
             self.label = label.strip()
-        self.text = text.strip()
+        # Issue 114: need to convert "&amp;" to "&" and such.
+        # Issue 140: need to make it plain text
+        self.stext=re.sub(r'<[^>]*?>', '', unescape(text))
+        self.stext = self.stext.strip()
         self.level = int(level)
         self.snum = snum
-        Flowable.__init__(self)
-
-    def wrap(self, w, h):
-        """This takes no space"""
-        return 0, 0
-
+        self.parent_id=parent_id
+        Paragraph.__init__(self, text, style, bulletText, 
+                          caseSensitive)
     def draw(self):
+
+        # Add outline entry
         self.canv.bookmarkPage(self.label)
         if self.canv.firstSect:
-            self.canv.sectName = self.text
+            self.canv.sectName = self.stext
             self.canv.firstSect=False
             if self.snum is not None:
                 self.canv.sectNum = self.snum
             else:
                 self.canv.sectNum = ""
-        self.canv.addOutlineEntry(self.text, self.label, self.level, False)
-
-    def __repr__(self):
-        return "OutlineEntry (label=%s , text=%s , level=%d) \n" % (
-            self.label, self.text, self.level)
+        self.canv.addOutlineEntry(self.stext, self.label, self.level, False)
+        Paragraph.draw(self)
 
 
 class Separation(Flowable):

@@ -845,16 +845,13 @@ class RstToPdf(object):
                 else:
                     snum = None
                 key = node.get('refid')
-                # Issue 114: need to convert "&amp;" to "&" and such.
-                elemtext=unescape(text)
-                # Issue 140: need to make it plain text
-                elemtext=re.sub(r'<[^>]*?>', '', elemtext)
-                elem = OutlineEntry(key, elemtext, depth - 1, snum)
-                p_ids=node.parent.get('ids', [None]) or [None]
-                elem.parent_id = p_ids[0]
                 if reportlab.Version > '2.1':
-                    node.elements = [KeepTogether([ elem, 
-                        Paragraph(text, self.styles['heading%d'%min(depth, 6)])])]
+                    node.elements = [ Heading(text, 
+                            self.styles['heading%d'%min(depth, 6)],
+                            level=depth-1,
+                            label=key,
+                            parent_id=(node.parent.get('ids', [None]) or [None])[0]
+                            )]
                 else:
                     node.elements = [Paragraph(text,
                             self.styles['heading%d'%min(depth, 4)]), elem]
@@ -1641,6 +1638,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree')
                 return
         elements = self.gen_elements(doctree, 0)
+        
 
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
@@ -1696,7 +1694,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 class FancyDocTemplate(BaseDocTemplate):
 
     def afterFlowable(self, flowable):
-        if isinstance(flowable, OutlineEntry):
+        if isinstance(flowable, Heading):
             # Notify TOC entry for headings/abstracts/dedications.
             level, text = flowable.level, flowable.text
             if hasattr(flowable, 'parent_id'):
