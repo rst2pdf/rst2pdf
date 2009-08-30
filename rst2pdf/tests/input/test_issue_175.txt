@@ -1,11 +1,51 @@
-A title
--------
-
 .. raw:: pdf
 
-   Spacer 0 22cm
+   Spacer 0 19cm
    
+This is not very close to the bottom
+
 Another title
 -------------
 
+A subsection
+~~~~~~~~~~~~
+
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+
+.. raw:: pdf
+
+   Spacer 0 17cm
+   
+This is not very close to the bottom
+   
+Third title
+-----------
+
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
+The content should be in the same page as the title
 The content should be in the same page as the title
