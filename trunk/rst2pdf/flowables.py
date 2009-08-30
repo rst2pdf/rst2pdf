@@ -13,31 +13,9 @@ from reportlab.lib.enums import *
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
-    ##from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    ## PyHnjHyphenator is broken for non-ascii characters, so
-    ## let's not use it and avoid useless crashes (http://is.gd/19efQ)
-
-    ##from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    ## If basehyphenator doesn't load, wordaxe is broken
-    ## pyhyphenator and DCW *may* not load.
-    
-    #from wordaxe.BaseHyphenator import BaseHyphenator
-    #try:
-        #from wordaxe.plugins.PyHyphenHyphenator \
-            #import PyHyphenHyphenator
-    #except:
-        #pass
-    #try:
-        #from wordaxe.DCWHyphenator import DCWHyphenator
-    #except:
-        #pass
-
 except ImportError:
-    # log.warning("No support for hyphenation, install wordaxe")
-    HAS_WORDAXE = False
-else:
-    HAS_WORDAXE = True
-    
+    from reportlab.platypus.paragraph import Paragraph
+
 from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
@@ -142,8 +120,7 @@ class Heading(Paragraph):
         self.level = int(level)
         self.snum = snum
         self.parent_id=parent_id
-        Paragraph.__init__(self, text, style, bulletText, 
-                          caseSensitive)
+        Paragraph.__init__(self, text, style, bulletText)
     def draw(self):
 
         # Add outline entry
