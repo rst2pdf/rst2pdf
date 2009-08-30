@@ -13,24 +13,24 @@ from reportlab.lib.enums import *
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
-    from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    # PyHnjHyphenator is broken for non-ascii characters, so
-    # let's not use it and avoid useless crashes (http://is.gd/19efQ)
+    ##from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+    ## PyHnjHyphenator is broken for non-ascii characters, so
+    ## let's not use it and avoid useless crashes (http://is.gd/19efQ)
 
-    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    # If basehyphenator doesn't load, wordaxe is broken
-    # pyhyphenator and DCW *may* not load.
+    ##from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    ## If basehyphenator doesn't load, wordaxe is broken
+    ## pyhyphenator and DCW *may* not load.
     
-    from wordaxe.BaseHyphenator import BaseHyphenator
-    try:
-        from wordaxe.plugins.PyHyphenHyphenator \
-            import PyHyphenHyphenator
-    except:
-        pass
-    try:
-        from wordaxe.DCWHyphenator import DCWHyphenator
-    except:
-        pass
+    #from wordaxe.BaseHyphenator import BaseHyphenator
+    #try:
+        #from wordaxe.plugins.PyHyphenHyphenator \
+            #import PyHyphenHyphenator
+    #except:
+        #pass
+    #try:
+        #from wordaxe.DCWHyphenator import DCWHyphenator
+    #except:
+        #pass
 
 except ImportError:
     # log.warning("No support for hyphenation, install wordaxe")
@@ -41,6 +41,7 @@ else:
 from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
+from reportlab.lib.styles import ParagraphStyle
 
 import styles
 from log import log
