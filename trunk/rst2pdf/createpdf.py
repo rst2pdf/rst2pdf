@@ -1187,13 +1187,16 @@ class RstToPdf(object):
             # Workaround for Issue 173 using tables
             leftIndent=self.styles['blockquote'].leftIndent
             rightIndent=self.styles['blockquote'].rightIndent
-            data=[[self.gather_elements( node, depth, style)]]
-            node.elements=[Table(data,
+            spaceBefore=self.styles['blockquote'].spaceBefore
+            spaceAfter=self.styles['blockquote'].spaceAfter
+            data=[['',self.gather_elements( node, depth, style)]]
+            node.elements=[Spacer(0,spaceBefore),SplitTable(data,
+                colWidths=[leftIndent,None],
                 style=[["TOPPADDING",[0,0],[-1,-1],0],
-                       ["LEFTPADDING",[0,0],[-1,-1],leftIndent],
+                       ["LEFTPADDING",[0,0],[-1,-1],0],
                        ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
                        ["BOTTOMPADDING",[0,0],[-1,-1],0],
-                ])]
+                ]), Spacer(0,spaceAfter)]
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
