@@ -1,3 +1,5 @@
-Internal link_
+.. toctree::
 
-.. _link: whatever
+   module
+
+* :ref:`modindex`
