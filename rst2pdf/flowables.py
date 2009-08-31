@@ -233,7 +233,7 @@ class SplitTable(DelayedTable):
                 if fh > h:
                     # The lth flowable is the guilty one
                     # split it
-                    _,lh=_listWrapOn(text[:l],w-dw,h-12)
+                    _,lh=_listWrapOn(text[:l],w-dw,None)
                     l2=text[l].split(w-dw,h-lh-12)
                     if l2==[] and l==0: # Can't fit anything
                         return l2
