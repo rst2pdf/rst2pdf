@@ -151,6 +151,7 @@ class Reference(Flowable):
 
     def __init__(self, refid):
         self.refid = refid
+        self.keepWithNext=True
         Flowable.__init__(self)
 
     def wrap(self, w, h):
