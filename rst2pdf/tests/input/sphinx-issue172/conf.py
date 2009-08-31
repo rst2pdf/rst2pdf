@@ -37,7 +37,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'brokenlink'
+project = u'sphinx'
 copyright = u'2009, RA'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -158,7 +158,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'brokenlink'
+htmlhelp_basename = 'sphinx'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -172,7 +172,7 @@ htmlhelp_basename = 'brokenlink'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'brokenlink.tex', u'brokenlink Documentation',
+  ('index', 'sphinx.tex', u'sphinx Documentation',
    u'RA', 'manual'),
 ]
 
