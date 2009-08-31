@@ -229,7 +229,7 @@ class SplitTable(DelayedTable):
                 # The -12 here is a hack. I don't know why
                 # If the table contents wrap to Y points, the
                 # table wraps to Y+12
-                _,fh = _listWrapOn(text[:l+1],w-dw,h-12)
+                _,fh = _listWrapOn(text[:l+1],w-dw,None)
                 if fh > h:
                     # The lth flowable is the guilty one
                     # split it
