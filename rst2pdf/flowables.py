@@ -90,9 +90,9 @@ class MyImage(Image):
                 self.drawHeight = availWidth / self.__ratio
             return Image.wrap(self, availWidth, availHeight)
 
-
 class MyIndenter(Indenter):
-    """I can't remember why this exists."""
+    """An indenter that has a width, because otherwise you get crashes
+    if added inside tables"""
 
     width = 0
     height = 0
@@ -164,7 +164,6 @@ class Reference(Flowable):
     def repr(self):
         return "Anchor: %s" % self.refid
 
-
 class DelayedTable(Flowable):
     """A flowable that inserts a table for which it has the data.
 
@@ -173,25 +172,25 @@ class DelayedTable(Flowable):
 
     """
 
-    def __init__(self, data, colwidths, style, repeatrows=False):
+    def __init__(self, data, colWidths, style, repeatrows=False):
         self.data = data
-        self.colwidths = colwidths
+        self.colWidths = colWidths
         self.style = style
         self.t = None
         self.repeatrows = repeatrows
 
     def wrap(self, w, h):
-        # Create the table, with the widths from colwidths reinterpreted
+        # Create the table, with the widths from colWidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
 
-        #_tw = w/sum(self.colwidths)
+        #_tw = w/sum(self.colWidths)
         def adjust(*args, **kwargs):
             kwargs['total']=w
             return styles.adjustUnits(*args, **kwargs)
         #adjust=functools.partial(styles.adjustUnits, total=w)
-        colwidths=map(adjust, self.colwidths)
-        #colwidths = [_w * _tw for _w in self.colwidths]
-        self.t = Table(self.data, colWidths=colwidths,
+        colWidths=map(adjust, self.colWidths)
+        #colWidths = [_w * _tw for _w in self.colWidths]
+        self.t = Table(self.data, colWidths=colWidths,
             style=self.style, repeatRows=self.repeatrows)
         return self.t.wrap(w, h)
 
@@ -201,6 +200,67 @@ class DelayedTable(Flowable):
     def drawOn(self, canvas, x, y, _sW=0):
         self.t.drawOn(canvas, x, y, _sW)
 
+class SplitTable(DelayedTable):
+    def __init__(self, data, colWidths, style):
+        if len(data) <>1 or len(data[0]) <>2:
+            log.error('SplitTable can only be 1 row and two columns!')
+            sys.exit(1)
+        DelayedTable.__init__(self,data,colWidths,style)
+        
+    def identity(self, maxLen=None):
+        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
+            hex(id(self)), self._frameName(),
+            getattr(self, 'name', '')
+                and (' name="%s"' % getattr(self, 'name', '')) or '',
+                unicode(self.data[0][1])[:180])
+                
+    def split(self,w,h):
+        _w,_h=self.t.wrap(w, h)
+        
+        if _h > h: # Can't split!
+            # The right column data mandates the split
+            # Find which flowable exceeds the available height
+            
+            dw=self.colWidths[0]
+            
+            bullet=self.data[0][0]
+            text=self.data[0][1]
+            for l in range(0,len(text)):
+                # The -12 here is a hack. I don't know why
+                # If the table contents wrap to Y points, the
+                # table wraps to Y+12
+                _,fh = _listWrapOn(text[:l+1],w-dw,h-12)
+                if fh > h:
+                    # The lth flowable is the guilty one
+                    # split it
+                    _,lh=_listWrapOn(text[:l],w-dw,h-12)
+                    l2=text[l].split(w-dw,h-lh-12)
+                    if l2==[] and l==0: # Can't fit anything
+                        return l2
+                    elif l2==[]: # Not splittable, move to next page
+                        l3=[Table([
+                                    [bullet,
+                                     text[:l]]
+                                   ],
+                                colWidths=self.colWidths,
+                                style=self.style),
+                                SplitTable([['',text[l:]]],
+                                colWidths=self.colWidths,
+                                style=self.style)]
+                    else:
+                        l3=[Table([[bullet,text[:l]+[l2[0]]]],
+                                colWidths=self.colWidths,
+                                style=self.style),
+                                SplitTable([['',l2[1:]+text[l+1:]]],
+                                colWidths=self.colWidths,
+                                style=self.style)]
+                    return l3
+            log.error("Can't splite list item")
+            return self.t.split(w, h)
+        else:
+            return DelayedTable.split(self,w,h)
+                 
+                
 
 class MyPageBreak(FrameActionFlowable):
 

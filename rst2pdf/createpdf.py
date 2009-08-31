@@ -734,7 +734,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.tgroup):
             rows = []
-            colwidths = []
+            colWidths = []
             hasHead = False
             headRows = 0
             for n in node.children:
@@ -753,16 +753,16 @@ class RstToPdf(object):
                             r.append(cell)
                         rows.append(r)
                 elif isinstance(n, docutils.nodes.colspec):
-                    colwidths.append(int(n['colwidth']))
+                    colWidths.append(int(n['colwidth']))
 
             # colWidths are in no specific unit, really. Maybe ems.
             # Convert them to %
-            colwidths=map(int, colwidths)
-            tot=sum(colwidths)
-            colwidths=["%s%%"%((100.*w)/tot) for w in colwidths]
+            colWidths=map(int, colWidths)
+            tot=sum(colWidths)
+            colWidths=["%s%%"%((100.*w)/tot) for w in colWidths]
 
             if 'colWidths' in style.__dict__:
-                colwidths[:len(style.colWidths)]=style.colWidths
+                colWidths[:len(style.colWidths)]=style.colWidths
 
             spans = self.filltable(rows)
 
@@ -815,7 +815,7 @@ class RstToPdf(object):
                     st.add(*cmd)
             rtr = self.repeat_table_rows
 
-            node.elements = [DelayedTable(data, colwidths, st, rtr)]
+            node.elements = [DelayedTable(data, colWidths, st, rtr)]
 
         elif isinstance(node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
@@ -1164,7 +1164,7 @@ class RstToPdf(object):
             colWidths = map(self.styles.adjustUnits,
                 self.styles['item_list'].colWidths)
 
-            node.elements = [Table([[Paragraph(b, style = bStyle), el]],
+            node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
                              style = t_style,
                              colWidths = colWidths)]
 
@@ -1671,8 +1671,8 @@ class RstToPdf(object):
                 pdfdoc.multiBuild(elements)
                 break
             except ValueError, v:
-                if v.args and v.args[0].startswith('format not resolved'):
-                    missing=v.args[0].split(' ')[-1]
+                if v.args and str(v.args[0]).startswith('format not resolved'):
+                    missing=str(v.args[0]).split(' ')[-1]
                     log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
                     elements.append(Reference(missing))
         #doc = SimpleDocTemplate("phello.pdf")
@@ -1831,6 +1831,7 @@ class FancyPage(PageTemplate):
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
         # Adjust for gutter margin
+        log.info('Page %s'%doc.page)
         if doc.page % 2: # Left page
             hx = self.hx
             fx = self.fx
