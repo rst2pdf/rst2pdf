@@ -24,7 +24,6 @@ from reportlab.lib.styles import ParagraphStyle
 import styles
 from log import log
 
-import functools
 import re
 from xml.sax.saxutils import unescape, escape
 
@@ -185,7 +184,10 @@ class DelayedTable(Flowable):
         # if needed as percentages of frame/cell/whatever width w is.
 
         #_tw = w/sum(self.colwidths)
-        adjust=functools.partial(styles.adjustUnits, total=w)
+        def adjust(*args, **kwargs):
+            kwargs['total']=w
+            return styles.adjustUnits(*args, **kwargs)
+        #adjust=functools.partial(styles.adjustUnits, total=w)
         colwidths=map(adjust, self.colwidths)
         #colwidths = [_w * _tw for _w in self.colwidths]
         self.t = Table(self.data, colWidths=colwidths,
