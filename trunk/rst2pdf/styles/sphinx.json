@@ -105,6 +105,10 @@
       "spaceBefore": 12,
       "spaceAfter": 6
     }],
+    ["table-heading" , {
+      "parent" : "heading",
+      "borderWidth" : 0
+    }],
     ["admonition-heading" , {
       "parent": "heading3",
       "borderPadding": 0,

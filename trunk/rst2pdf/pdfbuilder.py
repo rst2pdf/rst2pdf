@@ -79,7 +79,8 @@ class PDFBuilder(Builder):
                             )
             tgt_file = path.join(self.outdir, targetname + self.out_suffix)
             destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
-            doctree = self.assemble_doctree(docname,title,author)
+            doctree = self.assemble_doctree(docname,title,author, 
+                appendices=self.config.pdf_appendices or [])
             self.info("done")
             self.info("writing " + targetname + "... ", nonl=1)
             docwriter.write(doctree, destination)
@@ -104,7 +105,7 @@ class PDFBuilder(Builder):
                 docname = docname[:-5]
             self.titles.append((docname, entry[2]))
 
-    def assemble_doctree(self, docname, title, author):
+    def assemble_doctree(self, docname, title, author, appendices):
         # Page transitions
         output='.. raw:: pdf\n\n    PageBreak\n\n'
         pb=docutils.core.publish_doctree(output)[0]
@@ -285,6 +286,17 @@ class PDFBuilder(Builder):
             tree.insert(0,spacer)
             tree.insert(0,docsubtitle)
             tree.insert(0,doctitle)
+        
+        if appendices:
+            tree.append(pb_cutePage)
+            self.info()
+            self.info('adding appendixes...', nonl=1)
+            for docname in appendices:
+                self.info(darkgreen(docname) + " ", nonl=1)
+                appendix = self.env.get_doctree(docname)
+                appendix['docname'] = docname
+                tree.append(appendix)
+            self.info('done')        
         
         self.info()
         self.info("resolving references...")
@@ -629,6 +641,7 @@ def setup(app):
     app.add_config_value('pdf_use_index', True, None)
     app.add_config_value('pdf_use_modindex', True, None)
     app.add_config_value('pdf_use_coverpage', True, None)
+    app.add_config_value('pdf_appendices', [], None)
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
     project_doc_texescaped = unicode(app.config.project + ' Documentation')\

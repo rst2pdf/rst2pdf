@@ -1464,6 +1464,9 @@ To use it in your existing sphinx project you need to do the following:
     # If false, no coverpage is generated.
     #pdf_use_coverpage = True
     
+    # Documents to append as an appendix to all manuals.    
+    #pdf_appendices = []
+    
 3. (Maybe) add this in your Makefile::
     
     pdf:
