@@ -1638,7 +1638,6 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree')
                 return
         elements = self.gen_elements(doctree, 0)
-        
 
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
@@ -1667,7 +1666,15 @@ class RstToPdf(object):
             title=self.doc_title,
             author=self.doc_author,
             pageCompression=compressed)
-        pdfdoc.multiBuild(elements)
+        while True:
+            try:
+                pdfdoc.multiBuild(elements)
+                break
+            except ValueError, v:
+                if v.args and v.args[0].startswith('format not resolved'):
+                    missing=v.args[0].split(' ')[-1]
+                    log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
+                    elements.append(Reference(missing))
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
