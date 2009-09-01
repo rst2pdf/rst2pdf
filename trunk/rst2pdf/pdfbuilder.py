@@ -46,6 +46,7 @@ from sphinx.locale import admonitionlabels, versionlabels
 import rst2pdf.log
 import logging
 from pprint import pprint
+from copy import copy
 
 class PDFBuilder(Builder):
     name = 'pdf'
@@ -139,8 +140,8 @@ class PDFBuilder(Builder):
                 toctreenode.parent.replace(toctreenode, newnodes)
             return tree
 
-        tree = self.env.get_doctree(docname)
         
+        tree = self.env.get_doctree(docname)        
         tree = process_tree(docname, tree)
 
         if self.config.language:
@@ -150,10 +151,14 @@ class PDFBuilder(Builder):
             
         if self.config.pdf_use_index:
             # Add index at the end of the document
+            t=copy(self.env.indexentries)
+            self.env.indexentries={docname:self.env.indexentries[docname]}
             genindex = self.env.create_index(self)
-            _pb,index_nodes=genindex_nodes(genindex)
-            tree.append(_pb)
-            tree.append(index_nodes)
+            self.env.indexentries=t
+            if genindex: # No point in creating empty indexes
+                _pb,index_nodes=genindex_nodes(genindex)
+                tree.append(_pb)
+                tree.append(index_nodes)
 
         # This is stolen from the HTML builder
         #moduleindex = self.env.domaindata['py']['modules']
