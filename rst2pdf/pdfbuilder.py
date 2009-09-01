@@ -352,7 +352,7 @@ class PDFBuilder(Builder):
         return tree
 
     def get_target_uri(self, docname, typ=None):
-        print 'GTU',docname,typ
+        #print 'GTU',docname,typ
         # FIXME: production lists are not supported yet!
         if typ == 'token':
             # token references are always inside production lists and must be
