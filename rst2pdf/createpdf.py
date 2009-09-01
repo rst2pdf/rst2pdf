@@ -849,12 +849,15 @@ class RstToPdf(object):
                 if reportlab.Version > '2.1':
                     maxdepth=6
                 
-                node.elements = [ Heading(text, 
-                        self.styles['heading%d'%min(depth, maxdepth)],
-                        level=depth-1,
-                        label=key,
-                        parent_id=(node.parent.get('ids', [None]) or [None])[0]
-                        )]
+                if HAS_SPHINX and node.parent.ignoreme:
+                    node.elements = []
+                else:
+                    node.elements = [ Heading(text, 
+                            self.styles['heading%d'%min(depth, maxdepth)],
+                            level=depth-1,
+                            label=key,
+                            parent_id=(node.parent.get('ids', [None]) or [None])[0]
+                            )]
                 if depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak())
 
@@ -1068,7 +1071,10 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, depth, style=style)
 
         elif isinstance(node, docutils.nodes.section):
-            node.elements = self.gather_elements(node, depth+1)
+            if HAS_SPHINX and node.ignoreme:
+                node.elements = self.gather_elements(node, depth)
+            else:
+                node.elements = self.gather_elements(node, depth+1)
 
         elif isinstance(node, docutils.nodes.bullet_list):
             node._bullSize = self.styles["enumerated_list_item"].leading
@@ -1671,9 +1677,10 @@ class RstToPdf(object):
             pageCompression=compressed)
         while True:
             try:
+                log.info("Starting build")
                 pdfdoc.multiBuild(elements)
                 break
-            except ValueError, v:
+            except ValueError as v:
                 if v.args and str(v.args[0]).startswith('format not resolved'):
                     missing=str(v.args[0]).split(' ')[-1]
                     log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
@@ -1681,6 +1688,8 @@ class RstToPdf(object):
                     for e in elements:
                         if hasattr(e,'_postponed'):
                             delattr(e,'_postponed')
+                else:
+                    raise
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
