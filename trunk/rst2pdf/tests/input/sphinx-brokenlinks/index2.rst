@@ -13,3 +13,12 @@
 .. raw:: pdf
 
    PageBreak
+
+:mod:`parrot` links up
+
+.. _in-index-2:
+
+A section in index 2
+--------------------
+
+The content of the section

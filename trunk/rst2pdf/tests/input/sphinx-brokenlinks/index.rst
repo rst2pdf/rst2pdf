@@ -3,3 +3,5 @@ Broken link_
 .. _link: whatever
 
 :mod:`parrot`
+
+:ref:`in-index-2`
