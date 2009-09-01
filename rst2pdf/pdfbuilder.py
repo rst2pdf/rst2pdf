@@ -347,10 +347,34 @@ class PDFBuilder(Builder):
             #else:
                 #pass
         return tree
-    
 
     def get_target_uri(self, docname, typ=None):
-        return ""
+        # FIXME: production lists are not supported yet!
+        print 'GTU',docname
+        if typ == 'token':
+            # token references are always inside production lists and must be
+            # replaced by \token{} in LaTeX
+            return '@token'
+        if docname not in self.docnames:
+            
+            # It can be a 'main' document:
+            for doc in self.document_data:
+                if doc[0]==docname:
+                    return "pdf:"+docname
+            # It can be in some other document's toctree
+            for indexname, toctree in self.env.toctree_includes.items():
+                if docname in toctree:
+                    for doc in self.document_data:
+                        if doc[0]==indexname:
+                            return "pdf:"+doc[1]+'.pdf'
+            # No idea
+            raise NoUri
+        else: # Local link
+            return ""
+
+    def get_relative_uri(self, from_, to, typ=None):
+        # ignore source path
+        return self.get_target_uri(to, typ)
         
     def get_outdated_docs(self):
         for docname in self.env.found_docs:
