@@ -435,8 +435,11 @@ class StyleSheet(object):
             return self.StyleSheet[key]
         else:
             log.warning("Using undefined style '%s'"
-                        ", got style 'normal' instead"%key)
-            return self.StyleSheet['normal']
+                        ", aliased to style 'normal'."%key)
+            newst=copy(self.StyleSheet['normal'])
+            newst.name=key
+            self.StyleSheet.add(newst)
+            return newst
 
     def findStyle(self, fn):
         """Find the absolute file name for a given style filename.
