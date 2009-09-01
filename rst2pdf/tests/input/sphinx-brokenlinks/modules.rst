@@ -1,4 +1,7 @@
 
+MODULES
+=======
+
 .. _the-parrot-module:
 
 The parrot module

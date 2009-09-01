@@ -6,4 +6,5 @@ Broken link_
 
 :ref:`in-index-2`
 :ref:`the-parrot-module`
+:doc:`modules`
 
