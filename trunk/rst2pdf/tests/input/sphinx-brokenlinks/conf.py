@@ -199,6 +199,7 @@ latex_documents = [
 # (source start file, target name, title, author).
 pdf_documents = [ 
     ('index', u'MyProject', u'My Project', u'Author Name'),
+    ('index2', u'moduledocs', u'moduledocs', u'Author Name'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:
@@ -226,4 +227,4 @@ pdf_use_coverpage = False
 
 pdf_break_level = 1
 
-pdf_verbosity=2
+pdf_verbosity=0
