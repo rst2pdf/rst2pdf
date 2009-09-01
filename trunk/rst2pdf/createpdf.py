@@ -1671,13 +1671,16 @@ class RstToPdf(object):
             pageCompression=compressed)
         while True:
             try:
-                pdfdoc.multiBuild(deepcopy(elements))
+                pdfdoc.multiBuild(elements)
                 break
             except ValueError, v:
                 if v.args and str(v.args[0]).startswith('format not resolved'):
                     missing=str(v.args[0]).split(' ')[-1]
                     log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
                     elements.append(Reference(missing))
+                    for e in elements:
+                        if hasattr(e,'_postponed'):
+                            delattr(e,'_postponed')
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
