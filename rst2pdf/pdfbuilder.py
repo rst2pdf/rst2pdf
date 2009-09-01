@@ -318,11 +318,11 @@ class PDFBuilder(Builder):
             # This needs work, need to keep track of all targets
             # so I don't replace and create hanging refs, which
             # crash
-            if pendingnode['reftarget'] == 'genindex'\
+            if pendingnode.get('reftarget',None) == 'genindex'\
                 and self.config.pdf_use_index:
                 pendingnode.replace_self(nodes.reference(text=pendingnode.astext(),
                     refuri=pendingnode['reftarget']))
-            if pendingnode['reftarget'] == 'modindex'\
+            if pendingnode.get('reftarget',None) == 'modindex'\
                 and self.config.pdf_use_modindex:
                 pendingnode.replace_self(nodes.reference(text=pendingnode.astext(),
                     refuri=pendingnode['reftarget']))
