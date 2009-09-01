@@ -199,7 +199,7 @@ latex_appendices = ['appendix']
 # (source start file, target name, title, author).
 pdf_documents = [ 
     ('index', u'doc1', u'doc1', u'Author Name'),
-    ('index2', u'doc2', u'doc2', u'Author Name'),
+    ('index2', 'doc2', '', u'Author Name'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:
@@ -223,10 +223,10 @@ pdf_use_index = True
 pdf_use_modindex = False
 
 # If false, no coverpage is generated.
-pdf_use_coverpage = False
+pdf_use_coverpage = True
 
 pdf_break_level = 1
 
-pdf_verbosity=0
+pdf_verbosity=1
 
 pdf_appendices = ['appendix']
