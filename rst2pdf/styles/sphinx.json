@@ -85,7 +85,10 @@
       "borderPadding": 8,
       "borderWidth": 0.5,
       "spaceBefore": 12,
-      "spaceAfter": 6
+      "spaceAfter": 6,
+      "commands":[
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ]
+      ]
     }],
     ["note" , {
       "parent": "admonition",
