@@ -69,6 +69,8 @@ class PDFBuilder(Builder):
             docname, targetname, title, author = entry[:4]
             if len(entry)>4: # Custom options per document_data
                 opts=entry[4]
+            else:
+                opts={}
             self.info("processing " + targetname + "... ", nonl=1)
             docwriter = PDFWriter(self,
                             stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
