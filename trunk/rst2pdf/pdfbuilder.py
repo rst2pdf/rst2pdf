@@ -67,21 +67,23 @@ class PDFBuilder(Builder):
     
         for entry in self.document_data:
             docname, targetname, title, author = entry[:4]
+            if len(entry)>4: # Custom options per document_data
+                opts=entry[4]
             self.info("processing " + targetname + "... ", nonl=1)
             docwriter = PDFWriter(self,
-                            stylesheets=self.config.pdf_stylesheets,
-                            language=self.config.pdf_language,
-                            breaklevel=self.config.pdf_break_level,
-                            fontpath=self.config.pdf_font_path,
-                            fitmode=self.config.pdf_fit_mode,
-                            compressed=self.config.pdf_compressed,
-                            inline_footnotes=self.config.pdf_inline_footnotes,
+                            stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
+                            language=opts.get('pdf_language',self.config.pdf_language),
+                            breaklevel=opts.get('pdf_break_level',self.config.pdf_break_level),
+                            fontpath=opts.get('pdf_font_path',self.config.pdf_font_path),
+                            fitmode=opts.get('pdf_fit_mode',self.config.pdf_fit_mode),
+                            compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
+                            inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
                             srcdir=self.srcdir
                             )
             tgt_file = path.join(self.outdir, targetname + self.out_suffix)
             destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
             doctree = self.assemble_doctree(docname,title,author, 
-                appendices=self.config.pdf_appendices or [])
+                appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
             self.info("done")
             self.info("writing " + targetname + "... ", nonl=1)
             docwriter.write(doctree, destination)

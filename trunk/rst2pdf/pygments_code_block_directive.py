@@ -87,7 +87,10 @@ class DocutilsInterface(object):
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
-            lexer = get_lexer_by_name(self.language)
+            if self.language and unicode(self.language).lower() <> 'none':
+                lexer = get_lexer_by_name(self.language)
+            else:
+                lexer = get_lexer_by_name('text')
         except ValueError:
             log.info("no pygments lexer for %s, using 'text'" \
                 % self.language)
