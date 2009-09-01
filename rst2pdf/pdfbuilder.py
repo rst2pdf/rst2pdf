@@ -37,7 +37,7 @@ import docutils.core
 
 from sphinx import addnodes
 from sphinx.builders import Builder
-from sphinx.util.console import darkgreen
+from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
 from sphinx.util import ustrftime, texescape
 from sphinx.environment import NoUri
@@ -80,33 +80,37 @@ class PDFBuilder(Builder):
             rst2pdf.log.log.setLevel(logging.INFO)
     
         for entry in self.document_data:
-            docname, targetname, title, author = entry[:4]
-            if len(entry)>4: # Custom options per document_data
-                opts=entry[4]
-            else:
-                opts={}
-            self.info("processing " + targetname + "... ", nonl=1)
-            docwriter = PDFWriter(self,
-                            stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
-                            language=opts.get('pdf_language',self.config.pdf_language),
-                            breaklevel=opts.get('pdf_break_level',self.config.pdf_break_level),
-                            fontpath=opts.get('pdf_font_path',self.config.pdf_font_path),
-                            fitmode=opts.get('pdf_fit_mode',self.config.pdf_fit_mode),
-                            compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
-                            inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
-                            srcdir=self.srcdir,
-                            config=self.config
-                            )
-            tgt_file = path.join(self.outdir, targetname + self.out_suffix)
-            destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
-            doctree = self.assemble_doctree(docname,title,author, 
-                appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
-            doctree.settings.author=author
-            doctree.settings.title=title
-            self.info("done")
-            self.info("writing " + targetname + "... ", nonl=1)
-            docwriter.write(doctree, destination)
-            self.info("done")
+            try:
+                docname, targetname, title, author = entry[:4]
+                if len(entry)>4: # Custom options per document_data
+                    opts=entry[4]
+                else:
+                    opts={}
+                self.info("processing " + targetname + "... ", nonl=1)
+                docwriter = PDFWriter(self,
+                                stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
+                                language=opts.get('pdf_language',self.config.pdf_language),
+                                breaklevel=opts.get('pdf_break_level',self.config.pdf_break_level),
+                                fontpath=opts.get('pdf_font_path',self.config.pdf_font_path),
+                                fitmode=opts.get('pdf_fit_mode',self.config.pdf_fit_mode),
+                                compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
+                                inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
+                                srcdir=self.srcdir,
+                                config=self.config
+                                )
+                tgt_file = path.join(self.outdir, targetname + self.out_suffix)
+                destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
+                doctree = self.assemble_doctree(docname,title,author, 
+                    appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
+                doctree.settings.author=author
+                doctree.settings.title=title
+                self.info("done")
+                self.info("writing " + targetname + "... ", nonl=1)
+                docwriter.write(doctree, destination)
+                self.info("done")
+            except Exception, e:
+                rst2pdf.log.log.error(str(e))
+                self.info(red("FAILED"))
         
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
