@@ -637,13 +637,11 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         pass
     
     def visit_title(self, node):
-        print 'ATITLE:',node
         parent = node.parent
         if isinstance(parent, addnodes.seealso):
             # the environment already handles this
             raise nodes.SkipNode
         elif self.this_is_the_title:
-            print 'TITLE:',node.astext(),node
             if len(node.children) != 1 and not isinstance(node.children[0],
                                                           nodes.Text):
                 self.builder.warn(
