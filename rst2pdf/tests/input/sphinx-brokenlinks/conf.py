@@ -219,7 +219,7 @@ pdf_language="en_US"
 pdf_use_index = True
 
 # If false, no modindex is generated.
-pdf_use_modindex = True
+pdf_use_modindex = False
 
 # If false, no coverpage is generated.
 pdf_use_coverpage = False
