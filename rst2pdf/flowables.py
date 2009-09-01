@@ -201,11 +201,18 @@ class DelayedTable(Flowable):
         self.t.drawOn(canvas, x, y, _sW)
 
 class SplitTable(DelayedTable):
-    def __init__(self, data, colWidths, style):
+    def __init__(self, data, colWidths, style, padding=3):
         if len(data) <>1 or len(data[0]) <>2:
             log.error('SplitTable can only be 1 row and two columns!')
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
+        if not isinstance(padding,list):
+            padding=[padding,]*4
+        self.padding=padding
+        self.style.add('TOPPADDING',[0,0],[-1,-1],self.padding[0])
+        self.style.add('RIGHTPADDING',[-1,0],[-1,-1],self.padding[1])
+        self.style.add('BOTTOMPADDING',[0,0],[-1,-1],self.padding[2])
+        self.style.add('LEFTPADDING',[1,0],[1,-1],self.padding[3])
         
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
@@ -215,13 +222,14 @@ class SplitTable(DelayedTable):
                 unicode(self.data[0][1])[:180])
                 
     def split(self,w,h):
-        _w,_h=self.t.wrap(w, h)
+        _w,_h=self.wrap(w, h)
         
         if _h > h: # Can't split!
             # The right column data mandates the split
             # Find which flowable exceeds the available height
             
-            dw=self.colWidths[0]
+            dw=self.colWidths[0]+self.padding[1]+self.padding[3]
+            dh=self.padding[0]+self.padding[2]
             
             bullet=self.data[0][0]
             text=self.data[0][1]
@@ -230,32 +238,47 @@ class SplitTable(DelayedTable):
                 # If the table contents wrap to Y points, the
                 # table wraps to Y+12
                 _,fh = _listWrapOn(text[:l+1],w-dw,None)
-                if fh > h:
+                if fh+dh > h:
                     # The lth flowable is the guilty one
                     # split it
+                                                            
                     _,lh=_listWrapOn(text[:l],w-dw,None)
-                    l2=text[l].split(w-dw,h-lh-12)
+                    l2=text[l].split(w-dw,h-lh-dh)
                     if l2==[] and l==0: # Can't fit anything
                         return l2
                     elif l2==[]: # Not splittable, move to next page
-                        l3=[Table([
-                                    [bullet,
-                                     text[:l]]
-                                   ],
-                                colWidths=self.colWidths,
-                                style=self.style),
-                                SplitTable([['',text[l:]]],
-                                colWidths=self.colWidths,
-                                style=self.style)]
+                         
+                        # If the previous one is, keepwithnext, push
+                        # that one too
+                        while l>0 and text[l-1].getKeepWithNext():
+                            l-=1
+                            
+                        if l>0:
+                            l3=[Table([
+                                        [bullet,
+                                         text[:l]]
+                                       ],
+                                    colWidths=self.colWidths,
+                                    style=self.style),
+                                    SplitTable([['',text[l:]]],
+                                    colWidths=self.colWidths,
+                                    style=self.style,
+                                    padding=self.padding)]
+                        else: # Everything flows
+                            l3=[]
                     else:
                         l3=[Table([[bullet,text[:l]+[l2[0]]]],
                                 colWidths=self.colWidths,
-                                style=self.style),
+                                rowHeights=[h],
+                                style=self.style)]
+                        if l2[1:]+text[l+1:]:
+                            l3.append(
                                 SplitTable([['',l2[1:]+text[l+1:]]],
                                 colWidths=self.colWidths,
-                                style=self.style)]
+                                style=self.style,
+                                padding=self.padding))
                     return l3
-            log.error("Can't splite list item")
+            log.error("Can't split splittable")
             return self.t.split(w, h)
         else:
             return DelayedTable.split(self,w,h)

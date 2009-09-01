@@ -314,15 +314,16 @@
       "borderWidth": 0.5
     }],
     ["admonition" , {
-      "float": "none",
-      "width": "100%",
       "parent": "normal",
+      "spaceBefore": 12,
+      "spaceAfter": 6,
+      "borderPadding": [16,16,16,16],
       "backColor": "beige",
       "borderColor": "darkgray",
-      "borderPadding": 8,
       "borderWidth": 0.5,
-      "spaceBefore": 12,
-      "spaceAfter": 6
+      "commands":[
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ]
+      ]
     }],
     ["attention" , {
       "parent": "admonition"
