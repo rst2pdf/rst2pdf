@@ -151,10 +151,17 @@ class PDFBuilder(Builder):
             
         if self.config.pdf_use_index:
             # Add index at the end of the document
+            
+            # This is a hack. create_index creates an index from 
+            # ALL the documents data, not just this one.
+            # So, we preserve a copy, use just what we need, then
+            # restore it.
             t=copy(self.env.indexentries)
             self.env.indexentries={docname:self.env.indexentries[docname]}
             genindex = self.env.create_index(self)
             self.env.indexentries=t
+            # EOH (End Of Hack)
+            
             if genindex: # No point in creating empty indexes
                 _pb,index_nodes=genindex_nodes(genindex)
                 tree.append(_pb)
