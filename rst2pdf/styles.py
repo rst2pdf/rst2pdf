@@ -58,6 +58,10 @@ class StyleSheet(object):
                       '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, style_path)
 
+
+        self.FontSearchPath=list(set(self.FontSearchPath))
+        self.StyleSearchPath=list(set(self.StyleSearchPath))
+
         log.info('FontPath:%s'%self.FontSearchPath)
         log.info('StylePath:%s'%self.StyleSearchPath)
 
