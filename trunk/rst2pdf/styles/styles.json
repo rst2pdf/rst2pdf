@@ -71,7 +71,6 @@
       "fontName": "stdFont",
       "fontSize":10,
       "leading":12,
-      "autoLeading": "max",
       "leftIndent":0,
       "rightIndent":0,
       "firstLineIndent":0,
