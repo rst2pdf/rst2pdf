@@ -312,7 +312,10 @@ class PDFBuilder(Builder):
         
         self.info()
         self.info("resolving references...")
+        #print tree
+        #print '--------------'
         self.env.resolve_references(tree, docname, self)
+        #print tree
 
         for pendingnode in tree.traverse(addnodes.pending_xref):
             # This needs work, need to keep track of all targets
@@ -349,6 +352,7 @@ class PDFBuilder(Builder):
         return tree
 
     def get_target_uri(self, docname, typ=None):
+        print 'GTU',docname,typ
         # FIXME: production lists are not supported yet!
         if typ == 'token':
             # token references are always inside production lists and must be
@@ -359,7 +363,7 @@ class PDFBuilder(Builder):
             # It can be a 'main' document:
             for doc in self.document_data:
                 if doc[0]==docname:
-                    return "pdf:"+docname
+                    return "pdf:"+doc[1]+'.pdf'
             # It can be in some other document's toctree
             for indexname, toctree in self.env.toctree_includes.items():
                 if docname in toctree:
