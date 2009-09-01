@@ -49,6 +49,7 @@ from pprint import pprint
 from copy import copy, deepcopy
 from xml.sax.saxutils import unescape, escape
 
+from traceback import print_exc
 
 # Constants
 # Page transitions
@@ -110,6 +111,7 @@ class PDFBuilder(Builder):
                 self.info("done")
             except Exception, e:
                 rst2pdf.log.log.error(str(e))
+                print_exc()
                 self.info(red("FAILED"))
         
     def init_document_data(self):
