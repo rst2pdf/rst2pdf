@@ -46,7 +46,7 @@ from sphinx.locale import admonitionlabels, versionlabels
 import rst2pdf.log
 import logging
 from pprint import pprint
-from copy import copy
+from copy import copy, deepcopy
 
 class PDFBuilder(Builder):
     name = 'pdf'

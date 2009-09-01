@@ -1671,7 +1671,7 @@ class RstToPdf(object):
             pageCompression=compressed)
         while True:
             try:
-                pdfdoc.multiBuild(elements)
+                pdfdoc.multiBuild(deepcopy(elements))
                 break
             except ValueError, v:
                 if v.args and str(v.args[0]).startswith('format not resolved'):
