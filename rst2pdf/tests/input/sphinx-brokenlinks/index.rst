@@ -5,3 +5,5 @@ Broken link_
 :mod:`parrot`
 
 :ref:`in-index-2`
+:ref:`the-parrot-module`
+
