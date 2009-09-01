@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fix for Issue 184 (font metrics go crazy with TT font)
 * New admonition code based on SplitTable (beta quality)
 * Fix for Issue 180 (support for very very long list items. Needs testing)
 * Fix for Issue 175 (widow/orphan titles)
