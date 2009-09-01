@@ -47,6 +47,20 @@ import rst2pdf.log
 import logging
 from pprint import pprint
 from copy import copy, deepcopy
+from xml.sax.saxutils import unescape, escape
+
+
+# Constants
+# Page transitions
+output='.. raw:: pdf\n\n    PageBreak\n\n'
+pb=docutils.core.publish_doctree(output)[0]
+output='.. raw:: pdf\n\n    PageBreak oneColumn\n\n'
+pb_oneColumn=docutils.core.publish_doctree(output)[0]
+output='.. raw:: pdf\n\n    PageBreak cutePage\n\n'
+pb_cutePage=docutils.core.publish_doctree(output)[0]
+output='.. raw:: pdf\n\n    PageBreak twoColumn\n\n'
+pb_twoColumn=docutils.core.publish_doctree(output)[0]
+
 
 class PDFBuilder(Builder):
     name = 'pdf'
@@ -80,12 +94,15 @@ class PDFBuilder(Builder):
                             fitmode=opts.get('pdf_fit_mode',self.config.pdf_fit_mode),
                             compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
                             inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
-                            srcdir=self.srcdir
+                            srcdir=self.srcdir,
+                            config=self.config
                             )
             tgt_file = path.join(self.outdir, targetname + self.out_suffix)
             destination = FileOutput(destination_path=tgt_file, encoding='utf-8')
             doctree = self.assemble_doctree(docname,title,author, 
                 appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
+            doctree.settings.author=author
+            doctree.settings.title=title
             self.info("done")
             self.info("writing " + targetname + "... ", nonl=1)
             docwriter.write(doctree, destination)
@@ -111,15 +128,6 @@ class PDFBuilder(Builder):
             self.titles.append((docname, entry[2]))
 
     def assemble_doctree(self, docname, title, author, appendices):
-        # Page transitions
-        output='.. raw:: pdf\n\n    PageBreak\n\n'
-        pb=docutils.core.publish_doctree(output)[0]
-        output='.. raw:: pdf\n\n    PageBreak oneColumn\n\n'
-        pb_oneColumn=docutils.core.publish_doctree(output)[0]
-        output='.. raw:: pdf\n\n    PageBreak cutePage\n\n'
-        pb_cutePage=docutils.core.publish_doctree(output)[0]
-        output='.. raw:: pdf\n\n    PageBreak twoColumn\n\n'
-        pb_twoColumn=docutils.core.publish_doctree(output)[0]
         
         self.docnames = set([docname])
         self.info(darkgreen(docname) + " ", nonl=1)
@@ -265,50 +273,7 @@ class PDFBuilder(Builder):
             dt = docutils.core.publish_doctree('\n'.join(output))
             tree.append(pb_twoColumn)
             tree.extend(dt[1:])
-            
-            
-        # Generate Contents topic manually
-        contents=nodes.topic(classes=['contents'])
-        contents+=nodes.title('')
-        contents[0]+=nodes.Text( langmod.labels['contents'])
-        contents['ids']=['Contents']
-        pending=nodes.topic()
-        contents.append(pending)
-        pending.details={}
-        #tree.insert(0,pb_cutePage)
-        tree.insert(0,contents)
-        contTrans=PDFContents(tree)
-        contTrans.startnode=pending
-        contTrans.apply()
-
-        if self.config.pdf_use_coverpage:
-            # Generate cover page
-            spacer=docutils.core.publish_doctree('.. raw:: pdf\n\n    Spacer 0 3cm\n\n')[0]
-            doctitle=nodes.title()
-            doctitle.append(nodes.Text(title))
-            docsubtitle=nodes.subtitle()
-            docsubtitle.append(nodes.Text('%s %s'%(_('version'),self.config.version)))
-            authors=author.split('\\') # This is what's used in the python docs because
-                                       # Latex does a manual linrebreak. This sucks.
-            authornodes=[]
-            for author in authors:
-                node=nodes.paragraph()
-                node.append(nodes.Text(author))
-                node['classes']=['author']
-                authornodes.append(node)
-            date=nodes.paragraph()
-            date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
-            date['classes']=['author']
-            tree.insert(0,pb_cutePage)
-            tree.insert(0,pb)
-            tree.insert(0,date)
-            tree.insert(0,spacer)
-            for node in authornodes[::-1]:
-                tree.insert(0,node)
-            tree.insert(0,spacer)
-            tree.insert(0,docsubtitle)
-            tree.insert(0,doctitle)
-        
+                    
         if appendices:
             tree.append(pb_cutePage)
             self.info()
@@ -492,7 +457,8 @@ class PDFWriter(writers.Writer):
                 fitmode = 'shrink',
                 compressed = False,
                 inline_footnotes = False,
-                srcdir = '.'):
+                srcdir = '.',
+                config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
         self.output = ''
@@ -505,6 +471,7 @@ class PDFWriter(writers.Writer):
         self.inline_footnotes = inline_footnotes
         self.highlightlang = builder.config.highlight_language
         self.srcdir = srcdir
+        self.config = config
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -513,6 +480,58 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
+        
+        if self.config.language:
+            langmod = languages.get_language(self.config.language[:2])
+        else:
+            langmod = languages.get_language('en')
+            
+        # Generate Contents topic manually
+        contents=nodes.topic(classes=['contents'])
+        contents+=nodes.title('')
+        contents[0]+=nodes.Text( langmod.labels['contents'])
+        contents['ids']=['Contents']
+        pending=nodes.topic()
+        contents.append(pending)
+        pending.details={}
+        #tree.insert(0,pb_cutePage)
+        self.document.insert(0,contents)
+        contTrans=PDFContents(self.document)
+        contTrans.startnode=pending
+        contTrans.apply()
+
+        if self.config.pdf_use_coverpage:
+            # Generate cover page
+            spacer=docutils.core.publish_doctree('.. raw:: pdf\n\n    Spacer 0 3cm\n\n')[0]
+            doctitle=nodes.title()
+            doctitle.append(nodes.Text(self.document.settings.title or visitor.elements['title']))
+            docsubtitle=nodes.subtitle()
+            docsubtitle.append(nodes.Text('%s %s'%(_('version'),self.config.version)))
+            # This is what's used in the python docs because
+            # Latex does a manual linrebreak. This sucks.
+            authors=self.document.settings.author.split('\\') 
+                                       
+            authornodes=[]
+            for author in authors:
+                node=nodes.paragraph()
+                node.append(nodes.Text(author))
+                node['classes']=['author']
+                authornodes.append(node)
+            date=nodes.paragraph()
+            date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
+            date['classes']=['author']
+            self.document.insert(0,pb_cutePage)
+            self.document.insert(0,pb)
+            self.document.insert(0,date)
+            self.document.insert(0,spacer)
+            for node in authornodes[::-1]:
+                self.document.insert(0,node)
+            self.document.insert(0,spacer)
+            self.document.insert(0,docsubtitle)
+            self.document.insert(0,doctitle)
+        
+        
+        
         sio=StringIO('')
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
@@ -616,6 +635,31 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     
     def depart_desc_annotation(self, node):
         pass
+    
+    def visit_title(self, node):
+        print 'ATITLE:',node
+        parent = node.parent
+        if isinstance(parent, addnodes.seealso):
+            # the environment already handles this
+            raise nodes.SkipNode
+        elif self.this_is_the_title:
+            print 'TITLE:',node.astext(),node
+            if len(node.children) != 1 and not isinstance(node.children[0],
+                                                          nodes.Text):
+                self.builder.warn(
+                    'document title is not a single Text node',
+                    '%s:%s' % (self.builder.env.doc2path(self.curfilestack[-1]),
+                               node.line or ''))
+            if not self.elements['title']:
+                # text needs to be escaped since it is inserted into
+                # the output literally
+                self.elements['title'] = escape(node.astext())
+            self.this_is_the_title = 0
+            raise nodes.SkipNode
+        self.in_title = 1
+    def depart_title(self, node):
+        self.in_title = 0
+    
 
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
