@@ -1690,7 +1690,7 @@ class RstToPdf(object):
                 log.info("Starting build")
                 pdfdoc.multiBuild(elements)
                 break
-            except ValueError as v:
+            except ValueError, v:
                 if v.args and str(v.args[0]).startswith('format not resolved'):
                     missing=str(v.args[0]).split(' ')[-1]
                     log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
