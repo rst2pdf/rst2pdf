@@ -172,8 +172,8 @@ htmlhelp_basename = 'sphinxmarkup'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'sphinxmarkup.tex', u'sphinxmarkup Documentation',
-   u'RA', 'manual'),
+  ('index', 'MyProject.tex', u'My Project', u'RA', 'manual'),
+  ('index2', u'moduledocs.tex', u'moduledocs', u'RA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -188,7 +188,7 @@ latex_documents = [
 #latex_preamble = ''
 
 # Documents to append as an appendix to all manuals.
-#latex_appendices = []
+latex_appendices = ['appendix']
 
 # If false, no module index is generated.
 #latex_use_modindex = True
@@ -198,7 +198,7 @@ latex_documents = [
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
 pdf_documents = [ 
-    ('index', u'MyProject', u'My Project', u'Author Name'),
+#    ('index', u'MyProject', u'My Project', u'Author Name'),
     ('index2', u'moduledocs', u'moduledocs', u'Author Name'),
 ]
 
@@ -228,3 +228,5 @@ pdf_use_coverpage = False
 pdf_break_level = 1
 
 pdf_verbosity=0
+
+pdf_appendices = ['appendix']
