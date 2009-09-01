@@ -350,7 +350,6 @@ class PDFBuilder(Builder):
 
     def get_target_uri(self, docname, typ=None):
         # FIXME: production lists are not supported yet!
-        print 'GTU',docname
         if typ == 'token':
             # token references are always inside production lists and must be
             # replaced by \token{} in LaTeX
