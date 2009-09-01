@@ -198,8 +198,8 @@ latex_appendices = ['appendix']
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
 pdf_documents = [ 
-#    ('index', u'MyProject', u'My Project', u'Author Name'),
-    ('index2', u'moduledocs', u'moduledocs', u'Author Name'),
+    ('index', u'doc1', u'doc1', u'Author Name'),
+    ('index2', u'doc2', u'doc2', u'Author Name'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:
