@@ -1471,7 +1471,10 @@ class RstToPdf(object):
                     style=self.styles['%s-heading'%node.tagname])] 
             rows=title + self.gather_elements(node, depth, style=style)
             st=self.styles[node.tagname]
-            t_style = TableStyle(st.commands)
+            if 'commands' in dir(st):
+                t_style = TableStyle(st.commands)
+            else:
+                t_style = TableStyle()
             t_style.add("ROWBACKGROUNDS", [0, 0], [-1, -1],[st.backColor])
             t_style.add("BOX", [ 0, 0 ], [ -1, -1 ], st.borderWidth , st.borderColor)
 
