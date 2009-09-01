@@ -278,7 +278,7 @@ class SplitTable(DelayedTable):
                                 style=self.style,
                                 padding=self.padding))
                     return l3
-            log.error("Can't split splittable")
+            log.debug("Can't split splittable")
             return self.t.split(w, h)
         else:
             return DelayedTable.split(self,w,h)
