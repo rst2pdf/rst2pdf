@@ -1198,11 +1198,11 @@ class RstToPdf(object):
             data=[['',self.gather_elements( node, depth, style)]]
             node.elements=[Spacer(0,spaceBefore),SplitTable(data,
                 colWidths=[leftIndent,None],
-                style=[["TOPPADDING",[0,0],[-1,-1],0],
+                style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
                        ["LEFTPADDING",[0,0],[-1,-1],0],
                        ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
                        ["BOTTOMPADDING",[0,0],[-1,-1],0],
-                ]), Spacer(0,spaceAfter)]
+                ])), Spacer(0,spaceAfter)]
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
@@ -1470,7 +1470,17 @@ class RstToPdf(object):
                 title= [Paragraph(node.tagname.title(),
                     style=self.styles['%s-heading'%node.tagname])] 
             rows=title + self.gather_elements(node, depth, style=style)
-            node.elements = [BoxedContainer(rows, self.styles[node.tagname])]
+            st=self.styles[node.tagname]
+            t_style = TableStyle(st.commands)
+            t_style.add("ROWBACKGROUNDS", [0, 0], [-1, -1],[st.backColor])
+            t_style.add("BOX", [ 0, 0 ], [ -1, -1 ], st.borderWidth , st.borderColor)
+
+            node.elements = [Spacer(0,st.spaceBefore),
+                             SplitTable([['',rows]], 
+                             style=t_style, 
+                             colWidths=[0,None],
+                             padding=self.styles[node.tagname].borderPadding),
+                             Spacer(0,st.spaceAfter)]
                 
                 
                 
