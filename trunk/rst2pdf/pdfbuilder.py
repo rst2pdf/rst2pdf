@@ -557,6 +557,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         nodes.NodeVisitor.__init__(self, document)
         self.builder = builder
         self.footnotestack = []
+        self.curfilestack = []
 	self.top_sectionlevel = 1
         self.footnotecounter=1
         self.curfile=None
@@ -569,13 +570,23 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         self.highlightlang = builder.config.highlight_language
         
     def visit_document(self,node):
+        self.curfilestack.append(node.get('docname', ''))
         self.footnotestack.append('')
         
     def visit_start_of_file(self,node):
+        self.curfilestack.append(node['docname'])
         self.footnotestack.append(node['docname'])
 
     def depart_start_of_file(self,node):
         self.footnotestack.pop()
+        self.curfilestack.pop()
+        
+    def visit_section(self, node):
+        if self.this_is_the_title:
+            # This is not a real section
+            node.ignoreme=True
+        else:
+            node.ignoreme=False
         
     def visit_highlightlang(self, node):
         self.highlightlang = node['lang']
