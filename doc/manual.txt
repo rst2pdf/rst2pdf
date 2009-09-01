@@ -1438,6 +1438,9 @@ To use it in your existing sphinx project you need to do the following:
     # Grouping the document tree into PDF files. List of tuples
     # (source start file, target name, title, author, options).
     #
+    # If there is more than one author, separate them with \\.
+    # For example: r'Guido van Rossum\\Fred L. Drake, Jr., editor'
+    #
     # The options element is a dictionary that lets you override 
     # this config per-document.
     # For example, 

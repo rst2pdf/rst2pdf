@@ -288,9 +288,14 @@ class PDFBuilder(Builder):
             doctitle.append(nodes.Text(title))
             docsubtitle=nodes.subtitle()
             docsubtitle.append(nodes.Text('%s %s'%(_('version'),self.config.version)))
-            authornode=nodes.paragraph()
-            authornode.append(nodes.Text(author))
-            authornode['classes']=['author']
+            authors=author.split('\\') # This is what's used in the python docs because
+                                       # Latex does a manual linrebreak. This sucks.
+            authornodes=[]
+            for author in authors:
+                node=nodes.paragraph()
+                node.append(nodes.Text(author))
+                node['classes']=['author']
+                authornodes.append(node)
             date=nodes.paragraph()
             date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
             date['classes']=['author']
@@ -298,7 +303,8 @@ class PDFBuilder(Builder):
             tree.insert(0,pb)
             tree.insert(0,date)
             tree.insert(0,spacer)
-            tree.insert(0,authornode)
+            for node in authornodes[::-1]:
+                tree.insert(0,node)
             tree.insert(0,spacer)
             tree.insert(0,docsubtitle)
             tree.insert(0,doctitle)
