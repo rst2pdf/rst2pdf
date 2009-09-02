@@ -292,7 +292,7 @@ class SplitTable(DelayedTable):
                                 style=self.style)]
                         if l2[1:]+text[l+1:]:
                             # Workaround for Issue 180 with wordaxe:
-                            if False:
+                            if HAS_WORDAXE:
                                 l3.append(
                                     Table([['',l2[1:]+text[l+1:]]],
                                     colWidths=self.colWidths,
