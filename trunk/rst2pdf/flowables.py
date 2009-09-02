@@ -13,8 +13,10 @@ from reportlab.lib.enums import *
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
+    HAS_WORDAXE=True
 except ImportError:
     from reportlab.platypus.paragraph import Paragraph
+    HAS_WORDAXE=False
 
 from reportlab.lib.units import *
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
@@ -246,27 +248,41 @@ class SplitTable(DelayedTable):
                     # split it
                                                             
                     _,lh=_listWrapOn(text[:l],w-dw,None)
+                    # Workaround for Issue 180
+                    text[l].wrap(w-dw,h-lh-dh)
                     l2=text[l].split(w-dw,h-lh-dh)
                     if l2==[] and l==0: # Can't fit anything
                         return l2
-                    elif l2==[]: # Not splittable, move to next page
+                    elif l2==[]: # Not splittable, push to next page
                          
-                        # If the previous one is, keepwithnext, push
+                        # If the previous one is keepwithnext, push
                         # that one too
                         while l>0 and text[l-1].getKeepWithNext():
                             l-=1
                             
                         if l>0:
-                            l3=[Table([
-                                        [bullet,
-                                         text[:l]]
-                                       ],
-                                    colWidths=self.colWidths,
-                                    style=self.style),
-                                    SplitTable([['',text[l:]]],
-                                    colWidths=self.colWidths,
-                                    style=self.style,
-                                    padding=self.padding)]
+                            # Workaround for Issue 180 with wordaxe:
+                            if HAS_WORDAXE:
+                                l3=[Table([
+                                            [bullet,
+                                             text[:l]]
+                                           ],
+                                        colWidths=self.colWidths,
+                                        style=self.style),
+                                        Table([['',text[l:]]],
+                                        colWidths=self.colWidths,
+                                        style=self.style)]
+                            else:
+                                l3=[Table([
+                                            [bullet,
+                                             text[:l]]
+                                           ],
+                                        colWidths=self.colWidths,
+                                        style=self.style),
+                                        SplitTable([['',text[l:]]],
+                                        colWidths=self.colWidths,
+                                        style=self.style,
+                                        padding=self.padding)]
                         else: # Everything flows
                             l3=[]
                     else:
@@ -275,11 +291,18 @@ class SplitTable(DelayedTable):
                                 rowHeights=[h],
                                 style=self.style)]
                         if l2[1:]+text[l+1:]:
-                            l3.append(
-                                SplitTable([['',l2[1:]+text[l+1:]]],
-                                colWidths=self.colWidths,
-                                style=self.style,
-                                padding=self.padding))
+                            # Workaround for Issue 180 with wordaxe:
+                            if False:
+                                l3.append(
+                                    Table([['',l2[1:]+text[l+1:]]],
+                                    colWidths=self.colWidths,
+                                    style=self.style))
+                            else:
+                                l3.append(
+                                    SplitTable([['',l2[1:]+text[l+1:]]],
+                                    colWidths=self.colWidths,
+                                    style=self.style,
+                                    padding=self.padding))
                     return l3
             log.debug("Can't split splittable")
             return self.t.split(w, h)
