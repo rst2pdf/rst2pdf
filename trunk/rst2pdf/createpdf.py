@@ -974,10 +974,9 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.organization):
             fb = self.gather_pdftext(node, depth)
             t_style=TableStyle(self.styles['field_list'].commands)
-            colWidths=map(self.styles.adjustUnits,
-                self.styles['field_list'].colWidths)
+            colWidths=self.styles['field_list'].colWidths
             label=self.text_for_label("organization", style)
-            t = Table([[Paragraph(label, style=self.styles['fieldname']),
+            t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
