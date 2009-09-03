@@ -26,7 +26,7 @@ run_test() {
     fi
     echo "Processing $1"
     
-    if python ../../createpdf.py -v $1 $style 2> $1.err
+    if python ../../createpdf.py -v $1 $style $RSTOPTIONS 2> $1.err
     then
 	if [ -f "correct/$bn.pdf" ]
 	then
