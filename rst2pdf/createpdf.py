@@ -1420,10 +1420,9 @@ class RstToPdf(object):
             if self.inline_footnotes:
                 st=self.styles['endnote']
                 t_style = TableStyle(st.commands)
-                colWidths = map(self.styles.adjustUnits,
-                    self.styles['endnote'].colWidths)
+                colWidths = self.styles['endnote'].colWidths
                 node.elements = [Spacer(0, st.spaceBefore),
-                                 Table([[label, contents]],
+                                 DelayedTable([[label, contents]],
                                  style=t_style, colWidths=colWidths),
                                  Spacer(0, st.spaceAfter)]
             else:
