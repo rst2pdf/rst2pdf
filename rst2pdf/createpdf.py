@@ -1135,9 +1135,8 @@ class RstToPdf(object):
             desc = self.gather_elements(node.children[1], depth, style)
 
             t_style = TableStyle(self.styles['option_list'].commands)
-            colWidths = map(self.styles.adjustUnits,
-                self.styles['option_list'].colWidths)
-            node.elements = [Table([[self.PreformattedFit(
+            colWidths = self.styles['option_list'].colWidths
+            node.elements = [DelayedTable([[self.PreformattedFit(
                 optext, self.styles["literal"]), desc]], style = t_style,
                 colWidths = colWidths)]
 
