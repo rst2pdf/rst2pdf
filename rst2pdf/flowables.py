@@ -179,7 +179,7 @@ class DelayedTable(Flowable):
 
     def __init__(self, data, colWidths, style, repeatrows=False):
         self.data = data
-        self.colWidths = colWidths
+        self._colWidths = colWidths
         self.style = style
         self.t = None
         self.repeatrows = repeatrows
@@ -193,9 +193,9 @@ class DelayedTable(Flowable):
             kwargs['total']=w
             return styles.adjustUnits(*args, **kwargs)
         #adjust=functools.partial(styles.adjustUnits, total=w)
-        colWidths=map(adjust, self.colWidths)
+        self.colWidths=map(adjust, self._colWidths)
         #colWidths = [_w * _tw for _w in self.colWidths]
-        self.t = Table(self.data, colWidths=colWidths,
+        self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows)
         return self.t.wrap(w, h)
 
