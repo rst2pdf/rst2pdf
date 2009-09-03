@@ -1382,9 +1382,8 @@ class RstToPdf(object):
                     continue
                 t.append(r)
             t_style = TableStyle(self.styles['table'].commands)
-            colWidths = map(self.styles.adjustUnits,
-                self.styles['table'].colWidths)
-            node.elements = [Table(t, style=t_style, colWidths=colWidths)]
+            colWidths = self.styles['table'].colWidths
+            node.elements = [DelayedTable(t, style=t_style, colWidths=colWidths)]
 
         elif isinstance(node, (docutils.nodes.footnote,
                                docutils.nodes.citation)):
