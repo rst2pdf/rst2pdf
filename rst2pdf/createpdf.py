@@ -36,7 +36,8 @@ from math_directive import math_node
 from math_flowable import Math
 from aafigure_directive import Aanode
 
-from log import log
+from log import log, nodeid
+from pprint import pprint
 
 from smartypants import smartyPants
 
@@ -253,7 +254,7 @@ class RstToPdf(object):
             try:
                 from pyPdf import pdf
             except:
-                log.warning('PDF images are not supported without pypdf')
+                log.warning('PDF images are not supported without pypdf [%s]', nodeid(node))
                 return 0, 0, 'direct'
             reader = pdf.PdfFileReader(open(imgname))
             x1, y1, x2, y2 = reader.getPage(0)['/MediaBox']
@@ -273,7 +274,8 @@ class RstToPdf(object):
                 # xdpi, ydpi=img.density().???
             else:
                 log.warning("Sizing images without PIL "
-                            "or PythonMagick, using 100x100")
+                            "or PythonMagick, using 100x100 [%s]"
+                            , nodeid(node))
                 iw, ih = 100., 100.
 
         # Try to get the print resolution from the image itself via PIL.
@@ -302,7 +304,8 @@ class RstToPdf(object):
                                             default_unit='px')
         else:
             log.warning("Using image %s without specifying size."
-                "Calculating based on image size at %ddpi", imgname, xdpi)
+                "Calculating based on image size at %ddpi [%s]", 
+                imgname, xdpi, nodeid(node))
             # No width specified at all, use w in px
             w = iw*inch/xdpi
 
@@ -315,7 +318,7 @@ class RstToPdf(object):
             # aspect ratio, or else it will look ugly
             if h and h[-1]=='%':
                 log.error('Setting height as a percentage does **not** work. '\
-                          'ignoring height parameter')
+                          'ignoring height parameter [%s]', nodeid(node))
             h = w*ih/iw
 
         # Apply scale factor
@@ -323,8 +326,8 @@ class RstToPdf(object):
         h = h*scale
 
         # And now we have this probably completely bogus size!
-        log.info("Image %s size calculated:  %fcm by %fcm",
-            imgname, w/cm, h/cm)
+        log.info("Image %s size calculated:  %fcm by %fcm [%s]",
+            imgname, w/cm, h/cm, nodeid(node))
 
         return w, h, kind
 
@@ -402,6 +405,7 @@ class RstToPdf(object):
         post = ""
 
         log.debug("self.gen_pdftext: %s", node.__class__)
+        log.debug("[%s]", nodeid(node))
         try:
             log.debug("self.gen_pdftext: %s", node)
         except (UnicodeDecodeError, UnicodeEncodeError):
@@ -600,7 +604,7 @@ class RstToPdf(object):
             # use image-missing.png
             uri=node.get('uri')
             if not os.path.exists(uri):
-                log.error("Missing image file: %s"%uri)
+                log.error("Missing image file: %s [%s]", uri, nodeid(node))
                 uri=os.path.join(self.img_dir, 'image-missing.png')
                 w, h = 1*cm, 1*cm
             else:
@@ -671,8 +675,8 @@ class RstToPdf(object):
             cln=str(node.__class__)
             if not cln in unkn_text:
                 unkn_text.add(cln)
-                log.warning("Unkn. node (self.gen_pdftext): %s",
-                    node.__class__)
+                log.warning("Unkn. node (self.gen_pdftext): %s [%s]",
+                    node.__class__, nodeid(node))
                 try:
                     log.debug(node)
                 except (UnicodeDecodeError, UnicodeEncodeError):
@@ -691,8 +695,16 @@ class RstToPdf(object):
         return node.pdftext
 
     def gen_elements(self, node, depth, style=None):
+        #pprint (dir(node))
+        #try:
+            #print node.line
+            #print node.source
+        #except:
+            #pass
+        #print '------------'
 
         log.debug("gen_elements: %s", node.__class__)
+        log.debug("[%s]", nodeid(node))
         try:
             log.debug("gen_elements: %s", node)
         except (UnicodeDecodeError, UnicodeEncodeError):
@@ -704,8 +716,8 @@ class RstToPdf(object):
                 if self.styles.StyleSheet.has_key(node['classes'][0]):
                     style = self.styles[node['classes'][0]]
                 else:
-                    log.info("Unknown class %s, ignoring.",
-                        node['classes'][0])
+                    log.info("Unknown class %s, ignoring. [%s]",
+                        node['classes'][0], nodeid(node))
         except TypeError: # Happens when a docutils.node.Text reaches here
             pass
 
@@ -724,7 +736,8 @@ class RstToPdf(object):
                 self.pending_targets.append(node['entries'][0][2])
             except IndexError:
                 if node['entries']:
-                    log.error("Can't process index entry: %s",node['entries'])
+                    log.error("Can't process index entry: %s [%s]",
+                        node['entries'], nodeid(node))
             node.elements = []
 
         elif isinstance(node, math_node):
@@ -1243,7 +1256,7 @@ class RstToPdf(object):
             # FIXME: handle class,target,alt, check align
             imgname = os.path.join(self.basedir,str(node.get("uri")))
             if not os.path.exists(imgname):
-                log.error("Missing image file: %s"%imgname)
+                log.error("Missing image file: %s [%s]",imgname, nodeid(node))
                 imgname = os.path.join(self.img_dir, 'image-missing.png')
                 w, h, kind = 1*cm, 1*cm, 'direct'
             else:
@@ -1264,7 +1277,8 @@ class RstToPdf(object):
                         [pageCatcher.PDFImageFlowable(imgname, w, h)]
                 except:
                     log.warning("Proper PDF images require "\
-                        "pageCatcher (but doesn't work yet)")
+                        "pageCatcher (but doesn't work yet) [%s]", 
+                        nodeid(node))
                     if HAS_MAGICK:
                         # w,h are in pixels. I need to set the density
                         # of the image to  the right dpi so this
@@ -1281,7 +1295,7 @@ class RstToPdf(object):
                                                  kind=kind)]
                     else:
                         log.warning("Minimal PDF image support "\
-                            "requires PythonMagick")
+                            "requires PythonMagick [%s]", nodeid(node))
                         imgname = os.path.join(self.img_dir, 'image-missing.png')
                         w, h, kind = 1*cm, 1*cm, 'direct'
             elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
@@ -1298,7 +1312,7 @@ class RstToPdf(object):
                     kind=kind)]
             else:
                 # No way to make this work
-                log.error('To use a %s image you need PIL installed'%extension)
+                log.error('To use a %s image you need PIL installed [%s]',extension, nodeid(node))
                 node.elements = []
             if node.elements:
                 i = node.elements[0]
@@ -1500,7 +1514,8 @@ class RstToPdf(object):
             cln=str(node.__class__)
             if not cln in unkn_elem:
                 unkn_elem.add(cln)
-                log.error("Unkn. node (gen_elements): %s", str(node.__class__))
+                log.error("Unkn. node (gen_elements): %s [%s]", 
+                str(node.__class__), nodeid(node))
                     # Why fail? Just log it and do our best.
             node.elements = self.gather_elements(node, depth, style)
 
@@ -1569,8 +1584,8 @@ class RstToPdf(object):
             b = str(self.loweralpha[node.parent.children.index(node)
                 + start - 1].upper()) + '.'
         else:
-            log.critical("Unknown kind of list_item %s", node.parent)
-            sys.exit(1)
+            log.critical("Unknown kind of list_item %s [%s]", 
+                node.parent, nodeid(node))
         return b
 
     def filltable(self, rows):
