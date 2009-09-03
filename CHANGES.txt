@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed bug in authors field width calculation
 * Support % in bullet and field lists column widths
 * Use bullet_list or item_list styles for bullet and item lists respectively.
 * Support % in field list column width description.
