@@ -1121,7 +1121,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.enumerated_list):
             node._bullSize = self.styles["enumerated_list_item"].leading*\
-                max([len(self.bullet_for_node(x)) for x in node.children])
+                max([len(self.bullet_for_node(x)[0]) for x in node.children])
             node.elements = self.gather_elements(node, depth,
                 style = self.styles["enumerated_list_item"])
             s = self.styles["enumerated_list"]
@@ -1175,7 +1175,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.list_item):
             el = self.gather_elements(node, depth, style=style)
 
-            b = self.bullet_for_node(node)
+            b, t = self.bullet_for_node(node)
 
             # FIXME: this is really really not good code
             if not el:
@@ -1187,10 +1187,16 @@ class RstToPdf(object):
 
             bStyle = copy(style)
             bStyle.alignment = 2
-
-            t_style = TableStyle(self.styles['item_list'].commands)
-            colWidths = map(self.styles.adjustUnits,
-                self.styles['item_list'].colWidths)
+            
+            if t == 'bullet':
+                st=self.styles['bullet_list']
+            else:
+                st=self.styles['item_list']
+            t_style = TableStyle(st.commands)
+            
+            #colWidths = map(self.styles.adjustUnits,
+                #self.styles['item_list'].colWidths)
+            colWidths = st.colWidths
 
             if self.splittable:
                 node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
@@ -1585,6 +1591,7 @@ class RstToPdf(object):
            item whose parent is a list, and
            returns the bullet text it should have"""
         b = ""
+        t = 'item'
         if node.parent.get('start'):
             start = int(node.parent.get('start'))
         else:
@@ -1595,6 +1602,7 @@ class RstToPdf(object):
             b = node.parent.get('bullet','*')
             if b == "None":
                 b = ""
+            t = 'bullet'
 
         elif node.parent.get('enumtype')=='arabic':
             b = str(node.parent.children.index(node) + start) + '.'
@@ -1614,7 +1622,7 @@ class RstToPdf(object):
         else:
             log.critical("Unknown kind of list_item %s [%s]", 
                 node.parent, nodeid(node))
-        return b
+        return b, t
 
     def filltable(self, rows):
         """
