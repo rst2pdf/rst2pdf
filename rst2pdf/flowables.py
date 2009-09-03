@@ -134,8 +134,8 @@ class Heading(Paragraph):
             else:
                 self.canv.sectNum = ""
         
-        self.canv.addOutlineEntry(escape(self.stext), 
-                                  escape(self.parent_id), 
+        self.canv.addOutlineEntry(str(escape(self.stext)), 
+                                  str(escape(self.parent_id)), 
                                   int(self.level), False)
         Paragraph.draw(self)
 
@@ -268,27 +268,27 @@ class SplitTable(DelayedTable):
                             
                         if l>0:
                             # Workaround for Issue 180 with wordaxe:
-                            if HAS_WORDAXE:
-                                l3=[Table([
-                                            [bullet,
-                                             text[:l]]
-                                           ],
-                                        colWidths=self.colWidths,
-                                        style=self.style),
-                                        Table([['',text[l:]]],
-                                        colWidths=self.colWidths,
-                                        style=self.style)]
-                            else:
-                                l3=[Table([
-                                            [bullet,
-                                             text[:l]]
-                                           ],
-                                        colWidths=self.colWidths,
-                                        style=self.style),
-                                        SplitTable([['',text[l:]]],
-                                        colWidths=self.colWidths,
-                                        style=self.style,
-                                        padding=self.padding)]
+                            #if HAS_WORDAXE:
+                                #l3=[Table([
+                                            #[bullet,
+                                             #text[:l]]
+                                           #],
+                                        #colWidths=self.colWidths,
+                                        #style=self.style),
+                                        #Table([['',text[l:]]],
+                                        #colWidths=self.colWidths,
+                                        #style=self.style)]
+                            #else:
+                            l3=[Table([
+                                        [bullet,
+                                         text[:l]]
+                                       ],
+                                    colWidths=self.colWidths,
+                                    style=self.style),
+                                    SplitTable([['',text[l:]]],
+                                    colWidths=self.colWidths,
+                                    style=self.style,
+                                    padding=self.padding)]
                         else: # Everything flows
                             l3=[]
                     else:
@@ -297,18 +297,18 @@ class SplitTable(DelayedTable):
                                 rowHeights=[h],
                                 style=self.style)]
                         if l2[1:]+text[l+1:]:
-                            # Workaround for Issue 180 with wordaxe:
-                            if HAS_WORDAXE:
-                                l3.append(
-                                    Table([['',l2[1:]+text[l+1:]]],
-                                    colWidths=self.colWidths,
-                                    style=self.style))
-                            else:
-                                l3.append(
-                                    SplitTable([['',l2[1:]+text[l+1:]]],
-                                    colWidths=self.colWidths,
-                                    style=self.style,
-                                    padding=self.padding))
+                            ## Workaround for Issue 180 with wordaxe:
+                            #if HAS_WORDAXE:
+                                #l3.append(
+                                    #Table([['',l2[1:]+text[l+1:]]],
+                                    #colWidths=self.colWidths,
+                                    #style=self.style))
+                            #else:
+                            l3.append(
+                                SplitTable([['',l2[1:]+text[l+1:]]],
+                                colWidths=self.colWidths,
+                                style=self.style,
+                                padding=self.padding))
                     return l3
             log.debug("Can't split splittable")
             return self.t.split(w, h)
