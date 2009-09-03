@@ -963,13 +963,12 @@ class RstToPdf(object):
             # Multiple authors. Create a two-column table.
             # Author references on the right.
             t_style=TableStyle(self.styles['field_list'].commands)
-            colWidths=map(self.styles.adjustUnits,
-                self.styles['field_list'].colWidths)
+            colWidths = self.styles['field_list'].colWidths
 
             td = [[Paragraph(self.text_for_label("authors", style),
                         style=self.styles['fieldname']),
                    self.gather_elements(node, depth, style=style)]]
-            node.elements = [Table(td, style=t_style,
+            node.elements = [DelayedTable(td, style=t_style,
                 colWidths=colWidths)]
 
         elif isinstance(node, docutils.nodes.organization):
