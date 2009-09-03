@@ -242,7 +242,6 @@ code_block_directive.options = {'include': directives.unchanged_required,
                                 'linenos': directives.unchanged,
                                 }
 
-directives.register_directive('code-block', code_block_directive)
 
 
 # .. _doctutils: http://docutils.sf.net/

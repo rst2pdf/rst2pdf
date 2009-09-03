@@ -20,8 +20,9 @@ from docutils.languages import get_language
 import docutils.readers.doctree
 import docutils.core
 import docutils.nodes
+from docutils.parsers.rst import directives
 
-import pygments_code_block_directive # install code-block directive
+import pygments_code_block_directive # code-block directive
 
 from reportlab.platypus import *
 from reportlab.platypus.flowables import _listWrapOn, _Container
@@ -169,6 +170,7 @@ class RstToPdf(object):
             self.highlightlang = highlightlang
         else:
             HAS_SPHINX = False
+            directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
 
         if not self.styles.languages:
             self.styles.languages=[]
