@@ -1,6 +1,8 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Support % in bullet and field lists column widths
+* Use bullet_list or item_list styles for bullet and item lists respectively.
 * Support % in field list column width description.
 * Fix for Issue 184 (font metrics go crazy with TT font)
 * New admonition code based on SplitTable (beta quality)
