@@ -205,19 +205,25 @@ class DelayedTable(Flowable):
     def drawOn(self, canvas, x, y, _sW=0):
         self.t.drawOn(canvas, x, y, _sW)
 
+def tablepadding(padding):
+    if not isinstance(padding,(list,tuple)):
+        padding=[padding,]*4
+    return padding, ('TOPPADDING',[0,0],[-1,-1],padding[0]),\
+                    ('RIGHTPADDING',[-1,0],[-1,-1],padding[1]),\
+                    ('BOTTOMPADDING',[0,0],[-1,-1],padding[2]),\
+                    ('LEFTPADDING',[1,0],[1,-1],padding[3])
+
 class SplitTable(DelayedTable):
     def __init__(self, data, colWidths, style, padding=3):
         if len(data) <>1 or len(data[0]) <>2:
             log.error('SplitTable can only be 1 row and two columns!')
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
-        if not isinstance(padding,list):
-            padding=[padding,]*4
-        self.padding=padding
-        self.style.add('TOPPADDING',[0,0],[-1,-1],self.padding[0])
-        self.style.add('RIGHTPADDING',[-1,0],[-1,-1],self.padding[1])
-        self.style.add('BOTTOMPADDING',[0,0],[-1,-1],self.padding[2])
-        self.style.add('LEFTPADDING',[1,0],[1,-1],self.padding[3])
+        self.padding, p1, p2, p3, p4=tablepadding(padding)
+        self.style.add(*p1)
+        self.style.add(*p2)
+        self.style.add(*p3)
+        self.style.add(*p4)
         
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,

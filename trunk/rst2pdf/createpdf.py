@@ -121,9 +121,11 @@ class RstToPdf(object):
                  footnote_backlinks=True, inline_footnotes=False,
                  def_dpi=300, show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
-                 basedir=os.getcwd()
+                 basedir=os.getcwd(),
+                 splittable=False
                  ):
         global HAS_SPHINX
+        self.splittable=splittable
         self.basedir=basedir
         self.language = language
         self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
@@ -1190,9 +1192,14 @@ class RstToPdf(object):
             colWidths = map(self.styles.adjustUnits,
                 self.styles['item_list'].colWidths)
 
-            node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
-                             style = t_style,
-                             colWidths = colWidths)]
+            if self.splittable:
+                node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
+                                 style = t_style,
+                                 colWidths = colWidths)]
+            else:
+                node.elements = [DelayedTable([[Paragraph(b, style = bStyle), el]],
+                                 style = t_style,
+                                 colWidths = colWidths)]
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
@@ -1216,13 +1223,22 @@ class RstToPdf(object):
             spaceBefore=self.styles['blockquote'].spaceBefore
             spaceAfter=self.styles['blockquote'].spaceAfter
             data=[['',self.gather_elements( node, depth, style)]]
-            node.elements=[Spacer(0,spaceBefore),SplitTable(data,
-                colWidths=[leftIndent,None],
-                style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
-                       ["LEFTPADDING",[0,0],[-1,-1],0],
-                       ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
-                       ["BOTTOMPADDING",[0,0],[-1,-1],0],
-                ])), Spacer(0,spaceAfter)]
+            if self.splittable:
+                node.elements=[Spacer(0,spaceBefore),SplitTable(data,
+                    colWidths=[leftIndent,None],
+                    style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
+                           ["LEFTPADDING",[0,0],[-1,-1],0],
+                           ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
+                           ["BOTTOMPADDING",[0,0],[-1,-1],0],
+                    ])), Spacer(0,spaceAfter)]
+            else:
+                node.elements=[Spacer(0,spaceBefore),DelayedTable(data,
+                    colWidths=[leftIndent,None],
+                    style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
+                           ["LEFTPADDING",[0,0],[-1,-1],0],
+                           ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
+                           ["BOTTOMPADDING",[0,0],[-1,-1],0],
+                    ])), Spacer(0,spaceAfter)]
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
@@ -1499,12 +1515,24 @@ class RstToPdf(object):
             t_style.add("ROWBACKGROUNDS", [0, 0], [-1, -1],[st.backColor])
             t_style.add("BOX", [ 0, 0 ], [ -1, -1 ], st.borderWidth , st.borderColor)
 
-            node.elements = [Spacer(0,st.spaceBefore),
-                             SplitTable([['',rows]], 
-                             style=t_style, 
-                             colWidths=[0,None],
-                             padding=self.styles[node.tagname].borderPadding),
-                             Spacer(0,st.spaceAfter)]
+            if self.splittable:
+                node.elements = [Spacer(0,st.spaceBefore),
+                                 SplitTable([['',rows]], 
+                                 style=t_style, 
+                                 colWidths=[0,None],
+                                 padding=st.borderPadding),
+                                 Spacer(0,st.spaceAfter)]
+            else:
+                padding, p1, p2, p3, p4=tablepadding(padding=st.borderPadding)
+                t_style.add(*p1)
+                t_style.add(*p2)
+                t_style.add(*p3)
+                t_style.add(*p4)
+                node.elements = [Spacer(0,st.spaceBefore),
+                                 DelayedTable([['',rows]], 
+                                 style=t_style, 
+                                 colWidths=[0,None]),
+                                 Spacer(0,st.spaceAfter)]
                 
                 
                 
@@ -2041,6 +2069,11 @@ def main():
         action='store_true', default=False,
         help='Show frame borders (only useful for debugging). Default=False')
 
+    parser.add_option('--enable-splittable', dest='splittable',
+        action='store_true', default=False,
+        help='Use alpha-quality splittable flowables in some elements. '
+        'Only useful for things like page-long block quotes or list items')
+
     options, args = parser.parse_args()
 
     if options.version:
@@ -2135,7 +2168,8 @@ def main():
         inline_footnotes=options.inline_footnotes,
         def_dpi=int(options.def_dpi),
         basedir=basedir,
-        show_frame=options.show_frame).createPdf(text=infile.read(),
+        show_frame=options.show_frame,
+        splittable=options.splittable).createPdf(text=infile.read(),
                 source_path=infile.name,
                 output=outfile,
                 compressed=options.compressed)
