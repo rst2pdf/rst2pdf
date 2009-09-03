@@ -104,6 +104,10 @@ except ImportError:
     HAS_SPHINX = False
 
 
+# These are to suppress repeated messages
+unkn_elem=set()
+unkn_text=set()
+
 class RstToPdf(object):
 
     def __init__(self, stylesheets=[], language=None,
@@ -664,12 +668,15 @@ class RstToPdf(object):
         else:
             # With sphinx you will get hundreds of these
             #if not HAS_SPHINX:
-            log.warning("Unkn. node (self.gen_pdftext): %s",
+            cln=str(node.__class__)
+            if not cln in unkn_text:
+                unkn_text.add(cln)
+                log.warning("Unkn. node (self.gen_pdftext): %s",
                     node.__class__)
-            try:
-                log.debug(node)
-            except (UnicodeDecodeError, UnicodeEncodeError):
-                log.debug(repr(node))
+                try:
+                    log.debug(node)
+                except (UnicodeDecodeError, UnicodeEncodeError):
+                    log.debug(repr(node))
             node.pdftext = self.gather_pdftext(node, depth)
 
         try:
@@ -1490,8 +1497,11 @@ class RstToPdf(object):
         else:
             # With sphinx you will have hundreds of these
             #if not HAS_SPHINX:
-            log.error("Unkn. node (gen_elements): %s", str(node.__class__))
-                # Why fail? Just log it and do our best.
+            cln=str(node.__class__)
+            if not cln in unkn_elem:
+                unkn_elem.add(cln)
+                log.error("Unkn. node (gen_elements): %s", str(node.__class__))
+                    # Why fail? Just log it and do our best.
             node.elements = self.gather_elements(node, depth, style)
 
         # set anchors for internal references
