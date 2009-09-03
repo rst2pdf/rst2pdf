@@ -1718,9 +1718,8 @@ class RstToPdf(object):
             elements.append(Separation())
             for n in self.decoration['endnotes']:
                 t_style = TableStyle(self.styles['endnote'].commands)
-                colWidths = map(self.styles.adjustUnits,
-                    self.styles['endnote'].colWidths)
-                elements.append(Table([[n[0], n[1]]],
+                colWidths = self.styles['endnote'].colWidths
+                elements.append(DelayedTable([[n[0], n[1]]],
                     style=t_style, colWidths=colWidths))
 
         head = self.decoration['header']
