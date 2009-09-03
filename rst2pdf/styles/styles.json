@@ -200,10 +200,6 @@
       "parent": "bodytext",
       "alignment": "TA_CENTER"
     }],
-    ["bullet_list" , {
-      "parent": "bodytext",
-      "spaceBefore": 0
-    }],
     ["bullet_list_item" , {
       "parent": "bodytext"
     }],
@@ -511,6 +507,8 @@
         "colWidths": ["20pt",null]
     }],
     ["bullet_list", {
+      "parent": "bodytext",
+      "spaceBefore": 0,
        "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
             [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
