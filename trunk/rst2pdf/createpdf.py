@@ -919,10 +919,8 @@ class RstToPdf(object):
             fb = self.gen_elements(node.children[1],
                 depth, style=self.styles['fieldvalue'])
             t_style=TableStyle(self.styles['field_list'].commands)
-            colWidths=map(self.styles.adjustUnits,
-                self.styles['field_list'].colWidths)
-            node.elements = [Table([[fn, fb]], style=t_style,
-                colWidths=colWidths)]
+            node.elements = [DelayedTable([[fn, fb]], style=t_style,
+                colWidths=self.styles['field_list'].colWidths)]
 
         elif isinstance(node, docutils.nodes.decoration):
             node.elements = self.gather_elements(node, depth, style=style)

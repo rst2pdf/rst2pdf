@@ -83,7 +83,8 @@ class PDFBuilder(Builder):
         for entry in self.document_data:
             try:
                 docname, targetname, title, author = entry[:4]
-                if len(entry)>4: # Custom options per document_data
+                # Custom options per document
+                if len(entry)>4 and isinstance(entry[4],dict): 
                     opts=entry[4]
                 else:
                     opts={}
