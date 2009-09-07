@@ -123,9 +123,11 @@ class RstToPdf(object):
                  def_dpi=300, show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
                  basedir=os.getcwd(),
-                 splittable=False
+                 splittable=False,
+                 blank_first_page=False
                  ):
         global HAS_SPHINX
+        self.blank_first_page=blank_first_page
         self.splittable=splittable
         self.basedir=basedir
         self.language = language
@@ -1709,7 +1711,11 @@ class RstToPdf(object):
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
+                
         elements = self.gen_elements(doctree, 0)
+
+        if self.blank_first_page:
+            elements.insert(0,PageBreak())
 
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
@@ -2012,12 +2018,6 @@ def main():
         help='What todo when a literal is too wide. One of error,'\
         ' overflow,shrink,truncate. Default="%s"'%def_fit)
 
-    def_break = config.getValue("general", "break_level", 0)
-    parser.add_option('-b', '--break-level', dest='breaklevel',
-        metavar='LEVEL', default=def_break,
-        help='Maximum section level that starts in a new page.'\
-        ' Default: %d' % def_break)
-        
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
         help='shows target between parenthesis instead of active link')
@@ -2070,6 +2070,30 @@ def main():
         help='Use alpha-quality splittable flowables in some elements. '
         'Only useful for things like page-long block quotes or list items')
 
+    def_break = config.getValue("general", "break_level", 0)
+    parser.add_option('-b', '--break-level', dest='breaklevel',
+        metavar='LEVEL', default=def_break,
+        help='Maximum section level that starts in a new page.'\
+        ' Default: %d' % def_break)
+        
+    def_fpeven = config.getValue("general", "first_page_even", False)
+    parser.add_option('--first-page-even', dest='first_page_even',
+        action='store_true', default=def_fpeven,
+        help='Whether first page is odd (as in the screen on "facing pages"), '\
+             'or even (as in a book)')
+
+    def_blankfirst = config.getValue("general", "blank_first_page", False)
+    parser.add_option('--blank-first-page', dest='blank_first_page',
+        action='store_true', default=def_blankfirst,
+        help='Add a blank page at the beginning of the document.')
+
+    def_breakside = config.getValue("general", "breakside", 'even')
+    parser.add_option('--break-side', dest='break_side', metavar='VALUE',
+        default=def_breakside,
+        help='How section breaks work. Can be "even", and sections start in an even page,'\
+        '"odd", and sections start in odd pages, or "any" and sections start in the next page,'\
+        'be it even or odd')
+        
     options, args = parser.parse_args()
 
     if options.version:
@@ -2165,10 +2189,12 @@ def main():
         def_dpi=int(options.def_dpi),
         basedir=basedir,
         show_frame=options.show_frame,
-        splittable=options.splittable).createPdf(text=infile.read(),
-                source_path=infile.name,
-                output=outfile,
-                compressed=options.compressed)
+        splittable=options.splittable,
+        blank_first_page=options.blank_first_page
+        ).createPdf(text=infile.read(),
+                    source_path=infile.name,
+                    output=outfile,
+                    compressed=options.compressed)
 
 
 if __name__ == "__main__":
