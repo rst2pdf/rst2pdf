@@ -165,7 +165,10 @@ class PDFBuilder(Builder):
             # So, we preserve a copy, use just what we need, then
             # restore it.
             t=copy(self.env.indexentries)
-            self.env.indexentries={docname:self.env.indexentries[docname]}
+            try:
+                self.env.indexentries={docname:self.env.indexentries[docname+'-gen']}
+            except KeyError:
+                self.env.indexentries={docname:self.env.indexentries[docname]}
             genindex = self.env.create_index(self)
             self.env.indexentries=t
             # EOH (End Of Hack)
