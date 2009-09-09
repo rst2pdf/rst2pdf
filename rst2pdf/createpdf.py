@@ -1834,8 +1834,9 @@ class FancyPage(PageTemplate):
         
         # used for page numbers
         if '_counter' not in canv.__dict__: 
-            canv._counter = 1
+            canv._counter = 0
             canv._counterStyle = 'arabic'
+        canv._counter+=1
 
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
@@ -1916,7 +1917,6 @@ class FancyPage(PageTemplate):
                         text = unicode(text, 'utf-8')
                         
                 pnum=canv._counter
-                canv._counter+=1
                 if canv._counterStyle=='lowerroman':
                     ptext=toRoman(pnum).lower()
                 elif canv._counterStyle=='roman':
