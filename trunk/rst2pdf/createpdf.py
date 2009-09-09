@@ -135,7 +135,7 @@ class RstToPdf(object):
                  basedir=os.getcwd(),
                  splittable=False,
                  blank_first_page=False,
-                 breakside='even'
+                 breakside='odd'
                  ):
         global HAS_SPHINX
         self.breakside=breakside
@@ -1906,6 +1906,18 @@ class FancyPage(PageTemplate):
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
+        pnum=canv._counter
+        if canv._counterStyle=='lowerroman':
+            ptext=toRoman(pnum).lower()
+        elif canv._counterStyle=='roman':
+            ptext=toRoman(pnum).upper()
+        elif canv._counterStyle=='alpha':
+            ptext=string.uppercase[pnum%26]
+        elif canv._counterStyle=='loweralpha':
+            ptext=string.lowercase[pnum%26]
+        else:
+            ptext=unicode(pnum)
+            
         for e in elems:
             i = elems.index(e)
             if isinstance(e, Paragraph):
@@ -1915,18 +1927,6 @@ class FancyPage(PageTemplate):
                         text = unicode(text, e.encoding)
                     except AttributeError:
                         text = unicode(text, 'utf-8')
-                        
-                pnum=canv._counter
-                if canv._counterStyle=='lowerroman':
-                    ptext=toRoman(pnum).lower()
-                elif canv._counterStyle=='roman':
-                    ptext=toRoman(pnum).upper()
-                elif canv._counterStyle=='alpha':
-                    ptext=string.uppercase[pnum%26]
-                elif canv._counterStyle=='loweralpha':
-                    ptext=string.lowercase[pnum%26]
-                else:
-                    ptext=unicode(pnum)
                         
                 text = text.replace(u'###Page###', ptext)
                 text = text.replace(u"###Title###", doc.title)
@@ -2113,7 +2113,7 @@ def main():
         action='store_true', default=def_blankfirst,
         help='Add a blank page at the beginning of the document.')
 
-    def_breakside = config.getValue("general", "break_side", 'even')
+    def_breakside = config.getValue("general", "break_side", 'odd')
     parser.add_option('--break-side', dest='breakside', metavar='VALUE',
         default=def_breakside,
         help='How section breaks work. Can be "even", and sections start in an even page,'\

@@ -355,26 +355,37 @@ class MyPageBreak(FrameActionFlowable):
         self.extraContent=[]
 
     def frameAction(self, frame):
-        frame._generated_content = [SetNextTemplate(self.templateName)]
+        frame._generated_content = []
         
         if self.breakTo=='any': # Break only once. None if at top of page
             if not frame._atTop:
+                frame._generated_content.append(SetNextTemplate(self.templateName))
                 frame._generated_content.append(PageBreak())
         elif self.breakTo=='odd': #Break once if on even page, twice
                                   #on odd page, none if on top of odd page
             if frame._pagenum % 2: #odd pageNum
                 if not frame._atTop:
+                    # Blank pages get no heading or footer
+                    frame._generated_content.append(SetNextTemplate(self.templateName))
+                    frame._generated_content.append(SetNextTemplate('coverPage'))
                     frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(ResetNextTemplate())
                     frame._generated_content.append(PageBreak())
             else: #even
+                frame._generated_content.append(SetNextTemplate(self.templateName))
                 frame._generated_content.append(PageBreak())
         elif self.breakTo=='even': #Break once if on odd page, twice
                                    #on even page, none if on top of even page
             if frame._pagenum % 2: #odd pageNum
+                frame._generated_content.append(SetNextTemplate(self.templateName))
                 frame._generated_content.append(PageBreak())
             else: #even
                 if not frame._atTop:
+                    # Blank pages get no heading or footer
+                    frame._generated_content.append(SetNextTemplate(self.templateName))
+                    frame._generated_content.append(SetNextTemplate('coverPage'))
                     frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(ResetNextTemplate())
                     frame._generated_content.append(PageBreak())            
         
 class SetNextTemplate(Flowable):
@@ -390,7 +401,32 @@ class SetNextTemplate(Flowable):
 
     def draw(self):
         if self.templateName:
+            try:
+                self.canv.oldTemplateName = self.canv.templateName
+            except:
+                self.canv.oldTemplateName = 'oneColumn'
             self.canv.templateName = self.templateName
+            
+class ResetNextTemplate(Flowable):
+    """Go back to the previous template.
+
+    rst2pdf uses that to switch page templates back when
+    temporarily it needed to switch to another template.
+    
+    For example, after a OddPageBreak, there can be a totally
+    blank page. Those have to use coverPage as a template,
+    because they must not have headers or footers.
+    
+    And then we need to switch back to whatever was used.
+
+    """
+
+    def __init__(self):
+        Flowable.__init__(self)
+
+    def draw(self):
+        self.canv.templateName, self.canv.oldTemplateName = \
+            self.canv.oldTemplateName, self.canv.templateName
 
 
 class Transition(Flowable):
