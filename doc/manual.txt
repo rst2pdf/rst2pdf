@@ -1063,8 +1063,7 @@ In some documents, you may not want your page counter to start in the first page
 For example, if the first pages are a coverpage and a table of contents, you want page 1 to be
 where your first section starts.
 
-To do that, you have to specify the ``--manual-page-counter`` option, and use the SetPageCounter
-command.
+To do that, you have to use the SetPageCounter command.
 
 Here is a syntax example::
     
