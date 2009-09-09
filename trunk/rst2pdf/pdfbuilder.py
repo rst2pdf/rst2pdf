@@ -171,8 +171,8 @@ class PDFBuilder(Builder):
             # EOH (End Of Hack)
             
             if genindex: # No point in creating empty indexes
-                _pb,index_nodes=genindex_nodes(genindex)
-                tree.append(nodes.raw('OddPageBreak twoColumn'))
+                index_nodes=genindex_nodes(genindex)
+                tree.append(nodes.raw(text='OddPageBreak twoColumn'))
                 tree.append(index_nodes)
 
         # This is stolen from the HTML builder
@@ -266,12 +266,12 @@ class PDFBuilder(Builder):
                             output[-1]+=' **%s**'%_('Deprecated')
                 output.append('')
                 
-            dt = docutils.core.publish_doctree('\n'.join(output))
-            tree.append(nodes.raw('OddPageBreak twoColumn'))
-            tree.extend(dt[1:])
+            dt = docutils.core.publish_doctree('\n'.join(output))[1:]
+            dt.insert(0,nodes.raw(text='OddPageBreak twoColumn'))
+            tree.extend(dt)
                     
         if appendices:
-            tree.append(nodes.raw('OddPageBreak cutePage'))
+            tree.append(nodes.raw(text='OddPageBreak cutePage'))
             self.info()
             self.info('adding appendixes...', nonl=1)
             for docname in appendices:
@@ -371,7 +371,7 @@ class PDFBuilder(Builder):
 def genindex_nodes(genindexentries):
     indexlabel = _('Index')
     indexunder = '='*len(indexlabel)
-    output=['DUMMY','=====','','.. raw:: pdf\n\n    PageBreak twoColumn\n\n.. _genindex:\n\n',indexlabel,indexunder,'']
+    output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
 
     for key, entries in genindexentries:
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
@@ -396,7 +396,7 @@ def genindex_nodes(genindexentries):
                         
 
     doctree = docutils.core.publish_doctree('\n'.join(output))
-    return doctree[0][1],doctree[1]
+    return doctree[1]
 
 
 class PDFContents(Contents):
