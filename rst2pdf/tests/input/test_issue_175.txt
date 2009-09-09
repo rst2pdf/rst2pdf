@@ -1,6 +1,6 @@
 .. raw:: pdf
 
-   Spacer 0 19cm
+   Spacer 0 210mm
    
 This is not very close to the bottom
 
@@ -10,19 +10,6 @@ Another title
 A subsection
 ~~~~~~~~~~~~
 
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
-The content should be in the same page as the title
 The content should be in the same page as the title
 
 .. raw:: pdf
