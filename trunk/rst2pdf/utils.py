@@ -10,6 +10,7 @@ from reportlab.platypus import Spacer
 
 from flowables import *
 from styles import adjustUnits
+from log import log
 
 def parseRaw(data):
     """Parse and process a simple DSL to handle creation of flowables.
@@ -33,21 +34,25 @@ def parseRaw(data):
                 elements.append(MyPageBreak())
             else:
                 elements.append(MyPageBreak(tokens[1]))
-        if command == 'EvenPageBreak':
+        elif command == 'EvenPageBreak':
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='even'))
             else:
                 elements.append(MyPageBreak(tokens[1],breakTo='even'))
-        if command == 'OddPageBreak':
+        elif command == 'OddPageBreak':
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='odd'))
             else:
                 elements.append(MyPageBreak(tokens[1],breakTo='odd'))
-        if command == 'Spacer':
+        elif command == 'Spacer':
             elements.append(Spacer(adjustUnits(tokens[1]), 
                 adjustUnits(tokens[2])))
-        if command == 'Transition':
+        elif command == 'Transition':
             elements.append(Transition(*tokens[1:]))
+        elif command == 'SetPageCounter':
+            elements.append(PageCounter(*tokens[1:]))
+        else:
+            log.error('Unknown command %s in raw pdf directive'%command)
     return elements
 
 

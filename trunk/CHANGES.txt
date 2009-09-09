@@ -1,6 +1,10 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* New raw directive command: SetPageCounter. This enables
+  page counter manipulation, and use of different styles,
+  roman, lowerroman, alpha, loweralpha and arabic.
+* New raw directive commands: EvenPageBreak and OddPageBreak
 * New option to make sections break to odd or even pages:
   --break-side=VALUE
 * New option to add an empty page at the beginning of the

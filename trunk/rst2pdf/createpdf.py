@@ -10,6 +10,7 @@ import sys
 import os
 import tempfile
 import re
+import string
 from os.path import abspath, dirname, expanduser, join
 from urlparse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
@@ -41,6 +42,8 @@ from log import log, nodeid
 from pprint import pprint
 
 from smartypants import smartyPants
+
+from roman import toRoman
 
 # Is this really the best unescape in the stdlib for '&amp;' => '&'????
 from xml.sax.saxutils import unescape, escape
@@ -140,8 +143,6 @@ class RstToPdf(object):
         self.splittable=splittable
         self.basedir=basedir
         self.language = language
-        self.lowerroman = 'i ii iii iv v vi vii viii ix x xi'.split()
-        self.loweralpha = 'abcdefghijklmopqrstuvwxyz'
         self.doc_title = ""
         self.doc_author = ""
         self.decoration = {'header': header,
@@ -1603,17 +1604,15 @@ class RstToPdf(object):
             b = str(node.parent.children.index(node) + start) + '.'
 
         elif node.parent.get('enumtype') == 'lowerroman':
-            b = str(self.lowerroman[node.parent.children.index(node)
-                + start - 1]) + '.'
+            b = toRoman(node.parent.children.index(node) + start).lower() + '.'
         elif node.parent.get('enumtype') == 'upperroman':
-            b = str(self.lowerroman[node.parent.children.index(node)
-                + start - 1].upper()) + '.'
+            b = toRoman(node.parent.children.index(node) + start).upper() + '.'
         elif node.parent.get('enumtype') == 'loweralpha':
-            b = str(self.loweralpha[node.parent.children.index(node)
-                + start - 1]) + '.'
+            b = string.lowercase[node.parent.children.index(node)
+                + start - 1] + '.'
         elif node.parent.get('enumtype') == 'upperalpha':
-            b = str(self.loweralpha[node.parent.children.index(node)
-                + start - 1].upper()) + '.'
+            b = string.uppercase[node.parent.children.index(node)
+                + start - 1] + '.'
         else:
             log.critical("Unknown kind of list_item %s [%s]", 
                 node.parent, nodeid(node))
@@ -1832,6 +1831,11 @@ class FancyPage(PageTemplate):
 
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
+        
+        # used for page numbers
+        if '_counter' not in canv.__dict__: 
+            canv._counter = 1
+            canv._counterStyle = 'arabic'
 
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
@@ -1910,7 +1914,22 @@ class FancyPage(PageTemplate):
                         text = unicode(text, e.encoding)
                     except AttributeError:
                         text = unicode(text, 'utf-8')
-                text = text.replace(u'###Page###', unicode(doc.page))
+                        
+                pnum=canv._counter
+                print 'XX:',canv._counter, type(canv._counter)
+                canv._counter+=1
+                if canv._counterStyle=='lowerroman':
+                    ptext=toRoman(pnum).lower()
+                elif canv._counterStyle=='roman':
+                    ptext=toRoman(pnum).upper()
+                elif canv._counterStyle=='alpha':
+                    ptext=string.uppercase[pnum%26]
+                elif canv._counterStyle=='loweralpha':
+                    ptext=string.lowercase[pnum%26]
+                else:
+                    ptext=unicode(pnum)
+                        
+                text = text.replace(u'###Page###', ptext)
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
                     getattr(canv, 'sectName', ''))

@@ -1052,8 +1052,48 @@ The syntax is shell-like, here's an example::
 
     And another paragraph.
 
-The unit used by the spacer by default is points, and using a space or a comma is the same thing in all cases.
+The unit used by the spacer by default is points, and using a space or a comma is the same thing 
+in all cases.
 
+Page Counters
+-------------
+
+In some documents, you may not want your page counter to start in the first page.
+
+For example, if the first pages are a coverpage and a table of contents, you want page 1 to be
+where your first section starts.
+
+To do that, you have to specify the ``--manual-page-counter`` option, and use the SetPageCounter
+command.
+
+Here is a syntax example::
+    
+    .. raw:: pdf
+
+        SetPageCounter 0 lowerroman
+        
+This sets the counter to 0, and makes it display in lower roman characters (i, ii, iii, etc)
+which is a style often used for the pages before the document proper (for example, TOCs and 
+abstracts).
+
+It can take zero or two arguments.
+
+SetPageCounter
+    When used with no arguments, it sets the counter to 0, and the style to arabic numerals.
+    
+SetPageCounter number style
+    When used with two arguments, the first argument must be a number, it sets the page counter 
+    to that number.
+    
+    The second number is a style of counter. Valid values are:
+        
+    * lowerroman: i, ii, iii, iv, v ...
+    * roman: I, II, III, IV, V ...
+    * arabic: 1, 2, 3, 4, 5 ...
+    * loweralpha: a, b, c, d, e ... [Don't use for numbers above 26]
+    * alpha: A, B, C, D, E ... [Don't use for numbers above 26]
+    
+.. note:: Page counter changes take effect on the **current** page.
 
 Page Breaks
 -----------
@@ -1074,7 +1114,6 @@ Each of them can take an additional number which is the name of the next page te
 For example::
     
     PageBreak twoColumn
-    
 
 Page Transitions
 ----------------
