@@ -9,6 +9,7 @@ import shlex
 from reportlab.platypus import Spacer
 
 from flowables import *
+import flowables
 from styles import adjustUnits
 from log import log
 
@@ -50,7 +51,7 @@ def parseRaw(data):
         elif command == 'Transition':
             elements.append(Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
-            elements.append(PageCounter(*tokens[1:]))
+            elements.append(flowables.PageCounter(*tokens[1:]))
         else:
             log.error('Unknown command %s in raw pdf directive'%command)
     return elements

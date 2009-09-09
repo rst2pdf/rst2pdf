@@ -32,6 +32,7 @@ from reportlab.platypus.flowables import _listWrapOn, _Container
 #from reportlab.lib.pagesizes import *
 
 from flowables import * # our own reportlab flowables
+import flowables
 
 from svgimage import SVGImage
 from math_directive import math_node
@@ -1792,12 +1793,49 @@ class FancyDocTemplate(BaseDocTemplate):
             level, text = flowable.level, flowable.text
             if hasattr(flowable, 'parent_id'):
                 parent_id = flowable.parent_id
-            pagenum = self.canv._ptext
+            pagenum = setPageCounter()
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
 
 #FIXME: these should not be global, but look at issue 126
 head = None
 foot = None
+_counter=0
+_counterStyle='arabic'
+
+class PageCounter(Flowable):
+    
+    def __init__(self, number=0, style='arabic'):
+        self.style=str(style).lower()
+        self.number=int(number)
+        Flowable.__init__(self)
+    
+    def drawOn(self, canvas, x, y, _sW):
+        global _counter, _counterStyle
+        _counterStyle=self.style
+        _counter=self.number
+
+flowables.PageCounter = PageCounter
+
+def setPageCounter(counter=None, style=None):
+    
+    global _counter, _counterStyle
+    
+    if counter is not None:
+        _counter = counter
+    if style is not None:
+        _counterStyle = style
+        
+    if _counterStyle=='lowerroman':
+        ptext=toRoman(_counter).lower()
+    elif _counterStyle=='roman':
+        ptext=toRoman(_counter).upper()
+    elif _counterStyle=='alpha':
+        ptext=string.uppercase[_counter%26]
+    elif _counterStyle=='loweralpha':
+        ptext=string.lowercase[_counter%26]
+    else:
+        ptext=unicode(_counter)
+    return ptext
 
 
 class FancyPage(PageTemplate):
@@ -1812,7 +1850,8 @@ class FancyPage(PageTemplate):
         self.smarty = smarty
         self.show_frame = show_frame
         PageTemplate.__init__(self, _id, [])
-
+        
+        
     def beforeDrawPage(self, canv, doc):
         """Do adjustments to the page according to where we are in the document.
 
@@ -1820,7 +1859,7 @@ class FancyPage(PageTemplate):
 
         """
 
-        global head, foot
+        global head, foot, _counter
 
         self.tw = self.styles.pw - self.styles.lm -\
             self.styles.rm - self.styles.gm
@@ -1832,24 +1871,7 @@ class FancyPage(PageTemplate):
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
         
-        # used for page numbers
-        if '_counter' not in canv.__dict__: 
-            canv._counter = 0
-            canv._counterStyle = 'arabic'
-        canv._counter+=1
-
-        pnum=canv._counter
-        if canv._counterStyle=='lowerroman':
-            ptext=toRoman(pnum).lower()
-        elif canv._counterStyle=='roman':
-            ptext=toRoman(pnum).upper()
-        elif canv._counterStyle=='alpha':
-            ptext=string.uppercase[pnum%26]
-        elif canv._counterStyle=='loweralpha':
-            ptext=string.lowercase[pnum%26]
-        else:
-            ptext=unicode(pnum)
-        canv._ptext=ptext
+        _counter+=1
             
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
@@ -1919,6 +1941,10 @@ class FancyPage(PageTemplate):
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
+
+        # Make sure page counter is up to date
+        pnum=setPageCounter()
+        
         for e in elems:
             i = elems.index(e)
             if isinstance(e, Paragraph):
@@ -1929,7 +1955,7 @@ class FancyPage(PageTemplate):
                     except AttributeError:
                         text = unicode(text, 'utf-8')
                         
-                text = text.replace(u'###Page###', canv._ptext)
+                text = text.replace(u'###Page###', pnum)
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
                     getattr(canv, 'sectName', ''))
