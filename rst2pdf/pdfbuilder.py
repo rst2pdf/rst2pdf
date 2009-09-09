@@ -51,17 +51,6 @@ from xml.sax.saxutils import unescape, escape
 
 from traceback import print_exc
 
-# Constants
-# Page transitions
-output='.. raw:: pdf\n\n    PageBreak\n\n'
-pb=docutils.core.publish_doctree(output)[0]
-output='.. raw:: pdf\n\n    PageBreak oneColumn\n\n'
-pb_oneColumn=docutils.core.publish_doctree(output)[0]
-output='.. raw:: pdf\n\n    PageBreak cutePage\n\n'
-pb_cutePage=docutils.core.publish_doctree(output)[0]
-output='.. raw:: pdf\n\n    PageBreak twoColumn\n\n'
-pb_twoColumn=docutils.core.publish_doctree(output)[0]
-
 
 class PDFBuilder(Builder):
     name = 'pdf'
@@ -183,7 +172,7 @@ class PDFBuilder(Builder):
             
             if genindex: # No point in creating empty indexes
                 _pb,index_nodes=genindex_nodes(genindex)
-                tree.append(_pb)
+                tree.append(nodes.raw('OddPageBreak twoColumn'))
                 tree.append(index_nodes)
 
         # This is stolen from the HTML builder
@@ -258,7 +247,7 @@ class PDFBuilder(Builder):
             # modindex.html does, more or less
             
             output=['DUMMY','=====','',
-                    '.. raw:: pdf\n\n    PageBreak twoColumn\n\n.. _modindex:\n\n']
+                    '.. _modindex:\n\n']
             t=_('Global Module Index')
             t+='\n'+'='*len(t)+'\n'
             output.append(t)
@@ -278,11 +267,11 @@ class PDFBuilder(Builder):
                 output.append('')
                 
             dt = docutils.core.publish_doctree('\n'.join(output))
-            tree.append(pb_twoColumn)
+            tree.append(nodes.raw('OddPageBreak twoColumn'))
             tree.extend(dt[1:])
                     
         if appendices:
-            tree.append(pb_cutePage)
+            tree.append(nodes.raw('OddPageBreak cutePage'))
             self.info()
             self.info('adding appendixes...', nonl=1)
             for docname in appendices:
@@ -501,8 +490,10 @@ class PDFWriter(writers.Writer):
         pending=nodes.topic()
         contents.append(pending)
         pending.details={}
-        #tree.insert(0,pb_cutePage)
+        self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic'))
+        self.document.insert(0,nodes.raw(text='OddPageBreak cutePage'))
         self.document.insert(0,contents)
+        self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman'))
         contTrans=PDFContents(self.document)
         contTrans.startnode=pending
         contTrans.apply()
@@ -527,8 +518,7 @@ class PDFWriter(writers.Writer):
             date=nodes.paragraph()
             date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
             date['classes']=['author']
-            self.document.insert(0,pb_cutePage)
-            self.document.insert(0,pb)
+            self.document.insert(0,nodes.raw(text='OddPageBreak cutePage'))
             self.document.insert(0,date)
             self.document.insert(0,spacer)
             for node in authornodes[::-1]:

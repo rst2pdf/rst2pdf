@@ -1,3 +1,7 @@
+Sphinx Test Document
+====================
+
+
 .. toctree::
 
    module
@@ -13,3 +17,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
