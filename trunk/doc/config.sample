@@ -37,6 +37,20 @@ fit_mode="shrink"
 
 break_level=0
 
+# How section breaks work. Can be "even", and sections start in an 
+# even page, "odd", and sections start in odd pages, or "any" and 
+# sections start in the next page, be it even or odd.
+
+break_side="any"
+
+# Add a blank page at the beginning of the document
+
+blank_first_page=False
+
+# Treat the first page as even (default False, treat it as odd)
+
+first_page_even=False
+
 # Smart quotes.
 # 0:  Suppress  all  transformations. (Do nothing.)
 # 1: Performs default SmartyPants transformations: quotes (including ‘‘backticks''

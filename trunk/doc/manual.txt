@@ -44,52 +44,66 @@ what can be done, let´s continue.
 Command line options
 ====================
 
--h, --help            show this help message and exit
--o FILE, --output=FILE
-                    Write the PDF to FILE
--s STYLESHEETS, --stylesheets=STYLESHEETS
-                    A comma-separated list of custom stylesheets.
-                    Default=""
---stylesheet-path=FOLDERS
-                    A list of folders to search for stylesheets, separated
-                    using ":". Default=""
--c, --compressed      Create a compressed PDF. Default=False
---print-stylesheet    Print the default stylesheet and exit
---font-folder=FOLDER  Search this folder for fonts. (Deprecated)
---font-path=FOLDERS
-                    A list of folders to search for fonts, separated using
-                    ":". Default=""
---baseurl=URL         The base URL for relative URLs. Default="None"
--l LANG, --language=LANG
-                    Language to be used for hyphenation and docutils
-                    localizations. Default=None
---header=HEADER       Page header if not specified in the document.
-                    Default="None"
---footer=FOOTER       Page footer if not specified in the document.
-                    Default="None"
---smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
-                    the typographically correct equivalent. For details,
-                    read the man page or the manual. Default="0"
---fit-literal-mode=MODE
-                    What todo when a literal is too wide. One of
-                    error,overflow,shrink,truncate. Default="shrink"
--b LEVEL, --break-level=LEVEL
-                    Maximum section level that starts in a new page.
-                    Default: 0
---inline-links        shows target between parenthesis instead of active
-                    link
---repeat-table-rows   Repeats header row for each splitted table
--q, --quiet           Print less information.
--v, --verbose         Print debug information.
---very-verbose        Print even more debug information.
---version             Print version number and exit.
---no-footnote-backlinks
-                    Disable footnote backlinks. Default=False
---inline-footnotes    Show footnotes inline. Default=True
---default-dpi=NUMBER  DPI for objects sized in pixels. Default=300
---show-frame-boundary
-                    Show frame borders (only useful for debugging),
-                    default=False
+::
+
+  -h, --help            show this help message and exit
+  -o FILE, --output=FILE                               
+                        Write the PDF to FILE          
+  -s STYLESHEETS, --stylesheets=STYLESHEETS            
+                        A comma-separated list of custom stylesheets.
+                        Default=""                                   
+  --stylesheet-path=FOLDER:FOLDER:...:FOLDER                         
+                        A list of folders to search for stylesheets,"        "
+                        separated using ":". Default=""                       
+  -c, --compressed      Create a compressed PDF. Default=False                
+  --print-stylesheet    Print the default stylesheet and exit                 
+  --font-folder=FOLDER  Search this folder for fonts. (Deprecated)            
+  --font-path=FOLDER:FOLDER:...:FOLDER                                        
+                        A list of folders to search for fonts, separated using
+                        ":". Default=""                                       
+  --baseurl=URL         The base URL for relative URLs. Default="file:///home/
+                        ralsina/Desktop/proyectos/rst/trunk"                  
+  -l LANG, --language=LANG                                                    
+                        Language to be used for hyphenation and docutils      
+                        localizations. Default="None"                         
+  --header=HEADER       Page header if not specified in the document.         
+                        Default="None"                                        
+  --footer=FOOTER       Page footer if not specified in the document.         
+                        Default="None"                                        
+  --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to   
+                        the typographically correct equivalent. For details,  
+                        read the man page or the manual. Default="0"
+  --fit-literal-mode=MODE
+                        What todo when a literal is too wide. One of error,
+                        overflow,shrink,truncate. Default="shrink"
+  --inline-links        shows target between parenthesis instead of active
+                        link
+  --repeat-table-rows   Repeats header row for each splitted table
+  -q, --quiet           Print less information.
+  -v, --verbose         Print debug information.
+  --very-verbose        Print even more debug information.
+  --version             Print version number and exit.
+  --no-footnote-backlinks
+                        Disable footnote backlinks. Default=False
+  --inline-footnotes    Show footnotes inline. Default=True
+  --default-dpi=NUMBER  DPI for objects sized in pixels. Default=300
+  --show-frame-boundary
+                        Show frame borders (only useful for debugging).
+                        Default=False
+  --enable-splittable   Use alpha-quality splittable flowables in some
+                        elements. Only useful for things like page-long block
+                        quotes or list items
+  -b LEVEL, --break-level=LEVEL
+                        Maximum section level that starts in a new page.
+                        Default: 0
+  --first-page-even     Whether first page is odd (as in the screen on "facing
+                        pages"), or even (as in a book)
+  --blank-first-page    Add a blank page at the beginning of the document.
+  --break-side=VALUE    How section breaks work. Can be "even", and sections
+                        start in an even page,"odd", and sections start in odd
+                        pages, or "any" and sections start in the next page,be
+                        it even or odd. See also the -b option.
+
 
 For the options that take a folder list, like --stylesheet-path, the separator used will
 depend on your platform. On unix-like OSs, it's ":", on Windows it's ";". Don't blame me,
@@ -1040,6 +1054,27 @@ The syntax is shell-like, here's an example::
 
 The unit used by the spacer by default is points, and using a space or a comma is the same thing in all cases.
 
+
+Page Breaks
+-----------
+
+There are three kinds of page breaks:
+
+PageBreak
+    Break to the next page
+
+EvenPageBreak
+    Break to the next **even** numbered page
+    
+OddPageBreak
+    Break to the next **odd** numbered page
+
+Each of them can take an additional number which is the name of the next page template.
+
+For example::
+    
+    PageBreak twoColumn
+    
 
 Page Transitions
 ----------------
