@@ -1792,7 +1792,7 @@ class FancyDocTemplate(BaseDocTemplate):
             level, text = flowable.level, flowable.text
             if hasattr(flowable, 'parent_id'):
                 parent_id = flowable.parent_id
-            pagenum = self.page
+            pagenum = self.canv._ptext
             self.notify('TOCEntry', (level, text, pagenum, parent_id))
 
 #FIXME: these should not be global, but look at issue 126
@@ -1838,6 +1838,19 @@ class FancyPage(PageTemplate):
             canv._counterStyle = 'arabic'
         canv._counter+=1
 
+        pnum=canv._counter
+        if canv._counterStyle=='lowerroman':
+            ptext=toRoman(pnum).lower()
+        elif canv._counterStyle=='roman':
+            ptext=toRoman(pnum).upper()
+        elif canv._counterStyle=='alpha':
+            ptext=string.uppercase[pnum%26]
+        elif canv._counterStyle=='loweralpha':
+            ptext=string.lowercase[pnum%26]
+        else:
+            ptext=unicode(pnum)
+        canv._ptext=ptext
+            
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
             head or self.template.get('defaultHeader'))
@@ -1906,18 +1919,6 @@ class FancyPage(PageTemplate):
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
-        pnum=canv._counter
-        if canv._counterStyle=='lowerroman':
-            ptext=toRoman(pnum).lower()
-        elif canv._counterStyle=='roman':
-            ptext=toRoman(pnum).upper()
-        elif canv._counterStyle=='alpha':
-            ptext=string.uppercase[pnum%26]
-        elif canv._counterStyle=='loweralpha':
-            ptext=string.lowercase[pnum%26]
-        else:
-            ptext=unicode(pnum)
-            
         for e in elems:
             i = elems.index(e)
             if isinstance(e, Paragraph):
@@ -1928,7 +1929,7 @@ class FancyPage(PageTemplate):
                     except AttributeError:
                         text = unicode(text, 'utf-8')
                         
-                text = text.replace(u'###Page###', ptext)
+                text = text.replace(u'###Page###', canv._ptext)
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
                     getattr(canv, 'sectName', ''))
