@@ -1916,7 +1916,6 @@ class FancyPage(PageTemplate):
                         text = unicode(text, 'utf-8')
                         
                 pnum=canv._counter
-                print 'XX:',canv._counter, type(canv._counter)
                 canv._counter+=1
                 if canv._counterStyle=='lowerroman':
                     ptext=toRoman(pnum).lower()
