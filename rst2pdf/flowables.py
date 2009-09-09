@@ -30,6 +30,16 @@ import re
 from xml.sax.saxutils import unescape, escape
 
 
+class PageCounter(Flowable):
+    
+    def __init__(self, number=0, style='arabic'):
+        self.style=str(style).lower()
+        self.number=int(number)
+        Flowable.__init__(self)
+    
+    def drawOn(self, canvas, x, y, _sW):
+        canvas._counterStyle=self.style
+        canvas._counter=self.number
 
 class MyImage(Image):
     """A Image subclass that can take a 'percentage_of_container' kind,
