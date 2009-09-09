@@ -111,7 +111,7 @@ class Heading(Paragraph):
                  snum=None, label=None, parent_id=None):
         if label is None: # it happens
             self.label = text.replace(u'\xa0', ' ').strip(
-                ).replace(' ', '_').encode('ascii', 'replace')
+                ).replace(' ', '-').encode('ascii', 'replace').lower()
         else:
             self.label = label.strip()
         # Issue 114: need to convert "&amp;" to "&" and such.
@@ -122,6 +122,7 @@ class Heading(Paragraph):
         self.snum = snum
         self.parent_id=parent_id
         Paragraph.__init__(self, text, style, bulletText)
+        
     def draw(self):
 
         # Add outline entry
@@ -167,7 +168,10 @@ class Reference(Flowable):
         self.canv.bookmarkPage(self.refid)
 
     def repr(self):
-        return "Anchor: %s" % self.refid
+        return "Reference: %s" % self.refid
+        
+    def __str__(self):
+        return "Reference: %s" % self.refid
 
 class DelayedTable(Flowable):
     """A flowable that inserts a table for which it has the data.
@@ -319,15 +323,50 @@ class SplitTable(DelayedTable):
 
 class MyPageBreak(FrameActionFlowable):
 
-    def __init__(self, templateName=None):
+    def __init__(self, templateName=None, breakTo='any'):
+        '''templateName switches the page template starting in the 
+        next page.
+        
+        breakTo can be 'any' 'even' or 'odd'.
+        
+        'even' will break one page if the current page is odd
+        or two pages if it's even. That way the next flowable 
+        will be in an even page.
+        
+        'odd' is the opposite of 'even'
+        
+        'any' is the default, and means it will always break
+        only one page.
+        
+        '''
         self.templateName = templateName
+        self.breakTo=breakTo
+        self.forced=False
+        self.extraContent=[]
 
     def frameAction(self, frame):
         frame._generated_content = [SetNextTemplate(self.templateName)]
-        if not frame._atTop:
-            frame._generated_content.append(PageBreak())
-
-
+        
+        if self.breakTo=='any': # Break only once. None if at top of page
+            if not frame._atTop:
+                frame._generated_content.append(PageBreak())
+        elif self.breakTo=='odd': #Break once if on even page, twice
+                                  #on odd page, none if on top of odd page
+            if frame._pagenum % 2: #odd pageNum
+                if not frame._atTop:
+                    frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(PageBreak())
+            else: #even
+                frame._generated_content.append(PageBreak())
+        elif self.breakTo=='even': #Break once if on odd page, twice
+                                   #on even page, none if on top of even page
+            if frame._pagenum % 2: #odd pageNum
+                frame._generated_content.append(PageBreak())
+            else: #even
+                if not frame._atTop:
+                    frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(PageBreak())            
+        
 class SetNextTemplate(Flowable):
     """Set canv.templateName when drawing.
 

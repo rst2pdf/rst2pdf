@@ -33,6 +33,16 @@ def parseRaw(data):
                 elements.append(MyPageBreak())
             else:
                 elements.append(MyPageBreak(tokens[1]))
+        if command == 'EvenPageBreak':
+            if len(tokens) == 1:
+                elements.append(MyPageBreak(breakTo='even'))
+            else:
+                elements.append(MyPageBreak(tokens[1],breakTo='even'))
+        if command == 'OddPageBreak':
+            if len(tokens) == 1:
+                elements.append(MyPageBreak(breakTo='odd'))
+            else:
+                elements.append(MyPageBreak(tokens[1],breakTo='odd'))
         if command == 'Spacer':
             elements.append(Spacer(adjustUnits(tokens[1]), 
                 adjustUnits(tokens[2])))

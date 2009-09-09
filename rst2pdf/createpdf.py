@@ -113,20 +113,29 @@ unkn_text=set()
 class RstToPdf(object):
 
     def __init__(self, stylesheets=[], language=None,
-                 header=None, footer=None,
-                 inlinelinks=False, breaklevel=1,
-                 font_path=[], style_path=[],
-                 fit_mode='shrink', sphinx=False,
-                 smarty='0', baseurl=None,
+                 header=None, 
+                 footer=None,
+                 inlinelinks=False, 
+                 breaklevel=1,
+                 font_path=[], 
+                 style_path=[],
+                 fit_mode='shrink', 
+                 sphinx=False,
+                 smarty='0', 
+                 baseurl=None,
                  repeat_table_rows=False,
-                 footnote_backlinks=True, inline_footnotes=False,
-                 def_dpi=300, show_frame=False,
+                 footnote_backlinks=True, 
+                 inline_footnotes=False,
+                 def_dpi=300, 
+                 show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
                  basedir=os.getcwd(),
                  splittable=False,
-                 blank_first_page=False
+                 blank_first_page=False,
+                 breakside='even'
                  ):
         global HAS_SPHINX
+        self.breakside=breakside
         self.blank_first_page=blank_first_page
         self.splittable=splittable
         self.basedir=basedir
@@ -716,6 +725,14 @@ class RstToPdf(object):
         except (UnicodeDecodeError, UnicodeEncodeError):
             log.debug("gen_elements: %r", node)
 
+        # set anchors for internal references
+        try:
+            for i in node['ids']:
+                self.pending_targets.append(i)
+        except TypeError: #Happens with docutils.node.Text
+            pass
+        
+        
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
@@ -885,7 +902,7 @@ class RstToPdf(object):
                             parent_id=(node.parent.get('ids', [None]) or [None])[0]
                             )]
                 if depth <= self.breaklevel:
-                    node.elements.insert(0, MyPageBreak())
+                    node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
 
         elif isinstance(node, docutils.nodes.subtitle):
             if isinstance(node.parent, docutils.nodes.sidebar):
@@ -1544,19 +1561,6 @@ class RstToPdf(object):
                     # Why fail? Just log it and do our best.
             node.elements = self.gather_elements(node, depth, style)
 
-        # set anchors for internal references
-        try:
-            for i in node['ids']:
-                # ids should link **after** pagebreaks
-                if len(node.elements) and \
-                    isinstance(node.elements[0], MyPageBreak):
-                    idx = 1
-                else:
-                    idx = 0
-                node.elements.insert(idx, Reference(i))
-        except TypeError: #Hapens with docutils.node.Text
-            pass
-
         # Make all the sidebar cruft unreachable
         #if style.__dict__.get('float','None').lower() !='none':
             #node.elements=[Sidebar(node.elements,style)]
@@ -1713,7 +1717,7 @@ class RstToPdf(object):
                 return
                 
         elements = self.gen_elements(doctree, 0)
-
+        
         if self.blank_first_page:
             elements.insert(0,PageBreak())
 
@@ -1889,7 +1893,11 @@ class FancyPage(PageTemplate):
                 self.styles.adjustUnits(frame[2], self.tw),
                 self.styles.adjustUnits(frame[3], self.th),
                     showBoundary=self.show_frame))
+                    
         canv.firstSect=True
+        canv._pagenum=doc.page
+        for frame in self.frames:
+            frame._pagenum=doc.page
 
     def replaceTokens(self, elems, canv, doc):
         """Put doc_title/page number/etc in text of header/footer."""
@@ -2087,12 +2095,12 @@ def main():
         action='store_true', default=def_blankfirst,
         help='Add a blank page at the beginning of the document.')
 
-    def_breakside = config.getValue("general", "breakside", 'even')
-    parser.add_option('--break-side', dest='break_side', metavar='VALUE',
+    def_breakside = config.getValue("general", "break_side", 'even')
+    parser.add_option('--break-side', dest='breakside', metavar='VALUE',
         default=def_breakside,
         help='How section breaks work. Can be "even", and sections start in an even page,'\
         '"odd", and sections start in odd pages, or "any" and sections start in the next page,'\
-        'be it even or odd')
+        'be it even or odd. See also the -b option.')
         
     options, args = parser.parse_args()
 
@@ -2190,7 +2198,8 @@ def main():
         basedir=basedir,
         show_frame=options.show_frame,
         splittable=options.splittable,
-        blank_first_page=options.blank_first_page
+        blank_first_page=options.blank_first_page,
+        breakside=options.breakside
         ).createPdf(text=infile.read(),
                     source_path=infile.name,
                     output=outfile,

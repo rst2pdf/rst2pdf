@@ -1,6 +1,10 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* New option to make sections break to odd or even pages:
+  --break-side=VALUE
+* New option to add an empty page at the beginning of the
+  document: --blank-first-page.
 * Fixed bug in authors field width calculation
 * Support % in bullet and field lists column widths
 * Use bullet_list or item_list styles for bullet and item lists respectively.
