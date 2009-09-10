@@ -6,6 +6,13 @@
 
 __docformat__ = 'reStructuredText'
 
+# Import Psyco if available
+try:
+    import psyco
+    psyco.full()
+except ImportError:
+    pass
+
 import sys
 import os
 import tempfile
@@ -1787,6 +1794,67 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 class FancyDocTemplate(BaseDocTemplate):
 
+    def multiBuild(self, story,
+                   filename=None,
+                   canvasmaker=canvas.Canvas,
+                   maxPasses = 10):
+        """Makes multiple passes until all indexing flowables
+        are happy."""
+        self._indexingFlowables = []
+        #scan the story and keep a copy
+        for thing in story:
+            if thing.isIndexing():
+                self._indexingFlowables.append(thing)
+
+        #better fix for filename is a 'file' problem
+        self._doSave = 0
+        passes = 0
+        mbe = []
+        self._multiBuildEdits = mbe.append
+        while 1:
+            passes += 1
+            log.info('Pass number %d'%passes)
+            if self._onProgress:
+                self._onProgress('PASS', passes)
+            if verbose: print 'building pass '+str(passes) + '...',
+
+            for fl in self._indexingFlowables:
+                fl.beforeBuild()
+
+            # work with a copy of the story, since it is consumed
+            tempStory = story[:]
+            self.build(tempStory, filename, canvasmaker)
+            #self.notify('debug',None)
+
+            for fl in self._indexingFlowables:
+                fl.afterBuild()
+
+            happy = self._allSatisfied()
+
+            if happy:
+                self._doSave = 0
+                self.canv.save()
+                break
+            #else:
+                #self.canv.save()
+                #os.rename(filename,filename+'pass-%d'%passes)
+            if passes > maxPasses:
+                # Don't fail, just say that the indexes may be wrong
+                log.error("Index entries not resolved after %d passes" % maxPasses)
+                self._doSave = 0
+                self.canv.save()
+                break
+
+
+            #work through any edits
+            while mbe:
+                e = mbe.pop(0)
+                e[0](*e[1:])
+
+        del self._multiBuildEdits
+        if verbose: print 'saved'
+
+
     def afterFlowable(self, flowable):
         if isinstance(flowable, Heading):
             # Notify TOC entry for headings/abstracts/dedications.
@@ -1994,7 +2062,7 @@ class FancyPage(PageTemplate):
 
 def main():
     """Parse command line and call createPdf with the correct data."""
-
+    
     parser = OptionParser()
     parser.add_option('-o', '--output', dest='output', metavar='FILE',
         help='Write the PDF to FILE')
