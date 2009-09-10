@@ -935,8 +935,8 @@ class MyTableOfContents(TableOfContents):
                 (len(self._lastEntries),len(self._entries))) 
                 return False
                 
+            log.info('TOC entries that moved in this pass:')
             for i in xrange(len(self._entries)):
-                log.info('TOC entries that moved in this pass:')
                 if self._entries[i] != self._lastEntries[i]:
                     log.info(str(self._entries[i]))
                     log.info(str(self._lastEntries[i]))
