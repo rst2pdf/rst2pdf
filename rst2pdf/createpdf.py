@@ -93,6 +93,8 @@ from xml.sax.saxutils import unescape, escape
 
 import config
 
+from cStringIO import StringIO
+
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
@@ -1779,7 +1781,8 @@ class RstToPdf(object):
 
         # So, now, create the FancyPage with the right sizes and elements
         FP = FancyPage("fancypage", head, foot, self.styles,
-                       smarty=self.smarty, show_frame=self.show_frame)
+                       smarty=self.smarty, show_frame=True)
+                       #smarty=self.smarty, show_frame=self.show_frame)
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -1829,65 +1832,70 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 class FancyDocTemplate(BaseDocTemplate):
 
-    def multiBuild(self, story,
-                   filename=None,
-                   canvasmaker=canvas.Canvas,
-                   maxPasses = 10):
-        """Makes multiple passes until all indexing flowables
-        are happy."""
-        self._indexingFlowables = []
-        #scan the story and keep a copy
-        for thing in story:
-            if thing.isIndexing():
-                self._indexingFlowables.append(thing)
+    #def multiBuild(self, story,
+                   #filename=None,
+                   #canvasmaker=canvas.Canvas,
+                   #maxPasses = 10):
+        #"""Makes multiple passes until all indexing flowables
+        #are happy."""
+        
+        #self._indexingFlowables = []
+        ##scan the story and keep a copy
+        #for thing in story:
+            #if thing.isIndexing():
+                #self._indexingFlowables.append(thing)
+                
+        ##better fix for filename is a 'file' problem
+        #self._doSave = 0
+        #passes = 0
+        #mbe = []
+        #self._multiBuildEdits = mbe.append
+        #while 1:
+            #s=story[-202].style
+            #for n in dir(s):
+                #if not n.startswith('_'):
+                    #print n,eval('s.parent.%s'%n)
+            #print '----------------------'
+            #passes += 1
+            #log.info('Pass number %d'%passes)
+            
+            #for fl in self._indexingFlowables:
+                #fl.beforeBuild()
 
-        #better fix for filename is a 'file' problem
-        self._doSave = 0
-        passes = 0
-        mbe = []
-        self._multiBuildEdits = mbe.append
-        while 1:
-            passes += 1
-            log.info('Pass number %d'%passes)
-            if self._onProgress:
-                self._onProgress('PASS', passes)
-            if verbose: print 'building pass '+str(passes) + '...',
+            ## work with a copy of the story, since it is consumed
+            #tempStory = story[:]
+            #self.build(tempStory, filename, canvasmaker)
+            ##self.notify('debug',None)
 
-            for fl in self._indexingFlowables:
-                fl.beforeBuild()
+            #for fl in self._indexingFlowables:
+                #fl.afterBuild()
 
-            # work with a copy of the story, since it is consumed
-            tempStory = story[:]
-            self.build(tempStory, filename, canvasmaker)
-            #self.notify('debug',None)
+            #happy = self._allSatisfied()
 
-            for fl in self._indexingFlowables:
-                fl.afterBuild()
-
-            happy = self._allSatisfied()
-
-            if happy:
-                self._doSave = 0
-                self.canv.save()
-                break
+            #if happy:
+                #self._doSave = 0
+                #self.canv.save()
+                #break
             #else:
                 #self.canv.save()
-                #os.rename(filename,filename+'pass-%d'%passes)
-            if passes > maxPasses:
-                # Don't fail, just say that the indexes may be wrong
-                log.error("Index entries not resolved after %d passes" % maxPasses)
-                self._doSave = 0
-                self.canv.save()
-                break
+                #f=open('pass-%d.pdf'%passes,'wb')
+                #f.seek(0)
+                #f.truncate()
+                #f.write(self.filename.getvalue())
+                #self.filename = StringIO()
+            #if passes > maxPasses:
+                ## Don't fail, just say that the indexes may be wrong
+                #log.error("Index entries not resolved after %d passes" % maxPasses)
+                #break
 
 
-            #work through any edits
-            while mbe:
-                e = mbe.pop(0)
-                e[0](*e[1:])
+            ##work through any edits
+            #while mbe:
+                #e = mbe.pop(0)
+                #e[0](*e[1:])
 
-        del self._multiBuildEdits
-        if verbose: print 'saved'
+        #del self._multiBuildEdits
+        #if verbose: print 'saved'
 
 
     def afterFlowable(self, flowable):
@@ -1962,7 +1970,7 @@ class FancyPage(PageTemplate):
 
         """
 
-        global head, foot, _counter
+        global head, foot, _counter, _counterStyle
 
         self.tw = self.styles.pw - self.styles.lm -\
             self.styles.rm - self.styles.gm
@@ -1974,6 +1982,9 @@ class FancyPage(PageTemplate):
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
         
+        if doc.page==1:
+            _counter=0
+            _counterStyle='arabic'
         _counter+=1
             
         # Adjust text space accounting for header/footer
@@ -2036,7 +2047,6 @@ class FancyPage(PageTemplate):
                 self.styles.adjustUnits(frame[2], self.tw),
                 self.styles.adjustUnits(frame[3], self.th),
                     showBoundary=self.show_frame))
-                    
         canv.firstSect=True
         canv._pagenum=doc.page
         for frame in self.frames:
@@ -2070,7 +2080,7 @@ class FancyPage(PageTemplate):
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
         # Adjust for gutter margin
-        log.info('Page %s'%doc.page)
+        log.info('Page %s [%s]'%(_counter,doc.page))
         if doc.page % 2: # Left page
             hx = self.hx
             fx = self.fx
