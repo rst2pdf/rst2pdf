@@ -902,11 +902,14 @@ class MyTableOfContents(TableOfContents):
                 pre = '<a href="%s" color="%s">' % (label, self.linkColor)
                 post = '</a>'
                 text = pre + text + post
+            else:
+                pre = ''
+                post = ''
             #right col style is right aligned
             rightColStyle = ParagraphStyle(name='leftColLevel%d' % left_col_level,
                 parent=leftColStyle, leftIndent=0, alignment=TA_RIGHT)
             leftPara = Paragraph(text, leftColStyle)
-            rightPara = Paragraph(str(pageNum), rightColStyle)
+            rightPara = Paragraph(pre+str(pageNum)+post, rightColStyle)
             tableData.append([leftPara, rightPara])
 
         self._table = Table(tableData, colWidths=widths, style=self.tableStyle)
@@ -920,3 +923,23 @@ class MyTableOfContents(TableOfContents):
         if not self._table:
             self.wrap(aW,aH)
         return TableOfContents.split(self, aW, aH)
+
+    def isSatisfied(self):
+        if self._entries == self._lastEntries:
+            log.debug('Table Of Contents is stable')
+            return True
+        else:
+            if len(self._entries) != len(self._lastEntries):
+                log.info('Number of items in TOC changed '\
+                'from %d to %d, not satisfied'%\
+                (len(self._lastEntries),len(self._entries))) 
+                return False
+                
+            for i in xrange(len(self._entries)):
+                log.info('TOC entries that moved in this pass:')
+                if self._entries[i] != self._lastEntries[i]:
+                    log.info(str(self._entries[i]))
+                    log.info(str(self._lastEntries[i]))
+                    
+        return False
+                
