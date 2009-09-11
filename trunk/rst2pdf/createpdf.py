@@ -1220,10 +1220,10 @@ class RstToPdf(object):
                             ids.append('<a name="%s"/>' % i)
                             self.targets.append(i)
                     tt.append(self.styleToFont("definition_list_term")
-                        + self.gather_pdftext(n, style) + "</font>")
+                        + self.gather_pdftext(n) + "</font>")
                 elif isinstance(n, docutils.nodes.classifier):
                     tt.append(self.styleToFont("definition_list_classifier")
-                        + self.gather_pdftext(n, style) + "</font>")
+                        + self.gather_pdftext(n) + "</font>")
                 else:
                     dt.extend(self.gen_elements(n, style))
             node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
@@ -1526,7 +1526,7 @@ class RstToPdf(object):
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.centered):
-            node.elements=[Paragraph(self.gather_pdftext(node,self.depth),
+            node.elements=[Paragraph(self.gather_pdftext(node),
                 self.styles['centered'])]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
             
@@ -1548,7 +1548,7 @@ class RstToPdf(object):
                 if i not in self.targets:
                     pre+='<a name="%s" />'% i
                     self.targets.append(i)
-            node.elements = [Paragraph(pre+self.gather_pdftext(node,self.depth),style)]
+            node.elements = [Paragraph(pre+self.gather_pdftext(node),style)]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_content):
             node.elements = [MyIndenter(left=10)] +\
                 self.gather_elements(node, self.styles["definition"]) +\
