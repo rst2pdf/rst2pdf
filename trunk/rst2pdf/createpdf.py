@@ -1790,6 +1790,8 @@ class RstToPdf(object):
                 pdfdoc.multiBuild(elements)
                 break
             except ValueError, v:
+                # FIXME: cross-document links come through here, which means
+                # an extra pass per cross-document reference. Which sucks.
                 if v.args and str(v.args[0]).startswith('format not resolved'):
                     missing=str(v.args[0]).split(' ')[-1]
                     log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
