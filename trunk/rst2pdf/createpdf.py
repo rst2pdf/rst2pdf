@@ -129,7 +129,7 @@ try:
     #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     # If basehyphenator doesn't load, wordaxe is broken
     # pyhyphenator and DCW *may* not load.
-    
+
     from wordaxe.BaseHyphenator import BaseHyphenator
     try:
         from wordaxe.plugins.PyHyphenHyphenator \
@@ -161,20 +161,20 @@ unkn_text=set()
 class RstToPdf(object):
 
     def __init__(self, stylesheets=[], language=None,
-                 header=None, 
+                 header=None,
                  footer=None,
-                 inlinelinks=False, 
+                 inlinelinks=False,
                  breaklevel=1,
-                 font_path=[], 
+                 font_path=[],
                  style_path=[],
-                 fit_mode='shrink', 
+                 fit_mode='shrink',
                  sphinx=False,
-                 smarty='0', 
+                 smarty='0',
                  baseurl=None,
                  repeat_table_rows=False,
-                 footnote_backlinks=True, 
+                 footnote_backlinks=True,
                  inline_footnotes=False,
-                 def_dpi=300, 
+                 def_dpi=300,
                  show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
                  basedir=os.getcwd(),
@@ -235,7 +235,7 @@ class RstToPdf(object):
             if self.language:
                 self.styles.languages.append(self.language)
                 self.styles['bodytext'].language = self.language
-        
+
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
             try:
@@ -366,7 +366,7 @@ class RstToPdf(object):
                                             default_unit='px')
         else:
             log.warning("Using image %s without specifying size."
-                "Calculating based on image size at %ddpi [%s]", 
+                "Calculating based on image size at %ddpi [%s]",
                 imgname, xdpi, nodeid(node))
             # No width specified at all, use w in px
             w = iw*inch/xdpi
@@ -478,30 +478,30 @@ class RstToPdf(object):
         #########################################################
         if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
             node.pdftext = self.gather_pdftext(node)
-                        
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.pdftext = self.gather_pdftext(node)
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node)+post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
             pre = self.styleToFont("descname")
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node)+post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
             pre = self.styleToFont("returns")
             post = "</font>"
             node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node) + post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
             pre = self.styleToFont("desctype")
             post = "</font>"
             node.pdftext = pre+self.gather_pdftext(node)+post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
             pre=' ('
             post=')'
@@ -509,7 +509,7 @@ class RstToPdf(object):
             while t and t[0] in ', ':
                 t=t[1:]
             node.pdftext = pre+t+post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
             if node.hasattr('noemph'):
                 pre = ', '
@@ -520,7 +520,7 @@ class RstToPdf(object):
             pre += self.styleToFont("descparameter")
             post = "</font>"+post
             node.pdftext = pre+self.gather_pdftext(node)+post
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
             pre =self.styleToFont("optional")+'[</font>, '
             post = self.styleToFont("optional")+']</font>'
@@ -538,7 +538,7 @@ class RstToPdf(object):
         #########################################################
         # End of SPHINX nodes
         #########################################################
-        
+
         elif isinstance(node, (docutils.nodes.paragraph,
                docutils.nodes.title, docutils.nodes.subtitle)):
             pre=''
@@ -613,7 +613,7 @@ class RstToPdf(object):
             if uri:
                 if self.baseurl: # Need to join the uri with the base url
                     uri = urljoin(self.baseurl, uri)
-                    
+
                 if urlparse(uri)[0] and self.inlinelinks:
                     # external inline reference
                     post = u' (%s)' % uri
@@ -699,7 +699,7 @@ class RstToPdf(object):
             node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>'%\
                 (anchors, '#' + node.astext(),
                  self.styles.linkColor, node.astext())
-                 
+
         elif isinstance(node, docutils.nodes.citation_reference):
             anchors=''
             for i in node['ids']:
@@ -726,11 +726,11 @@ class RstToPdf(object):
                     (ftag, self.gather_pdftext(node))
             else:
                 node.pdftext = self.gather_pdftext(node)
-                
+
         elif isinstance(node,docutils.nodes.literal_block):
             node.pdftext = self.gather_pdftext(node)
 
-            
+
         else:
             # With sphinx you will get hundreds of these
             #if not HAS_SPHINX:
@@ -778,8 +778,8 @@ class RstToPdf(object):
                 self.pending_targets.append(i)
         except TypeError: #Happens with docutils.node.Text
             pass
-        
-        
+
+
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
@@ -800,7 +800,7 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.glossary,
                                               sphinx.addnodes.start_of_file)):
             node.elements = self.gather_elements(node, style=style)
-            
+
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.index)):
             try:
                 self.pending_targets.append(node['entries'][0][2])
@@ -938,7 +938,7 @@ class RstToPdf(object):
                 maxdepth=4
                 if reportlab.Version > '2.1':
                     maxdepth=6
-                node.elements = [ Heading(text, 
+                node.elements = [ Heading(text,
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
                         label=key,
@@ -958,7 +958,7 @@ class RstToPdf(object):
         elif HAS_SPHINX and isinstance(node,
                 sphinx.addnodes.compact_paragraph):
             node.elements = self.gather_elements(node, style=style)
-            
+
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.elements = [Reference('module-'+node['modname'])]
 
@@ -1168,7 +1168,7 @@ class RstToPdf(object):
 
 
         elif isinstance(node, docutils.nodes.field_list):
-            
+
             node.elements = [Spacer(0,self.styles['field_list'].spaceBefore)]+\
                 self.gather_elements(node, style=style)
 
@@ -1238,13 +1238,13 @@ class RstToPdf(object):
 
             bStyle = copy(style)
             bStyle.alignment = 2
-            
+
             if t == 'bullet':
                 st=self.styles['bullet_list']
             else:
                 st=self.styles['item_list']
             t_style = TableStyle(st.commands)
-            
+
             #colWidths = map(self.styles.adjustUnits,
                 #self.styles['item_list'].colWidths)
             colWidths = st.colWidths
@@ -1350,7 +1350,7 @@ class RstToPdf(object):
                         [pageCatcher.PDFImageFlowable(imgname, w, h)]
                 except:
                     log.warning("Proper PDF images require "\
-                        "pageCatcher (but doesn't work yet) [%s]", 
+                        "pageCatcher (but doesn't work yet) [%s]",
                         nodeid(node))
                     if HAS_MAGICK:
                         # w,h are in pixels. I need to set the density
@@ -1522,16 +1522,16 @@ class RstToPdf(object):
             node.elements=[Paragraph(self.gather_pdftext(node),
                 self.styles['centered'])]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
-            
+
             st=self.styles[node['desctype']]
             if st==self.styles['normal']:
                 st=copy(self.styles['desc'])
                 st.spaceBefore=0
-           
+
             pre=[Spacer(0,self.styles['desc'].spaceBefore)]
             node.elements = pre+\
                 self.gather_elements(node, st)
-                
+
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_signature):
             # Need to add ids as targets, found this when using one of the
             # django docs extensions
@@ -1546,7 +1546,7 @@ class RstToPdf(object):
             node.elements = [MyIndenter(left=10)] +\
                 self.gather_elements(node, self.styles["definition"]) +\
                 [MyIndenter(left=-10)]
-                
+
         # These are here because sphinx.addnodes.desc inherits Admonition
         elif isinstance(node, (docutils.nodes.attention,
                 docutils.nodes.caution, docutils.nodes.danger,
@@ -1558,7 +1558,7 @@ class RstToPdf(object):
                 title=[]
             else:
                 title= [Paragraph(node.tagname.title(),
-                    style=self.styles['%s-heading'%node.tagname])] 
+                    style=self.styles['%s-heading'%node.tagname])]
             rows=title + self.gather_elements(node, style=style)
             st=self.styles[node.tagname]
             if 'commands' in dir(st):
@@ -1570,8 +1570,8 @@ class RstToPdf(object):
 
             if self.splittable:
                 node.elements = [Spacer(0,st.spaceBefore),
-                                 SplitTable([['',rows]], 
-                                 style=t_style, 
+                                 SplitTable([['',rows]],
+                                 style=t_style,
                                  colWidths=[0,None],
                                  padding=st.borderPadding),
                                  Spacer(0,st.spaceAfter)]
@@ -1582,20 +1582,20 @@ class RstToPdf(object):
                 t_style.add(*p3)
                 t_style.add(*p4)
                 node.elements = [Spacer(0,st.spaceBefore),
-                                 DelayedTable([['',rows]], 
-                                 style=t_style, 
+                                 DelayedTable([['',rows]],
+                                 style=t_style,
                                  colWidths=[0,None]),
                                  Spacer(0,st.spaceAfter)]
-                
-                
-                
+
+
+
         else:
             # With sphinx you will have hundreds of these
             #if not HAS_SPHINX:
             cln=str(node.__class__)
             if not cln in unkn_elem:
                 unkn_elem.add(cln)
-                log.error("Unkn. node (gen_elements): %s [%s]", 
+                log.error("Unkn. node (gen_elements): %s [%s]",
                 str(node.__class__), nodeid(node))
                     # Why fail? Just log it and do our best.
             node.elements = self.gather_elements(node, style)
@@ -1652,7 +1652,7 @@ class RstToPdf(object):
             b = string.uppercase[node.parent.children.index(node)
                 + start - 1] + '.'
         else:
-            log.critical("Unknown kind of list_item %s [%s]", 
+            log.critical("Unknown kind of list_item %s [%s]",
                 node.parent, nodeid(node))
         return b, t
 
@@ -1752,9 +1752,9 @@ class RstToPdf(object):
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
-                
+
         elements = self.gen_elements(doctree)
-        
+
         if self.blank_first_page:
             elements.insert(0,PageBreak())
 
@@ -1832,13 +1832,13 @@ class FancyDocTemplate(BaseDocTemplate):
                    #maxPasses = 10):
         #"""Makes multiple passes until all indexing flowables
         #are happy."""
-        
+
         #self._indexingFlowables = []
         ##scan the story and keep a copy
         #for thing in story:
             #if thing.isIndexing():
                 #self._indexingFlowables.append(thing)
-                
+
         ##better fix for filename is a 'file' problem
         #self._doSave = 0
         #passes = 0
@@ -1852,7 +1852,7 @@ class FancyDocTemplate(BaseDocTemplate):
             #print '----------------------'
             #passes += 1
             #log.info('Pass number %d'%passes)
-            
+
             #for fl in self._indexingFlowables:
                 #fl.beforeBuild()
 
@@ -1908,12 +1908,12 @@ _counter=0
 _counterStyle='arabic'
 
 class PageCounter(Flowable):
-    
+
     def __init__(self, number=0, style='arabic'):
         self.style=str(style).lower()
         self.number=int(number)
         Flowable.__init__(self)
-    
+
     def drawOn(self, canvas, x, y, _sW):
         global _counter, _counterStyle
         _counterStyle=self.style
@@ -1922,14 +1922,14 @@ class PageCounter(Flowable):
 flowables.PageCounter = PageCounter
 
 def setPageCounter(counter=None, style=None):
-    
+
     global _counter, _counterStyle
-    
+
     if counter is not None:
         _counter = counter
     if style is not None:
         _counterStyle = style
-        
+
     if _counterStyle=='lowerroman':
         ptext=toRoman(_counter).lower()
     elif _counterStyle=='roman':
@@ -1955,8 +1955,8 @@ class FancyPage(PageTemplate):
         self.smarty = smarty
         self.show_frame = show_frame
         PageTemplate.__init__(self, _id, [])
-        
-        
+
+
     def beforeDrawPage(self, canv, doc):
         """Do adjustments to the page according to where we are in the document.
 
@@ -1975,12 +1975,12 @@ class FancyPage(PageTemplate):
 
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
-        
+
         if doc.page==1:
             _counter=0
             _counterStyle='arabic'
         _counter+=1
-            
+
         # Adjust text space accounting for header/footer
         head = self.template.get('showHeader', True) and (
             head or self.template.get('defaultHeader'))
@@ -2051,7 +2051,7 @@ class FancyPage(PageTemplate):
 
         # Make sure page counter is up to date
         pnum=setPageCounter()
-        
+
         for e in elems:
             i = elems.index(e)
             if isinstance(e, Paragraph):
@@ -2061,7 +2061,7 @@ class FancyPage(PageTemplate):
                         text = unicode(text, e.encoding)
                     except AttributeError:
                         text = unicode(text, 'utf-8')
-                        
+
                 text = text.replace(u'###Page###', pnum)
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
@@ -2099,9 +2099,9 @@ class FancyPage(PageTemplate):
             container.drawOn(canv, fx, self.fy)
 
 
-def main():
+def main(args=None):
     """Parse command line and call createPdf with the correct data."""
-    
+
     parser = OptionParser()
     parser.add_option('-o', '--output', dest='output', metavar='FILE',
         help='Write the PDF to FILE')
@@ -2158,7 +2158,7 @@ def main():
         default=def_header, dest='header',
         help='Page header if not specified in the document.'\
         ' Default="%s"' % def_header)
-        
+
     def_footer = config.getValue("general", "footer")
     parser.add_option('--footer', metavar='FOOTER',
         default=def_footer, dest='footer',
@@ -2181,23 +2181,23 @@ def main():
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
         help='shows target between parenthesis instead of active link')
-        
+
     parser.add_option('--repeat-table-rows', action="store_true",
         dest='repeattablerows', default=False,
         help='Repeats header row for each splitted table')
-        
+
     parser.add_option('-q', '--quiet', action="store_true",
         dest='quiet', default=False,
         help='Print less information.')
-        
+
     parser.add_option('-v', '--verbose', action="store_true",
         dest='verbose', default=False,
         help='Print debug information.')
-        
+
     parser.add_option('--very-verbose', action="store_true",
         dest='vverbose', default=False,
         help='Print even more debug information.')
-        
+
     parser.add_option('--version', action="store_true",
         dest='version', default=False,
         help='Print version number and exit.')
@@ -2235,7 +2235,7 @@ def main():
         metavar='LEVEL', default=def_break,
         help='Maximum section level that starts in a new page.'\
         ' Default: %d' % def_break)
-        
+
     def_fpeven = config.getValue("general", "first_page_even", False)
     parser.add_option('--first-page-even', dest='first_page_even',
         action='store_true', default=def_fpeven,
@@ -2253,8 +2253,8 @@ def main():
         help='How section breaks work. Can be "even", and sections start in an even page,'\
         '"odd", and sections start in odd pages, or "any" and sections start in the next page,'\
         'be it even or odd. See also the -b option.')
-        
-    options, args = parser.parse_args()
+
+    options, args = parser.parse_args(args)
 
     if options.version:
         from rst2pdf import version
@@ -2359,4 +2359,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
