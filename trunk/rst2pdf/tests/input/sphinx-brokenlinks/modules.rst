@@ -1,6 +1,8 @@
 
 MODULES
 =======
+.. index::
+   module: grail
 
 .. _the-parrot-module:
 
