@@ -939,15 +939,12 @@ class RstToPdf(object):
                 if reportlab.Version > '2.1':
                     maxdepth=6
                 
-                if HAS_SPHINX and node.parent.ignoreme:
-                    node.elements = []
-                else:
-                    node.elements = [ Heading(text, 
-                            self.styles['heading%d'%min(self.depth, maxdepth)],
-                            level=self.depth-1,
-                            label=key,
-                            parent_id=(node.parent.get('ids', [None]) or [None])[0]
-                            )]
+                node.elements = [ Heading(text, 
+                        self.styles['heading%d'%min(self.depth, maxdepth)],
+                        level=self.depth-1,
+                        label=key,
+                        parent_id=(node.parent.get('ids', [None]) or [None])[0]
+                        )]
                 if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
 
@@ -1151,12 +1148,9 @@ class RstToPdf(object):
             node.elements = self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.section):
-            if HAS_SPHINX and node.ignoreme:
-                node.elements = self.gather_elements(node)
-            else:
-                self.depth+=1
-                node.elements = self.gather_elements(node)
-                self.depth-=1
+            self.depth+=1
+            node.elements = self.gather_elements(node)
+            self.depth-=1
 
         elif isinstance(node, docutils.nodes.bullet_list):
             node._bullSize = self.styles["enumerated_list_item"].leading

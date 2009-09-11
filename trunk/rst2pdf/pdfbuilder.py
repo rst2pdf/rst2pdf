@@ -562,7 +562,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         self.footnotecounter=1
         self.curfile=None
         self.footnotedict={}
-        self.this_is_the_title = 1
+        self.this_is_the_title = True
         self.in_title = 0
         self.elements = {
             'title': document.settings.title,
@@ -580,14 +580,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_start_of_file(self,node):
         self.footnotestack.pop()
         self.curfilestack.pop()
-        
-    def visit_section(self, node):
-        if self.this_is_the_title:
-            # This is not a real section
-            node.ignoreme=True
-        else:
-            node.ignoreme=False
-        
+                
     def visit_highlightlang(self, node):
         self.highlightlang = node['lang']
         self.highlightlinenothreshold = node['linenothreshold']
@@ -647,29 +640,6 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_desc_annotation(self, node):
         pass
     
-    def visit_title(self, node):
-        parent = node.parent
-        if isinstance(parent, addnodes.seealso):
-            # the environment already handles this
-            raise nodes.SkipNode
-        elif self.this_is_the_title:
-            if len(node.children) != 1 and not isinstance(node.children[0],
-                                                          nodes.Text):
-                self.builder.warn(
-                    'document title is not a single Text node',
-                    '%s:%s' % (self.builder.env.doc2path(self.curfilestack[-1]),
-                               node.line or ''))
-            if not self.elements['title']:
-                # text needs to be escaped since it is inserted into
-                # the output literally
-                self.elements['title'] = escape(node.astext())
-            self.this_is_the_title = 0
-            raise nodes.SkipNode
-        self.in_title = 1
-    def depart_title(self, node):
-        self.in_title = 0
-    
-
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
     if lang in ('py', 'python'):
