@@ -479,6 +479,10 @@ class SmartFrame(Frame):
             id=None, showBoundary=0, overlapAttachedSpace=None, _debug=None):
         self.container = container
         self.onSidebar = False
+        self.__s = '[%s, %s, %s, %s, %s, %s, %s, %s,]'\
+            %(x1,y1,width,height, 
+              leftPadding, bottomPadding, 
+              rightPadding, topPadding)
         Frame.__init__(self, x1, y1, width, height,
             leftPadding, bottomPadding, rightPadding, topPadding,
             id, showBoundary, overlapAttachedSpace, _debug)
@@ -489,6 +493,9 @@ class SmartFrame(Frame):
         else:
             flowable._atTop=False
         return Frame.add(self, flowable, canv, trySplit)
+
+    def __repr__(self):
+        return self.__s
 
 class FrameCutter(FrameActionFlowable):
 
