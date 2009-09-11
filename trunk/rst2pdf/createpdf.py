@@ -943,7 +943,7 @@ class RstToPdf(object):
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
                         label=key,
-                        parent_id=(node.parent.get('ids', [None]) or [None])[0]
+                        parent_id=node.get('refid',node.parent.get('ids', [None])[0])
                         )]
                 if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
