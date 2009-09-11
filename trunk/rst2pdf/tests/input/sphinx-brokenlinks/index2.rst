@@ -4,7 +4,7 @@ A BIG TITLE
 
 :mod:`parrot` links down
 :mod:`nih` doesn't link at all, because it's not defined in this document
-:mod:`grail` links like parrot
+:mod:`grail` is in the index but doesn't link.
 
 :ref:`app1`
 

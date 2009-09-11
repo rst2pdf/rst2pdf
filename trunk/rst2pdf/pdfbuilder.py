@@ -164,11 +164,14 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
+            #from pudb import set_trace; set_trace()
             t=copy(self.env.indexentries)
             try:
                 self.env.indexentries={docname:self.env.indexentries[docname+'-gen']}
             except KeyError:
-                self.env.indexentries={docname:self.env.indexentries[docname]}
+                self.env.indexentries={}
+                for dname in self.docnames:
+                    self.env.indexentries[dname]=t.get(dname,[])
             genindex = self.env.create_index(self)
             self.env.indexentries=t
             # EOH (End Of Hack)

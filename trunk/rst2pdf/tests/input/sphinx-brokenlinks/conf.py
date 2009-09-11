@@ -172,8 +172,8 @@ htmlhelp_basename = 'sphinxmarkup'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'MyProject.tex', u'My Project', u'RA', 'manual'),
-  ('index2', u'moduledocs.tex', u'moduledocs', u'RA', 'manual'),
+  ('index', 'doc1.tex', u'doc1', u'RA', 'manual'),
+  ('index2', u'doc2.tex', u'doc2', u'RA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -220,13 +220,13 @@ pdf_language="en_US"
 pdf_use_index = True
 
 # If false, no modindex is generated.
-pdf_use_modindex = False
+pdf_use_modindex = True
 
 # If false, no coverpage is generated.
 pdf_use_coverpage = True
 
 pdf_break_level = 1
 
-pdf_verbosity=1
+pdf_verbosity=0
 
 pdf_appendices = ['appendix']
