@@ -125,7 +125,7 @@ class Heading(Paragraph):
     def draw(self):
 
         # Add outline entry
-        self.canv.bookmarkPage(self.label)
+        self.canv.bookmarkPage(self.parent_id)
         if self.canv.firstSect:
             self.canv.sectName = self.stext
             self.canv.firstSect=False
@@ -134,7 +134,6 @@ class Heading(Paragraph):
             else:
                 self.canv.sectNum = ""
 
-        #print 'XX:',self.stext.encode('utf-8','replace'),self.parent_id.encode('utf-8','replace')
         self.canv.addOutlineEntry(self.stext.encode('utf-8','replace'), 
                                   self.parent_id.encode('utf-8','replace'), 
                                   int(self.level), False)
@@ -861,6 +860,7 @@ class MyTableOfContents(TableOfContents):
         TableOfContents.__init__(self, *args, **kwargs)
         # reference ids for which this TOC should be notified
         self.refids = []
+        self.seen=set()
         # revese lookup table from (level, text) to refid
         self.refid_lut = {}
         self.linkColor = "#0000ff"
@@ -868,11 +868,12 @@ class MyTableOfContents(TableOfContents):
     def notify(self, kind, stuff):
         # stuff includes (level, text, pagenum, label)
         level, text, pageNum, label = stuff
-        if label in self.refids:
+        if not label in self.seen:
+            #if label in self.refids:
             self.addEntry(level, text, pageNum)
             self.refid_lut[(level, text)] = label
-        else:
-            pass
+            #else:
+                #pass
 
     def wrap(self, availWidth, availHeight):
         """Adds hyperlink to toc entry."""

@@ -938,12 +938,11 @@ class RstToPdf(object):
                 maxdepth=4
                 if reportlab.Version > '2.1':
                     maxdepth=6
-                
                 node.elements = [ Heading(text, 
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
                         label=key,
-                        parent_id=node.get('refid',node.parent.get('ids', [None])[0])
+                        parent_id=u'node-'+unicode(id(node))#.get('refid',node.parent.get('ids', [None])[0])
                         )]
                 if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
