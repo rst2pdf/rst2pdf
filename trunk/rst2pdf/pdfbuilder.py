@@ -23,7 +23,7 @@ import sys
 from os import path
 import os
 
-from StringIO import StringIO
+from cStringIO import StringIO
 from rst2pdf import createpdf
 from rst2pdf import pygments_code_block_directive
 from pygments.lexers import get_lexer_by_name, guess_lexer
@@ -532,7 +532,7 @@ class PDFWriter(writers.Writer):
         
         
         
-        sio=StringIO('')
+        sio=StringIO()
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
                  language=self.__language,
