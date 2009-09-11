@@ -1775,8 +1775,7 @@ class RstToPdf(object):
 
         # So, now, create the FancyPage with the right sizes and elements
         FP = FancyPage("fancypage", head, foot, self.styles,
-                       smarty=self.smarty, show_frame=False)
-                       #smarty=self.smarty, show_frame=self.show_frame)
+                       smarty=self.smarty, show_frame=self.show_frame)
 
         pdfdoc = FancyDocTemplate(
             output,
