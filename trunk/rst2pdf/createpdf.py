@@ -183,6 +183,7 @@ class RstToPdf(object):
                  breakside='odd'
                  ):
         global HAS_SPHINX
+        self.depth=0
         self.breakside=breakside
         self.blank_first_page=blank_first_page
         self.splittable=splittable
@@ -457,11 +458,11 @@ class RstToPdf(object):
             log.warning('Unknown class %s', style)
             return None
 
-    def gather_pdftext(self, node, depth, replaceEnt=True):
-        return ''.join([self.gen_pdftext(n, depth, replaceEnt)
+    def gather_pdftext(self, node, replaceEnt=True):
+        return ''.join([self.gen_pdftext(n, replaceEnt)
             for n in node.children])
 
-    def gen_pdftext(self, node, depth, replaceEnt=True):
+    def gen_pdftext(self, node, replaceEnt=True):
         pre = ""
         post = ""
 
@@ -476,35 +477,35 @@ class RstToPdf(object):
         # SPHINX nodes
         #########################################################
         if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
                         
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
             pre = self.styleToFont("descclassname")
             post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            node.pdftext = pre+self.gather_pdftext(node)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
             pre = self.styleToFont("descname")
             post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            node.pdftext = pre+self.gather_pdftext(node)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
             pre = self.styleToFont("returns")
             post = "</font>"
-            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node, depth) + post
+            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node) + post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
             pre = self.styleToFont("desctype")
             post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            node.pdftext = pre+self.gather_pdftext(node)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
             pre=' ('
             post=')'
-            t=self.gather_pdftext(node, depth)
+            t=self.gather_pdftext(node)
             while t and t[0] in ', ':
                 t=t[1:]
             node.pdftext = pre+t+post
@@ -518,21 +519,21 @@ class RstToPdf(object):
                 post = '</i>'
             pre += self.styleToFont("descparameter")
             post = "</font>"+post
-            node.pdftext = pre+self.gather_pdftext(node, depth)+post
+            node.pdftext = pre+self.gather_pdftext(node)+post
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
             pre =self.styleToFont("optional")+'[</font>, '
             post = self.styleToFont("optional")+']</font>'
-            t=self.gather_pdftext(node, depth)
+            t=self.gather_pdftext(node)
             while t and t[0]in ', ':
                 t=t[1:]
             node.pdftext = pre+t+post
 
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
-            node.pdftext = '<i>%s</i>'%self.gather_pdftext(node, depth)
+            node.pdftext = '<i>%s</i>'%self.gather_pdftext(node)
 
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.pending_xref):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
 
         #########################################################
         # End of SPHINX nodes
@@ -547,7 +548,7 @@ class RstToPdf(object):
                 if _id not in self.targets:
                     pre+='<a name="%s"/>'%_id
                     self.targets.append(_id)
-            node.pdftext = pre+self.gather_pdftext(node, depth) + "\n"
+            node.pdftext = pre+self.gather_pdftext(node) + "\n"
 
         elif isinstance(node, docutils.nodes.Text):
             node.pdftext = node.astext()
@@ -558,7 +559,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.strong):
             pre = "<b>"
             post = "</b>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
             node.pdftext = pre + node.pdftext + post
@@ -566,7 +567,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.emphasis):
             pre = "<i>"
             post = "</i>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
             node.pdftext = pre + node.pdftext + post
@@ -577,7 +578,7 @@ class RstToPdf(object):
             if not self.styles['literal'].hyphenation:
                 pre = '<nobr>' + pre
                 post += '</nobr>'
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
             node.pdftext = pre + node.pdftext + post
@@ -585,7 +586,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.superscript):
             pre = '<super>'
             post = "</super>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
                 #node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
@@ -593,7 +594,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.subscript):
             pre = '<sub>'
             post = "</sub>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
                 #node.pdftext = escape(node.pdftext, True)
             node.pdftext = pre + node.pdftext + post
@@ -601,7 +602,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.title_reference):
             pre = self.styleToFont("title_reference")
             post = "</font>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             # Fix issue 134
             #if replaceEnt:
                 #node.pdftext = escape(node.pdftext, True)
@@ -627,7 +628,7 @@ class RstToPdf(object):
                     pre += u'<a href="#%s" color="%s">' %\
                         (uri, self.styles.linkColor)
                     post = '</a>' + post
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             #if replaceEnt:
             #    node.pdftext=escape(node.pdftext,True)
             node.pdftext = pre + node.pdftext + post
@@ -639,7 +640,7 @@ class RstToPdf(object):
                 node.pdftext = escape(node.pdftext)
 
         elif isinstance(node, (docutils.nodes.header, docutils.nodes.footer)):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             if replaceEnt:
                 node.pdftext = escape(node.pdftext)
 
@@ -649,13 +650,13 @@ class RstToPdf(object):
                                docutils.nodes.problematic)):
             pre = '<font color="red">'
             post = "</font>"
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             if replaceEnt:
                 node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext + post
 
         elif isinstance(node, docutils.nodes.generated):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             if replaceEnt:
                 node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext + post
@@ -713,7 +714,7 @@ class RstToPdf(object):
             if node['ids'][0] not in self.targets:
                 pre = u'<a name="%s"/>' % node['ids'][0]
                 self.targets.append(node['ids'][0])
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
             if replaceEnt:
                 node.pdftext = escape(node.pdftext)
             node.pdftext = pre + node.pdftext
@@ -722,12 +723,12 @@ class RstToPdf(object):
             ftag = self.styleToFont(node['classes'][0])
             if ftag:
                 node.pdftext = "%s%s</font>"%\
-                    (ftag, self.gather_pdftext(node, depth))
+                    (ftag, self.gather_pdftext(node))
             else:
-                node.pdftext = self.gather_pdftext(node, depth)
+                node.pdftext = self.gather_pdftext(node)
                 
         elif isinstance(node,docutils.nodes.literal_block):
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
 
             
         else:
@@ -742,7 +743,7 @@ class RstToPdf(object):
                     log.debug(node)
                 except (UnicodeDecodeError, UnicodeEncodeError):
                     log.debug(repr(node))
-            node.pdftext = self.gather_pdftext(node, depth)
+            node.pdftext = self.gather_pdftext(node)
 
         try:
             log.debug("self.gen_pdftext: %s" % node.pdftext)
@@ -755,7 +756,7 @@ class RstToPdf(object):
 
         return node.pdftext
 
-    def gen_elements(self, node, depth, style=None):
+    def gen_elements(self, node, style=None):
         #pprint (dir(node))
         #try:
             #print node.line
@@ -794,11 +795,11 @@ class RstToPdf(object):
             style = self.styles.styleForNode(node)
 
         if isinstance(node, docutils.nodes.document):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
 
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.glossary,
                                               sphinx.addnodes.start_of_file)):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
             
         elif HAS_SPHINX and isinstance(node, (sphinx.addnodes.index)):
             try:
@@ -818,7 +819,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.table):
             node.elements = [Spacer(0, self.styles['table'].spaceBefore)] + \
-                            self.gather_elements(node, depth, style=style) +\
+                            self.gather_elements(node, style=style) +\
                             [Spacer(0, self.styles['table'].spaceAfter)]
 
         elif isinstance(node, docutils.nodes.tgroup):
@@ -867,7 +868,7 @@ class RstToPdf(object):
                     else:
                         # I honestly have no idea what the next line does
                         # (Roberto Alsina, May 25th, 2009)
-                        ell = self.gather_elements(cell, depth, style=
+                        ell = self.gather_elements(cell, style=
                             i < headRows and self.styles['table-heading'] \
                             or style)
                         #if len(ell) == 1:
@@ -909,24 +910,24 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.title):
             # Special cases: (Not sure this is right ;-)
             if isinstance(node.parent, docutils.nodes.document):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                                            self.styles['title'])]
-                self.doc_title = unicode(self.gen_pdftext(node, depth)).strip()
+                self.doc_title = unicode(self.gen_pdftext(node)).strip()
             elif isinstance(node.parent, docutils.nodes.topic):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                                            self.styles['topic-title'])]
             elif isinstance(node.parent, docutils.nodes.Admonition):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                                            self.styles['admonition-title'])]
             elif isinstance(node.parent, docutils.nodes.table):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                                            self.styles['table-title'])]
             elif isinstance(node.parent, docutils.nodes.sidebar):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                                            self.styles['sidebar-title'])]
             else:
                 # Section/Subsection/etc.
-                text = self.gen_pdftext(node, depth)
+                text = self.gen_pdftext(node)
                 fch = node.children[0]
                 if isinstance(fch, docutils.nodes.generated) and \
                     fch['classes'] == ['sectnum']:
@@ -942,67 +943,67 @@ class RstToPdf(object):
                     node.elements = []
                 else:
                     node.elements = [ Heading(text, 
-                            self.styles['heading%d'%min(depth, maxdepth)],
-                            level=depth-1,
+                            self.styles['heading%d'%min(self.depth, maxdepth)],
+                            level=self.depth-1,
                             label=key,
                             parent_id=(node.parent.get('ids', [None]) or [None])[0]
                             )]
-                if depth <= self.breaklevel:
+                if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
 
         elif isinstance(node, docutils.nodes.subtitle):
             if isinstance(node.parent, docutils.nodes.sidebar):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                     self.styles['sidebar-subtitle'])]
             elif isinstance(node.parent, docutils.nodes.document):
-                node.elements = [Paragraph(self.gen_pdftext(node, depth),
+                node.elements = [Paragraph(self.gen_pdftext(node),
                     self.styles['subtitle'])]
 
         elif HAS_SPHINX and isinstance(node,
                 sphinx.addnodes.compact_paragraph):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
             
         elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
             node.elements = [Reference('module-'+node['modname'])]
 
         elif isinstance(node, docutils.nodes.paragraph):
-            node.elements = [Paragraph(self.gen_pdftext(node, depth), style)]
+            node.elements = [Paragraph(self.gen_pdftext(node), style)]
 
         elif isinstance(node, docutils.nodes.docinfo):
             # A docinfo usually contains several fields.
             # We'll render it as a series of elements, one field each.
 
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.field):
             # A field has two child elements, a field_name and a field_body.
             # We render as a two-column table, left-column is right-aligned,
             # bold, and much smaller
 
-            fn = Paragraph(self.gather_pdftext(node.children[0], depth) + ":",
+            fn = Paragraph(self.gather_pdftext(node.children[0]) + ":",
                 style=self.styles['fieldname'])
             fb = self.gen_elements(node.children[1],
-                depth, style=self.styles['fieldvalue'])
+                 style=self.styles['fieldvalue'])
             t_style=TableStyle(self.styles['field_list'].commands)
             node.elements = [DelayedTable([[fn, fb]], style=t_style,
                 colWidths=self.styles['field_list'].colWidths)]
 
         elif isinstance(node, docutils.nodes.decoration):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.header):
-            self.decoration['header'] = self.gather_elements(node, depth,
+            self.decoration['header'] = self.gather_elements(node,
                 style=self.styles['header'])
             node.elements = []
         elif isinstance(node, docutils.nodes.footer):
-            self.decoration['footer'] = self.gather_elements(node, depth,
+            self.decoration['footer'] = self.gather_elements(node,
                 style=self.styles['footer'])
             node.elements = []
 
         elif isinstance(node, docutils.nodes.author):
             if isinstance(node.parent, docutils.nodes.authors):
                 # Is only one of multiple authors. Return a paragraph
-                node.elements = [Paragraph(self.gather_pdftext(node, depth),
+                node.elements = [Paragraph(self.gather_pdftext(node),
                     style=style)]
                 if self.doc_author:
                     self.doc_author += self.author_separator(style=style) \
@@ -1011,7 +1012,7 @@ class RstToPdf(object):
                     self.doc_author = node.astext().strip()
             else:
                 # A single author: works like a field
-                fb = self.gather_pdftext(node, depth)
+                fb = self.gather_pdftext(node)
 
                 t_style=TableStyle(self.styles['field_list'].commands)
                 colWidths=map(self.styles.adjustUnits,
@@ -1032,12 +1033,12 @@ class RstToPdf(object):
 
             td = [[Paragraph(self.text_for_label("authors", style),
                         style=self.styles['fieldname']),
-                   self.gather_elements(node, depth, style=style)]]
+                   self.gather_elements(node, style=style)]]
             node.elements = [DelayedTable(td, style=t_style,
                 colWidths=colWidths)]
 
         elif isinstance(node, docutils.nodes.organization):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths=self.styles['field_list'].colWidths
             label=self.text_for_label("organization", style)
@@ -1046,7 +1047,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.contact):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
             label=self.text_for_label("contact", style)
@@ -1055,7 +1056,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.address):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
             label=self.text_for_label("address", style)
@@ -1064,7 +1065,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.version):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
             label=self.text_for_label("version", style)
@@ -1073,7 +1074,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.revision):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths=map(self.styles.adjustUnits,
                 self.styles['field_list'].colWidths)
@@ -1083,7 +1084,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.status):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
             label=self.text_for_label("status", style)
@@ -1092,7 +1093,7 @@ class RstToPdf(object):
                         style=t_style, colWidths=colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.date):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style = TableStyle(self.styles['field_list'].commands)
             colWidths = self.styles['field_list'].colWidths
             label = self.text_for_label("date", style)
@@ -1101,7 +1102,7 @@ class RstToPdf(object):
                         style=t_style, colWidths = colWidths)
             node.elements = [t]
         elif isinstance(node, docutils.nodes.copyright):
-            fb = self.gather_pdftext(node, depth)
+            fb = self.gather_pdftext(node)
             t_style = TableStyle(self.styles['field_list'].commands)
             colWidths = self.styles['field_list'].colWidths
             label = self.text_for_label("copyright", style)
@@ -1141,23 +1142,25 @@ class RstToPdf(object):
                     node.elements = [toc]
                 else:
                     node.elements = \
-                        [Paragraph(self.gen_pdftext(node.children[0], depth),
+                        [Paragraph(self.gen_pdftext(node.children[0]),
                         self.styles['heading1']), toc]
             else:
-                node.elements = self.gather_elements(node, depth, style=style)
+                node.elements = self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.field_body):
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.section):
             if HAS_SPHINX and node.ignoreme:
-                node.elements = self.gather_elements(node, depth)
+                node.elements = self.gather_elements(node)
             else:
-                node.elements = self.gather_elements(node, depth+1)
+                self.depth+=1
+                node.elements = self.gather_elements(node)
+                self.depth-=1
 
         elif isinstance(node, docutils.nodes.bullet_list):
             node._bullSize = self.styles["enumerated_list_item"].leading
-            node.elements = self.gather_elements(node, depth,
+            node.elements = self.gather_elements(node,
                 style=self.styles["bullet_list_item"])
             s = self.styles["bullet_list"]
             if s.spaceBefore:
@@ -1168,18 +1171,18 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.definition_list,
                 docutils.nodes.option_list)):
 
-            node.elements = self.gather_elements(node, depth, style=style)
+            node.elements = self.gather_elements(node, style=style)
 
 
         elif isinstance(node, docutils.nodes.field_list):
             
             node.elements = [Spacer(0,self.styles['field_list'].spaceBefore)]+\
-                self.gather_elements(node, depth, style=style)
+                self.gather_elements(node, style=style)
 
         elif isinstance(node, docutils.nodes.enumerated_list):
             node._bullSize = self.styles["enumerated_list_item"].leading*\
                 max([len(self.bullet_for_node(x)[0]) for x in node.children])
-            node.elements = self.gather_elements(node, depth,
+            node.elements = self.gather_elements(node,
                 style = self.styles["enumerated_list_item"])
             s = self.styles["enumerated_list"]
             if s.spaceBefore:
@@ -1189,15 +1192,14 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.definition):
             node.elements = self.gather_elements(node,
-                                depth,
                                 style = self.styles["definition"])
 
         elif isinstance(node, docutils.nodes.option_list_item):
 
-            optext = ', '.join([self.gather_pdftext(child, depth)
+            optext = ', '.join([self.gather_pdftext(child)
                     for child in node.children[0].children])
 
-            desc = self.gather_elements(node.children[1], depth, style)
+            desc = self.gather_elements(node.children[1], style)
 
             t_style = TableStyle(self.styles['option_list'].commands)
             colWidths = self.styles['option_list'].colWidths
@@ -1218,18 +1220,18 @@ class RstToPdf(object):
                             ids.append('<a name="%s"/>' % i)
                             self.targets.append(i)
                     tt.append(self.styleToFont("definition_list_term")
-                        + self.gather_pdftext(n, depth, style) + "</font>")
+                        + self.gather_pdftext(n, style) + "</font>")
                 elif isinstance(n, docutils.nodes.classifier):
                     tt.append(self.styleToFont("definition_list_classifier")
-                        + self.gather_pdftext(n, depth, style) + "</font>")
+                        + self.gather_pdftext(n, style) + "</font>")
                 else:
-                    dt.extend(self.gen_elements(n, depth, style))
+                    dt.extend(self.gen_elements(n, style))
             node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
                 self.styles['definition_list_term']),
                 MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
 
         elif isinstance(node, docutils.nodes.list_item):
-            el = self.gather_elements(node, depth, style=style)
+            el = self.gather_elements(node, style=style)
 
             b, t = self.bullet_for_node(node)
 
@@ -1277,14 +1279,14 @@ class RstToPdf(object):
             # This should work, but doesn't look good inside of
             # table cells (see Issue 173)
             #node.elements = [MyIndenter(left=self.styles['blockquote'].leftIndent)]\
-                #+ self.gather_elements( node, depth, style) + \
+                #+ self.gather_elements( node, style) + \
                 #[MyIndenter(left=-self.styles['blockquote'].leftIndent)]
             # Workaround for Issue 173 using tables
             leftIndent=self.styles['blockquote'].leftIndent
             rightIndent=self.styles['blockquote'].rightIndent
             spaceBefore=self.styles['blockquote'].spaceBefore
             spaceAfter=self.styles['blockquote'].spaceAfter
-            data=[['',self.gather_elements( node, depth, style)]]
+            data=[['',self.gather_elements( node, style)]]
             if self.splittable:
                 node.elements=[Spacer(0,spaceBefore),SplitTable(data,
                     colWidths=[leftIndent,None],
@@ -1304,7 +1306,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.attribution):
             node.elements = [
-                Paragraph(self.gather_pdftext(node, depth),
+                Paragraph(self.gather_pdftext(node),
                           self.styles['attribution'])]
 
         elif isinstance(node, docutils.nodes.comment):
@@ -1317,17 +1319,17 @@ class RstToPdf(object):
                 qstyle.leftIndent += self.styles.adjustUnits("1.5em")
             else:
                 qstyle = copy(self.styles['lineblock'])
-            node.elements = self.gather_elements(node, depth, style=qstyle)
+            node.elements = self.gather_elements(node, style=qstyle)
 
         elif isinstance(node, docutils.nodes.line):
             # All elements in one line
-            node.elements = [Paragraph(self.gather_pdftext(node, depth),
+            node.elements = [Paragraph(self.gather_pdftext(node),
                                        style=style)]
 
         elif isinstance(node, (docutils.nodes.literal_block,
                                docutils.nodes.doctest_block)):
             node.elements = [self.PreformattedFit(
-                self.gather_pdftext(node, depth, replaceEnt = True),
+                self.gather_pdftext(node, replaceEnt = True),
                                 self.styles['code'])]
 
         elif isinstance(node, docutils.nodes.image):
@@ -1402,20 +1404,19 @@ class RstToPdf(object):
             #    i.vAlign = alignment
 
         elif isinstance(node, docutils.nodes.figure):
-            sub_elems = self.gather_elements(node, depth, style=None)
+            sub_elems = self.gather_elements(node, style=None)
             node.elements = [BoxedContainer(sub_elems, style)]
 
         elif isinstance(node, docutils.nodes.caption):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth),
+            node.elements = [Paragraph(self.gather_pdftext(node),
                                        style=self.styles['figure-caption'])]
 
         elif isinstance(node, docutils.nodes.legend):
-            node.elements = self.gather_elements(node, depth,
+            node.elements = self.gather_elements(node,
                 style=self.styles['figure-legend'])
 
         elif isinstance(node, docutils.nodes.sidebar):
             node.elements = [BoxedContainer(self.gather_elements(node,
-                                                                 depth,
                                                                  style=None),
                                             self.styles['sidebar'])]
 
@@ -1425,22 +1426,22 @@ class RstToPdf(object):
                 and node.children[0].astext() == 'Footnotes':
                     node.elements=[Separation(),]
             else:
-                node.elements = [Paragraph(self.gather_pdftext(node, depth),
+                node.elements = [Paragraph(self.gather_pdftext(node),
                                        self.styles['rubric'])]
 
         elif isinstance(node, docutils.nodes.compound):
             # FIXME think if this is even implementable
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         elif isinstance(node, docutils.nodes.container):
             # FIXME think if this is even implementable
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         elif isinstance(node, docutils.nodes.substitution_definition):
             node.elements = []
 
         elif isinstance(node, docutils.nodes.tbody):
-            rows = [self.gen_elements(n, depth) for n in node.children]
+            rows = [self.gen_elements(n) for n in node.children]
             t = []
             for r in rows:
                 if not r:
@@ -1453,7 +1454,7 @@ class RstToPdf(object):
         elif isinstance(node, (docutils.nodes.footnote,
                                docutils.nodes.citation)):
             # It seems a footnote contains a label and a series of elements
-            ltext = self.gather_pdftext(node.children[0], depth)
+            ltext = self.gather_pdftext(node.children[0])
             if len(node['backrefs']) > 1 and self.footnote_backlinks:
                 backrefs = []
                 i = 1
@@ -1481,7 +1482,7 @@ class RstToPdf(object):
                     label = Paragraph('<a name="%s"/>%s' % (ltext, ltext),
                         self.styles["normal"])
                     self.targets.append(ltext)
-            contents = self.gather_elements(node, depth, style)[1:]
+            contents = self.gather_elements(node, style)[1:]
             if self.inline_footnotes:
                 st=self.styles['endnote']
                 t_style = TableStyle(st.commands)
@@ -1495,19 +1496,19 @@ class RstToPdf(object):
                 node.elements = []
 
         elif isinstance(node, docutils.nodes.label):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), style)]
+            node.elements = [Paragraph(self.gather_pdftext(node), style)]
         elif isinstance(node, docutils.nodes.Text):
-            node.elements = [Paragraph(self.gather_pdftext(node, depth), style)]
+            node.elements = [Paragraph(self.gather_pdftext(node), style)]
         elif isinstance(node, docutils.nodes.entry):
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         elif isinstance(node, docutils.nodes.target):
             if 'refid' in node:
                 self.pending_targets.append(node['refid'])
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         elif isinstance(node, docutils.nodes.reference):
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         elif isinstance(node, docutils.nodes.raw):
             # Not really raw, but what the heck
@@ -1525,7 +1526,7 @@ class RstToPdf(object):
         # custom SPHINX nodes.
         # FIXME: make sure they are all here, and keep them all together
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.centered):
-            node.elements=[Paragraph(self.gather_pdftext(node,depth),
+            node.elements=[Paragraph(self.gather_pdftext(node,self.depth),
                 self.styles['centered'])]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc):
             
@@ -1536,7 +1537,7 @@ class RstToPdf(object):
            
             pre=[Spacer(0,self.styles['desc'].spaceBefore)]
             node.elements = pre+\
-                self.gather_elements(node, depth, st)
+                self.gather_elements(node, st)
                 
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_signature):
             # Need to add ids as targets, found this when using one of the
@@ -1547,11 +1548,10 @@ class RstToPdf(object):
                 if i not in self.targets:
                     pre+='<a name="%s" />'% i
                     self.targets.append(i)
-            node.elements = [Paragraph(pre+self.gather_pdftext(node,depth),style)]
+            node.elements = [Paragraph(pre+self.gather_pdftext(node,self.depth),style)]
         elif HAS_SPHINX and isinstance(node, sphinx.addnodes.desc_content):
             node.elements = [MyIndenter(left=10)] +\
-                self.gather_elements(node,
-                    depth, self.styles["definition"]) +\
+                self.gather_elements(node, self.styles["definition"]) +\
                 [MyIndenter(left=-10)]
                 
         # These are here because sphinx.addnodes.desc inherits Admonition
@@ -1566,7 +1566,7 @@ class RstToPdf(object):
             else:
                 title= [Paragraph(node.tagname.title(),
                     style=self.styles['%s-heading'%node.tagname])] 
-            rows=title + self.gather_elements(node, depth, style=style)
+            rows=title + self.gather_elements(node, style=style)
             st=self.styles[node.tagname]
             if 'commands' in dir(st):
                 t_style = TableStyle(st.commands)
@@ -1605,7 +1605,7 @@ class RstToPdf(object):
                 log.error("Unkn. node (gen_elements): %s [%s]", 
                 str(node.__class__), nodeid(node))
                     # Why fail? Just log it and do our best.
-            node.elements = self.gather_elements(node, depth, style)
+            node.elements = self.gather_elements(node, style)
 
         # Make all the sidebar cruft unreachable
         #if style.__dict__.get('float','None').lower() !='none':
@@ -1616,7 +1616,7 @@ class RstToPdf(object):
                 node.elements, style, mode="shrink")]
         return node.elements
 
-    def gather_elements(self, node, depth, style=None):
+    def gather_elements(self, node, style=None):
         if style is None:
             style = self.styles.styleForNode(node)
         r = []
@@ -1624,7 +1624,7 @@ class RstToPdf(object):
             style = None # Don't pass floating styles to children!
         for n in node.children:
             # import pdb; pdb.set_trace()
-            r.extend(self.gen_elements(n, depth, style=style))
+            r.extend(self.gen_elements(n, style=style))
         return r
 
     def bullet_for_node(self, node):
@@ -1760,7 +1760,7 @@ class RstToPdf(object):
                 log.error('Error: createPdf needs a text or a doctree')
                 return
                 
-        elements = self.gen_elements(doctree, 0)
+        elements = self.gen_elements(doctree)
         
         if self.blank_first_page:
             elements.insert(0,PageBreak())

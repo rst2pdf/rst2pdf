@@ -584,7 +584,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def visit_section(self, node):
         if self.this_is_the_title:
             # This is not a real section
-            node.ignoreme=False
+            node.ignoreme=True
         else:
             node.ignoreme=False
         
