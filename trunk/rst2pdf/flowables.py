@@ -908,9 +908,9 @@ class MyTableOfContents(TableOfContents):
                 leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text), None)
             if label:
-                pre = '<a href="%s" color="%s">' % (label, self.linkColor)
-                post = '</a>'
-                text = pre + text + post
+                pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
+                post = u'</a>'
+                text = pre + text.decode('utf-8') + post
             else:
                 pre = ''
                 post = ''
