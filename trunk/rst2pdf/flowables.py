@@ -73,9 +73,9 @@ class MyImage(Image):
             if self.drawHeight > availHeight:
                 if not self._atTop:
                     return Image.wrap(self, availWidth, availHeight)
-                else: 
+                else:
                     # It's the first thing in the frame, probably
-                    # Wrapping it will not make it work, so we 
+                    # Wrapping it will not make it work, so we
                     # adjust by height
                     # FIXME get rst file info (line number)
                     # here for better error message
@@ -100,12 +100,12 @@ class MyIndenter(Indenter):
 
     def draw(self):
         pass
-    
+
 
 class Heading(Paragraph):
     """A paragraph that also adds an outline entry in
     the PDF TOC."""
-    
+
     def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
                  snum=None, label=None, parent_id=None):
         if label is None: # it happens
@@ -121,7 +121,7 @@ class Heading(Paragraph):
         self.snum = snum
         self.parent_id=parent_id
         Paragraph.__init__(self, text, style, bulletText)
-        
+
     def draw(self):
 
         # Add outline entry
@@ -134,8 +134,8 @@ class Heading(Paragraph):
             else:
                 self.canv.sectNum = ""
 
-        self.canv.addOutlineEntry(self.stext.encode('utf-8','replace'), 
-                                  self.parent_id.encode('utf-8','replace'), 
+        self.canv.addOutlineEntry(self.stext.encode('utf-8','replace'),
+                                  self.parent_id.encode('utf-8','replace'),
                                   int(self.level), False)
         Paragraph.draw(self)
 
@@ -168,7 +168,7 @@ class Reference(Flowable):
 
     def repr(self):
         return "Reference: %s" % self.refid
-        
+
     def __str__(self):
         return "Reference: %s" % self.refid
 
@@ -227,24 +227,24 @@ class SplitTable(DelayedTable):
         self.style.add(*p2)
         self.style.add(*p3)
         self.style.add(*p4)
-        
+
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
                 unicode(self.data[0][1])[:180])
-                
+
     def split(self,w,h):
         _w,_h=self.wrap(w, h)
-        
+
         if _h > h: # Can't split!
             # The right column data mandates the split
             # Find which flowable exceeds the available height
-            
+
             dw=self.colWidths[0]+self.padding[1]+self.padding[3]
             dh=self.padding[0]+self.padding[2]
-            
+
             bullet=self.data[0][0]
             text=self.data[0][1]
             for l in range(0,len(text)):
@@ -255,7 +255,7 @@ class SplitTable(DelayedTable):
                 if fh+dh > h:
                     # The lth flowable is the guilty one
                     # split it
-                                                            
+
                     _,lh=_listWrapOn(text[:l],w-dw,None)
                     # Workaround for Issue 180
                     text[l].wrap(w-dw,h-lh-dh)
@@ -263,12 +263,12 @@ class SplitTable(DelayedTable):
                     if l2==[] and l==0: # Can't fit anything
                         return l2
                     elif l2==[]: # Not splittable, push to next page
-                         
+
                         # If the previous one is keepwithnext, push
                         # that one too
                         while l>0 and text[l-1].getKeepWithNext():
                             l-=1
-                            
+
                         if l>0:
                             # Workaround for Issue 180 with wordaxe:
                             #if HAS_WORDAXE:
@@ -317,28 +317,28 @@ class SplitTable(DelayedTable):
             return self.t.split(w, h)
         else:
             return DelayedTable.split(self,w,h)
-                 
-                
+
+
 
 class MyPageBreak(FrameActionFlowable):
 
     def __init__(self, templateName=None, breakTo='any'):
-        '''templateName switches the page template starting in the 
+        '''templateName switches the page template starting in the
         next page.
-        
+
         breakTo can be 'any' 'even' or 'odd'.
-        
+
         'even' will break one page if the current page is odd
-        or two pages if it's even. That way the next flowable 
+        or two pages if it's even. That way the next flowable
         will be in an even page.
-        
+
         'odd' is the opposite of 'even'
-        
+
         'any' is the default, and means it will always break
         only one page.
-        
+
         '''
-        
+
         self.templateName = templateName
         self.breakTo=breakTo
         self.forced=False
@@ -346,7 +346,7 @@ class MyPageBreak(FrameActionFlowable):
 
     def frameAction(self, frame):
         frame._generated_content = []
-        
+
         if self.breakTo=='any': # Break only once. None if at top of page
             if not frame._atTop:
                 frame._generated_content.append(SetNextTemplate(self.templateName))
@@ -376,8 +376,8 @@ class MyPageBreak(FrameActionFlowable):
                     frame._generated_content.append(SetNextTemplate('coverPage'))
                     frame._generated_content.append(PageBreak())
                     frame._generated_content.append(ResetNextTemplate())
-                    frame._generated_content.append(PageBreak())            
-        
+                    frame._generated_content.append(PageBreak())
+
 class SetNextTemplate(Flowable):
     """Set canv.templateName when drawing.
 
@@ -396,17 +396,17 @@ class SetNextTemplate(Flowable):
             except:
                 self.canv.oldTemplateName = 'oneColumn'
             self.canv.templateName = self.templateName
-            
+
 class ResetNextTemplate(Flowable):
     """Go back to the previous template.
 
     rst2pdf uses that to switch page templates back when
     temporarily it needed to switch to another template.
-    
+
     For example, after a OddPageBreak, there can be a totally
     blank page. Those have to use coverPage as a template,
     because they must not have headers or footers.
-    
+
     And then we need to switch back to whatever was used.
 
     """
@@ -480,8 +480,8 @@ class SmartFrame(Frame):
         self.container = container
         self.onSidebar = False
         self.__s = '[%s, %s, %s, %s, %s, %s, %s, %s,]'\
-            %(x1,y1,width,height, 
-              leftPadding, bottomPadding, 
+            %(x1,y1,width,height,
+              leftPadding, bottomPadding,
               rightPadding, topPadding)
         Frame.__init__(self, x1, y1, width, height,
             leftPadding, bottomPadding, rightPadding, topPadding,
@@ -664,7 +664,7 @@ class BoundByWidth(Flowable):
         maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         self.scale = 1.0
-        if self.width > maxWidth: 
+        if self.width > maxWidth:
             if self.mode <> 'shrink':
                 log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                     self.width,maxWidth,self.identity())
@@ -910,7 +910,9 @@ class MyTableOfContents(TableOfContents):
             if label:
                 pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
                 post = u'</a>'
-                text = pre + text.decode('utf-8') + post
+                if not isinstance(text, unicode):
+                    text = unicode(text, 'utf-8')
+                text = pre + text + post
             else:
                 pre = ''
                 post = ''
@@ -941,14 +943,14 @@ class MyTableOfContents(TableOfContents):
             if len(self._entries) != len(self._lastEntries):
                 log.info('Number of items in TOC changed '\
                 'from %d to %d, not satisfied'%\
-                (len(self._lastEntries),len(self._entries))) 
+                (len(self._lastEntries),len(self._entries)))
                 return False
-                
+
             log.info('TOC entries that moved in this pass:')
             for i in xrange(len(self._entries)):
                 if self._entries[i] != self._lastEntries[i]:
                     log.info(str(self._entries[i]))
                     log.info(str(self._lastEntries[i]))
-                    
+
         return False
-                
+
