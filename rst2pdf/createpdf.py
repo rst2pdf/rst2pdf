@@ -269,15 +269,6 @@ class RstToPdf(object):
                         " for language %s, trying base hyphenator", lang)
                 else:
                     continue
-                #try:
-                    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-                    #wordaxe.hyphRegistry[lang] = PyHnjHyphenator(
-                        #lang, 5, purePython=True)
-                #except Exception:
-                    #log.warning("Can't load wordaxe PyHnj hyphenator"
-                        #" for language %s, trying base hyphenator", lang)
-                #else:
-                    #continue
                 try:
                     wordaxe.hyphRegistry[lang] = BaseHyphenator(lang)
                 except Exception:
