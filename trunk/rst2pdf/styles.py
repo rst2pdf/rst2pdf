@@ -353,6 +353,13 @@ class StyleSheet(object):
                     if key == 'color' or key.endswith('Color') and style[key]:
                         style[key] = formatColor(style[key])
 
+                    # Yet another workaround for the unicode bug in
+                    # reportlab's toColor
+                    elif key == 'commands':
+                        for command in style[key]:
+                            if command[0].upper()=='ROWBACKGROUNDS':
+                                command[3]=[str(c) for c in command[3]]
+                                    
                     # Handle alignment constants
                     elif key == 'alignment':
                         style[key] = dict(TA_LEFT=0, TA_CENTER=1, TA_CENTRE=1,
