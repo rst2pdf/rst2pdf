@@ -1972,6 +1972,7 @@ class FancyPage(PageTemplate):
         tname = canv.__dict__.get('templateName',
                                   self.styles.firstTemplate)
         self.template = self.styles.pageTemplates[tname]
+        canv.templateName=tname
 
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None # to make _listWrapOn work
@@ -2247,7 +2248,7 @@ def main(args=None):
         action='store_true', default=def_blankfirst,
         help='Add a blank page at the beginning of the document.')
 
-    def_breakside = config.getValue("general", "break_side", 'odd')
+    def_breakside = config.getValue("general", "break_side", 'any')
     parser.add_option('--break-side', dest='breakside', metavar='VALUE',
         default=def_breakside,
         help='How section breaks work. Can be "even", and sections start in an even page,'\
