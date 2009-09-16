@@ -225,3 +225,4 @@ pdf_use_modindex = False
 pdf_use_coverpage = False
 
 pdf_verbosity=0
+pdf_break_level = 1

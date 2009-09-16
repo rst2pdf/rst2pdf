@@ -6,9 +6,3 @@ Section 2
 
 Sub A
 -----
-
-Sub B
------
-
-Sub C
------
