@@ -860,7 +860,6 @@ class MyTableOfContents(TableOfContents):
         TableOfContents.__init__(self, *args, **kwargs)
         # reference ids for which this TOC should be notified
         self.refids = []
-        self.seen=set()
         # revese lookup table from (level, text) to refid
         self.refid_lut = {}
         self.linkColor = "#0000ff"
@@ -868,12 +867,10 @@ class MyTableOfContents(TableOfContents):
     def notify(self, kind, stuff):
         # stuff includes (level, text, pagenum, label)
         level, text, pageNum, label = stuff
-        if not label in self.seen:
-            #if label in self.refids:
+        rlabel='-'.join(label.split('-')[:-1])
+        if rlabel in self.refids:
             self.addEntry(level, text, pageNum)
             self.refid_lut[(level, text)] = label
-            #else:
-                #pass
 
     def wrap(self, availWidth, availHeight):
         """Adds hyperlink to toc entry."""
