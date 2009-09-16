@@ -1104,7 +1104,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.topic):
             # toc
             node_classes = node.attributes.get('classes', [])
-            if 'contents' in node_classes:
+            if 'contents' in node_classes and 'local' not in node_classes:
                 toc_visitor = TocBuilderVisitor(node.document)
                 toc_visitor.toc = MyTableOfContents()
                 toc_visitor.toc.linkColor = self.styles.linkColor
