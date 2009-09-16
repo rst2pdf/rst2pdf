@@ -107,7 +107,7 @@ class Heading(Paragraph):
     the PDF TOC."""
 
     def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
-                 snum=None, label=None, parent_id=None):
+                 snum=None, label=None, parent_id=None, node=None):
         if label is None: # it happens
             self.label = text.replace(u'\xa0', ' ').strip(
                 ).replace(' ', '-').encode('ascii', 'replace').lower()
@@ -120,6 +120,7 @@ class Heading(Paragraph):
         self.level = int(level)
         self.snum = snum
         self.parent_id=parent_id
+        self.node=node
         Paragraph.__init__(self, text, style, bulletText)
 
     def draw(self):
@@ -857,6 +858,19 @@ class MyTableOfContents(TableOfContents):
     """
 
     def __init__(self, *args, **kwargs):
+        
+        # The parent argument is to define the locality of
+        # the TOC. If it's none, it's a global TOC and
+        # any heading it's notified about is accepted.
+        
+        # If it's a node, then the heading needs to be "inside"
+        # that node. This can be figured out because
+        # the heading flowable keeps a reference to the title
+        # node it was creatd from.
+        #
+        # Yes, this is gross.
+        
+        self.parent=kwargs.pop('parent')
         TableOfContents.__init__(self, *args, **kwargs)
         # reference ids for which this TOC should be notified
         self.refids = []
@@ -866,9 +880,21 @@ class MyTableOfContents(TableOfContents):
 
     def notify(self, kind, stuff):
         # stuff includes (level, text, pagenum, label)
-        level, text, pageNum, label = stuff
+        level, text, pageNum, label, node = stuff
         rlabel='-'.join(label.split('-')[:-1])
-        if rlabel in self.refids:
+        
+        def islocal(_node):
+            '''See if this node is "local enough" for this TOC.
+            This is for Issue 196'''
+            if self.parent is None:
+                return True
+            while _node.parent:
+                if _node.parent == self.parent:
+                    return True
+                _node=_node.parent
+            return False
+            
+        if rlabel in self.refids and islocal(node):
             self.addEntry(level, text, pageNum)
             self.refid_lut[(level, text)] = label
 
