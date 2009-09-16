@@ -929,11 +929,14 @@ class RstToPdf(object):
                 maxdepth=4
                 if reportlab.Version > '2.1':
                     maxdepth=6
+                    
+                # The parent ID is the refid + an ID to make it unique for Sphinx
+                parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+unicode(id(node))
                 node.elements = [ Heading(text,
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
                         label=key,
-                        parent_id=u'node-'+unicode(id(node))#.get('refid',node.parent.get('ids', [None])[0])
+                        parent_id=parent_id
                         )]
                 if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
