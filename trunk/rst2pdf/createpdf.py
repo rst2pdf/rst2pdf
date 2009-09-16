@@ -936,7 +936,8 @@ class RstToPdf(object):
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
                         label=key,
-                        parent_id=parent_id
+                        parent_id=parent_id,
+                        node=node
                         )]
                 if self.depth <= self.breaklevel:
                     node.elements.insert(0, MyPageBreak(breakTo=self.breakside))
@@ -1104,9 +1105,12 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.topic):
             # toc
             node_classes = node.attributes.get('classes', [])
-            if 'contents' in node_classes and 'local' not in node_classes:
+            if 'contents' in node_classes:
                 toc_visitor = TocBuilderVisitor(node.document)
-                toc_visitor.toc = MyTableOfContents()
+                if 'local' in node_classes:
+                    toc_visitor.toc = MyTableOfContents(parent=node.parent)
+                else:
+                    toc_visitor.toc = MyTableOfContents(parent=None)
                 toc_visitor.toc.linkColor = self.styles.linkColor
                 node.walk(toc_visitor)
                 toc = toc_visitor.toc
@@ -1890,10 +1894,10 @@ class FancyDocTemplate(BaseDocTemplate):
         if isinstance(flowable, Heading):
             # Notify TOC entry for headings/abstracts/dedications.
             level, text = flowable.level, flowable.text
-            if hasattr(flowable, 'parent_id'):
-                parent_id = flowable.parent_id
+            parent_id = flowable.parent_id
+            node = flowable.node  
             pagenum = setPageCounter()
-            self.notify('TOCEntry', (level, text, pagenum, parent_id))
+            self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
 #FIXME: these should not be global, but look at issue 126
 head = None
