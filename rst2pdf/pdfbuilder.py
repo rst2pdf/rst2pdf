@@ -82,10 +82,12 @@ class PDFBuilder(Builder):
                                 stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
                                 language=opts.get('pdf_language',self.config.pdf_language),
                                 breaklevel=opts.get('pdf_break_level',self.config.pdf_break_level),
+                                breakside=opts.get('pdf_breakside',self.config.pdf_breakside),
                                 fontpath=opts.get('pdf_font_path',self.config.pdf_font_path),
                                 fitmode=opts.get('pdf_fit_mode',self.config.pdf_fit_mode),
                                 compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
                                 inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
+                                splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -455,10 +457,12 @@ class PDFWriter(writers.Writer):
                 stylesheets,
                 language,
                 breaklevel = 0,
+                breakside = 'any',
                 fontpath = [],
                 fitmode = 'shrink',
                 compressed = False,
                 inline_footnotes = False,
+                splittables = False,
                 srcdir = '.',
                 config = {}):
         writers.Writer.__init__(self)
@@ -467,10 +471,12 @@ class PDFWriter(writers.Writer):
         self.stylesheets = stylesheets
         self.__language = language
         self.breaklevel = int(breaklevel)
+        self.breakside = breakside
         self.fontpath = fontpath
         self.fitmode = fitmode
         self.compressed = compressed
         self.inline_footnotes = inline_footnotes
+        self.splittables = splittables
         self.highlightlang = builder.config.highlight_language
         self.srcdir = srcdir
         self.config = config
@@ -540,10 +546,12 @@ class PDFWriter(writers.Writer):
                  stylesheets=self.stylesheets,
                  language=self.__language,
                  breaklevel=self.breaklevel,
-                 #fit_mode=self.fitmode,
-                 #font_path=self.fontpath,
+                 breakside=self.breakside,
+                 fit_mode=self.fitmode,
+                 font_path=self.fontpath,
                  inline_footnotes=self.inline_footnotes,
-                 #highlightlang=self.highlightlang,
+                 highlightlang=self.highlightlang,
+                 splittables=self.splittables,
                  style_path=[self.srcdir],
                 ).createPdf(doctree=self.document,
                     output=sio,
@@ -717,6 +725,9 @@ def setup(app):
     app.add_config_value('pdf_use_modindex', True, None)
     app.add_config_value('pdf_use_coverpage', True, None)
     app.add_config_value('pdf_appendices', [], None)
+    app.add_config_value('pdf_splittables', False, None)
+    app.add_config_value('pdf_breakside', 'odd', None)
+    
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
     project_doc_texescaped = unicode(app.config.project + ' Documentation')\

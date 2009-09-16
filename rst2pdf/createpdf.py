@@ -178,7 +178,7 @@ class RstToPdf(object):
                  show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
                  basedir=os.getcwd(),
-                 splittable=False,
+                 splittables=False,
                  blank_first_page=False,
                  breakside='odd'
                  ):
@@ -186,7 +186,7 @@ class RstToPdf(object):
         self.depth=0
         self.breakside=breakside
         self.blank_first_page=blank_first_page
-        self.splittable=splittable
+        self.splittables=splittables
         self.basedir=basedir
         self.language = language
         self.doc_title = ""
@@ -1240,7 +1240,7 @@ class RstToPdf(object):
                 #self.styles['item_list'].colWidths)
             colWidths = st.colWidths
 
-            if self.splittable:
+            if self.splittables:
                 node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
                                  style = t_style,
                                  colWidths = colWidths)]
@@ -1271,7 +1271,7 @@ class RstToPdf(object):
             spaceBefore=self.styles['blockquote'].spaceBefore
             spaceAfter=self.styles['blockquote'].spaceAfter
             data=[['',self.gather_elements( node, style)]]
-            if self.splittable:
+            if self.splittables:
                 node.elements=[Spacer(0,spaceBefore),SplitTable(data,
                     colWidths=[leftIndent,None],
                     style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
@@ -1559,7 +1559,7 @@ class RstToPdf(object):
             t_style.add("ROWBACKGROUNDS", [0, 0], [-1, -1],[st.backColor])
             t_style.add("BOX", [ 0, 0 ], [ -1, -1 ], st.borderWidth , st.borderColor)
 
-            if self.splittable:
+            if self.splittables:
                 node.elements = [Spacer(0,st.spaceBefore),
                                  SplitTable([['',rows]],
                                  style=t_style,
@@ -2217,7 +2217,7 @@ def main(args=None):
         action='store_true', default=False,
         help='Show frame borders (only useful for debugging). Default=False')
 
-    parser.add_option('--enable-splittable', dest='splittable',
+    parser.add_option('--enable-splittables', dest='splittables',
         action='store_true', default=False,
         help='Use alpha-quality splittable flowables in some elements. '
         'Only useful for things like page-long block quotes or list items')
@@ -2341,7 +2341,7 @@ def main(args=None):
         def_dpi=int(options.def_dpi),
         basedir=basedir,
         show_frame=options.show_frame,
-        splittable=options.splittable,
+        splittables=options.splittables,
         blank_first_page=options.blank_first_page,
         breakside=options.breakside
         ).createPdf(text=infile.read(),
