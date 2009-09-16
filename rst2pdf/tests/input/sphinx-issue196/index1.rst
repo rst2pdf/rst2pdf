@@ -1,11 +1,8 @@
 Section 1
 =========
 
+.. contents::
+   :local:
+
 Sub A
------
-
-Sub B
------
-
-Sub C
 -----
