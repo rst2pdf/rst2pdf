@@ -52,7 +52,7 @@ class SVGImage(Flowable):
         # Use uniconvertor for the rest
         elif load is not None:
             self._mode = 'uniconvertor'
-            self.doc = load.load_drawing(filename)
+            self.doc = load.load_drawing(filename.encode('utf-8'))
             self.saver = plugins.find_export_plugin(
                 plugins.guess_export_plugin('.pdf'))
             self.width = width
