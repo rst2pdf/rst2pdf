@@ -357,8 +357,11 @@ class StyleSheet(object):
                     # reportlab's toColor
                     elif key == 'commands':
                         for command in style[key]:
-                            if command[0].upper()=='ROWBACKGROUNDS':
+                            c=command[0].upper()
+                            if c=='ROWBACKGROUNDS':
                                 command[3]=[str(c) for c in command[3]]
+                            elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
+                                command[4]=str(command[4])
                                     
                     # Handle alignment constants
                     elif key == 'alignment':
