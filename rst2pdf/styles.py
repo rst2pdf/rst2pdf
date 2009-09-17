@@ -8,6 +8,7 @@ import os
 import sys
 import re
 from copy import copy
+from types import *
 
 import docutils.nodes
 
@@ -356,12 +357,13 @@ class StyleSheet(object):
                     # Yet another workaround for the unicode bug in
                     # reportlab's toColor
                     elif key == 'commands':
-                        for command in style[key]:
-                            c=command[0].upper()
-                            if c=='ROWBACKGROUNDS':
-                                command[3]=[str(c) for c in command[3]]
-                            elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
-                                command[4]=str(command[4])
+                        style[key]=validateCommands(style[key])
+                        #for command in style[key]:
+                            #c=command[0].upper()
+                            #if c=='ROWBACKGROUNDS':
+                                #command[3]=[str(c) for c in command[3]]
+                            #elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
+                                #command[4]=str(command[4])
                                     
                     # Handle alignment constants
                     elif key == 'alignment':
@@ -663,6 +665,8 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 def formatColor(value, numeric=True):
     """Convert a color like "gray" or "0xf" or "ffff"
     to something ReportLab will like."""
+    if value not in StringTypes: # Not a string, send it back
+        return value
     if value in colors.__dict__:
         return colors.__dict__[value]
     else: # Hopefully, a hex color:
@@ -678,3 +682,108 @@ def formatColor(value, numeric=True):
             return colors.Color(r, g, b)
         else:
             return str("#"+c)
+
+# The values are:
+# * Minimum number of arguments
+# * Maximum number of arguments
+# * Valid types of arguments.
+#
+# For example, if option FOO takes a list a string and a number, 
+# but the number is optional:
+#
+# "FOO":(2,3,"list","string","number")
+#
+# The reportlab command could look like
+#
+# ["FOO",(0,0),(-1,-1),[1,2],"whatever",4]
+#
+# THe (0,0) (-1,-1) are start and stop and are mandatory. 
+#
+# Possible types of arguments are string, number, color, colorlist
+
+
+validCommands={
+        # Cell format commands
+        "FONT":(1,3,"string","number","number"),
+        "FONTNAME":(1,1,"string"),
+        "FACE":(1,1,"string"),
+        "FONTSIZE":(1,1,"number"),
+        "SIZE":(1,1,"number"),
+        "LEADING":(1,1,"number"),
+        "TEXTCOLOR":(1,1,"color"),
+        "ALIGNMENT":(1,1,"string"),
+        "ALIGN":(1,1,"string"),
+        "LEFTPADDING":(1,1,"number"),
+        "RIGHTPADDING":(1,1,"number"),
+        "TOPPADDING":(1,1,"number"),
+        "BOTTOMPADDING":(1,1,"number"),
+        "BACKGROUND":(1,1,"color"),
+        "ROWBACKGROUNDS":(1,1,"colorlist"),
+        "COLBACKGROUNDS":(1,1,"colorlist"),
+        "VALIGN":(1,1,"string"),
+        # Line commands
+        "GRID":(2,2,"number","color"),
+        "BOX":(2,2,"number","color"),
+        "OUTLINE":(2,2,"number","color"),
+        "INNERGRID":(2,2,"number","color"),
+        "LINEBELOW":(2,2,"number","color"),
+        "LINEABOVE":(2,2,"number","color"),
+        "LINEBEFORE":(2,2,"number","color"),
+        "LINEAFTER":(2,2,"number","color"),
+        # You should NOT have span commands, man!
+        #"SPAN":(,,),
+    }
+
+def validateCommands(commands):
+    '''Given a list of reportlab's table commands, it fixes some common errors
+    and/or removes commands that can't be fixed'''
+    
+    fixed=[]
+    
+    for command in commands:
+        command[0]=command[0].upper()
+        flag=False
+        # See if the command is valid
+        if command[0] not in validCommands:
+            log.error('Unknown table command %s in stylesheet',command[0])
+            continue
+        
+        # See if start and stop are the right types
+        if type(command[1]) not in (ListType,TupleType):
+            log.error('Start cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
+            flag=True
+            
+        if type(command[2]) not in (ListType,TupleType):
+            log.error('Stop cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
+            flag=True
+        
+        # See if the number of arguments is right
+        l=len(command)-3
+        if l>validCommands[command[0]][1]:
+            log.error('Too many arguments in table command: %s',command)
+            flag=True
+            
+        if l<validCommands[command[0]][0]:
+            log.error('Too few arguments in table command: %s',command)
+            flag=True
+            
+        # Validate argument types
+        for pos,arg in enumerate(command[3:]):
+            typ = validCommands[command[0]][pos+2]
+            if typ == "color":
+                # Convert all 'string' colors to numeric
+                command[3+pos]=formatColor(arg)
+            elif typ == "colorlist":
+                command[3+pos]=[ formatColor(arg) for c in arg]
+            elif typ == "number":
+                pass
+            elif typ == "string":
+                # Force string, not unicode
+                command[3+pos]=str(arg)
+            else:
+                log.error("This should never happen: wrong type %s",typ)
+            
+        if not flag:
+            fixed.append(command)
+            
+    return fixed
