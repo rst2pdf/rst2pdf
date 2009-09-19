@@ -665,8 +665,6 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 def formatColor(value, numeric=True):
     """Convert a color like "gray" or "0xf" or "ffff"
     to something ReportLab will like."""
-    if value not in StringTypes: # Not a string, send it back
-        return value
     if value in colors.__dict__:
         return colors.__dict__[value]
     else: # Hopefully, a hex color:
@@ -774,7 +772,7 @@ def validateCommands(commands):
                 # Convert all 'string' colors to numeric
                 command[3+pos]=formatColor(arg)
             elif typ == "colorlist":
-                command[3+pos]=[ formatColor(arg) for c in arg]
+                command[3+pos]=[ formatColor(c) for c in arg]
             elif typ == "number":
                 pass
             elif typ == "string":
