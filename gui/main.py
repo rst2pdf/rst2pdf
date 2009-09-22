@@ -87,14 +87,12 @@ class Main(QtGui.QMainWindow):
         self.on_actionRender_triggered()
 
     def enableHL(self):
-        print 'Enabling HL'
         self.hl1.enabled=True
         self.hl2.enabled=True
         self.hl1.rehighlight()
         self.hl2.rehighlight()
 
     def disableHL(self):
-        print 'Disabling HL'
         self.hl1.enabled=False
         self.hl2.enabled=False
 
@@ -149,7 +147,6 @@ class Main(QtGui.QMainWindow):
             self.statusMessage.setText('')
         except ValueError, e:
             s=str(e)
-            print s
             if s == 'No JSON object could be decoded':
                 pos=0
             elif s.startswith('Expecting '):
@@ -185,7 +182,6 @@ class Main(QtGui.QMainWindow):
             os.write(fd,style)
             os.close(fd)
             try:
-                print 'loading styles'
                 _renderer.loadStyles([style_file])
                 flag = True
             except:
@@ -290,7 +286,6 @@ class PDFDisplay(QtGui.QLabel):
     
     @currentPage.setter
     def currentPage(self,value):
-        print "curPage set to",value
         value=int(value)
         if value != self._currentPage and \
                 0 < value <= self.doc.numPages():
@@ -337,8 +332,6 @@ class PDFDisplay(QtGui.QLabel):
             self.setPixmap(QtGui.QPixmap.fromImage(self.pdfImage))
                 #self.update()
                 #delete page;
-        else:
-            print "doc not loaded"
 
 if __name__ == "__main__":
     main()
