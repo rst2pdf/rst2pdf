@@ -196,15 +196,16 @@ class RstToPdf(object):
                            'endnotes': []}
         # find base path
         if hasattr(sys, 'frozen'):
-            PATH = abspath(dirname(sys.executable))
+            self.PATH = abspath(dirname(sys.executable))
         else:
-            PATH = abspath(dirname(__file__))
-        stylesheets = [join(PATH, 'styles', 'styles.json'),
-                       join(PATH, 'styles', 'default.json')] + stylesheets
-        self.styles = sty.StyleSheet(stylesheets,
-                                     font_path,
-                                     style_path,
-                                     def_dpi=def_dpi)
+            self.PATH = abspath(dirname(__file__))
+            
+            
+        self.font_path=font_path
+        self.style_path=style_path
+        self.def_dpi=def_dpi
+        self.loadStyles(stylesheets)
+            
         self.docutils_languages = {}
         self.inlinelinks = inlinelinks
         self.breaklevel = breaklevel
@@ -279,6 +280,20 @@ class RstToPdf(object):
 
         self.pending_targets=[]
         self.targets=[]
+        
+    def loadStyles(self, styleSheets=None ):
+        
+        if styleSheets is None:
+            styleSheets=[]
+        
+        styleSheets = [join(self.PATH, 'styles', 'styles.json'),
+                       join(self.PATH, 'styles', 'default.json')] + styleSheets
+        print styleSheets
+        self.styles = sty.StyleSheet(styleSheets,
+                                     self.font_path,
+                                     self.style_path,
+                                     def_dpi=self.def_dpi)
+
 
     def size_for_image_node(self, node):
         imgname = os.path.join(self.basedir,str(node.get("uri")))
