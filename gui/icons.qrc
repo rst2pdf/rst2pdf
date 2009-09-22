@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/" >
+    <file>icons/filesave.svg</file>
+    <file>icons/pdf.svg</file>
+    <file>icons/fileopen.svg</file>
+    <file>icons/viewmag+.svg</file>
+    <file>icons/viewmag-.svg</file>
+    <file>icons/next.svg</file>
+    <file>icons/previous.svg</file>
+  </qresource>
+</RCC>
