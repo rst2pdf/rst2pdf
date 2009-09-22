@@ -1,0 +1,14 @@
+Requirements: PyQt4, poppler-qt4, rst2pdf, pygments, simplejson.
+
+Building instructions:
+
+1) Enter the pypoppler folder
+
+2) Create an empty __init__.py in the pypoppler folder.
+
+3) edit configure.py, specifically, I had to change 
+   makefile.extra_include_dirs so it could find the 
+   popplerqt4 and Qt includes.
+
+4) Run python main.py
+

@@ -10,7 +10,7 @@ from rst2pdf.createpdf import RstToPdf
 
 # Import Qt modules
 from PyQt4 import QtCore,QtGui
-import QtPoppler
+from pypoppler import QtPoppler
 
 # from reSTinPeace
 from highlighter import Highlighter
