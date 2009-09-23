@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile
+import os,sys,tempfile,re
 from multiprocessing import Process
 from hashlib import md5
 from cStringIO import StringIO
@@ -12,12 +12,11 @@ import logging
 
 log.setLevel(logging.INFO)
 
-
 # Import Qt modules
 from PyQt4 import QtCore,QtGui
 from pypoppler import QtPoppler
 
-# from reSTinPeace
+# Syntax HL
 from highlighter import Highlighter
 
 # Import the compiled UI module
@@ -25,6 +24,7 @@ from Ui_main import Ui_MainWindow
 from Ui_pdf import Ui_Form
 
 import simplejson as json
+from BeautifulSoup import BeautifulSoup
 
 _renderer = RstToPdf(splittables=True, debugLinesPdf=True)
 
@@ -295,7 +295,11 @@ class Main(QtGui.QMainWindow):
                 # TODO: Convert to a python XML thing
                 # then use the LINE-X nodes to sync the PDFDisplay
                 # and the text window :-)
-                print unicode(toc.toString())
+                xml=unicode(toc.toString())
+                soup=BeautifulSoup(xml)
+                for tag in soup.findAll(re.compile('line-')):
+                    print tag
+                    print tag.name, tag['destination']
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
