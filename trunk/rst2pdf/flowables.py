@@ -126,7 +126,8 @@ class Heading(Paragraph):
     def draw(self):
 
         # Add outline entry
-        self.canv.bookmarkPage(self.parent_id)
+        #self.canv.bookmarkPage(self.parent_id)
+        self.canv.bookmarkHorizontal(self.parent_id,0,0+self.height)
         if self.canv.firstSect:
             self.canv.sectName = self.stext
             self.canv.firstSect=False
@@ -139,7 +140,6 @@ class Heading(Paragraph):
                                   self.parent_id.encode('utf-8','replace'),
                                   int(self.level), False)
         Paragraph.draw(self)
-
 
 class Separation(Flowable):
     """A simple <hr>-like flowable"""
