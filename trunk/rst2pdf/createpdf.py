@@ -288,7 +288,6 @@ class RstToPdf(object):
         
         styleSheets = [join(self.PATH, 'styles', 'styles.json'),
                        join(self.PATH, 'styles', 'default.json')] + styleSheets
-        print styleSheets
         self.styles = sty.StyleSheet(styleSheets,
                                      self.font_path,
                                      self.style_path,
@@ -1996,24 +1995,25 @@ class FancyPage(PageTemplate):
         _counter+=1
 
         # Adjust text space accounting for header/footer
-        head = self.template.get('showHeader', True) and (
+        
+        _head = self.template.get('showHeader', True) and (
             head or self.template.get('defaultHeader'))
-        if head:
-            if isinstance(head, list):
-                head = head[:]
+        if _head:
+            if isinstance(_head, list):
+                _head = _head[:]
             else:
-                head = [Paragraph(head, self.styles['header'])]
-            _, self.hh = _listWrapOn(head, self.tw, canv)
+                _head = [Paragraph(_head, self.styles['header'])]
+            _, self.hh = _listWrapOn(_head, self.tw, canv)
         else:
             self.hh = 0
-        foot = self.template.get('showFooter', True) and (
+        _foot = self.template.get('showFooter', True) and (
             foot or self.template.get('defaultFooter'))
-        if foot:
-            if isinstance(foot, list):
-                foot = foot[:]
+        if _foot:
+            if isinstance(_foot, list):
+                _foot = _foot[:]
             else:
-                foot = [Paragraph(foot, self.styles['footer'])]
-            _, self.fh = _listWrapOn(foot, self.tw, canv)
+                _foot = [Paragraph(_foot, self.styles['footer'])]
+            _, self.fh = _listWrapOn(_foot, self.tw, canv)
         else:
             self.fh = 0
 
@@ -2095,16 +2095,20 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
-        if head:
-            _head = copy(head)
+        _head = self.template.get('showHeader', True) and (
+            head or self.template.get('defaultHeader'))
+        if _head:
+            _head = copy(_head)
             self.replaceTokens(_head, canv, doc)
             container = _Container()
             container._content = _head
             container.width = self.tw
             container.height = self.hh
             container.drawOn(canv, hx, self.hy)
-        if foot:
-            _foot = copy(foot)
+        _foot = self.template.get('showFooter', True) and (
+            foot or self.template.get('defaultFooter'))
+        if _foot:
+            _foot = copy(_foot)
             self.replaceTokens(_foot, canv, doc)
             container = _Container()
             container._content = _foot
