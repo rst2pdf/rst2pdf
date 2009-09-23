@@ -24,20 +24,26 @@
     "oneColumn": {
         "frames": [
             ["0cm", "0cm", "100%", "100%"]
-        ]
+        ],
+        "showHeader" : true,
+        "showFooter" : true
     },
     "twoColumn": {
         "frames": [
             ["0cm", "0cm", "49%", "100%"],
             ["51%", "0cm", "49%", "100%"]
-        ]
+        ],
+        "showHeader" : true,
+        "showFooter" : true
     },
     "threeColumn": {
         "frames": [
             ["0cm", "0cm", "33%", "100%"],
             ["33%", "0cm", "33%", "100%"],
             ["67%", "0cm", "33%", "100%"]
-        ]
+        ],
+        "showHeader" : true,
+        "showFooter" : true
     },
     "cutePage": {
         "frames": [
@@ -50,7 +56,7 @@
     }
   },
   "fontsAlias" : {
-    "stdFont": "Helvetica",
+    "stdFont": "Helvetica",     
     "stdBold": "Helvetica-Bold",
     "stdItalic": "Helvetica-Oblique",
     "stdBoldItalic": "Helvetica-BoldOblique",
