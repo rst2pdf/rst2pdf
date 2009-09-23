@@ -7,6 +7,11 @@ from multiprocessing import Process
 from hashlib import md5
 from cStringIO import StringIO
 from rst2pdf.createpdf import RstToPdf 
+from rst2pdf.log import log
+import logging
+
+log.setLevel(logging.INFO)
+
 
 # Import Qt modules
 from PyQt4 import QtCore,QtGui
@@ -21,7 +26,7 @@ from Ui_pdf import Ui_Form
 
 import simplejson as json
 
-_renderer = RstToPdf(splittables=True)
+_renderer = RstToPdf(splittables=True, debugLinesPdf=True)
 
 def render(text):
     '''Render text to PDF via rst2pdf'''
@@ -285,6 +290,12 @@ class Main(QtGui.QMainWindow):
         if flag:
             self.lastPDF=render(text)
             self.pdf.loadDocument(self.lastPDF)
+            toc=self.pdf.document.toc()
+            if toc:
+                # TODO: Convert to a python XML thing
+                # then use the LINE-X nodes to sync the PDFDisplay
+                # and the text window :-)
+                print unicode(toc.toString())
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
