@@ -40,8 +40,6 @@ class Main(QtGui.QMainWindow):
         self.ui.setupUi(self)
         
         self.pdf=PDFWidget()
-        self.ui.dock.setWidget(self.pdf)
-        self.ui.pdfbar.addAction(self.pdf.ui.previous)
         
         self.ui.pageNum = QtGui.QSpinBox()
         self.ui.pageNum.setMinimum(1)
@@ -52,18 +50,26 @@ class Main(QtGui.QMainWindow):
             self.ui.pageNum.setValue)
         self.connect(self.ui.pageNum,QtCore.SIGNAL('valueChanged(int)'),
             self.pdf.gotoPage)
-        self.ui.pdfbar.addWidget(self.ui.pageNum)
-        
+
+        self.ui.actionShow_ToolBar=self.ui.toolBar.toggleViewAction()
+        self.ui.actionShow_ToolBar.setText("Show Main Toolbar")
+        self.ui.menuView.addAction(self.ui.actionShow_ToolBar)
+
+        self.ui.pdfbar.addAction(self.pdf.ui.previous)
+        self.ui.pdfbar.addWidget(self.ui.pageNum)        
         self.ui.pdfbar.addAction(self.pdf.ui.next)
         self.ui.pdfbar.addSeparator()
         self.ui.pdfbar.addAction(self.pdf.ui.zoomin)
         self.ui.pdfbar.addAction(self.pdf.ui.zoomout)
+        self.ui.actionShow_PDFBar=self.ui.pdfbar.toggleViewAction()
+        self.ui.actionShow_PDFBar.setText("Show PDF Toolbar")
+        self.ui.menuView.addAction(self.ui.actionShow_PDFBar)
 
-        self.ui.actionShow_PDF=self.ui.dock.toggleViewAction ()
+        self.ui.dockLayout.addWidget(self.ui.pdfbar)
+        self.ui.dockLayout.addWidget(self.pdf)
+        self.ui.actionShow_PDF=self.ui.dock.toggleViewAction()
         self.ui.actionShow_PDF.setText('Show Preview')
         self.ui.menuView.addAction(self.ui.actionShow_PDF)
-        self.connect(self.ui.dock,QtCore.SIGNAL('visibilityChanged(bool)'),
-            self.ui.pdfbar.setVisible)
         
         self.text_md5=''
         self.style_md5=''
@@ -91,6 +97,13 @@ class Main(QtGui.QMainWindow):
         self.text_fname=None
         self.style_fname=None
         self.pdf_fname=None
+
+    def createPopupMenu(self):
+        self.popup=QtGui.QMenu()
+        self.popup.addAction(self.ui.actionShow_ToolBar)
+        self.popup.addAction(self.ui.actionShow_PDFBar)
+        self.popup.addAction(self.ui.actionShow_PDF)
+        return self.popup
 
     def enableHL(self):
         self.hl1.enabled=True

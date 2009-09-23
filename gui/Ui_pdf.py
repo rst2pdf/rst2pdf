@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pdf.ui'
 #
-# Created: Tue Sep 22 17:17:08 2009
+# Created: Tue Sep 22 23:46:59 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,13 +14,14 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(400, 300)
         self.verticalLayout = QtGui.QVBoxLayout(Form)
-        self.verticalLayout.setMargin(2)
+        self.verticalLayout.setMargin(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.scroll = QtGui.QScrollArea(Form)
+        self.scroll.setFrameShape(QtGui.QFrame.NoFrame)
         self.scroll.setWidgetResizable(True)
         self.scroll.setObjectName("scroll")
         self.scrollAreaWidgetContents = QtGui.QWidget(self.scroll)
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 392, 292))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 400, 300))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scroll.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scroll)
