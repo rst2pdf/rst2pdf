@@ -94,7 +94,7 @@
      <x>0</x>
      <y>0</y>
      <width>574</width>
-     <height>28</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuText">
@@ -281,6 +281,11 @@
    <header>codeeditor</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>text</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>style</tabstop>
+ </tabstops>
  <resources>
   <include location="icons.qrc"/>
  </resources>
