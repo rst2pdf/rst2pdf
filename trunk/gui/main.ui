@@ -11,10 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Rst2PDF</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icons/pdf.svg</normaloff>:/icons/pdf.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <property name="margin">
+     <number>3</number>
+    </property>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -31,12 +38,24 @@
         <string>Text</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="margin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="CodeEditor" name="text">
           <property name="font">
            <font>
             <family>DejaVu Sans Mono</family>
            </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -47,12 +66,18 @@
         <string>StyleSheet</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="margin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="CodeEditor" name="style">
           <property name="font">
            <font>
             <family>DejaVu Sans Mono</family>
            </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
           </property>
          </widget>
         </item>
@@ -122,7 +147,26 @@
    <attribute name="dockWidgetArea">
     <number>2</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents"/>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="dockLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetNoConstraint</enum>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionLoad_Text">
    <property name="icon">
