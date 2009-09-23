@@ -180,13 +180,10 @@ class RstToPdf(object):
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
-                 breakside='odd',
-                 # This adds entries to the PDF TOC
-                 # matching the rst source lines
-                 debugLinesPdf=False
+                 breakside='odd'
                  ):
         global HAS_SPHINX
-        self.debugLinesPdf=debugLinesPdf
+        self.debugLinesPdf=False
         self.depth=0
         self.breakside=breakside
         self.blank_first_page=blank_first_page
@@ -976,8 +973,6 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.paragraph):
             node.elements = [Paragraph(self.gen_pdftext(node), style)]
-            if self.debugLinesPdf and node.line:
-                node.elements.insert(0,TocEntry(self.depth-1,'LINE-%s'%node.line))
 
         elif isinstance(node, docutils.nodes.docinfo):
             # A docinfo usually contains several fields.
@@ -1625,6 +1620,9 @@ class RstToPdf(object):
             node.elements = [BoundByWidth(style.width,
                 node.elements, style, mode="shrink")]
 
+        if self.debugLinesPdf and node.line:
+            node.elements.insert(0,TocEntry(self.depth-1,'LINE-%s'%node.line))
+            
         return node.elements
 
     def gather_elements(self, node, style=None):
@@ -1746,8 +1744,14 @@ class RstToPdf(object):
             content=[XPreformatted(text, style)],
             mode=self.fit_mode, style=style)
 
-    def createPdf(self, text=None, source_path=None, output=None, doctree=None,
-                  compressed=False):
+    def createPdf(self, text=None, 
+                  source_path=None, 
+                  output=None, 
+                  doctree=None,
+                  compressed=False,
+                  # This adds entries to the PDF TOC
+                  # matching the rst source lines
+                  debugLinesPdf=False):
         """Create a PDF from text (ReST input),
         or doctree (docutil nodes) and save it in outfile.
 
@@ -1756,6 +1760,8 @@ class RstToPdf(object):
         or a file object), the data is saved there.
 
         """
+
+        self.debugLinesPdf = debugLinesPdf
 
         if doctree is None:
             if text is not None:
