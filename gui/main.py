@@ -30,10 +30,7 @@ def render(text):
     sio=StringIO()
     _renderer.createPdf(text=text, output=sio)
     return sio.getvalue()
-    self.md5_text=''
-    self.md5_style=''
-
-# Create a class for our main window
+    
 class Main(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
@@ -85,6 +82,10 @@ class Main(QtGui.QMainWindow):
 
         self.on_text_cursorPositionChanged()
         self.on_actionRender_triggered()
+        
+        self.text_fname=None
+        self.style_fname=None
+        self.pdf_fname=None
 
     def enableHL(self):
         self.hl1.enabled=True
@@ -95,6 +96,30 @@ class Main(QtGui.QMainWindow):
     def disableHL(self):
         self.hl1.enabled=False
         self.hl2.enabled=False
+
+    def on_actionSave_Text_triggered(self, b=None):
+        if b is not None: return
+        
+        if self.text_fname is not None:
+            f=open(self.text_fname,'w+')
+            f.seek(0)
+            f.write(unicode(self.ui.text.toPlainText()))
+            f.close()
+        else:
+            self.on_actionSaveAs_Text_triggered()
+            
+     
+    def on_actionSaveAs_Text_triggered(self, b=None):
+        if b is not None: return
+        
+        fname=unicode(QtGui.QFileDialog.getSaveFileName(self, 
+                            'Save As',
+                            os.getcwd(),
+                            'reSt files (*.txt *.rst)'
+                            ))
+        if fname:
+            self.text_fname=fname
+            self.on_actionSave_Text_triggered()
 
     def on_actionLoad_Text_triggered(self, b=None):
         if b is None: return
@@ -108,6 +133,31 @@ class Main(QtGui.QMainWindow):
         self.disableHL()
         self.ui.text.setPlainText(open(self.text_fname).read())
         self.enableHL()
+        
+    def on_actionSave_Style_triggered(self, b=None):
+        if b is not None: return
+        
+        if self.style_fname is not None:
+            f=open(self.style_fname,'w+')
+            f.seek(0)
+            f.write(unicode(self.ui.style.toPlainText()))
+            f.close()
+        else:
+            self.on_actionSaveAs_Style_triggered()
+            
+     
+    def on_actionSaveAs_Style_triggered(self, b=None):
+        if b is not None: return
+        
+        fname=unicode(QtGui.QFileDialog.getSaveFileName(self, 
+                            'Save As',
+                            os.getcwd(),
+                            'style files (*.json *.style)'
+                            ))
+        if fname:
+            self.style_fname=fname
+            self.on_actionSave_Style_triggered()
+
 
     def on_actionLoad_Style_triggered(self, b=None):
         if b is None: return
@@ -121,6 +171,33 @@ class Main(QtGui.QMainWindow):
         self.disableHL()
         self.ui.style.setPlainText(open(self.style_fname).read())
         self.enableHL()
+        
+    def on_actionSave_PDF_triggered(self, b=None):
+        if b is not None: return
+        
+        if not self.lastPDF:
+            self.on_actionRender_triggered()
+            
+        if self.pdf_fname is not None:
+            f=open(self.pdf_fname,'wb+')
+            f.seek(0)
+            f.write(self.lastPDF)
+            f.close()
+        else:
+            self.on_actionSaveAs_PDF_triggered()
+            
+     
+    def on_actionSaveAs_PDF_triggered(self, b=None):
+        if b is not None: return
+        
+        fname=unicode(QtGui.QFileDialog.getSaveFileName(self, 
+                            'Save As',
+                            os.getcwd(),
+                            'PDF files (*.pdf)'
+                            ))
+        if fname:
+            self.pdf_fname=fname
+            self.on_actionSave_PDF_triggered()
 
     def on_tabs_currentChanged(self, i):
         if i == 0: 
@@ -164,7 +241,7 @@ class Main(QtGui.QMainWindow):
     on_style_textChanged = validateStyle
                
     def on_actionRender_triggered(self, b=None):
-        if b is None: return
+        if b is not None: return
         text=unicode(self.ui.text.toPlainText())
         style=unicode(self.ui.style.toPlainText())
         self.hl1.rehighlight()
@@ -188,7 +265,8 @@ class Main(QtGui.QMainWindow):
                 pass
             os.unlink(style_file)
         if flag:
-            self.pdf.loadDocument(render(text))
+            self.lastPDF=render(text)
+            self.pdf.loadDocument(self.lastPDF)
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
@@ -237,11 +315,13 @@ class PDFWidget(QtGui.QWidget):
         self.ui.scroll.verticalScrollBar().setValue(ypos)
         
     def checkActions(self):
-        if self.pdfd.currentPage == self.document.numPages():
+        if not self.pdfd or \
+               self.pdfd.currentPage == self.document.numPages():
             self.ui.next.setEnabled(False)
         else:
             self.ui.next.setEnabled(True)
-        if self.pdfd.currentPage == 1:
+        if not self.pdfd or \
+                self.pdfd.currentPage == 1:
             self.ui.previous.setEnabled(False)
         else:
             self.ui.previous.setEnabled(True)

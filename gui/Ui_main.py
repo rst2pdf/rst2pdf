@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Tue Sep 22 17:17:00 2009
+# Created: Tue Sep 22 22:03:04 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -95,12 +95,24 @@ class Ui_MainWindow(object):
         self.actionSave_PDF = QtGui.QAction(MainWindow)
         self.actionSave_PDF.setIcon(icon1)
         self.actionSave_PDF.setObjectName("actionSave_PDF")
+        self.actionSaveAs_Text = QtGui.QAction(MainWindow)
+        self.actionSaveAs_Text.setIcon(icon2)
+        self.actionSaveAs_Text.setObjectName("actionSaveAs_Text")
+        self.actionSaveAs_Style = QtGui.QAction(MainWindow)
+        self.actionSaveAs_Style.setIcon(icon2)
+        self.actionSaveAs_Style.setObjectName("actionSaveAs_Style")
+        self.actionSaveAs_PDF = QtGui.QAction(MainWindow)
+        self.actionSaveAs_PDF.setIcon(icon1)
+        self.actionSaveAs_PDF.setObjectName("actionSaveAs_PDF")
         self.menuText.addAction(self.actionLoad_Text)
         self.menuText.addAction(self.actionLoad_Style)
         self.menuText.addSeparator()
         self.menuText.addAction(self.actionSave_Text)
+        self.menuText.addAction(self.actionSaveAs_Text)
         self.menuText.addAction(self.actionSave_Style)
+        self.menuText.addAction(self.actionSaveAs_Style)
         self.menuText.addAction(self.actionSave_PDF)
+        self.menuText.addAction(self.actionSaveAs_PDF)
         self.menuBar.addAction(self.menuText.menuAction())
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
@@ -129,6 +141,12 @@ class Ui_MainWindow(object):
         self.actionSave_Style.setToolTip(QtGui.QApplication.translate("MainWindow", "Save Style", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_PDF.setText(QtGui.QApplication.translate("MainWindow", "Save PDF", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSave_PDF.setToolTip(QtGui.QApplication.translate("MainWindow", "Save PDF", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_Text.setText(QtGui.QApplication.translate("MainWindow", "Save Text As", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_Text.setToolTip(QtGui.QApplication.translate("MainWindow", "Save Text", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_Style.setText(QtGui.QApplication.translate("MainWindow", "Save Style As", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_Style.setToolTip(QtGui.QApplication.translate("MainWindow", "Save Style", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_PDF.setText(QtGui.QApplication.translate("MainWindow", "Save PDF As", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSaveAs_PDF.setToolTip(QtGui.QApplication.translate("MainWindow", "Save PDF", None, QtGui.QApplication.UnicodeUTF8))
 
 from codeeditor import CodeEditor
 import icons_rc
