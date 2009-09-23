@@ -26,14 +26,14 @@ from Ui_pdf import Ui_Form
 import simplejson as json
 from BeautifulSoup import BeautifulSoup
 
-_renderer = RstToPdf(splittables=True, debugLinesPdf=True)
+_renderer = RstToPdf(splittables=True)
 
-def render(text):
+def render(text, preview=True):
     '''Render text to PDF via rst2pdf'''
     # FIXME: get parameters for this from somewhere
     
     sio=StringIO()
-    _renderer.createPdf(text=text, output=sio)
+    _renderer.createPdf(text=text, output=sio, debugLinesPdf=preview)
     return sio.getvalue()
     
 class Main(QtGui.QMainWindow):
@@ -138,7 +138,7 @@ class Main(QtGui.QMainWindow):
                             ))
         if fname:
             self.text_fname=fname
-            self.on_actionSave_Text_triggered()
+            #self.on_actionSave_Text_triggered()
 
     def on_actionLoad_Text_triggered(self, b=None):
         if b is None: return
@@ -194,13 +194,13 @@ class Main(QtGui.QMainWindow):
     def on_actionSave_PDF_triggered(self, b=None):
         if b is not None: return
         
-        if not self.lastPDF:
-            self.on_actionRender_triggered()
+        # render it without line numbers in the toc
+        self.on_actionRender_triggered(preview=False)
             
         if self.pdf_fname is not None:
             f=open(self.pdf_fname,'wb+')
             f.seek(0)
-            f.write(self.lastPDF)
+            f.write(self.goodPDF)
             f.close()
         else:
             self.on_actionSaveAs_PDF_triggered()
@@ -230,8 +230,14 @@ class Main(QtGui.QMainWindow):
         
     def on_text_cursorPositionChanged(self):
         cursor=self.ui.text.textCursor()
-        self.editorPos.setText('Line: %d Col: %d'%(cursor.blockNumber(),cursor.columnNumber()))
-        
+        row=cursor.blockNumber()
+        column=cursor.columnNumber()
+        self.editorPos.setText('Line: %d Col: %d'%(row,column))
+        l='line-%s'%(row+1)
+        m=self.lineMarks.get(l,None)
+        if m:
+            self.pdf.gotoPosition(*m)
+            print m
     def validateStyle(self):
         style=unicode(self.ui.style.toPlainText())
         if not style.strip(): #no point in validating an empty string
@@ -259,7 +265,7 @@ class Main(QtGui.QMainWindow):
                 
     on_style_textChanged = validateStyle
                
-    def on_actionRender_triggered(self, b=None):
+    def on_actionRender_triggered(self, b=None, preview=True):
         if b is not None: return
         text=unicode(self.ui.text.toPlainText())
         style=unicode(self.ui.style.toPlainText())
@@ -284,19 +290,28 @@ class Main(QtGui.QMainWindow):
                 pass
             os.unlink(style_file)
         if flag:
-            self.lastPDF=render(text)
-            self.pdf.loadDocument(self.lastPDF)
-            toc=self.pdf.document.toc()
-            if toc:
-                # TODO: Convert to a python XML thing
-                # then use the LINE-X nodes to sync the PDFDisplay
-                # and the text window :-)
-                xml=unicode(toc.toString())
-                soup=BeautifulSoup(xml)
-                self.lineMarks={}
-                for tag in soup.findAll(re.compile('line-')):
-                    dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
-                    self.lineMarks[tag.name]= (dest.pageNumber(), dest.top(), dest.left())
+            if not preview:
+                self.goodPDF=render(text, preview=False)
+            else:
+                self.lastPDF=render(text, preview=preview)
+                self.pdf.loadDocument(self.lastPDF)
+                toc=self.pdf.document.toc()
+                if toc:
+                    # TODO: Convert to a python XML thing
+                    # then use the LINE-X nodes to sync the PDFDisplay
+                    # and the text window :-)
+                    xml=unicode(toc.toString())
+                    soup=BeautifulSoup(xml)
+                    self.lineMarks={}
+                    lastMark=None
+                    for tag in soup.findAll(re.compile('line-')):
+                        dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
+                        self.lineMarks[tag.name]= [dest.pageNumber(), dest.top(), dest.left(),1.]
+                        if lastMark and self.lineMarks[lastMark][1]<dest.top():
+                            self.lineMarks[lastMark][3]=dest.top()
+                        lastMark = tag.name
+                            
+        self.on_text_cursorPositionChanged()
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
@@ -356,6 +371,31 @@ class PDFWidget(QtGui.QWidget):
         else:
             self.ui.previous.setEnabled(True)
         
+    def gotoPosition(self, page, top, left, bottom):
+        """The position is defined in terms of poppler's linkdestinations,
+        top is in the range 0-1, page is one-based."""
+        
+        if not self.pdfd:
+            return
+            
+        self.gotoPage(page)
+        
+        # Draw a mark to see if we are calculating correctly
+        pixmap=QtGui.QPixmap(self.pdfd.pdfImage)
+        p=QtGui.QPainter(pixmap)
+        c=QtGui.QColor(QtCore.Qt.yellow).lighter(160)
+        c.setAlpha(150)
+        p.setBrush(c)
+        p.setPen(c)
+        # FIXME, move the highlighting outside
+        y1=self.pdfd.pdfImage.height()*top
+        y2=self.pdfd.pdfImage.height()*(bottom-top)
+        w=self.pdfd.pdfImage.width()
+        p.drawRect(0,y1,w,y2)
+        self.pdfd.setPixmap(pixmap)
+        
+        
+        
     def gotoPage(self,n):
         if self.pdfd:
             self.pdfd.currentPage = n
@@ -385,7 +425,9 @@ class PDFDisplay(QtGui.QLabel):
         QtGui.QLabel.__init__(self, None)
         self.doc = doc
         self.pdfImage = None
-        self._res = 72.0
+        self._res = self.physicalDpiX()
+        print 'RES:', self._res
+        
         self._currentPage = 1
         self.display()
 
