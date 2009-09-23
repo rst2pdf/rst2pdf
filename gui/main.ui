@@ -14,60 +14,49 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
-     <widget class="QSplitter" name="splitter">
+     <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab">
-        <attribute name="title">
-         <string>Text</string>
-        </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="CodeEditor" name="text">
-           <property name="font">
-            <font>
-             <family>DejaVu Sans Mono</family>
-            </font>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>StyleSheet</string>
-        </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="CodeEditor" name="style">
-           <property name="font">
-            <font>
-             <family>DejaVu Sans Mono</family>
-            </font>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Text</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="CodeEditor" name="text">
+          <property name="font">
+           <font>
+            <family>DejaVu Sans Mono</family>
+           </font>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>StyleSheet</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="CodeEditor" name="style">
+          <property name="font">
+           <font>
+            <family>DejaVu Sans Mono</family>
+           </font>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -97,7 +86,13 @@
     <addaction name="actionSave_PDF"/>
     <addaction name="actionSaveAs_PDF"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
    <addaction name="menuText"/>
+   <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -122,6 +117,12 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+  </widget>
+  <widget class="QDockWidget" name="dock">
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents"/>
   </widget>
   <action name="actionLoad_Text">
    <property name="icon">
@@ -236,11 +237,6 @@
    <header>codeeditor</header>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>text</tabstop>
-  <tabstop>tabWidget</tabstop>
-  <tabstop>style</tabstop>
- </tabstops>
  <resources>
   <include location="icons.qrc"/>
  </resources>
