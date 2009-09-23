@@ -39,7 +39,9 @@ def render(text):
 class Main(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
-        
+
+        self.lineMarks={}
+
         # This is always the same
         self.ui=Ui_MainWindow()
         self.ui.setupUi(self)
@@ -90,12 +92,6 @@ class Main(QtGui.QMainWindow):
         self.ui.statusBar.addWidget(self.statusMessage)
         self.statusMessage.show()
         
-        # Adjust the QSciScintillas
-        #for w in self.ui.text, self.ui.style:
-            #w.setMarginLineNumbers(1,True)
-            #w.setMarginWidth(1,"9999")
-            #w.markerDefine('>',1)
-
         self.on_text_cursorPositionChanged()
         self.on_actionRender_triggered()
         
@@ -297,9 +293,10 @@ class Main(QtGui.QMainWindow):
                 # and the text window :-)
                 xml=unicode(toc.toString())
                 soup=BeautifulSoup(xml)
+                self.lineMarks={}
                 for tag in soup.findAll(re.compile('line-')):
-                    print tag
-                    print tag.name, tag['destination']
+                    dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
+                    self.lineMarks[tag.name]= (dest.pageNumber(), dest.top(), dest.left())
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
