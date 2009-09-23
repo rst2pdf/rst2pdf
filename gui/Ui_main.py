@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Tue Sep 22 23:51:07 2009
+# Created: Wed Sep 23 14:25:08 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -62,7 +62,7 @@ class Ui_MainWindow(object):
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
         self.menuBar = QtGui.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 574, 28))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 574, 26))
         self.menuBar.setObjectName("menuBar")
         self.menuText = QtGui.QMenu(self.menuBar)
         self.menuText.setObjectName("menuText")
@@ -138,6 +138,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.text, self.tabWidget)
+        MainWindow.setTabOrder(self.tabWidget, self.style)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Rst2PDF", None, QtGui.QApplication.UnicodeUTF8))
