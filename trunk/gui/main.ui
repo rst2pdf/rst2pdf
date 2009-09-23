@@ -91,8 +91,11 @@
     <addaction name="actionLoad_Style"/>
     <addaction name="separator"/>
     <addaction name="actionSave_Text"/>
+    <addaction name="actionSaveAs_Text"/>
     <addaction name="actionSave_Style"/>
+    <addaction name="actionSaveAs_Style"/>
     <addaction name="actionSave_PDF"/>
+    <addaction name="actionSaveAs_PDF"/>
    </widget>
    <addaction name="menuText"/>
   </widget>
@@ -184,6 +187,42 @@
    </property>
    <property name="text">
     <string>Save PDF</string>
+   </property>
+   <property name="toolTip">
+    <string>Save PDF</string>
+   </property>
+  </action>
+  <action name="actionSaveAs_Text">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/filesave.svg</normaloff>:/icons/filesave.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save Text As</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Text</string>
+   </property>
+  </action>
+  <action name="actionSaveAs_Style">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/filesave.svg</normaloff>:/icons/filesave.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save Style As</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Style</string>
+   </property>
+  </action>
+  <action name="actionSaveAs_PDF">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/pdf.svg</normaloff>:/icons/pdf.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save PDF As</string>
    </property>
    <property name="toolTip">
     <string>Save PDF</string>
