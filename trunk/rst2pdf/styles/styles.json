@@ -239,7 +239,7 @@
       "fontName": "stdBold"
     }],
     ["fieldvalue" , {
-      "parent": "normal"
+      "parent": "bodytext"
     }],
     ["rubric" , {
       "parent": "bodytext",
