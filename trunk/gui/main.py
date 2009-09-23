@@ -62,6 +62,8 @@ class Main(QtGui.QMainWindow):
         self.ui.actionShow_PDF=self.ui.dock.toggleViewAction ()
         self.ui.actionShow_PDF.setText('Show Preview')
         self.ui.menuView.addAction(self.ui.actionShow_PDF)
+        self.connect(self.ui.dock,QtCore.SIGNAL('visibilityChanged(bool)'),
+            self.ui.pdfbar.setVisible)
         
         self.text_md5=''
         self.style_md5=''
