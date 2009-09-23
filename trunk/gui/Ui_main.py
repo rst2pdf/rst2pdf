@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Tue Sep 22 22:11:07 2009
+# Created: Tue Sep 22 23:27:54 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,17 +15,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(574, 601)
         self.centralWidget = QtGui.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
-        self.verticalLayout = QtGui.QVBoxLayout(self.centralWidget)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.splitter = QtGui.QSplitter(self.centralWidget)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.splitter.sizePolicy().hasHeightForWidth())
-        self.splitter.setSizePolicy(sizePolicy)
-        self.splitter.setOrientation(QtCore.Qt.Horizontal)
-        self.splitter.setObjectName("splitter")
-        self.tabWidget = QtGui.QTabWidget(self.splitter)
+        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.centralWidget)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.tabWidget = QtGui.QTabWidget(self.centralWidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -54,7 +46,7 @@ class Ui_MainWindow(object):
         self.style.setObjectName("style")
         self.horizontalLayout_2.addWidget(self.style)
         self.tabWidget.addTab(self.tab_2, "")
-        self.verticalLayout.addWidget(self.splitter)
+        self.horizontalLayout_3.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralWidget)
         self.statusBar = QtGui.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
@@ -64,6 +56,8 @@ class Ui_MainWindow(object):
         self.menuBar.setObjectName("menuBar")
         self.menuText = QtGui.QMenu(self.menuBar)
         self.menuText.setObjectName("menuText")
+        self.menuView = QtGui.QMenu(self.menuBar)
+        self.menuView.setObjectName("menuView")
         MainWindow.setMenuBar(self.menuBar)
         self.toolBar = QtGui.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
@@ -71,6 +65,12 @@ class Ui_MainWindow(object):
         self.pdfbar = QtGui.QToolBar(MainWindow)
         self.pdfbar.setObjectName("pdfbar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.pdfbar)
+        self.dock = QtGui.QDockWidget(MainWindow)
+        self.dock.setObjectName("dock")
+        self.dockWidgetContents = QtGui.QWidget()
+        self.dockWidgetContents.setObjectName("dockWidgetContents")
+        self.dock.setWidget(self.dockWidgetContents)
+        MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(2), self.dock)
         self.actionLoad_Text = QtGui.QAction(MainWindow)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/fileopen.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -114,20 +114,20 @@ class Ui_MainWindow(object):
         self.menuText.addAction(self.actionSave_PDF)
         self.menuText.addAction(self.actionSaveAs_PDF)
         self.menuBar.addAction(self.menuText.menuAction())
+        self.menuBar.addAction(self.menuView.menuAction())
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        MainWindow.setTabOrder(self.text, self.tabWidget)
-        MainWindow.setTabOrder(self.tabWidget, self.style)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("MainWindow", "Text", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtGui.QApplication.translate("MainWindow", "StyleSheet", None, QtGui.QApplication.UnicodeUTF8))
         self.menuText.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuView.setTitle(QtGui.QApplication.translate("MainWindow", "View", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.pdfbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Text.setText(QtGui.QApplication.translate("MainWindow", "Open Text", None, QtGui.QApplication.UnicodeUTF8))

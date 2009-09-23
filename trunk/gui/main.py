@@ -40,7 +40,7 @@ class Main(QtGui.QMainWindow):
         self.ui.setupUi(self)
         
         self.pdf=PDFWidget()
-        self.ui.splitter.addWidget(self.pdf)
+        self.ui.dock.setWidget(self.pdf)
         self.ui.pdfbar.addAction(self.pdf.ui.previous)
         
         self.ui.pageNum = QtGui.QSpinBox()
@@ -58,7 +58,10 @@ class Main(QtGui.QMainWindow):
         self.ui.pdfbar.addSeparator()
         self.ui.pdfbar.addAction(self.pdf.ui.zoomin)
         self.ui.pdfbar.addAction(self.pdf.ui.zoomout)
-        
+
+        self.ui.actionShow_PDF=self.ui.dock.toggleViewAction ()
+        self.ui.actionShow_PDF.setText('Show Preview')
+        self.ui.menuView.addAction(self.ui.actionShow_PDF)
         
         self.text_md5=''
         self.style_md5=''
