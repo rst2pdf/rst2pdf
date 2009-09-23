@@ -107,12 +107,12 @@ class Heading(Paragraph):
     the PDF TOC."""
 
     def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
-                 snum=None, label=None, parent_id=None, node=None):
-        if label is None: # it happens
-            self.label = text.replace(u'\xa0', ' ').strip(
-                ).replace(' ', '-').encode('ascii', 'replace').lower()
-        else:
-            self.label = label.strip()
+                 snum=None, parent_id=None, node=None):
+        #if label is None: # it happens
+            #self.label = text.replace(u'\xa0', ' ').strip(
+                #).replace(' ', '-').encode('ascii', 'replace').lower()
+        #else:
+            #self.label = label.strip()
         # Issue 114: need to convert "&amp;" to "&" and such.
         # Issue 140: need to make it plain text
         self.stext=re.sub(r'<[^>]*?>', '', unescape(text))
