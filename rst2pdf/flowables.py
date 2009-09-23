@@ -19,7 +19,7 @@ except ImportError:
     HAS_WORDAXE=False
 
 from reportlab.lib.units import *
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+from reportlab.platypus.flowables import _listWrapOn, _FUZZ, NullDraw
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
@@ -101,6 +101,21 @@ class MyIndenter(Indenter):
     def draw(self):
         pass
 
+class TocEntry(NullDraw):
+    """A flowable that adds a TOC entry but draws nothing"""
+    def __init__(self,level,label):
+        self.level=level
+        self.label=label
+        self.width=0
+        self.height=0
+        self.keepWithNext=True
+
+    def draw(self):
+        # Add outline entry
+        self.canv.bookmarkHorizontal(self.label,0,0+self.height)
+        self.canv.addOutlineEntry(self.label,
+                                  self.label,
+                                  max(0,int(self.level)), False)
 
 class Heading(Paragraph):
     """A paragraph that also adds an outline entry in
@@ -126,7 +141,6 @@ class Heading(Paragraph):
     def draw(self):
 
         # Add outline entry
-        #self.canv.bookmarkPage(self.parent_id)
         self.canv.bookmarkHorizontal(self.parent_id,0,0+self.height)
         if self.canv.firstSect:
             self.canv.sectName = self.stext

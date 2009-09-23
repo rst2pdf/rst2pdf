@@ -180,9 +180,13 @@ class RstToPdf(object):
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
-                 breakside='odd'
+                 breakside='odd',
+                 # This adds entries to the PDF TOC
+                 # matching the rst source lines
+                 debugLinesPdf=False
                  ):
         global HAS_SPHINX
+        self.debugLinesPdf=debugLinesPdf
         self.depth=0
         self.breakside=breakside
         self.blank_first_page=blank_first_page
@@ -551,7 +555,7 @@ class RstToPdf(object):
             self.pending_targets=[]
             for _id in targets:
                 if _id not in self.targets:
-                    pre+='<a name="%s"/>'%_id
+                    pre+='<a name="%s"/>'%(_id)
                     self.targets.append(_id)
             node.pdftext = pre+self.gather_pdftext(node) + "\n"
 
@@ -949,7 +953,6 @@ class RstToPdf(object):
                 node.elements = [ Heading(text,
                         self.styles['heading%d'%min(self.depth, maxdepth)],
                         level=self.depth-1,
-                        label=key,
                         parent_id=parent_id,
                         node=node
                         )]
@@ -973,6 +976,8 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.paragraph):
             node.elements = [Paragraph(self.gen_pdftext(node), style)]
+            if self.debugLinesPdf and node.line:
+                node.elements.insert(0,TocEntry(self.depth-1,'LINE-%s'%node.line))
 
         elif isinstance(node, docutils.nodes.docinfo):
             # A docinfo usually contains several fields.
@@ -1619,6 +1624,7 @@ class RstToPdf(object):
         if 'width' in style.__dict__:
             node.elements = [BoundByWidth(style.width,
                 node.elements, style, mode="shrink")]
+
         return node.elements
 
     def gather_elements(self, node, style=None):
@@ -1905,6 +1911,7 @@ class FancyDocTemplate(BaseDocTemplate):
 
 
     def afterFlowable(self, flowable):
+
         if isinstance(flowable, Heading):
             # Notify TOC entry for headings/abstracts/dedications.
             level, text = flowable.level, flowable.text
