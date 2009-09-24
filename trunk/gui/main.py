@@ -316,6 +316,17 @@ class Main(QtGui.QMainWindow):
                         # Fix height of the previous mark, unless we changed pages
                         if lastMark and self.lineMarks[lastMark][0]==dest[0]:
                             self.lineMarks[lastMark][3]=dest[1]
+                        # Fill missing lines
+                        
+                        if lastMark:
+                            n1=int(lastMark.split('-')[1])
+                            ldest=self.lineMarks[lastMark]
+                        else:
+                            n1=0
+                            ldest=[1,0,0,0]
+                        n2=int(key.split('-')[1])
+                        for n in range(n1,n2):
+                            self.lineMarks['line-%s'%n]=ldest
                         self.lineMarks[key]=dest
                         lastMark = key
         self.on_text_cursorPositionChanged()
