@@ -1,5 +1,10 @@
 <RCC>
   <qresource prefix="/" >
+    <file>icons/editcopy.svg</file>
+    <file>icons/editcut.svg</file>
+    <file>icons/editpaste.svg</file>
+    <file>icons/redo.svg</file>
+    <file>icons/undo.svg</file>
     <file>icons/filesave.svg</file>
     <file>icons/pdf.svg</file>
     <file>icons/fileopen.svg</file>
