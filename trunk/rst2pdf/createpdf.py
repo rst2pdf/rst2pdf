@@ -1620,7 +1620,7 @@ class RstToPdf(object):
             node.elements = [BoundByWidth(style.width,
                 node.elements, style, mode="shrink")]
 
-        if self.debugLinesPdf and node.line:
+        if node.line and self.debugLinesPdf:
             node.elements.insert(0,TocEntry(self.depth-1,'LINE-%s'%node.line))
             
         return node.elements

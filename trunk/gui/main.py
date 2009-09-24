@@ -237,7 +237,6 @@ class Main(QtGui.QMainWindow):
         m=self.lineMarks.get(l,None)
         if m:
             self.pdf.gotoPosition(*m)
-            print m
     def validateStyle(self):
         style=unicode(self.ui.style.toPlainText())
         if not style.strip(): #no point in validating an empty string
@@ -302,15 +301,23 @@ class Main(QtGui.QMainWindow):
                     # and the text window :-)
                     xml=unicode(toc.toString())
                     soup=BeautifulSoup(xml)
-                    self.lineMarks={}
-                    lastMark=None
+                    tempMarks=[]
+                    # Put all marks in a list and sort them
+                    # because they can be repeated and out of order
                     for tag in soup.findAll(re.compile('line-')):
                         dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
-                        self.lineMarks[tag.name]= [dest.pageNumber(), dest.top(), dest.left(),1.]
-                        if lastMark and self.lineMarks[lastMark][1]<dest.top():
-                            self.lineMarks[lastMark][3]=dest.top()
-                        lastMark = tag.name
-                            
+                        tempMarks.append([tag.name,[dest.pageNumber(), dest.top(), dest.left(),1.]])
+                    tempMarks.sort()
+                    
+                    self.lineMarks={}
+                    lastMark=None
+                    #from pudb import set_trace; set_trace()
+                    for key,dest in tempMarks:
+                        # Fix height of the previous mark, unless we changed pages
+                        if lastMark and self.lineMarks[lastMark][0]==dest[0]:
+                            self.lineMarks[lastMark][3]=dest[1]
+                        self.lineMarks[key]=dest
+                        lastMark = key
         self.on_text_cursorPositionChanged()
 
 def main():
@@ -393,6 +400,7 @@ class PDFWidget(QtGui.QWidget):
         w=self.pdfd.pdfImage.width()
         p.drawRect(0,y1,w,y2)
         self.pdfd.setPixmap(pixmap)
+        p.end()
         
         
         
@@ -426,7 +434,6 @@ class PDFDisplay(QtGui.QLabel):
         self.doc = doc
         self.pdfImage = None
         self._res = self.physicalDpiX()
-        print 'RES:', self._res
         
         self._currentPage = 1
         self.display()
