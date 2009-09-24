@@ -101,11 +101,24 @@ class Main(QtGui.QMainWindow):
         self.ui.actionUndo1.triggered.connect(self.ui.text.undo)
         self.ui.text.redoAvailable.connect(self.ui.actionRedo1.setEnabled)
         self.ui.actionRedo1.triggered.connect(self.ui.text.redo)
+        
+        self.ui.text.copyAvailable.connect(self.ui.actionCopy1.setEnabled)
+        self.ui.actionCopy1.triggered.connect(self.ui.text.copy)
+        self.ui.text.copyAvailable.connect(self.ui.actionCut1.setEnabled)
+        self.ui.actionCut1.triggered.connect(self.ui.text.cut)
+        self.ui.actionPaste1.triggered.connect(self.ui.text.paste)
+        
 
         self.ui.style.undoAvailable.connect(self.ui.actionUndo2.setEnabled)
         self.ui.actionUndo2.triggered.connect(self.ui.style.undo)
         self.ui.style.redoAvailable.connect(self.ui.actionRedo2.setEnabled)
         self.ui.actionRedo2.triggered.connect(self.ui.style.redo)
+        
+        self.ui.style.copyAvailable.connect(self.ui.actionCopy2.setEnabled)
+        self.ui.actionCopy2.triggered.connect(self.ui.style.copy)
+        self.ui.style.copyAvailable.connect(self.ui.actionCut2.setEnabled)
+        self.ui.actionCut2.triggered.connect(self.ui.style.cut)
+        self.ui.actionPaste2.triggered.connect(self.ui.style.paste)
         
         self.hookEditToolbar(self.ui.text)
         
