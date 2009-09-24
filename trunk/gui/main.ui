@@ -116,7 +116,24 @@
      <string>View</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo1"/>
+    <addaction name="actionUndo2"/>
+    <addaction name="actionRedo1"/>
+    <addaction name="actionRedo2"/>
+    <addaction name="separator"/>
+    <addaction name="actionCut1"/>
+    <addaction name="actionCut2"/>
+    <addaction name="actionCopy1"/>
+    <addaction name="actionCopy2"/>
+    <addaction name="actionPaste1"/>
+    <addaction name="actionPaste2"/>
+   </widget>
    <addaction name="menuText"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
