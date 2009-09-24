@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fix for Issue 200 (position of frames was miscalculated)
 * Fix For Issue 188 (uniconvertor "'unicode' object has no attribute 'readline'" error)
 * New raw directive command: SetPageCounter. This enables
   page counter manipulation, and use of different styles,

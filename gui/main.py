@@ -143,16 +143,18 @@ class Main(QtGui.QMainWindow):
 
     def on_actionLoad_Text_triggered(self, b=None):
         if b is None: return
-        
+        print 'XX1'
         fname=QtGui.QFileDialog.getOpenFileName(self, 
                                                 'Open File',
                                                 os.getcwd(),
                                                 'reSt files (*.txt *.rst)'
                                                 )
         self.text_fname=fname
+        print 'XX2'
         self.disableHL()
         self.ui.text.setPlainText(open(self.text_fname).read())
         self.enableHL()
+        print 'XX3'
         
     def on_actionSave_Style_triggered(self, b=None):
         if b is not None: return
