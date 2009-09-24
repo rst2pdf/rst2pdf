@@ -1,0 +1,84 @@
+.. header:: 
+
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+   This is a long header.
+
+.. footer:: 
+
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+   This is a long footer.
+
+
+Some content
