@@ -120,11 +120,25 @@ class Main(QtGui.QMainWindow):
         self.ui.actionCut2.triggered.connect(self.ui.style.cut)
         self.ui.actionPaste2.triggered.connect(self.ui.style.paste)
         
+        self.clipBoard=QtGui.QApplication.clipboard()
+        self.clipBoard.changed.connect(self.clipChanged)
+        
         self.hookEditToolbar(self.ui.text)
+        self.clipChanged(QtGui.QClipboard.Clipboard)
         
         self.text_fname=None
         self.style_fname=None
         self.pdf_fname=None
+
+    def clipChanged(self, mode=None):
+        if mode is None: return
+        if mode == QtGui.QClipboard.Clipboard:
+            if unicode(self.clipBoard.text()):
+                self.ui.actionPaste1.setEnabled(True)
+                self.ui.actionPaste2.setEnabled(True)
+            else:
+                self.ui.actionPaste1.setEnabled(False)
+                self.ui.actionPaste2.setEnabled(False)
 
     def hookEditToolbar(self, editor):
         if editor == self.ui.text:
