@@ -192,6 +192,8 @@ class RstToPdf(object):
         self.language = language
         self.doc_title = ""
         self.doc_author = ""
+        self.header = header
+        self.footer = footer
         self.decoration = {'header': header,
                            'footer': footer,
                            'endnotes': []}
@@ -1760,6 +1762,12 @@ class RstToPdf(object):
         or a file object), the data is saved there.
 
         """
+        self.decoration = {'header': self.header,
+                           'footer': self.footer,
+                           'endnotes': []}
+                           
+        self.pending_targets=[]
+        self.targets=[]
 
         self.debugLinesPdf = debugLinesPdf
 
