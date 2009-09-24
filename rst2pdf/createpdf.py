@@ -1769,15 +1769,15 @@ class RstToPdf(object):
                     settings_overrides={'language_code': self.language[:2]}
                 else:
                     settings_overrides={}
-                doctree = docutils.core.publish_doctree(text,
+                self.doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
                     settings_overrides=settings_overrides)
-                log.debug(doctree)
+                log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
 
-        elements = self.gen_elements(doctree)
+        elements = self.gen_elements(self.doctree)
 
         if self.blank_first_page:
             elements.insert(0,PageBreak())
