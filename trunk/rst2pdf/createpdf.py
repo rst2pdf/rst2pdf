@@ -1989,6 +1989,7 @@ class FancyPage(PageTemplate):
 
         """
 
+        #from pudb import set_trace; set_trace()
         global head, foot, _counter, _counterStyle
 
         self.tw = self.styles.pw - self.styles.lm -\
@@ -2029,7 +2030,7 @@ class FancyPage(PageTemplate):
             _, self.fh = _listWrapOn(_foot, self.tw, canv)
         else:
             self.fh = 0
-
+            
         canv._doctemplate = doct
 
         self.hx = self.styles.lm
@@ -2040,14 +2041,14 @@ class FancyPage(PageTemplate):
         self.th = self.styles.ph - self.styles.tm - \
             self.styles.bm - self.hh - self.fh - \
             self.styles.ts - self.styles.bs
-
+            
         # Adjust gutter margins
         if doc.page % 2: # Left page
             x1 = self.styles.lm
         else: # Right page
             x1 = self.styles.lm + self.styles.gm
-        y1 = self.styles.tm + self.hh + self.styles.bs
-
+        y1 = self.styles.bm + self.fh + self.styles.bs
+        
         # If there is a background parameter for this page Template, draw it
         if 'background' in self.template:
             if self.template['background'].split('.')[-1].lower() in [
