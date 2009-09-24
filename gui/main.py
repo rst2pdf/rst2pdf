@@ -3,6 +3,7 @@
 """The user interface for our app"""
 
 import os,sys,tempfile,re
+from pprint import pprint
 from multiprocessing import Process
 from hashlib import md5
 from cStringIO import StringIO
@@ -306,12 +307,13 @@ class Main(QtGui.QMainWindow):
                     # because they can be repeated and out of order
                     for tag in soup.findAll(re.compile('line-')):
                         dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
-                        tempMarks.append([tag.name,[dest.pageNumber(), dest.top(), dest.left(),1.]])
+                        tempMarks.append([int(tag.name.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
                     tempMarks.sort()
                     
                     self.lineMarks={}
                     lastMark=None
                     #from pudb import set_trace; set_trace()
+                    lastKey=0
                     for key,dest in tempMarks:
                         # Fix height of the previous mark, unless we changed pages
                         if lastMark and self.lineMarks[lastMark][0]==dest[0]:
@@ -319,16 +321,17 @@ class Main(QtGui.QMainWindow):
                         # Fill missing lines
                         
                         if lastMark:
-                            n1=int(lastMark.split('-')[1])
                             ldest=self.lineMarks[lastMark]
                         else:
-                            n1=0
                             ldest=[1,0,0,0]
-                        n2=int(key.split('-')[1])
-                        for n in range(n1,n2):
+                        for n in range(lastKey,key):
                             self.lineMarks['line-%s'%n]=ldest
-                        self.lineMarks[key]=dest
-                        lastMark = key
+                        k='line-%s'%key
+                        self.lineMarks[k]=dest
+                        lastMark = k
+                        lastKey = key
+                        
+        pprint (self.lineMarks)
         self.on_text_cursorPositionChanged()
 
 def main():
