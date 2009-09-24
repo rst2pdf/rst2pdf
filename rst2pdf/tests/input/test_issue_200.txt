@@ -39,46 +39,4 @@
    This is a long header.
    This is a long header.
 
-.. footer:: 
-
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-   This is a long footer.
-
-
 Some content. If Issue 200 is not fixed, this will appear overlapping with the header.
