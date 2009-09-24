@@ -95,10 +95,48 @@ class Main(QtGui.QMainWindow):
         
         self.on_text_cursorPositionChanged()
         self.on_actionRender_triggered()
+
+        # Connect editing actions to the editors
+        self.ui.text.undoAvailable.connect(self.ui.actionUndo1.setEnabled)
+        self.ui.actionUndo1.triggered.connect(self.ui.text.undo)
+        self.ui.text.redoAvailable.connect(self.ui.actionRedo1.setEnabled)
+        self.ui.actionRedo1.triggered.connect(self.ui.text.redo)
+
+        self.ui.style.undoAvailable.connect(self.ui.actionUndo2.setEnabled)
+        self.ui.actionUndo2.triggered.connect(self.ui.style.undo)
+        self.ui.style.redoAvailable.connect(self.ui.actionRedo2.setEnabled)
+        self.ui.actionRedo2.triggered.connect(self.ui.style.redo)
+        
+        self.hookEditToolbar(self.ui.text)
         
         self.text_fname=None
         self.style_fname=None
         self.pdf_fname=None
+
+    def hookEditToolbar(self, editor):
+        if editor == self.ui.text:
+            self.ui.actionUndo2.setVisible(False)
+            self.ui.actionRedo2.setVisible(False)
+            self.ui.actionCut2.setVisible(False)
+            self.ui.actionPaste2.setVisible(False)
+            self.ui.actionCopy2.setVisible(False)
+            self.ui.actionUndo1.setVisible(True)
+            self.ui.actionRedo1.setVisible(True)
+            self.ui.actionCut1.setVisible(True)
+            self.ui.actionPaste1.setVisible(True)
+            self.ui.actionCopy1.setVisible(True)
+        else:
+            self.ui.actionUndo1.setVisible(False)
+            self.ui.actionRedo1.setVisible(False)
+            self.ui.actionCut1.setVisible(False)
+            self.ui.actionPaste1.setVisible(False)
+            self.ui.actionCopy1.setVisible(False)
+            self.ui.actionUndo2.setVisible(True)
+            self.ui.actionRedo2.setVisible(True)
+            self.ui.actionCut2.setVisible(True)
+            self.ui.actionPaste2.setVisible(True)
+            self.ui.actionCopy2.setVisible(True)
+       
 
     def createPopupMenu(self):
         self.popup=QtGui.QMenu()
@@ -218,11 +256,16 @@ class Main(QtGui.QMainWindow):
             self.pdf_fname=fname
             self.on_actionSave_PDF_triggered()
 
-    def on_tabs_currentChanged(self, i):
-        if i == 0: 
+    def on_tabs_currentChanged(self, i=None):
+        print 'IDX:',self.ui.tabs.currentIndex()
+        if self.ui.tabs.currentIndex() == 0: 
             self.on_text_cursorPositionChanged()
+            print 'hooking text editor'
+            self.hookEditToolbar(self.ui.text)
         else:
             self.on_style_cursorPositionChanged()
+            print 'hooking style editor'
+            self.hookEditToolbar(self.ui.style)
 
     def on_style_cursorPositionChanged(self):
         cursor=self.ui.style.textCursor()
