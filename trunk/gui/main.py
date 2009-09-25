@@ -155,6 +155,10 @@ class Main(QtGui.QMainWindow):
         self.style_fname=None
         self.pdf_fname=None
 
+        self.ui.searchbar.setVisible(False)
+        self.ui.searchWidget=SearchWidget()
+        self.ui.searchbar.addWidget(self.ui.searchWidget)
+    
         self.updatePdf()
 
     def clipChanged(self, mode=None):
@@ -614,6 +618,17 @@ class PDFDisplay(QtGui.QLabel):
             self.setPixmap(QtGui.QPixmap.fromImage(self.pdfImage))
                 #self.update()
                 #delete page;
+
+# Firefox-style in-window search widget, 
+# copied from uRSSus: http://urssus.googlecode.com
+from Ui_searchwidget import Ui_Form as UI_SearchWidget
+
+class SearchWidget(QtGui.QWidget):
+  def __init__(self):
+    QtGui.QWidget.__init__(self)
+    # Set up the UI from designer
+    self.ui=UI_SearchWidget()
+    self.ui.setupUi(self)
 
 if __name__ == "__main__":
     main()

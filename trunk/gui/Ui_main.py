@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Sep 25 01:12:47 2009
+# Created: Fri Sep 25 01:32:12 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -95,6 +95,12 @@ class Ui_MainWindow(object):
         self.editbar = QtGui.QToolBar(MainWindow)
         self.editbar.setObjectName("editbar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.editbar)
+        self.searchbar = QtGui.QToolBar(MainWindow)
+        self.searchbar.setMovable(False)
+        self.searchbar.setAllowedAreas(QtCore.Qt.BottomToolBarArea)
+        self.searchbar.setFloatable(False)
+        self.searchbar.setObjectName("searchbar")
+        MainWindow.addToolBar(QtCore.Qt.BottomToolBarArea, self.searchbar)
         self.actionLoad_Text = QtGui.QAction(MainWindow)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/fileopen.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -230,6 +236,7 @@ class Ui_MainWindow(object):
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.pdfbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.editbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
+        self.searchbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Text.setText(QtGui.QApplication.translate("MainWindow", "Open Text", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Text.setToolTip(QtGui.QApplication.translate("MainWindow", "Open Text", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Style.setText(QtGui.QApplication.translate("MainWindow", "Open Style", None, QtGui.QApplication.UnicodeUTF8))

@@ -206,6 +206,26 @@
    <addaction name="actionPaste1"/>
    <addaction name="actionPaste2"/>
   </widget>
+  <widget class="QToolBar" name="searchbar">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomToolBarArea</set>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionLoad_Text">
    <property name="icon">
     <iconset resource="icons.qrc">
