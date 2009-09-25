@@ -464,7 +464,7 @@ class Main(QtGui.QMainWindow):
                 flag = True
             except:
                 pass
-            os.unlink(style_file)
+            #os.unlink(style_file)
         if flag:
             if not preview:
                 # Send text to the renderer in foreground
@@ -473,6 +473,8 @@ class Main(QtGui.QMainWindow):
             else:
                 # Que to render in background
                 self.render_queue.put([text, preview])
+                self.text_md5=m1
+                self.style_md5=m2
 
     def updatePdf(self):
         
