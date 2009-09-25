@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile,re
+import os,sys,tempfile,re,functools
 from pprint import pprint
 from multiprocessing import Process, Queue
 from Queue import Empty
@@ -158,8 +158,47 @@ class Main(QtGui.QMainWindow):
         self.ui.searchbar.setVisible(False)
         self.ui.searchWidget=SearchWidget()
         self.ui.searchbar.addWidget(self.ui.searchWidget)
+        self.ui.actionFind.triggered.connect(self.ui.searchbar.show)
+        self.ui.actionFind.triggered.connect(self.ui.searchWidget.ui.text.setFocus)
+        self.ui.searchWidget.ui.close.clicked.connect(self.ui.searchbar.hide)
+        self.ui.searchWidget.ui.close.clicked.connect(self.returnFocus)
+        self.ui.searchWidget.ui.next.clicked.connect(self.doFind)
+        self.ui.searchWidget.ui.previous.clicked.connect(self.doFindBackwards)
     
         self.updatePdf()
+
+    def returnFocus(self):
+        """after the search bar closes, focus on the editing widget"""
+        print 'RF:', self.ui.tabs.currentIndex()
+        if self.ui.tabs.currentIndex()==0:
+            self.ui.text.setFocus()
+        else:
+            self.ui.style.setFocus()
+
+    def doFindBackwards (self):
+        return self.doFind(backwards=True)
+    
+    def doFind(self, backwards=False):
+
+        flags=QtGui.QTextDocument.FindFlags()
+        print flags
+        if backwards:
+            flags=QtGui.QTextDocument.FindBackward
+        if self.ui.searchWidget.ui.matchCase.isChecked():
+            flags=flags|QtGui.QTextDocument.FindCaseSensitively
+
+        text=unicode(self.ui.searchWidget.ui.text.text())
+        
+        print 'Serching for:',text
+        
+        if self.ui.tabs.currentIndex()==0:
+            r=self.ui.text.find(text,flags)
+        else:
+            r=self.ui.style.find(text,flags)
+        if r:
+            self.statusMessage.setText('')
+        else:
+            self.statusMessage.setText('%s not found'%text)
 
     def clipChanged(self, mode=None):
         if mode is None: return
