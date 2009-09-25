@@ -100,9 +100,13 @@ class Main(QtGui.QMainWindow):
 
         self.ui.dockLayout.addWidget(self.ui.pdfbar)
         self.ui.dockLayout.addWidget(self.pdf)
+        self.ui.dock.hide()
         self.ui.actionShow_PDF=self.ui.dock.toggleViewAction()
         self.ui.actionShow_PDF.setText('Show Preview')
         self.ui.menuView.addAction(self.ui.actionShow_PDF)
+        self.ui.actionShow_Structure=self.ui.structure.toggleViewAction()
+        self.ui.actionShow_Structure.setText('Show Document Outline')
+        self.ui.menuView.addAction(self.ui.actionShow_Structure)
         
         self.text_md5=''
         self.style_md5=''
