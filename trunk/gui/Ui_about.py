@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'about.ui'
 #
-# Created: Fri Sep 25 11:16:34 2009
+# Created: Fri Sep 25 15:12:14 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -22,6 +22,7 @@ class Ui_Dialog(object):
         self.textBrowser.setStyleSheet("""background-image: url();
 background-color: rgba(255, 255, 255, 50);""")
         self.textBrowser.setFrameShape(QtGui.QFrame.NoFrame)
+        self.textBrowser.setOpenExternalLinks(True)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout.addWidget(self.textBrowser)
         self.horizontalLayout = QtGui.QHBoxLayout()
