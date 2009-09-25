@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Rst2PDF</string>
+   <string>Bookrest</string>
   </property>
   <property name="windowIcon">
    <iconset resource="icons.qrc">
-    <normaloff>:/icons/pdf.svg</normaloff>:/icons/pdf.svg</iconset>
+    <normaloff>:/icons/kaddressbook.svg</normaloff>:/icons/kaddressbook.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
