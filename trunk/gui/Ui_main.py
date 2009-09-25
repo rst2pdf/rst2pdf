@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Sep 25 01:32:12 2009
+# Created: Fri Sep 25 01:44:34 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -184,6 +184,11 @@ class Ui_MainWindow(object):
         self.actionPaste2.setEnabled(False)
         self.actionPaste2.setIcon(icon8)
         self.actionPaste2.setObjectName("actionPaste2")
+        self.actionFind = QtGui.QAction(MainWindow)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/icons/find.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionFind.setIcon(icon9)
+        self.actionFind.setObjectName("actionFind")
         self.menuText.addAction(self.actionLoad_Text)
         self.menuText.addAction(self.actionLoad_Style)
         self.menuText.addSeparator()
@@ -204,6 +209,8 @@ class Ui_MainWindow(object):
         self.menuEdit.addAction(self.actionCopy2)
         self.menuEdit.addAction(self.actionPaste1)
         self.menuEdit.addAction(self.actionPaste2)
+        self.menuEdit.addSeparator()
+        self.menuEdit.addAction(self.actionFind)
         self.menuBar.addAction(self.menuText.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuView.menuAction())
@@ -264,6 +271,7 @@ class Ui_MainWindow(object):
         self.actionCut2.setText(QtGui.QApplication.translate("MainWindow", "Cut", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCopy2.setText(QtGui.QApplication.translate("MainWindow", "Copy", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPaste2.setText(QtGui.QApplication.translate("MainWindow", "Paste", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFind.setText(QtGui.QApplication.translate("MainWindow", "Find", None, QtGui.QApplication.UnicodeUTF8))
 
 from codeeditor import CodeEditor
 import icons_rc
