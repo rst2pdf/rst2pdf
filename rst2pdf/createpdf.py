@@ -1784,6 +1784,8 @@ class RstToPdf(object):
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
+        else:
+            self.doctree = doctree
 
         elements = self.gen_elements(self.doctree)
 
