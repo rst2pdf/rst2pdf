@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile,re,functools
+import os,sys,tempfile,re,functools,time
 from pprint import pprint
 from multiprocessing import Process, Queue
 from Queue import Empty
@@ -13,6 +13,8 @@ from rst2pdf.log import log
 import logging
 
 log.setLevel(logging.INFO)
+
+import docutils
 
 # Import Qt modules
 from PyQt4 import QtCore,QtGui
@@ -30,7 +32,7 @@ from BeautifulSoup import BeautifulSoup
 
 _renderer = RstToPdf(splittables=True)
 
-def renderQueue(render_queue, pdf_queue):
+def renderQueue(render_queue, pdf_queue, doctree_queue):
     while True:
         print 'PPID:',os.getppid()
         try:
@@ -38,32 +40,39 @@ def renderQueue(render_queue, pdf_queue):
             text, preview = render_queue.get(False)
             print 'GOT text to render'
         except Empty: # no more things to render, so do it
-            pdf_queue.put(render(text, preview))
+            print 'PARSING',time.time()
+            doctree = docutils.core.publish_doctree(text)
+            doctree_queue.put(doctree)
+            print 'PARSED',time.time()    
+            pdf_queue.put(render(doctree, preview))
         if os.getppid()==1: # Parent died
             sys.exit(0)
       
-def render(text, preview=True):
+def render(doctree, preview=True):
     '''Render text to PDF via rst2pdf'''
     # FIXME: get parameters for this from somewhere
-    
+
     sio=StringIO()
-    _renderer.createPdf(text=text, output=sio, debugLinesPdf=preview)
+    _renderer.createPdf(doctree=doctree, output=sio, debugLinesPdf=preview)
     return sio.getvalue()
     
 class Main(QtGui.QMainWindow):
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
-
+        
+        self.doctree=None
         self.lineMarks={}
 
         # We put things we want rendered here
         self.render_queue = Queue()
         # We get things rendered back
         self.pdf_queue = Queue()
+        # We get doctrees for the outline viewer
+        self.doctree_queue = Queue()
         
         print 'Starting background renderer...',
         self.renderProcess=Process(target = renderQueue, 
-            args=(self.render_queue, self.pdf_queue))
+            args=(self.render_queue, self.pdf_queue, self.doctree_queue))
         self.renderProcess.daemon=True
         self.renderProcess.start()
         print 'DONE'
@@ -71,7 +80,12 @@ class Main(QtGui.QMainWindow):
         # This is always the same
         self.ui=Ui_MainWindow()
         self.ui.setupUi(self)
-        
+
+        # Adjust column widths in the structure tree
+        self.ui.tree.header().setStretchLastSection(False)
+        self.ui.tree.header().setResizeMode(0, QtGui.QHeaderView.Stretch)
+        self.ui.tree.header().setResizeMode(1, QtGui.QHeaderView.ResizeToContents)
+
         self.pdf=PDFWidget()
         
         self.ui.pageNum = QtGui.QSpinBox()
@@ -170,6 +184,10 @@ class Main(QtGui.QMainWindow):
         self.ui.searchWidget.ui.previous.clicked.connect(self.doFindBackwards)
     
         self.updatePdf()
+        
+        self.renderTimer=QtCore.QTimer()
+        self.renderTimer.timeout.connect(self.on_actionRender_triggered)
+        self.renderTimer.start(5000)
 
     def returnFocus(self):
         """after the search bar closes, focus on the editing widget"""
@@ -255,6 +273,16 @@ class Main(QtGui.QMainWindow):
     def disableHL(self):
         self.hl1.enabled=False
         self.hl2.enabled=False
+
+    def on_tree_itemClicked(self, item=None, column=None):
+        if item is None: return
+        
+        destline=int(item.text(1))-1
+        destblock=self.ui.text.document().findBlockByLineNumber(destline)
+        cursor=self.ui.text.textCursor()
+        cursor.setPosition(destblock.position())
+        self.ui.text.setTextCursor(cursor)
+        self.ui.text.ensureCursorVisible()
 
     def on_actionAbout_Bookrest_triggered(self, b=None):
         if b is None: return
@@ -440,12 +468,53 @@ class Main(QtGui.QMainWindow):
         if flag:
             if not preview:
                 # Send text to the renderer in foreground
-                self.goodPDF=render(text, preview=False)
+                doctree = docutils.core.publish_doctree(text)
+                self.goodPDF=render(doctree, preview=False)
             else:
                 # Que to render in background
                 self.render_queue.put([text, preview])
-                
+
     def updatePdf(self):
+        
+        # See if there is something in the doctree Queue
+        try:
+            self.doctree=self.doctree_queue.get(False)
+            self.doctree.reporter=log
+            class Visitor(docutils.nodes.SparseNodeVisitor):
+                
+                def __init__(self, document, treeWidget):
+                    self.treeWidget=treeWidget
+                    self.treeWidget.clear()
+                    self.doctree=document
+                    self.nodeDict={}
+                    docutils.nodes.SparseNodeVisitor.__init__(self, document)
+                
+                def visit_section(self, node):
+                    print 'SECTION:',node.line,
+                    item=QtGui.QTreeWidgetItem(["",str(node.line)])
+                    if node.parent==self.doctree:
+                        # Top level section
+                        self.treeWidget.addTopLevelItem(item)
+                        self.nodeDict[id(node)]=item
+                    else:
+                        self.nodeDict[id(node.parent)].addChild(item)
+                        self.nodeDict[id(node)]=item
+                    
+                def visit_title(self, node):
+                    if id(node.parent) in self.nodeDict:
+                        self.nodeDict[id(node.parent)].setText(0,node.astext())
+                    
+                def visit_document(self,node):
+                    print 'DOC:',node.line
+                    
+            print self.doctree.__class__
+            self.visitor=Visitor(self.doctree, self.ui.tree)
+            self.doctree.walkabout(self.visitor)
+            print self.visitor.nodeDict
+            
+        except Empty:
+            pass
+        
         # See if there is something in the PDF Queue
         try:
             self.lastPDF=self.pdf_queue.get(False)
@@ -467,7 +536,6 @@ class Main(QtGui.QMainWindow):
                 
                 self.lineMarks={}
                 lastMark=None
-                #from pudb import set_trace; set_trace()
                 lastKey=0
                 for key,dest in tempMarks:
                     # Fix height of the previous mark, unless we changed pages
@@ -492,7 +560,6 @@ class Main(QtGui.QMainWindow):
         
         # Schedule to run again
         QtCore.QTimer.singleShot(500,self.updatePdf)
-        
         
 
 def main():
@@ -687,7 +754,6 @@ class AboutDialog(QtGui.QDialog):
     # Set up the UI from designer
     self.ui=Ui_AboutDialog()
     self.ui.setupUi(self)
-
 
 if __name__ == "__main__":
     main()

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Sep 25 11:37:24 2009
+# Created: Fri Sep 25 13:51:14 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -115,10 +115,15 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.treeWidget = QtGui.QTreeWidget(self.dockWidgetContents_2)
-        self.treeWidget.setObjectName("treeWidget")
-        self.treeWidget.header().setVisible(False)
-        self.verticalLayout_2.addWidget(self.treeWidget)
+        self.tree = QtGui.QTreeWidget(self.dockWidgetContents_2)
+        self.tree.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.tree.setProperty("showDropIndicator", QtCore.QVariant(False))
+        self.tree.setAlternatingRowColors(True)
+        self.tree.setHeaderHidden(False)
+        self.tree.setObjectName("tree")
+        self.tree.header().setVisible(True)
+        self.tree.header().setStretchLastSection(False)
+        self.verticalLayout_2.addWidget(self.tree)
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
         self.structure.setWidget(self.dockWidgetContents_2)
         MainWindow.addDockWidget(QtCore.Qt.DockWidgetArea(1), self.structure)
@@ -270,7 +275,8 @@ class Ui_MainWindow(object):
         self.editbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.searchbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.structure.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Document Structure", None, QtGui.QApplication.UnicodeUTF8))
-        self.treeWidget.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Section", None, QtGui.QApplication.UnicodeUTF8))
+        self.tree.headerItem().setText(0, QtGui.QApplication.translate("MainWindow", "Section", None, QtGui.QApplication.UnicodeUTF8))
+        self.tree.headerItem().setText(1, QtGui.QApplication.translate("MainWindow", "Line", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Text.setText(QtGui.QApplication.translate("MainWindow", "Open Text", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Text.setToolTip(QtGui.QApplication.translate("MainWindow", "Open Text", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLoad_Style.setText(QtGui.QApplication.translate("MainWindow", "Open Style", None, QtGui.QApplication.UnicodeUTF8))
