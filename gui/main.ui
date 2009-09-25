@@ -131,6 +131,8 @@
     <addaction name="actionCopy2"/>
     <addaction name="actionPaste1"/>
     <addaction name="actionPaste2"/>
+    <addaction name="separator"/>
+    <addaction name="actionFind"/>
    </widget>
    <addaction name="menuText"/>
    <addaction name="menuEdit"/>
@@ -449,6 +451,15 @@
    </property>
    <property name="text">
     <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/find.svg</normaloff>:/icons/find.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Find</string>
    </property>
   </action>
  </widget>
