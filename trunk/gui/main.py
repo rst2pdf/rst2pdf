@@ -252,6 +252,11 @@ class Main(QtGui.QMainWindow):
         self.hl1.enabled=False
         self.hl2.enabled=False
 
+    def on_actionAbout_Bookrest_triggered(self, b=None):
+        if b is None: return
+        dlg=AboutDialog()
+        dlg.exec_()
+
     def on_actionSave_Text_triggered(self, b=None):
         if b is not None: return
         
@@ -668,6 +673,17 @@ class SearchWidget(QtGui.QWidget):
     # Set up the UI from designer
     self.ui=UI_SearchWidget()
     self.ui.setupUi(self)
+
+# Cute about dialog
+from Ui_about import Ui_Dialog as Ui_AboutDialog
+
+class AboutDialog(QtGui.QDialog):
+  def __init__(self):
+    QtGui.QDialog.__init__(self)
+    # Set up the UI from designer
+    self.ui=Ui_AboutDialog()
+    self.ui.setupUi(self)
+
 
 if __name__ == "__main__":
     main()
