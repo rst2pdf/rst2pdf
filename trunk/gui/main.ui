@@ -257,16 +257,39 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QTreeWidget" name="treeWidget">
+        <widget class="QTreeWidget" name="tree">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="showDropIndicator" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="headerHidden">
+          <bool>false</bool>
+         </property>
          <attribute name="headerVisible">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="headerStretchLastSection">
           <bool>false</bool>
          </attribute>
-         <attribute name="headerVisible">
+         <attribute name="headerStretchLastSection">
           <bool>false</bool>
          </attribute>
          <column>
           <property name="text">
            <string>Section</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Line</string>
+          </property>
+          <property name="textAlignment">
+           <set>AlignLeft|AlignVCenter</set>
           </property>
          </column>
         </widget>
