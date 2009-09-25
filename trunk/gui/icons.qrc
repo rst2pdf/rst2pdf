@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/" >
+    <file>icons/kaddressbook.svg</file>
     <file>icons/editcopy.svg</file>
     <file>icons/editcut.svg</file>
     <file>icons/editpaste.svg</file>

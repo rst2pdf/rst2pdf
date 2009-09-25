@@ -4,7 +4,8 @@
 
 import os,sys,tempfile,re
 from pprint import pprint
-from multiprocessing import Process
+from multiprocessing import Process, Queue
+from Queue import Empty
 from hashlib import md5
 from cStringIO import StringIO
 from rst2pdf.createpdf import RstToPdf 
@@ -29,6 +30,18 @@ from BeautifulSoup import BeautifulSoup
 
 _renderer = RstToPdf(splittables=True)
 
+def renderQueue(render_queue, pdf_queue):
+    while True:
+        print 'PPID:',os.getppid()
+        try:
+            text, preview = render_queue.get(10)
+            text, preview = render_queue.get(False)
+            print 'GOT text to render'
+        except Empty: # no more things to render, so do it
+            pdf_queue.put(render(text, preview))
+        if os.getppid()==1: # Parent died
+            sys.exit(0)
+      
 def render(text, preview=True):
     '''Render text to PDF via rst2pdf'''
     # FIXME: get parameters for this from somewhere
@@ -43,6 +56,18 @@ class Main(QtGui.QMainWindow):
 
         self.lineMarks={}
 
+        # We put things we want rendered here
+        self.render_queue = Queue()
+        # We get things rendered back
+        self.pdf_queue = Queue()
+        
+        print 'Starting background renderer...',
+        self.renderProcess=Process(target = renderQueue, 
+            args=(self.render_queue, self.pdf_queue))
+        self.renderProcess.daemon=True
+        self.renderProcess.start()
+        print 'DONE'
+        
         # This is always the same
         self.ui=Ui_MainWindow()
         self.ui.setupUi(self)
@@ -129,6 +154,8 @@ class Main(QtGui.QMainWindow):
         self.text_fname=None
         self.style_fname=None
         self.pdf_fname=None
+
+        self.updatePdf()
 
     def clipChanged(self, mode=None):
         if mode is None: return
@@ -360,47 +387,61 @@ class Main(QtGui.QMainWindow):
             os.unlink(style_file)
         if flag:
             if not preview:
+                # Send text to the renderer in foreground
                 self.goodPDF=render(text, preview=False)
             else:
-                self.lastPDF=render(text, preview=preview)
-                self.pdf.loadDocument(self.lastPDF)
-                toc=self.pdf.document.toc()
-                if toc:
-                    # TODO: Convert to a python XML thing
-                    # then use the LINE-X nodes to sync the PDFDisplay
-                    # and the text window :-)
-                    xml=unicode(toc.toString())
-                    soup=BeautifulSoup(xml)
-                    tempMarks=[]
-                    # Put all marks in a list and sort them
-                    # because they can be repeated and out of order
-                    for tag in soup.findAll(re.compile('line-')):
-                        dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
-                        tempMarks.append([int(tag.name.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
-                    tempMarks.sort()
+                # Que to render in background
+                self.render_queue.put([text, preview])
+                
+    def updatePdf(self):
+        # See if there is something in the PDF Queue
+        try:
+            self.lastPDF=self.pdf_queue.get(False)
+            self.pdf.loadDocument(self.lastPDF)
+            toc=self.pdf.document.toc()
+            if toc:
+                # TODO: Convert to a python XML thing
+                # then use the LINE-X nodes to sync the PDFDisplay
+                # and the text window :-)
+                xml=unicode(toc.toString())
+                soup=BeautifulSoup(xml)
+                tempMarks=[]
+                # Put all marks in a list and sort them
+                # because they can be repeated and out of order
+                for tag in soup.findAll(re.compile('line-')):
+                    dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
+                    tempMarks.append([int(tag.name.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
+                tempMarks.sort()
+                
+                self.lineMarks={}
+                lastMark=None
+                #from pudb import set_trace; set_trace()
+                lastKey=0
+                for key,dest in tempMarks:
+                    # Fix height of the previous mark, unless we changed pages
+                    if lastMark and self.lineMarks[lastMark][0]==dest[0]:
+                        self.lineMarks[lastMark][3]=dest[1]
+                    # Fill missing lines
                     
-                    self.lineMarks={}
-                    lastMark=None
-                    #from pudb import set_trace; set_trace()
-                    lastKey=0
-                    for key,dest in tempMarks:
-                        # Fix height of the previous mark, unless we changed pages
-                        if lastMark and self.lineMarks[lastMark][0]==dest[0]:
-                            self.lineMarks[lastMark][3]=dest[1]
-                        # Fill missing lines
-                        
-                        if lastMark:
-                            ldest=self.lineMarks[lastMark]
-                        else:
-                            ldest=[1,0,0,0]
-                        for n in range(lastKey,key):
-                            self.lineMarks['line-%s'%n]=ldest
-                        k='line-%s'%key
-                        self.lineMarks[k]=dest
-                        lastMark = k
-                        lastKey = key
-                        
-        self.on_text_cursorPositionChanged()
+                    if lastMark:
+                        ldest=self.lineMarks[lastMark]
+                    else:
+                        ldest=[1,0,0,0]
+                    for n in range(lastKey,key):
+                        self.lineMarks['line-%s'%n]=ldest
+                    k='line-%s'%key
+                    self.lineMarks[k]=dest
+                    lastMark = k
+                    lastKey = key
+                    
+            self.on_text_cursorPositionChanged()
+        except Empty: #Nothing there
+            pass
+        
+        # Schedule to run again
+        QtCore.QTimer.singleShot(500,self.updatePdf)
+        
+        
 
 def main():
     # Again, this is boilerplate, it's going to be the same on 
