@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Sep 25 09:55:58 2009
+# Created: Fri Sep 25 11:19:46 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,6 +70,8 @@ class Ui_MainWindow(object):
         self.menuView.setObjectName("menuView")
         self.menuEdit = QtGui.QMenu(self.menuBar)
         self.menuEdit.setObjectName("menuEdit")
+        self.menuHelp = QtGui.QMenu(self.menuBar)
+        self.menuHelp.setObjectName("menuHelp")
         MainWindow.setMenuBar(self.menuBar)
         self.toolBar = QtGui.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
@@ -189,6 +191,8 @@ class Ui_MainWindow(object):
         icon9.addPixmap(QtGui.QPixmap(":/icons/find.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionFind.setIcon(icon9)
         self.actionFind.setObjectName("actionFind")
+        self.actionAbout_Bookrest = QtGui.QAction(MainWindow)
+        self.actionAbout_Bookrest.setObjectName("actionAbout_Bookrest")
         self.menuText.addAction(self.actionLoad_Text)
         self.menuText.addAction(self.actionLoad_Style)
         self.menuText.addSeparator()
@@ -211,9 +215,11 @@ class Ui_MainWindow(object):
         self.menuEdit.addAction(self.actionPaste2)
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionFind)
+        self.menuHelp.addAction(self.actionAbout_Bookrest)
         self.menuBar.addAction(self.menuText.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
         self.menuBar.addAction(self.menuView.menuAction())
+        self.menuBar.addAction(self.menuHelp.menuAction())
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
         self.editbar.addAction(self.actionUndo1)
@@ -240,6 +246,7 @@ class Ui_MainWindow(object):
         self.menuText.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuView.setTitle(QtGui.QApplication.translate("MainWindow", "View", None, QtGui.QApplication.UnicodeUTF8))
         self.menuEdit.setTitle(QtGui.QApplication.translate("MainWindow", "Edit", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.pdfbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
         self.editbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar_2", None, QtGui.QApplication.UnicodeUTF8))
@@ -283,6 +290,7 @@ class Ui_MainWindow(object):
         self.actionPaste2.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+V", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind.setText(QtGui.QApplication.translate("MainWindow", "Find", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+F", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAbout_Bookrest.setText(QtGui.QApplication.translate("MainWindow", "About Bookrest", None, QtGui.QApplication.UnicodeUTF8))
 
 from codeeditor import CodeEditor
 import icons_rc
