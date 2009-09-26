@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile,re,functools,time
+import os,sys,tempfile,re,functools,time,types
 from pprint import pprint
 from multiprocessing import Process, Queue
 from Queue import Empty
@@ -30,6 +30,9 @@ from Ui_pdf import Ui_Form
 
 import simplejson as json
 from BeautifulSoup import BeautifulSoup
+
+StringTypes=types.StringTypes+(QtCore.QString,)
+
 
 def renderQueue(render_queue, pdf_queue, doctree_queue):
     _renderer = RstToPdf(splittables=True)
@@ -798,6 +801,11 @@ class PageTemplates(QtGui.QWidget):
         self.stylesheet = stylesheet
         for template in self.stylesheet.pageTemplates:
             self.ui.templates.addItem(template)
+
+    def on_templates_currentIndexChanged(self, text):
+        if not isinstance(text,StringTypes): return
+        text=unicode(text)
+        print self.stylesheet.pageTemplates[text]
 
 if __name__ == "__main__":
     main()
