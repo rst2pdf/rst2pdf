@@ -459,11 +459,9 @@ class Main(QtGui.QMainWindow):
             fd, style_file=tempfile.mkstemp()
             os.write(fd,style)
             os.close(fd)
-            try:
-                _renderer.loadStyles([style_file])
-                flag = True
-            except:
-                pass
+            print 'Loading styles from style_file'
+            _renderer.loadStyles([style_file])
+            flag = True
             #os.unlink(style_file)
         if flag:
             if not preview:
