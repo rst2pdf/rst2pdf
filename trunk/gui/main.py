@@ -9,6 +9,7 @@ from Queue import Empty
 from hashlib import md5
 from cStringIO import StringIO
 from rst2pdf.createpdf import RstToPdf 
+from rst2pdf.styles import StyleSheet 
 from rst2pdf.log import log
 import logging
 
@@ -279,6 +280,28 @@ class Main(QtGui.QMainWindow):
     def disableHL(self):
         self.hl1.enabled=False
         self.hl2.enabled=False
+
+    def on_actionTest_Action_triggered(self, b=None):
+        if b is not None: return
+        
+        
+        # I need to create a stylesheet object so I can parse and merge
+        # the current stylesheet
+        
+        # FIXME: passing the current stylesheet to the StyleSheet class
+        # should be much simpler than this, also it's repeated from
+        # another method
+        # TODO: don't use the current user stylesheet if it's not valid!
+        style=unicode(self.ui.style.toPlainText())
+        fd, style_file=tempfile.mkstemp()
+        os.write(fd,style)
+        os.close(fd)
+        self.styles = StyleSheet([style_file])
+        os.unlink(style_file)
+
+        self.testwidget=PageTemplates(self.styles)
+        self.testwidget.show()
+
 
     def on_tree_itemClicked(self, item=None, column=None):
         if item is None: return
@@ -755,6 +778,7 @@ class SearchWidget(QtGui.QWidget):
 # Cute about dialog
 from Ui_about import Ui_Dialog as Ui_AboutDialog
 
+
 class AboutDialog(QtGui.QDialog):
   def __init__(self):
     QtGui.QDialog.__init__(self)
@@ -762,5 +786,19 @@ class AboutDialog(QtGui.QDialog):
     self.ui=Ui_AboutDialog()
     self.ui.setupUi(self)
 
+# Widget to edit page templates
+from Ui_pagetemplates import Ui_Form as Ui_templates
+
+
+class PageTemplates(QtGui.QWidget):
+    def __init__(self, stylesheet, parent=None):
+        QtGui.QWidget.__init__(self,parent)
+        self.ui=Ui_templates()
+        self.ui.setupUi(self)
+        self.stylesheet = stylesheet
+        for template in self.stylesheet.pageTemplates:
+            self.ui.templates.addItem(template)
+
 if __name__ == "__main__":
     main()
+
