@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Fri Sep 25 13:51:14 2009
+# Created: Sat Sep 26 19:56:06 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -215,6 +215,8 @@ class Ui_MainWindow(object):
         self.actionFind.setObjectName("actionFind")
         self.actionAbout_Bookrest = QtGui.QAction(MainWindow)
         self.actionAbout_Bookrest.setObjectName("actionAbout_Bookrest")
+        self.actionTest_Action = QtGui.QAction(MainWindow)
+        self.actionTest_Action.setObjectName("actionTest_Action")
         self.menuText.addAction(self.actionLoad_Text)
         self.menuText.addAction(self.actionLoad_Style)
         self.menuText.addSeparator()
@@ -244,6 +246,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
+        self.toolBar.addAction(self.actionTest_Action)
         self.editbar.addAction(self.actionUndo1)
         self.editbar.addAction(self.actionUndo2)
         self.editbar.addAction(self.actionRedo1)
@@ -317,6 +320,7 @@ class Ui_MainWindow(object):
         self.actionFind.setText(QtGui.QApplication.translate("MainWindow", "Find", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+F", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_Bookrest.setText(QtGui.QApplication.translate("MainWindow", "About Bookrest", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionTest_Action.setText(QtGui.QApplication.translate("MainWindow", "Test Action", None, QtGui.QApplication.UnicodeUTF8))
 
 from codeeditor import CodeEditor
 import icons_rc

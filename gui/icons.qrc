@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/" >
+    <file>icons/new.svg</file>
     <file>icons/bookrest.jpg</file>
     <file>icons/find.svg</file>
     <file>icons/close.svg</file>

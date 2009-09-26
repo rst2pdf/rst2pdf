@@ -157,6 +157,7 @@
    </attribute>
    <addaction name="actionLoad_Text"/>
    <addaction name="actionRender"/>
+   <addaction name="actionTest_Action"/>
   </widget>
   <widget class="QToolBar" name="pdfbar">
    <property name="windowTitle">
@@ -272,9 +273,6 @@
          </property>
          <attribute name="headerVisible">
           <bool>true</bool>
-         </attribute>
-         <attribute name="headerStretchLastSection">
-          <bool>false</bool>
          </attribute>
          <attribute name="headerStretchLastSection">
           <bool>false</bool>
@@ -569,6 +567,11 @@
   <action name="actionAbout_Bookrest">
    <property name="text">
     <string>About Bookrest</string>
+   </property>
+  </action>
+  <action name="actionTest_Action">
+   <property name="text">
+    <string>Test Action</string>
    </property>
   </action>
  </widget>
