@@ -289,8 +289,6 @@ class RstToPdf(object):
         if styleSheets is None:
             styleSheets=[]
         
-        styleSheets = [join(self.PATH, 'styles', 'styles.json'),
-                       join(self.PATH, 'styles', 'default.json')] + styleSheets
         self.styles = sty.StyleSheet(styleSheets,
                                      self.font_path,
                                      self.style_path,

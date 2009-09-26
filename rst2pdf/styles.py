@@ -9,6 +9,7 @@ import sys
 import re
 from copy import copy
 from types import *
+from os.path import abspath, dirname, expanduser, join
 
 import docutils.nodes
 
@@ -44,9 +45,20 @@ class StyleSheet(object):
 
     def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
-        self.def_dpi=def_dpi
+        # find base path
+        if hasattr(sys, 'frozen'):
+            self.PATH = abspath(dirname(sys.executable))
+        else:
+            self.PATH = abspath(dirname(__file__))
+            
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
+        # but the two default stylesheets will always
+        # be loaded first
+        flist = [join(self.PATH, 'styles', 'styles.json'),
+                join(self.PATH, 'styles', 'default.json')] + flist
+
+        self.def_dpi=def_dpi        
         dirn=os.path.dirname(__file__)
         if font_path is None:
             font_path=[]
