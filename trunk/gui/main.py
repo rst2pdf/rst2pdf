@@ -799,13 +799,29 @@ class PageTemplates(QtGui.QWidget):
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.stylesheet = stylesheet
+        self.template = None
         for template in self.stylesheet.pageTemplates:
             self.ui.templates.addItem(template)
 
     def on_templates_currentIndexChanged(self, text):
         if not isinstance(text,StringTypes): return
         text=unicode(text)
-        print self.stylesheet.pageTemplates[text]
+        self.template=self.stylesheet.pageTemplates[text]
+        self.ui.frames.clear()
+        for i in range(0, len(self.template['frames'])):
+            self.ui.frames.addItem('Frame %d'%(i+1))
+        self.ui.footer.setChecked(self.template['showFooter'])
+        self.ui.header.setChecked(self.template['showHeader'])
+        
+    def on_frames_currentIndexChanged(self, index):
+        if type(index) != types.IntType: return
+        if not self.template: return
+        self.frame=self.template['frames'][index]
+        self.ui.top.setText(self.frame[0])
+        self.ui.left.setText(self.frame[1])
+        self.ui.width.setText(self.frame[2])
+        self.ui.height.setText(self.frame[3])
+    
 
 if __name__ == "__main__":
     main()
