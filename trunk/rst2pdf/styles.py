@@ -98,11 +98,11 @@ class StyleSheet(object):
             except ValueError, e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\
                     (fname, str(e)))
-                sys.exit(1)
+                continue
             except IOError, e: #Error opening the ssheet
                 log.critical('Error opening stylesheet "%s": %s'%\
                     (fname, str(e)))
-                sys.exit(1)
+                continue
 
         # Get pageSetup data from all stylessheets in order:
         self.ps = pagesizes.A4
@@ -117,7 +117,7 @@ class StyleSheet(object):
                     else:
                         log.critical('Unknown page size %s in stylesheet %s'%\
                             (page['size'], ssname))
-                        sys.exit(1)
+                        continue
                 else: #A custom size
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
@@ -268,7 +268,7 @@ class StyleSheet(object):
                     except Exception, e:
                         log.critical("Error processing font %s: %s",
                             fname, str(e))
-                        sys.exit(1)
+                        continue
 
         # Go though all styles in all stylesheets and find all fontNames.
         # Then decide what to do with them
