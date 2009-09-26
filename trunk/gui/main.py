@@ -30,16 +30,29 @@ from Ui_pdf import Ui_Form
 import simplejson as json
 from BeautifulSoup import BeautifulSoup
 
-_renderer = RstToPdf(splittables=True)
-
 def renderQueue(render_queue, pdf_queue, doctree_queue):
+    _renderer = RstToPdf(splittables=True)
+    
+    def render(doctree, preview=True):
+        '''Render text to PDF via rst2pdf'''
+        # FIXME: get parameters for this from somewhere
+
+        sio=StringIO()
+        _renderer.createPdf(doctree=doctree, output=sio, debugLinesPdf=preview)
+        return sio.getvalue()
+        
     while True:
         print 'PPID:',os.getppid()
         try:
-            text, preview = render_queue.get(10)
-            text, preview = render_queue.get(False)
+            style_file, text, preview = render_queue.get(10)
+            style_file, text, preview = render_queue.get(False)            
             print 'GOT text to render'
         except Empty: # no more things to render, so do it
+            if style_file:
+                print 'LOADING StyleSheet'
+                _renderer.loadStyles([style_file])
+            flag = True
+            #os.unlink(style_file)
             print 'PARSING',time.time()
             doctree = docutils.core.publish_doctree(text)
             doctree_queue.put(doctree)
@@ -48,13 +61,6 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
         if os.getppid()==1: # Parent died
             sys.exit(0)
       
-def render(doctree, preview=True):
-    '''Render text to PDF via rst2pdf'''
-    # FIXME: get parameters for this from somewhere
-
-    sio=StringIO()
-    _renderer.createPdf(doctree=doctree, output=sio, debugLinesPdf=preview)
-    return sio.getvalue()
     
 class Main(QtGui.QMainWindow):
     def __init__(self):
@@ -454,23 +460,24 @@ class Main(QtGui.QMainWindow):
         m2=m2.digest()
         
         flag = m1 != self.text_md5
-        
+        style_file=None
         if m2 != self.style_md5 and style:
             fd, style_file=tempfile.mkstemp()
             os.write(fd,style)
             os.close(fd)
             print 'Loading styles from style_file'
-            _renderer.loadStyles([style_file])
             flag = True
-            #os.unlink(style_file)
         if flag:
             if not preview:
+                pass
                 # Send text to the renderer in foreground
-                doctree = docutils.core.publish_doctree(text)
-                self.goodPDF=render(doctree, preview=False)
+                # FIXME: render is no longer accessible from the parent
+                # process
+                #doctree = docutils.core.publish_doctree(text)
+                #self.goodPDF=render(doctree, preview=False)
             else:
                 # Que to render in background
-                self.render_queue.put([text, preview])
+                self.render_queue.put([style_file, text, preview])
                 self.text_md5=m1
                 self.style_md5=m2
 
