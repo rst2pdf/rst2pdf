@@ -829,9 +829,27 @@ class PageTemplates(QtGui.QWidget):
         self.ui.left.setText(self.frame[1])
         self.ui.width.setText(self.frame[2])
         self.ui.height.setText(self.frame[3])
+        self.updatePreview()
     
     def updatePreview(self):
         pm=QtGui.QPixmap(self.pageImage)
+        p=QtGui.QPainter(pm)
+        p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
+        p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
+        
+        def drawFrame(frame):
+            x=self.stylesheet.adjustUnits(frame[0],self.pw)
+            y=self.stylesheet.adjustUnits(frame[1],self.ph)
+            w=self.stylesheet.adjustUnits(frame[2],self.pw)-1
+            h=self.stylesheet.adjustUnits(frame[3],self.ph)-1
+            p.drawRect(x,y,w,h)
+        
+        p.setBrush(QtGui.QBrush(QtGui.QColor("lightgrey")))
+        for frame in self.template['frames']:
+            drawFrame(frame)
+        p.setBrush(QtGui.QBrush(QtGui.QColor("yellow")))
+        drawFrame(self.frame)    
+        p.end()
         self.ui.preview.setPixmap(pm)
 
 if __name__ == "__main__":
