@@ -796,6 +796,7 @@ from Ui_pagetemplates import Ui_Form as Ui_templates
 class PageTemplates(QtGui.QWidget):
     def __init__(self, stylesheet, parent=None):
         QtGui.QWidget.__init__(self,parent)
+        self.scale = 1/3.
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.stylesheet = stylesheet
@@ -807,6 +808,8 @@ class PageTemplates(QtGui.QWidget):
         self.template = None
         for template in self.stylesheet.pageTemplates:
             self.ui.templates.addItem(template)
+            
+            
         self.updatePreview()
 
     def on_templates_currentIndexChanged(self, text):
@@ -830,7 +833,15 @@ class PageTemplates(QtGui.QWidget):
         self.ui.width.setText(self.frame[2])
         self.ui.height.setText(self.frame[3])
         self.updatePreview()
-    
+
+    def on_zoomin_clicked(self):
+        self.scale=self.scale*1.25
+        self.updatePreview()
+        
+    def on_zoomout_clicked(self):
+        self.scale=self.scale/1.25
+        self.updatePreview()
+
     def updatePreview(self):
         pm=QtGui.QPixmap(self.pageImage)
         p=QtGui.QPainter(pm)
@@ -850,7 +861,7 @@ class PageTemplates(QtGui.QWidget):
         p.setBrush(QtGui.QBrush(QtGui.QColor("yellow")))
         drawFrame(self.frame)    
         p.end()
-        self.ui.preview.setPixmap(pm)
+        self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
 
 if __name__ == "__main__":
     main()
