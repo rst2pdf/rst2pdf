@@ -799,9 +799,15 @@ class PageTemplates(QtGui.QWidget):
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.stylesheet = stylesheet
+        self.pw=self.stylesheet.ps[0]
+        self.ph=self.stylesheet.ps[1]
+        self.pageImage=QtGui.QImage(int(self.pw),
+                                    int(self.ph),
+                                    QtGui.QImage.Format_RGB32)
         self.template = None
         for template in self.stylesheet.pageTemplates:
             self.ui.templates.addItem(template)
+        self.updatePreview()
 
     def on_templates_currentIndexChanged(self, text):
         if not isinstance(text,StringTypes): return
@@ -813,6 +819,8 @@ class PageTemplates(QtGui.QWidget):
         self.ui.footer.setChecked(self.template['showFooter'])
         self.ui.header.setChecked(self.template['showHeader'])
         
+        self.updatePreview()
+        
     def on_frames_currentIndexChanged(self, index):
         if type(index) != types.IntType: return
         if not self.template: return
@@ -822,6 +830,9 @@ class PageTemplates(QtGui.QWidget):
         self.ui.width.setText(self.frame[2])
         self.ui.height.setText(self.frame[3])
     
+    def updatePreview(self):
+        pm=QtGui.QPixmap(self.pageImage)
+        self.ui.preview.setPixmap(pm)
 
 if __name__ == "__main__":
     main()
