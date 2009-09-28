@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'searchwidget.ui'
 #
-# Created: Fri Sep 25 01:36:24 2009
+# Created: Mon Sep 28 09:37:13 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -64,3 +64,13 @@ class Ui_Form(object):
         self.matchCase.setText(QtGui.QApplication.translate("Form", "&Match Case", None, QtGui.QApplication.UnicodeUTF8))
 
 import icons_rc
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Form = QtGui.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+
