@@ -812,6 +812,7 @@ class ConfigDialog(QtGui.QDialog):
 
         # Load all config things
         pages=[
+            ['Page Setup',PageSetup],
             ['Page Templates',PageTemplates],
         ]
         self.ui_pages={}
@@ -926,6 +927,19 @@ class PageTemplates(QtGui.QWidget):
         except:
             pass
         p.end()
+
+
+# Widget to edit page templates
+from Ui_pagesetup import Ui_Form as Ui_pagesetup
+
+
+class PageSetup(QtGui.QWidget):
+    def __init__(self, stylesheet, parent=None):
+        QtGui.QWidget.__init__(self,parent)
+        self.scale = 1/3.
+        self.ui=Ui_pagesetup()
+        self.ui.setupUi(self)
+
 
 if __name__ == "__main__":
     main()
