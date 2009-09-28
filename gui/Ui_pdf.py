@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pdf.ui'
 #
-# Created: Mon Sep 28 11:18:21 2009
+# Created: Mon Sep 28 15:29:03 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
