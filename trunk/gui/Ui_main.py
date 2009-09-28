@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Mon Sep 28 09:37:11 2009
+# Created: Mon Sep 28 10:27:06 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -217,6 +217,11 @@ class Ui_MainWindow(object):
         self.actionAbout_Bookrest.setObjectName("actionAbout_Bookrest")
         self.actionTest_Action = QtGui.QAction(MainWindow)
         self.actionTest_Action.setObjectName("actionTest_Action")
+        self.actionSettings = QtGui.QAction(MainWindow)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/icons/configure.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.actionSettings.setIcon(icon10)
+        self.actionSettings.setObjectName("actionSettings")
         self.menuText.addAction(self.actionLoad_Text)
         self.menuText.addAction(self.actionLoad_Style)
         self.menuText.addSeparator()
@@ -239,6 +244,8 @@ class Ui_MainWindow(object):
         self.menuEdit.addAction(self.actionPaste2)
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionFind)
+        self.menuEdit.addSeparator()
+        self.menuEdit.addAction(self.actionSettings)
         self.menuHelp.addAction(self.actionAbout_Bookrest)
         self.menuBar.addAction(self.menuText.menuAction())
         self.menuBar.addAction(self.menuEdit.menuAction())
@@ -247,6 +254,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
         self.toolBar.addAction(self.actionTest_Action)
+        self.toolBar.addAction(self.actionSettings)
         self.editbar.addAction(self.actionUndo1)
         self.editbar.addAction(self.actionUndo2)
         self.editbar.addAction(self.actionRedo1)
@@ -321,6 +329,7 @@ class Ui_MainWindow(object):
         self.actionFind.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+F", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout_Bookrest.setText(QtGui.QApplication.translate("MainWindow", "About Bookrest", None, QtGui.QApplication.UnicodeUTF8))
         self.actionTest_Action.setText(QtGui.QApplication.translate("MainWindow", "Test Action", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSettings.setText(QtGui.QApplication.translate("MainWindow", "Settings", None, QtGui.QApplication.UnicodeUTF8))
 
 from codeeditor import CodeEditor
 import icons_rc

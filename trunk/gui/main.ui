@@ -133,6 +133,8 @@
     <addaction name="actionPaste2"/>
     <addaction name="separator"/>
     <addaction name="actionFind"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -158,6 +160,7 @@
    <addaction name="actionLoad_Text"/>
    <addaction name="actionRender"/>
    <addaction name="actionTest_Action"/>
+   <addaction name="actionSettings"/>
   </widget>
   <widget class="QToolBar" name="pdfbar">
    <property name="windowTitle">
@@ -572,6 +575,15 @@
   <action name="actionTest_Action">
    <property name="text">
     <string>Test Action</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>

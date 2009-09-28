@@ -285,9 +285,8 @@ class Main(QtGui.QMainWindow):
         self.hl1.enabled=False
         self.hl2.enabled=False
 
-    def on_actionTest_Action_triggered(self, b=None):
+    def on_actionSettings_triggered(self, b=None):
         if b is not None: return
-        
         
         # I need to create a stylesheet object so I can parse and merge
         # the current stylesheet
@@ -302,6 +301,14 @@ class Main(QtGui.QMainWindow):
         os.close(fd)
         self.styles = StyleSheet([style_file])
         os.unlink(style_file)
+
+        config=ConfigDialog(styles=self.styles)
+        config.exec_()
+
+    def on_actionTest_Action_triggered(self, b=None):
+        if b is not None: return
+        
+        
 
         self.testwidget=PageTemplates(self.styles)
         self.testwidget.show()
@@ -789,6 +796,38 @@ class AboutDialog(QtGui.QDialog):
     # Set up the UI from designer
     self.ui=Ui_AboutDialog()
     self.ui.setupUi(self)
+
+# Configuration dialog
+from Ui_configdialog import Ui_Dialog as Ui_ConfigDialog
+
+
+class ConfigDialog(QtGui.QDialog):
+    def __init__(self, styles):
+        QtGui.QDialog.__init__(self)
+        # Set up the UI from designer
+        self.ui=Ui_ConfigDialog()
+        self.ui.setupUi(self)
+        self.styles=styles
+        self.curPageWidget=None
+
+        # Load all config things
+        pages=[
+            ['Page Templates',PageTemplates],
+        ]
+        self.ui_pages={}
+        for page,widget in pages:
+            self.ui_pages[page]=widget(self.styles)
+            self.ui.pagelist.addItem(page)
+
+    def on_pagelist_currentTextChanged(self, text=None):
+        if text is None: return
+        text=unicode(text)
+        if self.curPageWidget:
+            self.curPageWidget.hide()
+        self.curPageWidget=self.ui_pages[text]
+        self.ui.layout.addWidget(self.curPageWidget)
+        self.curPageWidget.show()
+        
 
 # Widget to edit page templates
 from Ui_pagetemplates import Ui_Form as Ui_templates
