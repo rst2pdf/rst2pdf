@@ -848,10 +848,23 @@ class PageTemplates(QtGui.QWidget):
                                     
         self.templates = copy(self.stylesheet.pageTemplates) 
         self.template = None
-        for template in self.stylesheet.pageTemplates:
+        for template in self.templates:
             self.ui.templates.addItem(template)
             
             
+        self.updatePreview()
+
+    def applyChanges(self):
+        # TODO: validate everything
+        self.frame=[unicode(w.text()) for w in [
+            self.ui.left,
+            self.ui.top,
+            self.ui.width,
+            self.ui.height
+            ]]
+        self.template["frames"][self.frameIndex]=self.frame
+        self.template['showFooter']=self.ui.footer.isChecked()
+        self.template['showHeader']=self.ui.header.isChecked()
         self.updatePreview()
 
     def on_templates_currentIndexChanged(self, text):
@@ -869,9 +882,10 @@ class PageTemplates(QtGui.QWidget):
     def on_frames_currentIndexChanged(self, index):
         if type(index) != types.IntType: return
         if not self.template: return
+        self.frameIndex=index
         self.frame=self.template['frames'][index]
-        self.ui.top.setText(self.frame[0])
-        self.ui.left.setText(self.frame[1])
+        self.ui.left.setText(self.frame[0])
+        self.ui.top.setText(self.frame[1])
         self.ui.width.setText(self.frame[2])
         self.ui.height.setText(self.frame[3])
         self.updatePreview()
@@ -887,28 +901,31 @@ class PageTemplates(QtGui.QWidget):
     def updatePreview(self):
         pm=QtGui.QPixmap(self.pageImage)
         p=QtGui.QPainter(pm)
-        
-        p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
-        p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
-        x1=self.stylesheet.lm
-        y1=self.stylesheet.tm
-        tw=self.stylesheet.pw-self.stylesheet.lm-self.stylesheet.rm
-        th=self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.tm
-        
-        def drawFrame(frame):
-            x=self.stylesheet.adjustUnits(frame[0],tw)
-            y=self.stylesheet.adjustUnits(frame[1],th)
-            w=self.stylesheet.adjustUnits(frame[2],tw)-1
-            h=self.stylesheet.adjustUnits(frame[3],th)-1
-            p.drawRect(x1+x,y1+y,w,h)
-        
-        p.setBrush(QtGui.QBrush(QtGui.QColor("lightgrey")))
-        for frame in self.template['frames']:
-            drawFrame(frame)
-        p.setBrush(QtGui.QBrush(QtGui.QColor("yellow")))
-        drawFrame(self.frame)    
+        try:
+            p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
+            p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
+            x1=self.stylesheet.lm
+            y1=self.stylesheet.tm
+            tw=self.stylesheet.pw-self.stylesheet.lm-self.stylesheet.rm
+            th=self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.tm
+            
+            def drawFrame(frame):
+                x=self.stylesheet.adjustUnits(frame[0],tw)
+                y=self.stylesheet.adjustUnits(frame[1],th)
+                w=self.stylesheet.adjustUnits(frame[2],tw)-1
+                h=self.stylesheet.adjustUnits(frame[3],th)-1
+                p.drawRect(x1+x,y1+y,w,h)
+            
+            p.setBrush(QtGui.QBrush(QtGui.QColor(150,150,150,128)))
+            for frame in self.template['frames']:
+                drawFrame(frame)
+            p.setBrush(QtGui.QBrush(QtGui.QColor(255,255,0,128)))
+            drawFrame(self.frame)
+            self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
+            self.ui.snippet.setPlainText(json.dumps(self.templates, indent=2))
+        except:
+            pass
         p.end()
-        self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
 
 if __name__ == "__main__":
     main()
