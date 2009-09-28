@@ -4,6 +4,7 @@
 
 import os,sys,tempfile,re,functools,time,types
 from pprint import pprint
+from copy import copy
 from multiprocessing import Process, Queue
 from Queue import Empty
 from hashlib import md5
@@ -805,6 +806,8 @@ class PageTemplates(QtGui.QWidget):
         self.pageImage=QtGui.QImage(int(self.pw),
                                     int(self.ph),
                                     QtGui.QImage.Format_RGB32)
+                                    
+        self.templates = copy(self.stylesheet.pageTemplates) 
         self.template = None
         for template in self.stylesheet.pageTemplates:
             self.ui.templates.addItem(template)
@@ -815,7 +818,7 @@ class PageTemplates(QtGui.QWidget):
     def on_templates_currentIndexChanged(self, text):
         if not isinstance(text,StringTypes): return
         text=unicode(text)
-        self.template=self.stylesheet.pageTemplates[text]
+        self.template=self.templates[text]
         self.ui.frames.clear()
         for i in range(0, len(self.template['frames'])):
             self.ui.frames.addItem('Frame %d'%(i+1))
@@ -852,7 +855,6 @@ class PageTemplates(QtGui.QWidget):
         y1=self.stylesheet.tm
         tw=self.stylesheet.pw-self.stylesheet.lm-self.stylesheet.rm
         th=self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.tm
-        
         
         def drawFrame(frame):
             x=self.stylesheet.adjustUnits(frame[0],tw)

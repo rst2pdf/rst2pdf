@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pdf.ui'
 #
-# Created: Tue Sep 22 23:46:59 2009
+# Created: Mon Sep 28 09:37:12 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -57,3 +57,13 @@ class Ui_Form(object):
         self.previous.setText(QtGui.QApplication.translate("Form", "Previous Page", None, QtGui.QApplication.UnicodeUTF8))
 
 import icons_rc
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    Form = QtGui.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+
