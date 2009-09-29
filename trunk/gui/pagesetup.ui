@@ -14,19 +14,13 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>First Page Template:</string>
+     </property>
+     <property name="buddy">
+      <cstring>firstTemplate</cstring>
      </property>
     </widget>
    </item>
@@ -37,6 +31,9 @@
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Page Size:</string>
+     </property>
+     <property name="buddy">
+      <cstring>size</cstring>
      </property>
     </widget>
    </item>
@@ -139,153 +136,117 @@
      <property name="text">
       <string>Height:</string>
      </property>
+     <property name="buddy">
+      <cstring>height</cstring>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLineEdit" name="height"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="height_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="height"/>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
       <string>Width:</string>
      </property>
+     <property name="buddy">
+      <cstring>width</cstring>
+     </property>
     </widget>
    </item>
    <item row="3" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLineEdit" name="width"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="width_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="width"/>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Top Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>margin_top</cstring>
+     </property>
     </widget>
    </item>
    <item row="4" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="margin_top"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="top_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="margin_top"/>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Bottom Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>margin_bottom</cstring>
+     </property>
     </widget>
    </item>
    <item row="5" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="margin_bottom"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="bottom_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="margin_bottom"/>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="label_7">
      <property name="text">
       <string>Left Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>margin_left</cstring>
+     </property>
     </widget>
    </item>
    <item row="6" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QLineEdit" name="margin_left"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="left_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="margin_left"/>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_8">
      <property name="text">
       <string>Right Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>margin_right</cstring>
+     </property>
     </widget>
    </item>
    <item row="7" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <item>
-      <widget class="QLineEdit" name="margin_right"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="right_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="margin_right"/>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_9">
      <property name="text">
       <string>Header Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>spacing_header</cstring>
+     </property>
     </widget>
    </item>
    <item row="8" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
-     <item>
-      <widget class="QLineEdit" name="spacing_header"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="header_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="spacing_header"/>
    </item>
    <item row="9" column="0">
     <widget class="QLabel" name="label_10">
      <property name="text">
       <string>Footer Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>spacing_footer</cstring>
+     </property>
     </widget>
    </item>
    <item row="9" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
-      <widget class="QLineEdit" name="spacing_footer"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="footer_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="spacing_footer"/>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
       <string>Gutter Margin:</string>
      </property>
+     <property name="buddy">
+      <cstring>margin_gutter</cstring>
+     </property>
     </widget>
    </item>
    <item row="10" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <item>
-      <widget class="QLineEdit" name="margin_gutter"/>
-     </item>
-     <item>
-      <widget class="QComboBox" name="gutter_unit"/>
-     </item>
-    </layout>
+    <widget class="QLineEdit" name="margin_gutter"/>
    </item>
   </layout>
  </widget>
