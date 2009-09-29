@@ -813,6 +813,7 @@ class ConfigDialog(QtGui.QDialog):
         self.ui.setupUi(self)
         self.styles=styles
         self.curPageWidget=None
+        self.scale=.3
 
         # Load all config things
         pages=[
@@ -838,11 +839,15 @@ class ConfigDialog(QtGui.QDialog):
         
     def on_zoomin_clicked(self):
         self.scale=self.scale*1.25
-        self.curPageWidget.updatePreview()
+        if self.curPageWidget:
+            self.curPageWidget.scale=self.scale
+            self.curPageWidget.updatePreview()
         
     def on_zoomout_clicked(self):
         self.scale=self.scale/1.25
-        self.curPageWidget.updatePreview()
+        if self.curPageWidget:
+            self.curPageWidget.scale=self.scale
+            self.curPageWidget.updatePreview()
 
 # Widget to edit page templates
 from Ui_pagetemplates import Ui_Form as Ui_templates
@@ -851,7 +856,7 @@ from Ui_pagetemplates import Ui_Form as Ui_templates
 class PageTemplates(QtGui.QWidget):
     def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
-        self.scale = 1.
+        self.scale = .3
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.ui.preview = preview
@@ -924,6 +929,10 @@ class PageTemplates(QtGui.QWidget):
         p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
         p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
         
+        pen = QtGui.QPen()
+        pen.setWidth(1/self.scale) # Make it be 1px wide when scaled
+        p.setPen(pen)
+        
         # Draw background
         bg=self.template.get("background",None)
         if bg:
@@ -972,7 +981,7 @@ from Ui_pagesetup import Ui_Form as Ui_pagesetup
 class PageSetup(QtGui.QWidget):
     def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
-        self.scale = 1.
+        self.scale = .3
         self.ui=Ui_pagesetup()
         self.ui.setupUi(self)
         self.stylesheet=stylesheet
@@ -987,6 +996,13 @@ class PageSetup(QtGui.QWidget):
         self.ui.firstTemplate.setCurrentIndex(0)
         self.pw=self.stylesheet.ps[0]
         self.ph=self.stylesheet.ps[1]
+        self.tm=self.stylesheet.tm
+        self.bm=self.stylesheet.bm
+        self.lm=self.stylesheet.lm
+        self.rm=self.stylesheet.rm
+        self.gm=self.stylesheet.gm
+        self.ts=self.stylesheet.ts
+        self.bs=self.stylesheet.bs
         self.pageImage=QtGui.QImage(int(self.pw),
                                     int(self.ph),
                                     QtGui.QImage.Format_RGB32)
@@ -997,25 +1013,57 @@ class PageSetup(QtGui.QWidget):
         # Draw white page
         p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
         p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
-        #pen=QtGui.QPen()
-        #pen.setColor(QtGui.QColor("black"))
-        #pen.setStyle(QtCore.Qt.DotLine)
-        p.setPen(QtGui.QColor("black"))
         
-        for x in (self.stylesheet.gm,
-                  self.stylesheet.gm+self.stylesheet.lm,
-                  self.stylesheet.pw-self.stylesheet.rm):
+        pen = QtGui.QPen()
+        pen.setWidth(1/self.scale) # Make it be 1px wide when scaled
+        p.setPen(pen)
+        
+        for x in (self.gm,
+                  self.gm+self.lm,
+                  self.pw-self.rm):
             p.drawLine(x,0,x,pm.height())
             
-        for y in (self.stylesheet.tm,
-                  self.stylesheet.tm+self.stylesheet.ts,
-                  self.stylesheet.ph-self.stylesheet.bm,
-                  self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.bs,
+        for y in (self.tm,
+                  self.tm+self.ts,
+                  self.ph-self.bm,
+                  self.ph-self.bm-self.bs,
                   ):
             p.drawLine(0,y,pm.width(),y)
         
         p.end()
         self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
+        
+        output={
+          "pageSetup" : {
+            "size": "A4",
+            "width": self.pw,
+            "height": self.ph,
+            "margin-top": self.tm,
+            "margin-bottom": self.bm,
+            "margin-left": self.lm,
+            "margin-right": self.rm,
+            "margin-gutter": self.gm,
+            "spacing-header": self.ts,
+            "spacing-footer": self.bs,
+            "firstTemplate": unicode(self.ui.firstTemplate.currentText())
+          }}
+                
+        body=highlight(json.dumps(output, indent=2),
+            JavascriptLexer(),HtmlFormatter())
+        head=HtmlFormatter().get_style_defs('.highlight')
+        self.ui.snippet.setHtml(
+        '''<HEAD>
+             <STYLE type="text/css">
+             %s
+             </STYLE>
+           </HEAD>
+           <BODY>
+           %s
+           </BODY>
+        '''%(head,body))
+        
+        # snippet
+        
 
 if __name__ == "__main__":
     main()
