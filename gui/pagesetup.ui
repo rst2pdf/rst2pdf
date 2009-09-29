@@ -32,7 +32,98 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QComboBox" name="size"/>
+    <widget class="QComboBox" name="size">
+     <item>
+      <property name="text">
+       <string>Custom</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A0</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A3</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A4</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A5</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>A6</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B0</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B3</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B4</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B5</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B6</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>letter</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>legal</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>11&quot;x17&quot;</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
