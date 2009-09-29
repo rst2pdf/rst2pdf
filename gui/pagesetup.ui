@@ -7,13 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>367</width>
-    <height>353</height>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -138,7 +147,7 @@
       <widget class="QLineEdit" name="height"/>
      </item>
      <item>
-      <widget class="QComboBox" name="height_unit_2"/>
+      <widget class="QComboBox" name="height_unit"/>
      </item>
     </layout>
    </item>
@@ -155,7 +164,7 @@
       <widget class="QLineEdit" name="width"/>
      </item>
      <item>
-      <widget class="QComboBox" name="width_unit_2"/>
+      <widget class="QComboBox" name="width_unit"/>
      </item>
     </layout>
    </item>
@@ -167,7 +176,14 @@
     </widget>
    </item>
    <item row="4" column="1">
-    <widget class="QLineEdit" name="margin_top"/>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="margin_top"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="top_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="label_6">
@@ -177,7 +193,14 @@
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="QLineEdit" name="margin_bottom"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLineEdit" name="margin_bottom"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="bottom_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="label_7">
@@ -187,7 +210,14 @@
     </widget>
    </item>
    <item row="6" column="1">
-    <widget class="QLineEdit" name="margin_left"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLineEdit" name="margin_left"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="left_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="label_8">
@@ -197,7 +227,14 @@
     </widget>
    </item>
    <item row="7" column="1">
-    <widget class="QLineEdit" name="margin_right"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLineEdit" name="margin_right"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="right_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_9">
@@ -207,7 +244,14 @@
     </widget>
    </item>
    <item row="8" column="1">
-    <widget class="QLineEdit" name="spacing_header"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLineEdit" name="spacing_header"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="header_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="9" column="0">
     <widget class="QLabel" name="label_10">
@@ -217,7 +261,14 @@
     </widget>
    </item>
    <item row="9" column="1">
-    <widget class="QLineEdit" name="spacing_footer"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLineEdit" name="spacing_footer"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="footer_unit"/>
+     </item>
+    </layout>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="label_11">
@@ -227,7 +278,14 @@
     </widget>
    </item>
    <item row="10" column="1">
-    <widget class="QLineEdit" name="margin_gutter"/>
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QLineEdit" name="margin_gutter"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="gutter_unit"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
