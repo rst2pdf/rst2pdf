@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'style.ui'
 #
-# Created: Mon Sep 28 16:31:48 2009
+# Created: Tue Sep 29 09:32:52 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(365, 446)
+        Form.resize(376, 611)
         self.formLayout = QtGui.QFormLayout(Form)
         self.formLayout.setObjectName("formLayout")
         self.label = QtGui.QLabel(Form)
@@ -174,6 +174,65 @@ class Ui_Form(object):
         self.checkBox_5.setObjectName("checkBox_5")
         self.horizontalLayout_8.addWidget(self.checkBox_5)
         self.formLayout.setLayout(10, QtGui.QFormLayout.FieldRole, self.horizontalLayout_8)
+        self.label_12 = QtGui.QLabel(Form)
+        self.label_12.setObjectName("label_12")
+        self.formLayout.setWidget(11, QtGui.QFormLayout.LabelRole, self.label_12)
+        self.horizontalLayout_9 = QtGui.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.label_14 = QtGui.QLabel(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_14.sizePolicy().hasHeightForWidth())
+        self.label_14.setSizePolicy(sizePolicy)
+        self.label_14.setObjectName("label_14")
+        self.horizontalLayout_9.addWidget(self.label_14)
+        self.toolButton_5 = QtGui.QToolButton(Form)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/color.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.toolButton_5.setIcon(icon)
+        self.toolButton_5.setObjectName("toolButton_5")
+        self.horizontalLayout_9.addWidget(self.toolButton_5)
+        self.formLayout.setLayout(11, QtGui.QFormLayout.FieldRole, self.horizontalLayout_9)
+        self.label_13 = QtGui.QLabel(Form)
+        self.label_13.setObjectName("label_13")
+        self.formLayout.setWidget(12, QtGui.QFormLayout.LabelRole, self.label_13)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_15 = QtGui.QLabel(Form)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
+        self.label_15.setSizePolicy(sizePolicy)
+        self.label_15.setObjectName("label_15")
+        self.horizontalLayout.addWidget(self.label_15)
+        self.toolButton_6 = QtGui.QToolButton(Form)
+        self.toolButton_6.setIcon(icon)
+        self.toolButton_6.setObjectName("toolButton_6")
+        self.horizontalLayout.addWidget(self.toolButton_6)
+        self.formLayout.setLayout(12, QtGui.QFormLayout.FieldRole, self.horizontalLayout)
+        self.gridLayout_3 = QtGui.QGridLayout()
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.checkBox_12 = QtGui.QCheckBox(Form)
+        self.checkBox_12.setObjectName("checkBox_12")
+        self.gridLayout_3.addWidget(self.checkBox_12, 0, 0, 1, 1)
+        self.checkBox_13 = QtGui.QCheckBox(Form)
+        self.checkBox_13.setObjectName("checkBox_13")
+        self.gridLayout_3.addWidget(self.checkBox_13, 0, 1, 1, 1)
+        self.checkBox_14 = QtGui.QCheckBox(Form)
+        self.checkBox_14.setObjectName("checkBox_14")
+        self.gridLayout_3.addWidget(self.checkBox_14, 1, 0, 1, 1)
+        self.checkBox_15 = QtGui.QCheckBox(Form)
+        self.checkBox_15.setObjectName("checkBox_15")
+        self.gridLayout_3.addWidget(self.checkBox_15, 1, 1, 1, 1)
+        self.formLayout.setLayout(13, QtGui.QFormLayout.FieldRole, self.gridLayout_3)
+        self.label_16 = QtGui.QLabel(Form)
+        self.label_16.setObjectName("label_16")
+        self.formLayout.setWidget(14, QtGui.QFormLayout.LabelRole, self.label_16)
+        self.lineEdit_2 = QtGui.QLineEdit(Form)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.formLayout.setWidget(14, QtGui.QFormLayout.FieldRole, self.lineEdit_2)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -206,7 +265,19 @@ class Ui_Form(object):
         self.checkBox_6.setText(QtGui.QApplication.translate("Form", "Inherited", None, QtGui.QApplication.UnicodeUTF8))
         self.label_11.setText(QtGui.QApplication.translate("Form", "Space After:", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBox_5.setText(QtGui.QApplication.translate("Form", "Inherited", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_12.setText(QtGui.QApplication.translate("Form", "Text Color:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_14.setText(QtGui.QApplication.translate("Form", "#000000", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolButton_5.setText(QtGui.QApplication.translate("Form", "...", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_13.setText(QtGui.QApplication.translate("Form", "Background Color:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_15.setText(QtGui.QApplication.translate("Form", "#ffffff", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolButton_6.setText(QtGui.QApplication.translate("Form", "...", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_12.setText(QtGui.QApplication.translate("Form", "Allow Widows", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_13.setText(QtGui.QApplication.translate("Form", "Allow Orphans", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_14.setText(QtGui.QApplication.translate("Form", "Hyphenation", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBox_15.setText(QtGui.QApplication.translate("Form", "Kerning", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_16.setText(QtGui.QApplication.translate("Form", "Languaje:", None, QtGui.QApplication.UnicodeUTF8))
 
+import icons_rc
 
 if __name__ == "__main__":
     import sys
