@@ -821,7 +821,9 @@ class ConfigDialog(QtGui.QDialog):
         ]
         self.ui_pages={}
         for page,widget in pages:
-            self.ui_pages[page]=widget(self.styles)
+            self.ui_pages[page]=widget(self.styles, 
+                                       self.ui.preview,
+                                       self.ui.snippet)
             self.ui.pagelist.addItem(page)
 
     def on_pagelist_currentTextChanged(self, text=None):
@@ -833,17 +835,26 @@ class ConfigDialog(QtGui.QDialog):
         self.ui.layout.addWidget(self.curPageWidget)
         self.curPageWidget.show()
         
+    def on_zoomin_clicked(self):
+        self.scale=self.scale*1.25
+        self.curPageWidget.updatePreview()
+        
+    def on_zoomout_clicked(self):
+        self.scale=self.scale/1.25
+        self.curPageWidget.updatePreview()
 
 # Widget to edit page templates
 from Ui_pagetemplates import Ui_Form as Ui_templates
 
 
 class PageTemplates(QtGui.QWidget):
-    def __init__(self, stylesheet, parent=None):
+    def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
         self.scale = 1/3.
         self.ui=Ui_templates()
         self.ui.setupUi(self)
+        self.ui.preview = preview
+        self.ui.snippet = snippet
         self.stylesheet = stylesheet
         self.pw=self.stylesheet.ps[0]
         self.ph=self.stylesheet.ps[1]
@@ -897,13 +908,6 @@ class PageTemplates(QtGui.QWidget):
         self.ui.height.setText(self.frame[3])
         self.updatePreview()
 
-    def on_zoomin_clicked(self):
-        self.scale=self.scale*1.25
-        self.updatePreview()
-        
-    def on_zoomout_clicked(self):
-        self.scale=self.scale/1.25
-        self.updatePreview()
 
     def on_selectFile_clicked(self,b=None):
         if b is not None: return
@@ -968,12 +972,14 @@ from Ui_pagesetup import Ui_Form as Ui_pagesetup
 
 
 class PageSetup(QtGui.QWidget):
-    def __init__(self, stylesheet, parent=None):
+    def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
         self.scale = 1/3.
         self.ui=Ui_pagesetup()
         self.ui.setupUi(self)
         self.stylesheet=stylesheet
+        self.ui.preview=preview
+        self.ui.snippet=snippet
         ft=self.stylesheet.firstTemplate
         for template in self.stylesheet.pageTemplates:
             if ft == template:
@@ -981,7 +987,19 @@ class PageSetup(QtGui.QWidget):
             self.ui.firstTemplate.addItem(template)
         self.ui.firstTemplate.insertItem(0,ft)
         self.ui.firstTemplate.setCurrentIndex(0)
-
+        for combo in [ self.ui.height_unit,
+                       self.ui.width_unit,
+                       self.ui.top_unit,
+                       self.ui.bottom_unit,
+                       self.ui.left_unit,
+                       self.ui.right_unit,
+                       self.ui.header_unit,
+                       self.ui.footer_unit,
+                       self.ui.gutter_unit]:
+            combo.addItems(['pt','mm','cm','in','pica'])
+            
+    def updatePreview(self):
+        pass
 
 if __name__ == "__main__":
     main()
