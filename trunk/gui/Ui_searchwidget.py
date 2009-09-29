@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'searchwidget.ui'
 #
-# Created: Tue Sep 29 12:51:05 2009
+
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
