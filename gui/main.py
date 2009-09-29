@@ -905,32 +905,48 @@ class PageTemplates(QtGui.QWidget):
         self.scale=self.scale/1.25
         self.updatePreview()
 
+    def on_selectFile_clicked(self,b=None):
+        if b is not None: return
+        
+        fname=QtGui.QFileDialog.getOpenFileName(self, 
+                                                'Open Background Image',
+                                                os.getcwd()
+                                                )
+        self.ui.background.setText(fname)    
+        self.applyChanges()
+
     def updatePreview(self):
         pm=QtGui.QPixmap(self.pageImage)
         p=QtGui.QPainter(pm)
-        try:
-            p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
-            p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
-            x1=self.stylesheet.lm
-            y1=self.stylesheet.tm
-            tw=self.stylesheet.pw-self.stylesheet.lm-self.stylesheet.rm
-            th=self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.tm
-            
-            def drawFrame(frame):
-                x=self.stylesheet.adjustUnits(frame[0],tw)
-                y=self.stylesheet.adjustUnits(frame[1],th)
-                w=self.stylesheet.adjustUnits(frame[2],tw)-1
-                h=self.stylesheet.adjustUnits(frame[3],th)-1
-                p.drawRect(x1+x,y1+y,w,h)
-            
-            p.setBrush(QtGui.QBrush(QtGui.QColor(150,150,150,128)))
-            for frame in self.template['frames']:
-                drawFrame(frame)
-            p.setBrush(QtGui.QBrush(QtGui.QColor(255,255,0,128)))
-            drawFrame(self.frame)
-            self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
-        except:
-            pass
+        # Draw white page
+        p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
+        p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
+        
+        # Draw background
+        bg=self.template.get("background",None)
+        if bg:
+            bg=QtGui.QImageReader(bg,)
+            bg.setScaledSize(QtCore.QSize(pm.width(),pm.height()))
+            p.drawImage(QtCore.QPoint(0,0),bg.read())
+                       
+        x1=self.stylesheet.lm
+        y1=self.stylesheet.tm
+        tw=self.stylesheet.pw-self.stylesheet.lm-self.stylesheet.rm
+        th=self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.tm
+        
+        def drawFrame(frame):
+            x=self.stylesheet.adjustUnits(frame[0],tw)
+            y=self.stylesheet.adjustUnits(frame[1],th)
+            w=self.stylesheet.adjustUnits(frame[2],tw)-1
+            h=self.stylesheet.adjustUnits(frame[3],th)-1
+            p.drawRect(x1+x,y1+y,w,h)
+        
+        p.setBrush(QtGui.QBrush(QtGui.QColor(150,150,150,128)))
+        for frame in self.template['frames']:
+            drawFrame(frame)
+        p.setBrush(QtGui.QBrush(QtGui.QColor(255,255,0,128)))
+        drawFrame(self.frame)
+        self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
         p.end()
         body=highlight(json.dumps(self.templates, indent=2),
             JavascriptLexer(),HtmlFormatter())
