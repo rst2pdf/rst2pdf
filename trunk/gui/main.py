@@ -32,6 +32,10 @@ from Ui_pdf import Ui_Form
 import simplejson as json
 from BeautifulSoup import BeautifulSoup
 
+from pygments import highlight
+from pygments.lexers import *
+from pygments.formatters import HtmlFormatter
+
 StringTypes=types.StringTypes+(QtCore.QString,)
 
 
@@ -866,6 +870,8 @@ class PageTemplates(QtGui.QWidget):
         self.template["frames"][self.frameIndex]=self.frame
         self.template['showFooter']=self.ui.footer.isChecked()
         self.template['showHeader']=self.ui.header.isChecked()
+        if unicode(self.ui.background.text()):
+            self.template['background']=unicode(self.ui.background.text())
         self.updatePreview()
 
     def on_templates_currentIndexChanged(self, text):
@@ -877,7 +883,7 @@ class PageTemplates(QtGui.QWidget):
             self.ui.frames.addItem('Frame %d'%(i+1))
         self.ui.footer.setChecked(self.template['showFooter'])
         self.ui.header.setChecked(self.template['showHeader'])
-        
+        self.ui.background.setText(self.template.get("background",""))        
         self.updatePreview()
         
     def on_frames_currentIndexChanged(self, index):
@@ -923,10 +929,22 @@ class PageTemplates(QtGui.QWidget):
             p.setBrush(QtGui.QBrush(QtGui.QColor(255,255,0,128)))
             drawFrame(self.frame)
             self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
-            self.ui.snippet.setPlainText(json.dumps(self.templates, indent=2))
         except:
             pass
         p.end()
+        body=highlight(json.dumps(self.templates, indent=2),
+            JavascriptLexer(),HtmlFormatter())
+        head=HtmlFormatter().get_style_defs('.highlight')
+        self.ui.snippet.setHtml(
+        '''<HEAD>
+             <STYLE type="text/css">
+             %s
+             </STYLE>
+           </HEAD>
+           <BODY>
+           %s
+           </BODY>
+        '''%(head,body))
 
 
 # Widget to edit page templates
