@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pagesetup.ui'
 #
-# Created: Tue Sep 29 10:27:08 2009
+# Created: Tue Sep 29 11:23:59 2009
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,6 +26,24 @@ class Ui_Form(object):
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.size = QtGui.QComboBox(Form)
         self.size.setObjectName("size")
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
+        self.size.addItem(QtCore.QString())
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.size)
         self.label_3 = QtGui.QLabel(Form)
         self.label_3.setObjectName("label_3")
@@ -101,6 +119,24 @@ class Ui_Form(object):
         Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Form", "First Page Template:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Form", "Page Size:", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(0, QtGui.QApplication.translate("Form", "Custom", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(1, QtGui.QApplication.translate("Form", "A0", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(2, QtGui.QApplication.translate("Form", "A1", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(3, QtGui.QApplication.translate("Form", "A2", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(4, QtGui.QApplication.translate("Form", "A3", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(5, QtGui.QApplication.translate("Form", "A4", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(6, QtGui.QApplication.translate("Form", "A5", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(7, QtGui.QApplication.translate("Form", "A6", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(8, QtGui.QApplication.translate("Form", "B0", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(9, QtGui.QApplication.translate("Form", "B1", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(10, QtGui.QApplication.translate("Form", "B2", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(11, QtGui.QApplication.translate("Form", "B3", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(12, QtGui.QApplication.translate("Form", "B4", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(13, QtGui.QApplication.translate("Form", "B5", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(14, QtGui.QApplication.translate("Form", "B6", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(15, QtGui.QApplication.translate("Form", "letter", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(16, QtGui.QApplication.translate("Form", "legal", None, QtGui.QApplication.UnicodeUTF8))
+        self.size.setItemText(17, QtGui.QApplication.translate("Form", "11\"x17\"", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("Form", "Height:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("Form", "Width:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Form", "Top Margin:", None, QtGui.QApplication.UnicodeUTF8))
