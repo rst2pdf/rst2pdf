@@ -851,7 +851,7 @@ from Ui_pagetemplates import Ui_Form as Ui_templates
 class PageTemplates(QtGui.QWidget):
     def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
-        self.scale = 1/3.
+        self.scale = 1.
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.ui.preview = preview
@@ -972,7 +972,7 @@ from Ui_pagesetup import Ui_Form as Ui_pagesetup
 class PageSetup(QtGui.QWidget):
     def __init__(self, stylesheet, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
-        self.scale = 1/3.
+        self.scale = 1.
         self.ui=Ui_pagesetup()
         self.ui.setupUi(self)
         self.stylesheet=stylesheet
@@ -985,16 +985,6 @@ class PageSetup(QtGui.QWidget):
             self.ui.firstTemplate.addItem(template)
         self.ui.firstTemplate.insertItem(0,ft)
         self.ui.firstTemplate.setCurrentIndex(0)
-        for combo in [ self.ui.height_unit,
-                       self.ui.width_unit,
-                       self.ui.top_unit,
-                       self.ui.bottom_unit,
-                       self.ui.left_unit,
-                       self.ui.right_unit,
-                       self.ui.header_unit,
-                       self.ui.footer_unit,
-                       self.ui.gutter_unit]:
-            combo.addItems(['pt','mm','cm','in','pica'])
         self.pw=self.stylesheet.ps[0]
         self.ph=self.stylesheet.ps[1]
         self.pageImage=QtGui.QImage(int(self.pw),
@@ -1007,6 +997,23 @@ class PageSetup(QtGui.QWidget):
         # Draw white page
         p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
         p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
+        #pen=QtGui.QPen()
+        #pen.setColor(QtGui.QColor("black"))
+        #pen.setStyle(QtCore.Qt.DotLine)
+        p.setPen(QtGui.QColor("black"))
+        
+        for x in (self.stylesheet.gm,
+                  self.stylesheet.gm+self.stylesheet.lm,
+                  self.stylesheet.pw-self.stylesheet.rm):
+            p.drawLine(x,0,x,pm.height())
+            
+        for y in (self.stylesheet.tm,
+                  self.stylesheet.tm+self.stylesheet.ts,
+                  self.stylesheet.ph-self.stylesheet.bm,
+                  self.stylesheet.ph-self.stylesheet.bm-self.stylesheet.bs,
+                  ):
+            p.drawLine(0,y,pm.width(),y)
+        
         p.end()
         self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
 
