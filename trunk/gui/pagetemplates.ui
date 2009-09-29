@@ -19,7 +19,7 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
@@ -167,17 +167,24 @@
          <property name="text">
           <string>Background:</string>
          </property>
+         <property name="buddy">
+          <cstring>background</cstring>
+         </property>
         </widget>
        </item>
        <item row="8" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="background"/>
          </item>
          <item>
-          <widget class="QToolButton" name="toolButton">
+          <widget class="QToolButton" name="selectFile">
            <property name="text">
             <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="icons.qrc">
+             <normaloff>:/icons/file.svg</normaloff>:/icons/file.svg</iconset>
            </property>
           </widget>
          </item>
@@ -207,7 +214,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>277</width>
+             <width>279</width>
              <height>325</height>
             </rect>
            </property>
@@ -417,6 +424,22 @@
     <hint type="destinationlabel">
      <x>5</x>
      <y>315</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>background</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>356</y>
     </hint>
    </hints>
   </connection>
