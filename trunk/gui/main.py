@@ -834,6 +834,7 @@ class ConfigDialog(QtGui.QDialog):
         self.curPageWidget=self.ui_pages[text]
         self.ui.layout.addWidget(self.curPageWidget)
         self.curPageWidget.show()
+        self.curPageWidget.updatePreview()
         
     def on_zoomin_clicked(self):
         self.scale=self.scale*1.25
@@ -866,9 +867,6 @@ class PageTemplates(QtGui.QWidget):
         self.template = None
         for template in self.templates:
             self.ui.templates.addItem(template)
-            
-            
-        self.updatePreview()
 
     def applyChanges(self):
         # TODO: validate everything
@@ -997,9 +995,20 @@ class PageSetup(QtGui.QWidget):
                        self.ui.footer_unit,
                        self.ui.gutter_unit]:
             combo.addItems(['pt','mm','cm','in','pica'])
+        self.pw=self.stylesheet.ps[0]
+        self.ph=self.stylesheet.ps[1]
+        self.pageImage=QtGui.QImage(int(self.pw),
+                                    int(self.ph),
+                                    QtGui.QImage.Format_RGB32)
             
     def updatePreview(self):
-        pass
+        pm=QtGui.QPixmap(self.pageImage)
+        p=QtGui.QPainter(pm)
+        # Draw white page
+        p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
+        p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
+        p.end()
+        self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
 
 if __name__ == "__main__":
     main()
