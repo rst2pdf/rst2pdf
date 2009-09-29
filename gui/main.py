@@ -973,6 +973,14 @@ class PageSetup(QtGui.QWidget):
         self.scale = 1/3.
         self.ui=Ui_pagesetup()
         self.ui.setupUi(self)
+        self.stylesheet=stylesheet
+        ft=self.stylesheet.firstTemplate
+        for template in self.stylesheet.pageTemplates:
+            if ft == template:
+                continue
+            self.ui.firstTemplate.addItem(template)
+        self.ui.firstTemplate.insertItem(0,ft)
+        self.ui.firstTemplate.setCurrentIndex(0)
 
 
 if __name__ == "__main__":
