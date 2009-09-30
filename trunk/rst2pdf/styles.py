@@ -118,19 +118,25 @@ class StyleSheet(object):
 
         # Get pageSetup data from all stylessheets in order:
         self.ps = pagesizes.A4
+        self.page={}
         for data, ssname in zip(ssdata, flist):
             page = data.get('pageSetup', {})
             if page:
+                self.page.update(page)
                 pgs=page.get('size', None)
                 if pgs: # A standard size
                     pgs=pgs.upper()
                     if pgs in pagesizes.__dict__:
                         self.ps = list(pagesizes.__dict__[pgs])
+                        self.psname = pgs
+                        if 'width' in self.page: del(self.page['width'])
+                        if 'height' in self.page: del(self.page['height'])
                     else:
                         log.critical('Unknown page size %s in stylesheet %s'%\
                             (page['size'], ssname))
                         continue
                 else: #A custom size
+                    del(self.page['size'])
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
                     # to do 2*cm (cm comes from reportlab.lib.units)
