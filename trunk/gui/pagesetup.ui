@@ -251,5 +251,185 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>firstTemplate</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>316</x>
+     <y>21</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>size</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>38</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>height</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>365</x>
+     <y>71</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>width</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>113</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>margin_top</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>margin_bottom</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>351</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>margin_left</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>margin_right</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>228</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spacing_header</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spacing_footer</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>292</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>margin_gutter</sender>
+   <signal>textEdited(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>applyChanges()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>366</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>applyChanges()</slot>
+ </slots>
 </ui>

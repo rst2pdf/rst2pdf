@@ -112,6 +112,17 @@ class Ui_Form(object):
         self.label_11.setBuddy(self.margin_gutter)
 
         self.retranslateUi(Form)
+        QtCore.QObject.connect(self.firstTemplate, QtCore.SIGNAL("currentIndexChanged(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.size, QtCore.SIGNAL("currentIndexChanged(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.height, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.width, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.margin_top, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.margin_bottom, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.margin_left, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.margin_right, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.spacing_header, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.spacing_footer, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
+        QtCore.QObject.connect(self.margin_gutter, QtCore.SIGNAL("textEdited(QString)"), Form.applyChanges)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
