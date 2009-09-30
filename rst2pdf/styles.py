@@ -652,13 +652,15 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
     """
 
-    if v is None:
-        return None
+    if v is None or not v:
+        return 0
 
     v = str(v)
-    _, n, u = re.split('(-?[0-9\.]*)', v)
-    if not u:
-        u=default_unit
+    l = re.split('(-?[0-9\.]*)', v)
+    n=l[1]
+    u=default_unit
+    if len(l) == 3 and l[2]:
+        u=l[2]
     if u in units.__dict__:
         return float(n) * units.__dict__[u]
     else:

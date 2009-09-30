@@ -13,6 +13,7 @@ from rst2pdf.createpdf import RstToPdf
 from rst2pdf.styles import StyleSheet 
 from rst2pdf.log import log
 import logging
+import reportlab.lib.pagesizes as pagesizes
 
 log.setLevel(logging.INFO)
 
@@ -992,31 +993,69 @@ class PageSetup(QtGui.QWidget):
             if ft == template:
                 continue
             self.ui.firstTemplate.addItem(template)
+            
+        if 'size' in self.stylesheet.page:
+            self.ui.size.insertItem(0,self.stylesheet.psname)
+            self.ui.height.setEnabled(False)
+            self.ui.width.setEnabled(False)
+            self.ui.height.setText('')
+            self.ui.width.setText('')
+        else:
+            self.ui.height.setEnabled(True)
+            self.ui.width.setEnabled(True)
+            self.ui.height.setText(self.stylesheet.page['height'])
+            self.ui.width.setText(self.stylesheet.page['width'])
+        self.ui.size.setCurrentIndex(0)
+            
         self.ui.firstTemplate.insertItem(0,ft)
         self.ui.firstTemplate.setCurrentIndex(0)
-        self.pw=self.stylesheet.ps[0]
-        self.ph=self.stylesheet.ps[1]
-        self.tm=self.stylesheet.tm
-        self.bm=self.stylesheet.bm
-        self.lm=self.stylesheet.lm
-        self.rm=self.stylesheet.rm
-        self.gm=self.stylesheet.gm
-        self.ts=self.stylesheet.ts
-        self.bs=self.stylesheet.bs
+        self.ui.margin_top.setText(unicode(self.stylesheet.page['margin-top']))
+        self.ui.margin_bottom.setText(unicode(self.stylesheet.page['margin-bottom']))
+        self.ui.margin_left.setText(unicode(self.stylesheet.page['margin-left']))
+        self.ui.margin_right.setText(unicode(self.stylesheet.page['margin-right']))
+        self.ui.margin_gutter.setText(unicode(self.stylesheet.page['margin-gutter']))
+        self.ui.spacing_header.setText(unicode(self.stylesheet.page['spacing-header']))
+        self.ui.spacing_footer.setText(unicode(self.stylesheet.page['spacing-footer']))
+        self.pageImage=None
+        self.applyChanges()
+        
+    def applyChanges(self):
+        if unicode(self.ui.size.currentText())==u'Custom':
+            # FIXME: % makes no sense for page size
+            self.ui.width.setEnabled(True)
+            self.ui.height.setEnabled(True)
+            self.pw=self.stylesheet.adjustUnits(unicode(self.ui.width.text()),1000)
+            self.ph=self.stylesheet.adjustUnits(unicode(self.ui.height.text()),1000)
+        else:
+            self.ui.width.setEnabled(False)
+            self.ui.height.setEnabled(False)
+            self.size=unicode(self.ui.size.currentText())
+            self.pw=pagesizes.__dict__[self.size.upper()][0]
+            self.ph=pagesizes.__dict__[self.size.upper()][1]
+       
+        self.lm=self.stylesheet.adjustUnits(unicode(self.ui.margin_left.text()),self.pw)
+        self.rm=self.stylesheet.adjustUnits(unicode(self.ui.margin_right.text()),self.pw)
+        self.tm=self.stylesheet.adjustUnits(unicode(self.ui.margin_top.text()),self.ph)
+        self.bm=self.stylesheet.adjustUnits(unicode(self.ui.margin_bottom.text()),self.ph)
+        self.ts=self.stylesheet.adjustUnits(unicode(self.ui.spacing_header.text()),self.ph)
+        self.bs=self.stylesheet.adjustUnits(unicode(self.ui.spacing_footer.text()),self.ph)
+        self.gm=self.stylesheet.adjustUnits(unicode(self.ui.margin_gutter.text()),self.pw)
         self.pageImage=QtGui.QImage(int(self.pw),
                                     int(self.ph),
                                     QtGui.QImage.Format_RGB32)
+        self.updatePreview()
             
     def updatePreview(self):
         pm=QtGui.QPixmap(self.pageImage)
         p=QtGui.QPainter(pm)
+        pen = QtGui.QPen()
+        pen.setWidth(1/self.scale) # Make it be 1px wide when scaled
+        p.setPen(pen)
+        
         # Draw white page
         p.setBrush(QtGui.QBrush(QtGui.QColor("white")))
         p.drawRect(-1,-1,pm.width()+2,pm.height()+2)
         
-        pen = QtGui.QPen()
-        pen.setWidth(1/self.scale) # Make it be 1px wide when scaled
-        p.setPen(pen)
         
         for x in (self.gm,
                   self.gm+self.lm,
@@ -1035,19 +1074,25 @@ class PageSetup(QtGui.QWidget):
         
         output={
           "pageSetup" : {
-            "size": "A4",
-            "width": self.pw,
-            "height": self.ph,
-            "margin-top": self.tm,
-            "margin-bottom": self.bm,
-            "margin-left": self.lm,
-            "margin-right": self.rm,
-            "margin-gutter": self.gm,
-            "spacing-header": self.ts,
-            "spacing-footer": self.bs,
+            "size": unicode(self.ui.size.currentText()).lower(),
+            "width": unicode(self.ui.width.text()),
+            "height": unicode(self.ui.height.text()),
+            "margin-top": unicode(self.ui.margin_top.text()),
+            "margin-bottom": unicode(self.ui.margin_bottom.text()),
+            "margin-left": unicode(self.ui.margin_left.text()),
+            "margin-right": unicode(self.ui.margin_right.text()),
+            "margin-gutter": unicode(self.ui.margin_gutter.text()),
+            "spacing-header": unicode(self.ui.spacing_header.text()),
+            "spacing-footer": unicode(self.ui.spacing_footer.text()),
             "firstTemplate": unicode(self.ui.firstTemplate.currentText())
           }}
-                
+          
+        if output['pageSetup']['size']==u'custom':
+            del(output['pageSetup']['size'])
+        else:
+            del(output['pageSetup']['width'])
+            del(output['pageSetup']['height'])
+        
         body=highlight(json.dumps(output, indent=2),
             JavascriptLexer(),HtmlFormatter())
         head=HtmlFormatter().get_style_defs('.highlight')
@@ -1061,8 +1106,6 @@ class PageSetup(QtGui.QWidget):
            %s
            </BODY>
         '''%(head,body))
-        
-        # snippet
         
 
 if __name__ == "__main__":
