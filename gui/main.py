@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile,re,functools,time,types
+import os,sys,tempfile,re,functools,time,types,glob
 from pprint import pprint
 from copy import copy
 from multiprocessing import Process, Queue
@@ -818,6 +818,7 @@ class ConfigDialog(QtGui.QDialog):
 
         # Load all config things
         pages=[
+            ['Stylesheets',StyleSheets],
             ['Page Setup',PageSetup],
             ['Page Templates',PageTemplates],
         ]
@@ -1106,7 +1107,83 @@ class PageSetup(QtGui.QWidget):
            %s
            </BODY>
         '''%(head,body))
-        
+
+# Widget to choose from system stylesheets
+from Ui_stylesheets import Ui_Form as Ui_stylesheets
+
+class StyleSheets(QtGui.QWidget):
+    def __init__(self, stylesheet, preview, snippet, parent=None):
+        QtGui.QWidget.__init__(self,parent)
+        self.scale = .3
+        self.ui=Ui_stylesheets()
+        self.ui.setupUi(self)
+        self.stylesheet=stylesheet
+        self.ui.preview=preview
+        self.ui.snippet=snippet
+        sheets=[]
+        for folder in self.stylesheet.StyleSearchPath:
+            sheets.extend(glob.glob(os.path.join(folder,'*.style')))
+            sheets.extend(glob.glob(os.path.join(folder,'*.json')))
+        sheets.sort()
+        for s in sheets:
+            self.ui.system.addItem(s)
+        self.applyChanges()
+            
+    def on_addFromFile_clicked(self, b = None):
+        if b is None: return
+        fname=QtGui.QFileDialog.getOpenFileName(self, 
+                                                'Open Stylesheet',
+                                                os.getcwd(),
+                                                'stylesheets (*.json *.style)'
+                                                )
+        if fname:
+            self.ui.custom.addItem(fname)
+        self.applyChanges()
+            
+    def on_addFromSystem_clicked(self, b = None):
+        if b is None: return
+        for i in self.ui.system.selectedItems():
+            self.ui.custom.addItem(i.text())
+            i.setSelected(False)
+        self.applyChanges()
+            
+    def on_remove_clicked(self, b = None):
+        if b is None: return
+        i=self.ui.custom.currentItem()
+        if not i:
+            return
+        self.ui.custom.takeItem(self.ui.custom.currentRow())
+        self.applyChanges()
+
+    def on_up_clicked(self, b = None):
+        if b is None: return
+        i=self.ui.custom.currentItem()
+        if not i:
+            return
+        cr=self.ui.custom.currentRow()
+        i=self.ui.custom.takeItem(cr)
+        self.ui.custom.insertItem(cr-1,i)
+        self.ui.custom.setCurrentItem(i)
+        self.applyChanges()
+
+    def on_down_clicked(self, b = None):
+        if b is None: return
+        i=self.ui.custom.currentItem()
+        if not i:
+            return
+        cr=self.ui.custom.currentRow()
+        i=self.ui.custom.takeItem(cr)
+        self.ui.custom.insertItem(cr+1,i)
+        self.ui.custom.setCurrentItem(i)
+        self.applyChanges()
+
+    def updatePreview(self):
+        print self.output
+            
+    def applyChanges(self):
+        self.output={'stylesheets':[unicode(self.ui.custom.item(x).text()) \
+            for x in range(self.ui.custom.count())]}
+        self.updatePreview()
 
 if __name__ == "__main__":
     main()
