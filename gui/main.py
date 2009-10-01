@@ -815,16 +815,20 @@ class ConfigDialog(QtGui.QDialog):
         self.styles=styles
         self.curPageWidget=None
         self.scale=.3
+        self.stylesheets_data={}
+        self.pagesetup_data={}
+        self.pagetemplates_data={}
 
         # Load all config things
         pages=[
-            ['Stylesheets',StyleSheets],
-            ['Page Setup',PageSetup],
-            ['Page Templates',PageTemplates],
+            ['Stylesheets',StyleSheets,self.stylesheets_data],
+            ['Page Setup',PageSetup,self.pagesetup_data],
+            ['Page Templates',PageTemplates,self.pagetemplates_data],
         ]
         self.ui_pages={}
-        for page,widget in pages:
-            self.ui_pages[page]=widget(self.styles, 
+        for page,widget,data in pages:
+            self.ui_pages[page]=widget(self.styles,
+                                       data,
                                        self.ui.preview,
                                        self.ui.snippet)
             self.ui.pagelist.addItem(page)
@@ -856,9 +860,10 @@ from Ui_pagetemplates import Ui_Form as Ui_templates
 
 
 class PageTemplates(QtGui.QWidget):
-    def __init__(self, stylesheet, preview, snippet, parent=None):
+    def __init__(self, stylesheet, data, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
         self.scale = .3
+        self.data = data
         self.ui=Ui_templates()
         self.ui.setupUi(self)
         self.ui.preview = preview
@@ -981,9 +986,10 @@ from Ui_pagesetup import Ui_Form as Ui_pagesetup
 
 
 class PageSetup(QtGui.QWidget):
-    def __init__(self, stylesheet, preview, snippet, parent=None):
+    def __init__(self, stylesheet, data, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
         self.scale = .3
+        self.data = data
         self.ui=Ui_pagesetup()
         self.ui.setupUi(self)
         self.stylesheet=stylesheet
@@ -1073,8 +1079,7 @@ class PageSetup(QtGui.QWidget):
         p.end()
         self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
         
-        output={
-          "pageSetup" : {
+        self.data["pageSetup"]= {
             "size": unicode(self.ui.size.currentText()).lower(),
             "width": unicode(self.ui.width.text()),
             "height": unicode(self.ui.height.text()),
@@ -1086,15 +1091,15 @@ class PageSetup(QtGui.QWidget):
             "spacing-header": unicode(self.ui.spacing_header.text()),
             "spacing-footer": unicode(self.ui.spacing_footer.text()),
             "firstTemplate": unicode(self.ui.firstTemplate.currentText())
-          }}
+          }
           
-        if output['pageSetup']['size']==u'custom':
-            del(output['pageSetup']['size'])
+        if self.data['pageSetup']['size']==u'custom':
+            del(self.data['pageSetup']['size'])
         else:
-            del(output['pageSetup']['width'])
-            del(output['pageSetup']['height'])
+            del(self.data['pageSetup']['width'])
+            del(self.data['pageSetup']['height'])
         
-        body=highlight(json.dumps(output, indent=2),
+        body=highlight(json.dumps(self.data, indent=2),
             JavascriptLexer(),HtmlFormatter())
         head=HtmlFormatter().get_style_defs('.highlight')
         self.ui.snippet.setHtml(
@@ -1112,9 +1117,10 @@ class PageSetup(QtGui.QWidget):
 from Ui_stylesheets import Ui_Form as Ui_stylesheets
 
 class StyleSheets(QtGui.QWidget):
-    def __init__(self, stylesheet, preview, snippet, parent=None):
+    def __init__(self, stylesheet, data, preview, snippet, parent=None):
         QtGui.QWidget.__init__(self,parent)
         self.scale = .3
+        self.data = data
         self.ui=Ui_stylesheets()
         self.ui.setupUi(self)
         self.stylesheet=stylesheet
@@ -1178,11 +1184,11 @@ class StyleSheets(QtGui.QWidget):
         self.applyChanges()
 
     def updatePreview(self):
-        print self.output
+        print self.data
             
     def applyChanges(self):
-        self.output={'stylesheets':[unicode(self.ui.custom.item(x).text()) \
-            for x in range(self.ui.custom.count())]}
+        self.data.update({'stylesheets':[unicode(self.ui.custom.item(x).text()) \
+            for x in range(self.ui.custom.count())]})
         self.updatePreview()
 
 if __name__ == "__main__":
