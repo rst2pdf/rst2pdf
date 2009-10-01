@@ -2138,11 +2138,13 @@ class FancyPage(PageTemplate):
             container.height = self.fh
             container.drawOn(canv, fx, self.fy)
 
-
-def main(args=None):
-    """Parse command line and call createPdf with the correct data."""
-
+def parse_commandline():
+    
     parser = OptionParser()
+    
+    parser.add_option('--config', dest='configfile', metavar='FILE',
+        help='Config file to use. Default=~/.rst2pdf/config')
+    
     parser.add_option('-o', '--output', dest='output', metavar='FILE',
         help='Write the PDF to FILE')
 
@@ -2294,7 +2296,18 @@ def main(args=None):
         '"odd", and sections start in odd pages, or "any" and sections start in the next page,'\
         'be it even or odd. See also the -b option.')
 
-    options, args = parser.parse_args(args)
+    return parser
+
+def main(args=None):
+    """Parse command line and call createPdf with the correct data."""
+
+    parser = parse_commandline()
+    options, args = parser.parse_args(copy(args))
+
+    if options.configfile:
+        options.cfname=options.configfile
+        parser = parse_commandline()
+        options, args = parser.parse_args(copy(args))
 
     if options.version:
         from rst2pdf import version
