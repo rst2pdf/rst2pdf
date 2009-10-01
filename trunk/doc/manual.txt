@@ -47,6 +47,7 @@ Command line options
 ::
 
   -h, --help            show this help message and exit
+  --config=FILE         Config file to use. Default=~/.rst2pdf/config  
   -o FILE, --output=FILE                               
                         Write the PDF to FILE          
   -s STYLESHEETS, --stylesheets=STYLESHEETS            
