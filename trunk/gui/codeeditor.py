@@ -121,7 +121,10 @@ class CodeEditor(QtGui.QPlainTextEdit):
 
 if __name__ == "__main__":
     
-    import simplejson as json
+    try:
+        import json
+    except ImportError:
+        import simplejson as json
     from highlighter import Highlighter
     
     app = QtGui.QApplication(sys.argv)
