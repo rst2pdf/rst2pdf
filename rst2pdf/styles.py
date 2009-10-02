@@ -655,8 +655,8 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
     """
 
-    if v is None or not v:
-        return 0
+    if v is None or v=="":
+        return None
 
     v = str(v)
     l = re.split('(-?[0-9\.]*)', v)
