@@ -24,7 +24,10 @@ from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 
-from simplejson import loads
+try:
+    from json import loads
+except ImportError:
+    from simplejson import loads
 
 import findfonts
 from log import log

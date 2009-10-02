@@ -30,7 +30,10 @@ from highlighter import Highlighter
 from Ui_main import Ui_MainWindow
 from Ui_pdf import Ui_Form
 
-import simplejson as json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 from BeautifulSoup import BeautifulSoup
 
 from pygments import highlight

@@ -39,9 +39,13 @@ install_requires = [
         'setuptools',
         'docutils',
         'reportlab>=2.1',
-        'Pygments',
-        'simplejson'
+        'Pygments'
         ]
+        
+try:
+    import json
+except ImportError:
+    install_requires.append('simplejson')
 
 tests_require = ['pyPdf']
 sphinx_require = ['sphinx']

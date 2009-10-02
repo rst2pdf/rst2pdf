@@ -5,7 +5,10 @@
 
 import ConfigParser
 import os
-from simplejson import loads
+try:
+    from json import loads
+except ImportError:
+    from simplejson import loads
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
 cfname = os.path.join(cfdir, 'config')
