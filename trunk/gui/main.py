@@ -299,18 +299,11 @@ class Main(QtGui.QMainWindow):
         # I need to create a stylesheet object so I can parse and merge
         # the current stylesheet
         
-        # FIXME: passing the current stylesheet to the StyleSheet class
-        # should be much simpler than this, also it's repeated from
-        # another method
-        # TODO: don't use the current user stylesheet if it's not valid!
-        style=unicode(self.ui.style.toPlainText())
-        fd, style_file=tempfile.mkstemp()
-        os.write(fd,style)
-        os.close(fd)
-        self.styles = StyleSheet([style_file])
-        os.unlink(style_file)
-
-        config=ConfigDialog(styles=self.styles)
+        try:
+            data=json.loads(unicode(self.ui.style.toPlainText()))
+        except: # TODO: fail if sheet doesn't validate
+            data={}
+        config=ConfigDialog(data=data)
         config.exec_()
 
     def on_actionTest_Action_triggered(self, b=None):
@@ -810,44 +803,42 @@ from Ui_configdialog import Ui_Dialog as Ui_ConfigDialog
 
 
 class ConfigDialog(QtGui.QDialog):
-    def __init__(self, styles):
+    def __init__(self, data={}):
         QtGui.QDialog.__init__(self)
         # Set up the UI from designer
         self.ui=Ui_ConfigDialog()
         self.ui.setupUi(self)
-        self.styles=styles
         self.curPageWidget=None
         self.scale=.3
-        self.stylesheets_data={}
-        self.pagesetup_data={}
-        self.pagetemplates_data={}
-
+        self.data=data
+        
         # Load all config things
         self.pages={
-            'Stylesheets':[StyleSheets,self.stylesheets_data],
-            'Page Setup':[PageSetup,self.pagesetup_data],
-            'Page Templates':[PageTemplates,self.pagetemplates_data],
+            'Stylesheets':StyleSheets,
+            'Page Setup':PageSetup,
+            'Page Templates':PageTemplates,
         }
         keys=self.pages.keys()
         keys.sort()
         for page in keys:
             self.ui.pagelist.addItem(page)
-        #self.ui_pages={}
-        #for page,widget,data in pages:
-            #self.ui_pages[page]=widget(self.styles,
-                                       #data,
-                                       #self.ui.preview,
-                                       #self.ui.snippet)
 
     def on_pagelist_currentTextChanged(self, text=None):
         if text is None: return
+        
+        fd, style_file=tempfile.mkstemp()
+        os.write(fd,json.dumps(self.data))
+        os.close(fd)
+        self.styles = StyleSheet([style_file])
+        os.unlink(style_file)
+        
         text=unicode(text)
         if self.curPageWidget:
             self.curPageWidget.hide()
             self.curPageWidget.deleteLater()
-        widget,data=self.pages[text]
+        widget=self.pages[text]
         self.curPageWidget=widget(self.styles,
-                                  data,
+                                  self.data,
                                   self.ui.preview,
                                   self.ui.snippet)
         self.ui.layout.addWidget(self.curPageWidget)
@@ -977,7 +968,8 @@ class PageTemplates(QtGui.QWidget):
         drawFrame(self.frame)
         self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
         p.end()
-        body=highlight(json.dumps(self.templates, indent=2),
+        self.data['pageTemplates']=self.templates
+        body=highlight(json.dumps(self.data, indent=2),
             JavascriptLexer(),HtmlFormatter())
         head=HtmlFormatter().get_style_defs('.highlight')
         self.ui.snippet.setHtml(
@@ -1195,7 +1187,19 @@ class StyleSheets(QtGui.QWidget):
         self.applyChanges()
 
     def updatePreview(self):
-        print self.data
+        body=highlight(json.dumps(self.data, indent=2),
+            JavascriptLexer(),HtmlFormatter())
+        head=HtmlFormatter().get_style_defs('.highlight')
+        self.ui.snippet.setHtml(
+        '''<HEAD>
+             <STYLE type="text/css">
+             %s
+             </STYLE>
+           </HEAD>
+           <BODY>
+           %s
+           </BODY>
+        '''%(head,body))
             
     def applyChanges(self):
         self.data.update({'stylesheets':[unicode(self.ui.custom.item(x).text()) \
