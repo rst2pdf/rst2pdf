@@ -823,25 +823,33 @@ class ConfigDialog(QtGui.QDialog):
         self.pagetemplates_data={}
 
         # Load all config things
-        pages=[
-            ['Stylesheets',StyleSheets,self.stylesheets_data],
-            ['Page Setup',PageSetup,self.pagesetup_data],
-            ['Page Templates',PageTemplates,self.pagetemplates_data],
-        ]
-        self.ui_pages={}
-        for page,widget,data in pages:
-            self.ui_pages[page]=widget(self.styles,
-                                       data,
-                                       self.ui.preview,
-                                       self.ui.snippet)
+        self.pages={
+            'Stylesheets':[StyleSheets,self.stylesheets_data],
+            'Page Setup':[PageSetup,self.pagesetup_data],
+            'Page Templates':[PageTemplates,self.pagetemplates_data],
+        }
+        keys=self.pages.keys()
+        keys.sort()
+        for page in keys:
             self.ui.pagelist.addItem(page)
+        #self.ui_pages={}
+        #for page,widget,data in pages:
+            #self.ui_pages[page]=widget(self.styles,
+                                       #data,
+                                       #self.ui.preview,
+                                       #self.ui.snippet)
 
     def on_pagelist_currentTextChanged(self, text=None):
         if text is None: return
         text=unicode(text)
         if self.curPageWidget:
             self.curPageWidget.hide()
-        self.curPageWidget=self.ui_pages[text]
+            self.curPageWidget.deleteLater()
+        widget,data=self.pages[text]
+        self.curPageWidget=widget(self.styles,
+                                  data,
+                                  self.ui.preview,
+                                  self.ui.snippet)
         self.ui.layout.addWidget(self.curPageWidget)
         self.curPageWidget.show()
         self.curPageWidget.updatePreview()
