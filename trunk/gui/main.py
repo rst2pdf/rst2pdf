@@ -1034,8 +1034,8 @@ class PageSetup(QtGui.QWidget):
             # FIXME: % makes no sense for page size
             self.ui.width.setEnabled(True)
             self.ui.height.setEnabled(True)
-            self.pw=self.stylesheet.adjustUnits(unicode(self.ui.width.text()),1000)
-            self.ph=self.stylesheet.adjustUnits(unicode(self.ui.height.text()),1000)
+            self.pw=self.stylesheet.adjustUnits(unicode(self.ui.width.text()),1000) or 0
+            self.ph=self.stylesheet.adjustUnits(unicode(self.ui.height.text()),1000) or 0
         else:
             self.ui.width.setEnabled(False)
             self.ui.height.setEnabled(False)
@@ -1043,13 +1043,13 @@ class PageSetup(QtGui.QWidget):
             self.pw=pagesizes.__dict__[self.size.upper()][0]
             self.ph=pagesizes.__dict__[self.size.upper()][1]
        
-        self.lm=self.stylesheet.adjustUnits(unicode(self.ui.margin_left.text()),self.pw)
-        self.rm=self.stylesheet.adjustUnits(unicode(self.ui.margin_right.text()),self.pw)
-        self.tm=self.stylesheet.adjustUnits(unicode(self.ui.margin_top.text()),self.ph)
-        self.bm=self.stylesheet.adjustUnits(unicode(self.ui.margin_bottom.text()),self.ph)
-        self.ts=self.stylesheet.adjustUnits(unicode(self.ui.spacing_header.text()),self.ph)
-        self.bs=self.stylesheet.adjustUnits(unicode(self.ui.spacing_footer.text()),self.ph)
-        self.gm=self.stylesheet.adjustUnits(unicode(self.ui.margin_gutter.text()),self.pw)
+        self.lm=self.stylesheet.adjustUnits(unicode(self.ui.margin_left.text()),self.pw) or 0
+        self.rm=self.stylesheet.adjustUnits(unicode(self.ui.margin_right.text()),self.pw) or 0
+        self.tm=self.stylesheet.adjustUnits(unicode(self.ui.margin_top.text()),self.ph) or 0
+        self.bm=self.stylesheet.adjustUnits(unicode(self.ui.margin_bottom.text()),self.ph) or 0
+        self.ts=self.stylesheet.adjustUnits(unicode(self.ui.spacing_header.text()),self.ph) or 0
+        self.bs=self.stylesheet.adjustUnits(unicode(self.ui.spacing_footer.text()),self.ph) or 0
+        self.gm=self.stylesheet.adjustUnits(unicode(self.ui.margin_gutter.text()),self.pw) or 0
         self.pageImage=QtGui.QImage(int(self.pw),
                                     int(self.ph),
                                     QtGui.QImage.Format_RGB32)
