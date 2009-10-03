@@ -55,21 +55,18 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
         return sio.getvalue()
         
     while True:
-        print 'PPID:',os.getppid()
         try:
             style_file, text, preview = render_queue.get(10)
             style_file, text, preview = render_queue.get(False)            
-            print 'GOT text to render'
         except Empty: # no more things to render, so do it
             if style_file:
-                print 'LOADING StyleSheet'
                 _renderer.loadStyles([style_file])
             flag = True
             #os.unlink(style_file)
-            print 'PARSING',time.time()
-            doctree = docutils.core.publish_doctree(text)
-            doctree_queue.put(doctree)
-            print 'PARSED',time.time()    
+            warnings=StringIO()
+            doctree = docutils.core.publish_doctree(text,
+                settings_overrides={'warning_stream':warnings})
+            doctree_queue.put([doctree,warnings.getvalue()])
             pdf_queue.put(render(doctree, preview))
         if os.getppid()==1: # Parent died
             sys.exit(0)
@@ -525,7 +522,7 @@ class Main(QtGui.QMainWindow):
         
         # See if there is something in the doctree Queue
         try:
-            self.doctree=self.doctree_queue.get(False)
+            self.doctree, self.warnings = self.doctree_queue.get(False)
             self.doctree.reporter=log
             class Visitor(docutils.nodes.SparseNodeVisitor):
                 
