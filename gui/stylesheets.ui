@@ -31,9 +31,6 @@
        <property name="selectionMode">
         <enum>QAbstractItemView::MultiSelection</enum>
        </property>
-       <property name="textElideMode">
-        <enum>Qt::ElideMiddle</enum>
-       </property>
       </widget>
      </item>
     </layout>

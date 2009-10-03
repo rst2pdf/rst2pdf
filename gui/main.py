@@ -1137,7 +1137,7 @@ class StyleSheets(QtGui.QWidget):
             sheets.extend(glob.glob(os.path.join(folder,'*.json')))
         sheets.sort()
         for s in sheets:
-            self.ui.system.addItem(s)
+            self.ui.system.addItem(os.path.basename(s))
         self.applyChanges()
             
     def on_addFromFile_clicked(self, b = None):
