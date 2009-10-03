@@ -1,6 +1,9 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* New "options" section in stylesheets. New ["options"]["stylesheets"] subsection,
+  which works similar to -s or to an include file: a list of stylesheets to be
+  processed before the current one.   
 * New --config option
 * Fix for Issue 200 (position of frames was miscalculated)
 * Fix For Issue 188 (uniconvertor "'unicode' object has no attribute 'readline'" error)

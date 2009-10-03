@@ -159,7 +159,6 @@
    </attribute>
    <addaction name="actionLoad_Text"/>
    <addaction name="actionRender"/>
-   <addaction name="actionTest_Action"/>
    <addaction name="actionSettings"/>
   </widget>
   <widget class="QToolBar" name="pdfbar">
