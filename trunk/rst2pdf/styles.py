@@ -121,7 +121,6 @@ class StyleSheet(object):
 
         # If any stylesheet has a [options][stylesheets] then those need to
         # be inserted, too
-        from pudb import set_trace; set_trace()
         _flist = []
         for data, ssname in zip(ssdata, flist):
             if 'options' in data and 'stylesheets' in data['options']:
@@ -168,7 +167,8 @@ class StyleSheet(object):
                             (page['size'], ssname))
                         continue
                 else: #A custom size
-                    del(self.page['size'])
+                    if 'size'in self.page:
+                        del(self.page['size'])
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
                     # to do 2*cm (cm comes from reportlab.lib.units)

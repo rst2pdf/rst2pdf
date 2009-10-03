@@ -303,8 +303,13 @@ class Main(QtGui.QMainWindow):
             data=json.loads(unicode(self.ui.style.toPlainText()))
         except: # TODO: fail if sheet doesn't validate
             data={}
-        config=ConfigDialog(data=data)
+        config=ConfigDialog(data=copy(data))
         config.exec_()
+        
+        # merge the edited stylesheet with current one because the editor 
+        # is not complete yet. When it is, just replace it.
+        data.update(config.data)
+        self.ui.style.setPlainText(json.dumps(data, indent=2))
 
     def on_actionTest_Action_triggered(self, b=None):
         if b is not None: return
@@ -1202,8 +1207,8 @@ class StyleSheets(QtGui.QWidget):
         '''%(head,body))
             
     def applyChanges(self):
-        self.data.update({'stylesheets':[unicode(self.ui.custom.item(x).text()) \
-            for x in range(self.ui.custom.count())]})
+        self.data.update({'options':{'stylesheets':[unicode(self.ui.custom.item(x).text()) \
+            for x in range(self.ui.custom.count())]}})
         self.updatePreview()
 
 if __name__ == "__main__":

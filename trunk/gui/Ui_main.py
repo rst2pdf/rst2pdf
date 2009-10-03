@@ -253,7 +253,6 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuHelp.menuAction())
         self.toolBar.addAction(self.actionLoad_Text)
         self.toolBar.addAction(self.actionRender)
-        self.toolBar.addAction(self.actionTest_Action)
         self.toolBar.addAction(self.actionSettings)
         self.editbar.addAction(self.actionUndo1)
         self.editbar.addAction(self.actionUndo2)
