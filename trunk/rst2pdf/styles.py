@@ -119,6 +119,35 @@ class StyleSheet(object):
                     (fname, str(e)))
                 continue
 
+        # If any stylesheet has a [options][stylesheets] then those need to
+        # be inserted, too
+        from pudb import set_trace; set_trace()
+        _flist = []
+        for data, ssname in zip(ssdata, flist):
+            if 'options' in data and 'stylesheets' in data['options']:
+                _flist.extend(data['options']['stylesheets'])
+            _flist.append(ssname)
+        
+        if _flist != flist: # Need to reparse
+            flist = _flist
+            ssdata = []
+            # First parse all files and store the results
+            for fname in flist:
+                fname = self.findStyle(fname)
+                try:
+                    if fname:
+                        ssdata.append(loads(open(fname).read()))
+                except ValueError, e: # Error parsing the JSON data
+                    log.critical('Error parsing stylesheet "%s": %s'%\
+                        (fname, str(e)))
+                    continue
+                except IOError, e: #Error opening the ssheet
+                    log.critical('Error opening stylesheet "%s": %s'%\
+                        (fname, str(e)))
+                    continue
+        
+            
+            
         # Get pageSetup data from all stylessheets in order:
         self.ps = pagesizes.A4
         self.page={}
