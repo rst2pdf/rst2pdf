@@ -1,6 +1,7 @@
 New in SVN (will be 0.12)
 -------------------------
 
+* Fixed Issue 202: broken processing of HTML raw nodes
 * New "options" section in stylesheets. New ["options"]["stylesheets"] subsection,
   which works similar to -s or to an include file: a list of stylesheets to be
   processed before the current one.   
