@@ -1,3 +1,8 @@
+New in 0.12.1
+-------------
+
+* Fixed Issue 204: syntax error on font importing code
+
 New in 0.12
 -----------
 
