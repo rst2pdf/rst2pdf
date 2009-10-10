@@ -1234,7 +1234,7 @@ If you want good looking documents, you want to enable hyphenation.
 
 To do it, you need to install Wordaxe [#]_.
 
-.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 0.3.2 or later is
+.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 1.0.0 or later is
        recommended.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
@@ -1255,22 +1255,10 @@ For english, this should be enough::
       "hyphenation": true
     }],
 
-If you are not an english speaker, you need to change the language.
+If you are not an english speaker, you need to change the language using 
+the -l or --language option.
 
-You can use the -l or --language option. The currently available dictionaries
-for wordaxe are:
-
-* de_DE
-
-* da
-
-* en_GB
-
-* en_US
-
-* ru
-
-However, since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
+Since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
 available. PyHyphen can use any OpenOffice dictionary, and can even download
 them automatically. [#]_
 
@@ -1474,9 +1462,9 @@ slightly.
 
 If you want kerning in your PDFs, you need to do the following:
     
-* Use wordaxe newer than 0.3 (r87 or later from SVN will work)
+* Use wordaxe at least 1.0.0
 
-* Use a TrueType font_path
+* Use a TrueType font
 
 * Set kerning to true in your style. For example, if you want **all**
   text to be kerned, you can set it in the "base" style.
