@@ -280,7 +280,7 @@ class StyleSheet(object):
                                 TTFont(str(variant.split('.')[0]),
                                 location))
                             log.info('Registering font: %s from %s'%\
-                                (str(variant.split('.')[0],location)))
+                                (str(variant.split('.')[0]),location))
                             self.embedded.append(str(variant.split('.')[0]))
 
                         # And map them all together
