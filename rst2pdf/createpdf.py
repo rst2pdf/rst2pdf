@@ -1518,7 +1518,7 @@ class RstToPdf(object):
         elif isinstance(node, docutils.nodes.raw):
             # Not really raw, but what the heck
             if node['format'].lower()=='pdf':
-                node.elements = parseRaw(node.astext())
+                node.elements = parseRaw(str(node.astext()))
             else:
                 node.elements = []
 
