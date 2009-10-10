@@ -1,5 +1,10 @@
-New in SVN (will be 0.12)
--------------------------
+New in 0.12.1
+-------------
+
+* Fixed Issue 204: syntax error on font importing code
+
+New in 0.12
+-----------
 
 * Fixed Issue 202: broken processing of HTML raw nodes
 * New "options" section in stylesheets. New ["options"]["stylesheets"] subsection,
