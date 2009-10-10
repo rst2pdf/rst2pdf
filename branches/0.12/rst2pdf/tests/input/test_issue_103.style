@@ -1,0 +1,14 @@
+{
+"styles" : [
+	["pad1" , {
+		"borderPadding": 0,
+                "borderWidth": 1,
+                "borderColor": "black" 
+	}], 
+	["pad2" , {
+		"borderPadding": [ 4,8,12,16 ],
+                "borderWidth": 1,
+                "borderColor": "black" 
+	}] 
+  ]
+}

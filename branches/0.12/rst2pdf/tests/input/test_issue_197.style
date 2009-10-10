@@ -1,0 +1,16 @@
+{
+ "styles" : [
+     [ "noborder", {
+         "commands": [
+            [ "GRID", [ 0, 0 ], [ -1, -1 ], 0.25, "white" ]
+        ]
+    }],
+     [ "funborder", {
+         "commands": [
+            [ "GRID", [ 0, 0 ], [ -1, -1 ], 2, "red" ],
+            [ "GRID", [ 0, 0 ], [ -1, -1 ], 1, "green" ]
+        ]
+    }]
+
+ ]
+}
