@@ -1,4 +1,4 @@
-Requirements: PyQt4, poppler-qt4, rst2pdf, pygments, simplejson.
+Requirements: PyQt4, poppler-qt4, rst2pdf, pygments, simplejson (if your python < 2.6).
 
 Building instructions:
 
