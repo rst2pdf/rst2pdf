@@ -8,7 +8,7 @@ from copy import copy
 from multiprocessing import Process, Queue
 from Queue import Empty
 from hashlib import md5
-from cStringIO import StringIO
+from StringIO import StringIO
 from rst2pdf.createpdf import RstToPdf 
 from rst2pdf.styles import StyleSheet 
 from rst2pdf.log import log
