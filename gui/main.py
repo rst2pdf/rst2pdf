@@ -34,7 +34,33 @@ try:
     import json
 except ImportError:
     import simplejson as json
-from BeautifulSoup import BeautifulSoup
+
+try:
+    from lxml import etree
+    print("running with lxml.etree")
+except ImportError:
+    try:
+        # Python 2.5
+        import xml.etree.cElementTree as etree
+        print("running with cElementTree on Python 2.5+")
+    except ImportError:
+        try:
+            # Python 2.5
+            import xml.etree.ElementTree as etree
+            print("running with ElementTree on Python 2.5+")
+        except ImportError:
+            try:
+                # normal cElementTree install
+                import cElementTree as etree
+                print("running with cElementTree")
+            except ImportError:
+                try:
+                    # normal ElementTree install
+                    import elementtree.ElementTree as etree
+                    print("running with ElementTree")
+                except ImportError:
+                    print("Failed to import ElementTree from any known place")
+
 
 from pygments import highlight
 from pygments.lexers import *
@@ -565,17 +591,22 @@ class Main(QtGui.QMainWindow):
             self.pdf.loadDocument(self.lastPDF)
             toc=self.pdf.document.toc()
             if toc:
-                # TODO: Convert to a python XML thing
-                # then use the LINE-X nodes to sync the PDFDisplay
+                # Use the LINE-X nodes to sync the PDFDisplay
                 # and the text window :-)
                 xml=unicode(toc.toString())
-                soup=BeautifulSoup(xml)
+                # Keep only the LINE- tags because elementtree chokes, and add a root
+                # node.
+                # This XML thing is not worth the effort :-(
+                # BeautifulSoup was cool, this is a pain.
+                xml='<root>\n%s\n</root>\n'%('\n'.join([ x for x in xml.splitlines() if x.startswith('<LINE') ]))
+                open('xml','w+').write(xml)
+                soup=etree.fromstring(xml)
                 tempMarks=[]
                 # Put all marks in a list and sort them
                 # because they can be repeated and out of order
-                for tag in soup.findAll(re.compile('line-')):
-                    dest=QtPoppler.Poppler.LinkDestination(tag['destination'])
-                    tempMarks.append([int(tag.name.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
+                for tag in soup.findall('*'):
+                    dest=QtPoppler.Poppler.LinkDestination(tag.attrib['Destination'])
+                    tempMarks.append([int(tag.tag.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
                 tempMarks.sort()
                 
                 self.lineMarks={}
