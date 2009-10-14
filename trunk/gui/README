@@ -4,13 +4,11 @@ Building instructions:
 
 1) Enter the pypoppler folder
 
-2) Create an empty __init__.py in the pypoppler folder.
-
-3) Copy poppler-qt4.sip from gui into pypoppler
-
-4) edit configure.py, specifically, I had to change 
+2) edit configure.py, specifically, I had to change 
    makefile.extra_include_dirs so it could find the 
    popplerqt4 and Qt includes.
 
-5) Run python main.py
+3) run configure.py && make
+
+4) Leave the pypoppler folder, and run python main.py
 
