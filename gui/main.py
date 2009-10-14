@@ -85,15 +85,19 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
             style_file, text, preview = render_queue.get(10)
             style_file, text, preview = render_queue.get(False)            
         except Empty: # no more things to render, so do it
-            if style_file:
-                _renderer.loadStyles([style_file])
-            flag = True
-            #os.unlink(style_file)
-            warnings=StringIO()
-            doctree = docutils.core.publish_doctree(text,
-                settings_overrides={'warning_stream':warnings})
-            doctree_queue.put([doctree,warnings.getvalue()])
-            pdf_queue.put(render(doctree, preview))
+            try:
+                if style_file:
+                    _renderer.loadStyles([style_file])
+                flag = True
+                #os.unlink(style_file)
+                warnings=StringIO()
+                doctree = docutils.core.publish_doctree(text,
+                    settings_overrides={'warning_stream':warnings})
+                doctree_queue.put([doctree,warnings.getvalue()])
+                pdf_queue.put(render(doctree, preview))
+            except:
+                # Don't crash ever ;-)
+                pass
         if os.getppid()==1: # Parent died
             sys.exit(0)
       
