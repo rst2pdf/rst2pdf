@@ -1,6 +1,7 @@
 New in 0.12.1
 -------------
 
+* Partial fix for Issue 205: KeyError: 'format'
 * Fixed Issue 212: XML parsing error in bookrest
 * Fixed Issue 210: pickle error in bookrest
 * Switched --enable-splittables to True by default
