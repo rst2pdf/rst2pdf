@@ -1,6 +1,9 @@
 New in 0.12.1
 -------------
 
+* Fixed Issue 212: XML parsing error in bookrest
+* Fixed Issue 210: pickle error in bookrest
+* Switched --enable-splittables to True by default
 * Fixed Issue 204: syntax error on font importing code
 
 New in 0.12
