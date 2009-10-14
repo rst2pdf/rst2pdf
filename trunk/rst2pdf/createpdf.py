@@ -53,6 +53,7 @@ import os
 import tempfile
 import re
 import string
+import types
 from os.path import abspath, dirname, expanduser, join
 from urlparse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
@@ -2124,6 +2125,10 @@ class FancyPage(PageTemplate):
             head or self.template.get('defaultHeader'))
         if _head:
             _head = copy(_head)
+            if isinstance(_head, list):
+                _head = _head[:]
+            else:
+                _head = [Paragraph(_head, self.styles['header'])]
             self.replaceTokens(_head, canv, doc)
             container = _Container()
             container._content = _head
@@ -2134,6 +2139,10 @@ class FancyPage(PageTemplate):
             foot or self.template.get('defaultFooter'))
         if _foot:
             _foot = copy(_foot)
+            if isinstance(_foot, list):
+                _foot = _foot[:]
+            else:
+                _foot = [Paragraph(_foot, self.styles['footer'])]
             self.replaceTokens(_foot, canv, doc)
             container = _Container()
             container._content = _foot
@@ -2270,10 +2279,10 @@ def parse_commandline():
         action='store_true', default=False,
         help='Show frame borders (only useful for debugging). Default=False')
 
-    parser.add_option('--enable-splittables', dest='splittables',
-        action='store_true', default=True,
-        help='Use splittable flowables in some elements. '
-        'Only set this to false if you can\'t process a document any other way.')
+    parser.add_option('--disable-splittables', dest='splittables',
+        action='store_false', default=True,
+        help='Don\'t use splittable flowables in some elements. '
+        'Only try this if you can\'t process a document any other way.')
 
     def_break = config.getValue("general", "break_level", 0)
     parser.add_option('-b', '--break-level', dest='breaklevel',
