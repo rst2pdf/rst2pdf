@@ -384,7 +384,7 @@ class Main(QtGui.QMainWindow):
                             ))
         if fname:
             self.text_fname=fname
-            #self.on_actionSave_Text_triggered()
+            self.on_actionSave_Text_triggered()
 
     def on_actionLoad_Text_triggered(self, b=None):
         if b is None: return
