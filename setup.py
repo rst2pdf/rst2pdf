@@ -49,7 +49,7 @@ except ImportError:
 
 tests_require = ['pyPdf']
 sphinx_require = ['sphinx']
-hyphenation_require = ['wordaxe']
+hyphenation_require = ['wordaxe>=1.0']
 images_require = ['PIL']
 pdfimages_require = ['PythonMagick']
 svgsupport_require = ['svglib']

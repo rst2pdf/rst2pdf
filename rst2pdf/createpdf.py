@@ -2271,9 +2271,9 @@ def parse_commandline():
         help='Show frame borders (only useful for debugging). Default=False')
 
     parser.add_option('--enable-splittables', dest='splittables',
-        action='store_true', default=False,
-        help='Use alpha-quality splittable flowables in some elements. '
-        'Only useful for things like page-long block quotes or list items')
+        action='store_true', default=True,
+        help='Use splittable flowables in some elements. '
+        'Only set this to false if you can\'t process a document any other way.')
 
     def_break = config.getValue("general", "break_level", 0)
     parser.add_option('-b', '--break-level', dest='breaklevel',
