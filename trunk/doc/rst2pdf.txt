@@ -1,15 +1,32 @@
-NAME
-       rst2pdf - Convert reStructuredText documents to PDF
+=======
+rst2pdf
+=======
+
+-----------------------------------------
+Convert reStructuredText documents to PDF
+-----------------------------------------
+
+:Author: Chris Lamb <chris@chris-lamb.co.uk> for the Debian project
+:Manual section: 1
+:Manual group: text processing
+
 
 SYNOPSIS
-       rst2pdf [options] [input] [-o output]
+--------
+
+rst2pdf [options] [input] [-o output]
+
 
 DESCRIPTION
-       The usual way of creating PDF from reStructuredText (ReST) is by going through LaTeX.
-       The rst2pdf utility provides an alternative by producing PDF directly using the ReportLab
-       library.
+-----------
+
+
+The usual way of creating PDF from reStructuredText (ReST) is by going through LaTeX.
+The rst2pdf utility provides an alternative by producing PDF directly using the ReportLab
+library.
 
 OPTIONS
+-------
 
 -h, --help
                     Show this help message and exit
@@ -60,7 +77,7 @@ The possible values are:
 
 0. Suppress all transformations. (Do nothing.)
         
-1. Performs default SmartyPants transformations: quotes (including ``backticks'' -style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
+1. Performs default SmartyPants transformations: quotes (including backticks-style), em-dashes, and ellipses. "--" (dash dash) is used to signify an em-dash; there is no support for en-dashes.
         
 2. Same as --smart-quotes=1, except that it uses the old-school typewriter shorthand for dashes: "--" (dash dash) for en-dashes, "---" (dash dash dash) for em-dashes.
 
@@ -100,10 +117,8 @@ The possible values are:
 
 
 EXAMPLES
+--------
 
-    $ rst2pdf rest.txt -o out.pdf
+$ rst2pdf rest.txt -o out.pdf
 
-    Produce an out.pdf file which is a PDF version of the ReST document rest.txt.
-
-AUTHORS
-    This manual page was written by Chris Lamb <chris@chris-lamb.co.uk>, for the Debian project (but may be used by others).
+Produce an out.pdf file which is a PDF version of the ReST document rest.txt.
