@@ -1,0 +1,153 @@
+First Section
+-------------
+
+This test has to run with -b1. If Issue 216 is fixed, the second section should be in page 2.
+If it's not fixed, it will be in page 3.
+
+
+Second Section
+--------------
+
+.. code-block:: python
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    bla
+    
+    
