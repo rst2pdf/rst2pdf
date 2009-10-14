@@ -1,6 +1,7 @@
 New in 0.12.1
 -------------
 
+* Switched --enable-splittables to True by default
 * Fixed Issue 204: syntax error on font importing code
 
 New in 0.12
