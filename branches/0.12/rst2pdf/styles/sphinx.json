@@ -95,6 +95,11 @@
       "borderColor": "#CCCCCC",
       "backColor": "#EEEEEE"
     }],
+    ["warning" , {
+      "parent": "admonition",
+      "borderColor": "#FF6666",
+      "backColor": "#FFE4E4"
+    }],
     ["seealso", {
       "borderColor": "#FFFF66",
       "backColor": "#FFFFCC",
