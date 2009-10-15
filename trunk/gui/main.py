@@ -602,7 +602,7 @@ class Main(QtGui.QMainWindow):
                 # node.
                 # This XML thing is not worth the effort :-(
                 # BeautifulSoup was cool, this is a pain.
-                codecs.open('xml','w+','utf-8').write(xml)
+                #codecs.open('xml','w+','utf-8').write(xml)
                 xml='<root>\n%s\n</root>\n'%('\n'.join([ x for x in xml.splitlines() \
                     if x.startswith('<LINE') and x.endswith('/>')]))
                 soup=etree.fromstring(xml)
