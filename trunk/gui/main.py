@@ -596,23 +596,21 @@ class Main(QtGui.QMainWindow):
             self.pdf.loadDocument(self.lastPDF)
             toc=self.pdf.document.toc()
             if toc:
-                # Use the LINE-X nodes to sync the PDFDisplay
-                # and the text window :-)
-                xml=unicode(toc.toString())
-                # Keep only the LINE- tags because elementtree chokes, and add a root
-                # node.
-                # This XML thing is not worth the effort :-(
-                # BeautifulSoup was cool, this is a pain.
-                #codecs.open('xml','w+','utf-8').write(xml)
-                xml='<root>\n%s\n</root>\n'%('\n'.join([ x for x in xml.splitlines() \
-                    if x.startswith('<LINE') and x.endswith('/>')]))
-                soup=etree.fromstring(xml)
                 tempMarks=[]
-                # Put all marks in a list and sort them
-                # because they can be repeated and out of order
-                for tag in soup.findall('*'):
-                    dest=QtPoppler.Poppler.LinkDestination(tag.attrib['Destination'])
-                    tempMarks.append([int(tag.tag.split('-')[1]),[dest.pageNumber(), dest.top(), dest.left(),1.]])
+                def traverse(node):
+                    children=node.childNodes()
+                    for i in range(children.length()):
+                        n=children.item(i)
+                        e=n.toElement()
+                        if e:
+                            tag=str(e.tagName())
+                            if tag.startswith('LINE'):
+                                dest=str(e.attribute('Destination'))
+                                dest=QtPoppler.Poppler.LinkDestination(dest)
+                                tempMarks.append([int(tag.split('-')[1]),
+                                    [dest.pageNumber(), dest.top(), dest.left(),1.]])
+                        traverse(n)
+                traverse(toc)
                 tempMarks.sort()
 
                 self.lineMarks={}
