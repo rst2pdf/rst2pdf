@@ -2,7 +2,7 @@
 
 """The user interface for our app"""
 
-import os,sys,tempfile,re,functools,time,types,glob
+import os,sys,tempfile,re,functools,time,types,glob,codecs
 from pprint import pprint
 from copy import copy
 from multiprocessing import Process, Queue
@@ -602,8 +602,9 @@ class Main(QtGui.QMainWindow):
                 # node.
                 # This XML thing is not worth the effort :-(
                 # BeautifulSoup was cool, this is a pain.
-                xml='<root>\n%s\n</root>\n'%('\n'.join([ x for x in xml.splitlines() if x.startswith('<LINE') ]))
-                open('xml','w+').write(xml)
+                codecs.open('xml','w+','utf-8').write(xml)
+                xml='<root>\n%s\n</root>\n'%('\n'.join([ x for x in xml.splitlines() \
+                    if x.startswith('<LINE') and x.endswith('/>')]))
                 soup=etree.fromstring(xml)
                 tempMarks=[]
                 # Put all marks in a list and sort them
