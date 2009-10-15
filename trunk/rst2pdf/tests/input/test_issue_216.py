@@ -13,14 +13,12 @@ def go():
         styles = getSampleStyleSheet()
         doc = SimpleDocTemplate("issue216.pdf")
         
-        space=Spacer(0,0)
-        
         knstyle=copy(styles['Normal'])
-        heading1=Paragraph('Heading 1',knstyle)
-        heading1.keepWithNext=True
+        heading=Paragraph('A heading at the beginning of the document',knstyle)
+        heading.keepWithNext=True
         content= XPreformatted('This is the content\n'*120,styles['Normal'])
         
-        Story=[space,heading1,content]
+        Story=[heading,content]
         doc.build(Story)
 
 go()
