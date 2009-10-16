@@ -1238,6 +1238,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.list_item):
             el = self.gather_elements(node, style=style)
+            
 
             b, t = self.bullet_for_node(node)
 
@@ -1254,8 +1255,22 @@ class RstToPdf(object):
 
             if t == 'bullet':
                 st=self.styles['bullet_list']
+                item_st=self.styles['bullet_list_item']
             else:
                 st=self.styles['item_list']
+                item_st=self.styles['item_list_item']
+                
+            idx=node.parent.children.index(node)
+            if idx>0: # Not the first item
+                sb=item_st.spaceBefore
+            else:
+                sb=0
+                
+            if (idx+1)<len(node.parent.children): #Not the last item
+                sa=item_st.spaceAfter
+            else:
+                sa=0
+                
             t_style = TableStyle(st.commands)
 
             #colWidths = map(self.styles.adjustUnits,
@@ -1263,13 +1278,19 @@ class RstToPdf(object):
             colWidths = st.colWidths
 
             if self.splittables:
-                node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
+                node.elements = [Spacer(0,sb),
+                                 SplitTable([[Paragraph(b, style = bStyle), el]],
                                  style = t_style,
-                                 colWidths = colWidths)]
+                                 colWidths = colWidths),
+                                 Spacer(0,sa)
+                                 ]
             else:
-                node.elements = [DelayedTable([[Paragraph(b, style = bStyle), el]],
+                node.elements = [Spacer(0,sb),
+                                 DelayedTable([[Paragraph(b, style = bStyle), el]],
                                  style = t_style,
-                                 colWidths = colWidths)]
+                                 colWidths = colWidths),
+                                 Spacer(0,sa)
+                                 ]
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
