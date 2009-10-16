@@ -553,6 +553,7 @@ class PDFWriter(writers.Writer):
                  highlightlang=self.highlightlang,
                  splittables=self.splittables,
                  style_path=[self.srcdir],
+                 basedir=self.srcdir,
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
