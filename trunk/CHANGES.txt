@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* More style docs in the manual
+* Better styling of lists
 * Fix bug reported in comments in my blog where a stylesheet with 
   showHeader=True and no explicit header caused an exception.
 * Fixed Issue 215: crashes in bookrest's background renderer.

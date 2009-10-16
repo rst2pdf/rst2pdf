@@ -897,6 +897,80 @@ be enough:
 
     PageBreak
 
+Styling Your Document
+---------------------
+
+Which styles you need to modify to achieve your desired result is not obvious.
+In this section, you will see some hints and pointers to that effect.
+
+The Base Styles
+~~~~~~~~~~~~~~~
+
+There are three styles which have great effect, they are ``base``,
+``normal`` and ``bodytext``. 
+
+Here's an example, the twelvepoint stylesheet::
+    
+    {"styles": [["base", {"fontSize": 12}]]}
+    
+Since all other styles inherit ``base``, changing the fontSize changes the fontSize 
+for everything in your document.
+
+The ``normal`` style is meant for most elements, so usually it's the same as changing
+``base``. 
+
+The ``bodytext`` style is for elements that form paragraphs. So, for example, you can set
+your document to be left-aligned like this::
+    
+    {"styles": [["bodytext", {"alignment": "TA_LEFT"}]]}
+    
+There are elements, however, that don't inherit from bodytext, for example headings and the
+styles used in the table of contents. Those are elements that are not real paragraphs, so
+they should not follow the indentation and spacing you use for your document's main content.
+
+The ``heading`` style is inherited by all sorts of titles: section titles, topic titles, 
+admonition titles, etc.
+
+Lists
+~~~~~
+
+Styling lists is mostly a matter of spacing and indentation.
+
+The space before and after a list is taken from the ``item_list`` and ``bullet_list`` styles::
+    
+    ["item_list", { 
+      "parent": "bodytext",
+      "spaceBefore": 0,
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+        ],
+        "colWidths": ["20pt",null]
+    }]
+    
+    ["bullet_list", {
+      "parent": "bodytext",
+      "spaceBefore": 0,
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+        ], 
+        "colWidths": ["20",null]
+    }],
+
+Yes, these are table styles, because they are implemented as tables. The RIGHTPADDING command
+and the colWidths option can be used to adjust the position of the bullet/item number.
+
+To control the separation between items, you use the item_list_item and 
+``bullet_list_item`` styles' spaceBefore and spaceAfter options, for example::
+
+    ["bullet_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 20
+    }]
+    
+Remember that this is only used **between items** and not before the first or after the 
+last items. 
 
 Syntax Highlighting
 ===================
