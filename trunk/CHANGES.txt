@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Added pdf_default_dpi option for pdfbuilder
 * More style docs in the manual
 * Better styling of lists
 * Fix bug reported in comments in my blog where a stylesheet with 
