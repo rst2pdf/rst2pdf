@@ -1639,6 +1639,9 @@ To use it in your existing sphinx project you need to do the following:
     # if you get "DelayedTable too big" errors
     #pdf_splittables = False
    
+    # Set the default DPI for images
+    #pdf_default_dpi = 72
+   
     
 3. (Maybe) add this in your Makefile::
     
