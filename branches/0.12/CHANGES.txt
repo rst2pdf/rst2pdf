@@ -1,3 +1,14 @@
+New in 0.12.2
+-------------
+
+* Fix Issue 219 (incompatibility with reportlab 2.1)
+* Added pdf_default_dpi option for pdfbuilder
+* More style docs in the manual
+* Better styling of lists
+* Fix bug reported in comments in my blog where a stylesheet with 
+  showHeader=True and no explicit header caused an exception.
+* Fixed Issue 215: crashes in bookrest's background renderer.
+
 New in 0.12.1
 -------------
 

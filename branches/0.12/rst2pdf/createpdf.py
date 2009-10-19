@@ -53,6 +53,7 @@ import os
 import tempfile
 import re
 import string
+import types
 from os.path import abspath, dirname, expanduser, join
 from urlparse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
@@ -1237,6 +1238,7 @@ class RstToPdf(object):
 
         elif isinstance(node, docutils.nodes.list_item):
             el = self.gather_elements(node, style=style)
+            
 
             b, t = self.bullet_for_node(node)
 
@@ -1253,8 +1255,22 @@ class RstToPdf(object):
 
             if t == 'bullet':
                 st=self.styles['bullet_list']
+                item_st=self.styles['bullet_list_item']
             else:
                 st=self.styles['item_list']
+                item_st=self.styles['item_list_item']
+                
+            idx=node.parent.children.index(node)
+            if idx>0: # Not the first item
+                sb=item_st.spaceBefore
+            else:
+                sb=0
+                
+            if (idx+1)<len(node.parent.children): #Not the last item
+                sa=item_st.spaceAfter
+            else:
+                sa=0
+                
             t_style = TableStyle(st.commands)
 
             #colWidths = map(self.styles.adjustUnits,
@@ -1262,13 +1278,19 @@ class RstToPdf(object):
             colWidths = st.colWidths
 
             if self.splittables:
-                node.elements = [SplitTable([[Paragraph(b, style = bStyle), el]],
+                node.elements = [Spacer(0,sb),
+                                 SplitTable([[Paragraph(b, style = bStyle), el]],
                                  style = t_style,
-                                 colWidths = colWidths)]
+                                 colWidths = colWidths),
+                                 Spacer(0,sa)
+                                 ]
             else:
-                node.elements = [DelayedTable([[Paragraph(b, style = bStyle), el]],
+                node.elements = [Spacer(0,sb),
+                                 DelayedTable([[Paragraph(b, style = bStyle), el]],
                                  style = t_style,
-                                 colWidths = colWidths)]
+                                 colWidths = colWidths),
+                                 Spacer(0,sa)
+                                 ]
 
         elif isinstance(node, docutils.nodes.transition):
             node.elements = [Separation()]
@@ -2124,6 +2146,10 @@ class FancyPage(PageTemplate):
             head or self.template.get('defaultHeader'))
         if _head:
             _head = copy(_head)
+            if isinstance(_head, list):
+                _head = _head[:]
+            else:
+                _head = [Paragraph(_head, self.styles['header'])]
             self.replaceTokens(_head, canv, doc)
             container = _Container()
             container._content = _head
@@ -2134,6 +2160,10 @@ class FancyPage(PageTemplate):
             foot or self.template.get('defaultFooter'))
         if _foot:
             _foot = copy(_foot)
+            if isinstance(_foot, list):
+                _foot = _foot[:]
+            else:
+                _foot = [Paragraph(_foot, self.styles['footer'])]
             self.replaceTokens(_foot, canv, doc)
             container = _Container()
             container._content = _foot
@@ -2270,10 +2300,10 @@ def parse_commandline():
         action='store_true', default=False,
         help='Show frame borders (only useful for debugging). Default=False')
 
-    parser.add_option('--enable-splittables', dest='splittables',
-        action='store_true', default=True,
-        help='Use splittable flowables in some elements. '
-        'Only set this to false if you can\'t process a document any other way.')
+    parser.add_option('--disable-splittables', dest='splittables',
+        action='store_false', default=True,
+        help='Don\'t use splittable flowables in some elements. '
+        'Only try this if you can\'t process a document any other way.')
 
     def_break = config.getValue("general", "break_level", 0)
     parser.add_option('-b', '--break-level', dest='breaklevel',

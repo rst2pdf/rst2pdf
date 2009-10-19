@@ -88,6 +88,7 @@ class PDFBuilder(Builder):
                                 compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
                                 inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
                                 splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
+                                default_dpi=opts.get('pdf_default_dpi', self.config.pdf_default_dpi),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -464,6 +465,7 @@ class PDFWriter(writers.Writer):
                 inline_footnotes = False,
                 splittables = False,
                 srcdir = '.',
+                default_dpi = 300,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -480,6 +482,7 @@ class PDFWriter(writers.Writer):
         self.highlightlang = builder.config.highlight_language
         self.srcdir = srcdir
         self.config = config
+        self.default_dpi = default_dpi
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -553,6 +556,8 @@ class PDFWriter(writers.Writer):
                  highlightlang=self.highlightlang,
                  splittables=self.splittables,
                  style_path=[self.srcdir],
+                 basedir=self.srcdir,
+                 def_dpi=self.default_dpi,
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
@@ -727,6 +732,7 @@ def setup(app):
     app.add_config_value('pdf_appendices', [], None)
     app.add_config_value('pdf_splittables', False, None)
     app.add_config_value('pdf_breakside', 'odd', None)
+    app.add_config_value('pdf_default_dpi', 300, None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
