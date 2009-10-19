@@ -207,10 +207,12 @@
       "alignment": "TA_CENTER"
     }],
     ["bullet_list_item" , {
-      "parent": "bodytext"
+      "parent": "bodytext",
+      "spaceBefore":-3
     }],
     ["item_list_item" , {
-      "parent": "bodytext"
+      "parent": "bodytext",
+      "spaceBefore":-3
     }],
     ["enumerated_list" , {
       "parent": "bodytext",
