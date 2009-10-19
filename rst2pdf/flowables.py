@@ -19,7 +19,11 @@ except ImportError:
     HAS_WORDAXE=False
 
 from reportlab.lib.units import *
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ, NullDraw
+try:
+    from reportlab.platypus.flowables import _listWrapOn, _FUZZ, NullDraw
+except ImportError: # Probably RL 2.1
+    from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+    NullDraw = Flowable
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
