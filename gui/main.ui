@@ -94,7 +94,7 @@
      <x>0</x>
      <y>0</y>
      <width>574</width>
-     <height>28</height>
+     <height>32</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuText">
@@ -310,6 +310,9 @@
    <property name="toolTip">
     <string>Open Text</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionLoad_Style">
    <property name="icon">
@@ -342,6 +345,9 @@
    </property>
    <property name="toolTip">
     <string>Save Text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionSave_Style">
