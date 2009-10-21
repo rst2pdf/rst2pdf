@@ -1,3 +1,8 @@
+New in SVN
+----------
+
+* Fix Issue 223 (non-monospaced styles used in code)
+
 New in 0.12.2
 -------------
 
