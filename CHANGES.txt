@@ -1,6 +1,12 @@
 New in SVN
 ----------
 
+* Fix Issue 223 (non-monospaced styles used in code)
+
+New in 0.12.2
+-------------
+
+* Fix Issue 219 (incompatibility with reportlab 2.1)
 * Added pdf_default_dpi option for pdfbuilder
 * More style docs in the manual
 * Better styling of lists
