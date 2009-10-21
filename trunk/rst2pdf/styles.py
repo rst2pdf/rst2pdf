@@ -496,9 +496,14 @@ class StyleSheet(object):
         if self.StyleSheet.has_key(key):
             return self.StyleSheet[key]
         else:
-            log.warning("Using undefined style '%s'"
-                        ", aliased to style 'normal'."%key)
-            newst=copy(self.StyleSheet['normal'])
+            if key.startswith('pygments'):
+                log.info("Using undefined style '%s'"
+                            ", aliased to style 'code'."%key)
+                newst=copy(self.StyleSheet['code'])            
+            else:
+                log.warning("Using undefined style '%s'"
+                            ", aliased to style 'normal'."%key)
+                newst=copy(self.StyleSheet['normal'])
             newst.name=key
             self.StyleSheet.add(newst)
             return newst
