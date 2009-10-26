@@ -434,7 +434,7 @@ class Main(QtGui.QMainWindow):
                                                 )
         self.style_fname=fname
         self.disableHL()
-        self.ui.style.setPlainText(codecs.open(self.style_fname,'utf-8').read())
+        self.ui.style.setPlainText(codecs.open(self.style_fname,'rb', 'utf-8').read())
         self.enableHL()
 
     def on_actionSave_PDF_triggered(self, b=None):
