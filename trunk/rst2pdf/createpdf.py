@@ -1346,7 +1346,10 @@ class RstToPdf(object):
                 qstyle.leftIndent += self.styles.adjustUnits("1.5em")
             else:
                 qstyle = copy(self.styles['lineblock'])
-            node.elements = self.gather_elements(node, style=qstyle)
+            # Fix Issue 225: no space betwen line in a lineblock, but keep
+            # space before the lineblock itself
+            qstyle.spaceBefore=0
+            node.elements = [Spacer(0,self.styles['lineblock'].spaceBefore)]+self.gather_elements(node, style=qstyle)
 
         elif isinstance(node, docutils.nodes.line):
             # All elements in one line
