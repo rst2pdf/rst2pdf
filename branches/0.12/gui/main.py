@@ -367,7 +367,7 @@ class Main(QtGui.QMainWindow):
         if b is not None: return
 
         if self.text_fname is not None:
-            f=open(self.text_fname,'w+')
+            f=codecs.open(self.text_fname,'w+','utf-8')
             f.seek(0)
             f.write(unicode(self.ui.text.toPlainText()))
             f.close()
@@ -396,14 +396,14 @@ class Main(QtGui.QMainWindow):
                                                 )
         self.text_fname=fname
         self.disableHL()
-        self.ui.text.setPlainText(open(self.text_fname).read())
+        self.ui.text.setPlainText(codecs.open(self.text_fname,'r','utf-8').read())
         self.enableHL()
 
     def on_actionSave_Style_triggered(self, b=None):
         if b is not None: return
 
         if self.style_fname is not None:
-            f=open(self.style_fname,'w+')
+            f=codecs.open(self.style_fname,'w+','utf-8')
             f.seek(0)
             f.write(unicode(self.ui.style.toPlainText()))
             f.close()
@@ -434,7 +434,7 @@ class Main(QtGui.QMainWindow):
                                                 )
         self.style_fname=fname
         self.disableHL()
-        self.ui.style.setPlainText(open(self.style_fname).read())
+        self.ui.style.setPlainText(codecs.open(self.style_fname,'rb', 'utf-8').read())
         self.enableHL()
 
     def on_actionSave_PDF_triggered(self, b=None):
