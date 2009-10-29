@@ -1962,9 +1962,6 @@ class FancyDocTemplate(BaseDocTemplate):
             pagenum = setPageCounter()
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
-#FIXME: these should not be global, but look at issue 126
-head = None
-foot = None
 _counter=0
 _counterStyle='arabic'
 
@@ -2004,6 +2001,78 @@ def setPageCounter(counter=None, style=None):
     return ptext
 
 
+class HeaderOrFooter(object):
+    """ A helper object for FancyPage (below)
+        HeaderOrFooter exists for two reasons:
+            1) to handle operations which are common to both headers
+               and footers; and
+            2) to thwart deepcopy when it attempts to copy things
+               which it shouldn't (see issue # 126)
+    """
+    def __init__(self, items=None, isfooter=False):
+        self.items = items
+        if isfooter:
+            locinfo = 'footer showFooter defaultFooter'
+        else:
+            locinfo = 'header showHeader defaultHeader'
+        self.isfooter = isfooter
+        self.loc, self.showloc, self.defaultloc = locinfo.split()
+
+    def __deepcopy__(self, *whatever):
+        return HeaderOrFooter(copy(self.items), self.isfooter)
+
+    def prepare(self, pageobj, canv):
+        showloc = pageobj.template.get(self.showloc, True)
+        items = self.items
+        if showloc and not items:
+            items = pageobj.template.get(self.defaultloc)
+        if items:
+            if isinstance(items, list):
+                items = items[:]
+            else:
+                items = [Paragraph(_head, pageobj.styles[self.loc])]
+            _, height =  _listWrapOn(items, pageobj.tw, canv)
+        else:
+            height = 0
+        self.prepared = items
+        return height
+
+    def replaceTokens(self, elems, canv, doc, smarty):
+        """Put doc_title/page number/etc in text of header/footer."""
+
+        # Make sure page counter is up to date
+        pnum=setPageCounter()
+
+        for e in elems:
+            i = elems.index(e)
+            if isinstance(e, Paragraph):
+                text = e.text
+                if not isinstance(text, unicode):
+                    try:
+                        text = unicode(text, e.encoding)
+                    except AttributeError:
+                        text = unicode(text, 'utf-8')
+
+                text = text.replace(u'###Page###', pnum)
+                text = text.replace(u"###Title###", doc.title)
+                text = text.replace(u"###Section###",
+                    getattr(canv, 'sectName', ''))
+                text = text.replace(u"###SectNum###",
+                    getattr(canv, 'sectNum', ''))
+                text = smartyPants(text, smarty)
+                elems[i] = Paragraph(text, e.style)
+
+    def draw(self, pageobj, canv, doc, x, y, width, height):
+        items = self.prepared
+        if items:
+            self.replaceTokens(items, canv, doc, pageobj.smarty)
+            container = _Container()
+            container._content = items
+            container.width = width
+            container.height = height
+            container.drawOn(canv, x, y)
+
+
 class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
@@ -2011,8 +2080,8 @@ class FancyPage(PageTemplate):
     def __init__(self, _id, _head, _foot, styles, smarty="0", show_frame=False):
         global head, foot
         self.styles = styles
-        head = _head
-        foot = _foot
+        self._head = HeaderOrFooter(_head)
+        self._foot = HeaderOrFooter(_foot, True)
         self.smarty = smarty
         self.show_frame = show_frame
         PageTemplate.__init__(self, _id, [])
@@ -2046,26 +2115,8 @@ class FancyPage(PageTemplate):
 
         # Adjust text space accounting for header/footer
         
-        _head = self.template.get('showHeader', True) and (
-            head or self.template.get('defaultHeader'))
-        if _head:
-            if isinstance(_head, list):
-                _head = _head[:]
-            else:
-                _head = [Paragraph(_head, self.styles['header'])]
-            _, self.hh = _listWrapOn(_head, self.tw, canv)
-        else:
-            self.hh = 0
-        _foot = self.template.get('showFooter', True) and (
-            foot or self.template.get('defaultFooter'))
-        if _foot:
-            if isinstance(_foot, list):
-                _foot = _foot[:]
-            else:
-                _foot = [Paragraph(_foot, self.styles['footer'])]
-            _, self.fh = _listWrapOn(_foot, self.tw, canv)
-        else:
-            self.fh = 0
+        self.hh = self._head.prepare(self, canv)
+        self.fh = self._foot.prepare(self, canv)
             
         canv._doctemplate = doct
 
@@ -2110,31 +2161,6 @@ class FancyPage(PageTemplate):
         for frame in self.frames:
             frame._pagenum=doc.page
 
-    def replaceTokens(self, elems, canv, doc):
-        """Put doc_title/page number/etc in text of header/footer."""
-
-        # Make sure page counter is up to date
-        pnum=setPageCounter()
-
-        for e in elems:
-            i = elems.index(e)
-            if isinstance(e, Paragraph):
-                text = e.text
-                if not isinstance(text, unicode):
-                    try:
-                        text = unicode(text, e.encoding)
-                    except AttributeError:
-                        text = unicode(text, 'utf-8')
-
-                text = text.replace(u'###Page###', pnum)
-                text = text.replace(u"###Title###", doc.title)
-                text = text.replace(u"###Section###",
-                    getattr(canv, 'sectName', ''))
-                text = text.replace(u"###SectNum###",
-                    getattr(canv, 'sectNum', ''))
-                text = smartyPants(text, self.smarty)
-                elems[i] = Paragraph(text, e.style)
-
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
         # Adjust for gutter margin
@@ -2145,34 +2171,9 @@ class FancyPage(PageTemplate):
         else: # Right Page
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
-        _head = self.template.get('showHeader', True) and (
-            head or self.template.get('defaultHeader'))
-        if _head:
-            _head = copy(_head)
-            if isinstance(_head, list):
-                _head = _head[:]
-            else:
-                _head = [Paragraph(_head, self.styles['header'])]
-            self.replaceTokens(_head, canv, doc)
-            container = _Container()
-            container._content = _head
-            container.width = self.tw
-            container.height = self.hh
-            container.drawOn(canv, hx, self.hy)
-        _foot = self.template.get('showFooter', True) and (
-            foot or self.template.get('defaultFooter'))
-        if _foot:
-            _foot = copy(_foot)
-            if isinstance(_foot, list):
-                _foot = _foot[:]
-            else:
-                _foot = [Paragraph(_foot, self.styles['footer'])]
-            self.replaceTokens(_foot, canv, doc)
-            container = _Container()
-            container._content = _foot
-            container.width = self.tw
-            container.height = self.fh
-            container.drawOn(canv, fx, self.fy)
+            
+        self._head.draw(self, canv, doc, hx, self.hy, self.tw, self.hh)
+        self._foot.draw(self, canv, doc, fx, self.fy, self.tw, self.fh)
 
 def parse_commandline():
     
