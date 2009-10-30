@@ -1,12 +1,5 @@
 {
-  "embeddedFonts" : ["Georgia"],
-  "fontsAlias" : {
-    "stdFont": "Georgia-Bold"
-  },
   "styles": [ 
-	[ "title", { "fontName" : "URWPalladioL-Bold" } ],
-	[ "heading1", { "fontName" : "Palatino" } ],
-	[ "heading2", { "fontName" : "New Century Schoolbook-Oblique" } ],
-	[ "heading3", { "fontName" : "URW Palladio L-Bold" } ] 
+	[ "title", { "fontName" : "CharterBT-Italic" } ]
   ]
 }

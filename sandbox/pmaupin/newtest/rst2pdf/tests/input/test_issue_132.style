@@ -1,9 +1,10 @@
 {
+  "embeddedFonts" : [["Tuffy.ttf", "Tuffy_Bold.ttf", "Tuffy_Italic.ttf", "Tuffy_Bold_Italic.ttf"]],
   "fontsAlias" : {
-    "stdFont": "Vera",
-    "stdBold": "Vera Bold",
-    "stdItalic": "Vera Oblique",
-    "stdBoldItalic": "Vera BoldOblique"
+    "stdFont": "Tuffy",
+    "stdBold": "Tuffy_Bold",
+    "stdItalic": "Tuffy_Italic",
+    "stdBoldItalic": "Tuffy_Bold_Italic"
   }
 }
 
