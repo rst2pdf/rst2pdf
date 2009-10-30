@@ -2078,7 +2078,6 @@ class FancyPage(PageTemplate):
     """
 
     def __init__(self, _id, _head, _foot, styles, smarty="0", show_frame=False):
-        global head, foot
         self.styles = styles
         self._head = HeaderOrFooter(_head)
         self._foot = HeaderOrFooter(_foot, True)
@@ -2095,7 +2094,7 @@ class FancyPage(PageTemplate):
         """
 
         #from pudb import set_trace; set_trace()
-        global head, foot, _counter, _counterStyle
+        global _counter, _counterStyle
 
         self.tw = self.styles.pw - self.styles.lm -\
             self.styles.rm - self.styles.gm
