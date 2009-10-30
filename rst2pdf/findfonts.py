@@ -58,7 +58,7 @@ def loadFonts():
             os.path.walk(folder, findFontFiles, None)
 
         # Now we have full afm and pbf lists, process the
-        # afm list to figure out family name weight and if
+        # afm list to figure out family name, weight and if
         # it's italic or not, as well as where the
         # matching pfb file is
 
