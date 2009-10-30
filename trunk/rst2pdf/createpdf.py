@@ -2030,7 +2030,7 @@ class HeaderOrFooter(object):
             if isinstance(items, list):
                 items = items[:]
             else:
-                items = [Paragraph(_head, pageobj.styles[self.loc])]
+                items = [Paragraph(items, pageobj.styles[self.loc])]
             _, height =  _listWrapOn(items, pageobj.tw, canv)
         else:
             height = 0
