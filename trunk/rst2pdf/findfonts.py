@@ -78,7 +78,7 @@ def loadFonts():
                 # TODO: find a way to alias the fullname to this font
                 # so you can use names like "Bitstream Charter Italic"
                 elif line.startswith('FullName'):
-                    fullName = line.split(' ')[1]
+                    fullName = ' '.join(line.split(' ')[1:])
                 elif line.startswith('Weight'):
                     w = line.split(' ')[1]
                     if w == 'Bold':
@@ -98,6 +98,7 @@ def loadFonts():
 
             # So now we have a font we know we can embed.
             fonts[fontName] = (afm, pfbList[baseName], family)
+            fonts[fullName] = (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
             if family not in families:
@@ -259,6 +260,7 @@ def guessFont(fname):
 
 
 def main():
+    #from pudb import set_trace; set_trace()
     global flist
     if len(sys.argv) != 2:
         print "Usage: findfont fontName"
