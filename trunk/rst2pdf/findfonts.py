@@ -188,7 +188,7 @@ def autoEmbed(fname):
         family = families[f[2]]
 
         # Register the whole family of faces
-        faces = [pdfmetrics.EmbeddedType1Face(*fonts[fn][:2]) for fn in family]
+        faces = [pdfmetrics.EmbeddedType1Face(*fonts[fn.lower()][:2]) for fn in family]
         for face in faces:
             pdfmetrics.registerTypeFace(face)
 
