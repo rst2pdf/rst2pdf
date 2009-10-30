@@ -263,7 +263,7 @@ def main():
     if len(sys.argv) != 2:
         print "Usage: findfont fontName"
         sys.exit(1)
-    flist = ["/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
+    flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
     f = findFont(sys.argv[1])
     if not f:
         f = findTTFont(sys.argv[1])
