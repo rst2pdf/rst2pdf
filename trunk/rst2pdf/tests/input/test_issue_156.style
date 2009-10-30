@@ -1,5 +1,5 @@
 {
-  "embeddedFonts" : [["tuffy.ttf", "tuffy.ttf", "tuffy.ttf", "tuffy.ttf"]],
+  "embeddedFonts" : [["Tuffy.ttf", "Tuffy_Bold.ttf", "Tuffy_Italic.ttf", "Tuffy_Bold_Italic.ttf"]],
   "styles" : [
     ["tuffy" , {
       "parent": "normal",
