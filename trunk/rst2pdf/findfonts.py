@@ -75,6 +75,10 @@ def loadFonts():
                     family = ' '.join(line.split(' ')[1:])
                 elif line.startswith('FontName'):
                     fontName = line.split(' ')[1]
+                # TODO: find a way to alias the fullname to this font
+                # so you can use names like "Bitstream Charter Italic"
+                elif line.startswith('FullName'):
+                    fullName = line.split(' ')[1]
                 elif line.startswith('Weight'):
                     w = line.split(' ')[1]
                     if w == 'Bold':
@@ -92,7 +96,7 @@ def loadFonts():
                 log.info("afm file without matching pfb file: %s"% baseName)
                 continue
 
-            # So now we have a font we knopw we can embed.
+            # So now we have a font we know we can embed.
             fonts[fontName] = (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
@@ -108,7 +112,6 @@ def loadFonts():
             # weights? We get a random one.
             else:
                 families[family][0] = fontName
-
 
 def findFont(fname):
     loadFonts()
