@@ -22,35 +22,42 @@ class PathInfo(object):
     runfile = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin', 'rst2pdf'))
     inpdir = os.path.join(rootdir, 'input')
     outdir = os.path.join(rootdir, 'output')
-
-    if not os.path.exists(outdir):
-        os.mkdir(outdir)
+    md5dir = os.path.join(rootdir, 'md5')
 
     if not os.path.exists(runfile):
         raise SystemExit('Use bootstrap.py and buildout to create executable')
 
+    ppath = os.environ.get('PYTHONPATH')
+    ppath = ppath is None and rootdir or '%s:%s' % (ppath, rootdir)
+    os.environ['PYTHONPATH'] = ppath
+
 def run_single_textfile(fname):
     iprefix = os.path.splitext(fname)[0]
-    oprefix = os.path.join(PathInfo.outdir, os.path.basename(iprefix))
+    basename = os.path.basename(iprefix)
+    oprefix = os.path.join(PathInfo.outdir, basename)
+    mprefix = os.path.join(PathInfo.md5dir, basename)
     style = iprefix + '.style'
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
+    md5file = mprefix + '.json'
 
     args = [PathInfo.runfile, '-v', fname]
     if os.path.exists(style):
         args.extend(('-s', style))
     args.extend(('-o', outpdf))
-    #args.insert(0, './tryme.py')
     result = textexec(args)
     result.append('\n')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
     outf.close()
 
-def run_textfiles():
-    textfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
-    textfiles.sort()
+def run_textfiles(textfiles=None):
+    if not textfiles:
+        textfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
+        textfiles.sort()
     for fname in textfiles:
         run_single_textfile(fname)
 
-run_textfiles()
+if __name__ == '__main__':
+    import sys
+    run_textfiles(sys.argv[1:])
