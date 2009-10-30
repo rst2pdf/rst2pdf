@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL:  $
-#$LastChangedDate:  $
-#$LastChangedRevision:  $
+#$HeadURL$
+#$LastChangedDate$
+#$LastChangedRevision$
 
 # See LICENSE.txt for licensing terms
 
 '''
-Copyright
+Copyright (c) 2009 Pat Maupin
+
 A wrapper around subprocess that performs two functions:
 
  1) Adds non-blocking I/O
