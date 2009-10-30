@@ -97,8 +97,9 @@ def loadFonts():
                 continue
 
             # So now we have a font we know we can embed.
-            fonts[fontName] = (afm, pfbList[baseName], family)
-            fonts[fullName] = (afm, pfbList[baseName], family)
+            fonts[fontName.lower()] = (afm, pfbList[baseName], family)
+            fonts[fullName.lower()] = (afm, pfbList[baseName], family)
+            fonts[fullName.lower().replace('italic','oblique')] = (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
             if family not in families:
@@ -118,8 +119,8 @@ def findFont(fname):
     loadFonts()
     # So now we are sure we know the families and font
     # names. Well, return some data!
-    if fname in fonts:
-        font = fonts[fname]
+    if fname.lower() in fonts:
+        font = fonts[fname.lower()]
     else:
         if fname in Alias:
             fname = Alias[fname]
@@ -158,8 +159,8 @@ def findTTFont(fname):
             get_fname(family + ":style=Bold"),
             get_fname(family + ":style=Oblique"),
             get_fname(family + ":style=Bold Oblique")]
-        if variants[1] == variants[0]:
-            variants[1] = get_fname(family + ":style=Italic")
+        if variants[2] == variants[0]:
+            variants[2] = get_fname(family + ":style=Italic")
         if variants[3] == variants[0]:
             variants[3] = get_fname(family + ":style=Bold Italic")
         if variants[0].endswith('.pfb') or variants[0].endswith('.gz'):
@@ -237,7 +238,8 @@ def autoEmbed(fname):
 
 
 def guessFont(fname):
-    """Given a font name (like Tahoma-BoldOblique) guess what it means.
+    """Given a font name (like "Tahoma-BoldOblique" or "Bitstream Charter Italic") 
+    guess what it means.
 
     Returns (family, x) where x is
         0: regular
@@ -246,40 +248,36 @@ def guessFont(fname):
         3: bolditalic
 
     """
-    if '-' not in fname:
-        return fname, 0
     italic = 0
     bold = 0
-    family, mod = fname.split('-')
+    if '-' not in fname:
+        family=fname
+        mod=fname.lower()
+    else:
+        family, mod = fname.split('-')
     mod = mod.lower()
     if "oblique" in mod or "italic" in mod:
         italic = 1
     if "bold" in mod or "black" in mod:
         bold = 1
+        
     return family, bold + 2*italic
 
 
 def main():
-    #from pudb import set_trace; set_trace()
     global flist
     if len(sys.argv) != 2:
         print "Usage: findfont fontName"
         sys.exit(1)
     flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
-    f = findFont(sys.argv[1])
+    fn, pos = guessFont(sys.argv[1])
+    f = findFont(fn)
     if not f:
-        f = findTTFont(sys.argv[1])
+        f = findTTFont(fn)
     if f:
         print f
     else:
-        fn, pos = guessFont(sys.argv[1])
-        f = findFont(fn)
-        if not f:
-            f = findTTFont(fn)
-        if f:
-            print f
-        else:
-            print "Unknown font %s" % sys.argv[1]
+        print "Unknown font %s" % sys.argv[1]
 
 
 if __name__ == "__main__":
