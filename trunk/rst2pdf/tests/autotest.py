@@ -132,9 +132,9 @@ def run_single_textfile(inpfname):
         if os.path.exists(fname):
             os.remove(fname)
 
-    args = PathInfo.runcmd + ['-v', os.path.basename(inpfname)]
+    args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]
     if os.path.exists(style):
-        args.extend(('-s', style))
+        args.extend(('-s', os.path.basename(style)))
     args.extend(('-o', outpdf))
     result = textexec(args, cwd=os.path.dirname(inpfname))
     checkinfo = checkmd5(outpdf, md5file, result)
