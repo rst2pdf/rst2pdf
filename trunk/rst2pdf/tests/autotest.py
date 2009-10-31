@@ -16,11 +16,14 @@ Automated testing for rst2pdf
 import os
 import glob
 import hashlib
+from copy import copy
+from optparse import OptionParser
 from execmgr import textexec
 
 class PathInfo(object):
     rootdir = os.path.realpath(os.path.dirname(__file__))
-    runfile = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin', 'rst2pdf'))
+    bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
+    runfile = os.path.join(bindir, 'rst2pdf')
     inpdir = os.path.join(rootdir, 'input')
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
@@ -31,6 +34,16 @@ class PathInfo(object):
     ppath = os.environ.get('PYTHONPATH')
     ppath = ppath is None and rootdir or '%s:%s' % (ppath, rootdir)
     os.environ['PYTHONPATH'] = ppath
+
+    runcmd = [runfile]
+
+    @classmethod
+    def add_coverage(cls, keep=False):
+        cls.runcmd[0:0] = [os.path.join(cls.bindir, 'real_coverage'), 'run', '-a']
+        if not keep:
+            fname = os.path.join(cls.rootdir, '.coverage')
+            if os.path.exists(fname):
+                os.remove(fname)
 
 class MD5Info(dict):
     categories = 'good bad unknown'.split()
@@ -106,11 +119,11 @@ def run_single_textfile(inpfname):
         if os.path.exists(fname):
             os.remove(fname)
 
-    args = [PathInfo.runfile, '-v', inpfname]
+    args = PathInfo.runcmd + ['-v', inpfname]
     if os.path.exists(style):
         args.extend(('-s', style))
     args.extend(('-o', outpdf))
-    result = textexec(args)
+    result = textexec(args, cwd=PathInfo.rootdir)
     checkinfo = checkmd5(outpdf, md5file, result)
     print result[-1]
     print
@@ -133,6 +146,24 @@ def run_textfiles(textfiles=None):
     print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
     print
 
+
+def parse_commandline():
+    parser = OptionParser()
+    parser.add_option('-c', '--coverage', action="store_true",
+        dest='coverage', default=False,
+        help='Generate coverage information.')
+    parser.add_option('-k', '--keep_coverage', action="store_true",
+        dest='keep_coverage', default=False,
+        help='Keep coverage information from previous runs.')
+    return parser
+
+def main(args=None):
+    parser = parse_commandline()
+    options, args = parser.parse_args(copy(args))
+    if options.coverage:
+        PathInfo.add_coverage(options.keep_coverage)
+    run_textfiles(args)
+
+
 if __name__ == '__main__':
-    import sys
-    run_textfiles(sys.argv[1:])
+    main()
