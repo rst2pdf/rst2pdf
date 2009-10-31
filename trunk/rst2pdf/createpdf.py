@@ -2137,15 +2137,17 @@ class FancyPage(PageTemplate):
         
         # If there is a background parameter for this page Template, draw it
         if 'background' in self.template:
-            if self.template['background'].split('.')[-1].lower() in [
-                    "ai", "ccx", "cdr", "cgm", "cmx",
-                    "sk1", "sk", "svg", "xml", "wmf", "fig"]:
-                bg = SVGImage(self.template['background'],
-                    self.styles.pw, self.styles.ph)
+            uri=self.template['background']
+            if os.path.exists(uri):
+                if uri.split('.')[-1].lower() in [
+                        "ai", "ccx", "cdr", "cgm", "cmx",
+                        "sk1", "sk", "svg", "xml", "wmf", "fig"]:
+                    bg = SVGImage(uri, self.styles.pw, self.styles.ph)
+                else:
+                    bg = Image(uri, self.styles.pw, self.styles.ph)
+                bg.drawOn(canv, 0, 0)
             else:
-                bg = Image(self.template['background'],
-                    self.styles.pw, self.styles.ph)
-            bg.drawOn(canv, 0, 0)
+                log.error("Missing background image file: %s", uri)
 
         self.frames = []
         for frame in self.template['frames']:
