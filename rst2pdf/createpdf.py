@@ -2334,6 +2334,11 @@ def parse_commandline():
         '"odd", and sections start in odd pages, or "any" and sections start in the next page,'\
         'be it even or odd. See also the -b option.')
 
+    parser.add_option('--date-invariant', dest='invariant', 
+        action='store_true', default=False,
+        help="Don't store the current date in the PDF. Useful mainly for the test suite, "\
+        "where we don't want the PDFs to change.")
+
     return parser
 
 def main(args=None):
@@ -2423,6 +2428,9 @@ def main(args=None):
             ' The suggested version '\
             'is 2.3 or higher'%reportlab.Version)
 
+    if options.invariant:
+        patch_PDFDate()
+
     RstToPdf(
         stylesheets=ssheet,
         language=options.language,
@@ -2448,6 +2456,27 @@ def main(args=None):
                     output=outfile,
                     compressed=options.compressed)
 
+
+def patch_PDFDate():
+    '''Patch reportlab.pdfdoc.PDFDate so the invariant dates work correctly'''
+    from reportlab.pdfbase import pdfdoc
+    class PDFDate:
+        __PDFObject__ = True
+        # gmt offset now suppported
+        def __init__(self, invariant=True, dateFormatter=None):
+            now = (2000,01,01,00,00,00,0)
+            self.date = now[:6]
+            self.dateFormatter = dateFormatter
+
+        def format(self, doc):
+            from time import timezone
+            dhh, dmm = timezone // 3600, (timezone % 3600) % 60
+            dfmt = self.dateFormatter or (
+                    lambda yyyy,mm,dd,hh,m,s:
+                        "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'" % (yyyy,mm,dd,hh,m,s,0,0))
+            return pdfdoc.format(pdfdoc.PDFString(dfmt(*self.date)), doc)
+        
+    pdfdoc.PDFDate = PDFDate
 
 if __name__ == "__main__":
     main(sys.argv[1:])
