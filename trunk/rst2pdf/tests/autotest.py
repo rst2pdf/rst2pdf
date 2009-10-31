@@ -107,7 +107,6 @@ def checkmd5(pdfpath, md5path, resultlist):
     return resulttype
 
 def run_single_textfile(inpfname):
-    inpfname = os.path.abspath(inpfname)
     iprefix = os.path.splitext(inpfname)[0]
     basename = os.path.basename(iprefix)
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -121,7 +120,7 @@ def run_single_textfile(inpfname):
         if os.path.exists(fname):
             os.remove(fname)
 
-    args = PathInfo.runcmd + ['-v', inpfname]
+    args = PathInfo.runcmd + ['-v', os.path.basename(inpfname)]
     if os.path.exists(style):
         args.extend(('-s', style))
     args.extend(('-o', outpdf))
