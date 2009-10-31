@@ -3,7 +3,7 @@
   "styles" : [
     ["tuffy" , {
       "parent": "normal",
-      "fontName": "tuffy"
+      "fontName": "Tuffy"
     }]
   ]
 }
