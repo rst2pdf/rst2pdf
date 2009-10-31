@@ -1,0 +1,10 @@
+bad_md5 = [
+]
+
+good_md5 = [
+]
+
+unknown_md5 = [
+        '167c72b9709c3e7fb1408a50e0ae4d12',
+]
+
