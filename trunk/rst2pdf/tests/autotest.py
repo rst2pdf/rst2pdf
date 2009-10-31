@@ -40,8 +40,9 @@ class PathInfo(object):
     @classmethod
     def add_coverage(cls, keep=False):
         cls.runcmd[0:0] = [os.path.join(cls.bindir, 'real_coverage'), 'run', '-a']
+        fname = os.path.join(cls.rootdir, '.coverage')
+        os.environ['COVERAGE_FILE'] = fname
         if not keep:
-            fname = os.path.join(cls.rootdir, '.coverage')
             if os.path.exists(fname):
                 os.remove(fname)
 
@@ -106,6 +107,7 @@ def checkmd5(pdfpath, md5path, resultlist):
     return resulttype
 
 def run_single_textfile(inpfname):
+    inpfname = os.path.abspath(inpfname)
     iprefix = os.path.splitext(inpfname)[0]
     basename = os.path.basename(iprefix)
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -123,7 +125,7 @@ def run_single_textfile(inpfname):
     if os.path.exists(style):
         args.extend(('-s', style))
     args.extend(('-o', outpdf))
-    result = textexec(args, cwd=PathInfo.rootdir)
+    result = textexec(args, cwd=os.path.dirname(inpfname))
     checkinfo = checkmd5(outpdf, md5file, result)
     print result[-1]
     print
