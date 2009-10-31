@@ -83,7 +83,7 @@ class MD5Info(dict):
                 result = name
                 break
         else:
-            mylist = newinfo[fullname]
+            mylist = newinfo['unknown_md5']
             mylist.append(checksum)
             mylist.sort()
         for key, value in newinfo.iteritems():
