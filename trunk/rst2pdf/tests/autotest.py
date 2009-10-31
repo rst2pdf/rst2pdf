@@ -54,8 +54,7 @@ class MD5Info(dict):
         result = []
         for name in sorted(self.categories.itervalues()):
             result.append('%s = [' % name)
-            for item in sorted(getattr(self, name)):
-                result.append("        '%s'," % item)
+            result.append(',\n'.join(["        '%s'"%item for item in sorted(getattr(self, name))]))
             result.append(']\n')
         result.append('')
         return '\n'.join(result)
