@@ -66,19 +66,32 @@ class MD5Info(dict):
             setattr(self, name, [])
 
     def find(self, checksum):
-        sets = {}
+        sets = []
+        newinfo = {}
         prev = set()
+        sentinel = set(['sentinel'])
         for name, fullname in self.categories.iteritems():
-            value = set(getattr(self, fullname))
+            value = set(getattr(self, fullname)) - sentinel
             assert not value & prev, (name, value, prev)
             prev |= value
-            sets[name] = value
-        for name, sumset in sets.iteritems():
+            sets.append((name, fullname, value))
+            newinfo[fullname] = sorted(value | sentinel)
+
+        result = 'unknown'
+        for name, fullname, sumset in sets:
             if checksum in sumset:
-                return name
-        self.changed = True
-        self.unknown_md5.append(checksum)
-        return 'unknown'
+                result = name
+                break
+        else:
+            mylist = newinfo[fullname]
+            mylist.append(checksum)
+            mylist.sort()
+        for key, value in newinfo.iteritems():
+            if value != self[key]:
+                self.update(newinfo)
+                print "Updating MD5 file"
+                self.changed = True
+        return result
 
 def checkmd5(pdfpath, md5path, resultlist):
     if not os.path.exists(pdfpath):
