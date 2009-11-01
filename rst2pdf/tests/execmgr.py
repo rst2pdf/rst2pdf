@@ -8,7 +8,7 @@
 # See LICENSE.txt for licensing terms
 
 '''
-Copyright (c) 2009 Pat Maupin
+Copyright (c) 2009,  Patrick Maupin, Austin, Texas
 
 A wrapper around subprocess that performs two functions:
 
@@ -266,10 +266,19 @@ def elapsedtime(when=time.time()):
     units = hrs and 'hours' or mins and 'minutes' or 'seconds'
     return '%s%s%s %s' % (hrs, mins, secs, units)
 
+def default_logger(resultlist, data=None, data2=None):
+    if data is not None:
+        resultlist.append(data)
+    if data2 is None:
+        data2 = data
+    print data2
+
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
         them to caller
     '''
+    logger = kw.pop('logger', default_logger)
+
     formatcmd = textwrap.TextWrapper(initial_indent='        ',
                                     subsequent_indent='        ',
                                     break_long_words=False).fill
@@ -278,20 +287,21 @@ def textexec(*arg, **kw):
     args = subproc.args
     procname = args[0]
     starttime = time.time()
-    print 'Process "%s" started on %s\n\n%s\n\n' % (
-             procname, time.asctime(), formatcmd(' '.join(args)))
     result = []
+    logger(result,
+        'Process "%s" started on %s\n\n%s\n\n' % (
+         procname, time.asctime(), formatcmd(' '.join(args))))
     for line in subproc:
-        result.append(line)
         if not line.startswith('**'):
-            print line
+            logger(result, line)
             continue
         errcode = int(line.split()[-1])
-        print '\n"%s" execution time is %s; Cumulative execution time is %s' % (
-                    procname, elapsedtime(starttime), elapsedtime())
-        if errcode != 0:
-            print 'Program %s failed with error code %s\n' % (procname, errcode)
-        print
+        status = errcode and 'FAIL' or 'PASS'
+        logger(result,
+            '\nProgram %s exit code: %s (%d)   elapsed time: %s\n' %
+            (procname, status, errcode, elapsedtime(starttime)))
+        logger(result, None,
+            'Cumulative execution time is %s\n' % elapsedtime())
     return result
 
 if __name__ == '__main__':
