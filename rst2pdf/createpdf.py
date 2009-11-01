@@ -155,9 +155,358 @@ except ImportError:
     HAS_SPHINX = False
 
 
+###################################################################################
+# New refactored code, not in final position yet
+
+import inspect
+
+class MetaHelper(type):
+    '''  MetaHelper is to simplify the use of metaclasses for one useful case.
+         Whenever a class which uses MetaHelper as its metaclass is compiled,
+         after compilation, that class's _classinit() function will be called.
+         _classinit() will be passed a base class parameter which is the
+         superclass which also uses MetaHelper as its metaclass, or None if
+         no such superclass exists. 
+    '''
+    def __new__(cls, name, bases, clsdict):
+        base = ([x for x in bases if type(x) is MetaHelper] + [None])[0]
+        clsdict.setdefault('_baseclass', base)
+        preinit = getattr(base, '_classpreinit', None)
+        if preinit is not None:
+            cls, name, bases, clsdict = preinit(cls, name, bases, clsdict)
+        return type.__new__(cls, name, bases, clsdict)
+
+    def __init__(cls, name, bases, clsdict):
+        type.__init__(cls, name, bases, clsdict)
+        if cls._classinit is not None:
+            cls._classinit()
+
+
+class NodeHandler(object):
+    __metaclass__ = MetaHelper
+
+    @classmethod
+    def _classpreinit(baseclass, cls, name, bases, clsdict):
+        new_bases = []
+        targets = []
+        for target in bases:
+            if target is not object:
+                (targets, new_bases)[issubclass(target, baseclass)].append(target)
+        clsdict['_targets'] = targets
+        return cls, name, tuple(new_bases), clsdict
+
+    @classmethod
+    def _classinit(cls):
+        if cls._baseclass is None:
+            cls.dispatchdict = {}
+            return
+        self = cls()
+        for target in cls._targets:
+            if cls.dispatchdict.setdefault(target, self) is not self:
+                t = repr(target)
+                old = repr(cls.dispatchdict[target])
+                new = repr(self)
+                raise ValueError("Multiple handlers for %s: %s and %s" % (t, old, new))
+
+    # Begin overridable attributes and methods for gen_pdftext
+
+    pre = ''
+    post = ''
+
+    def get_pre_post(self, client, node, replaceEnt):
+        return self.pre, self.post
+
+    def get_text(self, client, node, replaceEnt):
+        return client.gather_pdftext(node)
+
+    def apply_smartypants(self, text, smarty, node):
+        # Try to be clever about when to use smartypants
+        if node.__class__ in (docutils.nodes.paragraph,
+                docutils.nodes.block_quote, docutils.nodes.title):
+            return smartyPants(text, smarty)
+        return text
+
+    # End overridable attributes and methods for gen_pdftext
+
+    @classmethod
+    def gen_pdftext(cls, client, node, replaceEnt=True):
+        nodeclass = node.__class__
+        log.debug("self.gen_pdftext: %s", nodeclass)
+        log.debug("[%s]", nodeid(node))
+        try:
+            log.debug("self.gen_pdftext: %s", node)
+        except (UnicodeDecodeError, UnicodeEncodeError):
+            log.debug("self.gen_pdftext: %r", node)
+
+        # Dispatch to the first matching class in the MRO
+
+        dispatchdict = cls.dispatchdict
+        for baseclass in inspect.getmro(nodeclass):
+            self = dispatchdict.get(baseclass)
+            if self is not None:
+                break
+        else:
+            self = cls.default_dispatch
+
+        pre, post = self.get_pre_post(client, node, replaceEnt)
+        text = self.get_text(client, node, replaceEnt)
+        text = pre + text + post
+
+        try:
+            log.debug("self.gen_pdftext: %s" % text)
+        except UnicodeDecodeError:
+            pass
+
+        text = self.apply_smartypants(text, client.smarty, node)
+        node.pdftext = text
+        return text
+
+
+class HandleNotDefinedYet(NodeHandler, object):
+    def __init__(self):
+        self.unkn_text = set()
+        NodeHandler.default_dispatch = self
+
+    def get_text(self, client, node, replaceEnt):
+        cln=str(node.__class__)
+        if not cln in self.unkn_text:
+            self.unkn_text.add(cln)
+            log.warning("Unkn. node (self.gen_pdftext): %s [%s]",
+                node.__class__, nodeid(node))
+            try:
+                log.debug(node)
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                log.debug(repr(node))
+        return NodeHandler.get_text(self, client, node, replaceEnt)
+
+class FontHandler(NodeHandler):
+    def get_pre_post(self, client, node, replaceEnt):
+        return self.get_font_prefix(client, node, replaceEnt), '</font>'
+
+    def get_font_prefix(self, client, node, replaceEnt):
+        return client.styleToFont(self.fontstyle)
+
+class HandlePara(NodeHandler, docutils.nodes.paragraph,
+                      docutils.nodes.title, docutils.nodes.subtitle):
+    def get_pre_post(self, client, node, replaceEnt):
+        pre=''
+        targets=set(node.get('ids',[])+client.pending_targets)
+        client.pending_targets=[]
+        for _id in targets:
+            if _id not in client.targets:
+                pre+='<a name="%s"/>'%(_id)
+                client.targets.append(_id)
+        return pre, '\n'
+
+class HandleText(NodeHandler, docutils.nodes.Text):
+    def get_text(self, client, node, replaceEnt):
+        text = node.astext()
+        if replaceEnt:
+            text = escape(text)
+        return text
+
+class HandleStrong(NodeHandler, docutils.nodes.strong):
+    pre = "<b>"
+    post = "</b>"
+
+class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
+    pre = "<i>"
+    post = "</i>"
+
+class HandleLiteral(NodeHandler, docutils.nodes.literal):
+    def get_pre_post(self, client, node, replaceEnt):
+        pre = '<font face="%s">' % client.styles['literal'].fontName
+        post = "</font>"
+        if not client.styles['literal'].hyphenation:
+            pre = '<nobr>' + pre
+            post += '</nobr>'
+        return pre, post
+
+class HandleSuper(NodeHandler, docutils.nodes.superscript):
+    pre = '<super>'
+    post = "</super>"
+
+class HandleSub(NodeHandler, docutils.nodes.subscript):
+    pre = '<sub>'
+    post = "</sub>"
+
+class HandleTitleReference(FontHandler, docutils.nodes.title_reference):
+    fontstyle = 'title_reference'
+
+class HandleReference(NodeHandler, docutils.nodes.reference):
+    def get_pre_post(self, client, node, replaceEnt):
+        pre, post = '', ''
+        uri = node.get('refuri')
+        if uri:
+            if client.baseurl: # Need to join the uri with the base url
+                uri = urljoin(client.baseurl, uri)
+
+            if urlparse(uri)[0] and client.inlinelinks:
+                # external inline reference
+                post = u' (%s)' % uri
+            else:
+                # A plain old link
+                pre += u'<a href="%s" color="%s">' %\
+                    (uri, client.styles.linkColor)
+                post = '</a>' + post
+        else:
+            uri = node.get('refid')
+            if uri:
+                pre += u'<a href="#%s" color="%s">' %\
+                    (uri, client.styles.linkColor)
+                post = '</a>' + post
+        return pre, post
+
+class HandleOptions(HandleText, docutils.nodes.option_string, docutils.nodes.option_argument):
+    pass
+
+class HandleHeaderFooter(HandleText, docutils.nodes.header, docutils.nodes.footer):
+    pass
+
+class HandleSysMessage(HandleText, docutils.nodes.system_message, docutils.nodes.problematic):
+    pre = '<font color="red">'
+    post = "</font>"
+
+class HandleGenerated(HandleText, docutils.nodes.generated):
+    pass
+
+class HandleImage(NodeHandler, docutils.nodes.image):
+    def get_text(self, client, node, replaceEnt):
+        # First see if the image file exists, or else,
+        # use image-missing.png
+        uri=node.get('uri')
+        if not os.path.exists(uri):
+            log.error("Missing image file: %s [%s]", uri, nodeid(node))
+            uri=os.path.join(client.img_dir, 'image-missing.png')
+            w, h = 1*cm, 1*cm
+        else:
+            w, h, kind = client.size_for_image_node(node)
+        alignment=node.get('align', 'CENTER').lower()
+        if alignment in ('top', 'middle', 'bottom'):
+            align='valign="%s"'%alignment
+        else:
+            align=''
+
+        return '<img src="%s" width="%f" height="%f" %s/>'%\
+            (uri, w, h, align)
+
+class HandleMath(NodeHandler, math_node):
+    def get_text(self, client, node, replaceEnt):
+        mf = Math(node.math_data)
+        w, h = mf.wrap(0, 0)
+        descent = mf.descent()
+        img = mf.genImage()
+        client.to_unlink.append(img)
+        return '<img src="%s" width=%f height=%f valign=%f/>' % (
+            img, w, h, -descent)
+
+class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference):
+    def get_text(self, client, node, replaceEnt):
+        # TODO: when used in Sphinx, all footnotes are autonumbered
+        anchors=''
+        for i in node['ids']:
+            if i not in client.targets:
+                anchors+='<a name="%s"/>' % i
+                client.targets.append(i)
+        return u'%s<super><a href="%s" color="%s">%s</a></super>'%\
+            (anchors, '#' + node.astext(),
+                client.styles.linkColor, node.astext())
+
+class HandleCiteRef(NodeHandler, docutils.nodes.citation_reference):
+    def get_text(self, client, node, replaceEnt):
+        anchors=''
+        for i in node['ids']:
+            if i not in client.targets:
+                anchors +='<a name="%s"/>' % i
+                client.targets.append(i)
+        return u'%s[<a href="%s" color="%s">%s</a>]'%\
+            (anchors, '#' + node.astext(),
+                client.styles.linkColor, node.astext())
+
+class HandleTarget(NodeHandler, docutils.nodes.target):
+    def get_text(self, client, node, replaceEnt):
+        text = client.gather_pdftext(node)
+        if replaceEnt:
+            text = escape(text)
+        return text
+
+    def get_pre_post(self, client, node, replaceEnt):
+        pre = ''
+        if node['ids'][0] not in client.targets:
+            pre = u'<a name="%s"/>' % node['ids'][0]
+            client.targets.append(node['ids'][0])
+        return pre, ''
+
+class HandleInline(NodeHandler, docutils.nodes.inline):
+    def get_pre_post(self, client, node, replaceEnt):
+        ftag = client.styleToFont(node['classes'][0])
+        if ftag:
+            return ftag, '</font>'
+        return '', ''
+
+class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block):
+    pass
+
+
+def add_sphinx():
+    # THis function should basically disappear and turn into an
+    # import after refactoring
+
+    class HandleSphinxDefaults(NodeHandler,
+                 sphinx.addnodes.desc_signature,
+                 sphinx.addnodes.module,
+                 sphinx.addnodes.pending_xref):
+        pass
+
+    class SphinxListHandler(NodeHandler):
+        def get_text(self, client, node, replaceEnt):
+            t = client.gather_pdftext(node)
+            while t and t[0] in ', ':
+                t=t[1:]
+            return t
+
+    class HandleSphinxDescAddname(FontHandler,  sphinx.addnodes.desc_addname):
+        fontstyle = "descclassname"
+
+    class HandleSphinxDescName(FontHandler, sphinx.addnodes.desc_name):
+        fontstyle = "descname"
+
+    class HandleSphinxDescReturn(FontHandler, sphinx.addnodes.desc_returns):
+        def get_font_prefix(self, client, node, replaceEnt):
+            return ' &rarr; ' + client.styleToFont("returns")
+
+    class HandleSphinxDescType(FontHandler, sphinx.addnodes.desc_type):
+        fontstyle = "desctype"
+
+    class HandleSphinxDescParamList(SphinxListHandler, sphinx.addnodes.desc_parameterlist):
+        pre=' ('
+        post=')'
+
+    class HandleSphinxDescParam(FontHandler, sphinx.addnodes.desc_parameter):
+        fontstyle = "descparameter"
+        def get_pre_post(self, client, node, replaceEnt):
+            pre, post = FontHandler.get_pre_post(self, client, node, replaceEnt)
+            if node.hasattr('noemph'):
+                pre = ', ' + pre
+            else:
+                pre = ', <i>' + pre
+                post += '</i>'
+            return pre, post
+
+    class HandleSphinxDescOpt(SphinxListHandler, FontHandler, sphinx.addnodes.desc_optional):
+        fontstyle = "optional"
+        def get_pre_post(self, client, node, replaceEnt):
+            prepost = FontHandler.get_pre_post(self, client, node, replaceEnt)
+            return '%s[%s, ' % prepost, '%s]%s' % prepost
+
+    class HandleDescAnnotation(HandleEmphasis, sphinx.addnodes.desc_annotation):
+        pass
+
+# End new refactored code, not in final position yet
+###################################################################################
+
 # These are to suppress repeated messages
 unkn_elem=set()
-unkn_text=set()
 
 class RstToPdf(object):
 
@@ -231,6 +580,7 @@ class RstToPdf(object):
         if HAS_SPHINX and sphinx:
             import sphinx.roles
             self.highlightlang = highlightlang
+            add_sphinx()
         else:
             HAS_SPHINX = False
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
@@ -470,298 +820,7 @@ class RstToPdf(object):
             for n in node.children])
 
     def gen_pdftext(self, node, replaceEnt=True):
-        pre = ""
-        post = ""
-
-        log.debug("self.gen_pdftext: %s", node.__class__)
-        log.debug("[%s]", nodeid(node))
-        try:
-            log.debug("self.gen_pdftext: %s", node)
-        except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("self.gen_pdftext: %r", node)
-
-        #########################################################
-        # SPHINX nodes
-        #########################################################
-        if HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_signature):
-            node.pdftext = self.gather_pdftext(node)
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.module):
-            node.pdftext = self.gather_pdftext(node)
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_addname):
-            pre = self.styleToFont("descclassname")
-            post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node)+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_name):
-            pre = self.styleToFont("descname")
-            post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node)+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_returns):
-            pre = self.styleToFont("returns")
-            post = "</font>"
-            node.pdftext=' &rarr; ' + pre+ self.gather_pdftext(node) + post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_type):
-            pre = self.styleToFont("desctype")
-            post = "</font>"
-            node.pdftext = pre+self.gather_pdftext(node)+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameterlist):
-            pre=' ('
-            post=')'
-            t=self.gather_pdftext(node)
-            while t and t[0] in ', ':
-                t=t[1:]
-            node.pdftext = pre+t+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_parameter):
-            if node.hasattr('noemph'):
-                pre = ', '
-                post = ''
-            else:
-                pre = ', <i>'
-                post = '</i>'
-            pre += self.styleToFont("descparameter")
-            post = "</font>"+post
-            node.pdftext = pre+self.gather_pdftext(node)+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_optional):
-            pre =self.styleToFont("optional")+'[</font>, '
-            post = self.styleToFont("optional")+']</font>'
-            t=self.gather_pdftext(node)
-            while t and t[0]in ', ':
-                t=t[1:]
-            node.pdftext = pre+t+post
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.desc_annotation):
-            node.pdftext = '<i>%s</i>'%self.gather_pdftext(node)
-
-        elif HAS_SPHINX and isinstance(node,sphinx.addnodes.pending_xref):
-            node.pdftext = self.gather_pdftext(node)
-
-        #########################################################
-        # End of SPHINX nodes
-        #########################################################
-
-        elif isinstance(node, (docutils.nodes.paragraph,
-               docutils.nodes.title, docutils.nodes.subtitle)):
-            pre=''
-            targets=set(node.get('ids',[])+self.pending_targets)
-            self.pending_targets=[]
-            for _id in targets:
-                if _id not in self.targets:
-                    pre+='<a name="%s"/>'%(_id)
-                    self.targets.append(_id)
-            node.pdftext = pre+self.gather_pdftext(node) + "\n"
-
-        elif isinstance(node, docutils.nodes.Text):
-            node.pdftext = node.astext()
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.strong):
-            pre = "<b>"
-            post = "</b>"
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-            #    node.pdftext=escape(node.pdftext,True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.emphasis):
-            pre = "<i>"
-            post = "</i>"
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-            #    node.pdftext=escape(node.pdftext,True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.literal):
-            pre = '<font face="%s">' % self.styles['literal'].fontName
-            post = "</font>"
-            if not self.styles['literal'].hyphenation:
-                pre = '<nobr>' + pre
-                post += '</nobr>'
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-            #    node.pdftext=escape(node.pdftext,True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.superscript):
-            pre = '<super>'
-            post = "</super>"
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-                #node.pdftext = escape(node.pdftext, True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.subscript):
-            pre = '<sub>'
-            post = "</sub>"
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-                #node.pdftext = escape(node.pdftext, True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.title_reference):
-            pre = self.styleToFont("title_reference")
-            post = "</font>"
-            node.pdftext = self.gather_pdftext(node)
-            # Fix issue 134
-            #if replaceEnt:
-                #node.pdftext = escape(node.pdftext, True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.reference):
-            uri = node.get('refuri')
-            if uri:
-                if self.baseurl: # Need to join the uri with the base url
-                    uri = urljoin(self.baseurl, uri)
-
-                if urlparse(uri)[0] and self.inlinelinks:
-                    # external inline reference
-                    post = u' (%s)' % uri
-                else:
-                    # A plain old link
-                    pre += u'<a href="%s" color="%s">' %\
-                        (uri, self.styles.linkColor)
-                    post = '</a>' + post
-            else:
-                uri = node.get('refid')
-                if uri:
-                    pre += u'<a href="#%s" color="%s">' %\
-                        (uri, self.styles.linkColor)
-                    post = '</a>' + post
-            node.pdftext = self.gather_pdftext(node)
-            #if replaceEnt:
-            #    node.pdftext=escape(node.pdftext,True)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, (docutils.nodes.option_string,
-                               docutils.nodes.option_argument)):
-            node.pdftext = node.astext()
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-
-        elif isinstance(node, (docutils.nodes.header, docutils.nodes.footer)):
-            node.pdftext = self.gather_pdftext(node)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, (docutils.nodes.system_message,
-                               docutils.nodes.problematic)):
-            pre = '<font color="red">'
-            post = "</font>"
-            node.pdftext = self.gather_pdftext(node)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.generated):
-            node.pdftext = self.gather_pdftext(node)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-            node.pdftext = pre + node.pdftext + post
-
-        elif isinstance(node, docutils.nodes.image):
-            # First see if the image file exists, or else,
-            # use image-missing.png
-            uri=node.get('uri')
-            if not os.path.exists(uri):
-                log.error("Missing image file: %s [%s]", uri, nodeid(node))
-                uri=os.path.join(self.img_dir, 'image-missing.png')
-                w, h = 1*cm, 1*cm
-            else:
-                w, h, kind = self.size_for_image_node(node)
-            alignment=node.get('align', 'CENTER').lower()
-            if alignment in ('top', 'middle', 'bottom'):
-                align='valign="%s"'%alignment
-            else:
-                align=''
-
-            node.pdftext = '<img src="%s" width="%f" height="%f" %s/>'%\
-                (uri, w, h, align)
-
-        elif isinstance(node, math_node):
-            mf = Math(node.math_data)
-            w, h = mf.wrap(0, 0)
-            descent = mf.descent()
-            img = mf.genImage()
-            self.to_unlink.append(img)
-            node.pdftext = '<img src="%s" width=%f height=%f valign=%f/>' % (
-                img, w, h, -descent)
-
-        elif isinstance(node, docutils.nodes.footnote_reference):
-            # TODO: when used in Sphinx, all footnotes are autonumbered
-            anchors=''
-            for i in node['ids']:
-                if i not in self.targets:
-                    anchors+='<a name="%s"/>' % i
-                    self.targets.append(i)
-            node.pdftext = u'%s<super><a href="%s" color="%s">%s</a></super>'%\
-                (anchors, '#' + node.astext(),
-                 self.styles.linkColor, node.astext())
-
-        elif isinstance(node, docutils.nodes.citation_reference):
-            anchors=''
-            for i in node['ids']:
-                if i not in self.targets:
-                    anchors +='<a name="%s"/>' % i
-                    self.targets.append(i)
-            node.pdftext = u'%s[<a href="%s" color="%s">%s</a>]'%\
-                (anchors, '#' + node.astext(),
-                 self.styles.linkColor, node.astext())
-
-        elif isinstance(node, docutils.nodes.target):
-            if node['ids'][0] not in self.targets:
-                pre = u'<a name="%s"/>' % node['ids'][0]
-                self.targets.append(node['ids'][0])
-            node.pdftext = self.gather_pdftext(node)
-            if replaceEnt:
-                node.pdftext = escape(node.pdftext)
-            node.pdftext = pre + node.pdftext
-
-        elif isinstance(node, docutils.nodes.inline):
-            ftag = self.styleToFont(node['classes'][0])
-            if ftag:
-                node.pdftext = "%s%s</font>"%\
-                    (ftag, self.gather_pdftext(node))
-            else:
-                node.pdftext = self.gather_pdftext(node)
-
-        elif isinstance(node,docutils.nodes.literal_block):
-            node.pdftext = self.gather_pdftext(node)
-
-
-        else:
-            # With sphinx you will get hundreds of these
-            #if not HAS_SPHINX:
-            cln=str(node.__class__)
-            if not cln in unkn_text:
-                unkn_text.add(cln)
-                log.warning("Unkn. node (self.gen_pdftext): %s [%s]",
-                    node.__class__, nodeid(node))
-                try:
-                    log.debug(node)
-                except (UnicodeDecodeError, UnicodeEncodeError):
-                    log.debug(repr(node))
-            node.pdftext = self.gather_pdftext(node)
-
-        try:
-            log.debug("self.gen_pdftext: %s" % node.pdftext)
-        except UnicodeDecodeError:
-            pass
-        # Try to be clever about when to use smartypants
-        if node.__class__ in (docutils.nodes.paragraph,
-                docutils.nodes.block_quote, docutils.nodes.title):
-            node.pdftext = smartyPants(node.pdftext, self.smarty)
-
-        return node.pdftext
+        return NodeHandler.gen_pdftext(self, node, replaceEnt)
 
     def gen_elements(self, node, style=None):
         #pprint (dir(node))
