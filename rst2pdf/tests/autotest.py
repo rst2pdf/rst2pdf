@@ -184,7 +184,7 @@ def checkmd5(pdfpath, md5path, resultlist):
         f.close()
     return resulttype
 
-def run_single_textfile(inpfname):
+def run_single_textfile(inpfname, incremental=False):
     iprefix = os.path.splitext(inpfname)[0]
     basename = os.path.basename(iprefix)
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -194,6 +194,9 @@ def run_single_textfile(inpfname):
     outtext = oprefix + '.log'
     md5file = mprefix + '.json'
 
+    if incremental and os.path.exists(outpdf):
+        return 'preexisting', 0
+
     for fname in (outtext, outpdf):
         if os.path.exists(fname):
             os.remove(fname)
@@ -202,7 +205,7 @@ def run_single_textfile(inpfname):
     if os.path.exists(style):
         args.extend(('-s', os.path.basename(style)))
     args.extend(('-o', outpdf))
-    result = textexec(args, cwd=os.path.dirname(inpfname))
+    errcode, result = textexec(args, cwd=os.path.dirname(inpfname))
     checkinfo = checkmd5(outpdf, md5file, result)
     print result[-1]
     print
@@ -210,16 +213,18 @@ def run_single_textfile(inpfname):
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
     outf.close()
-    return checkinfo
+    return checkinfo, errcode
 
-def run_textfiles(textfiles=None):
+def run_textfiles(textfiles=None, incremental=False):
     if not textfiles:
         textfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
         textfiles.sort()
     results = {}
     for fname in textfiles:
-        key = run_single_textfile(fname)
+        key, errcode = run_single_textfile(fname, incremental)
         results[key] = results.get(key, 0) + 1
+        if incremental and errcode:
+            break
     print
     print 'Final checksum statistics:',
     print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
@@ -235,6 +240,9 @@ def parse_commandline():
     parser.add_option('-a', '--add-coverage', action="store_true",
         dest='add_coverage', default=False,
         help='Add coverage information to previous runs.')
+    parser.add_option('-i', '--incremental', action="store_true",
+        dest='incremental', default=False,
+        help='Incremental build -- ignores existing PDFs, stops on error')
     return parser
 
 def main(args=None):
@@ -242,7 +250,7 @@ def main(args=None):
     options, args = parser.parse_args(copy(args))
     if options.coverage or options.add_coverage:
         PathInfo.add_coverage(options.keep_coverage)
-    run_textfiles(args)
+    run_textfiles(args, options.incremental)
 
 
 if __name__ == '__main__':
