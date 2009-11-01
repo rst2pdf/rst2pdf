@@ -107,10 +107,14 @@ else:
 
 try:
     import sphinx
-    HAS_SPHINX = True
 except ImportError:
-    HAS_SPHINX = False
+    pass
 
+HAS_SPHINX = False
+def add_sphinx():
+    #XXX -- Hack needs to be fixed at some point
+    global HAS_SPHINX
+    HAS_SPHINX = True
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
