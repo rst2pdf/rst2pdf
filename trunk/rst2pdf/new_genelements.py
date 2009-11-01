@@ -447,27 +447,27 @@ class HandleFList(GenElements):
 class HandleOrganization(HandleFList, docutils.nodes.organization):
     labeltext = "organization"
 
-class HandleContact(GenElements, docutils.nodes.contact):
+class HandleContact(HandleFList, docutils.nodes.contact):
     labeltext = "contact"
 
-class HandleAddress(GenElements, docutils.nodes.address):
+class HandleAddress(HandleFList, docutils.nodes.address):
     labeltext = "address"
 
-class HandleVersion(GenElements, docutils.nodes.version):
+class HandleVersion(HandleFList, docutils.nodes.version):
     labeltext = "version"
 
-class HandleRevision(GenElements, docutils.nodes.revision):
+class HandleRevision(HandleFList, docutils.nodes.revision):
     labeltext = "revision"
     adjustwidths = True
     TableType = Table
 
-class HandleStatus(GenElements, docutils.nodes.status):
+class HandleStatus(HandleFList, docutils.nodes.status):
     labeltext = "status"
 
-class HandleDate(GenElements, docutils.nodes.date):
+class HandleDate(HandleFList, docutils.nodes.date):
     labeltext = "date"
 
-class HandleCopyright(GenElements, docutils.nodes.copyright):
+class HandleCopyright(HandleFList, docutils.nodes.copyright):
     labeltext = "copyright"
 
 class HandleTopic(GenElements, docutils.nodes.topic):
