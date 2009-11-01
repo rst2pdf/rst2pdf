@@ -302,7 +302,7 @@ def textexec(*arg, **kw):
             (procname, status, errcode, elapsedtime(starttime)))
         logger(result, None,
             'Cumulative execution time is %s\n' % elapsedtime())
-    return result
+    return errcode, result
 
 if __name__ == '__main__':
     import sys
