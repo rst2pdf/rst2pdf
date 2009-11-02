@@ -69,6 +69,13 @@ class PathInfo(object):
             if os.path.exists(fname):
                 os.remove(fname)
 
+    @classmethod
+    def load_subprocess(cls):
+        f = open(cls.runfile, 'rb')
+        exec f in {}
+        import rst2pdf.createpdf
+        return rst2pdf.createpdf.main
+
 class MD5Info(dict):
     ''' The MD5Info class is used to round-trip good, bad, unknown
         information to/from a .json file.
@@ -184,7 +191,7 @@ def checkmd5(pdfpath, md5path, resultlist):
         f.close()
     return resulttype
 
-def run_single_textfile(inpfname, incremental=False):
+def run_single_textfile(inpfname, incremental=False, fastfork=None):
     iprefix = os.path.splitext(inpfname)[0]
     basename = os.path.basename(iprefix)
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -205,7 +212,7 @@ def run_single_textfile(inpfname, incremental=False):
     if os.path.exists(style):
         args.extend(('-s', os.path.basename(style)))
     args.extend(('-o', outpdf))
-    errcode, result = textexec(args, cwd=os.path.dirname(inpfname))
+    errcode, result = textexec(args, cwd=os.path.dirname(inpfname), python_proc=fastfork)
     checkinfo = checkmd5(outpdf, md5file, result)
     print result[-1]
     print
@@ -215,13 +222,13 @@ def run_single_textfile(inpfname, incremental=False):
     outf.close()
     return checkinfo, errcode
 
-def run_textfiles(textfiles=None, incremental=False):
+def run_textfiles(textfiles=None, incremental=False, fastfork=None):
     if not textfiles:
         textfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
         textfiles.sort()
     results = {}
     for fname in textfiles:
-        key, errcode = run_single_textfile(fname, incremental)
+        key, errcode = run_single_textfile(fname, incremental, fastfork)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode:
             break
@@ -243,14 +250,21 @@ def parse_commandline():
     parser.add_option('-i', '--incremental', action="store_true",
         dest='incremental', default=False,
         help='Incremental build -- ignores existing PDFs, stops on error')
+    parser.add_option('-f', '--fast', action="store_true",
+        dest='fastfork', default=False,
+        help='Fork and reuse process information')
     return parser
 
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
+    fastfork = None
     if options.coverage or options.add_coverage:
+        assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
         PathInfo.add_coverage(options.keep_coverage)
-    run_textfiles(args, options.incremental)
+    elif options.fastfork:
+        fastfork = PathInfo.load_subprocess()
+    run_textfiles(args, options.incremental, fastfork)
 
 
 if __name__ == '__main__':
