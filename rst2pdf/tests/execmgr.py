@@ -19,12 +19,14 @@ Currently only works under Linux.
 
 '''
 
+import sys
 import subprocess
 import select
 import os
 import time
 import textwrap
 from signal import SIGTERM, SIGKILL
+import traceback
 
 class BaseExec(object):
     ''' BaseExec is designed to be subclassed.
@@ -34,6 +36,7 @@ class BaseExec(object):
         the new process, but doesn't do anything
         with them.
     '''
+    is_python_proc = False
     defaults = dict(
                 bufsize=0,
                 executable=None,
@@ -50,6 +53,7 @@ class BaseExec(object):
                 creationflags=0,
                 timeout=500.0,    # Time in seconds before termination
                 killdelay=20.0,   # Time in seconds after termination before kill
+                python_proc=None,
     )
 
     def before_init(self, keywords):
@@ -60,6 +64,22 @@ class BaseExec(object):
         # Replace this in subclass to execute code after
         # process creation
         pass
+
+    def wrap_python_exec(self, preexec_fn):
+        # Don't let anything in our buffer wrap back into new process
+        # Otherwise, it might (will!) come out twice...
+        sys.stdout.flush()
+        sys.stderr.flush()
+        self.is_python_proc = True
+
+        def wrapper():
+            sys.argv = self.args
+            try:
+                preexec_fn()
+            except Exception:
+                print >> sys.stderr, traceback.format_exc()
+                sys.stderr.write(chr(1))
+        return wrapper
 
     def __init__(self, *args, **kw):
 
@@ -82,6 +102,13 @@ class BaseExec(object):
         self.timeout = keywords.pop('timeout') + time.time()
         self.killdelay = keywords.pop('killdelay')
         self.before_init(keywords)
+
+        # Handle any special Python proc
+        python_proc = keywords.pop('python_proc')
+        if python_proc is not None:
+            assert keywords.pop('preexec_fn') is None
+            keywords['preexec_fn'] = self.wrap_python_exec(python_proc)
+            args = ['true']
 
         # Start the process and let subclass execute
         proc = subprocess.Popen(args, **keywords)
@@ -291,11 +318,16 @@ def textexec(*arg, **kw):
     logger(result,
         'Process "%s" started on %s\n\n%s\n\n' % (
          procname, time.asctime(), formatcmd(' '.join(args))))
+    errcode = 0
+    badexit = '* ' + chr(1)
     for line in subproc:
+        if line == badexit and subproc.is_python_proc:
+            errcode = 1
+            continue
         if not line.startswith('**'):
             logger(result, line)
             continue
-        errcode = int(line.split()[-1])
+        errcode = errcode or int(line.split()[-1])
         status = errcode and 'FAIL' or 'PASS'
         logger(result,
             '\nProgram %s exit code: %s (%d)   elapsed time: %s\n' %
@@ -305,7 +337,13 @@ def textexec(*arg, **kw):
     return errcode, result
 
 if __name__ == '__main__':
-    import sys
+
+    def goodfunc():
+        print "Good func", sys.argv
+
+    def badfunc():
+        assert 0, "Boo! %s" % sys.argv
+        #raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
         print "Starting subprocess"
@@ -319,9 +357,18 @@ if __name__ == '__main__':
         if sys.argv[1] == 'die':
             raise SystemExit('Deliberately croaking')
     else:
+        print 'Calling good python_proc 1'
+        textexec('goodfunc', '1', python_proc=goodfunc)
+        print 'Calling bad python_proc 1'
+        textexec('badfunc', '1', python_proc=badfunc)
+        print 'Calling good python_proc 2'
+        textexec('goodfunc', '2', python_proc=goodfunc)
+        print 'Calling bad python_proc 2'
+        textexec('badfunc', '2', python_proc=badfunc)
         print "Calling myself"
         textexec(__file__, 'subprocess')
         print "Calling myself with kill time"
         textexec(__file__, 'subprocess', timeout=0.8)
         print "Calling myself with forced error exit"
         textexec(__file__, 'die')
+        print 'All Done'
