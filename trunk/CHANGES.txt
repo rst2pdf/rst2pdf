@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fix Issue 228 (page labels and numbers match, so page ii is the
+  same on-page and in the PDF TOC)
 * Fix Issue 227 (missing background should not be fatal error)
 * Fix Issue 225 (bad spacing in lineblocks)
 * Fix Issue 223 (non-monospaced styles used in code)

@@ -70,6 +70,7 @@ import pygments_code_block_directive # code-block directive
 
 from reportlab.platypus import *
 from reportlab.platypus.flowables import _listWrapOn, _Container
+from reportlab.pdfbase.pdfdoc import PDFPageLabel
 #from reportlab.lib.enums import *
 #from reportlab.lib.units import *
 #from reportlab.lib.pagesizes import *
@@ -156,6 +157,14 @@ except ImportError:
 
 import genpdftext
 import genelements
+
+numberingstyles={ 'arabic': 'ARABIC',
+                  'roman': 'ROMAN_UPPER',
+                  'lowerroman': 'ROMAN_LOWER',
+                  'alpha':  'LETTERS_UPPER',
+                  'loweralpha':  'LETTERS_LOWER' }
+                 
+
 
 class RstToPdf(object):
 
@@ -781,7 +790,7 @@ class PageCounter(Flowable):
         global _counter, _counterStyle
         _counterStyle=self.style
         _counter=self.number
-
+        
 flowables.PageCounter = PageCounter
 
 def setPageCounter(counter=None, style=None):
@@ -970,6 +979,9 @@ class FancyPage(PageTemplate):
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
         # Adjust for gutter margin
+        canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
+        print canv._pageNumber-1,numberingstyles[_counterStyle],_counter
+        
         log.info('Page %s [%s]'%(_counter,doc.page))
         if doc.page % 2: # Left page
             hx = self.hx
