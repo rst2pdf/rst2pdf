@@ -62,7 +62,7 @@ class PathInfo(object):
 
     @classmethod
     def add_coverage(cls, keep=False):
-        cls.runcmd[0:0] = [os.path.join(cls.bindir, 'real_coverage'), 'run', '-a']
+        cls.runcmd[0:0] = ['coverage', 'run', '-a']
         fname = os.path.join(cls.rootdir, '.coverage')
         os.environ['COVERAGE_FILE'] = fname
         if not keep:
@@ -261,7 +261,7 @@ def main(args=None):
     fastfork = None
     if options.coverage or options.add_coverage:
         assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
-        PathInfo.add_coverage(options.keep_coverage)
+        PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
     run_textfiles(args, options.incremental, fastfork)
