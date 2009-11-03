@@ -8,54 +8,13 @@
 
 import os
 from xml.sax.saxutils import escape
-from utils import NodeHandler
 from log import log, nodeid
+from basenodehandlers import GenPdfText
 from math_directive import math_node
 import docutils.nodes
-from smartypants import smartyPants
 from urlparse import urljoin, urlparse
 from reportlab.lib.units import cm
 from math_flowable import Math
-
-
-class GenPdfText(NodeHandler):
-    _baseclass = None
-
-    # Begin overridable attributes and methods for gen_pdftext
-
-    pre = ''
-    post = ''
-
-    def get_pre_post(self, client, node, replaceEnt):
-        return self.pre, self.post
-
-    def get_text(self, client, node, replaceEnt):
-        return client.gather_pdftext(node)
-
-    def apply_smartypants(self, text, smarty, node):
-        # Try to be clever about when to use smartypants
-        if node.__class__ in (docutils.nodes.paragraph,
-                docutils.nodes.block_quote, docutils.nodes.title):
-            return smartyPants(text, smarty)
-        return text
-
-    # End overridable attributes and methods for gen_pdftext
-
-    @classmethod
-    def dispatch(cls, client, node, replaceEnt=True):
-        self = cls.findsubclass(node)
-        pre, post = self.get_pre_post(client, node, replaceEnt)
-        text = self.get_text(client, node, replaceEnt)
-        text = pre + text + post
-
-        try:
-            log.debug("self.gen_pdftext: %s" % text)
-        except UnicodeDecodeError:
-            pass
-
-        text = self.apply_smartypants(text, client.smarty, node)
-        node.pdftext = text
-        return text
 
 
 class HandleNotDefinedYet(GenPdfText, object):
