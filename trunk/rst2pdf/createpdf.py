@@ -980,7 +980,6 @@ class FancyPage(PageTemplate):
         """Draw header/footer."""
         # Adjust for gutter margin
         canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
-        print canv._pageNumber-1,numberingstyles[_counterStyle],_counter
         
         log.info('Page %s [%s]'%(_counter,doc.page))
         if doc.page % 2: # Left page
