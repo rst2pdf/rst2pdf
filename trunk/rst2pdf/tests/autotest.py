@@ -203,6 +203,7 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
     else:
         iprefix = os.path.splitext(inpfname)[0]
         style = iprefix + '.style'
+        cli = iprefix + '.cli'
         basename = os.path.basename(iprefix)
 
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -229,7 +230,12 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
         else:
             shutil.copyfile(pdffiles[0], outpdf)
     else:
-        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]
+        if cli:
+            extraargs=[ x.strip() for x in open(cli).readlines()]
+        else:
+            extraargs=[]
+        print 'EA:',extraargs
+        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
         if os.path.exists(style):
             args.extend(('-s', os.path.basename(style)))
         args.extend(('-o', outpdf))
