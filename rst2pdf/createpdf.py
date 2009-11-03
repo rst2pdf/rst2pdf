@@ -434,7 +434,7 @@ class RstToPdf(object):
                     .labels[label]
         except KeyError:
             text = label.capitalize()
-        return text + ":"
+        return text
 
     def text_for_bib_field(self, field, style):
         """Translate text for bibliographic fields."""
