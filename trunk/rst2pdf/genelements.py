@@ -992,7 +992,12 @@ class HandleAdmonition(GenElements, docutils.nodes.attention,
                                 Spacer(0,st.spaceAfter)]
         return node.elements
 
-def add_sphinx():
+def add_sphinx(added=[False]):
+    # avoid calling twice
+    if added[0]:
+        return
+    added[0] = True
+
     #XXX -- Hack needs to be fixed at some point
     global HAS_SPHINX
     HAS_SPHINX = True

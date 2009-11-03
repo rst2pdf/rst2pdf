@@ -42,7 +42,7 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
-def setpythonpaths(execfn):
+def setpythonpaths(execfn, rootdir):
     ''' There is probably a cleaner way to do this.
         maybe have buildout give us a json or something.
         This imports everything and takes awhile, but
@@ -59,6 +59,7 @@ def setpythonpaths(execfn):
     ppath = os.environ.get('PYTHONPATH')
     if ppath is not None:
         newpaths.append(ppath)
+    newpaths.append(rootdir)
     print ':'.join(newpaths)
     os.environ['PYTHONPATH'] = ':'.join(newpaths)
 
@@ -76,7 +77,7 @@ class PathInfo(object):
     if not os.path.exists(runfile):
         raise SystemExit('Use bootstrap.py and buildout to create executable')
 
-    setpythonpaths(runfile)
+    setpythonpaths(runfile, rootdir)
 
     runcmd = [runfile]
 

@@ -244,7 +244,11 @@ class HandleLiteralBlock(GenPdfText, docutils.nodes.literal_block):
     pass
 
 
-def add_sphinx():
+def add_sphinx(added=[False]):
+    # avoid calling twice
+    if added[0]:
+        return
+    added[0] = True
     import sphinx
 
     class HandleSphinxDefaults(GenPdfText,
