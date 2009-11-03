@@ -20,7 +20,7 @@ import glob
 import shutil
 from copy import copy
 from optparse import OptionParser
-from execmgr import textexec
+from execmgr import textexec, default_logger as log
 
 # md5 module deprecated, but hashlib not available in 2.4
 try:
@@ -182,7 +182,7 @@ def checkmd5(pdfpath, md5path, resultlist):
         a result of 'good', 'bad', 'fail', or 'unknown'
     '''
     if not os.path.exists(pdfpath):
-        resultlist.append('File %s not generated' % os.path.basename(pdfpath))
+        log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
 
     # Read the database
@@ -202,19 +202,29 @@ def checkmd5(pdfpath, md5path, resultlist):
 
     # Check MD5 against database and update if necessary
     resulttype = info.find(m)
-    resultlist.append("Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
+    log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed:
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
     return resulttype
 
-def run_single_textfile(inpfname, incremental=False, fastfork=None):
-    iprefix = os.path.splitext(inpfname)[0]
-    basename = os.path.basename(iprefix)
+
+def run_single_test(inpfname, incremental=False, fastfork=None):
+    use_sphinx = 'sphinx' in inpfname
+    if use_sphinx:
+        sphinxdir = inpfname
+        if sphinxdir.endswith('Makefile'):
+            sphinxdir = os.path.dirname(sphinxdir)
+        builddir = os.path.join(sphinxdir, '_build')
+        basename = os.path.basename(sphinxdir)
+    else:
+        iprefix = os.path.splitext(inpfname)[0]
+        style = iprefix + '.style'
+        basename = os.path.basename(iprefix)
+
     oprefix = os.path.join(PathInfo.outdir, basename)
     mprefix = os.path.join(PathInfo.md5dir, basename)
-    style = iprefix + '.style'
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
     md5file = mprefix + '.json'
@@ -226,45 +236,49 @@ def run_single_textfile(inpfname, incremental=False, fastfork=None):
         if os.path.exists(fname):
             os.remove(fname)
 
-    args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]
-    if os.path.exists(style):
-        args.extend(('-s', os.path.basename(style)))
-    args.extend(('-o', outpdf))
-    errcode, result = textexec(args, cwd=os.path.dirname(inpfname), python_proc=fastfork)
+    if use_sphinx:
+        if os.path.isdir(builddir):
+            shutil.rmtree(builddir)
+        errcode, result = textexec('make pdf', cwd=sphinxdir)
+        pdffiles = glob.glob(os.path.join(builddir, 'pdf', '*.pdf'))
+        if len(pdffiles) != 1:
+            log(result, 'Output PDF apparently not generated')
+            errcode = 1
+        else:
+            shutil.copyfile(pdffiles[0], outpdf)
+    else:
+        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]
+        if os.path.exists(style):
+            args.extend(('-s', os.path.basename(style)))
+        args.extend(('-o', outpdf))
+        errcode, result = textexec(args, cwd=os.path.dirname(inpfname), python_proc=fastfork)
+
     checkinfo = checkmd5(outpdf, md5file, result)
-    print result[-1]
-    print
-    result.append('')
+    log(result, '')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
     outf.close()
     return checkinfo, errcode
 
-def run_textfiles(textfiles=None, incremental=False, fastfork=None):
-    if not textfiles:
-        textfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
-        textfiles.sort()
+def run_testlist(testfiles=None, incremental=False, fastfork=None, sphinx=False):
+    if not testfiles:
+        if sphinx:
+            testfiles = glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
+        else:
+            testfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
+            testfiles += glob.glob(os.path.join(PathInfo.inpdir, '*', '*.txt'))
+            testfiles = [x for x in testfiles if 'sphinx' not in x]
+        testfiles.sort()
     results = {}
-    for fname in textfiles:
-        key, errcode = run_single_textfile(fname, incremental, fastfork)
+    for fname in testfiles:
+        key, errcode = run_single_test(fname, incremental, fastfork)
         results[key] = results.get(key, 0) + 1
-        if incremental and errcode:
+        if incremental and errcode and 0:
             break
     print
     print 'Final checksum statistics:',
     print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
     print
-
-def run_sphinxfiles(sphinxdirs):
-    if not sphinxdirs:
-        sphinxdirs = glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
-        sphinxdirs.sort()
-    args = 'make pdf'
-    for dirname in sphinxdirs:
-        builddir = os.path.join(dirname, '_build')
-        if os.path.isdir(builddir):
-            shutil.rmtree(builddir)
-        errcode, result = textexec(args, cwd=dirname)
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
@@ -277,7 +291,7 @@ def parse_commandline():
         help='Add coverage information to previous runs.')
     parser.add_option('-i', '--incremental', action="store_true",
         dest='incremental', default=False,
-        help='Incremental build -- ignores existing PDFs, stops on error')
+        help='Incremental build -- ignores existing PDFs')
     parser.add_option('-f', '--fast', action="store_true",
         dest='fastfork', default=False,
         help='Fork and reuse process information')
@@ -289,15 +303,14 @@ def parse_commandline():
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
-    if options.sphinx:
-        return run_sphinxfiles(args)
     fastfork = None
     if options.coverage or options.add_coverage:
         assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
+        assert not options.sphinx, "Cannot run sphinx and coverage simultaneously"
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
-    run_textfiles(args, options.incremental, fastfork)
+    run_testlist(args, options.incremental, fastfork, options.sphinx)
 
 if __name__ == '__main__':
     main()
