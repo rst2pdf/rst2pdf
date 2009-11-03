@@ -234,7 +234,6 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
             extraargs=[ x.strip() for x in open(cli).readlines()]
         else:
             extraargs=[]
-        print 'EA:',extraargs
         args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
         if os.path.exists(style):
             args.extend(('-s', os.path.basename(style)))
