@@ -58,7 +58,7 @@ from reportlab.lib.units import cm
 from flowables import Table, DelayedTable, SplitTable, Heading, \
               Spacer, MyIndenter, MyImage, MyTableOfContents, \
               Separation, BoxedContainer, BoundByWidth, \
-              MyPageBreak, Reference
+              MyPageBreak, Reference, tablepadding
 
 HAS_PIL = True
 try:
