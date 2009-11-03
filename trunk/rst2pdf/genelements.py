@@ -41,6 +41,7 @@
 
 import os
 import tempfile
+import re
 from copy import copy
 
 from basenodehandlers import GenElements
@@ -252,7 +253,8 @@ class HandleTitle(GenElements, docutils.nodes.title):
         if isinstance(node.parent, docutils.nodes.document):
             node.elements = [Paragraph(client.gen_pdftext(node),
                                         client.styles['title'])]
-            client.doc_title = unicode(client.gen_pdftext(node)).strip()
+            client.doc_title = re.sub(r'<[^>]*?>', '', 
+                unicode(client.gen_pdftext(node)).strip())
         elif isinstance(node.parent, docutils.nodes.topic):
             node.elements = [Paragraph(client.gen_pdftext(node),
                                         client.styles['topic-title'])]

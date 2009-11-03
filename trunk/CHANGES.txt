@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fix Issue 232 (HTML tags in title metadata)
 * Fix Issue 230 (Admonition titles were not translated)
 * Fix Issue 228 (page labels and numbers match, so page ii is the
   same on-page and in the PDF TOC)
