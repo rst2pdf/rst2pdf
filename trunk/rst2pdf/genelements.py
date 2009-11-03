@@ -359,7 +359,7 @@ class HandleAuthor(GenElements, docutils.nodes.author):
                 client.styles['field_list'].colWidths)
 
             node.elements = [Table(
-                [[Paragraph(client.text_for_label("author", style),
+                [[Paragraph(client.text_for_label("author", style)+":",
                     style=client.styles['fieldname']),
                     Paragraph(fb, style)]],
                 style=t_style, colWidths=colWidths)]
@@ -373,7 +373,7 @@ class HandleAuthors(GenElements, docutils.nodes.authors):
         t_style=TableStyle(client.styles['field_list'].commands)
         colWidths = client.styles['field_list'].colWidths
 
-        td = [[Paragraph(client.text_for_label("authors", style),
+        td = [[Paragraph(client.text_for_label("authors", style)+":",
                     style=client.styles['fieldname']),
                 client.gather_elements(node, style=style)]]
         return [DelayedTable(td, style=t_style,
@@ -388,7 +388,7 @@ class HandleFList(GenElements):
         colWidths=client.styles['field_list'].colWidths
         if self.adjustwidths:
             colWidths = map(client.styles.adjustUnits, colWidths)
-        label=client.text_for_label(self.labeltext, style)
+        label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                     Paragraph(fb, style)]],
                     style=t_style, colWidths=colWidths)
@@ -910,7 +910,7 @@ class HandleAdmonition(GenElements, docutils.nodes.attention,
         if node.children and isinstance(node.children[0], docutils.nodes.title):
             title=[]
         else:
-            title= [Paragraph(node.tagname.title(),
+            title= [Paragraph(client.text_for_label(node.tagname, style),
                 style=client.styles['%s-heading'%node.tagname])]
         rows=title + client.gather_elements(node, style=style)
         st=client.styles[node.tagname]
