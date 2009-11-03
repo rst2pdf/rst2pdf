@@ -15,7 +15,9 @@ See LICENSE.txt for licensing terms
 '''
 
 import os
+import sys
 import glob
+import shutil
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec
@@ -40,6 +42,26 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
+def setpythonpaths(execfn):
+    ''' There is probably a cleaner way to do this.
+        maybe have buildout give us a json or something.
+        This imports everything and takes awhile, but
+        it is a useful side-effect for the -f option
+        (and would have to be done anyway for that).
+        We only need the paths themselves when we are
+        setting up for sphinx execution.
+    '''
+    pathlen = len(sys.path)
+    f = open(execfn, 'rb')
+    exec f in {}
+    f.close()
+    newpaths = sys.path[:len(sys.path)-pathlen]
+    ppath = os.environ.get('PYTHONPATH')
+    if ppath is not None:
+        newpaths.append(ppath)
+    print ':'.join(newpaths)
+    os.environ['PYTHONPATH'] = ':'.join(newpaths)
+
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
          module namespace.  It is never instantiated.
@@ -54,9 +76,7 @@ class PathInfo(object):
     if not os.path.exists(runfile):
         raise SystemExit('Use bootstrap.py and buildout to create executable')
 
-    ppath = os.environ.get('PYTHONPATH')
-    ppath = ppath is None and rootdir or '%s:%s' % (ppath, rootdir)
-    os.environ['PYTHONPATH'] = ppath
+    setpythonpaths(runfile)
 
     runcmd = [runfile]
 
@@ -71,8 +91,6 @@ class PathInfo(object):
 
     @classmethod
     def load_subprocess(cls):
-        f = open(cls.runfile, 'rb')
-        exec f in {}
         import rst2pdf.createpdf
         return rst2pdf.createpdf.main
 
@@ -237,6 +255,16 @@ def run_textfiles(textfiles=None, incremental=False, fastfork=None):
     print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
     print
 
+def run_sphinxfiles(sphinxdirs):
+    if not sphinxdirs:
+        sphinxdirs = glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
+        sphinxdirs.sort()
+    args = 'make pdf'
+    for dirname in sphinxdirs:
+        builddir = os.path.join(dirname, '_build')
+        if os.path.isdir(builddir):
+            shutil.rmtree(builddir)
+        errcode, result = textexec(args, cwd=dirname)
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
@@ -253,11 +281,16 @@ def parse_commandline():
     parser.add_option('-f', '--fast', action="store_true",
         dest='fastfork', default=False,
         help='Fork and reuse process information')
+    parser.add_option('-s', '--sphinx', action="store_true",
+        dest='sphinx', default=False,
+        help='Run sphinx tests')
     return parser
 
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
+    if options.sphinx:
+        return run_sphinxfiles(args)
     fastfork = None
     if options.coverage or options.add_coverage:
         assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
@@ -265,7 +298,6 @@ def main(args=None):
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
     run_textfiles(args, options.incremental, fastfork)
-
 
 if __name__ == '__main__':
     main()
