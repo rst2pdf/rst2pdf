@@ -43,6 +43,8 @@ import os
 import tempfile
 from copy import copy
 
+from basenodehandlers import GenElements
+
 import docutils.nodes
 import reportlab
 
@@ -52,7 +54,7 @@ from math_flowable import Math
 from aafigure_directive import Aanode
 
 from log import log, nodeid
-from utils import log, parseRaw, NodeHandler
+from utils import log, parseRaw
 from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
 from flowables import Table, DelayedTable, SplitTable, Heading, \
@@ -127,59 +129,6 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
         refid = node.attributes.get('refid')
         if refid:
             self.toc.refids.append(refid)
-
-
-class GenElements(NodeHandler):
-    _baseclass = None
-
-    # Begin overridable attributes and methods for GenElements
-
-    def gather_elements(self, client, node, style):
-        return client.gather_elements(node, style=style)
-
-    # End overridable attributes and methods for GenElements
-
-    @classmethod
-    def dispatch(cls, client, node, style=None):
-        self = cls.findsubclass(node)
-
-        # set anchors for internal references
-        try:
-            for i in node['ids']:
-                client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
-            pass
-
-
-        try:
-            if node['classes'] and node['classes'][0]:
-                # FIXME: Supports only one class, sorry ;-)
-                if client.styles.StyleSheet.has_key(node['classes'][0]):
-                    style = client.styles[node['classes'][0]]
-                else:
-                    log.info("Unknown class %s, ignoring. [%s]",
-                        node['classes'][0], nodeid(node))
-        except TypeError: # Happens when a docutils.node.Text reaches here
-            pass
-
-        if style is None or style == client.styles['bodytext']:
-            style = client.styles.styleForNode(node)
-
-        elements = self.gather_elements(client, node, style)
-
-        # Make all the sidebar cruft unreachable
-        #if style.__dict__.get('float','None').lower() !='none':
-            #node.elements=[Sidebar(node.elements,style)]
-        #elif 'width' in style.__dict__:
-
-        if 'width' in style.__dict__:
-            elements = [BoundByWidth(style.width,
-                elements, style, mode="shrink")]
-
-        if node.line and client.debugLinesPdf:
-            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
-        node.elements = elements
-        return elements
 
 
 class HandleNotDefinedYet(GenElements):
