@@ -996,7 +996,7 @@ def add_sphinx():
     global HAS_SPHINX
     HAS_SPHINX = True
 
-    class HandleSphinxDefaults(GenELements, sphinx.addnodes.glossary,
+    class HandleSphinxDefaults(GenElements, sphinx.addnodes.glossary,
                                             sphinx.addnodes.start_of_file,
                                             sphinx.addnodes.compact_paragraph):
         pass
