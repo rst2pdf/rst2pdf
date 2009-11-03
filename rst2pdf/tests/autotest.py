@@ -280,7 +280,7 @@ def parse_commandline():
         dest='incremental', default=False,
         help='Incremental build -- ignores existing PDFs')
     parser.add_option('-f', '--fast', action="store_true",
-        dest='fastfork', default=False,
+        dest='fastfork', default=True,
         help='Fork and reuse process information')
     parser.add_option('-s', '--sphinx', action="store_true",
         dest='sphinx', default=False,
