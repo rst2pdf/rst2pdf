@@ -230,7 +230,7 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
         else:
             shutil.copyfile(pdffiles[0], outpdf)
     else:
-        if cli:
+        if os.path.isfile(cli):
             extraargs=[ x.strip() for x in open(cli).readlines()]
         else:
             extraargs=[]
