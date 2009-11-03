@@ -87,6 +87,15 @@ class NodeHandler(object):
         # Perform triage on the class bases to separate actual
         # inheritable bases from the target docutils node classes
         # which we want to dispatch for.
+
+        # Allow multiple class hierarchies to search up to,
+        # but not including, NodeHandler
+        while 1:
+            basebase = getattr(baseclass, '_baseclass', None)
+            if basebase in (None, NodeHandler):
+                break
+            baseclass = basebase
+
         new_bases = []
         targets = []
         for target in bases:
