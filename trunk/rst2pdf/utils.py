@@ -119,12 +119,12 @@ class NodeHandler(object):
     @classmethod
     def findsubclass(cls, node):
         nodeclass = node.__class__
-        log.debug("%s: %s", (cls, nodeclass))
+        log.debug("%s: %s", cls, nodeclass)
         log.debug("[%s]", nodeid(node))
         try:
-            log.debug("%s: %s", (cls, node))
+            log.debug("%s: %s", cls, node)
         except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("%s: %r", (cls, node))
+            log.debug("%s: %r", cls, node)
 
         # Dispatch to the first matching class in the MRO
 
