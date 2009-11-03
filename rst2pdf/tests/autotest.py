@@ -53,7 +53,7 @@ def setpythonpaths(execfn, rootdir):
     '''
     pathlen = len(sys.path)
     f = open(execfn, 'rb')
-    exec f in {}
+    exec f in {'__name__':'testing'}
     f.close()
     newpaths = sys.path[:len(sys.path)-pathlen]
     ppath = os.environ.get('PYTHONPATH')
@@ -77,7 +77,7 @@ class PathInfo(object):
     if not os.path.exists(runfile):
         raise SystemExit('Use bootstrap.py and buildout to create executable')
 
-    setpythonpaths(runfile, rootdir)
+    #setpythonpaths(runfile, rootdir)
 
     runcmd = [runfile]
 
