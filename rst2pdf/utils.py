@@ -124,6 +124,7 @@ class NodeHandler(object):
                 new = repr(self)
                 log.debug('Dispatch handler %s for node type %s overridden by %s' %
                     (old, t, new))
+                cls.dispatchdict[target] = self
 
     @classmethod
     def findsubclass(cls, node):
