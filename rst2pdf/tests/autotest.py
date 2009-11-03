@@ -21,6 +21,7 @@ import shutil
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
+from pythonpaths import setpythonpaths
 
 # md5 module deprecated, but hashlib not available in 2.4
 try:
@@ -42,26 +43,6 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
-def setpythonpaths(execfn, rootdir):
-    ''' There is probably a cleaner way to do this.
-        maybe have buildout give us a json or something.
-        This imports everything and takes awhile, but
-        it is a useful side-effect for the -f option
-        (and would have to be done anyway for that).
-        We only need the paths themselves when we are
-        setting up for sphinx execution.
-    '''
-    pathlen = len(sys.path)
-    f = open(execfn, 'rb')
-    exec f in {'__name__':'testing'}
-    f.close()
-    newpaths = sys.path[:len(sys.path)-pathlen]
-    ppath = os.environ.get('PYTHONPATH')
-    if ppath is not None:
-        newpaths.append(ppath)
-    newpaths.append(rootdir)
-    print ':'.join(newpaths)
-    os.environ['PYTHONPATH'] = ':'.join(newpaths)
 
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
