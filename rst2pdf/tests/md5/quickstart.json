@@ -7,6 +7,11 @@ good_md5 = [
         'sentinel'
 ]
 
+incomplete_md5 = [
+        '15097852dd7c4b45899317ab8f3a693f',
+        'sentinel'
+]
+
 unknown_md5 = [
         'sentinel'
 ]
