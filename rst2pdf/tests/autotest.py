@@ -43,12 +43,16 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
+def dirname(path):
+    # os.path.dirname('abc') returns '', which is completely
+    # useless for most purposes...
+    return os.path.dirname(path) or '.'
 
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
          module namespace.  It is never instantiated.
     '''
-    rootdir = os.path.realpath(os.path.dirname(__file__))
+    rootdir = os.path.realpath(dirname(__file__))
     bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
     runfile = os.path.join(bindir, 'rst2pdf')
     inpdir = os.path.join(rootdir, 'input')
@@ -217,7 +221,7 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
     if use_sphinx:
         sphinxdir = inpfname
         if sphinxdir.endswith('Makefile'):
-            sphinxdir = os.path.dirname(sphinxdir)
+            sphinxdir = dirname(sphinxdir)
         builddir = os.path.join(sphinxdir, '_build')
         basename = os.path.basename(sphinxdir)
     else:
@@ -264,7 +268,7 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
         if os.path.exists(style):
             args.extend(('-s', os.path.basename(style)))
         args.extend(('-o', outpdf))
-        errcode, result = textexec(args, cwd=os.path.dirname(inpfname), python_proc=fastfork)
+        errcode, result = textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
     checkinfo = checkmd5(outpdf, md5file, result)
     log(result, '')
