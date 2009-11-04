@@ -58,8 +58,6 @@ class PathInfo(object):
     if not os.path.exists(runfile):
         raise SystemExit('Use bootstrap.py and buildout to create executable')
 
-    #setpythonpaths(runfile, rootdir)
-
     runcmd = [runfile]
 
     @classmethod
@@ -247,14 +245,15 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
     outf.close()
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, sphinx=False):
+def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False):
     if not testfiles:
-        if sphinx:
-            testfiles = glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
-        else:
+        testfiles = []
+        if do_text:
             testfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
             testfiles += glob.glob(os.path.join(PathInfo.inpdir, '*', '*.txt'))
             testfiles = [x for x in testfiles if 'sphinx' not in x]
+        if do_sphinx:
+            testfiles += glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
         testfiles.sort()
     results = {}
     for fname in testfiles:
@@ -284,20 +283,30 @@ def parse_commandline():
         help='Fork and reuse process information')
     parser.add_option('-s', '--sphinx', action="store_true",
         dest='sphinx', default=False,
-        help='Run sphinx tests')
+        help='Run sphinx tests only')
+    parser.add_option('-e', '--everything', action="store_true",
+        dest='everything', default=False,
+        help='Run both rst2pdf and sphinx tests')
+    parser.add_option('-p', '--python-path', action="store_true",
+        dest='nopythonpath', default=False,
+        help='Do not set up PYTHONPATH env variable')
     return parser
 
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
+    if not options.nopythonpath:
+        setpythonpaths(PathInfo.runfile, PathInfo.rootdir)
     fastfork = None
+    do_sphinx = options.sphinx or options.everything
+    do_text = options.everything or not options.sphinx
     if options.coverage or options.add_coverage:
         assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
-        assert not options.sphinx, "Cannot run sphinx and coverage simultaneously"
+        assert not do_sphinx, "Cannot run sphinx and coverage simultaneously"
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
-    run_testlist(args, options.incremental, fastfork, options.sphinx)
+    run_testlist(args, options.incremental, fastfork, do_text, do_sphinx)
 
 if __name__ == '__main__':
     main()
