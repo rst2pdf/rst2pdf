@@ -153,8 +153,8 @@ class MD5Info(dict):
                 break
         else:
             mylist = newinfo.setdefault(result, [])
-            mylist.append(checksum)
-            mylist.sort()
+            myset = set(mylist) | set([checksum, self.sentinel])
+            mylist[:] = sorted(myset)
 
         for key, value in newinfo.iteritems():
             if value != self.get(key):
