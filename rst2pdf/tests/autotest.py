@@ -18,6 +18,7 @@ import os
 import sys
 import glob
 import shutil
+import shlex
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
@@ -261,7 +262,9 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
             shutil.copytree(pdfdir, outpdf)
     else:
         if os.path.isfile(cli):
-            extraargs=[ x.strip() for x in open(cli).readlines()]
+            f = open(cli)
+            extraargs=shlex.split(f.read())
+            f.close()
         else:
             extraargs=[]
         args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
