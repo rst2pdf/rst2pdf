@@ -85,7 +85,7 @@ class MD5Info(dict):
     # Category to dump new data into
     new_category = 'unknown'
     # Categories which always should be in file
-    mandatory_categories = 'good bad'
+    mandatory_categories = 'good bad'.split()
 
     # Sentinel to make manual changes and diffs easy
     sentinel = 'sentinel'
@@ -152,12 +152,12 @@ class MD5Info(dict):
                 result = key
                 break
         else:
-            mylist = newinfo.get(result, [])
+            mylist = newinfo.setdefault(result, [])
             mylist.append(checksum)
             mylist.sort()
 
         for key, value in newinfo.iteritems():
-            if value != self[key]:
+            if value != self.get(key):
                 self.update(newinfo)
                 print "Updating MD5 file"
                 self.changed = True
