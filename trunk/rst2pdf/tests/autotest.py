@@ -164,6 +164,10 @@ def checkmd5(pdfpath, md5path, resultlist):
     if not os.path.exists(pdfpath):
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
+    if os.path.isdir(pdfpath):
+        pdffiles = sorted(glob.glob(os.path.join(pdfpath, '*.pdf')))
+    else:
+        pdffiles = [pdfpath]
 
     # Read the database
     info = MD5Info()
@@ -173,12 +177,15 @@ def checkmd5(pdfpath, md5path, resultlist):
         f.close()
 
     # Generate the current MD5
-    f = open(pdfpath, 'rb')
-    data = f.read()
-    f.close()
-    m = hashlib.md5()
-    m.update(data)
-    m = m.hexdigest()
+    md5s = []
+    for pdfpath in pdffiles:
+        f = open(pdfpath, 'rb')
+        data = f.read()
+        f.close()
+        m = hashlib.md5()
+        m.update(data)
+        md5s.append(m.hexdigest())
+    m = ' '.join(md5s)
 
     # Check MD5 against database and update if necessary
     resulttype = info.find(m)
@@ -215,18 +222,24 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
 
     for fname in (outtext, outpdf):
         if os.path.exists(fname):
-            os.remove(fname)
+            if os.path.isdir(fname):
+                shutil.rmtree(fname)
+            else:
+                os.remove(fname)
 
     if use_sphinx:
         if os.path.isdir(builddir):
             shutil.rmtree(builddir)
         errcode, result = textexec('make pdf', cwd=sphinxdir)
-        pdffiles = glob.glob(os.path.join(builddir, 'pdf', '*.pdf'))
-        if len(pdffiles) != 1:
+        pdfdir = os.path.join(builddir, 'pdf')
+        pdffiles = glob.glob(os.path.join(pdfdir, '*.pdf'))
+        if len(pdffiles) == 1:
+            shutil.copyfile(pdffiles[0], outpdf)
+        elif not pdffiles:
             log(result, 'Output PDF apparently not generated')
             errcode = 1
         else:
-            shutil.copyfile(pdffiles[0], outpdf)
+            shutil.copytree(pdfdir, outpdf)
     else:
         if os.path.isfile(cli):
             extraargs=[ x.strip() for x in open(cli).readlines()]
