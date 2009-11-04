@@ -81,15 +81,27 @@ class MD5Info(dict):
         and since we're not worried about security, we don't bother using
         it for reading, either.
     '''
-    categories = 'good bad unknown'.split()
-    categories = dict((x, x + '_md5') for x in categories)
+
+    # Category to dump new data into
+    new_category = 'unknown'
+    # Categories which always should be in file
+    mandatory_categories = 'good bad'
+
+    # Sentinel to make manual changes and diffs easy
+    sentinel = 'sentinel'
+    # An empty list is one which is truly empty or which has a sentinel
+    empty = [[], ['sentinel']]
+    # Suffix for file items
+    suffix = '_md5'
 
     def __str__(self):
         ''' Return the string to output to the MD5 file '''
         result = []
-        for name in sorted(self.categories.itervalues()):
+        for name, value in sorted(self.iteritems()):
+            if not name.endswith(self.suffix):
+                continue
             result.append('%s = [' % name)
-            result.append(',\n'.join(["        '%s'"%item for item in sorted(getattr(self, name))]))
+            result.append(',\n'.join(["        '%s'"%item for item in sorted(value)]))
             result.append(']\n')
         result.append('')
         return '\n'.join(result)
@@ -97,8 +109,8 @@ class MD5Info(dict):
     def __init__(self):
         self.__dict__ = self
         self.changed = False
-        for name in self.categories.itervalues():
-            setattr(self, name, [])
+        for name in self.mandatory_categories:
+            setattr(self, name + self.suffix, [self.sentinel])
 
     def find(self, checksum):
         ''' find() has some serious side-effects.  If the checksum
@@ -122,23 +134,25 @@ class MD5Info(dict):
         sets = []
         newinfo = {}
         prev = set()
-        sentinel = set(['sentinel'])
-        for name, fullname in self.categories.iteritems():
-            value = set(getattr(self, fullname)) - sentinel
+        sentinel = set([self.sentinel])
+        for key, value in self.iteritems():
+            if not key.endswith(self.suffix):
+                continue
+            value = set(value) - sentinel
             # Make sure same checksum didn't make it into two
             # different categories (that would be a committer screwup...)
             assert not value & prev, (name, value, prev)
             prev |= value
-            sets.append((name, fullname, value))
-            newinfo[fullname] = sorted(value | sentinel)
+            sets.append((key, value))
+            newinfo[key] = sorted(value | sentinel)
 
-        result = 'unknown'
-        for name, fullname, sumset in sets:
+        result = self.new_category + self.suffix
+        for key, sumset in sets:
             if checksum in sumset:
-                result = name
+                result = key
                 break
         else:
-            mylist = newinfo['unknown_md5']
+            mylist = newinfo.get(result, [])
             mylist.append(checksum)
             mylist.sort()
 
@@ -148,7 +162,8 @@ class MD5Info(dict):
                 print "Updating MD5 file"
                 self.changed = True
                 break
-        return result
+        assert result.endswith(self.suffix), result
+        return result[:-len(self.suffix)]
 
 def checkmd5(pdfpath, md5path, resultlist):
     ''' checkmd5 validates the checksum of a generated PDF
