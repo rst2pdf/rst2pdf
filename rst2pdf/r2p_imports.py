@@ -151,19 +151,29 @@ except ImportError:
             pass
 
 def dumpinfo(varnames):
+    import inspect
     print
     g = globals()
     for name in varnames:
         if name not in g:
             print '%s not defined globally' % repr(name)
             continue
-        info = '%s (value %s)' % (repr(name), repr(g[name]))
+        value = g[name]
+        info = '%s (value %s)' % (repr(name), repr(value))
         line = _unconditional_info.get(name)
         if line is not None:
             print '%s imported with %s' % (
                     info, repr(line.split('#')[0].rstrip()))
         else:
             print '%s imported or defined explicitly (see source code)'
+        try:
+            sourcef = inspect.getfile(value)
+        except TypeError:
+            pass
+        else:
+            if sourcef.endswith('.pyc'):
+                sourcef = sourcef[:-1]
+            print '      defined in %s' % sourcef
     print
 
 def checkconditional():
