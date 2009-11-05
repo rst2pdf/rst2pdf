@@ -36,7 +36,7 @@ class SVGImage(Flowable):
 
     @classmethod
     def available(self):
-        if svglib is not None and load is not None:
+        if svglib is not None or load is not None:
             return True
         return False
 
@@ -112,6 +112,15 @@ class SVGImage(Flowable):
             elif self._mode == 'svglib':
                 self.doc._drawOn(canv)
             canv.restoreState()
+
+class VectorImage(SVGImage):
+    '''A class for non-SVG vector image formats. The main
+    difference is that it is only available if uniconvertor is installed'''
+    @classmethod
+    def available(self):
+        if load is not None:
+            return True
+        return False
 
 
 if __name__ == "__main__":
