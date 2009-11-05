@@ -168,6 +168,21 @@ class GenElements(NodeHandler):
             style = client.styles.styleForNode(node)
         return style
 
+    def getelements(self, client, node, style):
+        style = self.getstyle(client, node, style)
+        elements = self.gather_elements(client, node, style)
+
+        # Make all the sidebar cruft unreachable
+        #if style.__dict__.get('float','None').lower() !='none':
+            #node.elements=[Sidebar(node.elements,style)]
+        #elif 'width' in style.__dict__:
+
+        if 'width' in style.__dict__:
+            elements = [BoundByWidth(style.width,
+                elements, style, mode="shrink")]
+
+        return elements
+
     # End overridable attributes and methods for GenElements
 
     @classmethod
@@ -181,17 +196,7 @@ class GenElements(NodeHandler):
         except TypeError: #Happens with docutils.node.Text
             pass
 
-        style = self.getstyle(client, node, style)
-        elements = self.gather_elements(client, node, style)
-
-        # Make all the sidebar cruft unreachable
-        #if style.__dict__.get('float','None').lower() !='none':
-            #node.elements=[Sidebar(node.elements,style)]
-        #elif 'width' in style.__dict__:
-
-        if 'width' in style.__dict__:
-            elements = [BoundByWidth(style.width,
-                elements, style, mode="shrink")]
+        elements = self.getelements(client, node, style)
 
         if node.line and client.debugLinesPdf:
             elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
