@@ -6,6 +6,8 @@
 
 __docformat__ = 'reStructuredText'
 
+from copy import copy
+
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
@@ -44,6 +46,11 @@ class MyImage(Image):
     implement it ... hey, I kill this in a jiffie.
 
     """
+
+    def __deepcopy__(self, *whatever):
+        # ImageCore class is not deep copyable.  Stop the copy at this
+        # class.  If you remove this, re-test for issue #126.
+        return copy(self)
 
     def __init__(self, filename, width=None, height=None,
                  kind='direct', mask="auto", lazy=1):
