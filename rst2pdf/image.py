@@ -124,8 +124,6 @@ class MyImage(Image):
         '''Given a docutils image node, returns the size the image should have
         in the PDF document, and what 'kind' of size that is. 
         That involves lots of guesswork'''
-        #from pudb import set_trace; set_trace()        
-        from pudb import set_trace; set_trace()
         imgname = os.path.join(client.basedir,str(node.get("uri")))
         scale = float(node.get('scale', 100))/100
 
