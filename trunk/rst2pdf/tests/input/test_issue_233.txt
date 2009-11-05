@@ -1,0 +1,230 @@
+.. header::
+
+    .. container:: left
+
+        C1 left
+
+    .. container:: left
+
+        C2 left
+
+        C2 right
+
+    .. container:: left
+
+        C3 left
+
+        C3 center
+
+        C3 right
+
+    .. container:: left center
+
+        C4 left
+
+        C4 center
+
+    .. container:: right
+
+        C5 right
+
+    .. container:: right
+
+        C6 right
+
+        C6 left
+
+    .. container:: right
+
+        C7 right
+
+        C7 center
+
+        C7 left
+
+    .. container:: right center
+
+        C8 right
+
+        C8 center
+
+
+    .. container:: outside
+
+        C11 outside
+
+    .. container:: outside
+
+        C12 outside
+
+        C12 inside
+
+    .. container:: outside
+
+        C13 outside
+
+        C13 center
+
+        C13 inside
+
+    .. container:: outside center
+
+        C14 outside
+
+        C14 center
+
+    .. container:: inside
+
+        C15 inside
+
+    .. container:: inside
+
+        C16 inside
+
+        C16 outside
+
+    .. container:: inside
+
+        C17 inside
+
+        C17 center
+
+        C17 outside
+
+    .. container:: inside center
+
+        C18 inside
+
+        C18 center
+
+
+
+
+demonstration
+====================
+
+.. contents:: Table of Contents
+.. section-numbering::
+
+
+Section 1
+==========
+
+This file only has lots of sections in order to make lots of pages visible.
+
+The idea of the header/footer containers is as follows:
+
+For a header or footer (well, for the whole body really, but to start with,
+for a header or footer), a container could be used to keep two or three
+flowables (paragraphs, images, etc.) at the same vertical position.
+
+The 'classes' passed to the container define whether the two paragraphs
+are left and center, left and right, right and center, etc.  Another
+option, useful for printed PDFs is 'outside' and 'inside' instead of
+'left' and 'right'.
+
+For this example PDF, every paragraph which starts with the same Cx
+number should be at the same vertical alignment, and should be at the
+horizontal alignment specified in the paragraph.
+
+Subsection 1.1 
+---------------
+
+Subsubsection 1.1.1
+`````````````````````
+
+Subsubsection 1.1.2
+`````````````````````
+
+Subsection 1.2
+---------------
+
+Subsubsection 1.2.1
+`````````````````````
+
+Subsubsubsection 1.2.1.1
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Section 2
+==========
+
+.. contents:: :local:
+
+Subsection 2.1 
+---------------
+
+.. contents:: :local:
+
+Subsubsection 2.1.1
+`````````````````````
+
+Subsubsection 2.1.2
+`````````````````````
+
+Subsection 2.2
+---------------
+
+.. contents:: :local:
+
+Subsubsection 2.2.1
+`````````````````````
+
+Subsubsubsection 2.2.1.1
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Section 3
+==========
+
+.. contents:: :local:
+
+Subsection 3.1 
+---------------
+
+.. contents:: :local:
+
+Subsubsection 3.1.1
+`````````````````````
+
+Subsubsection 3.1.2
+`````````````````````
+
+Subsection 3.2
+---------------
+
+.. contents:: :local:
+
+Subsubsection 3.2.1
+`````````````````````
+
+Subsubsubsection 3.2.1.1
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Section 4
+==========
+
+.. contents:: :local:
+
+Subsection 4.1 
+---------------
+
+.. contents:: :local:
+
+Subsubsection 4.1.1
+`````````````````````
+
+Subsubsection 4.1.2
+`````````````````````
+
+Subsection 4.2
+---------------
+
+.. contents:: :local:
+
+Subsubsection 4.2.1
+`````````````````````
+
+Subsubsubsection 4.2.1.1
+~~~~~~~~~~~~~~~~~~~~~~~~~
