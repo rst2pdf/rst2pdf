@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
@@ -44,7 +45,7 @@ class MyImage (Flowable):
                  kind='direct', mask="auto", lazy=1, client=None):
         self.__kind=kind
         
-        self.filename, self._backend=self.get_backend(filename)
+        self.filename, self._backend=self.get_backend(filename, client)
         if kind == 'percentage_of_container':
             self.image=self._backend(self.filename, width, height,
                 'direct', mask, lazy)
@@ -59,7 +60,7 @@ class MyImage (Flowable):
         self.__wrappedonce=False
 
     @classmethod
-    def get_backend(self,filename):
+    def get_backend(self,filename, client):
         '''Given the filename of an image, returns (fname, backend)
         where fname is the filename to be used (could be the same as
         filename, or something different if the image had to be converted
