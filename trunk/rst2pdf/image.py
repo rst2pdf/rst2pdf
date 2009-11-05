@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
@@ -25,7 +26,6 @@ except ImportError:
 
 from svgimage import SVGImage, VectorImage
 
-
 missing = os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__))), 
           'images', 'image-missing.jpg')
 
@@ -44,16 +44,16 @@ class MyImage (Flowable):
                  kind='direct', mask="auto", lazy=1, client=None):
         self.__kind=kind
         
-        filename, self._backend=self.get_backend(filename)
+        self.filename, self._backend=self.get_backend(filename)
         if kind == 'percentage_of_container':
-            self.image=self._backend(filename, width, height,
+            self.image=self._backend(self.filename, width, height,
                 'direct', mask, lazy)
             self.image.drawWidth=width
             self.image.drawHeight=height
             self.__width=width
             self.__height=height
         else:
-            self.image=self._backend(filename, width, height,
+            self.image=self._backend(self.filename, width, height,
                 kind, mask, lazy)
         self.__ratio=float(self.image.imageWidth)/self.image.imageHeight
         self.__wrappedonce=False
