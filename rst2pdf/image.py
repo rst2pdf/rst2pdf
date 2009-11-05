@@ -70,7 +70,7 @@ class MyImage (Flowable):
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
-            log.error("Missing image file: %s [%s]",imgname, nodeid(node))
+            log.error("Missing image file: %s",filename)
             filename = missing
 
         # Decide what class of backend image we will use
@@ -99,7 +99,7 @@ class MyImage (Flowable):
                 backend=Image
             else:
                 log.warning("Minimal PDF image support "\
-                    "requires PythonMagick [%s]", nodeid(node))
+                    "requires PythonMagick [%s]", filename)
                 filename = missing
         elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
             # Need to convert to JPG via PythonMagick
@@ -127,6 +127,10 @@ class MyImage (Flowable):
         That involves lots of guesswork'''
         
         imgname = os.path.join(client.basedir,str(node.get("uri")))
+        
+        if not os.path.isfile(imgname):
+            imgname = missing
+            
         scale = float(node.get('scale', 100))/100
 
         # Figuring out the size to display of an image is ... annoying.
