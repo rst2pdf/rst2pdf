@@ -49,6 +49,10 @@ def dirname(path):
     # useless for most purposes...
     return os.path.dirname(path) or '.'
 
+def globjoin(*parts):
+    # A very common pattern in this module
+    return sorted(glob.glob(os.path.join(*parts)))
+
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
          module namespace.  It is never instantiated.
@@ -185,7 +189,7 @@ def checkmd5(pdfpath, md5path, resultlist):
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
     if os.path.isdir(pdfpath):
-        pdffiles = sorted(glob.glob(os.path.join(pdfpath, '*.pdf')))
+        pdffiles = globjoin(pdfpath, '*.pdf')
     else:
         pdffiles = [pdfpath]
 
@@ -218,12 +222,19 @@ def checkmd5(pdfpath, md5path, resultlist):
 
 
 def build_sphinx(sphinxdir, outpdf):
-    builddir = os.path.join(sphinxdir, '_build')
-    if os.path.isdir(builddir):
+    def getbuilddirs():
+        return globjoin(sphinxdir, '*build*')
+
+    for builddir in getbuilddirs():
         shutil.rmtree(builddir)
     errcode, result = textexec('make pdf', cwd=sphinxdir)
+    builddirs = getbuilddirs()
+    if len(builddirs) != 1:
+        log(result, 'Cannot determine build directory')
+        return 1, result
+    builddir, = builddirs
     pdfdir = os.path.join(builddir, 'pdf')
-    pdffiles = glob.glob(os.path.join(pdfdir, '*.pdf'))
+    pdffiles = globjoin(pdfdir, '*.pdf')
     if len(pdffiles) == 1:
         shutil.copyfile(pdffiles[0], outpdf)
     elif not pdffiles:
@@ -294,12 +305,11 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
     if not testfiles:
         testfiles = []
         if do_text:
-            testfiles = glob.glob(os.path.join(PathInfo.inpdir, '*.txt'))
-            testfiles += glob.glob(os.path.join(PathInfo.inpdir, '*', '*.txt'))
+            testfiles = globjoin(PathInfo.inpdir, '*.txt')
+            testfiles += globjoin(PathInfo.inpdir, '*', '*.txt')
             testfiles = [x for x in testfiles if 'sphinx' not in x]
         if do_sphinx:
-            testfiles += glob.glob(os.path.join(PathInfo.inpdir, 'sphinx*'))
-        testfiles.sort()
+            testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
     results = {}
     for fname in testfiles:
         key, errcode = run_single_test(fname, incremental, fastfork)
