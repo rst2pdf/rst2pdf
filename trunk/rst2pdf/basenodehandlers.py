@@ -152,20 +152,7 @@ class GenElements(NodeHandler):
     def gather_elements(self, client, node, style):
         return client.gather_elements(node, style=style)
 
-    # End overridable attributes and methods for GenElements
-
-    @classmethod
-    def dispatch(cls, client, node, style=None):
-        self = cls.findsubclass(node)
-
-        # set anchors for internal references
-        try:
-            for i in node['ids']:
-                client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
-            pass
-
-
+    def getstyle(self, client, node, style):
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
@@ -179,7 +166,22 @@ class GenElements(NodeHandler):
 
         if style is None or style == client.styles['bodytext']:
             style = client.styles.styleForNode(node)
+        return style
 
+    # End overridable attributes and methods for GenElements
+
+    @classmethod
+    def dispatch(cls, client, node, style=None):
+        self = cls.findsubclass(node)
+
+        # set anchors for internal references
+        try:
+            for i in node['ids']:
+                client.pending_targets.append(i)
+        except TypeError: #Happens with docutils.node.Text
+            pass
+
+        style = self.getstyle(client, node, style)
         elements = self.gather_elements(client, node, style)
 
         # Make all the sidebar cruft unreachable
