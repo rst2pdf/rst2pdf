@@ -40,7 +40,7 @@ class SVGImage(Flowable):
             return True
         return False
 
-    def __init__(self, filename, width=None, height=None, kind='direct'):
+    def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
         Flowable.__init__(self)
         ext = os.path.splitext(filename)[-1]
         self._kind = kind
@@ -48,37 +48,44 @@ class SVGImage(Flowable):
         if ext in ('.svg', '.svgz') and svglib is not None:
             self._mode = 'svglib'
             self.doc = svglib.svg2rlg(filename)
-            self.width = width
-            self.height = height
+            self.imageWidth = width
+            self.imageHeight = height
             _, _, self._w, self._h = self.doc.getBounds()
-            if not self.width:
-                self.width = self._w
-            if not self.height:
-                self.height = self._h
+            if not self.imageWidth:
+                self.imageWidth = self._w
+            if not self.imageHeight:
+                self.imageHeight = self._h
         # Use uniconvertor for the rest
         elif load is not None:
             self._mode = 'uniconvertor'
             self.doc = load.load_drawing(filename.encode('utf-8'))
             self.saver = plugins.find_export_plugin(
                 plugins.guess_export_plugin('.pdf'))
-            self.width = width
-            self.height = height
+            self.imageWidth = width
+            self.imageHeight = height
             _, _, self._w, self._h = self.doc.BoundingRect()
-            if not self.width:
-                self.width = self._w
-            if not self.height:
-                self.height = self._h
+            if not self.imageWidth:
+                self.imageWidth = self._w
+            if not self.imageHeight:
+                self.imageHeight = self._h
         else:
             self._mode = None
             log.error("Vector image support not enabled,"
                 " please install svglib and/or uniconvertor.")
         if self._mode:
-            self.__ratio = float(self.width)/self.height
+            self.__ratio = float(self.imageWidth)/self.imageHeight
+        if kind in ['direct','absolute']:
+            self.drawWidth = width or self.imageWidth
+            self.drawHeight = height or self.imageHeight
+        elif kind in ['bound','proportional']:
+            factor = min(float(width)/self.imageWidth,float(height)/self.imageHeight)
+            self.drawWidth = self.imageWidth*factor
+            self.drawHeight = self.imageHeight*factor
 
     def wrap(self, aW, aH):
         if self._mode:
             if self._kind == 'percentage_of_container':
-                w, h = self.width, self.height
+                w, h = self.imageWidth, self.imageHeight
                 if not w:
                     log.warning('Scaling image as % of container with w unset.'
                     'This should not happen, setting to 100')
@@ -86,10 +93,10 @@ class SVGImage(Flowable):
                 scale = w/100.
                 w = aW*scale
                 h = w/self.__ratio
-                self.width, self.height = w, h
+                self.imageWidth, self.imageHeight = w, h
                 return w, h
             else:
-                return self.width, self.height
+                return self.imageWidth, self.imageHeight
         return 0, 0
 
     def drawOn(self, canv, x, y, _sW=0):
@@ -104,7 +111,7 @@ class SVGImage(Flowable):
                     raise ValueError("Bad hAlign value " + str(a))
             canv.saveState()
             canv.translate(x, y)
-            canv.scale(self.width/self._w, self.height/self._h)
+            canv.scale(self.imageWidth/self._w, self.imageHeight/self._h)
             if self._mode == 'uniconvertor':
                 save(self.doc, open('.ignoreme.pdf', 'w'), '.ignoreme.pdf',
                     options=dict(pdfgen_canvas=canv))
