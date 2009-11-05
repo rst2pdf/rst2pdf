@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from reportlab.platypus.flowables import Image
+from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 
@@ -29,7 +29,7 @@ from svgimage import SVGImage, VectorImage
 missing = os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__))), 
           'images', 'image-missing.jpg')
 
-class MyImage(Image):
+class MyImage (Flowable):
     """A Image subclass that can:
     
     1. Take a 'percentage_of_container' kind,
@@ -45,7 +45,6 @@ class MyImage(Image):
         self.__kind=kind
         
         filename, self._backend=self.get_backend(filename)
-
         if kind == 'percentage_of_container':
             self.image=self._backend(filename, width, height,
                 'direct', mask, lazy)
@@ -66,6 +65,7 @@ class MyImage(Image):
         filename, or something different if the image had to be converted
         or is missing), and backend is an Image class that can handle 
         fname.'''
+        #from pudb import set_trace; set_trace()
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
@@ -73,7 +73,7 @@ class MyImage(Image):
             filename = missing
 
         # Decide what class of backend image we will use
-        extension = os.path.splitext(filename)[-1].lower()
+        extension = os.path.splitext(filename)[-1][1:].lower()
         
         if extension in ['svg','svgz'] and SVGImage.available():
             backend=SVGImage
@@ -124,6 +124,7 @@ class MyImage(Image):
         '''Given a docutils image node, returns the size the image should have
         in the PDF document, and what 'kind' of size that is. 
         That involves lots of guesswork'''
+        
         imgname = os.path.join(client.basedir,str(node.get("uri")))
         scale = float(node.get('scale', 100))/100
 
