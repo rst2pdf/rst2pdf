@@ -103,24 +103,6 @@ from cStringIO import StringIO
 from utils import log, parseRaw
 import styles as sty
 
-HAS_PIL = True
-try:
-    from PIL import Image as PILImage
-except ImportError:
-    try:
-        import Image as PILImage
-    except ImportError:
-        log.warning("Support for images other than JPG,"
-            " is now limited. Please install PIL.")
-        HAS_PIL = False
-
-try:
-    from PythonMagick import Image as PMImage
-    HAS_MAGICK = True
-except ImportError:
-    HAS_MAGICK = False
-
-
 try:
     import wordaxe
     from wordaxe.rl.paragraph import Paragraph
