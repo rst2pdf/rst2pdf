@@ -16,6 +16,7 @@ from urlparse import urljoin, urlparse
 from reportlab.lib.units import cm
 from math_flowable import Math
 
+from image import MyImage
 
 class HandleNotDefinedYet(GenPdfText, object):
     def __init__(self):
@@ -130,17 +131,14 @@ class HandleImage(GenPdfText, docutils.nodes.image):
         # First see if the image file exists, or else,
         # use image-missing.png
         uri=node.get('uri')
-        if not os.path.exists(uri):
-            log.error("Missing image file: %s [%s]", uri, nodeid(node))
-            uri=os.path.join(client.img_dir, 'image-missing.png')
-            w, h = 1*cm, 1*cm
-        else:
-            w, h, kind = client.size_for_image_node(node)
+        w, h, kind = MyImage.size_for_node(node, client=client)
         alignment=node.get('align', 'CENTER').lower()
         if alignment in ('top', 'middle', 'bottom'):
             align='valign="%s"'%alignment
         else:
             align=''
+            
+        uri=os.path.join(client.basedir,uri)
 
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)

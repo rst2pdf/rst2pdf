@@ -49,7 +49,7 @@ from basenodehandlers import GenElements
 import docutils.nodes
 import reportlab
 
-from svgimage import SVGImage
+from image import MyImage
 from math_directive import math_node
 from math_flowable import Math
 from aafigure_directive import Aanode
@@ -59,27 +59,9 @@ from utils import log, parseRaw
 from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
 from flowables import Table, DelayedTable, SplitTable, Heading, \
-              Spacer, MyIndenter, MyImage, MyTableOfContents, \
+              Spacer, MyIndenter, MyTableOfContents, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding
-
-HAS_PIL = True
-try:
-    from PIL import Image as PILImage
-except ImportError:
-    try:
-        import Image as PILImage
-    except ImportError:
-        log.warning("Support for images other than JPG,"
-            " is now limited. Please install PIL.")
-        HAS_PIL = False
-
-try:
-    from PythonMagick import Image as PMImage
-    HAS_MAGICK = True
-except ImportError:
-    HAS_MAGICK = False
-
 
 try:
     import wordaxe
@@ -690,72 +672,11 @@ class HandleImage(GenElements, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
         imgname = os.path.join(client.basedir,str(node.get("uri")))
-        if not os.path.exists(imgname):
-            log.error("Missing image file: %s [%s]",imgname, nodeid(node))
-            imgname = os.path.join(client.img_dir, 'image-missing.png')
-            w, h, kind = 1*cm, 1*cm, 'direct'
-        else:
-            w, h, kind = client.size_for_image_node(node)
-        extension = imgname.split('.')[-1].lower()
-        if extension in (
-                'ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
-                'sk1', 'sk', 'svg', 'xml', 'wmf'):
-            node.elements = [SVGImage(filename=imgname,
-                                        height=h,
-                                        width=w,
-                                        kind=kind)]
-        elif extension == 'pdf':
-            try:
-                #import rlextra.pageCatcher.pageCatcher as pageCatcher
-                raise Exception("Broken")
-                node.elements = \
-                    [pageCatcher.PDFImageFlowable(imgname, w, h)]
-            except:
-                log.warning("Proper PDF images require "\
-                    "pageCatcher (but doesn't work yet) [%s]",
-                    nodeid(node))
-                if HAS_MAGICK:
-                    # w,h are in pixels. I need to set the density
-                    # of the image to  the right dpi so this
-                    # looks decent
-                    img = PMImage()
-                    img.density("%s"%client.styles.def_dpi)
-                    img.read(imgname)
-                    _, tmpname = tempfile.mkstemp(suffix='.png')
-                    img.write(tmpname)
-                    client.to_unlink.append(tmpname)
-                    node.elements = [MyImage(filename=tmpname,
-                                                height=h,
-                                                width=w,
-                                                kind=kind)]
-                else:
-                    log.warning("Minimal PDF image support "\
-                        "requires PythonMagick [%s]", nodeid(node))
-                    imgname = os.path.join(client.img_dir, 'image-missing.png')
-                    w, h, kind = 1*cm, 1*cm, 'direct'
-		    node.elements = [MyImage(filename=imgname, height=h, width=w,
-				     kind=kind)]
-        elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
-            # Need to convert to JPG via PythonMagick
-            img = PMImage(imgname)
-            _, tmpname = tempfile.mkstemp(suffix='.jpg')
-            img.write(tmpname)
-            client.to_unlink.append(tmpname)
-            node.elements = [MyImage(filename=tmpname, height=h, width=w,
-                        kind=kind)]
-
-        elif HAS_PIL or extension == 'jpg':
-            node.elements = [MyImage(filename=imgname, height=h, width=w,
-                kind=kind)]
-        else:
-            # No way to make this work
-            log.error('To use a %s image you need PIL installed [%s]',extension, nodeid(node))
-            node.elements = []
-        if node.elements:
-            i = node.elements[0]
-            alignment = node.get('align', 'CENTER').upper()
-            if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-                i.hAlign = alignment
+        node.elements = [MyImage(filename=imgname, height=h, width=w,
+                    kind=kind, client=client)]
+        alignment = node.get('align', 'CENTER').upper()
+        if alignment in ('LEFT', 'CENTER', 'RIGHT'):
+            node.elements[0].hAlign = alignment
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment
