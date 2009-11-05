@@ -217,19 +217,50 @@ def checkmd5(pdfpath, md5path, resultlist):
     return resulttype
 
 
+def build_sphinx(sphinxdir, outpdf):
+    builddir = os.path.join(sphinxdir, '_build')
+    if os.path.isdir(builddir):
+        shutil.rmtree(builddir)
+    errcode, result = textexec('make pdf', cwd=sphinxdir)
+    pdfdir = os.path.join(builddir, 'pdf')
+    pdffiles = glob.glob(os.path.join(pdfdir, '*.pdf'))
+    if len(pdffiles) == 1:
+        shutil.copyfile(pdffiles[0], outpdf)
+    elif not pdffiles:
+        log(result, 'Output PDF apparently not generated')
+        errcode = 1
+    else:
+        shutil.copytree(pdfdir, outpdf)
+    return errcode, result
+
+def build_txt(iprefix, outpdf, fastfork):
+        inpfname = iprefix + '.txt'
+        style = iprefix + '.style'
+        cli = iprefix + '.cli'
+        if os.path.isfile(cli):
+            f = open(cli)
+            extraargs=shlex.split(f.read())
+            f.close()
+        else:
+            extraargs=[]
+        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
+        if os.path.exists(style):
+            args.extend(('-s', os.path.basename(style)))
+        args.extend(('-o', outpdf))
+        return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
+
 def run_single_test(inpfname, incremental=False, fastfork=None):
     use_sphinx = 'sphinx' in inpfname
     if use_sphinx:
         sphinxdir = inpfname
         if sphinxdir.endswith('Makefile'):
             sphinxdir = dirname(sphinxdir)
-        builddir = os.path.join(sphinxdir, '_build')
         basename = os.path.basename(sphinxdir)
     else:
         iprefix = os.path.splitext(inpfname)[0]
-        style = iprefix + '.style'
-        cli = iprefix + '.cli'
         basename = os.path.basename(iprefix)
+        if os.path.exists(iprefix + '.ignore'):
+            return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
     mprefix = os.path.join(PathInfo.md5dir, basename)
@@ -248,30 +279,9 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
                 os.remove(fname)
 
     if use_sphinx:
-        if os.path.isdir(builddir):
-            shutil.rmtree(builddir)
-        errcode, result = textexec('make pdf', cwd=sphinxdir)
-        pdfdir = os.path.join(builddir, 'pdf')
-        pdffiles = glob.glob(os.path.join(pdfdir, '*.pdf'))
-        if len(pdffiles) == 1:
-            shutil.copyfile(pdffiles[0], outpdf)
-        elif not pdffiles:
-            log(result, 'Output PDF apparently not generated')
-            errcode = 1
-        else:
-            shutil.copytree(pdfdir, outpdf)
+        errcode, result = build_sphinx(sphinxdir, outpdf)
     else:
-        if os.path.isfile(cli):
-            f = open(cli)
-            extraargs=shlex.split(f.read())
-            f.close()
-        else:
-            extraargs=[]
-        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
-        if os.path.exists(style):
-            args.extend(('-s', os.path.basename(style)))
-        args.extend(('-o', outpdf))
-        errcode, result = textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
+        errcode, result = build_txt(iprefix, outpdf, fastfork)
 
     checkinfo = checkmd5(outpdf, md5file, result)
     log(result, '')
