@@ -794,8 +794,13 @@ class HandleCompound(GenElements, docutils.nodes.compound):
     pass
 
 class HandleContainer(GenElements, docutils.nodes.container):
-    # FIXME think if this is even implementable
-    pass
+
+    def getelements(self, client, node, style):
+        parent = node.parent
+        if not isinstance(parent, (docutils.nodes.header, docutils.nodes.footer)):
+            return GenElements.getelements(self, client, node, style)
+        print 'Header/footer with classes', node['classes']
+        return self.gather_elements(client, node, style)
 
 class HandleSubstitutionDefinition(GenElements, docutils.nodes.substitution_definition):
     def gather_elements(self, client, node, style):
