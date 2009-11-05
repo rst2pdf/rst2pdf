@@ -50,7 +50,8 @@ class SVGImage(Flowable):
             self.doc = svglib.svg2rlg(filename)
             self.imageWidth = width
             self.imageHeight = height
-            _, _, self._w, self._h = self.doc.getBounds()
+            x1, y1, x2, y2 = self.doc.getBounds()
+            self._w, self._h = x2-x1, y2-y1
             if not self.imageWidth:
                 self.imageWidth = self._w
             if not self.imageHeight:
@@ -63,7 +64,13 @@ class SVGImage(Flowable):
                 plugins.guess_export_plugin('.pdf'))
             self.imageWidth = width
             self.imageHeight = height
-            _, _, self._w, self._h = self.doc.BoundingRect()
+            x1, y1, x2, y2 = self.doc.BoundingRect()
+            # The abs is to compensate for what appears to be
+            # a bug in uniconvertor. At least doing it this way
+            # I get the same values as in inkscape.
+            # This fixes Issue 236
+            self._w, self._h = abs(x2)-abs(x1), abs(y2)-abs(y1)
+            
             if not self.imageWidth:
                 self.imageWidth = self._w
             if not self.imageHeight:
