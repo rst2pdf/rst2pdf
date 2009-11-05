@@ -817,11 +817,8 @@ def setPageCounter(counter=None, style=None):
 
 class HeaderOrFooter(object):
     """ A helper object for FancyPage (below)
-        HeaderOrFooter exists for two reasons:
-            1) to handle operations which are common to both headers
-               and footers; and
-            2) to thwart deepcopy when it attempts to copy things
-               which it shouldn't (see issue # 126)
+        HeaderOrFooter handles operations which are common
+        to both headers and footers
     """
     def __init__(self, items=None, isfooter=False):
         self.items = items
@@ -831,9 +828,6 @@ class HeaderOrFooter(object):
             locinfo = 'header showHeader defaultHeader'
         self.isfooter = isfooter
         self.loc, self.showloc, self.defaultloc = locinfo.split()
-
-    def __deepcopy__(self, *whatever):
-        return HeaderOrFooter(copy(self.items), self.isfooter)
 
     def prepare(self, pageobj, canv):
         showloc = pageobj.template.get(self.showloc, True)
