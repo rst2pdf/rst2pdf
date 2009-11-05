@@ -34,6 +34,12 @@ except ImportError:
 
 class SVGImage(Flowable):
 
+    @classmethod
+    def available(self):
+        if svglib is not None and load is not None:
+            return True
+        return False
+
     def __init__(self, filename, width=None, height=None, kind='direct'):
         Flowable.__init__(self)
         ext = os.path.splitext(filename)[-1]
