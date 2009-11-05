@@ -77,8 +77,8 @@ from reportlab.pdfbase.pdfdoc import PDFPageLabel
 
 from flowables import * # our own reportlab flowables
 import flowables
+from image import MyImage
 
-from svgimage import SVGImage
 from math_directive import math_node
 from math_flowable import Math
 from aafigure_directive import Aanode
@@ -824,12 +824,7 @@ class FancyPage(PageTemplate):
         if 'background' in self.template:
             uri=self.template['background']
             if os.path.exists(uri):
-                if uri.split('.')[-1].lower() in [
-                        "ai", "ccx", "cdr", "cgm", "cmx",
-                        "sk1", "sk", "svg", "xml", "wmf", "fig"]:
-                    bg = SVGImage(uri, self.styles.pw, self.styles.ph)
-                else:
-                    bg = Image(uri, self.styles.pw, self.styles.ph)
+                bg = MyImage(uri, self.styles.pw, self.styles.ph)
                 bg.drawOn(canv, 0, 0)
             else:
                 log.error("Missing background image file: %s", uri)
