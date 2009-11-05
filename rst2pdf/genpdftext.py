@@ -142,6 +142,9 @@ class HandleImage(GenPdfText, docutils.nodes.image):
         if not os.path.isfile(uri):
             uri=missing
 
+        # TODO: inline images don't support SVG, vectors and PDF,
+        #       which may be surprising. So, work on converting them
+        #       previous to passing to reportlab.
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 
