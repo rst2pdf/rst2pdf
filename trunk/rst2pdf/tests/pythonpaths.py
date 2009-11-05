@@ -3,7 +3,7 @@
 import os
 import sys
 
-def setpythonpaths(execfn, rootdir):
+def setpythonpaths(execfn, rootdir=None):
     ''' There is probably a cleaner way to do this.
         maybe have buildout give us a json or something.
         This imports everything and takes awhile, but
@@ -20,6 +20,6 @@ def setpythonpaths(execfn, rootdir):
     ppath = os.environ.get('PYTHONPATH')
     if ppath is not None:
         newpaths.append(ppath)
-    newpaths.append(rootdir)
-    print ':'.join(newpaths)
+    if rootdir is not None:
+        newpaths.append(rootdir)
     os.environ['PYTHONPATH'] = ':'.join(newpaths)
