@@ -672,6 +672,7 @@ class HandleImage(GenElements, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
         imgname = os.path.join(client.basedir,str(node.get("uri")))
+        w, h, kind = MyImage.size_for_node(node, client=client)
         node.elements = [MyImage(filename=imgname, height=h, width=w,
                     kind=kind, client=client)]
         alignment = node.get('align', 'CENTER').upper()
