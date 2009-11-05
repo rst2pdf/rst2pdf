@@ -733,6 +733,8 @@ class HandleImage(GenElements, docutils.nodes.image):
                         "requires PythonMagick [%s]", nodeid(node))
                     imgname = os.path.join(client.img_dir, 'image-missing.png')
                     w, h, kind = 1*cm, 1*cm, 'direct'
+		    node.elements = [MyImage(filename=imgname, height=h, width=w,
+				     kind=kind)]
         elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
             # Need to convert to JPG via PythonMagick
             img = PMImage(imgname)
