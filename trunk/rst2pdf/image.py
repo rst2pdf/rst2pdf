@@ -109,7 +109,7 @@ class MyImage (Flowable):
             # of the image to  the right dpi so this
             # looks decent
             if HAS_MAGICK:
-                filename=self.raster(filename)
+                filename=self.raster(filename, client)
                 backend=Image
             else:
                 log.warning("Minimal PDF image support "\
