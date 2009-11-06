@@ -76,7 +76,7 @@ except ImportError:
 
 try:
     import aafigure
-    import aafigure.pdfwordaxe_version
+    import aafigure.pdf
 except ImportError:
     aafigure = None
 
