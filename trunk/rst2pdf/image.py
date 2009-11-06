@@ -66,7 +66,6 @@ class MyImage (Flowable):
         filename, or something different if the image had to be converted
         or is missing), and backend is an Image class that can handle 
         fname.'''
-        #from pudb import set_trace; set_trace()
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
