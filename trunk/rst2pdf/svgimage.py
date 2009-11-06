@@ -23,7 +23,7 @@ try:
             break
     else:
         raise ImportError
-except ImportError:
+except:
     load = None
 
 try:
