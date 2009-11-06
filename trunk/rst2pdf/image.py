@@ -79,7 +79,8 @@ class MyImage (Flowable):
             try:
                 img = PMImage()
                 # Adjust density to pixels/cm
-                img.density("%s"%(client.styles.def_dpi/2.54))
+                dpi=client.styles.def_dpi
+                img.density("%sx%s"%(dpi,dpi))
                 img.read(str(filename))
                 _, tmpname = tempfile.mkstemp(suffix=ext)
                 img.write(tmpname)
