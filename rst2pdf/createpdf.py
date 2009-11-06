@@ -42,11 +42,8 @@
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
-try:
-    import psyco
-    psyco.full()
-except ImportError:
-    pass
+from opt_imports import psyco
+psyco.full()
 
 import sys
 import os
@@ -100,45 +97,16 @@ from cStringIO import StringIO
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
-from utils import log, parseRaw
+from utils import log
 import styles as sty
 
-try:
-    import wordaxe
-    from wordaxe.rl.paragraph import Paragraph
-    from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    # PyHnjHyphenator is broken for non-ascii characters, so
-    # let's not use it and avoid useless crashes (http://is.gd/19efQ)
-
-    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
-    # If basehyphenator doesn't load, wordaxe is broken
-    # pyhyphenator and DCW *may* not load.
-
-    from wordaxe.BaseHyphenator import BaseHyphenator
-    try:
-        from wordaxe.plugins.PyHyphenHyphenator \
-            import PyHyphenHyphenator
-    except:
-        pass
-    try:
-        from wordaxe.DCWHyphenator import DCWHyphenator
-    except:
-        pass
-
-except ImportError:
-    # log.warning("No support for hyphenation, install wordaxe")
-    HAS_WORDAXE = False
-else:
-    HAS_WORDAXE = True
-
-try:
-    import sphinx
-    HAS_SPHINX = True
-except ImportError:
-    HAS_SPHINX = False
+from opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
+                         DCWHyphenator, sphinx, wordaxe
 
 import genpdftext
 import genelements
+
+HAS_SPHINX = sphinx is not None
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -245,7 +213,7 @@ class RstToPdf(object):
                         for language %s", lang)
 
         # Load the hyphenators for all required languages
-        if HAS_WORDAXE:
+        if wordaxe is not None:
             for lang in self.styles.languages:
                 if lang.split('_', 1)[0] == 'de':
                     try:

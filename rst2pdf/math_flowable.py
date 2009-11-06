@@ -8,14 +8,12 @@ from reportlab.platypus import *
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-try:
-    from matplotlib import mathtext
-except ImportError:
-    HAS_MATPLOTLIB = False
-else:
-    HAS_MATPLOTLIB = True
+from opt_imports import mathtext
+
 
 from log import log
+
+HAS_MATPLOTLIB = mathtext is not None
 
 fonts = {}
 

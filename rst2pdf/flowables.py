@@ -12,20 +12,10 @@ from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
 
-try:
-    import wordaxe
-    from wordaxe.rl.paragraph import Paragraph
-    HAS_WORDAXE=True
-except ImportError:
-    from reportlab.platypus.paragraph import Paragraph
-    HAS_WORDAXE=False
+from opt_imports import Paragraph, NullDraw
 
 from reportlab.lib.units import *
-try:
-    from reportlab.platypus.flowables import _listWrapOn, _FUZZ, NullDraw
-except ImportError: # Probably RL 2.1
-    from reportlab.platypus.flowables import _listWrapOn, _FUZZ
-    NullDraw = Flowable
+from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
@@ -231,7 +221,7 @@ class SplitTable(DelayedTable):
 
                         if l>0:
                             # Workaround for Issue 180 with wordaxe:
-                            #if HAS_WORDAXE:
+                            #if wordaxe is not None:
                                 #l3=[Table([
                                             #[bullet,
                                              #text[:l]]
@@ -261,7 +251,7 @@ class SplitTable(DelayedTable):
                                 style=self.style)]
                         if l2[1:]+text[l+1:]:
                             ## Workaround for Issue 180 with wordaxe:
-                            #if HAS_WORDAXE:
+                            #if wordaxe is not None:
                                 #l3.append(
                                     #Table([['',l2[1:]+text[l+1:]]],
                                     #colWidths=self.colWidths,
