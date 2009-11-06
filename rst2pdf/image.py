@@ -58,23 +58,39 @@ class MyImage (Flowable):
             log.error("Missing image file: %s",filename)
             return missing
 
-        #FIXME: don't convert things that already are raster
-
 	if HAS_PIL:
 	    ext='.png'
 	else:
 	    ext='.jpg'
-	if HAS_MAGICK:
-	    img = PMImage()
-	    img.density("%s"%client.styles.def_dpi)
-	    img.read(str(filename))
-	    _, tmpname = tempfile.mkstemp(suffix=ext)
-	    img.write(tmpname)
-	    client.to_unlink.append(tmpname)
-	    return tmpname
-	else:
-	    #FIXME: if there is no MAGICK, convert via PIL
-	    pass
+
+        extension = os.path.splitext(filename)[-1][1:].lower()
+        
+        if HAS_PIL: # See if pil can process it
+            try:
+                PILImage().read(filename)
+                return filename
+            except:
+                # Can't read it
+                pass
+
+        # PIL can't or isn't here, so try with Magick
+
+        if HAS_MAGICK:
+            try:
+                img = PMImage()
+                # Adjust density to pixels/cm
+                img.density("%s"%(client.styles.def_dpi/2.54))
+                img.read(str(filename))
+                _, tmpname = tempfile.mkstemp(suffix=ext)
+                img.write(tmpname)
+                client.to_unlink.append(tmpname)
+                return tmpname
+            except:
+                # Magick couldn't
+                pass
+        # PIL can't and Magick can't, so we can't
+        log.error("Couldn't load image [%s]"%filename)
+        return missing
 
 
     @classmethod
