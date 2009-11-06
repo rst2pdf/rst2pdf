@@ -15,37 +15,45 @@ from flowables import  Spacer, MyIndenter, Reference
 from opt_imports import Paragraph, sphinx
 from genpdftext import GenPdfText, FontHandler, HandleEmphasis
 
-class HandleSphinxDefaults(GenPdfText,
+
+
+class SphinxText(GenPdfText):
+    dispatchdict = {}
+
+class SphinxFont(SphinxText, FontHandler):
+    pass
+
+class HandleSphinxDefaults(SphinxText,
                 sphinx.addnodes.desc_signature,
                 sphinx.addnodes.module,
                 sphinx.addnodes.pending_xref):
     pass
 
-class SphinxListHandler(GenPdfText):
+class SphinxListHandler(SphinxText):
     def get_text(self, client, node, replaceEnt):
         t = client.gather_pdftext(node)
         while t and t[0] in ', ':
             t=t[1:]
         return t
 
-class HandleSphinxDescAddname(FontHandler,  sphinx.addnodes.desc_addname):
+class HandleSphinxDescAddname(SphinxFont,  sphinx.addnodes.desc_addname):
     fontstyle = "descclassname"
 
-class HandleSphinxDescName(FontHandler, sphinx.addnodes.desc_name):
+class HandleSphinxDescName(SphinxFont, sphinx.addnodes.desc_name):
     fontstyle = "descname"
 
-class HandleSphinxDescReturn(FontHandler, sphinx.addnodes.desc_returns):
+class HandleSphinxDescReturn(SphinxFont, sphinx.addnodes.desc_returns):
     def get_font_prefix(self, client, node, replaceEnt):
         return ' &rarr; ' + client.styleToFont("returns")
 
-class HandleSphinxDescType(FontHandler, sphinx.addnodes.desc_type):
+class HandleSphinxDescType(SphinxFont, sphinx.addnodes.desc_type):
     fontstyle = "desctype"
 
 class HandleSphinxDescParamList(SphinxListHandler, sphinx.addnodes.desc_parameterlist):
     pre=' ('
     post=')'
 
-class HandleSphinxDescParam(FontHandler, sphinx.addnodes.desc_parameter):
+class HandleSphinxDescParam(SphinxFont, sphinx.addnodes.desc_parameter):
     fontstyle = "descparameter"
     def get_pre_post(self, client, node, replaceEnt):
         pre, post = FontHandler.get_pre_post(self, client, node, replaceEnt)
@@ -56,22 +64,27 @@ class HandleSphinxDescParam(FontHandler, sphinx.addnodes.desc_parameter):
             post += '</i>'
         return pre, post
 
-class HandleSphinxDescOpt(SphinxListHandler, FontHandler, sphinx.addnodes.desc_optional):
+class HandleSphinxDescOpt(SphinxListHandler, SphinxFont, sphinx.addnodes.desc_optional):
     fontstyle = "optional"
     def get_pre_post(self, client, node, replaceEnt):
         prepost = FontHandler.get_pre_post(self, client, node, replaceEnt)
         return '%s[%s, ' % prepost, '%s]%s' % prepost
 
-class HandleDescAnnotation(HandleEmphasis, sphinx.addnodes.desc_annotation):
+class HandleDescAnnotation(SphinxText, HandleEmphasis, sphinx.addnodes.desc_annotation):
     pass
 
+###########################################################################
+###########################################################################
 
-class HandleSphinxDefaults(GenElements, sphinx.addnodes.glossary,
+class SphinxElements(GenElements):
+    dispatchdict = {}
+
+class HandleSphinxDefaults(SphinxElements, sphinx.addnodes.glossary,
                                         sphinx.addnodes.start_of_file,
                                         sphinx.addnodes.compact_paragraph):
     pass
 
-class HandleSphinxIndex(GenElements, sphinx.addnodes.index):
+class HandleSphinxIndex(SphinxElements, sphinx.addnodes.index):
     def gather_elements(self, client, node, style):
         try:
             client.pending_targets.append(node['entries'][0][2])
@@ -81,19 +94,19 @@ class HandleSphinxIndex(GenElements, sphinx.addnodes.index):
                     node['entries'], nodeid(node))
         return []
 
-class HandleSphinxModule(GenElements, sphinx.addnodes.module):
+class HandleSphinxModule(SphinxElements, sphinx.addnodes.module):
     def gather_elements(self, client, node, style):
         return [Reference('module-'+node['modname'])]
 
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
 
-class HandleSphinxCentered(GenElements, sphinx.addnodes.centered):
+class HandleSphinxCentered(SphinxElements, sphinx.addnodes.centered):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),
                 client.styles['centered'])]
 
-class HandleSphinxDesc(GenElements, sphinx.addnodes.desc):
+class HandleSphinxDesc(SphinxElements, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
         st=client.styles[node['desctype']]
         if st==client.styles['normal']:
@@ -102,7 +115,7 @@ class HandleSphinxDesc(GenElements, sphinx.addnodes.desc):
         pre=[Spacer(0,client.styles['desc'].spaceBefore)]
         return pre + client.gather_elements(node, st)
 
-class HandleSphinxDescSignature(GenElements, sphinx.addnodes.desc_signature):
+class HandleSphinxDescSignature(SphinxElements, sphinx.addnodes.desc_signature):
     def gather_elements(self, client, node, style):
         # Need to add ids as targets, found this when using one of the
         # django docs extensions
@@ -114,8 +127,19 @@ class HandleSphinxDescSignature(GenElements, sphinx.addnodes.desc_signature):
                 client.targets.append(i)
         return [Paragraph(pre+client.gather_pdftext(node),style)]
 
-class HandleSphinxDescContent(GenElements, sphinx.addnodes.desc_content):
+class HandleSphinxDescContent(SphinxElements, sphinx.addnodes.desc_content):
     def gather_elements(self, client, node, style):
         return [MyIndenter(left=10)] +\
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
+
+
+def builddict():
+    for cls in (SphinxText, SphinxElements):
+        self = cls()
+        mydict = self._baseclass.dispatchdict.copy()
+        mydict.update(self.dispatchdict)
+        self.dispatchdict = mydict
+        yield self.dispatch
+
+textdispatch, elemdispatch = builddict()

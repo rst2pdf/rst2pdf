@@ -190,12 +190,12 @@ class RstToPdf(object):
             self.highlightlang = highlightlang
             genelements.add_sphinx()
             import sphinxnodes
+            self.gen_pdftext = types.MethodType(sphinxnodes.textdispatch, self)
+            self.gen_elements = types.MethodType(sphinxnodes.elemdispatch, self)
         else:
-            HAS_SPHINX = False
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
-
-        self.gen_pdftext = types.MethodType(genpdftext.dispatch, self)
-        self.gen_elements = types.MethodType(genelements.dispatch, self)
+            self.gen_pdftext = types.MethodType(genpdftext.dispatch, self)
+            self.gen_elements = types.MethodType(genelements.dispatch, self)
 
         if not self.styles.languages:
             self.styles.languages=[]
