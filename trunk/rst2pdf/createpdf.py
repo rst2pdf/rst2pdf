@@ -101,12 +101,10 @@ from utils import log
 import styles as sty
 
 from opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
-                         DCWHyphenator, sphinx, wordaxe
+                         DCWHyphenator, sphinx as sphinx_module, wordaxe
 
 import genpdftext
 import genelements
-
-HAS_SPHINX = sphinx is not None
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -140,7 +138,6 @@ class RstToPdf(object):
                  blank_first_page=False,
                  breakside='odd'
                  ):
-        global HAS_SPHINX
         self.debugLinesPdf=False
         self.depth=0
         self.breakside=breakside
@@ -185,11 +182,10 @@ class RstToPdf(object):
         # ordinary documents fail (demo.txt specifically) so
         # I can' t just try to import it outside. I need
         # to do it only if it's requested
-        if HAS_SPHINX and sphinx:
+        if sphinx and sphinx_module:
             import sphinx.roles
-            self.highlightlang = highlightlang
-            genelements.add_sphinx()
             import sphinxnodes
+            self.highlightlang = highlightlang
             self.gen_pdftext = types.MethodType(sphinxnodes.textdispatch, self)
             self.gen_elements = types.MethodType(sphinxnodes.elemdispatch, self)
         else:
