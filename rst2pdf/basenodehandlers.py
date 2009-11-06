@@ -122,26 +122,25 @@ class NodeHandler(object):
                     (old, t, new))
                 cls.dispatchdict[target] = self
 
-    @classmethod
-    def findsubclass(cls, node):
+    def findsubclass(self, node):
         nodeclass = node.__class__
-        log.debug("%s: %s", cls, nodeclass)
+        log.debug("%s: %s", self, nodeclass)
         log.debug("[%s]", nodeid(node))
         try:
-            log.debug("%s: %s", cls, node)
+            log.debug("%s: %s", self, node)
         except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("%s: %r", cls, node)
+            log.debug("%s: %r", self, node)
 
         # Dispatch to the first matching class in the MRO
 
-        dispatchdict = cls.dispatchdict
+        dispatchdict = self.dispatchdict
         for baseclass in inspect.getmro(nodeclass):
-            self = dispatchdict.get(baseclass)
-            if self is not None:
+            result = dispatchdict.get(baseclass)
+            if result is not None:
                 break
         else:
-            self = cls.default_dispatch
-        return self
+            result = self.default_dispatch
+        return result
 
 
 class GenElements(NodeHandler):
@@ -185,9 +184,8 @@ class GenElements(NodeHandler):
 
     # End overridable attributes and methods for GenElements
 
-    @classmethod
-    def dispatch(cls, client, node, style=None):
-        self = cls.findsubclass(node)
+    def dispatch(self, client, node, style=None):
+        self = self.findsubclass(node)
 
         # set anchors for internal references
         try:
@@ -227,9 +225,8 @@ class GenPdfText(NodeHandler):
 
     # End overridable attributes and methods for gen_pdftext
 
-    @classmethod
-    def dispatch(cls, client, node, replaceEnt=True):
-        self = cls.findsubclass(node)
+    def dispatch(self, client, node, replaceEnt=True):
+        self = self.findsubclass(node)
         pre, post = self.get_pre_post(client, node, replaceEnt)
         text = self.get_text(client, node, replaceEnt)
         text = pre + text + post
