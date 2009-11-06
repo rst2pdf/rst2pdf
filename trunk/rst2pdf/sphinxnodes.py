@@ -13,7 +13,7 @@ from log import nodeid
 from flowables import  Spacer, MyIndenter, Reference
 
 from opt_imports import Paragraph, sphinx
-from genpdftext import GenPdfText, FontHandler
+from genpdftext import GenPdfText, FontHandler, HandleEmphasis
 
 class HandleSphinxDefaults(GenPdfText,
                 sphinx.addnodes.desc_signature,
