@@ -145,6 +145,7 @@ class NodeHandler(object):
 
 class GenElements(NodeHandler):
     _baseclass = None
+    sphinxmode = False
 
     # Begin overridable attributes and methods for GenElements
 
@@ -204,6 +205,7 @@ class GenElements(NodeHandler):
 
 class GenPdfText(NodeHandler):
     _baseclass = None
+    sphinxmode = False
 
     # Begin overridable attributes and methods for gen_pdftext
 

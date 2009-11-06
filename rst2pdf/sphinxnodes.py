@@ -6,6 +6,19 @@
 
 # See LICENSE.txt for licensing terms
 
+'''
+This module contains sphinx-specific node handlers for GenElements
+and GenPdfText.  An import of this module will fail if an import
+of sphinx would fail.
+
+This module creates separate sphinx-specific dispatch dictionaries,
+which are kept separate from the regular ones.
+
+At the end of the module, the separate dispatch dictionaries and
+the regular ones are combined into instantiated dispatch objects
+for pdftext and elements.
+'''
+
 from copy import copy
 from genelements import GenElements
 
@@ -16,8 +29,10 @@ from opt_imports import Paragraph, sphinx
 from genpdftext import GenPdfText, FontHandler, HandleEmphasis
 
 
+################## GenPdfText subclasses ###################
 
 class SphinxText(GenPdfText):
+    sphinxmode = True
     dispatchdict = {}
 
 class SphinxFont(SphinxText, FontHandler):
@@ -73,10 +88,10 @@ class HandleSphinxDescOpt(SphinxListHandler, SphinxFont, sphinx.addnodes.desc_op
 class HandleDescAnnotation(SphinxText, HandleEmphasis, sphinx.addnodes.desc_annotation):
     pass
 
-###########################################################################
-###########################################################################
+################## GenElements subclasses ###################
 
 class SphinxElements(GenElements):
+    sphinxmode = True
     dispatchdict = {}
 
 class HandleSphinxDefaults(SphinxElements, sphinx.addnodes.glossary,
@@ -133,11 +148,22 @@ class HandleSphinxDescContent(SphinxElements, sphinx.addnodes.desc_content):
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
 
+################## Housekeeping ###################
+
 
 def builddict():
+    ''' This is where the magic happens.  Make a copy of the elements
+        in the non-sphinx dispatch dictionary, setting sphinxmode on
+        every element, and then overwrite that dictionary with any
+        sphinx-specific handlers.
+    '''
     for cls in (SphinxText, SphinxElements):
         self = cls()
-        mydict = self._baseclass.dispatchdict.copy()
+        mydict = {}
+        for key, value in self._baseclass.dispatchdict.iteritems():
+            value = copy(value)
+            value.sphinxmode = True
+            mydict[key] = value
         mydict.update(self.dispatchdict)
         self.dispatchdict = mydict
         yield self.dispatch

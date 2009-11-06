@@ -63,9 +63,7 @@ from flowables import Table, DelayedTable, SplitTable, Heading, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding
 
-from opt_imports import wordaxe, Paragraph, ParagraphStyle, sphinx
-
-HAS_SPHINX = False   # Gets set later if we're really going to use it
+from opt_imports import wordaxe, Paragraph, ParagraphStyle
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
@@ -677,7 +675,7 @@ class HandleSidebar(GenElements, docutils.nodes.sidebar):
 class HandleRubric(GenElements, docutils.nodes.rubric):
     def gather_elements(self, client, node, style):
         # Sphinx uses a rubric as footnote container
-        if HAS_SPHINX and len(node.children) == 1 \
+        if self.sphinxmode and len(node.children) == 1 \
             and node.children[0].astext() == 'Footnotes':
                 return [Separation(),]
         else:
@@ -842,15 +840,5 @@ class HandleAdmonition(GenElements, docutils.nodes.attention,
                                 colWidths=[0,None]),
                                 Spacer(0,st.spaceAfter)]
         return node.elements
-
-def add_sphinx(added=[False]):
-    # avoid calling twice
-    if added[0]:
-        return
-    added[0] = True
-
-    #XXX -- Hack needs to be fixed at some point
-    global HAS_SPHINX
-    HAS_SPHINX = True
 
 dispatch = GenElements().dispatch
