@@ -79,8 +79,7 @@ class SVGImage(Flowable):
             self._mode = None
             log.error("Vector image support not enabled,"
                 " please install svglib and/or uniconvertor.")
-        if self._mode:
-            self.__ratio = float(self.imageWidth)/self.imageHeight
+        self.__ratio = float(self.imageWidth)/self.imageHeight
         if kind in ['direct','absolute']:
             self.drawWidth = width or self.imageWidth
             self.drawHeight = height or self.imageHeight
@@ -90,42 +89,27 @@ class SVGImage(Flowable):
             self.drawHeight = self.imageHeight*factor
 
     def wrap(self, aW, aH):
-        if self._mode:
-            if self._kind == 'percentage_of_container':
-                w, h = self.imageWidth, self.imageHeight
-                if not w:
-                    log.warning('Scaling image as % of container with w unset.'
-                    'This should not happen, setting to 100')
-                    w = 100
-                scale = w/100.
-                w = aW*scale
-                h = w/self.__ratio
-                self.imageWidth, self.imageHeight = w, h
-                return w, h
-            else:
-                return self.imageWidth, self.imageHeight
-        return 0, 0
+        return self.imageWidth, self.imageHeight
 
     def drawOn(self, canv, x, y, _sW=0):
-        if self._mode:
-            if _sW and hasattr(self, 'hAlign'):
-                a = self.hAlign
-                if a in ('CENTER', 'CENTRE', TA_CENTER):
-                    x += 0.5*_sW
-                elif a in ('RIGHT', TA_RIGHT):
-                    x += _sW
-                elif a not in ('LEFT', TA_LEFT):
-                    raise ValueError("Bad hAlign value " + str(a))
-            canv.saveState()
-            canv.translate(x, y)
-            canv.scale(self.imageWidth/self._w, self.imageHeight/self._h)
-            if self._mode == 'uniconvertor':
-                save(self.doc, open('.ignoreme.pdf', 'w'), '.ignoreme.pdf',
-                    options=dict(pdfgen_canvas=canv))
-                os.unlink('.ignoreme.pdf')
-            elif self._mode == 'svglib':
-                self.doc._drawOn(canv)
-            canv.restoreState()
+        if _sW and hasattr(self, 'hAlign'):
+            a = self.hAlign
+            if a in ('CENTER', 'CENTRE', TA_CENTER):
+                x += 0.5*_sW
+            elif a in ('RIGHT', TA_RIGHT):
+                x += _sW
+            elif a not in ('LEFT', TA_LEFT):
+                raise ValueError("Bad hAlign value " + str(a))
+        canv.saveState()
+        canv.translate(x, y)
+        canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
+        if self._mode == 'uniconvertor':
+            save(self.doc, open('.ignoreme.pdf', 'w'), '.ignoreme.pdf',
+                options=dict(pdfgen_canvas=canv))
+            os.unlink('.ignoreme.pdf')
+        elif self._mode == 'svglib':
+            self.doc._drawOn(canv)
+        canv.restoreState()
 
 class VectorImage(SVGImage):
     '''A class for non-SVG vector image formats. The main
