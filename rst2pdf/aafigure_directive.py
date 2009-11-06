@@ -32,6 +32,9 @@ from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
 from opt_imports import aafigure
+from log import log
+
+WARNED=False
 
 class Aanode(General, Inline, Element):
     children = ()
@@ -73,12 +76,16 @@ class Aafig(rst.Directive):
     )
 
     def run(self):
+        global WARNED
         if 'textual' in self.options:
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
         if aafigure is not None:
             return [Aanode(self.content, self.options)]
+        if not WARNED:
+            log.error('To render the aafigure directive correctly, please install aafigure')
+            WARNED=True
         return [literal_block(text='\n'.join(self.content))]
 
 
