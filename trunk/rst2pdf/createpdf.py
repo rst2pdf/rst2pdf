@@ -188,11 +188,14 @@ class RstToPdf(object):
         if HAS_SPHINX and sphinx:
             import sphinx.roles
             self.highlightlang = highlightlang
-            genpdftext.add_sphinx()
             genelements.add_sphinx()
+            import sphinxnodes
         else:
             HAS_SPHINX = False
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
+
+        self.gen_pdftext = types.MethodType(genpdftext.dispatch, self)
+        self.gen_elements = types.MethodType(genelements.dispatch, self)
 
         if not self.styles.languages:
             self.styles.languages=[]
@@ -322,12 +325,6 @@ class RstToPdf(object):
     def gather_pdftext(self, node, replaceEnt=True):
         return ''.join([self.gen_pdftext(n, replaceEnt)
             for n in node.children])
-
-    def gen_pdftext(self, node, replaceEnt=True):
-        return genpdftext.dispatch(self, node, replaceEnt)
-
-    def gen_elements(self, node, style=None):
-        return genelements.dispatch(self, node, style)
 
     def gather_elements(self, node, style=None):
         if style is None:
