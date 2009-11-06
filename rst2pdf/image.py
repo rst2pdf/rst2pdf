@@ -60,6 +60,27 @@ class MyImage (Flowable):
         self.__wrappedonce=False
 
     @classmethod
+    def raster(self, filename, client):
+	"""Takes a filename and converts it to a raster image
+        reportlab can process"""
+	if HAS_PIL:
+	    ext='.png'
+	else:
+	    ext='.jpg'
+	if HAS_MAGICK:
+	    img = PMImage()
+	    img.density("%s"%client.styles.def_dpi)
+	    img.read(str(filename))
+	    _, tmpname = tempfile.mkstemp(suffix=ext)
+	    img.write(tmpname)
+	    client.to_unlink.append(tmpname)
+	    return tmpname
+	else:
+	    #FIXME: if there is no MAGICK, convert via PIL
+	    pass
+
+
+    @classmethod
     def get_backend(self,filename, client):
         '''Given the filename of an image, returns (fname, backend)
         where fname is the filename to be used (could be the same as
@@ -88,13 +109,7 @@ class MyImage (Flowable):
             # of the image to  the right dpi so this
             # looks decent
             if HAS_MAGICK:
-                img = PMImage()
-                img.density("%s"%client.styles.def_dpi)
-                img.read(filename)
-                _, tmpname = tempfile.mkstemp(suffix='.png')
-                img.write(tmpname)
-                client.to_unlink.append(tmpname)
-                filename=tmpname
+                filename=self.raster(filename)
                 backend=Image
             else:
                 log.warning("Minimal PDF image support "\
@@ -102,11 +117,7 @@ class MyImage (Flowable):
                 filename = missing
         elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
             # Need to convert to JPG via PythonMagick
-            img = PMImage(imgname)
-            _, tmpname = tempfile.mkstemp(suffix='.jpg')
-            img.write(tmpname)
-            client.to_unlink.append(tmpname)
-            filename=tmpname
+            filename=self.raster(filename)
             backend=Image
             
         elif HAS_PIL or extension == 'jpg':
