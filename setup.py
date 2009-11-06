@@ -54,6 +54,7 @@ images_require = ['PIL']
 pdfimages_require = ['PythonMagick']
 svgsupport_require = ['svglib']
 sk1support_require = ['uniconvertor']
+aafiguresupport_require = ['aafigure>=0.4']
 
 setup(
     name="rst2pdf",
@@ -79,6 +80,7 @@ setup(
         pdfimages=pdfimages_require,
         svgsupport=svgsupport_require,
         sk1support=sk1support_require,
+        aafiguresupport=aafiguresupport_require,
     ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
