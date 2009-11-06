@@ -17,3 +17,6 @@ def test():
     results = {}
     for fname in testfiles:
         yield RunTest(fname), fname
+
+def setup():
+    PathInfo.add_coverage()
