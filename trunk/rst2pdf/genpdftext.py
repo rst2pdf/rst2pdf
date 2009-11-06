@@ -260,4 +260,4 @@ def add_sphinx(added=[False]):
     class HandleDescAnnotation(HandleEmphasis, sphinx.addnodes.desc_annotation):
         pass
 
-dispatch = GenPdfText.dispatch
+dispatch = GenPdfText().dispatch

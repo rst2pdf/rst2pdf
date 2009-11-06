@@ -907,4 +907,4 @@ def add_sphinx(added=[False]):
                     client.gather_elements(node, client.styles["definition"]) +\
                     [MyIndenter(left=-10)]
 
-dispatch = GenElements.dispatch
+dispatch = GenElements().dispatch
