@@ -63,6 +63,9 @@ class MyImage (Flowable):
     def raster(self, filename, client):
 	"""Takes a filename and converts it to a raster image
         reportlab can process"""
+        if not os.path.exists(filename):
+            log.error("Missing image file: %s",filename)
+            return missing
 	if HAS_PIL:
 	    ext='.png'
 	else:
