@@ -66,6 +66,9 @@ class MyImage (Flowable):
         if not os.path.exists(filename):
             log.error("Missing image file: %s",filename)
             return missing
+
+        #FIXME: don't convert things that already are raster
+
 	if HAS_PIL:
 	    ext='.png'
 	else:
