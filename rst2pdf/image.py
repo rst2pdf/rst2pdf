@@ -179,8 +179,10 @@ class MyImage (Flowable):
                 img = PMImage(imgname)
                 iw = img.size().width()
                 ih = img.size().height()
-                # FIXME: need to figure out how to get the DPI
-                # xdpi, ydpi=img.density().???
+		density=img.density() 
+		# The density is in pixelspercentimeter (!?)
+		xdpi=density.width()*2.54
+		ydpi=density.height()*2.54
             else:
                 log.warning("Sizing images without PIL "
                             "or PythonMagick, using 100x100 [%s]"
