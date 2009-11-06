@@ -25,20 +25,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-try:
-    import aafigure
-    import aafigure.pdf
-    HAS_AAFIG=True
-except ImportError:
-    HAS_AAFIG=False
-
 from docutils import nodes
 from docutils.nodes import General, Inline, Element, literal_block
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
-
+from opt_imports import aafigure
 
 class Aanode(General, Inline, Element):
     children = ()
@@ -84,7 +77,7 @@ class Aafig(rst.Directive):
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
-        if HAS_AAFIG:
+        if aafigure is not None:
             return [Aanode(self.content, self.options)]
         return [literal_block(text='\n'.join(self.content))]
 

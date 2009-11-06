@@ -7,23 +7,14 @@ from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 
-try:
-    from PythonMagick import Image as PMImage
-    HAS_MAGICK = True
-except ImportError:
-    HAS_MAGICK = False
+from opt_imports import PMImage, PILImage
 
-HAS_PIL = True
-try:
-    from PIL import Image as PILImage
-except ImportError:
-    try:
-        import Image as PILImage
-    except ImportError:
-        if not HAS_MAGICK:
-            log.warning("Support for images other than JPG,"
-                " is now limited. Please install PIL.")
-        HAS_PIL = False
+HAS_MAGICK = PMImage is not None
+HAS_PIL = PILImage is not None
+
+if not HAS_MAGICK and not HAS_PIL:
+    log.warning("Support for images other than JPG,"
+        " is now limited. Please install PIL.")
 
 from svgimage import SVGImage, VectorImage
 

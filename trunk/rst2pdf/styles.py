@@ -24,21 +24,14 @@ from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 
-try:
-    from json import loads
-except ImportError:
-    from simplejson import loads
+from opt_imports import json_loads
 
 import findfonts
 from log import log
 
-try:
-    from wordaxe.rl.paragraph import Paragraph
-    from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
-    from wordaxe import version as wordaxe_version
-    HAS_WORDAXE=True
-except ImportError:
-    HAS_WORDAXE=False
+from opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+
+HAS_WORDAXE = wordaxe is not None
 
 unit_separator = re.compile('(-?[0-9\.]*)')
 
@@ -109,7 +102,7 @@ class StyleSheet(object):
             fname = self.findStyle(fname)
             try:
                 if fname:
-                    ssdata.append(loads(open(fname).read()))
+                    ssdata.append(json_loads(open(fname).read()))
             except ValueError, e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\
                     (fname, str(e)))
@@ -135,7 +128,7 @@ class StyleSheet(object):
                 fname = self.findStyle(fname)
                 try:
                     if fname:
-                        ssdata.append(loads(open(fname).read()))
+                        ssdata.append(json_loads(open(fname).read()))
                 except ValueError, e: # Error parsing the JSON data
                     log.critical('Error parsing stylesheet "%s": %s'%\
                         (fname, str(e)))

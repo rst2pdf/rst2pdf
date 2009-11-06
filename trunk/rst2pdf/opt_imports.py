@@ -7,47 +7,9 @@
 # See LICENSE.txt for licensing terms
 
 '''
-We maintain imports of other packages in one place.  This gives us these
-advantages:
-    1) Slight efficiency gain
-    2) Centralized exception handling for optional imports
+opt_imports.py contains logic for handling optional imports.
+
 '''
-
-import sys
-import os
-import tempfile
-import re
-import string
-import types
-from os.path import abspath, dirname, expanduser, join
-from urlparse import urljoin, urlparse, urlunparse
-from copy import copy, deepcopy
-from optparse import OptionParser
-import logging
-
-from docutils.languages import get_language
-import docutils.readers.doctree
-import docutils.core
-import docutils.nodes
-from docutils.parsers.rst import directives
-
-import pygments_code_block_directive # code-block directive
-
-from reportlab.platypus import *
-from reportlab.platypus.flowables import _listWrapOn, _Container
-from reportlab.pdfbase.pdfdoc import PDFPageLabel
-from reportlab.lib.enums import *
-from reportlab.lib.units import *
-from reportlab.lib.pagesizes import *
-
-from pprint import pprint
-
-from roman import toRoman
-
-# Is this really the best unescape in the stdlib for '&amp;' => '&'????
-from xml.sax.saxutils import unescape, escape
-
-from cStringIO import StringIO
 
 try:
     from PIL import Image as PILImage
@@ -65,8 +27,11 @@ except ImportError:
     PMImage = None
 
 
+PyHyphenHyphenator = None
+DCWHyphenator = None
 try:
     import wordaxe
+    from wordaxe import version as wordaxe_version
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
     # PyHnjHyphenator is broken for non-ascii characters, so
@@ -90,6 +55,11 @@ try:
 except ImportError:
     # log.warning("No support for hyphenation, install wordaxe")
     wordaxe = None
+    wordaxe_version = None
+    BaseHyphenator = None
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.platypus.paragraph import Paragraph
+
 
 try:
     import sphinx
@@ -104,7 +74,23 @@ except ImportError:
         def full():
             pass
 
-#def escape (x,y):
-#    "Dummy escape function to test for excessive escaping"
-#    return x
+try:
+    import aafigure
+    import aafigure.pdfwordaxe_version
+except ImportError:
+    aafigure = None
 
+try:
+    from json import loads as json_loads
+except ImportError:
+    from simplejson import loads as json_loads
+
+try:
+    from reportlab.platypus.flowables import NullDraw
+except ImportError: # Probably RL 2.1
+    from reportlab.platypus.flowables import Flowable as NullDraw
+
+try:
+    from matplotlib import mathtext
+except ImportError:
+    mathtext = None
