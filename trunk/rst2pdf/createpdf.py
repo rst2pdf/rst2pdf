@@ -663,10 +663,14 @@ class PageCounter(Flowable):
         self.number=int(number)
         Flowable.__init__(self)
 
-    def drawOn(self, canvas, x, y, _sW):
+    def wrap(self, availWidth, availHeight):
         global _counter, _counterStyle
         _counterStyle=self.style
         _counter=self.number
+        return (self.width, self.height)
+
+    def drawOn(self, canvas, x, y, _sW):
+        pass
         
 flowables.PageCounter = PageCounter
 
