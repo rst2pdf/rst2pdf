@@ -140,39 +140,61 @@ class MD5Info(dict):
             is because every hexadecimal line (every line except
             the sentinel) is guaranteed to end with a comma.
         '''
-        sets = []
-        newinfo = {}
-        prev = set()
+        suffix = self.suffix
+        new_key = self.new_category + suffix
         sentinel = set([self.sentinel])
-        for key, value in self.iteritems():
-            if not key.endswith(self.suffix):
-                continue
-            value = set(value) - sentinel
-            # Make sure same checksum didn't make it into two
-            # different categories (that would be a committer screwup...)
-            assert not value & prev, (key, value, prev)
-            prev |= value
-            sets.append((key, value))
+
+        # Create a dictionary of relevant current information
+        # in the database.
+        oldinfo = dict((key, values)
+                        for (key, values) in self.iteritems()
+                            if key.endswith(suffix))
+
+        # Create sets and strip the sentinels while
+        # working with the dictionary.
+        newinfo = dict((key, set(values) - sentinel)
+                    for (key, values) in oldinfo.iteritems())
+
+        # Create an inverse mapping of MD5s to key names
+        inverse = {}
+        for key,values in newinfo.iteritems():
+            for value in values:
+                inverse.setdefault(value, set()).add(key)
+
+        # In general, inverse should be a function (there
+        # should only be one answer to the question "What
+        # key name goes with this MD5?")   If not,
+        # either report an error, or just remove one of
+        # the possible answers if it is the same answer
+        # we give by default.
+        for value, keys in inverse.iteritems():
+            if len(keys) > 1 and new_key in keys:
+                keys.remove(new_key)
+                newinfo[new_key].remove(value)
+            if len(keys) > 1:
+                raise SystemExit('MD5 %s is stored in multiple categories: %s' %
+                    (value, ', '.join(keys)))
+
+        # Find the result in the dictionary.  If it's not
+        # there we have to add it.
+        result, = inverse.get(checksum, [new_key])
+        if result == new_key:
+            newinfo.setdefault(result, set()).add(checksum)
+
+        # Create a canonical version of the dictionary,
+        # by adding sentinels and sorting the results.
+        for key, value in newinfo.iteritems():
             newinfo[key] = sorted(value | sentinel)
 
-        result = self.new_category + self.suffix
-        for key, sumset in sets:
-            if checksum in sumset:
-                result = key
-                break
-        else:
-            mylist = newinfo.setdefault(result, [])
-            myset = set(mylist) | set([checksum, self.sentinel])
-            mylist[:] = sorted(myset)
+        # See if we changed anything
+        if newinfo != oldinfo:
+            print "Updating MD5 file"
+            self.update(newinfo)
+            self.changed = True
 
-        for key, value in newinfo.iteritems():
-            if value != self.get(key):
-                self.update(newinfo)
-                print "Updating MD5 file"
-                self.changed = True
-                break
-        assert result.endswith(self.suffix), result
-        return result[:-len(self.suffix)]
+        # And return the key associated with the MD5
+        assert result.endswith(suffix), result
+        return result[:-len(suffix)]
 
 def checkmd5(pdfpath, md5path, resultlist):
     ''' checkmd5 validates the checksum of a generated PDF
