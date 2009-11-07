@@ -150,7 +150,7 @@ class MD5Info(dict):
             value = set(value) - sentinel
             # Make sure same checksum didn't make it into two
             # different categories (that would be a committer screwup...)
-            assert not value & prev, (name, value, prev)
+            assert not value & prev, (key, value, prev)
             prev |= value
             sets.append((key, value))
             newinfo[key] = sorted(value | sentinel)
