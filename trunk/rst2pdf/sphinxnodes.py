@@ -7,16 +7,15 @@
 # See LICENSE.txt for licensing terms
 
 '''
-This module contains sphinx-specific node handlers for GenElements
-and NodeHandler.  An import of this module will fail if an import
-of sphinx would fail.
+This module contains sphinx-specific node handlers.  An import
+of this module will apparently fail if sphinx.roles hasn't been
+imported.
 
-This module creates separate sphinx-specific dispatch dictionaries,
-which are kept separate from the regular ones.
+This module creates a sphinx-specific dispatch dictionary,
+which is kept separate from the regular one.
 
-At the end of the module, the separate dispatch dictionaries and
-the regular ones are combined into instantiated dispatch objects
-for pdftext and elements.
+When the SphinxHandler class is instantiated, the two dictionaries
+are combined into the instantiated object.
 '''
 
 from copy import copy
@@ -26,10 +25,7 @@ from flowables import  Spacer, MyIndenter, Reference
 
 from opt_imports import Paragraph, sphinx
 
-# Make sure that base node handlers are set up before
-# we set up our overrides
-import genelements
-from genpdftext import NodeHandler, FontHandler, HandleEmphasis
+from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 
 
 ################## NodeHandler subclasses ###################
