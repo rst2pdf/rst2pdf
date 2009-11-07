@@ -267,6 +267,9 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
         if sphinxdir.endswith('Makefile'):
             sphinxdir = dirname(sphinxdir)
         basename = os.path.basename(sphinxdir)
+        if not basename:
+            sphinxdir = os.path.dirname(sphinxdir)
+            basename = os.path.basename(sphinxdir)
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
