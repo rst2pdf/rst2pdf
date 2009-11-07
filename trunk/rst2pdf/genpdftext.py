@@ -10,11 +10,9 @@ import os
 from xml.sax.saxutils import escape
 from log import log, nodeid
 from basenodehandlers import NodeHandler
-from math_directive import math_node
 import docutils.nodes
 from urlparse import urljoin, urlparse
 from reportlab.lib.units import cm
-from math_flowable import Math
 from opt_imports import Paragraph
 
 from image import MyImage, missing
@@ -162,19 +160,6 @@ class HandleImage(NodeHandler, docutils.nodes.image):
 	uri=MyImage.raster(uri, client)
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
-
-class HandleMath(NodeHandler, math_node):
-    def gather_elements(self, client, node, style):
-        return [Math(node.math_data)]
-
-    def get_text(self, client, node, replaceEnt):
-        mf = Math(node.math_data)
-        w, h = mf.wrap(0, 0)
-        descent = mf.descent()
-        img = mf.genImage()
-        client.to_unlink.append(img)
-        return '<img src="%s" width=%f height=%f valign=%f/>' % (
-            img, w, h, -descent)
 
 class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference):
     def get_text(self, client, node, replaceEnt):

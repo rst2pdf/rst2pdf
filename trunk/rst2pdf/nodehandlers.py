@@ -9,6 +9,7 @@
 
 import genelements
 import genpdftext
+import math_directive
 
 #sphinxnodes needs these
 from genpdftext import NodeHandler, FontHandler, HandleEmphasis
