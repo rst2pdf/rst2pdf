@@ -67,7 +67,7 @@ class MyImage (Flowable):
         
         if HAS_PIL: # See if pil can process it
             try:
-                PILImage().read(filename)
+                PILImage().open(filename)
                 return filename
             except:
                 # Can't read it
