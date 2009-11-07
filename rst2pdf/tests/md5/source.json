@@ -4,11 +4,11 @@ bad_md5 = [
 
 good_md5 = [
         '774d9a48df9bb1c893ee6c98e76f2c69',
+        'b7badc40893e917de87d1a14a325ce9b',
         'sentinel'
 ]
 
 incomplete_md5 = [
-        'b7badc40893e917de87d1a14a325ce9b',
         'sentinel'
 ]
 
