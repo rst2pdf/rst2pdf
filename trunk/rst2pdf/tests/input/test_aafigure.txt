@@ -371,11 +371,6 @@ BSD
 Tests
 =====
 
-To compare input and output, look at the sources of this file_.
-
-.. _file: README.txt
-
-
 Simple tests
 ------------
 Different arrow types:
