@@ -447,6 +447,9 @@ class SmartFrame(Frame):
     def __repr__(self):
         return self.__s
 
+    def __deepcopy__(self, *whatever):
+        return copy(self)
+
 class FrameCutter(FrameActionFlowable):
 
     def __init__(self, dx, width, flowable, padding, lpad, floatLeft=True):
