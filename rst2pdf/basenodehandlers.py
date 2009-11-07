@@ -4,6 +4,7 @@
 #$LastChangedDate$
 #$LastChangedRevision$
 
+import types
 import inspect
 from log import log, nodeid
 from smartypants import smartyPants
@@ -236,7 +237,8 @@ class NodeHandler(object):
         node.pdftext = text
         return text
 
-basehandler = NodeHandler()
-
-elemdispatch = basehandler.elemdispatch
-textdispatch = basehandler.textdispatch
+    def __call__(self, client):
+        ''' Get the dispatchers, wrapped up as methods for the client'''
+        textdispatch = types.MethodType(self.textdispatch, client)
+        elemdispatch = types.MethodType(self.elemdispatch, client)
+        return textdispatch, elemdispatch
