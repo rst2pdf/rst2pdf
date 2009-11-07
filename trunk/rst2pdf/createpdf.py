@@ -50,7 +50,6 @@ import os
 import tempfile
 import re
 import string
-import types
 from os.path import abspath, dirname, expanduser, join
 from urlparse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
@@ -103,9 +102,7 @@ import styles as sty
 from opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
                          DCWHyphenator, sphinx as sphinx_module, wordaxe
 
-import genpdftext
-import genelements
-import basenodehandlers
+from nodehandlers import nodehandlers
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -185,14 +182,12 @@ class RstToPdf(object):
         # to do it only if it's requested
         if sphinx and sphinx_module:
             import sphinx.roles
-            import sphinxnodes
+            from sphinxnodes import sphinxhandlers
             self.highlightlang = highlightlang
-            self.gen_pdftext = types.MethodType(sphinxnodes.textdispatch, self)
-            self.gen_elements = types.MethodType(sphinxnodes.elemdispatch, self)
+            self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
-            self.gen_pdftext = types.MethodType(basenodehandlers.textdispatch, self)
-            self.gen_elements = types.MethodType(basenodehandlers.elemdispatch, self)
+            self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         if not self.styles.languages:
             self.styles.languages=[]

@@ -38,6 +38,21 @@ class SphinxHandler(NodeHandler):
     sphinxmode = True
     dispatchdict = {}
 
+    def __init__(self):
+        ''' This is where the magic happens.  Make a copy of the elements
+            in the non-sphinx dispatch dictionary, setting sphinxmode on
+            every element, and then overwrite that dictionary with any
+            sphinx-specific handlers.
+        '''
+        mydict = {}
+        for key, value in self._baseclass.dispatchdict.iteritems():
+            value = copy(value)
+            value.sphinxmode = True
+            mydict[key] = value
+        mydict.update(self.dispatchdict)
+        self.dispatchdict = mydict
+
+
 class SphinxFont(SphinxHandler, FontHandler):
     pass
 
@@ -140,25 +155,4 @@ class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
 
-################## Housekeeping ###################
-
-
-def builddict():
-    ''' This is where the magic happens.  Make a copy of the elements
-        in the non-sphinx dispatch dictionary, setting sphinxmode on
-        every element, and then overwrite that dictionary with any
-        sphinx-specific handlers.
-    '''
-    self = SphinxHandler()
-    mydict = {}
-    for key, value in self._baseclass.dispatchdict.iteritems():
-        value = copy(value)
-        value.sphinxmode = True
-        mydict[key] = value
-    mydict.update(self.dispatchdict)
-    self.dispatchdict = mydict
-    return self
-
-sphinxobj = builddict()
-
-textdispatch, elemdispatch = sphinxobj.textdispatch, sphinxobj.elemdispatch
+sphinxhandlers = SphinxHandler()
