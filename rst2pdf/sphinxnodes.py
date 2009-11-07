@@ -39,8 +39,6 @@ class SphinxFont(SphinxText, FontHandler):
     pass
 
 class HandleSphinxDefaults(SphinxText,
-                sphinx.addnodes.desc_signature,
-                sphinx.addnodes.module,
                 sphinx.addnodes.pending_xref):
     pass
 
@@ -90,9 +88,7 @@ class HandleDescAnnotation(SphinxText, HandleEmphasis, sphinx.addnodes.desc_anno
 
 ################## GenElements subclasses ###################
 
-class SphinxElements(GenElements):
-    sphinxmode = True
-    dispatchdict = {}
+SphinxElements = SphinxText
 
 class HandleSphinxDefaults(SphinxElements, sphinx.addnodes.glossary,
                                         sphinx.addnodes.start_of_file,
@@ -157,16 +153,16 @@ def builddict():
         every element, and then overwrite that dictionary with any
         sphinx-specific handlers.
     '''
-    for cls in (SphinxText, SphinxElements):
-        self = cls()
-        mydict = {}
-        for key, value in self._baseclass.dispatchdict.iteritems():
-            value = copy(value)
-            value.sphinxmode = True
-            mydict[key] = value
-        mydict.update(self.dispatchdict)
-        self.dispatchdict = mydict
-        yield self
+    self = SphinxText()
+    mydict = {}
+    for key, value in self._baseclass.dispatchdict.iteritems():
+        value = copy(value)
+        value.sphinxmode = True
+        mydict[key] = value
+    mydict.update(self.dispatchdict)
+    self.dispatchdict = mydict
+    return self
 
-textdispatch, elemdispatch = builddict()
-textdispatch, elemdispatch = textdispatch.textdispatch, elemdispatch.elemdispatch
+sphinxobj = builddict()
+
+textdispatch, elemdispatch = sphinxobj.textdispatch, sphinxobj.elemdispatch

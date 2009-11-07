@@ -83,28 +83,8 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
             self.toc.refids.append(refid)
 
 
-class HandleNotDefinedYet(GenElements):
-    def __init__(self):
-        self.unkn_elem = set()
-        GenElements.default_dispatch = self
-
-    def gather_elements(self, client, node, style):
-        # With sphinx you will have hundreds of these
-        #if not HAS_SPHINX:
-        cln=str(node.__class__)
-        if not cln in self.unkn_elem:
-            self.unkn_elem.add(cln)
-            log.error("Unkn. node (gen_elements): %s [%s]",
-            str(node.__class__), nodeid(node))
-                # Why fail? Just log it and do our best.
-        return client.gather_elements(node, style)
-
 class HandleDocument(GenElements, docutils.nodes.document):
     pass
-
-class HandleMathNode(GenElements, math_node):
-    def gather_elements(self, client, node, style):
-        return [Math(node.math_data)]
 
 class HandleTable(GenElements, docutils.nodes.table):
     def gather_elements(self, client, node, style):
@@ -198,7 +178,22 @@ class HandleTGroup(GenElements, docutils.nodes.tgroup):
 
         return [DelayedTable(data, colWidths, st, rtr)]
 
-class HandleTitle(GenElements, docutils.nodes.title):
+class HandleParagraph(GenElements, docutils.nodes.paragraph):
+    def gather_elements(self, client, node, style):
+        return [Paragraph(client.gen_pdftext(node), style)]
+
+    def get_pre_post(self, client, node, replaceEnt):
+        pre=''
+        targets=set(node.get('ids',[])+client.pending_targets)
+        client.pending_targets=[]
+        for _id in targets:
+            if _id not in client.targets:
+                pre+='<a name="%s"/>'%(_id)
+                client.targets.append(_id)
+        return pre, '\n'
+
+
+class HandleTitle(HandleParagraph, docutils.nodes.title):
     def gather_elements(self, client, node, style):
         # Special cases: (Not sure this is right ;-)
         if isinstance(node.parent, docutils.nodes.document):
@@ -244,7 +239,7 @@ class HandleTitle(GenElements, docutils.nodes.title):
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
 
-class HandleSubTitle(GenElements, docutils.nodes.subtitle):
+class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
     def gather_elements(self, client, node, style):
         if isinstance(node.parent, docutils.nodes.sidebar):
             elements = [Paragraph(client.gen_pdftext(node),
@@ -255,10 +250,6 @@ class HandleSubTitle(GenElements, docutils.nodes.subtitle):
         else:
             elements = node.elements  # FIXME Can we get here???
         return elements
-
-class HandleParagraph(GenElements, docutils.nodes.paragraph):
-    def gather_elements(self, client, node, style):
-        return [Paragraph(client.gen_pdftext(node), style)]
 
 class HandleDocInfo(GenElements, docutils.nodes.docinfo):
     # A docinfo usually contains several fields.
@@ -564,13 +555,6 @@ class HandleTransition(GenElements, docutils.nodes.transition):
         return [Separation()]
 
 
-class HandleSysMsg(GenElements, docutils.nodes.system_message,
-                               docutils.nodes.problematic):
-    def gather_elements(self, client, node, style):
-        # FIXME show the error in the document, red, whatever
-        # log.warning("Problematic node %s", node.astext())
-        return []
-
 class HandleBlockQuote(GenElements, docutils.nodes.block_quote):
     def gather_elements(self, client, node, style):
         # This should work, but doesn't look good inside of
@@ -636,21 +620,6 @@ class HandleLiteralBlock(GenElements, docutils.nodes.literal_block,
         return [client.PreformattedFit(
                 client.gather_pdftext(node, replaceEnt = True),
                                 client.styles['code'])]
-
-class HandleImage(GenElements, docutils.nodes.image):
-    def gather_elements(self, client, node, style):
-        # FIXME: handle class,target,alt, check align
-        imgname = os.path.join(client.basedir,str(node.get("uri")))
-        w, h, kind = MyImage.size_for_node(node, client=client)
-        node.elements = [MyImage(filename=imgname, height=h, width=w,
-                    kind=kind, client=client)]
-        alignment = node.get('align', 'CENTER').upper()
-        if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-            node.elements[0].image.hAlign = alignment
-        # Image flowables don't support valign (makes no sense for them?)
-        # elif alignment in ('TOP','MIDDLE','BOTTOM'):
-        #    i.vAlign = alignment
-        return node.elements
 
 class HandleFigure(GenElements, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
@@ -761,20 +730,7 @@ class HandleLabel(GenElements, docutils.nodes.label):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node), style)]
 
-class HandleText(GenElements, docutils.nodes.Text):
-    def gather_elements(self, client, node, style):
-        return [Paragraph(client.gather_pdftext(node), style)]
-
 class HandleEntry(GenElements, docutils.nodes.entry):
-    pass
-
-class HandleTarget(GenElements, docutils.nodes.target):
-    def gather_elements(self, client, node, style):
-        if 'refid' in node:
-            client.pending_targets.append(node['refid'])
-        return client.gather_elements(node, style)
-
-class HandleReference(GenElements, docutils.nodes.reference):
     pass
 
 class HandleRaw(GenElements, docutils.nodes.raw):

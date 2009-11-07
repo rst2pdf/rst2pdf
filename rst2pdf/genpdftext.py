@@ -15,25 +15,35 @@ import docutils.nodes
 from urlparse import urljoin, urlparse
 from reportlab.lib.units import cm
 from math_flowable import Math
+from opt_imports import Paragraph
 
 from image import MyImage, missing
 
-class HandleNotDefinedYet(GenPdfText, object):
+class HandleNotDefinedYet(GenPdfText):
     def __init__(self):
-        self.unkn_text = set()
+        self.unkn_node = set()
         GenPdfText.default_dispatch = self
 
-    def get_text(self, client, node, replaceEnt):
+    def log_unknown(self, node, during):
         cln=str(node.__class__)
-        if not cln in self.unkn_text:
-            self.unkn_text.add(cln)
-            log.warning("Unkn. node (self.gen_pdftext): %s [%s]",
-                node.__class__, nodeid(node))
+        if not cln in self.unkn_node:
+            self.unkn_node.add(cln)
+            log.warning("Unkn. node (self.%s): %s [%s]",
+                during, node.__class__, nodeid(node))
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
                 log.debug(repr(node))
+
+    def get_text(self, client, node, replaceEnt):
+        self.log_unknown(node, 'gen_pdftext')
         return GenPdfText.get_text(self, client, node, replaceEnt)
+
+    def gather_elements(self, client, node, style):
+        # With sphinx you will have hundreds of these
+        #if not HAS_SPHINX:
+        self.log_unknown(node, 'gen_elements')
+        return client.gather_elements(node, style)
 
 class FontHandler(GenPdfText):
     def get_pre_post(self, client, node, replaceEnt):
@@ -42,19 +52,10 @@ class FontHandler(GenPdfText):
     def get_font_prefix(self, client, node, replaceEnt):
         return client.styleToFont(self.fontstyle)
 
-class HandlePara(GenPdfText, docutils.nodes.paragraph,
-                      docutils.nodes.title, docutils.nodes.subtitle):
-    def get_pre_post(self, client, node, replaceEnt):
-        pre=''
-        targets=set(node.get('ids',[])+client.pending_targets)
-        client.pending_targets=[]
-        for _id in targets:
-            if _id not in client.targets:
-                pre+='<a name="%s"/>'%(_id)
-                client.targets.append(_id)
-        return pre, '\n'
-
 class HandleText(GenPdfText, docutils.nodes.Text):
+    def gather_elements(self, client, node, style):
+        return [Paragraph(client.gather_pdftext(node), style)]
+
     def get_text(self, client, node, replaceEnt):
         text = node.astext()
         if replaceEnt:
@@ -116,17 +117,34 @@ class HandleReference(GenPdfText, docutils.nodes.reference):
 class HandleOptions(HandleText, docutils.nodes.option_string, docutils.nodes.option_argument):
     pass
 
-class HandleHeaderFooter(HandleText, docutils.nodes.header, docutils.nodes.footer):
-    pass
-
 class HandleSysMessage(HandleText, docutils.nodes.system_message, docutils.nodes.problematic):
     pre = '<font color="red">'
     post = "</font>"
+
+    def gather_elements(self, client, node, style):
+        # FIXME show the error in the document, red, whatever
+        # log.warning("Problematic node %s", node.astext())
+        return []
+
 
 class HandleGenerated(HandleText, docutils.nodes.generated):
     pass
 
 class HandleImage(GenPdfText, docutils.nodes.image):
+    def gather_elements(self, client, node, style):
+        # FIXME: handle class,target,alt, check align
+        imgname = os.path.join(client.basedir,str(node.get("uri")))
+        w, h, kind = MyImage.size_for_node(node, client=client)
+        node.elements = [MyImage(filename=imgname, height=h, width=w,
+                    kind=kind, client=client)]
+        alignment = node.get('align', 'CENTER').upper()
+        if alignment in ('LEFT', 'CENTER', 'RIGHT'):
+            node.elements[0].image.hAlign = alignment
+        # Image flowables don't support valign (makes no sense for them?)
+        # elif alignment in ('TOP','MIDDLE','BOTTOM'):
+        #    i.vAlign = alignment
+        return node.elements
+
     def get_text(self, client, node, replaceEnt):
         # First see if the image file exists, or else,
         # use image-missing.png
@@ -146,6 +164,9 @@ class HandleImage(GenPdfText, docutils.nodes.image):
             (uri, w, h, align)
 
 class HandleMath(GenPdfText, math_node):
+    def gather_elements(self, client, node, style):
+        return [Math(node.math_data)]
+
     def get_text(self, client, node, replaceEnt):
         mf = Math(node.math_data)
         w, h = mf.wrap(0, 0)
@@ -179,6 +200,11 @@ class HandleCiteRef(GenPdfText, docutils.nodes.citation_reference):
                 client.styles.linkColor, node.astext())
 
 class HandleTarget(GenPdfText, docutils.nodes.target):
+    def gather_elements(self, client, node, style):
+        if 'refid' in node:
+            client.pending_targets.append(node['refid'])
+        return client.gather_elements(node, style)
+
     def get_text(self, client, node, replaceEnt):
         text = client.gather_pdftext(node)
         if replaceEnt:
@@ -198,7 +224,3 @@ class HandleInline(GenPdfText, docutils.nodes.inline):
         if ftag:
             return ftag, '</font>'
         return '', ''
-
-class HandleLiteralBlock(GenPdfText, docutils.nodes.literal_block):
-    pass
-

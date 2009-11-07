@@ -185,28 +185,6 @@ class GenElements(NodeHandler):
 
     # End overridable attributes and methods for GenElements
 
-    def elemdispatch(self, client, node, style=None):
-        self = self.findsubclass(node)
-
-        # set anchors for internal references
-        try:
-            for i in node['ids']:
-                client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
-            pass
-
-        elements = self.getelements(client, node, style)
-
-        if node.line and client.debugLinesPdf:
-            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
-        node.elements = elements
-        return elements
-
-
-class GenPdfText(NodeHandler):
-    _baseclass = None
-    sphinxmode = False
-
     # Begin overridable attributes and methods for gen_pdftext
 
     pre = ''
@@ -227,6 +205,23 @@ class GenPdfText(NodeHandler):
 
     # End overridable attributes and methods for gen_pdftext
 
+    def elemdispatch(self, client, node, style=None):
+        self = self.findsubclass(node)
+
+        # set anchors for internal references
+        try:
+            for i in node['ids']:
+                client.pending_targets.append(i)
+        except TypeError: #Happens with docutils.node.Text
+            pass
+
+        elements = self.getelements(client, node, style)
+
+        if node.line and client.debugLinesPdf:
+            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
+        node.elements = elements
+        return elements
+
     def textdispatch(self, client, node, replaceEnt=True):
         self = self.findsubclass(node)
         pre, post = self.get_pre_post(client, node, replaceEnt)
@@ -241,6 +236,8 @@ class GenPdfText(NodeHandler):
         text = self.apply_smartypants(text, client.smarty, node)
         node.pdftext = text
         return text
+
+GenPdfText = GenElements
 
 elemdispatch = GenElements().elemdispatch
 textdispatch = GenPdfText().textdispatch
