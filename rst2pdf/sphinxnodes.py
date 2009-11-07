@@ -8,7 +8,7 @@
 
 '''
 This module contains sphinx-specific node handlers for GenElements
-and GenPdfText.  An import of this module will fail if an import
+and NodeHandler.  An import of this module will fail if an import
 of sphinx would fail.
 
 This module creates separate sphinx-specific dispatch dictionaries,
@@ -20,29 +20,34 @@ for pdftext and elements.
 '''
 
 from copy import copy
-from genelements import GenElements
 
 from log import nodeid
 from flowables import  Spacer, MyIndenter, Reference
 
 from opt_imports import Paragraph, sphinx
-from genpdftext import GenPdfText, FontHandler, HandleEmphasis
+
+# Make sure that base node handlers are set up before
+# we set up our overrides
+import genelements
+from genpdftext import NodeHandler, FontHandler, HandleEmphasis
 
 
-################## GenPdfText subclasses ###################
+################## NodeHandler subclasses ###################
 
-class SphinxText(GenPdfText):
+class SphinxHandler(NodeHandler):
     sphinxmode = True
     dispatchdict = {}
 
-class SphinxFont(SphinxText, FontHandler):
+class SphinxFont(SphinxHandler, FontHandler):
     pass
 
-class HandleSphinxDefaults(SphinxText,
-                sphinx.addnodes.pending_xref):
+class HandleSphinxDefaults(SphinxHandler, sphinx.addnodes.glossary,
+                                        sphinx.addnodes.start_of_file,
+                                        sphinx.addnodes.compact_paragraph,
+                                        sphinx.addnodes.pending_xref):
     pass
 
-class SphinxListHandler(SphinxText):
+class SphinxListHandler(SphinxHandler):
     def get_text(self, client, node, replaceEnt):
         t = client.gather_pdftext(node)
         while t and t[0] in ', ':
@@ -83,19 +88,10 @@ class HandleSphinxDescOpt(SphinxListHandler, SphinxFont, sphinx.addnodes.desc_op
         prepost = FontHandler.get_pre_post(self, client, node, replaceEnt)
         return '%s[%s, ' % prepost, '%s]%s' % prepost
 
-class HandleDescAnnotation(SphinxText, HandleEmphasis, sphinx.addnodes.desc_annotation):
+class HandleDescAnnotation(SphinxHandler, HandleEmphasis, sphinx.addnodes.desc_annotation):
     pass
 
-################## GenElements subclasses ###################
-
-SphinxElements = SphinxText
-
-class HandleSphinxDefaults(SphinxElements, sphinx.addnodes.glossary,
-                                        sphinx.addnodes.start_of_file,
-                                        sphinx.addnodes.compact_paragraph):
-    pass
-
-class HandleSphinxIndex(SphinxElements, sphinx.addnodes.index):
+class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
     def gather_elements(self, client, node, style):
         try:
             client.pending_targets.append(node['entries'][0][2])
@@ -105,19 +101,19 @@ class HandleSphinxIndex(SphinxElements, sphinx.addnodes.index):
                     node['entries'], nodeid(node))
         return []
 
-class HandleSphinxModule(SphinxElements, sphinx.addnodes.module):
+class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
     def gather_elements(self, client, node, style):
         return [Reference('module-'+node['modname'])]
 
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
 
-class HandleSphinxCentered(SphinxElements, sphinx.addnodes.centered):
+class HandleSphinxCentered(SphinxHandler, sphinx.addnodes.centered):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),
                 client.styles['centered'])]
 
-class HandleSphinxDesc(SphinxElements, sphinx.addnodes.desc):
+class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
         st=client.styles[node['desctype']]
         if st==client.styles['normal']:
@@ -126,7 +122,7 @@ class HandleSphinxDesc(SphinxElements, sphinx.addnodes.desc):
         pre=[Spacer(0,client.styles['desc'].spaceBefore)]
         return pre + client.gather_elements(node, st)
 
-class HandleSphinxDescSignature(SphinxElements, sphinx.addnodes.desc_signature):
+class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
     def gather_elements(self, client, node, style):
         # Need to add ids as targets, found this when using one of the
         # django docs extensions
@@ -138,7 +134,7 @@ class HandleSphinxDescSignature(SphinxElements, sphinx.addnodes.desc_signature):
                 client.targets.append(i)
         return [Paragraph(pre+client.gather_pdftext(node),style)]
 
-class HandleSphinxDescContent(SphinxElements, sphinx.addnodes.desc_content):
+class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
     def gather_elements(self, client, node, style):
         return [MyIndenter(left=10)] +\
                 client.gather_elements(node, client.styles["definition"]) +\
@@ -153,7 +149,7 @@ def builddict():
         every element, and then overwrite that dictionary with any
         sphinx-specific handlers.
     '''
-    self = SphinxText()
+    self = SphinxHandler()
     mydict = {}
     for key, value in self._baseclass.dispatchdict.iteritems():
         value = copy(value)

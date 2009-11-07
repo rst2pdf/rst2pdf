@@ -84,11 +84,10 @@ class NodeHandler(object):
         # inheritable bases from the target docutils node classes
         # which we want to dispatch for.
 
-        # Allow multiple class hierarchies to search up to,
-        # but not including, NodeHandler
+        # Allow multiple class hierarchies to search up to NodeHandler
         while 1:
             basebase = getattr(baseclass, '_baseclass', None)
-            if basebase in (None, NodeHandler):
+            if basebase is None:
                 break
             baseclass = basebase
 
@@ -142,9 +141,9 @@ class NodeHandler(object):
             result = self.default_dispatch
         return result
 
+    # This will be set true in the instance if handling
+    # a sphinx document
 
-class GenElements(NodeHandler):
-    _baseclass = None
     sphinxmode = False
 
     # Begin overridable attributes and methods for GenElements
@@ -237,7 +236,7 @@ class GenElements(NodeHandler):
         node.pdftext = text
         return text
 
-GenPdfText = GenElements
+basehandler = NodeHandler()
 
-elemdispatch = GenElements().elemdispatch
-textdispatch = GenPdfText().textdispatch
+elemdispatch = basehandler.elemdispatch
+textdispatch = basehandler.textdispatch

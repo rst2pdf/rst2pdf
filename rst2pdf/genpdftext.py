@@ -9,7 +9,7 @@
 import os
 from xml.sax.saxutils import escape
 from log import log, nodeid
-from basenodehandlers import GenPdfText
+from basenodehandlers import NodeHandler
 from math_directive import math_node
 import docutils.nodes
 from urlparse import urljoin, urlparse
@@ -19,10 +19,10 @@ from opt_imports import Paragraph
 
 from image import MyImage, missing
 
-class HandleNotDefinedYet(GenPdfText):
+class HandleNotDefinedYet(NodeHandler):
     def __init__(self):
         self.unkn_node = set()
-        GenPdfText.default_dispatch = self
+        NodeHandler.default_dispatch = self
 
     def log_unknown(self, node, during):
         cln=str(node.__class__)
@@ -37,7 +37,7 @@ class HandleNotDefinedYet(GenPdfText):
 
     def get_text(self, client, node, replaceEnt):
         self.log_unknown(node, 'gen_pdftext')
-        return GenPdfText.get_text(self, client, node, replaceEnt)
+        return NodeHandler.get_text(self, client, node, replaceEnt)
 
     def gather_elements(self, client, node, style):
         # With sphinx you will have hundreds of these
@@ -45,14 +45,14 @@ class HandleNotDefinedYet(GenPdfText):
         self.log_unknown(node, 'gen_elements')
         return client.gather_elements(node, style)
 
-class FontHandler(GenPdfText):
+class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
         return self.get_font_prefix(client, node, replaceEnt), '</font>'
 
     def get_font_prefix(self, client, node, replaceEnt):
         return client.styleToFont(self.fontstyle)
 
-class HandleText(GenPdfText, docutils.nodes.Text):
+class HandleText(NodeHandler, docutils.nodes.Text):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node), style)]
 
@@ -62,15 +62,15 @@ class HandleText(GenPdfText, docutils.nodes.Text):
             text = escape(text)
         return text
 
-class HandleStrong(GenPdfText, docutils.nodes.strong):
+class HandleStrong(NodeHandler, docutils.nodes.strong):
     pre = "<b>"
     post = "</b>"
 
-class HandleEmphasis(GenPdfText, docutils.nodes.emphasis):
+class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
     pre = "<i>"
     post = "</i>"
 
-class HandleLiteral(GenPdfText, docutils.nodes.literal):
+class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
         pre = '<font face="%s">' % client.styles['literal'].fontName
         post = "</font>"
@@ -79,18 +79,18 @@ class HandleLiteral(GenPdfText, docutils.nodes.literal):
             post += '</nobr>'
         return pre, post
 
-class HandleSuper(GenPdfText, docutils.nodes.superscript):
+class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
     post = "</super>"
 
-class HandleSub(GenPdfText, docutils.nodes.subscript):
+class HandleSub(NodeHandler, docutils.nodes.subscript):
     pre = '<sub>'
     post = "</sub>"
 
 class HandleTitleReference(FontHandler, docutils.nodes.title_reference):
     fontstyle = 'title_reference'
 
-class HandleReference(GenPdfText, docutils.nodes.reference):
+class HandleReference(NodeHandler, docutils.nodes.reference):
     def get_pre_post(self, client, node, replaceEnt):
         pre, post = '', ''
         uri = node.get('refuri')
@@ -130,7 +130,7 @@ class HandleSysMessage(HandleText, docutils.nodes.system_message, docutils.nodes
 class HandleGenerated(HandleText, docutils.nodes.generated):
     pass
 
-class HandleImage(GenPdfText, docutils.nodes.image):
+class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
         imgname = os.path.join(client.basedir,str(node.get("uri")))
@@ -163,7 +163,7 @@ class HandleImage(GenPdfText, docutils.nodes.image):
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 
-class HandleMath(GenPdfText, math_node):
+class HandleMath(NodeHandler, math_node):
     def gather_elements(self, client, node, style):
         return [Math(node.math_data)]
 
@@ -176,7 +176,7 @@ class HandleMath(GenPdfText, math_node):
         return '<img src="%s" width=%f height=%f valign=%f/>' % (
             img, w, h, -descent)
 
-class HandleFootRef(GenPdfText, docutils.nodes.footnote_reference):
+class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference):
     def get_text(self, client, node, replaceEnt):
         # TODO: when used in Sphinx, all footnotes are autonumbered
         anchors=''
@@ -188,7 +188,7 @@ class HandleFootRef(GenPdfText, docutils.nodes.footnote_reference):
             (anchors, '#' + node.astext(),
                 client.styles.linkColor, node.astext())
 
-class HandleCiteRef(GenPdfText, docutils.nodes.citation_reference):
+class HandleCiteRef(NodeHandler, docutils.nodes.citation_reference):
     def get_text(self, client, node, replaceEnt):
         anchors=''
         for i in node['ids']:
@@ -199,7 +199,7 @@ class HandleCiteRef(GenPdfText, docutils.nodes.citation_reference):
             (anchors, '#' + node.astext(),
                 client.styles.linkColor, node.astext())
 
-class HandleTarget(GenPdfText, docutils.nodes.target):
+class HandleTarget(NodeHandler, docutils.nodes.target):
     def gather_elements(self, client, node, style):
         if 'refid' in node:
             client.pending_targets.append(node['refid'])
@@ -218,7 +218,7 @@ class HandleTarget(GenPdfText, docutils.nodes.target):
             client.targets.append(node['ids'][0])
         return pre, ''
 
-class HandleInline(GenPdfText, docutils.nodes.inline):
+class HandleInline(NodeHandler, docutils.nodes.inline):
     def get_pre_post(self, client, node, replaceEnt):
         ftag = client.styleToFont(node['classes'][0])
         if ftag:
