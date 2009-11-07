@@ -10,5 +10,8 @@
 import genelements
 import genpdftext
 
-from basenodehandlers import NodeHandler
+#sphinxnodes needs these
+from genpdftext import NodeHandler, FontHandler, HandleEmphasis
+
+# createpdf needs this
 nodehandlers = NodeHandler()
