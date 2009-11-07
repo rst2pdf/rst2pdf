@@ -102,6 +102,7 @@ class MyImage (Flowable):
         or is missing), and backend is an Image class that can handle 
         fname.'''
 
+        backend=Image
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
             log.error("Missing image file: %s",filename)
@@ -124,7 +125,6 @@ class MyImage (Flowable):
             # looks decent
             if HAS_MAGICK:
                 filename=self.raster(filename, client)
-                backend=Image
             else:
                 log.warning("Minimal PDF image support "\
                     "requires PythonMagick [%s]", filename)
@@ -132,14 +132,10 @@ class MyImage (Flowable):
         elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
             # Need to convert to JPG via PythonMagick
             filename=self.raster(filename)
-            backend=Image
             
-        elif HAS_PIL or extension == 'jpg':
-            backend=Image
-        else:
+        elif not (HAS_PIL or extension == 'jpg'):
             # No way to make this work
             log.error('To use a %s image you need PIL installed [%s]',extension,filename)
-            backend=Image
             filename=missing
         return filename, backend
 
