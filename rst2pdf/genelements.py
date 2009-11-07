@@ -50,8 +50,6 @@ import docutils.nodes
 import reportlab
 
 from image import MyImage
-from math_directive import math_node
-from math_flowable import Math
 from aafigure_directive import Aanode
 
 from log import log, nodeid

@@ -75,8 +75,6 @@ from flowables import * # our own reportlab flowables
 import flowables
 from image import MyImage
 
-from math_directive import math_node
-from math_flowable import Math
 from aafigure_directive import Aanode
 
 from log import log, nodeid
