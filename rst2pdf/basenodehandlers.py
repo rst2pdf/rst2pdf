@@ -185,7 +185,7 @@ class GenElements(NodeHandler):
 
     # End overridable attributes and methods for GenElements
 
-    def dispatch(self, client, node, style=None):
+    def elemdispatch(self, client, node, style=None):
         self = self.findsubclass(node)
 
         # set anchors for internal references
@@ -227,7 +227,7 @@ class GenPdfText(NodeHandler):
 
     # End overridable attributes and methods for gen_pdftext
 
-    def dispatch(self, client, node, replaceEnt=True):
+    def textdispatch(self, client, node, replaceEnt=True):
         self = self.findsubclass(node)
         pre, post = self.get_pre_post(client, node, replaceEnt)
         text = self.get_text(client, node, replaceEnt)
@@ -241,3 +241,6 @@ class GenPdfText(NodeHandler):
         text = self.apply_smartypants(text, client.smarty, node)
         node.pdftext = text
         return text
+
+elemdispatch = GenElements().elemdispatch
+textdispatch = GenPdfText().textdispatch

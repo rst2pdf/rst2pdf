@@ -840,5 +840,3 @@ class HandleAdmonition(GenElements, docutils.nodes.attention,
                                 colWidths=[0,None]),
                                 Spacer(0,st.spaceAfter)]
         return node.elements
-
-dispatch = GenElements().dispatch

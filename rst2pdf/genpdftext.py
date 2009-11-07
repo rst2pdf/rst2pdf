@@ -202,4 +202,3 @@ class HandleInline(GenPdfText, docutils.nodes.inline):
 class HandleLiteralBlock(GenPdfText, docutils.nodes.literal_block):
     pass
 
-dispatch = GenPdfText().dispatch

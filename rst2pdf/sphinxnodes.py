@@ -166,6 +166,7 @@ def builddict():
             mydict[key] = value
         mydict.update(self.dispatchdict)
         self.dispatchdict = mydict
-        yield self.dispatch
+        yield self
 
 textdispatch, elemdispatch = builddict()
+textdispatch, elemdispatch = textdispatch.textdispatch, elemdispatch.elemdispatch

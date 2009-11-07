@@ -105,6 +105,7 @@ from opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
 
 import genpdftext
 import genelements
+import basenodehandlers
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -190,8 +191,8 @@ class RstToPdf(object):
             self.gen_elements = types.MethodType(sphinxnodes.elemdispatch, self)
         else:
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
-            self.gen_pdftext = types.MethodType(genpdftext.dispatch, self)
-            self.gen_elements = types.MethodType(genelements.dispatch, self)
+            self.gen_pdftext = types.MethodType(basenodehandlers.textdispatch, self)
+            self.gen_elements = types.MethodType(basenodehandlers.elemdispatch, self)
 
         if not self.styles.languages:
             self.styles.languages=[]
