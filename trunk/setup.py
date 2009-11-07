@@ -47,11 +47,11 @@ try:
 except ImportError:
     install_requires.append('simplejson')
 
-tests_require = ['pyPdf']
+tests_require = ['pyPdf','coverage>=3.1']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 images_require = ['PIL']
-pdfimages_require = ['PythonMagick']
+pdfimages_require = ['pyPdf','PythonMagick']
 svgsupport_require = ['svglib']
 sk1support_require = ['uniconvertor']
 aafiguresupport_require = ['aafigure>=0.4']
