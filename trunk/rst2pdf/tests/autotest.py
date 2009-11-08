@@ -121,7 +121,7 @@ class MD5Info(dict):
         for name in self.mandatory_categories:
             setattr(self, name + self.suffix, [self.sentinel])
 
-    def find(self, checksum):
+    def find(self, checksum, new_category=new_category):
         ''' find() has some serious side-effects.  If the checksum
             is found, the category it was found in is returned.
             If the checksum is not found, then it is automagically
@@ -141,7 +141,7 @@ class MD5Info(dict):
             the sentinel) is guaranteed to end with a comma.
         '''
         suffix = self.suffix
-        new_key = self.new_category + suffix
+        new_key = new_category + suffix
         sentinel = set([self.sentinel])
 
         # Create a dictionary of relevant current information
@@ -188,7 +188,6 @@ class MD5Info(dict):
 
         # See if we changed anything
         if newinfo != oldinfo:
-            print "Updating MD5 file"
             self.update(newinfo)
             self.changed = True
 
@@ -196,7 +195,7 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
-def checkmd5(pdfpath, md5path, resultlist):
+def checkmd5(pdfpath, md5path, resultlist, updatemd5):
     ''' checkmd5 validates the checksum of a generated PDF
         against the database, both reporting the results,
         and updating the database to add this MD5 into the
@@ -233,10 +232,13 @@ def checkmd5(pdfpath, md5path, resultlist):
         md5s.append(m.hexdigest())
     m = ' '.join(md5s)
 
+    new_category = (updatemd5 and isinstance(updatemd5, str)
+                        and updatemd5 or info.new_category)
     # Check MD5 against database and update if necessary
-    resulttype = info.find(m)
+    resulttype = info.find(m, new_category)
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
-    if info.changed:
+    if info.changed and updatemd5:
+        print "Updating MD5 file"
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
@@ -282,7 +284,7 @@ def build_txt(iprefix, outpdf, fastfork):
         args.extend(('-o', outpdf))
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
-def run_single_test(inpfname, incremental=False, fastfork=None):
+def run_single_test(inpfname, incremental=False, fastfork=None, updatemd5=None):
     use_sphinx = 'sphinx' in inpfname
     if use_sphinx:
         sphinxdir = inpfname
@@ -319,14 +321,14 @@ def run_single_test(inpfname, incremental=False, fastfork=None):
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
 
-    checkinfo = checkmd5(outpdf, md5file, result)
+    checkinfo = checkmd5(outpdf, md5file, result, updatemd5)
     log(result, '')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
     outf.close()
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False):
+def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None):
     if not testfiles:
         testfiles = []
         if do_text:
@@ -337,7 +339,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
             testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
     results = {}
     for fname in testfiles:
-        key, errcode = run_single_test(fname, incremental, fastfork)
+        key, errcode = run_single_test(fname, incremental, fastfork, updatemd5)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
@@ -370,6 +372,9 @@ def parse_commandline():
     parser.add_option('-p', '--python-path', action="store_true",
         dest='nopythonpath', default=False,
         help='Do not set up PYTHONPATH env variable')
+    parser.add_option('-u', '--update-md5', action="store", type="string",
+        dest='updatemd5', default=None,
+        help='Update MD5 checksum files')
     return parser
 
 def main(args=None):
@@ -386,7 +391,10 @@ def main(args=None):
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
-    run_testlist(args, options.incremental, fastfork, do_text, do_sphinx)
+    updatemd5 = options.updatemd5
+    if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
+        raise SystemExit('Unexpected value for updatemd5: %s' % updatemd5)
+    run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
 
 if __name__ == '__main__':
     main()
