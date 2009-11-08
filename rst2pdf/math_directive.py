@@ -6,7 +6,7 @@ from docutils.parsers.rst import directives
 from docutils.nodes import General, Inline, Element
 from docutils.parsers.rst import roles
 
-import basenodehandlers, math_flowable
+import basenodehandler, math_flowable
 
 if 'Directive' in rst.__dict__:
 
@@ -46,7 +46,7 @@ def math_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 
 roles.register_local_role('math', math_role)
 
-class HandleMath(basenodehandlers.NodeHandler, math_node):
+class HandleMath(basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
         return [math_flowable.Math(node.math_data)]
 

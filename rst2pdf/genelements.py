@@ -44,7 +44,7 @@ import tempfile
 import re
 from copy import copy
 
-from basenodehandlers import NodeHandler
+from basenodehandler import NodeHandler
 
 import docutils.nodes
 import reportlab

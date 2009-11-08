@@ -9,39 +9,13 @@
 import os
 from xml.sax.saxutils import escape
 from log import log, nodeid
-from basenodehandlers import NodeHandler
+from basenodehandler import NodeHandler
 import docutils.nodes
 from urlparse import urljoin, urlparse
 from reportlab.lib.units import cm
 from opt_imports import Paragraph
 
 from image import MyImage, missing
-
-class HandleNotDefinedYet(NodeHandler):
-    def __init__(self):
-        self.unkn_node = set()
-        NodeHandler.default_dispatch = self
-
-    def log_unknown(self, node, during):
-        cln=str(node.__class__)
-        if not cln in self.unkn_node:
-            self.unkn_node.add(cln)
-            log.warning("Unkn. node (self.%s): %s [%s]",
-                during, node.__class__, nodeid(node))
-            try:
-                log.debug(node)
-            except (UnicodeDecodeError, UnicodeEncodeError):
-                log.debug(repr(node))
-
-    def get_text(self, client, node, replaceEnt):
-        self.log_unknown(node, 'gen_pdftext')
-        return NodeHandler.get_text(self, client, node, replaceEnt)
-
-    def gather_elements(self, client, node, style):
-        # With sphinx you will have hundreds of these
-        #if not HAS_SPHINX:
-        self.log_unknown(node, 'gen_elements')
-        return client.gather_elements(node, style)
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):

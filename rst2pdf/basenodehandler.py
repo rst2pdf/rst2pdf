@@ -4,6 +4,36 @@
 #$LastChangedDate$
 #$LastChangedRevision$
 
+'''
+This module provides one useful class:  NodeHandler
+
+The NodeHandler class is designed to be subclassed.  Each subclass
+should support the processing that createpdf.RstToPdf needs to do
+on a particular type of node that could appear in a document tree.
+
+When the subclass is defined, it should reference NodeHandler as
+the first base class, and one or more docutils node classes as
+subsequent base classes.
+
+These docutils node classes will not actually wind up in the
+base classes of the subclass.  Instead, they will be used as
+keys in a dispatch dictionary which is used to find the correct
+NodeHandler subclass to use to process an instance of a given
+docutils node class.
+
+When an instance of createpdf.RstToPdf is created, a NodeHandler
+instance will be called to return dispatchers for gather_elements
+and gather_pdftext, wrapped up as methods of the createpdf.RstToPdf
+class.
+
+When a dispatcher is called, it will dispatch to the correct subclass
+to handle the given docutils node instance.
+
+If no NodeHandler subclass has been created to handle that particular
+type of docutils node, then default processing will occur and a warning
+will be logged.
+'''
+
 import types
 import inspect
 from log import log, nodeid
@@ -85,18 +115,11 @@ class NodeHandler(object):
         # inheritable bases from the target docutils node classes
         # which we want to dispatch for.
 
-        # Allow multiple class hierarchies to search up to NodeHandler
-        while 1:
-            basebase = getattr(baseclass, '_baseclass', None)
-            if basebase is None:
-                break
-            baseclass = basebase
-
         new_bases = []
         targets = []
         for target in bases:
             if target is not object:
-                (targets, new_bases)[issubclass(target, baseclass)].append(target)
+                (targets, new_bases)[issubclass(target, NodeHandler)].append(target)
         clsdict['_targets'] = targets
         return clstype, name, tuple(new_bases), clsdict
 
@@ -122,32 +145,61 @@ class NodeHandler(object):
                     (old, t, new))
                 cls.dispatchdict[target] = self
 
-    def findsubclass(self, node):
-        nodeclass = node.__class__
-        log.debug("%s: %s", self, nodeclass)
-        log.debug("[%s]", nodeid(node))
+    @staticmethod
+    def getclassname(obj):
+        cln = repr(obj.__class__)
+        info = cln.split("'")
+        if len(info) == 3:
+            return info[1]
+        return cln
+
+    def log_unknown(self, node, during):
+        if not hasattr(self, 'unkn_node'):
+            self.unkn_node = set()
+        cln=self.getclassname(node)
+        if not cln in self.unkn_node:
+            self.unkn_node.add(cln)
+            log.warning("Unkn. node (self.%s): %s [%s]",
+                during, cln, nodeid(node))
+            try:
+                log.debug(node)
+            except (UnicodeDecodeError, UnicodeEncodeError):
+                log.debug(repr(node))
+
+    def findsubclass(self, node, during):
+        handlerinfo = '%s.%s' % (self.getclassname(self), during)
+        log.debug("%s: %s", handlerinfo, self.getclassname(node))
+        log.debug("%s: [%s]", handlerinfo, nodeid(node))
         try:
-            log.debug("%s: %s", self, node)
+            log.debug("%s: %s", handlerinfo, node)
         except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("%s: %r", self, node)
+            log.debug("%s: %r", handlerninfo, node)
+        log.debug("")
 
         # Dispatch to the first matching class in the MRO
 
         dispatchdict = self.dispatchdict
-        for baseclass in inspect.getmro(nodeclass):
+        for baseclass in inspect.getmro(node.__class__):
             result = dispatchdict.get(baseclass)
             if result is not None:
                 break
         else:
-            result = self.default_dispatch
+            self.log_unknown(node, during)
+            result = self
         return result
 
-    # This will be set true in the instance if handling
-    # a sphinx document
+    def __call__(self, client):
+        ''' Get the dispatchers, wrapped up as methods for the client'''
+        textdispatch = types.MethodType(self.textdispatch, client)
+        elemdispatch = types.MethodType(self.elemdispatch, client)
+        return textdispatch, elemdispatch
+
+    # This overridable attribute will be set true in the instance
+    # if handling a sphinx document
 
     sphinxmode = False
 
-    # Begin overridable attributes and methods for GenElements
+    # Begin overridable attributes and methods for elemdispatch
 
     def gather_elements(self, client, node, style):
         return client.gather_elements(node, style=style)
@@ -183,9 +235,26 @@ class NodeHandler(object):
 
         return elements
 
-    # End overridable attributes and methods for GenElements
+    # End overridable attributes and methods for elemdispatch
 
-    # Begin overridable attributes and methods for gen_pdftext
+    def elemdispatch(self, client, node, style=None):
+        self = self.findsubclass(node, 'elemdispatch')
+
+        # set anchors for internal references
+        try:
+            for i in node['ids']:
+                client.pending_targets.append(i)
+        except TypeError: #Happens with docutils.node.Text
+            pass
+
+        elements = self.getelements(client, node, style)
+
+        if node.line and client.debugLinesPdf:
+            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
+        node.elements = elements
+        return elements
+
+    # Begin overridable attributes and methods for textdispatch
 
     pre = ''
     post = ''
@@ -203,42 +272,19 @@ class NodeHandler(object):
             return smartyPants(text, smarty)
         return text
 
-    # End overridable attributes and methods for gen_pdftext
-
-    def elemdispatch(self, client, node, style=None):
-        self = self.findsubclass(node)
-
-        # set anchors for internal references
-        try:
-            for i in node['ids']:
-                client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
-            pass
-
-        elements = self.getelements(client, node, style)
-
-        if node.line and client.debugLinesPdf:
-            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
-        node.elements = elements
-        return elements
+    # End overridable attributes and methods for textdispatch
 
     def textdispatch(self, client, node, replaceEnt=True):
-        self = self.findsubclass(node)
+        self = self.findsubclass(node, 'textdispatch')
         pre, post = self.get_pre_post(client, node, replaceEnt)
         text = self.get_text(client, node, replaceEnt)
         text = pre + text + post
 
         try:
-            log.debug("self.gen_pdftext: %s" % text)
+            log.debug("%s.textdispatch: %s" % (self.getclassname(self), text))
         except UnicodeDecodeError:
             pass
 
         text = self.apply_smartypants(text, client.smarty, node)
         node.pdftext = text
         return text
-
-    def __call__(self, client):
-        ''' Get the dispatchers, wrapped up as methods for the client'''
-        textdispatch = types.MethodType(self.textdispatch, client)
-        elemdispatch = types.MethodType(self.elemdispatch, client)
-        return textdispatch, elemdispatch
