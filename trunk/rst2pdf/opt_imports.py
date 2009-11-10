@@ -11,6 +11,8 @@ opt_imports.py contains logic for handling optional imports.
 
 '''
 
+from log import log
+
 try:
     from PIL import Image as PILImage
 except ImportError:
