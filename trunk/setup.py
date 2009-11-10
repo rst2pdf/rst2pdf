@@ -47,7 +47,7 @@ try:
 except ImportError:
     install_requires.append('simplejson')
 
-tests_require = ['pyPdf','coverage>=3.1']
+tests_require = ['pyPdf']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 images_require = ['PIL']
