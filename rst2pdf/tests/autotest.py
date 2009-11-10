@@ -284,7 +284,7 @@ def build_txt(iprefix, outpdf, fastfork):
         args.extend(('-o', outpdf))
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
-def run_single_test(inpfname, incremental=False, fastfork=None, updatemd5=None):
+def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
     use_sphinx = 'sphinx' in inpfname
     if use_sphinx:
         sphinxdir = inpfname
@@ -339,7 +339,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
             testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
     results = {}
     for fname in testfiles:
-        key, errcode = run_single_test(fname, incremental, fastfork, updatemd5)
+        key, errcode = run_single(fname, incremental, fastfork, updatemd5)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break

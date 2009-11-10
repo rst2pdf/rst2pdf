@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from autotest import PathInfo, globjoin
-from autotest import run_single_test as run_single
+from autotest import run_single
 
 import sys, os
 import nose.plugins.skip
