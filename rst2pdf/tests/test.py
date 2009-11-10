@@ -13,7 +13,7 @@ class RunTest:
     def __call__(self,f):
         key, errcode = run_single(f)
 	if key in ['incomplete','unknown']:
-            raise nose.plugins.skip.Skip
+            raise nose.plugins.skip.SkipTest
         assert key == 'good', '%s is not good: %s'%(f,key)
 
 def test():
