@@ -9,27 +9,33 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 from log import log
 
-try:
-    for p in sys.path:
-        d = os.path.join(p, 'uniconvertor')
-        if os.path.isdir(d):
-            sys.path.append(d)
-            from app.io import load
-            from app.plugins import plugins
-            import app
-            from uniconvsaver import save
-            app.init_lib()
-            plugins.load_plugin_configuration()
-            break
-    else:
-        raise ImportError
-except:
+if os.environ.get('DISABLE_UNICONVERTOR',''):
     load = None
+else:
+    try:
+        for p in sys.path:
+            d = os.path.join(p, 'uniconvertor')
+            if os.path.isdir(d):
+                sys.path.append(d)
+                from app.io import load
+                from app.plugins import plugins
+                import app
+                from uniconvsaver import save
+                app.init_lib()
+                plugins.load_plugin_configuration()
+                break
+        else:
+            raise ImportError
+    except:
+        load = None
 
-try:
-    from svglib import svglib
-except ImportError:
+if os.environ.get('DISABLE_SVGLIB',''):
     svglib = None
+else:
+    try:
+        from svglib import svglib
+    except ImportError:
+        svglib = None
 
 
 class SVGImage(Flowable):
@@ -51,7 +57,8 @@ class SVGImage(Flowable):
             self.imageWidth = width
             self.imageHeight = height
             x1, y1, x2, y2 = self.doc.getBounds()
-            self._w, self._h = x2-x1, y2-y1
+            # Actually, svglib's getBounds seems broken.
+            self._w, self._h = x2, y2
             if not self.imageWidth:
                 self.imageWidth = self._w
             if not self.imageHeight:
