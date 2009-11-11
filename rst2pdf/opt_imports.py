@@ -25,8 +25,14 @@ except ImportError:
 
 try:
     from PythonMagick import Image as PMImage
+    gfx = None
 except ImportError:
     PMImage = None
+    # If there's no PythonMagick, we can use gfx to get PDF support
+    try:
+        import gfx
+    except ImportError:
+        gfx = None
 
 
 PyHyphenHyphenator = None
