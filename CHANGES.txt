@@ -1,6 +1,10 @@
 New in SVN
 ----------
 
+* Big refactoring of the code.
+* Support for Python 2.4
+* Fully reworked test suite, continuous integration site.
+* Optionally use SWFtools for PDF images
 * Fix Issue 231 (Smarter TTF autoembed)
 * Fix Issue 232 (HTML tags in title metadata)
 * Fix Issue 230 (Admonition titles were not translated)
