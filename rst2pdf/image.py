@@ -7,7 +7,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 
-from opt_imports import PMImage, PILImage
+from opt_imports import PMImage, PILImage, gfx
 
 HAS_MAGICK = PMImage is not None
 HAS_PIL = PILImage is not None
@@ -89,6 +89,31 @@ class MyImage (Flowable):
             except:
                 # Magick couldn't
                 pass
+        elif gfx and HAS_PIL: # It produces PNGs so it needs PIL
+            # This only really matters for PDFs but it's worth trying
+            try:
+                # Need to convert the DPI to % where 100% is 72DPI
+                gfx.setparameter( "zoom", str(client.styles.def_dpi/.72))
+                if extension == 'pdf':
+                    doc = gfx.open("pdf", filename)
+                elif extension == 'swf':
+                    doc = gfx.open("swf", filename)
+                else:
+                    doc = None
+                if doc:
+                    img = gfx.ImageList()
+                    img.setparameter("antialise", "1") # turn on antialising    
+                    page = doc.getPage(1)
+                    img.startpage(page.width,page.height)
+                    page.render(img)
+                    img.endpage()
+                    _, tmpname = tempfile.mkstemp(suffix='.png')
+                    img.save(tmpname)
+                    client.to_unlink.append(tmpname)
+                    return tmpname
+            except: # Didn't work
+                pass
+            
         # PIL can't and Magick can't, so we can't
         log.error("Couldn't load image [%s]"%filename)
         return missing
@@ -123,7 +148,7 @@ class MyImage (Flowable):
             # w,h are in pixels. I need to set the density
             # of the image to  the right dpi so this
             # looks decent
-            if HAS_MAGICK:
+            if HAS_MAGICK or gfx:
                 filename=self.raster(filename, client)
             else:
                 log.warning("Minimal PDF image support "\
