@@ -52,6 +52,7 @@ sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 images_require = ['PIL']
 pdfimages_require = ['pyPdf','PythonMagick']
+pdfimages2_require = ['pyPdf','SWFTools']
 svgsupport_require = ['svglib']
 sk1support_require = ['uniconvertor']
 aafiguresupport_require = ['aafigure>=0.4']
@@ -79,6 +80,7 @@ setup(
         hyphenation=hyphenation_require,
         images=images_require,
         pdfimages=pdfimages_require,
+        pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
         sk1support=sk1support_require,
         aafiguresupport=aafiguresupport_require,
