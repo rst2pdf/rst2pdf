@@ -206,19 +206,28 @@
       "parent": "bodytext",
       "alignment": "TA_CENTER"
     }],
-    ["bullet_list_item" , {
+    ["bullet_list", {
       "parent": "bodytext",
-      "spaceBefore":-3
+      "spaceBefore": 0,
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+        ], 
+        "colWidths": ["20",null]
+    }],
+    ["bullet_list_item" , {
+      "parent": "bodytext"
+    }],
+    ["item_list", { 
+      "parent": "bodytext",
+      "spaceBefore": 0,
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+        ],
+        "colWidths": ["20pt",null]
     }],
     ["item_list_item" , {
-      "parent": "bodytext",
-      "spaceBefore":-3
-    }],
-    ["enumerated_list" , {
-      "parent": "bodytext",
-      "spaceBefore": 0
-    }],
-    ["enumerated_list_item" , {
       "parent": "bodytext"
     }],
     ["definition_list_term" , {
@@ -508,24 +517,6 @@
     ["pygments-vi", {"textColor": "#B8860B", "parent": "code"}],
     ["pygments-il", {"textColor": "#666666", "parent": "code"}],
     
-    ["item_list", { 
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
-        ],
-        "colWidths": ["20pt",null]
-    }],
-    ["bullet_list", {
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
-        ], 
-        "colWidths": ["20",null]
-    }],
      [ "endnote", {
          "parent": "bodytext",
          "commands": [

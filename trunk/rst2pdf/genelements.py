@@ -416,14 +416,24 @@ class HandleSection(NodeHandler, docutils.nodes.section):
 
 class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
     def gather_elements(self, client, node, style):
-        node._bullSize = client.styles["enumerated_list_item"].leading
+        node._bullSize = client.styles["bullet_list_item"].leading
         node.elements = client.gather_elements(node,
-            style=client.styles["bullet_list_item"])
+            style=client.styles["bodytext"])
         s = client.styles["bullet_list"]
-        if s.spaceBefore:
-            node.elements.insert(0, Spacer(0, s.spaceBefore))
-        if s.spaceAfter:
-            node.elements.append(Spacer(0, s.spaceAfter))
+        
+        # Here we need to separate the list from the previous element.
+        # Calculate by how much:
+        
+        sb=max(s.spaceBefore, # list separation
+            client.styles['bullet_list_item'].spaceBefore, # list item separation
+            client.styles['bodytext'].spaceBefore) # paragraph separation
+
+        sa=max(s.spaceAfter, # list separation
+            client.styles['bullet_list_item'].spaceAfter, # list item separation
+            client.styles['bodytext'].spaceAfter) # paragraph separation
+
+        node.elements.insert(0, Spacer(0, sb))
+        node.elements.append(Spacer(0, sa))
         return node.elements
 
 class HandleDefOrOptList(NodeHandler, docutils.nodes.definition_list,
@@ -437,15 +447,25 @@ class HandleFieldList(NodeHandler, docutils.nodes.field_list):
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
     def gather_elements(self, client, node, style):
-        node._bullSize = client.styles["enumerated_list_item"].leading*\
+        node._bullSize = client.styles["item_list_item"].leading*\
             max([len(client.bullet_for_node(x)[0]) for x in node.children])
         node.elements = client.gather_elements(node,
-            style = client.styles["enumerated_list_item"])
-        s = client.styles["enumerated_list"]
-        if s.spaceBefore:
-            node.elements.insert(0, Spacer(0, s.spaceBefore))
-        if s.spaceAfter:
-            node.elements.append(Spacer(0, s.spaceAfter))
+            style = client.styles["bodytext"])
+        s = client.styles["item_list"]
+        
+        # Here we need to separate the list from the previous element.
+        # Calculate by how much:
+        
+        sb=max(s.spaceBefore, # list separation
+            client.styles['item_list_item'].spaceBefore, # list item separation
+            client.styles['bodytext'].spaceBefore) # paragraph separation
+
+        sa=max(s.spaceAfter, # list separation
+            client.styles['item_list_item'].spaceAfter, # list item separation
+            client.styles['bodytext'].spaceAfter) # paragraph separation
+
+        node.elements.insert(0, Spacer(0, sb))
+        node.elements.append(Spacer(0, sa))
         return node.elements
 
 class HandleDefinition(NodeHandler, docutils.nodes.definition):
@@ -516,22 +536,28 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             item_st=client.styles['item_list_item']
 
         idx=node.parent.children.index(node)
-        if idx>0: # Not the first item
-            sb=item_st.spaceBefore
-        else:
+        if idx==0:
+            # The first item in the list, so doesn't need
+            # separation (it's provided by the list itself)
             sb=0
-
-        if (idx+1)<len(node.parent.children): #Not the last item
-            sa=item_st.spaceAfter
         else:
+            # Not the first item, so need to separate from
+            # previous item. Account for space provided by
+            # the item's content, too.
+            sb=item_st.spaceBefore-style.spaceBefore
+
+        if (idx+1)==len(node.parent.children): #Not the last item
+            # The last item in the list, so doesn't need
+            # separation (it's provided by the list itself)
             sa=0
+        else:
+            sa=style.spaceAfter-style.spaceAfter
 
         t_style = TableStyle(st.commands)
 
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
         colWidths = st.colWidths
-
         if client.splittables:
             node.elements = [Spacer(0,sb),
                                 SplitTable([[Paragraph(b, style = bStyle), el]],
