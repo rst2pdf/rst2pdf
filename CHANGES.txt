@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fix Issue 243: Wrong spacing for second paragraphs in bullet lists.
 * Big refactoring of the code.
 * Support for Python 2.4
 * Fully reworked test suite, continuous integration site.
