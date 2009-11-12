@@ -424,13 +424,8 @@ class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
         
-        sb=max(s.spaceBefore, # list separation
-            client.styles['bullet_list_item'].spaceBefore, # list item separation
-            client.styles['bodytext'].spaceBefore) # paragraph separation
-
-        sa=max(s.spaceAfter, # list separation
-            client.styles['bullet_list_item'].spaceAfter, # list item separation
-            client.styles['bodytext'].spaceAfter) # paragraph separation
+        sb=s.spaceBefore # list separation
+        sa=s.spaceAfter # list separation
 
         node.elements.insert(0, Spacer(0, sb))
         node.elements.append(Spacer(0, sa))
@@ -456,13 +451,8 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
         
-        sb=max(s.spaceBefore, # list separation
-            client.styles['item_list_item'].spaceBefore, # list item separation
-            client.styles['bodytext'].spaceBefore) # paragraph separation
-
-        sa=max(s.spaceAfter, # list separation
-            client.styles['item_list_item'].spaceAfter, # list item separation
-            client.styles['bodytext'].spaceAfter) # paragraph separation
+        sb=s.spaceBefore # list separation
+        sa=s.spaceAfter # list separation
 
         node.elements.insert(0, Spacer(0, sb))
         node.elements.append(Spacer(0, sa))
@@ -551,7 +541,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # separation (it's provided by the list itself)
             sa=0
         else:
-            sa=style.spaceAfter-style.spaceAfter
+            sa=item_st.spaceAfter-style.spaceAfter
 
         t_style = TableStyle(st.commands)
 

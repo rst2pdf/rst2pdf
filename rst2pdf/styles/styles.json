@@ -107,7 +107,7 @@
     }],
     ["bodytext" , {
       "parent": "normal",
-      "spaceBefore":6,
+      "spaceBefore": 6,
       "alignment": "TA_JUSTIFY",
       "hyphenation": true
     }],
@@ -208,7 +208,6 @@
     }],
     ["bullet_list", {
       "parent": "bodytext",
-      "spaceBefore": 0,
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
             [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
@@ -220,7 +219,6 @@
     }],
     ["item_list", { 
       "parent": "bodytext",
-      "spaceBefore": 0,
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
             [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
