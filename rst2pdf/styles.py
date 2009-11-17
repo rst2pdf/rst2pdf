@@ -62,7 +62,7 @@ class StyleSheet(object):
 
         if style_path is None:
             style_path=[]
-        style_path+=['.', os.path.join(os.path.abspath(dirn), 'styles'),
+        style_path+=['.', os.path.join(self.PATH, 'styles'),
                       '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, style_path)
 
