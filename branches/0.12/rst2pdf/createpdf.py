@@ -425,7 +425,7 @@ class RstToPdf(object):
                     .labels[label]
         except KeyError:
             text = label.capitalize()
-        return text + ":"
+        return text
 
     def text_for_bib_field(self, field, style):
         """Translate text for bibliographic fields."""
@@ -1025,7 +1025,7 @@ class RstToPdf(object):
                     self.styles['field_list'].colWidths)
 
                 node.elements = [Table(
-                    [[Paragraph(self.text_for_label("author", style),
+                    [[Paragraph(self.text_for_label("author", style)+':',
                         style=self.styles['fieldname']),
                       Paragraph(fb, style)]],
                     style=t_style, colWidths=colWidths)]
@@ -1037,7 +1037,7 @@ class RstToPdf(object):
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths = self.styles['field_list'].colWidths
 
-            td = [[Paragraph(self.text_for_label("authors", style),
+            td = [[Paragraph(self.text_for_label("authors", style)+':',
                         style=self.styles['fieldname']),
                    self.gather_elements(node, style=style)]]
             node.elements = [DelayedTable(td, style=t_style,
@@ -1047,7 +1047,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths=self.styles['field_list'].colWidths
-            label=self.text_for_label("organization", style)
+            label=self.text_for_label("organization", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1056,7 +1056,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
-            label=self.text_for_label("contact", style)
+            label=self.text_for_label("contact", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1065,7 +1065,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
-            label=self.text_for_label("address", style)
+            label=self.text_for_label("address", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1074,7 +1074,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
-            label=self.text_for_label("version", style)
+            label=self.text_for_label("version", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1084,7 +1084,7 @@ class RstToPdf(object):
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths=map(self.styles.adjustUnits,
                 self.styles['field_list'].colWidths)
-            label=self.text_for_label("revision", style)
+            label=self.text_for_label("revision", style)+':'
             t = Table([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1093,7 +1093,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style=TableStyle(self.styles['field_list'].commands)
             colWidths= self.styles['field_list'].colWidths
-            label=self.text_for_label("status", style)
+            label=self.text_for_label("status", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1102,7 +1102,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style = TableStyle(self.styles['field_list'].commands)
             colWidths = self.styles['field_list'].colWidths
-            label = self.text_for_label("date", style)
+            label = self.text_for_label("date", style)+':'
             t = DelayedTable([[Paragraph(label, style = self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths = colWidths)
@@ -1111,7 +1111,7 @@ class RstToPdf(object):
             fb = self.gather_pdftext(node)
             t_style = TableStyle(self.styles['field_list'].commands)
             colWidths = self.styles['field_list'].colWidths
-            label = self.text_for_label("copyright", style)
+            label = self.text_for_label("copyright", style)+':'
             t = DelayedTable([[Paragraph(label, style=self.styles['fieldname']),
                         Paragraph(fb, style)]],
                         style=t_style, colWidths=colWidths)
@@ -1597,7 +1597,7 @@ class RstToPdf(object):
             if node.children and isinstance(node.children[0], docutils.nodes.title):
                 title=[]
             else:
-                title= [Paragraph(node.tagname.title(),
+                title= [Paragraph(self.text_for_label(node.tagname, style),
                     style=self.styles['%s-heading'%node.tagname])]
             rows=title + self.gather_elements(node, style=style)
             st=self.styles[node.tagname]
