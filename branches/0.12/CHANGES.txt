@@ -1,6 +1,7 @@
-New in SVN
-----------
+New in 0.12.3
+-------------
 
+* Fix Issue 230 (untranslated admonition titles)
 * Fix Issue 225 (bad spacing in lineblocks)
 * Fix Issue 223 (non-monospaced styles used in code)
 
