@@ -55,10 +55,9 @@ class StyleSheet(object):
                 join(self.PATH, 'styles', 'default.json')] + flist
 
         self.def_dpi=def_dpi        
-        dirn=os.path.dirname(__file__)
         if font_path is None:
             font_path=[]
-        font_path+=['.', os.path.join(os.path.abspath(dirn), 'fonts')]
+        font_path+=['.', os.path.join(self.PATH, 'fonts')]
         self.FontSearchPath = map(os.path.expanduser, font_path)
 
         if style_path is None:

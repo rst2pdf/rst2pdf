@@ -172,7 +172,7 @@ class RstToPdf(object):
         self.inline_footnotes = inline_footnotes
         self.def_dpi = def_dpi
         self.show_frame = show_frame
-        self.img_dir = os.path.join(abspath(dirname(__file__)), 'images')
+        self.img_dir = os.path.join(self.PATH, 'images')
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -1008,8 +1008,7 @@ def main(args=None):
         log.setLevel(logging.DEBUG)
 
     if options.printssheet:
-        print open(join(abspath(dirname(__file__)),
-            'styles', 'styles.json')).read()
+        print open(join(self.PATH, 'styles', 'styles.json')).read()
         sys.exit(0)
 
     filename = False
