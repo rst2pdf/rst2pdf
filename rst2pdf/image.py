@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+from os.path import abspath, dirname, expanduser, join
+import sys
 import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
@@ -18,8 +20,13 @@ if not HAS_MAGICK and not HAS_PIL:
 
 from svgimage import SVGImage, VectorImage
 
-missing = os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__))), 
-          'images', 'image-missing.jpg')
+# find base path
+if hasattr(sys, 'frozen'):
+    PATH = abspath(dirname(sys.executable))
+else:
+    PATH = abspath(dirname(__file__))
+
+missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
 class MyImage (Flowable):
     """A Image subclass that can:
