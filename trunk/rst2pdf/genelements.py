@@ -137,7 +137,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
                     if i < headRows:
                         st = client.styles['table-heading']
                     else:
-                        st = style
+                        st = client.styles['bodytext']
                     ell = client.gather_elements(cell, style=st)                    
                     r.append(ell)
                 j += 1
