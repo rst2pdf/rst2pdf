@@ -227,6 +227,7 @@ class MyImage (Flowable):
         else:
             if HAS_PIL:
                 img = PILImage.open(imgname)
+                img.load()
                 iw, ih = img.size
                 xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))
             elif HAS_MAGICK:
