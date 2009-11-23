@@ -55,6 +55,7 @@ from log import log, nodeid
 from utils import log, parseRaw
 from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from flowables import Table, DelayedTable, SplitTable, Heading, \
               Spacer, MyIndenter, MyTableOfContents, \
               Separation, BoxedContainer, BoundByWidth, \
@@ -157,8 +158,15 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
             for cmd in client.styles.tstyleHead(headRows):
                 st.add(*cmd)
         rtr = client.repeat_table_rows
-
-        return [DelayedTable(data, colWidths, st, rtr)]
+        
+        t=DelayedTable(data, colWidths, st, rtr)
+        if style.alignment == TA_LEFT:
+            t.hAlign='LEFT'
+        elif style.alignment == TA_CENTER:
+            t.hAlign='CENTER'
+        elif style.alignment == TA_RIGHT:
+            t.hAlign='RIGHT'
+        return [t]
 
 class HandleParagraph(NodeHandler, docutils.nodes.paragraph):
     def gather_elements(self, client, node, style):

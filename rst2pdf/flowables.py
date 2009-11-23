@@ -15,6 +15,7 @@ from reportlab.lib.enums import *
 from opt_imports import Paragraph, NullDraw
 
 from reportlab.lib.units import *
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
@@ -136,6 +137,7 @@ class DelayedTable(Flowable):
         self.style = style
         self.t = None
         self.repeatrows = repeatrows
+        self.hAlign = TA_CENTER
 
     def wrap(self, w, h):
         # Create the table, with the widths from colWidths reinterpreted
@@ -150,6 +152,7 @@ class DelayedTable(Flowable):
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows)
+        self.t.hAlign = self.hAlign
         return self.t.wrap(w, h)
 
     def split(self, w, h):
