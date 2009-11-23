@@ -42,7 +42,6 @@ class MyImage (Flowable):
     def __init__(self, filename, width=None, height=None,
                  kind='direct', mask="auto", lazy=1, client=None):
         self.__kind=kind
-        
         self.filename, self._backend=self.get_backend(filename, client)
         if kind == 'percentage_of_container':
             self.image=self._backend(self.filename, width, height,
@@ -144,10 +143,12 @@ class MyImage (Flowable):
         extension = os.path.splitext(filename)[-1][1:].lower()
         
         if extension in ['svg','svgz'] and SVGImage.available():
+            log.info('Backend for %s is SVGIMage'%filename)
             backend=SVGImage
         
         elif extension in ['ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                 'sk1', 'sk', 'xml', 'wmf']:
+            log.info('Backend for %s is VectorImage'%filename)
             backend=VectorImage
             
         elif extension in ['pdf']:
