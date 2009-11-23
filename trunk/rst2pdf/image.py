@@ -317,7 +317,7 @@ class MyImage (Flowable):
             return w, h
         else:
             if self.image.drawHeight > availHeight:
-                if not self._atTop:
+                if not getattr(self, '_atTop', True):
                     return self.image.wrap(availWidth, availHeight)
                 else:
                     # It's the first thing in the frame, probably
