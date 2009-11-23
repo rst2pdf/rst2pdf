@@ -1008,7 +1008,12 @@ def main(args=None):
         log.setLevel(logging.DEBUG)
 
     if options.printssheet:
-        print open(join(self.PATH, 'styles', 'styles.json')).read()
+        # find base path
+        if hasattr(sys, 'frozen'):
+            PATH = abspath(dirname(sys.executable))
+        else:
+            PATH = abspath(dirname(__file__))
+        print open(join(PATH, 'styles', 'styles.json')).read()
         sys.exit(0)
 
     filename = False
