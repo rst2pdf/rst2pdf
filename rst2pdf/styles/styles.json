@@ -429,6 +429,9 @@
       "valign" : "BOTTOM",
       "borderPadding" : 0
     }],
+    ["table-body", {
+      "parent" : "normal"
+    }],
     ["dedication" , {
       "parent" : "normal"
     }],
