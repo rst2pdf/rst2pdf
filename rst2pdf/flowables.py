@@ -441,10 +441,7 @@ class SmartFrame(Frame):
             id, showBoundary, overlapAttachedSpace, _debug)
 
     def add (self, flowable, canv, trySplit=0):
-        if self._atTop:
-            flowable._atTop=True
-        else:
-            flowable._atTop=False
+        flowable._atTop=self._atTop
         return Frame.add(self, flowable, canv, trySplit)
 
     def __repr__(self):
