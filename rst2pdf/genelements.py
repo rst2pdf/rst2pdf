@@ -49,7 +49,6 @@ from basenodehandler import NodeHandler
 import docutils.nodes
 import reportlab
 
-from image import MyImage
 from aafigure_directive import Aanode
 
 from log import log, nodeid
@@ -135,11 +134,12 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
                 if isinstance(cell, str):
                     r.append("")
                 else:
-                    # I honestly have no idea what the next line does
-                    # (Roberto Alsina, May 25th, 2009)
-                    ell = client.gather_elements(cell, style=
-                        i < headRows and client.styles['table-heading'] \
-                        or style)
+                    if i < headRows:
+                        st = client.styles['table-heading']
+                    else:
+                        st = style
+                    ell = client.gather_elements(cell, style=st)
+                    
                     #if len(ell) == 1:
                         # Experiment: if the cell has a single element,
                         # extract its  class and use it for the cell.
