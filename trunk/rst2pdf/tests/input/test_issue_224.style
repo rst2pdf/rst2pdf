@@ -1,6 +1,7 @@
 {
     "styles" : [
     [ "centered" , {
+        "parent": "table",
         "colWidths": ["25%","25%"]
       }],
     [ "left" , {
