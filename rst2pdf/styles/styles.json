@@ -410,6 +410,7 @@
     ["table" , {
       "spaceBefore":6,
       "spaceAfter":0,
+      "alignment": "TA_CENTER",
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
             [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
