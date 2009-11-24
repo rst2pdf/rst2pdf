@@ -58,16 +58,16 @@ class MyImage (Flowable):
 
     @classmethod
     def raster(self, filename, client):
-	"""Takes a filename and converts it to a raster image
+        """Takes a filename and converts it to a raster image
         reportlab can process"""
         if not os.path.exists(filename):
             log.error("Missing image file: %s",filename)
             return missing
 
-	if HAS_PIL:
-	    ext='.png'
-	else:
-	    ext='.jpg'
+        if HAS_PIL:
+            ext='.png'
+        else:
+            ext='.jpg'
 
         extension = os.path.splitext(filename)[-1][1:].lower()
         
@@ -234,10 +234,10 @@ class MyImage (Flowable):
                 img = PMImage(imgname)
                 iw = img.size().width()
                 ih = img.size().height()
-		density=img.density() 
-		# The density is in pixelspercentimeter (!?)
-		xdpi=density.width()*2.54
-		ydpi=density.height()*2.54
+                density=img.density() 
+                # The density is in pixelspercentimeter (!?)
+                xdpi=density.width()*2.54
+                ydpi=density.height()*2.54
             else:
                 log.warning("Sizing images without PIL "
                             "or PythonMagick, using 100x100 [%s]"

@@ -980,6 +980,10 @@ def parse_commandline():
         help="Don't store the current date in the PDF. Useful mainly for the test suite, "\
         "where we don't want the PDFs to change.")
 
+    parser.add_option('-e', '--extension-module', dest='extensions', action="append", type="string",
+        help="Add a helper extension module to this invocation of rst2pdf "
+             "(module must end in .py and be on the python path)")
+
     return parser
 
 def main(args=None):
@@ -1075,6 +1079,16 @@ def main(args=None):
 
     if options.invariant:
         patch_PDFDate()
+
+    if options.extensions:
+        for modname in options.extensions:
+            log.info('Importing extension module %s', repr(modname))
+            try:
+                __import__(modname, globals(), locals())
+            except:
+                raise SystemExit('\nError: Could not find module %s '
+                                 'in sys.path [\n    %s\n]\nExiting...\n' %
+                                 (modname, ', '.join(sys.path)))
 
     RstToPdf(
         stylesheets=ssheet,
