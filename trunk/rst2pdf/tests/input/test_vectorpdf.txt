@@ -1,0 +1,16 @@
+PDF Vector image test
+=======================
+
+To use this test, you need to do::
+
+    svn co http://pdfrw.googlecode.com/svn/trunk/pdfrw
+
+somewhere on your Python path.  For testing, I just do this
+right inside the rst2pdf/tests subdirectory
+
+.. image:: images/text_and_vectors_001.pdf
+        :align: center
+
+
+This should bring in an image.  Probably needs a lot of
+work to be generally useful.
