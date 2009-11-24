@@ -9,6 +9,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 
+import opt_imports
 from opt_imports import PMImage, PILImage, gfx
 
 HAS_MAGICK = PMImage is not None
@@ -19,6 +20,9 @@ if not HAS_MAGICK and not HAS_PIL:
         " is now limited. Please install PIL.")
 
 from svgimage import SVGImage, VectorImage
+
+# This assignment could be overridden by an extension module
+VectorPdf = None
 
 # find base path
 if hasattr(sys, 'frozen'):
@@ -152,11 +156,14 @@ class MyImage (Flowable):
             backend=VectorImage
             
         elif extension in ['pdf']:
+            if VectorPdf is not None:
+                backend = VectorPdf
+
             # PDF images are implemented by converting via PythonMagick
             # w,h are in pixels. I need to set the density
             # of the image to  the right dpi so this
             # looks decent
-            if HAS_MAGICK or gfx:
+            elif HAS_MAGICK or gfx:
                 filename=self.raster(filename, client)
             else:
                 log.warning("Minimal PDF image support "\
@@ -216,10 +223,13 @@ class MyImage (Flowable):
             try:
                 from pyPdf import pdf
             except:
-                log.warning('PDF images are not supported without pypdf [%s]', nodeid(node))
-                return 0, 0, 'direct'
-            reader = pdf.PdfFileReader(open(imgname))
-            x1, y1, x2, y2 = reader.getPage(0)['/MediaBox']
+                try:
+                    import pdfrw as pdf
+                except:
+                    log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
+                    return 0, 0, 'direct'
+            reader = pdf.PdfFileReader(open(imgname, 'rb'))
+            x1, y1, x2, y2 = [float(x) for x in reader.getPage(0)['/MediaBox']]
             # These are in pt, so convert to px
             iw = float((x2-x1) * xdpi / 72)
             ih = float((y2-y1) * ydpi / 72)
