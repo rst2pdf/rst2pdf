@@ -77,8 +77,19 @@ class BaseExec(object):
             try:
                 preexec_fn()
             except Exception:
+                sys.stdout.flush()
                 print >> sys.stderr, traceback.format_exc()
                 sys.stderr.write(chr(1))
+            except SystemExit, s:
+                sys.stdout.flush()
+                code = s.code
+                try:
+                    code = int(code)
+                except:
+                    pass
+                if code:
+                    print >> sys.stderr, code
+                    sys.stderr.write(chr(1))
         return wrapper
 
     def __init__(self, *args, **kw):
