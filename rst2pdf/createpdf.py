@@ -1150,7 +1150,7 @@ def add_extensions(extensions):
         except Exception:
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
-                                (modname, ', '.join(sys.path)))
+                                (modname, ',\n    '.join(sys.path)))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
