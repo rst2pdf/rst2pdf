@@ -1081,14 +1081,7 @@ def main(args=None):
         patch_PDFDate()
 
     if options.extensions:
-        for modname in options.extensions:
-            log.info('Importing extension module %s', repr(modname))
-            try:
-                __import__(modname, globals(), locals())
-            except:
-                raise SystemExit('\nError: Could not find module %s '
-                                 'in sys.path [\n    %s\n]\nExiting...\n' %
-                                 (modname, ', '.join(sys.path)))
+        add_extensions(options.extensions)
 
     RstToPdf(
         stylesheets=ssheet,
@@ -1138,6 +1131,24 @@ def patch_PDFDate():
         
     pdfdoc.PDFDate = PDFDate
     reportlab.rl_config.invariant = 1
+
+def add_extensions(extensions):
+    for modname in extensions:
+        prefix, modname = os.path.split(modname)
+        if not prefix:
+            prefix = os.path.join(os.path.dirname(__file__), 'extensions')
+            if prefix not in sys.path:
+                sys.path.insert(0, prefix)
+            prefix = os.getcwd()
+        if prefix not in sys.path:
+            sys.path.insert(0, prefix)
+        log.info('Importing extension module %s', repr(modname))
+        try:
+            __import__(modname, globals(), locals())
+        except Exception:
+            raise SystemExit('\nError: Could not find module %s '
+                                'in sys.path [\n    %s\n]\nExiting...\n' %
+                                (modname, ', '.join(sys.path)))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
