@@ -1135,6 +1135,8 @@ def patch_PDFDate():
 def add_extensions(extensions):
     for modname in extensions:
         prefix, modname = os.path.split(modname)
+        if modname.endswith('.py'):
+            modname = modname[:-3]
         if not prefix:
             prefix = os.path.join(os.path.dirname(__file__), 'extensions')
             if prefix not in sys.path:

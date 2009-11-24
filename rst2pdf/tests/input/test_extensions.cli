@@ -1,2 +1,2 @@
 -e sample
--e test_extensions
+-e test_extensions.py
