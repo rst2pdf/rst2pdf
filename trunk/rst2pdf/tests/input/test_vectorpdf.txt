@@ -1,7 +1,9 @@
 PDF Vector image test
 =======================
 
-To use this test, you need to do::
+At the time of this writing, the rst2pdf/extensions/vectorpdf
+directory has svn:externals set to bring in pdfrw.  If this
+ever changes, then to use this test, you might need to do::
 
     svn co http://pdfrw.googlecode.com/svn/trunk/pdfrw
 

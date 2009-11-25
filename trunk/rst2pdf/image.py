@@ -10,7 +10,7 @@ from log import log, nodeid
 from reportlab.lib.units import *
 
 import opt_imports
-from opt_imports import PMImage, PILImage, gfx
+from opt_imports import PMImage, PILImage, gfx, LazyImports
 
 HAS_MAGICK = PMImage is not None
 HAS_PIL = PILImage is not None
@@ -220,14 +220,10 @@ class MyImage (Flowable):
             ih = ih * ydpi / 72
                     
         elif extension == 'pdf':
-            try:
-                from pyPdf import pdf
-            except:
-                try:
-                    import pdfrw as pdf
-                except:
-                    log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
-                    return 0, 0, 'direct'
+            pdf = LazyImports.pdfinfo
+            if pdf is None:
+                log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
+                return 0, 0, 'direct'
             reader = pdf.PdfFileReader(open(imgname, 'rb'))
             x1, y1, x2, y2 = [float(x) for x in reader.getPage(0)['/MediaBox']]
             # These are in pt, so convert to px
