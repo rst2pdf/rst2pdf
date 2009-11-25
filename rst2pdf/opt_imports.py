@@ -11,6 +11,8 @@ opt_imports.py contains logic for handling optional imports.
 
 '''
 
+import os
+
 from log import log
 
 PyHyphenHyphenator = None
@@ -88,11 +90,13 @@ class LazyImports(object):
     def __getattr__(self, name):
         if name.startswith('_load_'):
             raise AttributeError
-        func = getattr(self, '_load_' + name)
-        try:
-            value = func()
-        except ImportError:
-            value = None
+        value = None
+        if not os.environ.get('DISABLE_' + name.upper()):
+            func = getattr(self, '_load_' + name)
+            try:
+                value = func()
+            except ImportError:
+                pass
         # Cache the result once we have it
         setattr(self, name, value)
         return value
@@ -118,5 +122,25 @@ class LazyImports(object):
     def _load_gfx(self):
         import gfx
         return gfx
+
+    def _load_svglib(self):
+        from svglib import svglib
+        return svglib
+
+    def _load_uniconvertor(self):
+        for p in sys.path:
+            d = os.path.join(p, 'uniconvertor')
+            if os.path.isdir(d):
+                sys.path.append(d)
+                from app.io import load
+                from app.plugins import plugins
+                import app
+                from uniconvsaver import save
+                app.init_lib()
+                plugins.load_plugin_configuration()
+                break
+        else:
+            raise ImportError
+        return load, plugins, save
 
 LazyImports = LazyImports()
