@@ -7,10 +7,17 @@ import os
 from reportlab.platypus import Flowable
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
+import pdfrw
+from pdfrw.decodegraphics import parsepage
+
 from rst2pdf.log import log
 import rst2pdf.image
-from pdfrw import PdfReader
-from pdfrw.decodegraphics import parsepage
+from rst2pdf.opt_imports import LazyImports
+
+# This is kinda goofy -- since we bring it in as a subpackage,
+# go ahead and monkey patch it in.
+
+LazyImports.pdfinfo = pdfrw
 
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
@@ -20,7 +27,7 @@ class VectorPdf(Flowable):
     def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
         Flowable.__init__(self)
         self._kind = kind
-        self.doc = PdfReader(filename).pages[0]
+        self.doc = pdfrw.PdfReader(filename).pages[0]
         self.imageWidth = width
         self.imageHeight = height
         x1, y1, x2, y2 = [float(x) for x in self.doc.MediaBox]

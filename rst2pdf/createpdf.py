@@ -1147,7 +1147,7 @@ def add_extensions(extensions):
         log.info('Importing extension module %s', repr(modname))
         try:
             __import__(modname, globals(), locals())
-        except Exception:
+        except ImportError:
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
                                 (modname, ',\n    '.join(sys.path)))

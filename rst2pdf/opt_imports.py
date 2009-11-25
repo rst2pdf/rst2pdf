@@ -102,3 +102,28 @@ try:
     from matplotlib import mathtext
 except ImportError:
     mathtext = None
+
+class LazyImports(object):
+    ''' Only import some things if we need them.
+    '''
+
+
+    def __getattr__(self, name):
+        if name.startswith('_load_'):
+            raise AttributeError
+        value = getattr(self, '_load_' + name)()
+        # Cache the result once we have it
+        setattr(self, name, value)
+        return value
+
+    def _load_pdfinfo(self):
+        try:
+            from pyPdf import pdf
+        except ImportError:
+            try:
+                import pdfrw as pdf
+            except ImportError:
+                pdf = None
+        return pdf
+
+LazyImports = LazyImports()
