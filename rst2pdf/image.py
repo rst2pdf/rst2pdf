@@ -9,15 +9,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 
-import opt_imports
-from opt_imports import PMImage, PILImage, gfx, LazyImports
-
-HAS_MAGICK = PMImage is not None
-HAS_PIL = PILImage is not None
-
-if not HAS_MAGICK and not HAS_PIL:
-    log.warning("Support for images other than JPG,"
-        " is now limited. Please install PIL.")
+from opt_imports import LazyImports
 
 from svgimage import SVGImage, VectorImage
 
@@ -42,6 +34,17 @@ class MyImage (Flowable):
     2. Take vector formats and instantiates the right "backend" flowable
     
     """
+
+    warned = False
+
+    @classmethod
+    def support_warning(cls):
+        if cls.warned or LazyImports.PILImage:
+            return
+        cls.warned = True
+        log.warning("Support for images other than JPG,"
+            " is now limited. Please install PIL.")
+
 
     def __init__(self, filename, width=None, height=None,
                  kind='direct', mask="auto", lazy=1, client=None):
@@ -68,14 +71,16 @@ class MyImage (Flowable):
             log.error("Missing image file: %s",filename)
             return missing
 
-        if HAS_PIL:
+        PILImage = LazyImports.PILImage
+
+        if PILImage:
             ext='.png'
         else:
             ext='.jpg'
 
         extension = os.path.splitext(filename)[-1][1:].lower()
         
-        if HAS_PIL: # See if pil can process it
+        if PILImage: # See if pil can process it
             try:
                 PILImage.open(filename)
                 return filename
@@ -85,7 +90,8 @@ class MyImage (Flowable):
 
         # PIL can't or isn't here, so try with Magick
 
-        if HAS_MAGICK:
+        PMImage = LazyImports.PMImage
+        if PMImage:
             try:
                 img = PMImage()
                 # Adjust density to pixels/cm
@@ -99,8 +105,11 @@ class MyImage (Flowable):
             except:
                 # Magick couldn't
                 pass
-        elif gfx and HAS_PIL: # It produces PNGs so it needs PIL
+        elif PILImage:
+            # Try to use gfx, which produces PNGs, and then
+            # pass them through PIL.
             # This only really matters for PDFs but it's worth trying
+            gfx = LazyImports.gfx
             try:
                 # Need to convert the DPI to % where 100% is 72DPI
                 gfx.setparameter( "zoom", str(client.styles.def_dpi/.72))
@@ -125,6 +134,7 @@ class MyImage (Flowable):
                 pass
             
         # PIL can't and Magick can't, so we can't
+        self.support_warning()
         log.error("Couldn't load image [%s]"%filename)
         return missing
 
@@ -163,20 +173,20 @@ class MyImage (Flowable):
             # w,h are in pixels. I need to set the density
             # of the image to  the right dpi so this
             # looks decent
-            elif HAS_MAGICK or gfx:
+            elif LazyImports.PMImage or LazyImports.gfx:
                 filename=self.raster(filename, client)
             else:
                 log.warning("Minimal PDF image support "\
                     "requires PythonMagick [%s]", filename)
                 filename = missing
-        elif not HAS_PIL and HAS_MAGICK and extension != 'jpg':
-            # Need to convert to JPG via PythonMagick
-            filename=self.raster(filename)
-            
-        elif not (HAS_PIL or extension == 'jpg'):
-            # No way to make this work
-            log.error('To use a %s image you need PIL installed [%s]',extension,filename)
-            filename=missing
+        elif extension != 'jpg' and not LazyImports.PILImage:
+            if LazyImports.PMImage:
+                # Need to convert to JPG via PythonMagick
+                filename=self.raster(filename)
+            else:
+                # No way to make this work
+                log.error('To use a %s image you need PIL installed [%s]',extension,filename)
+                filename=missing
         return filename, backend
 
 
@@ -231,13 +241,13 @@ class MyImage (Flowable):
             ih = float((y2-y1) * ydpi / 72)
             
         else:
-            if HAS_PIL:
-                img = PILImage.open(imgname)
+            if LazyImports.PILImage:
+                img = LazyImports.PILImage.open(imgname)
                 img.load()
                 iw, ih = img.size
                 xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))
-            elif HAS_MAGICK:
-                img = PMImage(imgname)
+            elif LazyImports.PMImage:
+                img = LazyImports.PMImage(imgname)
                 iw = img.size().width()
                 ih = img.size().height()
                 density=img.density() 
