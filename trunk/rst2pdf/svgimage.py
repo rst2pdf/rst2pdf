@@ -1,48 +1,19 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-import sys
 import os
 
 from reportlab.platypus import Flowable, Paragraph
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 from log import log
-
-if os.environ.get('DISABLE_UNICONVERTOR',''):
-    load = None
-else:
-    try:
-        for p in sys.path:
-            d = os.path.join(p, 'uniconvertor')
-            if os.path.isdir(d):
-                sys.path.append(d)
-                from app.io import load
-                from app.plugins import plugins
-                import app
-                from uniconvsaver import save
-                app.init_lib()
-                plugins.load_plugin_configuration()
-                break
-        else:
-            raise ImportError
-    except:
-        load = None
-
-if os.environ.get('DISABLE_SVGLIB',''):
-    svglib = None
-else:
-    try:
-        from svglib import svglib
-    except ImportError:
-        svglib = None
-
+from opt_imports import LazyImports
 
 class SVGImage(Flowable):
 
     @classmethod
     def available(self):
-        if svglib is not None or load is not None:
+        if LazyImports.svglib or LazyImports.uniconvertor:
             return True
         return False
 
@@ -51,9 +22,9 @@ class SVGImage(Flowable):
         ext = os.path.splitext(filename)[-1]
         self._kind = kind
         # Prefer svglib for SVG, as it works better
-        if ext in ('.svg', '.svgz') and svglib is not None:
+        if ext in ('.svg', '.svgz') and LazyImports.svglib:
             self._mode = 'svglib'
-            self.doc = svglib.svg2rlg(filename)
+            self.doc = LazyImports.svglib.svg2rlg(filename)
             self.imageWidth = width
             self.imageHeight = height
             x1, y1, x2, y2 = self.doc.getBounds()
@@ -64,7 +35,8 @@ class SVGImage(Flowable):
             if not self.imageHeight:
                 self.imageHeight = self._h
         # Use uniconvertor for the rest
-        elif load is not None:
+        elif LazyImports.uniconvertor:
+            load, plugins, self.uniconvertor_save = LazyImports.uniconvertor
             self._mode = 'uniconvertor'
             self.doc = load.load_drawing(filename.encode('utf-8'))
             self.saver = plugins.find_export_plugin(
@@ -111,8 +83,8 @@ class SVGImage(Flowable):
         canv.translate(x, y)
         canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
         if self._mode == 'uniconvertor':
-            save(self.doc, open('.ignoreme.pdf', 'w'), '.ignoreme.pdf',
-                options=dict(pdfgen_canvas=canv))
+            self.uniconvertor_save(self.doc, open('.ignoreme.pdf', 'w'),
+                '.ignoreme.pdf', options=dict(pdfgen_canvas=canv))
             os.unlink('.ignoreme.pdf')
         elif self._mode == 'svglib':
             self.doc._drawOn(canv)
@@ -123,12 +95,13 @@ class VectorImage(SVGImage):
     difference is that it is only available if uniconvertor is installed'''
     @classmethod
     def available(self):
-        if load is not None:
+        if LazyImports.uniconvertor:
             return True
         return False
 
 
 if __name__ == "__main__":
+    import sys
     from reportlab.platypus import SimpleDocTemplate
     from reportlab.lib.styles import getSampleStyleSheet
     doc = SimpleDocTemplate('svgtest.pdf')
