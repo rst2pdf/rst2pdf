@@ -13,28 +13,6 @@ opt_imports.py contains logic for handling optional imports.
 
 from log import log
 
-try:
-    from PIL import Image as PILImage
-except ImportError:
-    try:
-        import Image as PILImage
-    except ImportError:
-        log.warning("Support for images other than JPG"
-            " is now limited. Please install PIL.")
-        PILImage = None
-
-try:
-    from PythonMagick import Image as PMImage
-    gfx = None
-except ImportError:
-    PMImage = None
-    # If there's no PythonMagick, we can use gfx to get PDF support
-    try:
-        import gfx
-    except ImportError:
-        gfx = None
-
-
 PyHyphenHyphenator = None
 DCWHyphenator = None
 try:
@@ -107,11 +85,14 @@ class LazyImports(object):
     ''' Only import some things if we need them.
     '''
 
-
     def __getattr__(self, name):
         if name.startswith('_load_'):
             raise AttributeError
-        value = getattr(self, '_load_' + name)()
+        func = getattr(self, '_load_' + name)
+        try:
+            value = func()
+        except ImportError:
+            value = None
         # Cache the result once we have it
         setattr(self, name, value)
         return value
@@ -120,10 +101,22 @@ class LazyImports(object):
         try:
             from pyPdf import pdf
         except ImportError:
-            try:
-                import pdfrw as pdf
-            except ImportError:
-                pdf = None
+            import pdfrw as pdf
         return pdf
+
+    def _load_PILImage(self):
+        try:
+            from PIL import Image as PILImage
+        except ImportError:
+            import Image as PILImage
+        return PILImage
+
+    def _load_PMImage(self):
+        from PythonMagick import Image
+        return Image
+
+    def _load_gfx(self):
+        import gfx
+        return gfx
 
 LazyImports = LazyImports()
