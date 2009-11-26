@@ -8,7 +8,8 @@ from reportlab.platypus import Flowable
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 import pdfrw
-from pdfrw.decodegraphics import parsepage
+from pdfrw.toreportlab import makerl
+from pdfrw.buildxobj import CacheXObj
 
 from rst2pdf.log import log
 import rst2pdf.image
@@ -24,15 +25,18 @@ LazyImports.pdfinfo = pdfrw
 
 class VectorPdf(Flowable):
 
+    # TODO: Really need some way to uncache this between runs
+    load_xobj = CacheXObj().load
+
     def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
         Flowable.__init__(self)
         self._kind = kind
-        self.doc = pdfrw.PdfReader(filename).pages[0]
+        self.xobj = self.load_xobj(filename)
         self.imageWidth = width
         self.imageHeight = height
-        x1, y1, x2, y2 = [float(x) for x in self.doc.MediaBox]
+        x1, y1, x2, y2 = self.xobj.BBox
 
-        self._w, self._h = x2, y2
+        self._w, self._h = x2 - x1, y2 - y1
         if not self.imageWidth:
             self.imageWidth = self._w
         if not self.imageHeight:
@@ -58,10 +62,14 @@ class VectorPdf(Flowable):
                 x += _sW
             elif a not in ('LEFT', TA_LEFT):
                 raise ValueError("Bad hAlign value " + str(a))
+
+        xobjname = makerl(canv._doc, self.xobj, True)
+
+        array = self.xobj.BBox._rl_obj
         canv.saveState()
         canv.translate(x, y)
         canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
-        parsepage(self.doc, canv)
+        canv.doForm(xobjname)
         canv.restoreState()
 
 rst2pdf.image.VectorPdf = VectorPdf
