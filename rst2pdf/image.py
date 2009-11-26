@@ -45,6 +45,19 @@ class MyImage (Flowable):
         log.warning("Support for images other than JPG,"
             " is now limited. Please install PIL.")
 
+    @staticmethod
+    def split_uri(uri):
+        ''' A really minimalistic split -- doesn't cope with http:, etc.
+            HOWEVER, it tries to do so in a fashion that allows a clueless
+            user to have '#' inside his filename without screwing anything
+            up.
+        '''
+        basename, extra = os.path.splitext(uri)
+        extra = extra.split('#', 1) + ['']
+        fname = basename + extra[0]
+        extension = extra[0][1:].lower()
+        options = extra[1]
+        return fname, extension, options
 
     def __init__(self, filename, width=None, height=None,
                  kind='direct', mask="auto", lazy=1, client=None):
@@ -140,7 +153,7 @@ class MyImage (Flowable):
 
 
     @classmethod
-    def get_backend(self,filename, client):
+    def get_backend(self, uri, client):
         '''Given the filename of an image, returns (fname, backend)
         where fname is the filename to be used (could be the same as
         filename, or something different if the image had to be converted
@@ -148,14 +161,15 @@ class MyImage (Flowable):
         fname.'''
 
         backend=Image
+
+        # Extract all the information from the URI
+        filename, extension, options = self.split_uri(uri)
+
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
             log.error("Missing image file: %s",filename)
             filename = missing
 
-        # Decide what class of backend image we will use
-        extension = os.path.splitext(filename)[-1][1:].lower()
-        
         if extension in ['svg','svgz'] and SVGImage.available():
             log.info('Backend for %s is SVGIMage'%filename)
             backend=SVGImage
@@ -168,6 +182,7 @@ class MyImage (Flowable):
         elif extension in ['pdf']:
             if VectorPdf is not None:
                 backend = VectorPdf
+                filename = uri
 
             # PDF images are implemented by converting via PythonMagick
             # w,h are in pixels. I need to set the density
@@ -196,8 +211,11 @@ class MyImage (Flowable):
         in the PDF document, and what 'kind' of size that is. 
         That involves lots of guesswork'''
         
-        imgname = os.path.join(client.basedir,str(node.get("uri")))
+        uri = os.path.join(client.basedir,str(node.get("uri")))
         
+        # Extract all the information from the URI
+        imgname, extension, options = self.split_uri(uri)
+
         if not os.path.isfile(imgname):
             imgname = missing
             
@@ -230,12 +248,16 @@ class MyImage (Flowable):
             ih = ih * ydpi / 72
                     
         elif extension == 'pdf':
-            pdf = LazyImports.pdfinfo
-            if pdf is None:
-                log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
-                return 0, 0, 'direct'
-            reader = pdf.PdfFileReader(open(imgname, 'rb'))
-            x1, y1, x2, y2 = [float(x) for x in reader.getPage(0)['/MediaBox']]
+            if VectorPdf is not None:
+                box = VectorPdf.load_xobj(uri).BBox
+            else:
+                pdf = LazyImports.pdfinfo
+                if pdf is None:
+                    log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
+                    return 0, 0, 'direct'
+                reader = pdf.PdfFileReader(open(imgname, 'rb'))
+                box = [float(x) for x in reader.getPage(0)['/MediaBox']]
+            x1, y1, x2, y2 = box
             # These are in pt, so convert to px
             iw = float((x2-x1) * xdpi / 72)
             ih = float((y2-y1) * ydpi / 72)
