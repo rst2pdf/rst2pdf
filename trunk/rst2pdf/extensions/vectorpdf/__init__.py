@@ -63,7 +63,11 @@ class VectorPdf(Flowable):
             elif a not in ('LEFT', TA_LEFT):
                 raise ValueError("Bad hAlign value " + str(a))
 
-        xobjname = makerl(canv._doc, self.xobj, True)
+        xobj = self.xobj
+        xobjname = makerl(canv._doc, xobj, True)
+        box = xobj.BBox
+        x -= box[0]
+        y -= box[1]
 
         array = self.xobj.BBox._rl_obj
         canv.saveState()
