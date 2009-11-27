@@ -1,18 +1,22 @@
 PDF Vector image test
 =======================
 
-At the time of this writing, the rst2pdf/extensions/vectorpdf
-directory has svn:externals set to bring in pdfrw.  If this
-ever changes, then to use this test, you might need to do::
+This tests reading PDFs using the vectorpdf extension ("-e vectorpdf").  This extension
+relies on `pdfrw`__.
 
-    svn co http://pdfrw.googlecode.com/svn/trunk/pdfrw
+__ http://pdfrw.googlecode.com
 
-somewhere on your Python path.  For testing, I just do this
-right inside the rst2pdf/tests subdirectory
+
+Here is page 6 from the demo manual:
+
+.. image:: ../output/demo.pdf#page=6
+        :scale: 25%
+
+Here is a portion of that same page:
+
+.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+
+Here is a diagram:
 
 .. image:: images/text_and_vectors_001.pdf
-        :align: center
 
-
-This should bring in an image.  Probably needs a lot of
-work to be generally useful.
