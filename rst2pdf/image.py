@@ -220,6 +220,7 @@ class MyImage (Flowable):
             imgname = missing
             
         scale = float(node.get('scale', 100))/100
+        size_known = False
 
         # Figuring out the size to display of an image is ... annoying.
         # If the user provides a size with a unit, it's simple, adjustUnits
@@ -261,6 +262,7 @@ class MyImage (Flowable):
             # These are in pt, so convert to px
             iw = float((x2-x1) * xdpi / 72)
             ih = float((y2-y1) * ydpi / 72)
+            size_known = True  # Assume size from original PDF is OK
             
         else:
             if LazyImports.PILImage:
@@ -307,9 +309,10 @@ class MyImage (Flowable):
                 w = client.styles.adjustUnits(w, client.styles.tw,
                                             default_unit='px')
         else:
-            log.warning("Using image %s without specifying size."
-                "Calculating based on image size at %ddpi [%s]",
-                imgname, xdpi, nodeid(node))
+            if not size_known:
+                log.warning("Using image %s without specifying size."
+                    "Calculating based on image size at %ddpi [%s]",
+                    imgname, xdpi, nodeid(node))
             # No width specified at all, use w in px
             w = iw*inch/xdpi
 
