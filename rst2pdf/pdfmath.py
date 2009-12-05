@@ -9,32 +9,21 @@
     :license: BSD, see LICENSE for details.
 """
 
-import re
-import shutil
-import tempfile
-import posixpath
-from os import path, getcwd, chdir
-from subprocess import Popen, PIPE
-try:
-    from hashlib import sha1 as sha
-except ImportError:
-    from sha import sha
-
 from docutils import nodes
 
 from sphinx.errors import SphinxError
-from sphinx.util import ensuredir
-from sphinx.util.png import read_png_depth, write_png_depth
-from sphinx.ext.mathbase import setup as mathbase_setup, wrap_displaymath
+from sphinx.ext.mathbase import setup as mathbase_setup
 
 class MathExtError(SphinxError):
     category = 'Math extension error'
 
 
 def html_visit_math(self, node):
+    self.body.append(node['latex'])
     raise nodes.SkipNode
 
 def html_visit_displaymath(self, node):
+    self.body.append(node['latex'])
     raise nodes.SkipNode
 
 
