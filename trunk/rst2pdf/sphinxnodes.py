@@ -26,7 +26,7 @@ from flowables import  Spacer, MyIndenter, Reference
 from opt_imports import Paragraph, sphinx
 
 from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
-
+import math_flowable
 
 ################## NodeHandler subclasses ###################
 
@@ -150,5 +150,18 @@ class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
         return [MyIndenter(left=10)] +\
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
+
+class HandleSphinxMath(SphinxHandler, sphinx.ext.mathbase.displaymath):
+    def gather_elements(self, client, node, style):
+        return [math_flowable.Math(node.get('latex',''))]
+
+    def get_text(self, client, node, replaceEnt):
+        mf = math_flowable.Math(node.get('latex',''))
+        w, h = mf.wrap(0, 0)
+        descent = mf.descent()
+        img = mf.genImage()
+        client.to_unlink.append(img)
+        return '<img src="%s" width=%f height=%f valign=%f/>' % (
+            img, w, h, -descent)
 
 sphinxhandlers = SphinxHandler()
