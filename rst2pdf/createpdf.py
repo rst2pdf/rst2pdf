@@ -184,7 +184,9 @@ class RstToPdf(object):
             self.highlightlang = highlightlang
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
+            # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
+            import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         if not self.styles.languages:
