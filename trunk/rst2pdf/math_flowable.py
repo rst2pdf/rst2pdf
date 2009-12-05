@@ -64,6 +64,7 @@ class Math(Flowable):
                     canv.rect(ox, oy+2*height, width, height, fill=1)
             except:
                 # FIXME: report error
+                canv.setFillColorRGB(1,0,0)
                 canv.drawString(0,0,self.s)
             canv.restoreState()
         else:
