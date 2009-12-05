@@ -151,7 +151,9 @@ class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
 
-class HandleSphinxMath(SphinxHandler, sphinx.ext.mathbase.displaymath):
+from sphinx.ext import mathbase
+
+class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
     def gather_elements(self, client, node, style):
         return [math_flowable.Math(node.get('latex',''))]
 
