@@ -32,31 +32,39 @@ class Math(Flowable):
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
-            width, height, descent, glyphs, \
-            rects, used_characters = self.parser.parse(
-                '$%s$' % self.s, 72)
-            return width, height
+            try:
+                width, height, descent, glyphs, \
+                rects, used_characters = self.parser.parse(
+                    '$%s$' % self.s, 72)
+                return width, height
+            except:
+                pass
+                # FIXME: report error
         return 10, 10
 
     def drawOn(self, canv, x, y, _sW=0):
         if HAS_MATPLOTLIB:
             global fonts
-            width, height, descent, glyphs, \
-            rects, used_characters = self.parser.parse(
-                '$%s$' % self.s, 72)
             canv.saveState()
             canv.translate(x, y)
-            for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-                if not fontname in fonts:
-                    fonts[fontname] = fontname
-                    pdfmetrics.registerFont(TTFont(fontname, fontname))
-                canv.setFont(fontname, fontsize)
-                canv.drawString(ox, oy, unichr(num))
+            try:
+                width, height, descent, glyphs, \
+                rects, used_characters = self.parser.parse(
+                    '$%s$' % self.s, 72)
+                for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
+                    if not fontname in fonts:
+                        fonts[fontname] = fontname
+                        pdfmetrics.registerFont(TTFont(fontname, fontname))
+                    canv.setFont(fontname, fontsize)
+                    canv.drawString(ox, oy, unichr(num))
 
-            canv.setLineWidth(0)
-            canv.setDash([])
-            for ox, oy, width, height in rects:
-                canv.rect(ox, oy+2*height, width, height, fill=1)
+                canv.setLineWidth(0)
+                canv.setDash([])
+                for ox, oy, width, height in rects:
+                    canv.rect(ox, oy+2*height, width, height, fill=1)
+            except:
+                # FIXME: report error
+                canv.drawString(0,0,self.s)
             canv.restoreState()
         else:
             canv.saveState()
