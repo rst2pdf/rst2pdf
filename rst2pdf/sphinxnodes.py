@@ -155,7 +155,7 @@ from sphinx.ext import mathbase
 
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
     def gather_elements(self, client, node, style):
-        return [math_flowable.Math(node.get('latex',''))]
+        return [math_flowable.Math(node.get('latex',''),node.get('label',None))]
 
     def get_text(self, client, node, replaceEnt):
         mf = math_flowable.Math(node.get('latex',''))
@@ -165,5 +165,11 @@ class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
         client.to_unlink.append(img)
         return '<img src="%s" width=%f height=%f valign=%f/>' % (
             img, w, h, -descent)
+
+class HandleSphinxEq(SphinxHandler, mathbase.eqref):
+
+    def get_text(self, client, node, replaceEnt):
+        return '<a href="equation-%s" color="%s">%s</a>'%(node['target'], 
+            client.styles.linkColor, node.astext())
 
 sphinxhandlers = SphinxHandler()
