@@ -58,8 +58,18 @@ def math_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     latex = utils.unescape(text, restore_backslashes=True)
     return [math_node(latex, latex=latex)], []
 
-
 roles.register_local_role('math', math_role)
+
+class eq_node(Inline, Element):
+    def __init__(self, rawsource='', label=None, *children, **attributes):
+        self.label=label
+        Element.__init__(self, rawsource, *children, **attributes)
+
+def eq_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    return [eq_node(label=text)],[]
+
+roles.register_local_role('eq', eq_role)
+
 
 class HandleMath(basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
@@ -73,4 +83,10 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
         client.to_unlink.append(img)
         return '<img src="%s" width=%f height=%f valign=%f/>' % (
             img, w, h, -descent)
+
+class HandleEq(basenodehandler.NodeHandler, eq_node):
+    
+    def get_text(self, client, node, replaceEnt):
+        return '<a href="EQN-%s" color="%s">%s</a>'%(node.label, 
+            client.styles.linkColor, node.label)
 
