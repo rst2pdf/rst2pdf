@@ -4,6 +4,7 @@
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
 from docutils.nodes import General, Inline, Element
+from docutils import utils
 from docutils.parsers.rst import roles
 
 import basenodehandler, math_flowable
@@ -12,9 +13,19 @@ if 'Directive' in rst.__dict__:
 
     class Math(rst.Directive):
         has_content = True
+        required_arguments = 0
+        optional_arguments = 1
+        final_argument_whitespace = True
+        option_spec = {
+            'label': directives.unchanged,
+            'nowrap': directives.flag,
+        }
 
         def run(self):
-            return [math_node(data=''.join(self.content),
+            latex = '\n'.join(self.content)
+            if self.arguments and self.arguments[0]:
+                latex = self.arguments[0] + '\n\n' + latex
+            return [math_node(latex=latex,
                               rawsource=''.join(self.content))]
 
         def __repr__(self):
@@ -24,7 +35,7 @@ else:
 
     def Math(name, arguments, options, content, lineno,
             content_offset, block_text, state, state_machine):
-        return [math_node(data=''.join(content), rawsource=''.join(content))]
+        return [math_node(latex=''.join(content), rawsource=''.join(content))]
 
     Math.content = True
 
@@ -36,12 +47,13 @@ class math_node(General, Inline, Element):
 
     def __init__(self, rawsource='', *children, **attributes):
         self.rawsource = rawsource
-        self.math_data = attributes['data']
+        self.math_data = attributes['latex']
         Element.__init__(self, rawsource, *children, **attributes)
 
 
 def math_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    return [math_node(rawtext[7:-1], data=rawtext[7:-1])], []
+    latex = utils.unescape(text, restore_backslashes=True)
+    return [math_node(latex, latex=latex)], []
 
 
 roles.register_local_role('math', math_role)
