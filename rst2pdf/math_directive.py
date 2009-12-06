@@ -87,6 +87,6 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
 class HandleEq(basenodehandler.NodeHandler, eq_node):
     
     def get_text(self, client, node, replaceEnt):
-        return '<a href="EQN-%s" color="%s">%s</a>'%(node.label, 
+        return '<a href="equation-%s" color="%s">%s</a>'%(node.label, 
             client.styles.linkColor, node.label)
 

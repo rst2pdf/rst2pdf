@@ -53,8 +53,8 @@ class Math(Flowable):
                 rects, used_characters = self.parser.parse(
                     '$%s$' % self.s, 72)
                 if self.l:
-                    log.info('Drawing EQN-%s'%self.l)
-                    canv.bookmarkHorizontal('EQN-%s'%self.l,0,height)
+                    log.info('Drawing equation-%s'%self.l)
+                    canv.bookmarkHorizontal('equation-%s'%self.l,0,height)
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                     if not fontname in fonts:
                         fonts[fontname] = fontname
