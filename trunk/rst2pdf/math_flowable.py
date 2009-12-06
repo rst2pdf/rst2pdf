@@ -20,8 +20,9 @@ fonts = {}
 
 class Math(Flowable):
 
-    def __init__(self, s):
+    def __init__(self, s, l=None):
         self.s = s
+        self.l = l
         if HAS_MATPLOTLIB:
             self.parser = mathtext.MathTextParser("Pdf")
         else:
@@ -51,6 +52,9 @@ class Math(Flowable):
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
                     '$%s$' % self.s, 72)
+                if self.l:
+                    log.info('Drawing EQN-%s'%self.l)
+                    canv.bookmarkHorizontal('EQN-%s'%self.l,0,height)
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                     if not fontname in fonts:
                         fonts[fontname] = fontname
