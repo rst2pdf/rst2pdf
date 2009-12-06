@@ -25,7 +25,9 @@ if 'Directive' in rst.__dict__:
             latex = '\n'.join(self.content)
             if self.arguments and self.arguments[0]:
                 latex = self.arguments[0] + '\n\n' + latex
+            label=self.options.get('label', None)
             return [math_node(latex=latex,
+                              label=label,
                               rawsource=''.join(self.content))]
 
         def __repr__(self):
@@ -45,9 +47,10 @@ directives.register_directive('math', Math)
 class math_node(General, Inline, Element):
     children = ()
 
-    def __init__(self, rawsource='', *children, **attributes):
+    def __init__(self, rawsource='', label=None, *children, **attributes):
         self.rawsource = rawsource
         self.math_data = attributes['latex']
+        self.label = label
         Element.__init__(self, rawsource, *children, **attributes)
 
 
@@ -60,7 +63,7 @@ roles.register_local_role('math', math_role)
 
 class HandleMath(basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
-        return [math_flowable.Math(node.math_data)]
+        return [math_flowable.Math(node.math_data,node.label)]
 
     def get_text(self, client, node, replaceEnt):
         mf = math_flowable.Math(node.math_data)
