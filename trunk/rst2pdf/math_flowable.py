@@ -30,6 +30,7 @@ class Math(Flowable):
                 " some parts of this document will be rendered incorrectly."
                 " Install matplotlib.")
         Flowable.__init__(self)
+        self.hAlign='CENTER'
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
@@ -44,6 +45,15 @@ class Math(Flowable):
         return 10, 10
 
     def drawOn(self, canv, x, y, _sW=0):
+        if _sW and hasattr(self,'hAlign'):
+            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+            a = self.hAlign
+            if a in ('CENTER','CENTRE', TA_CENTER):
+                x = x + 0.5*_sW
+            elif a in ('RIGHT',TA_RIGHT):
+                x = x + _sW
+            elif a not in ('LEFT',TA_LEFT):
+                raise ValueError, "Bad hAlign value "+str(a)
         if HAS_MATPLOTLIB:
             global fonts
             canv.saveState()
