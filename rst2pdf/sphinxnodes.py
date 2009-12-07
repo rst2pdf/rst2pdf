@@ -21,7 +21,7 @@ are combined into the instantiated object.
 from copy import copy
 
 from log import nodeid
-from flowables import  Spacer, MyIndenter, Reference
+from flowables import  Spacer, MyIndenter, Reference, DelayedTable, Table
 
 from opt_imports import Paragraph, sphinx
 
@@ -155,7 +155,12 @@ from sphinx.ext import mathbase
 
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
     def gather_elements(self, client, node, style):
-        return [math_flowable.Math(node.get('latex',''),node.get('label',None))]
+        mflow=math_flowable.Math(node.get('latex',''),node.get('label',None))
+        n=node['number']
+        if n is not None:
+            number='(%s)'%node['number']
+            return [Table([[mflow,number]],)]
+        return [mflow]
 
     def get_text(self, client, node, replaceEnt):
         mf = math_flowable.Math(node.get('latex',''))
