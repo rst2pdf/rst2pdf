@@ -621,13 +621,16 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             pass
         else:
             lang=lang_for_block(node.astext(),node.get('language',self.highlightlang))
+            content = node.astext().splitlines()
+            # FIXME: make tab width configurable
+            content = [c.replace('\t','        ') for c in content]
             replacement = nodes.literal_block()
             replacement.children = \
                 pygments_code_block_directive.code_block_directive(
                                     name = None,
                                     arguments = [lang],
                                     options = {},
-                                    content = node.astext().splitlines(),
+                                    content = content,
                                     lineno = False,
                                     content_offset = None,
                                     block_text = None,
