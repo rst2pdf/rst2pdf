@@ -529,7 +529,10 @@ class RstToPdf(object):
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
-            os.unlink(fn)
+            try:
+                os.unlink(fn)
+            except OSError:
+                pass
 
 
 class FancyDocTemplate(BaseDocTemplate):
