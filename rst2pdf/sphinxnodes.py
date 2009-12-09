@@ -22,6 +22,7 @@ from copy import copy
 
 from log import nodeid
 from flowables import  Spacer, MyIndenter, Reference, DelayedTable, Table
+from image import MyImage
 
 from opt_imports import Paragraph, sphinx
 
@@ -176,5 +177,19 @@ class HandleSphinxEq(SphinxHandler, mathbase.eqref):
     def get_text(self, client, node, replaceEnt):
         return '<a href="equation-%s" color="%s">%s</a>'%(node['target'], 
             client.styles.linkColor, node.astext())
+
+
+
+class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
+    def gather_elements(self, client, node, style):
+            # Based on the graphviz extension
+        try:
+            fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
+        except sphinx.ext.graphviz.GraphvizError, exc:
+            log.error('dot code %r: ' % code + str(exc))
+            return [Paragraph(node['code'],client.styles['code'])]
+        return [MyImage(filename=outfn, client=client)]
+        
+            
 
 sphinxhandlers = SphinxHandler()

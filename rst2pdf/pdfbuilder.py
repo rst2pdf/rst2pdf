@@ -659,6 +659,12 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_desc_annotation(self, node):
         pass
     
+    # This is for graphviz support
+    def visit_graphviz(self, node):
+        # Not neat, but I need to send self to my handlers
+        node['builder']=self
+
+    
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
     if lang in ('py', 'python'):
