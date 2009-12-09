@@ -184,7 +184,7 @@ class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
     def gather_elements(self, client, node, style):
             # Based on the graphviz extension
         try:
-            fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
+            fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'png')
         except sphinx.ext.graphviz.GraphvizError, exc:
             log.error('dot code %r: ' % code + str(exc))
             return [Paragraph(node['code'],client.styles['code'])]
