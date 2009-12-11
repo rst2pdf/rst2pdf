@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Initial support for graphviz extension in pdfbuilder
+* Fix Issue 249: Images distorted when specifiying width and height
 * Fix Issue 252: math directive conflicted with sphinx
 * Fix Issue 224: Tables can be left/center/right aligned in the page.
 * Fix Issue 243: Wrong spacing for second paragraphs in bullet lists.
