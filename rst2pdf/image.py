@@ -318,7 +318,7 @@ class MyImage (Flowable):
 
         h = node.get('height')
         if h is not None and h[-1] != '%':
-            h = client.styles.adjustUnits(h, ih*inch/ydpi)
+            h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
         else:
             # Now, often, only the width is specified!
             # if we don't have a height, we need to keep the
