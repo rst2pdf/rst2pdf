@@ -170,9 +170,12 @@ class MyImage (Flowable):
             log.error("Missing image file: %s",filename)
             filename = missing
 
-        if extension in ['svg','svgz'] and SVGImage.available():
-            log.info('Backend for %s is SVGIMage'%filename)
-            backend=SVGImage
+        if extension in ['svg','svgz']:
+            if SVGImage.available():
+                log.info('Backend for %s is SVGIMage'%filename)
+                backend=SVGImage
+            else:
+                filename = missing
         
         elif extension in ['ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
                 'sk1', 'sk', 'xml', 'wmf']:
