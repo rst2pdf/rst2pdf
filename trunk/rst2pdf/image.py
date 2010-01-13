@@ -265,12 +265,18 @@ class MyImage (Flowable):
             size_known = True  # Assume size from original PDF is OK
             
         else:
+            keeptrying = True
+            
             if LazyImports.PILImage:
-                img = LazyImports.PILImage.open(imgname)
-                img.load()
-                iw, ih = img.size
-                xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))
-            elif LazyImports.PMImage:
+                try:
+                    img = LazyImports.PILImage.open(imgname)
+                    img.load()
+                    iw, ih = img.size
+                    xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))
+                    keeptrying = False
+                except IOError: # PIL throws this when it's a broken/unknown image
+                    pass
+            if keeptrying and LazyImports.PMImage:
                 img = LazyImports.PMImage(imgname)
                 iw = img.size().width()
                 ih = img.size().height()
@@ -278,7 +284,8 @@ class MyImage (Flowable):
                 # The density is in pixelspercentimeter (!?)
                 xdpi=density.width()*2.54
                 ydpi=density.height()*2.54
-            else:
+                keeptrying = False
+            if keeptrying:
                 log.warning("Sizing images without PIL "
                             "or PythonMagick, using 100x100 [%s]"
                             , nodeid(node))
