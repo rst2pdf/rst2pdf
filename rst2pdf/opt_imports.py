@@ -12,6 +12,7 @@ opt_imports.py contains logic for handling optional imports.
 '''
 
 import os
+import sys
 
 from log import log
 
