@@ -36,13 +36,16 @@ from log import log
 
 WARNED=False
 
-class Aanode(General, Inline, Element):
+class Aanode(Element):
     children = ()
 
     def __init__(self, content, options, rawsource='', *children, **attributes):
         self.content = content
         self.options = options
         Element.__init__(self, rawsource, *children, **attributes)
+
+    def copy(self, **attributes):
+        return Aanode(self.content, self.options, **self.attributes)
 
     def gen_flowable(self, style_options):
         options = dict(style_options)

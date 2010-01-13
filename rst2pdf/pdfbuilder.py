@@ -664,6 +664,11 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         # Not neat, but I need to send self to my handlers
         node['builder']=self
 
+    def visit_Aanode(self, node):
+        pass
+    
+    def depart_Aanode(self, node):
+        pass
     
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):

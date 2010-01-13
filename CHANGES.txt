@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fix Issue 257: support aafigure when using sphinx/pdfbuilder
 * Initial support for graphviz extension in pdfbuilder
 * Fix Issue 249: Images distorted when specifiying width and height
 * Fix Issue 252: math directive conflicted with sphinx
