@@ -228,3 +228,5 @@ pdf_use_modindex = False
 pdf_use_coverpage = False
 
 pdf_verbosity=2
+
+pdf_extensions=['vectorpdf']

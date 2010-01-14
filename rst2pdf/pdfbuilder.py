@@ -78,6 +78,9 @@ class PDFBuilder(Builder):
                 else:
                     opts={}
                 self.info("processing " + targetname + "... ", nonl=1)
+                
+                createpdf.add_extensions(self.config.pdf_extensions)
+                
                 docwriter = PDFWriter(self,
                                 stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
                                 language=opts.get('pdf_language',self.config.pdf_language),
@@ -747,6 +750,7 @@ def setup(app):
     app.add_config_value('pdf_splittables', False, None)
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
+    app.add_config_value('pdf_extensions',[], None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
