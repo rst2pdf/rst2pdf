@@ -1642,6 +1642,9 @@ To use it in your existing sphinx project you need to do the following:
     # Set the default DPI for images
     #pdf_default_dpi = 72
    
+    # Enable rst2pdf extension modules (default is empty list)
+    # you need vectorpdf for better sphinx's graphviz support
+    #pdf_extensions = ['vectorpdf']
     
 3. (Maybe) add this in your Makefile::
     
