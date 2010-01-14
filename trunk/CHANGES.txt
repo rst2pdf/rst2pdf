@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fix Issue 251: added support for rst2pdf extensions when using sphinx
 * Fix Issue 256: ugly crash when using SVG images without SVG support
 * Fix Issue 257: support aafigure when using sphinx/pdfbuilder
 * Initial support for graphviz extension in pdfbuilder
