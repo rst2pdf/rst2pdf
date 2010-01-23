@@ -64,14 +64,14 @@ class VectorPdf(Flowable):
                 raise ValueError("Bad hAlign value " + str(a))
 
         xobj = self.xobj
-        makerl(canv._doc, xobj)
+        xobj_name = makerl(canv._doc, xobj)
         x -= xobj.BBox[0]
         y -= xobj.BBox[1]
 
         canv.saveState()
         canv.translate(x, y)
         canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
-        canv.doForm(xobj.rl_xobj_name)
+        canv.doForm(xobj_name)
         canv.restoreState()
 
 rst2pdf.image.VectorPdf = VectorPdf
