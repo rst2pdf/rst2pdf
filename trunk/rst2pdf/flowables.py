@@ -201,9 +201,6 @@ class SplitTable(DelayedTable):
             bullet=self.data[0][0]
             text=self.data[0][1]
             for l in range(0,len(text)):
-                # The -12 here is a hack. I don't know why
-                # If the table contents wrap to Y points, the
-                # table wraps to Y+12
                 _,fh = _listWrapOn(text[:l+1],w-dw,None)
                 if fh+dh > h:
                     # The lth flowable is the guilty one
@@ -213,14 +210,35 @@ class SplitTable(DelayedTable):
                     # Workaround for Issue 180
                     text[l].wrap(w-dw,h-lh-dh)
                     l2=text[l].split(w-dw,h-lh-dh)
-                    if l2==[] and l==0: # Can't fit anything
-                        return l2
-                    elif l2==[]: # Not splittable, push to next page
+                    if l2==[]: # Not splittable, push some to next page
+                        if l==0: # Can't fit anything, push all to next page
+                            return l2
 
-                        # If the previous one is keepwithnext, push
-                        # that one too
-                        while l>0 and text[l-1].getKeepWithNext():
-                            l-=1
+                        # We reduce the number of items we keep on the
+                        # page for two reasons:
+                        #    1) If an item is associated with the following
+                        #       item (getKeepWithNext() == True), we have
+                        #       to back up to a previous one.
+                        #    2) If we miscalculated the size required on
+                        #       the first page (I dunno why, probably not
+                        #       counting borders properly, but we do
+                        #       miscalculate occasionally).  Seems to
+                        #       have to do with nested tables, so it might
+                        #       be the extra space on the border on the
+                        #       inner table.
+
+                        while l > 0:
+                            if not text[l-1].getKeepWithNext():
+                                first_t = Table([
+                                                [bullet,
+                                                text[:l]]
+                                            ],
+                                            colWidths=self.colWidths,
+                                            style=self.style)
+                                _w,_h = first_t.wrap(w, h)
+                                if _h <= h:
+                                    break
+                            l -= 1
 
                         if l>0:
                             # Workaround for Issue 180 with wordaxe:
@@ -235,12 +253,7 @@ class SplitTable(DelayedTable):
                                         #colWidths=self.colWidths,
                                         #style=self.style)]
                             #else:
-                            l3=[Table([
-                                        [bullet,
-                                         text[:l]]
-                                       ],
-                                    colWidths=self.colWidths,
-                                    style=self.style),
+                            l3=[first_t,
                                     SplitTable([['',text[l:]]],
                                     colWidths=self.colWidths,
                                     style=self.style,
