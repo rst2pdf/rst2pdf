@@ -18,17 +18,17 @@ Enlarged PDF image:
    :scale: 200%
 
 
-Normal PNG image:
+Normal image:
 
-.. image:: images/middleware.png
+.. image:: images/middleware.jpg
 
-Shrunken PNG image:
+Shrunken image:
 
-.. image:: images/middleware.png
+.. image:: images/middleware.jpg
    :scale: 60%
 
-Enlarged PNG image:
+Enlarged image:
 
-.. image:: images/middleware.png
+.. image:: images/middleware.jpg
    :scale: 200%
 
