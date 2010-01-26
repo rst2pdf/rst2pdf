@@ -65,12 +65,16 @@ class VectorPdf(Flowable):
 
         xobj = self.xobj
         xobj_name = makerl(canv._doc, xobj)
-        x -= xobj.BBox[0]
-        y -= xobj.BBox[1]
+
+        xscale = self.drawWidth/self._w
+        yscale = self.drawHeight/self._h
+
+        x -= xobj.BBox[0] * xscale
+        y -= xobj.BBox[1] * yscale
 
         canv.saveState()
         canv.translate(x, y)
-        canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
+        canv.scale(xscale, yscale)
         canv.doForm(xobj_name)
         canv.restoreState()
 
