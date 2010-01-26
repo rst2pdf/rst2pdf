@@ -71,6 +71,9 @@ class SVGImage(Flowable):
         return self.imageWidth, self.imageHeight
 
     def drawOn(self, canv, x, y, _sW=0):
+        canv.saveState()
+        canv.translate(x, y)
+        canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
         if _sW and hasattr(self, 'hAlign'):
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
@@ -79,9 +82,6 @@ class SVGImage(Flowable):
                 x += _sW
             elif a not in ('LEFT', TA_LEFT):
                 raise ValueError("Bad hAlign value " + str(a))
-        canv.saveState()
-        canv.translate(x, y)
-        canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
         if self._mode == 'uniconvertor':
             self.uniconvertor_save(self.doc, open('.ignoreme.pdf', 'w'),
                 '.ignoreme.pdf', options=dict(pdfgen_canvas=canv))
