@@ -654,7 +654,9 @@ def setPageCounter(counter=None, style=None):
     else:
         ptext=unicode(_counter)
     return ptext
-
+    
+class MyContainer(_Container, Flowable):
+    pass
 
 class HeaderOrFooter(object):
     """ A helper object for FancyPage (below)
@@ -715,7 +717,7 @@ class HeaderOrFooter(object):
         items = self.prepared
         if items:
             self.replaceTokens(items, canv, doc, pageobj.smarty)
-            container = _Container()
+            container = MyContainer()
             container._content = items
             container.width = width
             container.height = height
