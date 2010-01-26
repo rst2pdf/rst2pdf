@@ -68,10 +68,10 @@ class SVGImage(Flowable):
             self.drawHeight = self.imageHeight*factor
 
     def wrap(self, aW, aH):
-        return self.imageWidth, self.imageHeight
+        return self.drawWidth, self.drawHeight
 
     def drawOn(self, canv, x, y, _sW=0):
-        if _sW>0 and hasattr(self, 'hAlign'):
+        if _sW and hasattr(self, 'hAlign'):
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
                 x += 0.5*_sW
