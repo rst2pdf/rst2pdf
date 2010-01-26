@@ -30,5 +30,5 @@ Shrunken image:
 Enlarged image:
 
 .. image:: images/middleware.jpg
-   :scale: 200%
+   :scale: 900%
 
