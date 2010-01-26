@@ -734,7 +734,7 @@ class BoxedContainer(BoundByWidth):
         else:
             fill=0
         if self.style:
-            self.padding = self.style.__dict__.get('padding', 8)
+            self.padding = self.style.__dict__.get('borderPadding', 8)
         else:
             self.padding = 0
         self.padding += lw
