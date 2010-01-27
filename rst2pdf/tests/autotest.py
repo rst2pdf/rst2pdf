@@ -377,47 +377,11 @@ def parse_commandline():
         help='Update MD5 checksum files')
     return parser
 
-def monkeypatch():
-    ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
-        This allows us to compare PDFs more easily
-    '''
-    import reportlab
-    from reportlab import rl_config
-    from reportlab.pdfgen.canvas import Canvas
-    from reportlab.pdfbase import pdfdoc
-
-    if getattr(reportlab, 'Version', None) != '2.4':
-        return
-
-    # NOTE:  THIS IS A REAL DIFFERENCE -- DEFAULT y-offset FOR CHARS CHANGES!!!
-    rl_config.paraFontSizeHeightOffset = False
-
-    # Fix the preamble.  2.4 winds up injecting an extra space, so we toast it.
-
-    def new_make_preamble(self):
-        self._old_make_preamble()
-        self._preamble = ' '.join(self._preamble.split())
-
-    Canvas._old_make_preamble = Canvas._make_preamble
-    Canvas._make_preamble = new_make_preamble
-
-    # An new optimization removes the CR/LF between 'endstream' and 'endobj'
-    # Remove it for comparison
-    pdfdoc.INDIRECTOBFMT = pdfdoc.INDIRECTOBFMT.replace('CLINEEND', 'LINEEND')
-
-    # By default, transparency is set, and by default, that changes PDF version
-    # to 1.4 in RL 2.4.
-    pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1,3
-
-
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
     if not options.nopythonpath:
         setpythonpaths(PathInfo.runfile, PathInfo.rootdir)
-
-    monkeypatch()
-
     fastfork = None
     do_sphinx = options.sphinx or options.everything
     do_text = options.everything or not options.sphinx
