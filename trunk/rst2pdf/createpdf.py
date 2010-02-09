@@ -1153,11 +1153,13 @@ def add_extensions(extensions):
             sys.path.insert(0, prefix)
         log.info('Importing extension module %s', repr(modname))
         try:
-            __import__(modname, globals(), locals())
+            module = __import__(modname, globals(), locals())
         except ImportError:
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
                                 (modname, ',\n    '.join(sys.path)))
+        if hasattr(module, 'install'):
+            module.install()
 
 def monkeypatch():
     ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
