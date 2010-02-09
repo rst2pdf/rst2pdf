@@ -15,11 +15,6 @@ from rst2pdf.log import log
 import rst2pdf.image
 from rst2pdf.opt_imports import LazyImports
 
-# This is kinda goofy -- since we bring it in as a subpackage,
-# go ahead and monkey patch it in.
-
-LazyImports.pdfinfo = pdfrw
-
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
 
@@ -78,4 +73,8 @@ class VectorPdf(Flowable):
         canv.doForm(xobj_name)
         canv.restoreState()
 
-rst2pdf.image.VectorPdf = VectorPdf
+def install():
+    ''' Monkey-patch this PDF handling into rst2pdf
+    '''
+    LazyImports.pdfinfo = pdfrw
+    rst2pdf.image.VectorPdf = VectorPdf
