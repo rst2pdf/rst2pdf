@@ -121,6 +121,10 @@
     ["lineblock" , {
       "parent": "bodytext"
     }],
+    ["line" , {
+      "parent": "lineblock",
+      "spaceBefore": 0
+    }],
     ["toc1" , {
       "parent": "toc",
       "fontName": "stdBold"

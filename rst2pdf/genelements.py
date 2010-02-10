@@ -612,13 +612,12 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
             qstyle = copy(client.styles['lineblock'])
         # Fix Issue 225: no space betwen line in a lineblock, but keep
         # space before the lineblock itself
-        qstyle.spaceBefore=0
-        return [Spacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)
-
+        return [Spacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[Spacer(0,client.styles['lineblock'].spaceAfter)]
+        
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
         # All elements in one line
-        return [Paragraph(client.gather_pdftext(node), style=style)]
+        return [Paragraph(client.gather_pdftext(node), style=client.styles['line'])]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                                docutils.nodes.doctest_block):
