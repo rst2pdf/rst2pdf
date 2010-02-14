@@ -23,7 +23,8 @@ class VectorPdf(Flowable):
     # TODO: Really need some way to uncache this between runs
     load_xobj = CacheXObj().load
 
-    def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
+    def __init__(self, filename, width=None, height=None, kind='direct',
+                                     mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
         self.xobj = self.load_xobj(filename)

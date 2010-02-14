@@ -24,6 +24,15 @@ else:
 
 missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
+def defaultimage(filename, width=None, height=None, kind='direct',
+                                        mask="auto", lazy=1, srcinfo=None):
+    ''' We have multiple image backends, including the stock reportlab one.
+        This wrapper around the reportlab one allows us to pass the client
+        RstToPdf object and the uri into all our backends, which they can
+        use or not as necessary.
+    '''
+    return Image(filename, width, height, kind, mask, lazy)
+
 class MyImage (Flowable):
     """A Image subclass that can:
     
@@ -63,18 +72,19 @@ class MyImage (Flowable):
                  kind='direct', mask="auto", lazy=1, client=None):
         # Client is mandatory.  Perhaps move it farther up if we refactor
         assert client is not None
+        srcinfo = client, filename
         self.__kind=kind
         self.filename, self._backend=self.get_backend(filename, client)
         if kind == 'percentage_of_container':
             self.image=self._backend(self.filename, width, height,
-                'direct', mask, lazy)
+                'direct', mask, lazy, srcinfo)
             self.image.drawWidth=width
             self.image.drawHeight=height
             self.__width=width
             self.__height=height
         else:
             self.image=self._backend(self.filename, width, height,
-                kind, mask, lazy)
+                kind, mask, lazy, srcinfo)
         self.__ratio=float(self.image.imageWidth)/self.image.imageHeight
         self.__wrappedonce=False
 
@@ -162,7 +172,7 @@ class MyImage (Flowable):
         or is missing), and backend is an Image class that can handle 
         fname.'''
 
-        backend=Image
+        backend = defaultimage
 
         # Extract all the information from the URI
         filename, extension, options = self.split_uri(uri)
@@ -217,6 +227,7 @@ class MyImage (Flowable):
         That involves lots of guesswork'''
         
         uri = os.path.join(client.basedir,str(node.get("uri")))
+        srcinfo = client, uri
         
         # Extract all the information from the URI
         imgname, extension, options = self.split_uri(uri)
@@ -240,7 +251,7 @@ class MyImage (Flowable):
         xdpi, ydpi = client.styles.def_dpi, client.styles.def_dpi
         extension = imgname.split('.')[-1].lower()
         if extension in ['svg','svgz'] and SVGImage.available():
-            iw, ih = SVGImage(imgname).wrap(0, 0)
+            iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
@@ -248,7 +259,7 @@ class MyImage (Flowable):
         elif extension in [
                 "ai", "ccx", "cdr", "cgm", "cmx",
                 "sk1", "sk", "xml", "wmf", "fig"] and VectorImage.available():
-            iw, ih = VectorImage(imgname).wrap(0, 0)
+            iw, ih = VectorImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
