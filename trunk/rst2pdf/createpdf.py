@@ -498,8 +498,7 @@ class RstToPdf(object):
         foot = self.decoration['footer']
 
         # So, now, create the FancyPage with the right sizes and elements
-        FP = FancyPage("fancypage", head, foot, self.styles,
-                       smarty=self.smarty, show_frame=self.show_frame)
+        FP = FancyPage("fancypage", head, foot, self)
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -728,12 +727,13 @@ class FancyPage(PageTemplate):
     """ A page template that handles changing layouts.
     """
 
-    def __init__(self, _id, _head, _foot, styles, smarty="0", show_frame=False):
-        self.styles = styles
+    def __init__(self, _id, _head, _foot, client):
+        self.client = client
+        self.styles = client.styles
         self._head = HeaderOrFooter(_head)
         self._foot = HeaderOrFooter(_foot, True)
-        self.smarty = smarty
-        self.show_frame = show_frame
+        self.smarty = client.smarty
+        self.show_frame = client.show_frame
         PageTemplate.__init__(self, _id, [])
 
 
@@ -790,7 +790,7 @@ class FancyPage(PageTemplate):
         if 'background' in self.template:
             uri=self.template['background']
             if os.path.exists(uri):
-                bg = MyImage(uri, self.styles.pw, self.styles.ph)
+                bg = MyImage(uri, self.styles.pw, self.styles.ph, client=self.client)
                 bg.drawOn(canv, 0, 0)
             else:
                 log.error("Missing background image file: %s", uri)
