@@ -8,20 +8,23 @@
     TODO: NOTE:
 
     The initial version is a proof of concept; uses subprocess in a naive way,
-    doesn't check return from inkscape for errors, doesn't cache images, etc.,
-    so this will have to be cleaned up for production use.
-
-    ALSO, I think the way this is used, two instances will be created and
-    destroyed (invoking inkscape twice for every image), so that's a bit
-    wasteful...
+    and doesn't check return from inkscape for errors.
 '''
 
 import os, tempfile, subprocess
+from weakref import WeakKeyDictionary
 
 from vectorpdf import VectorPdf
 import rst2pdf.image
 
 class InkscapeImage(VectorPdf):
+
+    # The filecache allows us to only read a given PDF file once
+    # for every RstToPdf client object.  This allows this module
+    # to usefully cache, while avoiding being the cause of a memory
+    # leak in a long-running process.
+
+    source_filecache = WeakKeyDictionary()
 
     @classmethod
     def available(self):
@@ -29,12 +32,20 @@ class InkscapeImage(VectorPdf):
 
     def __init__(self, filename, width=None, height=None, kind='direct',
                                  mask=None, lazy=True, srcinfo=None):
-        tmpf, tmpname = tempfile.mkstemp(suffix='.pdf')
-        os.close(tmpf)
-        subprocess.call(['inkscape', filename, '-A', tmpname])
-        pdfsrc = srcinfo[0], srcinfo[1].replace(filename, tmpname)
-        VectorPdf.__init__(self, tmpname, width, height, kind, mask, lazy, pdfsrc)
-        os.unlink(tmpname)
+        client, uri = srcinfo
+        cache = self.source_filecache.setdefault(client, {})
+        pdffname = cache.get(filename)
+        if pdffname is None:
+            tmpf, pdffname = tempfile.mkstemp(suffix='.pdf')
+            os.close(tmpf)
+            client.to_unlink.append(pdffname)
+            cache[filename] = pdffname
+            subprocess.call(['inkscape', filename, '-A', pdffname])
+            self.load_xobj((client, pdffname))
+
+        pdfuri = uri.replace(filename, pdffname)
+        pdfsrc = client, pdfuri
+        VectorPdf.__init__(self, pdfuri, width, height, kind, mask, lazy, pdfsrc)
 
 def install():
     ''' Monkey-patch our class in to image as a replacement class for SVGImage.
