@@ -3,6 +3,7 @@
 
 import sys
 import os
+from weakref import WeakKeyDictionary
 
 from reportlab.platypus import Flowable
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
@@ -20,14 +21,26 @@ from rst2pdf.opt_imports import LazyImports
 
 class VectorPdf(Flowable):
 
-    # TODO: Really need some way to uncache this between runs
-    load_xobj = CacheXObj().load
+    # The filecache allows us to only read a given PDF file once
+    # for every RstToPdf client object.  This allows this module
+    # to usefully cache, while avoiding being the cause of a memory
+    # leak in a long-running process.
+
+    filecache = WeakKeyDictionary()
+
+    @classmethod
+    def load_xobj(cls, srcinfo):
+        client, uri = srcinfo
+        loader = cls.filecache.get(client)
+        if loader is None:
+            loader = cls.filecache[client] = CacheXObj().load
+        return loader(uri)
 
     def __init__(self, filename, width=None, height=None, kind='direct',
                                      mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
-        self.xobj = self.load_xobj(filename)
+        self.xobj = self.load_xobj(srcinfo)
         self.imageWidth = width
         self.imageHeight = height
         x1, y1, x2, y2 = self.xobj.BBox

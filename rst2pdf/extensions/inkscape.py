@@ -32,7 +32,8 @@ class InkscapeImage(VectorPdf):
         tmpf, tmpname = tempfile.mkstemp(suffix='.pdf')
         os.close(tmpf)
         subprocess.call(['inkscape', filename, '-A', tmpname])
-        VectorPdf.__init__(self, tmpname, width, height, kind, mask, lazy)
+        pdfsrc = srcinfo[0], srcinfo[1].replace(filename, tmpname)
+        VectorPdf.__init__(self, tmpname, width, height, kind, mask, lazy, pdfsrc)
         os.unlink(tmpname)
 
 def install():
