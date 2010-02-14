@@ -17,7 +17,8 @@ class SVGImage(Flowable):
             return True
         return False
 
-    def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
+    def __init__(self, filename, width=None, height=None, kind='direct',
+                                     mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         ext = os.path.splitext(filename)[-1]
         self._kind = kind

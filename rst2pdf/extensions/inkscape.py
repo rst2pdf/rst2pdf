@@ -27,7 +27,8 @@ class InkscapeImage(VectorPdf):
     def available(self):
         return True
 
-    def __init__(self, filename, width=None, height=None, kind='direct', mask=None, lazy=True):
+    def __init__(self, filename, width=None, height=None, kind='direct',
+                                 mask=None, lazy=True, srcinfo=None):
         tmpf, tmpname = tempfile.mkstemp(suffix='.pdf')
         os.close(tmpf)
         subprocess.call(['inkscape', filename, '-A', tmpname])
