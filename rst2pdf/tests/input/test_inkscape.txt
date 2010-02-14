@@ -1,5 +1,5 @@
 
-This is basically a copy of the "test image units test",
+This is basically a copy of the "test_image_units_svg" test,
 concatenated with the "test_issue_266_2" test,
 rendered using "-e inkscape", which uses inkscape to
 convert to a PDF, then uses pdfrw to eat the PDF.
