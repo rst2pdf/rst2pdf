@@ -266,7 +266,7 @@ class MyImage (Flowable):
                     
         elif extension == 'pdf':
             if VectorPdf is not None:
-                box = VectorPdf.load_xobj(uri).BBox
+                box = VectorPdf.load_xobj(srcinfo).BBox
             else:
                 pdf = LazyImports.pdfinfo
                 if pdf is None:
