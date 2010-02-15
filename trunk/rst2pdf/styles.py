@@ -726,6 +726,9 @@ def formatColor(value, numeric=True):
             r = int(c[:2], 16)/255.
             g = int(c[2:4], 16)/255.
             b = int(c[4:6], 16)/255.
+            if len(c) >= 8:
+                alpha = int(c[6:8], 16)/255.
+                return colors.Color(r, g, b, alpha=alpha)
             return colors.Color(r, g, b)
         else:
             return str("#"+c)
