@@ -734,7 +734,41 @@ class FancyPage(PageTemplate):
         self._foot = HeaderOrFooter(_foot, True)
         self.smarty = client.smarty
         self.show_frame = client.show_frame
+        self.image_cache = {}
         PageTemplate.__init__(self, _id, [])
+
+
+    def draw_background(self, which, canv):
+        ''' Draws a background and/or foreground image
+            on each page which uses the template.
+
+            Calculates the image one time, and caches
+            it for reuse on every page in the template.
+
+            Currently, reduces the image to fit on the page
+            and then centers it on the page.
+
+            If desired, we could add code to push it around
+            on the page, using stylesheets to align and/or
+            set the offset.
+        '''
+        uri=self.template[which]
+        info = self.image_cache.get(uri)
+        if info is None:
+            fname, _, _ = MyImage.split_uri(uri)
+            if not os.path.exists(fname):
+                del self.template[which]
+                log.error("Missing %s image file: %s", which, uri)
+                return
+            w, h, kind = MyImage.size_for_node(dict(uri=uri), self.client)
+            pw, ph = self.styles.pw, self.styles.ph
+            scale = min(1.0, 1.0 * pw / w, 1.0 * ph / h)
+            sw, sh = w * scale, h * scale
+            x, y = (pw - sw) / 2.0, (ph - sh) / 2.0
+            bg = MyImage(uri, sw, sh, client=self.client)
+            self.image_cache[uri] = info = bg, x, y
+        bg, x, y = info
+        bg.drawOn(canv, x, y)
 
 
     def beforeDrawPage(self, canv, doc):
@@ -788,12 +822,7 @@ class FancyPage(PageTemplate):
         
         # If there is a background parameter for this page Template, draw it
         if 'background' in self.template:
-            uri=self.template['background']
-            if os.path.exists(uri):
-                bg = MyImage(uri, self.styles.pw, self.styles.ph, client=self.client)
-                bg.drawOn(canv, 0, 0)
-            else:
-                log.error("Missing background image file: %s", uri)
+            self.draw_background('background', canv)
 
         self.frames = []
         for frame in self.template['frames']:
@@ -823,6 +852,11 @@ class FancyPage(PageTemplate):
             
         self._head.draw(self, canv, doc, hx, self.hy, self.tw, self.hh)
         self._foot.draw(self, canv, doc, fx, self.fy, self.tw, self.fh)
+
+        # If there is a foreground parameter for this page Template, draw it
+        if 'foreground' in self.template:
+            self.draw_background('foreground', canv)
+
 
 def parse_commandline():
     
