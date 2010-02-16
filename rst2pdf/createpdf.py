@@ -1176,8 +1176,10 @@ def patch_PDFDate():
 def add_extensions(extensions):
     for modname in extensions:
         prefix, modname = os.path.split(modname)
+        path_given = prefix
         if modname.endswith('.py'):
             modname = modname[:-3]
+            path_given = True
         if not prefix:
             prefix = os.path.join(os.path.dirname(__file__), 'extensions')
             if prefix not in sys.path:
@@ -1186,8 +1188,12 @@ def add_extensions(extensions):
         if prefix not in sys.path:
             sys.path.insert(0, prefix)
         log.info('Importing extension module %s', repr(modname))
+        firstname = path_given and modname or (modname + '_r2p')
         try:
-            module = __import__(modname, globals(), locals())
+            try:
+                module = __import__(firstname, globals(), locals())
+            except ImportError:
+                module = __import__(modname, globals(), locals())
         except ImportError:
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
