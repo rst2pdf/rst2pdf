@@ -90,6 +90,10 @@ class BaseExec(object):
                 if code:
                     print >> sys.stderr, code
                     sys.stderr.write(chr(1))
+            else:
+                sys.stdout.flush()
+            sys.stderr.flush()
+
         return wrapper
 
     def __init__(self, *args, **kw):
