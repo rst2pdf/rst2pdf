@@ -673,18 +673,18 @@ class HeaderOrFooter(object):
 
     def prepare(self, pageobj, canv):
         showloc = pageobj.template.get(self.showloc, True)
+        height = 0
         items = self.items
-        if showloc and not items:
-            items = pageobj.template.get(self.defaultloc)
-        if items:
-            if isinstance(items, list):
-                items = items[:]
-            else:
-                items = [Paragraph(items, pageobj.styles[self.loc])]
-            _, height =  _listWrapOn(items, pageobj.tw, canv)
-        else:
-            height = 0
-        self.prepared = items
+        if showloc:
+            if not items:
+                items = pageobj.template.get(self.defaultloc)
+            if items:
+                if isinstance(items, list):
+                    items = items[:]
+                else:
+                    items = [Paragraph(items, pageobj.styles[self.loc])]
+                _, height =  _listWrapOn(items, pageobj.tw, canv)
+        self.prepared = height and items
         return height
 
     def replaceTokens(self, elems, canv, doc, smarty):
