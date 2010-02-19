@@ -665,11 +665,11 @@ class HeaderOrFooter(object):
     def __init__(self, items=None, isfooter=False):
         self.items = items
         if isfooter:
-            locinfo = 'footer showFooter defaultFooter'
+            locinfo = 'footer showFooter defaultFooter footerSeparator'
         else:
-            locinfo = 'header showHeader defaultHeader'
+            locinfo = 'header showHeader defaultHeader headerSeparator'
         self.isfooter = isfooter
-        self.loc, self.showloc, self.defaultloc = locinfo.split()
+        self.loc, self.showloc, self.defaultloc, self.addsep = locinfo.split()
 
     def prepare(self, pageobj, canv):
         showloc = pageobj.template.get(self.showloc, True)
@@ -683,6 +683,12 @@ class HeaderOrFooter(object):
                     items = items[:]
                 else:
                     items = [Paragraph(items, pageobj.styles[self.loc])]
+                addsep = pageobj.template.get(self.addsep, False)
+                if addsep:
+                    if self.isfooter:
+                        items.insert(0, Separation())
+                    else:
+                        items.append(Separation())
                 _, height =  _listWrapOn(items, pageobj.tw, canv)
         self.prepared = height and items
         return height
