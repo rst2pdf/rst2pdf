@@ -39,6 +39,18 @@ unit_separator = re.compile('(-?[0-9\.]*)')
 class StyleSheet(object):
     '''Class to handle a collection of stylesheets'''
 
+    @staticmethod
+    def stylepairs(data):
+        ''' Allows pairs of style information to be expressed
+            in canonical reportlab list of two-item list/tuple,
+            or in a more human-readable dictionary.
+        '''
+        styles = data.get('styles', {})
+        try:
+            return styles.iteritems()
+        except AttributeError:
+            return styles
+
     def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
         # find base path
@@ -315,8 +327,7 @@ class StyleSheet(object):
         # Go though all styles in all stylesheets and find all fontNames.
         # Then decide what to do with them
         for data, ssname in zip(ssdata, flist):
-            styles = data.get('styles', {})
-            for [skey, style] in styles:
+            for [skey, style] in self.stylepairs(data):
 
                 for key in style:
                     if key == 'fontName' or key.endswith('FontName'):
@@ -387,8 +398,7 @@ class StyleSheet(object):
         self.linkColor = 'navy'
         for data, ssname in zip(ssdata, flist):
             self.linkColor = data.get('linkColor') or self.linkColor
-            styles = data.get('styles', {})
-            for [skey, style] in styles:
+            for [skey, style] in self.stylepairs(data):
                 sdict = {}
                 # FIXME: this is done completely backwards
                 for key in style:
