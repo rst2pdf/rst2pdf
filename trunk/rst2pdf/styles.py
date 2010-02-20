@@ -107,54 +107,13 @@ class StyleSheet(object):
         self.emsize=10
 
         self.languages = []
-        ssdata = []
-        # First parse all files and store the results
-        for fname in flist:
-            fname = self.findStyle(fname)
-            try:
-                if fname:
-                    ssdata.append(json_loads(open(fname).read()))
-            except ValueError, e: # Error parsing the JSON data
-                log.critical('Error parsing stylesheet "%s": %s'%\
-                    (fname, str(e)))
-                continue
-            except IOError, e: #Error opening the ssheet
-                log.critical('Error opening stylesheet "%s": %s'%\
-                    (fname, str(e)))
-                continue
 
-        # If any stylesheet has a [options][stylesheets] then those need to
-        # be inserted, too
-        _flist = []
-        for data, ssname in zip(ssdata, flist):
-            if 'options' in data and 'stylesheets' in data['options']:
-                _flist.extend(data['options']['stylesheets'])
-            _flist.append(ssname)
-        
-        if _flist != flist: # Need to reparse
-            flist = _flist
-            ssdata = []
-            # First parse all files and store the results
-            for fname in flist:
-                fname = self.findStyle(fname)
-                try:
-                    if fname:
-                        ssdata.append(json_loads(open(fname).read()))
-                except ValueError, e: # Error parsing the JSON data
-                    log.critical('Error parsing stylesheet "%s": %s'%\
-                        (fname, str(e)))
-                    continue
-                except IOError, e: #Error opening the ssheet
-                    log.critical('Error opening stylesheet "%s": %s'%\
-                        (fname, str(e)))
-                    continue
-        
-            
-            
+        ssdata = self.readSheets(flist)
+
         # Get pageSetup data from all stylessheets in order:
         self.ps = pagesizes.A4
         self.page={}
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             page = data.get('pageSetup', {})
             if page:
                 self.page.update(page)
@@ -205,7 +164,7 @@ class StyleSheet(object):
 
         # Get page templates from all stylesheets
         self.pageTemplates = {}
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             templates = data.get('pageTemplates', {})
             # templates is a dictionary of pageTemplates
             for key in templates:
@@ -219,13 +178,13 @@ class StyleSheet(object):
 
         # Get font aliases from all stylesheets in order
         self.fontsAlias = {}
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             self.fontsAlias.update(data.get('fontsAlias', {}))
 
         embedded_fontnames = []
         self.embedded = []
         # Embed all fonts indicated in all stylesheets
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             embedded = data.get('embeddedFonts', [])
 
             for font in embedded:
@@ -326,7 +285,7 @@ class StyleSheet(object):
 
         # Go though all styles in all stylesheets and find all fontNames.
         # Then decide what to do with them
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             for [skey, style] in self.stylepairs(data):
 
                 for key in style:
@@ -396,7 +355,7 @@ class StyleSheet(object):
         self.stylesheet = {}
         self.styles = []
         self.linkColor = 'navy'
-        for data, ssname in zip(ssdata, flist):
+        for data, ssname in ssdata:
             self.linkColor = data.get('linkColor') or self.linkColor
             for [skey, style] in self.stylepairs(data):
                 sdict = {}
@@ -509,6 +468,53 @@ class StyleSheet(object):
             newst.name=key
             self.StyleSheet.add(newst)
             return newst
+
+    def readSheets(self, flist):
+        ''' Read in the stylesheets.  Return a list of
+            (sheetdata, sheetname) tuples.
+
+            Orders included sheets in front
+            of including sheets.
+        '''
+        # Process from end of flist
+        flist.reverse()
+        # Keep previously seen sheets in sheetdict
+        sheetdict = {}
+        result = []
+
+        while flist:
+            ssname = flist.pop()
+            data = sheetdict.get(ssname)
+            if data is None:
+                data = self.readStyle(ssname)
+                if data is None:
+                    continue
+                sheetdict[ssname] = data
+                if 'options' in data and 'stylesheets' in data['options']:
+                    flist.append(ssname)
+                    newsheets = list(data['options']['stylesheets'])
+                    newsheets.reverse()
+                    flist.extend(newsheets)
+                    continue
+            result.append((data, ssname))
+        return result
+
+    def readStyle(self, ssname):
+            # If callables are used, they should probably be subclassed
+            # strings, or something else that will print nicely for errors
+            if callable(ssname):
+                return ssname()
+
+            fname = self.findStyle(ssname)
+            if fname:
+                try:
+                    return json_loads(open(fname).read())
+                except ValueError, e: # Error parsing the JSON data
+                    log.critical('Error parsing stylesheet "%s": %s'%\
+                        (fname, str(e)))
+                except IOError, e: #Error opening the ssheet
+                    log.critical('Error opening stylesheet "%s": %s'%\
+                        (fname, str(e)))
 
     def findStyle(self, fn):
         """Find the absolute file name for a given style filename.
