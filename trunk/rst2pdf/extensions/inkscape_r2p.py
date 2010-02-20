@@ -47,7 +47,7 @@ class InkscapeImage(VectorPdf):
         pdfsrc = client, pdfuri
         VectorPdf.__init__(self, pdfuri, width, height, kind, mask, lazy, pdfsrc)
 
-def install():
+def install(createpdf, options):
     ''' Monkey-patch our class in to image as a replacement class for SVGImage.
     '''
     rst2pdf.image.SVGImage = InkscapeImage

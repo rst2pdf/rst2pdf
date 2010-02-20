@@ -87,7 +87,7 @@ class VectorPdf(Flowable):
         canv.doForm(xobj_name)
         canv.restoreState()
 
-def install():
+def install(createpdf, options):
     ''' Monkey-patch this PDF handling into rst2pdf
     '''
     LazyImports.pdfinfo = pdfrw
