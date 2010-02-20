@@ -1071,14 +1071,15 @@ def main(args=None):
 
     if len(args) == 0 or args[0] == '-':
         infile = sys.stdin
-        basedir=os.getcwd()
+        options.basedir=os.getcwd()
     elif len(args) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
     else:
         filename = args[0]
-        basedir=os.path.dirname(os.path.abspath(filename))
+        options.basedir=os.path.dirname(os.path.abspath(filename))
         infile = open(filename)
+    options.infile = infile
 
     if options.output:
         outfile = options.output
@@ -1100,6 +1101,7 @@ def main(args=None):
             log.setLevel(logging.CRITICAL)
             #/reportlab/pdfbase/pdfdoc.py output can
             #be a callable (stringio, stdout ...)
+    options.outfile = outfile
 
     ssheet = []
     if options.style:
@@ -1107,17 +1109,19 @@ def main(args=None):
             ssheet += l.split(',')
     else:
         ssheet = []
-    ssheet = [x for x in ssheet if x]
+    options.style = [x for x in ssheet if x]
 
     fpath = []
     if options.fpath:
         fpath = options.fpath.split(os.pathsep)
     if options.ffolder:
         fpath.append(options.ffolder)
+    options.fpath = fpath
 
     spath = []
     if options.stylepath:
         spath = options.stylepath.split(os.pathsep)
+    options.stylepath = spath
 
     if reportlab.Version < '2.3':
         log.warning('You are using Reportlab version %s.'\
@@ -1128,10 +1132,10 @@ def main(args=None):
         patch_PDFDate()
 
     if options.extensions:
-        add_extensions(options.extensions)
+        add_extensions(options)
 
     RstToPdf(
-        stylesheets=ssheet,
+        stylesheets=options.style,
         language=options.language,
         header=options.header, footer=options.footer,
         inlinelinks=options.inlinelinks,
@@ -1139,20 +1143,20 @@ def main(args=None):
         baseurl=options.baseurl,
         fit_mode=options.fit_mode,
         smarty=str(options.smarty),
-        font_path=fpath,
-        style_path=spath,
+        font_path=options.fpath,
+        style_path=options.stylepath,
         repeat_table_rows=options.repeattablerows,
         footnote_backlinks=options.footnote_backlinks,
         inline_footnotes=options.inline_footnotes,
         def_dpi=int(options.def_dpi),
-        basedir=basedir,
+        basedir=options.basedir,
         show_frame=options.show_frame,
         splittables=options.splittables,
         blank_first_page=options.blank_first_page,
         breakside=options.breakside
-        ).createPdf(text=infile.read(),
-                    source_path=infile.name,
-                    output=outfile,
+        ).createPdf(text=options.infile.read(),
+                    source_path=options.infile.name,
+                    output=options.outfile,
                     compressed=options.compressed)
 
 
@@ -1179,8 +1183,14 @@ def patch_PDFDate():
     pdfdoc.PDFDate = PDFDate
     reportlab.rl_config.invariant = 1
 
-def add_extensions(extensions):
-    for modname in extensions:
+def add_extensions(options):
+    class ModuleProxy(object):
+        def __init__(self):
+            self.__dict__ = globals()
+
+    createpdf = ModuleProxy()
+
+    for modname in options.extensions:
         prefix, modname = os.path.split(modname)
         path_given = prefix
         if modname.endswith('.py'):
@@ -1205,7 +1215,7 @@ def add_extensions(extensions):
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
                                 (modname, ',\n    '.join(sys.path)))
         if hasattr(module, 'install'):
-            module.install()
+            module.install(createpdf, options)
 
 def monkeypatch():
     ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
