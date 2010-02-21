@@ -424,6 +424,7 @@
     }],
     ["table-title" , {
       "parent" : "heading4",
+      "keepWithNext": false,
       "alignment" : "TA_CENTER"
     }],
     ["table-heading" , {
