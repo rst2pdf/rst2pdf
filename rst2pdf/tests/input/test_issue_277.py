@@ -18,7 +18,7 @@ def go():
         heading=Paragraph('A heading at the beginning of the document',knstyle)
         heading.keepWithNext=True
         print [['This is the content'] for x in range(12)]
-        content= Table([[Paragraph('This is the content',styles['Normal'])] for x in range(120)],ts)
+        content= Table([[Paragraph('This is the content',styles['Normal'])] for x in range(120)], style=ts)
         
         Story=[heading,content]
         doc.build(Story)
