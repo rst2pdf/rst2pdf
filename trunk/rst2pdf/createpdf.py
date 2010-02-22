@@ -670,6 +670,7 @@ class HeaderOrFooter(object):
             locinfo = 'header showHeader defaultHeader headerSeparator'
         self.isfooter = isfooter
         self.loc, self.showloc, self.defaultloc, self.addsep = locinfo.split()
+        self.totalpages = 0
 
     def prepare(self, pageobj, canv):
         showloc = pageobj.template.get(self.showloc, True)
@@ -710,6 +711,7 @@ class HeaderOrFooter(object):
                         text = unicode(text, 'utf-8')
 
                 text = text.replace(u'###Page###', pnum)
+                text = text.replace(u'###Total###', str(self.totalpages))
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
                     getattr(canv, 'sectName', ''))
@@ -719,6 +721,7 @@ class HeaderOrFooter(object):
                 elems[i] = Paragraph(text, e.style)
 
     def draw(self, pageobj, canv, doc, x, y, width, height):
+        self.totalpages = max(self.totalpages, doc.page)
         items = self.prepared
         if items:
             self.replaceTokens(items, canv, doc, pageobj.smarty)
