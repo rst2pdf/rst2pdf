@@ -853,3 +853,16 @@ def validateCommands(commands):
             fixed.append(command)
             
     return fixed
+
+class CallableStyleSheet(str):
+    ''' Useful for programmatically generated stylesheets.
+        A generated stylesheet is a callable string (name),
+        which returns the pre-digested stylesheet data
+        when called.
+    '''
+    def __new__(cls, name, value=''):
+        self = str.__new__(cls, name)
+        self.value = value
+        return self
+    def __call__(self):
+        return json_loads(self.value)
