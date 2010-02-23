@@ -672,7 +672,7 @@ class HeaderOrFooter(object):
         self.loc, self.showloc, self.defaultloc, self.addsep = locinfo.split()
         self.totalpages = 0
 
-    def prepare(self, pageobj, canv):
+    def prepare(self, pageobj, canv, doc):
         showloc = pageobj.template.get(self.showloc, True)
         height = 0
         items = self.items
@@ -808,8 +808,8 @@ class FancyPage(PageTemplate):
 
         # Adjust text space accounting for header/footer
         
-        self.hh = self._head.prepare(self, canv)
-        self.fh = self._foot.prepare(self, canv)
+        self.hh = self._head.prepare(self, canv, doc)
+        self.fh = self._foot.prepare(self, canv, doc)
             
         canv._doctemplate = doct
 
