@@ -358,16 +358,17 @@ class HandleTopic(NodeHandler, docutils.nodes.topic):
     def gather_elements(self, client, node, style):
         # toc
         node_classes = node.attributes.get('classes', [])
+        cstyles = client.styles
         if 'contents' in node_classes:
             toc_visitor = TocBuilderVisitor(node.document)
             if 'local' in node_classes:
                 toc_visitor.toc = MyTableOfContents(parent=node.parent)
             else:
                 toc_visitor.toc = MyTableOfContents(parent=None)
-            toc_visitor.toc.linkColor = client.styles.linkColor
+            toc_visitor.toc.linkColor = cstyles.tocColor or cstyles.linkColor
             node.walk(toc_visitor)
             toc = toc_visitor.toc
-            toc.levelStyles=[client.styles['toc%d'%l] for l in range(1,15)]
+            toc.levelStyles=[cstyles['toc%d'%l] for l in range(1,15)]
             for s in toc.levelStyles:
                 # FIXME: awful slimy hack!
                 s.__class__=reportlab.lib.styles.ParagraphStyle
@@ -390,7 +391,7 @@ class HandleTopic(NodeHandler, docutils.nodes.topic):
             else:
                 node.elements = \
                     [Paragraph(client.gen_pdftext(node.children[0]),
-                    client.styles['heading1']), toc]
+                    cstyles['heading1']), toc]
         else:
             node.elements = client.gather_elements(node, style=style)
         return node.elements

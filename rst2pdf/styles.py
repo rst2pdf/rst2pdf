@@ -355,8 +355,14 @@ class StyleSheet(object):
         self.stylesheet = {}
         self.styles = []
         self.linkColor = 'navy'
+        # FIXME: linkColor should probably not be a global
+        #        style, and tocColor should probably not
+        #        be a special case, but for now I'm going
+        #        with the flow...
+        self.tocColor = None
         for data, ssname in ssdata:
             self.linkColor = data.get('linkColor') or self.linkColor
+            self.tocColor = data.get('tocColor') or self.tocColor
             for [skey, style] in self.stylepairs(data):
                 sdict = {}
                 # FIXME: this is done completely backwards
