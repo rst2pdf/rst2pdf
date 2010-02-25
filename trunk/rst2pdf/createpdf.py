@@ -1202,7 +1202,7 @@ def add_extensions(options):
         if not prefix:
             prefix = os.path.join(os.path.dirname(__file__), 'extensions')
             if prefix not in sys.path:
-                sys.path.insert(0, prefix)
+                sys.path.append(prefix)
             prefix = os.getcwd()
         if prefix not in sys.path:
             sys.path.insert(0, prefix)
