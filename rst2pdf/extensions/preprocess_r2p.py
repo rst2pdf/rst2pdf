@@ -110,8 +110,8 @@ class Preprocess(object):
                 self.keep = False
                 return
 
-        sourcef = DummyFile(source)
-        sourcef.name = name
+        self.sourcef = DummyFile(source)
+        self.sourcef.name = name
         self.source = source = [x for x in self.splitter(source) if x]
         self.result = result = []
         self.styles = {}
@@ -122,12 +122,15 @@ class Preprocess(object):
         isblank = False
         while source:
             wasblank = isblank
+            isblank = False
             chunk = source.pop()
             result.append(chunk)
 
             # Only process single lines
-            if not chunk.endswith('\n') or chunk.index('\n') != len(chunk)-1:
-                isblank = False
+            if not chunk.endswith('\n'):
+                continue
+            result[-1] = chunk[:-1]
+            if chunk.index('\n') != len(chunk)-1:
                 continue
             tokens = chunk.split()
             isblank = not tokens
@@ -156,32 +159,44 @@ class Preprocess(object):
                 f.close()
             self.result = result
         else:
-            self.result = sourcef
+            self.result = self.sourcef
 
     def handle_include(self, fname):
-        inc = Preprocess(open(fname, 'rb'), True)
+        for prefix in ('', os.path.dirname(self.sourcef.name)):
+            try:
+                f = open(os.path.join(prefix, fname), 'rb')
+            except IOError:
+                continue
+            else:
+                break
+        else:
+            log.error("Could not find include file %s", fname)
+            self.changed = True
+            return
+
+        inc = Preprocess(f, True)
         self.styles.update(inc.styles)
         if inc.changed:
             self.changed = True
             if not inc.keep:
                 return
             fname = inc.result.fname
-        self.result.extend(['', '.. include:: ' + fname, ''])
+        self.result.extend(['', '', '.. include:: ' + fname, ''])
 
     def handle_single(self, word):
         self.changed = True
-        self.result.extend(['', '.. class:: singleword', '', word, ''])
+        self.result.extend(['', '', '.. class:: singleword', '', word, ''])
 
     def handle_page(self, chunk):
         self.changed = True
-        self.result.extend(['', '.. raw:: pdf', '',
+        self.result.extend(['', '', '.. raw:: pdf', '',
                     '    PageBreak ' + chunk, ''])
 
     def handle_space(self, chunk):
         self.changed = True
         if len(chunk.replace(',', ' ').split()) == 1:
             chunk = '0 ' + chunk
-        self.result.extend(['', '.. raw:: pdf', '',
+        self.result.extend(['', '', '.. raw:: pdf', '',
                     '    Spacer ' + chunk, ''])
 
     def handle_widths(self, chunk):
@@ -207,7 +222,7 @@ class Preprocess(object):
         self.widthcount += 1
         stylename = 'embeddedtablewidth%d' % self.widthcount
         self.styles.setdefault('styles', {})[stylename] = dict(parent=parent, colWidths=values)
-        self.result.extend(['', '.. class:: ' + stylename, ''])
+        self.result.extend(['', '', '.. class:: ' + stylename, ''])
 
     def handle_style(self, chunk):
         self.changed = True
