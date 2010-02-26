@@ -1,16 +1,5 @@
 
-.. contents::
-
-Introduction
-==============
-
 This file tests the preprocesor extension ("-e preprocess").
-
-One test is that a blank table of contents is called
-"Table of Contents" instead of just "contents".
-
-Part deux
-==========
 
 This is one paragraph.
 
