@@ -41,8 +41,6 @@ Preprocessor extensions:
 All current extensions except style occupy a single line in the
 source file.
 
-.. contents::   default is changed to "Table of Contents" if no text is given
-
 .. include::    Processes the include file as well.
 
 .. page::       is translated into a raw PageBreak
@@ -90,10 +88,11 @@ class DummyFile(str):
         return self
 
 class Preprocess(object):
-    singleword = r'(?:\n\s*\n)([A-Za-z]+\s*\n)(?:\s*\n)'
-    keywords = set('page contents space widths style include'.split())
-    comment = r'^(\.\.\s+(?:%s)\:\:.*\n)' % '|'.join(keywords)
-    expression = '(?:%s)' % '|'.join([singleword, comment])
+    blankline  = r'^([ \t]*\n)'
+    singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
+    keywords = set('page space widths style include'.split())
+    comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
+    expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
     splitter = re.compile(expression, re.MULTILINE).split
 
     def __init__(self, sourcef, incfile=False):
@@ -120,20 +119,24 @@ class Preprocess(object):
         self.changed = False
 
         source.reverse()
+        isblank = False
         while source:
+            wasblank = isblank
             chunk = source.pop()
             result.append(chunk)
 
             # Only process single lines
             if not chunk.endswith('\n') or chunk.index('\n') != len(chunk)-1:
+                isblank = False
                 continue
             tokens = chunk.split()
+            isblank = not tokens
             if len(tokens) >= 2 and tokens[0] == '..' and tokens[1].endswith('::'):
                 keyword = tokens[1][:-2]
                 if keyword not in self.keywords:
                     continue
                 chunk = chunk.split('::', 1)[1]
-            elif len(tokens) == 1 and chunk[0].isalpha() and tokens[0].isalpha():
+            elif wasblank and len(tokens) == 1 and chunk[0].isalpha() and tokens[0].isalpha():
                 keyword = 'single'
                 chunk = tokens[0]
             else:
@@ -173,12 +176,6 @@ class Preprocess(object):
         self.changed = True
         self.result.extend(['', '.. raw:: pdf', '',
                     '    PageBreak ' + chunk, ''])
-
-    def handle_contents(self, chunk):
-        if not chunk:
-            chunk = 'Table of Contents'
-            self.changed = True
-        self.result.extend(['', '.. contents:: ' + chunk, ''])
 
     def handle_space(self, chunk):
         self.changed = True
