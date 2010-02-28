@@ -1211,12 +1211,12 @@ def add_extensions(options):
         try:
             try:
                 module = __import__(firstname, globals(), locals())
-            except ImportError:
+            except ImportError, e1:
                 module = __import__(modname, globals(), locals())
-        except ImportError:
+        except ImportError, e2:
             raise SystemExit('\nError: Could not find module %s '
-                                'in sys.path [\n    %s\n]\nExiting...\n' %
-                                (modname, ',\n    '.join(sys.path)))
+                                'in sys.path [\n    %s\n]\n\nPython error: %s\nPython error: %s\n\nExiting...\n' %
+                                (modname, ',\n    '.join(sys.path), e1, e2))
         if hasattr(module, 'install'):
             module.install(createpdf, options)
 
