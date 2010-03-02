@@ -11,11 +11,20 @@
     and doesn't check return from inkscape for errors.
 '''
 
-import os, tempfile, subprocess
+import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
+from rst2pdf.log import log
 
 from vectorpdf import VectorPdf
 import rst2pdf.image
+
+
+if sys.platform.startswith('win'):
+    # note: this is the default "all users" install location,
+    # we might want to provide an option for this
+    progname = os.path.expandvars(r'$PROGRAMFILES\Inkscape\inkscape.exe')
+else:
+    progname = 'inkscape'
 
 class InkscapeImage(VectorPdf):
 
@@ -40,7 +49,12 @@ class InkscapeImage(VectorPdf):
             os.close(tmpf)
             client.to_unlink.append(pdffname)
             cache[filename] = pdffname
-            subprocess.call(['inkscape', filename, '-A', pdffname])
+            cmd = [progname, os.path.abspath(filename), '-A', pdffname]
+            try:
+                subprocess.call(cmd)
+            except OSError, e:
+                log.error("Failed to run command: %s", ' '.join(cmd))
+                raise
             self.load_xobj((client, pdffname))
 
         pdfuri = uri.replace(filename, pdffname)
