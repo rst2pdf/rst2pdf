@@ -1031,6 +1031,7 @@ def parse_commandline():
         "where we don't want the PDFs to change.")
 
     parser.add_option('-e', '--extension-module', dest='extensions', action="append", type="string",
+        default = ['vectorpdf'],
         help="Add a helper extension module to this invocation of rst2pdf "
              "(module must end in .py and be on the python path)")
 
@@ -1134,8 +1135,7 @@ def main(args=None):
     if options.invariant:
         patch_PDFDate()
 
-    if options.extensions:
-        add_extensions(options)
+    add_extensions(options)
 
     RstToPdf(
         stylesheets=options.style,
@@ -1187,6 +1187,24 @@ def patch_PDFDate():
     reportlab.rl_config.invariant = 1
 
 def add_extensions(options):
+
+    extensions = []
+    for ext in options.extensions:
+        if not ext.startswith('!'):
+            extensions.append(ext)
+            continue
+        ext = ext[1:]
+        try:
+            extensions.remove(ext)
+        except ValueError:
+            log.warning('Could not remove extension %s -- no such extension installed' % ext)
+        else:
+            log.info('Removed extension %s' % ext)
+
+    options.extensions[:] = extensions
+    if not extensions:
+        return
+
     class ModuleProxy(object):
         def __init__(self):
             self.__dict__ = globals()
