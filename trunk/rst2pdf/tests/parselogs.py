@@ -44,7 +44,7 @@ def dumpinfo():
     if not mydict:
         print '\nNo log files found'
     for name, values in sorted(mydict.iteritems()):
-        print '\nCategory "%s" (%d tests)\n' % (name, len(values))
+        print '\nCategory "%s"\n        (%d tests)\n' % (name, len(values))
         fmt = '%%-%ds  %%s' % max(len(x[0]) for x in values)
         for item in sorted(values):
             print fmt % (item[0], repr(item[1]))
