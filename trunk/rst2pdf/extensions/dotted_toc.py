@@ -37,6 +37,7 @@
 #
 #####################################################################################
 
+import reportlab
 from reportlab.platypus.tableofcontents import drawPageNumbers
 import rst2pdf.genelements as genelements
 
@@ -60,10 +61,8 @@ History:
     this is unacceptable for at least some rst2pdf users.
 
     There are other differences in the rst2pdf one I don't understand.  This module
-    is a hack to add back dots between the lines.  I think it will only work for
-    RL 2.4, and will not work for multiple TOCs, so I am putting it in an extension
-    module for now.  Maybe at some point we can figure out how to support dots
-    with multiple TOCs in the main code.
+    is a hack to add back dots between the lines. Maybe at some point we can figure
+    out if this is right, or how to support dots in the TOC in the main code.
 
     Mind you, the original RL implementation is a complete hack in any case:
 
@@ -77,6 +76,9 @@ History:
 '''
 
 class DottedTableOfContents(genelements.MyTableOfContents):
+
+    toc_counter = [0]
+
     def wrap(self, availWidth, availHeight):
         "All table properties should be known by now."
 
@@ -85,33 +87,53 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            _tempEntries = [(0,'Placeholder for table of contents',0,None)]
+            if reportlab.Version <= '2.3':
+                _tempEntries = [(0, 'Placeholder for table of contents', 0)]
+            else:
+                _tempEntries = [(0, 'Placeholder for table of contents',
+                                 0, None)]
         else:
             _tempEntries = self._lastEntries
 
+        if _tempEntries:
+            base_level = _tempEntries[0][0]
+        else:
+            base_level = 0
+
         def drawTOCEntryEnd(canvas, kind, label):
             '''Callback to draw dots and page numbers after each entry.'''
-            label = label.split(',')
-            page, level, key = int(label[0]), int(label[1]), eval(label[2],{})
-            style = self.getLevelStyle(level)
-            if self.dotsMinLevel >= 0 and level >= self.dotsMinLevel:
-                dot = ' . '
-            else:
-                dot = ''
-            drawPageNumbers(canvas, style, [(page, key)], availWidth, availHeight, dot)
-        self.canv.drawTOCEntryEnd = drawTOCEntryEnd
 
+            style, page, key, dot = end_info[int(label)]
+            drawPageNumbers(canvas, style, [(page, key)], availWidth, availHeight, dot)
+
+        toc_counter = self.toc_counter
+        toc_counter[0] += 1
+        funcname = 'drawTOCEntryEnd%s' % toc_counter[0]
+        setattr(self.canv, funcname, drawTOCEntryEnd)
+
+        end_info = []
         tableData = []
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
-            key = self.refid_lut.get((level, text), None)
-            style = self.getLevelStyle(level)
-            if key:
-                text = '<a href="#%s">%s</a>' % (key, text)
-                keyVal = repr(key).replace(',','\\x2c').replace('"','\\x2c')
+            left_col_level = level - base_level
+            if reportlab.Version > '2.3': # For ReportLab post-2.3
+                style=self.getLevelStyle(left_col_level)
+            else: # For ReportLab <= 2.3
+                style = self.levelStyles[left_col_level]
+
+            if self.dotsMinLevel >= 0 and left_col_level >= self.dotsMinLevel:
+                dot = ' . '
             else:
-                keyVal = None
-            para = Paragraph('%s<onDraw name="drawTOCEntryEnd" label="%s,%d,%s"/>' % (text, pageNum, level, keyVal), style)
+                dot = ''
+
+            key = self.refid_lut.get((level, text), None)
+            if key:
+                if not isinstance(text, unicode):
+                    text = unicode(text, 'utf-8')
+                text = u'<a href="#%s" color="%s">%s</a>' % (key, self.linkColor, text)
+
+            para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
+            end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
                 tableData.append([Spacer(1, style.spaceBefore),])
             tableData.append([para,])
