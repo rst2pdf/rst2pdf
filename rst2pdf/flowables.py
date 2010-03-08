@@ -599,6 +599,16 @@ class BoundByWidth(Flowable):
         self.pad = None
         Flowable.__init__(self)
 
+    def border_padding(self, useWidth, additional):
+        sdict = self.style
+        sdict = sdict.__dict__ or {}
+        bp = sdict.get("borderPadding", 0)
+        if useWidth:
+            additional += sdict.get("borderWidth", 0)
+        if not isinstance(bp, list):
+            bp = [bp] * 4
+        return [x + additional for x in bp]
+
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
@@ -608,21 +618,7 @@ class BoundByWidth(Flowable):
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
-        if self.style:
-            bp = self.style.__dict__.get("borderPadding", 0)
-            bw = self.style.__dict__.get("borderWidth", 0)
-            if isinstance(bp,list):
-                self.pad = [bp[0] + bw + .1,
-                            bp[1] + bw + .1,
-                            bp[2] + bw + .1,
-                            bp[3] + bw + .1]
-            else:
-                self.pad = [bp + bw + .1,
-                            bp + bw + .1,
-                            bp + bw + .1,
-                            bp + bw + .1]
-        else:
-            self.pad = [0,0,0,0]
+        self.pad = self.border_padding(True, 0.1)
         maxWidth = float(min(
             styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
                                availWidth))
@@ -733,13 +729,13 @@ class BoxedContainer(BoundByWidth):
             fill=1
         else:
             fill=0
-        if self.style:
-            self.padding = self.style.__dict__.get('borderPadding', 8)
-        else:
-            self.padding = 0
-        self.padding += lw
+
+
+        padding = self.border_padding(False, lw)
+        xpadding = padding[1] + padding[3]
+        ypadding = padding[0] + padding[2]
         p = canv.beginPath()
-        p.rect(x, y, self.width + 2*self.padding, self.height + 2*self.padding)
+        p.rect(x, y, self.width + xpadding, self.height + ypadding)
         canv.drawPath(p, stroke=stroke, fill=fill)
         canv.restoreState()
         BoundByWidth.draw(self)
