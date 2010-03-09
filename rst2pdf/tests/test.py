@@ -12,7 +12,7 @@ class RunTest:
         self.description = basename 
         mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
         md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir , basename)+'.ignore'
+        ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
         info=MD5Info()
         self.skip=False
         if os.path.exists(ignfile):
