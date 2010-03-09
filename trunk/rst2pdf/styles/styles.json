@@ -199,7 +199,10 @@
     }],
     ["figure" , {
       "parent": "bodytext",
-      "alignment": "TA_CENTER"
+      "alignment": "TA_CENTER",
+      "commands": [
+          ],
+      "colWidths": ["100%"]
     }],
     ["figure-caption" , {
       "parent": "bodytext",

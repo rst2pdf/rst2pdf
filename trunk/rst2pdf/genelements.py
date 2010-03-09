@@ -632,8 +632,17 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
 
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
+        align=node.get('align','XXX')
+        cmd=client.styles['figure'].commands
+        if align != 'XXX':
+            for n in node.children:
+                n['align']=align
+            cmd.append(['ALIGN',[0,0],[-1,-1],align.upper()])
+        cw=[client.styles.adjustUnits(x) for x in client.styles['figure'].colWidths]
         sub_elems = client.gather_elements(node, style=None)
-        return [BoxedContainer(sub_elems, style)]
+        t_style=TableStyle(cmd)
+        return [DelayedTable([sub_elems],style=t_style,
+            colWidths=cw)]
 
 class HandleCaption(NodeHandler, docutils.nodes.caption):
     def gather_elements(self, client, node, style):
