@@ -1134,6 +1134,7 @@ def main(args=None):
 
     if options.invariant:
         patch_PDFDate()
+        patch_digester()
 
     add_extensions(options)
 
@@ -1162,6 +1163,18 @@ def main(args=None):
                     output=options.outfile,
                     compressed=options.compressed)
 
+
+def patch_digester():
+    ''' Patch digester so that we can get the same results when image
+filenames change'''
+    import reportlab.pdfgen.canvas as canvas
+
+    cache = {}
+
+    def _digester(s):
+        index = cache.setdefault(s, len(cache))
+        return 'rst2pdf_image_%s' % index
+    canvas._digester = _digester
 
 def patch_PDFDate():
     '''Patch reportlab.pdfdoc.PDFDate so the invariant dates work correctly'''
