@@ -9,12 +9,12 @@ __ http://pdfrw.googlecode.com
 
 Here is page 6 from the demo manual:
 
-.. image:: ../output/demo.pdf#page=6
+.. image:: images/demo.pdf#page=6
         :scale: 25%
 
 Here is a portion of that same page:
 
-.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. image:: images/demo.pdf#page=6#viewrect=250,330,270,130
 
 Here is a diagram:
 

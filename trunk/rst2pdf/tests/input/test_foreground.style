@@ -4,7 +4,7 @@
   "pageTemplates" : {
     "cutePage": {
         "foreground" : "images/foreground.svg",
-        "background" : "../output/demo.pdf#page=6"
+        "background" : "images/demo.pdf#page=6"
     }
   }
 }

@@ -43,40 +43,40 @@ Alignment for PDF-based images:
 
 Unaligned:
 
-.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. image:: images/demo.pdf#page=6#viewrect=250,330,270,130
 
 Align left:
 
-.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. image:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: left
 
 Align right:
 
-.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. image:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: right
 
 Align center:
 
-.. image:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. image:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: center
 
 Alignment for PDF-based figures:
 
 Unaligned:
 
-.. figure:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. figure:: images/demo.pdf#page=6#viewrect=250,330,270,130
 
 Align left:
 
-.. figure:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. figure:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: left
 
 Align right:
 
-.. figure:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. figure:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: right
 
 Align center:
 
-.. figure:: ../output/demo.pdf#page=6#viewrect=250,330,270,130
+.. figure:: images/demo.pdf#page=6#viewrect=250,330,270,130
    :align: center
