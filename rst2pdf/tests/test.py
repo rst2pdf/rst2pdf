@@ -15,6 +15,7 @@ class RunTest:
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
         info=MD5Info()
         self.skip=False
+        self.openIssue=False
         if os.path.exists(ignfile):
             self.skip=True
         if os.path.exists(md5file):
@@ -23,9 +24,11 @@ class RunTest:
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
-            self.skip=True
+            self.openIssue=True
             
     def __call__(self,f):
+        if self.openIssue:
+            assert False, 'Test has no known good output (Open Issue)'
         if self.skip:
             raise nose.plugins.skip.SkipTest
         else:
