@@ -1210,7 +1210,6 @@ def add_extensions(options):
             self.__dict__ = globals()
 
     createpdf = ModuleProxy()
-
     for modname in options.extensions:
         prefix, modname = os.path.split(modname)
         path_given = prefix
