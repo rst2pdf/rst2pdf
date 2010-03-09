@@ -195,7 +195,7 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
-def checkmd5(pdfpath, md5path, resultlist, updatemd5):
+def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     ''' checkmd5 validates the checksum of a generated PDF
         against the database, both reporting the results,
         and updating the database to add this MD5 into the
@@ -207,6 +207,9 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5):
         a result of 'good', 'bad', 'fail', or 'unknown'
     '''
     if not os.path.exists(pdfpath):
+        if not failcode and os.path.exists(iprefix + '.nopdf'):
+            log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
+            return 'good'
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
     if os.path.isdir(pdfpath):
@@ -321,7 +324,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
 
-    checkinfo = checkmd5(outpdf, md5file, result, updatemd5)
+    checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
     log(result, '')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
