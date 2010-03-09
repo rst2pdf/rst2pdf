@@ -179,7 +179,6 @@ class HandleSphinxEq(SphinxHandler, mathbase.eqref):
             client.styles.linkColor, node.astext())
 
 
-
 class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
     def gather_elements(self, client, node, style):
             # Based on the graphviz extension

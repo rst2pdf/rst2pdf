@@ -617,8 +617,11 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
         
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
-        # All elements in one line
-        return [Paragraph(client.gather_pdftext(node), style=client.styles['line'])]
+        # Indent .5em per indent unit
+        i=node.__dict__.get('indent',0)
+        qstyle = copy(client.styles['line'])
+        qstyle.leftIndent += client.styles.adjustUnits("0.5em")*i
+        return [Paragraph(client.gather_pdftext(node), style=qstyle)]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                                docutils.nodes.doctest_block):
