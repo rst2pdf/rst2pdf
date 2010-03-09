@@ -23,12 +23,23 @@ def dumpinfo():
         print '\nCategory "%s"\n        (%d tests)\n' % (name, len(values))
         fmt = '%%-%ds  %%s' % max(len(x[0]) for x in values)
         print '</h2>'
-        print '<ul>'
-        for item in sorted(values):
-            print '<li><a href="output/%s.pdf">' % item[0]
-            print fmt % (item[0], repr(item[1]))
-            print '</a></li>'
-        print '</ul>'
+        print '<table>'
+        href = 'http://code.google.com/p/rst2pdf/issues/detail?id='
+        for testname, checksum in sorted(values):
+
+            print '<tr>'
+            print '<td>'
+            if testname.startswith('test_issue_'):
+                testnum = testname.split('_')[2]
+                print '<a href="%s%s">%s</a>' % (href, testnum, testname)
+            else:
+                print testname
+            print '</td>'
+            print '<td>'
+            print '<a href="output/%s.pdf">%s</a>' % (testname, checksum)
+            print '</td>'
+            print '</tr>'
+        print '</table>'
     print
 
 if __name__ == '__main__':
