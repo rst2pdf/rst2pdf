@@ -638,10 +638,13 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
             for n in node.children:
                 n['align']=align
             cmd.append(['ALIGN',[0,0],[-1,-1],align.upper()])
+        else:
+            # Figures are centered by default.
+            cmd.append(['ALIGN',[0,0],[-1,-1],'CENTER'])
         cw=[client.styles.adjustUnits(x) for x in client.styles['figure'].colWidths]
         sub_elems = client.gather_elements(node, style=None)
         t_style=TableStyle(cmd)
-        return [DelayedTable([sub_elems],style=t_style,
+        return [DelayedTable([[e,] for e in sub_elems],style=t_style,
             colWidths=cw)]
 
 class HandleCaption(NodeHandler, docutils.nodes.caption):
