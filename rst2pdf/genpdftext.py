@@ -115,7 +115,6 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment
-        print node.elements
         return node.elements
 
     def get_text(self, client, node, replaceEnt):
