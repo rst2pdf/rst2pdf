@@ -4,5 +4,8 @@
                           "borderWidth": 0.5, 
                           "borderColor": "black",
                           "backColor": "white",
-                          "borderPadding": 50
+                          "borderPadding": 50,
+                          "commands": [
+                            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+          ]
 } ] ] } 
