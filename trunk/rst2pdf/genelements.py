@@ -632,8 +632,13 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
 
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
+        
+        # Either use the figure style or the class 
+        # selected by the user
+        if node.get('classes'):
+            style=client.styles[node.get('classes')[0]]
+        cmd=getattr(style,'commands',[])
         align=node.get('align','XXX')
-        cmd=client.styles['figure'].commands
         if align != 'XXX':
             for n in node.children:
                 n['align']=align
