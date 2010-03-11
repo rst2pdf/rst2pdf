@@ -47,9 +47,35 @@ class StyleSheet(object):
         '''
         styles = data.get('styles', {})
         try:
-            return styles.iteritems()
+            stylenames = styles.keys()
         except AttributeError:
-            return styles
+            for style in styles:
+                yield style
+            return
+
+        # Traditional reportlab styles are in ordered (key, value)
+        # tuples.  We also support dictionary lookup.  This is not
+        # necessarily ordered.
+
+        # The only problem with dictionary lookup is that
+        # we need to insure that parents are processed before
+        # their children.  This loop is a little ugly, but
+        # gets the job done.
+
+        while stylenames:
+            name = stylenames.pop()
+            parent = styles[name].get('parent')
+            if parent not in stylenames:
+                yield name, styles[name]
+                continue
+            names = [name]
+            while parent in stylenames:
+                stylenames.remove(parent)
+                names.append(parent)
+                parent = styles[names[-1]].get('parent')
+            while names:
+                name = names.pop()
+                yield name, styles[name]
 
     def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
