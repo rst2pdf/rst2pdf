@@ -5,7 +5,7 @@
 
 import ConfigParser
 import os
-from opt_imports import json_loads
+from rst2pdf.rson import loads
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
 cfname = os.path.join(cfdir, 'config')
@@ -15,7 +15,7 @@ def getValue(section, key, default=None):
     section = section.lower()
     key = key.lower()
     try:
-        return json_loads(conf.get(section, key))
+        return loads(conf.get(section, key))
     except Exception:
         return default
 

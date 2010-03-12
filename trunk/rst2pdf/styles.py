@@ -24,7 +24,7 @@ from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 
-from opt_imports import json_loads
+from rst2pdf.rson import loads as rson_loads
 
 import findfonts
 from log import log
@@ -84,15 +84,15 @@ class StyleSheet(object):
             self.PATH = abspath(dirname(sys.executable))
         else:
             self.PATH = abspath(dirname(__file__))
-            
+
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         # but the two default stylesheets will always
         # be loaded first
-        flist = [join(self.PATH, 'styles', 'styles.json'),
-                join(self.PATH, 'styles', 'default.json')] + flist
+        flist = [join(self.PATH, 'styles', 'styles.styles'),
+                join(self.PATH, 'styles', 'default.styles')] + flist
 
-        self.def_dpi=def_dpi        
+        self.def_dpi=def_dpi
         if font_path is None:
             font_path=[]
         font_path+=['.', os.path.join(self.PATH, 'fonts')]
@@ -376,7 +376,7 @@ class StyleSheet(object):
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
         #log.info('FontList: %s'%self.embedded)
-        #log.info('FontAlias: %s'%self.fontsAlias)        
+        #log.info('FontAlias: %s'%self.fontsAlias)
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles = []
@@ -407,7 +407,7 @@ class StyleSheet(object):
                                 #command[3]=[str(c) for c in command[3]]
                             #elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
                                 #command[4]=str(command[4])
-                                    
+
                     # Handle alignment constants
                     elif key == 'alignment':
                         style[key] = dict(TA_LEFT=0, TA_CENTER=1, TA_CENTRE=1,
@@ -416,7 +416,7 @@ class StyleSheet(object):
                     elif key == 'language':
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
-                            
+
                     # Make keys str instead of unicode (required by reportlab)
                     sdict[str(key)] = style[key]
                     sdict['name'] = skey
@@ -474,7 +474,7 @@ class StyleSheet(object):
             # If the borderPadding is a list and wordaxe <=0.3.2,
             # convert it to an integer. Workaround for Issue
             if 'borderPadding' in s and ((HAS_WORDAXE and \
-                    wordaxe_version <='wordaxe 0.3.2') or 
+                    wordaxe_version <='wordaxe 0.3.2') or
                     reportlab.Version < "2.3" )\
                     and isinstance(s['borderPadding'], list):
                 log.warning('Using a borderPadding list in '\
@@ -492,7 +492,7 @@ class StyleSheet(object):
             if key.startswith('pygments'):
                 log.info("Using undefined style '%s'"
                             ", aliased to style 'code'."%key)
-                newst=copy(self.StyleSheet['code'])            
+                newst=copy(self.StyleSheet['code'])
             else:
                 log.warning("Using undefined style '%s'"
                             ", aliased to style 'normal'."%key)
@@ -540,7 +540,7 @@ class StyleSheet(object):
             fname = self.findStyle(ssname)
             if fname:
                 try:
-                    return json_loads(open(fname).read())
+                    return rson_loads(open(fname).read())
                 except ValueError, e: # Error parsing the JSON data
                     log.critical('Error parsing stylesheet "%s": %s'%\
                         (fname, str(e)))
@@ -786,7 +786,7 @@ def formatColor(value, numeric=True):
 # * Maximum number of arguments
 # * Valid types of arguments.
 #
-# For example, if option FOO takes a list a string and a number, 
+# For example, if option FOO takes a list a string and a number,
 # but the number is optional:
 #
 # "FOO":(2,3,"list","string","number")
@@ -795,7 +795,7 @@ def formatColor(value, numeric=True):
 #
 # ["FOO",(0,0),(-1,-1),[1,2],"whatever",4]
 #
-# THe (0,0) (-1,-1) are start and stop and are mandatory. 
+# THe (0,0) (-1,-1) are start and stop and are mandatory.
 #
 # Possible types of arguments are string, number, color, colorlist
 
@@ -835,9 +835,9 @@ validCommands={
 def validateCommands(commands):
     '''Given a list of reportlab's table commands, it fixes some common errors
     and/or removes commands that can't be fixed'''
-    
+
     fixed=[]
-    
+
     for command in commands:
         command[0]=command[0].upper()
         flag=False
@@ -845,26 +845,26 @@ def validateCommands(commands):
         if command[0] not in validCommands:
             log.error('Unknown table command %s in stylesheet',command[0])
             continue
-        
+
         # See if start and stop are the right types
         if type(command[1]) not in (ListType,TupleType):
             log.error('Start cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
-            
+
         if type(command[2]) not in (ListType,TupleType):
             log.error('Stop cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
-        
+
         # See if the number of arguments is right
         l=len(command)-3
         if l>validCommands[command[0]][1]:
             log.error('Too many arguments in table command: %s',command)
             flag=True
-            
+
         if l<validCommands[command[0]][0]:
             log.error('Too few arguments in table command: %s',command)
             flag=True
-            
+
         # Validate argument types
         for pos,arg in enumerate(command[3:]):
             typ = validCommands[command[0]][pos+2]
@@ -880,10 +880,10 @@ def validateCommands(commands):
                 command[3+pos]=str(arg)
             else:
                 log.error("This should never happen: wrong type %s",typ)
-            
+
         if not flag:
             fixed.append(command)
-            
+
     return fixed
 
 class CallableStyleSheet(str):
@@ -897,4 +897,4 @@ class CallableStyleSheet(str):
         self.value = value
         return self
     def __call__(self):
-        return json_loads(self.value)
+        return rson_loads(self.value)
