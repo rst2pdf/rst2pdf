@@ -80,7 +80,8 @@ in the original source.
 import os
 import re
 
-from rst2pdf.opt_imports import json_loads
+from rst2pdf.rson import loads as rson_loads
+
 from rst2pdf.log import log
 
 class DummyFile(str):
@@ -101,7 +102,7 @@ class Preprocess(object):
 
         if incfile:
             try:
-                self.styles = json_loads(source)
+                self.styles = rson_loads(source)
             except:
                 pass
             else:
@@ -251,7 +252,7 @@ class Preprocess(object):
         mystyles.append('')
         mystyles = '\n'.join(mystyles)
         try:
-            styles = json_loads(mystyles)
+            styles = rson_loads(mystyles)
             self.styles.setdefault('styles', {}).update(styles)
         except ValueError, e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\

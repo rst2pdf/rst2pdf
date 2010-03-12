@@ -70,11 +70,6 @@ except ImportError:
     aafigure = None
 
 try:
-    from json import loads as json_loads
-except ImportError:
-    from simplejson import loads as json_loads
-
-try:
     from reportlab.platypus.flowables import NullDraw
 except ImportError: # Probably RL 2.1
     from reportlab.platypus.flowables import Flowable as NullDraw
