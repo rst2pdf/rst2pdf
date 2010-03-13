@@ -89,8 +89,8 @@ class StyleSheet(object):
         # They will be loaded and merged in order.
         # but the two default stylesheets will always
         # be loaded first
-        flist = [join(self.PATH, 'styles', 'styles.styles'),
-                join(self.PATH, 'styles', 'default.styles')] + flist
+        flist = [join(self.PATH, 'styles', 'styles.style'),
+                join(self.PATH, 'styles', 'default.style')] + flist
 
         self.def_dpi=def_dpi
         if font_path is None:
