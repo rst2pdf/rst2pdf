@@ -28,7 +28,7 @@ def dumps(obj, forcestyledict=True):
             obj = repr(obj).lower()
         result.append(str(obj))
 
-    badch = set('[]{}:=, \t"\n')
+    badch = set('[]{}:=,"\n')
 
     def dostr(result, obj, indent):
         try:
@@ -36,7 +36,7 @@ def dumps(obj, forcestyledict=True):
         except:
             ok = True
         else:
-            ok = False
+            ok = obj == obj.strip()
         ok = ok and not set(obj) & badch
         if ok:
             result.append(obj)
