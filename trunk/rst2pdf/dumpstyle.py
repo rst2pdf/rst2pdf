@@ -119,6 +119,8 @@ def fixspacing(s):
     indent = -1
     for line in s.splitlines():
         line = line.rstrip()  # Some lines had ' '
+        if not line:
+            continue
         indent, previndent = len(line) - len(line.lstrip()), indent
         if indent <= previndent and indent < 8:
             if indent < previndent or not indent:
