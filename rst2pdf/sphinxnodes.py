@@ -178,18 +178,23 @@ class HandleSphinxEq(SphinxHandler, mathbase.eqref):
         return '<a href="equation-%s" color="%s">%s</a>'%(node['target'], 
             client.styles.linkColor, node.astext())
 
-
-class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
-    def gather_elements(self, client, node, style):
-            # Based on the graphviz extension
-        try:
-            fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
-            client.to_unlink.append(outfn)
-            client.to_unlink.append(outfn+'.map')
-        except sphinx.ext.graphviz.GraphvizError, exc:
-            log.error('dot code %r: ' % code + str(exc))
-            return [Paragraph(node['code'],client.styles['code'])]
-        return [MyImage(filename=outfn, client=client)]
+try:
+    x=sphinx.ext.graphviz.graphviz
+    class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
+        def gather_elements(self, client, node, style):
+                # Based on the graphviz extension
+            try:
+                fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
+                client.to_unlink.append(outfn)
+                client.to_unlink.append(outfn+'.map')
+            except sphinx.ext.graphviz.GraphvizError, exc:
+                log.error('dot code %r: ' % code + str(exc))
+                return [Paragraph(node['code'],client.styles['code'])]
+            return [MyImage(filename=outfn, client=client)]
+except AttributeError:
+    # Probably the graphviz extension is not enabled
+    pass
+    
         
             
 

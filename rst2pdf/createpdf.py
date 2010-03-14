@@ -787,7 +787,6 @@ class FancyPage(PageTemplate):
 
         """
 
-        #from pudb import set_trace; set_trace()
         global _counter, _counterStyle
 
         self.tw = self.styles.pw - self.styles.lm -\

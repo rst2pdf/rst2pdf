@@ -79,7 +79,10 @@ class PDFBuilder(Builder):
                     opts={}
                 self.info("processing " + targetname + "... ", nonl=1)
                 
-                createpdf.add_extensions(self.config.pdf_extensions)
+                class dummy:
+                    extensions=self.config.pdf_extensions
+                    
+                createpdf.add_extensions(dummy())
                 
                 docwriter = PDFWriter(self,
                                 stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
