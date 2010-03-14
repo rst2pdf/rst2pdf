@@ -1,26 +1,49 @@
 New in SVN
 ----------
 
-* Fix Issue 251: added support for rst2pdf extensions when using sphinx
-* Fix Issue 256: ugly crash when using SVG images without SVG support
-* Fix Issue 257: support aafigure when using sphinx/pdfbuilder
+* New TOC code (supports dots between title and page number)
+* New extension framework
+* New preprocessor extension
+* New vectorpdf extension
+* Support for nested stylesheets
+* New headerSeparator/footerSeparator stylesheet options
+* Foreground image support (useful for watermarks)
+* Support transparency (alpha channel) when specifying colors
+* Inkscape extension for much better SVG support
+* Ability to show total page count in header/footer
+* New RSON format for stylesheets (JSON superset)
+* Fixed Issue 267: Support :align: in figures
+* Fixed Issue 174 regression (Indented lines in line blocks)
+* Fixed Issue 276: Load stylesheets from strings
+* Fixed Issue 275: Extra space before lineblocks
+* Fixed Issue 262: Full support for Reportlab 2.4
+* Fixed Issue 264: Splitting error in some documents
+* Fixed Issue 261: Assert error with wordaxe
+* Fixed Issue 251: added support for rst2pdf extensions when using sphinx
+* Fixed Issue 256: ugly crash when using SVG images without SVG support
+* Fixed Issue 257: support aafigure when using sphinx/pdfbuilder
 * Initial support for graphviz extension in pdfbuilder
-* Fix Issue 249: Images distorted when specifiying width and height
-* Fix Issue 252: math directive conflicted with sphinx
-* Fix Issue 224: Tables can be left/center/right aligned in the page.
-* Fix Issue 243: Wrong spacing for second paragraphs in bullet lists.
+* Fixed Issue 249: Images distorted when specifiying width and height
+* Fixed Issue 252: math directive conflicted with sphinx
+* Fixed Issue 224: Tables can be left/center/right aligned in the page.
+* Fixed Issue 243: Wrong spacing for second paragraphs in bullet lists.
 * Big refactoring of the code.
 * Support for Python 2.4
 * Fully reworked test suite, continuous integration site.
 * Optionally use SWFtools for PDF images
-* Fix Issue 231 (Smarter TTF autoembed)
-* Fix Issue 232 (HTML tags in title metadata)
-* Fix Issue 230 (Admonition titles were not translated)
-* Fix Issue 228 (page labels and numbers match, so page ii is the
+* Fixed Issue 231 (Smarter TTF autoembed)
+* Fixed Issue 232 (HTML tags in title metadata)
+* Fixed Issue 247 (printing stylesheet)
+
+New in 0.12.3
+-------------
+
+* Fixed Issue 230 (Admonition titles were not translated)
+* Fixed Issue 228 (page labels and numbers match, so page ii is the
   same on-page and in the PDF TOC)
-* Fix Issue 227 (missing background should not be fatal error)
-* Fix Issue 225 (bad spacing in lineblocks)
-* Fix Issue 223 (non-monospaced styles used in code)
+* Fixed Issue 227 (missing background should not be fatal error)
+* Fixed Issue 225 (bad spacing in lineblocks)
+* Fixed Issue 223 (non-monospaced styles used in code)
 
 New in 0.12.2
 -------------
