@@ -1068,7 +1068,7 @@ def main(args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        print open(join(PATH, 'styles', 'styles.json')).read()
+        print open(join(PATH, 'styles', 'styles.style')).read()
         sys.exit(0)
 
     filename = False
