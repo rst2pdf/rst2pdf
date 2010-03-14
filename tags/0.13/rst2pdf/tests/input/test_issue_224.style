@@ -1,0 +1,15 @@
+{
+    "styles" : [
+    [ "centered" , {
+        "parent": "table",
+        "colWidths": ["25%","25%"]
+      }],
+    [ "left" , {
+        "alignment": "TA_LEFT",
+        "colWidths": ["25%","25%"]
+      }],
+    [ "right" , {
+        "alignment": "TA_RIGHT",
+        "colWidths": ["25%","25%"]
+      }]
+]}

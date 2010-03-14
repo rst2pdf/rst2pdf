@@ -1,0 +1,9 @@
+{
+ "styles" : [
+        [ "with-border", {"parent": "figure", 
+                          "backColor": "white",
+                          "borderPadding": 8,
+                          "commands": [
+                            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+          ]
+} ] ] } 

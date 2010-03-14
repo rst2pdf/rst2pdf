@@ -1,0 +1,275 @@
+{
+  "styles": [
+    [
+      "pygments-hll", 
+      {
+        "textColor": "black",
+        "parent": "code", 
+        "backColor": "#ffffcc"
+      }
+    ], 
+    [
+      "pygments-c", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic",
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-err", 
+      {
+        "textColor": "black",
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-k", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cm", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-c1", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-cs", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ge", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gh", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gp", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gs", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-gu", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kc", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kd", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kn", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-kr", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nc", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ni", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ne", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nn", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nt", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ow", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoBold", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sb", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sc", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sd", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s2", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-se", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sh", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-si", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sx", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-sr", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-s1", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ss", 
+      {
+        "textColor": "black",
+        "fontName": "stdMonoItalic", 
+        "parent": "code"
+      }
+    ]
+  ]
+}

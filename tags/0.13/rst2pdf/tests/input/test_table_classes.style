@@ -1,0 +1,41 @@
+{
+  "styles": [
+    [ "justgrid", {
+        "parent": "table",
+        "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0, "white" ]
+        ]}
+    ],
+    [ "thin", {
+        "parent": "table",
+        "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ]
+        ]}
+    ],
+    [ "thick", {
+        "parent": "table",
+        "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
+        ]}
+    ],
+    [ "bigsmall", {
+        "parent": "table",
+    "colWidths": ["80%","20%"] } ],
+    [ "smallbig", {
+        "parent": "table",
+    "colWidths": ["20%","80%"] } ],
+    [ "onesmall", {
+        "parent": "table",
+    "colWidths": ["20%"] } ],
+    [ "toomany", {
+        "parent": "table",
+    "colWidths": ["30%","30%","30%"] } ],
+    [ "twosmall", {
+        "parent": "table",
+    "colWidths": ["20%","20%"] } ]
+  ]
+}
+

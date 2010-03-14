@@ -1,0 +1,6 @@
+{
+    "embeddedFonts" : [["Tuffy.ttf", "Tuffy_Bold.ttf", "Tuffy_Italic.ttf", "Tuffy_Bold_Italic.ttf"]],
+    "fontsAlias" : {
+    "stdFont": "Tuffy"
+    }
+}

@@ -1,0 +1,40 @@
+{
+ "styles" : [
+     [ "endnote", {
+         "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+        ], 
+        "colWidths": ["3cm",null]
+    }],
+    ["item_list", { 
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
+            [ "TOPPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
+            [ "BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], 0 ], 
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ],
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+        ]
+    }],
+    ["bullet_list", { 
+      "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+        ]
+    }],
+    ["field_list", { 
+      "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+        ]
+    }],
+    ["option_list", { 
+      "commands": [
+            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ]
+        ]
+    }]
+ ]
+}

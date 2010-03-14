@@ -1,0 +1,10 @@
+{"pageSetup": {
+    "firstTemplate": "cutePage"
+  },
+  "pageTemplates" : {
+    "cutePage": {
+        "foreground" : "images/foreground.svg",
+        "background" : "images/demo.pdf#page=6"
+    }
+  }
+}
