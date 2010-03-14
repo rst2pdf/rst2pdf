@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.13
+-----------
 
 * New TOC code (supports dots between title and page number)
 * New extension framework
