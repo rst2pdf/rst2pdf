@@ -110,6 +110,40 @@ class RunInstalledTest:
                 raise nose.plugins.skip.SkipTest
             assert key == 'good', '%s is not good: %s'%(f,key)
 
+class RunSphinxTest:
+    def __init__(self,f):
+        basename = os.path.basename(f[:-1])
+        self.description = basename 
+        mprefix = os.path.join(PathInfo.md5dir, basename)
+        md5file = mprefix + '.json'
+        ignfile = os.path.join(PathInfo.inpdir , basename)+'.ignore'
+        info=MD5Info()
+        self.skip=False
+        self.openIssue=False
+        
+        open('/tmp/xxx1','w').write(ignfile+'\n\n'+md5file)
+        
+        if os.path.exists(ignfile):
+            self.skip=True
+        if os.path.exists(md5file):
+            f = open(md5file, 'rb')
+            exec f in info
+            f.close()
+        if info.good_md5 in [[],['sentinel']]:
+            # This is an open issue or something that can't be checked automatically
+            self.openIssue=True
+            
+    def __call__(self,f):
+        if self.skip:
+            raise nose.plugins.skip.SkipTest
+        elif self.openIssue:
+            assert False, 'Test has no known good output (Open Issue)'
+        else:
+            key, errcode = run_single(f)
+            if key in ['incomplete']:
+                raise nose.plugins.skip.SkipTest
+            assert key == 'good', '%s is not good: %s'%(f,key)
+
 
 def regulartest():
     '''To run these tests (similar to autotest), run
@@ -126,6 +160,13 @@ def releasetest():
     results = {}
     for fname in testfiles:
         yield RunInstalledTest(fname), fname
+
+def sphinxtest():
+    '''To run these tests , run nosetests -i sphinxtest'''
+    testfiles = globjoin(PathInfo.inpdir, 'sphinx*/')
+    results = {}
+    for fname in testfiles:
+        yield RunSphinxTest(fname), fname
 
 
 def setup():
