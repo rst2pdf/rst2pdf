@@ -1,2 +1,2 @@
 # package
-from test import regulartest, releasetest
+from test import regulartest, releasetest, sphinxtest
