@@ -287,7 +287,7 @@ class PDFBuilder(Builder):
             tree.extend(dt)
                     
         if appendices:
-            tree.append(nodes.raw(text='OddPageBreak cutePage', format='pdf'))
+            tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
             self.info()
             self.info('adding appendixes...', nonl=1)
             for docname in appendices:
@@ -515,7 +515,7 @@ class PDFWriter(writers.Writer):
         contents.append(pending)
         pending.details={}
         self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic', format='pdf'))
-        self.document.insert(0,nodes.raw(text='OddPageBreak cutePage', format='pdf'))
+        self.document.insert(0,nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
         self.document.insert(0,contents)
         self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
         contTrans=PDFContents(self.document)
@@ -542,7 +542,7 @@ class PDFWriter(writers.Writer):
             date=nodes.paragraph()
             date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
             date['classes']=['author']
-            self.document.insert(0,nodes.raw(text='OddPageBreak cutePage', format='pdf'))
+            self.document.insert(0,nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
             self.document.insert(0,date)
             self.document.insert(0,spacer)
             for node in authornodes[::-1]:

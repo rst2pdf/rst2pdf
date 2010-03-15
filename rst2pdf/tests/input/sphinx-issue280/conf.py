@@ -250,3 +250,5 @@ pdf_use_coverpage = False
 # Enable experimental feature to split table cells. Use it
 # if you get "DelayedTable too big" errors
 #pdf_splittables = False
+
+pdf_page_template = 'customPage'

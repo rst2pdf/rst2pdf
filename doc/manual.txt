@@ -1583,6 +1583,9 @@ To use it in your existing sphinx project you need to do the following:
     # you need vectorpdf for better sphinx's graphviz support
     #pdf_extensions = ['vectorpdf']
     
+    # Page template name for "regular" pages
+    #pdf_page_template = 'cutePage'
+    
 3. (Maybe) add this in your Makefile::
     
     pdf:

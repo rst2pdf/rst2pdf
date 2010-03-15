@@ -1,3 +1,8 @@
+New in SVN
+----------
+
+* Fixed Issue 280: wrong page templates used in sphinx
+
 New in 0.13
 -----------
 
