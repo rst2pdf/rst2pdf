@@ -25,6 +25,7 @@ import os
 
 from cStringIO import StringIO
 from rst2pdf import createpdf
+
 from rst2pdf import pygments_code_block_directive
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
@@ -96,6 +97,7 @@ class PDFBuilder(Builder):
                                 splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
                                 default_dpi=opts.get('pdf_default_dpi',self.config.pdf_default_dpi),
                                 page_template=opts.get('pdf_page_template',self.config.pdf_page_template),
+                                invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -474,6 +476,7 @@ class PDFWriter(writers.Writer):
                 srcdir = '.',
                 default_dpi = 300,
                 page_template = 'cutePage',
+                invariant = 'False',
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -492,6 +495,7 @@ class PDFWriter(writers.Writer):
         self.config = config
         self.default_dpi = default_dpi
         self.page_template = page_template
+        self.invariant=invariant
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -554,6 +558,11 @@ class PDFWriter(writers.Writer):
         
         
         sio=StringIO()
+        
+        if self.invariant:
+            createpdf.patch_PDFDate()
+            createpdf.patch_digester()
+        
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
                  language=self.__language,
@@ -758,6 +767,7 @@ def setup(app):
     app.add_config_value('pdf_default_dpi', 300, None)
     app.add_config_value('pdf_extensions',[], None)
     app.add_config_value('pdf_page_template','cutePage', None)
+    app.add_config_value('pdf_invariant','False', None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
