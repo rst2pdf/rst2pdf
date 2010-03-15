@@ -227,3 +227,4 @@ pdf_use_coverpage = True
 pdf_break_level = 2
 
 pdf_verbosity=0
+pdf_invariant = True

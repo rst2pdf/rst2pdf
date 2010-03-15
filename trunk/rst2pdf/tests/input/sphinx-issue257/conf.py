@@ -250,3 +250,4 @@ pdf_verbosity = 0
 # Enable experimental feature to split table cells. Use it
 # if you get "DelayedTable too big" errors
 #pdf_splittables = False
+pdf_invariant = True

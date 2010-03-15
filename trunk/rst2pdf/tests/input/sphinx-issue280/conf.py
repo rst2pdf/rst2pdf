@@ -252,3 +252,4 @@ pdf_use_coverpage = False
 #pdf_splittables = False
 
 pdf_page_template = 'customPage'
+pdf_invariant = True
