@@ -94,7 +94,8 @@ class PDFBuilder(Builder):
                                 compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
                                 inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
                                 splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
-                                default_dpi=opts.get('pdf_default_dpi', self.config.pdf_default_dpi),
+                                default_dpi=opts.get('pdf_default_dpi',self.config.pdf_default_dpi),
+                                page_template=opts.get('pdf_page_template',self.config.pdf_page_template),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -472,6 +473,7 @@ class PDFWriter(writers.Writer):
                 splittables = False,
                 srcdir = '.',
                 default_dpi = 300,
+                page_template = 'cutePage',
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -489,6 +491,7 @@ class PDFWriter(writers.Writer):
         self.srcdir = srcdir
         self.config = config
         self.default_dpi = default_dpi
+        self.page_template = page_template
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -754,6 +757,7 @@ def setup(app):
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
     app.add_config_value('pdf_extensions',[], None)
+    app.add_config_value('pdf_page_template','cutePage', None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)

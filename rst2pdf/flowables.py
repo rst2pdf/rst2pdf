@@ -312,7 +312,6 @@ class MyPageBreak(FrameActionFlowable):
 
     def frameAction(self, frame):
         frame._generated_content = []
-
         if self.breakTo=='any': # Break only once. None if at top of page
             if not frame._atTop:
                 frame._generated_content.append(SetNextTemplate(self.templateName))
