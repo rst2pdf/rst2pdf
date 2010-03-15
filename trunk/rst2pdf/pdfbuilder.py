@@ -85,6 +85,8 @@ class PDFBuilder(Builder):
                     
                 createpdf.add_extensions(dummy())
                 
+                self.page_template=opts.get('pdf_page_template',self.config.pdf_page_template)
+                
                 docwriter = PDFWriter(self,
                                 stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
                                 language=opts.get('pdf_language',self.config.pdf_language),
@@ -96,11 +98,12 @@ class PDFBuilder(Builder):
                                 inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
                                 splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
                                 default_dpi=opts.get('pdf_default_dpi',self.config.pdf_default_dpi),
-                                page_template=opts.get('pdf_page_template',self.config.pdf_page_template),
+                                page_template=self.page_template,
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
+                
                 tgt_file = path.join(self.outdir, targetname + self.out_suffix)
                 destination = FileOutput(destination=open(tgt_file,'wb'), encoding='utf-8')
                 doctree = self.assemble_doctree(docname,title,author, 
