@@ -121,8 +121,6 @@ class RunSphinxTest:
         self.skip=False
         self.openIssue=False
         
-        open('/tmp/xxx1','w').write(ignfile+'\n\n'+md5file)
-        
         if os.path.exists(ignfile):
             self.skip=True
         if os.path.exists(md5file):
