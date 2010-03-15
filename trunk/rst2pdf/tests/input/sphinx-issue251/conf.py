@@ -227,7 +227,7 @@ pdf_use_modindex = False
 # If false, no coverpage is generated.
 pdf_use_coverpage = False
 
-pdf_verbosity=2
+pdf_verbosity=0
 
 pdf_extensions=['vectorpdf']
 pdf_invariant = True
