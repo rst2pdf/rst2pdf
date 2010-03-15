@@ -62,7 +62,7 @@ setup(
     name="rst2pdf",
     version=version,
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-    package_data=dict(rst2pdf=['styles/*.json','images/*png']),
+    package_data=dict(rst2pdf=['styles/*.json','styles/*.style','images/*png']),
     include_package_data=True,
     dependency_links=[
        # Reportlab (now on PyPI)
