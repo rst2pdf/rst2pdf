@@ -230,10 +230,10 @@ pdf_language = "en_US"
 # Section level that forces a break page.
 # For example: 1 means top-level sections start in a new page
 # 0 means disabled
-#pdf_break_level = 0
+pdf_break_level = 1
 # When a section starts in a new page, force it to be 'even', 'odd',
 # or just use 'any'
-#pdf_breakside = 'any'
+pdf_breakside = 'odd'
 # Insert footnotes where they are defined instead of
 # at the end.
 #pdf_inline_footnotes = True
