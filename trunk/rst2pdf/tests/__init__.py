@@ -1,2 +1,2 @@
 # package
-from test import test
+from test import regulartest, releasetest
