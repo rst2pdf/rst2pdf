@@ -321,10 +321,10 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
+        checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-
-    checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
+        checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
     log(result, '')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))

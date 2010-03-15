@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 281: sphinx test automation was broken
 * Fixed Issue 280: wrong page templates used in sphinx
 
 New in 0.13
