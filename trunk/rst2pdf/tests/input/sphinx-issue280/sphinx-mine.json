@@ -1,6 +1,6 @@
 {
   "pageTemplates" : {
-    "cutePage": {
+    "customPage": {
         "frames": [
             ["0%", "0%", "50%", "100%"]
         ],
