@@ -188,7 +188,7 @@ class PDFBuilder(Builder):
             
             if genindex: # No point in creating empty indexes
                 index_nodes=genindex_nodes(genindex)
-                tree.append(nodes.raw(text='OddPageBreak twoColumn'))
+                tree.append(nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
                 tree.append(index_nodes)
 
         # This is stolen from the HTML builder
@@ -283,11 +283,11 @@ class PDFBuilder(Builder):
                 output.append('')
                 
             dt = docutils.core.publish_doctree('\n'.join(output))[1:]
-            dt.insert(0,nodes.raw(text='OddPageBreak twoColumn'))
+            dt.insert(0,nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
             tree.extend(dt)
                     
         if appendices:
-            tree.append(nodes.raw(text='OddPageBreak cutePage'))
+            tree.append(nodes.raw(text='OddPageBreak cutePage', format='pdf'))
             self.info()
             self.info('adding appendixes...', nonl=1)
             for docname in appendices:
@@ -514,10 +514,10 @@ class PDFWriter(writers.Writer):
         pending=nodes.topic()
         contents.append(pending)
         pending.details={}
-        self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic'))
-        self.document.insert(0,nodes.raw(text='OddPageBreak cutePage'))
+        self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic', format='pdf'))
+        self.document.insert(0,nodes.raw(text='OddPageBreak cutePage', format='pdf'))
         self.document.insert(0,contents)
-        self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman'))
+        self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
         contTrans=PDFContents(self.document)
         contTrans.startnode=pending
         contTrans.apply()
@@ -542,7 +542,7 @@ class PDFWriter(writers.Writer):
             date=nodes.paragraph()
             date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
             date['classes']=['author']
-            self.document.insert(0,nodes.raw(text='OddPageBreak cutePage'))
+            self.document.insert(0,nodes.raw(text='OddPageBreak cutePage', format='pdf'))
             self.document.insert(0,date)
             self.document.insert(0,spacer)
             for node in authornodes[::-1]:
