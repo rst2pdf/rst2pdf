@@ -131,13 +131,14 @@ class DelayedTable(Flowable):
 
     """
 
-    def __init__(self, data, colWidths, style, repeatrows=False):
+    def __init__(self, data, colWidths, style, repeatrows=False, splitByRow=True):
         self.data = data
         self._colWidths = colWidths
         self.style = style
         self.t = None
         self.repeatrows = repeatrows
         self.hAlign = TA_CENTER
+        self.splitByRow=splitByRow
 
     def wrap(self, w, h):
         # Create the table, with the widths from colWidths reinterpreted
@@ -151,7 +152,8 @@ class DelayedTable(Flowable):
         self.colWidths=map(adjust, self._colWidths)
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
-            style=self.style, repeatRows=self.repeatrows)
+            style=self.style, repeatRows=self.repeatrows, 
+            splitByRow=self.splitByRow)
         self.t.hAlign = self.hAlign
         return self.t.wrap(w, h)
 
