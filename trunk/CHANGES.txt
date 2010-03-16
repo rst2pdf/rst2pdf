@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 165: Definition lists not properly indented inside
+  admonitions or tables.
 * SVG Images work inline when using the inkscape extension.
 * Fixed Issue 268: TOCs shifted to the left on RL 2.4
 * Fixed Issue 281: sphinx test automation was broken

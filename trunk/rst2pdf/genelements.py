@@ -489,9 +489,22 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
                     + client.gather_pdftext(n) + "</font>")
             else:
                 dt.extend(client.gen_elements(n, style))
-        node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
-            client.styles['definition_list_term']),
-            MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
+
+        # FIXME: make this configurable from the stylesheet
+        node.elements = [DelayedTable([
+            [Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition_list_term'])],
+            ['',dt]
+            ] , splitByRow=0, colWidths=[10,None], style = [
+                        ['VALIGN', [ 0, 0 ], [ -1, -1 ], 'TOP' ],
+                        ['LEFTPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
+                        ['BOTTOMPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
+                        ['RIGHTPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
+                        ]
+            
+            )]
+        #node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
+            #client.styles['definition_list_term']),
+            #MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
         return node.elements
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
