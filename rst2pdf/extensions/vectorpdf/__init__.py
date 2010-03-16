@@ -17,7 +17,9 @@ try:
     import rst2pdf.image
     from rst2pdf.opt_imports import LazyImports
 except ImportError:
-    pass # This is just to make nosetest happy on the CI server
+    # This is just to make nosetest happy on the CI server
+    class Flowable:
+        pass
 
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
