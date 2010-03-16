@@ -495,6 +495,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
             [Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition_list_term'])],
             ['',dt]
             ] , splitByRow=0, colWidths=[10,None], style = [
+                        ['SPAN', [0,0], [1,0]],
                         ['VALIGN', [ 0, 0 ], [ -1, -1 ], 'TOP' ],
                         ['LEFTPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
                         ['BOTTOMPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
