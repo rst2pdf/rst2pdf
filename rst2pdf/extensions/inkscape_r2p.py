@@ -61,6 +61,25 @@ class InkscapeImage(VectorPdf):
         pdfsrc = client, pdfuri
         VectorPdf.__init__(self, pdfuri, width, height, kind, mask, lazy, pdfsrc)
 
+    @classmethod
+    def raster(self, filename, client):
+        """Returns a URI to a rasterized version of the image"""
+        cache = self.source_filecache.setdefault(client, {})
+        pngfname = cache.get(filename+'_raster')
+        if pngfname is None:
+            tmpf, pngfname = tempfile.mkstemp(suffix='.png')
+            os.close(tmpf)
+            client.to_unlink.append(pngfname)
+            cache[filename+'_raster'] = pngfname
+            cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
+            try:
+                subprocess.call(cmd)
+                return pngfname
+            except OSError, e:
+                log.error("Failed to run command: %s", ' '.join(cmd))
+                raise
+        return None
+
 def install(createpdf, options):
     ''' Monkey-patch our class in to image as a replacement class for SVGImage.
     '''
