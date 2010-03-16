@@ -20,7 +20,7 @@ are combined into the instantiated object.
 
 from copy import copy
 
-from log import nodeid
+from log import nodeid, log
 from flowables import  Spacer, MyIndenter, Reference, DelayedTable, Table
 from image import MyImage
 
