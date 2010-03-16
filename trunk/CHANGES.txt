@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* SVG Images work inline when using the inkscape extension.
 * Fixed Issue 268: TOCs shifted to the left on RL 2.4
 * Fixed Issue 281: sphinx test automation was broken
 * Fixed Issue 280: wrong page templates used in sphinx

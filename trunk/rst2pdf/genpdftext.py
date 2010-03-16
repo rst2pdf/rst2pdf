@@ -131,7 +131,15 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         # TODO: inline images don't support SVG, vectors and PDF,
         #       which may be surprising. So, work on converting them
         #       previous to passing to reportlab.
+        # Try to rasterize using the backend
+        imgname = os.path.join(client.basedir,str(node.get("uri")))
+        w, h, kind = MyImage.size_for_node(node, client=client)
+        img = MyImage(filename=imgname, height=h, width=w,
+                      kind=kind, client=client)
+        # Last resort, try all rasterizers
+        print 'R1', uri
         uri=MyImage.raster(uri, client)
+        print 'R2', uri
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 

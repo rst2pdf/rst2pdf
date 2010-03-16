@@ -96,6 +96,16 @@ class MyImage (Flowable):
             log.error("Missing image file: %s",filename)
             return missing
 
+        #try:
+        # First try to rasterize using the suggested backend
+        backend = self.get_backend(filename, client)[1]
+        return backend.raster(filename, client)
+        #except:
+            #pass
+        
+        # Last resort: try everything
+
+
         PILImage = LazyImports.PILImage
 
         if PILImage:
