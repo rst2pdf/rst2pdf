@@ -27,6 +27,9 @@ import sys, os
 
 extensions = ['rst2pdf.pdfbuilder','sphinx.ext.graphviz']
 
+
+graphviz_dot_args = '-Tpng:gd'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
