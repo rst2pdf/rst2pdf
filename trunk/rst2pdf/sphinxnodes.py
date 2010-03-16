@@ -188,7 +188,7 @@ try:
                 client.to_unlink.append(outfn)
                 client.to_unlink.append(outfn+'.map')
             except sphinx.ext.graphviz.GraphvizError, exc:
-                log.error('dot code %r: ' % code + str(exc))
+                log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'],client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]
 except AttributeError:
