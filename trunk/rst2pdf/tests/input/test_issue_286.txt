@@ -35,7 +35,7 @@ Term:
 .. raw:: pdf
 
    PageBreak
-   Spacer 0 14cm
+   Spacer 0 16cm
 
 This is before the pagebreak. There is enough space below for the term and a paragraph.
    
