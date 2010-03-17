@@ -642,7 +642,7 @@
     ["versionmodified", {"parent": "bodytext",
         "fontName": "stdItalic"
     }],
-    ["xref", {"parent": "bodytext",
-        "fontName": "stdBold"
+    ["xref", {"parent": "code",
+        "fontName": "stdMonoBold"
     }]
 ]}
