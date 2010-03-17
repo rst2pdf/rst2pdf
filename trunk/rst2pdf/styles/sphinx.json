@@ -641,5 +641,8 @@
     }],
     ["versionmodified", {"parent": "bodytext",
         "fontName": "stdItalic"
+    }],
+    ["xref", {"parent": "bodytext",
+        "fontName": "stdBold"
     }]
 ]}
