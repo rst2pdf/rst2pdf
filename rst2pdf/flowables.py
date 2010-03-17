@@ -166,6 +166,13 @@ class DelayedTable(Flowable):
 
     def drawOn(self, canvas, x, y, _sW=0):
         self.t.drawOn(canvas, x, y, _sW)
+        
+    def identity(self, maxLen=None):
+        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
+            hex(id(self)), self._frameName(),
+            getattr(self, 'name', '')
+                and (' name="%s"' % getattr(self, 'name', '')) or '',
+                unicode(self.data[0][1])[:180])
 
 def tablepadding(padding):
     if not isinstance(padding,(list,tuple)):
