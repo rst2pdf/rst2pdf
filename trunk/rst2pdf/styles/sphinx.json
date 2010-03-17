@@ -644,5 +644,13 @@
     }],
     ["xref", {"parent": "code",
         "fontName": "stdMonoBold"
+    }],
+    ["hlist", {"parent": "normal",
+        "spaceBefore": 6,
+        "spaceAfter": 0,
+        "alignment": "TA_CENTER",
+        "commands": [
+             ["VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ]
+        ]
     }]
 ]}
