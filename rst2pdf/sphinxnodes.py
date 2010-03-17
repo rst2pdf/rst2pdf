@@ -28,6 +28,7 @@ from opt_imports import Paragraph, sphinx
 
 from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 import math_flowable
+from reportlab.platypus import Paragraph, TableStyle
 
 ################## NodeHandler subclasses ###################
 
@@ -152,6 +153,23 @@ class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
                 client.gather_elements(node, client.styles["definition"]) +\
                 [MyIndenter(left=-10)]
 
+class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
+    def gather_elements(self, client, node, style):
+        # Each child is a hlistcol and represents a column.
+        # Each grandchild is a bullet list that's the contents
+        # of the column
+        
+        # Represent it as a N-column, 1-row table, each cell containing
+        # a list.
+        
+        cells = [[ client.gather_elements(child, style) for child in node.children]]
+        t_style=TableStyle(client.styles['hlist'].commands)        
+        cw=100./len(node.children)
+        return [ DelayedTable( cells, 
+            colWidths=["%s%%"%cw,]*len(cells),
+            style=t_style
+            )]
+
 from sphinx.ext import mathbase
 
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
@@ -195,7 +213,6 @@ except AttributeError:
     # Probably the graphviz extension is not enabled
     pass
     
-        
-            
+
 
 sphinxhandlers = SphinxHandler()

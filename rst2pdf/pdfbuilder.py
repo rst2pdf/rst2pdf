@@ -691,9 +691,6 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_Aanode(self, node):
         pass
 
-    def starttag(self, node, tag, prefix='\n'):
-        return '<%s>'%tag
-
     def visit_productionlist(self, node):
         replacement=nodes.literal_block(classes=["code"])
         names = []
@@ -721,7 +718,6 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         pass
     def depart_production(self, node):
         pass
-
 
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
