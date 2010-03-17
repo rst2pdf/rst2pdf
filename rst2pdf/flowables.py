@@ -153,7 +153,8 @@ class DelayedTable(Flowable):
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows, 
-            splitByRow=self.splitByRow)
+            splitByRow=True)
+            #splitByRow=self.splitByRow)
         self.t.hAlign = self.hAlign
         return self.t.wrap(w, h)
 
