@@ -159,7 +159,10 @@ class DelayedTable(Flowable):
         return self.t.wrap(w, h)
 
     def split(self, w, h):
-        return self.t.split(w, h)
+        if self.splitByRow:
+            return self.t.split(w, h)
+        else:
+            return []
 
     def drawOn(self, canvas, x, y, _sW=0):
         self.t.drawOn(canvas, x, y, _sW)
