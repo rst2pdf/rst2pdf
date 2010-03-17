@@ -690,7 +690,39 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     
     def depart_Aanode(self, node):
         pass
-    
+
+    def starttag(self, node, tag, prefix='\n'):
+        return '<%s>'%tag
+
+    def visit_productionlist(self, node):
+        replacement=nodes.literal_block(classes=["code"])
+        names = []
+        for production in node:
+            names.append(production['tokenname'])
+        maxlen = max(len(name) for name in names)
+        for production in node:
+            if production['tokenname']:
+                lastname = production['tokenname'].ljust(maxlen)
+                n=nodes.strong()
+                n+=nodes.Text(lastname)
+                replacement+=n
+                replacement+=nodes.Text(' ::= ')
+            else:
+                replacement+=nodes.Text('%s     ' % (' '*len(lastname)))
+            production.walkabout(self)
+            replacement.children.extend(production.children)
+            replacement+=nodes.Text('\n')
+        node.parent.replace(node,replacement)
+        raise nodes.SkipNode
+    def depart_productionlist(self, node):
+        pass
+
+    def visit_production(self, node):
+        pass
+    def depart_production(self, node):
+        pass
+
+
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
     if lang in ('py', 'python'):
