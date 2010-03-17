@@ -1612,6 +1612,13 @@ to how you did it before.
 
 .. _sphinx: http://sphinx.pocoo.org
 
+Developers
+==========
+
+.. include:: DEVELOPERS.txt
+   :start-line: 8
+
+
 Licenses
 ========
 
