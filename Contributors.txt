@@ -6,3 +6,4 @@
 * Runar Tenfjord
 * Patrick Maupin
 * Joshua J. Kugler
+* Patrick Maupin
