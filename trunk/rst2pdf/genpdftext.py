@@ -44,8 +44,11 @@ class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
-        # FIXME: handle classes
-        pre = '<font face="%s">' % client.styles['literal'].fontName
+        
+        if node['classes']:
+            pre = client.styleToFont(node['classes'][0])
+        else:
+            pre = '<font face="%s">' % client.styles['literal'].fontName
         post = "</font>"
         if not client.styles['literal'].hyphenation:
             pre = '<nobr>' + pre

@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 284: Implemented production lists for sphinx
 * Fixed Issue 165: Definition lists not properly indented inside
   admonitions or tables.
 * SVG Images work inline when using the inkscape extension.
