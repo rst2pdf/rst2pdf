@@ -141,9 +141,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         img = MyImage(filename=imgname, height=h, width=w,
                       kind=kind, client=client)
         # Last resort, try all rasterizers
-        print 'R1', uri
         uri=MyImage.raster(uri, client)
-        print 'R2', uri
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 
