@@ -13,10 +13,10 @@ It preprocesses the source text file before handing it to docutils.
 This module serves two purposes:
 
 1) It demonstrates the technique and can be a starting point for similar
-user-written processing modules; and
+   user-written processing modules; and
 
 2) It provides a simplified syntax for documents which are targeted only
-at rst2pdf, rather than docutils in general.
+   at rst2pdf, rather than docutils in general.
 
 The design goal of "base rst2pdf" is to be completely compatible with
 docutils, such that a file which works as a PDF can also work as HTML,
@@ -41,27 +41,39 @@ Preprocessor extensions:
 All current extensions except style occupy a single line in the
 source file.
 
-.. include::    Processes the include file as well.
+``.. include::``
 
-.. page::       is translated into a raw PageBreak
+    Processes the include file as well.
 
-.. space::      is translated into a raw Spacer.  If only one number given, is
-                used for vertical
+``.. page::``       
 
-.. style::      Allows you to create in-line stylesheets.
-                (If you wish them to be in YAML format, you must give
-                -e yaml before -e preprocess on the command line.)
+    Is translated into a raw PageBreak
 
-.. widths::     creates a new table style (based on table or the first
-                non-numeric token) and creates a class using that style for
-                the next table.  Allows you to set the widths for the table,
-                using percentages.
+``.. space::``      
 
-SingleWordAtLeftColumn   If this is surrounded by blank lines, the singleword
-                         style is applied to the word.  This is a workaround
-                         for the broken interaction between docutils subtitles
-                         and bibliographic metadata.  Who wants a subtitle
-                         inside the TOC?
+    Is translated into a raw Spacer.  If only one number given, is
+    used for vertical
+
+``.. style::``
+
+    Allows you to create in-line stylesheets.
+    (If you wish them to be in YAML format, you must give
+    -e yaml before -e preprocess on the command line.)
+
+``.. widths::`` 
+
+    creates a new table style (based on table or the first
+    non-numeric token) and creates a class using that style for
+    the next table.  Allows you to set the widths for the table,
+    using percentages.
+
+``SingleWordAtLeftColumn``   
+
+    If this is surrounded by blank lines, the singleword
+    style is applied to the word.  This is a workaround
+    for the broken interaction between docutils subtitles
+    and bibliographic metadata.  Who wants a subtitle
+    inside the TOC?
 
 -----------------------------------------------------------------
 
