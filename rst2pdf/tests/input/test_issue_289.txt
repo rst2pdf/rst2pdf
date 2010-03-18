@@ -5,3 +5,19 @@
 .. class:: smallbullet
 
 * small bullet
+
+.. start a new list
+
+* regular bullet
+
+.. class:: bigbullet
+
+1. big item
+
+.. class:: smallbullet
+
+1. small item
+
+.. start a new list
+
+1. regular item

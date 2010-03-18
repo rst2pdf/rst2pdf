@@ -413,17 +413,16 @@ class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
         if node ['classes']:
             style = client.styles[node['classes'][0]]
         else:
-            style = client.styles["bodytext"]
+            style = client.styles["bullet_list"]
             
         node.elements = client.gather_elements(node,
             style=style)
-        s = client.styles["bullet_list"]
         
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
         
-        sb=s.spaceBefore # list separation
-        sa=s.spaceAfter # list separation
+        sb=style.spaceBefore # list separation
+        sa=style.spaceAfter # list separation
 
         node.elements.insert(0, Spacer(0, sb))
         node.elements.append(Spacer(0, sa))
@@ -440,15 +439,19 @@ class HandleFieldList(NodeHandler, docutils.nodes.field_list):
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
     def gather_elements(self, client, node, style):
+        if node ['classes']:
+            style = client.styles[node['classes'][0]]
+        else:
+            style = client.styles["item_list"]
+        
         node.elements = client.gather_elements(node,
-            style = client.styles["bodytext"])
-        s = client.styles["item_list"]
+            style = style)
         
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
         
-        sb=s.spaceBefore # list separation
-        sa=s.spaceAfter # list separation
+        sb=style.spaceBefore # list separation
+        sa=style.spaceAfter # list separation
 
         node.elements.insert(0, Spacer(0, sb))
         node.elements.append(Spacer(0, sa))
@@ -514,8 +517,9 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
     def gather_elements(self, client, node, style):
         
+        print 'BLI', style
         
-        el = client.gather_elements(node, style=style)
+        el = client.gather_elements(node, style=client.styles["bodytext"])
 
         b, t = client.bullet_for_node(node)
 
@@ -534,13 +538,14 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         #
         # bulletFontSize
         # bulletFont
+        # This is so the baselines of the bullet and the text align
+        extra_space= bStyle.bulletFontSize-bStyle.fontSize
+        
         bStyle.fontSize=bStyle.bulletFontSize
 
         if t == 'bullet':
-            st=client.styles['bullet_list']
             item_st=client.styles['bullet_list_item']
         else:
-            st=client.styles['item_list']
             item_st=client.styles['item_list_item']
 
         idx=node.parent.children.index(node)
@@ -554,6 +559,15 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # the item's content, too.
             sb=item_st.spaceBefore-style.spaceBefore
 
+        if extra_space >0:
+            # The bullet is larger, move down the item text
+            sb += extra_space
+            sbb = 0
+        else:
+            # The bullet is smaller, move down the bullet
+            sbb = -extra_space
+        bStyle.spaceBefore=0
+
         if (idx+1)==len(node.parent.children): #Not the last item
             # The last item in the list, so doesn't need
             # separation (it's provided by the list itself)
@@ -561,11 +575,11 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         else:
             sa=item_st.spaceAfter-style.spaceAfter
 
-        t_style = TableStyle(st.commands)
+        t_style = TableStyle(style.commands)
 
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
-        colWidths = st.colWidths
+        colWidths = style.colWidths
         if client.splittables:
             node.elements = [Spacer(0,sb),
                                 SplitTable([[Paragraph(b, style = bStyle), el]],
