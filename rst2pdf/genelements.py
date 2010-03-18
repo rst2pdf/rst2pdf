@@ -542,6 +542,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         extra_space= bStyle.bulletFontSize-bStyle.fontSize
         
         bStyle.fontSize=bStyle.bulletFontSize
+        bStyle.fontName=bStyle.bulletFontName
 
         if t == 'bullet':
             item_st=client.styles['bullet_list_item']
@@ -575,6 +576,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         else:
             sa=item_st.spaceAfter-style.spaceAfter
 
+        print 'ST:', style
         t_style = TableStyle(style.commands)
 
         #colWidths = map(client.styles.adjustUnits,

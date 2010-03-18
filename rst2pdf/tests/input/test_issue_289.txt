@@ -21,3 +21,13 @@
 .. start a new list
 
 1. regular item
+
+.. start a new list
+
+l. Helvetica bullet
+
+.. start a new list
+
+.. class:: weirdbullet
+
+l. Tuffy bullet
