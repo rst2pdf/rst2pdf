@@ -1,14 +1,13 @@
 {
     "styles" : [
-    [ "bigBullet" , { 
+    [ "bigbullet" , { 
         "parent": "bullet_list",
         "bulletFontSize": 32,
         "fontSize": 12
       }],
-    [ "smallBullet" , {
+    [ "smallbullet" , {
         "parent": "bullet_list",
         "bulletFontSize": 12,
         "fontSize": 32
       }]
-   ]
-}
+]}
