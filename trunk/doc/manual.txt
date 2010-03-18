@@ -1617,10 +1617,25 @@ Rst2pdf can get new features from *extensions*. Extensions are python modules th
 
 Several are included with rst2pdf.
 
-Preprocess
-----------
+Preprocess (``-e preprocess``)
+------------------------------
 
 .. include:: ../rst2pdf/extensions/preprocess_r2p.py
+   :start-after:  '''
+   :end-before: '''
+
+Inkscape (``-e inkscape``)
+--------------------------
+
+.. include:: ../rst2pdf/extensions/inkscape_r2p.py
+   :start-after:  '''
+   :end-before: '''
+
+
+Dotted_TOC (``-e dotted_toc``)
+------------------------------
+
+.. include:: ../rst2pdf/extensions/dotted_toc.py
    :start-after:  '''
    :end-before: '''
 
