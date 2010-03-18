@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 168: linenos and linenothreshold options in Sphinx now
+  work correctly.
 * Fixed regression in 0.12 (interaction between rst2pdf and sphinx math)
 * Documented extensions in the manual
 * Better styling of bullets/items (Issue 289)
