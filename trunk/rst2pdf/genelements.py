@@ -516,11 +516,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
     def gather_elements(self, client, node, style):
-        
-        print 'BLI', style
-        
         el = client.gather_elements(node, style=client.styles["bodytext"])
-
         b, t = client.bullet_for_node(node)
 
         # FIXME: this is really really not good code
@@ -576,7 +572,6 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         else:
             sa=item_st.spaceAfter-style.spaceAfter
 
-        print 'ST:', style
         t_style = TableStyle(style.commands)
 
         #colWidths = map(client.styles.adjustUnits,
@@ -728,7 +723,6 @@ class HandleContainer(NodeHandler, docutils.nodes.container):
         parent = node.parent
         if not isinstance(parent, (docutils.nodes.header, docutils.nodes.footer)):
             return NodeHandler.getelements(self, client, node, style)
-        print 'Header/footer with classes', node['classes']
         return self.gather_elements(client, node, style)
 
 class HandleSubstitutionDefinition(NodeHandler, docutils.nodes.substitution_definition):
