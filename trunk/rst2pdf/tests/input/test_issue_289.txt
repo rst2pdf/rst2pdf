@@ -1,0 +1,7 @@
+.. class:: bigBullet
+
+* big bullet
+
+.. class:: smallBullet
+
+* small bullet

@@ -1,0 +1,12 @@
+{
+    "styles" : [
+    [ "bigBullet" , { 
+        "bulletFontSize": 32,
+        "fontSize": 12
+      }],
+    [ "smallBullet" , {
+        "bulletFontSize": 12,
+        "fontSize": 32
+      }]
+   ]
+}
