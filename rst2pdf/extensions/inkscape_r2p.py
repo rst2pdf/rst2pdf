@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-''' inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
-    which uses the inkscape program to convert an svg to a PDF, then uses
-    the vectorpdf code to process the PDF.
+''' 
+inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
+which uses the inkscape program to convert an svg to a PDF, then uses
+the vectorpdf code to process the PDF.
 
-    TODO: NOTE:
+.. NOTE::
 
     The initial version is a proof of concept; uses subprocess in a naive way,
     and doesn't check return from inkscape for errors.
