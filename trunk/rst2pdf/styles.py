@@ -103,8 +103,6 @@ class StyleSheet(object):
         style_path+=['.', os.path.join(self.PATH, 'styles'),
                       '~/.rst2pdf/styles']
         self.StyleSearchPath = map(os.path.expanduser, style_path)
-
-
         self.FontSearchPath=list(set(self.FontSearchPath))
         self.StyleSearchPath=list(set(self.StyleSearchPath))
 
@@ -313,7 +311,6 @@ class StyleSheet(object):
         # Then decide what to do with them
         for data, ssname in ssdata:
             for [skey, style] in self.stylepairs(data):
-
                 for key in style:
                     if key == 'fontName' or key.endswith('FontName'):
                         # It's an alias, replace it

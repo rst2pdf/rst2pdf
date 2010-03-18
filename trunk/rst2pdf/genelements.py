@@ -409,8 +409,14 @@ class HandleSection(NodeHandler, docutils.nodes.section):
 
 class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
     def gather_elements(self, client, node, style):
+        
+        if node ['classes']:
+            style = client.styles[node['classes'][0]]
+        else:
+            style = client.styles["bodytext"]
+            
         node.elements = client.gather_elements(node,
-            style=client.styles["bodytext"])
+            style=style)
         s = client.styles["bullet_list"]
         
         # Here we need to separate the list from the previous element.
@@ -507,6 +513,8 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
     def gather_elements(self, client, node, style):
+        
+        
         el = client.gather_elements(node, style=style)
 
         b, t = client.bullet_for_node(node)
@@ -521,6 +529,12 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
         bStyle = copy(style)
         bStyle.alignment = 2
+        
+        # The style has information about the bullet:
+        #
+        # bulletFontSize
+        # bulletFont
+        bStyle.fontSize=bStyle.bulletFontSize
 
         if t == 'bullet':
             st=client.styles['bullet_list']
