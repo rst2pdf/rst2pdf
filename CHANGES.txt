@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed regression in 0.12 (interaction between rst2pdf and sphinx math)
 * Documented extensions in the manual
 * Better styling of bullets/items (Issue 289)
 * Fixed Issue 290: don't fail on broken images
