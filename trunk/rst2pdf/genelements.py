@@ -409,7 +409,6 @@ class HandleSection(NodeHandler, docutils.nodes.section):
 
 class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
     def gather_elements(self, client, node, style):
-        node._bullSize = client.styles["bullet_list_item"].leading
         node.elements = client.gather_elements(node,
             style=client.styles["bodytext"])
         s = client.styles["bullet_list"]
@@ -435,8 +434,6 @@ class HandleFieldList(NodeHandler, docutils.nodes.field_list):
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
     def gather_elements(self, client, node, style):
-        node._bullSize = client.styles["item_list_item"].leading*\
-            max([len(client.bullet_for_node(x)[0]) for x in node.children])
         node.elements = client.gather_elements(node,
             style = client.styles["bodytext"])
         s = client.styles["item_list"]

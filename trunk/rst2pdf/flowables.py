@@ -226,7 +226,7 @@ class SplitTable(DelayedTable):
                     if l2==[]: # Not splittable, push some to next page
                         if l==0: # Can't fit anything, push all to next page
                             return l2
-
+ 
                         # We reduce the number of items we keep on the
                         # page for two reasons:
                         #    1) If an item is associated with the following
