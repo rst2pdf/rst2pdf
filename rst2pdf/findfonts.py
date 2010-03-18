@@ -205,12 +205,60 @@ def findTTFont(fname):
             return None
         return variants
 
-    family = get_family(fname)
-    if not family:
-        log.error("Unknown font: %s", fname)
-        return None
-    return get_variants(family)
+    if os.name != 'nt':
+        family = get_family(fname)
+        if not family:
+            log.error("Unknown font: %s", fname)
+            return None
+        return get_variants(family)
+    else:
+        # lookup required font in registry lookup, alternative approach
+        # is to let loadFont() traverse windows font directory or use
+        # ctypes with EnumFontFamiliesEx
 
+        def get_nt_fname(ftname):
+            import _winreg as _w
+            fontkey = _w.OpenKey(_w.HKEY_LOCAL_MACHINE,
+                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
+            fontname = ftname + " (TrueType)"
+            try:
+                fname = _w.QueryValueEx(fontkey, fontname)[0]
+                fontdir = os.environ.get("SystemRoot", u"C:\\Windows")
+                fontdir += u"\\Fonts"
+                return fontdir + "\\" + fname
+            except WindowsError, err:
+                return None
+            finally:
+                fontkey.Close()
+
+        family, pos = guessFont(fname)
+        fontfile = get_nt_fname(fname)
+        if not fontfile:
+            if pos == 0:
+                fontfile = get_nt_fname(family)
+            elif pos == 1:
+                fontfile = get_nt_fname(family + " Bold")
+            elif pos == 2:
+                fontfile = get_nt_fname(family + " Italic") or \
+                    get_nt_fname(family + " Oblique")
+            else:
+                fontfile = get_nt_fname(family + " Bold Italic") or \
+                    get_nt_fname(family + " Bold Oblique")
+
+            if not fontfile:
+                log.error("Unknown font: %s", fname)
+                return None
+
+        family, pos = guessFont(fname)
+        variants = [
+            get_nt_fname(family) or fontfile,
+            get_nt_fname(family+" Bold") or fontfile,
+            get_nt_fname(family+" Italic") or \
+                get_nt_fname(family+" Oblique") or fontfile,
+            get_nt_fname(family+" Bold Italic") or \
+                get_nt_fname(family+" Bold Oblique") or fontfile,
+        ]
+        return variants
 
 def autoEmbed(fname):
     """Given a font name, does a best-effort of embedding
@@ -280,33 +328,37 @@ def autoEmbed(fname):
 
 
 def guessFont(fname):
-    """Given a font name (like "Tahoma-BoldOblique" or "Bitstream Charter Italic") 
-    guess what it means.
+    """Given a font name like "Tahoma-BoldOblique", "Bitstream Charter Italic"
+    or "Perpetua Bold Italic" guess what it means.
 
     Returns (family, x) where x is
         0: regular
-        1: italic
-        2: bold
+        1: bold
+        2: italic
         3: bolditalic
 
     """
     italic = 0
     bold = 0
     if '-' not in fname:
-        family=fname
-        mod=fname.lower()
+        sfx = {"Bold":1, "Bold Italic":3, "Bold Oblique":3, "Italic":2,
+            "Oblique":2}
+        for key in sfx:
+            if fname.endswith(" "+key):
+                return fname.rpartition(key)[0], sfx[key]
+        return fname, 0
+
     else:
-        sp=fname.split('-')
-        family='-'.join(sp[:-1])
-        mod = sp[-1]
+        family, mod = fname.rsplit('-', 1)
+        
     mod = mod.lower()
     if "oblique" in mod or "italic" in mod:
         italic = 1
-    if "bold" in mod or "black" in mod:
+    if "bold" in mod:
         bold = 1
      
-    if bold+italic ==0: #Not really a modifier
-        return fname,0
+    if bold+italic == 0: #Not really a modifier
+        return fname, 0
     return family, bold + 2*italic
 
 
@@ -315,7 +367,10 @@ def main():
     if len(sys.argv) != 2:
         print "Usage: findfont fontName"
         sys.exit(1)
-    flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
+    if os.name == 'nt':
+        flist = [".", os.environ.get("SystemRoot", "C:\\Windows")+"\\Fonts"]
+    else:
+        flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
     fn, pos = guessFont(sys.argv[1])
     f = findFont(fn)
     if not f:

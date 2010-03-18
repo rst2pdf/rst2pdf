@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Better font finding in windows (patch by techtonik, Issue 282). 
 * Fixed Issue 166: Implemented Sphinx's hlist (horizontal lists)
 * Fixed Issue 284: Implemented production lists for sphinx
 * Fixed Issue 165: Definition lists not properly indented inside
