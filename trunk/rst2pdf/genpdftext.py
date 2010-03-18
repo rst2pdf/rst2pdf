@@ -110,7 +110,12 @@ class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
         imgname = os.path.join(client.basedir,str(node.get("uri")))
-        w, h, kind = MyImage.size_for_node(node, client=client)
+        try:
+            w, h, kind = MyImage.size_for_node(node, client=client)
+        except ValueError: 
+            # Broken image, return arbitrary stuff
+            imgname=missing
+            w, h, kind = 100, 100, 'direct'
         node.elements = [MyImage(filename=imgname, height=h, width=w,
                     kind=kind, client=client)]
         alignment = node.get('align', 'CENTER').upper()
@@ -124,24 +129,28 @@ class HandleImage(NodeHandler, docutils.nodes.image):
     def get_text(self, client, node, replaceEnt):
         # First see if the image file exists, or else,
         # use image-missing.png
-        uri=node.get('uri')
-        w, h, kind = MyImage.size_for_node(node, client=client)
+        imgname = os.path.join(client.basedir,str(node.get("uri")))
+        try:
+            w, h, kind = MyImage.size_for_node(node, client=client)
+        except ValueError: 
+            # Broken image, return arbitrary stuff
+            imgname=missing
+            w, h, kind = 100, 100, 'direct'
+
         alignment=node.get('align', 'CENTER').lower()
         if alignment in ('top', 'middle', 'bottom'):
             align='valign="%s"'%alignment
         else:
             align=''
-        uri=os.path.join(client.basedir,uri)
         # TODO: inline images don't support SVG, vectors and PDF,
         #       which may be surprising. So, work on converting them
         #       previous to passing to reportlab.
         # Try to rasterize using the backend
-        imgname = os.path.join(client.basedir,str(node.get("uri")))
         w, h, kind = MyImage.size_for_node(node, client=client)
         img = MyImage(filename=imgname, height=h, width=w,
                       kind=kind, client=client)
         # Last resort, try all rasterizers
-        uri=MyImage.raster(uri, client)
+        uri=MyImage.raster(imgname, client)
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 
