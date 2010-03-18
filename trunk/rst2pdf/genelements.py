@@ -523,13 +523,13 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         if not el:
             el = [Paragraph(u"<nobr>\xa0</nobr>", client.styles["bodytext"])]
 
-        # FIXME: use different unicode bullets depending on b
-        if b and b in "*+-":
-            b = u'\u2022'
-
         bStyle = copy(style)
         bStyle.alignment = 2
-        
+
+        # FIXME: use different unicode bullets depending on b
+        if b and b in "*+-":
+            b = getattr(bStyle, 'bulletText', u'\u2022')
+
         # The style has information about the bullet:
         #
         # bulletFontSize
