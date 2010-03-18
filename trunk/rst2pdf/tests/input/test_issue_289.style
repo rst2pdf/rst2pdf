@@ -5,6 +5,10 @@
         "bulletFontSize": 32,
         "fontSize": 12
       }],
+    [ "weirdbullet" , {
+        "parent": "bullet_list",
+        "bulletFontName": "Tuffy"
+      }],
     [ "smallbullet" , {
         "parent": "bullet_list",
         "bulletFontSize": 12,
