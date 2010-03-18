@@ -595,7 +595,8 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         self.builder = builder
         self.footnotestack = []
         self.curfilestack = []
-	self.top_sectionlevel = 1
+        self.highlightlinenothreshold = 999999
+        self.top_sectionlevel = 1
         self.footnotecounter=1
         self.curfile=None
         self.footnotedict={}
@@ -643,6 +644,12 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         else:
             lang=lang_for_block(node.astext(),node.get('language',self.highlightlang))
             content = node.astext().splitlines()
+            if len(content) > self.highlightlinenothreshold or\
+               node.get('linenos',False):
+                options = { 'linenos': True }
+            else:
+                options = {}
+                
             # FIXME: make tab width configurable
             content = [c.replace('\t','        ') for c in content]
             replacement = nodes.literal_block()
@@ -650,7 +657,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
                 pygments_code_block_directive.code_block_directive(
                                     name = None,
                                     arguments = [lang],
-                                    options = {},
+                                    options = options,
                                     content = content,
                                     lineno = False,
                                     content_offset = None,
