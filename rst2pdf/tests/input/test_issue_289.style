@@ -9,6 +9,10 @@
         "parent": "bullet_list",
         "bulletFontName": "Tuffy"
       }],
+    [ "custombullet" , {
+        "parent": "bullet_list",
+        "bulletText": ">>"
+      }],
     [ "smallbullet" , {
         "parent": "bullet_list",
         "bulletFontSize": 12,

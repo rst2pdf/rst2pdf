@@ -24,10 +24,20 @@
 
 .. start a new list
 
+.. class:: weirdbullet
+
+l. Tuffy bullet
+
+.. start a new list
+
 l. Helvetica bullet
 
 .. start a new list
 
-.. class:: weirdbullet
+.. class:: custombullet
 
-l. Tuffy bullet
+* The bullet should be ">>"
+
+.. class:: custombullet
+
+1. The bullet should be "1."
