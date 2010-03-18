@@ -47,33 +47,36 @@ Paragraph = genelements.Paragraph
 
 '''
 
-NOTE:  THIS IS A HUGE HACK HACK HACK
+.. NOTE:  
+
+    THIS IS A HUGE HACK HACK HACK
 
 All I did was take the wrap() method from the stock reportlab TOC generator,
 and make the minimal changes to make it work on MY documents in rst2pdf.
 
 History:
+~~~~~~~~
 
-    The reportlab TOC generator adds nice dots between the text and the page number.
-    The rst2pdf one does not.
+The reportlab TOC generator adds nice dots between the text and the page number.
+The rst2pdf one does not.
 
-    A closer examination reveals that the rst2pdf one probably deliberately stripped
-    this code, because the reportlab implementation only allowed a single TOC, and
-    this is unacceptable for at least some rst2pdf users.
+A closer examination reveals that the rst2pdf one probably deliberately stripped
+this code, because the reportlab implementation only allowed a single TOC, and
+this is unacceptable for at least some rst2pdf users.
 
-    There are other differences in the rst2pdf one I don't understand.  This module
-    is a hack to add back dots between the lines. Maybe at some point we can figure
-    out if this is right, or how to support dots in the TOC in the main code.
+There are other differences in the rst2pdf one I don't understand.  This module
+is a hack to add back dots between the lines. Maybe at some point we can figure
+out if this is right, or how to support dots in the TOC in the main code.
 
-    Mind you, the original RL implementation is a complete hack in any case:
+Mind you, the original RL implementation is a complete hack in any case:
 
-       - It uses a callback to a nested function which doesn't even bother to
-         assume the original enclosing scope is available at callback time.
-         This leads it to do crazy things like eval()
+- It uses a callback to a nested function which doesn't even bother to
+    assume the original enclosing scope is available at callback time.
+    This leads it to do crazy things like eval()
 
-       - It uses a single name in the canvas for the callback function
-         (this is what kills multiple TOC capability) when it would be
-         extremely easy to generate a unique name.
+- It uses a single name in the canvas for the callback function
+    (this is what kills multiple TOC capability) when it would be
+    extremely easy to generate a unique name.
 '''
 
 class DottedTableOfContents(genelements.MyTableOfContents):
