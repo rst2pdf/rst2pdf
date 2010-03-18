@@ -6,6 +6,7 @@ jabberwocky.txt:
 
 jabberwocky with 4-space tabs:
 
-.. literalinclude:: jabberwocky.txt
+.. include:: jabberwocky.txt
    :encoding: latin-1
    :tab-width: 4
+   :literal:
