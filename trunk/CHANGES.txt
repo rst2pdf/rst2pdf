@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Documented extensions in the manual
+* Better styling of bullets/items (Issue 289)
 * Fixed Issue 290: don't fail on broken images
 * Better font finding in windows (patch by techtonik, Issue 282). 
 * Fixed Issue 166: Implemented Sphinx's hlist (horizontal lists)
