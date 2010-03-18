@@ -65,6 +65,7 @@ from docutils.parsers.rst import directives
 import pygments_code_block_directive # code-block directive
 
 from reportlab.platypus import *
+from reportlab.platypus.doctemplate import IndexingFlowable
 from reportlab.platypus.flowables import _listWrapOn, _Container
 from reportlab.pdfbase.pdfdoc import PDFPageLabel
 #from reportlab.lib.enums import *
@@ -147,7 +148,8 @@ class RstToPdf(object):
         self.footer = footer
         self.decoration = {'header': header,
                            'footer': footer,
-                           'endnotes': []}
+                           'endnotes': [],
+                           'extraflowables':[]}
         # find base path
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
@@ -455,7 +457,8 @@ class RstToPdf(object):
         """
         self.decoration = {'header': self.header,
                            'footer': self.footer,
-                           'endnotes': []}
+                           'endnotes': [],
+                           'extraflowables': []}
                            
         self.pending_targets=[]
         self.targets=[]
@@ -494,6 +497,8 @@ class RstToPdf(object):
                 elements.append(DelayedTable([[n[0], n[1]]],
                     style=t_style, colWidths=colWidths))
 
+        
+
         head = self.decoration['header']
         foot = self.decoration['footer']
 
@@ -512,6 +517,13 @@ class RstToPdf(object):
             try:
                 log.info("Starting build")
                 pdfdoc.multiBuild(elements)
+                #from pudb import set_trace; set_trace()
+                # See if this *must* be multipass
+                if getattr(self, 'mustMultiBuild', False):
+                    if not isinstance(elements[-1],UnhappyOnce):
+                        log.info ('Forcing second pass so Total pages work')
+                        elements.append(UnhappyOnce())
+                        continue
                 break
             except ValueError, v:
                 # FIXME: cross-document links come through here, which means
@@ -657,12 +669,28 @@ def setPageCounter(counter=None, style=None):
 class MyContainer(_Container, Flowable):
     pass
 
+class UnhappyOnce(IndexingFlowable):
+    '''An indexing flowable that is only unsatisfied once.
+    If added to a story, it will make multiBuild run 
+    at least two passes. Useful for ###Total###'''
+    _unhappy=True
+    def isSatisfied(self):
+        if self._unhappy:
+            self._unhappy= False
+            print 'UNHAPPY'
+            return False
+        print 'HAPPY'
+        return True
+        
+    def draw(self):
+        pass
+
 class HeaderOrFooter(object):
     """ A helper object for FancyPage (below)
         HeaderOrFooter handles operations which are common
         to both headers and footers
     """
-    def __init__(self, items=None, isfooter=False):
+    def __init__(self, items=None, isfooter=False, client=None):
         self.items = items
         if isfooter:
             locinfo = 'footer showFooter defaultFooter footerSeparator'
@@ -671,6 +699,7 @@ class HeaderOrFooter(object):
         self.isfooter = isfooter
         self.loc, self.showloc, self.defaultloc, self.addsep = locinfo.split()
         self.totalpages = 0
+        self.client = client
 
     def prepare(self, pageobj, canv, doc):
         showloc = pageobj.template.get(self.showloc, True)
@@ -711,7 +740,9 @@ class HeaderOrFooter(object):
                         text = unicode(text, 'utf-8')
 
                 text = text.replace(u'###Page###', pnum)
-                text = text.replace(u'###Total###', str(self.totalpages))
+                if '###Total###' in text:
+                    text = text.replace(u'###Total###', str(self.totalpages))
+                    self.client.mustMultiBuild=True
                 text = text.replace(u"###Title###", doc.title)
                 text = text.replace(u"###Section###",
                     getattr(canv, 'sectName', ''))
@@ -739,8 +770,8 @@ class FancyPage(PageTemplate):
     def __init__(self, _id, _head, _foot, client):
         self.client = client
         self.styles = client.styles
-        self._head = HeaderOrFooter(_head)
-        self._foot = HeaderOrFooter(_foot, True)
+        self._head = HeaderOrFooter(_head, client=client)
+        self._foot = HeaderOrFooter(_foot, True, client)
         self.smarty = client.smarty
         self.show_frame = client.show_frame
         self.image_cache = {}
