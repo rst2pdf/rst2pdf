@@ -769,7 +769,13 @@ class FancyPage(PageTemplate):
                 del self.template[which]
                 log.error("Missing %s image file: %s", which, uri)
                 return
-            w, h, kind = MyImage.size_for_node(dict(uri=uri), self.client)
+            try:
+                w, h, kind = MyImage.size_for_node(dict(uri=uri), self.client)
+            except ValueError: 
+                # Broken image, return arbitrary stuff
+                uri=missing
+                w, h, kind = 100, 100, 'direct'
+                
             pw, ph = self.styles.pw, self.styles.ph
             scale = min(1.0, 1.0 * pw / w, 1.0 * ph / h)
             sw, sh = w * scale, h * scale
