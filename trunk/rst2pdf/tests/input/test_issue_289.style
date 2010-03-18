@@ -1,10 +1,12 @@
 {
     "styles" : [
     [ "bigBullet" , { 
+        "parent": "bullet_list",
         "bulletFontSize": 32,
         "fontSize": 12
       }],
     [ "smallBullet" , {
+        "parent": "bullet_list",
         "bulletFontSize": 12,
         "fontSize": 32
       }]
