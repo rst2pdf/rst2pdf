@@ -65,6 +65,9 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
 * If you implemented a new feature, please document it in manual.txt 
   (or in a separate file and add an include in manual.txt)
 
+* If you implement an extension, make the docstring valid restructured text
+  and link it to the manual like the others.
+
 Why should you bother with all this?
 
 It's important that you do it this way because it means that the rest of us know what you are doing. It also means you don't break rst2pdf.
