@@ -463,6 +463,9 @@
       borderWidth: 0.5
       borderPadding: 6
 
+    linenumber:
+      parent: code
+
     pygments-n: parent: code
     pygments-nx: parent: code
     pygments-p: parent: code

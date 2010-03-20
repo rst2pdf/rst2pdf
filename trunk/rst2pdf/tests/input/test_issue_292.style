@@ -1,5 +1,9 @@
 {
     "styles" : [
+    [ "linenumber", {
+        "fontName": "stdMonoBold",
+        "textColor": "#00FF00"
+        }],
     [ "nobox" , {
         "parent": "code",
         "borderWidth": 0,
