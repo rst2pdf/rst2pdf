@@ -3,6 +3,7 @@
     [
       "pygments-hll", 
       {
+        "textColor": "black", 
         "parent": "code", 
         "backColor": "#333333"
       }

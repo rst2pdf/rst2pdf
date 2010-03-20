@@ -11,106 +11,151 @@
     [
       "pygments-c", 
       {
-        "textColor": "#888888", 
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
         "parent": "code"
       }
     ], 
     [
       "pygments-err", 
       {
-        "textColor": "#a61717", 
-        "parent": "code", 
-        "backColor": "#e3d2d2"
+        "textColor": "#a40000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-g", 
+      {
+        "textColor": "#000000", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-k", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#008800", 
+        "textColor": "#204a87", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-l", 
+      {
+        "textColor": "#000000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-n", 
+      {
+        "textColor": "#000000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-o", 
+      {
+        "fontName": "stdMonoBold", 
+        "textColor": "#ce5c00", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-x", 
+      {
+        "textColor": "#000000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-p", 
+      {
+        "fontName": "stdMonoBold", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-cm", 
       {
-        "textColor": "#888888", 
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
         "parent": "code"
       }
     ], 
     [
       "pygments-cp", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#cc0000", 
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
         "parent": "code"
       }
     ], 
     [
       "pygments-c1", 
       {
-        "textColor": "#888888", 
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
         "parent": "code"
       }
     ], 
     [
       "pygments-cs", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#cc0000", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-gd", 
       {
-        "textColor": "#000000", 
-        "parent": "code", 
-        "backColor": "#ffdddd"
+        "textColor": "#a40000", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-ge", 
       {
         "fontName": "stdMonoItalic", 
-        "textColor": "black", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gr", 
       {
-        "textColor": "#aa0000", 
+        "textColor": "#ef2929", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gh", 
       {
-        "textColor": "#303030", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#000080", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gi", 
       {
-        "textColor": "#000000", 
-        "parent": "code", 
-        "backColor": "#ddffdd"
+        "textColor": "#00A000", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-go", 
       {
-        "textColor": "#888888", 
+        "fontName": "stdMonoItalic", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gp", 
       {
-        "textColor": "#555555", 
+        "textColor": "#8f5902", 
         "parent": "code"
       }
     ], 
@@ -118,21 +163,23 @@
       "pygments-gs", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "black", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gu", 
       {
-        "textColor": "#606060", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#800080", 
         "parent": "code"
       }
     ], 
     [
       "pygments-gt", 
       {
-        "textColor": "#aa0000", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#a40000", 
         "parent": "code"
       }
     ], 
@@ -140,7 +187,7 @@
       "pygments-kc", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#008800", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
@@ -148,7 +195,7 @@
       "pygments-kd", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#008800", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
@@ -156,14 +203,15 @@
       "pygments-kn", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#008800", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
     [
       "pygments-kp", 
       {
-        "textColor": "#008800", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
@@ -171,7 +219,7 @@
       "pygments-kr", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#008800", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
@@ -179,7 +227,14 @@
       "pygments-kt", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#888888", 
+        "textColor": "#204a87", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ld", 
+      {
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
@@ -187,52 +242,57 @@
       "pygments-m", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ], 
     [
       "pygments-s", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-na", 
       {
-        "textColor": "#336699", 
+        "textColor": "#c4a000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nb", 
       {
-        "textColor": "#003388", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nc", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#bb0066", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-no", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#003366", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nd", 
       {
-        "textColor": "#555555", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#5c35cc", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-ni", 
+      {
+        "textColor": "#ce5c00", 
         "parent": "code"
       }
     ], 
@@ -240,39 +300,42 @@
       "pygments-ne", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#bb0066", 
+        "textColor": "#cc0000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nf", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#0066bb", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nl", 
       {
-        "fontName": "stdMonoItalic", 
-        "textColor": "#336699", 
+        "textColor": "#f57900", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nn", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#bb0066", 
+        "textColor": "#000000", 
+        "parent": "code"
+      }
+    ], 
+    [
+      "pygments-nx", 
+      {
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-py", 
       {
-        "fontName": "stdMonoBold", 
-        "textColor": "#336699", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
@@ -280,28 +343,29 @@
       "pygments-nt", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#bb0066", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
     [
       "pygments-nv", 
       {
-        "textColor": "#336699", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-ow", 
       {
-        "textColor": "#008800", 
+        "fontName": "stdMonoBold", 
+        "textColor": "#204a87", 
         "parent": "code"
       }
     ], 
     [
       "pygments-w", 
       {
-        "textColor": "#bbbbbb", 
+        "textColor": "#f8f8f8", 
         "parent": "code"
       }
     ], 
@@ -309,7 +373,7 @@
       "pygments-mf", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ], 
@@ -317,7 +381,7 @@
       "pygments-mh", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ], 
@@ -325,7 +389,7 @@
       "pygments-mi", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ], 
@@ -333,123 +397,113 @@
       "pygments-mo", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ], 
     [
       "pygments-sb", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-sc", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-sd", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "fontName": "stdMonoItalic", 
+        "textColor": "#8f5902", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-s2", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-se", 
       {
-        "textColor": "#0044dd", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-sh", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-si", 
       {
-        "textColor": "#3333bb", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-sx", 
       {
-        "textColor": "#22bb22", 
-        "parent": "code", 
-        "backColor": "#f0fff0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-sr", 
       {
-        "textColor": "#008800", 
-        "parent": "code", 
-        "backColor": "#fff0ff"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-s1", 
       {
-        "textColor": "#dd2200", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-ss", 
       {
-        "textColor": "#aa6600", 
-        "parent": "code", 
-        "backColor": "#fff0f0"
+        "textColor": "#4e9a06", 
+        "parent": "code"
       }
     ], 
     [
       "pygments-bp", 
       {
-        "textColor": "#003388", 
+        "textColor": "#3465a4", 
         "parent": "code"
       }
     ], 
     [
       "pygments-vc", 
       {
-        "textColor": "#336699", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-vg", 
       {
-        "textColor": "#dd7700", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
     [
       "pygments-vi", 
       {
-        "textColor": "#3333bb", 
+        "textColor": "#000000", 
         "parent": "code"
       }
     ], 
@@ -457,7 +511,7 @@
       "pygments-il", 
       {
         "fontName": "stdMonoBold", 
-        "textColor": "#0000DD", 
+        "textColor": "#0000cf", 
         "parent": "code"
       }
     ]
