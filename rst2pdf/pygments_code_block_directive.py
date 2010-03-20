@@ -202,7 +202,7 @@ def code_block_directive(name, arguments, options, content, lineno,
         total_lines = content.count('\n') + 1
         lnwidth = len(str(total_lines))
         fstr = "\n%%%dd " % lnwidth
-        code_block += nodes.Text(fstr[1:] % lineno, fstr[1:] % lineno)
+        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno,   classes=['linenumber'])
 
     # parse content with pygments and add to code_block element
     for cls, value in DocutilsInterface(content, language):
@@ -215,7 +215,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             linenos = range(lineno, lineno + len(values))
             for chunk, ln in zip(values, linenos)[1:]:
                 if ln <= total_lines:
-                    code_block += nodes.Text(fstr % ln, fstr % ln)
+                    code_block += nodes.inline(fstr % ln, fstr % ln, classes=['linenumber'])
                     code_block += nodes.Text(chunk, chunk)
             lineno += len(values) - 1
 

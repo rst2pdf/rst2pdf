@@ -910,9 +910,6 @@ last items.
 Syntax Highlighting
 ===================
 
-Inline
-------
-
 Rst2pdf adds a non-standard directive, called code-block, which produces syntax
 highlighted for many languages using Pygments_.
 
@@ -930,6 +927,14 @@ For example, if you want to include a python fragment::
 
 Notice that you need to declare the language of the fragment. Here's a list of
 the currently supported_.
+
+You can use the ``linenos`` option to display line numbers:
+
+.. code-block:: python
+   :linenos:
+
+   def myFun(x,y):
+       print x+y
 
 Rst2pdf includes several stylesheets for highlighting code:
 
@@ -961,9 +966,11 @@ There is an online demo of pygments showing these styles:
     
     http://pygments.org/demo/1817/
 
+The overal look of a code box is controlled by the "code" style or by a class you apply to it using the ``.. class::`` directive.
 Aditionally, if you want to change some properties when using different languages, you can define styles with the name of the language.
-
 For example, a ``python`` style will be applied to code blocks created with ``.. code-block:: python``.
+
+The look of the line numbers is controlled by the "linenumbers" style.
 
 Examples
 ~~~~~~~~
