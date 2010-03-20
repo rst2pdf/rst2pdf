@@ -236,7 +236,7 @@ class MyImage (Flowable):
         '''Given a docutils image node, returns the size the image should have
         in the PDF document, and what 'kind' of size that is. 
         That involves lots of guesswork'''
-        
+
         uri = os.path.join(client.basedir,str(node.get("uri")))
         srcinfo = client, uri
         
@@ -328,7 +328,17 @@ class MyImage (Flowable):
         #
 
         w = node.get('width')
-        if w is not None:
+        h = node.get('height')
+
+        if h is None and w is None: # Nothing specified
+            # Guess from iw, ih
+            log.warning("Using image %s without specifying size."
+                "Calculating based on image size at %ddpi [%s]",
+                imgname, xdpi, nodeid(node))
+            w = iw*inch/xdpi
+            h = ih*inch/ydpi
+        elif w is not None:
+            # Node specifies only w
             # In this particular case, we want the default unit
             # to be pixels so we work like rst2html
             if w[-1] == '%':
@@ -341,25 +351,24 @@ class MyImage (Flowable):
                 # docutils mailing list discussion
                 w = client.styles.adjustUnits(w, client.styles.tw,
                                             default_unit='px')
-        else:
-            if not size_known:
-                log.warning("Using image %s without specifying size."
-                    "Calculating based on image size at %ddpi [%s]",
-                    imgname, xdpi, nodeid(node))
-            # No width specified at all, use w in px
-            w = iw*inch/xdpi
+            
+            if h is None:
+                # h is set from w with right aspect ratio
+                h = w*iw/ih
+            else:
+                h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
+        elif h is not None and w is None:
+            if h[-1] != '%':
+                h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
 
-        h = node.get('height')
-        if h is not None and h[-1] != '%':
-            h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
-        else:
-            # Now, often, only the width is specified!
-            # if we don't have a height, we need to keep the
-            # aspect ratio, or else it will look ugly
-            if h and h[-1]=='%':
+                # w is set from h with right aspect ratio
+                w = h*ih/iw
+            else:
                 log.error('Setting height as a percentage does **not** work. '\
                           'ignoring height parameter [%s]', nodeid(node))
-            h = w*ih/iw
+                # Set both from image data
+                w = iw*inch/xdpi
+                h = ih*inch/ydpi
 
         # Apply scale factor
         w = w*scale
