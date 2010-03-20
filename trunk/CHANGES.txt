@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 294: Images were deformed when only height was specified.
 * Fixed Issue 293: Accept left/center/right as alignments in stylesheets.
 * Fixed Issue 292: separate style for line numbers in codeblocks
 * Fixed Issue 291: support class directive for codeblocks
