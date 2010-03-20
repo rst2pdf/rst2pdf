@@ -475,7 +475,7 @@ and not on inline styles::
     "leftIndent":0,
     "rightIndent":0,
     "firstLineIndent":0,
-    "alignment":TA_LEFT,
+    "alignment":"left",
     "spaceBefore":0,
     "spaceAfter":0,
     "bulletFontName":"Helvetica",
@@ -857,7 +857,7 @@ The ``normal`` style is meant for most elements, so usually it's the same as cha
 The ``bodytext`` style is for elements that form paragraphs. So, for example, you can set
 your document to be left-aligned like this::
     
-    {"styles": [["bodytext", {"alignment": "TA_LEFT"}]]}
+    {"styles": [["bodytext", {"alignment": "left"}]]}
     
 There are elements, however, that don't inherit from bodytext, for example headings and the
 styles used in the table of contents. Those are elements that are not real paragraphs, so
@@ -1271,7 +1271,7 @@ for hyphenation via the command line or paragraph styles.
 For english, this should be enough::
 
     ["bodytext" , {
-      "alignment": "TA_JUSTIFY",
+      "alignment": "justify",
       "hyphenation": true
     }],
 
@@ -1293,7 +1293,7 @@ For example, you could inherit bodytext for spanish::
 
     ["bodytext_es" , {
       "parent": "bodytext",
-      "alignment": "TA_JUSTIFY",
+      "alignment": "justify",
       "hyphenation": true,
       "language": "es_ES"
     }],

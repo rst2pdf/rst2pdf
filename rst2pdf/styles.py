@@ -407,8 +407,17 @@ class StyleSheet(object):
 
                     # Handle alignment constants
                     elif key == 'alignment':
-                        style[key] = dict(TA_LEFT=0, TA_CENTER=1, TA_CENTRE=1,
-                            TA_RIGHT=2, TA_JUSTIFY=4, DECIMAL=8)[style[key]]
+                        style[key] = dict(TA_LEFT=0,
+                                          LEFT=0,
+                                          TA_CENTER=1,
+                                          CENTER=1,
+                                          TA_CENTRE=1,
+                                          CENTRE=1,
+                                          TA_RIGHT=2,
+                                          RIGHT=2,
+                                          TA_JUSTIFY=4,
+                                          JUSTIFY=4,
+                                          DECIMAL=8, )[style[key].upper()]
 
                     elif key == 'language':
                         if not style[key] in self.languages:
