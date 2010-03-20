@@ -5,6 +5,7 @@
         "borderWidth": 0,
         "borderPadding": 0,
         "borderColor": null,
-        "borderRadius": null
+        "borderRadius": null,
+        "backColor": "white"
       }]
 ]}
