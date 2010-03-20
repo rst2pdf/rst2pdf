@@ -88,7 +88,7 @@ doctest:
 	      "results in _build/doctest/output.txt."
 
 
-pdf:
+pdf: html
 	$(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) _build/pdf
 	@echo
 	@echo "Build finished. The PDF files are in _build/pdf."
