@@ -213,6 +213,9 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
     if os.path.isdir(pdfpath):
+        if not failcode and os.path.exists(iprefix + '.nopdf'):
+            log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
+            return 'good'
         pdffiles = globjoin(pdfpath, '*.pdf')
     else:
         pdffiles = [pdfpath]
@@ -288,7 +291,7 @@ def build_txt(iprefix, outpdf, fastfork):
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
 def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
-    use_sphinx = 'sphinx' in inpfname
+    use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
         if sphinxdir.endswith('Makefile'):
