@@ -1,0 +1,10 @@
+{
+    "styles" : [
+    [ "nobox" , {
+        "parent": "code",
+        "borderWidth": 0,
+        "borderPadding": 0,
+        "borderColor": null,
+        "borderRadius": null
+      }]
+]}
