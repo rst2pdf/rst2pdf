@@ -1,1 +1,1 @@
-{"styles": [["base", {"fontSize": 12, "leading": 28}]]}
+styles: base: {fontSize: 12, leading: 28}

@@ -1,21 +1,13 @@
-{
-    "styles" : [
-    [ "bigbullet" , { 
-        "parent": "bullet_list",
-        "bulletFontSize": 32,
-        "fontSize": 12
-      }],
-    [ "weirdbullet" , {
-        "parent": "bullet_list",
-        "bulletFontName": "Tuffy"
-      }],
-    [ "custombullet" , {
-        "parent": "bullet_list",
-        "bulletText": ">>"
-      }],
-    [ "smallbullet" , {
-        "parent": "bullet_list",
-        "bulletFontSize": 12,
-        "fontSize": 32
-      }]
-]}
+styles:
+    bigbullet:
+        bulletFontSize: 32
+        fontSize: 12
+        parent: bullet_list
+
+    custombullet: {bulletText: >>, parent: bullet_list}
+    smallbullet:
+        bulletFontSize: 12
+        fontSize: 32
+        parent: bullet_list
+
+    weirdbullet: {bulletFontName: Tuffy, parent: bullet_list}

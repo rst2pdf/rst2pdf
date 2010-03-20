@@ -1,7 +1,4 @@
-{
-  "embeddedFonts" : [["GL-Antique.ttf","GL-Antique.ttf","GL-Antique.ttf","GL-Antique.ttf"]],
-  "fontsAlias" : {
-    "stdBold": "GL-Antique",
-    "stdMono": "GL-Antique"
-    }
-}
+embeddedFonts: []
+        [GL-Antique.ttf, GL-Antique.ttf, GL-Antique.ttf, GL-Antique.ttf]
+
+fontsAlias: {stdBold: GL-Antique, stdMono: GL-Antique}

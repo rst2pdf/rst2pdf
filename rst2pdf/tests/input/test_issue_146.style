@@ -1,1 +1,1 @@
-{ "styles" : [ [ "thai" , { "fontName" : "garuda" }] ] }
+styles: thai: fontName: garuda

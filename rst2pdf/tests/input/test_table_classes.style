@@ -1,41 +1,38 @@
-{
-  "styles": [
-    [ "justgrid", {
-        "parent": "table",
-        "commands": [
-            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 1, "black" ],
-            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0, "white" ]
-        ]}
-    ],
-    [ "thin", {
-        "parent": "table",
-        "commands": [
-            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ],
-            [ "BOX", [ 0, 0 ], [ -1, -1 ], 0.1, "black" ]
-        ]}
-    ],
-    [ "thick", {
-        "parent": "table",
-        "commands": [
-            [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 2, "black" ],
-            [ "BOX", [ 0, 0 ], [ -1, -1 ], 2, "black" ]
-        ]}
-    ],
-    [ "bigsmall", {
-        "parent": "table",
-    "colWidths": ["80%","20%"] } ],
-    [ "smallbig", {
-        "parent": "table",
-    "colWidths": ["20%","80%"] } ],
-    [ "onesmall", {
-        "parent": "table",
-    "colWidths": ["20%"] } ],
-    [ "toomany", {
-        "parent": "table",
-    "colWidths": ["30%","30%","30%"] } ],
-    [ "twosmall", {
-        "parent": "table",
-    "colWidths": ["20%","20%"] } ]
-  ]
-}
+styles:
+    bigsmall:
+        colWidths: [80%, 20%]
+        parent: table
 
+    justgrid:
+        commands: []
+                [INNERGRID, [0, 0], [-1, -1], 1, black]
+                [BOX, [0, 0], [-1, -1], 0, white]
+        parent: table
+
+    onesmall:
+        colWidths: [20%]
+        parent: table
+
+    smallbig:
+        colWidths: [20%, 80%]
+        parent: table
+
+    thick:
+        commands: []
+                [INNERGRID, [0, 0], [-1, -1], 2, black]
+                [BOX, [0, 0], [-1, -1], 2, black]
+        parent: table
+
+    thin:
+        commands: []
+                [INNERGRID, [0, 0], [-1, -1], 0.1, black]
+                [BOX, [0, 0], [-1, -1], 0.1, black]
+        parent: table
+
+    toomany:
+        colWidths: [30%, 30%, 30%]
+        parent: table
+
+    twosmall:
+        colWidths: [20%, 20%]
+        parent: table
