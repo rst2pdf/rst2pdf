@@ -3,6 +3,7 @@
     [
       "pygments-hll", 
       {
+        "textColor": "black", 
         "parent": "code", 
         "backColor": "#ffffcc"
       }
@@ -18,6 +19,7 @@
     [
       "pygments-err", 
       {
+        "textColor": "black", 
         "parent": "code"
       }
     ], 
@@ -78,6 +80,7 @@
       "pygments-ge", 
       {
         "fontName": "stdMonoItalic", 
+        "textColor": "black", 
         "parent": "code"
       }
     ], 
@@ -122,6 +125,7 @@
       "pygments-gs", 
       {
         "fontName": "stdMonoBold", 
+        "textColor": "black", 
         "parent": "code"
       }
     ], 
