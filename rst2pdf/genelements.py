@@ -662,9 +662,13 @@ class HandleLine(NodeHandler, docutils.nodes.line):
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                                docutils.nodes.doctest_block):
     def gather_elements(self, client, node, style):
+        if node['classes']:
+            style = client.styles.combinedStyle(['code']+node['classes'])
+        else:
+            style = client.styles['code']
         return [client.PreformattedFit(
                 client.gather_pdftext(node, replaceEnt = True),
-                                client.styles['code'])]
+                                style )]
 
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):

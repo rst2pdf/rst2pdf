@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 291: support class directive for codeblocks
 * Fixed Issue 104: total number of pages in header/footer works in
   all cases now.
 * Fixed Issue 168: linenos and linenothreshold options in Sphinx now
