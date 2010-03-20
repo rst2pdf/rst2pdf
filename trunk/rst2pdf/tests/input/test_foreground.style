@@ -1,10 +1,3 @@
-{"pageSetup": {
-    "firstTemplate": "cutePage"
-  },
-  "pageTemplates" : {
-    "cutePage": {
-        "foreground" : "images/foreground.svg",
-        "background" : "images/demo.pdf#page=6"
-    }
-  }
-}
+pageSetup: firstTemplate: cutePage
+
+pageTemplates: cutePage: {background: "images/demo.pdf#page=6", foreground: images/foreground.svg}

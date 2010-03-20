@@ -1,7 +1,1 @@
-{
-    "styles" : [
-    [ "centered" , {
-        "alignment": "center"
-      }]
-   ]
-}
+styles: centered: alignment: center

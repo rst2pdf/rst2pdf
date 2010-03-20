@@ -1,12 +1,8 @@
-{
-  "styles": [
-    ["code", {
-        "backColor": "#EEFFCC",
-        "borderWidth": 0.3,
-        "borderColor": "#AACC99",
-        "borderPadding": [6,0,0,4],
-        "spaceBefore": 0,
-        "allowOrphans": false,
-        "allowWidows": false
-    }]
-]}
+styles: code:
+        allowOrphans: false
+        allowWidows: false
+        backColor: #EEFFCC
+        borderColor: #AACC99
+        borderPadding: [6, 0, 0, 4]
+        borderWidth: 0.3
+        spaceBefore: 0

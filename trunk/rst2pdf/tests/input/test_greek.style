@@ -1,5 +1,1 @@
-{
-  "fontsAlias" : {
-    "stdFont": "DejaVu Sans"
-    }
-}
+fontsAlias: stdFont: DejaVu Sans

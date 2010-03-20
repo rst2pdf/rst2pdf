@@ -1,5 +1,1 @@
-{
-  "styles": [ 
-    [ "title", { "fontName" : "CharterBT-Italic" } ]
-  ]
-}
+styles: title: fontName: CharterBT-Italic

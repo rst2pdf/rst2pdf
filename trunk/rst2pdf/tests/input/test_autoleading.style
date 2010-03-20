@@ -1,8 +1,1 @@
-{
- "styles" : [
-  [ "bodytext", {
-    "fontSize" : 8
-    }
-  ]
- ]
-}
+styles: bodytext: fontSize: 8
