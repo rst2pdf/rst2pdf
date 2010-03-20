@@ -710,6 +710,29 @@ class StyleSheet(object):
                            default_unit,
                            emsize=self.emsize)
 
+    def combinedStyle(self, styles):
+        '''Given a list of style names, it merges them (the existing ones)
+        and returns a new style.
+
+        The styles that don't exist are silently ignored.
+
+        For example, if called with styles=['style1','style2'] the returned
+        style will be called 'merged_style1_style2'.
+
+        The styles that are *later* in the list will have priority.
+        '''
+
+        validst = [x for x in styles if self.StyleSheet.has_key(x)]
+        newname = '_'.join(['merged']+validst)
+        validst = [self[x] for x in validst]
+        newst=copy(validst[0])
+
+        for st in validst[1:]:
+            newst.__dict__.update(st.__dict__)
+        
+        newst.name=newname
+        return newst
+        
 
 def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
     """Takes something like 2cm and returns 2*cm.

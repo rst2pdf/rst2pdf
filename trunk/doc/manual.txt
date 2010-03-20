@@ -961,6 +961,10 @@ There is an online demo of pygments showing these styles:
     
     http://pygments.org/demo/1817/
 
+Aditionally, if you want to change some properties when using different languages, you can define styles with the name of the language.
+
+For example, a ``python`` style will be applied to code blocks created with ``.. code-block:: python``.
+
 Examples
 ~~~~~~~~
 
