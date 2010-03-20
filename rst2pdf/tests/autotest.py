@@ -213,9 +213,6 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return 'fail'
     if os.path.isdir(pdfpath):
-        if not failcode and os.path.exists(iprefix + '.nopdf'):
-            log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
-            return 'good'
         pdffiles = globjoin(pdfpath, '*.pdf')
     else:
         pdffiles = [pdfpath]
