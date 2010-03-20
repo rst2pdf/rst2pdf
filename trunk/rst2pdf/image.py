@@ -329,7 +329,6 @@ class MyImage (Flowable):
 
         w = node.get('width')
         h = node.get('height')
-
         if h is None and w is None: # Nothing specified
             # Guess from iw, ih
             log.warning("Using image %s without specifying size."
@@ -354,7 +353,7 @@ class MyImage (Flowable):
             
             if h is None:
                 # h is set from w with right aspect ratio
-                h = w*iw/ih
+                h = w*ih/iw
             else:
                 h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
         elif h is not None and w is None:
@@ -362,7 +361,7 @@ class MyImage (Flowable):
                 h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
 
                 # w is set from h with right aspect ratio
-                w = h*ih/iw
+                w = h*iw/ih
             else:
                 log.error('Setting height as a percentage does **not** work. '\
                           'ignoring height parameter [%s]', nodeid(node))
