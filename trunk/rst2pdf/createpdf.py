@@ -750,17 +750,30 @@ class HeaderOrFooter(object):
             return text
         
         for i,e  in enumerate(elems):
+            print dir(e)
             if isinstance(e, Paragraph):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
-            elif isinstance(e, (DelayedTable)):
+            elif isinstance(e, DelayedTable):
                 for i,row in enumerate(e.data):
                     if isinstance (row, list):
                         for j,cell in enumerate(row):
                             if isinstance (cell, list):
-                                self.replaceTokens(cell, canv, doc, smarty)                                
+                                self.replaceTokens(cell, canv, doc, smarty)
                             else:
                                 row[j]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+            elif isinstance(e, Table):
+                for i,row in enumerate(e._cellvalues):
+                    if isinstance (row, list):
+                        for j,cell in enumerate(row):
+                            if isinstance (cell, list):
+                                self.replaceTokens(cell, canv, doc, smarty)
+                            else:
+                                row[j]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+
+            elif isinstance(e, OddEven):
+                e.odd=self.replaceTokens([e.odd,], canv, doc, smarty)[0]
+                e.even=self.replaceTokens([e.even,], canv, doc, smarty)[0]
         return elems
         
     def draw(self, pageobj, canv, doc, x, y, width, height):
