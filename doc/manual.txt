@@ -1207,6 +1207,19 @@ If you want to use more complex content, you should wrap it with containers, lik
 
         This will appear on even pages. It's a single paragraph, so no need for containers.
 
+This directive has several limitations.
+
+* I intentionally have disabled splitting into pages for this, because I have
+  no idea how that could make sense. That means that if its content is larger
+  than a frame, you **will** make rst2pdf barf with one of those ugly errors.
+
+* It will reserve the space of the larger of the two sets of contents. So if
+  one is small and the other large, it **will** look wrong. I may be able to
+  fix this though.
+
+* If you try to generate HTML (or anything other than a PDF via rst2pdf) from a file
+  containing this, it will not do what you want.
+
 Mathematics
 ===========
 
