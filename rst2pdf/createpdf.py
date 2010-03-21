@@ -750,7 +750,6 @@ class HeaderOrFooter(object):
             return text
         
         for i,e  in enumerate(elems):
-            print dir(e)
             if isinstance(e, Paragraph):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
