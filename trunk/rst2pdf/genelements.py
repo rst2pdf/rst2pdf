@@ -47,6 +47,7 @@ from copy import copy
 from basenodehandler import NodeHandler
 
 import docutils.nodes
+from oddeven_directive import OddEvenNode
 import reportlab
 
 from aafigure_directive import Aanode
@@ -59,7 +60,7 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from flowables import Table, DelayedTable, SplitTable, Heading, \
               Spacer, MyIndenter, MyTableOfContents, \
               Separation, BoxedContainer, BoundByWidth, \
-              MyPageBreak, Reference, tablepadding
+              MyPageBreak, Reference, tablepadding, OddEven
 
 from opt_imports import wordaxe, Paragraph, ParagraphStyle
 
@@ -806,12 +807,17 @@ class HandleRaw(NodeHandler, docutils.nodes.raw):
         else:
             return []
 
-# FIXME -- this was here in the if/elif but citations
-# already taken care of.
 
-#class HandleCitation(NodeHandler, docutils.nodes.citation):
-    #def gather_elements(self, client, node, style):
-        #return []
+class HandleOddEven (NodeHandler, OddEvenNode):
+    def gather_elements(self, client, node, style):
+        odd=[]
+        even=[]
+        if node.children:
+            odd=client.gather_elements(node.children[0])
+        elif len(node.children>0):
+            even=client.gather_elements(node.children[1])
+        
+        return [OddEven(odd=odd, even=even)]
 
 class HandleAanode(NodeHandler, Aanode):
     def gather_elements(self, client, node, style):

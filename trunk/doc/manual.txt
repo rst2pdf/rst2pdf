@@ -133,7 +133,7 @@ ReST supports headers and footers, using the header and footer directive::
      This will be at the top of every page.
 
 Often, you may want to put a page number there, or a section name.The following
-magic tokens will be replaced (More will be added as rst2pdf evolves):
+magic tokens will be replaced (More may be added as rst2pdf evolves):
 
 ###Page###
     Replaced by the current page number.
@@ -143,10 +143,14 @@ magic tokens will be replaced (More will be added as rst2pdf evolves):
     Replaced by the currect section title
 ###SectNum###
     Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
+###Total###
+    Replaced by the total number of pages in the document. Keep in mind that this is the **real** number of pages, not the displayed number, so if you play with `page counters`_ this number will probably be wrong.
 
 Headers and footers are visible by default but they can be disabled by specific
 `Page Templates`_ for example, cover pages. You can also set headers and footers
 via `command line options` or the `configuration file`_.
+
+If you want to do things like "put the page number on the *out* side of the page, check `The oddeven directive`_
 
 Footnotes
 =========
@@ -972,10 +976,7 @@ For example, a ``python`` style will be applied to code blocks created with ``..
 
 The look of the line numbers is controlled by the "linenumbers" style.
 
-Examples
-~~~~~~~~
-
-As rst2pdf is in python let's see some examples and variations around python
+As rst2pdf is written in python let's see some examples and variations around python.
 
 Python in console
 
@@ -1184,6 +1185,27 @@ natural thing is to use it before a PageBreak::
        Transition Dissolve 1
        PageBreak
 
+
+The oddeven directive
+=====================
+
+This is a nonstandard directive, which means it will only work with rst2pdf, and not with rst2html or any other docutils tool.
+
+The contents of oddeven should consist of **exactly** two things (in this case, two paragraphs). The first will be used on odd pages, and the second one on even pages.
+
+If you want to use more complex content, you should wrap it with containers, like in this example:
+
+.. code-block:: rst
+
+    .. oddeven::
+
+        .. container::
+
+            This will appear on odd pages.
+
+            Both paragraphs in the container are for odd pages.
+
+        This will appear on even pages. It's a single paragraph, so no need for containers.
 
 Mathematics
 ===========
