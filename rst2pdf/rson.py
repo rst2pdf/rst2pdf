@@ -21,7 +21,7 @@ Additional documentation available at:
 http://code.google.com/p/rson/
 '''
 
-__version__ = '0.04'
+__version__ = '0.06'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'
 
@@ -246,8 +246,8 @@ class BaseObjects(object):
     # Stock object constructor copes with multiple keys just fine
     disallow_multiple_object_keys = False
 
-    # Stock object constructor copes with non-string keys just fine
-    disallow_nonstring_keys = False
+    # Default JSON requires string keys
+    disallow_nonstring_keys = True
 
     def default_array_factory(self):
         ''' This function returns a constructor for RSON arrays.
@@ -631,7 +631,8 @@ class RsonParser(object):
     ''' Parser for RSON
     '''
 
-    allow_trailing_commas = True
+    allow_trailing_commas = False
+    allow_rson_sublists = True
 
     def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
 
@@ -700,6 +701,8 @@ class RsonParser(object):
                         error('Unexpected trailing comma', token)
                     break
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
+                if disallow_nonstring_keys and not isinstance(key, basestring):
+                    error('Non-string key %s not supported' % repr(key), token)
                 token = next()
                 t0 = token[1]
                 if t0 != ':':
@@ -719,14 +722,42 @@ class RsonParser(object):
                 break
             return new_object(result, firsttok)
 
+        def read_rson_unquoted(firsttok, next):
+            toklist = []
+            linenum = firsttok[5]
+            while 1:
+                token = next()
+                if token[5] != linenum or token[1] in ':=':
+                    break
+                toklist.append(token)
+            firsttok[-1].push(token)
+            if not toklist:
+                return read_unquoted(firsttok, next)
+            s = list(firsttok[2:4])
+            for tok in toklist:
+                s.extend(tok[2:4])
+            result = list(firsttok)
+            result[3] = s.pop()
+            result[2] = ''.join(s)
+            return read_unquoted(result, next)
+
         json_value_dispatch = {'X':read_unquoted, '[':read_json_array,
                                '{': read_json_dict, '"':read_quoted}.get
 
 
-        rson_value_dispatch = {'X':read_unquoted, '[':read_json_array,
+        rson_value_dispatch = {'X':read_rson_unquoted, '[':read_json_array,
                                   '{': read_json_dict, '"':read_quoted,
-                                   '=': parse_equals}.get
+                                   '=': parse_equals}
 
+        if not self.allow_rson_sublists:
+            rson_value_dispatch['['] = read_rson_unquoted
+
+        rson_key_dispatch = rson_value_dispatch.copy()
+        if disallow_missing_object_keys:
+            del rson_key_dispatch['=']
+
+        rson_value_dispatch = rson_value_dispatch.get
+        rson_key_dispatch = rson_key_dispatch.get
 
         empty_object = new_object([], None)
         empty_array = new_array([], None)
@@ -820,7 +851,7 @@ class RsonParser(object):
                     if thisindent < arrayindent:
                         return new_object(result, token), token
                     bad_unindent(token, next)
-                key = json_value_dispatch(token[1], bad_top_value)(token, next)
+                key = rson_key_dispatch(token[1], bad_top_value)(token, next)
                 stack[-1] = token
                 entry, token = parse_one_dict_entry(stack, next, next(), [key])
                 result.append(entry)
@@ -832,15 +863,12 @@ class RsonParser(object):
                 of length 1 and strip the contents out of the array.
             '''
             firsttok = stack[-1]
-            if firsttok[1] == '=':
-                return parse_recurse_array(stack, next, firsttok, new_array([], firsttok))
-
-            value = json_value_dispatch(firsttok[1], bad_top_value)(firsttok, next)
-            token = next()
+            value = rson_value_dispatch(firsttok[1], bad_top_value)(firsttok, next)
 
             # We return an array if the next value is on a new line and either
             # is at the same indentation, or the current value is an empty list
 
+            token = next()
             if (token[5] != firsttok[5] and
                     (token[4] <= firsttok[4] or
                      value in empties) and disallow_missing_object_keys):
