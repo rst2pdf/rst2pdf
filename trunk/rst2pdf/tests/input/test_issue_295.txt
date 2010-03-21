@@ -1,0 +1,7 @@
+.. header::
+
+   ==== ==========
+   Page ###Page###
+   ==== ==========
+
+The header should show "Page" and the number
