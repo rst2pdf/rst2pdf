@@ -26,7 +26,6 @@ from log import log
 import re
 from xml.sax.saxutils import unescape, escape
 
-
 class MyIndenter(Indenter):
     """An indenter that has a width, because otherwise you get crashes
     if added inside tables"""
@@ -122,6 +121,36 @@ class Reference(Flowable):
 
     def __str__(self):
         return "Reference: %s" % self.refid
+
+class OddEven(Flowable):
+    """This flowable takes two lists of flowables as arguments, odd and even.
+    If will draw the "odd" list when drawn in odd pages and the "even" list on
+    even pages.
+
+
+    wrap() will always return a size large enough for both lists, and this flowable
+    **cannot** be split, so use with care.
+    """
+    
+    def __init__(self, odd, even):
+        self.odd=Table([[odd]])
+        self.even=Table([[even]])
+
+    def wrap(self, w, h):
+        """Return a box large enough for both odd and even"""
+        w1,h1=self.odd.wrap(w,h)
+        w2,h2=self.even.wrap(w,h)
+        return max(w1,w2), max (h1,h2)
+
+    def drawOn(self, canvas, x, y, _sW=0):
+        if canvas._pagenum %2 == 0:
+            self.even.drawOn(canvas, x, y, _sW)
+        else:
+            self.odd.drawOn(canvas, x, y, _sW)
+
+    def split(self):
+        """Makes no sense to split this..."""
+        return []
 
 class DelayedTable(Flowable):
     """A flowable that inserts a table for which it has the data.

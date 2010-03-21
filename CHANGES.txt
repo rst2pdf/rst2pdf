@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* New feature: oddeven directive to display alternative content on
+  odd/even pages (good for headers/footers!)
 * Switched all stylesheets to more readable RSON format.
 * Fixed Issue 294: Images were deformed when only height was specified.
 * Fixed Issue 293: Accept left/center/right as alignments in stylesheets.

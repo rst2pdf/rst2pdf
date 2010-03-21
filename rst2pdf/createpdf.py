@@ -63,6 +63,7 @@ import docutils.nodes
 from docutils.parsers.rst import directives
 
 import pygments_code_block_directive # code-block directive
+import oddeven_directive 
 
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import IndexingFlowable
