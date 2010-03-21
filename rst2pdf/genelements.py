@@ -814,7 +814,7 @@ class HandleOddEven (NodeHandler, OddEvenNode):
         even=[]
         if node.children:
             odd=client.gather_elements(node.children[0])
-        elif len(node.children>0):
+        if len(node.children)>0:
             even=client.gather_elements(node.children[1])
         
         return [OddEven(odd=odd, even=even)]
