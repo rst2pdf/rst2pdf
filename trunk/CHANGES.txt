@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 295: keyword replacement in headers/footers didn't work
+  if ###Page### and others was inside a table. 
 * New feature: oddeven directive to display alternative content on
   odd/even pages (good for headers/footers!)
 * Switched all stylesheets to more readable RSON format.
