@@ -730,26 +730,29 @@ class HeaderOrFooter(object):
         # Make sure page counter is up to date
         pnum=setPageCounter()
 
+        def replace(text):
+            if not isinstance(text, unicode):
+                try:
+                    text = unicode(text, e.encoding)
+                except AttributeError:
+                    text = unicode(text, 'utf-8')
+
+            text = text.replace(u'###Page###', pnum)
+            if '###Total###' in text:
+                text = text.replace(u'###Total###', str(self.totalpages))
+                self.client.mustMultiBuild=True
+            text = text.replace(u"###Title###", doc.title)
+            text = text.replace(u"###Section###",
+                getattr(canv, 'sectName', ''))
+            text = text.replace(u"###SectNum###",
+                getattr(canv, 'sectNum', ''))
+            text = smartyPants(text, smarty)
+            return text
+
         for e in elems:
             i = elems.index(e)
             if isinstance(e, Paragraph):
-                text = e.text
-                if not isinstance(text, unicode):
-                    try:
-                        text = unicode(text, e.encoding)
-                    except AttributeError:
-                        text = unicode(text, 'utf-8')
-
-                text = text.replace(u'###Page###', pnum)
-                if '###Total###' in text:
-                    text = text.replace(u'###Total###', str(self.totalpages))
-                    self.client.mustMultiBuild=True
-                text = text.replace(u"###Title###", doc.title)
-                text = text.replace(u"###Section###",
-                    getattr(canv, 'sectName', ''))
-                text = text.replace(u"###SectNum###",
-                    getattr(canv, 'sectNum', ''))
-                text = smartyPants(text, smarty)
+                text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
 
     def draw(self, pageobj, canv, doc, x, y, width, height):
