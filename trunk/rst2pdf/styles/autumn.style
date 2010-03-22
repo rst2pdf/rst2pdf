@@ -26,6 +26,7 @@ styles:
         parent: code
         textColor: #F00000
 
+    pygments-g: {parent: code, textColor: black}
     pygments-gd: {parent: code, textColor: #aa0000}
     pygments-ge:
         fontName: stdMonoItalic
@@ -65,21 +66,26 @@ styles:
     pygments-kp: {parent: code, textColor: #0000aa}
     pygments-kr: {parent: code, textColor: #0000aa}
     pygments-kt: {parent: code, textColor: #00aaaa}
+    pygments-l: {parent: code, textColor: black}
+    pygments-ld: {parent: code, textColor: black}
     pygments-m: {parent: code, textColor: #009999}
     pygments-mf: {parent: code, textColor: #009999}
     pygments-mh: {parent: code, textColor: #009999}
     pygments-mi: {parent: code, textColor: #009999}
     pygments-mo: {parent: code, textColor: #009999}
+    pygments-n: {parent: code, textColor: black}
     pygments-na: {parent: code, textColor: #1e90ff}
     pygments-nb: {parent: code, textColor: #00aaaa}
     pygments-nc: {parent: code, textColor: #00aa00}
     pygments-nd: {parent: code, textColor: #888888}
+    pygments-ne: {parent: code, textColor: black}
     pygments-nf: {parent: code, textColor: #00aa00}
     pygments-ni:
         fontName: stdMonoBold
         parent: code
         textColor: #800000
 
+    pygments-nl: {parent: code, textColor: black}
     pygments-nn: {parent: code, textColor: #00aaaa}
     pygments-no: {parent: code, textColor: #aa0000}
     pygments-nt:
@@ -88,7 +94,11 @@ styles:
         textColor: #1e90ff
 
     pygments-nv: {parent: code, textColor: #aa0000}
+    pygments-nx: {parent: code, textColor: black}
+    pygments-o: {parent: code, textColor: black}
     pygments-ow: {parent: code, textColor: #0000aa}
+    pygments-p: {parent: code, textColor: black}
+    pygments-py: {parent: code, textColor: black}
     pygments-s: {parent: code, textColor: #aa5500}
     pygments-s1: {parent: code, textColor: #aa5500}
     pygments-s2: {parent: code, textColor: #aa5500}
@@ -105,3 +115,4 @@ styles:
     pygments-vg: {parent: code, textColor: #aa0000}
     pygments-vi: {parent: code, textColor: #aa0000}
     pygments-w: {parent: code, textColor: #bbbbbb}
+    pygments-x: {parent: code, textColor: black}

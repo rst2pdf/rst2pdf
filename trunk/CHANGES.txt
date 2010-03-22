@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 297: styles from default.json leaked onto other syntax
+  highlighting stylesheets.
 * Fixed Issue 295: keyword replacement in headers/footers didn't work
   if ###Page### and others was inside a table. 
 * New feature: oddeven directive to display alternative content on

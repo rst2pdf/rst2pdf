@@ -30,6 +30,7 @@ styles:
         parent: code
         textColor: #a61717
 
+    pygments-g: {parent: code, textColor: black}
     pygments-gd:
         backColor: #ffdddd
         parent: code
@@ -97,11 +98,14 @@ styles:
         parent: code
         textColor: #445588
 
+    pygments-l: {parent: code, textColor: black}
+    pygments-ld: {parent: code, textColor: black}
     pygments-m: {parent: code, textColor: #009999}
     pygments-mf: {parent: code, textColor: #009999}
     pygments-mh: {parent: code, textColor: #009999}
     pygments-mi: {parent: code, textColor: #009999}
     pygments-mo: {parent: code, textColor: #009999}
+    pygments-n: {parent: code, textColor: black}
     pygments-na: {parent: code, textColor: #008080}
     pygments-nb: {parent: code, textColor: #999999}
     pygments-nc:
@@ -109,6 +113,7 @@ styles:
         parent: code
         textColor: #445588
 
+    pygments-nd: {parent: code, textColor: black}
     pygments-ne:
         fontName: stdMonoBold
         parent: code
@@ -120,10 +125,12 @@ styles:
         textColor: #990000
 
     pygments-ni: {parent: code, textColor: #800080}
+    pygments-nl: {parent: code, textColor: black}
     pygments-nn: {parent: code, textColor: #555555}
     pygments-no: {parent: code, textColor: #008080}
     pygments-nt: {parent: code, textColor: #000080}
     pygments-nv: {parent: code, textColor: #008080}
+    pygments-nx: {parent: code, textColor: black}
     pygments-o:
         fontName: stdMonoBold
         parent: code
@@ -134,6 +141,8 @@ styles:
         parent: code
         textColor: black
 
+    pygments-p: {parent: code, textColor: black}
+    pygments-py: {parent: code, textColor: black}
     pygments-s: {parent: code, textColor: #bb8844}
     pygments-s1: {parent: code, textColor: #bb8844}
     pygments-s2: {parent: code, textColor: #bb8844}
@@ -150,3 +159,4 @@ styles:
     pygments-vg: {parent: code, textColor: #008080}
     pygments-vi: {parent: code, textColor: #008080}
     pygments-w: {parent: code, textColor: #bbbbbb}
+    pygments-x: {parent: code, textColor: black}
