@@ -87,12 +87,24 @@ class HandleDocument(NodeHandler, docutils.nodes.document):
 
 class HandleTable(NodeHandler, docutils.nodes.table):
     def gather_elements(self, client, node, style):
+        if node['classes']:
+            style = client.styles.combinedStyle(['code']+node['classes'])
+        else:
+            style = client.styles['table']
         return [Spacer(0, client.styles['table'].spaceBefore)] + \
                     client.gather_elements(node, style=style) +\
                     [Spacer(0, client.styles['table'].spaceAfter)]
 
 class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
     def gather_elements(self, client, node, style):
+
+        # Take the style from the parent "table" node
+        # because sometimes it's not passed down.
+        
+        if node.parent['classes']:
+            style = client.styles.combinedStyle(['code']+node.parent['classes'])
+        else:
+            style = client.styles['table']
         rows = []
         colWidths = []
         hasHead = False
@@ -146,15 +158,16 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
             data.append(r)
 
         st = TableStyle(spans)
-        if 'commands' in client.styles['table'].__dict__:
-            for cmd in client.styles['table'].commands:
-                st.add(*cmd)
         if 'commands' in style.__dict__:
             for cmd in style.commands:
                 st.add(*cmd)
-        for cmd in cellStyles:
-            st.add(*cmd)
-
+        else:
+            # Only use the commands from "table" if the
+            # specified class has no commands.
+            
+            for cmd in client.styles['table'].commands:
+                st.add(*cmd)
+            
         if hasHead:
             for cmd in client.styles.tstyleHead(headRows):
                 st.add(*cmd)
@@ -816,7 +829,7 @@ class HandleOddEven (NodeHandler, OddEvenNode):
             odd=client.gather_elements(node.children[0])
         if len(node.children)>1:
             even=client.gather_elements(node.children[1])
-        
+
         return [OddEven(odd=odd, even=even)]
 
 class HandleAanode(NodeHandler, Aanode):
