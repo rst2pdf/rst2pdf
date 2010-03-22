@@ -7,8 +7,8 @@ f2=$2
 
 tmpdir=/tmp/comppdf-$$
 mkdir $tmpdir
-convert $f1 $tmpdir/page.png
-convert $f2 $tmpdir/bpage.png
+convert -density 300x300 $f1 $tmpdir/page.png
+convert -density 300x300 $f2 $tmpdir/bpage.png
 pushd $tmpdir
 
 for page in page*.png
