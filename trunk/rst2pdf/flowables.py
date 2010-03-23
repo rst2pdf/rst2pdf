@@ -132,9 +132,9 @@ class OddEven(Flowable):
     **cannot** be split, so use with care.
     """
     
-    def __init__(self, odd, even):
-        self.odd=Table([[odd]])
-        self.even=Table([[even]])
+    def __init__(self, odd, even, style=None):
+        self.odd=DelayedTable([[odd]],['100%'], style)
+        self.even=DelayedTable([[even]],['100%'], style)
 
     def wrap(self, w, h):
         """Return a box large enough for both odd and even"""
