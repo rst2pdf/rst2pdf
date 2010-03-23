@@ -754,25 +754,19 @@ class HeaderOrFooter(object):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
             elif isinstance(e, DelayedTable):
-                for i,row in enumerate(e.data):
-                    if isinstance (row, list):
-                        for j,cell in enumerate(row):
-                            if isinstance (cell, list):
-                                self.replaceTokens(cell, canv, doc, smarty)
-                            else:
-                                row[j]=self.replaceTokens([cell,], canv, doc, smarty)[0]
-            elif isinstance(e, Table):
-                for i,row in enumerate(e._cellvalues):
-                    if isinstance (row, list):
-                        for j,cell in enumerate(row):
-                            if isinstance (cell, list):
-                                self.replaceTokens(cell, canv, doc, smarty)
-                            else:
-                                row[j]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+                data=deepcopy(e.data)
+                for r,row in enumerate(data):
+                    for c,cell in enumerate(row):
+                        if isinstance (cell, list):
+                            data[r][c]=self.replaceTokens(cell, canv, doc, smarty)
+                        else:
+                            row[r]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+                elems[i]=DelayedTable(data, e._colWidths, e.style)
 
             elif isinstance(e, OddEven):
-                e.odd=self.replaceTokens([e.odd,], canv, doc, smarty)[0]
-                e.even=self.replaceTokens([e.even,], canv, doc, smarty)[0]
+                odd=self.replaceTokens([e.odd,], canv, doc, smarty)[0]
+                even=self.replaceTokens([e.even,], canv, doc, smarty)[0]
+                elems[i]=OddEven(odd, even)
         return elems
         
     def draw(self, pageobj, canv, doc, x, y, width, height):
