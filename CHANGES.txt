@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+New in 0.14
+-----------
+
 * Fixed Issue 197: Table borders were confusing.
 * Fixed Issue 297: styles from default.json leaked onto other syntax
   highlighting stylesheets.
