@@ -5,7 +5,7 @@
   "styles" : [
     ["thin" , {
     "parent" : "bodytext",
-    "width" : "35%",
+    "width" : "65%",
     "alignment": "TA_JUSTIFY",
     "hyphenation": true,
     "language": "es_ES"
