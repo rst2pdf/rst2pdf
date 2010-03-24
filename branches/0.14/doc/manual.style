@@ -1,0 +1,30 @@
+{
+  "pageSetup" : {
+    "firstTemplate": "coverPage"
+  },
+  "styles" : [
+    ["thin" , {
+    "parent" : "bodytext",
+    "width" : "35%",
+    "alignment": "TA_JUSTIFY",
+    "hyphenation": true,
+    "language": "es_ES"
+    }
+    ],
+    ["right", {
+        "parent": "bodytext",
+        "alignment": "right"
+    }],
+    ["centered", {
+        "parent": "bodytext",
+        "alignment": "center"
+    }],
+    ["headertable" , {
+    "parent" : "table",
+    "colWidths": ["20%","60%","20%"],
+    "commands": []
+    }
+    ]
+   ]
+}
+

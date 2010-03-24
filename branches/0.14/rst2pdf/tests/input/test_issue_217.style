@@ -1,0 +1,19 @@
+{ "styles": [
+    ["bullet_list", {
+      "parent": "bodytext",
+      "spaceBefore": 0,
+       "commands": [
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
+        ],
+        "colWidths": ["20",null]
+    }],
+    ["bullet_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 30
+    }],
+    ["item_list_item" , {
+      "parent": "bodytext",
+      "spaceBefore": 30
+    }]
+]}

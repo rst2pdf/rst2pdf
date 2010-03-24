@@ -1,0 +1,3 @@
+styles:
+    halfwidth: {parent: bodytext, width: 50%}
+    threeq: {parent: bodytext, width: 75%}

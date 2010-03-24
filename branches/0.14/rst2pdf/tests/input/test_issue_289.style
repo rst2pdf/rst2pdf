@@ -1,0 +1,13 @@
+styles:
+    bigbullet:
+        bulletFontSize: 32
+        fontSize: 12
+        parent: bullet_list
+
+    custombullet: {bulletText: >>, parent: bullet_list}
+    smallbullet:
+        bulletFontSize: 12
+        fontSize: 32
+        parent: bullet_list
+
+    weirdbullet: {bulletFontName: Tuffy, parent: bullet_list}
