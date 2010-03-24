@@ -88,7 +88,7 @@ class HandleDocument(NodeHandler, docutils.nodes.document):
 class HandleTable(NodeHandler, docutils.nodes.table):
     def gather_elements(self, client, node, style):
         if node['classes']:
-            style = client.styles.combinedStyle(['code']+node['classes'])
+            style = client.styles.combinedStyle(['table']+node['classes'])
         else:
             style = client.styles['table']
         return [Spacer(0, client.styles['table'].spaceBefore)] + \
