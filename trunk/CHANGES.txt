@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Make it compatible with Sphinx 0.6.3 again
+* Fixed Issue 300: image-missing.jpg was not installed
+
 New in 0.14
 -----------
 
