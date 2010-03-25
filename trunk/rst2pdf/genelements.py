@@ -680,6 +680,7 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
             style = client.styles.combinedStyle(['code']+node['classes'])
         else:
             style = client.styles['code']
+
         return [client.PreformattedFit(
                 client.gather_pdftext(node, replaceEnt = True),
                                 style )]

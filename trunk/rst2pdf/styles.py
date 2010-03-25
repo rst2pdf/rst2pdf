@@ -456,6 +456,7 @@ class StyleSheet(object):
             # Adjust fontsize units
             if 'fontSize' not in s:
                 s['fontSize'] = s['parent'].fontSize
+                s['trueFontSize']=None
                 hasFS = False
             elif 'parent' in s:
                 # This means you can set the fontSize to
@@ -463,6 +464,7 @@ class StyleSheet(object):
                 # relative to the parent style
                 s['fontSize'] = self.adjustUnits(s['fontSize'],
                                     s['parent'].fontSize)
+                s['trueFontSize']=s['fontSize']
             else:
                 # If s has no parent, it's base, which has
                 # an explicit point size by default and %

@@ -304,15 +304,15 @@ class RstToPdf(object):
 
         try:
             s = self.styles[style]
+            r=['<font face="%s" color="#%s" ' %
+                (s.fontName, s.textColor.hexval()[2:])]
             bc = s.backColor
             if bc:
-                r = '<font face="%s" size="%d" color="#%s" backColor="#%s">'\
-                    %(s.fontName, s.fontSize,
-                      s.textColor.hexval()[2:], bc.hexval()[2:])
-            else:
-                r = '<font face="%s" size="%d" color="#%s">' % (
-                    s.fontName, s.fontSize, s.textColor.hexval()[2:])
-            return r
+                r.append('backColor="#%s"' % bc.hexval()[2:])
+            if s.trueFontSize:
+                r.append('size="%d"'%s.fontSize) 
+            r.append('>')
+            return ''.join(r)
         except KeyError:
             log.warning('Unknown class %s', style)
             return None
@@ -437,7 +437,7 @@ class RstToPdf(object):
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
         return BoundByWidth(2000*cm,
-            content=[Preformatted(text, style)],
+            content=[XXPreformatted(text, style)],
             mode=self.fit_mode, style=style)
 
     def createPdf(self, text=None, 
