@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Improved widow/orphan support for literal blocks
+* Fixed Issue 304: Code blocks didn't respect fontSize in class.
 * Regained compatibility with reportlab 2.3
 * Fixed regression in Issue 152: right-edege of boxes not aligned inside
   list items.
