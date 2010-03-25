@@ -26,6 +26,10 @@ from log import log
 import re
 from xml.sax.saxutils import unescape, escape
 
+class Preformatted(XPreformatted):
+    def __init__(self, *args, **kwargs):
+        XPreformatted.__init__(self, *args, **kwargs)
+
 class MyIndenter(Indenter):
     """An indenter that has a width, because otherwise you get crashes
     if added inside tables"""
