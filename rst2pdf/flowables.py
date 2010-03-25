@@ -219,10 +219,10 @@ class SplitTable(DelayedTable):
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
         self.padding, p1, p2, p3, p4=tablepadding(padding)
-        self.style.add(*p1)
-        self.style.add(*p2)
-        self.style.add(*p3)
-        self.style.add(*p4)
+        self.style._cmds.insert(0,p1)
+        self.style._cmds.insert(0,p2)
+        self.style._cmds.insert(0,p3)
+        self.style._cmds.insert(0,p4)
 
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
