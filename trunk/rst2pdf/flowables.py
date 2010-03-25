@@ -26,9 +26,39 @@ from log import log
 import re
 from xml.sax.saxutils import unescape, escape
 
-class Preformatted(XPreformatted):
+class XXPreformatted(XPreformatted):
+    """An extended XPreformattedFit"""
     def __init__(self, *args, **kwargs):
         XPreformatted.__init__(self, *args, **kwargs)
+
+    def split (self, aW, aH):
+
+        # Not enabled yet
+        
+        return XPreformatted.split(self, aW, aH)
+
+        # Figure out a nice range of splits
+        #
+        # Assume we would prefer 5 lines (at least) on
+        # a splitted flowable before a break, and 4 on
+        # the last flowable after a break.
+        # So, the minimum wrap height for a fragment
+        # will be 5*leading
+
+        minH1=5*self.style.leading
+        minH2=4*self.style.leading
+
+        # If there's no way to fid a decent fragment,
+        # refuse to split
+        if aH < minH1:
+            return []
+
+        # Now, don't split too close to the end either
+        pw, ph = self.wrap(aW, aH)
+        if ph - aH < minH2:
+            aH = ph - minH2
+            
+        return XPreformatted.split(self, aW, aH)
 
 class MyIndenter(Indenter):
     """An indenter that has a width, because otherwise you get crashes
