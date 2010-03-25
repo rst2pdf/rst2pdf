@@ -1,6 +1,15 @@
 New in SVN
 ----------
 
+* Regained compatibility with reportlab 2.3
+* Fixed regression in Issue 152: right-edege of boxes not aligned inside
+  list items.
+
+* Fixed Issue 301: accept padding parameters in bullet/item lists
+
+New in 0.14.1
+-------------
+
 * Make it compatible with Sphinx 0.6.3 again
 * Fixed Issue 300: image-missing.jpg was not installed
 
