@@ -437,7 +437,7 @@ class RstToPdf(object):
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
         return BoundByWidth(2000*cm,
-            content=[XPreformatted(text, style)],
+            content=[Preformatted(text, style)],
             mode=self.fit_mode, style=style)
 
     def createPdf(self, text=None, 
