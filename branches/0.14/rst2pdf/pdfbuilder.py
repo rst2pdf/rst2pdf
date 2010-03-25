@@ -794,7 +794,16 @@ def init_math(app):
         :license: BSD, see LICENSE for details.
     """
     from sphinx.errors import SphinxError
-    from sphinx.ext.mathbase import setup_math as mathbase_setup
+    try:
+        # Sphinx 0.6.4 and later
+        from sphinx.ext.mathbase import setup_math as mathbase_setup
+    except ImportError:
+        try:
+            # Sphinx 0.6.3
+            from sphinx.ext.mathbase import setup as mathbase_setup
+        except ImportError, e:
+            rst2pdf.log.log.error('Error importing sphinx math extension: %s', e)
+        
     class MathExtError(SphinxError):
         category = 'Math extension error'
 
