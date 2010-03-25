@@ -102,7 +102,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
         # because sometimes it's not passed down.
         
         if node.parent['classes']:
-            style = client.styles.combinedStyle(['code']+node.parent['classes'])
+            style = client.styles.combinedStyle(['table']+node.parent['classes'])
         else:
             style = client.styles['table']
         rows = []
