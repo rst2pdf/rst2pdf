@@ -33,10 +33,6 @@ class XXPreformatted(XPreformatted):
 
     def split (self, aW, aH):
 
-        # Not enabled yet
-        
-        return XPreformatted.split(self, aW, aH)
-
         # Figure out a nice range of splits
         #
         # Assume we would prefer 5 lines (at least) on
