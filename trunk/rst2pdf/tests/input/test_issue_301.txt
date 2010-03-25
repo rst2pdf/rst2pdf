@@ -3,6 +3,7 @@ Before
 .. class:: smallbullet
 
 * small bullet
+* small bullet
 
 After
 
