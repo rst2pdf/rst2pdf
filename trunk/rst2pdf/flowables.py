@@ -41,18 +41,21 @@ class XXPreformatted(XPreformatted):
         # So, the minimum wrap height for a fragment
         # will be 5*leading
 
-        minH1=getattr(self.style, 'allowOrphans', 5)*self.style.leading
-        minH2=getattr(self.style, 'allowWidows', 4)*self.style.leading
+        rW, rH = self.wrap(aW, aH)
+        if rH > aH:
 
-        # If there's no way to fid a decent fragment,
-        # refuse to split
-        if aH < minH1:
-            return []
+            minH1=getattr(self.style, 'allowOrphans', 5)*self.style.leading
+            minH2=getattr(self.style, 'allowWidows', 4)*self.style.leading
 
-        # Now, don't split too close to the end either
-        pw, ph = self.wrap(aW, aH)
-        if ph - aH < minH2:
-            aH = ph - minH2
+            # If there's no way to fid a decent fragment,
+            # refuse to split
+            if aH < minH1:
+                return []
+
+            # Now, don't split too close to the end either
+            pw, ph = self.wrap(aW, aH)
+            if ph - aH < minH2:
+                aH = ph - minH2
             
         return XPreformatted.split(self, aW, aH)
 
@@ -227,7 +230,6 @@ class DelayedTable(Flowable):
         self.t.drawOn(canvas, x, y, _sW)
         
     def identity(self, maxLen=None):
-        print self.data
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')

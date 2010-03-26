@@ -71,7 +71,9 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
         pre, post = '', ''
         uri = node.get('refuri')
         if uri:
-            if client.baseurl: # Need to join the uri with the base url
+            if uri.startswith ('#'):
+                pass
+            elif client.baseurl: # Need to join the uri with the base url
                 uri = urljoin(client.baseurl, uri)
 
             if urlparse(uri)[0] and client.inlinelinks:
