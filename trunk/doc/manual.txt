@@ -506,8 +506,8 @@ and not on inline styles::
     "borderPadding": 0,
     "borderColor": None,
     "borderRadius": None,
-    "allowWidows": 1,
-    "allowOrphans": 0
+    "allowWidows": 5,
+    "allowOrphans": 4
 
 The following are the only attributes that work on styles when used for interpreted roles
 (inline styles):
@@ -519,6 +519,38 @@ The following are the only attributes that work on styles when used for interpre
 * textColor
 
 * backColor (if your reportlab is version 2.3 or newer)
+
+Widows and Orphans
+------------------
+
+Widow
+    A paragraph-ending line that falls at the beginning of the following page/column, thus separated from the remainder of the text.
+
+Orphan
+    A paragraph-opening line that appears by itself at the bottom of a page/column.
+
+Rst2pdf has *some* widow/orphan control. Specifically, here's what's currently implemented:
+
+On ordinary paragraphs, allowWidows ans allowOrphans is passed to reportlab, which is supposed to do something about it if they are non-zero. In practice, it doesn't seem to have much effect.
+
+The plan is to change the semantics of those settings, so that they mean the minimum number of lines that can be left alone at the beginning of a page (widows) or at the end (orphans).
+
+Currently, these semantics only work for literal blocks and code blocks.
+
+.. code-block:: rst
+
+   A literal block::
+
+       This is a literal block.
+
+   A code block:
+
+   .. code-block:: python
+
+       def x(y):
+           print y**2
+
+In future versions this may extend to ordinary paragraphs.
 
 Font Embedding
 --------------
