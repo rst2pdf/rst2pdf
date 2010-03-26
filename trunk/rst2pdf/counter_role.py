@@ -20,7 +20,6 @@ class CounterNode(Text):
         return unicode(self.value)
 
 def counter_fn(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    print name, rawtext, text, lineno, inliner
     n=CounterNode(text)
     s='%s-%s'%(n.name, n.value)
     return [target(ids=[s]),n], []
