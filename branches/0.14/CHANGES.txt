@@ -1,3 +1,9 @@
+New in 0.14.2
+-------------
+
+* Fixed Issue 301: Respect paddings in SplitTables (list items)
+* Fixed Issue 302: Regained compatibility with ReportLab 2.3
+
 New in 0.14.1
 -------------
 
