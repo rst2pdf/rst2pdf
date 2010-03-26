@@ -41,8 +41,8 @@ class XXPreformatted(XPreformatted):
         # So, the minimum wrap height for a fragment
         # will be 5*leading
 
-        minH1=5*self.style.leading
-        minH2=4*self.style.leading
+        minH1=getattr(self.style.allowOrphans, 5)*self.style.leading
+        minH2=getattr(self.style.allowWidows, 4)*self.style.leading
 
         # If there's no way to fid a decent fragment,
         # refuse to split
