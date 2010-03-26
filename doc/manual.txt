@@ -1230,6 +1230,37 @@ natural thing is to use it before a PageBreak::
        Transition Dissolve 1
        PageBreak
 
+The counter role
+================
+
+This is a nonstandard interpreted text role, which means it will only work with rst2pdf. It implements an unlimited number of counters you can use in your text.
+For example, you could use it to have numbered figures, or numbered tables.
+
+The syntax is this:
+
+.. code-block:: rst
+
+    Start a counter called seq1 that starts from 1: :counter:`seq1`
+    Now this should print 2: :counter:`seq1`
+
+    You can start counters from any number (this prints 12): :counter:`seq2:12`
+
+    And have any number of counters with any name: :counter:`figures`
+
+    So ``#seq1-2`` should link to `the number 2 above <#seq1-2>`_
+
+The output is:
+
+Start a counter called seq1 that starts from 1: :counter:`seq1`
+Now this should print 2: :counter:`seq1`
+
+You can start counters from any number (this prints 12): :counter:`seq2:12`
+
+And have any number of counters with any name: :counter:`figures`
+
+Also, the counters create targets for links with this scheme: #countername-number.
+
+So ``#seq1-2`` should link to `the number 2 above <#seq1-2>`_
 
 The oddeven directive
 =====================

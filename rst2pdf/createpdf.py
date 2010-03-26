@@ -78,6 +78,7 @@ import flowables
 from image import MyImage
 
 from aafigure_directive import Aanode
+import counter_role
 
 from log import log, nodeid
 from pprint import pprint
