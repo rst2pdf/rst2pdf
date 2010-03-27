@@ -116,11 +116,13 @@ class DummyFile(str):
         return self
 
 class Preprocess(object):
-    def __init__(self, sourcef, incfile=False):
+    def __init__(self, sourcef, incfile=False, widthcount=0):
         ''' Process a file and decorate the resultant Preprocess instance with
             self.result (the preprocessed file) and self.styles (extracted stylesheet
             information) for the caller.
         '''
+        self.widthcount = widthcount
+
         name = sourcef.name
         source = sourcef.read().replace('\r\n', '\n').replace('\r', '\n')
 
@@ -148,12 +150,13 @@ class Preprocess(object):
         self.source = source = [x for x in self.splitter(source) if x]
         self.result = result = []
         self.styles = {}
-        self.widthcount = 0
         self.changed = False
 
         # More efficient to pop() a list than to keep taking tokens from [0]
         source.reverse()
         isblank = False
+        keywords = self.keywords
+        handle_single = keywords['single::']
         while source:
             wasblank = isblank
             isblank = False
@@ -166,21 +169,23 @@ class Preprocess(object):
             result[-1] = chunk[:-1]
             if chunk.index('\n') != len(chunk)-1:
                 continue
+
+            # Parse the line to look for one of our keywords.
             tokens = chunk.split()
             isblank = not tokens
             if len(tokens) >= 2 and tokens[0] == '..' and tokens[1].endswith('::'):
-                keyword = tokens[1][:-2]
-                if keyword not in self.keywords:
+                func = keywords.get(tokens[1])
+                if func is None:
                     continue
                 chunk = chunk.split('::', 1)[1]
             elif wasblank and len(tokens) == 1 and chunk[0].isalpha() and tokens[0].isalpha():
-                keyword = 'single'
+                func = handle_single
                 chunk = tokens[0]
             else:
                 continue
 
             result.pop()
-            getattr(self, 'handle_'+keyword)(chunk.strip())
+            func(self, chunk.strip())
 
         # Determine if we actually did anything or not.  Just use our source file
         # if not.  Otherwise, write the results to disk (so the user can use them
@@ -218,7 +223,8 @@ class Preprocess(object):
         # Recursively call this class to process include files.
         # Extract all the information from the included file.
 
-        inc = Preprocess(f, True)
+        inc = Preprocess(f, True, self.widthcount)
+        self.widthcount = inc.widthcount
         self.styles.update(inc.styles)
         if inc.changed:
             self.changed = True
@@ -316,7 +322,7 @@ class Preprocess(object):
 
 
     # Automatically generate our keywords from methods prefixed with 'handle_'
-    keywords = set(x[7:] for x in vars() if x.startswith('handle_'))
+    keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
 
     # Generate the regular expression for parsing, and a split function using it.
     blankline  = r'^([ \t]*\n)'
@@ -325,6 +331,10 @@ class Preprocess(object):
     expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
     splitter = re.compile(expression, re.MULTILINE).split
 
+    # Once we have used the keywords in our regular expression,
+    # fix them up for use by the parser.
+    print vars()
+    keywords = dict([(x + '::', vars()['handle_' + x]) for x in keywords])
 
 class MyStyles(str):
     ''' This class conforms to the styles.py processing requirements
