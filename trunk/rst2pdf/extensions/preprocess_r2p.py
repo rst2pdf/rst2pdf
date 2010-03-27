@@ -43,37 +43,41 @@ source file.
 
 ``.. include::``
 
-    Processes the include file as well.
+    Processes the include file as well.  An include file may
+    either be a restructured text file, OR may be an RSON
+    stylesheet.  The determination is made by trying to parse
+    it as RSON.  If it passes, it is a stylesheet; if not
+    well, we'll let the docutils parser have its way with it.
 
-``.. page::``       
+``.. page::``
 
     Is translated into a raw PageBreak
 
-``.. space::``      
+``.. space::``
 
     Is translated into a raw Spacer.  If only one number given, is
     used for vertical
 
 ``.. style::``
 
-    Allows you to create in-line stylesheets.
-    (If you wish them to be in YAML format, you must give
-    -e yaml before -e preprocess on the command line.)
+    Allows you to create in-line stylesheets.  As with other
+    restructured text components, the stylesheet data must
+    be indented.  Stylesheets are in RSON or JSON.
 
-``.. widths::`` 
+``.. widths::``
 
     creates a new table style (based on table or the first
     non-numeric token) and creates a class using that style for
     the next table.  Allows you to set the widths for the table,
     using percentages.
 
-``SingleWordAtLeftColumn``   
+``SingleWordAtLeftColumn``
 
-    If this is surrounded by blank lines, the singleword
-    style is applied to the word.  This is a workaround
-    for the broken interaction between docutils subtitles
-    and bibliographic metadata.  Who wants a subtitle
-    inside the TOC?
+    If a single word at the left column is surrounded by
+    blank lines, the singleword style is automatically applied to
+    the word.  This is a workaround for the broken interaction
+    between docutils subtitles and bibliographic metadata.
+    Who wants a subtitle inside the TOC?
 
 -----------------------------------------------------------------
 
