@@ -286,32 +286,15 @@ class Preprocess(object):
     def handle_style(self, chunk):
         ''' Parse through the source until we find lines that are no longer indented,
             then pass our indented lines to the RSON parser.
-
-            NB: This indented processing should be pulled out into a separate function
-            if we have other processors that require the same handling.
         '''
         self.changed = True
         if chunk:
             log.error(".. styles:: does not recognize string %s" % repr(chunk))
             return
-        source = self.source
-        data = source and source.pop().splitlines() or []
-        data.reverse()
-        mystyles = []
-        while data:
-            myline = data.pop().rstrip()
-            if not myline:
-                continue
-            if myline.lstrip() == myline:
-                data.append(myline)
-                break
-            mystyles.append(myline)
-        data.reverse()
-        data.append('')
-        source.append('\n'.join(data))
+
+        mystyles = '\n'.join(self.read_indented())
         if not mystyles:
             log.error("Empty .. styles:: block found")
-        mystyles = '\n'.join(mystyles)
         try:
             styles = rson_loads(mystyles)
         except ValueError, e: # Error parsing the JSON data
@@ -320,6 +303,29 @@ class Preprocess(object):
         else:
             self.styles.setdefault('styles', {}).update(styles)
 
+    def read_indented(self):
+        ''' Read data from source while it is indented (or blank).
+            Stop on the first non-indented line, and leave the rest
+            on the source.
+
+            Note that this function expects that the split function
+            will insure that every source chunk starts in the left-most
+            column (that it does not have to read multiple chunks from
+            the source in order to find a stopping point).
+        '''
+        source = self.source
+        data = source and source.pop().splitlines() or []
+        data.reverse()
+        while data:
+            line = data.pop().rstrip()
+            if not line or line.lstrip() != line:
+                yield line
+                continue
+            data.append(line)
+            break
+        data.reverse()
+        data.append('')
+        source.append('\n'.join(data))
 
     # Automatically generate our keywords from methods prefixed with 'handle_'
     keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
