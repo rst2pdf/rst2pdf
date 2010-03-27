@@ -21,8 +21,7 @@ Now we're going to try to do a pagebreak:
 Now, we're going to test the single word styling:
 
 .. style::
-    {"singleword" : {"parent" : "base", "fontSize" : 24}}
-
+    singleword: {parent: base, fontSize: 24}
 
 SingleWord
 
