@@ -8,7 +8,9 @@
 preprocess is a rst2pdf extension module (invoked by -e preprocess
 on the rst2pdf command line.
 
-It preprocesses the source text file before handing it to docutils.
+There is a testcase for this file at rst2pdf/tests/test_preprocess.txt
+
+This preprocesses the source text file before handing it to docutils.
 
 This module serves two purposes:
 
@@ -44,19 +46,20 @@ source file.
 ``.. include::``
 
     Processes the include file as well.  An include file may
-    either be a restructured text file, OR may be an RSON
-    stylesheet.  The determination is made by trying to parse
-    it as RSON.  If it passes, it is a stylesheet; if not
+    either be a restructured text file, OR may be an RSON or
+    JSON stylesheet.  The determination is made by trying to
+    parse it as RSON.  If it passes, it is a stylesheet; if not,
     well, we'll let the docutils parser have its way with it.
 
 ``.. page::``
 
-    Is translated into a raw PageBreak
+    Is translated into a raw PageBreak.
 
 ``.. space::``
 
     Is translated into a raw Spacer.  If only one number given, is
-    used for vertical
+    used for vertical space.  This is the canonical use case, since
+    horizontal space is ignored anyway!
 
 ``.. style::``
 
@@ -67,17 +70,21 @@ source file.
 ``.. widths::``
 
     creates a new table style (based on table or the first
-    non-numeric token) and creates a class using that style for
-    the next table.  Allows you to set the widths for the table,
-    using percentages.
+    non-numeric token) and creates a class using that style
+    specifically for the next table in the document. (Creates
+    a .. class::, so you must specify .. widths:: immediately
+    before the table it applies to.   Allows you to set the
+    widths for the table, using percentages.
 
 ``SingleWordAtLeftColumn``
 
     If a single word at the left column is surrounded by
     blank lines, the singleword style is automatically applied to
     the word.  This is a workaround for the broken interaction
-    between docutils subtitles and bibliographic metadata.
-    Who wants a subtitle inside the TOC?
+    between docutils subtitles and bibliographic metadata.  (I
+    found that docutils was referencing my subtitles from inside
+    the TOC, and that seemed silly.  Perhaps there is a better
+    workaround at a lower level in rst2pdf.)
 
 -----------------------------------------------------------------
 
@@ -89,7 +96,8 @@ file to the restructured text parser.
 
 This file is left on the disk after operation, because any error
 messages from docutils will refer to line numbers in it, rather than
-in the original source.
+in the original source, so debugging could be difficult if the
+file were automatically removed.
 
 '''
 
@@ -101,20 +109,23 @@ from rst2pdf.rson import loads as rson_loads
 from rst2pdf.log import log
 
 class DummyFile(str):
+    ''' We could use stringio, but that's really overkill for what
+        we need here.
+    '''
     def read(self):
         return self
 
 class Preprocess(object):
-    blankline  = r'^([ \t]*\n)'
-    singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
-    keywords = set('page space widths style include'.split())
-    comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
-    expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
-    splitter = re.compile(expression, re.MULTILINE).split
-
     def __init__(self, sourcef, incfile=False):
+        ''' Process a file and decorate the resultant Preprocess instance with
+            self.result (the preprocessed file) and self.styles (extracted stylesheet
+            information) for the caller.
+        '''
         name = sourcef.name
         source = sourcef.read().replace('\r\n', '\n').replace('\r', '\n')
+
+        # Make the determination if an include file is a stylesheet or
+        # another restructured text file, and handle stylesheets appropriately.
 
         if incfile:
             try:
@@ -127,14 +138,20 @@ class Preprocess(object):
                 self.keep = False
                 return
 
+        # Read the whole file and wrap it in a DummyFile
         self.sourcef = DummyFile(source)
         self.sourcef.name = name
+
+        # Use a regular expression on the source, to take it apart
+        # and put it back together again.
+
         self.source = source = [x for x in self.splitter(source) if x]
         self.result = result = []
         self.styles = {}
         self.widthcount = 0
         self.changed = False
 
+        # More efficient to pop() a list than to keep taking tokens from [0]
         source.reverse()
         isblank = False
         while source:
@@ -165,6 +182,9 @@ class Preprocess(object):
             result.pop()
             getattr(self, 'handle_'+keyword)(chunk.strip())
 
+        # Determine if we actually did anything or not.  Just use our source file
+        # if not.  Otherwise, write the results to disk (so the user can use them
+        # for debugging) and return them.
         if self.changed:
             result.append('')
             result = DummyFile('\n'.join(result))
@@ -179,6 +199,10 @@ class Preprocess(object):
             self.result = self.sourcef
 
     def handle_include(self, fname):
+        # Ugly, violates DRY, etc., but I'm not about to go
+        # figure out how to re-use docutils include file
+        # path processing!
+
         for prefix in ('', os.path.dirname(self.sourcef.name)):
             try:
                 f = open(os.path.join(prefix, fname), 'rb')
@@ -191,6 +215,9 @@ class Preprocess(object):
             self.changed = True
             return
 
+        # Recursively call this class to process include files.
+        # Extract all the information from the included file.
+
         inc = Preprocess(f, True)
         self.styles.update(inc.styles)
         if inc.changed:
@@ -201,15 +228,21 @@ class Preprocess(object):
         self.result.extend(['', '', '.. include:: ' + fname, ''])
 
     def handle_single(self, word):
+        ''' Prepend the singleword class in front of the word.
+        '''
         self.changed = True
         self.result.extend(['', '', '.. class:: singleword', '', word, ''])
 
     def handle_page(self, chunk):
+        ''' Insert a raw pagebreak
+        '''
         self.changed = True
         self.result.extend(['', '', '.. raw:: pdf', '',
                     '    PageBreak ' + chunk, ''])
 
     def handle_space(self, chunk):
+        ''' Insert a raw space
+        '''
         self.changed = True
         if len(chunk.replace(',', ' ').split()) == 1:
             chunk = '0 ' + chunk
@@ -217,6 +250,9 @@ class Preprocess(object):
                     '    Spacer ' + chunk, ''])
 
     def handle_widths(self, chunk):
+        ''' Insert a unique style in the stylesheet, and reference it
+            from a .. class:: comment.
+        '''
         self.changed = True
         chunk = chunk.replace(',', ' ').replace('%', ' ').split()
         if not chunk:
@@ -242,6 +278,12 @@ class Preprocess(object):
         self.result.extend(['', '', '.. class:: ' + stylename, ''])
 
     def handle_style(self, chunk):
+        ''' Parse through the source until we find lines that are no longer indented,
+            then pass our indented lines to the RSON parser.
+
+            NB: This indented processing should be pulled out into a separate function
+            if we have other processors that require the same handling.
+        '''
         self.changed = True
         if chunk:
             log.error(".. styles:: does not recognize string %s" % repr(chunk))
@@ -263,18 +305,32 @@ class Preprocess(object):
         source.append('\n'.join(data))
         if not mystyles:
             log.error("Empty .. styles:: block found")
-        indent = min(len(x) - len(x.lstrip()) for x in mystyles)
-        mystyles = [x[indent:] for x in mystyles]
-        mystyles.append('')
         mystyles = '\n'.join(mystyles)
         try:
             styles = rson_loads(mystyles)
-            self.styles.setdefault('styles', {}).update(styles)
         except ValueError, e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\
                     (mystyles, str(e)))
+        else:
+            self.styles.setdefault('styles', {}).update(styles)
+
+
+    # Automatically generate our keywords from methods prefixed with 'handle_'
+    keywords = set(x[7:] for x in vars() if x.startswith('handle_'))
+
+    # Generate the regular expression for parsing, and a split function using it.
+    blankline  = r'^([ \t]*\n)'
+    singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
+    comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
+    expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
+    splitter = re.compile(expression, re.MULTILINE).split
+
 
 class MyStyles(str):
+    ''' This class conforms to the styles.py processing requirements
+        for a stylesheet that is not really a file.  It must be callable(),
+        and str(x) must return the name of the stylesheet.
+    '''
     def __new__(cls, styles):
         self = str.__new__(cls, 'Embedded Preprocess Styles')
         self.data = styles
@@ -283,6 +339,10 @@ class MyStyles(str):
         return self.data
 
 def install(createpdf, options):
+    ''' This is where we intercept the document conversion.
+        Preprocess the restructured text, and insert our
+        new styles (if any).
+    '''
     data = Preprocess(options.infile)
     options.infile = data.result
     if data.styles:
