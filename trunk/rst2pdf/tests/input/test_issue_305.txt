@@ -1,0 +1,3 @@
+.. image:: images/biohazard.*
+
+That should be a smooth SVG biohazard if you have SVG support, or a blocky raster biohazard if you don't.
