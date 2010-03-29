@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 305: support wildcards in image names
+  and then use the best one available.
 * Implemented Issue 298: counters
 * Improved widow/orphan support for literal blocks
 * Fixed Issue 304: Code blocks didn't respect fontSize in class.
