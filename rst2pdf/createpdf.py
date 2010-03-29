@@ -1090,6 +1090,11 @@ def parse_commandline():
         help="Add a helper extension module to this invocation of rst2pdf "
              "(module must end in .py and be on the python path)")
 
+    def_cover = config.getValue("general", "custom_cover", 'cover.tmpl')
+    parser.add_option('--custom-cover', dest='custom_cover',
+        metavar='FILE', default= def_cover,
+        help='Template file used for the cover page. Default: %s'%def_cover)
+
     return parser
 
 def main(args=None):
