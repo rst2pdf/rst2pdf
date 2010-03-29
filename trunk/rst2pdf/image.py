@@ -8,6 +8,7 @@ from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
+import glob
 
 from opt_imports import LazyImports
 
@@ -72,9 +73,10 @@ class MyImage (Flowable):
                  kind='direct', mask="auto", lazy=1, client=None):
         # Client is mandatory.  Perhaps move it farther up if we refactor
         assert client is not None
-        srcinfo = client, filename
         self.__kind=kind
         self.filename, self._backend=self.get_backend(filename, client)
+        srcinfo = client, self.filename
+        
         if kind == 'percentage_of_container':
             self.image=self._backend(self.filename, width, height,
                 'direct', mask, lazy, srcinfo)
@@ -181,12 +183,46 @@ class MyImage (Flowable):
         where fname is the filename to be used (could be the same as
         filename, or something different if the image had to be converted
         or is missing), and backend is an Image class that can handle 
-        fname.'''
+        fname.
+
+
+        If uri ensd with '.*' then the returned filename will be the best
+        quality supported at the moment.
+
+        That means:  PDF > SVG > anything else
+
+        '''
 
         backend = defaultimage
 
         # Extract all the information from the URI
         filename, extension, options = self.split_uri(uri)
+
+        if '*' in filename:
+            preferred=['gif','jpg','png']
+            if SVGImage.available():
+                preferred.append('svg')
+            preferred.append('pdf')
+
+            # Find out what images are available
+            available = glob.glob(filename)
+            print available, preferred
+            cfn=available[0]
+            cv=-10
+            for fn in available:
+                ext=fn.split('.')[-1]
+                if ext in preferred:
+                    v=preferred.index(ext)
+                else:
+                    v=-1
+                if v > cv:
+                    cv=v
+                    cfn=fn
+            # cfn should have our favourite type of
+            # those available
+            filename = cfn
+            extension = cfn.split('.')[-1]
+            uri = filename
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
@@ -228,6 +264,7 @@ class MyImage (Flowable):
                 # No way to make this work
                 log.error('To use a %s image you need PIL installed [%s]',extension,filename)
                 filename=missing
+        print filename, backend
         return filename, backend
 
 
