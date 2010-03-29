@@ -70,3 +70,9 @@ footnote_backlinks=True
 # Show footnotes inline instead of at the end of the document
 
 inline_footnotes=False
+
+# Cover page template.
+# It will be searched in the document's folder, in ~/.rst2pdf/templates and 
+# in the templates subfolder of the package folder
+
+# custom_cover = cover.tmpl 
