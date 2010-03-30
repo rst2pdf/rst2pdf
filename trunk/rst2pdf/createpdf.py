@@ -87,6 +87,18 @@ from smartypants import smartyPants
 
 from roman import toRoman
 
+# Small template engine for covers
+# The obvious import doesn't work for complicated reasons ;-)
+import tenjin
+to_str=tenjin.helpers.to_str
+escape=tenjin.helpers.escape
+templateEngine=tenjin.Engine()
+
+def renderTemplate(tname, **context):
+  context['to_str']=to_str
+  context['escape']=escape
+  return templateEngine.render(tname, context)
+
 # Is this really the best unescape in the stdlib for '&amp;' => '&'????
 from xml.sax.saxutils import unescape, escape
 
@@ -135,7 +147,8 @@ class RstToPdf(object):
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
-                 breakside='odd'
+                 breakside='odd',
+                 custom_cover='cover.tmpl'
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -145,10 +158,12 @@ class RstToPdf(object):
         self.basedir=basedir
         self.language = language
         self.doc_title = ""
+        self.doc_title_clean = ""
         self.doc_subtitle = ""
         self.doc_author = ""
         self.header = header
         self.footer = footer
+        self.custom_cover=custom_cover
         self.decoration = {'header': header,
                            'footer': footer,
                            'endnotes': [],
@@ -486,6 +501,34 @@ class RstToPdf(object):
 
         elements = self.gen_elements(self.doctree)
 
+
+        # Find cover template, save it in cover_file
+        def find_cover(name):
+            cover_path=[os.path.expanduser('~/.rst2pdf'),
+                os.path.join(self.PATH,'templates')]
+            cover_file=None
+            for d in cover_path:
+                if os.path.exists(os.path.join(d,name)):
+                    cover_file=os.path.join(d,name)
+                    break
+            return cover_file
+
+        cover_file=find_cover(self.custom_cover)
+        if cover_file is None:
+            log.error("Can't find cover template %s, using default"%self.custom_cover)
+            cover_file=find_cover('cover.tmpl')
+
+        # Feed data to the template, get restructured text.
+        cover_text = renderTemplate(tname=cover_file,
+                            title=self.doc_title,
+                            subtitle=self.doc_subtitle
+                        )
+
+        self.cover_tree = docutils.core.publish_doctree(cover_text,
+                    source_path=source_path)
+
+        elements = self.gen_elements(self.cover_tree) + elements
+
         if self.blank_first_page:
             elements.insert(0,PageBreak())
 
@@ -506,12 +549,16 @@ class RstToPdf(object):
         # So, now, create the FancyPage with the right sizes and elements
         FP = FancyPage("fancypage", head, foot, self)
 
+        def cleantags(s):
+            re.sub(r'<[^>]*?>', '',
+                unicode(s).strip())
+
         pdfdoc = FancyDocTemplate(
             output,
             pageTemplates=[FP],
             showBoundary=0,
             pagesize=self.styles.ps,
-            title=self.doc_title,
+            title=self.doc_title_clean,
             author=self.doc_author,
             pageCompression=compressed)
         while True:
@@ -1216,7 +1263,8 @@ def main(args=None):
         show_frame=options.show_frame,
         splittables=options.splittables,
         blank_first_page=options.blank_first_page,
-        breakside=options.breakside
+        breakside=options.breakside,
+        custom_cover=options.custom_cover
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,

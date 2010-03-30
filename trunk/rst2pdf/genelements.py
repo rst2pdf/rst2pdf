@@ -201,10 +201,12 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
     def gather_elements(self, client, node, style):
         # Special cases: (Not sure this is right ;-)
         if isinstance(node.parent, docutils.nodes.document):
-            node.elements = [Paragraph(client.gen_pdftext(node),
-                                        client.styles['title'])]
-            client.doc_title = re.sub(r'<[^>]*?>', '', 
-                unicode(client.gen_pdftext(node)).strip())
+            #node.elements = [Paragraph(client.gen_pdftext(node),
+                                        #client.styles['title'])]
+            # The visible output is now done by the cover template
+            node.elements = []
+            client.doc_title = node.rawsource
+            client.doc_title_clean = node.astext().strip()
         elif isinstance(node.parent, docutils.nodes.topic):
             node.elements = [Paragraph(client.gen_pdftext(node),
                                         client.styles['topic-title'])]
@@ -249,10 +251,15 @@ class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
             elements = [Paragraph(client.gen_pdftext(node),
                 client.styles['sidebar-subtitle'])]
         elif isinstance(node.parent, docutils.nodes.document):
-            elements = [Paragraph(client.gen_pdftext(node),
-                client.styles['subtitle'])]
-            client.doc_subtitle = re.sub(r'<[^>]*?>', '',
-                unicode(client.gen_pdftext(node)).strip())
+            #elements = [Paragraph(client.gen_pdftext(node),
+                #client.styles['subtitle'])]
+            # The visible output is now done by the cover template
+            elements = []
+            # FIXME: looks like subtitles don't have a rawsource like
+            # titles do.
+            # That means that literals and italics etc in subtitles won't
+            # work.
+            client.doc_subtitle = node.rawtext or node.astext().strip()
         else:
             elements = node.elements  # FIXME Can we get here???
         return elements
