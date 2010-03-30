@@ -1,0 +1,13 @@
+- When a bulleted list has a bulleted sub-list,
+
+- There is more vertical space after this line
+
+     - (sublist element)
+
+     - (another)
+
+- than before this line.
+
+This may or may not be desired behavior, but it was counterintuitive to me.
+I expected the sublist to bind more tightly to the element above than the
+element below.
