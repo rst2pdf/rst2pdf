@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##
 ## $Rev: 137 $
 ## $Release: 0.6.2 $
@@ -953,7 +954,7 @@ class Engine(object):
         _write_file_with_lock(cache_filename, s)
 
     def cachename(self, filename):
-        return os.path.join(os.path.expanduser('~'),'.urssus', os.path.basename(filename) + '.cache')
+        return os.path.join(os.path.expanduser('~'),'.rst2pdf', os.path.basename(filename) + '.cache')
 
     def create_template(self, filename, _context, _globals):
         """Read template file and create template object."""
