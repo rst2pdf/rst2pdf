@@ -2,7 +2,22 @@
   "pageSetup" : {
     "firstTemplate": "coverPage"
   },
+  "pageTemplates" : {
+    "coverPage": {
+        "frames": [
+            ["0cm", "0cm", "100%", "100%"]
+          ],
+        "background" : "biohazard.pdf",
+        "showHeader" : false,
+        "showFooter" : false
+    }
+  },
   "styles" : [
+    ["title", {
+        "fontName": "White Rabbit",
+        "fontSize": 96
+    }],
+        
     ["thin" , {
     "parent" : "bodytext",
     "width" : "65%",
