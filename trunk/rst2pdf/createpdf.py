@@ -209,6 +209,8 @@ class RstToPdf(object):
             import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
+        self.sphinx = sphinx
+
         if not self.styles.languages:
             self.styles.languages=[]
             if self.language:
@@ -523,10 +525,12 @@ class RstToPdf(object):
                             subtitle=self.doc_subtitle
                         )
 
-        self.cover_tree = docutils.core.publish_doctree(cover_text,
-                    source_path=source_path)
+        # FIXME: doing this crashes sphinx. Why???
+        if not self.sphinx:
+            self.cover_tree = docutils.core.publish_doctree(cover_text,
+                        source_path=source_path)
 
-        elements = self.gen_elements(self.cover_tree) + elements
+            elements = self.gen_elements(self.cover_tree) + elements
 
         if self.blank_first_page:
             elements.insert(0,PageBreak())
