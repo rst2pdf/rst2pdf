@@ -254,7 +254,7 @@ def build_sphinx(sphinxdir, outpdf):
 
     for builddir in getbuilddirs():
         shutil.rmtree(builddir)
-    errcode, result = textexec('make pdf', cwd=sphinxdir)
+    errcode, result = textexec('make clean pdf', cwd=sphinxdir)
     builddirs = getbuilddirs()
     if len(builddirs) != 1:
         log(result, 'Cannot determine build directory')
