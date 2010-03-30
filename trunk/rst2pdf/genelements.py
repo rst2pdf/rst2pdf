@@ -259,7 +259,7 @@ class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
             # titles do.
             # That means that literals and italics etc in subtitles won't
             # work.
-            client.doc_subtitle = node.rawtext or node.astext().strip()
+            client.doc_subtitle = getattr(node,'rawtext',node.astext()).strip()
         else:
             elements = node.elements  # FIXME Can we get here???
         return elements
