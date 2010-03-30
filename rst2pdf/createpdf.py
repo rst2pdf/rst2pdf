@@ -501,10 +501,9 @@ class RstToPdf(object):
 
         elements = self.gen_elements(self.doctree)
 
-
         # Find cover template, save it in cover_file
         def find_cover(name):
-            cover_path=[os.path.expanduser('~/.rst2pdf'),
+            cover_path=[self.basedir, os.path.expanduser('~/.rst2pdf'),
                 os.path.join(self.PATH,'templates')]
             cover_file=None
             for d in cover_path:
