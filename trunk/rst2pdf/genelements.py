@@ -251,6 +251,8 @@ class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
         elif isinstance(node.parent, docutils.nodes.document):
             elements = [Paragraph(client.gen_pdftext(node),
                 client.styles['subtitle'])]
+            client.doc_subtitle = re.sub(r'<[^>]*?>', '',
+                unicode(client.gen_pdftext(node)).strip())
         else:
             elements = node.elements  # FIXME Can we get here???
         return elements

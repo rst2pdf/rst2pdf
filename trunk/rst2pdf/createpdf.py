@@ -145,6 +145,7 @@ class RstToPdf(object):
         self.basedir=basedir
         self.language = language
         self.doc_title = ""
+        self.doc_subtitle = ""
         self.doc_author = ""
         self.header = header
         self.footer = footer
@@ -498,8 +499,6 @@ class RstToPdf(object):
                 colWidths = self.styles['endnote'].colWidths
                 elements.append(DelayedTable([[n[0], n[1]]],
                     style=t_style, colWidths=colWidths))
-
-        
 
         head = self.decoration['header']
         foot = self.decoration['footer']
