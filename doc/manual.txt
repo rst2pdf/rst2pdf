@@ -1688,7 +1688,10 @@ To use it in your existing sphinx project you need to do the following:
 
     # If false, no coverpage is generated.
     #pdf_use_coverpage = True
-    
+   
+    # Name of the cover page template to use
+    #pdf_cover_template = 'sphinxcover.tmpl'
+ 
     # Documents to append as an appendix to all manuals.    
     #pdf_appendices = []
     

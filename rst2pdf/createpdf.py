@@ -525,7 +525,8 @@ class RstToPdf(object):
                             subtitle=self.doc_subtitle
                         )
 
-        # FIXME: doing this crashes sphinx. Why???
+        # This crashes sphinx because .. class:: in sphinx is
+        # something else. Ergo, pdfbuilder does it in its own way.
         if not self.sphinx:
             self.cover_tree = docutils.core.publish_doctree(cover_text,
                         source_path=source_path)
