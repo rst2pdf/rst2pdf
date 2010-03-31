@@ -21,6 +21,7 @@ import parser
 import re
 import sys
 from os import path
+from os.path import abspath, dirname, expanduser, join
 import os
 
 from cStringIO import StringIO
@@ -499,6 +500,10 @@ class PDFWriter(writers.Writer):
         self.default_dpi = default_dpi
         self.page_template = page_template
         self.invariant=invariant
+        if hasattr(sys, 'frozen'):
+            self.PATH = abspath(dirname(sys.executable))
+        else:
+            self.PATH = abspath(dirname(__file__))
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -531,35 +536,40 @@ class PDFWriter(writers.Writer):
 
         if self.config.pdf_use_coverpage:
             # Generate cover page
-            spacer=docutils.core.publish_doctree('.. raw:: pdf\n\n    Spacer 0 3cm\n\n')[0]
-            doctitle=nodes.title()
-            doctitle.append(nodes.Text(self.document.settings.title or visitor.elements['title']))
-            docsubtitle=nodes.subtitle()
-            docsubtitle.append(nodes.Text('%s %s'%(_('version'),self.config.version)))
+
+            # FIXME: duplicate from createpdf, refactor!
+            
+            # Find cover template, save it in cover_file
+            def find_cover(name):
+                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'),
+                    os.path.join(self.PATH,'templates')]
+                cover_file=None
+                for d in cover_path:
+                    if os.path.exists(os.path.join(d,name)):
+                        cover_file=os.path.join(d,name)
+                        break
+                return cover_file
+
+            cover_file=find_cover(self.config.pdf_cover_template)
+            if cover_file is None:
+                log.error("Can't find cover template %s, using default"%self.custom_cover)
+                cover_file=find_cover('sphinxcover.tmpl')
+                
             # This is what's used in the python docs because
-            # Latex does a manual linrebreak. This sucks.
-            authors=self.document.settings.author.split('\\') 
-                                       
-            authornodes=[]
-            for author in authors:
-                node=nodes.paragraph()
-                node.append(nodes.Text(author))
-                node['classes']=['author']
-                authornodes.append(node)
-            date=nodes.paragraph()
-            date.append(nodes.Text(ustrftime(self.config.today_fmt or _('%B %d, %Y'))))
-            date['classes']=['author']
-            self.document.insert(0,nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
-            self.document.insert(0,date)
-            self.document.insert(0,spacer)
-            for node in authornodes[::-1]:
-                self.document.insert(0,node)
-            self.document.insert(0,spacer)
-            self.document.insert(0,docsubtitle)
-            self.document.insert(0,doctitle)
-        
-        
-        
+            # Latex does a manual linebreak. This sucks.
+            authors=self.document.settings.author.split('\\')
+            
+            # Feed data to the template, get restructured text.
+            cover_text = createpdf.renderTemplate(tname=cover_file,
+                                title=self.document.settings.title or visitor.elements['title'],
+                                subtitle='%s %s'%(_('version'),self.config.version),
+                                authors=authors,
+                                date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
+                                )
+
+            cover_tree = docutils.core.publish_doctree(cover_text)
+            self.document.insert(0, cover_tree)
+            
         sio=StringIO()
         
         if self.invariant:
@@ -837,6 +847,7 @@ def setup(app):
     app.add_config_value('pdf_use_index', True, None)
     app.add_config_value('pdf_use_modindex', True, None)
     app.add_config_value('pdf_use_coverpage', True, None)
+    app.add_config_value('pdf_cover_template', 'sphinxcover.tmpl', None)
     app.add_config_value('pdf_appendices', [], None)
     app.add_config_value('pdf_splittables', False, None)
     app.add_config_value('pdf_breakside', 'odd', None)

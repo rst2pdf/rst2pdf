@@ -1,6 +1,6 @@
 <?py if title: ?>
 
-.. class:: title
+.. cssclass:: title
 
 #{title}
 
@@ -8,11 +8,30 @@
 
 <?py if subtitle: ?>
 
-.. class:: subtitle
+.. cssclass:: subtitle
 
 #{subtitle}
 
 <?py #end ?>
+
+.. raw:: pdf
+
+   Spacer 0 3cm
+
+<?py for author in authors: ?>
+.. cssclass:: author
+
+#{author}
+
+<?py #end ?>
+
+.. raw:: pdf
+
+   Spacer 0 3cm
+
+.. cssclass:: author
+
+#{date}
 
 .. raw:: pdf
 
