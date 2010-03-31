@@ -846,7 +846,7 @@ class Engine(object):
     layout     = None
     templateclass = Template
     path       = None
-    cache      = True
+    cache      = False
     preprocess = False
 
     def __init__(self, prefix=None, postfix=None, layout=None, path=None, cache=None, preprocess=None, templateclass=None, **kwargs):
