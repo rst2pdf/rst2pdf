@@ -729,9 +729,7 @@ class UnhappyOnce(IndexingFlowable):
     def isSatisfied(self):
         if self._unhappy:
             self._unhappy= False
-            print 'UNHAPPY'
             return False
-        print 'HAPPY'
         return True
         
     def draw(self):
