@@ -633,7 +633,9 @@ class HandleBlockQuote(NodeHandler, docutils.nodes.block_quote):
         rightIndent=client.styles['blockquote'].rightIndent
         spaceBefore=client.styles['blockquote'].spaceBefore
         spaceAfter=client.styles['blockquote'].spaceAfter
-        data=[['',client.gather_elements( node, style)]]
+        s=copy(client.styles['blockquote'])
+        s.leftIndent=style.leftIndent
+        data=[['',client.gather_elements( node, s)]]
         if client.splittables:
             node.elements=[Spacer(0,spaceBefore),SplitTable(data,
                 colWidths=[leftIndent,None],
