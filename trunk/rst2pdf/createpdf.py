@@ -1016,7 +1016,7 @@ def parse_commandline():
         help='A list of folders to search for fonts,'\
              ' separated using "%s". Default="%s"'%(os.pathsep, def_fontpath))
 
-    def_baseurl = urlunparse(['file',os.getcwd(),'','','',''])
+    def_baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','',''])
     parser.add_option('--baseurl', dest='baseurl', metavar='URL',
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)
