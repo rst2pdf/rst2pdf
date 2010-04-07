@@ -217,7 +217,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             # The first piece, pass as-is
             code_block += nodes.Text(values[0], values[0])
             # On the second and later pieces, insert \n and linenos
-            linenos = range(lineno, lineno + len(values) -1)
+            linenos = range(lineno, lineno + len(values))
             for chunk, ln in zip(values, linenos)[1:]:
                 if ln <= total_lines:
                     code_block += nodes.inline(fstr % ln, fstr % ln, classes=['linenumber'])
