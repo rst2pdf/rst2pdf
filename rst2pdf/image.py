@@ -206,7 +206,6 @@ class MyImage (Flowable):
 
             # Find out what images are available
             available = glob.glob(filename)
-            print available, preferred
             cfn=available[0]
             cv=-10
             for fn in available:
@@ -264,7 +263,6 @@ class MyImage (Flowable):
                 # No way to make this work
                 log.error('To use a %s image you need PIL installed [%s]',extension,filename)
                 filename=missing
-        print filename, backend
         return filename, backend
 
 
