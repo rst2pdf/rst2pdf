@@ -1095,6 +1095,17 @@ this command gives
 
 .. _pygments: http://pygments.org/
 
+Options
+~~~~~~~
+
+linenos
+    Display line numbers along the code
+
+linenos_offset
+    If you include a file and are skipping the beginning, using the linenos_offset
+    makes the line count start from the real line number, instead of 1.
+
+
 Raw Directive
 =============
 
