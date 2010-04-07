@@ -135,7 +135,7 @@ def code_block_directive(name, arguments, options, content, lineno,
     """Parse and classify content of a code_block."""
     if 'include' in options:
         try:
-            content = codecs.open(options['include'], 'r', 'utf-8').read()
+            content = codecs.open(options['include'], 'r', 'utf-8').read().rstrip()
         except (IOError, UnicodeError): # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
             content = u''
