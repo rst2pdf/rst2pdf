@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 310: added option linenos_offset to code blocks.
 * Fixed Issue 309: style for blockquotes was not respected.
 * Custom cover page support (related to Issue 157)
 * Fixed Issue 305: support wildcards in image names
