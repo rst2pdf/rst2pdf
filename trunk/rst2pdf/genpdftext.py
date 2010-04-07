@@ -111,7 +111,6 @@ class HandleGenerated(HandleText, docutils.nodes.generated):
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
-	print node
         imgname = os.path.join(client.basedir,str(node.get("uri")))
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
