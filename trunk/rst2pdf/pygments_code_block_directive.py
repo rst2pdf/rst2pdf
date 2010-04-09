@@ -264,10 +264,12 @@ code_block_directive.options = {'include': directives.unchanged_required,
 
 if __name__ == '__main__':
     from docutils.core import publish_cmdline, default_description
+    from docutils.parsers.rst import directives
+    directives.register_directive('code-block', code_block_directive)
     description = "code-block directive test output" + default_description
     try:
         import locale
         locale.setlocale(locale.LC_ALL, '')
     except Exception:
         pass
-    publish_cmdline(writer_name='pdf', description=description)
+    publish_cmdline(writer_name='html', description=description)
