@@ -90,7 +90,7 @@ from roman import toRoman
 # Small template engine for covers
 # The obvious import doesn't work for complicated reasons ;-)
 import tenjin
-to_str=tenjin.helpers.to_str
+to_str=tenjin.helpers.generate_tostrfunc('utf-8')
 escape=tenjin.helpers.escape
 templateEngine=tenjin.Engine()
 
