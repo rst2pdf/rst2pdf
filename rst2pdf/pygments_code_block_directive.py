@@ -163,7 +163,6 @@ def code_block_directive(name, arguments, options, content, lineno,
             after_text = options.get('start-after', None)
             if after_text:
                 # skip content in include_text before *and incl.* a matching text
-                print type(content), type(after_text)
                 after_index = content.find(after_text)
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
