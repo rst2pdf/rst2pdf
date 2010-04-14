@@ -205,8 +205,6 @@ class StyleSheet(object):
         self.fontsAlias = {}
         for data, ssname in ssdata:
             self.fontsAlias.update(data.get('fontsAlias', {}))
-        # Make stdFont the basefont, for Issue 65
-        reportlab.rl_config.canvas_basefontname = self.fontsAlias['stdFont']
 
         embedded_fontnames = []
         self.embedded = []
@@ -375,6 +373,7 @@ class StyleSheet(object):
                             log.error("Unknown font: \"%s\","
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
+                            
         #log.info('FontList: %s'%self.embedded)
         #log.info('FontAlias: %s'%self.fontsAlias)
         # Get styles from all stylesheets in order
@@ -495,6 +494,8 @@ class StyleSheet(object):
 
             self.StyleSheet.add(ParagraphStyle(**s))
         self.emsize=self['base'].fontSize
+        # Make stdFont the basefont, for Issue 65
+        reportlab.rl_config.canvas_basefontname = self['base'].fontName
 
     def __getitem__(self, key):
         if self.StyleSheet.has_key(key):
