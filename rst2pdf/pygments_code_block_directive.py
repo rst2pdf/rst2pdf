@@ -149,7 +149,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             # the reason is we want to be able to define a start-at like
             # def mymethod(self)
             # and have such a definition included
-            #import pdb; pdb.set_trace()
+
             after_text = options.get('start-at', None)
             if after_text:
                 # skip content in include_text before *and NOT incl.* a matching text
@@ -167,8 +167,8 @@ def code_block_directive(name, arguments, options, content, lineno,
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
                                       'code-block directive:\nText not found.' % options['start-after'])
+                line_offset = len(content[:after_index + len(after_text)].splitlines())
                 content = content[after_index + len(after_text):]
-                line_offset = len(content[:after_index + len(after_text)].splitlines())-1
 
 
             # same changes here for the same reason
