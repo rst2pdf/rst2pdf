@@ -23,6 +23,7 @@ from reportlab.lib.styles import *
 from reportlab.lib.enums import *
 from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
+import reportlab.rl_config
 
 from rst2pdf.rson import loads as rson_loads
 
@@ -204,6 +205,8 @@ class StyleSheet(object):
         self.fontsAlias = {}
         for data, ssname in ssdata:
             self.fontsAlias.update(data.get('fontsAlias', {}))
+        # Make stdFont the basefont, for Issue 65
+        reportlab.rl_config.canvas_basefontname = self.fontsAlias['stdFont']
 
         embedded_fontnames = []
         self.embedded = []
