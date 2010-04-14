@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 65: References to Helvetica when it was not used.
 * Fixed Issue 310: added option linenos_offset to code blocks.
 * Fixed Issue 309: style for blockquotes was not respected.
 * Custom cover page support (related to Issue 157)
