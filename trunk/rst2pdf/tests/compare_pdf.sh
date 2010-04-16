@@ -8,8 +8,8 @@ flag=0
 
 tmpdir=/tmp/comppdf-$$ 
 mkdir $tmpdir
-convert -density 300x300 $f1 $tmpdir/page.png
-convert -density 300x300 $f2 $tmpdir/bpage.png
+convert -density 96x96 $f1 $tmpdir/page.png
+convert -density 96x96 $f2 $tmpdir/bpage.png
 pushd $tmpdir >/dev/null 2>&1
 
 for page in page*.png
@@ -25,6 +25,4 @@ do
     fi    
 done
 popd >/dev/null 2>&1
-
-convert $tmpdir/diff*png diff-$$.pdf
 exit $flag
