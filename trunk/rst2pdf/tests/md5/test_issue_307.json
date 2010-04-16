@@ -1,4 +1,5 @@
 bad_md5 = [
+        '578eec965c8e6c6db90944aacbc3c00a',
         'c2dd75ba85647f702a96cf8ed8e7ea5a',
         'sentinel'
 ]
