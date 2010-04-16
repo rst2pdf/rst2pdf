@@ -6,11 +6,11 @@ f1=$1
 f2=$2
 flag=0
 
-tmpdir=/tmp/comppdf-$$
+tmpdir=/tmp/comppdf-$$ 
 mkdir $tmpdir
 convert -density 300x300 $f1 $tmpdir/page.png
 convert -density 300x300 $f2 $tmpdir/bpage.png
-pushd $tmpdir
+pushd $tmpdir >/dev/null 2>&1
 
 for page in page*.png
 do
@@ -24,7 +24,7 @@ do
 	    flag=1
     fi    
 done
-popd
+popd >/dev/null 2>&1
 
 convert $tmpdir/diff*png diff-$$.pdf
 exit $flag
