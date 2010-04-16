@@ -4,6 +4,7 @@
 
 f1=$1
 f2=$2
+flag=0
 
 tmpdir=/tmp/comppdf-$$
 mkdir $tmpdir
@@ -20,8 +21,10 @@ do
             true
     else
             echo "$page has ERRORs, see $tmpdir/diff$page"
+	    flag=1
     fi    
 done
 popd
 
 convert $tmpdir/diff*png diff-$$.pdf
+exit $flag
