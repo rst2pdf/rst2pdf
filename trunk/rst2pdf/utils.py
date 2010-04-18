@@ -6,8 +6,6 @@
 
 import shlex
 
-from reportlab.platypus import Spacer
-
 from flowables import *
 import flowables
 from styles import adjustUnits
@@ -46,7 +44,7 @@ def parseRaw(data):
             else:
                 elements.append(MyPageBreak(tokens[1],breakTo='odd'))
         elif command == 'Spacer':
-            elements.append(Spacer(adjustUnits(tokens[1]), 
+            elements.append(MySpacer(adjustUnits(tokens[1]), 
                 adjustUnits(tokens[2])))
         elif command == 'Transition':
             elements.append(Transition(*tokens[1:]))
