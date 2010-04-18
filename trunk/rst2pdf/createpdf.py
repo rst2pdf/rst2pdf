@@ -141,6 +141,7 @@ class RstToPdf(object):
                  repeat_table_rows=False,
                  footnote_backlinks=True,
                  inline_footnotes=False,
+                 real_footnotes=False,
                  def_dpi=300,
                  show_frame=False,
                  highlightlang='python', #This one is only used by sphinx
@@ -190,6 +191,7 @@ class RstToPdf(object):
         self.repeat_table_rows = repeat_table_rows
         self.footnote_backlinks = footnote_backlinks
         self.inline_footnotes = inline_footnotes
+        self.real_footnotes = real_footnotes
         self.def_dpi = def_dpi
         self.show_frame = show_frame
         self.img_dir = os.path.join(self.PATH, 'images')
@@ -572,6 +574,24 @@ class RstToPdf(object):
                 #from pudb import set_trace; set_trace()
                 # See if this *must* be multipass
                 if getattr(self, 'mustMultiBuild', False):
+                    # Rearrange footnotes if needed
+                    if self.real_footnotes:
+                        newStory=[]
+                        fnPile=[]
+                        for e in elements:
+                            if getattr(e,'isFootnote',False):
+                                # Add it to the pile
+                                print 'FN'
+                                fnPile.append(e)
+                            elif e._atTop or \
+                                isinstance (e, (UnhappyOnce, MyPageBreak)):
+                                newStory.extend(fnPile)
+                                newStory.append(e)
+                                fnPile=[]
+                            else:
+                                newStory.append(e)
+                        elements = newStory+fnPile
+                    # Force a multibuild pass
                     if not isinstance(elements[-1],UnhappyOnce):
                         log.info ('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
@@ -589,6 +609,7 @@ class RstToPdf(object):
                             delattr(e,'_postponed')
                 else:
                     raise
+
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
@@ -1090,6 +1111,13 @@ def parse_commandline():
         help='Show footnotes inline.'\
         ' Default=%s' % str(not def_inline_footnotes))
 
+    def_real_footnotes = config.getValue("general",
+        "real_footnotes", False)
+    parser.add_option('--real-footnotes', action='store_true',
+        dest='real_footnotes', default=def_real_footnotes,
+        help='Show footnotes at the bottom of the page where they are defined.'\
+        ' Default=%s' % str(not def_real_footnotes))
+
     def_dpi = config.getValue("general", "default_dpi", 300)
     parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
         default=def_dpi,
@@ -1235,6 +1263,9 @@ def main(args=None):
         spath = options.stylepath.split(os.pathsep)
     options.stylepath = spath
 
+    if options.real_footnotes:
+        options.inline_footnotes = True
+
     if reportlab.Version < '2.3':
         log.warning('You are using Reportlab version %s.'\
             ' The suggested version '\
@@ -1260,6 +1291,7 @@ def main(args=None):
         repeat_table_rows=options.repeattablerows,
         footnote_backlinks=options.footnote_backlinks,
         inline_footnotes=options.inline_footnotes,
+        real_footnotes=options.real_footnotes,
         def_dpi=int(options.def_dpi),
         basedir=options.basedir,
         show_frame=options.show_frame,

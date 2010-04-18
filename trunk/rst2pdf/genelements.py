@@ -812,6 +812,10 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                                 DelayedTable([[label, contents]],
                                 style=t_style, colWidths=colWidths),
                                 Spacer(0, st.spaceAfter)]
+            if client.real_footnotes:
+                client.mustMultiBuild = True
+                for e in node.elements:
+                    e.isFootnote=True
         else:
             client.decoration['endnotes'].append([label, contents])
             node.elements = []
