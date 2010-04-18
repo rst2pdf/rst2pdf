@@ -360,6 +360,13 @@ class SplitTable(DelayedTable):
             return DelayedTable.split(self,w,h)
 
 
+class MySpacer(Spacer):
+    def wrap (self, aW, aH):
+        w, h = Spacer.wrap(self, aW, aH)
+	self.height = min(aH, h) 
+        return w, self.height 
+
+    
 
 class MyPageBreak(FrameActionFlowable):
 
