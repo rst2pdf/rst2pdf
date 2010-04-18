@@ -2,7 +2,9 @@ This is a paragraph in Page 1 [#]_
 
 .. [#] This is a footnote in page 1
 
-This is another paragrah in page 1.
+This is another paragrah in page 1. [#]_
+
+.. [#] This is 2nd footnote in page 1
 
 .. raw:: pdf
 
