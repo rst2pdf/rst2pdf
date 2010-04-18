@@ -581,7 +581,6 @@ class RstToPdf(object):
                         for e in elements:
                             if getattr(e,'isFootnote',False):
                                 # Add it to the pile
-                                print 'FN'
                                 fnPile.append(e)
                             elif e._atTop or \
                                 isinstance (e, (UnhappyOnce, MyPageBreak)):
