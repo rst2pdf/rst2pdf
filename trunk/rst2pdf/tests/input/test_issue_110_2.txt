@@ -29,3 +29,9 @@ This is a paragraph in Page 3 [#]_
 .. [#] This is a footnote in page 3
 
 This is another paragrah in page 3.
+
+.. raw:: pdf
+
+   PageBreak
+
+This is page 4 without footnotes.

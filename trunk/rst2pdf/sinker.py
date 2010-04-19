@@ -30,3 +30,4 @@ class Sinker(Flowable):
             canv.saveState()
             c.drawOn(canv, x, y, _sW=aW - w)
             canv.restoreState()
+        canv.restoreState()
