@@ -222,6 +222,8 @@ class DelayedTable(Flowable):
 
     def split(self, w, h):
         if self.splitByRow:
+            if not self.t:
+                self.wrap(w,h)
             return self.t.split(w, h)
         else:
             return []
@@ -363,9 +365,9 @@ class SplitTable(DelayedTable):
 class MySpacer(Spacer):
     def wrap (self, aW, aH):
         w, h = Spacer.wrap(self, aW, aH)
-        #print 'SH', aH, h	
-	self.height = min(aH, h) 
-        return w, self.height 
+        #print 'SH', aH, h
+        self.height = min(aH, h)
+        return w, self.height
 
     
 
