@@ -74,6 +74,7 @@ from reportlab.pdfbase.pdfdoc import PDFPageLabel
 #from reportlab.lib.pagesizes import *
 
 from flowables import * # our own reportlab flowables
+from sinker import Sinker
 import flowables
 from image import MyImage
 
@@ -606,7 +607,8 @@ class RstToPdf(object):
                             fnPile.append(e)
                         elif e._atTop or \
                             isinstance (e, (UnhappyOnce, MyPageBreak)):
-                            newStory.extend(fnPile)
+                            if fnPile:
+                                newStory.append(Sinker(fnPile))
                             newStory.append(e)
                             fnPile=[]
                         else:
