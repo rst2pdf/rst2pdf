@@ -21,7 +21,7 @@ are combined into the instantiated object.
 from copy import copy
 
 from log import nodeid, log
-from flowables import  Spacer, MyIndenter, Reference, DelayedTable, Table
+from flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
 from image import MyImage
 
 from opt_imports import Paragraph, sphinx
@@ -132,7 +132,7 @@ class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
         if st==client.styles['normal']:
             st=copy(client.styles['desc'])
             st.spaceBefore=0
-        pre=[Spacer(0,client.styles['desc'].spaceBefore)]
+        pre=[MySpacer(0,client.styles['desc'].spaceBefore)]
         return pre + client.gather_elements(node, st)
 
 class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
