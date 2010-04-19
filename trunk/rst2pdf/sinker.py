@@ -13,7 +13,7 @@ class Sinker(Flowable):
 
     def wrap (self, aW, aH):
         self.width, self.height = _listWrapOn(self.content, aW, None)
-        return self.width, aH - 1
+        return self.width, aH
 
     def draw (self):
         canv = self.canv
