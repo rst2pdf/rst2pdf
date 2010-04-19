@@ -580,7 +580,6 @@ class RstToPdf(object):
         while True:
             try:
                 log.info("Starting build")
-                #from pudb import set_trace; set_trace()
                 # See if this *must* be multipass
                 pdfdoc.multiBuild(elements)
                 # Force a multibuild pass
@@ -605,7 +604,7 @@ class RstToPdf(object):
                             # Add it to the pile
                             #if not isinstance (e, MySpacer):
                             fnPile.append(e)
-                        elif e._atTop or \
+                        elif getattr(e, '_atTop', False) or \
                             isinstance (e, (UnhappyOnce, MyPageBreak)):
                             if fnPile:
                                 newStory.append(Sinker(fnPile))
@@ -619,6 +618,9 @@ class RstToPdf(object):
                             delattr(e,'_postponed')
                     self.real_footnotes = False
                     continue
+
+
+                
                 break
             except ValueError, v:
                 # FIXME: cross-document links come through here, which means
@@ -642,73 +644,9 @@ class RstToPdf(object):
                 pass
 
 
+from reportlab.platypus import doctemplate
+
 class FancyDocTemplate(BaseDocTemplate):
-
-    #def multiBuild(self, story,
-                   #filename=None,
-                   #canvasmaker=canvas.Canvas,
-                   #maxPasses = 10):
-        #"""Makes multiple passes until all indexing flowables
-        #are happy."""
-
-        #self._indexingFlowables = []
-        ##scan the story and keep a copy
-        #for thing in story:
-            #if thing.isIndexing():
-                #self._indexingFlowables.append(thing)
-
-        ##better fix for filename is a 'file' problem
-        #self._doSave = 0
-        #passes = 0
-        #mbe = []
-        #self._multiBuildEdits = mbe.append
-        #while 1:
-            #s=story[-202].style
-            #for n in dir(s):
-                #if not n.startswith('_'):
-                    #print n,eval('s.parent.%s'%n)
-            #print '----------------------'
-            #passes += 1
-            #log.info('Pass number %d'%passes)
-
-            #for fl in self._indexingFlowables:
-                #fl.beforeBuild()
-
-            ## work with a copy of the story, since it is consumed
-            #tempStory = story[:]
-            #self.build(tempStory, filename, canvasmaker)
-            ##self.notify('debug',None)
-
-            #for fl in self._indexingFlowables:
-                #fl.afterBuild()
-
-            #happy = self._allSatisfied()
-
-            #if happy:
-                #self._doSave = 0
-                #self.canv.save()
-                #break
-            #else:
-                #self.canv.save()
-                #f=open('pass-%d.pdf'%passes,'wb')
-                #f.seek(0)
-                #f.truncate()
-                #f.write(self.filename.getvalue())
-                #self.filename = StringIO()
-            #if passes > maxPasses:
-                ## Don't fail, just say that the indexes may be wrong
-                #log.error("Index entries not resolved after %d passes" % maxPasses)
-                #break
-
-
-            ##work through any edits
-            #while mbe:
-                #e = mbe.pop(0)
-                #e[0](*e[1:])
-
-        #del self._multiBuildEdits
-        #if verbose: print 'saved'
-
 
     def afterFlowable(self, flowable):
 
@@ -719,6 +657,77 @@ class FancyDocTemplate(BaseDocTemplate):
             node = flowable.node  
             pagenum = setPageCounter()
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
+
+
+    def handle_flowable(self,flowables):
+        '''try to handle one flowable from the front of list flowables.'''
+
+        # this method is copied from reportlab
+
+        #allow document a chance to look at, modify or ignore
+        #the object(s) about to be processed
+        self.filterFlowables(flowables)
+
+        self.handle_breakBefore(flowables)
+        self.handle_keepWithNext(flowables)
+        f = flowables[0]
+        del flowables[0]
+        if f is None:
+            return
+
+        if isinstance(f,PageBreak):
+            if isinstance(f,SlowPageBreak):
+                self.handle_pageBreak(slow=1)
+            else:
+                self.handle_pageBreak()
+            self.afterFlowable(f)
+        elif isinstance(f,ActionFlowable):
+            f.apply(self)
+            self.afterFlowable(f)
+        else:
+            frame = self.frame
+            canv = self.canv
+            #try to fit it then draw it
+            if frame.add(f, canv, trySplit=self.allowSplitting):
+                if not isinstance(f,FrameActionFlowable):
+                    self._curPageFlowableCount += 1
+                    self.afterFlowable(f)
+                doctemplate._addGeneratedContent(flowables,frame)
+            else:
+                if self.allowSplitting:
+                    # see if this is a splittable thing
+                    S = frame.split(f,canv)
+                    n = len(S)
+                else:
+                    n = 0
+                if n:
+                    if not isinstance(S[0],(PageBreak,SlowPageBreak,ActionFlowable)):
+                        if frame.add(S[0], canv, trySplit=0):
+                            self._curPageFlowableCount += 1
+                            self.afterFlowable(S[0])
+                            doctemplate._addGeneratedContent(flowables,frame)
+                        else:
+                            ident = "Splitting error(n==%d) on page %d in\n%s" % (n,self.page,self._fIdent(f,60,frame))
+                            #leave to keep apart from the raise
+                            raise LayoutError(ident)
+                        del S[0]
+                    for i,f in enumerate(S):
+                        flowables.insert(i,f)   # put split flowables back on the list
+                else:
+                    if hasattr(f,'_postponed'):
+                        ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % \
+                                (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+                                        self.frame._aSpaceString(), self.pageTemplate.id)
+                        #leave to keep apart from the raise
+                        raise LayoutError(ident)
+                    # this ought to be cleared when they are finally drawn!
+                    f._postponed = 1
+                    mbe = getattr(self,'_multiBuildEdits',None)
+                    if mbe:
+                        mbe((delattr,f,'_postponed'))
+                    flowables.insert(0,f)           # put the flowable back
+                    self.handle_frameEnd()
+
 
 _counter=0
 _counterStyle='arabic'
