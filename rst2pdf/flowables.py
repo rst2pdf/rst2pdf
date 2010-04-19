@@ -741,11 +741,9 @@ class BoundByWidth(Flowable):
         _sW = 0
         scale = self.scale
         content = None
-        aW = None
         #, canv, x, y, _sW=0, scale=1.0, content=None, aW=None):
         pS = 0
-        if aW is None:
-            aW = self.width
+        aW = self.width
         aW = scale*(aW + _sW)
         if content is None:
             content = self.content
