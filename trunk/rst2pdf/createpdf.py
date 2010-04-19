@@ -192,6 +192,9 @@ class RstToPdf(object):
         self.footnote_backlinks = footnote_backlinks
         self.inline_footnotes = inline_footnotes
         self.real_footnotes = real_footnotes
+        # Real footnotes are always a two-pass thing.
+        if self.real_footnotes:
+            self.mustMultiBuild = True
         self.def_dpi = def_dpi
         self.show_frame = show_frame
         self.img_dir = os.path.join(self.PATH, 'images')
@@ -567,34 +570,53 @@ class RstToPdf(object):
             title=self.doc_title_clean,
             author=self.doc_author,
             pageCompression=compressed)
+
+        if getattr(self, 'mustMultiBuild', False):
+            # Force a multibuild pass
+            if not isinstance(elements[-1],UnhappyOnce):
+                log.info ('Forcing second pass so Total pages work')
+                elements.append(UnhappyOnce())
         while True:
             try:
                 log.info("Starting build")
-                pdfdoc.multiBuild(elements)
                 #from pudb import set_trace; set_trace()
                 # See if this *must* be multipass
+                pdfdoc.multiBuild(elements)
+                # Force a multibuild pass
+
+                # FIXME: since mustMultiBuild is set by the
+                # first pass in the case of ###Total###, then we
+                # make a new forced two-pass build. This is broken.
+                # conceptually.
+                
                 if getattr(self, 'mustMultiBuild', False):
-                    # Rearrange footnotes if needed
-                    if self.real_footnotes:
-                        newStory=[]
-                        fnPile=[]
-                        for e in elements:
-                            if getattr(e,'isFootnote',False):
-                                # Add it to the pile
-                                fnPile.append(e)
-                            elif e._atTop or \
-                                isinstance (e, (UnhappyOnce, MyPageBreak)):
-                                newStory.extend(fnPile)
-                                newStory.append(e)
-                                fnPile=[]
-                            else:
-                                newStory.append(e)
-                        elements = newStory+fnPile
                     # Force a multibuild pass
                     if not isinstance(elements[-1],UnhappyOnce):
                         log.info ('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
+                ## Rearrange footnotes if needed
+                if self.real_footnotes:
+                    newStory=[]
+                    fnPile=[]
+                    for e in elements:
+                        if getattr(e,'isFootnote',False):
+                            # Add it to the pile
+                            #if not isinstance (e, MySpacer):
+                            fnPile.append(e)
+                        elif e._atTop or \
+                            isinstance (e, (UnhappyOnce, MyPageBreak)):
+                            newStory.extend(fnPile)
+                            newStory.append(e)
+                            fnPile=[]
+                        else:
+                            newStory.append(e)
+                    elements = newStory+fnPile
+                    for e in elements:
+                        if hasattr(e, '_postponed'):
+                            delattr(e,'_postponed')
+                    self.real_footnotes = False
+                    continue
                 break
             except ValueError, v:
                 # FIXME: cross-document links come through here, which means
