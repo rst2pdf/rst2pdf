@@ -101,6 +101,7 @@ class PDFBuilder(Builder):
                                 default_dpi=opts.get('pdf_default_dpi',self.config.pdf_default_dpi),
                                 page_template=self.page_template,
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
+                                real_footnotes=opts.get('pdf_real_footnotes',self.config.pdf_real_footnotes),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -480,7 +481,8 @@ class PDFWriter(writers.Writer):
                 srcdir = '.',
                 default_dpi = 300,
                 page_template = 'cutePage',
-                invariant = 'False',
+                invariant = False,
+                real_footnotes = False,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -500,6 +502,7 @@ class PDFWriter(writers.Writer):
         self.default_dpi = default_dpi
         self.page_template = page_template
         self.invariant=invariant
+        self.real_footnotes=real_footnotes
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
@@ -589,6 +592,7 @@ class PDFWriter(writers.Writer):
                  style_path=[self.srcdir],
                  basedir=self.srcdir,
                  def_dpi=self.default_dpi,
+                 real_footnotes=self.real_footnotes
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
@@ -855,6 +859,7 @@ def setup(app):
     app.add_config_value('pdf_extensions',[], None)
     app.add_config_value('pdf_page_template','cutePage', None)
     app.add_config_value('pdf_invariant','False', None)
+    app.add_config_value('pdf_real_footnotes','False', None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
