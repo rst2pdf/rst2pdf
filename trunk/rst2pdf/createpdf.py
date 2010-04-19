@@ -863,7 +863,6 @@ class HeaderOrFooter(object):
         return elems
         
     def draw(self, pageobj, canv, doc, x, y, width, height):
-        print "HD", x,y,width,height
         self.totalpages = max(self.totalpages, doc.page)
         items = self.prepared
         if items:
