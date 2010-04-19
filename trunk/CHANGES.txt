@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 176: spacers larger than a page don't crash.
 * Fixed Issue 65: References to Helvetica/Times when it was not used.
 * Fixed Issue 310: added option linenos_offset to code blocks.
 * Fixed Issue 309: style for blockquotes was not respected.

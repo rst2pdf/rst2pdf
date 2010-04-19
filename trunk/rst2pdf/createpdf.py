@@ -541,7 +541,7 @@ class RstToPdf(object):
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
-            elements.append(Spacer(1, 2*cm))
+            elements.append(MySpacer(1, 2*cm))
             elements.append(Separation())
             for n in self.decoration['endnotes']:
                 t_style = TableStyle(self.styles['endnote'].commands)

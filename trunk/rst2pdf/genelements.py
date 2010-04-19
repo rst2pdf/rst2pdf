@@ -58,7 +58,7 @@ from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from flowables import Table, DelayedTable, SplitTable, Heading, \
-              Spacer, MyIndenter, MyTableOfContents, \
+              MyIndenter, MyTableOfContents, MySpacer, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding, OddEven
 
@@ -91,9 +91,9 @@ class HandleTable(NodeHandler, docutils.nodes.table):
             style = client.styles.combinedStyle(['table']+node['classes'])
         else:
             style = client.styles['table']
-        return [Spacer(0, client.styles['table'].spaceBefore)] + \
+        return [MySpacer(0, client.styles['table'].spaceBefore)] + \
                     client.gather_elements(node, style=style) +\
-                    [Spacer(0, client.styles['table'].spaceAfter)]
+                    [MySpacer(0, client.styles['table'].spaceAfter)]
 
 class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
     def gather_elements(self, client, node, style):
@@ -447,8 +447,8 @@ class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
         sb=style.spaceBefore # list separation
         sa=style.spaceAfter # list separation
 
-        node.elements.insert(0, Spacer(0, sb))
-        node.elements.append(Spacer(0, sa))
+        node.elements.insert(0, MySpacer(0, sb))
+        node.elements.append(MySpacer(0, sa))
         return node.elements
 
 class HandleDefOrOptList(NodeHandler, docutils.nodes.definition_list,
@@ -457,7 +457,7 @@ class HandleDefOrOptList(NodeHandler, docutils.nodes.definition_list,
 
 class HandleFieldList(NodeHandler, docutils.nodes.field_list):
     def gather_elements(self, client, node, style):
-        return [Spacer(0,client.styles['field_list'].spaceBefore)]+\
+        return [MySpacer(0,client.styles['field_list'].spaceBefore)]+\
                 client.gather_elements(node, style=style)
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
@@ -476,8 +476,8 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
         sb=style.spaceBefore # list separation
         sa=style.spaceAfter # list separation
 
-        node.elements.insert(0, Spacer(0, sb))
-        node.elements.append(Spacer(0, sa))
+        node.elements.insert(0, MySpacer(0, sb))
+        node.elements.append(MySpacer(0, sa))
         return node.elements
 
 class HandleDefinition(NodeHandler, docutils.nodes.definition):
@@ -601,18 +601,18 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             #client.styles['item_list'].colWidths)
         colWidths = style.colWidths
         if client.splittables:
-            node.elements = [Spacer(0,sb),
+            node.elements = [MySpacer(0,sb),
                                 SplitTable([[Paragraph(b, style = bStyle), el]],
                                 style = t_style,
                                 colWidths = colWidths),
-                                Spacer(0,sa)
+                                MySpacer(0,sa)
                                 ]
         else:
-            node.elements = [Spacer(0,sb),
+            node.elements = [MySpacer(0,sb),
                                 DelayedTable([[Paragraph(b, style = bStyle), el]],
                                 style = t_style,
                                 colWidths = colWidths),
-                                Spacer(0,sa)
+                                MySpacer(0,sa)
                                 ]
         return node.elements
 
@@ -637,21 +637,21 @@ class HandleBlockQuote(NodeHandler, docutils.nodes.block_quote):
         s.leftIndent=style.leftIndent
         data=[['',client.gather_elements( node, s)]]
         if client.splittables:
-            node.elements=[Spacer(0,spaceBefore),SplitTable(data,
+            node.elements=[MySpacer(0,spaceBefore),SplitTable(data,
                 colWidths=[leftIndent,None],
                 style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
                         ["LEFTPADDING",[0,0],[-1,-1],0],
                         ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
                         ["BOTTOMPADDING",[0,0],[-1,-1],0],
-                ])), Spacer(0,spaceAfter)]
+                ])), MySpacer(0,spaceAfter)]
         else:
-            node.elements=[Spacer(0,spaceBefore),DelayedTable(data,
+            node.elements=[MySpacer(0,spaceBefore),DelayedTable(data,
                 colWidths=[leftIndent,None],
                 style=TableStyle([["TOPPADDING",[0,0],[-1,-1],0],
                         ["LEFTPADDING",[0,0],[-1,-1],0],
                         ["RIGHTPADDING",[0,0],[-1,-1],rightIndent],
                         ["BOTTOMPADDING",[0,0],[-1,-1],0],
-                ])), Spacer(0,spaceAfter)]
+                ])), MySpacer(0,spaceAfter)]
         return node.elements
 
 class HandleAttribution(NodeHandler, docutils.nodes.attribution):
@@ -674,7 +674,7 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
             qstyle = copy(client.styles['lineblock'])
         # Fix Issue 225: no space betwen line in a lineblock, but keep
         # space before the lineblock itself
-        return [Spacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[Spacer(0,client.styles['lineblock'].spaceAfter)]
+        return [MySpacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[MySpacer(0,client.styles['lineblock'].spaceAfter)]
         
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
@@ -808,10 +808,10 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
             st=client.styles['endnote']
             t_style = TableStyle(st.commands)
             colWidths = client.styles['endnote'].colWidths
-            node.elements = [Spacer(0, st.spaceBefore),
+            node.elements = [MySpacer(0, st.spaceBefore),
                                 DelayedTable([[label, contents]],
                                 style=t_style, colWidths=colWidths),
-                                Spacer(0, st.spaceAfter)]
+                                MySpacer(0, st.spaceAfter)]
             if client.real_footnotes:
                 client.mustMultiBuild = True
                 for e in node.elements:
@@ -878,21 +878,21 @@ class HandleAdmonition(NodeHandler, docutils.nodes.attention,
         t_style.add("BOX", [ 0, 0 ], [ -1, -1 ], st.borderWidth , st.borderColor)
 
         if client.splittables:
-            node.elements = [Spacer(0,st.spaceBefore),
+            node.elements = [MySpacer(0,st.spaceBefore),
                                 SplitTable([['',rows]],
                                 style=t_style,
                                 colWidths=[0,None],
                                 padding=st.borderPadding),
-                                Spacer(0,st.spaceAfter)]
+                                MySpacer(0,st.spaceAfter)]
         else:
             padding, p1, p2, p3, p4=tablepadding(padding=st.borderPadding)
             t_style.add(*p1)
             t_style.add(*p2)
             t_style.add(*p3)
             t_style.add(*p4)
-            node.elements = [Spacer(0,st.spaceBefore),
+            node.elements = [MySpacer(0,st.spaceBefore),
                                 DelayedTable([['',rows]],
                                 style=t_style,
                                 colWidths=[0,None]),
-                                Spacer(0,st.spaceAfter)]
+                                MySpacer(0,st.spaceAfter)]
         return node.elements

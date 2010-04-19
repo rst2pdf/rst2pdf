@@ -363,6 +363,7 @@ class SplitTable(DelayedTable):
 class MySpacer(Spacer):
     def wrap (self, aW, aH):
         w, h = Spacer.wrap(self, aW, aH)
+        print 'SH', aH, h	
 	self.height = min(aH, h) 
         return w, self.height 
 
