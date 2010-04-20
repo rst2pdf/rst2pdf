@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Implemented Issue 279: images can be specified as URLs.
 * Fixed Issue 313: new --fit-background-mode option.
 * Fixed Issue 110: new --real-footnotes option.
 * Fixed Issue 176: spacers larger than a page don't crash.

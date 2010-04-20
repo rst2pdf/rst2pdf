@@ -9,6 +9,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from log import log, nodeid
 from reportlab.lib.units import *
 import glob
+import urllib
 
 from opt_imports import LazyImports
 
@@ -74,6 +75,15 @@ class MyImage (Flowable):
         # Client is mandatory.  Perhaps move it farther up if we refactor
         assert client is not None
         self.__kind=kind
+
+        if filename.split("://")[0].lower() in ('http','ftp','https'):
+            try:
+                filename2, _ = urllib.urlretrieve(filename)
+                if filename != filename2:
+                    client.to_unlink.append(filename2)
+                    filename = filename2
+            except IOError:
+                filename = missing
         self.filename, self._backend=self.get_backend(filename, client)
         srcinfo = client, self.filename
         
@@ -195,6 +205,7 @@ class MyImage (Flowable):
 
         backend = defaultimage
 
+
         # Extract all the information from the URI
         filename, extension, options = self.split_uri(uri)
 
@@ -272,9 +283,14 @@ class MyImage (Flowable):
         in the PDF document, and what 'kind' of size that is. 
         That involves lots of guesswork'''
 
-        uri = os.path.join(client.basedir,str(node.get("uri")))
+        uri = str(node.get("uri"))
+        if uri.split("://")[0].lower() not in ('http','ftp','https'):
+            uri = os.path.join(client.basedir,uri)
+        else:
+            uri, _ = urllib.urlretrieve(uri)
+            client.to_unlink.append(uri)
+            
         srcinfo = client, uri
-        
         # Extract all the information from the URI
         imgname, extension, options = self.split_uri(uri)
 

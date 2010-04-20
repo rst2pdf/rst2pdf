@@ -111,7 +111,13 @@ class HandleGenerated(HandleText, docutils.nodes.generated):
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt, check align
-        imgname = os.path.join(client.basedir,str(node.get("uri")))
+
+        uri = str(node.get("uri"))
+        if uri.split("://")[0].lower() not in ('http','ftp','https'):
+            imgname = os.path.join(client.basedir,uri)
+        else:
+            imgname = uri
+
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
         except ValueError: 

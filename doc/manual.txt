@@ -243,6 +243,15 @@ is not implemented yet, though.
 If there is any other image format you need supported, please report it as a feature
 request in rst2pdf's site.
 
+.. note:: Image URLs
+
+   Attempting to be more compatible with rst2html, rst2pdf will try
+   to handle images specified as HTTP or FTP URLs by downloading them
+   to a temporary file and including them in the PDF.
+
+   This is probably not a good idea unless you are **really** sure
+   the image won't go away.
+
 Image Size
 ----------
 
@@ -313,9 +322,6 @@ So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5 inche
 If your image doesn't have a DPI property set, and doesn't have it's desired size specified,
 rst2pdf will arbitrarily decide it should use 300DPI (or whatever you choose with 
 the --default-dpi option).
-
-As of 0.10.1, images taller than the page will not work (rst2pdf will fail to run), and 
-images wider than the page will be cropped.
 
 
 Styles
