@@ -136,6 +136,7 @@ class RstToPdf(object):
                  font_path=[],
                  style_path=[],
                  fit_mode='shrink',
+                 background_fit_mode='center',
                  sphinx=False,
                  smarty='0',
                  baseurl=None,
@@ -186,6 +187,7 @@ class RstToPdf(object):
         self.inlinelinks = inlinelinks
         self.breaklevel = breaklevel
         self.fit_mode = fit_mode
+        self.background_fit_mode = background_fit_mode
         self.to_unlink = []
         self.smarty = smarty
         self.baseurl = baseurl
@@ -905,8 +907,8 @@ class FancyPage(PageTemplate):
             Calculates the image one time, and caches
             it for reuse on every page in the template.
 
-            Currently, reduces the image to fit on the page
-            and then centers it on the page.
+            How the background is drawn depends on the
+            --fit-background-mode option.
 
             If desired, we could add code to push it around
             on the page, using stylesheets to align and/or
@@ -921,16 +923,26 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, kind = MyImage.size_for_node(dict(uri=uri), self.client)
+                w, h, kind = MyImage.size_for_node(dict(uri=uri, ), self.client)
             except ValueError: 
                 # Broken image, return arbitrary stuff
                 uri=missing
                 w, h, kind = 100, 100, 'direct'
                 
             pw, ph = self.styles.pw, self.styles.ph
-            scale = min(1.0, 1.0 * pw / w, 1.0 * ph / h)
-            sw, sh = w * scale, h * scale
-            x, y = (pw - sw) / 2.0, (ph - sh) / 2.0
+            if self.client.background_fit_mode == 'center':
+                scale = min(1.0, 1.0 * pw / w, 1.0 * ph / h)
+                sw, sh = w * scale, h * scale
+                x, y = (pw - sw) / 2.0, (ph - sh) / 2.0
+            elif self.client.background_fit_mode == 'scale':
+                x, y = 0, 0
+                sw, sh = pw, ph
+            else:
+                log.error('Unknown background fit mode: %s'% self.client.background_fit_mode)
+                # Do scale anyway
+                x, y = 0, 0
+                sw, sh = pw, ph
+                
             bg = MyImage(uri, sw, sh, client=self.client)
             self.image_cache[uri] = info = bg, x, y
         bg, x, y = info
@@ -1104,6 +1116,13 @@ def parse_commandline():
         default=def_fit, dest='fit_mode',
         help='What todo when a literal is too wide. One of error,'\
         ' overflow,shrink,truncate. Default="%s"'%def_fit)
+
+    def_fit_background = config.getValue("general", "background_fit_mode",
+    "center")
+    parser.add_option('--fit-background-mode', metavar='MODE',
+        default=def_fit_background, dest='background_fit_mode',
+        help='How to fit the background image to the page.'\
+        ' One of stretch or center. Default="%s"'%def_fit_background)
 
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
@@ -1317,6 +1336,7 @@ def main(args=None):
         breaklevel=int(options.breaklevel),
         baseurl=options.baseurl,
         fit_mode=options.fit_mode,
+        background_fit_mode = options.background_fit_mode,
         smarty=str(options.smarty),
         font_path=options.fpath,
         style_path=options.stylepath,
