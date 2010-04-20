@@ -1546,8 +1546,9 @@ The supported page template options and their defaults are:
 
 * background: None
 
-  The background should be an image, which will be stretched to match your page, 
-  so use with caution.
+  The background should be an image, which will be centered in your page or
+  stretched to match your page size, depending on the ``--fit-background-mode``
+  option, so use with caution.
 
 
 .. _fontconfig: http://www.freedesktop.org/fontconfig/

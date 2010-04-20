@@ -87,6 +87,10 @@ The possible values are:
                     What to do when a literal is too wide.
                     One of error,overflow,shrink,truncate. 
                     Default="shrink"
+
+--fit-background-mode=MODE
+                        How to fit the background image to the page. One of
+                        stretch or center. Default="center"
                                         
 --inline-links
                     Shows target between parenthesis instead of active link
