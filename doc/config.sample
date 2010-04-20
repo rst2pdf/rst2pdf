@@ -32,6 +32,11 @@ footer=None
 
 fit_mode="shrink"
 
+# How to adjust the background image to the page.
+# Can be: "scale" and "center"
+
+fit_background_mode="center"
+
 # What is the maximum level of heading that starts in a new page.
 # 0 means no level starts in a new page.
 
