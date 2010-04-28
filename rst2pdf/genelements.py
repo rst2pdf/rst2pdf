@@ -719,7 +719,6 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         t_style=TableStyle(cmd)
         return [DelayedTable([[e,] for e in sub_elems],style=t_style,
             colWidths=cw)]
-
 class HandleCaption(NodeHandler, docutils.nodes.caption):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),
