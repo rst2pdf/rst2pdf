@@ -6,7 +6,9 @@ styles:
     left:
         alignment: TA_LEFT
         colWidths: [25%, 25%]
+        parent: table
 
     right:
         alignment: TA_RIGHT
         colWidths: [25%, 25%]
+        parent: table
