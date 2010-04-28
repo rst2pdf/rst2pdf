@@ -1,4 +1,4 @@
-.. class:: halfwidth
+.. class:: halfwidthtable
 
 +---------------------+---------------------+
 | 50% width           | 50% width           |
