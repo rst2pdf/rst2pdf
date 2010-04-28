@@ -599,7 +599,9 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
-        colWidths = style.colWidths
+        colWidths = getattr(style,'colWidths',[])
+        while len(colWidths) < 2:
+            colWidths.append(None)
         if client.splittables:
             node.elements = [MySpacer(0,sb),
                                 SplitTable([[Paragraph(b, style = bStyle), el]],

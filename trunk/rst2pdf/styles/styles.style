@@ -103,6 +103,7 @@
       allowOrphans: false
       hyphenation: false
       kerning: false
+      commands: []
 
     normal:
       parent: base

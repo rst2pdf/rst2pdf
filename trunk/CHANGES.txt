@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 315: crash when using an undefined class for 
+  a list.
 * Implemented Issue 279: images can be specified as URLs.
 * Fixed Issue 313: new --fit-background-mode option.
 * Fixed Issue 110: new --real-footnotes option.
