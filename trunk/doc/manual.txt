@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.15
+:version: 0.16
 :revision: $LastChangedRevision$
 
 .. header::
