@@ -1,11 +1,14 @@
 New in SVN
 ----------
 
+New in 0.15
+-----------
+
 * Fixed Issue 315: crash when using an undefined class for 
   a list.
 * Implemented Issue 279: images can be specified as URLs.
 * Fixed Issue 313: new --fit-background-mode option.
-* Fixed Issue 110: new --real-footnotes option.
+* Fixed Issue 110: new --real-footnotes option (buggy).
 * Fixed Issue 176: spacers larger than a page don't crash.
 * Fixed Issue 65: References to Helvetica/Times when it was not used.
 * Fixed Issue 310: added option linenos_offset to code blocks.
