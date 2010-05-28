@@ -21,7 +21,7 @@ Additional documentation available at:
 http://code.google.com/p/rson/
 '''
 
-__version__ = '0.06'
+__version__ = '0.08'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'
 
@@ -233,6 +233,15 @@ class Tokenizer(list):
         raise err
 
 
+def make_hashable(what):
+    try:
+        hash(what)
+        return what
+    except TypeError:
+        if isinstance(what, dict):
+            return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+        return tuple(make_hashable(x) for x in what)
+
 class BaseObjects(object):
 
     # These hooks allow compatibility with simplejson
@@ -249,12 +258,9 @@ class BaseObjects(object):
     # Default JSON requires string keys
     disallow_nonstring_keys = True
 
-    def default_array_factory(self):
-        ''' This function returns a constructor for RSON arrays.
-        '''
-        def new_array(startlist, token):
-            return startlist
-        return new_array
+    class default_array(list):
+        def __new__(self, startlist, token):
+            return list(startlist)
 
     class default_object(dict):
         ''' By default, RSON objects are dictionaries that
@@ -263,47 +269,29 @@ class BaseObjects(object):
         def __init__(self):
             self.__dict__ = self
 
-    def default_object_factory(self, isinstance=isinstance, dict=dict, hash=hash,
-                            tuple=tuple, sorted=sorted, ValueError=ValueError):
-        ''' This function returns a constructor for RSON objects (dicts).
-        '''
+        def append(self, itemlist):
+            mydict = self
+            value = itemlist.pop()
+            itemlist = [make_hashable(x) for x in itemlist]
+            lastkey = itemlist.pop()
 
-        default_object = self.default_object
+            if itemlist:
+                itemlist.reverse()
+                while itemlist:
+                    key = itemlist.pop()
+                    subdict = mydict.get(key)
+                    if not isinstance(subdict, dict):
+                        subdict = mydict[key] = type(self)()
+                    mydict = subdict
+            if isinstance(value, dict):
+                oldvalue = mydict.get(lastkey)
+                if isinstance(oldvalue, dict):
+                    oldvalue.update(value)
+                    return
+            mydict[lastkey] = value
 
-        def make_hashable(what):
-            try:
-                hash(what)
-                return what
-            except TypeError:
-                if isinstance(what, dict):
-                    return tuple(sorted(make_hashable(x) for x in what.iteritems()))
-                return tuple(make_hashable(x) for x in what)
-
-        def merge(source, token):
-            result = default_object()
-            for itemlist in source:
-                mydict = result
-                value = itemlist.pop()
-                itemlist = [make_hashable(x) for x in itemlist]
-                lastkey = itemlist.pop()
-
-                if itemlist:
-                    itemlist.reverse()
-                    while itemlist:
-                        key = itemlist.pop()
-                        subdict = mydict.get(key)
-                        if not isinstance(subdict, dict):
-                            subdict = mydict[key] = default_object()
-                        mydict = subdict
-                if isinstance(value, dict):
-                    oldvalue = mydict.get(lastkey)
-                    if isinstance(oldvalue, dict):
-                        oldvalue.update(value)
-                        continue
-                mydict[lastkey] = value
-            return result
-
-        return merge
+        def get_result(self, token):
+            return self
 
     def object_type_factory(self, dict=dict, tuple=tuple):
         ''' This function returns constructors for RSON objects and arrays.
@@ -313,20 +301,22 @@ class BaseObjects(object):
         object_pairs_hook = self.object_pairs_hook
 
         if object_pairs_hook is not None:
-            def build_object(source, token):
-                return object_pairs_hook([tuple(x) for x in source])
+            class build_object(list):
+                def get_result(self, token):
+                    return object_pairs_hook([tuple(x) for x in self])
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         elif object_hook is not None:
             mydict = dict
-            def build_object(source, token):
-                return object_hook(mydict(source))
+            class build_object(list):
+                def get_result(self, token):
+                    return object_hook(mydict(self))
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         else:
-            build_object = self.default_object_factory()
+            build_object = self.default_object
 
-        build_array = self.array_hook or self.default_array_factory()
+        build_array = self.array_hook or self.default_array
         return build_object, build_array
 
 
@@ -621,7 +611,7 @@ class EqualToken(object):
             stringlist = bigstring.split('\n')
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)
-            token[1:3] = 'X', parse_equals(stringlist, indent, firsttok)
+            token[1:3] = '=', parse_equals(stringlist, indent, firsttok)
             return encoder(token, next)
 
         return parse
@@ -631,8 +621,16 @@ class RsonParser(object):
     ''' Parser for RSON
     '''
 
-    allow_trailing_commas = False
-    allow_rson_sublists = True
+    disallow_trailing_commas = True
+    disallow_rson_sublists = False
+    disallow_rson_subdicts = False
+
+    @staticmethod
+    def post_parse(tokens, value):
+        return value
+
+    def client_info(self, parse_locals):
+        pass
 
     def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
 
@@ -644,10 +642,11 @@ class RsonParser(object):
         read_quoted = self.quoted_parse_factory()
         parse_equals = self.equal_parse_factory(read_unquoted)
         new_object, new_array = self.object_type_factory()
-        allow_trailing_commas = self.allow_trailing_commas
+        disallow_trailing_commas = self.disallow_trailing_commas
         disallow_missing_object_keys = self.disallow_missing_object_keys
         key_handling = [disallow_missing_object_keys, self.disallow_multiple_object_keys]
         disallow_nonstring_keys = self.disallow_nonstring_keys
+        post_parse = self.post_parse
 
 
         def bad_array_element(token, next):
@@ -675,7 +674,7 @@ class RsonParser(object):
                 token = next()
                 t0 = token[1]
                 if t0 == ']':
-                    if result and not allow_trailing_commas:
+                    if result and disallow_trailing_commas:
                         error('Unexpected trailing comma', token)
                     break
                 append(json_value_dispatch(t0,  bad_array_element)(token, next))
@@ -691,13 +690,13 @@ class RsonParser(object):
             return result
 
         def read_json_dict(firsttok, next):
-            result = []
+            result = new_object()
             append = result.append
             while 1:
                 token = next()
                 t0 = token[1]
                 if t0  == '}':
-                    if result and not allow_trailing_commas:
+                    if result and disallow_trailing_commas:
                         error('Unexpected trailing comma', token)
                     break
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
@@ -720,7 +719,7 @@ class RsonParser(object):
                         error('Unterminated dict (no matching "}")', firsttok)
                     error('Expected "," or "}"', delim)
                 break
-            return new_object(result, firsttok)
+            return result.get_result(firsttok)
 
         def read_rson_unquoted(firsttok, next):
             toklist = []
@@ -749,8 +748,11 @@ class RsonParser(object):
                                   '{': read_json_dict, '"':read_quoted,
                                    '=': parse_equals}
 
-        if not self.allow_rson_sublists:
+        if self.disallow_rson_sublists:
             rson_value_dispatch['['] = read_rson_unquoted
+
+        if self.disallow_rson_subdicts:
+            rson_value_dispatch['{'] = read_rson_unquoted
 
         rson_key_dispatch = rson_value_dispatch.copy()
         if disallow_missing_object_keys:
@@ -759,7 +761,7 @@ class RsonParser(object):
         rson_value_dispatch = rson_value_dispatch.get
         rson_key_dispatch = rson_key_dispatch.get
 
-        empty_object = new_object([], None)
+        empty_object = new_object().get_result(None)
         empty_array = new_array([], None)
         empty_array_type = type(empty_array)
         empties = empty_object, empty_array
@@ -778,7 +780,7 @@ class RsonParser(object):
                         if lastitem == empty_array:
                             result[-1], token = parse_recurse_array(stack, next, token, lastitem)
                         elif lastitem == empty_object:
-                            result[-1], token = parse_recurse_dict(stack, next, token, [])
+                            result[-1], token = parse_recurse_dict(stack, next, token, lastitem)
                         else:
                             result = None
                     if result:
@@ -797,7 +799,7 @@ class RsonParser(object):
                 result.append(value)
                 token = next()
 
-        def parse_one_dict_entry(stack, next, token, entry):
+        def parse_one_dict_entry(stack, next, token, entry, mydict):
             arrayindent, linenum = stack[-1][4:6]
             while token[1] == ':':
                 tok1 = next()
@@ -841,7 +843,8 @@ class RsonParser(object):
                 for key in entry[:-1]:
                     if not isinstance(key, basestring):
                         error('Non-string key %s not supported' % repr(key), token)
-            return entry, token
+            mydict.append(entry)
+            return token
 
         def parse_recurse_dict(stack, next, token, result):
             arrayindent = stack[-1][4]
@@ -849,14 +852,13 @@ class RsonParser(object):
                 thisindent = token[4]
                 if thisindent != arrayindent:
                     if thisindent < arrayindent:
-                        return new_object(result, token), token
+                        return result.get_result(token), token
                     bad_unindent(token, next)
                 key = rson_key_dispatch(token[1], bad_top_value)(token, next)
                 stack[-1] = token
-                entry, token = parse_one_dict_entry(stack, next, next(), [key])
-                result.append(entry)
+                token = parse_one_dict_entry(stack, next, next(), [key], result)
 
-        def parse_recurse(stack, next):
+        def parse_recurse(stack, next, tokens=None):
             ''' parse_recurse ALWAYS returns a list or a dict.
                 (or the user variants thereof)
                 It is up to the caller to determine that it was an array
@@ -872,18 +874,25 @@ class RsonParser(object):
             if (token[5] != firsttok[5] and
                     (token[4] <= firsttok[4] or
                      value in empties) and disallow_missing_object_keys):
-                return parse_recurse_array(stack, next, token, new_array([value], firsttok))
+                result = new_array([value], firsttok)
+                if tokens is not None:
+                    tokens.top_object = result
+                return parse_recurse_array(stack, next, token, result)
 
             # Otherwise, return a dict
-            entry, token = parse_one_dict_entry(stack, next, token, [value])
-            return parse_recurse_dict(stack, next, token, [entry])
+            result = new_object()
+            if tokens is not None:
+                tokens.top_object = result
+            token = parse_one_dict_entry(stack, next, token, [value], result)
+            return parse_recurse_dict(stack, next, token, result)
 
 
         def parse(source):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
+            tokens.client_info = client_info
             next = tokens.next
-            value, token = parse_recurse([next()], next)
+            value, token = parse_recurse([next()], next, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)
 
@@ -892,7 +901,9 @@ class RsonParser(object):
             if (len(value) == 1 and isinstance(value, list)
                    and disallow_missing_object_keys):
                 value = value[0]
-            return value
+            return post_parse(tokens, value)
+
+        client_info = self.client_info(locals())
 
         return parse
 
