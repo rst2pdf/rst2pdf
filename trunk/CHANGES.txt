@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 317: Ugly error message when file does not exist
+ 
 New in 0.15
 -----------
 
