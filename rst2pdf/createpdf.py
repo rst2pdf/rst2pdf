@@ -324,6 +324,38 @@ class RstToPdf(object):
             sep = ';'
         return sep + " "
 
+
+    def styleToTags(self, style):
+        '''Takes a style name, returns a pair of opening/closing tags for it, like
+        "<font face=helvetica size=14 color=red>". Used for inline
+        nodes (custom interpreted roles)'''
+
+        try:
+            s = self.styles[style]
+            r1=['<font face="%s" color="#%s" ' %
+                (s.fontName, s.textColor.hexval()[2:])]
+            bc = s.backColor
+            if bc:
+                r1.append('backColor="#%s"' % bc.hexval()[2:])
+            if s.trueFontSize:
+                r1.append('size="%d"'%s.fontSize)
+            r1.append('>')
+            r2=['</font>']
+
+            if s.strike:
+                r1.append('<strike>')
+                r2.insert(0,'</strike>')
+            if s.underline:
+                r1.append('<u>')
+                r2.insert(0,'</u>')
+            
+            return [''.join(r1), ''.join(r2)]
+        except KeyError:
+            log.warning('Unknown class %s', style)
+            return None
+
+        
+
     def styleToFont(self, style):
         '''Takes a style name, returns a font tag for it, like
         "<font face=helvetica size=14 color=red>". Used for inline

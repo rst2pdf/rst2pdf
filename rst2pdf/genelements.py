@@ -511,11 +511,11 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
                     if i not in client.targets:
                         ids.append('<a name="%s"/>' % i)
                         client.targets.append(i)
-                tt.append(client.styleToFont("definition_list_term")
-                    + client.gather_pdftext(n) + "</font>")
+                o, c = client.styleToTags("definition_list_term")
+                tt.append(o + client.gather_pdftext(n) + c)
             elif isinstance(n, docutils.nodes.classifier):
-                tt.append(client.styleToFont("definition_list_classifier")
-                    + client.gather_pdftext(n) + "</font>")
+                o, c = client.styleToTags("definition_list_classifier")
+                tt.append(o + client.gather_pdftext(n) + c)
             else:
                 dt.extend(client.gen_elements(n, style))
 

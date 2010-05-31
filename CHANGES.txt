@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Implemented Issue 321: underline and strikethrough available
+  in stylesheet.
 * Fixed Issue 317: Ugly error message when file does not exist
  
 New in 0.15
