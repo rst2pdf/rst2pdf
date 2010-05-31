@@ -1269,7 +1269,11 @@ def main(args=None):
     else:
         filename = args[0]
         options.basedir=os.path.dirname(os.path.abspath(filename))
-        infile = open(filename)
+        try:
+            infile = open(filename)
+        except IOError, e:
+            log.error(e)
+            sys.exit(1)
     options.infile = infile
 
     if options.output:
