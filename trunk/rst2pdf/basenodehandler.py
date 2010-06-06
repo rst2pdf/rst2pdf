@@ -39,7 +39,7 @@ import inspect
 from log import log, nodeid
 from smartypants import smartyPants
 import docutils.nodes
-from flowables import BoundByWidth
+from flowables import BoundByWidth, TocEntry
 
 
 class MetaHelper(type):
