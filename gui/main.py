@@ -96,8 +96,9 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
                     settings_overrides={'warning_stream':warnings})
                 doctree_queue.put([doctree,warnings.getvalue()])
                 pdf_queue.put(render(doctree, preview))
-            except:
+            except Exception, e:
                 # Don't crash ever ;-)
+                print e
                 pass
         if os.getppid()==1: # Parent died
             sys.exit(0)
