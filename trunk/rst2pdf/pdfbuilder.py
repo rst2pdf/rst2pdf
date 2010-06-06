@@ -437,6 +437,7 @@ class PDFContents(Contents):
         #sections = [sect for sect in node if isinstance(sect, nodes.section)]
         entries = []
         autonum = 0
+        # FIXME: depth should be taken from :maxdepth: (Issue 320)
         depth = self.startnode.details.get('depth', sys.maxint)
         for section in sections:
             title = section[0]
