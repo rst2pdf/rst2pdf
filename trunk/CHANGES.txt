@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 322: Image substitutions didn't work in document title. 
 * Implemented Issue 321: underline and strikethrough available
   in stylesheet.
 * Fixed Issue 317: Ugly error message when file does not exist

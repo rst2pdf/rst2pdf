@@ -61,6 +61,8 @@ import docutils.readers.doctree
 import docutils.core
 import docutils.nodes
 from docutils.parsers.rst import directives
+from docutils.readers import standalone
+from docutils.transforms import Transform
 
 import pygments_code_block_directive # code-block directive
 import oddeven_directive 
@@ -568,9 +570,33 @@ class RstToPdf(object):
         # This crashes sphinx because .. class:: in sphinx is
         # something else. Ergo, pdfbuilder does it in its own way.
         if not self.sphinx:
-            self.cover_tree = docutils.core.publish_doctree(cover_text,
-                        source_path=source_path)
 
+            # This is a hack so the text substitutions defined
+            # in the document are available when we process the cover
+            # page. See Issue 322
+            dt = self.doctree
+            class addSubsts(Transform):
+                default_priority = 219
+                
+                def apply(self):
+                    self.document.substitution_defs.update(dt.substitution_defs)
+                    self.document.substitution_names.update(dt.substitution_names)
+
+            # Use an own reader to modify transformations done.
+            class Reader(standalone.Reader):
+
+                def get_transforms(self):
+                    default = standalone.Reader.get_transforms(self)
+                    return (default + [ addSubsts, ])
+
+            # End of Issue 322 hack
+                    
+            self.cover_tree = docutils.core.publish_doctree(cover_text,
+                        reader = Reader(), source_path=source_path)
+            # Add substitutions  from the main doctree
+
+            # Subst. transform
+            
             elements = self.gen_elements(self.cover_tree) + elements
 
         if self.blank_first_page:
