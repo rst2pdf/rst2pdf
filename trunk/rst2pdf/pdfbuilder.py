@@ -103,6 +103,7 @@ class PDFBuilder(Builder):
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
                                 real_footnotes=opts.get('pdf_real_footnotes',self.config.pdf_real_footnotes),
                                 use_toc=opts.get('pdf_use_toc',self.config.pdf_use_toc),
+                                toc_depth=opts.get('pdf_toc_depth',self.config.pdf_toc_depth),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -439,7 +440,8 @@ class PDFContents(Contents):
         entries = []
         autonum = 0
         # FIXME: depth should be taken from :maxdepth: (Issue 320)
-        depth = self.startnode.details.get('depth', sys.maxint)
+        depth = self.toc_depth
+        print 'DEPTH', depth
         for section in sections:
             title = section[0]
             auto = title.get('auto')    # May be set by SectNum.
@@ -486,6 +488,7 @@ class PDFWriter(writers.Writer):
                 invariant = False,
                 real_footnotes = False,
                 use_toc = True,
+                toc_depth = 9999,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -507,6 +510,7 @@ class PDFWriter(writers.Writer):
         self.invariant=invariant
         self.real_footnotes=real_footnotes
         self.use_toc=use_toc
+        self.toc_depth=toc_depth
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
@@ -539,6 +543,7 @@ class PDFWriter(writers.Writer):
             self.document.insert(0,contents)
             self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
             contTrans=PDFContents(self.document)
+            contTrans.toc_depth = self.toc_depth
             contTrans.startnode=pending
             contTrans.apply()
 
@@ -866,6 +871,7 @@ def setup(app):
     app.add_config_value('pdf_invariant','False', None)
     app.add_config_value('pdf_real_footnotes','False', None)
     app.add_config_value('pdf_use_toc','True', None)
+    app.add_config_value('pdf_toc_depth',9999, None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
