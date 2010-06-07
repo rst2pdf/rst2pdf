@@ -102,6 +102,7 @@ class PDFBuilder(Builder):
                                 page_template=self.page_template,
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
                                 real_footnotes=opts.get('pdf_real_footnotes',self.config.pdf_real_footnotes),
+                                use_toc=opts.get('pdf_use_toc',self.config.pdf_use_toc),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -484,6 +485,7 @@ class PDFWriter(writers.Writer):
                 page_template = 'cutePage',
                 invariant = False,
                 real_footnotes = False,
+                use_toc = True,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -504,6 +506,7 @@ class PDFWriter(writers.Writer):
         self.page_template = page_template
         self.invariant=invariant
         self.real_footnotes=real_footnotes
+        self.use_toc=use_toc
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
@@ -523,26 +526,27 @@ class PDFWriter(writers.Writer):
             langmod = languages.get_language('en')
             
         # Generate Contents topic manually
-        contents=nodes.topic(classes=['contents'])
-        contents+=nodes.title('')
-        contents[0]+=nodes.Text( langmod.labels['contents'])
-        contents['ids']=['Contents']
-        pending=nodes.topic()
-        contents.append(pending)
-        pending.details={}
-        self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic', format='pdf'))
-        self.document.insert(0,nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
-        self.document.insert(0,contents)
-        self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
-        contTrans=PDFContents(self.document)
-        contTrans.startnode=pending
-        contTrans.apply()
+        if self.use_toc:
+            contents=nodes.topic(classes=['contents'])
+            contents+=nodes.title('')
+            contents[0]+=nodes.Text( langmod.labels['contents'])
+            contents['ids']=['Contents']
+            pending=nodes.topic()
+            contents.append(pending)
+            pending.details={}
+            self.document.insert(0,nodes.raw(text='SetPageCounter 1 arabic', format='pdf'))
+            self.document.insert(0,nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
+            self.document.insert(0,contents)
+            self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
+            contTrans=PDFContents(self.document)
+            contTrans.startnode=pending
+            contTrans.apply()
 
         if self.config.pdf_use_coverpage:
             # Generate cover page
 
             # FIXME: duplicate from createpdf, refactor!
-            
+
             # Find cover template, save it in cover_file
             def find_cover(name):
                 cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'),
@@ -558,11 +562,11 @@ class PDFWriter(writers.Writer):
             if cover_file is None:
                 log.error("Can't find cover template %s, using default"%self.custom_cover)
                 cover_file=find_cover('sphinxcover.tmpl')
-                
+
             # This is what's used in the python docs because
             # Latex does a manual linebreak. This sucks.
             authors=self.document.settings.author.split('\\')
-            
+
             # Feed data to the template, get restructured text.
             cover_text = createpdf.renderTemplate(tname=cover_file,
                                 title=self.document.settings.title or visitor.elements['title'],
@@ -861,6 +865,7 @@ def setup(app):
     app.add_config_value('pdf_page_template','cutePage', None)
     app.add_config_value('pdf_invariant','False', None)
     app.add_config_value('pdf_real_footnotes','False', None)
+    app.add_config_value('pdf_use_toc','True', None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)

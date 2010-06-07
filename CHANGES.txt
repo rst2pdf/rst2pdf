@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* New pdf_use_toc option for Sphinx/pdfbuilder
 * Fixed Issue 308: compatibility with reportlab from SVN
 * Fixed Issue 323: errors in the config.sample made it work weird.
 * Fixed Issue 322: Image substitutions didn't work in document title. 
