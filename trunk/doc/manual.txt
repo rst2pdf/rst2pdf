@@ -1694,7 +1694,11 @@ To use it in your existing sphinx project you need to do the following:
     
     # Page template name for "regular" pages
     #pdf_page_template = 'cutePage'
-    
+
+    # Show Table Of Contents at the beginning?
+    #pdf_use_toc = True
+
+
 3. (Maybe) add this in your Makefile (on unix-like systems):
     
     .. code-block:: makefile
