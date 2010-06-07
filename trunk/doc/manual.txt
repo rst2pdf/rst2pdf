@@ -1698,6 +1698,8 @@ To use it in your existing sphinx project you need to do the following:
     # Show Table Of Contents at the beginning?
     #pdf_use_toc = True
 
+    # How many levels deep should the table of contents be?
+    pdf_toc_depth = 9999
 
 3. (Maybe) add this in your Makefile (on unix-like systems):
     

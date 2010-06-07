@@ -37,6 +37,7 @@ from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
 
+import sphinx
 from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
@@ -44,6 +45,9 @@ from sphinx.util import SEP
 from sphinx.util import ustrftime, texescape
 from sphinx.environment import NoUri
 from sphinx.locale import admonitionlabels, versionlabels
+
+if sphinx.__version__ >= '1.':
+    from sphinx.locale import _
 
 import rst2pdf.log
 import logging
@@ -202,7 +206,7 @@ class PDFBuilder(Builder):
 
         # This is stolen from the HTML builder
         #moduleindex = self.env.domaindata['py']['modules']
-        if self.config.pdf_use_modindex and self.env.modules:
+        if sphinx.__version__ < "1.0" and self.config.pdf_use_modindex and self.env.modules:
             modules = sorted(((mn, ('#module-' + mn, sy, pl, dep)) 
                 for (mn, (fn, sy, pl, dep)) in self.env.modules.iteritems()),
                 key=lambda x: x[0].lower())
@@ -441,7 +445,6 @@ class PDFContents(Contents):
         autonum = 0
         # FIXME: depth should be taken from :maxdepth: (Issue 320)
         depth = self.toc_depth
-        print 'DEPTH', depth
         for section in sections:
             title = section[0]
             auto = title.get('auto')    # May be set by SectNum.

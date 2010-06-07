@@ -29,6 +29,7 @@ from opt_imports import Paragraph, sphinx
 from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 import math_flowable
 from reportlab.platypus import Paragraph, TableStyle
+import sphinx
 
 ################## NodeHandler subclasses ###################
 
@@ -114,9 +115,10 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
                     node['entries'], nodeid(node))
         return []
 
-class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
-    def gather_elements(self, client, node, style):
-        return [Reference('module-'+node['modname'])]
+if sphinx.__version__ < '1.0':
+    class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
+        def gather_elements(self, client, node, style):
+            return [Reference('module-'+node['modname'])]
 
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
