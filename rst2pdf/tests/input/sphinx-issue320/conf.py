@@ -194,3 +194,4 @@ latex_documents = [
 #latex_use_modindex = True
 
 pdf_toc_depth = 2
+pdf_invariant = True
