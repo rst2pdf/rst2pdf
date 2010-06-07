@@ -50,11 +50,11 @@ break_side="any"
 
 # Add a blank page at the beginning of the document
 
-blank_first_page=False
+blank_first_page=false
 
 # Treat the first page as even (default False, treat it as odd)
 
-first_page_even=False
+first_page_even=false
 
 # Smart quotes.
 # 0:  Suppress  all  transformations. (Do nothing.)
