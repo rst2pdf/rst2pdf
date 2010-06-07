@@ -52,7 +52,7 @@ break_side="any"
 
 blank_first_page=false
 
-# Treat the first page as even (default False, treat it as odd)
+# Treat the first page as even (default false, treat it as odd)
 
 first_page_even=false
 
@@ -70,11 +70,11 @@ smartquotes=0
 
 # Footnote backlinks enabled or not (default: enabled)
 
-footnote_backlinks=True
+footnote_backlinks=true
 
 # Show footnotes inline instead of at the end of the document
 
-inline_footnotes=False
+inline_footnotes=false
 
 # Cover page template.
 # It will be searched in the document's folder, in ~/.rst2pdf/templates and 
