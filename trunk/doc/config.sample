@@ -24,8 +24,8 @@ stylesheet_path=""
 language="en_US"
 
 # Default page header and footer
-header=None
-footer=None
+header=null
+footer=null
 
 # What to do if a literal block is too large. Can be
 # shrink/truncate/overflow
