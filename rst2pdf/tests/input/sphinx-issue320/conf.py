@@ -193,4 +193,4 @@ latex_documents = [
 # If false, no module index is generated.
 #latex_use_modindex = True
 
-pdf_use_toc = True
+pdf_toc_depth = 2
