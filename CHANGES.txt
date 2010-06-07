@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Don't fail so much with Sphinx 1.0b2 (but modindex is disabled)
 * New pdf_toc_depth option for Sphinx/pdfbuilder
 * New pdf_use_toc option for Sphinx/pdfbuilder
 * Fixed Issue 308: compatibility with reportlab from SVN
