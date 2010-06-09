@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 307: header/footer from stylesheet now supports inline
+  rest markup and substitutions defined in the main document.
 * Don't fail so much with Sphinx 1.0b2 (but modindex is disabled)
 * New pdf_toc_depth option for Sphinx/pdfbuilder
 * New pdf_use_toc option for Sphinx/pdfbuilder

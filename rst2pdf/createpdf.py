@@ -606,6 +606,7 @@ class RstToPdf(object):
             title=self.doc_title_clean,
             author=self.doc_author,
             pageCompression=compressed)
+        pdfdoc.client =self
 
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
@@ -845,13 +846,8 @@ class HeaderOrFooter(object):
         items = self.items
         if showloc:
             if not items:
-                # FIXME: Issue 307, here, we are getting items as a
-                # string from the stylesheet and just inserting it
-                # as a paragraph.
-                # That means thinhs like **emphasis** don't work
-                # also, substitutions defined in the text.
-                
                 items = pageobj.template.get(self.defaultloc)
+                items = self.client.gen_elements(publish_secondary_doctree(items, self.client.doctree, None))
             if items:
                 if isinstance(items, list):
                     items = items[:]
