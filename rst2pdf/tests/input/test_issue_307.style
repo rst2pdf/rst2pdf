@@ -4,6 +4,6 @@ pageTemplates:
             [0%, 0%, 100%, 100%]
         showHeader : true
         showFooter : true
-        defaultHeader : "|Python|     **Customer Initials:**_______ Date:_______          Page ###Page### of ###Total###"
-        defaultFooter : "|Python|     **Customer Initials:**_______ Date:_______          Page ###Page### of ###Total###"
+        defaultHeader : "|biohazard| |Python|     **Customer Initials:** _______ Date:_______          Page ###Page### of ###Total###"
+        defaultFooter : "|biohazard| |Python|     **Customer Initials:** _______ Date:_______          Page ###Page### of ###Total###"
 
