@@ -870,6 +870,12 @@ class HeaderOrFooter(object):
         items = self.items
         if showloc:
             if not items:
+                # FIXME: Issue 307, here, we are getting items as a
+                # string from the stylesheet and just inserting it
+                # as a paragraph.
+                # That means thinhs like **emphasis** don't work
+                # also, substitutions defined in the text.
+                
                 items = pageobj.template.get(self.defaultloc)
             if items:
                 if isinstance(items, list):
