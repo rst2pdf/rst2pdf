@@ -847,7 +847,8 @@ class HeaderOrFooter(object):
         if showloc:
             if not items:
                 items = pageobj.template.get(self.defaultloc)
-                items = self.client.gen_elements(publish_secondary_doctree(items, self.client.doctree, None))
+                if items:
+                    items = self.client.gen_elements(publish_secondary_doctree(items, self.client.doctree, None))
             if items:
                 if isinstance(items, list):
                     items = items[:]
