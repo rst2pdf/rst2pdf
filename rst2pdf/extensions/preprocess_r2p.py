@@ -227,6 +227,8 @@ class Preprocess(object):
 
         inc = Preprocess(f, True, self.widthcount)
         self.widthcount = inc.widthcount
+        if 'styles' in self.styles and 'styles' in inc.styles:
+            self.styles['styles'].update(inc.styles.pop('styles'))
         self.styles.update(inc.styles)
         if inc.changed:
             self.changed = True
