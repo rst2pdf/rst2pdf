@@ -232,7 +232,7 @@ class Preprocess(object):
             self.changed = True
             if not inc.keep:
                 return
-            fname = inc.result.fname
+            fname = inc.result.name
         self.result.extend(['', '', '.. include:: ' + fname, ''])
 
     def handle_single(self, word):
