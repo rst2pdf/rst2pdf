@@ -131,11 +131,13 @@ class Preprocess(object):
 
         if incfile:
             try:
-                self.styles = rson_loads(source)
+                self.styles = styles = rson_loads(source)
+                substyles = styles.get('styles')
+                if substyles is not None:
+                    styles['styles'] = dict(substyles)
             except:
                 pass
             else:
-                self.styles['styles'] = dict(self.styles['styles'])
                 self.changed = True
                 self.keep = False
                 return
