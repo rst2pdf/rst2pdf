@@ -153,6 +153,10 @@ The possible values are:
                         Template file used for the cover page. Default:
                         cover.tmpl
 
+--use-floating-images
+                        Makes images with :aling: attribute work more like in
+                        rst2html. Default: False
+
 
 EXAMPLES
 --------

@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 186: new --use-floating-images makes images with
+  :align: set work like in HTML, with the next flowable flowing
+  beside it.
 * Fixed Issue 307: header/footer from stylesheet now supports inline
   rest markup and substitutions defined in the main document.
 * Don't fail so much with Sphinx 1.0b2 (but modindex is disabled)

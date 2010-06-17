@@ -81,3 +81,8 @@ inline_footnotes=false
 # in the templates subfolder of the package folder
 
 # custom_cover = cover.tmpl 
+
+# Use floating images.
+# Makes the behaviour of images with the :align: attribute more like rst2html's
+
+floating_images = false
