@@ -110,7 +110,7 @@ class HandleGenerated(HandleText, docutils.nodes.generated):
 
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
-        # FIXME: handle class,target,alt, check align
+        # FIXME: handle class,target,alt
 
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):

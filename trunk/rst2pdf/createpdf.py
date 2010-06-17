@@ -153,7 +153,8 @@ class RstToPdf(object):
                  splittables=False,
                  blank_first_page=False,
                  breakside='odd',
-                 custom_cover='cover.tmpl'
+                 custom_cover='cover.tmpl',
+                 floating_images=False
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -169,6 +170,7 @@ class RstToPdf(object):
         self.header = header
         self.footer = footer
         self.custom_cover=custom_cover
+        self.floating_images=floating_images
         self.decoration = {'header': header,
                            'footer': footer,
                            'endnotes': [],
@@ -544,7 +546,7 @@ class RstToPdf(object):
             self.doctree = doctree
 
         elements = self.gen_elements(self.doctree)
-        
+
         # Find cover template, save it in cover_file
         def find_cover(name):
             cover_path=[self.basedir, os.path.expanduser('~/.rst2pdf'),
@@ -587,6 +589,26 @@ class RstToPdf(object):
                 colWidths = self.styles['endnote'].colWidths
                 elements.append(DelayedTable([[n[0], n[1]]],
                     style=t_style, colWidths=colWidths))
+
+
+        if self.floating_images:
+            # Handle images with alignment more like in HTML
+            new_elem=[]
+            counter = 0
+            for i,e in enumerate(elements[:]):
+                if isinstance (e, MyImage) and e.image.hAlign != 'CENTER':
+                    # This is an image where flowables should wrap
+                    # around it
+                    new_elem.append(ImageAndFlowables(e,elements[i+1],
+                        imageSide=e.image.hAlign.lower()))
+                    print 'IS',e.image.hAlign
+                    counter = 1
+                elif counter == 1:
+                    counter = 0
+                else:
+                    new_elem.append(e)
+
+            elements = new_elem
 
         head = self.decoration['header']
         foot = self.decoration['footer']
@@ -1258,6 +1280,11 @@ def parse_commandline():
         metavar='FILE', default= def_cover,
         help='Template file used for the cover page. Default: %s'%def_cover)
 
+    def_floating_images = config.getValue("general", "floating_images", False)
+    parser.add_option('--use-floating-images', action='store_true', default=def_floating_images,
+        help='Makes images with :aling: attribute work more like in rst2html. Default: %s'%def_floating_images,
+        dest='floating_images')
+
     return parser
 
 def main(args=None):
@@ -1390,7 +1417,8 @@ def main(args=None):
         splittables=options.splittables,
         blank_first_page=options.blank_first_page,
         breakside=options.breakside,
-        custom_cover=options.custom_cover
+        custom_cover=options.custom_cover,
+        floating_images=options.floating_images,
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,
