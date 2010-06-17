@@ -596,12 +596,12 @@ class RstToPdf(object):
             new_elem=[]
             counter = 0
             for i,e in enumerate(elements[:]):
-                if isinstance (e, MyImage) and e.image.hAlign != 'CENTER':
+                if isinstance (e, MyImage) and e.image.hAlign != 'CENTER'\
+                and i < len(elements)-1:
                     # This is an image where flowables should wrap
                     # around it
                     new_elem.append(ImageAndFlowables(e,elements[i+1],
                         imageSide=e.image.hAlign.lower()))
-                    print 'IS',e.image.hAlign
                     counter = 1
                 elif counter == 1:
                     counter = 0
