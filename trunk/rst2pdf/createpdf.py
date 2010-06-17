@@ -590,25 +590,23 @@ class RstToPdf(object):
                 elements.append(DelayedTable([[n[0], n[1]]],
                     style=t_style, colWidths=colWidths))
 
-
         if self.floating_images:
+            #from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
             new_elem=[]
-            counter = 0
-            for i,e in enumerate(elements[:]):
+            for i,e in enumerate(elements[::-1]):
                 if isinstance (e, MyImage) and e.image.hAlign != 'CENTER'\
-                and i < len(elements)-1:
+                and new_elem:
                     # This is an image where flowables should wrap
                     # around it
-                    new_elem.append(ImageAndFlowables(e,elements[i+1],
+                    popped=new_elem.pop()
+                    new_elem.append(ImageAndFlowables(e,popped,
                         imageSide=e.image.hAlign.lower()))
-                    counter = 1
-                elif counter == 1:
-                    counter = 0
                 else:
                     new_elem.append(e)
 
             elements = new_elem
+            elements.reverse()
 
         head = self.decoration['header']
         foot = self.decoration['footer']
