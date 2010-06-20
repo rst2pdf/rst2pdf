@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 328: list item styles were being ignored.
 * Fixed Issue 186: new --use-floating-images makes images with
   :align: set work like in HTML, with the next flowable flowing
   beside it.
