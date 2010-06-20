@@ -1,0 +1,16 @@
+  styles:
+    bodytext:
+      parent: normal
+      firstLineIndent: 24
+
+    bullet_list:
+      parent: base
+
+    bullet_list_item:
+      parent: base
+
+    item_list:
+      parent: base
+
+    item_list_item:
+      parent: base
