@@ -539,12 +539,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
     def gather_elements(self, client, node, style):
-        el = client.gather_elements(node, style=client.styles["bodytext"])
         b, t = client.bullet_for_node(node)
-
-        # FIXME: this is really really not good code
-        if not el:
-            el = [Paragraph(u"<nobr>\xa0</nobr>", client.styles["bodytext"])]
 
         bStyle = copy(style)
         bStyle.alignment = 2
@@ -568,16 +563,25 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         else:
             item_st=client.styles['item_list_item']
 
+        el = client.gather_elements(node, item_st)
+        # FIXME: this is really really not good code
+        if not el:
+            el = [Paragraph(u"<nobr>\xa0</nobr>", item_st)]
+
+
         idx=node.parent.children.index(node)
         if idx==0:
             # The first item in the list, so doesn't need
             # separation (it's provided by the list itself)
             sb=0
+            # It also doesn't need a first-line-indent
+            fli=0
         else:
             # Not the first item, so need to separate from
             # previous item. Account for space provided by
             # the item's content, too.
             sb=item_st.spaceBefore-style.spaceBefore
+            fli=item_st.firstLineIndent
 
         if extra_space >0:
             # The bullet is larger, move down the item text
@@ -587,6 +591,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # The bullet is smaller, move down the bullet
             sbb = -extra_space
         bStyle.spaceBefore=0
+        bStyle.firstLineIndent=fli
 
         if (idx+1)==len(node.parent.children): #Not the last item
             # The last item in the list, so doesn't need
