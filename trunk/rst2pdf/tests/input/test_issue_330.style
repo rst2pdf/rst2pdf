@@ -2,7 +2,7 @@ styles:
 
     bullet_list:
        spaceBefore: 50
-      spaceAfter: 0
+       spaceAfter: 0
 
     bullet_list_item:
       spaceBefore: 0
@@ -14,4 +14,4 @@ styles:
 
     item_list_item:
        spaceBefore: 0
-      spaceAfter: 0
+       spaceAfter: 0
