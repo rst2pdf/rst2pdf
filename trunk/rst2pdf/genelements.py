@@ -705,6 +705,11 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
 
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
+
+        # FIXME:
+        # Need to handle :figwidth:
+        # Need to handle :figclass:
+        # :class: and :width: apply to the image only
         
         # Either use the figure style or the class 
         # selected by the user
