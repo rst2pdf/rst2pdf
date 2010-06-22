@@ -703,6 +703,7 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                 client.gather_pdftext(node, replaceEnt = True),
                                 style )]
 
+
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
 
@@ -716,19 +717,35 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         if node.get('classes'):
             style=client.styles[node.get('classes')[0]]
         cmd=getattr(style,'commands',[])
+        image=node.children[0]
+        if len(node.children) > 1:
+            caption = node.children[1]
+        else:
+            caption=None
+
+        if len(node.children) > 2:
+            legend = node.children[2:]
+        else:
+            legend=[]
+
         align=node.get('align','XXX')
         if align != 'XXX':
-            for n in node.children:
-                n['align']=align
+            image['align'] = align
             cmd.append(['ALIGN',[0,0],[-1,-1],align.upper()])
         else:
             # Figures are centered by default.
             cmd.append(['ALIGN',[0,0],[-1,-1],'CENTER'])
-        cw=[client.styles.adjustUnits(x) for x in client.styles['figure'].colWidths]
+
+        w=node.get('width',client.styles['figure'].colWidths[0])
+        cw=[client.styles.adjustUnits(w),]
+        print cw, node.get('width')
+        print node
         sub_elems = client.gather_elements(node, style=None)
         t_style=TableStyle(cmd)
         return [DelayedTable([[e,] for e in sub_elems],style=t_style,
             colWidths=cw)]
+
+            
 class HandleCaption(NodeHandler, docutils.nodes.caption):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),
