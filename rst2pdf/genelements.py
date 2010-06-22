@@ -730,8 +730,6 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
 
         w=node.get('width',client.styles['figure'].colWidths[0])
         cw=[client.styles.adjustUnits(w),]
-        print cw, node.get('width')
-        print node
         sub_elems = client.gather_elements(node, style=None)
         t_style=TableStyle(cmd)
         table = DelayedTable([[e,] for e in sub_elems],style=t_style,
