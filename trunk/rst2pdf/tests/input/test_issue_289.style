@@ -1,8 +1,10 @@
 styles:
     bigbullet:
-        bulletFontSize: 32
+        bulletFontSize: 52
         fontSize: 12
+        leading: 56
         parent: bullet_list
+        spaceAfter: 3
 
     custombullet: {bulletText: >>, parent: bullet_list}
     smallbullet:
