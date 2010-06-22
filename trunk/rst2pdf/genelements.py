@@ -728,22 +728,16 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         else:
             legend=[]
 
-        align=node.get('align','XXX')
-        if align != 'XXX':
-            image['align'] = align
-            cmd.append(['ALIGN',[0,0],[-1,-1],align.upper()])
-        else:
-            # Figures are centered by default.
-            cmd.append(['ALIGN',[0,0],[-1,-1],'CENTER'])
-
         w=node.get('width',client.styles['figure'].colWidths[0])
         cw=[client.styles.adjustUnits(w),]
         print cw, node.get('width')
         print node
         sub_elems = client.gather_elements(node, style=None)
         t_style=TableStyle(cmd)
-        return [DelayedTable([[e,] for e in sub_elems],style=t_style,
-            colWidths=cw)]
+        table = DelayedTable([[e,] for e in sub_elems],style=t_style,
+            colWidths=cw)
+        table.hAlign = node.get('align','CENTER').upper()
+        return [table]
 
             
 class HandleCaption(NodeHandler, docutils.nodes.caption):
