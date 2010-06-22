@@ -591,7 +591,14 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             #["GRID", [ 0, 0 ], [ -1, -1 ], .25, "black" ],
             ["BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], -3 ]]
         )
-
+        if extra_space >0:
+            # The bullet is larger, move down the item text
+            sb += extra_space
+            sbb = 0
+        else:
+            # The bullet is smaller, move down the bullet
+            sbb = -extra_space
+            
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
         colWidths = getattr(style,'colWidths',[])
@@ -717,7 +724,7 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
             legend=[]
 
         w=node.get('width',client.styles['figure'].colWidths[0])
-        cw=[client.styles.adjustUnits(w),]
+        cw=[w,]
         sub_elems = client.gather_elements(node, style=None)
         t_style=TableStyle(cmd)
         table = DelayedTable([[e,] for e in sub_elems],style=t_style,
