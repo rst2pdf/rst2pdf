@@ -580,32 +580,15 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # Not the first item, so need to separate from
             # previous item. Account for space provided by
             # the item's content, too.
-            print style
-            print 'SB', item_st.spaceBefore-item_st.spaceAfter, item_st.spaceBefore,item_st.spaceAfter
             sb=item_st.spaceBefore-item_st.spaceAfter
             fli=item_st.firstLineIndent
 
-        if extra_space >0:
-            # The bullet is larger, move down the item text
-            sb += extra_space
-            sbb = 0
-        else:
-            # The bullet is smaller, move down the bullet
-            sbb = -extra_space
         bStyle.spaceBefore=0
-        bStyle.firstLineIndent=fli
-
-        #if (idx+1)==len(node.parent.children): #Not the last item
-            ## The last item in the list, so doesn't need
-            ## separation (it's provided by the list itself)
-            #sa=0
-        #else:
-            #print 'SA',item_st.spaceAfter
-            #sa=0
 
         t_style = TableStyle(style.commands)
         # The -3 here is to compensate for padding, 0 doesn't work :-(
         t_style._cmds.extend([
+            #["GRID", [ 0, 0 ], [ -1, -1 ], .25, "black" ],
             ["BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], -3 ]]
         )
 
