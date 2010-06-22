@@ -219,7 +219,6 @@
 
     figure-legend:
       parent: bodytext
-      alignment: TA_CENTER
 
     bullet_list:
       parent: bodytext
