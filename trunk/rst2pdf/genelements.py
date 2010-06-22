@@ -580,7 +580,9 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # Not the first item, so need to separate from
             # previous item. Account for space provided by
             # the item's content, too.
-            sb=item_st.spaceBefore-style.spaceBefore
+            print style
+            print 'SB', item_st.spaceBefore-item_st.spaceAfter, item_st.spaceBefore,item_st.spaceAfter
+            sb=item_st.spaceBefore-item_st.spaceAfter
             fli=item_st.firstLineIndent
 
         if extra_space >0:
@@ -593,14 +595,19 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         bStyle.spaceBefore=0
         bStyle.firstLineIndent=fli
 
-        if (idx+1)==len(node.parent.children): #Not the last item
-            # The last item in the list, so doesn't need
-            # separation (it's provided by the list itself)
-            sa=0
-        else:
-            sa=item_st.spaceAfter-style.spaceAfter
+        #if (idx+1)==len(node.parent.children): #Not the last item
+            ## The last item in the list, so doesn't need
+            ## separation (it's provided by the list itself)
+            #sa=0
+        #else:
+            #print 'SA',item_st.spaceAfter
+            #sa=0
 
         t_style = TableStyle(style.commands)
+        # The -3 here is to compensate for padding, 0 doesn't work :-(
+        t_style._cmds.extend([
+            ["BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], -3 ]]
+        )
 
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
@@ -611,15 +618,13 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             node.elements = [MySpacer(0,sb),
                                 SplitTable([[Paragraph(b, style = bStyle), el]],
                                 style = t_style,
-                                colWidths = colWidths),
-                                MySpacer(0,sa)
+                                colWidths = colWidths)
                                 ]
         else:
             node.elements = [MySpacer(0,sb),
                                 DelayedTable([[Paragraph(b, style = bStyle), el]],
                                 style = t_style,
-                                colWidths = colWidths),
-                                MySpacer(0,sa)
+                                colWidths = colWidths)
                                 ]
         return node.elements
 
