@@ -23,4 +23,22 @@
    Above should be: a 3cm image, centered, inside a 6cm wide figure at the right
    side of the page. A caption, centered. This legend should be full width of the figure, justified like regular bodytext.
 
-This paragraph may or may not wrap at the left of the previous image.
+.. figure:: images/biohazard.png
+   :figwidth: 6cm
+   :width: 3cm
+   :align: left
+
+   The caption.
+
+   Above should be: a 3cm image, centered, inside a 6cm wide figure at the left
+   side of the page. A caption, centered. This legend should be full width of the figure, justified like regular bodytext.
+
+.. figure:: images/biohazard.png
+   :figwidth: 6cm
+   :width: 3cm
+   :align: center
+
+   The caption.
+
+   Above should be: a 3cm image, centered, inside a 6cm wide figure at the center
+   of the page. A caption, centered. This legend should be full width of the figure, justified like regular bodytext.
