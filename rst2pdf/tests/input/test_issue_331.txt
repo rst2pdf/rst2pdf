@@ -6,7 +6,6 @@
 |    :width: 100%                      |    :width: 100%                      |
 |                                      |                                      |
 |    should only fill half of the page |    should only fill half of the page |
-|                                      |                                      |
 +--------------------------------------+--------------------------------------+
 
 
@@ -15,29 +14,23 @@
 |    :width: 100%                      |    :width: 100%                      |
 |    :align: center                    |    :align: center                    |
 |                                      |                                      |
-|                                      |                                      |
-|                                      |                                      |
 +--------------------------------------+--------------------------------------+
 
-images size is ok
+Below should be two images 50% width of the cells, center-aligned
 
 +--------------------------------------+--------------------------------------+
 |.. image:: none.jpg                   |.. image:: none.jpg                   |
-|    :width: 50%                       |    :width: 50%                       |
-|    :align: center                    |    :align: center                    |
-|                                      |                                      |
-|                                      |                                      |
-|                                      |                                      |
+|   :width: 50%                        |   :width: 50%                        |
+|   :align: center                     |   :align: center                     |
 +--------------------------------------+--------------------------------------+
 
-but not the alignment (should be centered)
+Below should be two images 50% width of the cells, center-aligned
 
 +--------------------------------------+--------------------------------------+
 |.. figure:: none.jpg                  |.. figure:: none.jpg                  |
-|    :figwidth:  45%                   |    :figwidth:  45%                   |
-|    :align: center                    |    :align: center                    |
-|    :width: 100%                      |    :width: 100%                      |
+|   :figwidth:  45%                    |   :figwidth:  45%                    |
+|   :align: center                     |   :align: center                     |
+|   :width: 100%                       |   :width: 100%                       |
 |                                      |                                      |
-|    workaround  (45%)                 |    workaround                        |
-|                                      |                                      |
+|   workaround  (45%)                  |   workaround                         |
 +--------------------------------------+--------------------------------------+
