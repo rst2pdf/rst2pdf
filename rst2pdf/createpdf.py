@@ -1422,6 +1422,8 @@ def main(args=None):
                     output=options.outfile,
                     compressed=options.compressed)
 
+# Ugly hack that fixes Issue 335
+reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
 
 def patch_digester():
     ''' Patch digester so that we can get the same results when image
