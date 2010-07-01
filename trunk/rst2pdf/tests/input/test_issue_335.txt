@@ -1,4 +1,4 @@
-.. |mitellogo| image:: images/abiohazard.png
+.. |mitellogo| image:: images/biohazard.jpg
 
 .. footer::
 
