@@ -1,4 +1,4 @@
-styles: field_list:
+styles: field-list:
         colWidths: [50%, 50%]
         commands: []
                 [VALIGN, [0, 0], [-1, -1], TOP]

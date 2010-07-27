@@ -3,13 +3,13 @@ styles:
         bulletFontSize: 52
         fontSize: 12
         leading: 56
-        parent: bullet_list
+        parent: bullet-list
         spaceAfter: 3
 
-    custombullet: {bulletText: >>, parent: bullet_list}
+    custombullet: {bulletText: >>, parent: bullet-list}
     smallbullet:
         bulletFontSize: 12
         fontSize: 32
-        parent: bullet_list
+        parent: bullet-list
 
-    weirdbullet: {bulletFontName: Tuffy, parent: bullet_list}
+    weirdbullet: {bulletFontName: Tuffy, parent: bullet-list}

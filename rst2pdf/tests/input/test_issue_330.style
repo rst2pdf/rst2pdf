@@ -1,17 +1,17 @@
 styles:
 
-    bullet_list:
+    bullet-list:
        spaceBefore: 50
        spaceAfter: 0
 
-    bullet_list_item:
+    bullet-list-item:
       spaceBefore: 0
       spaceAfter: 0
 
-    item_list:
+    item-list:
       spaceBefore: 15
       spaceAfter: 0
 
-    item_list_item:
+    item-list-item:
        spaceBefore: 0
        spaceAfter: 0
