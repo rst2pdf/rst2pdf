@@ -3,14 +3,14 @@
       parent: normal
       firstLineIndent: 24
 
-    bullet_list:
+    bullet-list:
       parent: base
 
-    bullet_list_item:
+    bullet-list-item:
       parent: base
 
-    item_list:
+    item-list:
       parent: base
 
-    item_list_item:
+    item-list-item:
       parent: base

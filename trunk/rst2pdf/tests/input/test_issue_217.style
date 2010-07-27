@@ -1,5 +1,5 @@
 { "styles": [
-    ["bullet_list", {
+    ["bullet-list", {
       "parent": "bodytext",
       "spaceBefore": 0,
        "commands": [
@@ -8,11 +8,11 @@
         ],
         "colWidths": ["20",null]
     }],
-    ["bullet_list_item" , {
+    ["bullet-list-item" , {
       "parent": "bodytext",
       "spaceBefore": 30
     }],
-    ["item_list_item" , {
+    ["item-list-item" , {
       "parent": "bodytext",
       "spaceBefore": 30
     }]

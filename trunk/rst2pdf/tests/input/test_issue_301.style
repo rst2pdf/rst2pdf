@@ -2,7 +2,7 @@ styles:
     smallbullet:
         bulletFontSize: 12
         fontSize: 32
-        parent: bullet_list
+        parent: bullet-list
         commands: [
             [ TOPPADDING, [0,0],[0,0], 50],
             [ VALIGN, [0,0],[-1,-1], TOP],

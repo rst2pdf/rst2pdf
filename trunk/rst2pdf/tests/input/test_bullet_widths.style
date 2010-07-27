@@ -1,5 +1,5 @@
 styles:
-    bullet_list:
+    bullet-list:
         colWidths: [50%, 50%]
         commands: []
                 [VALIGN, [0, 0], [-1, -1], TOP]
@@ -9,7 +9,7 @@ styles:
         parent: bodytext
         spaceBefore: 0
 
-    item_list:
+    item-list:
         colWidths: [25%, 75%]
         commands: []
                 [VALIGN, [0, 0], [-1, -1], TOP]

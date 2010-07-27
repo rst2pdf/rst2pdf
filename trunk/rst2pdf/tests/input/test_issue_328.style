@@ -3,18 +3,18 @@
       parent: normal
       firstLineIndent: 24
 
-    bullet_list:
+    bullet-list:
       parent: bodytext
       firstLineIndent: 0
 
-    bullet_list_item:
+    bullet-list-item:
       parent: bodytext
       firstLineIndent: 0
 
-    item_list:
+    item-list:
       parent: bodytext
       firstLineIndent: 0
 
-    item_list_item:
+    item-list-item:
       parent: bodytext
       firstLineIndent: 0
