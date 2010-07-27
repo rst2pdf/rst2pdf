@@ -78,7 +78,7 @@ from reportlab.pdfbase.pdfdoc import PDFPageLabel
 from flowables import * # our own reportlab flowables
 from sinker import Sinker
 import flowables
-from image import MyImage
+from image import MyImage, missing
 
 from aafigure_directive import Aanode
 import counter_role
