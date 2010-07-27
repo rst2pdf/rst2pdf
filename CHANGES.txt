@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 340: endnotes/footnotes were not styled.
 * Fixed Issue 339: class names using _ were not usable.
 * Fixed Issue 335: ugly crash when using images in some
   specific places (looks like a reportlab bug)

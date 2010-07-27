@@ -798,7 +798,7 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
             if ltext not in client.targets:
                 label = Paragraph('<a name="%s"/>%s'%(ltext,
                                                     ltext + backrefs),
-                                client.styles["normal"])
+                                client.styles["endnote"])
                 client.targets.append(ltext)
         elif len(node['backrefs'])==1 and client.footnote_backlinks:
             if ltext not in client.targets:
@@ -807,14 +807,14 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                                     ltext,
                                     node['backrefs'][0],
                                     client.styles.linkColor,
-                                    ltext), client.styles["normal"])
+                                    ltext), client.styles["endnote"])
                 client.targets.append(ltext)
         else:
             if ltext not in client.targets:
                 label = Paragraph('<a name="%s"/>%s' % (ltext, ltext),
-                    client.styles["normal"])
+                    client.styles["endnote"])
                 client.targets.append(ltext)
-        contents = client.gather_elements(node, style)[1:]
+        contents = client.gather_elements(node, client.styles["endnote"])[1:]
         if client.inline_footnotes:
             st=client.styles['endnote']
             t_style = TableStyle(st.commands)
