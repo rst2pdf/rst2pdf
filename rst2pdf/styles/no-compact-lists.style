@@ -1,3 +1,3 @@
 styles:
-    bullet_list: {parent: bodytext, spaceBefore: 8}
-    enumerated_list: {parent: bodytext, spaceBefore: 8}
+    bullet-list: {parent: bodytext, spaceBefore: 8}
+    enumerated-list: {parent: bodytext, spaceBefore: 8}

@@ -279,9 +279,9 @@ class HandleField(NodeHandler, docutils.nodes.field):
             style=client.styles['fieldname'])
         fb = client.gen_elements(node.children[1],
                 style=client.styles['fieldvalue'])
-        t_style=TableStyle(client.styles['field_list'].commands)
+        t_style=TableStyle(client.styles['field-list'].commands)
         return [DelayedTable([[fn, fb]], style=t_style,
-            colWidths=client.styles['field_list'].colWidths)]
+            colWidths=client.styles['field-list'].colWidths)]
 
 class HandleDecoration(NodeHandler, docutils.nodes.decoration):
     pass
@@ -311,9 +311,9 @@ class HandleAuthor(NodeHandler, docutils.nodes.author):
             # A single author: works like a field
             fb = client.gather_pdftext(node)
 
-            t_style=TableStyle(client.styles['field_list'].commands)
+            t_style=TableStyle(client.styles['field-list'].commands)
             colWidths=map(client.styles.adjustUnits,
-                client.styles['field_list'].colWidths)
+                client.styles['field-list'].colWidths)
 
             node.elements = [Table(
                 [[Paragraph(client.text_for_label("author", style)+":",
@@ -327,8 +327,8 @@ class HandleAuthors(NodeHandler, docutils.nodes.authors):
     def gather_elements(self, client, node, style):
         # Multiple authors. Create a two-column table.
         # Author references on the right.
-        t_style=TableStyle(client.styles['field_list'].commands)
-        colWidths = client.styles['field_list'].colWidths
+        t_style=TableStyle(client.styles['field-list'].commands)
+        colWidths = client.styles['field-list'].colWidths
 
         td = [[Paragraph(client.text_for_label("authors", style)+":",
                     style=client.styles['fieldname']),
@@ -341,8 +341,8 @@ class HandleFList(NodeHandler):
     TableType = DelayedTable
     def gather_elements(self, client, node, style):
         fb = client.gather_pdftext(node)
-        t_style=TableStyle(client.styles['field_list'].commands)
-        colWidths=client.styles['field_list'].colWidths
+        t_style=TableStyle(client.styles['field-list'].commands)
+        colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
             colWidths = map(client.styles.adjustUnits, colWidths)
         label=client.text_for_label(self.labeltext, style)+":"
@@ -436,7 +436,7 @@ class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
         if node ['classes']:
             style = client.styles[node['classes'][0]]
         else:
-            style = client.styles["bullet_list"]
+            style = client.styles["bullet-list"]
             
         node.elements = client.gather_elements(node,
             style=style)
@@ -457,7 +457,7 @@ class HandleDefOrOptList(NodeHandler, docutils.nodes.definition_list,
 
 class HandleFieldList(NodeHandler, docutils.nodes.field_list):
     def gather_elements(self, client, node, style):
-        return [MySpacer(0,client.styles['field_list'].spaceBefore)]+\
+        return [MySpacer(0,client.styles['field-list'].spaceBefore)]+\
                 client.gather_elements(node, style=style)
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
@@ -465,7 +465,7 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
         if node ['classes']:
             style = client.styles[node['classes'][0]]
         else:
-            style = client.styles["item_list"]
+            style = client.styles["item-list"]
         
         node.elements = client.gather_elements(node,
             style = style)
@@ -492,8 +492,8 @@ class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
 
         desc = client.gather_elements(node.children[1], style)
 
-        t_style = TableStyle(client.styles['option_list'].commands)
-        colWidths = client.styles['option_list'].colWidths
+        t_style = TableStyle(client.styles['option-list'].commands)
+        colWidths = client.styles['option-list'].colWidths
         node.elements = [DelayedTable([[client.PreformattedFit(
             optext, client.styles["literal"]), desc]], style = t_style,
             colWidths = colWidths)]
@@ -511,17 +511,17 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
                     if i not in client.targets:
                         ids.append('<a name="%s"/>' % i)
                         client.targets.append(i)
-                o, c = client.styleToTags("definition_list_term")
+                o, c = client.styleToTags("definition-list-term")
                 tt.append(o + client.gather_pdftext(n) + c)
             elif isinstance(n, docutils.nodes.classifier):
-                o, c = client.styleToTags("definition_list_classifier")
+                o, c = client.styleToTags("definition-list-classifier")
                 tt.append(o + client.gather_pdftext(n) + c)
             else:
                 dt.extend(client.gen_elements(n, style))
 
         # FIXME: make this configurable from the stylesheet
         node.elements = [DelayedTable([
-            [Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition_list_term']),''],
+            [Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),''],
             ['',dt]
             ] , splitByRow=0, colWidths=[10,None], style = [
                         ['SPAN', [0,0], [1,0]],
@@ -559,9 +559,9 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         bStyle.fontName=bStyle.bulletFontName
 
         if t == 'bullet':
-            item_st=client.styles['bullet_list_item']
+            item_st=client.styles['bullet-list-item']
         else:
-            item_st=client.styles['item_list_item']
+            item_st=client.styles['item-list-item']
 
         el = client.gather_elements(node, item_st)
         # FIXME: this is really really not good code

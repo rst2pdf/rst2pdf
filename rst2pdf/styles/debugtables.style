@@ -1,5 +1,5 @@
 styles:
-    bullet_list: commands: []
+    bullet-list: commands: []
                 [VALIGN, [0, 0], [-1, -1], TOP]
                 [INNERGRID, [0, 0], [-1, -1], 0.25, black]
                 [BOX, [0, 0], [-1, -1], 0.25, black]
@@ -10,11 +10,11 @@ styles:
                 [INNERGRID, [0, 0], [-1, -1], 0.25, black]
                 [BOX, [0, 0], [-1, -1], 0.25, black]
 
-    field_list: commands: []
+    field-list: commands: []
                 [INNERGRID, [0, 0], [-1, -1], 0.25, black]
                 [BOX, [0, 0], [-1, -1], 0.25, black]
 
-    item_list: commands: []
+    item-list: commands: []
                 [VALIGN, [0, 0], [-1, -1], TOP]
                 [TOPPADDING, [0, 0], [-1, -1], 0]
                 [BOTTOMPADDING, [0, 0], [-1, -1], 0]
@@ -22,6 +22,6 @@ styles:
                 [INNERGRID, [0, 0], [-1, -1], 0.25, black]
                 [BOX, [0, 0], [-1, -1], 0.25, black]
 
-    option_list: commands: []
+    option-list: commands: []
                 [INNERGRID, [0, 0], [-1, -1], 0.25, black]
                 [BOX, [0, 0], [-1, -1], 0.25, black]
