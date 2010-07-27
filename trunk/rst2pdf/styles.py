@@ -435,6 +435,22 @@ class StyleSheet(object):
                     self.stylesheet[skey] = sdict
                     self.styles.append(sdict)
 
+        # If the stylesheet has a style name docutils won't reach
+        # make a copy with a sanitized name.
+        # This may make name collisions possible but that should be
+        # rare (who would have custom_name and custom-name in the
+        # same stylesheet? ;-)
+        # Issue 339
+        
+        styles2=[]
+        for s in self.styles:
+            if not re.match("^[a-z](-?[a-z0-9]+)*$", s['name']):
+                s2 = copy(s)
+                s2['name'] = docutils.nodes.make_id(s['name'])
+                log.warning('%s is an invalid docutils class name, adding alias %s'%(s['name'], s2['name']))
+                styles2.append(s2)
+        self.styles.extend(styles2)
+
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
         # Patch to make the code compatible with reportlab from SVN 2.4+ and
@@ -497,6 +513,8 @@ class StyleSheet(object):
                 s['borderPadding']=s['borderPadding'][0]
 
             self.StyleSheet.add(ParagraphStyle(**s))
+
+        
         self.emsize=self['base'].fontSize
         # Make stdFont the basefont, for Issue 65
         reportlab.rl_config.canvas_basefontname = self['base'].fontName
