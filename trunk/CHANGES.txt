@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* New extension: fancytitles, see http://lateral.netmanagers.com.ar/weblog/posts/BB906.html
 * New feature: tab-width option in code-block directive (defaults to 8).
 * Fixed Issue 340: endnotes/footnotes were not styled.
 * Fixed Issue 339: class names using _ were not usable.
