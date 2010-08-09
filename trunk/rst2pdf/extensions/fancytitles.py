@@ -83,9 +83,14 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 # Make rst2pdf delete it later.
                 client.to_unlink.append(tfname)
                 
-                e = FancyHeading(tfname, width=700, height=100,
-                    client=client, snum=snum, parent_id=parent_id,
-                    text=text, level=client.depth-1)
+                e = FancyHeading(tfname,
+                    width=700,
+                    height=100,
+                    client=client,
+                    snum=snum,
+                    parent_id=parent_id,
+                    text=text,
+                    hstyle=client.styles['heading%d'%min(client.depth, maxdepth)])
                 
                 node.elements = [e]
                 
@@ -93,23 +98,25 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
 
-class FancyHeading(MyImage):
+class FancyHeading(MyImage, Heading):
     '''This is a cross between the Heading flowable, that adds outline
     entries so you have a PDF TOC, and MyImage, that draws images'''
 
     def __init__(self, *args, **kwargs):
         # The inicialization is taken from rst2pdf.flowables.Heading
-        self.stext = kwargs.pop('text')
+        hstyle = kwargs.pop('hstyle')
+        level = 0
+        text = kwargs.pop('text')
+        self.snum = kwargs.pop('snum')
+        self.parent_id= kwargs.pop('parent_id')
+        #self.stext = 
+        Heading.__init__(self,text,hstyle,level=level,
+            parent_id=self.parent_id)
         # Cleanup title text
-        self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
-        self.stext = self.stext.strip()
+        #self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
+        #self.stext = self.stext.strip()
 
         # Stuff needed for the outline entry
-        self.snum = kwargs.pop('snum')
-        self.level = kwargs.pop('level')
-        self.parent_id= kwargs.pop('parent_id')
-        
-        
         MyImage.__init__(self, *args, **kwargs)
 
     def drawOn(self,canv,x,y,_sW):
