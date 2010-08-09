@@ -1606,7 +1606,7 @@ Rst2pdf includes an experimental PDF extension for sphinx.
 
 To use it in your existing sphinx project you need to do the following:
     
-1. Add rst2pdf.createpdf in your conf.py's extensions. For example::
+1. Add rst2pdf.pdfbuilder in your conf.py's extensions. For example::
     
     extensions = ['sphinx.ext.autodoc','rst2pdf.pdfbuilder']
 
