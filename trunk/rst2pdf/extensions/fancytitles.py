@@ -126,7 +126,7 @@ class FancyHeading(MyImage, Heading):
             #self.parent_id=self.parent_id[0]
         
         # Add outline entry. This is copied from rst2pdf.flowables.heading
-        canv.bookmarkHorizontal(self.parent_id,0,0+self.image.height)
+        canv.bookmarkHorizontal(self.parent_id,0,y+self.image.height)
 
         if canv.firstSect:
             canv.sectName = self.stext
