@@ -88,7 +88,7 @@ class DocutilsInterface(object):
         # Get lexer for language (use text as fallback)
         try:
             if self.language and unicode(self.language).lower() <> 'none':
-                lexer = get_lexer_by_name(self.language)
+                lexer = get_lexer_by_name(self.language.lower())
             else:
                 lexer = get_lexer_by_name('text')
         except ValueError:

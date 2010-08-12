@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Smarter --inline-links option
 * New extension: fancytitles, see http://lateral.netmanagers.com.ar/weblog/posts/BB906.html
 * New feature: tab-width option in code-block directive (defaults to 8).
 * Fixed Issue 340: endnotes/footnotes were not styled.
