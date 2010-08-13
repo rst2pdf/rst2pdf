@@ -470,6 +470,14 @@
     linenumber:
       parent: code
 
+    right:
+      parent: bodytext
+      alignment: right
+
+    center:
+      parent: bodytext
+      alignment: center
+
     pygments-n: parent: code
     pygments-nx: parent: code
     pygments-p: parent: code
