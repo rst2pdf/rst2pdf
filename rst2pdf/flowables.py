@@ -185,7 +185,7 @@ class OddEven(Flowable):
         """Makes no sense to split this..."""
         return []
 
-class DelayedTable(Flowable):
+class DelayedTable(Table):
     """A flowable that inserts a table for which it has the data.
 
     Needed so column widths can be determined after we know on what frame
@@ -202,6 +202,18 @@ class DelayedTable(Flowable):
         self.hAlign = TA_CENTER
         self.splitByRow=splitByRow
 
+        ## Try to look more like a Table
+        #self._ncols = 2
+        #self._nosplitCmds= []
+        #self._nrows= 1
+        #self._rowHeights= [None]
+        #self._spanCmds= []
+        #self.ident= None
+        #self.repeatCols= 0
+        #self.repeatRows= 0
+        #self.splitByRow= 1
+        #self.vAlign= 'MIDDLE'
+        
     def wrap(self, w, h):
         # Create the table, with the widths from colWidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
@@ -560,7 +572,7 @@ class FrameCutter(FrameActionFlowable):
     def frameAction(self, frame):
         idx = frame.container.frames.index(frame)
         if self.floatLeft:
-            # Don´ t bother inserting a silly thin frame
+            # Don't bother inserting a silly thin frame
             if self.width-self.padding > 30:
                 f1 = SmartFrame(frame.container,
                     frame._x1 + self.dx - 2*self.padding,
@@ -582,7 +594,7 @@ class FrameCutter(FrameActionFlowable):
                         frame._height - self.f.height - 3*self.padding,
                         topPadding=0))
         else:
-            # Don´ t bother inserting a silly thin frame
+            # Don't bother inserting a silly thin frame
             if self.width-self.padding > 30:
                 f1 = SmartFrame(frame.container,
                     frame._x1 - self.width,

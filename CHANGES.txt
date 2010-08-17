@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed bug where nested lists broke page layout if the page was small.
 * Smarter --inline-links option
 * New extension: fancytitles, see http://lateral.netmanagers.com.ar/weblog/posts/BB906.html
 * New feature: tab-width option in code-block directive (defaults to 8).
