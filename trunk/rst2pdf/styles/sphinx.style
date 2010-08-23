@@ -200,7 +200,7 @@ styles:
         parent: code
         textColor: #4000E0
 
-    pygments-n-Identifier: parent: code
+    pygments-n-identifier: parent: code
     pygments-na: {parent: code, textColor: #0000C0}
     pygments-nb: {parent: code, textColor: #007020}
     pygments-nc:
