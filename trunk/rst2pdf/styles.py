@@ -523,6 +523,14 @@ class StyleSheet(object):
         
 
     def __getitem__(self, key):
+
+        # This 'normalizes' the key.
+        # For example, if the key is todo_node (like sphinx uses), it will be
+        # converted to 'todo-node' which is a valid docutils class name.
+
+        if not re.match("^[a-z](-?[a-z0-9]+)*$", key):
+            key = docutils.nodes.make_id(key)
+
         if self.StyleSheet.has_key(key):
             return self.StyleSheet[key]
         else:
