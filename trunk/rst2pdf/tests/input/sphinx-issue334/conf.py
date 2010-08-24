@@ -199,8 +199,6 @@ latex_documents = [
 #latex_use_modindex = True
 
 
-graphviz_dot='C:/appl/graphics/graphviz/2.26.3/bin/dot.exe'
-
 # -- Options for PDF output --------------------------------------------------
 #pdf_extensions=['vectorpdf']
 
