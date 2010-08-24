@@ -189,7 +189,7 @@ class HandleCiteRef(NodeHandler, docutils.nodes.citation_reference):
                 anchors +='<a name="%s"/>' % i
                 client.targets.append(i)
         return u'%s[<a href="%s" color="%s">%s</a>]'%\
-            (anchors, '#' + node.astext(),
+            (anchors, '#' + node.get('refid',node.astext()),
                 client.styles.linkColor, node.astext())
 
 class HandleTarget(NodeHandler, docutils.nodes.target):

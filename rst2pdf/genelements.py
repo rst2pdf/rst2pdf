@@ -787,6 +787,12 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
     def gather_elements(self, client, node, style):
         # It seems a footnote contains a label and a series of elements
         ltext = client.gather_pdftext(node.children[0])
+        label = None
+        ids=''
+        for i in node.get('ids',[]):
+            ids+='<a name="%s"/>'%(i)
+        client.targets.extend(node.get('ids',[]))
+
         if len(node['backrefs']) > 1 and client.footnote_backlinks:
             backrefs = []
             i = 1
@@ -796,13 +802,13 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                 i += 1
             backrefs = '(%s)' % ', '.join(backrefs)
             if ltext not in client.targets:
-                label = Paragraph('<a name="%s"/>%s'%(ltext,
+                label = Paragraph(ids+'<a name="%s"/>%s'%(ltext,
                                                     ltext + backrefs),
                                 client.styles["endnote"])
                 client.targets.append(ltext)
         elif len(node['backrefs'])==1 and client.footnote_backlinks:
             if ltext not in client.targets:
-                label = Paragraph('<a name="%s"/>'\
+                label = Paragraph(ids+'<a name="%s"/>'\
                                 '<a href="%s" color="%s">%s</a>' % (
                                     ltext,
                                     node['backrefs'][0],
@@ -811,9 +817,12 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                 client.targets.append(ltext)
         else:
             if ltext not in client.targets:
-                label = Paragraph('<a name="%s"/>%s' % (ltext, ltext),
+                label = Paragraph(ids+'<a name="%s"/>%s' % (ltext, ltext),
                     client.styles["endnote"])
                 client.targets.append(ltext)
+        if not label:
+            label = Paragraph('%s%s'%(ids, ltext),
+                    client.styles["endnote"])
         contents = client.gather_elements(node, client.styles["endnote"])[1:]
         if client.inline_footnotes:
             st=client.styles['endnote']
