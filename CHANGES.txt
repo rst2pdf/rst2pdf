@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 345: give file/line info when there is an error in a raw PDF directive.
 * Fixed Issue 336: JPEG images should work even without PIL (but give a warning because
   sizes will probably be wrong)
 * Fixed Issue 351: footnote/citation references were generated incorrectly, which

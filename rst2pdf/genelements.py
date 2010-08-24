@@ -849,7 +849,7 @@ class HandleRaw(NodeHandler, docutils.nodes.raw):
     def gather_elements(self, client, node, style):
         # Not really raw, but what the heck
         if node.get('format','NONE').lower()=='pdf':
-            return parseRaw(str(node.astext()))
+            return parseRaw(str(node.astext()), node)
         else:
             return []
 
