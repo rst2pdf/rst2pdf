@@ -22,7 +22,7 @@ from copy import copy
 
 from log import nodeid, log
 from flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
-from image import MyImage
+from image import MyImage, VectorPdf
 
 from opt_imports import Paragraph, sphinx
 
@@ -198,13 +198,25 @@ class HandleSphinxEq(SphinxHandler, mathbase.eqref):
         return '<a href="equation-%s" color="%s">%s</a>'%(node['target'], 
             client.styles.linkColor, node.astext())
 
+graphviz_warn = False
+
 try:
     x=sphinx.ext.graphviz.graphviz
     class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
         def gather_elements(self, client, node, style):
-                # Based on the graphviz extension
+            # Based on the graphviz extension
+            global graphviz_warn
             try:
-                fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
+                # Is vectorpdf enabled?
+                if hasattr(VectorPdf,'load_xobj'):
+                    # Yes, we have vectorpdf
+                    fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
+                else:
+                    # Use bitmap
+                    if not graphviz_warn:
+                        log.warning('Using graphviz with PNG output. You get much better results if you enable the vectorpdf extension.')
+                        graphviz_warn = True
+                    fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'png')
                 client.to_unlink.append(outfn)
                 client.to_unlink.append(outfn+'.map')
             except sphinx.ext.graphviz.GraphvizError, exc:
