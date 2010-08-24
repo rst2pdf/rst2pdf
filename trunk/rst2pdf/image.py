@@ -264,7 +264,7 @@ class MyImage (Flowable):
                 filename=self.raster(filename, client)
             else:
                 log.warning("Minimal PDF image support "\
-                    "requires PythonMagick [%s]", filename)
+                    "requires PythonMagick or the vectorpdf extension [%s]", filename)
                 filename = missing
         elif extension != 'jpg' and not LazyImports.PILImage:
             if LazyImports.PMImage:
