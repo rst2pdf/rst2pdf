@@ -217,8 +217,9 @@ try:
                         log.warning('Using graphviz with PNG output. You get much better results if you enable the vectorpdf extension.')
                         graphviz_warn = True
                     fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'png')
-                client.to_unlink.append(outfn)
-                client.to_unlink.append(outfn+'.map')
+                if outfn:
+                    client.to_unlink.append(outfn)
+                    client.to_unlink.append(outfn+'.map')
             except sphinx.ext.graphviz.GraphvizError, exc:
                 log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'],client.styles['code'])]
