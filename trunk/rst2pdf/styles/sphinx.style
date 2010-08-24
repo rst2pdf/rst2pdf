@@ -317,7 +317,14 @@ styles:
         parent: heading3
 
     table-heading: {borderWidth: 0, parent: heading}
+
+    todo-node:
+        backColor: #FFFFFF
+        borderColor: #CCCCCC
+        parent: admonition
+
     versionmodified: {fontName: stdItalic, parent: bodytext}
+
     warning:
         backColor: #FFE4E4
         borderColor: #FF6666
