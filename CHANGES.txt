@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 336: JPEG images should work even without PIL (but give a warning because
+  sizes will probably be wrong)
 * Fixed Issue 351: footnote/citation references were generated incorrectly, which
   caused problems if there was a citation with the same text as a heading.
 * Fixed Issue 353: better handling of graphviz, so that it works without vectorpdf
