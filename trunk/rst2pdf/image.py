@@ -364,9 +364,16 @@ class MyImage (Flowable):
                 ydpi=density.height()*2.54
                 keeptrying = False
             if keeptrying:
-                log.error("The image (%s, %s) is broken or in an unknown format"
-                            , imgname, nodeid(node))
-                raise ValueError
+                if extension not in ['jpg', 'jpeg']:
+                    log.error("The image (%s, %s) is broken or in an unknown format"
+                                , imgname, nodeid(node))
+                    raise ValueError
+                else:
+                    # Can be handled by reportlab
+                    log.warning("Can't figure out size of the image (%s, %s). Install PIL for better results."
+                                , imgname, nodeid(node))
+                    iw = 1000
+                    ih = 1000
 
         # Try to get the print resolution from the image itself via PIL.
         # If it fails, assume a DPI of 300, which is pretty much made up,
