@@ -220,6 +220,10 @@ try:
                 if outfn:
                     client.to_unlink.append(outfn)
                     client.to_unlink.append(outfn+'.map')
+                else:
+                    # Something went very wrong with graphviz, and
+                    # sphinx should have given an error already
+                    return []
             except sphinx.ext.graphviz.GraphvizError, exc:
                 log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'],client.styles['code'])]
