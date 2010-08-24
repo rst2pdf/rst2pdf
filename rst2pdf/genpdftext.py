@@ -169,26 +169,15 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
 
-class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference):
+class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference,docutils.nodes.citation_reference):
     def get_text(self, client, node, replaceEnt):
         # TODO: when used in Sphinx, all footnotes are autonumbered
         anchors=''
-        for i in node['ids']:
+        for i in node.get('ids'):
             if i not in client.targets:
                 anchors+='<a name="%s"/>' % i
                 client.targets.append(i)
         return u'%s<super><a href="%s" color="%s">%s</a></super>'%\
-            (anchors, '#' + node.astext(),
-                client.styles.linkColor, node.astext())
-
-class HandleCiteRef(NodeHandler, docutils.nodes.citation_reference):
-    def get_text(self, client, node, replaceEnt):
-        anchors=''
-        for i in node['ids']:
-            if i not in client.targets:
-                anchors +='<a name="%s"/>' % i
-                client.targets.append(i)
-        return u'%s[<a href="%s" color="%s">%s</a>]'%\
             (anchors, '#' + node.get('refid',node.astext()),
                 client.styles.linkColor, node.astext())
 
