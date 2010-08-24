@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 353: better handling of graphviz, so that it works without vectorpdf
+  but gives a warning about it.
+* Fixed Issue 354: make todo_node from sphinx customizable.
 * Fixed bug where nested lists broke page layout if the page was small.
 * Smarter --inline-links option
 * New extension: fancytitles, see http://lateral.netmanagers.com.ar/weblog/posts/BB906.html
