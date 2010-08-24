@@ -434,10 +434,12 @@ class PDFContents(Contents):
         level += 1
         sections=[]
         for sect in node:
-            if isinstance(sect,addnodes.start_of_file):
+            if isinstance(sect,nodes.compound):
                 for sect2 in sect:
-                    if isinstance(sect2,nodes.section):
-                        sections.append(sect2)
+                    if isinstance(sect2,addnodes.start_of_file):
+                        for sect3 in sect2:
+                            if isinstance(sect3,nodes.section):
+                                sections.append(sect3)
             elif isinstance(sect, nodes.section):
                 sections.append(sect)
         #sections = [sect for sect in node if isinstance(sect, nodes.section)]
