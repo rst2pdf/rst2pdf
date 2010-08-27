@@ -176,9 +176,16 @@ class PDFBuilder(Builder):
         tree = process_tree(docname, tree)
 
         if self.config.language:
-            langmod = languages.get_language(self.config.language[:2])
-        else:
-            langmod = languages.get_language('en')
+            try:
+                self.docutils_languages[lang] = get_language(lang)
+            except ImportError:
+                try:
+                    self.docutils_languages[lang] = \
+                         get_language(lang.split('_', 1)[0])
+                except ImportError:
+                    log.warning("Can't load Docutils module \
+                        for language %s", lang)
+                langmod = languages.get_language('en')
             
         if self.config.pdf_use_index:
             # Add index at the end of the document
@@ -529,10 +536,16 @@ class PDFWriter(writers.Writer):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
         
-        if self.config.language:
-            langmod = languages.get_language(self.config.language[:2])
-        else:
-            langmod = languages.get_language('en')
+        try:
+            self.docutils_languages[lang] = get_language(lang)
+        except ImportError:
+            try:
+                self.docutils_languages[lang] = \
+                    get_language(lang.split('_', 1)[0])
+            except ImportError:
+                log.warning("Can't load Docutils module "\
+                    "for language %s", lang)
+                langmod = languages.get_language('en')
             
         # Generate Contents topic manually
         if self.use_toc:

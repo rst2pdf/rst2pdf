@@ -163,6 +163,17 @@ class RstToPdf(object):
         self.splittables=splittables
         self.basedir=basedir
         self.language = language
+        try:
+            get_language (self.language)
+        except ImportError:
+            try:
+                language = self.language.split('_', 1)[0]
+                get_language (language)
+                self.language = language
+            except ImportError:
+                log.warning("Can't load Docutils module "\
+                    "for language %s or %s", self.language, language)
+                self.language = 'en'
         self.doc_title = ""
         self.doc_title_clean = ""
         self.doc_subtitle = ""
@@ -532,7 +543,7 @@ class RstToPdf(object):
         if doctree is None:
             if text is not None:
                 if self.language:
-                    settings_overrides={'language_code': self.language[:2]}
+                    settings_overrides={'language_code': self.language}
                 else:
                     settings_overrides={}
                 self.doctree = docutils.core.publish_doctree(text,
