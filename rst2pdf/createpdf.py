@@ -447,7 +447,7 @@ class RstToPdf(object):
         Takes a list of rows, consisting of cells and performs the following fixes:
 
         * For multicolumn cells, add continuation cells, to make all rows the same
-        size.
+        size. These cells have to be multirow if the original cell is multirow.
 
         * For multirow cell, insert continuation cells, to make all columns the
         same size.
@@ -462,6 +462,8 @@ class RstToPdf(object):
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
 
+        #from pudb import set_trace; set_trace()
+
         for y in range(0, len(rows)):
             for x in range(0, len(rows[y])):
                 cell = rows[y][x]
@@ -469,7 +471,9 @@ class RstToPdf(object):
                     continue
                 if cell.get("morecols"):
                     for i in range(0, cell.get("morecols")):
-                        rows[y].insert(x + 1, "")
+                        e=docutils.nodes.entry("")
+                        e["morerows"] = cell.get("morerows",0)
+                        rows[y].insert(x + 1, e)
 
         for y in range(0, len(rows)):
             for x in range(0, len(rows[y])):
