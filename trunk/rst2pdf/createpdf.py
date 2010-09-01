@@ -130,7 +130,8 @@ numberingstyles={ 'arabic': 'ARABIC',
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets=[], language=None,
+    def __init__(self, stylesheets=[],
+                 language='en',
                  header=None,
                  footer=None,
                  inlinelinks=False,
