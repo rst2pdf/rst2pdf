@@ -538,9 +538,11 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
+        self.docutils_languages = {}
         lang = self.config.language
+        langmod = languages.get_language('en')
         try:
-            self.docutils_languages[lang] = get_language(lang)
+            langmod = get_language(lang)
         except ImportError:
             try:
                 self.docutils_languages[lang] = \
