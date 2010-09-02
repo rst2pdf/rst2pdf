@@ -33,6 +33,7 @@ from pygments.lexers import get_lexer_by_name, guess_lexer
 from docutils import writers
 from docutils import nodes
 from docutils import languages
+from docutils.languages import get_language
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
@@ -175,7 +176,9 @@ class PDFBuilder(Builder):
         tree = self.env.get_doctree(docname)        
         tree = process_tree(docname, tree)
 
+        self.docutils_languages = {}
         if self.config.language:
+            lang = self.config.language
             try:
                 self.docutils_languages[lang] = get_language(lang)
             except ImportError:
@@ -535,7 +538,7 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
-        
+        lang = self.config.language
         try:
             self.docutils_languages[lang] = get_language(lang)
         except ImportError:
