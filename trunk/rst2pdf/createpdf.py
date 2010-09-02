@@ -1158,7 +1158,7 @@ def parse_commandline():
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)
 
-    def_lang = config.getValue("general", "language", None)
+    def_lang = config.getValue("general", "language", 'en')
     parser.add_option('-l', '--language', metavar='LANG',
         default=def_lang, dest='language',
         help='Language to be used for hyphenation and '\
