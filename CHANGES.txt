@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 359: Wrong --fit-background-mode help string
 * Fixed Issue 356: missing cells if a cell spawns rows and columns.
 * Fixed Issue 349: Work correctly with languages that are available in form  aa_bb and not aa (example: zh_cn)
 * Fixed Issue 345: give file/line info when there is an error in a raw PDF directive.
