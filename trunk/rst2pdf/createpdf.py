@@ -1194,7 +1194,7 @@ def parse_commandline():
     parser.add_option('--fit-background-mode', metavar='MODE',
         default=def_fit_background, dest='background_fit_mode',
         help='How to fit the background image to the page.'\
-        ' One of stretch or center. Default="%s"'%def_fit_background)
+        ' One of scale or center. Default="%s"'%def_fit_background)
 
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
