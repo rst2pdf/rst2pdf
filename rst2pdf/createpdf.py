@@ -1239,7 +1239,7 @@ def parse_commandline():
     parser.add_option('--real-footnotes', action='store_true',
         dest='real_footnotes', default=def_real_footnotes,
         help='Show footnotes at the bottom of the page where they are defined.'\
-        ' Default=%s' % str(not def_real_footnotes))
+        ' Default=%s' % str(def_real_footnotes))
 
     def_dpi = config.getValue("general", "default_dpi", 300)
     parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
