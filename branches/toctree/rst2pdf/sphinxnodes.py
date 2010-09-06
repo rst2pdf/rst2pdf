@@ -68,6 +68,9 @@ class SphinxListHandler(SphinxHandler):
             t=t[1:]
         return t
 
+class HandleSphinxToctree(SphinxFont,  sphinx.addnodes.toctree):
+    fontstyle = "descclassname"
+
 class HandleSphinxDescAddname(SphinxFont,  sphinx.addnodes.desc_addname):
     fontstyle = "descclassname"
 

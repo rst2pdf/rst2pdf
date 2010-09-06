@@ -107,8 +107,6 @@ class PDFBuilder(Builder):
                                 page_template=self.page_template,
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
                                 real_footnotes=opts.get('pdf_real_footnotes',self.config.pdf_real_footnotes),
-                                use_toc=opts.get('pdf_use_toc',self.config.pdf_use_toc),
-                                toc_depth=opts.get('pdf_toc_depth',self.config.pdf_toc_depth),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -170,7 +168,8 @@ class PDFBuilder(Builder):
                         sof = addnodes.start_of_file(docname=includefile)
                         sof.children = subtree.children
                         newnodes.append(sof)
-                toctreenode.parent.replace(toctreenode, newnodes)
+                for newnode in newnodes:
+                    toctreenode.parent.append(newnode)
             return tree
 
         
@@ -441,23 +440,32 @@ def genindex_nodes(genindexentries):
 
 class PDFContents(Contents):
     
-    def build_contents(self, node, level=0):
+    def build_contents(self, node, depth=None, level=0):
         level += 1
         sections=[]
-        for sect in node:
-            if isinstance(sect,nodes.compound):
-                for sect2 in sect:
-                    if isinstance(sect2,addnodes.start_of_file):
-                        for sect3 in sect2:
-                            if isinstance(sect3,nodes.section):
-                                sections.append(sect3)
-            elif isinstance(sect, nodes.section):
+        if compound:
+            toctree = compound[0].traverse(addnodes.toctree)
+            if toctree:
+                if toctree[0]['titlesonly']:
+                    depth = 1
+                else:
+                    depth = toctree[0]['maxdepth']
+
+            start_of_file = compound[0].traverse(addnodes.start_of_file)
+            if start_of_file:
+                for sect in start_of_file[0].traverse(nodes.section):
+                    sect['docname'] = start_of_file[0]['docname']
+                    sections.append(sect)
+        else:
+            for sect in node[0].traverse(nodes.section):
+                sect['docname'] = docname
                 sections.append(sect)
-        #sections = [sect for sect in node if isinstance(sect, nodes.section)]
+
         entries = []
         autonum = 0
-        # FIXME: depth should be taken from :maxdepth: (Issue 320)
-        depth = self.toc_depth
+        if toctree is not None:
+            depth = toctree['maxdepth']
+
         for section in sections:
             title = section[0]
             auto = title.get('auto')    # May be set by SectNum.
@@ -473,8 +481,8 @@ class PDFContents(Contents):
                     title['refid'] = ref_id
                 elif self.backlinks == 'top':
                     title['refid'] = self.toc_id
-            if level < depth:
-                subsects = self.build_contents(section, level)
+            if depth < 0 or level < depth:
+                subsects = self.build_contents(section, depth, level)
                 item += subsects
             entries.append(item)
         if entries:
@@ -503,8 +511,6 @@ class PDFWriter(writers.Writer):
                 page_template = 'cutePage',
                 invariant = False,
                 real_footnotes = False,
-                use_toc = True,
-                toc_depth = 9999,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -525,8 +531,6 @@ class PDFWriter(writers.Writer):
         self.page_template = page_template
         self.invariant=invariant
         self.real_footnotes=real_footnotes
-        self.use_toc=use_toc
-        self.toc_depth=toc_depth
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
@@ -535,6 +539,14 @@ class PDFWriter(writers.Writer):
     supported = ('pdf')
     config_section = 'pdf writer'
     config_section_dependencies = ('writers',)
+
+    def is_toc_enabled(self):
+        toctree = self.document.traverse(addnodes.toctree)
+
+        if len(toctree) > 0 and toctree[0]['hidden'] is False:
+            return True
+        else:
+            return False
 
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
@@ -554,7 +566,7 @@ class PDFWriter(writers.Writer):
                 langmod = languages.get_language('en')
             
         # Generate Contents topic manually
-        if self.use_toc:
+        if self.is_toc_enabled():
             contents=nodes.topic(classes=['contents'])
             contents+=nodes.title('')
             contents[0]+=nodes.Text( langmod.labels['contents'])
@@ -567,7 +579,6 @@ class PDFWriter(writers.Writer):
             self.document.insert(0,contents)
             self.document.insert(0,nodes.raw(text='SetPageCounter 1 lowerroman', format='pdf'))
             contTrans=PDFContents(self.document)
-            contTrans.toc_depth = self.toc_depth
             contTrans.startnode=pending
             contTrans.apply()
 
@@ -894,8 +905,6 @@ def setup(app):
     app.add_config_value('pdf_page_template','cutePage', None)
     app.add_config_value('pdf_invariant','False', None)
     app.add_config_value('pdf_real_footnotes','False', None)
-    app.add_config_value('pdf_use_toc','True', None)
-    app.add_config_value('pdf_toc_depth',9999, None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
