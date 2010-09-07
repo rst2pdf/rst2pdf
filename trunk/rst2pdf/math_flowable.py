@@ -3,6 +3,7 @@
 
 import tempfile
 import os
+import re
 
 from reportlab.platypus import *
 from reportlab.pdfbase.ttfonts import TTFont
@@ -17,6 +18,11 @@ HAS_MATPLOTLIB = mathtext is not None
 
 fonts = {}
 
+def enclose(s):
+    """Enclose the string in $...$ if needed"""
+    if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
+        s = u"$%s$" % s
+    return s
 
 class Math(Flowable):
 
@@ -37,7 +43,7 @@ class Math(Flowable):
             try:
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
-                    '$%s$' % self.s, 72)
+                    enclose(self.s), 72)
                 return width, height
             except:
                 pass
@@ -61,7 +67,7 @@ class Math(Flowable):
             try:
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
-                    '$%s$' % self.s, 72)
+                    enclose(self.s), 72)
                 if self.l:
                     log.info('Drawing equation-%s'%self.l)
                     canv.bookmarkHorizontal('equation-%s'%self.l,0,height)
@@ -91,7 +97,7 @@ class Math(Flowable):
         useful to align it when used inline."""
         if HAS_MATPLOTLIB:
             width, height, descent, glyphs, rects, used_characters = \
-            self.parser.parse('$%s$'%self.s, 72)
+            self.parser.parse(enclose(self.s), 72)
             return descent
         return 0
 
@@ -117,7 +123,7 @@ class Math(Flowable):
         else:
             width, height, descent, glyphs,\
             rects, used_characters = self.parser.parse(
-                '$%s$' % self.s, dpi)
+                enclose(self.s), dpi)
             img = Image.new('L', (int(width*scale), int(height*scale)),
                 ImageColor.getcolor("white", "L"))
             draw = ImageDraw.Draw(img)
