@@ -685,7 +685,10 @@ class HandleLine(NodeHandler, docutils.nodes.line):
         i=node.__dict__.get('indent',0)
         qstyle = copy(client.styles['line'])
         qstyle.leftIndent += client.styles.adjustUnits("0.5em")*i
-        return [Paragraph(client.gather_pdftext(node), style=qstyle)]
+        text = client.gather_pdftext(node)
+        if not text: # empty line
+            text=u"<nobr>\xa0</nobr>"
+        return [Paragraph(text, style=qstyle)]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                                docutils.nodes.doctest_block):
