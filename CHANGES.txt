@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 362: Smarter auto-enclosing of equations in $...$
 * Fixed Issue 358: --real--footnotes defaults to False, but help text indicates default is True
 * Fixed Issue 359: Wrong --fit-background-mode help string
 * Fixed Issue 356: missing cells if a cell spawns rows and columns.
