@@ -22,9 +22,12 @@ if 'Directive' in rst.__dict__:
         }
 
         def run(self):
+
             latex = '\n'.join(self.content)
-            if self.arguments and self.arguments[0]:
+            if self.arguments and self.arguments[0] and latex:
                 latex = self.arguments[0] + '\n\n' + latex
+            if self.arguments and self.arguments[0] and not latex:
+                latex = self.arguments[0]
             label=self.options.get('label', None)
             return [math_node(latex=latex,
                               label=label,
