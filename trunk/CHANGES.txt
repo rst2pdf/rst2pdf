@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 364: Some options not respected when passed in per-doc options
+  in sphinx.
 * Fixed Issue 361: multiple linebreaks in line blocks were collapsed.
 * Fixed Issue 363: strange characters in some cases in math directive.
 * Fixed Issue 362: Smarter auto-enclosing of equations in $...$
