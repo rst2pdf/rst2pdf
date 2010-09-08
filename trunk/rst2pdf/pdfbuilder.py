@@ -540,7 +540,7 @@ class PDFWriter(writers.Writer):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
         self.docutils_languages = {}
-        lang = self.config.language
+        lang = self.config.language or 'en'
         langmod = languages.get_language('en')
         try:
             langmod = get_language(lang)
@@ -877,7 +877,7 @@ def setup(app):
     app.add_config_value('pdf_stylesheets', ['sphinx'], None)
     app.add_config_value('pdf_compressed', False, None)
     app.add_config_value('pdf_font_path', [], None)
-    app.add_config_value('pdf_language', '', 'en_US')
+    app.add_config_value('pdf_language', 'en_US', None)
     app.add_config_value('pdf_fit_mode', '', None),
     app.add_config_value('pdf_break_level', 0, None)
     app.add_config_value('pdf_inline_footnotes', True, None)
