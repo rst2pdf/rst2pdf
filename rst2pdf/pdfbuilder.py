@@ -109,6 +109,7 @@ class PDFBuilder(Builder):
                                 real_footnotes=opts.get('pdf_real_footnotes',self.config.pdf_real_footnotes),
                                 use_toc=opts.get('pdf_use_toc',self.config.pdf_use_toc),
                                 toc_depth=opts.get('pdf_toc_depth',self.config.pdf_toc_depth),
+                                use_coverpage=opts.get('pdf_use_coverpage',self.config.pdf_use_coverpage),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -503,6 +504,7 @@ class PDFWriter(writers.Writer):
                 invariant = False,
                 real_footnotes = False,
                 use_toc = True,
+                use_coverpage = True,
                 toc_depth = 9999,
                 config = {}):
         writers.Writer.__init__(self)
@@ -525,6 +527,7 @@ class PDFWriter(writers.Writer):
         self.invariant=invariant
         self.real_footnotes=real_footnotes
         self.use_toc=use_toc
+        self.use_coverpage=use_coverpage
         self.toc_depth=toc_depth
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
@@ -570,7 +573,7 @@ class PDFWriter(writers.Writer):
             contTrans.startnode=pending
             contTrans.apply()
 
-        if self.config.pdf_use_coverpage:
+        if self.use_coverpage:
             # Generate cover page
 
             # FIXME: duplicate from createpdf, refactor!
