@@ -85,7 +85,7 @@ class PDFBuilder(Builder):
                 else:
                     opts={}
                 self.info("processing " + targetname + "... ", nonl=1)
-                
+                self.opts = opts
                 class dummy:
                     extensions=self.config.pdf_extensions
                     
@@ -189,8 +189,8 @@ class PDFBuilder(Builder):
                     log.warning("Can't load Docutils module \
                         for language %s", lang)
                 langmod = languages.get_language('en')
-            
-        if self.config.pdf_use_index:
+
+        if self.opts.get('pdf_use_index',self.config.pdf_use_index):
             # Add index at the end of the document
             
             # This is a hack. create_index creates an index from 
