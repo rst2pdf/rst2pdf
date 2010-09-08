@@ -130,7 +130,6 @@ class PDFBuilder(Builder):
         
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
-	print '==========', self.config.pdf_documents
         if not preliminary_document_data:
             self.warn('no "pdf_documents" config value found; no documents '
                       'will be written')
