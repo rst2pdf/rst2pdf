@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Added stylesheets for landscape paper sizes (i.e: a4-landscape.style)
 * Fixed Issue 364: Some options not respected when passed in per-doc options
   in sphinx.
 * Fixed Issue 361: multiple linebreaks in line blocks were collapsed.
