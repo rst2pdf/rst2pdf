@@ -150,6 +150,11 @@ class StyleSheet(object):
                         self.psname = pgs
                         if 'width' in self.page: del(self.page['width'])
                         if 'height' in self.page: del(self.page['height'])
+                    elif pgs.endswith('-LANDSCAPE'):
+                        self.psname = pgs.split('-')[0]
+                        self.ps = list(pagesizes.landscape(pagesizes.__dict__[self.psname]))
+                        if 'width' in self.page: del(self.page['width'])
+                        if 'height' in self.page: del(self.page['height'])
                     else:
                         log.critical('Unknown page size %s in stylesheet %s'%\
                             (page['size'], ssname))
