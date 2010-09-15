@@ -114,6 +114,12 @@ class HandleSysMessage(HandleText, docutils.nodes.system_message, docutils.nodes
 
 class HandleGenerated(HandleText, docutils.nodes.generated):
     pass
+#    def get_text(self, client, node, replaceEnt):
+#        if 'sectnum' in node['classes']:
+#            # This is the child of a title with a section number
+#            # Send the section number up to the title node
+#            node.parent['_sectnum'] = node.astext()
+#        return node.astext()
 
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):

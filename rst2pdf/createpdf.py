@@ -155,7 +155,8 @@ class RstToPdf(object):
                  blank_first_page=False,
                  breakside='odd',
                  custom_cover='cover.tmpl',
-                 floating_images=False
+                 floating_images=False,
+                 numbered_links=False,
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -216,6 +217,7 @@ class RstToPdf(object):
             self.mustMultiBuild = True
         self.def_dpi = def_dpi
         self.show_frame = show_frame
+        self.numbered_links = numbered_links
         self.img_dir = os.path.join(self.PATH, 'images')
 
         # Sorry about this, but importing sphinx.roles makes some
@@ -561,6 +563,14 @@ class RstToPdf(object):
         else:
             self.doctree = doctree
 
+        if self.numbered_links:
+            # Transform all links to sections so they show numbers
+            from sectnumlinks import SectNumFolder, SectRefExpander
+            snf = SectNumFolder(self.doctree)
+            self.doctree.walk(snf)
+            srf = SectRefExpander(self.doctree, snf.sectnums)
+            self.doctree.walk(srf)
+            
         elements = self.gen_elements(self.doctree)
 
         # Find cover template, save it in cover_file
@@ -1299,6 +1309,11 @@ def parse_commandline():
         help='Makes images with :aling: attribute work more like in rst2html. Default: %s'%def_floating_images,
         dest='floating_images')
 
+    def_numbered_links = config.getValue("general", "numbered_links", False)
+    parser.add_option('--use-numbered-links', action='store_true', default=def_numbered_links,
+        help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s'%def_numbered_links,
+        dest='numbered_links')
+
     return parser
 
 def main(args=None):
@@ -1433,6 +1448,7 @@ def main(args=None):
         breakside=options.breakside,
         custom_cover=options.custom_cover,
         floating_images=options.floating_images,
+        numbered_links=options.numbered_links,
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,
