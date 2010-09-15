@@ -57,6 +57,7 @@ styles:
 
     confval: parent: bodytext
     data: parent: bodytext
+    kbd: parent: bodytext
     desc: {parent: bodytext, spaceBefore: 6}
     descclassname: {fontName: stdMono, parent: literal}
     descname: {fontName: stdMonoBold, parent: literal}
