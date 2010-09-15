@@ -157,6 +157,9 @@ The possible values are:
                         Makes images with :aling: attribute work more like in
                         rst2html. Default: False
 
+--use-numbered-links  When using numbered sections, adds the numbers to all
+                      links referring to the section headers. Default: False
+
 
 EXAMPLES
 --------
