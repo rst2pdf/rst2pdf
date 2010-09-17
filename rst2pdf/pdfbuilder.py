@@ -110,6 +110,8 @@ class PDFBuilder(Builder):
                                 use_toc=opts.get('pdf_use_toc',self.config.pdf_use_toc),
                                 toc_depth=opts.get('pdf_toc_depth',self.config.pdf_toc_depth),
                                 use_coverpage=opts.get('pdf_use_coverpage',self.config.pdf_use_coverpage),
+                                use_numbered_links=opts.get('pdf_use_numbered_links',self.config.pdf_use_numbered_links),
+                                fit_background_mode=opts.get('pdf_fit_background_mode',self.config.pdf_fit_background_mode),
                                 srcdir=self.srcdir,
                                 config=self.config
                                 )
@@ -506,6 +508,8 @@ class PDFWriter(writers.Writer):
                 use_toc = True,
                 use_coverpage = True,
                 toc_depth = 9999,
+                use_numbered_links = False,
+                fit_background_mode = "scale",
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -529,6 +533,8 @@ class PDFWriter(writers.Writer):
         self.use_toc=use_toc
         self.use_coverpage=use_coverpage
         self.toc_depth=toc_depth
+        self.use_numbered_links=use_numbered_links
+        self.fit_background_mode=fit_background_mode
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
@@ -628,7 +634,9 @@ class PDFWriter(writers.Writer):
                  style_path=[self.srcdir],
                  basedir=self.srcdir,
                  def_dpi=self.default_dpi,
-                 real_footnotes=self.real_footnotes
+                 real_footnotes=self.real_footnotes,
+                 numbered_links=self.use_numbered_links,
+                 background_fit_mode=self.fit_background_mode,
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
@@ -898,6 +906,8 @@ def setup(app):
     app.add_config_value('pdf_real_footnotes','False', None)
     app.add_config_value('pdf_use_toc','True', None)
     app.add_config_value('pdf_toc_depth',9999, None)
+    app.add_config_value('pdf_use_numbered_links',False, None)
+    app.add_config_value('pdf_fit_background_mode',"scale", None)
     
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
