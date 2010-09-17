@@ -419,7 +419,7 @@ class MyPageBreak(FrameActionFlowable):
                 if not frame._atTop:
                     # Blank pages get no heading or footer
                     frame._generated_content.append(SetNextTemplate(self.templateName))
-                    frame._generated_content.append(SetNextTemplate('coverPage'))
+                    frame._generated_content.append(SetNextTemplate('emptyPage'))
                     frame._generated_content.append(PageBreak())
                     frame._generated_content.append(ResetNextTemplate())
                     frame._generated_content.append(PageBreak())
@@ -435,7 +435,7 @@ class MyPageBreak(FrameActionFlowable):
                 if not frame._atTop:
                     # Blank pages get no heading or footer
                     frame._generated_content.append(SetNextTemplate(self.templateName))
-                    frame._generated_content.append(SetNextTemplate('coverPage'))
+                    frame._generated_content.append(SetNextTemplate('emptyPage'))
                     frame._generated_content.append(PageBreak())
                     frame._generated_content.append(ResetNextTemplate())
                     frame._generated_content.append(PageBreak())
@@ -480,6 +480,8 @@ class ResetNextTemplate(Flowable):
         self.canv.templateName, self.canv.oldTemplateName = \
             self.canv.oldTemplateName, self.canv.templateName
 
+    def wrap(self, aW, aH):
+        return 0,0
 
 class Transition(Flowable):
     """Wrap canvas.setPageTransition.
