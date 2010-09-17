@@ -1701,6 +1701,12 @@ To use it in your existing sphinx project you need to do the following:
     # How many levels deep should the table of contents be?
     pdf_toc_depth = 9999
 
+    # Add section number to section references
+    pdf_use_numbered_links = False
+
+    # Background images fitting mode
+    pdf_fit_background_mode = 'scale'
+
 3. (Maybe) add this in your Makefile (on unix-like systems):
     
     .. code-block:: makefile
