@@ -33,7 +33,7 @@
 
     emptyPage:
         frames: []
-            [0cm, 0cm, 12, 12]
+            [0cm, 0cm, 100%, 100%]
         showHeader : false
         showFooter : false
 
