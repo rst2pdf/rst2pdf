@@ -861,15 +861,26 @@ class HandleOddEven (NodeHandler, OddEvenNode):
     def gather_elements(self, client, node, style):
         odd=[]
         even=[]
+        #from pudb import set_trace; set_trace()
         if node.children:
             if isinstance (node.children[0], docutils.nodes.paragraph):
-                odd=[Paragraph(client.gather_pdftext(node.children[0]), style)]
+                if node.children[0].get('classes'):
+                    s = client.styles[node.children[0].get('classes')[0]]
+                else:
+                    s = style
+                odd=[Paragraph(client.gather_pdftext(node.children[0]),
+                    s)]
             else:
                 # A compound element
                 odd=client.gather_elements(node.children[0])
         if len(node.children)>1:
             if isinstance (node.children[1], docutils.nodes.paragraph):
-                even=[Paragraph(client.gather_pdftext(node.children[1]), style)]
+                if node.children[1].get('classes'):
+                    s = client.styles[node.children[1].get('classes')[0]]
+                else:
+                    s = style
+                even=[Paragraph(client.gather_pdftext(node.children[1]),
+                     s)]
             else:
                 even=client.gather_elements(node.children[1])
 
