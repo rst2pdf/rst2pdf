@@ -27,7 +27,7 @@ import os
 from cStringIO import StringIO
 from rst2pdf import createpdf
 
-from rst2pdf import pygments_code_block_directive
+from rst2pdf import pygments_code_block_directive, oddeven_directive
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
 from docutils import writers
