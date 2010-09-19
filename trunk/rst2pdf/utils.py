@@ -27,6 +27,8 @@ def parseRaw(data, node):
         lexer = shlex.shlex(line)
         lexer.whitespace += ','
         tokens = list(lexer)
+        if not tokens:
+            continue # Empty line
         command = tokens[0]
         if command == 'PageBreak':
             if len(tokens) == 1:
