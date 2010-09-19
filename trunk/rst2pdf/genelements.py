@@ -184,6 +184,8 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
 class HandleParagraph(NodeHandler, docutils.nodes.paragraph):
     def gather_elements(self, client, node, style):
+        if isinstance(node.parent, OddEven):
+            from pudb import set_trace; set_trace()
         return [Paragraph(client.gen_pdftext(node), style)]
 
     def get_pre_post(self, client, node, replaceEnt):
@@ -862,9 +864,16 @@ class HandleOddEven (NodeHandler, OddEvenNode):
         odd=[]
         even=[]
         if node.children:
-            odd=client.gather_elements(node.children[0])
+            if isinstance (node.children[0], docutils.nodes.paragraph):
+                odd=[Paragraph(client.gather_pdftext(node.children[0]), style)]
+            else:
+                # A compound element
+                odd=client.gather_elements(node.children[0])
         if len(node.children)>1:
-            even=client.gather_elements(node.children[1])
+            if isinstance (node.children[1], docutils.nodes.paragraph):
+                even=[Paragraph(client.gather_pdftext(node.children[1]), style)]
+            else:
+                even=client.gather_elements(node.children[1])
 
         return [OddEven(odd=odd, even=even)]
 
