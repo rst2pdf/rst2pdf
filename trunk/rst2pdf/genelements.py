@@ -184,8 +184,6 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
 class HandleParagraph(NodeHandler, docutils.nodes.paragraph):
     def gather_elements(self, client, node, style):
-        if isinstance(node.parent, OddEven):
-            from pudb import set_trace; set_trace()
         return [Paragraph(client.gen_pdftext(node), style)]
 
     def get_pre_post(self, client, node, replaceEnt):
