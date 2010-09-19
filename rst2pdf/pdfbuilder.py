@@ -784,6 +784,11 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_production(self, node):
         pass
 
+    def visit_OddEvenNode(self, node):
+        pass
+    def depart_OddEvenNode(self, node):
+        pass
+
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
     if lang in ('py', 'python'):
