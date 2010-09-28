@@ -389,7 +389,7 @@ class MyImage (Flowable):
         h = node.get('height')
         if h is None and w is None: # Nothing specified
             # Guess from iw, ih
-            log.warning("Using image %s without specifying size."
+            log.debug("Using image %s without specifying size."
                 "Calculating based on image size at %ddpi [%s]",
                 imgname, xdpi, nodeid(node))
             w = iw*inch/xdpi
