@@ -499,7 +499,7 @@ class PDFWriter(writers.Writer):
                 fitmode = 'shrink',
                 compressed = False,
                 inline_footnotes = False,
-                splittables = False,
+                splittables = True,
                 srcdir = '.',
                 default_dpi = 300,
                 page_template = 'cutePage',
@@ -902,7 +902,7 @@ def setup(app):
     app.add_config_value('pdf_use_coverpage', True, None)
     app.add_config_value('pdf_cover_template', 'sphinxcover.tmpl', None)
     app.add_config_value('pdf_appendices', [], None)
-    app.add_config_value('pdf_splittables', False, None)
+    app.add_config_value('pdf_splittables', True, None)
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
     app.add_config_value('pdf_extensions',['vectorpdf'], None)
