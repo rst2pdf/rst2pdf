@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Switched pdfbuilder to use SplitTables by default (it made no sense not to do it)
+* Fixed Issue 365: some TTF fonts don't validate but they work anyway.
+* Set a valid default baseurl for Sphinx (makes it much faster!)
 * New feature: --use-numbered-links to show section numbers in links to sections, like  "See section 2.3 Termination"
 * Added stylesheets for landscape paper sizes (i.e: a4-landscape.style)
 * Fixed Issue 364: Some options not respected when passed in per-doc options
