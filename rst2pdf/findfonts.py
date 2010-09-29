@@ -65,7 +65,7 @@ def loadFonts():
         for ttf in ttfList:
             '''Find out how to process these'''
             try:
-                font = TTFontFile(ttf,validate=True)
+                font = TTFontFile(ttf)
             except TTFError:
                 continue
             
@@ -309,7 +309,7 @@ def autoEmbed(fname):
             vname = os.path.basename(variant)[:-4]
             try:
                 if vname not in pdfmetrics._fonts:
-                    _font=TTFont(vname, variant, validate = 1)
+                    _font=TTFont(vname, variant)
                     log.info('Registering font: %s from %s'%\
                             (vname,variant))
                     pdfmetrics.registerFont(_font)
