@@ -422,6 +422,7 @@
       fontName: stdMono
       firstLineIndent: 0
       hyphenation: false
+      wordWrap: null
 
     aafigure:
       parent: literal

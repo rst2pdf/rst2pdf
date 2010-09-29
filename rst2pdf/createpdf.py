@@ -707,15 +707,16 @@ class RstToPdf(object):
             except ValueError, v:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
-                if v.args and str(v.args[0]).startswith('format not resolved'):
-                    missing=str(v.args[0]).split(' ')[-1]
-                    log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
-                    elements.append(Reference(missing))
-                    for e in elements:
-                        if hasattr(e,'_postponed'):
-                            delattr(e,'_postponed')
-                else:
-                    raise
+                #if v.args and str(v.args[0]).startswith('format not resolved'):
+                    #missing=str(v.args[0]).split(' ')[-1]
+                    #log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
+                    #elements.append(Reference(missing))
+                    #for e in elements:
+                        #if hasattr(e,'_postponed'):
+                            #delattr(e,'_postponed')
+                #else:
+                    #raise
+                raise
 
         #doc = SimpleDocTemplate("phello.pdf")
         #doc.build(elements)
@@ -1101,7 +1102,7 @@ class FancyPage(PageTemplate):
         # Adjust for gutter margin
         canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
         
-        log.info('Page %s [%s]'%(_counter,doc.page))
+        log.error('Page %s [%s]'%(_counter,doc.page))
         if doc.page % 2: # Left page
             hx = self.hx
             fx = self.fx

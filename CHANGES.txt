@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 360: Set literal.wordWrap to None by default so it doesn't inherit
+  wordWrap CJK when you use the otherwise correct japanese settings. In any case,
+  literal blocks are not supposed to wrap at all.
 * Switched pdfbuilder to use SplitTables by default (it made no sense not to do it)
 * Fixed Issue 365: some TTF fonts don't validate but they work anyway.
 * Set a valid default baseurl for Sphinx (makes it much faster!)
