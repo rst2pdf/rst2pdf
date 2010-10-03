@@ -216,10 +216,78 @@ class PDFBuilder(Builder):
                 tree.append(nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
                 tree.append(index_nodes)
 
-        # This is stolen from the HTML builder
+        # This is stolen from the HTML builder's prepare_writing function
         #moduleindex = self.env.domaindata['py']['modules']
         # FIXME: implement domain indexes for Sphinx 1.0.x
-                    
+        # determine the additional indices to include
+        self.domain_indices = []
+        # html_domain_indices can be False/True or a list of index names
+        indices_config = self.config.pdf_domain_indices
+        if indices_config:
+            for domain in self.env.domains.itervalues():
+                for indexcls in domain.indices:
+                    indexname = '%s-%s' % (domain.name, indexcls.name)
+                    if isinstance(indices_config, list):
+                        if indexname not in indices_config:
+                            continue
+                    # deprecated config value
+                    if indexname == 'py-modindex' and \
+                           not self.config.pdf_use_modindex:
+                        continue
+                    content, collapse = indexcls(domain).generate()
+                    if content:
+                        self.domain_indices.append(
+                            (indexname, indexcls, content, collapse))
+
+        # self.domain_indices contains a list of indices to generate, like
+        # this:
+        # [('py-modindex',
+        #    <class 'sphinx.domains.python.PythonModuleIndex'>,
+        #   [(u'p', [[u'parrot', 0, 'test', u'module-parrot', 'Unix, Windows',
+        #   '', 'Analyze and reanimate dead parrots.']])], True)]
+
+        # Now this in the HTML builder is passed onto write_domain_indices.
+        # We handle it right here
+        
+        for indexname, indexcls, content, collapse in self.domain_indices:
+            indexcontext = dict(
+                indextitle = indexcls.localname,
+                content = content,
+                collapse_index = collapse,
+            )
+            # In HTML this is handled with a Jinja template, domainindex.html
+            # We have to generate docutils stuff right here in the same way.
+            self.info(' ' + indexname, nonl=1)
+            print
+
+            output=['DUMMY','=====','',
+                    '.. _modindex:\n\n']
+            t=indexcls.localname
+            t+='\n'+'='*len(t)+'\n'
+            output.append(t)
+
+            for letter, entries in content:
+                output.append('.. cssclass:: heading4\n\n%s\n\n'%letter)
+                for (name, grouptype, page, anchor,
+                    extra, qualifier, description) in entries:
+                    if qualifier:
+                        q = '[%s]'%qualifier
+                    else:
+                        q = ''
+
+                    if extra:
+                        e = '(%s)'%extra
+                    else:
+                        e = ''
+                    output.append ('`%s <#%s>`_ %s %s'%(name, anchor, e, q))
+                    output.append('    %s'%description)
+                output.append('')
+
+            dt = docutils.core.publish_doctree('\n'.join(output))[1:]
+            dt.insert(0,nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
+            tree.extend(dt)            
+
+        
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
             self.info()
@@ -808,6 +876,7 @@ def setup(app):
     app.add_config_value('pdf_verbosity', 0, None)
     app.add_config_value('pdf_use_index', True, None)
     app.add_config_value('pdf_domain_indices', True, None)
+    app.add_config_value('pdf_use_modindex', True, None)
     app.add_config_value('pdf_use_coverpage', True, None)
     app.add_config_value('pdf_cover_template', 'sphinxcover.tmpl', None)
     app.add_config_value('pdf_appendices', [], None)

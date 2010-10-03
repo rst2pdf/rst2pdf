@@ -138,7 +138,7 @@ html_static_path = ['_static']
 #html_additional_pages = {}
 
 # If false, no module index is generated.
-html_domain_indices = ['py-modindex']
+html_domain_indices = True
 
 # If false, no index is generated.
 #html_use_index = True
@@ -186,6 +186,10 @@ pdf_documents = [
   ('test', 'Issue318', u'Issue 318 Documentation',
    u'Roberto Alsina'),
 ]
+
+pdf_use_index = True
+#pdf_verbosity = 2
+pdf_domain_indices = True
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
