@@ -218,98 +218,7 @@ class PDFBuilder(Builder):
 
         # This is stolen from the HTML builder
         #moduleindex = self.env.domaindata['py']['modules']
-        if sphinx.__version__ < "1.0" and self.config.pdf_use_modindex and self.env.modules:
-            modules = sorted(((mn, ('#module-' + mn, sy, pl, dep)) 
-                for (mn, (fn, sy, pl, dep)) in self.env.modules.iteritems()),
-                key=lambda x: x[0].lower())
-            # collect all platforms
-            platforms = set()
-            letters = []
-            pmn = ''
-            fl = '' # first letter
-            modindexentries = []
-            num_toplevels = 0
-            num_collapsables = 0
-            cg = 0 # collapse group
-            for mn, (fn, sy, pl, dep) in modules:
-                pl = pl and pl.split(', ') or []
-                platforms.update(pl)
-                ignore = self.env.config['modindex_common_prefix']
-                ignore = sorted(ignore, key=len, reverse=True)
-                for i in ignore:
-                    if mn.startswith(i):
-                        mn = mn[len(i):]
-                        stripped = i
-                        break
-                else:
-                    stripped = ''
-
-                if fl != mn[0].lower() and mn[0] != '_':
-                    # heading
-                    letter = mn[0].upper()
-                    if letter not in letters:
-                        modindexentries.append(['', False, 0, False,
-                                                letter, '', [], False, ''])
-                        letters.append(letter)
-                tn = mn.split('.')[0]
-                if tn != mn:
-                    # submodule
-                    if pmn == tn:
-                        # first submodule - make parent collapsable
-                        modindexentries[-1][1] = True
-                        num_collapsables += 1
-                    elif not pmn.startswith(tn):
-                        # submodule without parent in list, add dummy entry
-                        cg += 1
-                        modindexentries.append([tn, True, cg, False, '', '',
-                                                [], False, stripped])
-                else:
-                    num_toplevels += 1
-                    cg += 1
-                modindexentries.append([mn, False, cg, (tn != mn), fn, sy, pl,
-                                        dep, stripped])
-                pmn = mn
-                fl = mn[0].lower()
-            platforms = sorted(platforms)
-            # As some parts of the module names may have been stripped, those
-            # names have changed, thus it is necessary to sort the entries.
-            if ignore:
-                def sorthelper(entry):
-                    name = entry[0]
-                    if name == '':
-                        # heading
-                        name = entry[4]
-                    return name.lower()
-
-                modindexentries.sort(key=sorthelper)
-                letters.sort()
-
-            # Now, let's try to do the same thing
-            # modindex.html does, more or less
-            
-            output=['DUMMY','=====','',
-                    '.. _modindex:\n\n']
-            t=_('Global Module Index')
-            t+='\n'+'='*len(t)+'\n'
-            output.append(t)
-            for modname, collapse, cgroup, indent,\
-                fname, synops, pform, dep, stripped in modindexentries:
-                if not modname: # A letter
-                    output.append('.. cssclass:: heading4\n\n%s\n\n'%fname)
-                else: # A module
-                    if fname:
-                        output.append('`%s <%s>`_ '%(stripped+modname,fname))
-                        if pform and pform[0]:
-                            output[-1]+='*(%s)*'%' '.join(pform)
-                        if synops:
-                            output[-1]+=', *%s*'%synops
-                        if dep:
-                            output[-1]+=' **%s**'%_('Deprecated')
-                output.append('')
-                
-            dt = docutils.core.publish_doctree('\n'.join(output))[1:]
-            dt.insert(0,nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
-            tree.extend(dt)
+        # FIXME: implement domain indexes for Sphinx 1.0.x
                     
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
@@ -337,12 +246,9 @@ class PDFBuilder(Builder):
                 and self.config.pdf_use_index:
                 pendingnode.replace_self(nodes.reference(text=pendingnode.astext(),
                     refuri=pendingnode['reftarget']))
-            if pendingnode.get('reftarget',None) == 'modindex'\
-                and self.config.pdf_use_modindex:
-                pendingnode.replace_self(nodes.reference(text=pendingnode.astext(),
-                    refuri=pendingnode['reftarget']))
+            # FIXME: probably need to handle dangling links to domain-specific indexes
             else:
-                # FIXME: This is from the LaTeX builder and I dtill don't understand it
+                # FIXME: This is from the LaTeX builder and I still don't understand it
                 # well, and doesn't seem to work
                 
                 # resolve :ref:s to distant tex files -- we can't add a cross-reference,
@@ -410,6 +316,7 @@ class PDFBuilder(Builder):
                 pass
 
 def genindex_nodes(genindexentries):
+    from pudb import set_trace; set_trace()
     indexlabel = _('Index')
     indexunder = '='*len(indexlabel)
     output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
@@ -418,7 +325,7 @@ def genindex_nodes(genindexentries):
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
         for entryname, (links, subitems) in entries:
             if links:
-                output.append('`%s <%s>`_'%(entryname,links[0]))
+                output.append('`%s <%s>`_'%(entryname,nodes.make_id(links[0])))
                 for i,link in enumerate(links[1:]):
                     output[-1]+=(' `[%s] <%s>`_ '%(i+1,link))
                 output.append('')
@@ -900,7 +807,7 @@ def setup(app):
     app.add_config_value('pdf_inline_footnotes', True, None)
     app.add_config_value('pdf_verbosity', 0, None)
     app.add_config_value('pdf_use_index', True, None)
-    app.add_config_value('pdf_use_modindex', True, None)
+    app.add_config_value('pdf_domain_indices', True, None)
     app.add_config_value('pdf_use_coverpage', True, None)
     app.add_config_value('pdf_cover_template', 'sphinxcover.tmpl', None)
     app.add_config_value('pdf_appendices', [], None)
