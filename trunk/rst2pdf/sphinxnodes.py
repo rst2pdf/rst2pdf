@@ -109,7 +109,8 @@ class HandleDescAnnotation(SphinxHandler, HandleEmphasis, sphinx.addnodes.desc_a
 class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
     def gather_elements(self, client, node, style):
         try:
-            client.pending_targets.append(docutils.nodes.make_id(node['entries'][0][2]))
+            for entry in node['entries']:
+                client.pending_targets.append(docutils.nodes.make_id(entry[2]))
         except IndexError:
             if node['entries']:
                 log.error("Can't process index entry: %s [%s]",
