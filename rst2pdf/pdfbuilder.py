@@ -316,7 +316,6 @@ class PDFBuilder(Builder):
                 pass
 
 def genindex_nodes(genindexentries):
-    from pudb import set_trace; set_trace()
     indexlabel = _('Index')
     indexunder = '='*len(indexlabel)
     output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
