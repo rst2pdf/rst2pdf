@@ -321,6 +321,7 @@ def genindex_nodes(genindexentries):
     output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
 
     for key, entries in genindexentries:
+        #from pudb import set_trace; set_trace()
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
         for entryname, (links, subitems) in entries:
             if links:
