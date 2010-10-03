@@ -324,9 +324,9 @@ def genindex_nodes(genindexentries):
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
         for entryname, (links, subitems) in entries:
             if links:
-                output.append('`%s <%s>`_'%(entryname,nodes.make_id(links[0])))
+                output.append('`%s <#%s>`_'%(entryname,nodes.make_id(links[0])))
                 for i,link in enumerate(links[1:]):
-                    output[-1]+=(' `[%s] <%s>`_ '%(i+1,link))
+                    output[-1]+=(' `[%s] <#%s>`_ '%(i+1,nodes.make_id(link)))
                 output.append('')
             else:
                 output.append(entryname)
