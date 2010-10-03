@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 318: Implemented Domain specific indexes for Sphinx 1.0.x
+* Fixed Index links when using Sphinx/pdfbuilder.
 * Fixed Issue 360: Set literal.wordWrap to None by default so it doesn't inherit
   wordWrap CJK when you use the otherwise correct japanese settings. In any case,
   literal blocks are not supposed to wrap at all.

@@ -43,6 +43,15 @@ Contents:
    :type limit: integer or None
    :rtype: list of strings
 
+.. module:: parrot
+   :platform: Unix, Windows
+   :synopsis: Analyze and reanimate dead parrots.
+
+.. function:: spam(eggs)
+              ham(eggs)
+
+   Spam or ham the foo.
+
 
 
 Indices and tables
