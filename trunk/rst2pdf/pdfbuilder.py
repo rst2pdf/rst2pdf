@@ -4,12 +4,9 @@
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
       Usage:
-      1. Copy this file to your Sphinx project directory.
-      2. In conf.py file uncomment this line:
-         #sys.path.append(os.path.abspath('.'))
-      3. In conf.py add 'pdfbuilder' element to 'extensions' list:
-         extensions = ['pdfbuilder']
-      4. Modify your Makefile or run it with:
+      1. In conf.py add 'rst2pdf.pdfbuilder' element to 'extensions' list:
+         extensions = ['rst2pdf.pdfbuilder']
+      2. Modify your Makefile or run it with:
          $ sphinx-build -d_build/doctrees -bpdf . _build/pdf
 
     :copyright: Copyright 2009 Roberto Alsina, Wojtek Walczak
