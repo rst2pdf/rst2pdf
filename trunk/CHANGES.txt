@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 367: german-localized dates are MM. DD. YYYY so when used in sphinx's
+  template cover they appeared weird, like a list item. Fixed with a minor workaround in 
+  the template.
 * Fixed Issue 366: links to "#" make no sense on a PDF file
 * Made definitions from definition lists more stylable.
 * Moved definition lists to SplitTables, so you can have very long
