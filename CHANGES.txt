@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Made definitions from definition lists more stylable.
+* Moved definition lists to SplitTables, so you can have very long
+  definitions.
 * Fixed Issue 318: Implemented Domain specific indexes for Sphinx 1.0.x
 * Fixed Index links when using Sphinx/pdfbuilder.
 * Fixed Issue 360: Set literal.wordWrap to None by default so it doesn't inherit

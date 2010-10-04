@@ -520,21 +520,18 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
                 dt.extend(client.gen_elements(n, style))
 
         # FIXME: make this configurable from the stylesheet
-        node.elements = [DelayedTable([
-            [Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),''],
-            ['',dt]
-            ] , splitByRow=0, colWidths=[10,None], style = [
-                        ['SPAN', [0,0], [1,0]],
-                        ['VALIGN', [ 0, 0 ], [ -1, -1 ], 'TOP' ],
-                        ['LEFTPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
-                        ['BOTTOMPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
-                        ['RIGHTPADDING', [ 0, 0 ], [ -1, -1 ], 0 ],
-                        ]
+        t_style = TableStyle (client.styles['definition'].commands)
+        cw = getattr(client.styles['definition'],'colWidths',[])
+        
+        if client.splittables:
+            node.elements = [
+                Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),
+                SplitTable([['',dt]] , colWidths=cw, style = t_style )]
+        else:
+            node.elements = [
+                Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),
+                DelayedTable([['',dt]] , colWidths=[10,None], style = t_style )]
             
-            )]
-        #node.elements = [Paragraph(''.join(ids)+' : '.join(tt),
-            #client.styles['definition_list_term']),
-            #MyIndenter(left=10)] + dt + [MyIndenter(left=-10)]
         return node.elements
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):

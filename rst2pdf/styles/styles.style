@@ -253,7 +253,7 @@
       fontName: stdBold
       spaceBefore: 4
       spaceAfter: 0
-      keepWithNext: true
+      keepWithNext: false
 
     definition-list-classifier:
       parent: normal
@@ -264,7 +264,13 @@
       firstLineIndent: 0
       bulletIndent: 0
       spaceBefore: 0
-
+      colWidths: [20pt,null]
+      commands: []
+                    [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
+                    [LEFTPADDING, [ 0, 0 ], [ -1, -1 ], 0 ]
+                    [BOTTOMPADDING, [ 0, 0 ], [ -1, -1 ], 0 ]
+                    [RIGHTPADDING, [ 0, 0 ], [ -1, -1 ], 0 ]
+                    
     fieldname:
       parent: bodytext
       alignment: TA_RIGHT
