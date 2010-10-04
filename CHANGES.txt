@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 366: links to "#" make no sense on a PDF file
 * Made definitions from definition lists more stylable.
 * Moved definition lists to SplitTables, so you can have very long
   definitions.

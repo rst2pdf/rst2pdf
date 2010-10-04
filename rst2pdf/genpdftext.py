@@ -71,6 +71,9 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
         pre, post = '', ''
         uri = node.get('refuri')
         if uri:
+            # Issue 366: links to "#" make no sense in a PDF
+            if uri =="#":
+                return "", ""
             if uri.startswith ('#'):
                 pass
             elif client.baseurl: # Need to join the uri with the base url
