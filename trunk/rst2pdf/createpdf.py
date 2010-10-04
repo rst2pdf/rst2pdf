@@ -797,7 +797,7 @@ class FancyDocTemplate(BaseDocTemplate):
                     for i,f in enumerate(S):
                         flowables.insert(i,f)   # put split flowables back on the list
                 else:
-                    if hasattr(f,'_postponed'):
+                    if hasattr(f,'_postponed') and f._postponed > 4:
                         ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % \
                                 (self._fIdent(f,60,frame),doctemplate._fSizeString(f),self.page, self.frame.id,
                                         self.frame._aSpaceString(), self.pageTemplate.id)
