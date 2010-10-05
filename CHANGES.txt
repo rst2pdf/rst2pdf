@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fix for Issue 287: there is still a corner case if you have two sections
+  with the same title, at the same level, in the same page, in different files
+  where the links will break.
 * Fixed Issue 367: german-localized dates are MM. DD. YYYY so when used in sphinx's
   template cover they appeared weird, like a list item. Fixed with a minor workaround in 
   the template.
