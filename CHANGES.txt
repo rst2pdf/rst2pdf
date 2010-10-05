@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 343: Plugged memory leak in the RSON parser.
 * Fix for Issue 287: there is still a corner case if you have two sections
   with the same title, at the same level, in the same page, in different files
   where the links will break.
