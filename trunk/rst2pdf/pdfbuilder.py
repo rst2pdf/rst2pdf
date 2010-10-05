@@ -150,6 +150,9 @@ class PDFBuilder(Builder):
             self.titles.append((docname, entry[2]))
 
     def assemble_doctree(self, docname, title, author, appendices):
+
+        # FIXME: use the new inline_all_trees from Sphinx.
+        # check how the LaTeX builder does it.
         
         self.docnames = set([docname])
         self.info(darkgreen(docname) + " ", nonl=1)
@@ -217,9 +220,6 @@ class PDFBuilder(Builder):
                 tree.append(index_nodes)
 
         # This is stolen from the HTML builder's prepare_writing function
-        #moduleindex = self.env.domaindata['py']['modules']
-        # FIXME: implement domain indexes for Sphinx 1.0.x
-        # determine the additional indices to include
         self.domain_indices = []
         # html_domain_indices can be False/True or a list of index names
         indices_config = self.config.pdf_domain_indices
@@ -416,10 +416,16 @@ def genindex_nodes(genindexentries):
 
 
 class PDFContents(Contents):
+
+    # Mostly copied from Docutils' Contents transformation
     
     def build_contents(self, node, level=0):
         level += 1
         sections=[]
+        # Replaced this with the for below to make it work for Sphinx
+        # trees.
+        
+        #sections = [sect for sect in node if isinstance(sect, nodes.section)]
         for sect in node:
             if isinstance(sect,nodes.compound):
                 for sect2 in sect:
@@ -429,7 +435,6 @@ class PDFContents(Contents):
                                 sections.append(sect3)
             elif isinstance(sect, nodes.section):
                 sections.append(sect)
-        #sections = [sect for sect in node if isinstance(sect, nodes.section)]
         entries = []
         autonum = 0
         # FIXME: depth should be taken from :maxdepth: (Issue 320)
