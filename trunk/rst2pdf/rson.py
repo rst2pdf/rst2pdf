@@ -267,11 +267,10 @@ class BaseObjects(object):
             allow attribute access to their existing contents.
         '''
         
-        def __init__(self):
-            self.__getattr__ = self.__getitem__
-            self.__setattr__ = self.__setitem__
-            self.__delattr__ = self.__delitem__
-
+       def __getattr__(self, key):
+            return self[key]
+       def __setattr__(self, key, value):
+            self[key]=value
 
         def append(self, itemlist):
             mydict = self
