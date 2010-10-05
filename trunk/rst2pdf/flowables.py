@@ -377,7 +377,6 @@ class SplitTable(DelayedTable):
 class MySpacer(Spacer):
     def wrap (self, aW, aH):
         w, h = Spacer.wrap(self, aW, aH)
-        #print 'SH', aH, h
         self.height = min(aH, h)
         return w, self.height
 
@@ -953,7 +952,7 @@ class MyTableOfContents(TableOfContents):
             
         if rlabel in self.refids and islocal(node):
             self.addEntry(level, text, pageNum)
-            self.refid_lut[(level, text)] = label
+            self.refid_lut[(level, text, pageNum)] = label
 
     def wrap(self, availWidth, availHeight):
         """Adds hyperlink to toc entry."""
@@ -986,7 +985,7 @@ class MyTableOfContents(TableOfContents):
                 leftColStyle=self.getLevelStyle(left_col_level)
             else: # For ReportLab <= 2.3
                 leftColStyle = self.levelStyles[left_col_level]
-            label = self.refid_lut.get((level, text), None)
+            label = self.refid_lut.get((level, text, pageNum), None)
             if label:
                 pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
                 post = u'</a>'

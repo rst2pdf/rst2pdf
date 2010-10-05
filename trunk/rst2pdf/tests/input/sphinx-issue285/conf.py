@@ -187,7 +187,7 @@ pdf_documents = [
 ]
 
 pdf_break_level = 3
-
+pdf_verbosity = 0
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
 #latex_logo = None
