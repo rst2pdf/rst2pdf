@@ -4,6 +4,7 @@ Doc2
 =====
 
 .. contents::
+   :local:
 
 --------------
 Section Beta
