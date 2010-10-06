@@ -1,0 +1,7 @@
+|biohazard|   
+
+.. image:: images/biohazard.png 
+   :width: 50%                  
+
+.. |biohazard| image:: images/biohazard.png
+   :width: 50%
