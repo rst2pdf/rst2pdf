@@ -1102,7 +1102,7 @@ class FancyPage(PageTemplate):
         # Adjust for gutter margin
         canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
         
-        log.error('Page %s [%s]'%(_counter,doc.page))
+        log.info('Page %s [%s]'%(_counter,doc.page))
         if doc.page % 2: # Left page
             hx = self.hx
             fx = self.fx
