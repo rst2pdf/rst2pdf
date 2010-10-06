@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.16
+-----------
 
 * Fixed Issue 343: Plugged memory leak in the RSON parser.
 * Fix for Issue 287: there is still a corner case if you have two sections
