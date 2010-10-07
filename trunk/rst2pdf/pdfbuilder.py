@@ -223,7 +223,7 @@ class PDFBuilder(Builder):
         self.domain_indices = []
         # html_domain_indices can be False/True or a list of index names
         indices_config = self.config.pdf_domain_indices
-        if indices_config:
+        if indices_config and hasattr(self.env, 'domains'):
             for domain in self.env.domains.itervalues():
                 for indexcls in domain.indices:
                     indexname = '%s-%s' % (domain.name, indexcls.name)
