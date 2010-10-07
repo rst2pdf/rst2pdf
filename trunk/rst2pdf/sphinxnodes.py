@@ -176,7 +176,7 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
 
 from sphinx.ext import mathbase
 
-class HadleHighlightLng(SphinxHandler, sphinx.addnodes.highlightlang):
+class HandleHighlightLang(SphinxHandler, sphinx.addnodes.highlightlang):
     pass
 
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
