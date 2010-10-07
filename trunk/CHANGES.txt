@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+New in 0.16
+-----------
+
 * Fixed Issue 343: Plugged memory leak in the RSON parser.
 * Fix for Issue 287: there is still a corner case if you have two sections
   with the same title, at the same level, in the same page, in different files
@@ -55,7 +58,6 @@ New in SVN
   beside it.
 * Fixed Issue 307: header/footer from stylesheet now supports inline
   rest markup and substitutions defined in the main document.
-* Don't fail so much with Sphinx 1.0b2 (but modindex is disabled)
 * New pdf_toc_depth option for Sphinx/pdfbuilder
 * New pdf_use_toc option for Sphinx/pdfbuilder
 * Fixed Issue 308: compatibility with reportlab from SVN
