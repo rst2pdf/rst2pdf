@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 369: crash in hyphenator when specifying "en" as a language.
+* Compatibility fix to Sphinx 0.6.x (For python 2.7 docs)
+
 New in 0.16
 -----------
 

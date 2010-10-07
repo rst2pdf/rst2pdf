@@ -131,7 +131,7 @@ numberingstyles={ 'arabic': 'ARABIC',
 class RstToPdf(object):
 
     def __init__(self, stylesheets=[],
-                 language='en',
+                 language='en_US',
                  header=None,
                  footer=None,
                  inlinelinks=False,
@@ -165,17 +165,19 @@ class RstToPdf(object):
         self.splittables=splittables
         self.basedir=basedir
         self.language = language
+        self.docutils_language = language
         try:
             get_language (self.language)
         except ImportError:
             try:
                 language = self.language.split('_', 1)[0]
                 get_language (language)
-                self.language = language
+                self.docutils_language = language
             except ImportError:
                 log.warning("Can't load Docutils module "\
                     "for language %s or %s", self.language, language)
-                self.language = 'en'
+                self.language = 'en_US'
+                self.docutils_language = 'en'
         self.doc_title = ""
         self.doc_title_clean = ""
         self.doc_subtitle = ""
@@ -242,7 +244,9 @@ class RstToPdf(object):
             if self.language:
                 self.styles.languages.append(self.language)
                 self.styles['bodytext'].language = self.language
-
+            else:
+                self.styles.languages.append('en_US')
+                self.styles['bodytext'].language = 'en_US'
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
             try:
@@ -550,7 +554,7 @@ class RstToPdf(object):
         if doctree is None:
             if text is not None:
                 if self.language:
-                    settings_overrides={'language_code': self.language}
+                    settings_overrides={'language_code': self.docutils_language}
                 else:
                     settings_overrides={}
                 self.doctree = docutils.core.publish_doctree(text,
@@ -1169,7 +1173,7 @@ def parse_commandline():
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)
 
-    def_lang = config.getValue("general", "language", 'en')
+    def_lang = config.getValue("general", "language", 'en_US')
     parser.add_option('-l', '--language', metavar='LANG',
         default=def_lang, dest='language',
         help='Language to be used for hyphenation and '\
