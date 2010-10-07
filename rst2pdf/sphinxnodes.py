@@ -176,6 +176,9 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
 
 from sphinx.ext import mathbase
 
+class HadleHighlightLng(SphinxHandler, sphinx.addnodes.highlightlang):
+    pass
+
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
     def gather_elements(self, client, node, style):
         mflow=math_flowable.Math(node.get('latex',''),node.get('label',None))
