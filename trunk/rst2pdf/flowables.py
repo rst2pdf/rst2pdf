@@ -731,9 +731,10 @@ class BoundByWidth(Flowable):
             if self.mode == 'shrink' and not self.scale:
                 self.scale = (maxWidth + self.pad[1]+self.pad[3])/\
                     (self.width + self.pad[1]+self.pad[3])
+        else:
+            self.scale = 1.0
         self.height *= self.scale
         self.width *= self.scale
-        self.width = max(self.width, availWidth)
         return self.width, self.height + (self.pad[0]+self.pad[2])*self.scale
 
     def split(self, availWidth, availHeight):
