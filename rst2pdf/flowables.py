@@ -688,12 +688,13 @@ class BoundByWidth(Flowable):
 
     """
 
-    def __init__(self, maxWidth, content=[], style=None, mode=None):
+    def __init__(self, maxWidth, content=[], style=None, mode=None, scale = None):
         self.maxWidth = maxWidth
         self.content = content
         self.style = style
         self.mode = mode
         self.pad = None
+        self.scale = scale
         Flowable.__init__(self)
 
     def border_padding(self, useWidth, additional):
@@ -722,15 +723,17 @@ class BoundByWidth(Flowable):
         self.maxWidth = maxWidth
         maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
-        self.scale = 1.0
         if self.width > maxWidth:
             if self.mode <> 'shrink':
+                self.scale = 1.0
                 log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                     self.width,maxWidth,self.identity())
-            if self.mode == 'shrink':
+            if self.mode == 'shrink' and not self.scale:
                 self.scale = (maxWidth + self.pad[1]+self.pad[3])/\
                     (self.width + self.pad[1]+self.pad[3])
-                self.height *= self.scale
+        self.height *= self.scale
+        self.width *= self.scale
+        self.width = max(self.width, availWidth)
         return self.width, self.height + (self.pad[0]+self.pad[2])*self.scale
 
     def split(self, availWidth, availHeight):
@@ -740,10 +743,11 @@ class BoundByWidth(Flowable):
         if len(self.content) == 1:
             # We need to split the only element we have
             content = content[0].split(
-                availWidth - (self.pad[1]+self.pad[3]),
-                availHeight - (self.pad[0]+self.pad[2]))
-        return [BoundByWidth(self.maxWidth, [f],
-                             self.style, self.mode) for f in content]
+                (1./self.scale) * (availWidth - (self.pad[1]+self.pad[3])),
+                (1./self.scale) * (availHeight - (self.pad[0]+self.pad[2])))
+        result =  [BoundByWidth(self.maxWidth, [f],
+                             self.style, self.mode, self.scale) for f in content]
+        return result
 
     def draw(self):
         """we simulate being added to a frame"""
