@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Implemented Issue 11: FrameBreak (and conditional FrameBreak)
 * The description of frames in page templates was just wrong.
 * Fixed Issue 374: in some cases, literal blocks were split inside
   a page, or the pagebreak came too early.

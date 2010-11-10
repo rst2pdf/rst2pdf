@@ -45,6 +45,11 @@ def parseRaw(data, node):
                 elements.append(MyPageBreak(breakTo='odd'))
             else:
                 elements.append(MyPageBreak(tokens[1],breakTo='odd'))
+        elif command == 'FrameBreak':
+            if len(tokens) == 1:
+                elements.append(CondPageBreak(99999))
+            else:
+                elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
             elements.append(MySpacer(adjustUnits(tokens[1]), 
                 adjustUnits(tokens[2])))

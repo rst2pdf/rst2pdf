@@ -1166,6 +1166,23 @@ For example::
     
     PageBreak twoColumn
 
+Frame Breaks
+------------
+
+If you want to jump to the next frame in the page (or the next page if the current
+frame is the last), you can use the FrameBreak command. It takes an optional
+height in points, and then it only breaks the frame if there is less than that
+vertical space available.
+
+For example, if you don't want a paragraph to begin if it's less than 50 points from the
+bottom of the frame::
+
+    .. raw:: pdf
+
+       FrameBreak 50
+
+    This paragraph is so important that I don't want it at the very bottom of the page...
+
 Page Transitions
 ----------------
 
