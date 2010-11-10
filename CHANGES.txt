@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* The description of frames in page templates was just wrong.
 * Fixed Issue 374: in some cases, literal blocks were split inside
   a page, or the pagebreak came too early.
 * Fixed Issue 370: warning about sphinx.addnodes.highlightlang not being

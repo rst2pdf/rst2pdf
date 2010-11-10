@@ -1465,14 +1465,14 @@ stylesheet already has 3 of them::
 A page template has a name (oneColumn, twoColumn), some options, and a list of frames.
 A frame is a list containing this::
 
-    [ left position, top position, width, height ]
+    [ left position, bottom position, width, height ]
 
-For example, this defines a frame "at the very left", "at the very top", "a bit less than half
+For example, this defines a frame "at the very left", "at the very bottom", "a bit less than half
 a page wide" and "as tall as possible"::
 
     ["0cm", "0cm", "49%", "100%"]
 
-And this means "the bottom third of the page"::
+And this means "the top third of the page"::
 
     ["0cm", "66.66%", "100%", "33.34%"]
 
