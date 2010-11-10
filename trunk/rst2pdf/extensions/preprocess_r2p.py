@@ -275,9 +275,9 @@ class Preprocess(object):
         while 1:
             total = sum(values)
             if total > 100:
-                values[index(max(values))] -= 1
+                values[values.index(max(values))] -= 1
             elif total < 100:
-                values[index(max(values))] += 1
+                values[values.index(max(values))] += 1
             else:
                 break
 
