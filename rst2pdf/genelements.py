@@ -60,7 +60,8 @@ from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from flowables import Table, DelayedTable, SplitTable, Heading, \
               MyIndenter, MyTableOfContents, MySpacer, \
               Separation, BoxedContainer, BoundByWidth, \
-              MyPageBreak, Reference, tablepadding, OddEven
+              MyPageBreak, Reference, tablepadding, OddEven, \
+              XPreformatted
 
 from opt_imports import wordaxe, Paragraph, ParagraphStyle
 
@@ -359,6 +360,17 @@ class HandleContact(HandleFList, docutils.nodes.contact):
 
 class HandleAddress(HandleFList, docutils.nodes.address):
     labeltext = "address"
+    def gather_elements(self, client, node, style):
+        fb = client.gather_pdftext(node)
+        t_style=TableStyle(client.styles['field-list'].commands)
+        colWidths=client.styles['field-list'].colWidths
+        if self.adjustwidths:
+            colWidths = map(client.styles.adjustUnits, colWidths)
+        label=client.text_for_label(self.labeltext, style)+":"
+        t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
+                             XPreformatted(fb, style)]
+                    ], style=t_style, colWidths=colWidths)
+        return [t]        
 
 class HandleVersion(HandleFList, docutils.nodes.version):
     labeltext = "version"
