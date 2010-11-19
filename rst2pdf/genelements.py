@@ -495,7 +495,7 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
 class HandleDefinition(NodeHandler, docutils.nodes.definition):
     def gather_elements(self, client, node, style):
         return client.gather_elements(node,
-                       style = client.styles["definition"])
+                       style = style)
 
 class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
     def gather_elements(self, client, node, style):
