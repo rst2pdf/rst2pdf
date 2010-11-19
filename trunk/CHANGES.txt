@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 379: Wrong style applied to paragraphs in definitions.
 * Fixed Issue 378: Multiline :address: were shown collapsed.
 * Implemented Issue 11: FrameBreak (and conditional FrameBreak)
 * The description of frames in page templates was just wrong.
