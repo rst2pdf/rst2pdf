@@ -132,7 +132,7 @@ class DottedTableOfContents(genelements.MyTableOfContents):
 
             style = copy(style)
             style.textColor = self.linkColor
-            key = self.refid_lut.get((level, text), None)
+            key = self.refid_lut.get((level, text, pageNum), None)
             if key:
                 if not isinstance(text, unicode):
                     text = unicode(text, 'utf-8')
