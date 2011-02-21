@@ -34,7 +34,6 @@ def parseConfig(extracf=None):
     if extracf:
         cflist.append(extracf)
     conf = ConfigParser.SafeConfigParser()
-    print 'PC:', cflist
     conf.read(cflist)
     
 parseConfig()
