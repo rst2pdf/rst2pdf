@@ -1021,6 +1021,45 @@ Python traceback
     ZeroDivisionError: integer division or modulo by zero
     Exit 1
 
+The code-block directive supports many options, that mirror pygments'::
+
+FIXME: fix this to really explain them all. This is a placeholder.
+
+                                'stripnl' : string_bool,
+                                'stripall': string_bool,
+                                'ensurenl': string_bool,
+                                'tabsize' : directives.positive_int,
+                                'encoding': directives.encoding,
+                                # Lua
+                                'func_name_hightlighting':string_bool,
+                                'disabled_modules': string_list,
+                                # Python Console
+                                'python3': string_bool,
+                                # Delphi
+                                'turbopascal':string_bool,
+                                'delphi' :string_bool,
+                                'freepascal': string_bool,
+                                'units': string_list,
+                                # Modula2
+                                'pim'   : string_bool,
+                                'iso'   : string_bool,
+                                'objm2' : string_bool,
+                                'gm2ext': string_bool,
+                                # CSharp
+                                'unicodelevel' : csharp_unicodelevel,
+                                # Literate haskell
+                                'litstyle' : lhs_litstyle,
+                                # Raw
+                                'compress': raw_compress,
+                                # Rst
+                                'handlecodeblocks': string_bool,
+                                # Php
+                                'startinline': string_bool,
+                                'funcnamehighlighting': string_bool,
+                                'disabledmodules': string_list,
+
+You can find more information about them in the pygments manual.
+
 File inclusion
 --------------
 
