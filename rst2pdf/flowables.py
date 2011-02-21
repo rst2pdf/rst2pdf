@@ -90,12 +90,7 @@ class Heading(Paragraph):
     the PDF TOC."""
 
     def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
-                 snum=None, parent_id=None, node=None):
-        #if label is None: # it happens
-            #self.label = text.replace(u'\xa0', ' ').strip(
-                #).replace(' ', '-').encode('ascii', 'replace').lower()
-        #else:
-            #self.label = label.strip()
+                 snum=None, parent_id=None, node=None, section_header_depth=2):
         # Issue 114: need to convert "&amp;" to "&" and such.
         # Issue 140: need to make it plain text
         self.stext=re.sub(r'<[^>]*?>', '', unescape(text))
@@ -104,13 +99,15 @@ class Heading(Paragraph):
         self.snum = snum
         self.parent_id=parent_id
         self.node=node
+        self.section_header_depth = section_header_depth
         Paragraph.__init__(self, text, style, bulletText)
 
     def draw(self):
 
         # Add outline entry
         self.canv.bookmarkHorizontal(self.parent_id,0,0+self.height)
-        if self.canv.firstSect:
+        # self.section_header_depth is for Issue 391
+        if self.canv.firstSect and self.level < self.section_header_depth:
             self.canv.sectName = self.stext
             self.canv.firstSect=False
             if self.snum is not None:

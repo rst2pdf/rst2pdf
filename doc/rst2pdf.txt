@@ -70,6 +70,10 @@ OPTIONS
 --footer=FOOTER
                     Page footer if not specified in the document.
 
+--section-header-depth=N
+                    Sections up to this dept will be used in the header
+                    and footer's replacement of ###Section###. Default=2
+
 --smart-quotes=VALUE  Try to convert ASCII quotes, ellipsis and dashes to
                       the typographically correct equivalent. Default=0
 
