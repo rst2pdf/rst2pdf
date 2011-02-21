@@ -1328,7 +1328,7 @@ def main(args=None):
     options, args = parser.parse_args(copy(args))
 
     if options.configfile:
-        options.cfname=options.configfile
+        config.parseConfig(options.configfile)
         parser = parse_commandline()
         options, args = parser.parse_args(copy(args))
 

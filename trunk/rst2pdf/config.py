@@ -26,6 +26,15 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
-
 conf = ConfigParser.SafeConfigParser()
-conf.read(["/etc/rst2pdf.conf", cfname])
+
+def parseConfig(extracf=None):
+    global conf
+    cflist = ["/etc/rst2pdf.conf", cfname]
+    if extracf:
+        cflist.append(extracf)
+    conf = ConfigParser.SafeConfigParser()
+    print 'PC:', cflist
+    conf.read(cflist)
+    
+parseConfig()

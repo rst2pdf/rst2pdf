@@ -80,17 +80,20 @@ class DocutilsInterface(object):
 
     """
 
-    def __init__(self, code, language):
+    def __init__(self, code, language, custom_args={}):
         self.code = code
         self.language = language
+        self.custom_args = custom_args
 
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
             if self.language and unicode(self.language).lower() <> 'none':
-                lexer = get_lexer_by_name(self.language.lower())
+                lexer = get_lexer_by_name(self.language.lower(),
+                                        **self.custom_args
+                                        )
             else:
-                lexer = get_lexer_by_name('text')
+                lexer = get_lexer_by_name('text', **self.custom_args)
         except ValueError:
             log.info("no pygments lexer for %s, using 'text'" \
                 % self.language)
@@ -135,7 +138,11 @@ def code_block_directive(name, arguments, options, content, lineno,
     """Parse and classify content of a code_block."""
     if 'include' in options:
         try:
-            content = codecs.open(options['include'], 'r', 'utf-8').read().rstrip()
+            if 'encoding' in options:
+                encoding = options['encoding']
+            else:
+                encoding = 'utf-8'
+            content = codecs.open(options['include'], 'r', encoding).read().rstrip()
         except (IOError, UnicodeError): # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
             content = u''
@@ -192,7 +199,12 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     else:
         content = u'\n'.join(content)
-    tabw = int(options.get('tab-width', 8))
+        
+    if 'tabsize' in options:
+        tabw = options['tabsize']
+    else:
+        tabw = int(options.get('tab-width', 8))
+
     content = content.replace('\t',' '*tabw)
 
     withln = "linenos" in options
@@ -211,7 +223,7 @@ def code_block_directive(name, arguments, options, content, lineno,
         code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno,   classes=['linenumber'])
 
     # parse content with pygments and add to code_block element
-    for cls, value in DocutilsInterface(content, language):
+    for cls, value in DocutilsInterface(content, language, options):
         if withln and "\n" in value:
             # Split on the "\n"s
             values = value.split("\n")
@@ -233,6 +245,52 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     return [code_block]
 
+# Custom argument validators
+# --------------------------
+# ::
+#
+# Move to separated module??
+
+def string_list(argument):
+    """
+    Converts a space- or comma-separated list of values into a python list
+    of strings.
+    (Directive option conversion function)
+    Based in positive_int_list of docutils.parsers.rst.directives
+    """
+    if ',' in argument:
+        entries = argument.split(',')
+    else:
+        entries = argument.split()
+    return entries
+
+def string_bool(argument):
+    """
+    Converts True, true, False, False in python boolean values
+    """
+    if argument is None:
+        msg = 'argument required but none supplied; choose from "True" or "False"'
+        raise ValueError(msg)
+
+    elif argument.lower() == 'true':
+        return True
+    elif argument.lower() == 'false':
+        return False
+    else:
+        raise ValueError('"%s" unknown; choose from "True" or "False"'
+                        % argument)
+
+def csharp_unicodelevel(argument):
+    return directives.choice(argument, ('none', 'basic', 'full'))
+
+def lhs_litstyle(argument):
+    return directives.choice(argument, ('bird', 'latex'))
+
+def raw_compress(argument):
+    return directives.choice(argument, ('gz', 'bz2'))
+
+
+
 
 # Register Directive
 # ------------------
@@ -248,6 +306,39 @@ code_block_directive.options = {'include': directives.unchanged_required,
                                 'linenos': directives.unchanged,
                                 'linenos_offset': directives.unchanged,
                                 'tab-width': directives.unchanged,
+                                # generic
+                                'stripnl' : string_bool,
+                                'stripall': string_bool,
+                                'ensurenl': string_bool,
+                                'tabsize' : directives.positive_int,
+                                'encoding': directives.encoding,
+                                # Lua
+                                'func_name_hightlighting':string_bool,
+                                'disabled_modules': string_list,
+                                # Python Console
+                                'python3': string_bool,
+                                # Delphi
+                                'turbopascal':string_bool,
+                                'delphi' :string_bool,
+                                'freepascal': string_bool,
+                                'units': string_list,
+                                # Modula2
+                                'pim'   : string_bool,
+                                'iso'   : string_bool,
+                                'objm2' : string_bool,
+                                'gm2ext': string_bool,
+                                # CSharp
+                                'unicodelevel' : csharp_unicodelevel,
+                                # Literate haskell
+                                'litstyle' : lhs_litstyle,
+                                # Raw
+                                'compress': raw_compress,
+                                # Rst
+                                'handlecodeblocks': string_bool,
+                                # Php
+                                'startinline': string_bool,
+                                'funcnamehighlighting': string_bool,
+                                'disabledmodules': string_list,
                                 }
 
 

@@ -8,3 +8,4 @@
 * Joshua J. Kugler
 * Patrick Maupin
 * anatoly techtonik
+* Joaquin Sorianello
