@@ -157,6 +157,7 @@ class RstToPdf(object):
                  custom_cover='cover.tmpl',
                  floating_images=False,
                  numbered_links=False,
+                 section_header_depth=2
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -220,6 +221,7 @@ class RstToPdf(object):
         self.def_dpi = def_dpi
         self.show_frame = show_frame
         self.numbered_links = numbered_links
+        self.section_header_depth = section_header_depth
         self.img_dir = os.path.join(self.PATH, 'images')
 
         # Sorry about this, but importing sphinx.roles makes some
@@ -1191,6 +1193,11 @@ def parse_commandline():
         help='Page footer if not specified in the document.'\
         ' Default="%s"' % def_footer)
 
+    def_section_header_depth = config.getValue("general","section_header_depth",2)
+    parser.add_option('--section-header-depth', metavar='N',
+        default=def_section_header_depth, dest='section_header_depth',
+        help = '''Sections up to this dept will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
+
     def_smartquotes = config.getValue("general", "smartquotes", "0")
     parser.add_option("--smart-quotes", metavar="VALUE",
         default=def_smartquotes, dest="smarty",
@@ -1454,6 +1461,7 @@ def main(args=None):
         custom_cover=options.custom_cover,
         floating_images=options.floating_images,
         numbered_links=options.numbered_links,
+	section_header_depth=int(options.section_header_depth),
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,

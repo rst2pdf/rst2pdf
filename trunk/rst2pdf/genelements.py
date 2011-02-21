@@ -240,7 +240,8 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
                     parent_id=parent_id,
-                    node=node
+                    node=node,
+                    section_header_depth=client.section_header_depth
                     )]
             if client.depth <= client.breaklevel:
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))

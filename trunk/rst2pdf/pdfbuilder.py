@@ -111,6 +111,7 @@ class PDFBuilder(Builder):
                                 use_numbered_links=opts.get('pdf_use_numbered_links',self.config.pdf_use_numbered_links),
                                 fit_background_mode=opts.get('pdf_fit_background_mode',self.config.pdf_fit_background_mode),
                                 baseurl=opts.get('pdf_baseurl',self.config.pdf_baseurl),
+                                section_header_depth=opts.get('section_header_depth',self.config.section_header_depth),
                                 srcdir=self.srcdir,
                                 config=self.config,
                                 )
@@ -489,6 +490,7 @@ class PDFWriter(writers.Writer):
                 toc_depth = 9999,
                 use_numbered_links = False,
                 fit_background_mode = "scale",
+                section_header_depth = 2,
                 baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','','']),
                 config = {}):
         writers.Writer.__init__(self)
@@ -515,6 +517,7 @@ class PDFWriter(writers.Writer):
         self.toc_depth=toc_depth
         self.use_numbered_links=use_numbered_links
         self.fit_background_mode=fit_background_mode
+        self.section_header_depth=section_header_depth
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
@@ -618,7 +621,8 @@ class PDFWriter(writers.Writer):
                  real_footnotes=self.real_footnotes,
                  numbered_links=self.use_numbered_links,
                  background_fit_mode=self.fit_background_mode,
-                 baseurl=self.baseurl
+                 baseurl=self.baseurl,
+                 section_header_depth=self.section_header_depth
                 ).createPdf(doctree=self.document,
                     output=sio,
                     compressed=self.compressed)
@@ -896,6 +900,7 @@ def setup(app):
     app.add_config_value('pdf_toc_depth',9999, None)
     app.add_config_value('pdf_use_numbered_links',False, None)
     app.add_config_value('pdf_fit_background_mode',"scale", None)
+    app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
     
     author_texescaped = unicode(app.config.copyright)\
