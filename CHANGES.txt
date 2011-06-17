@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Issue 399: support sphinx's template path option
 * Fixed Issue 406: calls to the wrong logging function
 * Implemented Issue 391: New --section-header-depth option.
 * Fixed Issue 390: the --config option was ignored.

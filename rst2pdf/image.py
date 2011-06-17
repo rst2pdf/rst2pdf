@@ -344,7 +344,6 @@ class MyImage (Flowable):
             
         else:
             keeptrying = True
-            
             if LazyImports.PILImage:
                 try:
                     img = LazyImports.PILImage.open(imgname)
