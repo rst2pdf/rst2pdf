@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Implemented Issue 404: plantuml support
 * Issue 399: support sphinx's template path option
 * Fixed Issue 406: calls to the wrong logging function
 * Implemented Issue 391: New --section-header-depth option.
