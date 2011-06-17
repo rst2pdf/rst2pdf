@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 407: calls to the wrong logging function
+* Implemented Issue 391: New --section-header-depth option.
+* Fixed Issue 390: the --config option was ignored.
 * Added support for many pygments options in code-block (by Joaquin Sorianello)
 * Fixed Issue 379: Wrong style applied to paragraphs in definitions.
 * Fixed Issue 378: Multiline :address: were shown collapsed.
