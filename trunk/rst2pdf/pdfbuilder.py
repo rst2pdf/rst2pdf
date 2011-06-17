@@ -192,7 +192,7 @@ class PDFBuilder(Builder):
                     self.docutils_languages[lang] = \
                          get_language(lang.split('_', 1)[0])
                 except ImportError:
-                    log.warning("Can't load Docutils module \
+                    rst2pdf.log.log.warning("Can't load Docutils module \
                         for language %s", lang)
                 langmod = languages.get_language('en')
 
@@ -581,7 +581,7 @@ class PDFWriter(writers.Writer):
 
             cover_file=find_cover(self.config.pdf_cover_template)
             if cover_file is None:
-                log.error("Can't find cover template %s, using default"%self.custom_cover)
+                rst2pdf.log.log.error("Can't find cover template %s, using default"%self.custom_cover)
                 cover_file=find_cover('sphinxcover.tmpl')
 
             # This is what's used in the python docs because
