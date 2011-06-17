@@ -1,0 +1,17 @@
+{
+	"styles":
+	{
+		"base":
+		{
+			"wordWrap": "CJK"
+		}
+	} ,
+
+	"fontsAlias": 
+	{
+		"stdFont": "WenQuanYi Micro Hei Mono-Regular",
+		"stdBold": "WenQuanYi Micro Hei Mono-Bold",
+		"stdItalic": "WenQuanYi Micro Hei Mono-Italic",
+		"stdBoldItalic": "WenQuanYi Micro Hei Mono-Italic"
+	}
+}
