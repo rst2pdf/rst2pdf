@@ -1196,23 +1196,23 @@ def parse_commandline():
     def_section_header_depth = config.getValue("general","section_header_depth",2)
     parser.add_option('--section-header-depth', metavar='N',
         default=def_section_header_depth, dest='section_header_depth',
-        help = '''Sections up to this dept will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
+        help = '''Sections up to this depth will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
 
     def_smartquotes = config.getValue("general", "smartquotes", "0")
     parser.add_option("--smart-quotes", metavar="VALUE",
         default=def_smartquotes, dest="smarty",
-        help='Try to convert ASCII quotes, ellipsis and dashes '\
+        help='Try to convert ASCII quotes, ellipses and dashes '\
         'to the typographically correct equivalent. For details,'\
         ' read the man page or the manual. Default="%s"'%def_smartquotes)
 
     def_fit = config.getValue("general", "fit_mode", "shrink")
     parser.add_option('--fit-literal-mode', metavar='MODE',
         default=def_fit, dest='fit_mode',
-        help='What todo when a literal is too wide. One of error,'\
+        help='What to do when a literal is too wide. One of error,'\
         ' overflow,shrink,truncate. Default="%s"'%def_fit)
 
     def_fit_background = config.getValue("general", "background_fit_mode",
-    "center")
+       "center")
     parser.add_option('--fit-background-mode', metavar='MODE',
         default=def_fit_background, dest='background_fit_mode',
         help='How to fit the background image to the page.'\
@@ -1220,11 +1220,11 @@ def parse_commandline():
 
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
-        help='shows target between parenthesis instead of active link')
+        help='Shows target between parentheses instead of active link.')
 
     parser.add_option('--repeat-table-rows', action="store_true",
         dest='repeattablerows', default=False,
-        help='Repeats header row for each splitted table')
+        help='Repeats header row for each split table.')
 
     parser.add_option('-q', '--quiet', action="store_true",
         dest='quiet', default=False,
@@ -1287,7 +1287,7 @@ def parse_commandline():
     parser.add_option('--first-page-even', dest='first_page_even',
         action='store_true', default=def_fpeven,
         help='Whether first page is odd (as in the screen on "facing pages"), '\
-             'or even (as in a book)')
+             'or even (as in a book).')
 
     def_blankfirst = config.getValue("general", "blank_first_page", False)
     parser.add_option('--blank-first-page', dest='blank_first_page',
@@ -1318,7 +1318,7 @@ def parse_commandline():
 
     def_floating_images = config.getValue("general", "floating_images", False)
     parser.add_option('--use-floating-images', action='store_true', default=def_floating_images,
-        help='Makes images with :aling: attribute work more like in rst2html. Default: %s'%def_floating_images,
+        help='Makes images with :align: attribute work more like in rst2html. Default: %s'%def_floating_images,
         dest='floating_images')
 
     def_numbered_links = config.getValue("general", "numbered_links", False)
