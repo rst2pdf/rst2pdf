@@ -570,8 +570,15 @@ class PDFWriter(writers.Writer):
 
             # Find cover template, save it in cover_file
             def find_cover(name):
-                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'),
-                    os.path.join(self.PATH,'templates')]
+                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'), 
+                                            os.path.join(self.PATH,'templates')]
+               
+                # Add the Sphinx template paths
+                def add_template_path(path):
+                    return os.path.join(self.srcdir, path)
+                
+                cover_path.extend(map(add_template_path, self.config.templates_path))
+            
                 cover_file=None
                 for d in cover_path:
                     if os.path.exists(os.path.join(d,name)):
