@@ -13,28 +13,28 @@
     :license: BSD, see LICENSE for details.
 """
 
-
+import logging
 import parser
 import re
 import sys
+import os
 from os import path
 from os.path import abspath, dirname, expanduser, join
-import os
-
+from pprint import pprint
+from copy import copy, deepcopy
+from xml.sax.saxutils import unescape, escape
+from traceback import print_exc
 from cStringIO import StringIO
-from rst2pdf import createpdf
+from urlparse import urljoin, urlparse, urlunparse
 
-from rst2pdf import pygments_code_block_directive, oddeven_directive
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
 from docutils import writers
 from docutils import nodes
 from docutils import languages
-from docutils.languages import get_language
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
-from urlparse import urljoin, urlparse, urlunparse
 
 import sphinx
 from sphinx import addnodes
@@ -44,17 +44,12 @@ from sphinx.util import SEP
 from sphinx.util import ustrftime, texescape
 from sphinx.environment import NoUri
 from sphinx.locale import admonitionlabels, versionlabels
-
 if sphinx.__version__ >= '1.':
     from sphinx.locale import _
 
-import rst2pdf.log
-import logging
-from pprint import pprint
-from copy import copy, deepcopy
-from xml.sax.saxutils import unescape, escape
-
-from traceback import print_exc
+from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
+from rst2pdf.log import log
+from rst2pdf.languages import get_language_avaiblable
 
 
 class PDFBuilder(Builder):
@@ -66,19 +61,19 @@ class PDFBuilder(Builder):
         self.document_data = []
 
     def write(self, *ignored):
-        
+
         self.init_document_data()
-        
+
         if self.config.pdf_verbosity > 1:
-            rst2pdf.log.log.setLevel(logging.DEBUG)
+            log.setLevel(logging.DEBUG)
         elif self.config.pdf_verbosity > 0:
-            rst2pdf.log.log.setLevel(logging.INFO)
-    
+            log.setLevel(logging.INFO)
+
         for entry in self.document_data:
             try:
                 docname, targetname, title, author = entry[:4]
                 # Custom options per document
-                if len(entry)>4 and isinstance(entry[4],dict): 
+                if len(entry)>4 and isinstance(entry[4],dict):
                     opts=entry[4]
                 else:
                     opts={}
@@ -86,11 +81,11 @@ class PDFBuilder(Builder):
                 self.opts = opts
                 class dummy:
                     extensions=self.config.pdf_extensions
-                    
+
                 createpdf.add_extensions(dummy())
-                
+
                 self.page_template=opts.get('pdf_page_template',self.config.pdf_page_template)
-                
+
                 docwriter = PDFWriter(self,
                                 stylesheets=opts.get('pdf_stylesheets',self.config.pdf_stylesheets),
                                 language=opts.get('pdf_language',self.config.pdf_language),
@@ -115,10 +110,10 @@ class PDFBuilder(Builder):
                                 srcdir=self.srcdir,
                                 config=self.config,
                                 )
-                
+
                 tgt_file = path.join(self.outdir, targetname + self.out_suffix)
                 destination = FileOutput(destination=open(tgt_file,'wb'), encoding='utf-8')
-                doctree = self.assemble_doctree(docname,title,author, 
+                doctree = self.assemble_doctree(docname,title,author,
                     appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
                 doctree.settings.author=author
                 doctree.settings.title=title
@@ -127,10 +122,10 @@ class PDFBuilder(Builder):
                 docwriter.write(doctree, destination)
                 self.info("done")
             except Exception, e:
-                rst2pdf.log.log.error(str(e))
+                log.error(str(e))
                 print_exc()
                 self.info(red("FAILED"))
-        
+
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
         if not preliminary_document_data:
@@ -154,7 +149,7 @@ class PDFBuilder(Builder):
 
         # FIXME: use the new inline_all_trees from Sphinx.
         # check how the LaTeX builder does it.
-        
+
         self.docnames = set([docname])
         self.info(darkgreen(docname) + " ", nonl=1)
         def process_tree(docname, tree):
@@ -178,28 +173,17 @@ class PDFBuilder(Builder):
                 toctreenode.parent.replace(toctreenode, newnodes)
             return tree
 
-        
-        tree = self.env.get_doctree(docname)        
+        tree = self.env.get_doctree(docname)
         tree = process_tree(docname, tree)
 
         self.docutils_languages = {}
         if self.config.language:
-            lang = self.config.language
-            try:
-                self.docutils_languages[lang] = get_language(lang)
-            except ImportError:
-                try:
-                    self.docutils_languages[lang] = \
-                         get_language(lang.split('_', 1)[0])
-                except ImportError:
-                    rst2pdf.log.log.warning("Can't load Docutils module \
-                        for language %s", lang)
-                langmod = languages.get_language('en')
+            self.docutils_languages[lang] = get_language_available(lang)[2]
 
         if self.opts.get('pdf_use_index',self.config.pdf_use_index):
             # Add index at the end of the document
-            
-            # This is a hack. create_index creates an index from 
+
+            # This is a hack. create_index creates an index from
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
@@ -214,7 +198,7 @@ class PDFBuilder(Builder):
             genindex = self.env.create_index(self)
             self.env.indexentries=t
             # EOH (End Of Hack)
-            
+
             if genindex: # No point in creating empty indexes
                 index_nodes=genindex_nodes(genindex)
                 tree.append(nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
@@ -249,7 +233,7 @@ class PDFBuilder(Builder):
 
         # Now this in the HTML builder is passed onto write_domain_indices.
         # We handle it right here
-        
+
         for indexname, indexcls, content, collapse in self.domain_indices:
             indexcontext = dict(
                 indextitle = indexcls.localname,
@@ -286,9 +270,9 @@ class PDFBuilder(Builder):
 
             dt = docutils.core.publish_doctree('\n'.join(output))[1:]
             dt.insert(0,nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
-            tree.extend(dt)            
+            tree.extend(dt)
 
-        
+
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
             self.info()
@@ -298,8 +282,8 @@ class PDFBuilder(Builder):
                 appendix = self.env.get_doctree(docname)
                 appendix['docname'] = docname
                 tree.append(appendix)
-            self.info('done')        
-        
+            self.info('done')
+
         self.info()
         self.info("resolving references...")
         #print tree
@@ -319,7 +303,7 @@ class PDFBuilder(Builder):
             else:
                 # FIXME: This is from the LaTeX builder and I still don't understand it
                 # well, and doesn't seem to work
-                
+
                 # resolve :ref:s to distant tex files -- we can't add a cross-reference,
                 # but append the document name
                 docname = pendingnode['refdocname']
@@ -346,7 +330,7 @@ class PDFBuilder(Builder):
             # replaced by \token{} in LaTeX
             return '@token'
         if docname not in self.docnames:
-            
+
             # It can be a 'main' document:
             for doc in self.document_data:
                 if doc[0]==docname:
@@ -365,7 +349,7 @@ class PDFBuilder(Builder):
     def get_relative_uri(self, from_, to, typ=None):
         # ignore source path
         return self.get_target_uri(to, typ)
-        
+
     def get_outdated_docs(self):
         for docname in self.env.found_docs:
             if docname not in self.env.all_docs:
@@ -410,7 +394,7 @@ def genindex_nodes(genindexentries):
                     else:
                         output.append(subentryname)
                         output.append('')
-                        
+
 
     doctree = docutils.core.publish_doctree('\n'.join(output))
     return doctree[1]
@@ -419,13 +403,13 @@ def genindex_nodes(genindexentries):
 class PDFContents(Contents):
 
     # Mostly copied from Docutils' Contents transformation
-    
+
     def build_contents(self, node, level=0):
         level += 1
         sections=[]
         # Replaced this with the for below to make it work for Sphinx
         # trees.
-        
+
         #sections = [sect for sect in node if isinstance(sect, nodes.section)]
         for sect in node:
             if isinstance(sect,nodes.compound):
@@ -531,25 +515,14 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
-        self.docutils_languages = {}
-        lang = self.config.language or 'en'
-        langmod = languages.get_language('en')
-        try:
-            langmod = get_language(lang)
-        except ImportError:
-            try:
-                self.docutils_languages[lang] = \
-                    get_language(lang.split('_', 1)[0])
-            except ImportError:
-                log.warning("Can't load Docutils module "\
-                    "for language %s", lang)
-                langmod = languages.get_language('en')
-            
+        langmod = get_language_available(self.config.language or 'en')[2]
+        self.docutils_languages = {lang: langmod}
+
         # Generate Contents topic manually
         if self.use_toc:
             contents=nodes.topic(classes=['contents'])
             contents+=nodes.title('')
-            contents[0]+=nodes.Text( langmod.labels['contents'])
+            contents[0]+=nodes.Text(langmod.labels['contents'])
             contents['ids']=['Contents']
             pending=nodes.topic()
             contents.append(pending)
@@ -570,15 +543,15 @@ class PDFWriter(writers.Writer):
 
             # Find cover template, save it in cover_file
             def find_cover(name):
-                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'), 
+                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'),
                                             os.path.join(self.PATH,'templates')]
-               
+
                 # Add the Sphinx template paths
                 def add_template_path(path):
                     return os.path.join(self.srcdir, path)
-                
+
                 cover_path.extend(map(add_template_path, self.config.templates_path))
-            
+
                 cover_file=None
                 for d in cover_path:
                     if os.path.exists(os.path.join(d,name)):
@@ -588,7 +561,7 @@ class PDFWriter(writers.Writer):
 
             cover_file=find_cover(self.config.pdf_cover_template)
             if cover_file is None:
-                rst2pdf.log.log.error("Can't find cover template %s, using default"%self.custom_cover)
+                log.error("Can't find cover template %s, using default"%self.custom_cover)
                 cover_file=find_cover('sphinxcover.tmpl')
 
             # This is what's used in the python docs because
@@ -605,13 +578,13 @@ class PDFWriter(writers.Writer):
 
             cover_tree = docutils.core.publish_doctree(cover_text)
             self.document.insert(0, cover_tree)
-            
+
         sio=StringIO()
-        
+
         if self.invariant:
             createpdf.patch_PDFDate()
             createpdf.patch_digester()
-        
+
         createpdf.RstToPdf(sphinx=True,
                  stylesheets=self.stylesheets,
                  language=self.__language,
@@ -657,11 +630,11 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             'title': document.settings.title,
         }
         self.highlightlang = builder.config.highlight_language
-        
+
     def visit_document(self,node):
         self.curfilestack.append(node.get('docname', ''))
         self.footnotestack.append('')
-        
+
     def visit_start_of_file(self,node):
         self.curfilestack.append(node['docname'])
         self.footnotestack.append(node['docname'])
@@ -669,12 +642,12 @@ class PDFTranslator(nodes.SparseNodeVisitor):
     def depart_start_of_file(self,node):
         self.footnotestack.pop()
         self.curfilestack.pop()
-                
+
     def visit_highlightlang(self, node):
         self.highlightlang = node['lang']
         self.highlightlinenothreshold = node['linenothreshold']
         raise nodes.SkipNode
-    
+
     def visit_versionmodified(self, node):
         text = versionlabels[node['type']] % node['version']
         if len(node):
@@ -685,10 +658,10 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         replacement+=nodes.Text(text)
         replacement.extend(node.children)
         node.parent.replace(node,replacement)
-                
+
     def depart_versionmodified(self, node):
         pass
-    
+
     def visit_literal_block(self, node):
         if 'code' in node['classes']: #Probably a processed code-block
             pass
@@ -700,7 +673,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
                 options = { 'linenos': True }
             else:
                 options = {}
-                
+
             # FIXME: make tab width configurable
             content = [c.replace('\t','        ') for c in content]
             replacement = nodes.literal_block()
@@ -717,14 +690,14 @@ class PDFTranslator(nodes.SparseNodeVisitor):
                                     state_machine = None,
                                     )
             node.parent.replace(node,replacement)
-        
+
     def visit_footnote(self, node):
         node['backrefs']=[ '%s_%s'%(self.footnotestack[-1],x) for x in node['backrefs']]
         node['ids']=[ '%s_%s'%(self.footnotestack[-1],x) for x in node['ids']]
         node.children[0][0]=nodes.Text(str(self.footnotecounter))
         for id in node['backrefs']:
             fnr=self.footnotedict[id]
-            fnr.children[0]=nodes.Text(str(self.footnotecounter))        
+            fnr.children[0]=nodes.Text(str(self.footnotecounter))
         self.footnotecounter+=1
 
     def visit_footnote_reference(self, node):
@@ -734,10 +707,10 @@ class PDFTranslator(nodes.SparseNodeVisitor):
 
     def visit_desc_annotation(self, node):
         pass
-    
+
     def depart_desc_annotation(self, node):
         pass
-    
+
     # This is for graphviz support
     def visit_graphviz(self, node):
         # Not neat, but I need to send self to my handlers
@@ -745,7 +718,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
 
     def visit_Aanode(self, node):
         pass
-    
+
     def depart_Aanode(self, node):
         pass
 
@@ -806,7 +779,7 @@ def lang_for_block(source,lang):
             return None
     else:
         return lang
-    
+
 def try_parse(src):
     # Make sure it ends in a newline
     src += '\n'
@@ -842,10 +815,10 @@ def try_parse(src):
 def init_math(app):
     """
         This is a dummy math extension.
-        
+
         It's a hack, but if you want math in a PDF via pdfbuilder, and don't want to
         enable pngmath or jsmath, then enable this one.
-        
+
         :copyright: Copyright 2007-2009 by the Sphinx team, see AUTHORS.
         :license: BSD, see LICENSE for details.
     """
@@ -858,8 +831,8 @@ def init_math(app):
             # Sphinx 0.6.3
             from sphinx.ext.mathbase import setup as mathbase_setup
         except ImportError, e:
-            rst2pdf.log.log.error('Error importing sphinx math extension: %s', e)
-        
+            log.error('Error importing sphinx math extension: %s', e)
+
     class MathExtError(SphinxError):
         category = 'Math extension error'
 
@@ -878,7 +851,7 @@ def init_math(app):
 def setup(app):
     #Init dummy math extension
     init_math(app)
-    
+
     app.add_builder(PDFBuilder)
     # PDF options
     app.add_config_value('pdf_documents', [], None)
@@ -909,7 +882,7 @@ def setup(app):
     app.add_config_value('pdf_fit_background_mode',"scale", None)
     app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
-    
+
     author_texescaped = unicode(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
     project_doc_texescaped = unicode(app.config.project + ' Documentation')\

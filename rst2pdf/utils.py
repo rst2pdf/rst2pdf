@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 import shlex
 
@@ -51,7 +51,7 @@ def parseRaw(data, node):
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
-            elements.append(MySpacer(adjustUnits(tokens[1]), 
+            elements.append(MySpacer(adjustUnits(tokens[1]),
                 adjustUnits(tokens[2])))
         elif command == 'Transition':
             elements.append(Transition(*tokens[1:]))
