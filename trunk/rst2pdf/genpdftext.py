@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -44,7 +44,7 @@ class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
-        
+
         if node['classes']:
             pre = client.styleToFont(node['classes'][0])
         else:
@@ -136,7 +136,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
 
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
-        except ValueError: 
+        except ValueError:
             # Broken image, return arbitrary stuff
             imgname=missing
             w, h, kind = 100, 100, 'direct'
@@ -156,7 +156,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         imgname = os.path.join(client.basedir,str(node.get("uri")))
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
-        except ValueError: 
+        except ValueError:
             # Broken image, return arbitrary stuff
             imgname=missing
             w, h, kind = 100, 100, 'direct'

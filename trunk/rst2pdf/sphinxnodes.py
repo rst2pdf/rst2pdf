@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -162,14 +162,14 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
         # Each child is a hlistcol and represents a column.
         # Each grandchild is a bullet list that's the contents
         # of the column
-        
+
         # Represent it as a N-column, 1-row table, each cell containing
         # a list.
-        
+
         cells = [[ client.gather_elements(child, style) for child in node.children]]
-        t_style=TableStyle(client.styles['hlist'].commands)        
+        t_style=TableStyle(client.styles['hlist'].commands)
         cw=100./len(node.children)
-        return [ DelayedTable( cells, 
+        return [ DelayedTable( cells,
             colWidths=["%s%%"%cw,]*len(cells),
             style=t_style
             )]
@@ -200,7 +200,7 @@ class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
 class HandleSphinxEq(SphinxHandler, mathbase.eqref):
 
     def get_text(self, client, node, replaceEnt):
-        return '<a href="equation-%s" color="%s">%s</a>'%(node['target'], 
+        return '<a href="equation-%s" color="%s">%s</a>'%(node['target'],
             client.styles.linkColor, node.astext())
 
 graphviz_warn = False
@@ -236,7 +236,7 @@ try:
 except AttributeError:
     # Probably the graphviz extension is not enabled
     pass
-    
+
 
 
 sphinxhandlers = SphinxHandler()

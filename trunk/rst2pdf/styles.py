@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 import os
 import sys
@@ -378,7 +378,7 @@ class StyleSheet(object):
                             log.error("Unknown font: \"%s\","
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
-                            
+
         #log.info('FontList: %s'%self.embedded)
         #log.info('FontAlias: %s'%self.fontsAlias)
         # Get styles from all stylesheets in order
@@ -446,7 +446,7 @@ class StyleSheet(object):
         # rare (who would have custom_name and custom-name in the
         # same stylesheet? ;-)
         # Issue 339
-        
+
         styles2=[]
         for s in self.styles:
             if not re.match("^[a-z](-?[a-z0-9]+)*$", s['name']):
@@ -519,13 +519,13 @@ class StyleSheet(object):
 
             self.StyleSheet.add(ParagraphStyle(**s))
 
-        
+
         self.emsize=self['base'].fontSize
         # Make stdFont the basefont, for Issue 65
         reportlab.rl_config.canvas_basefontname = self['base'].fontName
         # Make stdFont the default font for table cell styles (Issue 65)
         reportlab.platypus.tables.CellStyle1.fontname=self['base'].fontName
-        
+
 
     def __getitem__(self, key):
 
@@ -782,10 +782,10 @@ class StyleSheet(object):
 
         for st in validst[1:]:
             newst.__dict__.update(st.__dict__)
-        
+
         newst.name=newname
         return newst
-        
+
 
 def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
     """Takes something like 2cm and returns 2*cm.

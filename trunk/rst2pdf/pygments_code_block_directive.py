@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date$
@@ -199,7 +199,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     else:
         content = u'\n'.join(content)
-        
+
     if 'tabsize' in options:
         tabw = options['tabsize']
     else:

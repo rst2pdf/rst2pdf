@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -50,13 +50,16 @@ import os
 import tempfile
 import re
 import string
+import config
+import logging
+from cStringIO import StringIO
 from os.path import abspath, dirname, expanduser, join
 from urlparse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
 from optparse import OptionParser
-import logging
+from pprint import pprint
+from xml.sax.saxutils import unescape, escape
 
-from docutils.languages import get_language
 import docutils.readers.doctree
 import docutils.core
 import docutils.nodes
@@ -64,8 +67,7 @@ from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
 
-import pygments_code_block_directive # code-block directive
-import oddeven_directive
+from roman import toRoman
 
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import IndexingFlowable
@@ -75,57 +77,42 @@ from reportlab.pdfbase.pdfdoc import PDFPageLabel
 #from reportlab.lib.units import *
 #from reportlab.lib.pagesizes import *
 
-from flowables import * # our own reportlab flowables
-from sinker import Sinker
-import flowables
-from image import MyImage, missing
-
-from aafigure_directive import Aanode
-import counter_role
-
-from log import log, nodeid
-from pprint import pprint
-
-from smartypants import smartyPants
-
-from roman import toRoman
+from rst2pdf import counter_role, oddeven_directive
+from rst2pdf import pygments_code_block_directive # code-block directive
+from rst2pdf import flowables
+from rst2pdf.flowables import * # our own reportlab flowables
+from rst2pdf.sinker import Sinker
+from rst2pdf.image import MyImage, missing
+from rst2pdf.aafigure_directive import Aanode
+from rst2pdf.log import log, nodeid
+from rst2pdf.smartypants import smartyPants
+from rst2pdf import styles as sty
+from rst2pdf.nodehandlers import nodehandlers
+from rst2pdf.languages import get_language_available
+from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
+    DCWHyphenator, sphinx as sphinx_module, wordaxe
 
 # Small template engine for covers
 # The obvious import doesn't work for complicated reasons ;-)
-import tenjin
-to_str=tenjin.helpers.generate_tostrfunc('utf-8')
-escape=tenjin.helpers.escape
-templateEngine=tenjin.Engine()
+from rst2pdf import tenjin
+to_str = tenjin.helpers.generate_tostrfunc('utf-8')
+escape = tenjin.helpers.escape
+templateEngine = tenjin.Engine()
 
 def renderTemplate(tname, **context):
-  context['to_str']=to_str
-  context['escape']=escape
+  context['to_str'] = to_str
+  context['escape'] = escape
   return templateEngine.render(tname, context)
-
-# Is this really the best unescape in the stdlib for '&amp;' => '&'????
-from xml.sax.saxutils import unescape, escape
-
-import config
-
-from cStringIO import StringIO
 
 #def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
-from utils import log
-import styles as sty
-
-from opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
-                         DCWHyphenator, sphinx as sphinx_module, wordaxe
-
-from nodehandlers import nodehandlers
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
                   'lowerroman': 'ROMAN_LOWER',
                   'alpha':  'LETTERS_UPPER',
                   'loweralpha':  'LETTERS_LOWER' }
-
 
 
 class RstToPdf(object):
@@ -149,7 +136,7 @@ class RstToPdf(object):
                  real_footnotes=False,
                  def_dpi=300,
                  show_frame=False,
-                 highlightlang='python', #This one is only used by sphinx
+                 highlightlang='python', # this one is only used by Sphinx
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
@@ -165,20 +152,8 @@ class RstToPdf(object):
         self.blank_first_page=blank_first_page
         self.splittables=splittables
         self.basedir=basedir
-        self.language = language
-        self.docutils_language = language
-        try:
-            self.get_language(self.language)
-        except ImportError:
-            try:
-                language = self.language.split('_', 1)[0]
-                self.get_language(language)
-                self.docutils_language = language
-            except ImportError:
-                log.warning("Can't load Docutils module"
-                    " for language %s or %s", self.language, language)
-                self.language = 'en_US'
-                self.docutils_language = 'en'
+        self.language, self.docutils_language = get_language_available(
+            language)[:2]
         self.doc_title = ""
         self.doc_title_clean = ""
         self.doc_subtitle = ""
@@ -251,15 +226,7 @@ class RstToPdf(object):
                 self.styles['bodytext'].language = 'en_US'
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
-            try:
-                self.docutils_languages[lang] = self.get_language(lang)
-            except ImportError:
-                try:
-                    self.docutils_languages[lang] = \
-                        self.get_language(lang.split('_', 1)[0])
-                except ImportError:
-                    log.warning("Can't load Docutils module"
-                        " for language %s", lang)
+            self.docutils_languages[lang] = get_language_available(lang)[2]
 
         # Load the hyphenators for all required languages
         if wordaxe is not None:
@@ -302,14 +269,6 @@ class RstToPdf(object):
                                      self.font_path,
                                      self.style_path,
                                      def_dpi=self.def_dpi)
-
-    def get_language(self, lang):
-        try:
-            return get_language(lang, reporter=log)
-        except TypeError, err: # Docutils < 0.8
-            if 'get_language' in str(err) and 'reporter' in str(err):
-                return get_language(lang)
-            raise # re-raise any other TypeError
 
     def style_language(self, style):
         """Return language corresponding to this style."""
@@ -355,7 +314,6 @@ class RstToPdf(object):
         except KeyError:
             sep = ';'
         return sep + " "
-
 
     def styleToTags(self, style):
         '''Takes a style name, returns a pair of opening/closing tags for it, like

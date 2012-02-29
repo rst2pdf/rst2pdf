@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -101,7 +101,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         # Take the style from the parent "table" node
         # because sometimes it's not passed down.
-        
+
         if node.parent['classes']:
             style = client.styles.combinedStyle(['table']+node.parent['classes'])
         else:
@@ -153,7 +153,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
                         st = client.styles['table-heading']
                     else:
                         st = client.styles['table-body']
-                    ell = client.gather_elements(cell, style=st)                    
+                    ell = client.gather_elements(cell, style=st)
                     r.append(ell)
                 j += 1
             data.append(r)
@@ -165,15 +165,15 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
         else:
             # Only use the commands from "table" if the
             # specified class has no commands.
-            
+
             for cmd in client.styles['table'].commands:
                 st.add(*cmd)
-            
+
         if hasHead:
             for cmd in client.styles.tstyleHead(headRows):
                 st.add(*cmd)
         rtr = client.repeat_table_rows
-        
+
         t=DelayedTable(data, colWidths, st, rtr)
         if style.alignment == TA_LEFT:
             t.hAlign='LEFT'
@@ -233,7 +233,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
             maxdepth=4
             if reportlab.Version > '2.1':
                 maxdepth=6
-                
+
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+unicode(id(node))
             node.elements = [ Heading(text,
@@ -371,7 +371,7 @@ class HandleAddress(HandleFList, docutils.nodes.address):
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                              XPreformatted(fb, style)]
                     ], style=t_style, colWidths=colWidths)
-        return [t]        
+        return [t]
 
 class HandleVersion(HandleFList, docutils.nodes.version):
     labeltext = "version"
@@ -445,18 +445,18 @@ class HandleSection(NodeHandler, docutils.nodes.section):
 
 class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
     def gather_elements(self, client, node, style):
-        
+
         if node ['classes']:
             style = client.styles[node['classes'][0]]
         else:
             style = client.styles["bullet-list"]
-            
+
         node.elements = client.gather_elements(node,
             style=style)
-        
+
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
-        
+
         sb=style.spaceBefore # list separation
         sa=style.spaceAfter # list separation
 
@@ -479,13 +479,13 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
             style = client.styles[node['classes'][0]]
         else:
             style = client.styles["item-list"]
-        
+
         node.elements = client.gather_elements(node,
             style = style)
-        
+
         # Here we need to separate the list from the previous element.
         # Calculate by how much:
-        
+
         sb=style.spaceBefore # list separation
         sa=style.spaceAfter # list separation
 
@@ -535,7 +535,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
         # FIXME: make this configurable from the stylesheet
         t_style = TableStyle (client.styles['definition'].commands)
         cw = getattr(client.styles['definition'],'colWidths',[])
-        
+
         if client.splittables:
             node.elements = [
                 Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),
@@ -544,7 +544,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
             node.elements = [
                 Paragraph(''.join(ids)+' : '.join(tt), client.styles['definition-list-term']),
                 DelayedTable([['',dt]] , colWidths=[10,None], style = t_style )]
-            
+
         return node.elements
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
@@ -564,7 +564,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         # bulletFont
         # This is so the baselines of the bullet and the text align
         extra_space= bStyle.bulletFontSize-bStyle.fontSize
-        
+
         bStyle.fontSize=bStyle.bulletFontSize
         bStyle.fontName=bStyle.bulletFontName
 
@@ -608,7 +608,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         else:
             # The bullet is smaller, move down the bullet
             sbb = -extra_space
-            
+
         #colWidths = map(client.styles.adjustUnits,
             #client.styles['item_list'].colWidths)
         colWidths = getattr(style,'colWidths',[])
@@ -688,7 +688,7 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
         # Fix Issue 225: no space betwen line in a lineblock, but keep
         # space before the lineblock itself
         return [MySpacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[MySpacer(0,client.styles['lineblock'].spaceAfter)]
-        
+
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
         # Indent .5em per indent unit
@@ -716,7 +716,7 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
 class HandleFigure(NodeHandler, docutils.nodes.figure):
     def gather_elements(self, client, node, style):
 
-        # Either use the figure style or the class 
+        # Either use the figure style or the class
         # selected by the user
         if node.get('classes'):
             style=client.styles[node.get('classes')[0]]
@@ -741,7 +741,7 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         table.hAlign = node.get('align','CENTER').upper()
         return [table]
 
-            
+
 class HandleCaption(NodeHandler, docutils.nodes.caption):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),

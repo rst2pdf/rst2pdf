@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+#$URL$
+#$Date$
+#$Revision$
 
 __docformat__ = 'reStructuredText'
 
@@ -56,7 +56,7 @@ class XXPreformatted(XPreformatted):
             pw, ph = self.wrap(aW, aH)
             if ph - aH < minH2:
                 aH = ph - minH2
-            
+
         return XPreformatted.split(self, aW, aH)
 
 class MyIndenter(Indenter):
@@ -161,7 +161,7 @@ class OddEven(Flowable):
     wrap() will always return a size large enough for both lists, and this flowable
     **cannot** be split, so use with care.
     """
-    
+
     def __init__(self, odd, even, style=None):
         self.odd=DelayedTable([[odd]],['100%'], style)
         self.even=DelayedTable([[even]],['100%'], style)
@@ -210,7 +210,7 @@ class DelayedTable(Table):
         #self.repeatRows= 0
         #self.splitByRow= 1
         #self.vAlign= 'MIDDLE'
-        
+
     def wrap(self, w, h):
         # Create the table, with the widths from colWidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
@@ -223,7 +223,7 @@ class DelayedTable(Table):
         self.colWidths=map(adjust, self._colWidths)
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
-            style=self.style, repeatRows=self.repeatrows, 
+            style=self.style, repeatRows=self.repeatrows,
             splitByRow=True)
             #splitByRow=self.splitByRow)
         self.t.hAlign = self.hAlign
@@ -239,7 +239,7 @@ class DelayedTable(Table):
 
     def drawOn(self, canvas, x, y, _sW=0):
         self.t.drawOn(canvas, x, y, _sW)
-        
+
     def identity(self, maxLen=None):
         return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
             hex(id(self)), self._frameName(),
@@ -299,7 +299,7 @@ class SplitTable(DelayedTable):
                     if l2==[]: # Not splittable, push some to next page
                         if l==0: # Can't fit anything, push all to next page
                             return l2
- 
+
                         # We reduce the number of items we keep on the
                         # page for two reasons:
                         #    1) If an item is associated with the following
@@ -377,7 +377,7 @@ class MySpacer(Spacer):
         self.height = min(aH, h)
         return w, self.height
 
-    
+
 
 class MyPageBreak(FrameActionFlowable):
 
@@ -916,18 +916,18 @@ class MyTableOfContents(TableOfContents):
     """
 
     def __init__(self, *args, **kwargs):
-        
+
         # The parent argument is to define the locality of
         # the TOC. If it's none, it's a global TOC and
         # any heading it's notified about is accepted.
-        
+
         # If it's a node, then the heading needs to be "inside"
         # that node. This can be figured out because
         # the heading flowable keeps a reference to the title
         # node it was creatd from.
         #
         # Yes, this is gross.
-        
+
         self.parent=kwargs.pop('parent')
         TableOfContents.__init__(self, *args, **kwargs)
         # reference ids for which this TOC should be notified
@@ -940,7 +940,7 @@ class MyTableOfContents(TableOfContents):
         # stuff includes (level, text, pagenum, label)
         level, text, pageNum, label, node = stuff
         rlabel='-'.join(label.split('-')[:-1])
-        
+
         def islocal(_node):
             '''See if this node is "local enough" for this TOC.
             This is for Issue 196'''
@@ -951,7 +951,7 @@ class MyTableOfContents(TableOfContents):
                     return True
                 _node=_node.parent
             return False
-            
+
         if rlabel in self.refids and islocal(node):
             self.addEntry(level, text, pageNum)
             self.refid_lut[(level, text, pageNum)] = label
