@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 428: page numbers logged as errors
 * Added support for many pygments options in code-block (by Joaquin Sorianello)
 * Implemented Issue 404: plantuml support
 * Issue 399: support sphinx's template path option
