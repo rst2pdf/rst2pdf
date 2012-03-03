@@ -9,3 +9,4 @@
 * Patrick Maupin
 * anatoly techtonik
 * Joaquin Sorianello
+* tyler at datastax.com

@@ -108,6 +108,7 @@ class PDFBuilder(Builder):
                                 baseurl=opts.get('pdf_baseurl',self.config.pdf_baseurl),
                                 section_header_depth=opts.get('section_header_depth',self.config.section_header_depth),
                                 srcdir=self.srcdir,
+                                style_path=opts.get('pdf_style_path', self.config.pdf_style_path),
                                 config=self.config,
                                 )
 
@@ -476,6 +477,7 @@ class PDFWriter(writers.Writer):
                 fit_background_mode = "scale",
                 section_header_depth = 2,
                 baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','','']),
+                style_path = None,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -507,6 +509,7 @@ class PDFWriter(writers.Writer):
             self.PATH = abspath(dirname(sys.executable))
         else:
             self.PATH = abspath(dirname(__file__))
+        self.style_path = [self.srcdir] if style_path is None else style_path
 
     supported = ('pdf')
     config_section = 'pdf writer'
@@ -595,7 +598,7 @@ class PDFWriter(writers.Writer):
                  inline_footnotes=self.inline_footnotes,
                  highlightlang=self.highlightlang,
                  splittables=self.splittables,
-                 style_path=[self.srcdir],
+                 style_path=self.style_path,
                  basedir=self.srcdir,
                  def_dpi=self.default_dpi,
                  real_footnotes=self.real_footnotes,
@@ -856,6 +859,7 @@ def setup(app):
     # PDF options
     app.add_config_value('pdf_documents', [], None)
     app.add_config_value('pdf_stylesheets', ['sphinx'], None)
+    app.add_config_value('pdf_style_path', None, None)
     app.add_config_value('pdf_compressed', False, None)
     app.add_config_value('pdf_font_path', [], None)
     app.add_config_value('pdf_language', 'en_US', None)
