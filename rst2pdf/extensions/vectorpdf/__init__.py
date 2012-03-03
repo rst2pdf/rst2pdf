@@ -96,4 +96,6 @@ def install(createpdf, options):
     ''' Monkey-patch this PDF handling into rst2pdf
     '''
     LazyImports.pdfinfo = pdfrw
+    print "X1"
     rst2pdf.image.VectorPdf = VectorPdf
+    print "X2"
