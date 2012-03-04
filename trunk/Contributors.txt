@@ -10,3 +10,5 @@
 * anatoly techtonik
 * Joaquin Sorianello
 * tyler at datastax.com
+* charles at stanhope.com
+
