@@ -57,6 +57,7 @@ svgsupport_require = ['svglib']
 sk1support_require = ['uniconvertor']
 aafiguresupport_require = ['aafigure>=0.4']
 mathsupport_require = ['matplotlib']
+rawhtmlsupport_require = ['xhtml2pdf']
 
 setup(
     name="rst2pdf",
@@ -90,6 +91,7 @@ setup(
         sk1support=sk1support_require,
         aafiguresupport=aafiguresupport_require,
         mathsupport=mathsupport_require,
+        rawhtmlsupport=rawhtmlsupport_require,
     ),
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers

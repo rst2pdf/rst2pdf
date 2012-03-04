@@ -103,6 +103,8 @@ The possible values are:
 --repeat-table-rows
                     Repeats header row for each splitted table
 
+--raw-html          Support embeddig raw HTML. Default: False
+
 -q, --quiet
                     Print less information.
                     

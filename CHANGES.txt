@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Added raw HTML support, by Dimitri Christodoulou
 * Fixed Issue 422: Having no .afm files made font lookup slow.
 * Fixed Issue 411: Sometimes the windows registry has the font's abspath.
 * Fixed Issue 430: Using --config option caused other options to 

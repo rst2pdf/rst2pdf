@@ -12,3 +12,4 @@
 * tyler at datastax.com
 * charles at stanhope.com
 * al.yazdi
+* Dimitri Christodoulou

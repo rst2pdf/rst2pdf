@@ -144,7 +144,8 @@ class RstToPdf(object):
                  custom_cover='cover.tmpl',
                  floating_images=False,
                  numbered_links=False,
-                 section_header_depth=2
+                 section_header_depth=2,
+                 raw_html=False
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -198,6 +199,7 @@ class RstToPdf(object):
         self.numbered_links = numbered_links
         self.section_header_depth = section_header_depth
         self.img_dir = os.path.join(self.PATH, 'images')
+        self.raw_html = raw_html
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -1191,6 +1193,11 @@ def parse_commandline():
         dest='repeattablerows', default=False,
         help='Repeats header row for each split table.')
 
+    def_raw_html = config.getValue("general", "raw_html", False)
+    parser.add_option('--raw-html', action="store_true",
+        dest='raw_html', default=def_raw_html,
+        help='Support embeddig raw HTML. Default=%s' % def_raw_html)
+
     parser.add_option('-q', '--quiet', action="store_true",
         dest='quiet', default=False,
         help='Print less information.')
@@ -1431,7 +1438,8 @@ def main(_args=None):
         custom_cover=options.custom_cover,
         floating_images=options.floating_images,
         numbered_links=options.numbered_links,
-	section_header_depth=int(options.section_header_depth),
+        raw_html=options.raw_html,
+	    section_header_depth=int(options.section_header_depth),
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,
