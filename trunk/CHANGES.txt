@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.90
+-----------
 
 * Added raw HTML support, by Dimitri Christodoulou
 * Fixed Issue 422: Having no .afm files made font lookup slow.
