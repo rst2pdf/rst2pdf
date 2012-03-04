@@ -40,14 +40,11 @@ fontMappings = {}
 
 
 def loadFonts():
-    """Given a font name, returns the actual font files.
-
-    If the font name is not valid, it will treat it as a font family name,
-    and return the value of searching for the regular font of said family.
-
+    """
+    Search the system and build lists of available fonts.
     """
     
-    if not afmList or not pfbList or not ttfList:
+    if not afmList and not pfbList and not ttfList:
         # Find all ".afm" and ".pfb" files files
         def findFontFiles(_, folder, names):
             for f in os.listdir(folder):
