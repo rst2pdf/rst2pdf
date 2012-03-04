@@ -225,7 +225,7 @@ def findTTFont(fname):
                 fname = _w.QueryValueEx(fontkey, fontname)[0]
                 if os.path.isabs(fname):
                     fontkey.close()
-                    retur fname
+                    return fname
                 fontdir = os.environ.get("SystemRoot", u"C:\\Windows")
                 fontdir += u"\\Fonts"
                 fontkey.Close()
