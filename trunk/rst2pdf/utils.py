@@ -7,7 +7,7 @@
 import shlex
 
 from flowables import *
-import flowables
+import rst2pdf.flowables
 from styles import adjustUnits
 from log import log, nodeid
 
