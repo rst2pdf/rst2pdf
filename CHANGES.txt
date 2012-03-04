@@ -1,6 +1,8 @@
 New in SVN
 ----------
 
+* Fixed Issue 430:  Using --config option caused other options to 
+  be ignored (by charles at cstanhope dot com)
 * Fixed Issue 436: Add pdf_style_path to sphinx (by tyler@datastax.com)
 * Fixed Issue 428: page numbers logged as errors
 * Added support for many pygments options in code-block (by Joaquin Sorianello)

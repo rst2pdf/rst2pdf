@@ -1299,9 +1299,13 @@ def main(args=None):
     """Parse command line and call createPdf with the correct data."""
 
     parser = parse_commandline()
-    options, args = parser.parse_args(copy(args))
+    # Fix issue 430: don't overwrite args
+    # need to parse_args to see i we have a custom config file
+    options, _ = parser.parse_args(copy(args))
 
     if options.configfile:
+        # If there is a config file, we need to reparse
+        # the command line because we have different defaults
         config.parseConfig(options.configfile)
         parser = parse_commandline()
         options, args = parser.parse_args(copy(args))
