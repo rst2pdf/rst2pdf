@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 #$HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
