@@ -1122,6 +1122,9 @@ linenos_offset
 Raw Directive
 =============
 
+Raw PDF
+-------
+
 Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
 You can use the raw directive to insert pagebreaks and spacers (other reportlab flowables
 may be added if there's interest), and set page transitions.
@@ -1270,6 +1273,13 @@ natural thing is to use it before a PageBreak::
 
        Transition Dissolve 1
        PageBreak
+
+Raw HTML
+--------
+
+If you have a document that contais raw HTML, andhave xhtml2pdf installed, rst2pdf 
+will try to render that HTML inside your documet. To enable this, use 
+the --raw-html command line option.
 
 The counter role
 ================

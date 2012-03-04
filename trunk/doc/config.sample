@@ -86,3 +86,6 @@ inline_footnotes=false
 # Makes the behaviour of images with the :align: attribute more like rst2html's
 
 floating_images = false
+
+# Support the ..raw:: html directive
+raw_html = false
