@@ -252,7 +252,6 @@ class MyImage (Flowable):
             backend=VectorImage
             
         elif extension in ['pdf']:
-            print "AAA"
             if VectorPdf is not None and filename is not missing:
                 backend = VectorPdf
                 filename = uri
