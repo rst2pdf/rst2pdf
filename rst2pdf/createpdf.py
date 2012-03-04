@@ -1295,20 +1295,20 @@ def parse_commandline():
 
     return parser
 
-def main(args=None):
+def main(_args=None):
     """Parse command line and call createPdf with the correct data."""
 
     parser = parse_commandline()
     # Fix issue 430: don't overwrite args
     # need to parse_args to see i we have a custom config file
-    options, _ = parser.parse_args(copy(args))
+    options, args = parser.parse_args(copy(_args))
 
     if options.configfile:
         # If there is a config file, we need to reparse
         # the command line because we have different defaults
         config.parseConfig(options.configfile)
         parser = parse_commandline()
-        options, args = parser.parse_args(copy(args))
+        options, args = parser.parse_args(copy(_args))
 
     if options.version:
         from rst2pdf import version
