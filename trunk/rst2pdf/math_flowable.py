@@ -113,10 +113,18 @@ class Math(Flowable):
         dpi = 72
         scale = 10
 
-        import Image
-        import ImageFont
-        import ImageDraw
-        import ImageColor
+        try:
+            import Image
+            import ImageFont
+            import ImageDraw
+            import ImageColor
+        except ImportError:
+            from PIL import (
+                Image,
+                ImageFont,
+                ImageDraw,
+                ImageColor,
+            )
 
         if not HAS_MATPLOTLIB:
             img = Image.new('L', (120, 120), ImageColor.getcolor("black", "L"))
