@@ -402,4 +402,5 @@ if HAS_XHTML2PDF:
 
 else: # no xhtml2pdf
     def parseHTML(data, none):
+        log.error("You need xhtml2pdf installed to use the raw HTML directive.")
         return []
