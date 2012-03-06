@@ -26,9 +26,9 @@ def enclose(s):
 
 class Math(Flowable):
 
-    def __init__(self, s, l=None):
+    def __init__(self, s, label=None):
         self.s = s
-        self.l = l
+        self.label = label
         if HAS_MATPLOTLIB:
             self.parser = mathtext.MathTextParser("Pdf")
         else:
@@ -60,6 +60,7 @@ class Math(Flowable):
                 x = x + _sW
             elif a not in ('LEFT',TA_LEFT):
                 raise ValueError, "Bad hAlign value "+str(a)
+        height = 0
         if HAS_MATPLOTLIB:
             global fonts
             canv.saveState()
@@ -68,9 +69,6 @@ class Math(Flowable):
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
                     enclose(self.s), 72)
-                if self.l:
-                    log.info('Drawing equation-%s'%self.l)
-                    canv.bookmarkHorizontal('equation-%s'%self.l,0,height)
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                     if not fontname in fonts:
                         fonts[fontname] = fontname
@@ -87,6 +85,9 @@ class Math(Flowable):
                 canv.setFillColorRGB(1,0,0)
                 canv.drawString(0,0,self.s)
             canv.restoreState()
+        if self.label:
+            log.info('Drawing equation-%s'%self.label)
+            canv.bookmarkHorizontal('equation-%s'%self.label,0,height)
         else:
             canv.saveState()
             canv.drawString(x, y, self.s)
