@@ -49,7 +49,7 @@ if sphinx.__version__ >= '1.':
 
 from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
 from rst2pdf.log import log
-from rst2pdf.languages import get_language_avaiblable
+from rst2pdf.languages import get_language_available
 
 
 class PDFBuilder(Builder):
@@ -179,7 +179,8 @@ class PDFBuilder(Builder):
 
         self.docutils_languages = {}
         if self.config.language:
-            self.docutils_languages[lang] = get_language_available(lang)[2]
+            self.docutils_languages[self.config.language] = \
+                get_language_available(self.config.language)[2]
 
         if self.opts.get('pdf_use_index',self.config.pdf_use_index):
             # Add index at the end of the document
@@ -518,7 +519,8 @@ class PDFWriter(writers.Writer):
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
         self.document.walkabout(visitor)
-        langmod = get_language_available(self.config.language or 'en')[2]
+        lang = self.config.language or 'en'
+        langmod = get_language_available(lang)[2]
         self.docutils_languages = {lang: langmod}
 
         # Generate Contents topic manually
