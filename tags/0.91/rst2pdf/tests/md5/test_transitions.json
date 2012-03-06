@@ -1,0 +1,14 @@
+bad_md5 = [
+        'sentinel'
+]
+
+good_md5 = [
+        '6abbe3a0761c54dc7bbaed199039bb6a',
+        '701393c4d5aed0577810debd84433c1d',
+        'sentinel'
+]
+
+unknown_md5 = [
+        'sentinel'
+]
+
