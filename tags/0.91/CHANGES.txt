@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.91
+-----------
 
 * Fixed Issue 438: sphinx support was completely broken in 0.90
 

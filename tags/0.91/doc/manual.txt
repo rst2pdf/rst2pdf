@@ -75,12 +75,36 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
        if you are using rst2pdf in other systems, please contact me and tell me where
        the system-wide config file should be.
 
-
-
-Here's an example file showing some of the currently available options:
+A full example config file is included as 
+doc/config.sample. Here is a small example:
 
 .. code-block:: ini
-   :include: config.sample
+
+    # This is an example config file. Modify and place in ~/.rst2pdf/config
+
+    [general]
+    # A comma-separated list of custom stylesheets. Example:
+    # stylesheets="fruity.json,a4paper.json,verasans.json"
+
+    stylesheets=""
+
+    # Create a compressed PDF
+    # Use true/false (lower case) or 1/0
+    compressed=false
+
+    # A colon-separated list of folders to search for fonts. Example:
+    # font_path="/usr/share/fonts:/usr/share/texmf-dist/fonts/"
+
+    font_path=""
+
+    # A colon-separated list of folders to search for stylesheets. Example:
+    # stylesheet_path="~/styles:/usr/share/styles"
+    stylesheet_path=""
+
+    # Language to be used for hyphenation support
+
+    language="en_US"
+
 
 Pipe usage
 ==========
