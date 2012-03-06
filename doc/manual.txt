@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 :author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.17
+:version: 0.91
 :revision: $LastChangedRevision$
 
 .. header::
@@ -1022,8 +1022,6 @@ Python traceback
     Exit 1
 
 The code-block directive supports many options, that mirror pygments'::
-
-FIXME: fix this to really explain them all. This is a placeholder.
 
                                 'stripnl' : string_bool,
                                 'stripall': string_bool,
