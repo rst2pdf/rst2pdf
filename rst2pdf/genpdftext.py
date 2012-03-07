@@ -55,6 +55,12 @@ class HandleLiteral(NodeHandler, docutils.nodes.literal):
             post += '</nobr>'
         return pre, post
 
+    def get_text(self, client, node, replaceEnt):
+        text = node.astext()
+        text = escape(node.astext())
+        text = text.replace(' ', '&nbsp;')
+        return text
+        
 class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
     post = "</super>"
