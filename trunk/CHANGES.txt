@@ -1,6 +1,11 @@
 New in SVN
 ----------
 
+* Fixed Issue 427: multiple spaces collapsed on inline literals.
+
+New in 0.91
+-----------
+
 * Fixed Issue 438: sphinx support was completely broken in 0.90
 
 New in 0.90
