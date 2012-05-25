@@ -67,7 +67,10 @@ from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
 
-from roman import toRoman
+try:
+    from roman import toRoman
+except ImportError:
+    from docutils.utils.roman import toRoman
 
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import IndexingFlowable
