@@ -510,7 +510,11 @@ class PDFWriter(writers.Writer):
             self.PATH = abspath(dirname(sys.executable))
         else:
             self.PATH = abspath(dirname(__file__))
-        self.style_path = [self.srcdir] if style_path is None else style_path
+        if style_path:
+            self.style_path = style_path
+        else:
+            self.style_path = [self.srcdir]
+
 
     supported = ('pdf')
     config_section = 'pdf writer'
