@@ -6,6 +6,7 @@ import os
 from weakref import WeakKeyDictionary
 
 try:
+    from reportlab.rl_config import _FUZZ
     from reportlab.platypus import Flowable
     from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
@@ -91,6 +92,14 @@ class VectorPdf(Flowable):
         canv.scale(xscale, yscale)
         canv.doForm(xobj_name)
         canv.restoreState()
+
+    def _restrictSize(self,aW,aH):
+        if self.drawWidth>aW+_FUZZ or self.drawHeight>aH+_FUZZ:
+            self._oldDrawSize = self.drawWidth, self.drawHeight
+            factor = min(float(aW)/self.drawWidth,float(aH)/self.drawHeight)
+            self.drawWidth *= factor
+            self.drawHeight *= factor
+        return self.drawWidth, self.drawHeight
 
 def install(createpdf, options):
     ''' Monkey-patch this PDF handling into rst2pdf
