@@ -613,7 +613,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             #client.styles['item_list'].colWidths)
         colWidths = getattr(style,'colWidths',[])
         while len(colWidths) < 2:
-            colWidths.append(None)
+            colWidths.append(client.styles['item_list'].colWidths[len(colWidths)])
 
         if client.splittables:
             node.elements = [MySpacer(0,sb),
@@ -863,9 +863,9 @@ class HandleRaw(NodeHandler, docutils.nodes.raw):
         # Not really raw, but what the heck
         if node.get('format','NONE').lower()=='pdf':
             return parseRaw(str(node.astext()), node)
-        elif client.raw_html and node.get('format','NONE').lower()=='html':        
+        elif client.raw_html and node.get('format','NONE').lower()=='html':
             x = parseHTML(str(node.astext()), node)
-            return x            
+            return x
         else:
             return []
 

@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 452: applying missing classes to lists crashed rst2pdf
 * Fixed Issue 427: multiple spaces collapsed on inline literals.
 * Fixed Issue 451: roman.py was moved in docutils 0.9
 * Fixed Issue 446: made it work again with python 2.4
