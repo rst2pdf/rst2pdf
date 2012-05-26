@@ -1,0 +1,15 @@
+Introduction
+============
+
+This is the documentation for the Sphinx documentation builder.  Sphinx is a
+tool that translates a set of reStructuredText_ source files into various output
+formats, automatically producing cross-references, indices etc.  
+
+.. image:: images/biohazard.png
+   :align: left
+   :scale: 200   
+
+That is, if you have a directory containing a bunch of reST-formatted documents (and
+possibly subdirectories of docs in there as well), Sphinx can generate a
+nicely-organized arrangement of HTML files (in some other directory) for easy
+browsing and navigation. 
