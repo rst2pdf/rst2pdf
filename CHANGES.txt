@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.92
+-----------
 
 * Fixed Issue 394; missing _restrictSize method with RL 2.5
 * Fixed Issue 452: applying missing classes to lists crashed rst2pdf
