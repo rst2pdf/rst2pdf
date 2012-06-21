@@ -16,6 +16,9 @@ from log import log
 
 HAS_MATPLOTLIB = mathtext is not None
 
+if HAS_MATPLOTLIB:
+    from matplotlib.font_manager import FontProperties
+    from matplotlib.colors import ColorConverter
 fonts = {}
 
 def enclose(s):
@@ -26,9 +29,11 @@ def enclose(s):
 
 class Math(Flowable):
 
-    def __init__(self, s, label=None):
+    def __init__(self, s, label=None, fontsize=12,color='black'):
         self.s = s
         self.label = label
+        self.fontsize = fontsize
+        self.color = color
         if HAS_MATPLOTLIB:
             self.parser = mathtext.MathTextParser("Pdf")
         else:
@@ -43,7 +48,7 @@ class Math(Flowable):
             try:
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
-                    enclose(self.s), 72)
+                    enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
                 return width, height
             except:
                 pass
@@ -68,12 +73,15 @@ class Math(Flowable):
             try:
                 width, height, descent, glyphs, \
                 rects, used_characters = self.parser.parse(
-                    enclose(self.s), 72)
+                    enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                     if not fontname in fonts:
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
                     canv.setFont(fontname, fontsize)
+                    col_conv=ColorConverter()
+                    rgb_color=col_conv.to_rgb(self.color)
+                    canv.setFillColorRGB(rgb_color[0],rgb_color[1],rgb_color[2])
                     canv.drawString(ox, oy, unichr(num))
 
                 canv.setLineWidth(0)
@@ -82,7 +90,9 @@ class Math(Flowable):
                     canv.rect(ox, oy+2*height, width, height, fill=1)
             except:
                 # FIXME: report error
-                canv.setFillColorRGB(1,0,0)
+                col_conv=ColorConverter()
+                rgb_color=col_conv.to_rgb(self.color)
+                canv.setFillColorRGB(rgb_color[0],rgb_color[1],rgb_color[2])
                 canv.drawString(0,0,self.s)
             canv.restoreState()
         else:
@@ -98,7 +108,7 @@ class Math(Flowable):
         useful to align it when used inline."""
         if HAS_MATPLOTLIB:
             width, height, descent, glyphs, rects, used_characters = \
-            self.parser.parse(enclose(self.s), 72)
+            self.parser.parse(enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
             return descent
         return 0
 
@@ -128,13 +138,12 @@ class Math(Flowable):
             )
 
         if not HAS_MATPLOTLIB:
-            img = Image.new('L', (120, 120), ImageColor.getcolor("black", "L"))
+            img = Image.new('RGBA', (120, 120), (255,255,255,0))
         else:
             width, height, descent, glyphs,\
             rects, used_characters = self.parser.parse(
-                enclose(self.s), dpi)
-            img = Image.new('L', (int(width*scale), int(height*scale)),
-                ImageColor.getcolor("white", "L"))
+                enclose(self.s), dpi, prop=FontProperties(size=self.fontsize))
+            img = Image.new('RGBA', (int(width*scale), int(height*scale)),(255,255,255,0))
             draw = ImageDraw.Draw(img)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 font = ImageFont.truetype(fontname, int(fontsize*scale))
@@ -142,15 +151,17 @@ class Math(Flowable):
                 # No, I don't understand why that 4 is there.
                 # As we used to say in the pure math
                 # department, that was a numerical solution.
+                col_conv=ColorConverter()
+                fc=col_conv.to_rgb(self.color)
+                rgb_color=(int(fc[0]*255),int(fc[1]*255),int(fc[2]*255))
                 draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
-                           unichr(num), font=font)
+                           unichr(num), font=font,fill=rgb_color)
             for ox, oy, w, h in rects:
                 x1 = ox*scale
                 x2 = x1 + w*scale
                 y1 = (height - oy)*scale
                 y2 = y1 + h*scale
-                draw.rectangle([x1, y1, x2, y2],
-                               fill=ImageColor.getcolor("black", "L"))
+                draw.rectangle([x1, y1, x2, y2],(0,0,0))
 
         fh, fn = tempfile.mkstemp(suffix=".png")
         os.close(fh)
