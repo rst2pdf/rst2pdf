@@ -1409,6 +1409,17 @@ is similar to the math directive.
 
 Rst2pdf doesn't support numbering equations yet.
 
+The math directive supports the following options:
+
+``:fontsize:`` 
+    Sets the font size used in the math directive. By default it will use the paragraph's
+    font and size.
+
+``:color:``
+    Can change the color of the math directive's output. Can take either a color by name
+    like ``red`` or a hex code like ``#4c050f``
+
+
 Hyphenation
 ===========
 
