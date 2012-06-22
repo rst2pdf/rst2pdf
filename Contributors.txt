@@ -13,3 +13,5 @@
 * charles at stanhope.com
 * al.yazdi
 * Dimitri Christodoulou
+* Paul Nation
+* Robert Johansson
