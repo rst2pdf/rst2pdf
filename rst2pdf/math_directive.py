@@ -84,6 +84,10 @@ roles.register_local_role('eq', eq_role)
 
 class HandleMath(basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
+        if not node.fontsize:
+            node.fontsize=style.fontSize
+        if not node.color:
+            node.color=style.textColor.rgb()
         return [math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
 
     def get_text(self, client, node, replaceEnt):
@@ -100,8 +104,8 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
             img, w, h, -descent)
 
 class HandleEq(basenodehandler.NodeHandler, eq_node):
-    
+
     def get_text(self, client, node, replaceEnt):
-        return '<a href="equation-%s" color="%s">%s</a>'%(node.label, 
+        return '<a href="equation-%s" color="%s">%s</a>'%(node.label,
             client.styles.linkColor, node.label)
 
