@@ -32,7 +32,7 @@ if 'Directive' in rst.__dict__:
                 latex = self.arguments[0]
             label=self.options.get('label', None)
             fontsize=self.options.get('fontsize', None)
-            color=self.options.get('color', 'black')
+            color=self.options.get('color', None)
             return [math_node(latex=latex,
                               label=label,
                               fontsize=fontsize,
