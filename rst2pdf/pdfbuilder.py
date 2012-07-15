@@ -14,7 +14,11 @@
 """
 
 import logging
-import parser
+try:
+    import parser
+except ImportError:
+    # parser is not available on Jython
+    parser = None
 import re
 import sys
 import os
