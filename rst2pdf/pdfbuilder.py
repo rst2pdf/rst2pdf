@@ -814,6 +814,8 @@ def try_parse(src):
         # just replace all non-ASCII characters.
         src = src.encode('ascii', 'replace')
 
+    if parser is None:
+        return True
     try:
         parser.suite(src)
     except SyntaxError, UnicodeEncodeError:
