@@ -900,6 +900,8 @@ class HeaderOrFooter(object):
                     text = unicode(text, e.encoding)
                 except AttributeError:
                     text = unicode(text, 'utf-8')
+                except TypeError:
+                    text = unicode(text, 'utf-8')
 
             text = text.replace(u'###Page###', pnum)
             if '###Total###' in text:
@@ -914,6 +916,7 @@ class HeaderOrFooter(object):
             return text
 
         for i,e  in enumerate(elems):
+            # TODO: implement a search/replace for arbitrary things
             if isinstance(e, Paragraph):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
@@ -926,6 +929,12 @@ class HeaderOrFooter(object):
                         else:
                             row[r]=self.replaceTokens([cell,], canv, doc, smarty)[0]
                 elems[i]=DelayedTable(data, e._colWidths, e.style)
+
+            elif isinstance(e, BoundByWidth):
+                for index, item in enumerate(e.content):
+                    if isinstance(item, Paragraph):
+                        e.content[index] = Paragraph(replace(item.text), item.style)
+                elems[i] = e
 
             elif isinstance(e, OddEven):
                 odd=self.replaceTokens([e.odd,], canv, doc, smarty)[0]
