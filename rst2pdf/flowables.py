@@ -190,9 +190,16 @@ class DelayedTable(Table):
 
     """
 
-    def __init__(self, data, colWidths, style, repeatrows=False, splitByRow=True):
+    def __init__(self, data, colWidths, style=None, repeatrows=False, splitByRow=True):
         self.data = data
         self._colWidths = colWidths
+        if style is None:
+            style = TableStyle([
+                ('LEFTPADDING', (0,0), (-1,-1), 0),
+                ('RIGHTPADDING', (0,0), (-1,-1), 0),
+                ('TOPPADDING', (0,0), (-1,-1), 0),
+                ('BOTTOMPADDING', (0,0), (-1,-1), 0),
+                ])
         self.style = style
         self.t = None
         self.repeatrows = repeatrows
