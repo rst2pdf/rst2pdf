@@ -42,6 +42,16 @@ class VectorPdf(Flowable):
             loader = cls.filecache[client] = CacheXObj().load
         return loader(uri)
 
+    def xobj_rotation(self):
+        ''' Assume the transformation matrix does a simple
+            90-degree granularity rotation, and extract the
+            rotation code.
+        '''
+        x = self.xobj.Matrix
+        if not x:
+            return 0
+        return abs(x[0]) - x[0] + 2 * abs(x[1]) + x[1]
+
     def __init__(self, filename, width=None, height=None, kind='direct',
                                      mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
@@ -52,6 +62,8 @@ class VectorPdf(Flowable):
         x1, y1, x2, y2 = self.xobj.BBox
 
         self._w, self._h = x2 - x1, y2 - y1
+        if self.xobj_rotation() & 1:
+            self._w, self._h = self._h, self._w
         if not self.imageWidth:
             self.imageWidth = self._w
         if not self.imageHeight:
@@ -83,9 +95,16 @@ class VectorPdf(Flowable):
 
         xscale = self.drawWidth/self._w
         yscale = self.drawHeight/self._h
+        start = xobj.BBox
+        rotation = self.xobj_rotation()
+        if rotation:
+            start = list(start)
+            start[-1] = -start[-1]
+            start[-2] = -start[-2]
+            start = start[rotation:] + start
 
-        x -= xobj.BBox[0] * xscale
-        y -= xobj.BBox[1] * yscale
+        x -= start[0] * xscale
+        y -= start[1] * yscale
 
         canv.saveState()
         canv.translate(x, y)
