@@ -1,0 +1,5 @@
+The text below should be upright
+
+.. image:: images/rotated_180.pdf
+   :width: 100%
+
