@@ -64,8 +64,7 @@ class PathInfo(object):
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
-    if not os.path.exists(runfile):
-        raise SystemExit('Use bootstrap.py and buildout to create executable')
+    assert os.path.exists(runfile), 'Executable not found -- Use bootstrap.py and buildout to create it.'
 
     runcmd = [runfile]
 
