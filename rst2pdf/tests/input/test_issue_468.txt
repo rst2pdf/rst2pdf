@@ -54,3 +54,31 @@ Page 4 should be upright:
 .. image:: images/rotated.pdf#page=4
    :width: 50%
 
+.. raw:: pdf
+
+   PageBreak
+
+Page 1 should be upright:
+
+.. image:: images/rotated.pdf#page=2&rotate=-90
+   :width: 75%
+
+Page 2 should be upright:
+
+.. image:: images/rotated.pdf#page=2&rotate=0
+   :width: 50%
+
+.. raw:: pdf
+
+   PageBreak
+
+Page 3 should be upright:
+
+.. image:: images/rotated.pdf#page=2&rotate=90
+   :width: 75%
+
+Page 4 should be upright:
+
+.. image:: images/rotated.pdf#page=4&rotate=180
+   :width: 50%
+
