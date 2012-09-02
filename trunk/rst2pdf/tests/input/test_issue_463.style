@@ -1,0 +1,30 @@
+pageSetup:
+    firstTemplate: myLayout
+    margin-bottom: 8mm
+    margin-left: 12mm
+    margin-right: 12mm
+    margin-top: 8mm
+
+pageTemplates:
+    myLayout: 
+        frames:  [[0cm, 0cm, 180%, 100%]]
+        defaultHeader =
+            .. class:: mytext
+
+                |img|
+
+            .. |img| image:: images/demo.pdf
+                        :width: 2cm
+
+        defaultFooter =
+            .. class:: mytext
+
+                ###Page### of ###Total###
+
+        showFooter: true
+
+styles:
+    mytext:
+        alignment: TA_RIGHT
+        width: 14cm
+        fontSize: 12

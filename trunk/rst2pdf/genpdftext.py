@@ -177,9 +177,6 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         #       previous to passing to reportlab.
         # Try to rasterize using the backend
         w, h, kind = MyImage.size_for_node(node, client=client)
-        img = MyImage(filename=imgname, height=h, width=w,
-                      kind=kind, client=client)
-        # Last resort, try all rasterizers
         uri=MyImage.raster(imgname, client)
         return '<img src="%s" width="%f" height="%f" %s/>'%\
             (uri, w, h, align)
