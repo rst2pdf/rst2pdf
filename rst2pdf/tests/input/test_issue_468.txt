@@ -79,6 +79,6 @@ Page 3 should be upright:
 
 Page 4 should be upright:
 
-.. image:: images/rotated.pdf#page=4&rotate=180
+.. image:: images/rotated.pdf#page=2&rotate=180
    :width: 50%
 
