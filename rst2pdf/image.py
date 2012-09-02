@@ -269,7 +269,7 @@ class MyImage (Flowable):
         elif extension != 'jpg' and not LazyImports.PILImage:
             if LazyImports.PMImage:
                 # Need to convert to JPG via PythonMagick
-                filename=self.raster(filename)
+                filename=self.raster(filename, client)
             else:
                 # No way to make this work
                 log.error('To use a %s image you need PIL installed [%s]',extension,filename)
