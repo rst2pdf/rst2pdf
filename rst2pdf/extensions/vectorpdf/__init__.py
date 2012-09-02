@@ -42,40 +42,20 @@ class VectorPdf(Flowable):
             loader = cls.filecache[client] = CacheXObj().load
         return loader(uri)
 
-    def xobj_rotation(self):
-        ''' Assume the transformation matrix does a simple
-            90-degree granularity rotation, and extract the
-            rotation code.
-        '''
-        x = self.xobj.Matrix
-        if not x:
-            return 0
-        return abs(x[0]) - x[0] + 2 * abs(x[1]) + x[1]
-
     def __init__(self, filename, width=None, height=None, kind='direct',
                                      mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
-        self.xobj = self.load_xobj(srcinfo)
-        self.imageWidth = width
-        self.imageHeight = height
-        x1, y1, x2, y2 = self.xobj.BBox
-
-        self._w, self._h = x2 - x1, y2 - y1
-        if self.xobj_rotation() & 1:
-            self._w, self._h = self._h, self._w
-        if not self.imageWidth:
-            self.imageWidth = self._w
-        if not self.imageHeight:
-            self.imageHeight = self._h
-        self.__ratio = float(self.imageWidth)/self.imageHeight
-        if kind in ['direct','absolute']:
-            self.drawWidth = width or self.imageWidth
-            self.drawHeight = height or self.imageHeight
-        elif kind in ['bound','proportional']:
-            factor = min(float(width)/self.imageWidth,float(height)/self.imageHeight)
-            self.drawWidth = self.imageWidth*factor
-            self.drawHeight = self.imageHeight*factor
+        self.xobj = xobj = self.load_xobj(srcinfo)
+        self.imageWidth, self.imageHeight = imageWidth, imageHeight = xobj.w, xobj.h
+        width = width or imageWidth
+        height = height or imageHeight
+        if kind in ['bound','proportional']:
+            factor = min(float(width)/imageWidth,float(height)/imageHeight)
+            width = factor * imageWidth
+            height = factor * imageHeight
+        self.drawWidth = width
+        self.drawHeight = height
 
     def wrap(self, aW, aH):
         return self.drawWidth, self.drawHeight
@@ -93,18 +73,10 @@ class VectorPdf(Flowable):
         xobj = self.xobj
         xobj_name = makerl(canv._doc, xobj)
 
-        xscale = self.drawWidth/self._w
-        yscale = self.drawHeight/self._h
-        start = xobj.BBox
-        rotation = self.xobj_rotation()
-        if rotation:
-            start = list(start)
-            start[-1] = -start[-1]
-            start[-2] = -start[-2]
-            start = start[rotation:] + start
-
-        x -= start[0] * xscale
-        y -= start[1] * yscale
+        xscale = self.drawWidth / xobj.w
+        yscale = self.drawHeight / xobj.h
+        x -= xobj.x * xscale
+        y -= xobj.y * yscale
 
         canv.saveState()
         canv.translate(x, y)

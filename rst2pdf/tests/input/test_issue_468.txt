@@ -1,5 +1,32 @@
-The text below should be upright
+Page 1 should be upright:
 
-.. image:: images/rotated_180.pdf
-   :width: 100%
+.. image:: images/rotated.pdf
+   :width: 70%
+
+.. raw:: pdf
+
+   PageBreak
+
+Page 2 should be upright:
+
+.. image:: images/rotated.pdf#page=2
+   :width: 70%
+
+.. raw:: pdf
+
+   PageBreak
+
+Page 3 should be upright:
+
+.. image:: images/rotated.pdf#page=3
+   :width: 70%
+
+.. raw:: pdf
+
+   PageBreak
+
+Page 4 should be upright:
+
+.. image:: images/rotated.pdf#page=4
+   :width: 70%
 

@@ -328,7 +328,8 @@ class MyImage (Flowable):
 
         elif extension == 'pdf':
             if VectorPdf is not None:
-                box = VectorPdf.load_xobj(srcinfo).BBox
+                xobj = VectorPdf.load_xobj(srcinfo)
+                iw, ih = xobj.w, xobj.h
             else:
                 pdf = LazyImports.pdfinfo
                 if pdf is None:
@@ -336,10 +337,10 @@ class MyImage (Flowable):
                     return 0, 0, 'direct'
                 reader = pdf.PdfFileReader(open(imgname, 'rb'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]
-            x1, y1, x2, y2 = box
+                iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px
-            iw = float((x2-x1) * xdpi / 72)
-            ih = float((y2-y1) * ydpi / 72)
+            iw = iw * xdpi / 72.0
+            ih = ih * ydpi / 72.0
             size_known = True  # Assume size from original PDF is OK
 
         else:
