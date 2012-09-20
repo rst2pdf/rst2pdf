@@ -39,7 +39,8 @@ install_requires = [
         'setuptools',
         'docutils',
         'reportlab>=2.4',
-        'Pygments'
+        'Pygments',
+        'pdfrw',
         ]
         
 try:

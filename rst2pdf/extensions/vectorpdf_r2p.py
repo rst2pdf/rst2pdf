@@ -6,12 +6,6 @@ import os
 from weakref import WeakKeyDictionary
 from copy import copy
 
-# TODO:  TEMP -- Remove this line when pdfrw is a separate package.
-#        We need it for now because of the absolute imports inside
-#        the new pdfrw.
-
-sys.path.insert(0, os.path.dirname(__file__))
-
 try:
     from reportlab.rl_config import _FUZZ
     from reportlab.platypus import Flowable
