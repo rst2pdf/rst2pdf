@@ -16,7 +16,7 @@ import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
 from rst2pdf.log import log
 
-from vectorpdf import VectorPdf
+from vectorpdf_r2p import VectorPdf
 import rst2pdf.image
 
 

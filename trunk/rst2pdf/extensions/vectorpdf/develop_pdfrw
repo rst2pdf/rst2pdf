@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# Make pdfrw subdirectory writable for development
-
-svn switch --relocate http://pdfrw.googlecode.com/svn/trunk/pdfrw https://pdfrw.googlecode.com/svn/trunk/pdfrw pdfrw/
