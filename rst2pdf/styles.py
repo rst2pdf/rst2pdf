@@ -524,7 +524,7 @@ class StyleSheet(object):
         # Make stdFont the basefont, for Issue 65
         reportlab.rl_config.canvas_basefontname = self['base'].fontName
         # Make stdFont the default font for table cell styles (Issue 65)
-        reportlab.platypus.tables.CellStyle1.fontname=self['base'].fontName
+        reportlab.platypus.tables.CellStyle.fontname=self['base'].fontName
 
 
     def __getitem__(self, key):

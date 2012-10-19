@@ -1,6 +1,9 @@
 New in SVN
 ----------
 
+* Fixed Issue 474: CellStyle1 is not there in reportlab 2.6
+* Removed default padding from DelayedTable, which looked bad
+  on headers/footers.
 * Improvements to the math directive (font color and size)
 
 New in 0.92
