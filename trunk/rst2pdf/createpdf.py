@@ -444,7 +444,7 @@ class RstToPdf(object):
         #from pudb import set_trace; set_trace()
 
         for y in range(0, len(rows)):
-            for x in range(0, len(rows[y])):
+            for x in range(len(rows[y])-1, -1, -1):
                 cell = rows[y][x]
                 if isinstance(cell, str):
                     continue
