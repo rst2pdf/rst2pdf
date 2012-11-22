@@ -5,6 +5,7 @@ New in SVN
 * Removed default padding from DelayedTable, which looked bad
   on headers/footers.
 * Improvements to the math directive (font color and size)
+* Better support for styling literals.
 
 New in 0.92
 -----------
