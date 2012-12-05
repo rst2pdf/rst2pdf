@@ -166,6 +166,10 @@ The possible values are:
 --use-numbered-links  When using numbered sections, adds the numbers to all
                       links referring to the section headers. Default: False
 
+--strip-elements-with-class=CLASS
+                      Remove elements with this CLASS from the output. Can
+                      be used multiple times.
+
 
 EXAMPLES
 --------
