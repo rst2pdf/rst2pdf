@@ -1023,7 +1023,7 @@ Python traceback
 
 The code-block directive supports many options, that mirror pygments'::
 
-FIXME: fix this to really explain them all. This is a placeholder.
+	FIXME: fix this to really explain them all. This is a placeholder.
 
                                 'stripnl' : string_bool,
                                 'stripall': string_bool,
