@@ -148,7 +148,8 @@ class RstToPdf(object):
                  floating_images=False,
                  numbered_links=False,
                  section_header_depth=2,
-                 raw_html=False
+                 raw_html=False,
+                 strip_elements_with_classes=[]
                  ):
         self.debugLinesPdf=False
         self.depth=0
@@ -203,6 +204,7 @@ class RstToPdf(object):
         self.section_header_depth = section_header_depth
         self.img_dir = os.path.join(self.PATH, 'images')
         self.raw_html = raw_html
+        self.strip_elements_with_classes = strip_elements_with_classes
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -529,15 +531,19 @@ class RstToPdf(object):
                     settings_overrides={'language_code': self.docutils_language}
                 else:
                     settings_overrides={}
+                settings_overrides['strip_elements_with_classes']=self.strip_elements_with_classes
                 self.doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
                     settings_overrides=settings_overrides)
+                #import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
         else:
             self.doctree = doctree
+            
+        
 
         if self.numbered_links:
             # Transform all links to sections so they show numbers
@@ -546,7 +552,11 @@ class RstToPdf(object):
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
             self.doctree.walk(srf)
-
+        if self.strip_elements_with_classes:
+            from docutils.transforms.universal import StripClassesAndElements
+            sce = StripClassesAndElements(self.doctree)
+            sce.apply()
+            
         elements = self.gen_elements(self.doctree)
 
         # Find cover template, save it in cover_file
@@ -1311,6 +1321,9 @@ def parse_commandline():
     parser.add_option('--use-numbered-links', action='store_true', default=def_numbered_links,
         help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s'%def_numbered_links,
         dest='numbered_links')
+        
+    parser.add_option('--strip-elements-with-class', action='append', dest='strip_elements_with_classes',
+        metavar='CLASS', help='Remove elements with this CLASS from the output. Can be used multiple times.')
 
     return parser
 
@@ -1452,6 +1465,7 @@ def main(_args=None):
         numbered_links=options.numbered_links,
         raw_html=options.raw_html,
 	    section_header_depth=int(options.section_header_depth),
+	    strip_elements_with_classes=options.strip_elements_with_classes,
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,
