@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Implemented Issue 389: New --strip-element-with-class option
 * Fixed Issue 474: CellStyle1 is not there in reportlab 2.6
 * Removed default padding from DelayedTable, which looked bad
   on headers/footers.
