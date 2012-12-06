@@ -1367,7 +1367,18 @@ def main(_args=None):
 
     filename = False
 
-    if len(args) == 0 or args[0] == '-':
+    if len(args) == 0:
+        args = [ '-', ]
+    elif len(args) > 2:
+        log.critical('Usage: %s [ file.txt [ file.pdf ] ]', sys.argv[0])
+        sys.exit(1)
+    elif len(args) == 2:
+        if options.output:
+            log.critical('You may not give both "-o/--output" and second argument')
+            sys.exit(1)
+        options.output = args.pop()
+
+    if args[0] == '-':
         infile = sys.stdin
         options.basedir=os.getcwd()
     elif len(args) > 1:
