@@ -7,6 +7,8 @@ New in SVN
   on headers/footers.
 * Improvements to the math directive (font color and size)
 * Better support for styling literals.
+* Fixed Issue 454 (Splitting failure)
+* Regressed Issue 374 (some literal blocks get oversplit)
 
 New in 0.92
 -----------

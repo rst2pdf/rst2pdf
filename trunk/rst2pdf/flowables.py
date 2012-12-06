@@ -748,8 +748,8 @@ class BoundByWidth(Flowable):
         if len(self.content) == 1:
             # We need to split the only element we have
             content = content[0].split(
-                (1./self.scale) * (availWidth - (self.pad[1]+self.pad[3])),
-                (1./self.scale) * (availHeight - (self.pad[0]+self.pad[2])))
+                availWidth - (self.pad[1]+self.pad[3]),
+                availHeight - (self.pad[0]+self.pad[2]))
         result =  [BoundByWidth(self.maxWidth, [f],
                              self.style, self.mode, self.scale) for f in content]
         return result
