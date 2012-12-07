@@ -170,46 +170,15 @@ Supported Image Types
 For raster images, rst2pdf supports anything PIL (The Python Imaging Library) supports.
 The exact list of supported formats varies according to your PIL version and system.
 
-For vector image support, you need to install svg2rlg
-(http://pypi.python.org/pypi/svg2rlg/) or Uniconvertor from http://sk1project.org 
-version 1.1.3 or later.
-
-It provides support for these formats:
-
-* CorelDRAW ver.7-X3,X4 (CDR/CDT/CCX/CDRX/CMX)
-* Adobe Illustrator up to 9 ver. (AI postscript based)
-* Postscript (PS)
-* Encapsulated Postscript (EPS)
-* Computer Graphics Metafile (CGM)
-* Windows Metafile (WMF)
-* XFIG
-* Scalable Vector Graphics (SVG)
-* Skencil/Sketch/sK1 (SK and SK1)
-* Acorn Draw (AFF)
+For SVG support, you need to install svg2rlg or use the inkscape extension.
 
 Some features will not work when using these images.For example, gradients will not
-display, and text may cause problems.
+display, and text may cause problems depending on font availability.
 
-To test suitability of your vector images for use with rst2pdf, try converting them
-to PDF using uniconvertor. The result should be exactly the way they will look
-when used in your documents.
+You can also use PDF images, via pdfrw.
 
 If you can choose between raster and vectorial images, for non-photographic images,
 vector files are usually smaller and look better, specially when printed.
-
-If you want to use PDF files as images, you need to install PythonMagick
-(http://www.imagemagick.org), which will be used to convert it to PNG and
-then inserted in your document. If the quality is not good enough, try something like
-``--default-dpi 1200``
-
-This only works for one-page PDF files, and has several drawbacks, such as
-inability to copy text from the embedded image.
-
-In the future, rst2pdf will support ReportLab's PageCatcher to properly embed PDFs. That
-is not implemented yet, though.
-
-If there is any other image format you need supported, please report it as a feature
-request in rst2pdf's site.
 
 .. note:: Image URLs
 
