@@ -119,9 +119,9 @@ class LazyImports(object):
         import gfx
         return gfx
 
-    def _load_svglib(self):
-        from svglib import svglib
-        return svglib
+    def _load_svg2rlg(self):
+        import svg2rlg
+        return svg2rlg
 
     def _load_uniconvertor(self):
         for p in sys.path:
