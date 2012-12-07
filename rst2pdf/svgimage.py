@@ -13,7 +13,7 @@ class SVGImage(Flowable):
 
     @classmethod
     def available(self):
-        if LazyImports.svg2rlg or LazyImports.uniconvertor:
+        if LazyImports.svg2rlg:
             return True
         return False
 
@@ -23,7 +23,7 @@ class SVGImage(Flowable):
         ext = os.path.splitext(filename)[-1]
         self._kind = kind
         # Prefer svg2rlg for SVG, as it works better
-        if ext in ('.svg', '.svgz') and LazyImports.svg2rlg:
+        if LazyImports.svg2rlg:
             self._mode = 'svg2rlg'
             self.doc = LazyImports.svg2rlg.svg2rlg(filename)
             self.imageWidth = width
@@ -35,30 +35,10 @@ class SVGImage(Flowable):
                 self.imageWidth = self._w
             if not self.imageHeight:
                 self.imageHeight = self._h
-        # Use uniconvertor for the rest
-        elif LazyImports.uniconvertor:
-            load, plugins, self.uniconvertor_save = LazyImports.uniconvertor
-            self._mode = 'uniconvertor'
-            self.doc = load.load_drawing(filename.encode('utf-8'))
-            self.saver = plugins.find_export_plugin(
-                plugins.guess_export_plugin('.pdf'))
-            self.imageWidth = width
-            self.imageHeight = height
-            x1, y1, x2, y2 = self.doc.BoundingRect()
-            # The abs is to compensate for what appears to be
-            # a bug in uniconvertor. At least doing it this way
-            # I get the same values as in inkscape.
-            # This fixes Issue 236
-            self._w, self._h = abs(x2)-abs(x1), abs(y2)-abs(y1)
-            
-            if not self.imageWidth:
-                self.imageWidth = self._w
-            if not self.imageHeight:
-                self.imageHeight = self._h
         else:
             self._mode = None
-            log.error("Vector image support not enabled,"
-                " please install svg2rlg and/or uniconvertor.")
+            log.error("SVG support not enabled,"
+                " please install svg2rlg.")
         self.__ratio = float(self.imageWidth)/self.imageHeight
         if kind in ['direct','absolute']:
             self.drawWidth = width or self.imageWidth
@@ -83,23 +63,8 @@ class SVGImage(Flowable):
         canv.saveState()
         canv.translate(x, y)
         canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
-        if self._mode == 'uniconvertor':
-            self.uniconvertor_save(self.doc, open('.ignoreme.pdf', 'w'),
-                '.ignoreme.pdf', options=dict(pdfgen_canvas=canv))
-            os.unlink('.ignoreme.pdf')
-        elif self._mode == 'svg2rlg':
-            self.doc._drawOn(canv)
+        self.doc._drawOn(canv)
         canv.restoreState()
-
-class VectorImage(SVGImage):
-    '''A class for non-SVG vector image formats. The main
-    difference is that it is only available if uniconvertor is installed'''
-    @classmethod
-    def available(self):
-        if LazyImports.uniconvertor:
-            return True
-        return False
-
 
 if __name__ == "__main__":
     import sys

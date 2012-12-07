@@ -11,6 +11,7 @@ New in SVN
 * Fixed Issue 454 (Splitting failure)
 * Regressed Issue 374 (some literal blocks get oversplit)
 * Switched from svglib to svg2rlg
+* Removed uniconvertor support
 
 New in 0.92
 -----------

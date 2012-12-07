@@ -123,20 +123,4 @@ class LazyImports(object):
         import svg2rlg
         return svg2rlg
 
-    def _load_uniconvertor(self):
-        for p in sys.path:
-            d = os.path.join(p, 'uniconvertor')
-            if os.path.isdir(d):
-                sys.path.append(d)
-                from app.io import load
-                from app.plugins import plugins
-                import app
-                from uniconvsaver import save
-                app.init_lib()
-                plugins.load_plugin_configuration()
-                break
-        else:
-            raise ImportError
-        return load, plugins, save
-
 LazyImports = LazyImports()

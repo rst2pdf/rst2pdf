@@ -13,7 +13,7 @@ import urllib
 
 from opt_imports import LazyImports
 
-from svgimage import SVGImage, VectorImage
+from svgimage import SVGImage
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
@@ -246,11 +246,6 @@ class MyImage (Flowable):
             else:
                 filename = missing
 
-        elif extension in ['ai', 'ccx', 'cdr', 'cgm', 'cmx', 'fig',
-                'sk1', 'sk', 'xml', 'wmf']:
-            log.info('Backend for %s is VectorImage'%filename)
-            backend=VectorImage
-
         elif extension in ['pdf']:
             if VectorPdf is not None and filename is not missing:
                 backend = VectorPdf
@@ -314,14 +309,6 @@ class MyImage (Flowable):
         extension = imgname.split('.')[-1].lower()
         if extension in ['svg','svgz'] and SVGImage.available():
             iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
-            # These are in pt, so convert to px
-            iw = iw * xdpi / 72
-            ih = ih * ydpi / 72
-
-        elif extension in [
-                "ai", "ccx", "cdr", "cgm", "cmx",
-                "sk1", "sk", "xml", "wmf", "fig"] and VectorImage.available():
-            iw, ih = VectorImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
