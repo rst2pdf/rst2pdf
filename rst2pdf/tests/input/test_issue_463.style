@@ -7,24 +7,13 @@ pageSetup:
 
 pageTemplates:
     myLayout: 
-        frames:  [[0cm, 0cm, 180%, 100%]]
+        frames:  [[0cm, 0cm, 100%, 100%]]
         defaultHeader =
-            .. class:: mytext
+            Biohazard PDF in the header: |img|
 
-                |img|
-
-            .. |img| image:: images/demo.pdf
+            .. |img| image:: images/biohazard.pdf
                         :width: 2cm
 
-        defaultFooter =
-            .. class:: mytext
+        showFooter: false
+        showHeader: true
 
-                ###Page### of ###Total###
-
-        showFooter: true
-
-styles:
-    mytext:
-        alignment: TA_RIGHT
-        width: 14cm
-        fontSize: 12
