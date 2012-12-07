@@ -12,6 +12,7 @@ New in SVN
 * Regressed Issue 374 (some literal blocks get oversplit)
 * Switched from svglib to svg2rlg
 * Removed uniconvertor support
+* Fixed Issue 477: Sink footnote separator (patch by asermax)
 
 New in 0.92
 -----------

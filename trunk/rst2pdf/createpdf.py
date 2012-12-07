@@ -675,6 +675,7 @@ class RstToPdf(object):
                         elif getattr(e, '_atTop', False) or isinstance(
                                 e, (UnhappyOnce, MyPageBreak)):
                             if fnPile:
+                                fnPile.insert(0, Separation())
                                 newStory.append(Sinker(fnPile))
                             newStory.append(e)
                             fnPile=[]
