@@ -5,6 +5,7 @@ This is normal size.
 
    This should be
      half-size
+       also this is halfsize
 
 
 .. class:: myclass
