@@ -16,6 +16,7 @@ New in SVN
 * Fixed Issue 473: Support "code" directive like an alias of code-block.
 * Fixed Issue 472: Implemented MyImage._unRestrictSize
 * Fixed Issue 471: Respect class in lineblocks.
+* Fixed Issue 455: New pisa/xhtml2pdf has very different imports
 
 New in 0.92
 -----------
