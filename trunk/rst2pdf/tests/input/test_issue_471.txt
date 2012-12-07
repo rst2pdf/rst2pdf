@@ -1,0 +1,14 @@
+This is normal size.
+
+.. line-block::
+   :class: myclass
+
+   This should be
+     half-size
+
+
+.. class:: myclass
+
+This should also be half-size.
+
+
