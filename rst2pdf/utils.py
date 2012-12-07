@@ -64,12 +64,34 @@ def parseRaw(data, node):
 from reportlab.lib.colors import Color, CMYKColor, getAllNamedColors, toColor, \
     HexColor
 
+HAS_XHTML2PDF = True
 try:
     from xhtml2pdf.util import COLOR_BY_NAME
     from xhtml2pdf.util import memoized
-    HAS_XHTML2PDF = True
+    from xhtml2pdf.context import pisaContext
+    from xhtml2pdf.default import DEFAULT_CSS
+    from xhtml2pdf.parser import pisaParser,pisaGetAttributes
+    from xhtml2pdf.document import pisaStory
+    from reportlab.platypus.flowables import Spacer
+    from reportlab.platypus.frames import Frame
+    from xhtml2pdf.xhtml2pdf_reportlab import PmlBaseDoc, PmlPageTemplate
+    from xhtml2pdf.util import pisaTempFile, getBox, pyPdf
+    import xhtml2pdf.parser as pisa_parser
 except ImportError:
-    HAS_XHTML2PDF = False
+    try:
+        from sx.pisa3.pisa_util import COLOR_BY_NAME
+        memoized = lambda *a: a
+        from sx.pisa3.pisa_context import pisaContext
+        from sx.pisa3.pisa_default import DEFAULT_CSS
+        from sx.pisa3.pisa_parser import pisaParser,pisaGetAttributes
+        from sx.pisa3.pisa_document import pisaStory
+        from reportlab.platypus.flowables import Spacer
+        from reportlab.platypus.frames import Frame
+        from sx.pisa3.pisa_reportlab import PmlBaseDoc, PmlPageTemplate
+        from sx.pisa3.pisa_util import pisaTempFile, getBox, pyPdf
+        import sx.pisa3.pisa_parser as pisa_parser
+    except ImportError:
+        HAS_XHTML2PDF = False
 
 
 if HAS_XHTML2PDF:
@@ -104,17 +126,7 @@ if HAS_XHTML2PDF:
 
     #import xhtml2pdf.util
     #xhtml2pdf.util.getColor = getColor2
-
-
-
-    from xhtml2pdf.context import pisaContext
-    from xhtml2pdf.default import DEFAULT_CSS
-    from xhtml2pdf.parser import pisaParser,pisaGetAttributes
-    from xhtml2pdf.document import pisaStory
-    from reportlab.platypus.flowables import Spacer
-    from reportlab.platypus.frames import Frame
-    from xhtml2pdf.xhtml2pdf_reportlab import PmlBaseDoc, PmlPageTemplate
-    from xhtml2pdf.util import pisaTempFile, getBox, pyPdf
+    
     import cgi
     import logging
     from xml.dom import Node
@@ -168,8 +180,7 @@ if HAS_XHTML2PDF:
         return data
 
 
-    import xhtml2pdf.parser
-    xhtml2pdf.parser.pisaPreLoop = pisaPreLoop2
+    pisa_parser.pisaPreLoop = pisaPreLoop2
 
         
     HTML_CSS = """
