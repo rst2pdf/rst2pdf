@@ -762,7 +762,7 @@ class HandleRubric(NodeHandler, docutils.nodes.rubric):
         # Sphinx uses a rubric as footnote container
         if self.sphinxmode and len(node.children) == 1 \
             and node.children[0].astext() == 'Footnotes':
-                return [Separation(),]
+                return []
         else:
             return [Paragraph(client.gather_pdftext(node),
                                 client.styles['rubric'])]
