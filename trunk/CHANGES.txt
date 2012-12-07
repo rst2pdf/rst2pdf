@@ -13,6 +13,7 @@ New in SVN
 * Switched from svglib to svg2rlg
 * Removed uniconvertor support
 * Fixed Issue 477: Sink footnote separator (patch by asermax)
+* Fixed Issue 473: Support "code" directive like an alias of code-block.
 
 New in 0.92
 -----------

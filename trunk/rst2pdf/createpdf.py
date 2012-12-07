@@ -218,6 +218,7 @@ class RstToPdf(object):
         else:
             # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
+            directives.register_directive('code', pygments_code_block_directive.code_block_directive)
             import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
