@@ -18,6 +18,7 @@ New in SVN
 * Fixed Issue 471: Respect class in lineblocks.
 * Fixed Issue 455: New pisa/xhtml2pdf has very different imports
 * Reopened Issue 289: Broken bullet customization.
+* Reopened Issue 310: Line numbers in code blocks are wrong
 
 New in 0.92
 -----------
