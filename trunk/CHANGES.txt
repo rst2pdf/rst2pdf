@@ -17,6 +17,7 @@ New in SVN
 * Fixed Issue 472: Implemented MyImage._unRestrictSize
 * Fixed Issue 471: Respect class in lineblocks.
 * Fixed Issue 455: New pisa/xhtml2pdf has very different imports
+* Reopened Issue 289: Broken bullet customization.
 
 New in 0.92
 -----------
