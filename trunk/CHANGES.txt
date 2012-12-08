@@ -20,6 +20,7 @@ New in SVN
 * Reopened Issue 289: Broken bullet customization.
 * Reopened Issue 310: Line numbers in code blocks are wrong
 * Reopened Issue 337: Bad layout with inline images in tables
+* Marked Issue 358 as fixed.
 
 New in 0.92
 -----------
