@@ -1,7 +1,8 @@
 New in SVN
 ----------
 
-* Fixed Issue 485: Better styling support for figures (spaceBefore/After)
+* New style "image" to be applied to image directives.
+* Fixed Issue 485: Better styling support for figures/images (spaceBefore/After)
 * Support rst2pdf [inf [outf]] syntax to be more compatible with rst2*
 * Implemented Issue 389: New --strip-element-with-class option
 * Fixed Issue 474: CellStyle1 is not there in reportlab 2.6
