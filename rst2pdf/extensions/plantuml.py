@@ -10,6 +10,7 @@ Ergo:
 
 '''
 
+import errno
 from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
@@ -63,7 +64,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
             p = subprocess.Popen(args.split(), stdout=tfile,
                                  stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         except OSError, err:
-            if err.errno != ENOENT:
+            if err.errno != errno.ENOENT:
                 raise
             raise PlantUmlError('plantuml command %r cannot be run'
                                 % self.builder.config.plantuml)
