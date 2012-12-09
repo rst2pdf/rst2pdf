@@ -731,7 +731,6 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         if node.get('classes'):
             st_name = node.get('classes')[0]
         style=client.styles[st_name]
-        print "============>", st_name
         cmd=getattr(style,'commands',[])
         image=node.children[0]
         if len(node.children) > 1:
