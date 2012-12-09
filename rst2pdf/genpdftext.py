@@ -16,6 +16,7 @@ from reportlab.lib.units import cm
 from opt_imports import Paragraph
 
 from image import MyImage, missing
+from flowables import MySpacer
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
@@ -134,6 +135,11 @@ class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
         # FIXME: handle class,target,alt
 
+        st_name = 'image'
+        if node.get('classes'):
+            st_name = node.get('classes')[0]
+        style=client.styles[st_name]
+        
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             imgname = os.path.join(client.basedir,uri)
@@ -146,11 +152,14 @@ class HandleImage(NodeHandler, docutils.nodes.image):
             # Broken image, return arbitrary stuff
             imgname=missing
             w, h, kind = 100, 100, 'direct'
-        node.elements = [MyImage(filename=imgname, height=h, width=w,
-                    kind=kind, client=client)]
+        node.elements = [
+            MySpacer(0, style.spaceBefore),
+            MyImage(filename=imgname, height=h, width=w,
+                    kind=kind, client=client),
+            MySpacer(0, style.spaceAfter)]
         alignment = node.get('align', 'CENTER').upper()
         if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-            node.elements[0].image.hAlign = alignment
+            node.elements[1].image.hAlign = alignment
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment

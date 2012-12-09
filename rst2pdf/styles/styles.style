@@ -212,6 +212,9 @@
       parent: bodytext
       alignment: TA_RIGHT
 
+    image:
+      parent: bodytext
+
     figure:
       parent: bodytext
       alignment: TA_CENTER
