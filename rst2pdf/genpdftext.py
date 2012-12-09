@@ -153,13 +153,14 @@ class HandleImage(NodeHandler, docutils.nodes.image):
             imgname=missing
             w, h, kind = 100, 100, 'direct'
         node.elements = [
-            MySpacer(0, style.spaceBefore),
             MyImage(filename=imgname, height=h, width=w,
-                    kind=kind, client=client),
-            MySpacer(0, style.spaceAfter)]
+                    kind=kind, client=client)]
         alignment = node.get('align', 'CENTER').upper()
         if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-            node.elements[1].image.hAlign = alignment
+            node.elements[0].image.hAlign = alignment
+        node.elements[0].spaceBefore = style.spaceBefore
+        node.elements[0].spaceAfter = style.spaceAfter
+        
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment
