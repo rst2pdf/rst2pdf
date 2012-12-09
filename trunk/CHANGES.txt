@@ -23,6 +23,7 @@ New in SVN
 * Marked Issue 358 as fixed.
 * Fixed Issue 410: always include full lines in code-blocks (mmueller patch)
 * Regression in stylesheet includes: Issue 483
+* Regression in fancytitles extension: Issue 486
 
 New in 0.92
 -----------
