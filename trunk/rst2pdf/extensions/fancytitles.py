@@ -96,10 +96,6 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 
             if client.depth <= client.breaklevel:
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
-        print node.elements
-        print "-------------"
-        print
-        print
         return node.elements
 
 class FancyHeading(MyImage, Heading):
