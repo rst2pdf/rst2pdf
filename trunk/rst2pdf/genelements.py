@@ -727,8 +727,11 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
 
         # Either use the figure style or the class
         # selected by the user
+        st_name = 'figure'
         if node.get('classes'):
-            style=client.styles[node.get('classes')[0]]
+            st_name = node.get('classes')[0]
+        style=client.styles[st_name]
+        print "============>", st_name
         cmd=getattr(style,'commands',[])
         image=node.children[0]
         if len(node.children) > 1:
@@ -748,7 +751,8 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         table = DelayedTable([[e,] for e in sub_elems],style=t_style,
             colWidths=cw)
         table.hAlign = node.get('align','CENTER').upper()
-        return [table]
+        return [MySpacer(0, style.spaceBefore),table,
+            MySpacer(0, style.spaceAfter)]
 
 
 class HandleCaption(NodeHandler, docutils.nodes.caption):
