@@ -1,1 +1,1 @@
-options: stylesheets: [/home/ralsina/Desktop/proyectos/rst/trunk/rst2pdf/styles/twelvepoint.json, /home/ralsina/Desktop/proyectos/rst/trunk/rst2pdf/styles/twocolumn.json]
+options: stylesheets: [twelvepoint, twocolumn]
