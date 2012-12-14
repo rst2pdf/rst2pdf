@@ -142,13 +142,11 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         if node.get('classes'):
             st_name = node.get('classes')[0]
         style=client.styles[st_name]
-        
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             imgname = os.path.join(client.basedir,uri)
         else:
             imgname = uri
-
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
         except ValueError:
@@ -158,9 +156,13 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         node.elements = [
             MyImage(filename=imgname, height=h, width=w,
                     kind=kind, client=client, target=target)]
-        alignment = node.get('align', 'CENTER').upper()
-        if alignment in ('LEFT', 'CENTER', 'RIGHT'):
-            node.elements[0].image.hAlign = alignment
+        alignment = node.get('align', '').upper()
+        if not alignment:
+            # There is no JUSTIFY for flowables, of course, so 4:LEFT
+            alignment = {0:'LEFT', 1:'CENTER', 2:'RIGHT', 4:'LEFT'}[style.alignment]
+        if not alignment:
+            alignment = 'CENTER'
+        node.elements[0].image.hAlign = alignment
         node.elements[0].spaceBefore = style.spaceBefore
         node.elements[0].spaceAfter = style.spaceAfter
         
