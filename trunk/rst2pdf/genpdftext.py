@@ -133,8 +133,11 @@ class HandleGenerated(HandleText, docutils.nodes.generated):
 
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
-        # FIXME: handle class,target,alt
+        # FIXME: handle alt
 
+        target = None
+        if isinstance(node.parent, docutils.nodes.reference):
+            target = node.parent.get('refuri', None)
         st_name = 'image'
         if node.get('classes'):
             st_name = node.get('classes')[0]
@@ -154,7 +157,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
             w, h, kind = 100, 100, 'direct'
         node.elements = [
             MyImage(filename=imgname, height=h, width=w,
-                    kind=kind, client=client)]
+                    kind=kind, client=client, target=target)]
         alignment = node.get('align', 'CENTER').upper()
         if alignment in ('LEFT', 'CENTER', 'RIGHT'):
             node.elements[0].image.hAlign = alignment

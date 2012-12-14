@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 470: Support for :target: in figures.
 * New style "image" to be applied to image directives.
 * Fixed Issue 485: Better styling support for figures/images (spaceBefore/After)
 * Support rst2pdf [inf [outf]] syntax to be more compatible with rst2*

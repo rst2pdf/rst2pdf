@@ -71,7 +71,7 @@ class MyImage (Flowable):
         return fname, extension, options
 
     def __init__(self, filename, width=None, height=None,
-                 kind='direct', mask="auto", lazy=1, client=None):
+                 kind='direct', mask="auto", lazy=1, client=None, target=None):
         # Client is mandatory.  Perhaps move it farther up if we refactor
         assert client is not None
         self.__kind=kind
@@ -99,6 +99,7 @@ class MyImage (Flowable):
                 kind, mask, lazy, srcinfo)
         self.__ratio=float(self.image.imageWidth)/self.image.imageHeight
         self.__wrappedonce=False
+        self.target = target
 
     @classmethod
     def raster(self, filename, client):
@@ -470,5 +471,18 @@ class MyImage (Flowable):
             return self.image.wrap(availWidth, availHeight)
 
     def drawOn(self, canv, x, y, _sW=0):
+        if self.target:
+            offset = 0
+            if self.image.hAlign == 'CENTER':
+                offset = _sW / 2.
+            elif self.image.hAlign == 'RIGHT':
+                offset = _sW
+            canv.linkURL(self.target,
+                    (
+                    x + offset, y,
+                    x + offset + self.image.drawWidth, 
+                    y + self.image.drawHeight),
+                    relative = True,
+                    #thickness = 3,
+                    )
         return self.image.drawOn(canv, x, y, _sW)
-
