@@ -544,8 +544,6 @@ class RstToPdf(object):
         else:
             self.doctree = doctree
             
-        
-
         if self.numbered_links:
             # Transform all links to sections so they show numbers
             from sectnumlinks import SectNumFolder, SectRefExpander

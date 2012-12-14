@@ -687,7 +687,11 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
             qstyle = copy(client.styles['lineblock'])
         # Fix Issue 225: no space betwen line in a lineblock, but keep
         # space before the lineblock itself
-        return [MySpacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[MySpacer(0,client.styles['lineblock'].spaceAfter)]
+        # Fix Issue 482: nested lineblocks don't need spacing before/after
+        if not isinstance(node.parent, docutils.nodes.line_block):
+            return [MySpacer(0,client.styles['lineblock'].spaceBefore)]+client.gather_elements(node, style=qstyle)+[MySpacer(0,client.styles['lineblock'].spaceAfter)]
+        else:
+            return client.gather_elements(node, style=qstyle)
 
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
