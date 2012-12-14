@@ -1,6 +1,7 @@
 New in SVN
 ----------
 
+* Fixed Issue 482: Line blocks with indented parts get extraneous spacing
 * Fixed Issue 470: Support for :target: in figures.
 * New style "image" to be applied to image directives.
 * Fixed Issue 485: Better styling support for figures/images (spaceBefore/After)
