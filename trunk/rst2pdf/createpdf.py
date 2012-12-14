@@ -143,6 +143,7 @@ class RstToPdf(object):
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
+                 first_page_on_right=False,
                  breakside='odd',
                  custom_cover='cover.tmpl',
                  floating_images=False,
@@ -154,6 +155,7 @@ class RstToPdf(object):
         self.debugLinesPdf=False
         self.depth=0
         self.breakside=breakside
+        self.first_page_on_right=first_page_on_right
         self.blank_first_page=blank_first_page
         self.splittables=splittables
         self.basedir=basedir
@@ -1027,6 +1029,16 @@ class FancyPage(PageTemplate):
         bg, x, y = info
         bg.drawOn(canv, x, y)
 
+    def is_left(self, page_num):
+        """Default behavior is that the first page is on the left.   
+           
+           If the user has --first_page_on_right, the calculation is reversed.
+        """
+        val = page_num % 2 == 1
+        if self.client.first_page_on_right:
+            val = not val
+        return val
+
 
     def beforeDrawPage(self, canv, doc):
         """Do adjustments to the page according to where we are in the document.
@@ -1069,7 +1081,7 @@ class FancyPage(PageTemplate):
                     - self.fh - styles.ts - styles.bs
 
         # Adjust gutter margins
-        if doc.page % 2: # Left page
+        if self.is_left(doc.page): # Left page
             x1 = styles.lm
         else: # Right page
             x1 = styles.lm + styles.gm
@@ -1098,7 +1110,7 @@ class FancyPage(PageTemplate):
         canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
 
         log.info('Page %s [%s]'%(_counter,doc.page))
-        if doc.page % 2: # Left page
+        if self.is_left(doc.page): # Left page
             hx = self.hx
             fx = self.fx
         else: # Right Page
@@ -1277,16 +1289,15 @@ def parse_commandline():
         help='Maximum section level that starts in a new page.'
             ' Default: %d' % def_break)
 
-    def_fpeven = config.getValue("general", "first_page_even", False)
-    parser.add_option('--first-page-even', dest='first_page_even',
-        action='store_true', default=def_fpeven,
-        help='Whether first page is odd (as in the screen on "facing pages"),'
-            ' or even (as in a book).')
-
     def_blankfirst = config.getValue("general", "blank_first_page", False)
     parser.add_option('--blank-first-page', dest='blank_first_page',
         action='store_true', default=def_blankfirst,
         help='Add a blank page at the beginning of the document.')
+
+    def_first_page_on_right = config.getValue("general", "first_page_on_right", False)
+    parser.add_option('--first-page-on-right', dest='first_page_on_right',
+        action='store_true', default=def_first_page_on_right,
+        help='Two-sided book style (where first page starts on the right side)')
 
     def_breakside = config.getValue("general", "break_side", 'any')
     parser.add_option('--break-side', dest='breakside', metavar='VALUE',
@@ -1470,6 +1481,7 @@ def main(_args=None):
         show_frame=options.show_frame,
         splittables=options.splittables,
         blank_first_page=options.blank_first_page,
+        first_page_on_right=options.first_page_on_right,
         breakside=options.breakside,
         custom_cover=options.custom_cover,
         floating_images=options.floating_images,
