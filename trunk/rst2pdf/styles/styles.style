@@ -214,6 +214,7 @@
 
     image:
       parent: bodytext
+      alignment: TA_CENTER
 
     figure:
       parent: bodytext
