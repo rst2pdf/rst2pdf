@@ -1,6 +1,11 @@
 New in SVN
 ----------
 
+* Fixed Issue 447: Double-sided always starts on the right (By Rob Ludwick)
+  
+  * Removed --first-page-even as it was not used anywhere.
+  * Added --first-page-on-right
+
 * Fixed Issue 464: support alignment via :class: in image directives.
 * Fixed Issue 482: Line blocks with indented parts get extraneous spacing
 * Fixed Issue 470: Support for :target: in figures.

@@ -133,9 +133,9 @@ The possible values are:
 
 -b LEVEL, --break-level=LEVEL
                     Maximum section level that starts in a new page. Default: 0
-                    
---first-page-even     Whether first page is odd (as in the screen on "facing
-                        pages"), or even (as in a book)
+                   
+--first-page-on-right When using double sided pages, the first page will start
+                      on the right hand side. (Book Style) 
                         
 --blank-first-page    Add a blank page at the beginning of the document.
 
