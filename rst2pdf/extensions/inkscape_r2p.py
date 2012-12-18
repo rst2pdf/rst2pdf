@@ -19,7 +19,6 @@ from rst2pdf.log import log
 from vectorpdf_r2p import VectorPdf
 import rst2pdf.image
 
-print "FLAGINKSCAPE"
 
 if sys.platform.startswith('win'):
     # note: this is the default "all users" install location,
