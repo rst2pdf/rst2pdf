@@ -13,7 +13,7 @@
    height="100"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="titletemplate.svg">
   <defs
      id="defs4">
@@ -38,10 +38,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="852"
-     inkscape:window-x="-4"
-     inkscape:window-y="-3"
+     inkscape:window-width="1600"
+     inkscape:window-height="876"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,5 +70,35 @@
          id="tspan2839"
          x="522.85712"
          y="1009.5051">TITLEGOESHERE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-108.95982"
+       y="1027.4414"
+       id="text2985"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.97977043,-0.20012474,0.20012474,0.97977043,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="-108.95982"
+         y="1027.4414">PRETTY!</tspan></text>
+    <path
+       sodipodi:type="star"
+       style="opacity:0.21810704;fill:#008490;fill-opacity:1;stroke:#ff00ff;stroke-width:16.60000038;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.65296804;stroke-dasharray:none"
+       id="path2989"
+       sodipodi:sides="5"
+       sodipodi:cx="117.14286"
+       sodipodi:cy="60"
+       sodipodi:r1="44.629997"
+       sodipodi:r2="22.314999"
+       sodipodi:arg1="-0.69473828"
+       sodipodi:arg2="-0.066419745"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 151.42857,31.428572 139.40865,58.518933 154.91077,83.778594 125.43195,80.718354 106.199,103.26741 100,74.285714 72.611271,62.962134 98.258905,48.110703 l 2.305785,-29.547411 22.0501,19.803004 z"
+       transform="matrix(0.9841089,-0.17756597,0.17756597,0.9841089,-8.7924291,974.11623)"
+       inkscape:transform-center-x="0.95397607"
+       inkscape:transform-center-y="3.3442907" />
   </g>
 </svg>
