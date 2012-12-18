@@ -1,5 +1,5 @@
-New in SVN
-----------
+New in 0.93
+-----------
 
 * Fixed Issue 447: Double-sided always starts on the right (By Rob Ludwick)
   
