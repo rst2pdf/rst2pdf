@@ -55,7 +55,6 @@ images_require = ['PIL']
 pdfimages_require = ['pyPdf','PythonMagick']
 pdfimages2_require = ['pyPdf','SWFTools']
 svgsupport_require = ['svg2rlg']
-sk1support_require = ['uniconvertor']
 aafiguresupport_require = ['aafigure>=0.4']
 mathsupport_require = ['matplotlib']
 rawhtmlsupport_require = ['xhtml2pdf']
@@ -72,12 +71,6 @@ setup(
 	]),
     include_package_data=True,
     dependency_links=[
-       # Reportlab (now on PyPI)
-       #"http://ftp.schooltool.org/schooltool/eggs/3.4",
-       # Wordaxe (now on PyPI)
-       # "http://sourceforge.net/project/platformdownload.php?group_id=105867",
-       # UniConvertor
-       "http://sk1project.org/downloads/uniconvertor/v1.1.4/uniconvertor-1.1.4.tar.gz",
     ],
     install_requires=install_requires,
     tests_require=tests_require,
@@ -89,7 +82,6 @@ setup(
         pdfimages=pdfimages_require,
         pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
-        sk1support=sk1support_require,
         aafiguresupport=aafiguresupport_require,
         mathsupport=mathsupport_require,
         rawhtmlsupport=rawhtmlsupport_require,
