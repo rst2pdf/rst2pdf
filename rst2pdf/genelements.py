@@ -702,7 +702,6 @@ class HandleLine(NodeHandler, docutils.nodes.line):
         while isinstance(parent.parent, (docutils.nodes.line, docutils.nodes.line_block)):
             parent=parent.parent
         p_class = (parent.get('classes') or  ['line'])[0]
-        print node, p_class
         qstyle = copy(client.styles[p_class])
         # Indent .5em per indent unit
         i=node.__dict__.get('indent',0)
