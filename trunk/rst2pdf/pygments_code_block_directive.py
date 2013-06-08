@@ -212,6 +212,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 content = content[:before_index]
 
     else:
+        line_offset = options.get('linenos_offset')
         content = u'\n'.join(content)
 
     if 'tabsize' in options:
@@ -264,6 +265,19 @@ def code_block_directive(name, arguments, options, content, lineno,
 # ::
 #
 # Move to separated module??
+
+def zero_or_positive_int(argument): 
+    """ 
+    Converts a string into python positive integer including zero. 
+    None is a special case; it is regarded as zero. 
+    """ 
+    if argument is None: 
+        return 0 
+    elif argument == '0': 
+        return 0 
+    else: 
+        return directives.positive_int(argument) 
+
 
 def string_list(argument):
     """
@@ -318,7 +332,7 @@ code_block_directive.options = {'include': directives.unchanged_required,
                                 'start-after': directives.unchanged_required,
                                 'end-before': directives.unchanged_required,
                                 'linenos': directives.unchanged,
-                                'linenos_offset': directives.unchanged,
+                                'linenos_offset': zero_or_positive_int,
                                 'tab-width': directives.unchanged,
                                 # generic
                                 'stripnl' : string_bool,
