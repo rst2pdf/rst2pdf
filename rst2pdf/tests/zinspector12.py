@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 # See LICENSE.txt for licensing terms
 
@@ -23,7 +23,7 @@ where each name in the arguments list is imported from.
 
 '''
 
-import pythonpaths
+from . import pythonpaths
 import sys
 
 loader = '../../bin/rst2pdf'

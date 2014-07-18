@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
-#$LastChangedDate: 2010-03-07 21:25:16 -0600 (Sun, 07 Mar 2010) $
-#$LastChangedRevision: 1730 $
+# $HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
+# $LastChangedDate: 2010-03-07 21:25:16 -0600 (Sun, 07 Mar 2010) $
+# $LastChangedRevision: 1730 $
 
 # See LICENSE.txt for licensing terms
 
@@ -14,7 +14,7 @@ into stupid HTML output.
 
 import os, sys
 
-from parselogs import getcategories
+from .parselogs import getcategories
 
 def dumpinfo():
     ifiles = set(os.listdir('input'))
@@ -29,7 +29,7 @@ def dumpinfo():
         print('<table>')
         href = 'http://code.google.com/p/rst2pdf/issues/detail?id='
         for testname, checksum in sorted(values):
-            if os.path.exists(os.path.join('input',testname+'.ignore')):
+            if os.path.exists(os.path.join('input', testname + '.ignore')):
                 continue
 
             print('<tr>')
@@ -58,6 +58,6 @@ if __name__ == '__main__':
     print('<html><body>')
     dumpinfo()
     print('<pre>')
-    print('\n\n'.join(10*'.'))  # A bit of separation from end for scrolling...
+    print('\n\n'.join(10 * '.'))  # A bit of separation from end for scrolling...
     print('</pre>')
     print('</body></html>')

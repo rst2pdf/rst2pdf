@@ -17,17 +17,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-###Sketch Config
-#type = Export
-#tk_file_type = ("Portable Document Format (PDF)", '.pdf')
-#extensions = '.pdf'
-#format_name = 'PDF-Reportlab'
-#unload = 1
-###End
+# ##Sketch Config
+# type = Export
+# tk_file_type = ("Portable Document Format (PDF)", '.pdf')
+# extensions = '.pdf'
+# format_name = 'PDF-Reportlab'
+# unload = 1
+# ##End
 
 from math import atan2, pi
 import PIL
-from app import _,Bezier, EmptyPattern, Rotation, Translation, _sketch
+from app import _, Bezier, EmptyPattern, Rotation, Translation, _sketch
 from app.Graphics.curveop import arrow_trafos
 import reportlab.pdfgen.canvas
 import app
@@ -65,7 +65,7 @@ class PDFDevice:
 	def Concat(self, trafo):
 		self.pdf.transform(*trafo.coeff())
 
-	def Translate(self, x, y = None):
+	def Translate(self, x, y=None):
 		if y is None:
 			x, y = x
 		self.pdf.translate(x, y)
@@ -75,7 +75,7 @@ class PDFDevice:
 
 	def Scale(self, scale):
 		self.pdf.scale(scale, scale)
-	
+
 	def PopTrafo(self):
 		self.pdf.restoreState()
 
@@ -88,7 +88,7 @@ class PDFDevice:
 	def SetLineColor(self, color):
 		self.pdf.setStrokeColor(tuple(color))
 
-	def SetLineAttributes(self, width, cap = 1, join = 0, dashes = ()):
+	def SetLineAttributes(self, width, cap=1, join=0, dashes=()):
 		self.pdf.setLineWidth(width)
 		self.pdf.setLineCap(cap - 1)
 		self.pdf.setLineJoin(join)
@@ -108,7 +108,7 @@ class PDFDevice:
 		self.pdf.line(x1, y1, x2, y2)
 
 	def DrawRectangle(self, start, end):
-		self.pdf.rectangle(start.x, start.y, end.x - start.x, end.y - start.y, 
+		self.pdf.rectangle(start.x, start.y, end.x - start.x, end.y - start.y,
 						   1, 0)
 
 	def FillRectangle(self, left, bottom, right, top):
@@ -128,10 +128,10 @@ class PDFDevice:
 		path.close()
 		self.pdf.drawPath(path, 0, 1)
 
-	def DrawBezierPath(self, path, rect = None):
+	def DrawBezierPath(self, path, rect=None):
 		self.pdf.drawPath(make_pdf_path(self.pdf.beginPath(), (path,)), 1, 0)
 
-	def FillBezierPath(self, path, rect = None):
+	def FillBezierPath(self, path, rect=None):
 		self.pdf.drawPath(make_pdf_path(self.pdf.beginPath(), (path,)), 0, 1)
 
 
@@ -163,11 +163,11 @@ class PDFGenSaver:
 		if "pdfgen_canvas" not in self.options:
 			self.pdf.save()
 
-	def set_properties(self, properties, bounding_rect = None):
+	def set_properties(self, properties, bounding_rect=None):
 		pattern = properties.line_pattern
 		if not pattern.is_Empty:
 			if pattern.is_Solid:
-				c, m, y, k =pattern.Color().getCMYK()
+				c, m, y, k = pattern.Color().getCMYK()
 				self.pdf.setStrokeColorCMYK(c, m, y, k)
 			self.pdf.setLineWidth(properties.line_width)
 			self.pdf.setLineJoin(properties.line_join)
@@ -185,7 +185,7 @@ class PDFGenSaver:
 		pattern = properties.fill_pattern
 		if not pattern.is_Empty:
 			if pattern.is_Solid:
-				c, m, y, k =pattern.Color().getCMYK()
+				c, m, y, k = pattern.Color().getCMYK()
 				self.pdf.setFillColorCMYK(c, m, y, k)
 			elif pattern.is_Tiled:
 				pass
@@ -205,11 +205,11 @@ class PDFGenSaver:
 		trafo = rot(Translation(center))
 		image = PIL.Image.new('RGB', (1, 200))
 		border = int(round(100 * pattern.Border()))
-		_sketch.fill_axial_gradient(image.im, pattern.Gradient().Colors(), 
+		_sketch.fill_axial_gradient(image.im, pattern.Gradient().Colors(),
 									0, border, 0, 200 - border)
 		self.pdf.saveState()
 		self.pdf.transform(*trafo.coeff())
-		self.pdf.drawInlineImage(image, (left - right) / 2, (bottom - top) / 2, 
+		self.pdf.drawInlineImage(image, (left - right) / 2, (bottom - top) / 2,
 								 right - left, top - bottom)
 		self.pdf.restoreState()
 
@@ -220,7 +220,7 @@ class PDFGenSaver:
 	def make_pdf_path(self, paths):
 		return make_pdf_path(self.pdf.beginPath(), paths)
 
-	def polybezier(self, paths, properties, bounding_rect, clip = 0):
+	def polybezier(self, paths, properties, bounding_rect, clip=0):
 		pdfpath = self.make_pdf_path(paths)
 		active_fill = self.set_properties(properties, bounding_rect)
 		if active_fill:
@@ -237,7 +237,7 @@ class PDFGenSaver:
 				method = self.pdf.clipPath
 			else:
 				method = self.pdf.drawPath
-			method(self.make_pdf_path(paths), properties.HasLine(), 
+			method(self.make_pdf_path(paths), properties.HasLine(),
 				   properties.HasFill())
 		# draw the arrows
 		if properties.HasLine():
@@ -256,7 +256,7 @@ class PDFGenSaver:
 						self.draw_arrow(arrow1, t1)
 					if arrow2 and t2 is not None:
 						self.draw_arrow(arrow2, t2)
-					
+
 	def draw_arrow(self, arrow, trafo):
 		path = arrow.Paths()[0].Duplicate()
 		path.Transform(trafo)
@@ -274,14 +274,14 @@ class PDFGenSaver:
 		if mask.is_curve:
 			self.pdf.saveState()
 			prop = mask.Properties().Duplicate()
-			prop.SetProperty(line_pattern = EmptyPattern)
-			self.polybezier(mask.Paths(), prop, mask.bounding_rect, clip = 1)
+			prop.SetProperty(line_pattern=EmptyPattern)
+			self.polybezier(mask.Paths(), prop, mask.bounding_rect, clip=1)
 			self.save_objects(object.MaskedObjects())
 			if mask.has_line and mask.Properties().HasLine():
 				prop = mask.Properties().Duplicate()
-				prop.SetProperty(fill_pattern = EmptyPattern)
-				self.polybezier(mask.Paths(), prop, mask.bounding_rect, 
-								clip = 1)
+				prop.SetProperty(fill_pattern=EmptyPattern)
+				self.polybezier(mask.Paths(), prop, mask.bounding_rect,
+								clip=1)
 			self.pdf.restoreState()
 
 	def raster_image(self, object):
@@ -290,7 +290,7 @@ class PDFGenSaver:
 		self.pdf.drawInlineImage(object.Data().Image(), 0, 0)
 		self.pdf.restoreState()
 
-	def simple_text(self, object, clip = 0):
+	def simple_text(self, object, clip=0):
 		properties = object.Properties()
 		active_fill = self.set_properties(properties, object.bounding_rect)
 		fontname = properties.font.PostScriptName()
@@ -313,7 +313,7 @@ class PDFGenSaver:
 			if not clip:
 				self.pdf.restoreState()
 
-	def path_text(self, object, clip = 0):
+	def path_text(self, object, clip=0):
 		properties = object.Properties()
 		active_fill = self.set_properties(properties, object.bounding_rect)
 		fontname = properties.font.PostScriptName()
@@ -341,18 +341,18 @@ class PDFGenSaver:
 
 	def Save(self):
 		self.document.updateActivePage()
-		masters=self.document.getMasterLayers()
-		count=0
-		pagenum=len(self.document.pages)
-		interval=int(97/pagenum)
+		masters = self.document.getMasterLayers()
+		count = 0
+		pagenum = len(self.document.pages)
+		interval = int(97 / pagenum)
 		for page in self.document.pages:
-			count+=1
-			app.updateInfo(inf2=_('Composing page %u of %u')%(count,pagenum),inf3=count*interval)
-			layers=page+masters
+			count += 1
+			app.updateInfo(inf2=_('Composing page %u of %u') % (count, pagenum), inf3=count * interval)
+			layers = page + masters
 			for layer in layers:
 				if not layer.is_SpecialLayer and layer.Printable():
 					self.save_objects(layer.GetObjects())
-			#self.pdf.showPage()
+			# self.pdf.showPage()
 
 	def save_objects(self, objects):
 		for object in objects:
@@ -362,11 +362,11 @@ class PDFGenSaver:
 				else:
 					self.save_objects(object.GetObjects())
 			elif object.is_SimpleText:
-#				self.simple_text(object)
-				obj=object.AsBezier()
+# 				self.simple_text(object)
+				obj = object.AsBezier()
 				self.polybezier(obj.Paths(), obj.Properties(), obj.bounding_rect)
 			elif object.is_PathTextText:
-				self.path_text(object)				
+				self.path_text(object)
 			elif object.is_Image:
 				self.raster_image(object)
 			elif object.is_Bezier or object.is_Rectangle or object.is_Ellipse:
@@ -374,9 +374,9 @@ class PDFGenSaver:
 
 
 
-def save(document, file, filename, options = {}):
-	app.updateInfo(inf1=_('PDF generation.'),inf2=_('Start document composing'),inf3=3)
+def save(document, file, filename, options={}):
+	app.updateInfo(inf1=_('PDF generation.'), inf2=_('Start document composing'), inf3=3)
 	saver = PDFGenSaver(file, filename, document, options)
 	saver.Save()
 	saver.close()
-	app.updateInfo(inf2=_('Document generation is finished'),inf3=100)
+	app.updateInfo(inf2=_('Document generation is finished'), inf3=100)

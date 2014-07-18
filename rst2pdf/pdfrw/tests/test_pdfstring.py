@@ -4,7 +4,7 @@ python -m tests.test_pdfstring
 '''
 
 
-import pdfrw
+from rst2pdf import pdfrw
 import unittest
 
 

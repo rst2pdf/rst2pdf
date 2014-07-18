@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 
 '''
@@ -109,7 +109,7 @@ class MD5Info(dict):
             if not name.endswith(self.suffix):
                 continue
             result.append('%s = [' % name)
-            result.append(',\n'.join(["        '%s'"%item for item in sorted(value)]))
+            result.append(',\n'.join(["        '%s'" % item for item in sorted(value)]))
             result.append(']\n')
         result.append('')
         return '\n'.join(result)
@@ -156,7 +156,7 @@ class MD5Info(dict):
 
         # Create an inverse mapping of MD5s to key names
         inverse = {}
-        for key,values in newinfo.items():
+        for key, values in newinfo.items():
             for value in values:
                 inverse.setdefault(value, set()).add(key)
 
@@ -276,11 +276,11 @@ def build_txt(iprefix, outpdf, fastfork):
         cli = iprefix + '.cli'
         if os.path.isfile(cli):
             f = open(cli)
-            extraargs=shlex.split(f.read())
+            extraargs = shlex.split(f.read())
             f.close()
         else:
-            extraargs=[]
-        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
+            extraargs = []
+        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
         if os.path.exists(style):
             args.extend(('-s', os.path.basename(style)))
         args.extend(('-o', outpdf))
@@ -330,7 +330,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
     outf.close()
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None):
+def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text=False, do_sphinx=False, updatemd5=None):
     if not testfiles:
         testfiles = []
         if do_text:

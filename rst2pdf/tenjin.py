@@ -1,28 +1,28 @@
 # -*- coding: utf-8 -*-
-##
-## $Rev: 137 $
-## $Release: 0.6.2 $
-## copyright(c) 2007-2008 kuwata-lab.com all rights reserved.
-##
-## Permission is hereby granted, free of charge, to any person obtaining
-## a copy of this software and associated documentation files (the
-## "Software"), to deal in the Software without restriction, including
-## without limitation the rights to use, copy, modify, merge, publish,
-## distribute, sublicense, and/or sell copies of the Software, and to
-## permit persons to whom the Software is furnished to do so, subject to
-## the following conditions:
-##
-## The above copyright notice and this permission notice shall be
-## included in all copies or substantial portions of the Software.
-##
-## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-## EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-## MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-## NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-## LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-## OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-## WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-##
+# #
+# # $Rev: 137 $
+# # $Release: 0.6.2 $
+# # copyright(c) 2007-2008 kuwata-lab.com all rights reserved.
+# #
+# # Permission is hereby granted, free of charge, to any person obtaining
+# # a copy of this software and associated documentation files (the
+# # "Software"), to deal in the Software without restriction, including
+# # without limitation the rights to use, copy, modify, merge, publish,
+# # distribute, sublicense, and/or sell copies of the Software, and to
+# # permit persons to whom the Software is furnished to do so, subject to
+# # the following conditions:
+# #
+# # The above copyright notice and this permission notice shall be
+# # included in all copies or substantial portions of the Software.
+# #
+# # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# # EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# # MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# # NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# #
 
 """Very fast and light-weight template engine based embedded Python.
 
@@ -41,17 +41,17 @@
 """
 
 __revision__ = "$Rev: 137 $"[6:-2]
-__release__  = "0.6.2"
-__license__  = "MIT License"
-__all__      = ['Template', 'Engine', 'helpers', 'html', ]
+__release__ = "0.6.2"
+__license__ = "MIT License"
+__all__ = ['Template', 'Engine', 'helpers', 'html', ]
 
 
 import re, sys, os, time, marshal
 
 
-##
-## utilities
-##
+# #
+# # utilities
+# #
 
 try:
     import fcntl
@@ -78,16 +78,17 @@ def _write_file_with_lock(filename, content):
 
 def _create_module(module_name):
     """ex. mod = _create_module('tenjin.util')"""
-    import new
-    mod = new.module(module_name.split('.')[-1])
+    import types
+    class mod(types.ModuleType):
+        __name__ = module_name.split('.')[-1]
     sys.modules[module_name] = mod
     return mod
 
 
 
-##
-## helper method's module
-##
+# #
+# # helper method's module
+# #
 
 def _create_helpers_module():
 
@@ -197,37 +198,37 @@ def _create_helpers_module():
 
     def _p(arg):
         """ex. '/show/'+_p("item['id']") => "/show/#{item['id']}" """
-        return '<`#%s#`>' % arg    # decoded into #{...} by preprocessor
+        return '<`#%s#`>' % arg  # decoded into #{...} by preprocessor
 
     def _P(arg):
         """ex. '<b>%s</b>' % _P("item['id']") => "<b>${item['id']}</b>" """
-        return '<`$%s$`>' % arg    # decoded into ${...} by preprocessor
+        return '<`$%s$`>' % arg  # decoded into ${...} by preprocessor
 
     def _decode_params(s):
         """decode <`#...#`> and <`$...$`> into #{...} and ${...}"""
         from urllib.parse import unquote
         dct = { 'lt':'<', 'gt':'>', 'amp':'&', 'quot':'"', '#039':"'", }
         def unescape(s):
-            #return s.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&#039;', "'").replace('&amp;',  '&')
-            return re.sub(r'&(lt|gt|quot|amp|#039);',  lambda m: dct[m.group(1)],  s)
+            # return s.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&#039;', "'").replace('&amp;',  '&')
+            return re.sub(r'&(lt|gt|quot|amp|#039);', lambda m: dct[m.group(1)], s)
         s = re.sub(r'%3C%60%23(.*?)%23%60%3E', lambda m: '#{%s}' % unquote(m.group(1)), s)
         s = re.sub(r'%3C%60%24(.*?)%24%60%3E', lambda m: '${%s}' % unquote(m.group(1)), s)
-        s = re.sub(r'&lt;`#(.*?)#`&gt;',   lambda m: '#{%s}' % unescape(m.group(1)), s)
+        s = re.sub(r'&lt;`#(.*?)#`&gt;', lambda m: '#{%s}' % unescape(m.group(1)), s)
         s = re.sub(r'&lt;`\$(.*?)\$`&gt;', lambda m: '${%s}' % unescape(m.group(1)), s)
         s = re.sub(r'<`#(.*?)#`>', r'#{\1}', s)
         s = re.sub(r'<`\$(.*?)\$`>', r'${\1}', s)
         return s
 
     mod = _create_module('tenjin.helpers')
-    mod.to_str             = to_str
+    mod.to_str = to_str
     mod.generate_tostrfunc = generate_tostrfunc
-    mod.echo               = echo
-    mod.start_capture      = start_capture
-    mod.stop_capture       = stop_capture
-    mod.captured_as        = captured_as
-    mod._p                 = _p
-    mod._P                 = _P
-    mod._decode_params     = _decode_params
+    mod.echo = echo
+    mod.start_capture = start_capture
+    mod.stop_capture = stop_capture
+    mod.captured_as = captured_as
+    mod._p = _p
+    mod._P = _P
+    mod._decode_params = _decode_params
     mod.__all__ = ['escape', 'to_str', 'echo', 'generate_tostrfunc',
                    'start_capture', 'stop_capture', 'captured_as',
                    '_p', '_P', '_decode_params',
@@ -240,9 +241,9 @@ generate_tostrfunc = helpers.generate_tostrfunc
 
 
 
-##
-## module for html
-##
+# #
+# # module for html
+# #
 
 def _create_html_module():
 
@@ -255,7 +256,7 @@ def _create_html_module():
         """Escape '&', '<', '>', '"' into '&amp;', '&lt;', '&gt;', '&quot;'.
         """
         return _escape_pattern.sub(_escape_callable, s)
-        #return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;')
+        # return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;')
 
     def tagattr(name, expr, value=None, escape=True):
         """return empty string when expr is false value, ' name="value"' when
@@ -283,17 +284,17 @@ def _create_html_module():
     def checked(expr):
         """return ' checked="checked"' if expr is true."""
         return expr and ' checked="checked"' or ''
-        #return attr('checked', expr, 'checked')
+        # return attr('checked', expr, 'checked')
 
     def selected(expr):
         """return ' selected="selected"' if expr is true."""
         return expr and ' selected="selected"' or ''
-        #return attr('selected', expr, 'selected')
+        # return attr('selected', expr, 'selected')
 
     def disabled(expr):
         """return ' disabled="disabled"' if expr is true."""
         return expr and ' disabled="disabled"' or ''
-        #return attr('disabled, expr, 'disabled')
+        # return attr('disabled, expr, 'disabled')
 
     def nl2br(text):
         """replace "\n" to "<br />\n" and return it."""
@@ -310,13 +311,13 @@ def _create_html_module():
     mod = _create_module('tenjin.helpers.html')
     mod._escape_table = _escape_table
     mod.escape_xml = escape_xml
-    mod.escape     = escape_xml
-    mod.tagattr    = tagattr
-    mod.checked    = checked
-    mod.selected   = selected
-    mod.disabled   = disabled
-    mod.nl2br      = nl2br
-    mod.text2html  = text2html
+    mod.escape = escape_xml
+    mod.tagattr = tagattr
+    mod.checked = checked
+    mod.selected = selected
+    mod.disabled = disabled
+    mod.nl2br = nl2br
+    mod.text2html = text2html
     return mod
 
 helpers.html = _create_html_module()
@@ -326,9 +327,9 @@ helpers.escape = helpers.html.escape_xml
 
 
 
-##
-## Template class
-##
+# #
+# # Template class
+# #
 
 class Template(object):
     """Convert and evaluate embedded python string.
@@ -380,16 +381,16 @@ class Template(object):
          </table>
     """
 
-    ## default value of attributes
-    filename   = None
-    encoding   = None
+    # # default value of attributes
+    filename = None
+    encoding = None
     escapefunc = 'escape'
-    tostrfunc  = 'to_str'
-    indent     = 4
-    preamble   = None
-    postamble  = None    # "_buf = []"
-    smarttrim  = None    # "print ''.join(_buf)"
-    args       = None
+    tostrfunc = 'to_str'
+    indent = 4
+    preamble = None
+    postamble = None  # "_buf = []"
+    smarttrim = None  # "print ''.join(_buf)"
+    args = None
 
     def __init__(self, filename=None, encoding=None, escapefunc=None, tostrfunc=None, indent=None, preamble=None, postamble=None, smarttrim=None):
         """Initailizer of Template class.
@@ -417,13 +418,13 @@ class Template(object):
              If True then "<div>\\n#{_context}\\n</div>" is parsed as
              "<div>\\n#{_context}</div>".
         """
-        if encoding   is not None:  self.encoding   = encoding
+        if encoding   is not None:  self.encoding = encoding
         if escapefunc is not None:  self.escapefunc = escapefunc
-        if tostrfunc  is not None:  self.tostrfunc  = tostrfunc
-        if indent     is not None:  self.indent     = indent
-        if preamble   is not None:  self.preamble   = preamble
-        if postamble  is not None:  self.postamble  = postamble
-        if smarttrim  is not None:  self.smarttrim  = smarttrim
+        if tostrfunc  is not None:  self.tostrfunc = tostrfunc
+        if indent     is not None:  self.indent = indent
+        if preamble   is not None:  self.preamble = preamble
+        if postamble  is not None:  self.postamble = postamble
+        if smarttrim  is not None:  self.smarttrim = smarttrim
         #
         if preamble  is True:  self.preamble = "_buf = []"
         if postamble is True:  self.postamble = "print ''.join(_buf)"
@@ -433,22 +434,22 @@ class Template(object):
             self._reset()
 
     def _reset(self, input=None, filename=None):
-        self._spaces  = ''
-        self.script   = None
+        self._spaces = ''
+        self.script = None
         self.bytecode = None
-        self.input    = input
+        self.input = input
         self.filename = filename
         if input != None:
             i = input.find("\n")
             if i < 0:
-                self.newline = "\n"   # or None
-            elif len(input) >= 2 and input[i-1] == "\r":
+                self.newline = "\n"  # or None
+            elif len(input) >= 2 and input[i - 1] == "\r":
                 self.newline = "\r\n"
             else:
                 self.newline = "\n"
 
     def before_convert(self, buf):
-        #buf.append('_buf = []; ')
+        # buf.append('_buf = []; ')
         if self.preamble:
             buf.append(self.preamble)
             buf.append(self.input.startswith('<?py') and "\n" or "; ")
@@ -512,11 +513,11 @@ class Template(object):
         index = 0
         for m in rexp.finditer(input):
             mspace, code, rspace = m.groups()
-            #mspace, close, rspace = m.groups()
-            #code = input[m.start()+4+len(mspace):m.end()-len(close)-(rspace and len(rspace) or 0)]
+            # mspace, close, rspace = m.groups()
+            # code = input[m.start()+4+len(mspace):m.end()-len(close)-(rspace and len(rspace) or 0)]
             text = input[index:m.start()]
             index = m.end()
-            ## detect spaces at beginning of line
+            # # detect spaces at beginning of line
             lspace = None
             if text == '':
                 if is_bol:
@@ -530,40 +531,40 @@ class Template(object):
                         lspace = text
                         text = ''
                 else:
-                    s = text[rindex+1:]
+                    s = text[rindex + 1:]
                     if s.isspace():
                         lspace = s
-                        text = text[:rindex+1]
-            #is_bol = rspace is not None
-            ## add text, spaces, and statement
+                        text = text[:rindex + 1]
+            # is_bol = rspace is not None
+            # # add text, spaces, and statement
             self.parse_exprs(buf, text, is_bol)
             is_bol = rspace is not None
             if lspace:
                 buf.append(lspace)
             if mspace != " ":
-                #buf.append(mspace)
+                # buf.append(mspace)
                 buf.append(mspace == "\t" and "\t" or "\n")  # don't append "\r\n"!
             if code:
                 code = self.statement_hook(code)
                 self.add_stmt(buf, code)
             self._set_spaces(code, lspace, mspace)
             if rspace:
-                #buf.append(rspace)
-                buf.append("\n")    # don't append "\r\n"!
+                # buf.append(rspace)
+                buf.append("\n")  # don't append "\r\n"!
         rest = input[index:]
         if rest:
             self.parse_exprs(buf, rest)
 
     def statement_hook(self, stmt):
         """expand macros and parse '#@ARGS' in a statement."""
-        ## macro expantion
-        #macro_pattern = r'^(\s*)(\w+)\((.*?)\);?\s*$';
-        #m = re.match(macro_pattern, stmt)
-        #if m:
+        # # macro expantion
+        # macro_pattern = r'^(\s*)(\w+)\((.*?)\);?\s*$';
+        # m = re.match(macro_pattern, stmt)
+        # if m:
         #    lspace, name, arg = m.group(1), m.group(2), m.group(3)
         #    handler = self.get_macro_handler(name)
         #    return handler is None and stmt or lspace + handler(arg)
-        ## arguments declaration
+        # # arguments declaration
         if self.args is None:
             args_pattern = r'^ *#@ARGS(?:[ \t]+(.*?))?$'
             m = re.match(args_pattern, stmt)
@@ -579,10 +580,10 @@ class Template(object):
                     declares.append("%s = _context.get('%s'); " % (arg, arg))
                 self.args = args
                 return ''.join(declares)
-        ##
+        # #
         return stmt
 
-    #MACRO_HANDLER_TABLE = {
+    # MACRO_HANDLER_TABLE = {
     #    "echo":
     #        lambda arg: "_buf.append(%s); " % arg,
     #    "include":
@@ -595,9 +596,9 @@ class Template(object):
     #        lambda arg: "if (_context[%s]) _buf.push(_context[%s]); else:" % (arg, arg),
     #    "stop_placeholder":
     #        lambda arg: "#endif",
-    #}
+    # }
     #
-    #def get_macro_handler(name):
+    # def get_macro_handler(name):
     #    return MACRO_HANDLER_TABLE.get(name)
 
     EXPR_PATTERN = re.compile(r'([#$])\{(.*?)\}', re.S)
@@ -617,17 +618,17 @@ class Template(object):
         rexp = self.expr_pattern()
         smarttrim = self.smarttrim
         nl = self.newline
-        nl_len  = len(nl)
+        nl_len = len(nl)
         pos = 0
         for m in rexp.finditer(input):
-            start  = m.start()
-            text   = input[pos:start]
-            pos    = m.end()
+            start = m.start()
+            text = input[pos:start]
+            pos = m.end()
             expr, flag_escape = self.get_expr_and_escapeflag(m)
             #
             if text:
                 self.add_text(buf, text)
-                #if text[-1] == "\n":
+                # if text[-1] == "\n":
                 #    buf.append("\n")
                 #    if self._spaces:
                 #        buf.append(self._spaces)
@@ -635,7 +636,7 @@ class Template(object):
             #
             if smarttrim:
                 flag_bol = text.endswith(nl) or not text and (start > 0  or is_bol)
-                if flag_bol and not flag_escape and input[pos:pos+nl_len] == nl:
+                if flag_bol and not flag_escape and input[pos:pos + nl_len] == nl:
                     pos += nl_len
                     buf.append("\n")
         if smarttrim:
@@ -663,7 +664,7 @@ class Template(object):
             buf.append("u'''")
         else:
             buf.append("'''")
-        #text = re.sub(r"(['\\\\])", r"\\\1", text)
+        # text = re.sub(r"(['\\\\])", r"\\\1", text)
         text = Template._quote_rexp.sub(r"\\\1", text)
         if not encode_newline or text[-1] != "\n":
             buf.append(text)
@@ -691,7 +692,7 @@ class Template(object):
         if self.newline == "\r\n":
             code = code.replace("\r\n", "\n")
         buf.append(code)
-        #if code[-1] != '\n':
+        # if code[-1] != '\n':
         #    buf.append(self.newline)
 
     def _set_spaces(self, code, lspace, mspace):
@@ -700,10 +701,10 @@ class Template(object):
                 code = lspace + code
             elif mspace == "\t":
                 code = lspace + "\t" + code
-        #i = code.rstrip().rfind("\n")
-        #if i < 0:   # i == -1
+        # i = code.rstrip().rfind("\n")
+        # if i < 0:   # i == -1
         #    i = 0
-        #else:
+        # else:
         #    i += 1
         i = code.rstrip().rfind("\n") + 1
         indent = 0
@@ -760,7 +761,7 @@ class Template(object):
         exec(self.bytecode, globals, locals)
         if bufarg is None:
             s = ''.join(_buf)
-            #if self.encoding:
+            # if self.encoding:
             #    s = s.encode(self.encoding)
             return s
         else:
@@ -771,9 +772,9 @@ class Template(object):
         self.bytecode = compile(self.script, self.filename or '(tenjin)', 'exec')
 
 
-##
-## preprocessor class
-##
+# #
+# # preprocessor class
+# #
 
 class Preprocessor(Template):
 
@@ -787,7 +788,7 @@ class Preprocessor(Template):
     def expr_pattern(self):
         return Preprocessor.EXPR_PATTERN
 
-    #def get_expr_and_escapeflag(self, match):
+    # def get_expr_and_escapeflag(self, match):
     #    return match.group(2), match.group(1) == '$'
 
     def add_expr(self, buf, code, flag_escape=None):
@@ -797,9 +798,9 @@ class Preprocessor(Template):
         Template.add_expr(self, buf, code, flag_escape)
 
 
-##
-## template engine class
-##
+# #
+# # template engine class
+# #
 
 class Engine(object):
     """Engine class of templates.
@@ -840,13 +841,13 @@ class Engine(object):
          </html>
     """
 
-    ## default value of attributes
-    prefix     = ''
-    postfix    = ''
-    layout     = None
+    # # default value of attributes
+    prefix = ''
+    postfix = ''
+    layout = None
     templateclass = Template
-    path       = None
-    cache      = False
+    path = None
+    cache = False
     preprocess = False
 
     def __init__(self, prefix=None, postfix=None, layout=None, path=None, cache=None, preprocess=None, templateclass=None, **kwargs):
@@ -878,7 +879,7 @@ class Engine(object):
         if cache is not None:  self.cache = cache
         if preprocess is not None: self.preprocess = preprocess
         self.kwargs = kwargs
-        self.templates = {}   # template_name => Template object
+        self.templates = {}  # template_name => Template object
 
     def to_filename(self, template_name):
         """Convert template short name to filename.
@@ -916,10 +917,10 @@ class Engine(object):
 
     def load_cachefile(self, cache_filename, template):
         """load marshaled cache file"""
-        #template.bytecode = marshal.load(open(cache_filename, 'rb'))
+        # template.bytecode = marshal.load(open(cache_filename, 'rb'))
         dct = marshal.load(open(cache_filename, 'rb'))
-        template.args     = dct['args']
-        template.script   = dct['script']
+        template.args = dct['args']
+        template.script = dct['script']
         template.bytecode = dct['bytecode']
 
     def _load_cachefile_for_script(self, cache_filename, template):
@@ -928,11 +929,11 @@ class Engine(object):
             pos = s.find("\n")
             args_str = s[len('#@ARGS '):pos]
             template.args = args_str and args_str.split(', ') or []
-            s = s[pos+1:]
+            s = s[pos + 1:]
         else:
             template.args = None
         if template.encoding:
-            #s = s.decode(template.encoding)
+            # s = s.decode(template.encoding)
             s = s.decode('utf-8')
         template.script = s
         template.compile()
@@ -948,13 +949,13 @@ class Engine(object):
         s = template.script
         if template.encoding and isinstance(s, str):
             s = s.encode(template.encoding)
-            #s = s.encode('utf-8')
+            # s = s.encode('utf-8')
         if template.args is not None:
             s = "#@ARGS %s\n%s" % (', '.join(template.args), s)
         _write_file_with_lock(cache_filename, s)
 
     def cachename(self, filename):
-        return os.path.join(os.path.expanduser('~'),'.rst2pdf', os.path.basename(filename) + '.cache')
+        return os.path.join(os.path.expanduser('~'), '.rst2pdf', os.path.basename(filename) + '.cache')
 
     def create_template(self, filename, _context, _globals):
         """Read template file and create template object."""
@@ -965,15 +966,15 @@ class Engine(object):
         if not self.cache:
             input = self.read_template_file(filename, _context, _globals)
             template.convert(input, filename)
-            #template.compile()
+            # template.compile()
         elif os.path.exists(cache_filename) and getmtime(cache_filename) >= getmtime(filename):
-            #Tenjin.logger.info("** debug: %s: cache found." % filename)
+            # Tenjin.logger.info("** debug: %s: cache found." % filename)
             template.filename = filename
             self.load_cachefile(cache_filename, template)
             if template.bytecode is None:
                 template.compile()
         else:
-            #Tenjin.logger.info("** debug: %s: cache not found." % filename)
+            # Tenjin.logger.info("** debug: %s: cache not found." % filename)
             input = self.read_template_file(filename, _context, _globals)
             template.convert(input, filename)
             template.compile()
@@ -1023,7 +1024,7 @@ class Engine(object):
              <?py val = include('file.pyhtml', False) ?>
         """
         frame = sys._getframe(1)
-        locals  = frame.f_locals
+        locals = frame.f_locals
         globals = frame.f_globals
         assert '_context' in locals
         context = locals['_context']
@@ -1059,9 +1060,9 @@ class Engine(object):
         self.hook_context(context)
         while True:
             # context and globals are passed to get_template() only for preprocessing
-            template = self.get_template(template_name,  context, globals)
-            content  = template.render(context, globals)
-            layout   = context.pop('_layout', layout)
+            template = self.get_template(template_name, context, globals)
+            content = template.render(context, globals)
+            layout = context.pop('_layout', layout)
             if layout is True or layout is None:
                 layout = self.layout
             if not layout:
@@ -1074,5 +1075,5 @@ class Engine(object):
 
     def hook_context(self, context):
         context['_engine'] = self
-        #context['render'] = self.render
+        # context['render'] = self.render
         context['include'] = self.include

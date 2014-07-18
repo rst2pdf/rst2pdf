@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 import os
 from setuptools import setup, find_packages
@@ -40,9 +40,8 @@ install_requires = [
         'docutils',
         'reportlab>=2.4',
         'Pygments',
-        'pdfrw',
         ]
-        
+
 try:
     import json
 except ImportError:
@@ -52,8 +51,8 @@ tests_require = ['pyPdf']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 images_require = ['PIL']
-pdfimages_require = ['pyPdf','PythonMagick']
-pdfimages2_require = ['pyPdf','SWFTools']
+pdfimages_require = ['pyPdf', 'PythonMagick']
+pdfimages2_require = ['pyPdf', 'SWFTools']
 svgsupport_require = ['svg2rlg']
 aafiguresupport_require = ['aafigure>=0.4']
 mathsupport_require = ['matplotlib']
