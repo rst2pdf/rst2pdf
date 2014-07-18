@@ -36,7 +36,7 @@ class AnyCache(object):
 # This is monkey-patched into reportlab IFF we are using
 # PDF files inside paragraphs.
 
-def drawImage(self, image, x, y, width=None, height=None, mask=None, 
+def drawImage(self, image, x, y, width=None, height=None, mask=None,
             preserveAspectRatio=False, anchor='c'):
     if not isinstance(image, VectorPdf):
         return self._drawImageNotVectorPDF(image, x, y, width, height, mask,
@@ -68,8 +68,8 @@ class VectorPdf(Flowable):
         self.imageWidth, self.imageHeight = imageWidth, imageHeight = xobj.w, xobj.h
         width = width or imageWidth
         height = height or imageHeight
-        if kind in ['bound','proportional']:
-            factor = min(float(width)/imageWidth,float(height)/imageHeight)
+        if kind in ['bound', 'proportional']:
+            factor = min(float(width) / imageWidth, float(height) / imageHeight)
             width = factor * imageWidth
             height = factor * imageHeight
         self.drawWidth = width
@@ -82,7 +82,7 @@ class VectorPdf(Flowable):
         if _sW > 0 and hasattr(self, 'hAlign'):
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
-                x += 0.5*_sW
+                x += 0.5 * _sW
             elif a in ('RIGHT', TA_RIGHT):
                 x += _sW
             elif a not in ('LEFT', TA_LEFT):
@@ -102,10 +102,10 @@ class VectorPdf(Flowable):
         canv.doForm(xobj_name)
         canv.restoreState()
 
-    def _restrictSize(self,aW,aH):
-        if self.drawWidth>aW+_FUZZ or self.drawHeight>aH+_FUZZ:
+    def _restrictSize(self, aW, aH):
+        if self.drawWidth > aW + _FUZZ or self.drawHeight > aH + _FUZZ:
             self._oldDrawSize = self.drawWidth, self.drawHeight
-            factor = min(float(aW)/self.drawWidth,float(aH)/self.drawHeight)
+            factor = min(float(aW) / self.drawWidth, float(aH) / self.drawHeight)
             self.drawWidth *= factor
             self.drawHeight *= factor
         return self.drawWidth, self.drawHeight
@@ -115,7 +115,7 @@ class VectorPdf(Flowable):
 
     @staticmethod
     def SleazyPDFCheck(fname):
-        return fname.split('#',1)[0].rsplit('.',1)[1].lower() == 'pdf'
+        return fname.split('#', 1)[0].rsplit('.', 1)[1].lower() == 'pdf'
 
     OldImageReader = None
 

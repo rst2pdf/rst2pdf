@@ -66,12 +66,12 @@ class InkscapeImage(VectorPdf):
     def raster(self, filename, client):
         """Returns a URI to a rasterized version of the image"""
         cache = self.source_filecache.setdefault(client, {})
-        pngfname = cache.get(filename+'_raster')
+        pngfname = cache.get(filename + '_raster')
         if pngfname is None:
             tmpf, pngfname = tempfile.mkstemp(suffix='.png')
             os.close(tmpf)
             client.to_unlink.append(pngfname)
-            cache[filename+'_raster'] = pngfname
+            cache[filename + '_raster'] = pngfname
             cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
             try:
                 subprocess.call(cmd)

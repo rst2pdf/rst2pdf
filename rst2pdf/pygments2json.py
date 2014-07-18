@@ -26,8 +26,8 @@ def css2rl(css):
         for option in options:
             option = option.strip()
             option, argument = option.split(':')
-            option=option.strip()
-            argument=argument.strip()
+            option = option.strip()
+            argument = argument.strip()
             if option == 'color':
                 style['textColor'] = argument.strip()
             if option == 'background-color':
@@ -46,11 +46,11 @@ def css2rl(css):
                 else:
                     style['fontName'] = 'stdMonoItalic'
         if style.get('textColor', None) is None:
-		style['textColor']='black'
+		style['textColor'] = 'black'
         styles.append([sname, style])
 
     return simplejson.dumps({'styles': styles}, indent=2)
 
 for name in list(pstyles.get_all_styles()):
-    css=os.popen('pygmentize -S %s -f html'%name, 'r').read()
-    open(name+'.json', 'w').write(css2rl(css))
+    css = os.popen('pygmentize -S %s -f html' % name, 'r').read()
+    open(name + '.json', 'w').write(css2rl(css))

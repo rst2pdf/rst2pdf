@@ -21,15 +21,15 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
     Since this class is defined in an extension, it
     effectively replaces rst2pdf.genelements.HandleTitle.
     '''
-    
+
     def gather_elements(self, client, node, style):
         # This method is copied from the HandleTitle class
         # in rst2pdf.genelements.
-        
+
         # Special cases: (Not sure this is right ;-)
         if isinstance(node.parent, docutils.nodes.document):
-            #node.elements = [Paragraph(client.gen_pdftext(node),
-                                        #client.styles['title'])]
+            # node.elements = [Paragraph(client.gen_pdftext(node),
+                                        # client.styles['title'])]
             # The visible output is now done by the cover template
             node.elements = []
             client.doc_title = node.rawsource
@@ -56,22 +56,22 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
             else:
                 snum = None
             key = node.get('refid')
-            maxdepth=4
+            maxdepth = 4
             if reportlab.Version > '2.1':
-                maxdepth=6
+                maxdepth = 6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+'-'+str(id(node))
+            parent_id = (node.parent.get('ids', [None]) or [None])[0] + '-' + str(id(node))
             if client.depth > 1:
                 node.elements = [ Heading(text,
-                        client.styles['heading%d'%min(client.depth, maxdepth)],
-                        level=client.depth-1,
+                        client.styles['heading%d' % min(client.depth, maxdepth)],
+                        level=client.depth - 1,
                         parent_id=parent_id,
                         node=node,
                         )]
-            else: # This is an important title, do our magic ;-)
+            else:  # This is an important title, do our magic ;-)
                 # Hack the title template SVG
-                tfile = codecs.open('titletemplate.svg','r','utf-8')
+                tfile = codecs.open('titletemplate.svg', 'r', 'utf-8')
                 tdata = tfile.read()
                 tfile.close()
                 tfile = tempfile.NamedTemporaryFile(dir='.', delete=False, suffix='.svg')
@@ -82,7 +82,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 # Now tfname contains a SVG with the right title.
                 # Make rst2pdf delete it later.
                 client.to_unlink.append(tfname)
-                
+
                 e = FancyHeading(tfname,
                     width=700,
                     height=100,
@@ -90,10 +90,10 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                     snum=snum,
                     parent_id=parent_id,
                     text=text,
-                    hstyle=client.styles['heading%d'%min(client.depth, maxdepth)])
-                
+                    hstyle=client.styles['heading%d' % min(client.depth, maxdepth)])
+
                 node.elements = [e]
-                
+
             if client.depth <= client.breaklevel:
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
@@ -108,37 +108,37 @@ class FancyHeading(MyImage, Heading):
         level = 0
         text = kwargs.pop('text')
         self.snum = kwargs.pop('snum')
-        self.parent_id= kwargs.pop('parent_id')
-        #self.stext = 
-        Heading.__init__(self,text,hstyle,level=level,
+        self.parent_id = kwargs.pop('parent_id')
+        # self.stext =
+        Heading.__init__(self, text, hstyle, level=level,
             parent_id=self.parent_id)
         # Cleanup title text
-        #self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
-        #self.stext = self.stext.strip()
+        # self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
+        # self.stext = self.stext.strip()
 
         # Stuff needed for the outline entry
         MyImage.__init__(self, *args, **kwargs)
 
-    def drawOn(self,canv,x,y,_sW):
+    def drawOn(self, canv, x, y, _sW):
 
-        ## These two lines are magic.
-        #if isinstance(self.parent_id, tuple):
-            #self.parent_id=self.parent_id[0]
-        
+        # # These two lines are magic.
+        # if isinstance(self.parent_id, tuple):
+            # self.parent_id=self.parent_id[0]
+
         # Add outline entry. This is copied from rst2pdf.flowables.heading
-        canv.bookmarkHorizontal(self.parent_id,0,y+self.image.height)
+        canv.bookmarkHorizontal(self.parent_id, 0, y + self.image.height)
 
         if canv.firstSect:
             canv.sectName = self.stext
-            canv.firstSect=False
+            canv.firstSect = False
             if self.snum is not None:
                 canv.sectNum = self.snum
             else:
                 canv.sectNum = ""
 
-        canv.addOutlineEntry(self.stext.encode('utf-8','replace'),
-                                  self.parent_id.encode('utf-8','replace'),
+        canv.addOutlineEntry(self.stext.encode('utf-8', 'replace'),
+                                  self.parent_id.encode('utf-8', 'replace'),
                                   int(self.level), False)
 
         # And let MyImage do all the drawing
-        MyImage.drawOn(self,canv,x,y,_sW)
+        MyImage.drawOn(self, canv, x, y, _sW)

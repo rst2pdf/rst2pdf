@@ -169,7 +169,7 @@ class Preprocess(object):
             if not chunk.endswith('\n'):
                 continue
             result[-1] = chunk[:-1]
-            if chunk.index('\n') != len(chunk)-1:
+            if chunk.index('\n') != len(chunk) - 1:
                 continue
 
             # Parse the line to look for one of our keywords.
@@ -301,8 +301,8 @@ class Preprocess(object):
             log.error("Empty .. style:: block found")
         try:
             styles = rson_loads(mystyles)
-        except ValueError as e: # Error parsing the JSON data
-                log.critical('Error parsing stylesheet "%s": %s'%\
+        except ValueError as e:  # Error parsing the JSON data
+                log.critical('Error parsing stylesheet "%s": %s' % \
                     (mystyles, str(e)))
         else:
             self.styles.setdefault('styles', {}).update(styles)
@@ -333,7 +333,7 @@ class Preprocess(object):
     keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
 
     # Generate the regular expression for parsing, and a split function using it.
-    blankline  = r'^([ \t]*\n)'
+    blankline = r'^([ \t]*\n)'
     singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
     comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
     expression = '(?:%s)' % '|'.join([blankline, singleword, comment])

@@ -55,10 +55,10 @@ class UMLHandler(genelements.NodeHandler, plantuml):
 
     def gather_elements(self, client, node, style):
         # Create image calling plantuml
-        tfile = tempfile.NamedTemporaryFile(dir='.', delete=False, suffix='.'+node['format'])
+        tfile = tempfile.NamedTemporaryFile(dir='.', delete=False, suffix='.' + node['format'])
         args = 'plantuml -pipe -charset utf-8'
         if node['format'].lower() == 'svg':
-            args+=' -tsvg'
+            args += ' -tsvg'
         client.to_unlink.append(tfile.name)
         try:
             p = subprocess.Popen(args.split(), stdout=tfile,
@@ -71,7 +71,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         serr = p.communicate(node['uml'].encode('utf-8'))[1]
         if p.returncode != 0:
             raise PlantUmlError('error while running plantuml\n\n' + serr)
-        
+
         # Add Image node with the right image
         return [MyImage(tfile.name, client=client)]
 
