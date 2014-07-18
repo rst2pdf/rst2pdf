@@ -21,7 +21,7 @@ class PdfReader(PdfDict):
     warned_bad_stream_start = False  # Use to keep from spewing warnings
     warned_bad_stream_end = False  # Use to keep from spewing warnings
 
-    def findindirect(self, objnum, gennum, PdfIndirect=PdfIndirect, int=int):
+    def findindirect(self, objnum, gennum):
         ''' Return a previously loaded indirect object, or create
             a placeholder for it.
         '''
@@ -59,25 +59,24 @@ class PdfReader(PdfDict):
         '''
         specialget = self.special.get
         result = PdfDict()
-        next = source.__next__
 
-        tok = next()
+        tok = next(source)
         while tok != b'>>':
             if not tok.startswith(b'/'):
                 source.exception('Expected PDF /name object')
             key = tok
-            value = next()
+            value = next(source)
             func = specialget(value)
             if func is not None:
                 value = func(source)
-                tok = next()
+                tok = next(source)
             else:
-                tok = next()
+                tok = next(source)
                 if value.isdigit() and tok.isdigit():
-                    if next() != b'R':
+                    if next(source) != b'R':
                         source.exception('Expected "R" following two integers')
                     value = self.findindirect(value, tok)
-                    tok = next()
+                    tok = next(source)
             result[key] = value
         return result
 
@@ -92,7 +91,7 @@ class PdfReader(PdfDict):
         '''
         source.exception('Unexpected delimiter')
 
-    def findstream(self, obj, tok, source, PdfDict=PdfDict, isinstance=isinstance, len=len):
+    def findstream(self, obj, tok, source):
         ''' Figure out if there is a content stream
             following an object, and return the start
             pointer to the content stream if so.
@@ -120,7 +119,7 @@ class PdfReader(PdfDict):
         return startstream
 
     def readstream(self, obj, startstream, source,
-                     streamending='endstream endobj'.split(), int=int):
+                     streamending='endstream endobj'.split()):
         fdata = source.fdata
         length = int(obj.Length)
         source.floc = target_endstream = startstream + length
@@ -222,8 +221,6 @@ class PdfReader(PdfDict):
         if startloc < 0:
             raise PdfParseError('Did not find "startxref" at end of file')
         source = PdfTokens(fdata, startloc, False)
-        tok = next(source)
-        assert tok == b'startxref'  # (We just checked this...)
         tableloc = source.next_default()
         if not tableloc.isdigit():
             source.exception('Expected table location')
@@ -232,27 +229,25 @@ class PdfReader(PdfDict):
         return startloc, PdfTokens(fdata, int(tableloc), True)
     findxref = staticmethod(findxref)
 
-    def parsexref(self, source, int=int, range=range):
+    def parsexref(self, source):
         ''' Parse (one of) the cross-reference file section(s)
         '''
-        fdata = source.fdata
         setdefault = source.obj_offsets.setdefault
         add_offset = source.all_offsets.append
-        next = source.__next__
-        tok = next()
+        tok = next(source)
         if tok != 'xref':
             source.exception('Expected "xref" keyword')
         start = source.floc
         try:
             while 1:
-                tok = next()
+                tok = next(source)
                 if tok == 'trailer':
                     return
                 startobj = int(tok)
-                for objnum in range(startobj, startobj + int(next())):
-                    offset = int(next())
-                    generation = int(next())
-                    inuse = next()
+                for objnum in range(startobj, startobj + int(next(source))):
+                    offset = int(next(source))
+                    generation = int(next(source))
+                    inuse = next(source)
                     if inuse == 'n':
                         if offset != 0:
                             setdefault((objnum, generation), offset)
