@@ -269,21 +269,21 @@ def build_sphinx(sphinxdir, outpdf):
     return errcode, result
 
 def build_txt(iprefix, outpdf, fastfork):
-        inpfname = iprefix + '.txt'
-        style = iprefix + '.style'
-        cli = iprefix + '.cli'
-        if os.path.isfile(cli):
-            f = open(cli)
-            extraargs = shlex.split(f.read())
-            f.close()
-        else:
-            extraargs = []
-        args = ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
-        if os.path.exists(style):
-            args.extend(('-s', os.path.basename(style)))
-        args.extend(('-o', outpdf))
-        os.chdir(dirname(inpfname))
-        return main(args)
+    inpfname = iprefix + '.txt'
+    style = iprefix + '.style'
+    cli = iprefix + '.cli'
+    if os.path.isfile(cli):
+        f = open(cli)
+        extraargs = shlex.split(f.read())
+        f.close()
+    else:
+        extraargs = []
+    args = ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
+    if os.path.exists(style):
+        args.extend(('-s', os.path.basename(style)))
+    args.extend(('-o', outpdf))
+    os.chdir(dirname(inpfname))
+    return main(args)
 
 def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
