@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -76,14 +76,14 @@ from reportlab.platypus import *
 from reportlab.platypus.doctemplate import IndexingFlowable
 from reportlab.platypus.flowables import _listWrapOn, _Container
 from reportlab.pdfbase.pdfdoc import PDFPageLabel
-#from reportlab.lib.enums import *
-#from reportlab.lib.units import *
-#from reportlab.lib.pagesizes import *
+# from reportlab.lib.enums import *
+# from reportlab.lib.units import *
+# from reportlab.lib.pagesizes import *
 
 from rst2pdf import counter_role, oddeven_directive
-from rst2pdf import pygments_code_block_directive # code-block directive
+from rst2pdf import pygments_code_block_directive  # code-block directive
 from rst2pdf import flowables
-from rst2pdf.flowables import * # our own reportlab flowables
+from rst2pdf.flowables import *  # our own reportlab flowables
 from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
 from rst2pdf.aafigure_directive import Aanode
@@ -107,11 +107,11 @@ def renderTemplate(tname, **context):
   context['escape'] = escape
   return templateEngine.render(tname, context)
 
-#def escape (x,y):
+# def escape (x,y):
 #    "Dummy escape function to test for excessive escaping"
 #    return x
 
-numberingstyles={ 'arabic': 'ARABIC',
+numberingstyles = { 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
                   'lowerroman': 'ROMAN_LOWER',
                   'alpha':  'LETTERS_UPPER',
@@ -139,7 +139,7 @@ class RstToPdf(object):
                  real_footnotes=False,
                  def_dpi=300,
                  show_frame=False,
-                 highlightlang='python', # this one is only used by Sphinx
+                 highlightlang='python',  # this one is only used by Sphinx
                  basedir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
@@ -152,13 +152,13 @@ class RstToPdf(object):
                  raw_html=False,
                  strip_elements_with_classes=[]
                  ):
-        self.debugLinesPdf=False
-        self.depth=0
-        self.breakside=breakside
-        self.first_page_on_right=first_page_on_right
-        self.blank_first_page=blank_first_page
-        self.splittables=splittables
-        self.basedir=basedir
+        self.debugLinesPdf = False
+        self.depth = 0
+        self.breakside = breakside
+        self.first_page_on_right = first_page_on_right
+        self.blank_first_page = blank_first_page
+        self.splittables = splittables
+        self.basedir = basedir
         self.language, self.docutils_language = get_language_available(
             language)[:2]
         self.doc_title = ""
@@ -167,8 +167,8 @@ class RstToPdf(object):
         self.doc_author = ""
         self.header = header
         self.footer = footer
-        self.custom_cover=custom_cover
-        self.floating_images=floating_images
+        self.custom_cover = custom_cover
+        self.floating_images = floating_images
         self.decoration = {'header': header,
                            'footer': footer,
                            'endnotes': [],
@@ -180,9 +180,9 @@ class RstToPdf(object):
             self.PATH = abspath(dirname(__file__))
 
 
-        self.font_path=font_path
-        self.style_path=style_path
-        self.def_dpi=def_dpi
+        self.font_path = font_path
+        self.style_path = style_path
+        self.def_dpi = def_dpi
         self.loadStyles(stylesheets)
 
         self.docutils_languages = {}
@@ -227,7 +227,7 @@ class RstToPdf(object):
         self.sphinx = sphinx
 
         if not self.styles.languages:
-            self.styles.languages=[]
+            self.styles.languages = []
             if self.language:
                 self.styles.languages.append(self.language)
                 self.styles['bodytext'].language = self.language
@@ -267,13 +267,13 @@ class RstToPdf(object):
                 self.styles['bodytext'].language,
                 ','.join(self.styles.languages))
 
-        self.pending_targets=[]
-        self.targets=[]
+        self.pending_targets = []
+        self.targets = []
 
-    def loadStyles(self, styleSheets=None ):
+    def loadStyles(self, styleSheets=None):
 
         if styleSheets is None:
-            styleSheets=[]
+            styleSheets = []
 
         self.styles = sty.StyleSheet(styleSheets,
                                      self.font_path,
@@ -332,22 +332,22 @@ class RstToPdf(object):
 
         try:
             s = self.styles[style]
-            r1=['<font face="%s" color="#%s" ' %
+            r1 = ['<font face="%s" color="#%s" ' %
                 (s.fontName, s.textColor.hexval()[2:])]
             bc = s.backColor
             if bc:
                 r1.append('backColor="#%s"' % bc.hexval()[2:])
             if s.trueFontSize:
-                r1.append('size="%d"'%s.fontSize)
+                r1.append('size="%d"' % s.fontSize)
             r1.append('>')
-            r2=['</font>']
+            r2 = ['</font>']
 
             if s.strike:
                 r1.append('<strike>')
-                r2.insert(0,'</strike>')
+                r2.insert(0, '</strike>')
             if s.underline:
                 r1.append('<u>')
-                r2.insert(0,'</u>')
+                r2.insert(0, '</u>')
 
             return [''.join(r1), ''.join(r2)]
         except KeyError:
@@ -362,13 +362,13 @@ class RstToPdf(object):
 
         try:
             s = self.styles[style]
-            r=['<font face="%s" color="#%s" ' %
+            r = ['<font face="%s" color="#%s" ' %
                 (s.fontName, s.textColor.hexval()[2:])]
             bc = s.backColor
             if bc:
                 r.append('backColor="#%s"' % bc.hexval()[2:])
             if s.trueFontSize:
-                r.append('size="%d"'%s.fontSize)
+                r.append('size="%d"' % s.fontSize)
             r.append('>')
             return ''.join(r)
         except KeyError:
@@ -384,7 +384,7 @@ class RstToPdf(object):
             style = self.styles.styleForNode(node)
         r = []
         if 'float' in style.__dict__:
-            style = None # Don't pass floating styles to children!
+            style = None  # Don't pass floating styles to children!
         for n in node.children:
             # import pdb; pdb.set_trace()
             r.extend(self.gen_elements(n, style=style))
@@ -446,17 +446,17 @@ class RstToPdf(object):
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
 
-        #from pudb import set_trace; set_trace()
+        # from pudb import set_trace; set_trace()
 
         for y in range(0, len(rows)):
-            for x in range(len(rows[y])-1, -1, -1):
+            for x in range(len(rows[y]) - 1, -1, -1):
                 cell = rows[y][x]
                 if isinstance(cell, str):
                     continue
                 if cell.get("morecols"):
                     for i in range(0, cell.get("morecols")):
-                        e=docutils.nodes.entry("")
-                        e["morerows"] = cell.get("morerows",0)
+                        e = docutils.nodes.entry("")
+                        e["morerows"] = cell.get("morerows", 0)
                         rows[y].insert(x + 1, e)
 
         for y in range(0, len(rows)):
@@ -498,7 +498,7 @@ class RstToPdf(object):
         """Preformatted section that gets horizontally compressed if needed."""
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
-        return BoundByWidth(2000*cm,
+        return BoundByWidth(2000 * cm,
             content=[XXPreformatted(text, style)],
             mode=self.fit_mode, style=style)
 
@@ -523,29 +523,29 @@ class RstToPdf(object):
                            'endnotes': [],
                            'extraflowables': []}
 
-        self.pending_targets=[]
-        self.targets=[]
+        self.pending_targets = []
+        self.targets = []
 
         self.debugLinesPdf = debugLinesPdf
 
         if doctree is None:
             if text is not None:
                 if self.language:
-                    settings_overrides={'language_code': self.docutils_language}
+                    settings_overrides = {'language_code': self.docutils_language}
                 else:
-                    settings_overrides={}
-                settings_overrides['strip_elements_with_classes']=self.strip_elements_with_classes
+                    settings_overrides = {}
+                settings_overrides['strip_elements_with_classes'] = self.strip_elements_with_classes
                 self.doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
                     settings_overrides=settings_overrides)
-                #import pdb; pdb.set_trace()
+                # import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return
         else:
             self.doctree = doctree
-            
+
         if self.numbered_links:
             # Transform all links to sections so they show numbers
             from .sectnumlinks import SectNumFolder, SectRefExpander
@@ -557,24 +557,24 @@ class RstToPdf(object):
             from docutils.transforms.universal import StripClassesAndElements
             sce = StripClassesAndElements(self.doctree)
             sce.apply()
-            
+
         elements = self.gen_elements(self.doctree)
 
         # Find cover template, save it in cover_file
         def find_cover(name):
-            cover_path=[self.basedir, os.path.expanduser('~/.rst2pdf'),
-                os.path.join(self.PATH,'templates')]
-            cover_file=None
+            cover_path = [self.basedir, os.path.expanduser('~/.rst2pdf'),
+                os.path.join(self.PATH, 'templates')]
+            cover_file = None
             for d in cover_path:
-                if os.path.exists(os.path.join(d,name)):
-                    cover_file=os.path.join(d,name)
+                if os.path.exists(os.path.join(d, name)):
+                    cover_file = os.path.join(d, name)
                     break
             return cover_file
 
-        cover_file=find_cover(self.custom_cover)
+        cover_file = find_cover(self.custom_cover)
         if cover_file is None:
-            log.error("Can't find cover template %s, using default"%self.custom_cover)
-            cover_file=find_cover('cover.tmpl')
+            log.error("Can't find cover template %s, using default" % self.custom_cover)
+            cover_file = find_cover('cover.tmpl')
 
         # Feed data to the template, get restructured text.
         cover_text = renderTemplate(tname=cover_file,
@@ -590,12 +590,12 @@ class RstToPdf(object):
                 publish_secondary_doctree(cover_text, self.doctree, source_path)) + elements
 
         if self.blank_first_page:
-            elements.insert(0,PageBreak())
+            elements.insert(0, PageBreak())
 
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
-            elements.append(MySpacer(1, 2*cm))
+            elements.append(MySpacer(1, 2 * cm))
             elements.append(Separation())
             for n in self.decoration['endnotes']:
                 t_style = TableStyle(self.styles['endnote'].commands)
@@ -604,16 +604,16 @@ class RstToPdf(object):
                     style=t_style, colWidths=colWidths))
 
         if self.floating_images:
-            #from pudb import set_trace; set_trace()
+            # from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
-            new_elem=[]
-            for i,e in enumerate(elements[::-1]):
+            new_elem = []
+            for i, e in enumerate(elements[::-1]):
                 if (isinstance (e, MyImage) and e.image.hAlign != 'CENTER'
                         and new_elem):
                     # This is an image where flowables should wrap
                     # around it
-                    popped=new_elem.pop()
-                    new_elem.append(ImageAndFlowables(e,popped,
+                    popped = new_elem.pop()
+                    new_elem.append(ImageAndFlowables(e, popped,
                         imageSide=e.image.hAlign.lower()))
                 else:
                     new_elem.append(e)
@@ -639,11 +639,11 @@ class RstToPdf(object):
             title=self.doc_title_clean,
             author=self.doc_author,
             pageCompression=compressed)
-        pdfdoc.client =self
+        pdfdoc.client = self
 
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
-            if not isinstance(elements[-1],UnhappyOnce):
+            if not isinstance(elements[-1], UnhappyOnce):
                 log.info ('Forcing second pass so Total pages work')
                 elements.append(UnhappyOnce())
         while True:
@@ -660,18 +660,18 @@ class RstToPdf(object):
 
                 if getattr(self, 'mustMultiBuild', False):
                     # Force a multibuild pass
-                    if not isinstance(elements[-1],UnhappyOnce):
+                    if not isinstance(elements[-1], UnhappyOnce):
                         log.info ('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
-                ## Rearrange footnotes if needed
+                # # Rearrange footnotes if needed
                 if self.real_footnotes:
-                    newStory=[]
-                    fnPile=[]
+                    newStory = []
+                    fnPile = []
                     for e in elements:
-                        if getattr(e,'isFootnote',False):
+                        if getattr(e, 'isFootnote', False):
                             # Add it to the pile
-                            #if not isinstance (e, MySpacer):
+                            # if not isinstance (e, MySpacer):
                             fnPile.append(e)
                         elif getattr(e, '_atTop', False) or isinstance(
                                 e, (UnhappyOnce, MyPageBreak)):
@@ -679,13 +679,13 @@ class RstToPdf(object):
                                 fnPile.insert(0, Separation())
                                 newStory.append(Sinker(fnPile))
                             newStory.append(e)
-                            fnPile=[]
+                            fnPile = []
                         else:
                             newStory.append(e)
-                    elements = newStory+fnPile
+                    elements = newStory + fnPile
                     for e in elements:
                         if hasattr(e, '_postponed'):
-                            delattr(e,'_postponed')
+                            delattr(e, '_postponed')
                     self.real_footnotes = False
                     continue
 
@@ -695,19 +695,19 @@ class RstToPdf(object):
             except ValueError as v:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
-                #if v.args and str(v.args[0]).startswith('format not resolved'):
-                    #missing=str(v.args[0]).split(' ')[-1]
-                    #log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
-                    #elements.append(Reference(missing))
-                    #for e in elements:
-                        #if hasattr(e,'_postponed'):
-                            #delattr(e,'_postponed')
-                #else:
-                    #raise
+                # if v.args and str(v.args[0]).startswith('format not resolved'):
+                    # missing=str(v.args[0]).split(' ')[-1]
+                    # log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
+                    # elements.append(Reference(missing))
+                    # for e in elements:
+                        # if hasattr(e,'_postponed'):
+                            # delattr(e,'_postponed')
+                # else:
+                    # raise
                 raise
 
-        #doc = SimpleDocTemplate("phello.pdf")
-        #doc.build(elements)
+        # doc = SimpleDocTemplate("phello.pdf")
+        # doc.build(elements)
         for fn in self.to_unlink:
             try:
                 os.unlink(fn)
@@ -730,13 +730,13 @@ class FancyDocTemplate(BaseDocTemplate):
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
 
-    def handle_flowable(self,flowables):
+    def handle_flowable(self, flowables):
         '''try to handle one flowable from the front of list flowables.'''
 
         # this method is copied from reportlab
 
-        #allow document a chance to look at, modify or ignore
-        #the object(s) about to be processed
+        # allow document a chance to look at, modify or ignore
+        # the object(s) about to be processed
         self.filterFlowables(flowables)
 
         self.handle_breakBefore(flowables)
@@ -746,75 +746,75 @@ class FancyDocTemplate(BaseDocTemplate):
         if f is None:
             return
 
-        if isinstance(f,PageBreak):
-            if isinstance(f,SlowPageBreak):
+        if isinstance(f, PageBreak):
+            if isinstance(f, SlowPageBreak):
                 self.handle_pageBreak(slow=1)
             else:
                 self.handle_pageBreak()
             self.afterFlowable(f)
-        elif isinstance(f,ActionFlowable):
+        elif isinstance(f, ActionFlowable):
             f.apply(self)
             self.afterFlowable(f)
         else:
             frame = self.frame
             canv = self.canv
-            #try to fit it then draw it
+            # try to fit it then draw it
             if frame.add(f, canv, trySplit=self.allowSplitting):
-                if not isinstance(f,FrameActionFlowable):
+                if not isinstance(f, FrameActionFlowable):
                     self._curPageFlowableCount += 1
                     self.afterFlowable(f)
-                doctemplate._addGeneratedContent(flowables,frame)
+                doctemplate._addGeneratedContent(flowables, frame)
             else:
                 if self.allowSplitting:
                     # see if this is a splittable thing
-                    S = frame.split(f,canv)
+                    S = frame.split(f, canv)
                     n = len(S)
                 else:
                     n = 0
                 if n:
-                    if not isinstance(S[0],(PageBreak,SlowPageBreak,ActionFlowable)):
+                    if not isinstance(S[0], (PageBreak, SlowPageBreak, ActionFlowable)):
                         if frame.add(S[0], canv, trySplit=0):
                             self._curPageFlowableCount += 1
                             self.afterFlowable(S[0])
-                            doctemplate._addGeneratedContent(flowables,frame)
+                            doctemplate._addGeneratedContent(flowables, frame)
                         else:
                             ident = "Splitting error(n==%d) on page %d in\n%s" % (
                                 n, self.page, self._fIdent(f, 60, frame))
-                            #leave to keep apart from the raise
+                            # leave to keep apart from the raise
                             raise LayoutError(ident)
                         del S[0]
-                    for i,f in enumerate(S):
-                        flowables.insert(i,f)   # put split flowables back on the list
+                    for i, f in enumerate(S):
+                        flowables.insert(i, f)  # put split flowables back on the list
                 else:
-                    if hasattr(f,'_postponed') and f._postponed > 4:
+                    if hasattr(f, '_postponed') and f._postponed > 4:
                         ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % (
-                            self._fIdent(f, 60, frame), doctemplate._fSizeString(f),self.page,
+                            self._fIdent(f, 60, frame), doctemplate._fSizeString(f), self.page,
                             self.frame.id, self.frame._aSpaceString(), self.pageTemplate.id)
-                        #leave to keep apart from the raise
+                        # leave to keep apart from the raise
                         raise LayoutError(ident)
                     # this ought to be cleared when they are finally drawn!
                     f._postponed = 1
                     mbe = getattr(self, '_multiBuildEdits', None)
                     if mbe:
                         mbe((delattr, f, '_postponed'))
-                    flowables.insert(0, f)           # put the flowable back
+                    flowables.insert(0, f)  # put the flowable back
                     self.handle_frameEnd()
 
 
-_counter=0
-_counterStyle='arabic'
+_counter = 0
+_counterStyle = 'arabic'
 
 class PageCounter(Flowable):
 
     def __init__(self, number=0, style='arabic'):
-        self.style=str(style).lower()
-        self.number=int(number)
+        self.style = str(style).lower()
+        self.number = int(number)
         Flowable.__init__(self)
 
     def wrap(self, availWidth, availHeight):
         global _counter, _counterStyle
-        _counterStyle=self.style
-        _counter=self.number
+        _counterStyle = self.style
+        _counter = self.number
         return (self.width, self.height)
 
     def drawOn(self, canvas, x, y, _sW):
@@ -831,16 +831,16 @@ def setPageCounter(counter=None, style=None):
     if style is not None:
         _counterStyle = style
 
-    if _counterStyle=='lowerroman':
-        ptext=toRoman(_counter).lower()
-    elif _counterStyle=='roman':
-        ptext=toRoman(_counter).upper()
-    elif _counterStyle=='alpha':
-        ptext=string.uppercase[_counter%26]
-    elif _counterStyle=='loweralpha':
-        ptext=string.lowercase[_counter%26]
+    if _counterStyle == 'lowerroman':
+        ptext = toRoman(_counter).lower()
+    elif _counterStyle == 'roman':
+        ptext = toRoman(_counter).upper()
+    elif _counterStyle == 'alpha':
+        ptext = string.uppercase[_counter % 26]
+    elif _counterStyle == 'loweralpha':
+        ptext = string.lowercase[_counter % 26]
     else:
-        ptext=str(_counter)
+        ptext = str(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -850,10 +850,10 @@ class UnhappyOnce(IndexingFlowable):
     '''An indexing flowable that is only unsatisfied once.
     If added to a story, it will make multiBuild run
     at least two passes. Useful for ###Total###'''
-    _unhappy=True
+    _unhappy = True
     def isSatisfied(self):
         if self._unhappy:
-            self._unhappy= False
+            self._unhappy = False
             return False
         return True
 
@@ -896,7 +896,7 @@ class HeaderOrFooter(object):
                         items.insert(0, Separation())
                     else:
                         items.append(Separation())
-                _, height =  _listWrapOn(items, pageobj.tw, canv)
+                _, height = _listWrapOn(items, pageobj.tw, canv)
         self.prepared = height and items
         return height
 
@@ -904,7 +904,7 @@ class HeaderOrFooter(object):
         """Put doc_title/page number/etc in text of header/footer."""
 
         # Make sure page counter is up to date
-        pnum=setPageCounter()
+        pnum = setPageCounter()
 
         def replace(text):
             if not isinstance(text, str):
@@ -918,7 +918,7 @@ class HeaderOrFooter(object):
             text = text.replace('###Page###', pnum)
             if '###Total###' in text:
                 text = text.replace('###Total###', str(self.totalpages))
-                self.client.mustMultiBuild=True
+                self.client.mustMultiBuild = True
             text = text.replace("###Title###", doc.title)
             text = text.replace("###Section###",
                 getattr(canv, 'sectName', ''))
@@ -927,20 +927,20 @@ class HeaderOrFooter(object):
             text = smartyPants(text, smarty)
             return text
 
-        for i,e  in enumerate(elems):
+        for i, e  in enumerate(elems):
             # TODO: implement a search/replace for arbitrary things
             if isinstance(e, Paragraph):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
             elif isinstance(e, DelayedTable):
-                data=deepcopy(e.data)
-                for r,row in enumerate(data):
-                    for c,cell in enumerate(row):
+                data = deepcopy(e.data)
+                for r, row in enumerate(data):
+                    for c, cell in enumerate(row):
                         if isinstance (cell, list):
-                            data[r][c]=self.replaceTokens(cell, canv, doc, smarty)
+                            data[r][c] = self.replaceTokens(cell, canv, doc, smarty)
                         else:
-                            row[r]=self.replaceTokens([cell,], canv, doc, smarty)[0]
-                elems[i]=DelayedTable(data, e._colWidths, e.style)
+                            row[r] = self.replaceTokens([cell, ], canv, doc, smarty)[0]
+                elems[i] = DelayedTable(data, e._colWidths, e.style)
 
             elif isinstance(e, BoundByWidth):
                 for index, item in enumerate(e.content):
@@ -949,9 +949,9 @@ class HeaderOrFooter(object):
                 elems[i] = e
 
             elif isinstance(e, OddEven):
-                odd=self.replaceTokens([e.odd,], canv, doc, smarty)[0]
-                even=self.replaceTokens([e.even,], canv, doc, smarty)[0]
-                elems[i]=OddEven(odd, even)
+                odd = self.replaceTokens([e.odd, ], canv, doc, smarty)[0]
+                even = self.replaceTokens([e.even, ], canv, doc, smarty)[0]
+                elems[i] = OddEven(odd, even)
         return elems
 
     def draw(self, pageobj, canv, doc, x, y, width, height):
@@ -995,7 +995,7 @@ class FancyPage(PageTemplate):
             on the page, using stylesheets to align and/or
             set the offset.
         '''
-        uri=self.template[which]
+        uri = self.template[which]
         info = self.image_cache.get(uri)
         if info is None:
             fname, _, _ = MyImage.split_uri(uri)
@@ -1004,10 +1004,10 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, kind = MyImage.size_for_node(dict(uri=uri, ), self.client)
+                w, h, kind = MyImage.size_for_node(dict(uri=uri,), self.client)
             except ValueError:
                 # Broken image, return arbitrary stuff
-                uri=missing
+                uri = missing
                 w, h, kind = 100, 100, 'direct'
 
             pw, ph = self.styles.pw, self.styles.ph
@@ -1019,7 +1019,7 @@ class FancyPage(PageTemplate):
                 x, y = 0, 0
                 sw, sh = pw, ph
             else:
-                log.error('Unknown background fit mode: %s'% self.client.background_fit_mode)
+                log.error('Unknown background fit mode: %s' % self.client.background_fit_mode)
                 # Do scale anyway
                 x, y = 0, 0
                 sw, sh = pw, ph
@@ -1030,8 +1030,8 @@ class FancyPage(PageTemplate):
         bg.drawOn(canv, x, y)
 
     def is_left(self, page_num):
-        """Default behavior is that the first page is on the left.   
-           
+        """Default behavior is that the first page is on the left.
+
            If the user has --first_page_on_right, the calculation is reversed.
         """
         val = page_num % 2 == 1
@@ -1055,10 +1055,10 @@ class FancyPage(PageTemplate):
         tname = canv.__dict__.get('templateName',
                                   self.styles.firstTemplate)
         self.template = self.styles.pageTemplates[tname]
-        canv.templateName=tname
+        canv.templateName = tname
 
         doct = getattr(canv, '_doctemplate', None)
-        canv._doctemplate = None # to make _listWrapOn work
+        canv._doctemplate = None  # to make _listWrapOn work
 
         if doc.page == 1:
             _counter = 0
@@ -1081,9 +1081,9 @@ class FancyPage(PageTemplate):
                     - self.fh - styles.ts - styles.bs
 
         # Adjust gutter margins
-        if self.is_left(doc.page): # Left page
+        if self.is_left(doc.page):  # Left page
             x1 = styles.lm
-        else: # Right page
+        else:  # Right page
             x1 = styles.lm + styles.gm
         y1 = styles.bm + self.fh + styles.bs
 
@@ -1102,18 +1102,18 @@ class FancyPage(PageTemplate):
         canv.firstSect = True
         canv._pagenum = doc.page
         for frame in self.frames:
-            frame._pagenum=doc.page
+            frame._pagenum = doc.page
 
     def afterDrawPage(self, canv, doc):
         """Draw header/footer."""
         # Adjust for gutter margin
-        canv.addPageLabel(canv._pageNumber-1,numberingstyles[_counterStyle],_counter)
+        canv.addPageLabel(canv._pageNumber - 1, numberingstyles[_counterStyle], _counter)
 
-        log.info('Page %s [%s]'%(_counter,doc.page))
-        if self.is_left(doc.page): # Left page
+        log.info('Page %s [%s]' % (_counter, doc.page))
+        if self.is_left(doc.page):  # Left page
             hx = self.hx
             fx = self.fx
-        else: # Right Page
+        else:  # Right Page
             hx = self.hx + self.styles.gm
             fx = self.fx + self.styles.gm
 
@@ -1146,15 +1146,15 @@ def parse_commandline():
     def_sheetpath = os.pathsep.join([expanduser(p) for p in
         config.getValue("general", "stylesheet_path", "").split(os.pathsep)])
     parser.add_option('--stylesheet-path', dest='stylepath',
-        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep, )*3),
+        metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
         default=def_sheetpath,
         help='A list of folders to search for stylesheets,'
-            ' separated using "%s". Default="%s"' %(os.pathsep, def_sheetpath))
+            ' separated using "%s". Default="%s"' % (os.pathsep, def_sheetpath))
 
     def_compressed = config.getValue("general", "compressed", False)
     parser.add_option('-c', '--compressed', dest='compressed',
         action="store_true", default=def_compressed,
-        help='Create a compressed PDF. Default=%s'%def_compressed)
+        help='Create a compressed PDF. Default=%s' % def_compressed)
 
     parser.add_option('--print-stylesheet', dest='printssheet',
         action="store_true", default=False,
@@ -1166,15 +1166,15 @@ def parse_commandline():
     def_fontpath = os.pathsep.join([expanduser(p) for p in
         config.getValue("general", "font_path", "").split(os.pathsep)])
     parser.add_option('--font-path', dest='fpath',
-        metavar='FOLDER%sFOLDER%s...%sFOLDER'%((os.pathsep, )*3),
+        metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
         default=def_fontpath,
         help='A list of folders to search for fonts, separated using "%s".'
             ' Default="%s"' % (os.pathsep, def_fontpath))
 
-    def_baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','',''])
+    def_baseurl = urlunparse(['file', os.getcwd() + os.sep, '', '', '', ''])
     parser.add_option('--baseurl', dest='baseurl', metavar='URL',
         default=def_baseurl,
-        help='The base URL for relative URLs. Default="%s"'%def_baseurl)
+        help='The base URL for relative URLs. Default="%s"' % def_baseurl)
 
     def_lang = config.getValue("general", "language", 'en_US')
     parser.add_option('-l', '--language', metavar='LANG',
@@ -1194,10 +1194,10 @@ def parse_commandline():
         help='Page footer if not specified in the document.'
             ' Default="%s"' % def_footer)
 
-    def_section_header_depth = config.getValue("general","section_header_depth",2)
+    def_section_header_depth = config.getValue("general", "section_header_depth", 2)
     parser.add_option('--section-header-depth', metavar='N',
         default=def_section_header_depth, dest='section_header_depth',
-        help = '''Sections up to this depth will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
+        help='''Sections up to this depth will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
 
     def_smartquotes = config.getValue("general", "smartquotes", "0")
     parser.add_option("--smart-quotes", metavar="VALUE",
@@ -1272,7 +1272,7 @@ def parse_commandline():
     def_dpi = config.getValue("general", "default_dpi", 300)
     parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
         default=def_dpi,
-        help='DPI for objects sized in pixels. Default=%d'%def_dpi)
+        help='DPI for objects sized in pixels. Default=%d' % def_dpi)
 
     parser.add_option('--show-frame-boundary', dest='show_frame',
         action='store_true', default=False,
@@ -1314,25 +1314,25 @@ def parse_commandline():
             " where we don't want the PDFs to change.")
 
     parser.add_option('-e', '--extension-module', dest='extensions', action="append", type="string",
-        default = ['vectorpdf'],
+        default=['vectorpdf'],
         help="Add a helper extension module to this invocation of rst2pdf "
              "(module must end in .py and be on the python path)")
 
     def_cover = config.getValue("general", "custom_cover", 'cover.tmpl')
     parser.add_option('--custom-cover', dest='custom_cover',
-        metavar='FILE', default= def_cover,
-        help='Template file used for the cover page. Default: %s'%def_cover)
+        metavar='FILE', default=def_cover,
+        help='Template file used for the cover page. Default: %s' % def_cover)
 
     def_floating_images = config.getValue("general", "floating_images", False)
     parser.add_option('--use-floating-images', action='store_true', default=def_floating_images,
-        help='Makes images with :align: attribute work more like in rst2html. Default: %s'%def_floating_images,
+        help='Makes images with :align: attribute work more like in rst2html. Default: %s' % def_floating_images,
         dest='floating_images')
 
     def_numbered_links = config.getValue("general", "numbered_links", False)
     parser.add_option('--use-numbered-links', action='store_true', default=def_numbered_links,
-        help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s'%def_numbered_links,
+        help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s' % def_numbered_links,
         dest='numbered_links')
-        
+
     parser.add_option('--strip-elements-with-class', action='append', dest='strip_elements_with_classes',
         metavar='CLASS', help='Remove elements with this CLASS from the output. Can be used multiple times.')
 
@@ -1391,13 +1391,13 @@ def main(_args=None):
 
     if args[0] == '-':
         infile = sys.stdin
-        options.basedir=os.getcwd()
+        options.basedir = os.getcwd()
     elif len(args) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
     else:
         filename = args[0]
-        options.basedir=os.path.dirname(os.path.abspath(filename))
+        options.basedir = os.path.dirname(os.path.abspath(filename))
         try:
             infile = open(filename)
         except IOError as e:
@@ -1410,7 +1410,7 @@ def main(_args=None):
         if outfile == '-':
             outfile = sys.stdout
             options.compressed = False
-            #we must stay quiet
+            # we must stay quiet
             log.setLevel(logging.CRITICAL)
     else:
         if filename:
@@ -1421,10 +1421,10 @@ def main(_args=None):
         else:
             outfile = sys.stdout
             options.compressed = False
-            #we must stay quiet
+            # we must stay quiet
             log.setLevel(logging.CRITICAL)
-            #/reportlab/pdfbase/pdfdoc.py output can
-            #be a callable (stringio, stdout ...)
+            # /reportlab/pdfbase/pdfdoc.py output can
+            # be a callable (stringio, stdout ...)
     options.outfile = outfile
 
     ssheet = []
@@ -1468,7 +1468,7 @@ def main(_args=None):
         breaklevel=int(options.breaklevel),
         baseurl=options.baseurl,
         fit_mode=options.fit_mode,
-        background_fit_mode = options.background_fit_mode,
+        background_fit_mode=options.background_fit_mode,
         smarty=str(options.smarty),
         font_path=options.fpath,
         style_path=options.stylepath,
@@ -1487,15 +1487,15 @@ def main(_args=None):
         floating_images=options.floating_images,
         numbered_links=options.numbered_links,
         raw_html=options.raw_html,
-	    section_header_depth=int(options.section_header_depth),
-	    strip_elements_with_classes=options.strip_elements_with_classes,
+            section_header_depth=int(options.section_header_depth),
+            strip_elements_with_classes=options.strip_elements_with_classes,
         ).createPdf(text=options.infile.read(),
                     source_path=options.infile.name,
                     output=options.outfile,
                     compressed=options.compressed)
 
 # Ugly hack that fixes Issue 335
-reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
+reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy(self)
 
 def patch_digester():
     ''' Patch digester so that we can get the same results when image
@@ -1517,7 +1517,7 @@ def patch_PDFDate():
         __PDFObject__ = True
         # gmt offset now suppported
         def __init__(self, invariant=True, dateFormatter=None):
-            now = (2000,0o1,0o1,00,00,00,0)
+            now = (2000, 0o1, 0o1, 00, 00, 00, 0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter
 
@@ -1525,8 +1525,8 @@ def patch_PDFDate():
             from time import timezone
             dhh, dmm = timezone // 3600, (timezone % 3600) % 60
             dfmt = self.dateFormatter or (
-                    lambda yyyy,mm,dd,hh,m,s:
-                        "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'" % (yyyy,mm,dd,hh,m,s,0,0))
+                    lambda yyyy, mm, dd, hh, m, s:
+                        "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'" % (yyyy, mm, dd, hh, m, s, 0, 0))
             return pdfdoc.format(pdfdoc.PDFString(dfmt(*self.date)), doc)
 
     pdfdoc.PDFDate = PDFDate
@@ -1635,7 +1635,7 @@ def monkeypatch():
 
     # By default, transparency is set, and by default, that changes PDF version
     # to 1.4 in RL 2.4.
-    pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1,3
+    pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1, 3
 
 monkeypatch()
 
@@ -1663,7 +1663,7 @@ def publish_secondary_doctree(text, main_tree, source_path):
     # End of Issue 322 hack
 
     return docutils.core.publish_doctree(text,
-        reader = Reader(), source_path=source_path)
+        reader=Reader(), source_path=source_path)
 
 
 if __name__ == "__main__":

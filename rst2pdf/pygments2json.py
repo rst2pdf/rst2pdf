@@ -46,7 +46,7 @@ def css2rl(css):
                 else:
                     style['fontName'] = 'stdMonoItalic'
         if style.get('textColor', None) is None:
-		style['textColor'] = 'black'
+            style['textColor'] = 'black'
         styles.append([sname, style])
 
     return json.dumps({'styles': styles}, indent=2)

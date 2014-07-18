@@ -12,7 +12,7 @@ def go():
                                   fontName='Helvetica',
                                   fontSize=10,
                                   leading=12)), ]
-	# This story has only Helvetica
+        # This story has only Helvetica
         # Story=cell
         # This one has helvetica and Times-Roman
         Story = cell + [Table([[cell]])]
