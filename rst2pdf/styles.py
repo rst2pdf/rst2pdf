@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 import os
 import sys
@@ -94,22 +94,22 @@ class StyleSheet(object):
         flist = [join(self.PATH, 'styles', 'styles.style'),
                 join(self.PATH, 'styles', 'default.style')] + flist
 
-        self.def_dpi=def_dpi
+        self.def_dpi = def_dpi
         if font_path is None:
-            font_path=[]
-        font_path+=['.', os.path.join(self.PATH, 'fonts')]
+            font_path = []
+        font_path += ['.', os.path.join(self.PATH, 'fonts')]
         self.FontSearchPath = list(map(os.path.expanduser, font_path))
 
         if style_path is None:
-            style_path=[]
-        style_path+=['.', os.path.join(self.PATH, 'styles'),
+            style_path = []
+        style_path += ['.', os.path.join(self.PATH, 'styles'),
                       '~/.rst2pdf/styles']
         self.StyleSearchPath = list(map(os.path.expanduser, style_path))
-        self.FontSearchPath=list(set(self.FontSearchPath))
-        self.StyleSearchPath=list(set(self.StyleSearchPath))
+        self.FontSearchPath = list(set(self.FontSearchPath))
+        self.StyleSearchPath = list(set(self.StyleSearchPath))
 
-        log.info('FontPath:%s'%self.FontSearchPath)
-        log.info('StylePath:%s'%self.StyleSearchPath)
+        log.info('FontPath:%s' % self.FontSearchPath)
+        log.info('StylePath:%s' % self.StyleSearchPath)
 
         findfonts.flist = self.FontSearchPath
         # Page width, height
@@ -126,11 +126,11 @@ class StyleSheet(object):
         self.rm = 0
         self.gm = 0
 
-        #text width
+        # text width
         self.tw = 0
 
         # Default emsize, later it will be the fontSize of the base style
-        self.emsize=10
+        self.emsize = 10
 
         self.languages = []
 
@@ -138,14 +138,14 @@ class StyleSheet(object):
 
         # Get pageSetup data from all stylessheets in order:
         self.ps = pagesizes.A4
-        self.page={}
+        self.page = {}
         for data, ssname in ssdata:
             page = data.get('pageSetup', {})
             if page:
                 self.page.update(page)
-                pgs=page.get('size', None)
-                if pgs: # A standard size
-                    pgs=pgs.upper()
+                pgs = page.get('size', None)
+                if pgs:  # A standard size
+                    pgs = pgs.upper()
                     if pgs in pagesizes.__dict__:
                         self.ps = list(pagesizes.__dict__[pgs])
                         self.psname = pgs
@@ -157,10 +157,10 @@ class StyleSheet(object):
                         if 'width' in self.page: del(self.page['width'])
                         if 'height' in self.page: del(self.page['height'])
                     else:
-                        log.critical('Unknown page size %s in stylesheet %s'%\
+                        log.critical('Unknown page size %s in stylesheet %s' % \
                             (page['size'], ssname))
                         continue
-                else: #A custom size
+                else:  # A custom size
                     if 'size'in self.page:
                         del(self.page['size'])
                     # The sizes are expressed in some unit.
@@ -267,14 +267,14 @@ class StyleSheet(object):
                     # The fonts will be registered with the file name,
                     # minus the extension.
 
-                    if font[0].lower().endswith('.ttf'): # A True Type font
+                    if font[0].lower().endswith('.ttf'):  # A True Type font
                         for variant in font:
-                            location=self.findFont(variant)
+                            location = self.findFont(variant)
                             pdfmetrics.registerFont(
                                 TTFont(str(variant.split('.')[0]),
                                 location))
-                            log.info('Registering font: %s from %s'%\
-                                (str(variant.split('.')[0]),location))
+                            log.info('Registering font: %s from %s' % \
+                                (str(variant.split('.')[0]), location))
                             self.embedded.append(str(variant.split('.')[0]))
 
                         # And map them all together
@@ -284,7 +284,7 @@ class StyleSheet(object):
                         addMapping(regular, 0, 1, italic)
                         addMapping(regular, 1, 0, bold)
                         addMapping(regular, 1, 1, bolditalic)
-                    else: # A Type 1 font
+                    else:  # A Type 1 font
                         # For type 1 fonts we require
                         # [FontName,regular,italic,bold,bolditalic]
                         # where each variant is a (pfbfile,afmfile) pair.
@@ -367,21 +367,21 @@ class StyleSheet(object):
                             suff = ["", "-Bold", "-Oblique", "-BoldOblique"]
                             if not fontList[0].startswith(style[key]):
                                 # We need to create font aliases, and use them
-                                basefname=style[key].split('-')[0]
+                                basefname = style[key].split('-')[0]
                                 for fname, aliasname in zip(
                                         fontList,
                                         [basefname + suffix for
                                         suffix in suff]):
                                     self.fontsAlias[aliasname] = fname
-                                style[key] = self.fontsAlias[basefname +\
+                                style[key] = self.fontsAlias[basefname + \
                                              suff[pos]]
                         else:
                             log.error("Unknown font: \"%s\","
                                       "replacing with Helvetica", style[key])
                             style[key] = "Helvetica"
 
-        #log.info('FontList: %s'%self.embedded)
-        #log.info('FontAlias: %s'%self.fontsAlias)
+        # log.info('FontList: %s'%self.embedded)
+        # log.info('FontAlias: %s'%self.fontsAlias)
         # Get styles from all stylesheets in order
         self.stylesheet = {}
         self.styles = []
@@ -405,13 +405,13 @@ class StyleSheet(object):
                     # Yet another workaround for the unicode bug in
                     # reportlab's toColor
                     elif key == 'commands':
-                        style[key]=validateCommands(style[key])
-                        #for command in style[key]:
-                            #c=command[0].upper()
-                            #if c=='ROWBACKGROUNDS':
-                                #command[3]=[str(c) for c in command[3]]
-                            #elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
-                                #command[4]=str(command[4])
+                        style[key] = validateCommands(style[key])
+                        # for command in style[key]:
+                            # c=command[0].upper()
+                            # if c=='ROWBACKGROUNDS':
+                                # command[3]=[str(c) for c in command[3]]
+                            # elif c in ['BOX','INNERGRID'] or c.startswith('LINE'):
+                                # command[4]=str(command[4])
 
                     # Handle alignment constants
                     elif key == 'alignment':
@@ -425,7 +425,7 @@ class StyleSheet(object):
                                           RIGHT=2,
                                           TA_JUSTIFY=4,
                                           JUSTIFY=4,
-                                          DECIMAL=8, )[style[key].upper()]
+                                          DECIMAL=8,)[style[key].upper()]
 
                     elif key == 'language':
                         if not style[key] in self.languages:
@@ -437,7 +437,7 @@ class StyleSheet(object):
                 # If the style already exists, update it
                 if skey in self.stylesheet:
                     self.stylesheet[skey].update(sdict)
-                else: # New style
+                else:  # New style
                     self.stylesheet[skey] = sdict
                     self.styles.append(sdict)
 
@@ -448,12 +448,12 @@ class StyleSheet(object):
         # same stylesheet? ;-)
         # Issue 339
 
-        styles2=[]
+        styles2 = []
         for s in self.styles:
             if not re.match("^[a-z](-?[a-z0-9]+)*$", s['name']):
                 s2 = copy(s)
                 s2['name'] = docutils.nodes.make_id(s['name'])
-                log.warning('%s is an invalid docutils class name, adding alias %s'%(s['name'], s2['name']))
+                log.warning('%s is an invalid docutils class name, adding alias %s' % (s['name'], s2['name']))
                 styles2.append(s2)
         self.styles.extend(styles2)
 
@@ -484,7 +484,7 @@ class StyleSheet(object):
             # Adjust fontsize units
             if 'fontSize' not in s:
                 s['fontSize'] = s['parent'].fontSize
-                s['trueFontSize']=None
+                s['trueFontSize'] = None
                 hasFS = False
             elif 'parent' in s:
                 # This means you can set the fontSize to
@@ -492,7 +492,7 @@ class StyleSheet(object):
                 # relative to the parent style
                 s['fontSize'] = self.adjustUnits(s['fontSize'],
                                     s['parent'].fontSize)
-                s['trueFontSize']=s['fontSize']
+                s['trueFontSize'] = s['fontSize']
             else:
                 # If s has no parent, it's base, which has
                 # an explicit point size by default and %
@@ -501,7 +501,7 @@ class StyleSheet(object):
 
             # If the leading is not set, but the size is, set it
             if 'leading' not in s and hasFS:
-                s['leading'] = 1.2*s['fontSize']
+                s['leading'] = 1.2 * s['fontSize']
 
             # If the bullet font size is not set, set it as fontSize
             if ('bulletFontSize' not in s) and ('fontSize' in s):
@@ -510,22 +510,22 @@ class StyleSheet(object):
             # If the borderPadding is a list and wordaxe <=0.3.2,
             # convert it to an integer. Workaround for Issue
             if 'borderPadding' in s and ((HAS_WORDAXE and \
-                    wordaxe_version <='wordaxe 0.3.2') or
-                    reportlab.Version < "2.3" )\
+                    wordaxe_version <= 'wordaxe 0.3.2') or
+                    reportlab.Version < "2.3")\
                     and isinstance(s['borderPadding'], list):
                 log.warning('Using a borderPadding list in '\
                     'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '\
-                    'supported, so it will probably look wrong'%s['name'])
-                s['borderPadding']=s['borderPadding'][0]
+                    'supported, so it will probably look wrong' % s['name'])
+                s['borderPadding'] = s['borderPadding'][0]
 
             self.StyleSheet.add(ParagraphStyle(**s))
 
 
-        self.emsize=self['base'].fontSize
+        self.emsize = self['base'].fontSize
         # Make stdFont the basefont, for Issue 65
         reportlab.rl_config.canvas_basefontname = self['base'].fontName
         # Make stdFont the default font for table cell styles (Issue 65)
-        reportlab.platypus.tables.CellStyle.fontname=self['base'].fontName
+        reportlab.platypus.tables.CellStyle.fontname = self['base'].fontName
 
 
     def __getitem__(self, key):
@@ -542,13 +542,13 @@ class StyleSheet(object):
         else:
             if key.startswith('pygments'):
                 log.info("Using undefined style '%s'"
-                            ", aliased to style 'code'."%key)
-                newst=copy(self.StyleSheet['code'])
+                            ", aliased to style 'code'." % key)
+                newst = copy(self.StyleSheet['code'])
             else:
                 log.warning("Using undefined style '%s'"
-                            ", aliased to style 'normal'."%key)
-                newst=copy(self.StyleSheet['normal'])
-            newst.name=key
+                            ", aliased to style 'normal'." % key)
+                newst = copy(self.StyleSheet['normal'])
+            newst.name = key
             self.StyleSheet.add(newst)
             return newst
 
@@ -592,11 +592,11 @@ class StyleSheet(object):
             if fname:
                 try:
                     return rson_loads(open(fname).read())
-                except ValueError as e: # Error parsing the JSON data
-                    log.critical('Error parsing stylesheet "%s": %s'%\
+                except ValueError as e:  # Error parsing the JSON data
+                    log.critical('Error parsing stylesheet "%s": %s' % \
                         (fname, str(e)))
-                except IOError as e: #Error opening the ssheet
-                    log.critical('Error opening stylesheet "%s": %s'%\
+                except IOError as e:  # Error opening the ssheet
+                    log.critical('Error opening stylesheet "%s": %s' % \
                         (fname, str(e)))
 
     def findStyle(self, fn):
@@ -618,11 +618,11 @@ class StyleSheet(object):
                         return tfn
             return None
         for ext in ['', '.style', '.json']:
-            result = innerFind(self.StyleSearchPath, fn+ext)
+            result = innerFind(self.StyleSearchPath, fn + ext)
             if result:
                 break
         if result is None:
-            log.warning("Can't find stylesheet %s"%fn)
+            log.warning("Can't find stylesheet %s" % fn)
         return result
 
     def findFont(self, fn):
@@ -646,8 +646,8 @@ class StyleSheet(object):
         example, it's sidebar.
 
         """
-        n= docutils.nodes
-        styles={n.sidebar: 'sidebar',
+        n = docutils.nodes
+        styles = {n.sidebar: 'sidebar',
                 n.figure: 'figure',
                 n.tgroup: 'table',
                 n.table: 'table',
@@ -692,8 +692,8 @@ class StyleSheet(object):
 
     def adjustFieldStyle(self):
         """Merges fieldname and fieldvalue styles into the field table style"""
-        tstyle=self.tstyles['field']
-        extras=self.pStyleToTStyle(self['fieldname'], 0, 0)+\
+        tstyle = self.tstyles['field']
+        extras = self.pStyleToTStyle(self['fieldname'], 0, 0) + \
                 self.pStyleToTStyle(self['fieldvalue'], 1, 0)
         for e in extras:
             tstyle.add(*e)
@@ -717,7 +717,7 @@ class StyleSheet(object):
                 del style.__dict__['borderColor']
             else:
                 bc = colors.black
-            bc=str(bc)
+            bc = str(bc)
             results.append(('BOX', (x, y), (x, y), bw, bc))
         if style.borderPadding:
             if isinstance(style.borderPadding, list):
@@ -777,14 +777,14 @@ class StyleSheet(object):
         '''
 
         validst = [x for x in styles if x in self.StyleSheet]
-        newname = '_'.join(['merged']+validst)
+        newname = '_'.join(['merged'] + validst)
         validst = [self[x] for x in validst]
-        newst=copy(validst[0])
+        newst = copy(validst[0])
 
         for st in validst[1:]:
             newst.__dict__.update(st.__dict__)
 
-        newst.name=newname
+        newst.name = newname
         return newst
 
 
@@ -803,31 +803,31 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
     """
 
-    if v is None or v=="":
+    if v is None or v == "":
         return None
 
     v = str(v)
     l = re.split('(-?[0-9\.]*)', v)
-    n=l[1]
-    u=default_unit
+    n = l[1]
+    u = default_unit
     if len(l) == 3 and l[2]:
-        u=l[2]
+        u = l[2]
     if u in units.__dict__:
         return float(n) * units.__dict__[u]
     else:
         if u == '%':
-            return float(n) * total/100
-        elif u=='px':
+            return float(n) * total / 100
+        elif u == 'px':
             return float(n) * units.inch / dpi
-        elif u=='pt':
+        elif u == 'pt':
             return float(n)
-        elif u=='in':
+        elif u == 'in':
             return float(n) * units.inch
-        elif u=='em':
+        elif u == 'em':
             return float(n) * emsize
-        elif u=='ex':
-            return float(n) * emsize /2
-        elif u=='pc': # picas!
+        elif u == 'ex':
+            return float(n) * emsize / 2
+        elif u == 'pc':  # picas!
             return float(n) * 12
         log.error('Unknown unit "%s"' % u)
     return float(n)
@@ -838,22 +838,22 @@ def formatColor(value, numeric=True):
     to something ReportLab will like."""
     if value in colors.__dict__:
         return colors.__dict__[value]
-    else: # Hopefully, a hex color:
+    else:  # Hopefully, a hex color:
         c = value.strip()
         if c[0] == '#':
             c = c[1:]
         while len(c) < 6:
             c = '0' + c
         if numeric:
-            r = int(c[:2], 16)/255.
-            g = int(c[2:4], 16)/255.
-            b = int(c[4:6], 16)/255.
+            r = int(c[:2], 16) / 255.
+            g = int(c[2:4], 16) / 255.
+            b = int(c[4:6], 16) / 255.
             if len(c) >= 8:
-                alpha = int(c[6:8], 16)/255.
+                alpha = int(c[6:8], 16) / 255.
                 return colors.Color(r, g, b, alpha=alpha)
             return colors.Color(r, g, b)
         else:
-            return str("#"+c)
+            return str("#" + c)
 
 # The values are:
 # * Minimum number of arguments
@@ -874,86 +874,86 @@ def formatColor(value, numeric=True):
 # Possible types of arguments are string, number, color, colorlist
 
 
-validCommands={
+validCommands = {
         # Cell format commands
-        "FONT":(1,3,"string","number","number"),
-        "FONTNAME":(1,1,"string"),
-        "FACE":(1,1,"string"),
-        "FONTSIZE":(1,1,"number"),
-        "SIZE":(1,1,"number"),
-        "LEADING":(1,1,"number"),
-        "TEXTCOLOR":(1,1,"color"),
-        "ALIGNMENT":(1,1,"string"),
-        "ALIGN":(1,1,"string"),
-        "LEFTPADDING":(1,1,"number"),
-        "RIGHTPADDING":(1,1,"number"),
-        "TOPPADDING":(1,1,"number"),
-        "BOTTOMPADDING":(1,1,"number"),
-        "BACKGROUND":(1,1,"color"),
-        "ROWBACKGROUNDS":(1,1,"colorlist"),
-        "COLBACKGROUNDS":(1,1,"colorlist"),
-        "VALIGN":(1,1,"string"),
+        "FONT":(1, 3, "string", "number", "number"),
+        "FONTNAME":(1, 1, "string"),
+        "FACE":(1, 1, "string"),
+        "FONTSIZE":(1, 1, "number"),
+        "SIZE":(1, 1, "number"),
+        "LEADING":(1, 1, "number"),
+        "TEXTCOLOR":(1, 1, "color"),
+        "ALIGNMENT":(1, 1, "string"),
+        "ALIGN":(1, 1, "string"),
+        "LEFTPADDING":(1, 1, "number"),
+        "RIGHTPADDING":(1, 1, "number"),
+        "TOPPADDING":(1, 1, "number"),
+        "BOTTOMPADDING":(1, 1, "number"),
+        "BACKGROUND":(1, 1, "color"),
+        "ROWBACKGROUNDS":(1, 1, "colorlist"),
+        "COLBACKGROUNDS":(1, 1, "colorlist"),
+        "VALIGN":(1, 1, "string"),
         # Line commands
-        "GRID":(2,2,"number","color"),
-        "BOX":(2,2,"number","color"),
-        "OUTLINE":(2,2,"number","color"),
-        "INNERGRID":(2,2,"number","color"),
-        "LINEBELOW":(2,2,"number","color"),
-        "LINEABOVE":(2,2,"number","color"),
-        "LINEBEFORE":(2,2,"number","color"),
-        "LINEAFTER":(2,2,"number","color"),
+        "GRID":(2, 2, "number", "color"),
+        "BOX":(2, 2, "number", "color"),
+        "OUTLINE":(2, 2, "number", "color"),
+        "INNERGRID":(2, 2, "number", "color"),
+        "LINEBELOW":(2, 2, "number", "color"),
+        "LINEABOVE":(2, 2, "number", "color"),
+        "LINEBEFORE":(2, 2, "number", "color"),
+        "LINEAFTER":(2, 2, "number", "color"),
         # You should NOT have span commands, man!
-        #"SPAN":(,,),
+        # "SPAN":(,,),
     }
 
 def validateCommands(commands):
     '''Given a list of reportlab's table commands, it fixes some common errors
     and/or removes commands that can't be fixed'''
 
-    fixed=[]
+    fixed = []
 
     for command in commands:
-        command[0]=command[0].upper()
-        flag=False
+        command[0] = command[0].upper()
+        flag = False
         # See if the command is valid
         if command[0] not in validCommands:
-            log.error('Unknown table command %s in stylesheet',command[0])
+            log.error('Unknown table command %s in stylesheet', command[0])
             continue
 
         # See if start and stop are the right types
-        if type(command[1]) not in (ListType,TupleType):
-            log.error('Start cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
-            flag=True
+        if not isinstance(command[1], (list, tuple)):
+            log.error('Start cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
+            flag = True
 
-        if type(command[2]) not in (ListType,TupleType):
-            log.error('Stop cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
-            flag=True
+        if not isinstance(command[2], (list, tuple)):
+            log.error('Stop cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
+            flag = True
 
         # See if the number of arguments is right
-        l=len(command)-3
-        if l>validCommands[command[0]][1]:
-            log.error('Too many arguments in table command: %s',command)
-            flag=True
+        l = len(command) - 3
+        if l > validCommands[command[0]][1]:
+            log.error('Too many arguments in table command: %s', command)
+            flag = True
 
-        if l<validCommands[command[0]][0]:
-            log.error('Too few arguments in table command: %s',command)
-            flag=True
+        if l < validCommands[command[0]][0]:
+            log.error('Too few arguments in table command: %s', command)
+            flag = True
 
         # Validate argument types
-        for pos,arg in enumerate(command[3:]):
-            typ = validCommands[command[0]][pos+2]
+        for pos, arg in enumerate(command[3:]):
+            typ = validCommands[command[0]][pos + 2]
             if typ == "color":
                 # Convert all 'string' colors to numeric
-                command[3+pos]=formatColor(arg)
+                command[3 + pos] = formatColor(arg)
             elif typ == "colorlist":
-                command[3+pos]=[ formatColor(c) for c in arg]
+                command[3 + pos] = [ formatColor(c) for c in arg]
             elif typ == "number":
                 pass
             elif typ == "string":
                 # Force string, not unicode
-                command[3+pos]=str(arg)
+                command[3 + pos] = str(arg)
             else:
-                log.error("This should never happen: wrong type %s",typ)
+                log.error("This should never happen: wrong type %s", typ)
 
         if not flag:
             fixed.append(command)
