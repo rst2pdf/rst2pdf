@@ -59,16 +59,16 @@ class PdfTokens(object):
     findparen = re.compile('(%s)[%s]*' % (p_literal_string_extend, whitespace), re.DOTALL).finditer
     splitname = re.compile(r'\#([0-9A-Fa-f]{2})').split
 
-    def _cacheobj(cache, obj, constructor):
+    def _cacheobj(self, obj, constructor):
         ''' This caching relies on the constructors
             returning something that will compare as
             equal to the original obj.  This works
             fine with our PDF objects.
         '''
-        result = cache.get(obj)
+        result = self.get(obj)
         if result is None:
             result = constructor(obj)
-            cache[result] = result
+            self[result] = result
         return result
 
     def fixname(self, cache, token, constructor, splitname=splitname, join=''.join, cacheobj=_cacheobj):
