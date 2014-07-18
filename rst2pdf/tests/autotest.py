@@ -22,7 +22,6 @@ import shlex
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
-from pythonpaths import setpythonpaths
 
 # md5 module deprecated, but hashlib not available in 2.4
 try:
@@ -59,14 +58,11 @@ class PathInfo(object):
     '''
     rootdir = os.path.realpath(dirname(__file__))
     bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
-    runfile = os.path.join(bindir, 'rst2pdf')
     inpdir = os.path.join(rootdir, 'input')
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
-    assert os.path.exists(runfile), 'Executable not found -- Use bootstrap.py and buildout to create it.'
-
-    runcmd = [runfile]
+    runcmd = ['rst2pdf']
 
     @classmethod
     def add_coverage(cls, keep=False):
@@ -382,8 +378,6 @@ def parse_commandline():
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
-    if not options.nopythonpath:
-        setpythonpaths(PathInfo.runfile, PathInfo.rootdir)
     fastfork = None
     do_sphinx = options.sphinx or options.everything
     do_text = options.everything or not options.sphinx
