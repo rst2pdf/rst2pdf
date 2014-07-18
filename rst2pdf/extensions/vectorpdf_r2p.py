@@ -11,9 +11,9 @@ try:
     from reportlab.platypus import Flowable
     from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-    import pdfrw
-    from pdfrw.toreportlab import makerl
-    from pdfrw.buildxobj import CacheXObj
+    from rst2pdf import pdfrw
+    from rst2pdf.pdfrw.toreportlab import makerl
+    from rst2pdf.pdfrw.buildxobj import CacheXObj
 
     from rst2pdf.log import log
     import rst2pdf.image
