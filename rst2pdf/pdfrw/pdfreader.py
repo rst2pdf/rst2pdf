@@ -42,8 +42,8 @@ class PdfReader(PdfDict):
         append = result.append
 
         for value in source:
-            if value in ']R':
-                if value == ']':
+            if value in b']R':
+                if value == b']':
                     break
                 generation = pop()
                 value = self.findindirect(pop(), generation)
@@ -62,8 +62,8 @@ class PdfReader(PdfDict):
         next = source.__next__
 
         tok = next()
-        while tok != '>>':
-            if not tok.startswith('/'):
+        while tok != b'>>':
+            if not tok.startswith(b'/'):
                 source.exception('Expected PDF /name object')
             key = tok
             value = next()
@@ -74,7 +74,7 @@ class PdfReader(PdfDict):
             else:
                 tok = next()
                 if value.isdigit() and tok.isdigit():
-                    if next() != 'R':
+                    if next() != b'R':
                         source.exception('Expected "R" following two integers')
                     value = self.findindirect(value, tok)
                     tok = next()
@@ -107,9 +107,9 @@ class PdfReader(PdfDict):
             source.exception("Expected 'endobj'%s token", isdict and " or 'stream'" or '')
         fdata = source.fdata
         startstream = source.tokstart + len(tok)
-        gotcr = fdata[startstream] == '\r'
+        gotcr = fdata[startstream] == b'\r'
         startstream += gotcr
-        gotlf = fdata[startstream] == '\n'
+        gotlf = fdata[startstream] == b'\n'
         startstream += gotlf
         if not gotlf:
             if not gotcr:
@@ -183,13 +183,13 @@ class PdfReader(PdfDict):
         ok = len(objid) == 3
         ok = ok and objid[0].isdigit() and int(objid[0]) == objnum
         ok = ok and objid[1].isdigit() and int(objid[1]) == gennum
-        ok = ok and objid[2] == 'obj'
+        ok = ok and objid[2] == b'obj'
         if not ok:
             source.floc = offset
             next(source)
-            objheader = '%d %d obj' % (objnum, gennum)
+            objheader = b'%d %d obj' % (objnum, gennum)
             fdata = source.fdata
-            offset2 = fdata.find('\n' + objheader) + 1 or fdata.find('\r' + objheader) + 1
+            offset2 = fdata.find(b'\n' + objheader) + 1 or fdata.find(b'\r' + objheader) + 1
             if not offset2 or fdata.find(fdata[offset2 - 1] + objheader, offset2) > 0:
                 source.warning("Expected indirect object '%s'" % objheader)
                 return None
@@ -211,23 +211,23 @@ class PdfReader(PdfDict):
         # add it to the list of streams if it starts a stream
         obj.indirect = key
         tok = next(source)
-        if tok != 'endobj':
+        if tok != b'endobj':
             self.readstream(obj, self.findstream(obj, tok, source), source)
         return obj
 
     def findxref(fdata):
         ''' Find the cross reference section at the end of a file
         '''
-        startloc = fdata.rfind('startxref')
+        startloc = fdata.rfind(b'startxref')
         if startloc < 0:
             raise PdfParseError('Did not find "startxref" at end of file')
         source = PdfTokens(fdata, startloc, False)
         tok = next(source)
-        assert tok == 'startxref'  # (We just checked this...)
+        assert tok == b'startxref'  # (We just checked this...)
         tableloc = source.next_default()
         if not tableloc.isdigit():
             source.exception('Expected table location')
-        if source.next_default().rstrip().lstrip('%') != 'EOF':
+        if source.next_default().rstrip().lstrip(b'%') != b'EOF':
             source.exception('Expected %%EOF')
         return startloc, PdfTokens(fdata, int(tableloc), True)
     findxref = staticmethod(findxref)
@@ -334,8 +334,8 @@ class PdfReader(PdfDict):
                         raise PdfParseError('Could not read PDF file %s' % fname)
 
             assert fdata is not None
-            if not fdata.startswith('%PDF-'):
-                startloc = fdata.find('%PDF-')
+            if not fdata.startswith(b'%PDF-'):
+                startloc = fdata.find(b'%PDF-')
                 if startloc >= 0:
                     log.warning('PDF header not at beginning of file')
                 else:
@@ -344,23 +344,23 @@ class PdfReader(PdfDict):
                         raise PdfParseError('Empty PDF file!')
                     raise PdfParseError('Invalid PDF header: %s' % repr(lines[0]))
 
-            endloc = fdata.rfind('%EOF')
+            endloc = fdata.rfind(b'%EOF')
             if endloc < 0:
                 raise PdfParseError('EOF mark not found: %s' % repr(fdata[-20:]))
             endloc += 6
             junk = fdata[endloc:]
             fdata = fdata[:endloc]
-            if junk.rstrip('\00').strip():
+            if junk.rstrip(b'\00').strip():
                 log.warning('Extra data at end of file')
 
             private = self.private
             private.indirect_objects = {}
             private.deferred_objects = set()
-            private.special = {'<<': self.readdict,
-                               '[': self.readarray,
-                               'endobj': self.empty_obj,
+            private.special = {b'<<': self.readdict,
+                               b'[': self.readarray,
+                               b'endobj': self.empty_obj,
                                }
-            for tok in r'\ ( ) < > { } ] >> %'.split():
+            for tok in b'\ ( ) < > { } ] >> %'.split():
                 self.special[tok] = self.badtoken
 
 
@@ -373,13 +373,13 @@ class PdfReader(PdfDict):
                 # Loop through all the cross-reference tables
                 self.parsexref(source)
                 tok = next(source)
-                if tok != '<<':
+                if tok != b'<<':
                     source.exception('Expected "<<" starting catalog')
 
                 newdict = self.readdict(source)
 
                 token = next(source)
-                if token != 'startxref' and not xref_table_list:
+                if token != b'startxref' and not xref_table_list:
                     source.warning('Expected "startxref" at end of xref table')
 
                 # Loop if any previously-written tables.
