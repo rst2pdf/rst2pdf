@@ -43,7 +43,7 @@ try:
 except ImportError:
     pass
 
-from log import log
+from .log import log
 
 
 # Customisation
@@ -88,7 +88,7 @@ class DocutilsInterface(object):
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
-            if self.language and unicode(self.language).lower() <> 'none':
+            if self.language and str(self.language).lower() != 'none':
                 lexer = get_lexer_by_name(self.language.lower(),
                                         **self.custom_args
                                         )
@@ -105,7 +105,7 @@ class DocutilsInterface(object):
         """join subsequent tokens of same token-type
         """
         tokens = iter(tokens)
-        (lasttype, lastval) = tokens.next()
+        (lasttype, lastval) = next(tokens)
         for ttype, value in tokens:
             if ttype is lasttype:
                 lastval += value
@@ -145,7 +145,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             content = codecs.open(options['include'], 'r', encoding).read().rstrip()
         except (IOError, UnicodeError): # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
-            content = u''
+            content = ''
         line_offset = 0
         if content:
             # here we define the start-at and end-at options
@@ -173,7 +173,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                     # in '\r\n'.
                     # Going with .splitlines() seems more appropriate
                     # but needs a few more changes.
-                    if char == u'\n' or char == u'\r':
+                    if char == '\n' or char == '\r':
                         break
                     after_index -= 1
                 # patch mmueller end
@@ -213,7 +213,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     else:
         line_offset = options.get('linenos_offset')
-        content = u'\n'.join(content)
+        content = '\n'.join(content)
 
     if 'tabsize' in options:
         tabw = options['tabsize']
@@ -245,7 +245,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             # The first piece, pass as-is
             code_block += nodes.Text(values[0], values[0])
             # On the second and later pieces, insert \n and linenos
-            linenos = range(lineno, lineno + len(values))
+            linenos = list(range(lineno, lineno + len(values)))
             for chunk, ln in zip(values, linenos)[1:]:
                 if ln <= total_lines:
                     code_block += nodes.inline(fstr % ln, fstr % ln, classes=['linenumber'])

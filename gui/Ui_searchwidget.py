@@ -44,7 +44,7 @@ class Ui_Form(object):
         self.next.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.next.setAutoRaise(True)
         self.next.setObjectName("next")
-        self.horizontalLayout.addWidget(self.next)
+        self.horizontalLayout.addWidget(self.__next__)
         self.matchCase = QtGui.QCheckBox(Form)
         self.matchCase.setObjectName("matchCase")
         self.horizontalLayout.addWidget(self.matchCase)

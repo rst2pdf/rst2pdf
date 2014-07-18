@@ -63,7 +63,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         try:
             p = subprocess.Popen(args.split(), stdout=tfile,
                                  stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        except OSError, err:
+        except OSError as err:
             if err.errno != errno.ENOENT:
                 raise
             raise PlantUmlError('plantuml command %r cannot be run'

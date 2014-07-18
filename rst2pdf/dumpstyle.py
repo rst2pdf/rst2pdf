@@ -9,7 +9,7 @@
 import sys
 import os
 
-from rson import loads as rloads
+from .rson import loads as rloads
 from json import loads as jloads
 
 def dumps(obj, forcestyledict=True):
@@ -68,7 +68,7 @@ def dumps(obj, forcestyledict=True):
         if not obj:
             result.append('{}')
             return
-        obj = sorted(obj.iteritems())
+        obj = sorted(obj.items())
         multiline = indent and ( len(obj) > 2 or
                     len(obj) == 2 and (
                          isinstance(obj[0][-1], (list, dict)) or
@@ -92,10 +92,10 @@ def dumps(obj, forcestyledict=True):
     def donone(result, obj, indent):
         result.append('null')
 
-    dumpfuncs = {float: dofloat, int: doint, basestring: dostr,
+    dumpfuncs = {float: dofloat, int: doint, str: dostr,
                      list: dolist, dict: dodict, type(None): donone}
 
-    dumpfuncs = dumpfuncs.items()
+    dumpfuncs = list(dumpfuncs.items())
 
     def dumprecurse(result, obj, indent='\n', indentnow=True):
         if indentnow:
@@ -144,7 +144,7 @@ def fixstyle(obj):
 def convert(srcname):
     ''' Convert a single file from .json to .style
     '''
-    print srcname
+    print(srcname)
     sstr = open(srcname, 'rb').read()
     sdata = fixstyle(jloads(sstr))
     dstr = dumps(sdata)

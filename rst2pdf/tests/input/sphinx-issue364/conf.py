@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'sphinx'
-copyright = u'2009, RA'
+project = 'sphinx'
+copyright = '2009, RA'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +172,8 @@ htmlhelp_basename = 'sphinx'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'sphinx.tex', u'sphinx Documentation', u'RA', 'manual'),
-  ('index2', 'sphinx2.tex', u'sphinx2 Documentation', u'RA', 'manual'),
+  ('index', 'sphinx.tex', 'sphinx Documentation', 'RA', 'manual'),
+  ('index2', 'sphinx2.tex', 'sphinx2 Documentation', 'RA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -196,11 +196,11 @@ latex_documents = [
 # -- Options for PDF output --------------------------------------------------
 
 pdf_documents = [
-    ('index', u'index', u'test1', u'C.G.',
+    ('index', 'index', 'test1', 'C.G.',
      dict(pdf_use_index=True,
           pdf_use_modindex=True,
           pdf_use_coverpage=True)),
-    ('index2', u'index2', u'test2', u'C.G.',
+    ('index2', 'index2', 'test2', 'C.G.',
      dict(pdf_use_index=False,
           pdf_use_modindex=False,
           pdf_use_coverpage=False,

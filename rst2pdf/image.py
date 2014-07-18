@@ -6,14 +6,14 @@ import sys
 import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
-from log import log, nodeid
+from .log import log, nodeid
 from reportlab.lib.units import *
 import glob
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
-from opt_imports import LazyImports
+from .opt_imports import LazyImports
 
-from svgimage import SVGImage
+from .svgimage import SVGImage
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
@@ -78,7 +78,7 @@ class MyImage (Flowable):
 
         if filename.split("://")[0].lower() in ('http','ftp','https'):
             try:
-                filename2, _ = urllib.urlretrieve(filename)
+                filename2, _ = urllib.request.urlretrieve(filename)
                 if filename != filename2:
                     client.to_unlink.append(filename2)
                     filename = filename2
@@ -283,7 +283,7 @@ class MyImage (Flowable):
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             uri = os.path.join(client.basedir,uri)
         else:
-            uri, _ = urllib.urlretrieve(uri)
+            uri, _ = urllib.request.urlretrieve(uri)
             client.to_unlink.append(uri)
 
         srcinfo = client, uri

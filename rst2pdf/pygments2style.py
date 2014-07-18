@@ -6,7 +6,7 @@ Creates a rst2pdf stylesheet for each pygments style.
 
 import sys
 import os
-import dumpstyle
+from . import dumpstyle
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
 

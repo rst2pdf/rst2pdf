@@ -130,7 +130,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=unicode, isinstance=isinstance):
+    def factory(cls, len=len, iter=iter, str=str, isinstance=isinstance):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -139,7 +139,7 @@ class Tokenizer(list):
             self.client = client
 
             # Deal with 8 bit bytes for now
-            if isinstance(source, unicode):
+            if isinstance(source, str):
                 source = source.encode('utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
@@ -153,7 +153,7 @@ class Tokenizer(list):
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
-            next = sourceiter.next
+            next = sourceiter.__next__
             offset -= len(next())
 
             # Strip comment from first line
@@ -239,7 +239,7 @@ def make_hashable(what):
         return what
     except TypeError:
         if isinstance(what, dict):
-            return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+            return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
 class BaseObjects(object):
@@ -341,7 +341,7 @@ class Dispatcher(object):
             if not kw:
                 return default_loads(s)
 
-            key = tuple(sorted(kw.iteritems()))
+            key = tuple(sorted(kw.items()))
             func = cached(key)
             if func is None:
                 # Begin some real ugliness here -- just modify our instance to
@@ -360,20 +360,20 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, unicode=unicode: unicode(s, 'utf-8'))
-    parse_encoded_chr = unichr
-    parse_join_str = u''.join
+          lambda token, s, str=str: str(s, 'utf-8'))
+    parse_encoded_chr = chr
+    parse_join_str = ''.join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
-    quoted_mapper = { '\\\\' : u'\\',
-               r'\"' : u'"',
-               r'\/' : u'/',
-               r'\b' : u'\b',
-               r'\f' : u'\f',
-               r'\n' : u'\n',
-               r'\r' : u'\r',
-               r'\t' : u'\t'}.get
+    quoted_mapper = { '\\\\' : '\\',
+               r'\"' : '"',
+               r'\/' : '/',
+               r'\b' : '\b',
+               r'\f' : '\f',
+               r'\n' : '\n',
+               r'\r' : '\r',
+               r'\t' : '\t'}.get
 
     def quoted_parse_factory(self, int=int, iter=iter, len=len):
         quoted_splitter = self.quoted_splitter
@@ -404,7 +404,7 @@ class QuotedToken(object):
                 result = [result]
                 append = result.append
                 s = iter(s)
-                next = s.next
+                next = s.__next__
                 next()
                 for special in s:
                     nonmatch = next()
@@ -489,7 +489,7 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+        lambda token, str=str: str(token[2], 'utf-8'))
 
     special_strings = dict(true = True, false = False, null = None)
 
@@ -635,7 +635,7 @@ class RsonParser(object):
     def client_info(self, parse_locals):
         pass
 
-    def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
+    def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, str=str):
 
         Tokenizer = self.Tokenizer
         tokenizer = Tokenizer.factory()
@@ -703,7 +703,7 @@ class RsonParser(object):
                         error('Unexpected trailing comma', token)
                     break
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
-                if disallow_nonstring_keys and not isinstance(key, basestring):
+                if disallow_nonstring_keys and not isinstance(key, str):
                     error('Non-string key %s not supported' % repr(key), token)
                 token = next()
                 t0 = token[1]
@@ -844,7 +844,7 @@ class RsonParser(object):
                 error("rson client's object handlers do not support chained objects", token)
             if disallow_nonstring_keys:
                 for key in entry[:-1]:
-                    if not isinstance(key, basestring):
+                    if not isinstance(key, str):
                         error('Non-string key %s not supported' % repr(key), token)
             mydict.append(entry)
             return token
@@ -894,7 +894,7 @@ class RsonParser(object):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
-            next = tokens.next
+            next = tokens.__next__
             value, token = parse_recurse([next()], next, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)

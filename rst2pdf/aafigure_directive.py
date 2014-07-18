@@ -31,8 +31,8 @@ from docutils.parsers.rst import directives
 from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
-from opt_imports import aafigure
-from log import log
+from .opt_imports import aafigure
+from .log import log
 
 WARNED=False
 

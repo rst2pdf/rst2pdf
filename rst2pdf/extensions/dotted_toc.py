@@ -134,9 +134,9 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             style.textColor = self.linkColor
             key = self.refid_lut.get((level, text, pageNum), None)
             if key:
-                if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
-                text = u'<a href="#%s">%s</a>' % (key, text)
+                if not isinstance(text, str):
+                    text = str(text, 'utf-8')
+                text = '<a href="#%s">%s</a>' % (key, text)
 
             para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
             end_info.append((style, pageNum, key, dot))

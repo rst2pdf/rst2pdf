@@ -12,7 +12,7 @@ from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
 
-from opt_imports import Paragraph, NullDraw
+from .opt_imports import Paragraph, NullDraw
 
 from reportlab.lib.units import *
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
@@ -20,8 +20,8 @@ from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
-import styles
-from log import log
+from . import styles
+from .log import log
 
 import re
 from xml.sax.saxutils import unescape, escape
@@ -227,7 +227,7 @@ class DelayedTable(Table):
             kwargs['total']=w
             return styles.adjustUnits(*args, **kwargs)
         #adjust=functools.partial(styles.adjustUnits, total=w)
-        self.colWidths=map(adjust, self._colWidths)
+        self.colWidths=list(map(adjust, self._colWidths))
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows,
@@ -252,7 +252,7 @@ class DelayedTable(Table):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0])[:180])
+                str(self.data[0])[:180])
 
 def tablepadding(padding):
     if not isinstance(padding,(list,tuple)):
@@ -264,7 +264,7 @@ def tablepadding(padding):
 
 class SplitTable(DelayedTable):
     def __init__(self, data, colWidths, style, padding=3):
-        if len(data) <>1 or len(data[0]) <>2:
+        if len(data) !=1 or len(data[0]) !=2:
             log.error('SplitTable can only be 1 row and two columns!')
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
@@ -279,7 +279,7 @@ class SplitTable(DelayedTable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0][1])[:180])
+                str(self.data[0][1])[:180])
 
     def split(self,w,h):
         _w,_h=self.wrap(w, h)
@@ -716,7 +716,7 @@ class BoundByWidth(Flowable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode([c.identity() for c in self.content])[:80])
+                str([c.identity() for c in self.content])[:80])
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
@@ -728,7 +728,7 @@ class BoundByWidth(Flowable):
         maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         if self.width > maxWidth:
-            if self.mode <> 'shrink':
+            if self.mode != 'shrink':
                 self.scale = 1.0
                 log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                     self.width,maxWidth,self.identity())
@@ -808,7 +808,7 @@ class BoxedContainer(BoundByWidth):
         self.mode = mode
 
     def identity(self, maxLen=None):
-        return unicode([u"BoxedContainer containing: ",
+        return str(["BoxedContainer containing: ",
             [c.identity() for c in self.content]])[:80]
 
     def draw(self):
@@ -913,7 +913,7 @@ if reportlab.Version == '2.1':
         xs.link = None
 
     # Look behind you! A three-headed monkey!
-    pla_para._do_post_text.func_code = _do_post_text.func_code
+    pla_para._do_post_text.__code__ = _do_post_text.__code__
     ############### End of the ugly
 
 class MyTableOfContents(TableOfContents):
@@ -996,10 +996,10 @@ class MyTableOfContents(TableOfContents):
                 leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text, pageNum), None)
             if label:
-                pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
-                post = u'</a>'
-                if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
+                pre = '<a href="%s" color="%s">' % (label, self.linkColor)
+                post = '</a>'
+                if not isinstance(text, str):
+                    text = str(text, 'utf-8')
                 text = pre + text + post
             else:
                 pre = ''
@@ -1035,7 +1035,7 @@ class MyTableOfContents(TableOfContents):
                 return False
 
             log.info('TOC entries that moved in this pass:')
-            for i in xrange(len(self._entries)):
+            for i in range(len(self._entries)):
                 if self._entries[i] != self._lastEntries[i]:
                     log.info(str(self._entries[i]))
                     log.info(str(self._lastEntries[i]))

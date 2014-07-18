@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'issue252'
-copyright = u'2009, RA'
+project = 'issue252'
+copyright = '2009, RA'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -175,8 +175,8 @@ htmlhelp_basename = 'issue252doc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'issue252.tex', u'issue252 Documentation',
-   u'RA', 'manual'),
+  ('index', 'issue252.tex', 'issue252 Documentation',
+   'RA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -201,7 +201,7 @@ latex_documents = [
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
 pdf_documents = [ 
-    ('index', u'MyProject', u'My Project', u'Author Name'),
+    ('index', 'MyProject', 'My Project', 'Author Name'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:

@@ -6,10 +6,10 @@
 
 import shlex
 
-from flowables import *
+from .flowables import *
 import rst2pdf.flowables
-from styles import adjustUnits
-from log import log, nodeid
+from .styles import adjustUnits
+from .log import log, nodeid
 
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.
@@ -138,7 +138,7 @@ if HAS_XHTML2PDF:
         Collect all CSS definitions
         """
 
-        data = u""
+        data = ""
         if node.nodeType == Node.TEXT_NODE and collect:
             data = node.data
 
@@ -148,7 +148,7 @@ if HAS_XHTML2PDF:
             # print name, node.attributes.items()
             if name in ("style", "link"):
                 attr = pisaGetAttributes(context, name, node.attributes)
-                print " ", attr
+                print(" ", attr)
                 media = [x.strip() for x in attr.media.lower().split(",") if x.strip()]
                 # print repr(media)
 
@@ -162,7 +162,7 @@ if HAS_XHTML2PDF:
                         for node in node.childNodes:
                             data += pisaPreLoop2(node, context, collect=True)
                         #context.addCSS(data)
-                        return u""
+                        return ""
                         #collect = True
 
                     if name == "link" and attr.href and attr.rel.lower() == "stylesheet":

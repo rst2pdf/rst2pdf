@@ -63,7 +63,7 @@ class PDFDevice:
 		self.pdf.saveState()
 
 	def Concat(self, trafo):
-		apply(self.pdf.transform, trafo.coeff())
+		self.pdf.transform(*trafo.coeff())
 
 	def Translate(self, x, y = None):
 		if y is None:
@@ -122,7 +122,7 @@ class PDFDevice:
 
 	def FillPolygon(self, pts):
 		path = self.pdf.beginPath()
-		apply(path.moveTo, pts[0])
+		path.moveTo(*pts[0])
 		for x, y in pts:
 			path.lineTo(x, y)
 		path.close()
@@ -153,14 +153,14 @@ class PDFGenSaver:
 		#
 		# The code here assumes that the canvas is already setup
 		# properly.
-		if options.has_key("pdfgen_canvas"):
+		if "pdfgen_canvas" in options:
 			self.pdf = options["pdfgen_canvas"]
 		else:
 			self.pdf = reportlab.pdfgen.canvas.Canvas(file)
 			self.pdf.setPageSize(document.PageSize())
 
 	def close(self):
-		if not self.options.has_key("pdfgen_canvas"):
+		if "pdfgen_canvas" not in self.options:
 			self.pdf.save()
 
 	def set_properties(self, properties, bounding_rect = None):
@@ -208,7 +208,7 @@ class PDFGenSaver:
 		_sketch.fill_axial_gradient(image.im, pattern.Gradient().Colors(), 
 									0, border, 0, 200 - border)
 		self.pdf.saveState()
-		apply(self.pdf.transform, trafo.coeff())
+		self.pdf.transform(*trafo.coeff())
 		self.pdf.drawInlineImage(image, (left - right) / 2, (bottom - top) / 2, 
 								 right - left, top - bottom)
 		self.pdf.restoreState()
@@ -286,7 +286,7 @@ class PDFGenSaver:
 
 	def raster_image(self, object):
 		self.pdf.saveState()
-		apply(self.pdf.transform, object.Trafo().coeff())
+		self.pdf.transform(*object.Trafo().coeff())
 		self.pdf.drawInlineImage(object.Data().Image(), 0, 0)
 		self.pdf.restoreState()
 
@@ -305,7 +305,7 @@ class PDFGenSaver:
 		elif clip:
 			pdftext.setTextRenderMode(4)
 		pdftext.setFont(fontname, properties.font_size)
-		apply(pdftext.setTextTransform, object.FullTrafo().coeff())
+		pdftext.setTextTransform(*object.FullTrafo().coeff())
 		pdftext.textOut(object.Text())
 		self.pdf.drawText(pdftext)
 		if active_fill:
@@ -331,7 +331,7 @@ class PDFGenSaver:
 		trafos = object.CharacterTransformations()
 		text = object.Text()
 		for i in range(len(trafos)):
-			apply(pdftext.setTextTransform, trafos[i].coeff())
+			pdftext.setTextTransform(*trafos[i].coeff())
 			pdftext.textOut(text[i])
 		self.pdf.drawText(pdftext)
 		if active_fill:

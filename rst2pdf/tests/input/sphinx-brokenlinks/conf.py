@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'sphinxmarkup'
-copyright = u'2009, RA'
+project = 'sphinxmarkup'
+copyright = '2009, RA'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +172,8 @@ htmlhelp_basename = 'sphinxmarkup'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'doc1.tex', u'doc1', u'RA', 'manual'),
-  ('index2', u'doc2.tex', u'doc2', u'RA', 'manual'),
+  ('index', 'doc1.tex', 'doc1', 'RA', 'manual'),
+  ('index2', 'doc2.tex', 'doc2', 'RA', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -198,8 +198,8 @@ latex_appendices = ['appendix']
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
 pdf_documents = [ 
-    ('index', u'doc1', u'doc1', u'Author Name'),
-    ('index2', 'doc2', '', u'Author Name'),
+    ('index', 'doc1', 'doc1', 'Author Name'),
+    ('index2', 'doc2', '', 'Author Name'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:

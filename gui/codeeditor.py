@@ -54,7 +54,7 @@ class CodeEditor(QtGui.QPlainTextEdit):
                     self.fontMetrics().height(),
                     QtCore.Qt.AlignRight, number)
 
-            block = block.next()
+            block = next(block)
             top = bottom
             bottom = top + int(self.blockBoundingRect(block).height())
             blockNumber+=1
@@ -135,15 +135,15 @@ if __name__ == "__main__":
     js.show()
 
     def validateJSON():
-        style=unicode(js.toPlainText())
+        style=str(js.toPlainText())
         if not style.strip(): #no point in validating an empty string
             return
         pos=None
         try:
             json.loads(style)
-        except ValueError, e:
+        except ValueError as e:
             s=str(e)
-            print s
+            print(s)
             if s == 'No JSON object could be decoded':
                 pos=0
             elif s.startswith('Expecting '):
@@ -151,7 +151,7 @@ if __name__ == "__main__":
             elif s.startswith('Extra data'):
                 pos=int(s.split(' ')[-3])
             else:
-                print 'UNKNOWN ERROR'
+                print('UNKNOWN ERROR')
                 
         # This makes a red bar appear in the line
         # containing position pos

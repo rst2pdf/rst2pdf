@@ -36,10 +36,10 @@ will be logged.
 
 import types
 import inspect
-from log import log, nodeid
-from smartypants import smartyPants
+from .log import log, nodeid
+from .smartypants import smartyPants
 import docutils.nodes
-from flowables import BoundByWidth, TocEntry
+from .flowables import BoundByWidth, TocEntry
 
 
 class MetaHelper(type):
@@ -101,12 +101,11 @@ class MetaHelper(type):
             cls._classinit()
 
 
-class NodeHandler(object):
+class NodeHandler(object, metaclass=MetaHelper):
     ''' NodeHandler classes are used to dispatch
        to the correct class to handle some node class
        type, via a dispatchdict in the main class.
     '''
-    __metaclass__ = MetaHelper
 
     @classmethod
     def _classpreinit(baseclass, clstype, name, bases, clsdict):
@@ -208,7 +207,7 @@ class NodeHandler(object):
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
-                if client.styles.StyleSheet.has_key(node['classes'][0]):
+                if node['classes'][0] in client.styles.StyleSheet:
                     style = client.styles[node['classes'][0]]
                 else:
                     log.info("Unknown class %s, ignoring. [%s]",

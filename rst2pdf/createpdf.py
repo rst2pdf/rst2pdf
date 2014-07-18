@@ -42,7 +42,7 @@
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
-from opt_imports import psyco
+from .opt_imports import psyco
 psyco.full()
 
 import sys
@@ -50,11 +50,11 @@ import os
 import tempfile
 import re
 import string
-import config
+from . import config
 import logging
-from cStringIO import StringIO
+from io import StringIO
 from os.path import abspath, dirname, expanduser, join
-from urlparse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
 from optparse import OptionParser
 from pprint import pprint
@@ -214,14 +214,14 @@ class RstToPdf(object):
         # to do it only if it's requested
         if sphinx and sphinx_module:
             import sphinx.roles
-            from sphinxnodes import sphinxhandlers
+            from .sphinxnodes import sphinxhandlers
             self.highlightlang = highlightlang
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
             directives.register_directive('code', pygments_code_block_directive.code_block_directive)
-            import math_directive
+            from . import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
@@ -548,7 +548,7 @@ class RstToPdf(object):
             
         if self.numbered_links:
             # Transform all links to sections so they show numbers
-            from sectnumlinks import SectNumFolder, SectRefExpander
+            from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
@@ -629,7 +629,7 @@ class RstToPdf(object):
 
         def cleantags(s):
             re.sub(r'<[^>]*?>', '',
-                unicode(s).strip())
+                str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -692,7 +692,7 @@ class RstToPdf(object):
 
 
                 break
-            except ValueError, v:
+            except ValueError as v:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
                 #if v.args and str(v.args[0]).startswith('format not resolved'):
@@ -840,7 +840,7 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='loweralpha':
         ptext=string.lowercase[_counter%26]
     else:
-        ptext=unicode(_counter)
+        ptext=str(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -907,22 +907,22 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, unicode):
+            if not isinstance(text, str):
                 try:
-                    text = unicode(text, e.encoding)
+                    text = str(text, e.encoding)
                 except AttributeError:
-                    text = unicode(text, 'utf-8')
+                    text = str(text, 'utf-8')
                 except TypeError:
-                    text = unicode(text, 'utf-8')
+                    text = str(text, 'utf-8')
 
-            text = text.replace(u'###Page###', pnum)
+            text = text.replace('###Page###', pnum)
             if '###Total###' in text:
-                text = text.replace(u'###Total###', str(self.totalpages))
+                text = text.replace('###Total###', str(self.totalpages))
                 self.client.mustMultiBuild=True
-            text = text.replace(u"###Title###", doc.title)
-            text = text.replace(u"###Section###",
+            text = text.replace("###Title###", doc.title)
+            text = text.replace("###Section###",
                 getattr(canv, 'sectName', ''))
-            text = text.replace(u"###SectNum###",
+            text = text.replace("###SectNum###",
                 getattr(canv, 'sectNum', ''))
             text = smartyPants(text, smarty)
             return text
@@ -1355,7 +1355,7 @@ def main(_args=None):
 
     if options.version:
         from rst2pdf import version
-        print version
+        print(version)
         sys.exit(0)
 
     if options.quiet:
@@ -1373,7 +1373,7 @@ def main(_args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        print open(join(PATH, 'styles', 'styles.style')).read()
+        print(open(join(PATH, 'styles', 'styles.style')).read())
         sys.exit(0)
 
     filename = False
@@ -1400,7 +1400,7 @@ def main(_args=None):
         options.basedir=os.path.dirname(os.path.abspath(filename))
         try:
             infile = open(filename)
-        except IOError, e:
+        except IOError as e:
             log.error(e)
             sys.exit(1)
     options.infile = infile
@@ -1517,7 +1517,7 @@ def patch_PDFDate():
         __PDFObject__ = True
         # gmt offset now suppported
         def __init__(self, invariant=True, dateFormatter=None):
-            now = (2000,01,01,00,00,00,0)
+            now = (2000,0o1,0o1,00,00,00,0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter
 
@@ -1574,11 +1574,11 @@ def add_extensions(options):
         try:
             try:
                 module = __import__(firstname, globals(), locals())
-            except ImportError, e:
+            except ImportError as e:
                 if firstname != str(e).split()[-1]:
                     raise
                 module = __import__(modname, globals(), locals())
-        except ImportError, e:
+        except ImportError as e:
             if str(e).split()[-1] not in [firstname, modname]:
                 raise
             raise SystemExit('\nError: Could not find module %s '

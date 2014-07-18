@@ -28,8 +28,8 @@ from pprint import pprint
 from copy import copy, deepcopy
 from xml.sax.saxutils import unescape, escape
 from traceback import print_exc
-from cStringIO import StringIO
-from urlparse import urljoin, urlparse, urlunparse
+from io import StringIO
+from urllib.parse import urljoin, urlparse, urlunparse
 
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
@@ -126,13 +126,13 @@ class PDFBuilder(Builder):
                 self.info("writing " + targetname + "... ", nonl=1)
                 docwriter.write(doctree, destination)
                 self.info("done")
-            except Exception, e:
+            except Exception as e:
                 log.error(str(e))
                 print_exc()
                 self.info(red("FAILED"))
 
     def init_document_data(self):
-        preliminary_document_data = map(list, self.config.pdf_documents)
+        preliminary_document_data = list(map(list, self.config.pdf_documents))
         if not preliminary_document_data:
             self.warn('no "pdf_documents" config value found; no documents '
                       'will be written')
@@ -161,7 +161,7 @@ class PDFBuilder(Builder):
             tree = tree.deepcopy()
             for toctreenode in tree.traverse(addnodes.toctree):
                 newnodes = []
-                includefiles = map(str, toctreenode['includefiles'])
+                includefiles = list(map(str, toctreenode['includefiles']))
                 for includefile in includefiles:
                     try:
                         self.info(darkgreen(includefile) + " ", nonl=1)
@@ -215,7 +215,7 @@ class PDFBuilder(Builder):
         # html_domain_indices can be False/True or a list of index names
         indices_config = self.config.pdf_domain_indices
         if indices_config and hasattr(self.env, 'domains'):
-            for domain in self.env.domains.itervalues():
+            for domain in self.env.domains.values():
                 for indexcls in domain.indices:
                     indexname = '%s-%s' % (domain.name, indexcls.name)
                     if isinstance(indices_config, list):
@@ -249,7 +249,7 @@ class PDFBuilder(Builder):
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
             self.info(' ' + indexname, nonl=1)
-            print
+            print()
 
             output=['DUMMY','=====','',
                     '.. _modindex:\n\n']
@@ -342,7 +342,7 @@ class PDFBuilder(Builder):
                 if doc[0]==docname:
                     return "pdf:"+doc[1]+'.pdf'
             # It can be in some other document's toctree
-            for indexname, toctree in self.env.toctree_includes.items():
+            for indexname, toctree in list(self.env.toctree_includes.items()):
                 if docname in toctree:
                     for doc in self.document_data:
                         if doc[0]==indexname:
@@ -563,7 +563,7 @@ class PDFWriter(writers.Writer):
                 def add_template_path(path):
                     return os.path.join(self.srcdir, path)
 
-                cover_path.extend(map(add_template_path, self.config.templates_path))
+                cover_path.extend(list(map(add_template_path, self.config.templates_path)))
 
                 cover_file=None
                 for d in cover_path:
@@ -810,7 +810,7 @@ def try_parse(src):
     if sys.version_info >= (2, 5):
         src = 'from __future__ import with_statement\n' + src
 
-    if isinstance(src, unicode):
+    if isinstance(src, str):
         # Non-ASCII chars will only occur in string literals
         # and comments.  If we wanted to give them to the parser
         # correctly, we'd have to find out the correct source
@@ -822,7 +822,7 @@ def try_parse(src):
         return True
     try:
         parser.suite(src)
-    except SyntaxError, UnicodeEncodeError:
+    except SyntaxError as UnicodeEncodeError:
         return False
     else:
         return True
@@ -845,7 +845,7 @@ def init_math(app):
         try:
             # Sphinx 0.6.3
             from sphinx.ext.mathbase import setup as mathbase_setup
-        except ImportError, e:
+        except ImportError as e:
             log.error('Error importing sphinx math extension: %s', e)
 
     class MathExtError(SphinxError):
@@ -899,9 +899,9 @@ def setup(app):
     app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
 
-    author_texescaped = unicode(app.config.copyright)\
+    author_texescaped = str(app.config.copyright)\
                                .translate(texescape.tex_escape_map)
-    project_doc_texescaped = unicode(app.config.project + ' Documentation')\
+    project_doc_texescaped = str(app.config.project + ' Documentation')\
                                      .translate(texescape.tex_escape_map)
     app.config.pdf_documents.append((app.config.master_doc,
                                      app.config.project,

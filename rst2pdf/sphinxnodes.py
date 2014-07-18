@@ -20,14 +20,14 @@ are combined into the instantiated object.
 
 from copy import copy
 
-from log import nodeid, log
-from flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
-from image import MyImage, VectorPdf
+from .log import nodeid, log
+from .flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
+from .image import MyImage, VectorPdf
 
-from opt_imports import Paragraph, sphinx
+from .opt_imports import Paragraph, sphinx
 
-from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
-import math_flowable
+from .nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+from . import math_flowable
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 import docutils
@@ -45,7 +45,7 @@ class SphinxHandler(NodeHandler):
             sphinx-specific handlers.
         '''
         mydict = {}
-        for key, value in self._baseclass.dispatchdict.iteritems():
+        for key, value in self._baseclass.dispatchdict.items():
             value = copy(value)
             value.sphinxmode = True
             mydict[key] = value
@@ -229,7 +229,7 @@ try:
                     # Something went very wrong with graphviz, and
                     # sphinx should have given an error already
                     return []
-            except sphinx.ext.graphviz.GraphvizError, exc:
+            except sphinx.ext.graphviz.GraphvizError as exc:
                 log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'],client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]

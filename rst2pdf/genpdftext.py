@@ -8,15 +8,15 @@
 
 import os
 from xml.sax.saxutils import escape
-from log import log, nodeid
-from basenodehandler import NodeHandler
+from .log import log, nodeid
+from .basenodehandler import NodeHandler
 import docutils.nodes
-from urlparse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse
 from reportlab.lib.units import cm
-from opt_imports import Paragraph
+from .opt_imports import Paragraph
 
-from image import MyImage, missing
-from flowables import MySpacer
+from .image import MyImage, missing
+from .flowables import MySpacer
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
@@ -90,21 +90,21 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
                 # external inline reference
                 if uri in [node.astext(),"mailto:"+node.astext()]:
                     # No point on repeating it
-                    post = u''
+                    post = ''
                 elif uri.startswith('http://') or uri.startswith('ftp://'):
-                    post = u' (%s)' % uri
+                    post = ' (%s)' % uri
                 elif uri.startswith('mailto:'):
                     #No point on showing "mailto:"
-                    post = u' (%s)' % uri[7:]
+                    post = ' (%s)' % uri[7:]
             else:
                 # A plain old link
-                pre += u'<a href="%s" color="%s">' %\
+                pre += '<a href="%s" color="%s">' %\
                     (uri, client.styles.linkColor)
                 post = '</a>' + post
         else:
             uri = node.get('refid')
             if uri:
-                pre += u'<a href="#%s" color="%s">' %\
+                pre += '<a href="#%s" color="%s">' %\
                     (uri, client.styles.linkColor)
                 post = '</a>' + post
         return pre, post
@@ -204,7 +204,7 @@ class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference,docutils.node
             if i not in client.targets:
                 anchors+='<a name="%s"/>' % i
                 client.targets.append(i)
-        return u'%s<super><a href="%s" color="%s">%s</a></super>'%\
+        return '%s<super><a href="%s" color="%s">%s</a></super>'%\
             (anchors, '#' + node.get('refid',node.astext()),
                 client.styles.linkColor, node.astext())
 
@@ -223,7 +223,7 @@ class HandleTarget(NodeHandler, docutils.nodes.target):
     def get_pre_post(self, client, node, replaceEnt):
         pre = ''
         if node['ids'][0] not in client.targets:
-            pre = u'<a name="%s"/>' % node['ids'][0]
+            pre = '<a name="%s"/>' % node['ids'][0]
             client.targets.append(node['ids'][0])
         return pre, ''
 

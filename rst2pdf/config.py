@@ -3,7 +3,7 @@
 """Singleton config object"""
 
 
-import ConfigParser
+import configparser
 import os
 from rst2pdf.rson import loads
 
@@ -26,14 +26,14 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
-conf = ConfigParser.SafeConfigParser()
+conf = configparser.SafeConfigParser()
 
 def parseConfig(extracf=None):
     global conf
     cflist = ["/etc/rst2pdf.conf", cfname]
     if extracf:
         cflist.append(extracf)
-    conf = ConfigParser.SafeConfigParser()
+    conf = configparser.SafeConfigParser()
     conf.read(cflist)
     
 parseConfig()

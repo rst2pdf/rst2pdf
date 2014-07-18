@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Issue 285'
-copyright = u'2010, Roberto Alsina'
+project = 'Issue 285'
+copyright = '2010, Roberto Alsina'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -178,12 +178,12 @@ htmlhelp_basename = 'Issue285doc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Issue285.tex', u'Issue 285 Documentation',
-   u'Roberto Alsina', 'manual'),
+  ('index', 'Issue285.tex', 'Issue 285 Documentation',
+   'Roberto Alsina', 'manual'),
 ]
 pdf_documents = [
-  ('index', 'Issue285', u'Issue 285 Documentation',
-   u'Roberto Alsina'),
+  ('index', 'Issue285', 'Issue 285 Documentation',
+   'Roberto Alsina'),
 ]
 
 pdf_break_level = 3
@@ -217,6 +217,6 @@ pdf_verbosity = 0
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'issue285', u'Issue 285 Documentation',
-     [u'Roberto Alsina'], 1)
+    ('index', 'issue285', 'Issue 285 Documentation',
+     ['Roberto Alsina'], 1)
 ]

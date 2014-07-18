@@ -14,7 +14,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont, TTFontFile, TTFError, FF_FORCEBOLD, FF_ITALIC
 from reportlab.lib.fonts import addMapping
 
-from log import log
+from .log import log
 
 flist = []
 afmList = []
@@ -214,7 +214,7 @@ def findTTFont(fname):
         # ctypes with EnumFontFamiliesEx
 
         def get_nt_fname(ftname):
-            import _winreg as _w
+            import winreg as _w
             fontkey = _w.OpenKey(_w.HKEY_LOCAL_MACHINE,
                 "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
             fontname = ftname + " (TrueType)"
@@ -223,11 +223,11 @@ def findTTFont(fname):
                 if os.path.isabs(fname):
                     fontkey.close()
                     return fname
-                fontdir = os.environ.get("SystemRoot", u"C:\\Windows")
-                fontdir += u"\\Fonts"
+                fontdir = os.environ.get("SystemRoot", "C:\\Windows")
+                fontdir += "\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
-            except WindowsError, err:
+            except WindowsError as err:
                 fontkey.Close()
                 return None
 
@@ -365,7 +365,7 @@ def guessFont(fname):
 def main():
     global flist
     if len(sys.argv) != 2:
-        print "Usage: findfont fontName"
+        print("Usage: findfont fontName")
         sys.exit(1)
     if os.name == 'nt':
         flist = [".", os.environ.get("SystemRoot", "C:\\Windows")+"\\Fonts"]
@@ -376,9 +376,9 @@ def main():
     if not f:
         f = findTTFont(fn)
     if f:
-        print f
+        print(f)
     else:
-        print "Unknown font %s" % sys.argv[1]
+        print("Unknown font %s" % sys.argv[1])
 
 
 if __name__ == "__main__":

@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Test Case'
-copyright = u'2009, vorsorge'
+project = 'Test Case'
+copyright = '2009, vorsorge'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +172,8 @@ htmlhelp_basename = 'TestCasedoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'TestCase.tex', u'Test Case Documentation',
-   u'vorsorge', 'manual'),
+  ('index', 'TestCase.tex', 'Test Case Documentation',
+   'vorsorge', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -211,7 +211,7 @@ latex_documents = [
 # regardless of the global pdf_compressed setting.
    
 pdf_documents = [ 
-    ('index', 'TestCase', u'A Sphinx Test Case', u'vorsorge'),
+    ('index', 'TestCase', 'A Sphinx Test Case', 'vorsorge'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:

@@ -44,26 +44,26 @@ import tempfile
 import re
 from copy import copy
 
-from basenodehandler import NodeHandler
+from .basenodehandler import NodeHandler
 
 import docutils.nodes
-from oddeven_directive import OddEvenNode
+from .oddeven_directive import OddEvenNode
 import reportlab
 
-from aafigure_directive import Aanode
+from .aafigure_directive import Aanode
 
-from log import log, nodeid
-from utils import log, parseRaw, parseHTML
+from .log import log, nodeid
+from .utils import log, parseRaw, parseHTML
 from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from flowables import Table, DelayedTable, SplitTable, Heading, \
+from .flowables import Table, DelayedTable, SplitTable, Heading, \
               MyIndenter, MyTableOfContents, MySpacer, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding, OddEven, \
               XPreformatted
 
-from opt_imports import wordaxe, Paragraph, ParagraphStyle
+from .opt_imports import wordaxe, Paragraph, ParagraphStyle
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
@@ -130,7 +130,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         # colWidths are in no specific unit, really. Maybe ems.
         # Convert them to %
-        colWidths=map(int, colWidths)
+        colWidths=list(map(int, colWidths))
         tot=sum(colWidths)
         colWidths=["%s%%"%((100.*w)/tot) for w in colWidths]
 
@@ -141,7 +141,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         data = []
         cellStyles = []
-        rowids = range(0, len(rows))
+        rowids = list(range(0, len(rows)))
         for row, i in zip(rows, rowids):
             r = []
             j = 0
@@ -235,7 +235,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+unicode(id(node))
+            parent_id=(node.parent.get('ids', [None]) or [None])[0]+'-'+str(id(node))
             node.elements = [ Heading(text,
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
@@ -314,8 +314,8 @@ class HandleAuthor(NodeHandler, docutils.nodes.author):
             fb = client.gather_pdftext(node)
 
             t_style=TableStyle(client.styles['field-list'].commands)
-            colWidths=map(client.styles.adjustUnits,
-                client.styles['field-list'].colWidths)
+            colWidths=list(map(client.styles.adjustUnits,
+                client.styles['field-list'].colWidths))
 
             node.elements = [Table(
                 [[Paragraph(client.text_for_label("author", style)+":",
@@ -346,7 +346,7 @@ class HandleFList(NodeHandler):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = list(map(client.styles.adjustUnits, colWidths))
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                     Paragraph(fb, style)]],
@@ -366,7 +366,7 @@ class HandleAddress(HandleFList, docutils.nodes.address):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = list(map(client.styles.adjustUnits, colWidths))
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                              XPreformatted(fb, style)]
@@ -556,7 +556,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
         # FIXME: use different unicode bullets depending on b
         if b and b in "*+-":
-            b = getattr(bStyle, 'bulletText', u'\u2022')
+            b = getattr(bStyle, 'bulletText', '\u2022')
 
         # The style has information about the bullet:
         #
@@ -576,7 +576,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         el = client.gather_elements(node, item_st)
         # FIXME: this is really really not good code
         if not el:
-            el = [Paragraph(u"<nobr>\xa0</nobr>", item_st)]
+            el = [Paragraph("<nobr>\xa0</nobr>", item_st)]
 
 
         idx=node.parent.children.index(node)
@@ -709,7 +709,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
         qstyle.leftIndent += client.styles.adjustUnits("0.5em")*i
         text = client.gather_pdftext(node)
         if not text: # empty line
-            text=u"<nobr>\xa0</nobr>"
+            text="<nobr>\xa0</nobr>"
         return [Paragraph(text, style=qstyle)]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,

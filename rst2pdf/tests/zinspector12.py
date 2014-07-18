@@ -71,15 +71,15 @@ def getimports(importf, ignore):
     importinfo = {}
     badimports = []
     basedir = {}
-    exec '0' in basedir
+    exec('0', basedir)
     globaldir = basedir.copy()
 
     for code in splitf(importf):
         newdir = basedir.copy()
-        exec code in newdir
+        exec(code, newdir)
         for key in basedir:
             del newdir[key]
-        for key, value in newdir.iteritems():
+        for key, value in newdir.items():
             oldcode = importinfo.setdefault(key, code)
             if oldcode is not code:
                 badimports.append((key, oldcode, code, globaldir[key], value))
@@ -102,7 +102,7 @@ def checkimports(importf, ignore):
     printed = False
 
     fmt = "\nSame '%s' imported twice:\n\n%s\n%s"
-    for (oldcode, code), deflist in sorted(same.iteritems()):
+    for (oldcode, code), deflist in sorted(same.items()):
         nevermind = set()
         x, y = oldcode.split('.', 1)[0], code.split('.', 1)[0]
         if ('.' in oldcode and '.' in code and
@@ -110,34 +110,34 @@ def checkimports(importf, ignore):
             nevermind.add(x.split()[-1])
         deflist = ', '.join(sorted(set(deflist) - nevermind))
         if deflist:
-            print fmt % (deflist, oldcode, code)
+            print(fmt % (deflist, oldcode, code))
             printed = True
 
     fmt = "\nConflicting definitions for %s:\n\n%s\n%s"
-    for (oldcode, code), deflist in sorted(diff.iteritems()):
+    for (oldcode, code), deflist in sorted(diff.items()):
         deflist = ', '.join(sorted(deflist))
-        print fmt % (deflist, oldcode, code)
+        print(fmt % (deflist, oldcode, code))
         printed = True
 
     if not printed:
-        print "No conflicting imports"
+        print("No conflicting imports")
 
 def dumpinfo(varnames, importf, ignore):
     import inspect
-    print
+    print()
     g, importinfo, _ = getimports(importf, ignore)
     for name in varnames:
         if name not in g:
-            print '%s not defined globally' % repr(name)
+            print('%s not defined globally' % repr(name))
             continue
         value = g[name]
         info = '%s (value %s)' % (repr(name), repr(value))
         line = importinfo.get(name)
         if line is not None:
-            print '%s imported with %s' % (
-                    info, repr(line.split('#')[0].rstrip()))
+            print('%s imported with %s' % (
+                    info, repr(line.split('#')[0].rstrip())))
         else:
-            print '%s imported or defined explicitly (see source code)'
+            print('%s imported or defined explicitly (see source code)')
         try:
             sourcef = inspect.getfile(value)
         except TypeError:
@@ -145,8 +145,8 @@ def dumpinfo(varnames, importf, ignore):
         else:
             if sourcef.endswith('.pyc'):
                 sourcef = sourcef[:-1]
-            print '      defined in %s' % sourcef
-    print
+            print('      defined in %s' % sourcef)
+    print()
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:

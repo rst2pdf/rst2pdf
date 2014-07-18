@@ -62,9 +62,9 @@ def getcategories():
 def dumpinfo():
     mydict = getcategories()
     if not mydict:
-        print '\nNo log files found'
+        print('\nNo log files found')
     migrate = set('good bad incomplete'.split())
-    for checksum_result, values in sorted(mydict.iteritems()):
+    for checksum_result, values in sorted(mydict.items()):
         if checksum_result not in migrate:
             continue
         names = ' '.join('input/%s' % x[0] for x in values)

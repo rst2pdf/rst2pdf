@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'issue 319'
-copyright = u'2010, Roberto Alsina'
+project = 'issue 319'
+copyright = '2010, Roberto Alsina'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +172,8 @@ htmlhelp_basename = 'issue319doc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'issue319.tex', u'issue 319 Documentation',
-   u'Roberto Alsina', 'manual'),
+  ('index', 'issue319.tex', 'issue 319 Documentation',
+   'Roberto Alsina', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

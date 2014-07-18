@@ -84,7 +84,7 @@ class Highlighter(QtGui.QSyntaxHighlighter):
         # The \n is not really needed, but sometimes  
         # you are in an empty last block, so your position is
         # **after** the end of the document.
-        text=unicode(self.document().toPlainText())+'\n'
+        text=str(self.document().toPlainText())+'\n'
         
         # Yes, re-highlight the whole document.
         # There **must** be some optimizacion possibilities
@@ -110,7 +110,7 @@ class Highlighter(QtGui.QSyntaxHighlighter):
         # Just apply the formatting to this block.
         # For titles, it may be necessary to backtrack
         # and format a couple of blocks **earlier**.
-        for i in range(len(unicode(text))):
+        for i in range(len(str(text))):
             try:
                 self.setFormat(i,1,self.formatter.data[p+i])
             except IndexError:

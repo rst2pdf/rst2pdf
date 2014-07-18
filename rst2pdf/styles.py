@@ -27,10 +27,11 @@ import reportlab.rl_config
 
 from rst2pdf.rson import loads as rson_loads
 
-import findfonts
-from log import log
+from . import findfonts
+from .log import log
 
-from opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+import collections
 
 HAS_WORDAXE = wordaxe is not None
 
@@ -48,7 +49,7 @@ class StyleSheet(object):
         '''
         styles = data.get('styles', {})
         try:
-            stylenames = styles.keys()
+            stylenames = list(styles.keys())
         except AttributeError:
             for style in styles:
                 yield style
@@ -97,13 +98,13 @@ class StyleSheet(object):
         if font_path is None:
             font_path=[]
         font_path+=['.', os.path.join(self.PATH, 'fonts')]
-        self.FontSearchPath = map(os.path.expanduser, font_path)
+        self.FontSearchPath = list(map(os.path.expanduser, font_path))
 
         if style_path is None:
             style_path=[]
         style_path+=['.', os.path.join(self.PATH, 'styles'),
                       '~/.rst2pdf/styles']
-        self.StyleSearchPath = map(os.path.expanduser, style_path)
+        self.StyleSearchPath = list(map(os.path.expanduser, style_path))
         self.FontSearchPath=list(set(self.FontSearchPath))
         self.StyleSearchPath=list(set(self.StyleSearchPath))
 
@@ -220,7 +221,7 @@ class StyleSheet(object):
             for font in embedded:
                 try:
                     # Just a font name, try to embed it
-                    if isinstance(font, unicode):
+                    if isinstance(font, str):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:
@@ -298,7 +299,7 @@ class StyleSheet(object):
                         bold = pdfmetrics.EmbeddedType1Face(*font[3])
                         bolditalic = pdfmetrics.EmbeddedType1Face(*font[4])
 
-                except Exception, e:
+                except Exception as e:
                     try:
                         if isinstance(font, list):
                             fname = font[0]
@@ -308,7 +309,7 @@ class StyleSheet(object):
                             os.path.splitext(fname)[0], str(e))
                         log.error("Registering %s as Helvetica alias", fname)
                         self.fontsAlias[fname] = 'Helvetica'
-                    except Exception, e:
+                    except Exception as e:
                         log.critical("Error processing font %s: %s",
                             fname, str(e))
                         continue
@@ -536,7 +537,7 @@ class StyleSheet(object):
         if not re.match("^[a-z](-?[a-z0-9]+)*$", key):
             key = docutils.nodes.make_id(key)
 
-        if self.StyleSheet.has_key(key):
+        if key in self.StyleSheet:
             return self.StyleSheet[key]
         else:
             if key.startswith('pygments'):
@@ -584,17 +585,17 @@ class StyleSheet(object):
     def readStyle(self, ssname):
             # If callables are used, they should probably be subclassed
             # strings, or something else that will print nicely for errors
-            if callable(ssname):
+            if isinstance(ssname, collections.Callable):
                 return ssname()
 
             fname = self.findStyle(ssname)
             if fname:
                 try:
                     return rson_loads(open(fname).read())
-                except ValueError, e: # Error parsing the JSON data
+                except ValueError as e: # Error parsing the JSON data
                     log.critical('Error parsing stylesheet "%s": %s'%\
                         (fname, str(e)))
-                except IOError, e: #Error opening the ssheet
+                except IOError as e: #Error opening the ssheet
                     log.critical('Error opening stylesheet "%s": %s'%\
                         (fname, str(e)))
 
@@ -775,7 +776,7 @@ class StyleSheet(object):
         The styles that are *later* in the list will have priority.
         '''
 
-        validst = [x for x in styles if self.StyleSheet.has_key(x)]
+        validst = [x for x in styles if x in self.StyleSheet]
         newname = '_'.join(['merged']+validst)
         validst = [self[x] for x in validst]
         newst=copy(validst[0])

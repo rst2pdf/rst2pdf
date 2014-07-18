@@ -7,7 +7,7 @@ from docutils.nodes import General, Inline, Element
 from docutils import utils
 from docutils.parsers.rst import roles
 
-import basenodehandler, math_flowable
+from . import basenodehandler, math_flowable
 
 if 'Directive' in rst.__dict__:
 
@@ -40,7 +40,7 @@ if 'Directive' in rst.__dict__:
                               rawsource=''.join(self.content))]
 
         def __repr__(self):
-            return u''.join(self.content)
+            return ''.join(self.content)
 
 else:
 

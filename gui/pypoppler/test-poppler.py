@@ -17,7 +17,7 @@ class PDFDisplay(QtGui.QWidget):
         if self.pdfImage is not None:
             painter.drawImage(0, 0, self.pdfImage)
         else:
-            print "No Pixmap"
+            print("No Pixmap")
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Down:
@@ -30,8 +30,8 @@ class PDFDisplay(QtGui.QWidget):
                 self.display()
         elif (event.key() == QtCore.Qt.Key_F):
             r = QtCore.QRectF()
-            print self.doc.page(self.currentPage).search(QtCore.QString("Dinamis"), r, QtPoppler.Poppler.Page.FromTop, QtPoppler.Poppler.Page.CaseSensitive)
-            print r
+            print(self.doc.page(self.currentPage).search(QtCore.QString("Dinamis"), r, QtPoppler.Poppler.Page.FromTop, QtPoppler.Poppler.Page.CaseSensitive))
+            print(r)
         elif (event.key() == QtCore.Qt.Key_Q):
             sys.exit(0)
     
@@ -44,7 +44,7 @@ class PDFDisplay(QtGui.QWidget):
                 self.update()
                 #delete page;
         else:
-            print "doc not loaded"
+            print("doc not loaded")
 
 
 if __name__ == "__main__":

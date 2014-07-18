@@ -37,8 +37,8 @@ source_encoding = 'utf-8'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Foobar'
-copyright = u'2009, Jason S'
+project = 'Foobar'
+copyright = '2009, Jason S'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +172,8 @@ htmlhelp_basename = 'Foobardoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('foobar', 'Foobar.tex', u'Foobar Documentation',
-   u'Jason S', 'manual'),
+  ('foobar', 'Foobar.tex', 'Foobar Documentation',
+   'Jason S', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -212,7 +212,7 @@ graphviz_dot='C:/appl/graphics/graphviz/2.24/bin/dot.exe'
 # would mean that specific document would be compressed
 # regardless of the global pdf_compressed setting.
 pdf_documents = [
-('index', u'index', u'index', u'lorenzo'),
+('index', 'index', 'index', 'lorenzo'),
 ]
 # A comma-separated list of custom stylesheets. Example:
 pdf_stylesheets = ['sphinx']
