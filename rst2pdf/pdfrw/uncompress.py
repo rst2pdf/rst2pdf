@@ -38,7 +38,7 @@ def uncompress(mylist, warnings=set(), flate = PdfName.FlateDecode,
             error = None
             try:
                 data = dco.decompress(obj.stream)
-            except Exception, s:
+            except Exception as s:
                 error = str(s)
             if error is None:
                 assert not dco.unconsumed_tail

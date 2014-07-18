@@ -104,7 +104,7 @@ class PdfDict(dict):
             if isinstance(args, PdfDict):
                 self.indirect = args.indirect
                 self._stream = args.stream
-        for key, value in kw.iteritems():
+        for key, value in kw.items():
             setattr(self, key, value)
 
     def __getattr__(self, name, PdfName=PdfName):
@@ -150,16 +150,16 @@ class PdfDict(dict):
                 yield key, value
 
     def items(self):
-        return list(self.iteritems())
+        return list(self.items())
     def itervalues(self):
-        for key, value in self.iteritems():
+        for key, value in self.items():
             yield value
     def values(self):
-        return list((value for key, value in self.iteritems()))
+        return list((value for key, value in self.items()))
     def keys(self):
-        return list((key for key, value in self.iteritems()))
+        return list((key for key, value in self.items()))
     def __iter__(self):
-        for key, value in self.iteritems():
+        for key, value in self.items():
             yield key
     def iterkeys(self):
         return iter(self)

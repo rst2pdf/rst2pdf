@@ -33,7 +33,7 @@ NullObject.Type = 'Null object'
 
 def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
         id=id, isinstance=isinstance, getattr=getattr,len=len,
-        sum=sum, set=set, str=str, basestring=basestring,
+        sum=sum, set=set, str=str, str=str,
         hasattr=hasattr, repr=repr, enumerate=enumerate,
         list=list, dict=dict, tuple=tuple,
         do_compress=do_compress, PdfArray=PdfArray,
@@ -120,7 +120,7 @@ def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
                     if compress and obj.stream:
                         do_compress([obj])
                     myarray = []
-                    dictkeys = [str(x) for x in obj.keys()]
+                    dictkeys = [str(x) for x in list(obj.keys())]
                     dictkeys.sort()
                     for key in dictkeys:
                         myarray.append(key)
@@ -133,7 +133,7 @@ def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
                 obj = (PdfArray, PdfDict)[isinstance(obj, dict)](obj)
                 continue
 
-            if not hasattr(obj, 'indirect') and isinstance(obj, basestring):
+            if not hasattr(obj, 'indirect') and isinstance(obj, str):
                 return encode(obj)
             return str(getattr(obj, 'encoded', obj))
 
@@ -158,7 +158,7 @@ def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
 
     # Don't reference old catalog or pages objects -- swap references to new ones.
     swapobj = {PdfName.Catalog:trailer.Root, PdfName.Pages:trailer.Root.Pages, None:trailer}.get
-    swapobj = [(objid, swapobj(obj.Type)) for objid, obj in killobj.iteritems()]
+    swapobj = [(objid, swapobj(obj.Type)) for objid, obj in killobj.items()]
     swapobj = dict((objid, obj is None and NullObject or obj) for objid, obj in swapobj).get
 
     for objid in killobj:
@@ -284,12 +284,12 @@ class PdfWriter(object):
 if __name__ == '__main__':
     import logging
     log.setLevel(logging.DEBUG)
-    import pdfreader
+    from . import pdfreader
     x = pdfreader.PdfReader('source.pdf')
     y = PdfWriter()
     for i, page in enumerate(x.pages):
-        print '  Adding page', i+1, '\r',
+        print('  Adding page', i+1, '\r', end=' ')
         y.addpage(page)
-    print
+    print()
     y.write('result.pdf')
-    print
+    print()

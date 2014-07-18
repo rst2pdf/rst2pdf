@@ -59,7 +59,7 @@ class PdfReader(PdfDict):
         '''
         specialget = self.special.get
         result = PdfDict()
-        next = source.next
+        next = source.__next__
 
         tok = next()
         while tok != '>>':
@@ -186,7 +186,7 @@ class PdfReader(PdfDict):
         ok = ok and objid[2] == 'obj'
         if not ok:
             source.floc = offset
-            source.next()
+            next(source)
             objheader = '%d %d obj' % (objnum, gennum)
             fdata = source.fdata
             offset2 = fdata.find('\n' + objheader) + 1 or fdata.find('\r' + objheader) + 1
@@ -199,7 +199,7 @@ class PdfReader(PdfDict):
 
         # Read the object, and call special code if it starts
         # an array or dictionary
-        obj = source.next()
+        obj = next(source)
         func = self.special.get(obj)
         if func is not None:
             obj = func(source)
@@ -210,7 +210,7 @@ class PdfReader(PdfDict):
         # Mark the object as indirect, and
         # add it to the list of streams if it starts a stream
         obj.indirect = key
-        tok = source.next()
+        tok = next(source)
         if tok != 'endobj':
             self.readstream(obj, self.findstream(obj, tok, source), source)
         return obj
@@ -222,7 +222,7 @@ class PdfReader(PdfDict):
         if startloc < 0:
             raise PdfParseError('Did not find "startxref" at end of file')
         source = PdfTokens(fdata, startloc, False)
-        tok = source.next()
+        tok = next(source)
         assert tok == 'startxref'  # (We just checked this...)
         tableloc = source.next_default()
         if not tableloc.isdigit():
@@ -238,7 +238,7 @@ class PdfReader(PdfDict):
         fdata = source.fdata
         setdefault = source.obj_offsets.setdefault
         add_offset = source.all_offsets.append
-        next = source.next
+        next = source.__next__
         tok = next()
         if tok != 'xref':
             source.exception('Expected "xref" keyword')
@@ -280,7 +280,7 @@ class PdfReader(PdfDict):
                     raise ValueError
             log.warning('Badly formatted xref table')
             source.floc = end
-            source.next()
+            next(source)
         except:
             source.floc = start
             source.exception('Invalid table format')
@@ -309,7 +309,7 @@ class PdfReader(PdfDict):
                 log.error('Expected /Page or /Pages dictionary, got %s' % repr(node))
         try:
             return list(readnode(node))
-        except (AttributeError, TypeError), s:
+        except (AttributeError, TypeError) as s:
             log.error('Invalid page tree: %s' % s)
             return []
 
@@ -372,13 +372,13 @@ class PdfReader(PdfDict):
                 source.obj_offsets = {}
                 # Loop through all the cross-reference tables
                 self.parsexref(source)
-                tok = source.next()
+                tok = next(source)
                 if tok != '<<':
                     source.exception('Expected "<<" starting catalog')
 
                 newdict = self.readdict(source)
 
-                token = source.next()
+                token = next(source)
                 if token != 'startxref' and not xref_table_list:
                     source.warning('Expected "startxref" at end of xref table')
 
@@ -430,4 +430,4 @@ class PdfReader(PdfDict):
 
     def uncompress(self):
         self.read_all()
-        uncompress(self.indirect_objects.itervalues())
+        uncompress(iter(self.indirect_objects.values()))

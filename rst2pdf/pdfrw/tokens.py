@@ -10,7 +10,7 @@ sixth edition, for PDF version 1.7, dated November 2006.
 
 '''
 
-from __future__ import generators
+
 
 import re
 import itertools
@@ -169,7 +169,7 @@ class PdfTokens(object):
         self.fdata = fdata
         self.strip_comments = strip_comments
         self.iterator = iterator = self._gettoks(startloc)
-        self.next = iterator.next
+        self.next = iterator.__next__
 
     def setstart(self, startloc):
         ''' Change the starting location.
