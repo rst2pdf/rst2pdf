@@ -45,6 +45,7 @@ __docformat__ = 'reStructuredText'
 from .opt_imports import psyco
 psyco.full()
 
+import importlib
 import sys
 import os
 import tempfile
@@ -1573,14 +1574,10 @@ def add_extensions(options):
         firstname = path_given and modname or (modname + '_r2p')
         try:
             try:
-                module = __import__(firstname, globals(), locals())
-            except ImportError as e:
-                if firstname != str(e).split()[-1]:
-                    raise
-                module = __import__(modname, globals(), locals())
-        except ImportError as e:
-            if str(e).split()[-1] not in [firstname, modname]:
-                raise
+                module = importlib.import_module(firstname)
+            except ImportError:
+                module = importlib.import_module(modname)
+        except ImportError:
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
                                 (modname, ',\n    '.join(sys.path)))
