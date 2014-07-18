@@ -18,46 +18,46 @@ from .objects import PdfString, PdfObject
 from .errors import log, PdfParseError
 
 def linepos(fdata, loc):
-    line = fdata.count('\n', 0, loc) + 1
-    line += fdata.count('\r', 0, loc) - fdata.count('\r\n', 0, loc)
-    col = loc - max(fdata.rfind('\n', 0, loc), fdata.rfind('\r', 0, loc))
+    line = fdata.count(b'\n', 0, loc) + 1
+    line += fdata.count(b'\r', 0, loc) - fdata.count(b'\r\n', 0, loc)
+    col = loc - max(fdata.rfind(b'\n', 0, loc), fdata.rfind(b'\r', 0, loc))
     return line, col
 
 class PdfTokens(object):
 
     # Table 3.1, page 50 of reference, defines whitespace
-    eol = '\n\r'
-    whitespace = '\x00 \t\f' + eol
+    eol = b'\n\r'
+    whitespace = b'\x00 \t\f' + eol
 
     # Text on page 50 defines delimiter characters
     # Escape the ]
-    delimiters = r'()<>{}[\]/%'
+    delimiters = br'()<>{}[\]/%'
 
     # "normal" stuff is all but delimiters or whitespace.
 
-    p_normal = r'(?:[^\\%s%s]+|\\[^%s])+' % (whitespace, delimiters, whitespace)
+    p_normal = br'(?:[^\\' + whitespace + delimiters + br']+|\\[^' + whitespace + br'%s])+'
 
-    p_comment = r'\%%[^%s]*' % eol
+    p_comment = br'\%%[^' + eol + b']*'
 
     # This will get the bulk of literal strings.
-    p_literal_string = r'\((?:[^\\()]+|\\.)*[()]?'
+    p_literal_string = br'\((?:[^\\()]+|\\.)*[()]?'
 
     # This will get more pieces of literal strings
     # (Don't ask me why, but it hangs without the trailing ?.)
-    p_literal_string_extend = r'(?:[^\\()]+|\\.)*[()]?'
+    p_literal_string_extend = br'(?:[^\\()]+|\\.)*[()]?'
 
     # A hex string.  This one's easy.
-    p_hex_string = r'\<[%s0-9A-Fa-f]*\>' % whitespace
+    p_hex_string = br'\<[' + whitespace + br'0-9A-Fa-f]*\>'
 
-    p_dictdelim = r'\<\<|\>\>'
-    p_name = r'/[^%s%s]*' % (delimiters, whitespace)
+    p_dictdelim = br'\<\<|\>\>'
+    p_name = br'/[^' + delimiters + whitespace + b']*'
 
-    p_catchall = '[^%s]' % whitespace
+    p_catchall = b'[^' + whitespace + b']'
 
-    pattern = '|'.join([p_normal, p_name, p_hex_string, p_dictdelim, p_literal_string, p_comment, p_catchall])
-    findtok = re.compile('(%s)[%s]*' % (pattern, whitespace), re.DOTALL).finditer
-    findparen = re.compile('(%s)[%s]*' % (p_literal_string_extend, whitespace), re.DOTALL).finditer
-    splitname = re.compile(r'\#([0-9A-Fa-f]{2})').split
+    pattern = b'|'.join([p_normal, p_name, p_hex_string, p_dictdelim, p_literal_string, p_comment, p_catchall])
+    findtok = re.compile(b'(' + pattern + b')[' + whitespace + b']*', re.DOTALL).finditer
+    findparen = re.compile(b'(' + p_literal_string_extend + b')[' + whitespace + b']*', re.DOTALL).finditer
+    splitname = re.compile(br'\#([0-9A-Fa-f]{2})').split
 
     def _cacheobj(self, obj, constructor):
         ''' This caching relies on the constructors
@@ -77,7 +77,7 @@ class PdfTokens(object):
             to form the 'real' character.
         '''
         substrs = splitname(token)
-        if '#' in join(substrs[::2]):
+        if b'#' in join(substrs[::2]):
             self.warning('Invalid /Name token')
             return token
         substrs[1::2] = (chr(int(x, 16)) for x in substrs[1::2])
@@ -111,27 +111,27 @@ class PdfTokens(object):
                 firstch = token[0]
                 if firstch not in delimiters:
                     token = cacheobj(cache, token, PdfObject)
-                elif firstch in '/<(%':
-                    if firstch == '/':
+                elif firstch in b'/<(%':
+                    if firstch == b'/':
                         # PDF Name
-                        token = namehandler['#' in token](cache, token, PdfObject)
-                    elif firstch == '<':
+                        token = namehandler[b'#' in token](cache, token, PdfObject)
+                    elif firstch == b'<':
                         # << dict delim, or < hex string >
-                        if token[1:2] != '<':
+                        if token[1:2] != b'<':
                             token = cacheobj(cache, token, PdfString)
-                    elif firstch == '(':
+                    elif firstch == b'(':
                         # Literal string
                         # It's probably simple, but maybe not
                         # Nested parentheses are a bear, and if
                         # they are present, we exit the for loop
                         # and get back in with a new starting location.
                         ends = None  # For broken strings
-                        if fdata[match.end(1) - 1] != ')':
+                        if fdata[match.end(1) - 1] != b')':
                             nest = 2
                             m_start, loc = tokspan
                             for match in findparen(fdata, loc):
                                 loc = match.end(1)
-                                ending = fdata[loc - 1] == ')'
+                                ending = fdata[loc - 1] == b')'
                                 nest += 1 - ending * 2
                                 if not nest:
                                     break
@@ -147,10 +147,10 @@ class PdfTokens(object):
                                 # fair project for another time.
                                 (self.error, self.exception)[not ends]('Unterminated literal string')
                                 loc, ends, nest = ends
-                                token = fdata[m_start:loc] + ')' * nest
+                                token = fdata[m_start:loc] + b')' * nest
                                 current[0] = m_start, ends
                         token = cacheobj(cache, token, PdfString)
-                    elif firstch == '%':
+                    elif firstch == b'%':
                         # Comment
                         if self.strip_comments:
                             continue
