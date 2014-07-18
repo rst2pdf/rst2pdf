@@ -138,10 +138,6 @@ class Tokenizer(list):
             self = cls()
             self.client = client
 
-            # Deal with 8 bit bytes for now
-            if isinstance(source, str):
-                source = source.encode('utf-8')
-
             # Convert MS-DOS or Mac line endings to the one true way
             source = source.replace('\r\n', '\n').replace('\r', '\n')
             sourcelist = splitter(source)
@@ -166,7 +162,7 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            self *= len(sourcelist) / 2 + 1
+            self *= len(sourcelist) // 2 + 1
             index = 0
 
             # Create all the tokens
@@ -188,12 +184,11 @@ class Tokenizer(list):
 
             # Add a sentinel
             self[index] = (offset, '@', '@', '', '', linenum + 1, self)
-            self[index+1:] = []
+            self[index + 1:] = []
 
             # Put everything we need in the actual object instantiation
             self.reverse()
             self.source = source
-            self.next = self.pop
             self.push = self.append
             return self
         return newstring
@@ -266,11 +261,11 @@ class BaseObjects(object):
         ''' By default, RSON objects are dictionaries that
             allow attribute access to their existing contents.
         '''
-        
+
         def __getattr__(self, key):
             return self[key]
         def __setattr__(self, key, value):
-            self[key]=value
+            self[key] = value
 
         def append(self, itemlist):
             mydict = self
@@ -347,7 +342,7 @@ class Dispatcher(object):
                 # Begin some real ugliness here -- just modify our instance to
                 # have the correct user variables for the initialization functions.
                 # Seems to speed up simplejson testcases a bit.
-                self.__dict__ = dict((x,y) for (x,y) in key if y is not None)
+                self.__dict__ = dict((x, y) for (x, y) in key if y is not None)
                 func = parsercache[key] = parser_factory()
 
             return func(s)
@@ -360,7 +355,7 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, str=str: str(s, 'utf-8'))
+          lambda token, s, str=str: str(s))
     parse_encoded_chr = chr
     parse_join_str = ''.join
     cachestrings = False
@@ -455,13 +450,13 @@ class QuotedToken(object):
             end = source.find('"""', start)
             if end < 0:
                 tokens.error('Did not find end for triple-quoted string', token)
-            if source[end-1] != '\\':
+            if source[end - 1] != '\\':
                 break
-            result.append(source[start:end-1])
+            result.append(source[start:end - 1])
             result.append('"""')
             start = end + 3
         result.append(source[start:end])
-        offset = bisect.bisect(tokens, (- end -2, ))
+        offset = bisect.bisect(tokens, (-end - 2,))
         tokens[offset:] = []
         return ''.join(result)
 
@@ -489,9 +484,9 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, str=str: str(token[2], 'utf-8'))
+        lambda token, str=str: str(token[2]))
 
-    special_strings = dict(true = True, false = False, null = None)
+    special_strings = dict(true=True, false=False, null=None)
 
     unquoted_pattern = r'''
     (?:
@@ -610,7 +605,7 @@ class EqualToken(object):
             # Get rid of \n, and indent one past =
             indent = indent[1:] + ' '
 
-            bigstring = tokens.source[-firsttok[0] + 1 : -token[0]]
+            bigstring = tokens.source[-firsttok[0] + 1 :-token[0]]
             stringlist = bigstring.split('\n')
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)
@@ -680,7 +675,7 @@ class RsonParser(object):
                     if result and disallow_trailing_commas:
                         error('Unexpected trailing comma', token)
                     break
-                append(json_value_dispatch(t0,  bad_array_element)(token, next))
+                append(json_value_dispatch(t0, bad_array_element)(token, next))
                 delim = next()
                 t0 = delim[1]
                 if t0 == ',':
@@ -698,7 +693,7 @@ class RsonParser(object):
             while 1:
                 token = next()
                 t0 = token[1]
-                if t0  == '}':
+                if t0 == '}':
                     if result and disallow_trailing_commas:
                         error('Unexpected trailing comma', token)
                     break
@@ -894,8 +889,8 @@ class RsonParser(object):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
-            next = tokens.__next__
-            value, token = parse_recurse([next()], next, tokens)
+            next_ = lambda: tokens.pop()
+            value, token = parse_recurse([next_()], next_, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)
 
