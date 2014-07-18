@@ -6,7 +6,7 @@ Creates a rst2pdf stylesheet for each pygments style.
 
 import sys
 import os
-import simplejson
+import json
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
 
@@ -49,7 +49,7 @@ def css2rl(css):
 		style['textColor'] = 'black'
         styles.append([sname, style])
 
-    return simplejson.dumps({'styles': styles}, indent=2)
+    return json.dumps({'styles': styles}, indent=2)
 
 for name in list(pstyles.get_all_styles()):
     css = os.popen('pygmentize -S %s -f html' % name, 'r').read()
