@@ -2,7 +2,7 @@
 # Copyright (C) 2006-2012 Patrick Maupin, Austin, Texas
 # MIT license -- See LICENSE.txt for details
 
-from pdfrw.objects.pdfobject import PdfObject
+from .pdfobject import PdfObject
 
 class PdfName(object):
     ''' PdfName is a simple way to get a PDF name from a string:

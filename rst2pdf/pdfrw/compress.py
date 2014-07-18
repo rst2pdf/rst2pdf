@@ -8,9 +8,9 @@ using the flate (zlib) algorithm.  Maybe more later, but it's
 not a priority for me...
 '''
 import zlib
-from pdfrw.objects import PdfDict, PdfName
-from pdfrw.errors import log
-from pdfrw.uncompress import streamobjects
+from .objects import PdfDict, PdfName
+from .errors import log
+from .uncompress import streamobjects
 
 def compress(mylist):
     flate = PdfName.FlateDecode

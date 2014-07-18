@@ -23,9 +23,9 @@ try:
 except NameError:
     from sets import Set as set
 
-from pdfrw.objects import PdfName, PdfArray, PdfDict, IndirectPdfDict, PdfObject, PdfString
-from pdfrw.compress import compress as do_compress
-from pdfrw.errors import PdfOutputError, log
+from .objects import PdfName, PdfArray, PdfDict, IndirectPdfDict, PdfObject, PdfString
+from .compress import compress as do_compress
+from .errors import PdfOutputError, log
 
 NullObject = PdfObject('null')
 NullObject.indirect = True

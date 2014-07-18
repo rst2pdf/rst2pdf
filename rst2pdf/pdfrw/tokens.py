@@ -14,8 +14,8 @@ sixth edition, for PDF version 1.7, dated November 2006.
 
 import re
 import itertools
-from pdfrw.objects import PdfString, PdfObject
-from pdfrw.errors import log, PdfParseError
+from .objects import PdfString, PdfObject
+from .errors import log, PdfParseError
 
 def linepos(fdata, loc):
     line = fdata.count('\n', 0, loc) + 1

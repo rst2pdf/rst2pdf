@@ -2,8 +2,8 @@
 # Copyright (C) 2006-2012 Patrick Maupin, Austin, Texas
 # MIT license -- See LICENSE.txt for details
 
-from pdfrw.objects.pdfindirect import PdfIndirect
-from pdfrw.objects.pdfobject import PdfObject
+from .pdfindirect import PdfIndirect
+from .pdfobject import PdfObject
 
 def _resolved():
     pass

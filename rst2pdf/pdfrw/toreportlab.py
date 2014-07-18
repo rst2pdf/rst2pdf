@@ -52,7 +52,7 @@ Notes:
 '''
 
 from reportlab.pdfbase import pdfdoc as rldocmodule
-from pdfrw.objects import PdfDict, PdfArray, PdfName
+from .objects import PdfDict, PdfArray, PdfName
 
 RLStream = rldocmodule.PDFStream
 RLDict = rldocmodule.PDFDictionary

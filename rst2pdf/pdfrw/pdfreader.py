@@ -11,10 +11,10 @@ of the object.
 '''
 import gc
 
-from pdfrw.errors import PdfParseError, log
-from pdfrw.tokens import PdfTokens
-from pdfrw.objects import PdfDict, PdfArray, PdfName, PdfObject, PdfIndirect
-from pdfrw.uncompress import uncompress
+from .errors import PdfParseError, log
+from .tokens import PdfTokens
+from .objects import PdfDict, PdfArray, PdfName, PdfObject, PdfIndirect
+from .uncompress import uncompress
 
 class PdfReader(PdfDict):
 

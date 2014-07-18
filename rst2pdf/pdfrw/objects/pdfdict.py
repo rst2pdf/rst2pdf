@@ -2,9 +2,9 @@
 # Copyright (C) 2006-2012 Patrick Maupin, Austin, Texas
 # MIT license -- See LICENSE.txt for details
 
-from pdfrw.objects.pdfname import PdfName
-from pdfrw.objects.pdfindirect import PdfIndirect
-from pdfrw.objects.pdfobject import PdfObject
+from .pdfname import PdfName
+from .pdfindirect import PdfIndirect
+from .pdfobject import PdfObject
 
 class _DictSearch(object):
     '''  Used to search for inheritable attributes.

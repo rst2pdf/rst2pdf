@@ -28,9 +28,9 @@ Reference for content:   Adobe PDF reference, sixth edition, version 1.7
         Form xobjects discussed chapter 4.9, page 355
 '''
 
-from pdfrw.objects import PdfDict, PdfArray, PdfName
-from pdfrw.pdfreader import PdfReader
-from pdfrw.errors import log
+from .objects import PdfDict, PdfArray, PdfName
+from .pdfreader import PdfReader
+from .errors import log
 
 class ViewInfo(object):
     ''' Instantiate ViewInfo with a uri, and it will parse out

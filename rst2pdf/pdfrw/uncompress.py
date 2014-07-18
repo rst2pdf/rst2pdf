@@ -8,8 +8,8 @@ using the flate (zlib) algorithm.  Maybe more later, but it's
 not a priority for me...
 '''
 import zlib
-from pdfrw.objects import PdfDict, PdfName
-from pdfrw.errors import log
+from .objects import PdfDict, PdfName
+from .errors import log
 
 def streamobjects(mylist, isinstance=isinstance, PdfDict=PdfDict):
     for obj in mylist:

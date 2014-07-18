@@ -8,9 +8,9 @@ objects are arrays and dicts.  Either of these can be
 indirect or not, and dicts could have an associated
 stream.
 '''
-from pdfrw.objects.pdfname import PdfName
-from pdfrw.objects.pdfdict import PdfDict, IndirectPdfDict
-from pdfrw.objects.pdfarray import PdfArray
-from pdfrw.objects.pdfobject import PdfObject
-from pdfrw.objects.pdfstring import PdfString
-from pdfrw.objects.pdfindirect import PdfIndirect
+from .pdfname import PdfName
+from .pdfdict import PdfDict, IndirectPdfDict
+from .pdfarray import PdfArray
+from .pdfobject import PdfObject
+from .pdfstring import PdfString
+from .pdfindirect import PdfIndirect
