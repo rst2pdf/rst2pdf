@@ -12,11 +12,11 @@ class TestEncoding(unittest.TestCase):
 
     @staticmethod
     def decode(value):
-        return pdfrw.pdfobjects.PdfString(value).decode()
+        return pdfrw.PdfString(value).decode()
 
     @staticmethod
     def encode(value):
-        return str(pdfrw.pdfobjects.PdfString.encode(value))
+        return str(pdfrw.PdfString.encode(value))
 
     @classmethod
     def encode_decode(cls, value):

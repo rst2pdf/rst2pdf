@@ -18,11 +18,6 @@ addpage() assumes that the pages are part of a valid
 tree/forest of PDF objects.
 '''
 
-try:
-    set
-except NameError:
-    from sets import Set as set
-
 from .objects import PdfName, PdfArray, PdfDict, IndirectPdfDict, PdfObject, PdfString
 from .compress import compress as do_compress
 from .errors import PdfOutputError, log
@@ -33,7 +28,7 @@ NullObject.Type = 'Null object'
 
 def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
         id=id, isinstance=isinstance, getattr=getattr, len=len,
-        sum=sum, set=set, str=str, str=str,
+        sum=sum, set=set, str=str,
         hasattr=hasattr, repr=repr, enumerate=enumerate,
         list=list, dict=dict, tuple=tuple,
         do_compress=do_compress, PdfArray=PdfArray,

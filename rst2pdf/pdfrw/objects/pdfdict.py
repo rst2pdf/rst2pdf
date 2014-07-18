@@ -139,7 +139,7 @@ class PdfDict(dict):
                 notnone = value is not None
                 self.Length = notnone and PdfObject(len(value)) or None
 
-    def iteritems(self, dictiter=dict.iteritems, isinstance=isinstance, PdfIndirect=PdfIndirect):
+    def iteritems(self, dictiter=dict.items, isinstance=isinstance, PdfIndirect=PdfIndirect):
         ''' Iterate over the dictionary, resolving any unresolved objects
         '''
         for key, value in list(dictiter(self)):

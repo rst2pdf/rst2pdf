@@ -34,10 +34,6 @@ class PdfArray(list):
         self._resolve()
         return listget(self, index)
 
-    def __getslice__(self, index, listget=list.__getslice__):
-        self._resolve()
-        return listget(self, index)
-
     def __iter__(self, listiter=list.__iter__):
         self._resolve()
         return listiter(self)

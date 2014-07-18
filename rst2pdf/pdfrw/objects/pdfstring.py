@@ -66,8 +66,8 @@ class PdfString(str):
             source = source.encode('utf-8')
         else:
             source = str(source)
-        source = source.replace('\\', '\\\\')
-        source = source.replace('(', '\\(')
-        source = source.replace(')', '\\)')
-        return cls('(' + source + ')')
+        source = source.replace(b'\\', b'\\\\')
+        source = source.replace(b'(', b'\\(')
+        source = source.replace(b')', b'\\)')
+        return cls(b'(' + source + b')')
     encode = classmethod(encode)

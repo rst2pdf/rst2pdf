@@ -7,7 +7,6 @@ PDF Exceptions and error handling
 '''
 
 import logging
-from exceptions import Exception
 
 
 logging.basicConfig(
