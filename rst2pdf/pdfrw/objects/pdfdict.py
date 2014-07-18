@@ -84,9 +84,9 @@ class PdfDict(dict):
     indirect = False
     stream = None
 
-    _special = dict(indirect = ('indirect', False),
-                    stream = ('stream', True),
-                    _stream = ('stream', False),
+    _special = dict(indirect=('indirect', False),
+                    stream=('stream', True),
+                    _stream=('stream', False),
                    )
 
     def __setitem__(self, name, value, setter=dict.__setitem__):

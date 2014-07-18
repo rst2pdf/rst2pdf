@@ -43,11 +43,11 @@ class ViewInfo(object):
     rotate = None
 
     def __init__(self, pageinfo='', **kw):
-        pageinfo=pageinfo.split('#',1)
+        pageinfo = pageinfo.split('#', 1)
         if len(pageinfo) == 2:
             pageinfo[1:] = pageinfo[1].replace('&', '#').split('#')
         for key in 'page viewrect'.split():
-            if pageinfo[0].startswith(key+'='):
+            if pageinfo[0].startswith(key + '='):
                 break
         else:
             self.docname = pageinfo.pop(0)
@@ -83,7 +83,7 @@ def get_rotation(rotate):
     return rotate / 90
 
 def rotate_point(point, rotation):
-    ''' Rotate an (x,y) coordinate clockwise by a 
+    ''' Rotate an (x,y) coordinate clockwise by a
         rotation code specifying a multiple of 90 degrees.
     '''
     if rotation & 1:
@@ -137,10 +137,10 @@ def _cache_xobj(contents, resources, mbox, bbox, rotation):
         func = (_get_fullpage, _get_subpage)[mbox != bbox]
         result = PdfDict(
             func(contents, resources, mbox, bbox, rotation),
-            Type = PdfName.XObject,
-            Subtype = PdfName.Form,
-            FormType = 1,
-            BBox = PdfArray(bbox),
+            Type=PdfName.XObject,
+            Subtype=PdfName.Form,
+            FormType=1,
+            BBox=PdfArray(bbox),
         )
         rect = bbox
         if rotation:
@@ -170,10 +170,10 @@ def _get_subpage(contents, resources, mbox, bbox, rotation):
         items from the page.
     '''
     return PdfDict(
-        stream = '/FullPage Do\n',
-        Resources = PdfDict(
-            XObject = PdfDict(
-                FullPage = _cache_xobj(contents, resources, mbox, mbox, 0)
+        stream='/FullPage Do\n',
+        Resources=PdfDict(
+            XObject=PdfDict(
+                FullPage=_cache_xobj(contents, resources, mbox, mbox, 0)
             )
         )
     )
@@ -215,7 +215,7 @@ def docxobj(pageinfo, doc=None, allow_compressed=True):
     elif pageinfo.doc is not None:
         doc = pageinfo.doc
     else:
-        doc = pageinfo.doc = PdfReader(pageinfo.docname, decompress = not allow_compressed)
+        doc = pageinfo.doc = PdfReader(pageinfo.docname, decompress=not allow_compressed)
     assert isinstance(doc, PdfReader)
 
     sourcepage = doc.pages[(pageinfo.page or 1) - 1]

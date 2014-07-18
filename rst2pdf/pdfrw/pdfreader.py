@@ -120,9 +120,9 @@ class PdfReader(PdfDict):
         return startstream
 
     def readstream(self, obj, startstream, source,
-                     streamending = 'endstream endobj'.split(), int=int):
+                     streamending='endstream endobj'.split(), int=int):
         fdata = source.fdata
-        length =  int(obj.Length)
+        length = int(obj.Length)
         source.floc = target_endstream = startstream + length
         endit = source.multiple(2)
         obj._stream = fdata[startstream:target_endstream]
@@ -134,7 +134,7 @@ class PdfReader(PdfDict):
 
         do_warn, self.warned_bad_stream_end = self.warned_bad_stream_end, False
 
-        #TODO:  Extract maxstream from dictionary of object offsets
+        # TODO:  Extract maxstream from dictionary of object offsets
         # and use rfind instead of find.
         maxstream = len(fdata) - 20
         endstream = fdata.find('endstream', startstream, maxstream)
@@ -143,9 +143,9 @@ class PdfReader(PdfDict):
         if endstream < 0:
             source.error('Could not find endstream')
             return
-        if length == room + 1 and fdata[startstream-2:startstream] == '\r\n':
+        if length == room + 1 and fdata[startstream - 2:startstream] == '\r\n':
             source.warning(r"stream keyword terminated by \r without \n")
-            obj._stream = fdata[startstream-1:target_endstream-1]
+            obj._stream = fdata[startstream - 1:target_endstream - 1]
             return
         source.floc = endstream
         if length > room:
@@ -190,7 +190,7 @@ class PdfReader(PdfDict):
             objheader = '%d %d obj' % (objnum, gennum)
             fdata = source.fdata
             offset2 = fdata.find('\n' + objheader) + 1 or fdata.find('\r' + objheader) + 1
-            if not offset2 or fdata.find(fdata[offset2-1] + objheader, offset2) > 0:
+            if not offset2 or fdata.find(fdata[offset2 - 1] + objheader, offset2) > 0:
                 source.warning("Expected indirect object '%s'" % objheader)
                 return None
             source.warning("Indirect object %s found at incorrect offset %d (expected offset %d)" %
@@ -286,8 +286,8 @@ class PdfReader(PdfDict):
             source.exception('Invalid table format')
 
     def readpages(self, node):
-        pagename=PdfName.Page
-        pagesname=PdfName.Pages
+        pagename = PdfName.Page
+        pagesname = PdfName.Pages
         catalogname = PdfName.Catalog
         typename = PdfName.Type
         kidname = PdfName.Kids
@@ -402,7 +402,7 @@ class PdfReader(PdfDict):
                 newdict = original_newdict
             self.update(newdict)
 
-            #self.read_all_indirect(source)
+            # self.read_all_indirect(source)
             private.pages = self.readpages(self.Root)
             if decompress:
                 self.uncompress()

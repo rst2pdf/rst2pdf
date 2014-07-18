@@ -16,7 +16,7 @@ def streamobjects(mylist, isinstance=isinstance, PdfDict=PdfDict):
         if isinstance(obj, PdfDict) and obj.stream is not None:
             yield obj
 
-def uncompress(mylist, warnings=set(), flate = PdfName.FlateDecode,
+def uncompress(mylist, warnings=set(), flate=PdfName.FlateDecode,
                     decompress=zlib.decompressobj, isinstance=isinstance, list=list, len=len):
     ok = True
     for obj in streamobjects(mylist):

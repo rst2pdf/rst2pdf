@@ -76,7 +76,7 @@ def _makestream(rldoc, pdfobj, xobjtype=PdfName.XObject):
     rlobj = RLStream(rldict, pdfobj.stream)
 
     if pdfobj.Type == xobjtype:
-        shortname = 'pdfrw_%s' % (rldoc.objectcounter+1)
+        shortname = 'pdfrw_%s' % (rldoc.objectcounter + 1)
         fullname = rldoc.getXObjectName(shortname)
     else:
         shortname = fullname = None

@@ -32,7 +32,7 @@ NullObject.indirect = True
 NullObject.Type = 'Null object'
 
 def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
-        id=id, isinstance=isinstance, getattr=getattr,len=len,
+        id=id, isinstance=isinstance, getattr=getattr, len=len,
         sum=sum, set=set, str=str, str=str,
         hasattr=hasattr, repr=repr, enumerate=enumerate,
         list=list, dict=dict, tuple=tuple,
@@ -83,7 +83,7 @@ def FormatObjects(f, trailer, version='1.3', compress=True, killobj=(),
             objnum = len(objlist) + 1
             objlist_append(None)
             indirect_dict[objid] = objnum
-            deferred.append((objnum-1, obj))
+            deferred.append((objnum - 1, obj))
         return '%s 0 R' % objnum
 
     def format_array(myarray, formatter):
@@ -212,14 +212,14 @@ class PdfWriter(object):
         if page.Type != PdfName.Page:
             raise PdfOutputError('Bad /Type:  Expected %s, found %s'
                                   % (PdfName.Page, page.Type))
-        inheritable = page.inheritable # searches for resources
+        inheritable = page.inheritable  # searches for resources
         self.pagearray.append(
             IndirectPdfDict(
                 page,
-                Resources = inheritable.Resources,
-                MediaBox = inheritable.MediaBox,
-                CropBox = inheritable.CropBox,
-                Rotate = inheritable.Rotate,
+                Resources=inheritable.Resources,
+                MediaBox=inheritable.MediaBox,
+                CropBox=inheritable.CropBox,
+                Rotate=inheritable.Rotate,
             )
         )
 
@@ -249,12 +249,12 @@ class PdfWriter(object):
 
         # Create the basic object structure of the PDF file
         trailer = PdfDict(
-            Root = IndirectPdfDict(
-                Type = PdfName.Catalog,
-                Pages = IndirectPdfDict(
-                    Type = PdfName.Pages,
-                    Count = PdfObject(len(self.pagearray)),
-                    Kids = self.pagearray
+            Root=IndirectPdfDict(
+                Type=PdfName.Catalog,
+                Pages=IndirectPdfDict(
+                    Type=PdfName.Pages,
+                    Count=PdfObject(len(self.pagearray)),
+                    Kids=self.pagearray
                 )
             )
         )
@@ -288,7 +288,7 @@ if __name__ == '__main__':
     x = pdfreader.PdfReader('source.pdf')
     y = PdfWriter()
     for i, page in enumerate(x.pages):
-        print('  Adding page', i+1, '\r', end=' ')
+        print('  Adding page', i + 1, '\r', end=' ')
         y.addpage(page)
     print()
     y.write('result.pdf')

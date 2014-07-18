@@ -126,12 +126,12 @@ class PdfTokens(object):
                         # they are present, we exit the for loop
                         # and get back in with a new starting location.
                         ends = None  # For broken strings
-                        if fdata[match.end(1)-1] != ')':
+                        if fdata[match.end(1) - 1] != ')':
                             nest = 2
                             m_start, loc = tokspan
                             for match in findparen(fdata, loc):
                                 loc = match.end(1)
-                                ending = fdata[loc-1] == ')'
+                                ending = fdata[loc - 1] == ')'
                                 nest += 1 - ending * 2
                                 if not nest:
                                     break
