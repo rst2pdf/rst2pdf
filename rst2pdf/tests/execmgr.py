@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 # See LICENSE.txt for licensing terms
 
@@ -43,16 +43,16 @@ class BaseExec(object):
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                preexec_fn=None,   # Callable object in child process
-                close_fds=False,   
+                preexec_fn=None,  # Callable object in child process
+                close_fds=False,
                 shell=False,
                 cwd=None,
                 env=None,
                 universal_newlines=False,
                 startupinfo=None,
                 creationflags=0,
-                timeout=500.0,    # Time in seconds before termination
-                killdelay=20.0,   # Time in seconds after termination before kill
+                timeout=500.0,  # Time in seconds before termination
+                killdelay=20.0,  # Time in seconds after termination before kill
                 python_proc=None,
     )
 
@@ -163,14 +163,14 @@ class PipeReader(object):
         such as the subprocess's stdin, but the initial version is
         input pipes only (the subprocess's stdout and stderr).
     '''
-    TIMEOUT = 1.0     # Poll interval in seconds
+    TIMEOUT = 1.0  # Poll interval in seconds
     BUFSIZE = 100000
     def __init__(self, *pipes, **kw):
         self.timeout = kw.pop('timeout', self.TIMEOUT)
         self.bufsize = kw.pop('bufsize', self.BUFSIZE)
         self.by_pipenum = {}  # Dictionary of read functions
-        self.ready = []       # List of ready pipes
-        assert not kw, kw     # Check for mispelings :)
+        self.ready = []  # List of ready pipes
+        assert not kw, kw  # Check for mispelings :)
         for pipe in pipes:
             self.addpipe(pipe)
 
@@ -200,9 +200,9 @@ class PipeReader(object):
             allpipes = list(self.by_pipenum)
             if not allpipes:
                 raise StopIteration
-            ready[:] = select.select(allpipes,[],[],self.timeout)[0]
+            ready[:] = select.select(allpipes, [], [], self.timeout)[0]
             if not ready:
-                return None, None   # Allow code to execute after timeout
+                return None, None  # Allow code to execute after timeout
         return self.by_pipenum[ready.pop()]()
 
 
@@ -358,7 +358,7 @@ if __name__ == '__main__':
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
-        #raise SystemExit('I am bad')
+        # raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
         print("Starting subprocess")
