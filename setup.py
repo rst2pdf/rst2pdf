@@ -42,11 +42,6 @@ install_requires = [
         'Pygments',
         ]
 
-try:
-    import json
-except ImportError:
-    install_requires.append('simplejson')
-
 tests_require = ['pyPdf']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
