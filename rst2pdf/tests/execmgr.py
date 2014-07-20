@@ -287,6 +287,8 @@ class TextOutExec(BaseExec):
         while not lines:
             self.checktimeout()
             for pipe, data in self.pipes:
+                if data is not None:
+                    data = data.decode('utf-8')
                 if pipe is not None:
                     lines.extend(self.pipedir[pipe](data))
                     lines.reverse()
