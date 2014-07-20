@@ -341,7 +341,8 @@ class Preprocess(object):
 
     # Once we have used the keywords in our regular expression,
     # fix them up for use by the parser.
-    keywords = dict([(x + '::', vars()['handle_' + x]) for x in keywords])
+    v = vars()
+    keywords = dict([(x + '::', v['handle_' + x]) for x in keywords])
 
 class MyStyles(str):
     ''' This class conforms to the styles.py processing requirements
