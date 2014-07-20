@@ -3,3 +3,7 @@
 .settings
 *.pyc
 *.pyo
+*.egg
+rst2pdf.egg-info
+rst2pdf/tests/input/tmp*
+rst2pdf/tests/output
