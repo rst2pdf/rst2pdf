@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 '''
 This module provides one useful class:  NodeHandler
@@ -155,7 +155,7 @@ class NodeHandler(object, metaclass=MetaHelper):
     def log_unknown(self, node, during):
         if not hasattr(self, 'unkn_node'):
             self.unkn_node = set()
-        cln=self.getclassname(node)
+        cln = self.getclassname(node)
         if not cln in self.unkn_node:
             self.unkn_node.add(cln)
             log.warning("Unkn. node (self.%s): %s [%s]",
@@ -212,7 +212,7 @@ class NodeHandler(object, metaclass=MetaHelper):
                 else:
                     log.info("Unknown class %s, ignoring. [%s]",
                         node['classes'][0], nodeid(node))
-        except TypeError: # Happens when a docutils.node.Text reaches here
+        except TypeError:  # Happens when a docutils.node.Text reaches here
             pass
 
         if style is None or style == client.styles['bodytext']:
@@ -224,9 +224,9 @@ class NodeHandler(object, metaclass=MetaHelper):
         elements = self.gather_elements(client, node, style)
 
         # Make all the sidebar cruft unreachable
-        #if style.__dict__.get('float','None').lower() !='none':
-            #node.elements=[Sidebar(node.elements,style)]
-        #elif 'width' in style.__dict__:
+        # if style.__dict__.get('float','None').lower() !='none':
+            # node.elements=[Sidebar(node.elements,style)]
+        # elif 'width' in style.__dict__:
 
         if 'width' in style.__dict__:
             elements = [BoundByWidth(style.width,
@@ -243,13 +243,13 @@ class NodeHandler(object, metaclass=MetaHelper):
         try:
             for i in node['ids']:
                 client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
+        except TypeError:  # Happens with docutils.node.Text
             pass
 
         elements = self.getelements(client, node, style)
 
         if node.line and client.debugLinesPdf:
-            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
+            elements.insert(0, TocEntry(client.depth - 1, 'LINE-%s' % node.line))
         node.elements = elements
         return elements
 

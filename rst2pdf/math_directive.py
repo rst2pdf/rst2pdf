@@ -30,9 +30,9 @@ if 'Directive' in rst.__dict__:
                 latex = self.arguments[0] + '\n\n' + latex
             if self.arguments and self.arguments[0] and not latex:
                 latex = self.arguments[0]
-            label=self.options.get('label', None)
-            fontsize=self.options.get('fontsize', None)
-            color=self.options.get('color', None)
+            label = self.options.get('label', None)
+            fontsize = self.options.get('fontsize', None)
+            color = self.options.get('color', None)
             return [math_node(latex=latex,
                               label=label,
                               fontsize=fontsize,
@@ -73,11 +73,11 @@ roles.register_local_role('math', math_role)
 
 class eq_node(Inline, Element):
     def __init__(self, rawsource='', label=None, *children, **attributes):
-        self.label=label
+        self.label = label
         Element.__init__(self, rawsource, *children, **attributes)
 
 def eq_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    return [eq_node(label=text)],[]
+    return [eq_node(label=text)], []
 
 roles.register_local_role('eq', eq_role)
 
@@ -85,17 +85,17 @@ roles.register_local_role('eq', eq_role)
 class HandleMath(basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
         if not node.fontsize:
-            node.fontsize=style.fontSize
+            node.fontsize = style.fontSize
         if not node.color:
-            node.color=style.textColor.rgb()
-        return [math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
+            node.color = style.textColor.rgb()
+        return [math_flowable.Math(node.math_data, node.label, node.fontsize, node.color)]
 
     def get_text(self, client, node, replaceEnt):
-        #get style for current node
-        sty=client.styles.styleForNode(node)
-        node_fontsize=sty.fontSize
-        node_color='#'+sty.textColor.hexval()[2:]
-        mf = math_flowable.Math(node.math_data,label=node.label,fontsize=node_fontsize,color=node_color)
+        # get style for current node
+        sty = client.styles.styleForNode(node)
+        node_fontsize = sty.fontSize
+        node_color = '#' + sty.textColor.hexval()[2:]
+        mf = math_flowable.Math(node.math_data, label=node.label, fontsize=node_fontsize, color=node_color)
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()
@@ -106,6 +106,6 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
 class HandleEq(basenodehandler.NodeHandler, eq_node):
 
     def get_text(self, client, node, replaceEnt):
-        return '<a href="equation-%s" color="%s">%s</a>'%(node.label,
+        return '<a href="equation-%s" color="%s">%s</a>' % (node.label,
             client.styles.linkColor, node.label)
 

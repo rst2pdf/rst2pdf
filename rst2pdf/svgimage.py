@@ -39,14 +39,14 @@ class SVGImage(Flowable):
             self._mode = None
             log.error("SVG support not enabled,"
                 " please install svg2rlg.")
-        self.__ratio = float(self.imageWidth)/self.imageHeight
-        if kind in ['direct','absolute']:
+        self.__ratio = float(self.imageWidth) / self.imageHeight
+        if kind in ['direct', 'absolute']:
             self.drawWidth = width or self.imageWidth
             self.drawHeight = height or self.imageHeight
-        elif kind in ['bound','proportional']:
-            factor = min(float(width)/self.imageWidth,float(height)/self.imageHeight)
-            self.drawWidth = self.imageWidth*factor
-            self.drawHeight = self.imageHeight*factor
+        elif kind in ['bound', 'proportional']:
+            factor = min(float(width) / self.imageWidth, float(height) / self.imageHeight)
+            self.drawWidth = self.imageWidth * factor
+            self.drawHeight = self.imageHeight * factor
 
     def wrap(self, aW, aH):
         return self.drawWidth, self.drawHeight
@@ -55,14 +55,14 @@ class SVGImage(Flowable):
         if _sW and hasattr(self, 'hAlign'):
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
-                x += 0.5*_sW
+                x += 0.5 * _sW
             elif a in ('RIGHT', TA_RIGHT):
                 x += _sW
             elif a not in ('LEFT', TA_LEFT):
                 raise ValueError("Bad hAlign value " + str(a))
         canv.saveState()
         canv.translate(x, y)
-        canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
+        canv.scale(self.drawWidth / self._w, self.drawHeight / self._h)
         self.doc._drawOn(canv)
         canv.restoreState()
 

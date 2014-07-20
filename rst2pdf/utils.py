@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 import shlex
 
@@ -28,7 +28,7 @@ def parseRaw(data, node):
         lexer.whitespace += ','
         tokens = list(lexer)
         if not tokens:
-            continue # Empty line
+            continue  # Empty line
         command = tokens[0]
         if command == 'PageBreak':
             if len(tokens) == 1:
@@ -39,12 +39,12 @@ def parseRaw(data, node):
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='even'))
             else:
-                elements.append(MyPageBreak(tokens[1],breakTo='even'))
+                elements.append(MyPageBreak(tokens[1], breakTo='even'))
         elif command == 'OddPageBreak':
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='odd'))
             else:
-                elements.append(MyPageBreak(tokens[1],breakTo='odd'))
+                elements.append(MyPageBreak(tokens[1], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
                 elements.append(CondPageBreak(99999))
@@ -58,7 +58,7 @@ def parseRaw(data, node):
         elif command == 'SetPageCounter':
             elements.append(flowables.PageCounter(*tokens[1:]))
         else:
-            log.error('Unknown command %s in raw pdf directive [%s]'%(command,nodeid(node)))
+            log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements
 
 from reportlab.lib.colors import Color, CMYKColor, getAllNamedColors, toColor, \
@@ -70,7 +70,7 @@ try:
     from xhtml2pdf.util import memoized
     from xhtml2pdf.context import pisaContext
     from xhtml2pdf.default import DEFAULT_CSS
-    from xhtml2pdf.parser import pisaParser,pisaGetAttributes
+    from xhtml2pdf.parser import pisaParser, pisaGetAttributes
     from xhtml2pdf.document import pisaStory
     from reportlab.platypus.flowables import Spacer
     from reportlab.platypus.frames import Frame
@@ -83,7 +83,7 @@ except ImportError:
         memoized = lambda *a: a
         from sx.pisa3.pisa_context import pisaContext
         from sx.pisa3.pisa_default import DEFAULT_CSS
-        from sx.pisa3.pisa_parser import pisaParser,pisaGetAttributes
+        from sx.pisa3.pisa_parser import pisaParser, pisaGetAttributes
         from sx.pisa3.pisa_document import pisaStory
         from reportlab.platypus.flowables import Spacer
         from reportlab.platypus.frames import Frame
@@ -122,11 +122,11 @@ if HAS_XHTML2PDF:
         else:
             # Shrug
             pass
-        return toColor(value, default) # Calling the reportlab function
+        return toColor(value, default)  # Calling the reportlab function
 
-    #import xhtml2pdf.util
-    #xhtml2pdf.util.getColor = getColor2
-    
+    # import xhtml2pdf.util
+    # xhtml2pdf.util.getColor = getColor2
+
     import cgi
     import logging
     from xml.dom import Node
@@ -161,15 +161,15 @@ if HAS_XHTML2PDF:
                     if name == "style":
                         for node in node.childNodes:
                             data += pisaPreLoop2(node, context, collect=True)
-                        #context.addCSS(data)
+                        # context.addCSS(data)
                         return ""
-                        #collect = True
+                        # collect = True
 
                     if name == "link" and attr.href and attr.rel.lower() == "stylesheet":
                         # print "CSS LINK", attr
                         context.addCSS('\n@import "%s" %s;' % (attr.href, ",".join(media)))
                         # context.addCSS(unicode(file(attr.href, "rb").read(), attr.charset))
-        #else:
+        # else:
         #    print node.nodeType
 
         for node in node.childNodes:
@@ -182,7 +182,7 @@ if HAS_XHTML2PDF:
 
     pisa_parser.pisaPreLoop = pisaPreLoop2
 
-        
+
     HTML_CSS = """
     html {
         font-family: Helvetica;
@@ -391,16 +391,16 @@ if HAS_XHTML2PDF:
     """
 
     def parseHTML(data, node):
-        dest=None 
-        path=None 
-        link_callback=None 
-        debug=0
-        default_css=HTML_CSS
-        xhtml=False
-        encoding=None
-        xml_output=None
-        raise_exception=True
-        capacity=100*1024
+        dest = None
+        path = None
+        link_callback = None
+        debug = 0
+        default_css = HTML_CSS
+        xhtml = False
+        encoding = None
+        xml_output = None
+        raise_exception = True
+        capacity = 100 * 1024
 
         # Prepare simple context
         context = pisaContext(path, debug=debug, capacity=capacity)
@@ -411,7 +411,7 @@ if HAS_XHTML2PDF:
                             encoding, context=context, xml_output=xml_output)
         return context.story
 
-else: # no xhtml2pdf
+else:  # no xhtml2pdf
     def parseHTML(data, none):
         log.error("You need xhtml2pdf installed to use the raw HTML directive.")
         return []

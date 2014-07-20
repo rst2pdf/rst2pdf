@@ -69,7 +69,7 @@ def dumps(obj, forcestyledict=True):
             result.append('{}')
             return
         obj = sorted(obj.items())
-        multiline = indent and ( len(obj) > 2 or
+        multiline = indent and (len(obj) > 2 or
                     len(obj) == 2 and (
                          isinstance(obj[0][-1], (list, dict)) or
                          isinstance(obj[-1][-1], (list, dict))))

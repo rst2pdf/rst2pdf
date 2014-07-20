@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date$
@@ -143,7 +143,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             else:
                 encoding = 'utf-8'
             content = codecs.open(options['include'], 'r', encoding).read().rstrip()
-        except (IOError, UnicodeError): # no file or problem finding it or reading it
+        except (IOError, UnicodeError):  # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
             content = ''
         line_offset = 0
@@ -220,7 +220,7 @@ def code_block_directive(name, arguments, options, content, lineno,
     else:
         tabw = int(options.get('tab-width', 8))
 
-    content = content.replace('\t',' '*tabw)
+    content = content.replace('\t', ' ' * tabw)
 
     withln = "linenos" in options
     if not "linenos_offset" in options:
@@ -235,7 +235,7 @@ def code_block_directive(name, arguments, options, content, lineno,
         total_lines = content.count('\n') + 1 + line_offset
         lnwidth = len(str(total_lines))
         fstr = "\n%%%dd " % lnwidth
-        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno,   classes=['linenumber'])
+        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno, classes=['linenumber'])
 
     # parse content with pygments and add to code_block element
     for cls, value in DocutilsInterface(content, language, options):
@@ -266,17 +266,17 @@ def code_block_directive(name, arguments, options, content, lineno,
 #
 # Move to separated module??
 
-def zero_or_positive_int(argument): 
-    """ 
-    Converts a string into python positive integer including zero. 
-    None is a special case; it is regarded as zero. 
-    """ 
-    if argument is None: 
-        return 0 
-    elif argument == '0': 
-        return 0 
-    else: 
-        return directives.positive_int(argument) 
+def zero_or_positive_int(argument):
+    """
+    Converts a string into python positive integer including zero.
+    None is a special case; it is regarded as zero.
+    """
+    if argument is None:
+        return 0
+    elif argument == '0':
+        return 0
+    else:
+        return directives.positive_int(argument)
 
 
 def string_list(argument):

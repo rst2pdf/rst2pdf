@@ -34,7 +34,7 @@ from docutils.parsers import rst
 from .opt_imports import aafigure
 from .log import log
 
-WARNED=False
+WARNED = False
 
 class Aanode(Element):
     children = ()
@@ -56,7 +56,7 @@ class Aanode(Element):
             aafigure.pdf.PDFOutputVisitor,
             options=options)
         return renderPDF.GraphicsFlowable(visitor.drawing)
-        
+
 
 class Aafig(rst.Directive):
     """
@@ -67,15 +67,15 @@ class Aafig(rst.Directive):
     optional_arguments = 0
     final_argument_whitespace = False
     option_spec = dict(
-        scale = float,
-        line_width = float,
-        background = str,
-        foreground = str,
-        fill = str,
-        name = str,
-        aspect = float,
-        textual = directives.flag,
-        proportional = directives.flag,
+        scale=float,
+        line_width=float,
+        background=str,
+        foreground=str,
+        fill=str,
+        name=str,
+        aspect=float,
+        textual=directives.flag,
+        proportional=directives.flag,
     )
 
     def run(self):
@@ -88,7 +88,7 @@ class Aafig(rst.Directive):
             return [Aanode(self.content, self.options)]
         if not WARNED:
             log.error('To render the aafigure directive correctly, please install aafigure')
-            WARNED=True
+            WARNED = True
         return [literal_block(text='\n'.join(self.content))]
 
 

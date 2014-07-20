@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -45,7 +45,7 @@ class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
-        
+
         if node['classes']:
             pre = client.styleToFont(node['classes'][0])
         else:
@@ -61,7 +61,7 @@ class HandleLiteral(NodeHandler, docutils.nodes.literal):
         text = escape(node.astext())
         text = text.replace(' ', '&nbsp;')
         return text
-        
+
 class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
     post = "</super>"
@@ -79,32 +79,32 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
         uri = node.get('refuri')
         if uri:
             # Issue 366: links to "#" make no sense in a PDF
-            if uri =="#":
+            if uri == "#":
                 return "", ""
             if uri.startswith ('#'):
                 pass
-            elif client.baseurl: # Need to join the uri with the base url
+            elif client.baseurl:  # Need to join the uri with the base url
                 uri = urljoin(client.baseurl, uri)
 
             if urlparse(uri)[0] and client.inlinelinks:
                 # external inline reference
-                if uri in [node.astext(),"mailto:"+node.astext()]:
+                if uri in [node.astext(), "mailto:" + node.astext()]:
                     # No point on repeating it
                     post = ''
                 elif uri.startswith('http://') or uri.startswith('ftp://'):
                     post = ' (%s)' % uri
                 elif uri.startswith('mailto:'):
-                    #No point on showing "mailto:"
+                    # No point on showing "mailto:"
                     post = ' (%s)' % uri[7:]
             else:
                 # A plain old link
-                pre += '<a href="%s" color="%s">' %\
+                pre += '<a href="%s" color="%s">' % \
                     (uri, client.styles.linkColor)
                 post = '</a>' + post
         else:
             uri = node.get('refid')
             if uri:
-                pre += '<a href="#%s" color="%s">' %\
+                pre += '<a href="#%s" color="%s">' % \
                     (uri, client.styles.linkColor)
                 post = '</a>' + post
         return pre, post
@@ -141,17 +141,17 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         st_name = 'image'
         if node.get('classes'):
             st_name = node.get('classes')[0]
-        style=client.styles[st_name]
+        style = client.styles[st_name]
         uri = str(node.get("uri"))
-        if uri.split("://")[0].lower() not in ('http','ftp','https'):
-            imgname = os.path.join(client.basedir,uri)
+        if uri.split("://")[0].lower() not in ('http', 'ftp', 'https'):
+            imgname = os.path.join(client.basedir, uri)
         else:
             imgname = uri
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
         except ValueError:
             # Broken image, return arbitrary stuff
-            imgname=missing
+            imgname = missing
             w, h, kind = 100, 100, 'direct'
         node.elements = [
             MyImage(filename=imgname, height=h, width=w,
@@ -165,7 +165,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         node.elements[0].image.hAlign = alignment
         node.elements[0].spaceBefore = style.spaceBefore
         node.elements[0].spaceAfter = style.spaceAfter
-        
+
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment
@@ -174,38 +174,38 @@ class HandleImage(NodeHandler, docutils.nodes.image):
     def get_text(self, client, node, replaceEnt):
         # First see if the image file exists, or else,
         # use image-missing.png
-        imgname = os.path.join(client.basedir,str(node.get("uri")))
+        imgname = os.path.join(client.basedir, str(node.get("uri")))
         try:
             w, h, kind = MyImage.size_for_node(node, client=client)
         except ValueError:
             # Broken image, return arbitrary stuff
-            imgname=missing
+            imgname = missing
             w, h, kind = 100, 100, 'direct'
 
-        alignment=node.get('align', 'CENTER').lower()
+        alignment = node.get('align', 'CENTER').lower()
         if alignment in ('top', 'middle', 'bottom'):
-            align='valign="%s"'%alignment
+            align = 'valign="%s"' % alignment
         else:
-            align=''
+            align = ''
         # TODO: inline images don't support SVG, vectors and PDF,
         #       which may be surprising. So, work on converting them
         #       previous to passing to reportlab.
         # Try to rasterize using the backend
         w, h, kind = MyImage.size_for_node(node, client=client)
-        uri=MyImage.raster(imgname, client)
-        return '<img src="%s" width="%f" height="%f" %s/>'%\
+        uri = MyImage.raster(imgname, client)
+        return '<img src="%s" width="%f" height="%f" %s/>' % \
             (uri, w, h, align)
 
-class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference,docutils.nodes.citation_reference):
+class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference, docutils.nodes.citation_reference):
     def get_text(self, client, node, replaceEnt):
         # TODO: when used in Sphinx, all footnotes are autonumbered
-        anchors=''
+        anchors = ''
         for i in node.get('ids'):
             if i not in client.targets:
-                anchors+='<a name="%s"/>' % i
+                anchors += '<a name="%s"/>' % i
                 client.targets.append(i)
-        return '%s<super><a href="%s" color="%s">%s</a></super>'%\
-            (anchors, '#' + node.get('refid',node.astext()),
+        return '%s<super><a href="%s" color="%s">%s</a></super>' % \
+            (anchors, '#' + node.get('refid', node.astext()),
                 client.styles.linkColor, node.astext())
 
 class HandleTarget(NodeHandler, docutils.nodes.target):

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL: http://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
-#$LastChangedDate: 2009-10-31 00:53:18 -0500 (Sat, 31 Oct 2009) $
-#$LastChangedRevision: 1271 $
+# $HeadURL: http://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
+# $LastChangedDate: 2009-10-31 00:53:18 -0500 (Sat, 31 Oct 2009) $
+# $LastChangedRevision: 1271 $
 
 # See LICENSE.txt for licensing terms
 
@@ -68,7 +68,7 @@ def dumpinfo():
         if checksum_result not in migrate:
             continue
         names = ' '.join('input/%s' % x[0] for x in values)
-        cmd = './autotest.py -f -u %s %s' %  (checksum_result, names)
+        cmd = './autotest.py -f -u %s %s' % (checksum_result, names)
         subprocess.call(cmd.split())
 
 if __name__ == '__main__':

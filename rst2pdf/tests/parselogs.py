@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 # See LICENSE.txt for licensing terms
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -26,7 +26,7 @@ try:
     # PyHnjHyphenator is broken for non-ascii characters, so
     # let's not use it and avoid useless crashes (http://is.gd/19efQ)
 
-    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    # from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     # If basehyphenator doesn't load, wordaxe is broken
     # pyhyphenator and DCW *may* not load.
 
@@ -71,7 +71,7 @@ except ImportError:
 
 try:
     from reportlab.platypus.flowables import NullDraw
-except ImportError: # Probably RL 2.1
+except ImportError:  # Probably RL 2.1
     from reportlab.platypus.flowables import Flowable as NullDraw
 
 try:

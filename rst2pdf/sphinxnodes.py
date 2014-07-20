@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -66,10 +66,10 @@ class SphinxListHandler(SphinxHandler):
     def get_text(self, client, node, replaceEnt):
         t = client.gather_pdftext(node)
         while t and t[0] in ', ':
-            t=t[1:]
+            t = t[1:]
         return t
 
-class HandleSphinxDescAddname(SphinxFont,  sphinx.addnodes.desc_addname):
+class HandleSphinxDescAddname(SphinxFont, sphinx.addnodes.desc_addname):
     fontstyle = "descclassname"
 
 class HandleSphinxDescName(SphinxFont, sphinx.addnodes.desc_name):
@@ -83,8 +83,8 @@ class HandleSphinxDescType(SphinxFont, sphinx.addnodes.desc_type):
     fontstyle = "desctype"
 
 class HandleSphinxDescParamList(SphinxListHandler, sphinx.addnodes.desc_parameterlist):
-    pre=' ('
-    post=')'
+    pre = ' ('
+    post = ')'
 
 class HandleSphinxDescParam(SphinxFont, sphinx.addnodes.desc_parameter):
     fontstyle = "descparameter"
@@ -120,7 +120,7 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
 if sphinx.__version__ < '1.0':
     class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
         def gather_elements(self, client, node, style):
-            return [Reference('module-'+node['modname'])]
+            return [Reference('module-' + node['modname'])]
 
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
@@ -132,29 +132,29 @@ class HandleSphinxCentered(SphinxHandler, sphinx.addnodes.centered):
 
 class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
-        st=client.styles[node['desctype']]
-        if st==client.styles['normal']:
-            st=copy(client.styles['desc'])
-            st.spaceBefore=0
-        pre=[MySpacer(0,client.styles['desc'].spaceBefore)]
+        st = client.styles[node['desctype']]
+        if st == client.styles['normal']:
+            st = copy(client.styles['desc'])
+            st.spaceBefore = 0
+        pre = [MySpacer(0, client.styles['desc'].spaceBefore)]
         return pre + client.gather_elements(node, st)
 
 class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
     def gather_elements(self, client, node, style):
         # Need to add ids as targets, found this when using one of the
         # django docs extensions
-        targets=[i.replace(' ','') for i in node['ids']]
-        pre=''
+        targets = [i.replace(' ', '') for i in node['ids']]
+        pre = ''
         for i in targets:
             if i not in client.targets:
-                pre+='<a name="%s" />'% i
+                pre += '<a name="%s" />' % i
                 client.targets.append(i)
-        return [Paragraph(pre+client.gather_pdftext(node),style)]
+        return [Paragraph(pre + client.gather_pdftext(node), style)]
 
 class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
     def gather_elements(self, client, node, style):
-        return [MyIndenter(left=10)] +\
-                client.gather_elements(node, client.styles["definition"]) +\
+        return [MyIndenter(left=10)] + \
+                client.gather_elements(node, client.styles["definition"]) + \
                 [MyIndenter(left=-10)]
 
 class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
@@ -167,10 +167,10 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
         # a list.
 
         cells = [[ client.gather_elements(child, style) for child in node.children]]
-        t_style=TableStyle(client.styles['hlist'].commands)
-        cw=100./len(node.children)
-        return [ DelayedTable( cells,
-            colWidths=["%s%%"%cw,]*len(cells),
+        t_style = TableStyle(client.styles['hlist'].commands)
+        cw = 100. / len(node.children)
+        return [ DelayedTable(cells,
+            colWidths=["%s%%" % cw, ] * len(cells),
             style=t_style
             )]
 
@@ -181,15 +181,15 @@ class HandleHighlightLang(SphinxHandler, sphinx.addnodes.highlightlang):
 
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
     def gather_elements(self, client, node, style):
-        mflow=math_flowable.Math(node.get('latex',''),node.get('label',None))
-        n=node['number']
+        mflow = math_flowable.Math(node.get('latex', ''), node.get('label', None))
+        n = node['number']
         if n is not None:
-            number='(%s)'%node['number']
-            return [Table([[mflow,number]],)]
+            number = '(%s)' % node['number']
+            return [Table([[mflow, number]],)]
         return [mflow]
 
     def get_text(self, client, node, replaceEnt):
-        mf = math_flowable.Math(node.get('latex',''))
+        mf = math_flowable.Math(node.get('latex', ''))
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()
@@ -200,20 +200,20 @@ class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
 class HandleSphinxEq(SphinxHandler, mathbase.eqref):
 
     def get_text(self, client, node, replaceEnt):
-        return '<a href="equation-%s" color="%s">%s</a>'%(node['target'],
+        return '<a href="equation-%s" color="%s">%s</a>' % (node['target'],
             client.styles.linkColor, node.astext())
 
 graphviz_warn = False
 
 try:
-    x=sphinx.ext.graphviz.graphviz
+    x = sphinx.ext.graphviz.graphviz
     class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
         def gather_elements(self, client, node, style):
             # Based on the graphviz extension
             global graphviz_warn
             try:
                 # Is vectorpdf enabled?
-                if hasattr(VectorPdf,'load_xobj'):
+                if hasattr(VectorPdf, 'load_xobj'):
                     # Yes, we have vectorpdf
                     fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'pdf')
                 else:
@@ -224,14 +224,14 @@ try:
                     fname, outfn = sphinx.ext.graphviz.render_dot(node['builder'], node['code'], node['options'], 'png')
                 if outfn:
                     client.to_unlink.append(outfn)
-                    client.to_unlink.append(outfn+'.map')
+                    client.to_unlink.append(outfn + '.map')
                 else:
                     # Something went very wrong with graphviz, and
                     # sphinx should have given an error already
                     return []
             except sphinx.ext.graphviz.GraphvizError as exc:
                 log.error('dot code %r: ' % node['code'] + str(exc))
-                return [Paragraph(node['code'],client.styles['code'])]
+                return [Paragraph(node['code'], client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]
 except AttributeError:
     # Probably the graphviz extension is not enabled
