@@ -57,7 +57,7 @@ def loadFonts():
                     pfbList[f[:-4]] = os.path.join(folder, f)
 
         for folder in flist:
-            os.path.walk(folder, findFontFiles, None)
+            os.walk(folder, findFontFiles, None)
 
         for ttf in ttfList:
             '''Find out how to process these'''
