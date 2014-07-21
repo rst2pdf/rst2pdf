@@ -17,7 +17,7 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('README.txt')
+    read('README.md')
     + '\n' +
     'Contributors\n'
     '************\n'
@@ -38,7 +38,7 @@ long_description = (
 install_requires = [
         'setuptools',
         'docutils',
-        'reportlab>=2.4',
+        'reportlab>=3.0',
         'Pygments',
         ]
 
