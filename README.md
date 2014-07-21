@@ -1,7 +1,7 @@
 Intro to RST2PDF2
 =================
 
-This is attempt to update the well-known rst2pdf utility, mainly to make
+This is my attempt to update the well-known rst2pdf utility, mainly to make
 it Python 3 compatible.  The original repo (https://code.google.com/p/rst2pdf/)
 hasn't seen any activity since 2012.  The primary aim of this is to get it
 running under Python 3, but I am also generally tidying up the code,  
