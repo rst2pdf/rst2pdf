@@ -8,7 +8,7 @@ library.
 Installing
 ==========
 
-python setup.py install
+sudo python setup.py install
 
 should do the trick.
 
