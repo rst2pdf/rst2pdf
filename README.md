@@ -1,19 +1,27 @@
-Intro
-=====
+# Intro
+
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX. 
 This tool provides an alternative by producing PDF directly using the ReportLab
 library. 
 
-Installing
-==========
+# Installation
 
-python setup.py install
+Clone down this repository, then simply: 
 
-should do the trick.
+	cd /path/to/cloned/repository
+	python setup.py install
 
-Features
-========
+
+# Quick Start
+
+To convert a document to a PDF, simply:
+
+    rst2pdf <document name> output.pdf
+
+
+# Feature Overview
+
 
 * User-defined page layout. Multiple frames per page, multiple layouts per
   document. 
