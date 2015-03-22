@@ -45,3 +45,7 @@ To convert a document to a PDF, simply:
 * Supports hyphenation and kerning (using wordaxe). 
 
 * Full user's manual
+
+# User Manual
+
+For a more detailed list of all of the features included, the user manual may be found [here](http://ralsina.me/static/manual.pdf). 
