@@ -4,43 +4,54 @@
 # $Date$
 # $Revision$
 
-__docformat__ = 'reStructuredText'
+import copy
+import re
 
-from copy import copy
-
-from reportlab.platypus import *
+from reportlab.platypus import (
+    Frame,
+    FrameActionFlowable,
+    FrameBreak,
+    Indenter,
+    ResetNextTemplate,
+    PageBreak,
+    Spacer,
+    Table,
+    XPreformatted,
+)
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
 
-from .opt_imports import Paragraph, NullDraw
+from .opt_imports import Paragraph
 
-from reportlab.lib.units import *
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+from reportlab.lib.units import cm
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
+from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
 from . import styles
 from .log import log
 
-import re
-from xml.sax.saxutils import unescape, escape
+from xml.sax.saxutils import unescape
+
 
 class XXPreformatted(XPreformatted):
-    """An extended XPreformattedFit"""
+
+    """
+    An extended XPreformattedFit
+    """
+
     def __init__(self, *args, **kwargs):
         XPreformatted.__init__(self, *args, **kwargs)
 
-    def split (self, aW, aH):
+    def split(self, aW, aH):
+        """
+        Figure out a nice range of splits
 
-        # Figure out a nice range of splits
-        #
-        # Assume we would prefer 5 lines (at least) on
-        # a splitted flowable before a break, and 4 on
-        # the last flowable after a break.
-        # So, the minimum wrap height for a fragment
-        # will be 5*leading
-
+        Assume we would prefer 5 lines (at least) on a splitted flowable
+        before a break, and 4 on the last flowable after a break.
+        So, the minimum wrap height for a fragment will be 5 * leading
+        """
         rW, rH = self.wrap(aW, aH)
         if rH > aH:
 
@@ -59,9 +70,14 @@ class XXPreformatted(XPreformatted):
 
         return XPreformatted.split(self, aW, aH)
 
+
 class MyIndenter(Indenter):
-    """An indenter that has a width, because otherwise you get crashes
-    if added inside tables"""
+
+    """
+    An indenter that has a width.
+
+    Otherwise you get crashes if added inside tables.
+    """
 
     width = 0
     height = 0
@@ -69,9 +85,15 @@ class MyIndenter(Indenter):
     def draw(self):
         pass
 
-class TocEntry(NullDraw):
-    """A flowable that adds a TOC entry but draws nothing"""
+
+class TocEntry(Flowable):
+
+    """
+    A flowable that adds a TOC entry but draws nothing.
+    """
+
     def __init__(self, level, label):
+        super().__init__()
         self.level = level
         self.label = label
         self.width = 0
@@ -85,9 +107,13 @@ class TocEntry(NullDraw):
                                   self.label,
                                   max(0, int(self.level)), False)
 
+
 class Heading(Paragraph):
-    """A paragraph that also adds an outline entry in
-    the PDF TOC."""
+
+    """
+    A paragraph that also adds an outline entry in
+    the PDF TOC.
+    """
 
     def __init__(self, text, style, bulletText=None, caseSensitive=1, level=0,
                  snum=None, parent_id=None, node=None, section_header_depth=2):
@@ -100,10 +126,9 @@ class Heading(Paragraph):
         self.parent_id = parent_id
         self.node = node
         self.section_header_depth = section_header_depth
-        Paragraph.__init__(self, text, style, bulletText)
+        super().__init__(text, style, bulletText)
 
     def draw(self):
-
         # Add outline entry
         self.canv.bookmarkHorizontal(self.parent_id, 0, 0 + self.height)
         # self.section_header_depth is for Issue 391
@@ -120,8 +145,12 @@ class Heading(Paragraph):
                                   int(self.level), False)
         Paragraph.draw(self)
 
+
 class Separation(Flowable):
-    """A simple <hr>-like flowable"""
+
+    """
+    A simple <hr>-like flowable.
+    """
 
     def wrap(self, w, h):
         self.w = w
@@ -132,7 +161,10 @@ class Separation(Flowable):
 
 
 class Reference(Flowable):
-    """A flowable to insert an anchor without taking space"""
+
+    """
+    A flowable to insert an anchor without taking space.
+    """
 
     def __init__(self, refid):
         self.refid = refid
@@ -152,14 +184,18 @@ class Reference(Flowable):
     def __str__(self):
         return "Reference: %s" % self.refid
 
+
 class OddEven(Flowable):
-    """This flowable takes two lists of flowables as arguments, odd and even.
+
+    """
+    Draw on alternate pages.
+
+    This flowable takes two lists of flowables as arguments, odd and even.
     If will draw the "odd" list when drawn in odd pages and the "even" list on
     even pages.
 
-
-    wrap() will always return a size large enough for both lists, and this flowable
-    **cannot** be split, so use with care.
+    wrap() will always return a size large enough for both lists, and this
+    flowable **cannot** be split, so use with care.
     """
 
     def __init__(self, odd, even, style=None):
@@ -182,12 +218,14 @@ class OddEven(Flowable):
         """Makes no sense to split this..."""
         return []
 
+
 class DelayedTable(Table):
-    """A flowable that inserts a table for which it has the data.
+
+    """
+    A flowable that inserts a table for which it has the data.
 
     Needed so column widths can be determined after we know on what frame
     the table will be inserted, thus making the overal table width correct.
-
     """
 
     def __init__(self, data, colWidths, style=None, repeatrows=False, splitByRow=True):
@@ -248,11 +286,14 @@ class DelayedTable(Table):
         self.t.drawOn(canvas, x, y, _sW)
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
+        return "<%s at %s%s%s> containing: %s" % (
+            self.__class__.__name__,
             hex(id(self)), self._frameName(),
-            getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', '')) or '',
-                str(self.data[0])[:180])
+            getattr(self, 'name', '') and
+                (' name="%s"' % getattr(self, 'name', '')) or '',
+            str(self.data[0])[:180]
+        )
+
 
 def tablepadding(padding):
     if not isinstance(padding, (list, tuple)):
@@ -261,6 +302,7 @@ def tablepadding(padding):
                     ('RIGHTPADDING', [-1, 0], [-1, -1], padding[1]), \
                     ('BOTTOMPADDING', [0, 0], [-1, -1], padding[2]), \
                     ('LEFTPADDING', [1, 0], [1, -1], padding[3])
+
 
 class SplitTable(DelayedTable):
     def __init__(self, data, colWidths, style, padding=3):
@@ -322,12 +364,11 @@ class SplitTable(DelayedTable):
 
                         while l > 0:
                             if not text[l - 1].getKeepWithNext():
-                                first_t = Table([
-                                                [bullet,
-                                                text[:l]]
-                                            ],
-                                            colWidths=self.colWidths,
-                                            style=self.style)
+                                first_t = Table(
+                                    [[bullet, text[:l]]],
+                                    colWidths=self.colWidths,
+                                    style=self.style
+                                )
                                 _w, _h = first_t.wrap(w, h)
                                 if _h <= h:
                                     break
@@ -346,18 +387,22 @@ class SplitTable(DelayedTable):
                                         # colWidths=self.colWidths,
                                         # style=self.style)]
                             # else:
-                            l3 = [first_t,
-                                    SplitTable([['', text[l:]]],
-                                    colWidths=self.colWidths,
-                                    style=self.style,
-                                    padding=self.padding)]
+                            l3 = [
+                                first_t,
+                                SplitTable([['', text[l:]]],
+                                colWidths=self.colWidths,
+                                style=self.style,
+                                padding=self.padding)
+                            ]
                         else:  # Everything flows
                             l3 = []
                     else:
-                        l3 = [Table([[bullet, text[:l] + [l2[0]]]],
-                                colWidths=self.colWidths,
-                                rowHeights=[h],
-                                style=self.style)]
+                        l3 = [Table(
+                            [[bullet, text[:l] + [l2[0]]]],
+                            colWidths=self.colWidths,
+                            rowHeights=[h],
+                            style=self.style
+                        )]
                         if l2[1:] + text[l + 1:]:
                             # # Workaround for Issue 180 with wordaxe:
                             # if wordaxe is not None:
@@ -366,11 +411,12 @@ class SplitTable(DelayedTable):
                                     # colWidths=self.colWidths,
                                     # style=self.style))
                             # else:
-                            l3.append(
-                                SplitTable([['', l2[1:] + text[l + 1:]]],
+                            l3.append(SplitTable(
+                                [['', l2[1:] + text[l + 1:]]],
                                 colWidths=self.colWidths,
                                 style=self.style,
-                                padding=self.padding))
+                                padding=self.padding
+                            ))
                     return l3
             log.debug("Can't split splittable")
             return self.t.split(w, h)
@@ -379,11 +425,11 @@ class SplitTable(DelayedTable):
 
 
 class MySpacer(Spacer):
+
     def wrap (self, aW, aH):
         w, h = Spacer.wrap(self, aW, aH)
         self.height = min(aH, h)
         return w, self.height
-
 
 
 class MyPageBreak(FrameActionFlowable):
@@ -443,16 +489,18 @@ class MyPageBreak(FrameActionFlowable):
                     frame._generated_content.append(ResetNextTemplate())
                     frame._generated_content.append(PageBreak())
 
+
 class SetNextTemplate(Flowable):
-    """Set canv.templateName when drawing.
+
+    """
+    Set canv.templateName when drawing.
 
     rst2pdf uses that to switch page templates.
-
     """
 
     def __init__(self, templateName=None):
         self.templateName = templateName
-        Flowable.__init__(self)
+        super().__init__()
 
     def draw(self):
         if self.templateName:
@@ -462,8 +510,11 @@ class SetNextTemplate(Flowable):
                 self.canv.oldTemplateName = 'oneColumn'
             self.canv.templateName = self.templateName
 
+
 class ResetNextTemplate(Flowable):
-    """Go back to the previous template.
+
+    """
+    Go back to the previous template.
 
     rst2pdf uses that to switch page templates back when
     temporarily it needed to switch to another template.
@@ -473,33 +524,35 @@ class ResetNextTemplate(Flowable):
     because they must not have headers or footers.
 
     And then we need to switch back to whatever was used.
-
     """
 
     def __init__(self):
-        Flowable.__init__(self)
+        super().__init__()
 
     def draw(self):
-        self.canv.templateName, self.canv.oldTemplateName = \
-            self.canv.oldTemplateName, self.canv.templateName
+        self.canv.templateName = self.canv.oldTemplateName
+        self.canv.oldTemplateName = self.canv.templateName
 
     def wrap(self, aW, aH):
         return 0, 0
 
-class Transition(Flowable):
-    """Wrap canvas.setPageTransition.
 
-    Sets the transition effect from the current page to the next.
+class Transition(Flowable):
 
     """
+    Wrap canvas.setPageTransition.
 
-    PageTransitionEffects = dict(
-        Split=['direction', 'motion'],
-        Blinds=['dimension'],
-        Box=['motion'],
-        Wipe=['direction'],
-        Dissolve=[],
-        Glitter=['direction'])
+    Sets the transition effect from the current page to the next.
+    """
+
+    PageTransitionEffects = {
+        'Split': ['direction', 'motion'],
+        'Blinds': ['dimension'],
+        'Box': ['motion'],
+        'Wipe': ['direction'],
+        'Dissolve': [],
+        'Glitter': ['direction'],
+    }
 
     def __init__(self, *args):
         if len(args) < 1:
@@ -534,11 +587,12 @@ class Transition(Flowable):
 
 
 class SmartFrame(Frame):
-    """A (Hopefully) smarter frame object.
+
+    """
+    A (Hopefully) smarter frame object.
 
     This frame object knows how to handle a two-pass
     layout procedure (someday).
-
     """
 
     def __init__(self, container, x1, y1, width, height,
@@ -550,7 +604,7 @@ class SmartFrame(Frame):
             % (x1, y1, width, height,
               leftPadding, bottomPadding,
               rightPadding, topPadding)
-        Frame.__init__(self, x1, y1, width, height,
+        super().__init__(x1, y1, width, height,
             leftPadding, bottomPadding, rightPadding, topPadding,
             id, showBoundary, overlapAttachedSpace, _debug)
 
@@ -562,7 +616,8 @@ class SmartFrame(Frame):
         return self.__s
 
     def __deepcopy__(self, *whatever):
-        return copy(self)
+        return copy.copy(self)
+
 
 class FrameCutter(FrameActionFlowable):
 
@@ -579,46 +634,54 @@ class FrameCutter(FrameActionFlowable):
         if self.floatLeft:
             # Don't bother inserting a silly thin frame
             if self.width - self.padding > 30:
-                f1 = SmartFrame(frame.container,
+                f1 = SmartFrame(
+                    frame.container,
                     frame._x1 + self.dx - 2 * self.padding,
                     frame._y2 - self.f.height - 3 * self.padding,
                     self.width + 2 * self.padding,
                     self.f.height + 3 * self.padding,
-                    bottomPadding=0, topPadding=0, leftPadding=self.lpad)
+                    bottomPadding=0, topPadding=0, leftPadding=self.lpad
+                )
                 f1._atTop = frame._atTop
                 # This is a frame next to a sidebar.
                 f1.onSidebar = True
                 frame.container.frames.insert(idx + 1, f1)
             # Don't add silly thin frame
             if frame._height - self.f.height - 2 * self.padding > 30:
-                frame.container.frames.insert(idx + 2,
-                    SmartFrame(frame.container,
-                        frame._x1,
-                        frame._y1p,
-                        self.width + self.dx,
-                        frame._height - self.f.height - 3 * self.padding,
-                        topPadding=0))
+                frame.container.frames.insert(idx + 2, SmartFrame(
+                    frame.container,
+                    frame._x1,
+                    frame._y1p,
+                    self.width + self.dx,
+                    frame._height - self.f.height - 3 * self.padding,
+                    topPadding=0
+                ))
         else:
             # Don't bother inserting a silly thin frame
             if self.width - self.padding > 30:
-                f1 = SmartFrame(frame.container,
+                f1 = SmartFrame(
+                    frame.container,
                     frame._x1 - self.width,
                     frame._y2 - self.f.height - 2 * self.padding,
                     self.width,
                     self.f.height + 2 * self.padding,
-                    bottomPadding=0, topPadding=0, rightPadding=self.lpad)
+                    bottomPadding=0,
+                    topPadding=0,
+                    rightPadding=self.lpad
+                )
                 f1._atTop = frame._atTop
                 # This is a frame next to a sidebar.
                 f1.onSidebar = True
                 frame.container.frames.insert(idx + 1, f1)
             if frame._height - self.f.height - 2 * self.padding > 30:
-                frame.container.frames.insert(idx + 2,
-                    SmartFrame(frame.container,
-                        frame._x1 - self.width,
-                        frame._y1p,
-                        self.width + self.dx,
-                        frame._height - self.f.height - 2 * self.padding,
-                        topPadding=0))
+                frame.container.frames.insert(idx + 2, SmartFrame(
+                    frame.container,
+                    frame._x1 - self.width,
+                    frame._y1p,
+                    self.width + self.dx,
+                    frame._height - self.f.height - 2 * self.padding,
+                    topPadding=0
+                ))
 
 
 class Sidebar(FrameActionFlowable):
@@ -645,34 +708,44 @@ class Sidebar(FrameActionFlowable):
             self.kif = BoxedContainer(self.flowables, self.style)
             if self.style.float == 'left':
                 self.style.lpad = frame.leftPadding
-                f1 = SmartFrame(frame.container,
+                f1 = SmartFrame(
+                    frame.container,
                     frame._x1,
                     frame._y1p,
                     w - 2 * self.style.padding,
                     frame._y - frame._y1p,
-                    leftPadding=self.style.lpad, rightPadding=0,
-                    bottomPadding=0, topPadding=0)
+                    leftPadding=self.style.lpad,
+                    rightPadding=0,
+                    bottomPadding=0,
+                    topPadding=0
+                )
                 f1._atTop = frame._atTop
                 frame.container.frames.insert(idx + 1, f1)
                 frame._generated_content = [
                     FrameBreak(),
                     self.kif,
-                    FrameCutter(w,
+                    FrameCutter(
+                        w,
                         frame.width - w,
                         self.kif,
                         padding,
                         self.style.lpad,
-                        True),
-                    FrameBreak()]
+                        True
+                    ),
+                    FrameBreak()
+                ]
             elif self.style.float == 'right':
                 self.style.lpad = frame.rightPadding
-                frame.container.frames.insert(idx + 1,
-                    SmartFrame(frame.container,
-                        frame._x1 + frame.width - self.style.width,
-                        frame._y1p,
-                        w, frame._y - frame._y1p,
-                        rightPadding=self.style.lpad, leftPadding=0,
-                        bottomPadding=0, topPadding=0))
+                frame.container.frames.insert(idx + 1, SmartFrame(
+                    frame.container,
+                    frame._x1 + frame.width - self.style.width,
+                    frame._y1p,
+                    w, frame._y - frame._y1p,
+                    rightPadding=self.style.lpad,
+                    leftPadding=0,
+                    bottomPadding=0,
+                    topPadding=0
+                ))
                 frame._generated_content = [
                     FrameBreak(),
                     self.kif,
@@ -682,14 +755,16 @@ class Sidebar(FrameActionFlowable):
                         padding,
                         self.style.lpad,
                         False),
-                    FrameBreak()]
+                    FrameBreak()
+                ]
 
 
 class BoundByWidth(Flowable):
-    """Limit a list of flowables by width.
+
+    """
+    Limit a list of flowables by width.
 
     This still lets the flowables break over pages and frames.
-
     """
 
     def __init__(self, maxWidth, content=[], style=None, mode=None, scale=None):
@@ -712,14 +787,19 @@ class BoundByWidth(Flowable):
         return [x + additional for x in bp]
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s> containing: %s" % (self.__class__.__name__,
-            hex(id(self)), self._frameName(),
-            getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', '')) or '',
-                str([c.identity() for c in self.content])[:80])
+        return "<%s at %s%s%s> containing: %s" % (
+            self.__class__.__name__,
+            hex(id(self)),
+            self._frameName(),
+            getattr(self, 'name', '') and
+                (' name="%s"' % getattr(self, 'name', '')) or '',
+            str([c.identity() for c in self.content])[:80]
+        )
 
     def wrap(self, availWidth, availHeight):
-        """If we need more width than we have, complain, keep a scale"""
+        """
+        If we need more width than we have, complain, keep a scale.
+        """
         self.pad = self.border_padding(True, 0.1)
         maxWidth = float(min(
             styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
@@ -750,12 +830,14 @@ class BoundByWidth(Flowable):
             content = content[0].split(
                 availWidth - (self.pad[1] + self.pad[3]),
                 availHeight - (self.pad[0] + self.pad[2]))
-        result = [BoundByWidth(self.maxWidth, [f],
-                             self.style, self.mode, self.scale) for f in content]
+        result = [BoundByWidth(self.maxWidth, [f], self.style, self.mode,
+                               self.scale) for f in content]
         return result
 
     def draw(self):
-        """we simulate being added to a frame"""
+        """
+        we simulate being added to a frame.
+        """
         canv = self.canv
         canv.saveState()
         x = canv._x
@@ -809,7 +891,7 @@ class BoxedContainer(BoundByWidth):
 
     def identity(self, maxLen=None):
         return str(["BoxedContainer containing: ",
-            [c.identity() for c in self.content]])[:80]
+                   [c.identity() for c in self.content]])[:80]
 
     def draw(self):
         canv = self.canv
@@ -833,7 +915,6 @@ class BoxedContainer(BoundByWidth):
             fill = 1
         else:
             fill = 0
-
 
         padding = self.border_padding(False, lw)
         xpadding = padding[1] + padding[3]
@@ -872,51 +953,8 @@ class BoxedContainer(BoundByWidth):
             return [candidate, remainder]
 
 
-if reportlab.Version == '2.1':
-    import reportlab.platypus.paragraph as pla_para
-
-    ################Ugly stuff below
-    def _do_post_text(i, t_off, tx):
-        """From reportlab's paragraph.py, patched to avoid underlined links"""
-        xs = tx.XtraState
-        leading = xs.style.leading
-        ff = 0.125 * xs.f.fontSize
-        y0 = xs.cur_y - i * leading
-        y = y0 - ff
-        ulc = None
-        for x1, x2, c in xs.underlines:
-            if c != ulc:
-                tx._canvas.setStrokeColor(c)
-                ulc = c
-            tx._canvas.line(t_off + x1, y, t_off + x2, y)
-        xs.underlines = []
-        xs.underline = 0
-        xs.underlineColor = None
-
-        ys = y0 + 2 * ff
-        ulc = None
-        for x1, x2, c in xs.strikes:
-            if c != ulc:
-                tx._canvas.setStrokeColor(c)
-                ulc = c
-            tx._canvas.line(t_off + x1, ys, t_off + x2, ys)
-        xs.strikes = []
-        xs.strike = 0
-        xs.strikeColor = None
-
-        yl = y + leading
-        for x1, x2, link in xs.links:
-            # This is the bad line
-            # tx._canvas.line(t_off+x1, y, t_off+x2, y)
-            _doLink(tx, link, (t_off + x1, y, t_off + x2, yl))
-        xs.links = []
-        xs.link = None
-
-    # Look behind you! A three-headed monkey!
-    pla_para._do_post_text.__code__ = _do_post_text.__code__
-    ############### End of the ugly
-
 class MyTableOfContents(TableOfContents):
+
     """
     Subclass of reportlab.platypus.tableofcontents.TableOfContents
     which supports hyperlinks to corresponding sections.
@@ -936,7 +974,7 @@ class MyTableOfContents(TableOfContents):
         # Yes, this is gross.
 
         self.parent = kwargs.pop('parent')
-        TableOfContents.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         # reference ids for which this TOC should be notified
         self.refids = []
         # revese lookup table from (level, text) to refid
@@ -964,11 +1002,11 @@ class MyTableOfContents(TableOfContents):
             self.refid_lut[(level, text, pageNum)] = label
 
     def wrap(self, availWidth, availHeight):
-        """Adds hyperlink to toc entry."""
-
+        """
+        Adds hyperlink to toc entry.
+        """
         widths = (availWidth - self.rightColumnWidth,
                   self.rightColumnWidth)
-
         # makes an internal table which does all the work.
         # we draw the LAST RUN's entries!  If there are
         # none, we make some dummy data to keep the table
@@ -990,10 +1028,7 @@ class MyTableOfContents(TableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            if reportlab.Version > '2.3':  # For ReportLab post-2.3
-                leftColStyle = self.getLevelStyle(left_col_level)
-            else:  # For ReportLab <= 2.3
-                leftColStyle = self.levelStyles[left_col_level]
+            leftColStyle = self.getLevelStyle(left_col_level)
             label = self.refid_lut.get((level, text, pageNum), None)
             if label:
                 pre = '<a href="%s" color="%s">' % (label, self.linkColor)
@@ -1005,8 +1040,12 @@ class MyTableOfContents(TableOfContents):
                 pre = ''
                 post = ''
             # right col style is right aligned
-            rightColStyle = ParagraphStyle(name='leftColLevel%d' % left_col_level,
-                parent=leftColStyle, leftIndent=0, alignment=TA_RIGHT)
+            rightColStyle = ParagraphStyle(
+                name='leftColLevel%d' % left_col_level,
+                parent=leftColStyle,
+                leftIndent=0,
+                alignment=TA_RIGHT
+            )
             leftPara = Paragraph(text, leftColStyle)
             rightPara = Paragraph(pre + str(pageNum) + post, rightColStyle)
             tableData.append([leftPara, rightPara])
@@ -1039,6 +1078,4 @@ class MyTableOfContents(TableOfContents):
                 if self._entries[i] != self._lastEntries[i]:
                     log.info(str(self._entries[i]))
                     log.info(str(self._lastEntries[i]))
-
         return False
-

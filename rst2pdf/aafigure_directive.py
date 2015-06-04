@@ -25,16 +25,16 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from docutils import nodes
-from docutils.nodes import General, Inline, Element, literal_block
+from docutils.nodes import Element, literal_block
 from docutils.parsers.rst import directives
-from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
 from .opt_imports import aafigure
 from .log import log
 
+
 WARNED = False
+
 
 class Aanode(Element):
     children = ()
@@ -59,9 +59,11 @@ class Aanode(Element):
 
 
 class Aafig(rst.Directive):
+
     """
     Directive to insert an ASCII art figure to be rendered by aafigure.
     """
+
     has_content = True
     required_arguments = 0
     optional_arguments = 0

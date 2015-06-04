@@ -39,21 +39,17 @@
 #
 ###############################################################################
 
+import copy
 import importlib
 import logging
 import os
+import os.path
 import re
 import string
 import sys
-import tempfile
+import urllib.parse as urllib_parse
 
-from copy import copy, deepcopy
-from io import StringIO
 from optparse import OptionParser
-from os.path import abspath, dirname, expanduser, join
-from pprint import pprint
-from urllib.parse import urljoin, urlparse, urlunparse
-from xml.sax.saxutils import unescape, escape
 
 import docutils.core
 import docutils.nodes
@@ -68,19 +64,34 @@ try:
 except ImportError:
     from docutils.utils.roman import toRoman
 
-from reportlab.platypus import *
-from reportlab.platypus import doctemplate
-from reportlab.platypus.doctemplate import IndexingFlowable
-from reportlab.platypus.flowables import _listWrapOn, _Container
-from reportlab.pdfbase.pdfdoc import PDFPageLabel
+from reportlab.lib.units import cm
 
-from rst2pdf import config
-from rst2pdf import counter_role, oddeven_directive
-from rst2pdf import flowables
-from rst2pdf import pygments_code_block_directive
-from rst2pdf import styles as sty
+from reportlab.platypus import (
+    ActionFlowable,
+    BaseDocTemplate,
+    Flowable,
+    ImageAndFlowables,
+    IndexingFlowable,
+    PageBreak,
+    PageTemplate,
+    TableStyle,
+)
 
-from rst2pdf.aafigure_directive import Aanode
+# Private functions used from these
+from reportlab.platypus import doctemplate, reportlab_flowables
+
+from rst2pdf import (
+    config,
+    counter_role,
+    flowables,
+    oddeven_directive,
+    pygments_code_block_directive,
+    styles as sty,
+)
+
+# Import so that the directive is registered
+import rst2pdf.aafigure_directive
+
 from rst2pdf.flowables import *  # our own reportlab flowables
 from rst2pdf.image import MyImage, missing
 from rst2pdf.languages import get_language_available
@@ -122,14 +133,15 @@ numberingstyles = {
 
 class RstToPdf(object):
 
-    def __init__(self, stylesheets=[],
+    def __init__(self,
+                 stylesheets=None,
                  language='en_US',
                  header=None,
                  footer=None,
                  inlinelinks=False,
                  breaklevel=1,
-                 font_path=[],
-                 style_path=[],
+                 font_path=None,
+                 style_path=None,
                  fit_mode='shrink',
                  background_fit_mode='center',
                  sphinx=False,
@@ -152,7 +164,7 @@ class RstToPdf(object):
                  numbered_links=False,
                  section_header_depth=2,
                  raw_html=False,
-                 strip_elements_with_classes=[]
+                 strip_elements_with_classes=None
                  ):
         self.debugLinesPdf = False
         self.depth = 0
@@ -179,14 +191,14 @@ class RstToPdf(object):
         }
         # find base path
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
 
-        self.font_path = font_path
-        self.style_path = style_path
+        self.font_path = font_path or []
+        self.style_path = style_path or []
         self.def_dpi = def_dpi
-        self.loadStyles(stylesheets)
+        self.loadStyles(stylesheets or [])
 
         self.docutils_languages = {}
         self.inlinelinks = inlinelinks
@@ -209,7 +221,7 @@ class RstToPdf(object):
         self.section_header_depth = section_header_depth
         self.img_dir = os.path.join(self.PATH, 'images')
         self.raw_html = raw_html
-        self.strip_elements_with_classes = strip_elements_with_classes
+        self.strip_elements_with_classes = strip_elements_with_classes or []
 
         # Sorry about this, but importing sphinx.roles makes some
         # ordinary documents fail (demo.txt specifically) so
@@ -291,7 +303,9 @@ class RstToPdf(object):
                                      def_dpi=self.def_dpi)
 
     def style_language(self, style):
-        """Return language corresponding to this style."""
+        """
+        Return language corresponding to this style.
+        """
         try:
             return style.language
         except AttributeError:
@@ -309,7 +323,9 @@ class RstToPdf(object):
             return os.environ['LANG'] or 'en'
 
     def text_for_label(self, label, style):
-        """Translate text for label."""
+        """
+        Translate text for label.
+        """
         try:
             text = self.docutils_languages[
                         self.style_language(style)].labels[label]
@@ -318,7 +334,9 @@ class RstToPdf(object):
         return text
 
     def text_for_bib_field(self, field, style):
-        """Translate text for bibliographic fields."""
+        """
+        Translate text for bibliographic fields.
+        """
         try:
             text = self.docutils_languages[
                         self.style_language(style)].bibliographic_fields[field]
@@ -327,7 +345,9 @@ class RstToPdf(object):
         return text + ":"
 
     def author_separator(self, style):
-        """Return separator string for authors."""
+        """
+        Return separator string for authors.
+        """
         try:
             sep = self.docutils_languages[
                     self.style_language(style)].author_separators[0]
@@ -336,10 +356,12 @@ class RstToPdf(object):
         return sep + " "
 
     def styleToTags(self, style):
-        '''Takes a style name, returns a pair of opening/closing tags for it, like
-        "<font face=helvetica size=14 color=red>". Used for inline
-        nodes (custom interpreted roles)'''
+        """
+        Take a style name and return a pair of opening/closing tags for it
 
+        For example, "<font face=helvetica size=14 color=red>". Used for inline
+        nodes (custom interpreted roles).
+        """
         try:
             s = self.styles[style]
             r1 = ['<font face="%s" color="#%s" ' %
@@ -366,8 +388,9 @@ class RstToPdf(object):
 
     def styleToFont(self, style):
         """
-        Takes a style name, returns a font tag for it, like
-        "<font face=helvetica size=14 color=red>". Used for inline
+        Take a style name and return a font tag for it.
+
+        For example, "<font face=helvetica size=14 color=red>". Used for inline
         nodes (custom interpreted roles).
         """
         try:
@@ -506,7 +529,9 @@ class RstToPdf(object):
         return spans
 
     def PreformattedFit(self, text, style):
-        """Preformatted section that gets horizontally compressed if needed."""
+        """
+        Preformatted section that gets horizontally compressed if needed.
+        """
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
         return BoundByWidth(
@@ -545,10 +570,13 @@ class RstToPdf(object):
         if doctree is None:
             if text is not None:
                 if self.language:
-                    settings_overrides = {'language_code': self.docutils_language}
+                    settings_overrides = {
+                        'language_code': self.docutils_language
+                    }
                 else:
                     settings_overrides = {}
-                settings_overrides['strip_elements_with_classes'] = self.strip_elements_with_classes
+                settings_overrides['strip_elements_with_classes'] = \
+                    self.strip_elements_with_classes
                 self.doctree = docutils.core.publish_doctree(
                     text,
                     source_path=source_path,
@@ -654,7 +682,7 @@ class RstToPdf(object):
 
         def cleantags(s):
             re.sub(r'<[^>]*?>', '',
-                str(s).strip())
+                   str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -822,6 +850,7 @@ class FancyDocTemplate(BaseDocTemplate):
 _counter = 0
 _counterStyle = 'arabic'
 
+
 class PageCounter(Flowable):
 
     def __init__(self, number=0, style='arabic'):
@@ -864,7 +893,7 @@ def setPageCounter(counter=None, style=None):
     return ptext
 
 
-class MyContainer(_Container, Flowable):
+class MyContainer(reportlab_flowables._Container, Flowable):
     pass
 
 
@@ -919,7 +948,7 @@ class HeaderOrFooter(object):
                         items.insert(0, Separation())
                     else:
                         items.append(Separation())
-                _, height = _listWrapOn(items, pageobj.tw, canv)
+                _, height = reportlab_flowables._listWrapOn(items, pageobj.tw, canv)
         self.prepared = height and items
         return height
 
@@ -956,7 +985,7 @@ class HeaderOrFooter(object):
                 text = replace(e.text)
                 elems[i] = Paragraph(text, e.style)
             elif isinstance(e, DelayedTable):
-                data = deepcopy(e.data)
+                data = copy.deepcopy(e.data)
                 for r, row in enumerate(data):
                     for c, cell in enumerate(row):
                         if isinstance(cell, list):
@@ -1163,7 +1192,7 @@ def parse_commandline():
     parser.add_option('-o', '--output', dest='output', metavar='FILE',
         help='Write the PDF to FILE')
 
-    def_ssheets = ','.join([expanduser(p) for p in
+    def_ssheets = ','.join([os.path.expanduser(p) for p in
         config.getValue("general", "stylesheets", "").split(',')])
     parser.add_option('-s', '--stylesheets', dest='style',
         type='string', action='append',
@@ -1171,7 +1200,7 @@ def parse_commandline():
         help='A comma-separated list of custom stylesheets. Default="%s"'
             % def_ssheets)
 
-    def_sheetpath = os.pathsep.join([expanduser(p) for p in
+    def_sheetpath = os.pathsep.join([os.path.expanduser(p) for p in
         config.getValue("general", "stylesheet_path", "").split(os.pathsep)])
     parser.add_option('--stylesheet-path', dest='stylepath',
         metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
@@ -1191,7 +1220,7 @@ def parse_commandline():
     parser.add_option('--font-folder', dest='ffolder', metavar='FOLDER',
         help='Search this folder for fonts. (Deprecated)')
 
-    def_fontpath = os.pathsep.join([expanduser(p) for p in
+    def_fontpath = os.pathsep.join([os.path.expanduser(p) for p in
         config.getValue("general", "font_path", "").split(os.pathsep)])
     parser.add_option('--font-path', dest='fpath',
         metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
@@ -1199,7 +1228,7 @@ def parse_commandline():
         help='A list of folders to search for fonts, separated using "%s".'
             ' Default="%s"' % (os.pathsep, def_fontpath))
 
-    def_baseurl = urlunparse(['file', os.getcwd() + os.sep, '', '', '', ''])
+    def_baseurl = urllib_parse.urlunparse(['file', os.getcwd() + os.sep, '', '', '', ''])
     parser.add_option('--baseurl', dest='baseurl', metavar='URL',
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"' % def_baseurl)
@@ -1373,14 +1402,14 @@ def main(_args=None):
     parser = parse_commandline()
     # Fix issue 430: don't overwrite args
     # need to parse_args to see i we have a custom config file
-    options, args = parser.parse_args(copy(_args))
+    options, args = parser.parse_args(copy.copy(_args))
 
     if options.configfile:
         # If there is a config file, we need to reparse
         # the command line because we have different defaults
         config.parseConfig(options.configfile)
         parser = parse_commandline()
-        options, args = parser.parse_args(copy(_args))
+        options, args = parser.parse_args(copy.copy(_args))
 
     if options.version:
         from rst2pdf import version
@@ -1399,10 +1428,10 @@ def main(_args=None):
     if options.printssheet:
         # find base path
         if hasattr(sys, 'frozen'):
-            PATH = abspath(dirname(sys.executable))
+            PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            PATH = abspath(dirname(__file__))
-        print(open(join(PATH, 'styles', 'styles.style')).read())
+            PATH = os.path.abspath(os.path.dirname(__file__))
+        print(open(os.path.join(PATH, 'styles', 'styles.style')).read())
         sys.exit(0)
 
     filename = False
@@ -1526,7 +1555,7 @@ def main(_args=None):
 
 
 # Ugly hack that fixes Issue 335
-reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy(self)
+reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy.copy(self)
 
 
 def patch_digester():

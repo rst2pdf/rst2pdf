@@ -12,9 +12,6 @@ opt_imports.py contains logic for handling optional imports.
 '''
 
 import os
-import sys
-
-from .log import log
 
 PyHyphenHyphenator = None
 DCWHyphenator = None
@@ -63,19 +60,16 @@ except ImportError:
     aafigure = None
 
 try:
-    from reportlab.platypus.flowables import NullDraw
-except ImportError:  # Probably RL 2.1
-    from reportlab.platypus.flowables import Flowable as NullDraw
-
-try:
     from matplotlib import mathtext
 except ImportError:
     mathtext = None
 
 
 class LazyImports(object):
-    ''' Only import some things if we need them.
-    '''
+
+    """
+    Only import some things if we need them.
+    """
 
     def __getattr__(self, name):
         if name.startswith('_load_'):

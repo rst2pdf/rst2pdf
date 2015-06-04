@@ -15,7 +15,6 @@ See LICENSE.txt for licensing terms
 '''
 
 import os
-import sys
 import glob
 import shutil
 import shlex
