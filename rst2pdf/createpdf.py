@@ -1400,6 +1400,7 @@ def main(_args=None):
         filename = args[0]
         options.basedir = os.path.dirname(os.path.abspath(filename))
         try:
+            # TODO: Replace with a context manager
             infile = open(filename)
         except IOError as e:
             log.error(e)

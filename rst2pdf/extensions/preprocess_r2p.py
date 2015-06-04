@@ -198,9 +198,8 @@ class Preprocess(object):
             result.name = name + '.build_temp'
             self.keep = keep = len(result.strip())
             if keep:
-                f = open(result.name, 'wb')
-                f.write(result)
-                f.close()
+                with open(result.name, 'w') as f:
+                    f.write(result)
             self.result = result
         else:
             self.result = self.sourcef
@@ -212,7 +211,8 @@ class Preprocess(object):
 
         for prefix in ('', os.path.dirname(self.sourcef.name)):
             try:
-                f = open(os.path.join(prefix, fname), 'rb')
+                with open(os.path.join(prefix, fname), 'r'):
+                    pass
             except IOError:
                 continue
             else:

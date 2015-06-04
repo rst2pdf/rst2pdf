@@ -117,15 +117,16 @@ class PDFBuilder(Builder):
                                 )
 
                 tgt_file = path.join(self.outdir, targetname + self.out_suffix)
-                destination = FileOutput(destination=open(tgt_file, 'wb'), encoding='utf-8')
-                doctree = self.assemble_doctree(docname, title, author,
-                    appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
-                doctree.settings.author = author
-                doctree.settings.title = title
-                self.info("done")
-                self.info("writing " + targetname + "... ", nonl=1)
-                docwriter.write(doctree, destination)
-                self.info("done")
+                with open(tgt_file, 'w') as f:
+                    destination = FileOutput(destination=f, encoding='utf-8')
+                    doctree = self.assemble_doctree(docname, title, author,
+                        appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
+                    doctree.settings.author = author
+                    doctree.settings.title = title
+                    self.info("done")
+                    self.info("writing " + targetname + "... ", nonl=1)
+                    docwriter.write(doctree, destination)
+                    self.info("done")
             except Exception as e:
                 log.error(str(e))
                 print_exc()

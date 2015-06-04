@@ -40,9 +40,8 @@ import subprocess
 
 def getchecksuminfo():
     for fn in sorted(glob.glob(os.path.join('old', '*.log'))):
-        f = open(fn, 'rb')
-        data = f.read()
-        f.close()
+        with open(fn, 'r') as f:
+            data = f.read()
         fn = os.path.splitext(os.path.basename(fn))[0]
         data = data.rsplit('\n', 2)[1]
         if data.startswith('File'):

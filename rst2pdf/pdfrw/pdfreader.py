@@ -322,9 +322,8 @@ class PdfReader(PdfDict):
                     fdata = fname.read()
                 else:
                     try:
-                        f = open(fname, 'rb')
-                        fdata = f.read()
-                        f.close()
+                        with open(fname, 'rb') as f:
+                            fdata = f.read()
                     except IOError:
                         raise PdfParseError('Could not read PDF file %s' % fname)
 

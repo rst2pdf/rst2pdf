@@ -323,7 +323,7 @@ class MyImage (Flowable):
                 if pdf is None:
                     log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
                     return 0, 0, 'direct'
-                reader = pdf.PdfFileReader(open(imgname, 'rb'))
+                reader = pdf.PdfFileReader(open(imgname, 'r'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]
                 iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px

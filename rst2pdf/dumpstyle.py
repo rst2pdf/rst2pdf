@@ -145,15 +145,15 @@ def convert(srcname):
     ''' Convert a single file from .json to .style
     '''
     print(srcname)
-    sstr = open(srcname, 'rb').read()
+    with open(srcname, 'r') as f:
+        sstr = f.read()
     sdata = fixstyle(jloads(sstr))
     dstr = dumps(sdata)
     assert sdata == rloads(dstr), "Bad round-trip"
 
     dstname = srcname.replace('.json', '.style')
-    dstf = open(dstname, 'wb')
-    dstf.write(dstr)
-    dstf.close()
+    with open(dstname, 'w') as dstf:
+        dstf.write(dstr)
 
 
 if __name__ == '__main__':

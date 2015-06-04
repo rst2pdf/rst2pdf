@@ -19,9 +19,8 @@ class RunTest:
         if os.path.exists(ignfile):
             self.skip = True
         if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            exec(f, info)
-            f.close()
+            with open(md5file, 'r') as f:
+                exec(f.read(), info)
         if info.good_md5 in [[], ['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue = True
@@ -60,9 +59,8 @@ def run_installed_single(inpfname):
     style = iprefix + '.style'
     cli = iprefix + '.cli'
     if os.path.isfile(cli):
-        f = open(cli)
-        extraargs = shlex.split(f.read())
-        f.close()
+        with open(cli, 'r') as f:
+            extraargs = shlex.split(f.read())
     else:
         extraargs = []
     args = ['rst2pdf'] + ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
@@ -73,9 +71,8 @@ def run_installed_single(inpfname):
 
     checkinfo = checkmd5(outpdf, md5file, result, None, errcode, iprefix)
     log(result, '')
-    outf = open(outtext, 'wb')
-    outf.write('\n'.join(result))
-    outf.close()
+    with open(outtext, 'w') as outf:
+        outf.write('\n'.join(result))
     return checkinfo, errcode
 
 
@@ -92,8 +89,8 @@ class RunInstalledTest:
         if os.path.exists(ignfile):
             self.skip = True
         if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            exec(f, info)
+            with open(md5file, 'r') as f:
+                exec(f.read(), info)
             f.close()
         if info.good_md5 in [[], ['sentinel']]:
             # This is an open issue or something that can't be checked automatically
@@ -124,9 +121,8 @@ class RunSphinxTest:
         if os.path.exists(ignfile):
             self.skip = True
         if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            exec(f, info)
-            f.close()
+            with open(md5file, 'r') as f:
+                exec(f.read(), info)
         if info.good_md5 in [[], ['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue = True
