@@ -43,19 +43,25 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
+
 def dirname(path):
     # os.path.dirname('abc') returns '', which is completely
     # useless for most purposes...
     return os.path.dirname(path) or '.'
 
+
 def globjoin(*parts):
     # A very common pattern in this module
     return sorted(glob.glob(os.path.join(*parts)))
 
-class PathInfo(object):
-    '''  This class is just a namespace to avoid cluttering up the
-         module namespace.  It is never instantiated.
-    '''
+
+class PathInfo:
+
+    """
+    This class is just a namespace to avoid cluttering up the
+    module namespace.  It is never instantiated.
+    """
+
     rootdir = os.path.realpath(dirname(__file__))
     bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
     inpdir = os.path.join(rootdir, 'input')
@@ -77,6 +83,7 @@ class PathInfo(object):
     def load_subprocess(cls):
         import rst2pdf.createpdf
         return rst2pdf.createpdf.main
+
 
 class MD5Info(dict):
     ''' The MD5Info class is used to round-trip good, bad, unknown

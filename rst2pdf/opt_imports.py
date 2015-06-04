@@ -18,6 +18,7 @@ from .log import log
 
 PyHyphenHyphenator = None
 DCWHyphenator = None
+
 try:
     import wordaxe
     from wordaxe import version as wordaxe_version
@@ -70,6 +71,7 @@ try:
     from matplotlib import mathtext
 except ImportError:
     mathtext = None
+
 
 class LazyImports(object):
     ''' Only import some things if we need them.

@@ -8,58 +8,57 @@
 
 # Some fragments of code are copied from Reportlab under this license:
 #
-#####################################################################################
+###############################################################################
 #
-#       Copyright (c) 2000-2008, ReportLab Inc.
-#       All rights reserved.
+#   Copyright (c) 2000-2008, ReportLab Inc.
+#   All rights reserved.
 #
-#       Redistribution and use in source and binary forms, with or without modification,
-#       are permitted provided that the following conditions are met:
+#   Redistribution and use in source and binary forms, with or without
+#   modification, are permitted provided that the following conditions are met:
 #
-#               *       Redistributions of source code must retain the above copyright notice,
-#                       this list of conditions and the following disclaimer.
-#               *       Redistributions in binary form must reproduce the above copyright notice,
-#                       this list of conditions and the following disclaimer in the documentation
-#                       and/or other materials provided with the distribution.
-#               *       Neither the name of the company nor the names of its contributors may be
-#                       used to endorse or promote products derived from this software without
-#                       specific prior written permission.
+#     * Redistributions of source code must retain the above copyright notice,
+#       this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of the company nor the names of its contributors may
+#       be used to endorse or promote products derived from this software
+#       without specific prior written permission.
 #
-#       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-#       ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-#       WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-#       IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-#       INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-#       TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-#       OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-#       IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-#       IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-#       SUCH DAMAGE.
+#   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#   ARE DISCLAIMED. IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE
+#   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+#   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#   LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+#   OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+#   DAMAGE.
 #
-#####################################################################################
-
-
-__docformat__ = 'reStructuredText'
+###############################################################################
 
 import importlib
-import sys
+import logging
 import os
-import tempfile
 import re
 import string
-from . import config
-import logging
-from io import StringIO
-from os.path import abspath, dirname, expanduser, join
-from urllib.parse import urljoin, urlparse, urlunparse
+import sys
+import tempfile
+
 from copy import copy, deepcopy
+from io import StringIO
 from optparse import OptionParser
+from os.path import abspath, dirname, expanduser, join
 from pprint import pprint
+from urllib.parse import urljoin, urlparse, urlunparse
 from xml.sax.saxutils import unescape, escape
 
-import docutils.readers.doctree
 import docutils.core
 import docutils.nodes
+import docutils.readers.doctree
+
 from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
@@ -70,27 +69,33 @@ except ImportError:
     from docutils.utils.roman import toRoman
 
 from reportlab.platypus import *
+from reportlab.platypus import doctemplate
 from reportlab.platypus.doctemplate import IndexingFlowable
 from reportlab.platypus.flowables import _listWrapOn, _Container
 from reportlab.pdfbase.pdfdoc import PDFPageLabel
-# from reportlab.lib.enums import *
-# from reportlab.lib.units import *
-# from reportlab.lib.pagesizes import *
 
+from rst2pdf import config
 from rst2pdf import counter_role, oddeven_directive
-from rst2pdf import pygments_code_block_directive  # code-block directive
 from rst2pdf import flowables
-from rst2pdf.flowables import *  # our own reportlab flowables
-from rst2pdf.sinker import Sinker
-from rst2pdf.image import MyImage, missing
-from rst2pdf.aafigure_directive import Aanode
-from rst2pdf.log import log, nodeid
-from rst2pdf.smartypants import smartyPants
+from rst2pdf import pygments_code_block_directive
 from rst2pdf import styles as sty
-from rst2pdf.nodehandlers import nodehandlers
+
+from rst2pdf.aafigure_directive import Aanode
+from rst2pdf.flowables import *  # our own reportlab flowables
+from rst2pdf.image import MyImage, missing
 from rst2pdf.languages import get_language_available
-from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
-    DCWHyphenator, sphinx as sphinx_module, wordaxe
+from rst2pdf.log import log, nodeid
+from rst2pdf.opt_imports import (
+    Paragraph,
+    BaseHyphenator,
+    PyHyphenHyphenator,
+    DCWHyphenator,
+    sphinx as sphinx_module,
+    wordaxe
+)
+from rst2pdf.nodehandlers import nodehandlers
+from rst2pdf.sinker import Sinker
+from rst2pdf.smartypants import smartyPants
 
 # Small template engine for covers
 # The obvious import doesn't work for complicated reasons ;-)
@@ -99,20 +104,20 @@ to_str = tenjin.helpers.generate_tostrfunc('utf-8')
 escape = tenjin.helpers.escape
 templateEngine = tenjin.Engine()
 
+
 def renderTemplate(tname, **context):
-  context['to_str'] = to_str
-  context['escape'] = escape
-  return templateEngine.render(tname, context)
+    context['to_str'] = to_str
+    context['escape'] = escape
+    return templateEngine.render(tname, context)
 
-# def escape (x,y):
-#    "Dummy escape function to test for excessive escaping"
-#    return x
 
-numberingstyles = { 'arabic': 'ARABIC',
-                  'roman': 'ROMAN_UPPER',
-                  'lowerroman': 'ROMAN_LOWER',
-                  'alpha':  'LETTERS_UPPER',
-                  'loweralpha':  'LETTERS_LOWER' }
+numberingstyles = {
+    'arabic': 'ARABIC',
+    'roman': 'ROMAN_UPPER',
+    'lowerroman': 'ROMAN_LOWER',
+    'alpha': 'LETTERS_UPPER',
+    'loweralpha':  'LETTERS_LOWER'
+}
 
 
 class RstToPdf(object):
@@ -166,16 +171,17 @@ class RstToPdf(object):
         self.footer = footer
         self.custom_cover = custom_cover
         self.floating_images = floating_images
-        self.decoration = {'header': header,
-                           'footer': footer,
-                           'endnotes': [],
-                           'extraflowables':[]}
+        self.decoration = {
+            'header': header,
+            'footer': footer,
+            'endnotes': [],
+            'extraflowables': []
+        }
         # find base path
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
         else:
             self.PATH = abspath(dirname(__file__))
-
 
         self.font_path = font_path
         self.style_path = style_path
@@ -216,8 +222,14 @@ class RstToPdf(object):
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
-            directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
-            directives.register_directive('code', pygments_code_block_directive.code_block_directive)
+            directives.register_directive(
+                'code-block',
+                pygments_code_block_directive.code_block_directive
+            )
+            directives.register_directive(
+                'code',
+                pygments_code_block_directive.code_block_directive
+            )
             from . import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
@@ -245,15 +257,16 @@ class RstToPdf(object):
                     except Exception:
                         # hyphenators may not always be available or crash,
                         # e.g. wordaxe issue 2809074 (http://is.gd/16lqs)
-                        log.warning("Can't load wordaxe DCW hyphenator"
-                        " for German language, trying Py hyphenator instead")
+                        log.warning("Can't load wordaxe DCW hyphenator for" +
+                                    " German language, trying Py hyphenator" +
+                                    " instead")
                     else:
                         continue
                 try:
                     wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
                 except Exception:
-                    log.warning("Can't load wordaxe Py hyphenator"
-                        " for language %s, trying base hyphenator", lang)
+                    log.warning("Can't load wordaxe Py hyphenator for" +
+                                " language %s, trying base hyphenator", lang)
                 else:
                     continue
                 try:
@@ -261,8 +274,8 @@ class RstToPdf(object):
                 except Exception:
                     log.warning("Can't even load wordaxe base hyphenator")
             log.info('hyphenation by default in %s , loaded %s',
-                self.styles['bodytext'].language,
-                ','.join(self.styles.languages))
+                     self.styles['bodytext'].language,
+                     ','.join(self.styles.languages))
 
         self.pending_targets = []
         self.targets = []
@@ -330,7 +343,7 @@ class RstToPdf(object):
         try:
             s = self.styles[style]
             r1 = ['<font face="%s" color="#%s" ' %
-                (s.fontName, s.textColor.hexval()[2:])]
+                  (s.fontName, s.textColor.hexval()[2:])]
             bc = s.backColor
             if bc:
                 r1.append('backColor="#%s"' % bc.hexval()[2:])
@@ -351,16 +364,16 @@ class RstToPdf(object):
             log.warning('Unknown class %s', style)
             return None
 
-
     def styleToFont(self, style):
-        '''Takes a style name, returns a font tag for it, like
+        """
+        Takes a style name, returns a font tag for it, like
         "<font face=helvetica size=14 color=red>". Used for inline
-        nodes (custom interpreted roles)'''
-
+        nodes (custom interpreted roles).
+        """
         try:
             s = self.styles[style]
             r = ['<font face="%s" color="#%s" ' %
-                (s.fontName, s.textColor.hexval()[2:])]
+                 (s.fontName, s.textColor.hexval()[2:])]
             bc = s.backColor
             if bc:
                 r.append('backColor="#%s"' % bc.hexval()[2:])
@@ -374,7 +387,7 @@ class RstToPdf(object):
 
     def gather_pdftext(self, node, replaceEnt=True):
         return ''.join([self.gen_pdftext(n, replaceEnt)
-            for n in node.children])
+                        for n in node.children])
 
     def gather_elements(self, node, style=None):
         if style is None:
@@ -388,9 +401,10 @@ class RstToPdf(object):
         return r
 
     def bullet_for_node(self, node):
-        """Takes a node, assumes it's some sort of
-           item whose parent is a list, and
-           returns the bullet text it should have"""
+        """
+        Take a node, assume it's some sort of item whose parent is a list,
+        and return the bullet text it should have.
+        """
         b = ""
         t = 'item'
         if node.parent.get('start'):
@@ -410,41 +424,42 @@ class RstToPdf(object):
 
         elif node.parent.get('enumtype') == 'lowerroman':
             b = toRoman(node.parent.children.index(node) + start).lower() + '.'
+
         elif node.parent.get('enumtype') == 'upperroman':
             b = toRoman(node.parent.children.index(node) + start).upper() + '.'
+
         elif node.parent.get('enumtype') == 'loweralpha':
-            b = string.lowercase[node.parent.children.index(node)
-                + start - 1] + '.'
+            b = string.ascii_lowercase[node.parent.children.index(node) +
+                                       start - 1] + '.'
+
         elif node.parent.get('enumtype') == 'upperalpha':
-            b = string.uppercase[node.parent.children.index(node)
-                + start - 1] + '.'
+            b = string.ascii_uppercase[node.parent.children.index(node) +
+                                       start - 1] + '.'
+
         else:
             log.critical("Unknown kind of list_item %s [%s]",
-                node.parent, nodeid(node))
+                         node.parent, nodeid(node))
         return b, t
 
     def filltable(self, rows):
         """
-        Takes a list of rows, consisting of cells and performs the following fixes:
+        Take a list of rows consisting of cells and perform the following fixes
 
-        * For multicolumn cells, add continuation cells, to make all rows the same
-        size. These cells have to be multirow if the original cell is multirow.
+          * For multicolumn cells, add continuation cells to make all rows the
+            same size. These cells have to be multirow if the original cell is
+            multirow.
 
-        * For multirow cell, insert continuation cells, to make all columns the
-        same size.
+          * For multirow cell, insert continuation cells, to make all columns
+            the same size.
 
-        * If there are still shorter rows, add empty cells at the end (ReST quirk)
+          * If there are still shorter rows, add empty cells at the end (ReST
+            quirk)
 
-        * Once the table is *normalized*, create spans list, fitting for reportlab's
-        Table class.
-
+          * Once the table is *normalized*, create spans list, fitting for
+            reportlab's Table class.
         """
-
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
-
-        # from pudb import set_trace; set_trace()
-
         for y in range(0, len(rows)):
             for x in range(len(rows[y]) - 1, -1, -1):
                 cell = rows[y][x]
@@ -464,7 +479,6 @@ class RstToPdf(object):
                 if cell.get("morerows"):
                     for i in range(0, cell.get("morerows")):
                         rows[y + i + 1].insert(x, "")
-
 
         # If a row is shorter, add empty cells at the right end
         maxw = max([len(r) for r in rows])
@@ -495,9 +509,12 @@ class RstToPdf(object):
         """Preformatted section that gets horizontally compressed if needed."""
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
-        return BoundByWidth(2000 * cm,
+        return BoundByWidth(
+            2000 * cm,
             content=[XXPreformatted(text, style)],
-            mode=self.fit_mode, style=style)
+            mode=self.fit_mode,
+            style=style
+        )
 
     def createPdf(self, text=None,
                   source_path=None,
@@ -507,13 +524,13 @@ class RstToPdf(object):
                   # This adds entries to the PDF TOC
                   # matching the rst source lines
                   debugLinesPdf=False):
-        """Create a PDF from text (ReST input),
-        or doctree (docutil nodes) and save it in outfile.
+        """
+        Create a PDF from text or doctree and save it in outfile.
 
-        If outfile is a string, it's a filename.
-        If it's something with a write method, (like a StringIO,
-        or a file object), the data is saved there.
-
+        Input is either text (ReST) or a doctree (docutil nodes)
+        If outfile is a string, it's a filename.  If it's something with a
+        write method, (like a StringIO, or a file object), the data is
+        saved there.
         """
         self.decoration = {'header': self.header,
                            'footer': self.footer,
@@ -532,9 +549,11 @@ class RstToPdf(object):
                 else:
                     settings_overrides = {}
                 settings_overrides['strip_elements_with_classes'] = self.strip_elements_with_classes
-                self.doctree = docutils.core.publish_doctree(text,
+                self.doctree = docutils.core.publish_doctree(
+                    text,
                     source_path=source_path,
-                    settings_overrides=settings_overrides)
+                    settings_overrides=settings_overrides
+                )
                 # import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
@@ -559,8 +578,11 @@ class RstToPdf(object):
 
         # Find cover template, save it in cover_file
         def find_cover(name):
-            cover_path = [self.basedir, os.path.expanduser('~/.rst2pdf'),
-                os.path.join(self.PATH, 'templates')]
+            cover_path = [
+                self.basedir,
+                os.path.expanduser('~/.rst2pdf'),
+                os.path.join(self.PATH, 'templates')
+            ]
             cover_file = None
             for d in cover_path:
                 if os.path.exists(os.path.join(d, name)):
@@ -570,21 +592,24 @@ class RstToPdf(object):
 
         cover_file = find_cover(self.custom_cover)
         if cover_file is None:
-            log.error("Can't find cover template %s, using default" % self.custom_cover)
+            log.error("Can't find cover template %s, using default"
+                      % self.custom_cover)
             cover_file = find_cover('cover.tmpl')
 
         # Feed data to the template, get restructured text.
-        cover_text = renderTemplate(tname=cover_file,
-                            title=self.doc_title,
-                            subtitle=self.doc_subtitle
-                        )
+        cover_text = renderTemplate(
+            tname=cover_file,
+            title=self.doc_title,
+            subtitle=self.doc_subtitle
+        )
 
         # This crashes sphinx because .. class:: in sphinx is
         # something else. Ergo, pdfbuilder does it in its own way.
         if not self.sphinx:
-
             elements = self.gen_elements(
-                publish_secondary_doctree(cover_text, self.doctree, source_path)) + elements
+                publish_secondary_doctree(cover_text, self.doctree,
+                                          source_path)
+            ) + elements
 
         if self.blank_first_page:
             elements.insert(0, PageBreak())
@@ -598,20 +623,23 @@ class RstToPdf(object):
                 t_style = TableStyle(self.styles['endnote'].commands)
                 colWidths = self.styles['endnote'].colWidths
                 elements.append(DelayedTable([[n[0], n[1]]],
-                    style=t_style, colWidths=colWidths))
+                                style=t_style, colWidths=colWidths))
 
         if self.floating_images:
             # from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
             new_elem = []
             for i, e in enumerate(elements[::-1]):
-                if (isinstance (e, MyImage) and e.image.hAlign != 'CENTER'
-                        and new_elem):
+                if (
+                    isinstance(e, MyImage) and
+                    e.image.hAlign != 'CENTER' and
+                    new_elem
+                ):
                     # This is an image where flowables should wrap
                     # around it
                     popped = new_elem.pop()
                     new_elem.append(ImageAndFlowables(e, popped,
-                        imageSide=e.image.hAlign.lower()))
+                                    imageSide=e.image.hAlign.lower()))
                 else:
                     new_elem.append(e)
 
@@ -641,7 +669,7 @@ class RstToPdf(object):
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
             if not isinstance(elements[-1], UnhappyOnce):
-                log.info ('Forcing second pass so Total pages work')
+                log.info('Forcing second pass so Total pages work')
                 elements.append(UnhappyOnce())
         while True:
             try:
@@ -658,7 +686,7 @@ class RstToPdf(object):
                 if getattr(self, 'mustMultiBuild', False):
                     # Force a multibuild pass
                     if not isinstance(elements[-1], UnhappyOnce):
-                        log.info ('Forcing second pass so Total pages work')
+                        log.info('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
                 # # Rearrange footnotes if needed
@@ -685,9 +713,6 @@ class RstToPdf(object):
                             delattr(e, '_postponed')
                     self.real_footnotes = False
                     continue
-
-
-
                 break
             except ValueError as v:
                 # FIXME: cross-document links come through here, which means
@@ -712,8 +737,6 @@ class RstToPdf(object):
                 pass
 
 
-from reportlab.platypus import doctemplate
-
 class FancyDocTemplate(BaseDocTemplate):
 
     def afterFlowable(self, flowable):
@@ -726,7 +749,6 @@ class FancyDocTemplate(BaseDocTemplate):
             pagenum = setPageCounter()
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
-
     def handle_flowable(self, flowables):
         '''try to handle one flowable from the front of list flowables.'''
 
@@ -735,7 +757,6 @@ class FancyDocTemplate(BaseDocTemplate):
         # allow document a chance to look at, modify or ignore
         # the object(s) about to be processed
         self.filterFlowables(flowables)
-
         self.handle_breakBefore(flowables)
         self.handle_keepWithNext(flowables)
         f = flowables[0]
@@ -817,7 +838,9 @@ class PageCounter(Flowable):
     def drawOn(self, canvas, x, y, _sW):
         pass
 
+
 flowables.PageCounter = PageCounter
+
 
 def setPageCounter(counter=None, style=None):
 
@@ -840,8 +863,10 @@ def setPageCounter(counter=None, style=None):
         ptext = str(_counter)
     return ptext
 
+
 class MyContainer(_Container, Flowable):
     pass
+
 
 class UnhappyOnce(IndexingFlowable):
     '''An indexing flowable that is only unsatisfied once.
@@ -856,6 +881,7 @@ class UnhappyOnce(IndexingFlowable):
 
     def draw(self):
         pass
+
 
 class HeaderOrFooter(object):
     """ A helper object for FancyPage (below)
@@ -918,13 +944,13 @@ class HeaderOrFooter(object):
                 self.client.mustMultiBuild = True
             text = text.replace("###Title###", doc.title)
             text = text.replace("###Section###",
-                getattr(canv, 'sectName', ''))
+                                getattr(canv, 'sectName', ''))
             text = text.replace("###SectNum###",
-                getattr(canv, 'sectNum', ''))
+                                getattr(canv, 'sectNum', ''))
             text = smartyPants(text, smarty)
             return text
 
-        for i, e  in enumerate(elems):
+        for i, e in enumerate(elems):
             # TODO: implement a search/replace for arbitrary things
             if isinstance(e, Paragraph):
                 text = replace(e.text)
@@ -933,7 +959,7 @@ class HeaderOrFooter(object):
                 data = deepcopy(e.data)
                 for r, row in enumerate(data):
                     for c, cell in enumerate(row):
-                        if isinstance (cell, list):
+                        if isinstance(cell, list):
                             data[r][c] = self.replaceTokens(cell, canv, doc, smarty)
                         else:
                             row[r] = self.replaceTokens([cell, ], canv, doc, smarty)[0]
@@ -964,7 +990,9 @@ class HeaderOrFooter(object):
 
 
 class FancyPage(PageTemplate):
-    """ A page template that handles changing layouts.
+
+    """
+    A page template that handles changing layouts.
     """
 
     def __init__(self, _id, _head, _foot, client):
@@ -975,23 +1003,21 @@ class FancyPage(PageTemplate):
         self.smarty = client.smarty
         self.show_frame = client.show_frame
         self.image_cache = {}
-        PageTemplate.__init__(self, _id, [])
-
+        super().__init__(_id, [])
 
     def draw_background(self, which, canv):
-        ''' Draws a background and/or foreground image
-            on each page which uses the template.
+        """
+        Draw a background and/or foreground image on each page.
 
-            Calculates the image one time, and caches
-            it for reuse on every page in the template.
+        The image is calculate once, cached, and reused on every page
+        in the template.
 
-            How the background is drawn depends on the
-            --fit-background-mode option.
+        How the background is drawn depends on the
+        --fit-background-mode option.
 
-            If desired, we could add code to push it around
-            on the page, using stylesheets to align and/or
-            set the offset.
-        '''
+        If desired, we could add code to push it around on the page, using
+        stylesheets to align and/or set the offset.
+        """
         uri = self.template[which]
         info = self.image_cache.get(uri)
         if info is None:
@@ -1016,7 +1042,8 @@ class FancyPage(PageTemplate):
                 x, y = 0, 0
                 sw, sh = pw, ph
             else:
-                log.error('Unknown background fit mode: %s' % self.client.background_fit_mode)
+                log.error('Unknown background fit mode: %s' %
+                          self.client.background_fit_mode)
                 # Do scale anyway
                 x, y = 0, 0
                 sw, sh = pw, ph
@@ -1027,23 +1054,22 @@ class FancyPage(PageTemplate):
         bg.drawOn(canv, x, y)
 
     def is_left(self, page_num):
-        """Default behavior is that the first page is on the left.
+        """
+        Default behavior is that the first page is on the left.
 
-           If the user has --first_page_on_right, the calculation is reversed.
+        If the user has --first_page_on_right, the calculation is reversed.
         """
         val = page_num % 2 == 1
         if self.client.first_page_on_right:
             val = not val
         return val
 
-
     def beforeDrawPage(self, canv, doc):
-        """Do adjustments to the page according to where we are in the document.
-
-           * Gutter margins on left or right as needed
-
         """
+        Do adjustments to the page according to where we are in the document.
 
+        Gutter margins on left or right as needed
+        """
         global _counter, _counterStyle
 
         styles = self.styles
@@ -1074,8 +1100,8 @@ class FancyPage(PageTemplate):
 
         self.fx = styles.lm
         self.fy = styles.bm
-        self.th = styles.ph - styles.tm - styles.bm - self.hh \
-                    - self.fh - styles.ts - styles.bs
+        self.th = styles.ph - styles.tm - styles.bm - self.hh - \
+            self.fh - styles.ts - styles.bs
 
         # Adjust gutter margins
         if self.is_left(doc.page):  # Left page
@@ -1090,21 +1116,26 @@ class FancyPage(PageTemplate):
 
         self.frames = []
         for frame in self.template['frames']:
-            self.frames.append(SmartFrame(self,
+            self.frames.append(SmartFrame(
+                self,
                 styles.adjustUnits(frame[0], self.tw) + x1,
                 styles.adjustUnits(frame[1], self.th) + y1,
                 styles.adjustUnits(frame[2], self.tw),
                 styles.adjustUnits(frame[3], self.th),
-                    showBoundary=self.show_frame))
+                showBoundary=self.show_frame
+            ))
         canv.firstSect = True
         canv._pagenum = doc.page
         for frame in self.frames:
             frame._pagenum = doc.page
 
     def afterDrawPage(self, canv, doc):
-        """Draw header/footer."""
+        """
+        Draw header/footer.
+        """
         # Adjust for gutter margin
-        canv.addPageLabel(canv._pageNumber - 1, numberingstyles[_counterStyle], _counter)
+        canv.addPageLabel(canv._pageNumber - 1, numberingstyles[_counterStyle],
+                          _counter)
 
         log.info('Page %s [%s]' % (_counter, doc.page))
         if self.is_left(doc.page):  # Left page
@@ -1335,6 +1366,7 @@ def parse_commandline():
 
     return parser
 
+
 def main(_args=None):
     """Parse command line and call createPdf with the correct data."""
 
@@ -1485,19 +1517,22 @@ def main(_args=None):
         floating_images=options.floating_images,
         numbered_links=options.numbered_links,
         raw_html=options.raw_html,
-            section_header_depth=int(options.section_header_depth),
-            strip_elements_with_classes=options.strip_elements_with_classes,
-        ).createPdf(text=options.infile.read(),
-                    source_path=options.infile.name,
-                    output=options.outfile,
-                    compressed=options.compressed)
+        section_header_depth=int(options.section_header_depth),
+        strip_elements_with_classes=options.strip_elements_with_classes,
+    ).createPdf(text=options.infile.read(),
+                source_path=options.infile.name,
+                output=options.outfile,
+                compressed=options.compressed)
+
 
 # Ugly hack that fixes Issue 335
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy(self)
 
+
 def patch_digester():
-    ''' Patch digester so that we can get the same results when image
-filenames change'''
+    """
+    Patch digester so that we  get the same results when image filenames change
+    """
     import reportlab.pdfgen.canvas as canvas
 
     cache = {}
@@ -1507,8 +1542,11 @@ filenames change'''
         return 'rst2pdf_image_%s' % index
     canvas._digester = _digester
 
+
 def patch_PDFDate():
-    '''Patch reportlab.pdfdoc.PDFDate so the invariant dates work correctly'''
+    """
+    Patch reportlab.pdfdoc.PDFDate so the invariant dates work correctly
+    """
     from reportlab.pdfbase import pdfdoc
     import reportlab
     class PDFDate:
@@ -1530,8 +1568,8 @@ def patch_PDFDate():
     pdfdoc.PDFDate = PDFDate
     reportlab.rl_config.invariant = 1
 
-def add_extensions(options):
 
+def add_extensions(options):
     extensions = []
     for ext in options.extensions:
         if not ext.startswith('!'):
@@ -1582,27 +1620,28 @@ def add_extensions(options):
             module.install(createpdf, options)
 
 def monkeypatch():
-    ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
-        This allows us to compare PDFs more easily.
+    """
+    For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
+    This allows us to compare PDFs more easily.
 
-        There are two sets of changes here:
+    There are two sets of changes here:
 
-        1)  rl_config.paraFontSizeHeightOffset = False
+    1)  rl_config.paraFontSizeHeightOffset = False
 
-            This reverts a change reportlab that messes up a lot of docs.
-            We may want to keep this one in here, or at least figure out
-            the right thing to do.  If we do NOT keep this one here,
-            we will have documents look different in RL2.3 than they do
-            in RL2.4.  This is probably unacceptable.
+        This reverts a change reportlab that messes up a lot of docs.
+        We may want to keep this one in here, or at least figure out
+        the right thing to do.  If we do NOT keep this one here,
+        we will have documents look different in RL2.3 than they do
+        in RL2.4.  This is probably unacceptable.
 
-        2) Everything else (below the paraFontSizeHeightOffset line):
+    2) Everything else (below the paraFontSizeHeightOffset line):
 
-            These change some behavior in reportlab that affects the
-            graphics content stream without affecting the actual output.
+        These change some behavior in reportlab that affects the
+        graphics content stream without affecting the actual output.
 
-            We can remove these changes after making sure we are happy
-            and the checksums are good.
-    '''
+        We can remove these changes after making sure we are happy
+        and the checksums are good.
+    """
     import reportlab
     from reportlab import rl_config
     from reportlab.pdfgen.canvas import Canvas
@@ -1631,10 +1670,11 @@ def monkeypatch():
     # to 1.4 in RL 2.4.
     pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1, 3
 
+
 monkeypatch()
 
-def publish_secondary_doctree(text, main_tree, source_path):
 
+def publish_secondary_doctree(text, main_tree, source_path):
     # This is a hack so the text substitutions defined
     # in the document are available when we process the cover
     # page. See Issue 322
