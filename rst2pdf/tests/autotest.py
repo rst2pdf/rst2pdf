@@ -23,8 +23,6 @@ from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
 
-from rst2pdf.createpdf import main as rst2pdf
-
 # md5 module deprecated, but hashlib not available in 2.4
 try:
     import hashlib
@@ -274,12 +272,11 @@ def build_txt(iprefix, outpdf, fastfork):
             extraargs = shlex.split(f.read())
     else:
         extraargs = []
-    args = ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
+    args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
     if os.path.exists(style):
         args.extend(('-s', os.path.basename(style)))
     args.extend(('-o', outpdf))
-    os.chdir(dirname(inpfname))
-    return main(args)
+    return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
 def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
