@@ -170,7 +170,3 @@ def sphinxtest():
     testfiles = globjoin(PathInfo.inpdir, 'sphinx*/')
     for fname in testfiles:
         yield RunSphinxTest(fname), fname
-
-
-def setup():
-    PathInfo.add_coverage()

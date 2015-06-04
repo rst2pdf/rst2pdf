@@ -71,15 +71,6 @@ class PathInfo:
     runcmd = ['rst2pdf']
 
     @classmethod
-    def add_coverage(cls, keep=False):
-        cls.runcmd[0:0] = ['coverage', 'run', '-a']
-        fname = os.path.join(cls.rootdir, '.coverage')
-        os.environ['COVERAGE_FILE'] = fname
-        if not keep:
-            if os.path.exists(fname):
-                os.remove(fname)
-
-    @classmethod
     def load_subprocess(cls):
         import rst2pdf.createpdf
         return rst2pdf.createpdf.main
@@ -270,7 +261,7 @@ def build_sphinx(sphinxdir, outpdf):
         shutil.copytree(pdfdir, outpdf)
     return errcode, result
 
-def build_txt(iprefix, outpdf, fastfork):
+def build_txt(iprefix, outpdf):
     inpfname = iprefix + '.txt'
     style = iprefix + '.style'
     cli = iprefix + '.cli'
@@ -283,9 +274,9 @@ def build_txt(iprefix, outpdf, fastfork):
     if os.path.exists(style):
         args.extend(('-s', os.path.basename(style)))
     args.extend(('-o', outpdf))
-    return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
+    return textexec(args, cwd=dirname(inpfname), python_proc=None)
 
-def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
+def run_single(inpfname, incremental=False, updatemd5=None):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
@@ -321,14 +312,14 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
         errcode, result = build_sphinx(sphinxdir, outpdf)
         checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode)
     else:
-        errcode, result = build_txt(iprefix, outpdf, fastfork)
+        errcode, result = build_txt(iprefix, outpdf)
         checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
     log(result, '')
     with open(outtext, 'w') as outf:
         outf.write('\n'.join(result))
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text=False, do_sphinx=False, updatemd5=None):
+def run_testlist(testfiles=None, incremental=False, do_text=False, do_sphinx=False, updatemd5=None):
     if not testfiles:
         testfiles = []
         if do_text:
@@ -339,7 +330,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text=False
             testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
     results = {}
     for fname in testfiles:
-        key, errcode = run_single(fname, incremental, fastfork, updatemd5)
+        key, errcode = run_single(fname, incremental, updatemd5)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
@@ -354,15 +345,9 @@ def parse_commandline():
     parser.add_option('-c', '--coverage', action="store_true",
         dest='coverage', default=False,
         help='Generate new coverage information.')
-    parser.add_option('-a', '--add-coverage', action="store_true",
-        dest='add_coverage', default=False,
-        help='Add coverage information to previous runs.')
     parser.add_option('-i', '--incremental', action="store_true",
         dest='incremental', default=False,
         help='Incremental build -- ignores existing PDFs')
-    parser.add_option('-f', '--fast', action="store_true",
-        dest='fastfork', default=False,
-        help='Fork and reuse process information')
     parser.add_option('-s', '--sphinx', action="store_true",
         dest='sphinx', default=False,
         help='Run sphinx tests only')
@@ -380,19 +365,12 @@ def parse_commandline():
 def main(args=None):
     parser = parse_commandline()
     options, args = parser.parse_args(copy(args))
-    fastfork = None
     do_sphinx = options.sphinx or options.everything
     do_text = options.everything or not options.sphinx
-    if options.coverage or options.add_coverage:
-        assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
-        assert not do_sphinx, "Cannot run sphinx and coverage simultaneously"
-        PathInfo.add_coverage(options.add_coverage)
-    elif options.fastfork:
-        fastfork = PathInfo.load_subprocess()
     updatemd5 = options.updatemd5
     if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
         raise SystemExit('Unexpected value for updatemd5: %s' % updatemd5)
-    run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
+    run_testlist(args, options.incremental, do_text, do_sphinx, options.updatemd5)
 
 if __name__ == '__main__':
     main()
