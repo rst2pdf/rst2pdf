@@ -56,14 +56,6 @@ except ImportError:
     sphinx = None
 
 try:
-    import psyco
-except ImportError:
-    class psyco(object):
-        @staticmethod
-        def full():
-            pass
-
-try:
     import aafigure
     import aafigure.pdf
 except ImportError:

@@ -41,10 +41,6 @@
 
 __docformat__ = 'reStructuredText'
 
-# Import Psyco if available
-from .opt_imports import psyco
-psyco.full()
-
 import importlib
 import sys
 import os
