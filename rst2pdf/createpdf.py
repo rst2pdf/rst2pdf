@@ -604,7 +604,7 @@ class RstToPdf(object):
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
-                return
+                return 2
         else:
             self.doctree = doctree
 
@@ -675,7 +675,7 @@ class RstToPdf(object):
             # from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
             new_elem = []
-            for i, e in enumerate(elements[::-1]):
+            for e in elements[::-1]:
                 if (
                     isinstance(e, MyImage) and
                     e.image.hAlign != 'CENTER' and
@@ -697,10 +697,6 @@ class RstToPdf(object):
 
         # So, now, create the FancyPage with the right sizes and elements
         FP = FancyPage("fancypage", head, foot, self)
-
-        def cleantags(s):
-            re.sub(r'<[^>]*?>', '',
-                   str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -781,6 +777,7 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
+        return 0
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -796,8 +793,9 @@ class FancyDocTemplate(BaseDocTemplate):
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
     def handle_flowable(self, flowables):
-        '''try to handle one flowable from the front of list flowables.'''
-
+        """
+        try to handle one flowable from the front of list flowables.
+        """
         # this method is copied from reportlab
 
         # allow document a chance to look at, modify or ignore
@@ -1610,6 +1608,8 @@ def parse_commandline():
 def main(_args=None):
     """
     Parse command line and call createPdf with the correct data.
+
+    The return value is the system exit code.
     """
     parser = parse_commandline()
     # Fix issue 430: don't overwrite args
@@ -1626,7 +1626,7 @@ def main(_args=None):
     if args.version:
         from rst2pdf import version
         print(version)
-        sys.exit(0)
+        return 0
 
     if args.quiet:
         log.setLevel(logging.CRITICAL)
@@ -1644,19 +1644,19 @@ def main(_args=None):
         else:
             PATH = os.path.abspath(os.path.dirname(__file__))
         print(open(os.path.join(PATH, 'styles', 'styles.style')).read())
-        sys.exit(0)
+        return 0
 
     filename = False
 
     if len(args.filenames) == 0:
-        args.filenames = ['-',]
+        args.filenames = ['-', ]
     elif len(args.filenames) > 2:
         log.critical('Usage: %s [ file.txt [ file.pdf ] ]', sys.argv[0])
-        sys.exit(1)
+        return 1
     elif len(args.filenames) == 2:
         if args.output:
             log.critical('You may not give both "-o/--output" and second argument')
-            sys.exit(1)
+            return 1
         args.output = args.filenames.pop()
 
     if args.filenames[0] == '-':
@@ -1664,7 +1664,7 @@ def main(_args=None):
         args.basedir = os.getcwd()
     elif len(args.filenames) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
-        sys.exit(1)
+        return 1
     else:
         filename = args.filenames[0]
         args.basedir = os.path.dirname(os.path.abspath(filename))
@@ -1673,7 +1673,7 @@ def main(_args=None):
             infile = open(filename)
         except IOError as e:
             log.error(e)
-            sys.exit(1)
+            return 1
     args.infile = infile
 
     if args.output:
@@ -1727,7 +1727,7 @@ def main(_args=None):
 
     add_extensions(args)
 
-    RstToPdf(
+    return RstToPdf(
         stylesheets=args.style,
         language=args.language,
         header=args.header, footer=args.footer,
@@ -1940,4 +1940,4 @@ def publish_secondary_doctree(text, main_tree, source_path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    exit(main(sys.argv[1:]))
