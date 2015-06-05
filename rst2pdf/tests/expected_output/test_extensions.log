@@ -1,0 +1,37 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:36 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_extensions.txt -e sample -e test_extensions.py -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_extensions.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] createpdf.py:1572 Importing extension module 'sample'
+* [INFO] createpdf.py:1572 Importing extension module 'test_extensions'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: 
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] createpdf.py:651 Starting build
+  
+  This is a sample rst2pdf extension.
+  
+  Because it is named 'sample.py' you can get rst2pdf to import it by
+  putting '-e sample' on the rst2pdf command line.
+  
+  An extension is called after the command-line is parsed, and can
+  monkey-patch any necessary changes into rst2pdf.
+  
+  An extension can live either in the extensions subdirectory, or
+  anywhere on the python path.
+  
+  
+  
+  This test should print the message from the sample extension,
+  and then this message, and then generate an empty PDF.
+  
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
+
+Validity of file test_extensions.pdf checksum '9852870a99307db4145b47ac7db44da9' is good.

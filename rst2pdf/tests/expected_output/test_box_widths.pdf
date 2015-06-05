@@ -1,0 +1,526 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R
+ /F4 6 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 11 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 10 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+6 0 obj
+<< /BaseFont /Courier-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F4
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+7 0 obj
+<< /Contents 12 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 10 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+8 0 obj
+<< /Outlines 13 0 R
+ /PageLabels 14 0 R
+ /PageMode /UseNone
+ /Pages 10 0 R
+ /Type /Catalog >>
+endobj
+9 0 obj
+<< /Author ()
+ /CreationDate (D:20000101000000+00'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+10 0 obj
+<< /Count 2
+ /Kids [ 5 0 R
+ 7 0 R ]
+ /Type /Pages >>
+endobj
+11 0 obj
+<< /Length 6831 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 16.82 Tm /F1 10 Tf 12 TL 1.36237 Tw (Each of the following blocks right edge should be at the same place. If it's not, it's either a bug in the) Tj T* 0 Tw (stylesheet or in rst2pdf.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 651.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 76.82 Tm /F1 10 Tf 12 TL 2.10881 Tw (This is a common paragraph. This is a common paragraph. This is a common paragraph. This is a) Tj T* 0 Tw 2.315984 Tw (common paragraph. This is a common paragraph. This is a common paragraph. This is a common) Tj T* 0 Tw .19061 Tw (paragraph. This is a common paragraph. This is a common paragraph. This is a common paragraph. This) Tj T* 0 Tw .964692 Tw (is a common paragraph. This is a common paragraph. This is a common paragraph. This is a common) Tj T* 0 Tw .19061 Tw (paragraph. This is a common paragraph. This is a common paragraph. This is a common paragraph. This) Tj T* 0 Tw .964692 Tw (is a common paragraph. This is a common paragraph. This is a common paragraph. This is a common) Tj T* 0 Tw (paragraph. This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 633.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a block quote:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 627.0236 cm
+Q
+q
+1 0 0 1 62.69291 531.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 88.82 Tm /F1 10 Tf 12 TL .932339 Tw (This is a common paragraph. This is a common paragraph. This is a common paragraph. This is a) Tj T* 0 Tw .982651 Tw (common paragraph. This is a common paragraph. This is a common paragraph. This is a common) Tj T* 0 Tw .314651 Tw (paragraph. This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* 0 Tw .932339 Tw (This is a common paragraph. This is a common paragraph. This is a common paragraph. This is a) Tj T* 0 Tw .982651 Tw (common paragraph. This is a common paragraph. This is a common paragraph. This is a common) Tj T* 0 Tw .314651 Tw (paragraph. This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* 0 Tw .932339 Tw (This is a common paragraph. This is a common paragraph. This is a common paragraph. This is a) Tj T* 0 Tw (common paragraph.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 531.0236 cm
+Q
+q
+1 0 0 1 62.69291 513.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a literal block:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 404.6481 cm
+q
+q
+.91919 0 0 .91919 0 0 cm
+q
+1 0 0 1 6.6 7.180237 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 384.6481 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a literal block inside a quote:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 378.6481 cm
+Q
+q
+1 0 0 1 62.69291 282.5449 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+.880066 0 0 .880066 0 0 cm
+q
+1 0 0 1 6.6 7.499437 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 282.5449 cm
+Q
+q
+1 0 0 1 62.69291 266.5449 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F3 10 Tf 12 TL (This is a literal block in a definition list) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 167.4417 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 86.10321 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+.880066 0 0 .880066 0 0 cm
+q
+1 0 0 1 6.6 7.499437 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 149.4417 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a code block:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 85.18728 cm
+q
+q
+.91919 0 0 .91919 0 0 cm
+q
+1 0 0 1 6.6 7.180237 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 41.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+
+endobj
+12 0 obj
+<< /Length 5456 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 708.7692 cm
+q
+q
+.91919 0 0 .91919 0 0 cm
+q
+1 0 0 1 6.6 7.180237 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 41.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 688.7692 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a code block inside a quote:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 682.7692 cm
+Q
+q
+1 0 0 1 62.69291 586.666 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+.880066 0 0 .880066 0 0 cm
+q
+1 0 0 1 6.6 7.499437 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 586.666 cm
+Q
+q
+1 0 0 1 62.69291 568.666 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a code block inside a quote:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 562.666 cm
+Q
+q
+1 0 0 1 62.69291 452.8351 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 97.83091 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (Inside a quote:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 91.83091 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+.840942 0 0 .840942 0 0 cm
+q
+1 0 0 1 6.6 7.848338 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 510 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 89.71 Tm /F2 10 Tf 12 TL (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* (This is a common paragraph. This is a common paragraph. This is a common paragraph.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 452.8351 cm
+Q
+q
+1 0 0 1 62.69291 434.8351 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is from the rusty docs:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 416.8351 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (Changelog) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 410.8351 cm
+Q
+q
+1 0 0 1 62.69291 187.6351 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 187.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 28.82 Tm /F1 10 Tf 12 TL 1.367126 Tw (This use case happens to be initial reason for writing the directive. Consider the changelog/relese) Tj T* 0 Tw .17528 Tw (notes document, containing a list of new features, bug fixes and other changes. By using a role, each) Tj T* 0 Tw (change can be separated for each other, by listing them in a separate list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 181.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 428.6898 180 re B*
+Q
+q
+BT 1 0 0 1 0 161.71 Tm 12 TL /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (Release Notes) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T*  T* /F4 10 Tf 0 0 .501961 rg (Release X) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=========) Tj /F2 10 Tf 0 0 0 rg  T* (Following issues have been fixed in this release:) Tj T*  T* (Fixes) Tj T*  T* (  ..) Tj ( ) Tj /F4 10 Tf .666667 .133333 1 rg (rolelist) Tj /F2 10 Tf 0 0 0 rg (::) Tj ( bug) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:template:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (#${value}: ${text}) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:levelsup:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (2) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:siblings:) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 187.6351 cm
+Q
+ 
+endstream
+
+endobj
+13 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+14 0 obj
+<< /Nums [ 0
+ 15 0 R
+ 1
+ 16 0 R ] >>
+endobj
+15 0 obj
+<< /S /D
+ /St 1 >>
+endobj
+16 0 obj
+<< /S /D
+ /St 2 >>
+endobj
+xref
+0 17
+0000000000 65535 f
+0000000075 00000 n
+0000000145 00000 n
+0000000263 00000 n
+0000000379 00000 n
+0000000502 00000 n
+0000000735 00000 n
+0000000856 00000 n
+0000001089 00000 n
+0000001205 00000 n
+0000001387 00000 n
+0000001462 00000 n
+0000008352 00000 n
+0000013867 00000 n
+0000013919 00000 n
+0000013978 00000 n
+0000014017 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)] 
+
+ /Info 9 0 R
+ /Root 8 0 R
+ /Size 17 >>
+startxref
+14056
+%%EOF

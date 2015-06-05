@@ -1,0 +1,21 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:57 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_216.txt -s test_issue_216.style -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_216.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: test_issue_216.style
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+
+Validity of file test_issue_216.pdf checksum '7d852245b2f1500a310443039b9c2f43' is good.

@@ -1,0 +1,20 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:59 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_227.txt -s test_issue_227.style -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_227.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: test_issue_227.style
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] createpdf.py:651 Starting build
+* [ERROR] createpdf.py:1004 Missing background image file: background-missing.png
+* [INFO] createpdf.py:1112 Page 1 [1]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
+
+Validity of file test_issue_227.pdf checksum '8490204bb232415f21a8242463f8d004' is good.

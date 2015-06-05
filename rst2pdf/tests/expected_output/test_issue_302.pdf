@@ -1,0 +1,152 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R
+ /F2 3 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+4 0 obj
+<< /Contents 8 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 7 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+5 0 obj
+<< /Outlines 9 0 R
+ /PageLabels 10 0 R
+ /PageMode /UseNone
+ /Pages 7 0 R
+ /Type /Catalog >>
+endobj
+6 0 obj
+<< /Author ()
+ /CreationDate (D:20000101000000+00'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title (Failing Definition) >>
+endobj
+7 0 obj
+<< /Count 1
+ /Kids [ 4 0 R ]
+ /Type /Pages >>
+endobj
+8 0 obj
+<< /Length 788 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 9.64 Tm /F2 20 Tf 24 TL 153.8249 0 Td (Failing Definition) Tj T* -153.8249 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 719.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F2 10 Tf 12 TL (foo) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 704.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (bar) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 688.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F2 10 Tf 12 TL (egg) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 673.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (spam) Tj T* ET
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+
+endobj
+9 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+10 0 obj
+<< /Nums [ 0
+ 11 0 R ] >>
+endobj
+11 0 obj
+<< /S /D
+ /St 1 >>
+endobj
+xref
+0 12
+0000000000 65535 f
+0000000075 00000 n
+0000000121 00000 n
+0000000239 00000 n
+0000000362 00000 n
+0000000593 00000 n
+0000000707 00000 n
+0000000907 00000 n
+0000000973 00000 n
+0000001818 00000 n
+0000001869 00000 n
+0000001915 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\033\202]\306\325\255\251\346\226drv\346O\323\032) (\033\202]\306\325\255\251\346\226drv\346O\323\032)] 
+
+ /Info 6 0 R
+ /Root 5 0 R
+ /Size 12 >>
+startxref
+1954
+%%EOF

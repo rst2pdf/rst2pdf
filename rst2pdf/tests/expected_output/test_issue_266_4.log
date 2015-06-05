@@ -1,0 +1,31 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:05 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_266_4.txt -e vectorpdf -s test_issue_266_4.style
+        -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_266_4.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: test_issue_266_4.style
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  9.525000cm by 4.586111cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  14.287500cm by 6.879167cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  28.575000cm by 13.758333cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  9.525000cm by 4.586111cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  14.287500cm by 6.879167cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf size calculated:  28.575000cm by 13.758333cm [near line UNKNOWN in file UNKNOWN]
+* [INFO] createpdf.py:651 Starting build
+* [WARNING] image.py:468 image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf#page=6#viewrect=250,330,270,130 is too wide for the frame, rescaling
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [WARNING] image.py:468 image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/demo.pdf#page=6#viewrect=250,330,270,130 is too wide for the frame, rescaling
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+
+Validity of file test_issue_266_4.pdf checksum 'c27fe74766e841fd783f41d3a54bd037' is unknown.

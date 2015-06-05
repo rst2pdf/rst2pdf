@@ -1,0 +1,161 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /ZapfDingbats
+ /Encoding /ZapfDingbatsEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 12 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 11 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+6 0 obj
+<< /Outlines 8 0 R
+ /PageLabels 13 0 R
+ /PageMode /UseNone
+ /Pages 11 0 R
+ /Type /Catalog >>
+endobj
+7 0 obj
+<< /Author ()
+ /CreationDate (D:20000101000000+00'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+8 0 obj
+<< /Count 2
+ /First 9 0 R
+ /Last 10 0 R
+ /Type /Outlines >>
+endobj
+9 0 obj
+<< /Dest [ 5 0 R
+ /XYZ
+ 62.69291
+ 765.0236
+ 0 ]
+ /Next 10 0 R
+ /Parent 8 0 R
+ /Title (\376\377\000A\000 \000h\000e\000a\000d\000i\000n\000g\000 \000w\000i\000t\000h\000 \000u\000n\000i\000c\000o\000d\000e\000:\000 \000\301\000\353\000\354\001\007\001\011) >>
+endobj
+10 0 obj
+<< /Dest [ 5 0 R
+ /XYZ
+ 62.69291
+ 702.0236
+ 0 ]
+ /Parent 8 0 R
+ /Prev 9 0 R
+ /Title (Dummy heading) >>
+endobj
+11 0 obj
+<< /Count 1
+ /Kids [ 5 0 R ]
+ /Type /Pages >>
+endobj
+12 0 obj
+<< /Length 724 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 744.0236 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (A heading with unicode: \301\353\354) Tj /F3 17.5 Tf 21 TL (nn) Tj /F2 17.5 Tf 21 TL T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 714.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 16.82 Tm /F1 10 Tf 12 TL .77683 Tw (Even if you can't see the heading correctly in the page, you should see it correctly in your PDF viewer's) Tj T* 0 Tw (TOC) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 681.0236 cm
+q
+BT 1 0 0 1 0 8.435 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Dummy heading) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 663.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is so the first one appears in the TOC) Tj T* ET
+Q
+Q
+ 
+endstream
+
+endobj
+13 0 obj
+<< /Nums [ 0
+ 14 0 R ] >>
+endobj
+14 0 obj
+<< /S /D
+ /St 1 >>
+endobj
+xref
+0 15
+0000000000 65535 f
+0000000075 00000 n
+0000000133 00000 n
+0000000251 00000 n
+0000000374 00000 n
+0000000500 00000 n
+0000000733 00000 n
+0000000848 00000 n
+0000001030 00000 n
+0000001111 00000 n
+0000001395 00000 n
+0000001524 00000 n
+0000001591 00000 n
+0000002373 00000 n
+0000002419 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)] 
+
+ /Info 7 0 R
+ /Root 6 0 R
+ /Size 15 >>
+startxref
+2458
+%%EOF

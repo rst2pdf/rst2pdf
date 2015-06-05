@@ -1,0 +1,39 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:25 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_468.txt -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_468.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: 
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  3.175000cm by 0.529167cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.116667cm by 0.529167cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  3.175000cm by 0.529167cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.116667cm by 0.529167cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.058333cm by 0.435429cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.058333cm by 0.435429cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.058333cm by 0.435429cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.058333cm by 0.435429cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.645833cm by 1.763889cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.763889cm by 2.645833cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.645833cm by 1.763889cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.763889cm by 2.645833cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.645833cm by 1.763889cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.763889cm by 2.645833cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  2.645833cm by 1.763889cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/rotated.pdf size calculated:  1.763889cm by 2.645833cm [near line UNKNOWN in file test_issue_468.txt]
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+* [INFO] createpdf.py:1112 Page 4 [4]
+* [INFO] createpdf.py:1112 Page 5 [5]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+
+Validity of file test_issue_468.pdf checksum '476854b4a3a5edec5b4fa27f49dfe9ef' is unknown.

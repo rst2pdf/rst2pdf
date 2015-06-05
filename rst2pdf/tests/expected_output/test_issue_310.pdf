@@ -1,0 +1,236 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R
+ /F2 3 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+4 0 obj
+<< /Contents 8 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 7 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+5 0 obj
+<< /Outlines 9 0 R
+ /PageLabels 10 0 R
+ /PageMode /UseNone
+ /Pages 7 0 R
+ /Type /Catalog >>
+endobj
+6 0 obj
+<< /Author ()
+ /CreationDate (D:20000101000000+00'00')
+ /Keywords ()
+ /Producer (ReportLab http://www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title () >>
+endobj
+7 0 obj
+<< /Count 1
+ /Kids [ 4 0 R ]
+ /Type /Pages >>
+endobj
+8 0 obj
+<< /Length 2557 >>
+stream
+1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (In the following code blocks, the line numbers always should match the numbers in the content.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 659.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 65.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 1) Tj  T* (2 ) Tj (Line 2) Tj  T* (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 578.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 53.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (4 ) Tj (Line 3) Tj  T* (5 ) Tj (Line 4) Tj  T* (6 ) Tj (Line 5) Tj  T* (7 ) Tj (Line 6) Tj  T* (8 ) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 497.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 53.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj  T* (7 ) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 404.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 65.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (2 ) Tj (e 1) Tj  T* (3 ) Tj (Line 2) Tj  T* (4 ) Tj (Line 3) Tj  T* (5 ) Tj (Line 4) Tj  T* (6 ) Tj (Line 5) Tj  T* (7 ) Tj (Line 6) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 384.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (In the following, the line numbers always start at 1:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 303.0236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 53.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 3) Tj  T* (2 ) Tj (Line 4) Tj  T* (3 ) Tj (Line 5) Tj  T* (4 ) Tj (Line 6) Tj  T* (5 ) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 221.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 53.71 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 3) Tj  T* (2 ) Tj (Line 4) Tj  T* (3 ) Tj (Line 5) Tj  T* (4 ) Tj (Line 6) Tj  T* (5 ) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+
+endobj
+9 0 obj
+<< /Count 0
+ /Type /Outlines >>
+endobj
+10 0 obj
+<< /Nums [ 0
+ 11 0 R ] >>
+endobj
+11 0 obj
+<< /S /D
+ /St 1 >>
+endobj
+xref
+0 12
+0000000000 65535 f
+0000000075 00000 n
+0000000121 00000 n
+0000000239 00000 n
+0000000355 00000 n
+0000000586 00000 n
+0000000700 00000 n
+0000000882 00000 n
+0000000948 00000 n
+0000003563 00000 n
+0000003614 00000 n
+0000003660 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)] 
+
+ /Info 6 0 R
+ /Root 5 0 R
+ /Size 12 >>
+startxref
+3699
+%%EOF

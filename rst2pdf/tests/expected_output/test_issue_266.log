@@ -1,0 +1,34 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:04 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_266.txt -e vectorpdf -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_266.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: 
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/text_and_vectors_001.pdf size calculated:  13.501007cm by 8.510868cm [near line 9 in file test_issue_266.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/text_and_vectors_001.pdf size calculated:  8.100604cm by 5.106521cm [near line UNKNOWN in file test_issue_266.txt]
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/text_and_vectors_001.pdf size calculated:  27.002015cm by 17.021737cm [near line UNKNOWN in file test_issue_266.txt]
+* [WARNING] image.py:362 Can't figure out size of the image (/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg, near line 24 in file test_issue_266.txt). Install PIL for better results.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg size calculated:  8.466667cm by 8.466667cm [near line 24 in file test_issue_266.txt]
+* [WARNING] image.py:362 Can't figure out size of the image (/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg, near line UNKNOWN in file test_issue_266.txt). Install PIL for better results.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg size calculated:  5.080000cm by 5.080000cm [near line UNKNOWN in file test_issue_266.txt]
+* [WARNING] image.py:362 Can't figure out size of the image (/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg, near line UNKNOWN in file test_issue_266.txt). Install PIL for better results.
+* [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg size calculated:  76.200000cm by 76.200000cm [near line UNKNOWN in file test_issue_266.txt]
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [WARNING] image.py:468 image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/text_and_vectors_001.pdf is too wide for the frame, rescaling
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+* [WARNING] image.py:463 image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/middleware.jpg is too tall for the frame, rescaling
+* [INFO] createpdf.py:1112 Page 4 [4]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+
+Validity of file test_issue_266.pdf checksum 'd67df2c74361ffa19ad829112ce6472a' is unknown.

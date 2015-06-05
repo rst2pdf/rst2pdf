@@ -1,0 +1,41 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:42 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_uml_extension.txt -e inkscape -e plantuml -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_uml_extension.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] createpdf.py:1572 Importing extension module 'inkscape'
+* [INFO] createpdf.py:1572 Importing extension module 'plantuml'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: 
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* Traceback (most recent call last):
+*   File "/home/david/Projects/rst2pdf_py2/bin/rst2pdf", line 9, in <module>
+*     load_entry_point('rst2pdf===0.93.dev-r0', 'console_scripts', 'rst2pdf')()
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 1495, in main
+*     compressed=options.compressed)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 561, in createPdf
+*     elements = self.gen_elements(self.doctree)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 205, in gather_elements
+*     return client.gather_elements(node, style=style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 390, in gather_elements
+*     r.extend(self.gen_elements(n, style=style))
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/extensions/plantuml.py", line 69, in gather_elements
+*     raise PlantUmlError('plantuml command %r cannot be run'
+* NameError: global name 'PlantUmlError' is not defined
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: FAIL (1)   elapsed time: 00.2 seconds
+
+File test_uml_extension.pdf not generated

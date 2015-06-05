@@ -1,0 +1,135 @@
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:06 2015
+
+        /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
+        -v test_issue_274_2.txt -o
+        /home/david/Projects/rst2pdf_py2/rst2pdf/tests/output/test_issue_274_2.pdf
+
+
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: 
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* test_issue_274_2.txt:174: (ERROR/3) Duplicate target name, cannot be used as a unique reference: "fffff".
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+* [INFO] createpdf.py:1112 Page 4 [4]
+* [INFO] createpdf.py:1112 Page 5 [5]
+* [INFO] createpdf.py:1112 Page 6 [6]
+* [INFO] flowables.py:1034 Number of items in TOC changed from 0 to 46, not satisfied
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+* [INFO] createpdf.py:1112 Page 4 [4]
+* [INFO] createpdf.py:1112 Page 5 [5]
+* [INFO] createpdf.py:1112 Page 6 [6]
+* [INFO] createpdf.py:1112 Page 7 [7]
+* [INFO] createpdf.py:1112 Page 8 [8]
+* [INFO] flowables.py:1037 TOC entries that moved in this pass:
+* [INFO] flowables.py:1040 (0, '<a name="ffgfffffff"/>ff\xc4\x9efffffff', u'3', None)
+* [INFO] flowables.py:1041 (0, '<a name="ffgfffffff"/>ff\xc4\x9efffffff', u'1', None)
+* [INFO] flowables.py:1040 (1, '<a name="caaf"/>caaf', u'3', None)
+* [INFO] flowables.py:1041 (1, '<a name="caaf"/>caaf', u'1', None)
+* [INFO] flowables.py:1040 (1, '<a name="id1"/>caaf', u'3', None)
+* [INFO] flowables.py:1041 (1, '<a name="id1"/>caaf', u'1', None)
+* [INFO] flowables.py:1040 (1, '<a name="cabb"/>cabb', u'3', None)
+* [INFO] flowables.py:1041 (1, '<a name="cabb"/>cabb', u'1', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffffffff-c"/>ffffffff c', u'3', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffffffff-c"/>ffffffff c', u'1', None)
+* [INFO] flowables.py:1040 (1, '<a name="fe-fff"/>fe-fff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="fe-fff"/>fe-fff', u'2', None)
+* [INFO] flowables.py:1040 (0, '<a name="ffffff-ffffffffifffi"/>ffffff ffffffff\xc4\xb0fff\xc4\xb0', u'4', None)
+* [INFO] flowables.py:1041 (0, '<a name="ffffff-ffffffffifffi"/>ffffff ffffffff\xc4\xb0fff\xc4\xb0', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffff"/>ffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffff"/>ffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffff"/>fffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffff"/>fffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="id2"/>ffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="id2"/>ffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="id3"/>fffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="id3"/>fffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="id4"/>ffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="id4"/>ffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="id5"/>ffff', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="id5"/>ffff', u'2', None)
+* [INFO] flowables.py:1040 (0, '<a name="id6"/>fffff', u'4', None)
+* [INFO] flowables.py:1041 (0, '<a name="id6"/>fffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffuf"/>fff\xc3\xbcf', u'4', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffuf"/>fff\xc3\xbcf', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="id7"/>fffff', u'5', None)
+* [INFO] flowables.py:1041 (1, '<a name="id7"/>fffff', u'2', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffffff"/>ffffff', u'5', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffffff"/>ffffff', u'3', None)
+* [INFO] flowables.py:1040 (1, '<a name="id8"/>ffff', u'5', None)
+* [INFO] flowables.py:1041 (1, '<a name="id8"/>ffff', u'3', None)
+* [INFO] flowables.py:1040 (0, '<a name="ffs-ffffffff"/>ff\xc5\x9e ffffffff', u'5', None)
+* [INFO] flowables.py:1041 (0, '<a name="ffs-ffffffff"/>ff\xc5\x9e ffffffff', u'3', None)
+* [INFO] flowables.py:1040 (1, '<a name="id9"/>fffff', u'5', None)
+* [INFO] flowables.py:1041 (1, '<a name="id9"/>fffff', u'3', None)
+* [INFO] flowables.py:1040 (1, '<a name="fff"/>fff', u'5', None)
+* [INFO] flowables.py:1041 (1, '<a name="fff"/>fff', u'3', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffuf"/>ff\xc3\x9cf', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffuf"/>ff\xc3\x9cf', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="id10"/>fff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="id10"/>fff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="id11"/>ffff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="id11"/>ffff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffffff"/>fffffff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffffff"/>fffffff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="foffffof"/>f\xc3\xb6ffff\xc3\xb6f', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="foffffof"/>f\xc3\xb6ffff\xc3\xb6f', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="ifff-iffffff"/>\xc4\xb0fff \xc4\xb0ffffff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="ifff-iffffff"/>\xc4\xb0fff \xc4\xb0ffffff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="ifffffff-ifffffff"/>\xc4\xb0fffffff/\xc4\xb0fffffff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="ifffffff-ifffffff"/>\xc4\xb0fffffff/\xc4\xb0fffffff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="id12"/>fff', u'6', None)
+* [INFO] flowables.py:1041 (1, '<a name="id12"/>fff', u'4', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffffff-ffffffigi"/>ffffff ffffff\xc4\xb1\xc4\x9f\xc4\xb1', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffffff-ffffffigi"/>ffffff ffffff\xc4\xb1\xc4\x9f\xc4\xb1', u'4', None)
+* [INFO] flowables.py:1040 (0, '<a name="fff-ffffffff"/>fff ffffffff', u'7', None)
+* [INFO] flowables.py:1041 (0, '<a name="fff-ffffffff"/>fff ffffffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id13"/>fffff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id13"/>fffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id14"/>fff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id14"/>fff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id15"/>ffff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id15"/>ffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id16"/>ffff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id16"/>ffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id17"/>fffff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id17"/>fffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="ffffuff"/>ffff\xc3\xbcff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="ffffuff"/>ffff\xc3\xbcff', u'5', None)
+* [INFO] flowables.py:1040 (0, '<a name="is-fffffffff"/>\xc4\xb0\xc5\x9e fffffffff', u'7', None)
+* [INFO] flowables.py:1041 (0, '<a name="is-fffffffff"/>\xc4\xb0\xc5\x9e fffffffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffffif"/>fffff\xc4\xb1f', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffffif"/>fffff\xc4\xb1f', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="id18"/>ffff', u'7', None)
+* [INFO] flowables.py:1041 (1, '<a name="id18"/>ffff', u'5', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffifif"/>fff\xc4\xb1f\xc4\xb1f', u'8', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffifif"/>fff\xc4\xb1f\xc4\xb1f', u'6', None)
+* [INFO] flowables.py:1040 (1, '<a name="id19"/>ffffff', u'8', None)
+* [INFO] flowables.py:1041 (1, '<a name="id19"/>ffffff', u'6', None)
+* [INFO] flowables.py:1040 (0, '<a name="id20"/>fffffff', u'8', None)
+* [INFO] flowables.py:1041 (0, '<a name="id20"/>fffffff', u'6', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffffffffff"/>fffffffffff', u'8', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffffffffff"/>fffffffffff', u'6', None)
+* [INFO] flowables.py:1040 (0, '<a name="ifffi-isfff"/>\xc4\xb0fff\xc4\xb0 \xc4\xb0\xc5\x9efff', u'8', None)
+* [INFO] flowables.py:1041 (0, '<a name="ifffi-isfff"/>\xc4\xb0fff\xc4\xb0 \xc4\xb0\xc5\x9efff', u'6', None)
+* [INFO] flowables.py:1040 (1, '<a name="fffifffff"/>fff\xc4\xb1fffff', u'8', None)
+* [INFO] flowables.py:1041 (1, '<a name="fffifffff"/>fff\xc4\xb1fffff', u'6', None)
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 3 [3]
+* [INFO] createpdf.py:1112 Page 4 [4]
+* [INFO] createpdf.py:1112 Page 5 [5]
+* [INFO] createpdf.py:1112 Page 6 [6]
+* [INFO] createpdf.py:1112 Page 7 [7]
+* [INFO] createpdf.py:1112 Page 8 [8]
+
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 01.4 seconds
+
+Validity of file test_issue_274_2.pdf checksum '897b494a52f27e5ce848d4eb8507ac55' is incomplete.
