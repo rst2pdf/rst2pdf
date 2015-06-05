@@ -39,6 +39,7 @@
 #
 ###############################################################################
 
+import argparse
 import copy
 import importlib
 import logging
@@ -48,8 +49,6 @@ import re
 import string
 import sys
 import urllib.parse as urllib_parse
-
-from optparse import OptionParser
 
 import docutils.core
 import docutils.nodes
@@ -171,7 +170,7 @@ class RstToPdf(object):
                  footnote_backlinks=True,
                  inline_footnotes=False,
                  real_footnotes=False,
-                 def_dpi=300,
+                 default_dpi=300,
                  show_frame=False,
                  highlightlang='python',  # this one is only used by Sphinx
                  basedir=os.getcwd(),
@@ -217,7 +216,7 @@ class RstToPdf(object):
 
         self.font_path = font_path or []
         self.style_path = style_path or []
-        self.def_dpi = def_dpi
+        self.default_dpi = default_dpi
         self.loadStyles(stylesheets or [])
 
         self.docutils_languages = {}
@@ -235,7 +234,7 @@ class RstToPdf(object):
         # Real footnotes are always a two-pass thing.
         if self.real_footnotes:
             self.mustMultiBuild = True
-        self.def_dpi = def_dpi
+        self.default_dpi = default_dpi
         self.show_frame = show_frame
         self.numbered_links = numbered_links
         self.section_header_depth = section_header_depth
@@ -319,7 +318,7 @@ class RstToPdf(object):
         self.styles = sty.StyleSheet(styleSheets,
                                      self.font_path,
                                      self.style_path,
-                                     def_dpi=self.def_dpi)
+                                     def_dpi=self.default_dpi)
 
     def style_language(self, style):
         """
@@ -1214,249 +1213,431 @@ class FancyPage(PageTemplate):
 
 
 def parse_commandline():
+    # Get defaults from config.
+    # First, the names and default values to get from the config
+    d = {
+        'stylesheets': '',
+        'stylesheet_path': '',
+        'compressed': False,
+        'font_path': '',
+        'language': 'en_US',
+        'header': None,
+        'footer': None,
+        'section_header_depth': 2,
+        'smartquotes': '0',
+        'fit_mode': 'shrink',
+        'numbered_links': False,
+        'floating_images': False,
+        'break_level': 0,
+        'blank_first_page': False,
+        'first_page_on_right': False,
+        'background_fit_mode': 'center',
+        'raw_html': False,
+        'footnote_backlinks': True,
+        'inline_footnotes': False,
+        'real_footnotes': False,
+        'default_dpi': 300,
+        'break_side': 'any',
+        'custom_cover': 'cover.tmpl',
+    }
+    # Get values from the config
+    d = {k: config.getValue('general', k, v) for k, v in d.items()}
+    # Now add/change the exceptions
+    d['stylesheets'] = ','.join(
+        os.path.expanduser(p) for p in d['stylesheets'].split(',')
+    )
+    d['stylesheet_path'] = os.pathsep.join(
+        os.path.expanduser(p) for p in d['stylesheet_path'].split(os.pathsep)
+    )
+    d['font_path'] = os.pathsep.join(
+        os.path.expanduser(p) for p in d['font_path'].split(os.pathsep)
+    )
+    d['baseurl'] = urllib_parse.urlunparse(
+        ['file', os.getcwd() + os.sep, '', '', '', '']
+    )
 
-    parser = OptionParser()
+    # Set up the parser
+    parser = argparse.ArgumentParser()
 
-    parser.add_option('--config', dest='configfile', metavar='FILE',
-        help='Config file to use. Default=~/.rst2pdf/config')
+    parser.add_argument(
+        '--config',
+        dest='configfile',
+        metavar='FILE',
+        help='Config file to use. Default=~/.rst2pdf/config'
+    )
 
-    parser.add_option('-o', '--output', dest='output', metavar='FILE',
-        help='Write the PDF to FILE')
+    parser.add_argument(
+        '-o',
+        '--output',
+        metavar='FILE',
+        help='Write the PDF to FILE'
+    )
 
-    def_ssheets = ','.join([os.path.expanduser(p) for p in
-        config.getValue("general", "stylesheets", "").split(',')])
-    parser.add_option('-s', '--stylesheets', dest='style',
-        type='string', action='append',
-        metavar='STYLESHEETS', default=[def_ssheets],
-        help='A comma-separated list of custom stylesheets. Default="%s"'
-            % def_ssheets)
+    parser.add_argument(
+        '-s',
+        '--stylesheets',
+        dest='style',
+        action='append',
+        metavar='STYLESHEETS',
+        default=[d['stylesheets']],
+        help='A comma-separated list of custom stylesheets. Default="%s"' %
+             d['stylesheets']
+    )
 
-    def_sheetpath = os.pathsep.join([os.path.expanduser(p) for p in
-        config.getValue("general", "stylesheet_path", "").split(os.pathsep)])
-    parser.add_option('--stylesheet-path', dest='stylepath',
+    parser.add_argument(
+        '--stylesheet-path',
+        dest='stylepath',
         metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
-        default=def_sheetpath,
-        help='A list of folders to search for stylesheets,'
-            ' separated using "%s". Default="%s"' % (os.pathsep, def_sheetpath))
+        default=d['stylesheet_path'],
+        help='A list of folders to search for stylesheets, separated ' +
+             'using "%s". Default="%s"' % (os.pathsep, d['stylesheet_path'])
+    )
 
-    def_compressed = config.getValue("general", "compressed", False)
-    parser.add_option('-c', '--compressed', dest='compressed',
-        action="store_true", default=def_compressed,
-        help='Create a compressed PDF. Default=%s' % def_compressed)
+    parser.add_argument(
+        '-c',
+        '--compressed',
+        action="store_true",
+        default=d['compressed'],
+        help='Create a compressed PDF. Default=%s' % d['compressed']
+    )
 
-    parser.add_option('--print-stylesheet', dest='printssheet',
-        action="store_true", default=False,
-        help='Print the default stylesheet and exit')
+    parser.add_argument(
+        '--print-stylesheet',
+        dest='printssheet',
+        action="store_true",
+        default=False,
+        help='Print the default stylesheet and exit'
+    )
 
-    parser.add_option('--font-folder', dest='ffolder', metavar='FOLDER',
-        help='Search this folder for fonts. (Deprecated)')
+    parser.add_argument(
+        '--font-folder',
+        dest='ffolder',
+        metavar='FOLDER',
+        help='Search this folder for fonts. (Deprecated)'
+    )
 
-    def_fontpath = os.pathsep.join([os.path.expanduser(p) for p in
-        config.getValue("general", "font_path", "").split(os.pathsep)])
-    parser.add_option('--font-path', dest='fpath',
+    parser.add_argument(
+        '--font-path',
+        dest='font_path',
         metavar='FOLDER%sFOLDER%s...%sFOLDER' % ((os.pathsep,) * 3),
-        default=def_fontpath,
-        help='A list of folders to search for fonts, separated using "%s".'
-            ' Default="%s"' % (os.pathsep, def_fontpath))
+        default=d['font_path'],
+        help='A list of folders to search for fonts, separated using' +
+             '"%s". Default="%s"' % (os.pathsep, d['font_path'])
+    )
 
-    def_baseurl = urllib_parse.urlunparse(['file', os.getcwd() + os.sep, '', '', '', ''])
-    parser.add_option('--baseurl', dest='baseurl', metavar='URL',
-        default=def_baseurl,
-        help='The base URL for relative URLs. Default="%s"' % def_baseurl)
+    parser.add_argument(
+        '--baseurl',
+        dest='baseurl',
+        metavar='URL',
+        default=d['baseurl'],
+        help='The base URL for relative URLs. Default="%s"' % d['baseurl']
+    )
 
-    def_lang = config.getValue("general", "language", 'en_US')
-    parser.add_option('-l', '--language', metavar='LANG',
-        default=def_lang, dest='language',
-        help='Language to be used for hyphenation'
-            ' and docutils localizations. Default="%s"' % def_lang)
+    parser.add_argument(
+        '-l',
+        '--language',
+        metavar='LANG',
+        default=d['language'],
+        help='Language to be used for hyphenation ' +
+             'and docutils localizations. Default="%s"' % d['language']
+    )
 
-    def_header = config.getValue("general", "header")
-    parser.add_option('--header', metavar='HEADER',
-        default=def_header, dest='header',
-        help='Page header if not specified in the document.'
-            ' Default="%s"' % def_header)
+    parser.add_argument(
+        '--header',
+        metavar='HEADER',
+        default=d['header'],
+        dest='header',
+        help='Page header if not specified in the document. ' +
+             'Default="%s"' % d['header'])
 
-    def_footer = config.getValue("general", "footer")
-    parser.add_option('--footer', metavar='FOOTER',
-        default=def_footer, dest='footer',
-        help='Page footer if not specified in the document.'
-            ' Default="%s"' % def_footer)
+    parser.add_argument(
+        '--footer',
+        metavar='FOOTER',
+        default=d['footer'],
+        dest='footer',
+        help='Page footer if not specified in the document. ' +
+             'Default="%s"' % d['footer'])
 
-    def_section_header_depth = config.getValue("general", "section_header_depth", 2)
-    parser.add_option('--section-header-depth', metavar='N',
-        default=def_section_header_depth, dest='section_header_depth',
-        help='''Sections up to this depth will be used in the header and footer's replacement of ###Section###. Default=%s''' % def_section_header_depth)
+    parser.add_argument(
+        '--section-header-depth',
+        metavar='N',
+        default=d['section_header_depth'],
+        dest='section_header_depth',
+        help="Sections up to this depth will be used in the header and " +
+             "footer's replacement of ###Section###. Default=%s" %
+                d['section_header_depth']
+    )
 
-    def_smartquotes = config.getValue("general", "smartquotes", "0")
-    parser.add_option("--smart-quotes", metavar="VALUE",
-        default=def_smartquotes, dest="smarty",
-        help='Try to convert ASCII quotes, ellipses and dashes'
-            ' to the typographically correct equivalent. For details,'
-            ' read the man page or the manual. Default="%s"' % def_smartquotes)
+    parser.add_argument(
+        "--smart-quotes",
+        metavar="VALUE",
+        default=d['smartquotes'],
+        dest="smarty",
+        help='Try to convert ASCII quotes, ellipses and dashes ' +
+             'to the typographically correct equivalent. For details, ' +
+             'read the man page or the manual. Default="%s"' % d['smartquotes']
+    )
 
-    def_fit = config.getValue("general", "fit_mode", "shrink")
-    parser.add_option('--fit-literal-mode', metavar='MODE',
-        default=def_fit, dest='fit_mode',
-        help='What to do when a literal is too wide. One of error,'
-            ' overflow,shrink,truncate. Default="%s"' % def_fit)
+    parser.add_argument(
+        '--fit-literal-mode',
+        metavar='MODE',
+        default=d['fit_mode'],
+        dest='fit_mode',
+        help='What to do when a literal is too wide. One of error, ' +
+             'overflow, shrink, truncate. Default="%s"' % d['fit_mode']
+    )
 
-    def_fit_background = config.getValue("general", "background_fit_mode",
-       "center")
-    parser.add_option('--fit-background-mode', metavar='MODE',
-        default=def_fit_background, dest='background_fit_mode',
-        help='How to fit the background image to the page.'
-            ' One of scale or center. Default="%s"' % def_fit_background)
+    parser.add_argument(
+        '--fit-background-mode',
+        metavar='MODE',
+        default=d['background_fit_mode'],
+        dest='background_fit_mode',
+        help='How to fit the background image to the page. ' +
+             'One of scale or center. Default="%s"' % d['background_fit_mode']
+    )
 
-    parser.add_option('--inline-links', action="store_true",
-    dest='inlinelinks', default=False,
-        help='Shows target between parentheses instead of active link.')
+    parser.add_argument(
+        '--inline-links',
+        action="store_true",
+        dest='inlinelinks',
+        default=False,
+        help='Shows target between parentheses instead of active link.'
+    )
 
-    parser.add_option('--repeat-table-rows', action="store_true",
-        dest='repeattablerows', default=False,
-        help='Repeats header row for each split table.')
+    parser.add_argument(
+        '--repeat-table-rows',
+        action="store_true",
+        dest='repeattablerows',
+        default=False,
+        help='Repeats header row for each split table.'
+    )
 
-    def_raw_html = config.getValue("general", "raw_html", False)
-    parser.add_option('--raw-html', action="store_true",
-        dest='raw_html', default=def_raw_html,
-        help='Support embeddig raw HTML. Default=%s' % def_raw_html)
+    parser.add_argument(
+        '--raw-html',
+        action="store_true",
+        dest='raw_html',
+        default=d['raw_html'],
+        help='Support embeddig raw HTML. Default=%s' % d['raw_html']
+    )
 
-    parser.add_option('-q', '--quiet', action="store_true",
-        dest='quiet', default=False,
-        help='Print less information.')
+    parser.add_argument(
+        '-q',
+        '--quiet',
+        action="store_true",
+        dest='quiet',
+        default=False,
+        help='Print less information.'
+    )
 
-    parser.add_option('-v', '--verbose', action="store_true",
-        dest='verbose', default=False,
-        help='Print debug information.')
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        action="store_true",
+        dest='verbose',
+        default=False,
+        help='Print debug information.'
+    )
 
-    parser.add_option('--very-verbose', action="store_true",
-        dest='vverbose', default=False,
-        help='Print even more debug information.')
+    parser.add_argument(
+        '--very-verbose',
+        action="store_true",
+        dest='vverbose',
+        default=False,
+        help='Print even more debug information.'
+    )
 
-    parser.add_option('--version', action="store_true",
-        dest='version', default=False,
-        help='Print version number and exit.')
+    parser.add_argument(
+        '--version',
+        action="store_true",
+        dest='version',
+        default=False,
+        help='Print version number and exit.'
+    )
 
-    def_footnote_backlinks = config.getValue("general",
-        "footnote_backlinks", True)
-    parser.add_option('--no-footnote-backlinks', action='store_false',
-        dest='footnote_backlinks', default=def_footnote_backlinks,
-        help='Disable footnote backlinks.'
-            ' Default=%s' % str(not def_footnote_backlinks))
+    parser.add_argument(
+        '--no-footnote-backlinks',
+        action='store_false',
+        dest='footnote_backlinks',
+        default=d['footnote_backlinks'],
+        help='Disable footnote backlinks. Default=%s' %
+             str(not d['footnote_backlinks'])
+    )
 
-    def_inline_footnotes = config.getValue("general",
-        "inline_footnotes", False)
-    parser.add_option('--inline-footnotes', action='store_true',
-        dest='inline_footnotes', default=def_inline_footnotes,
-        help='Show footnotes inline.'
-            ' Default=%s' % str(not def_inline_footnotes))
+    parser.add_argument(
+        '--inline-footnotes',
+        action='store_true',
+        dest='inline_footnotes',
+        default=d['inline_footnotes'],
+        help='Show footnotes inline. Default=%s' %
+             str(not d['inline_footnotes'])
+    )
 
-    def_real_footnotes = config.getValue("general",
-        "real_footnotes", False)
-    parser.add_option('--real-footnotes', action='store_true',
-        dest='real_footnotes', default=def_real_footnotes,
-        help='Show footnotes at the bottom of the page where they are defined.'
-            ' Default=%s' % str(def_real_footnotes))
+    parser.add_argument(
+        '--real-footnotes',
+        action='store_true',
+        dest='real_footnotes',
+        default=d['real_footnotes'],
+        help='Show footnotes at the bottom of the page where they are ' +
+             'defined. Default=%s' % str(d['real_footnotes'])
+    )
 
-    def_dpi = config.getValue("general", "default_dpi", 300)
-    parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
-        default=def_dpi,
-        help='DPI for objects sized in pixels. Default=%d' % def_dpi)
+    parser.add_argument(
+        '--default-dpi',
+        dest='default_dpi',
+        metavar='NUMBER',
+        default=d['default_dpi'],
+        help='DPI for objects sized in pixels. Default=%d' % d['default_dpi']
+    )
 
-    parser.add_option('--show-frame-boundary', dest='show_frame',
-        action='store_true', default=False,
-        help='Show frame borders (only useful for debugging). Default=False')
+    parser.add_argument(
+        '--show-frame-boundary',
+        dest='show_frame',
+        action='store_true',
+        default=False,
+        help='Show frame borders (only useful for debugging). Default=False'
+    )
 
-    parser.add_option('--disable-splittables', dest='splittables',
-        action='store_false', default=True,
-        help="Don't use splittable flowables in some elements."
-            " Only try this if you can't process a document any other way.")
+    parser.add_argument(
+        '--disable-splittables',
+        dest='splittables',
+        action='store_false',
+        default=True,
+        help="Don't use splittable flowables in some elements. " +
+             "Only try this if you can't process a document any other way."
+    )
 
-    def_break = config.getValue("general", "break_level", 0)
-    parser.add_option('-b', '--break-level', dest='breaklevel',
-        metavar='LEVEL', default=def_break,
-        help='Maximum section level that starts in a new page.'
-            ' Default: %d' % def_break)
+    parser.add_argument(
+        '-b',
+        '--break-level',
+        dest='breaklevel',
+        metavar='LEVEL',
+        default=d['break_level'],
+        help='Maximum section level that starts in a new page. ' +
+             'Default: %d' % d['break_level'])
 
-    def_blankfirst = config.getValue("general", "blank_first_page", False)
-    parser.add_option('--blank-first-page', dest='blank_first_page',
-        action='store_true', default=def_blankfirst,
-        help='Add a blank page at the beginning of the document.')
+    parser.add_argument(
+        '--blank-first-page',
+        dest='blank_first_page',
+        action='store_true',
+        default=d['blank_first_page'],
+        help='Add a blank page at the beginning of the document.'
+    )
 
-    def_first_page_on_right = config.getValue("general", "first_page_on_right", False)
-    parser.add_option('--first-page-on-right', dest='first_page_on_right',
-        action='store_true', default=def_first_page_on_right,
-        help='Two-sided book style (where first page starts on the right side)')
+    parser.add_argument(
+        '--first-page-on-right',
+        dest='first_page_on_right',
+        action='store_true',
+        default=d['first_page_on_right'],
+        help='Two-sided book style (where first page starts on the right side)'
+    )
 
-    def_breakside = config.getValue("general", "break_side", 'any')
-    parser.add_option('--break-side', dest='breakside', metavar='VALUE',
-        default=def_breakside,
-        help='How section breaks work. Can be "even", and sections start'
-            ' in an even page, "odd", and sections start in odd pages,'
-            ' or "any" and sections start in the next page, be it even or odd.'
-            ' See also the -b option.')
+    parser.add_argument(
+        '--break-side',
+        dest='breakside', metavar='VALUE',
+        default=d['break_side'],
+        help='How section breaks work. Can be "even", and sections start ' +
+             'in an even page, "odd", and sections start in odd pages, ' +
+             'or "any" and sections start in the next page, be it even or ' +
+             'odd. See also the -b option.'
+    )
 
-    parser.add_option('--date-invariant', dest='invariant',
-        action='store_true', default=False,
-        help="Don't store the current date in the PDF."
-            " Useful mainly for the test suite,"
-            " where we don't want the PDFs to change.")
+    parser.add_argument(
+        '--date-invariant',
+        dest='invariant',
+        action='store_true',
+        default=False,
+        help="Don't store the current date in the PDF. " +
+             "Useful mainly for the test suite, " +
+             "where we don't want the PDFs to change."
+        )
 
-    parser.add_option('-e', '--extension-module', dest='extensions', action="append", type="string",
+    parser.add_argument(
+        '-e',
+        '--extension-module',
+        dest='extensions',
+        action="append",
         default=['vectorpdf'],
-        help="Add a helper extension module to this invocation of rst2pdf "
-             "(module must end in .py and be on the python path)")
+        help="Add a helper extension module to this invocation of rst2pdf " +
+             "(module must end in .py and be on the python path)"
+    )
 
-    def_cover = config.getValue("general", "custom_cover", 'cover.tmpl')
-    parser.add_option('--custom-cover', dest='custom_cover',
-        metavar='FILE', default=def_cover,
-        help='Template file used for the cover page. Default: %s' % def_cover)
+    parser.add_argument(
+        '--custom-cover',
+        dest='custom_cover',
+        metavar='FILE',
+        default=d['custom_cover'],
+        help='Template file used for the cover page. Default: %s' %
+             d['custom_cover']
+    )
 
-    def_floating_images = config.getValue("general", "floating_images", False)
-    parser.add_option('--use-floating-images', action='store_true', default=def_floating_images,
-        help='Makes images with :align: attribute work more like in rst2html. Default: %s' % def_floating_images,
-        dest='floating_images')
+    parser.add_argument(
+        '--use-floating-images',
+        action='store_true',
+        default=d['floating_images'],
+        dest='floating_images',
+        help='Makes images with :align: attribute work more like in ' +
+             'rst2html. Default: %s' % d['floating_images']
+    )
 
-    def_numbered_links = config.getValue("general", "numbered_links", False)
-    parser.add_option('--use-numbered-links', action='store_true', default=def_numbered_links,
-        help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s' % def_numbered_links,
-        dest='numbered_links')
+    parser.add_argument(
+        '--use-numbered-links',
+        action='store_true',
+        default=d['numbered_links'],
+        dest='numbered_links',
+        help='When using numbered sections, adds the numbers to all links ' +
+             'referring to the section headers. Default: %s' %
+                 d['numbered_links']
+    )
 
-    parser.add_option('--strip-elements-with-class', action='append', dest='strip_elements_with_classes',
-        metavar='CLASS', help='Remove elements with this CLASS from the output. Can be used multiple times.')
+    parser.add_argument(
+        '--strip-elements-with-class',
+        action='append',
+        dest='strip_elements_with_classes',
+        metavar='CLASS',
+        help='Remove elements with this CLASS from the output. Can be used ' +
+             'multiple times.'
+    )
+
+    parser.add_argument(
+        'filenames',
+        nargs='+',
+        help='Input file (and optionally an output filename)'
+    )
 
     return parser
 
 
 def main(_args=None):
-    """Parse command line and call createPdf with the correct data."""
-
+    """
+    Parse command line and call createPdf with the correct data.
+    """
     parser = parse_commandline()
     # Fix issue 430: don't overwrite args
     # need to parse_args to see i we have a custom config file
-    options, args = parser.parse_args(copy.copy(_args))
+    args = parser.parse_args(copy.copy(_args))
 
-    if options.configfile:
+    if args.configfile:
         # If there is a config file, we need to reparse
         # the command line because we have different defaults
-        config.parseConfig(options.configfile)
+        config.parseConfig(args.configfile)
         parser = parse_commandline()
-        options, args = parser.parse_args(copy.copy(_args))
+        args = parser.parse_args(copy.copy(_args))
 
-    if options.version:
+    if args.version:
         from rst2pdf import version
         print(version)
         sys.exit(0)
 
-    if options.quiet:
+    if args.quiet:
         log.setLevel(logging.CRITICAL)
 
-    if options.verbose:
+    if args.verbose:
         log.setLevel(logging.INFO)
 
-    if options.vverbose:
+    if args.vverbose:
         log.setLevel(logging.DEBUG)
 
-    if options.printssheet:
+    if args.printssheet:
         # find base path
         if hasattr(sys, 'frozen'):
             PATH = os.path.abspath(os.path.dirname(sys.executable))
@@ -1467,39 +1648,39 @@ def main(_args=None):
 
     filename = False
 
-    if len(args) == 0:
-        args = [ '-', ]
-    elif len(args) > 2:
+    if len(args.filenames) == 0:
+        args.filenames = ['-',]
+    elif len(args.filenames) > 2:
         log.critical('Usage: %s [ file.txt [ file.pdf ] ]', sys.argv[0])
         sys.exit(1)
-    elif len(args) == 2:
-        if options.output:
+    elif len(args.filenames) == 2:
+        if args.output:
             log.critical('You may not give both "-o/--output" and second argument')
             sys.exit(1)
-        options.output = args.pop()
+        args.output = args.filenames.pop()
 
-    if args[0] == '-':
+    if args.filenames[0] == '-':
         infile = sys.stdin
-        options.basedir = os.getcwd()
-    elif len(args) > 1:
+        args.basedir = os.getcwd()
+    elif len(args.filenames) > 1:
         log.critical('Usage: %s file.txt [ -o file.pdf ]', sys.argv[0])
         sys.exit(1)
     else:
-        filename = args[0]
-        options.basedir = os.path.dirname(os.path.abspath(filename))
+        filename = args.filenames[0]
+        args.basedir = os.path.dirname(os.path.abspath(filename))
         try:
             # TODO: Replace with a context manager
             infile = open(filename)
         except IOError as e:
             log.error(e)
             sys.exit(1)
-    options.infile = infile
+    args.infile = infile
 
-    if options.output:
-        outfile = options.output
+    if args.output:
+        outfile = args.output
         if outfile == '-':
             outfile = sys.stdout
-            options.compressed = False
+            args.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
     else:
@@ -1510,79 +1691,75 @@ def main(_args=None):
                 outfile = filename + '.pdf'
         else:
             outfile = sys.stdout
-            options.compressed = False
+            args.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
             # /reportlab/pdfbase/pdfdoc.py output can
             # be a callable (stringio, stdout ...)
-    options.outfile = outfile
+    args.outfile = outfile
 
     ssheet = []
-    if options.style:
-        for l in options.style:
+    if args.style:
+        for l in args.style:
             ssheet += l.split(',')
     else:
         ssheet = []
-    options.style = [x for x in ssheet if x]
+    args.style = [x for x in ssheet if x]
 
-    fpath = []
-    if options.fpath:
-        fpath = options.fpath.split(os.pathsep)
-    if options.ffolder:
-        fpath.append(options.ffolder)
-    options.fpath = fpath
+    font_path = []
+    if args.font_path:
+        font_path = args.font_path.split(os.pathsep)
+    if args.ffolder:
+        font_path.append(args.ffolder)
+    args.font_path = font_path
 
     spath = []
-    if options.stylepath:
-        spath = options.stylepath.split(os.pathsep)
-    options.stylepath = spath
+    if args.stylepath:
+        spath = args.stylepath.split(os.pathsep)
+    args.stylepath = spath
 
-    if options.real_footnotes:
-        options.inline_footnotes = True
+    if args.real_footnotes:
+        args.inline_footnotes = True
 
-    if reportlab.Version < '2.3':
-        log.warning('You are using Reportlab version %s.'
-            ' The suggested version is 2.3 or higher' % reportlab.Version)
-
-    if options.invariant:
+    if args.invariant:
         patch_PDFDate()
         patch_digester()
 
-    add_extensions(options)
+    add_extensions(args)
 
     RstToPdf(
-        stylesheets=options.style,
-        language=options.language,
-        header=options.header, footer=options.footer,
-        inlinelinks=options.inlinelinks,
-        breaklevel=int(options.breaklevel),
-        baseurl=options.baseurl,
-        fit_mode=options.fit_mode,
-        background_fit_mode=options.background_fit_mode,
-        smarty=str(options.smarty),
-        font_path=options.fpath,
-        style_path=options.stylepath,
-        repeat_table_rows=options.repeattablerows,
-        footnote_backlinks=options.footnote_backlinks,
-        inline_footnotes=options.inline_footnotes,
-        real_footnotes=options.real_footnotes,
-        def_dpi=int(options.def_dpi),
-        basedir=options.basedir,
-        show_frame=options.show_frame,
-        splittables=options.splittables,
-        blank_first_page=options.blank_first_page,
-        first_page_on_right=options.first_page_on_right,
-        breakside=options.breakside,
-        custom_cover=options.custom_cover,
-        floating_images=options.floating_images,
-        numbered_links=options.numbered_links,
-        raw_html=options.raw_html,
-        section_header_depth=int(options.section_header_depth),
-        strip_elements_with_classes=options.strip_elements_with_classes,
-    ).createPdf(text=options.infile.read(),
-                source_path=options.infile.name,
-                output=options.outfile,
-                compressed=options.compressed)
+        stylesheets=args.style,
+        language=args.language,
+        header=args.header, footer=args.footer,
+        inlinelinks=args.inlinelinks,
+        breaklevel=int(args.breaklevel),
+        baseurl=args.baseurl,
+        fit_mode=args.fit_mode,
+        background_fit_mode=args.background_fit_mode,
+        smarty=str(args.smarty),
+        font_path=args.font_path,
+        style_path=args.stylepath,
+        repeat_table_rows=args.repeattablerows,
+        footnote_backlinks=args.footnote_backlinks,
+        inline_footnotes=args.inline_footnotes,
+        real_footnotes=args.real_footnotes,
+        default_dpi=int(args.default_dpi),
+        basedir=args.basedir,
+        show_frame=args.show_frame,
+        splittables=args.splittables,
+        blank_first_page=args.blank_first_page,
+        first_page_on_right=args.first_page_on_right,
+        breakside=args.breakside,
+        custom_cover=args.custom_cover,
+        floating_images=args.floating_images,
+        numbered_links=args.numbered_links,
+        raw_html=args.raw_html,
+        section_header_depth=int(args.section_header_depth),
+        strip_elements_with_classes=args.strip_elements_with_classes,
+    ).createPdf(text=args.infile.read(),
+                source_path=args.infile.name,
+                output=args.outfile,
+                compressed=args.compressed)
 
 
 # Ugly hack that fixes Issue 335
