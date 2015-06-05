@@ -71,14 +71,13 @@ from reportlab.platypus import (
     BaseDocTemplate,
     Flowable,
     ImageAndFlowables,
-    IndexingFlowable,
     PageBreak,
     PageTemplate,
     TableStyle,
 )
 
 # Private functions used from these
-from reportlab.platypus import doctemplate, reportlab_flowables
+from reportlab.platypus import doctemplate, flowables as reportlab_flowables
 
 from rst2pdf import (
     config,
@@ -92,7 +91,28 @@ from rst2pdf import (
 # Import so that the directive is registered
 import rst2pdf.aafigure_directive
 
-from rst2pdf.flowables import *  # our own reportlab flowables
+from rst2pdf.flowables import (  # our own reportlab flowables
+    BoundByWidth,
+    BoxedContainer,
+    DelayedTable,
+    FrameCutter,
+    Heading,
+    MyIndenter,
+    MyPageBreak,
+    MySpacer,
+    MyTableOfContents,
+    OddEven,
+    Reference,
+    ResetNextTemplate,
+    Separation,
+    SetNextTemplate,
+    Sidebar,
+    SmartFrame,
+    SplitTable,
+    TocEntry,
+    Transition,
+    XXPreformatted,
+)
 from rst2pdf.image import MyImage, missing
 from rst2pdf.languages import get_language_available
 from rst2pdf.log import log, nodeid
@@ -242,7 +262,6 @@ class RstToPdf(object):
                 'code',
                 pygments_code_block_directive.code_block_directive
             )
-            from . import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
@@ -806,7 +825,9 @@ class FancyDocTemplate(BaseDocTemplate):
             canv = self.canv
             # try to fit it then draw it
             if frame.add(f, canv, trySplit=self.allowSplitting):
-                if not isinstance(f, FrameActionFlowable):
+                # TODO: Currently nothing is a FrameActionFlowable because the
+                #       class doesn't exist in reportlab anymore
+                if True: #not isinstance(f, FrameActionFlowable):
                     self._curPageFlowableCount += 1
                     self.afterFlowable(f)
                 doctemplate._addGeneratedContent(flowables, frame)
@@ -897,19 +918,29 @@ class MyContainer(reportlab_flowables._Container, Flowable):
     pass
 
 
-class UnhappyOnce(IndexingFlowable):
-    '''An indexing flowable that is only unsatisfied once.
-    If added to a story, it will make multiBuild run
-    at least two passes. Useful for ###Total###'''
-    _unhappy = True
-    def isSatisfied(self):
-        if self._unhappy:
-            self._unhappy = False
-            return False
-        return True
-
-    def draw(self):
-        pass
+# TODO: IndexingFlowable doens't exist in reportlab any more.  Instead, it
+#       looks like the approach is to include an `<index>` tag in
+#       paragraphs.  Need to figure out what this class does and how to
+#       replace it
+#
+# class UnhappyOnce(IndexingFlowable):
+#
+#     """
+#     An indexing flowable that is only unsatisfied once.
+#     If added to a story, it will make multiBuild run
+#     at least two passes. Useful for ###Total###
+#     """
+#
+#     _unhappy = True
+#
+#     def isSatisfied(self):
+#         if self._unhappy:
+#             self._unhappy = False
+#             return False
+#         return True
+#
+#     def draw(self):
+#         pass
 
 
 class HeaderOrFooter(object):
@@ -1555,6 +1586,7 @@ def main(_args=None):
 
 
 # Ugly hack that fixes Issue 335
+import reportlab.lib.utils
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy.copy(self)
 
 
@@ -1647,6 +1679,7 @@ def add_extensions(options):
                                 (modname, ',\n    '.join(sys.path)))
         if hasattr(module, 'install'):
             module.install(createpdf, options)
+
 
 def monkeypatch():
     """
