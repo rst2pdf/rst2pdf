@@ -4,6 +4,8 @@
 *.pyc
 *.pyo
 *.egg
+.eggs
+.venv
 rst2pdf.egg-info
 rst2pdf/tests/input/tmp*
 rst2pdf/tests/output
