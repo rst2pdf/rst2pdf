@@ -1,0 +1,33 @@
+Process "make" started on Sat Jun  6 07:31:37 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 1 source files that are out of date
+  updating environment: 1 added, 0 changed, 0 removed
+  reading sources... [100%] test
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+  processing Issue318... test  py-modindex
+  
+  resolving references...
+  done
+* [WARNING] styles.py:548 Using undefined style 'function', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'member', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'type', aliased to style 'normal'.
+  writing Issue318... done
+  build succeeded.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.7 seconds
+
+Validity of file sphinx-issue318.pdf checksum 'ee2e31acdd1c38c88d794da1dab0f90c' is unknown.

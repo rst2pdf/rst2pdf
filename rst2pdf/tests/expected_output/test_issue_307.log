@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:13 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:25:12 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_307.txt -s test_issue_307.style -o
@@ -66,6 +66,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * ValueError: 
 *    handle_pageBegin args=()
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: FAIL (1)   elapsed time: 00.3 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: FAIL (1)   elapsed time: 00.2 seconds
 
 File test_issue_307.pdf not generated

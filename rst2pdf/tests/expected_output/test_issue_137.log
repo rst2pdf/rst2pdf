@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:49 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:24:48 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_137.txt -o
@@ -14,6 +14,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] createpdf.py:651 Starting build
 * [INFO] createpdf.py:1112 Page 1 [1]
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
 
 Validity of file test_issue_137.pdf checksum '397c1b3abd1ac53710e941a34c29df25' is good.

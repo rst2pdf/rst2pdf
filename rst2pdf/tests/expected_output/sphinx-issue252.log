@@ -1,0 +1,98 @@
+Process "make" started on Sat Jun  6 07:31:33 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b html -d _build/doctrees   . _build/html
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+* WARNING: 'default' html theme has been renamed to 'classic'. Please change your html_theme setting either to the new 'alabaster' default theme, or to 'classic' to keep using the old default.
+  building [mo]: targets for 0 po files that are out of date
+  building [html]: targets for 1 source files that are out of date
+  updating environment: 1 added, 0 changed, 0 removed
+  reading sources... [100%] index
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+  preparing documents... done
+  writing output... [100%] index
+* WARNING: LaTeX command 'latex' cannot be run (needed for math display), check the pngmath_latex setting
+  
+  generating indices... genindex
+  writing additional pages... search
+* WARNING: html_static_path entry u'/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-issue252/_static' does not exist
+  copying static files... done
+  copying extra files... done
+  dumping search index in English (code: en) ... done
+  dumping object inventory... done
+  build succeeded, 3 warnings.
+  
+  Build finished. The HTML pages are in _build/html.
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... done
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 1 source files that are out of date
+  updating environment: 0 added, 0 changed, 0 removed
+  looking for now-outdated files... none found
+  processing MyProject... index 
+  resolving references...
+  done
+* [ERROR] math_flowable.py:40 Math support not available, some parts of this document will be rendered incorrectly. Install matplotlib.
+* [ERROR] pdfbuilder.py:130 No module named PIL
+* Traceback (most recent call last):
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/pdfbuilder.py", line 127, in write
+*     docwriter.write(doctree, destination)
+*   File "/home/david/Projects/rst2pdf_py2/.venv/lib/python2.7/site-packages/docutils-0.12-py2.7.egg/docutils/writers/__init__.py", line 80, in write
+*     self.translate()
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/pdfbuilder.py", line 621, in translate
+*     compressed=self.compressed)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 561, in createPdf
+*     elements = self.gen_elements(self.doctree)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 205, in gather_elements
+*     return client.gather_elements(node, style=style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 390, in gather_elements
+*     r.extend(self.gen_elements(n, style=style))
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/genelements.py", line 442, in gather_elements
+*     elements = client.gather_elements(node)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 390, in gather_elements
+*     r.extend(self.gen_elements(n, style=style))
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/genelements.py", line 188, in gather_elements
+*     return [Paragraph(client.gen_pdftext(node), style)]
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 280, in textdispatch
+*     text = self.get_text(client, node, replaceEnt)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 266, in get_text
+*     return client.gather_pdftext(node)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 380, in gather_pdftext
+*     for n in node.children])
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 280, in textdispatch
+*     text = self.get_text(client, node, replaceEnt)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/sphinxnodes.py", line 195, in get_text
+*     img = mf.genImage()
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/math_flowable.py", line 133, in genImage
+*     from PIL import (
+* ImportError: No module named PIL
+  writing MyProject... FAILED
+  build succeeded.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.9 seconds
+
+Validity of file sphinx-issue252.pdf checksum 'd41d8cd98f00b204e9800998ecf8427e' is unknown.

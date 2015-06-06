@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:37 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:24:37 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_field_widths.txt -s test_field_widths.style -o
@@ -15,6 +15,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] createpdf.py:1112 Page 1 [1]
 * [INFO] createpdf.py:1112 Page 2 [2]
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
 
 Validity of file test_field_widths.pdf checksum '4d6143e24c974b1c1740fac430b7b413' is good.

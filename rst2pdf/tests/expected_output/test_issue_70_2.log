@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:29 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:25:28 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_70_2.txt -o

@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:24 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:25:23 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_463.txt -s test_issue_463.style -o
@@ -17,6 +17,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/images/biohazard.pdf size calculated:  2.000000cm by 2.000000cm [near line UNKNOWN in file UNKNOWN]
 * [INFO] createpdf.py:1112 Page 1 [1]
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
 
 Validity of file test_issue_463.pdf checksum '53d5802a2d06a49b917e988b8e4d5681' is unknown.

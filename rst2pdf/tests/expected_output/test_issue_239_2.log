@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:00 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:24:59 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_239_2.txt -e inkscape -o
@@ -13,16 +13,16 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
 * [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
 * 
-* ** (inkscape:13483): WARNING **: unknown type: svg:RDF
+* ** (inkscape:1707): WARNING **: unknown type: svg:RDF
 * [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/warning.svg size calculated:  1.693333cm by 1.693333cm [near line UNKNOWN in file UNKNOWN]
 * [INFO] image.py:424 Image /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/warning.svg size calculated:  1.693333cm by 1.693333cm [near line UNKNOWN in file UNKNOWN]
 * [INFO] image.py:245 Backend for /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/warning.svg is SVGIMage
 * 
-* ** (inkscape:13488): WARNING **: unknown type: svg:RDF
+* ** (inkscape:1711): WARNING **: unknown type: svg:RDF
   DPI: 300
   Background RRGGBBAA: ffffff00
   Area 0:0:60:60 exported to 200 x 200 pixels (300 dpi)
-  Bitmap saved as: /tmp/tmpETEb6y.png
+  Bitmap saved as: /tmp/tmpTI8LKl.png
 * Traceback (most recent call last):
 *   File "/home/david/Projects/rst2pdf_py2/bin/rst2pdf", line 9, in <module>
 *     load_entry_point('rst2pdf===0.93.dev-r0', 'console_scripts', 'rst2pdf')()
@@ -62,6 +62,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 *     return isinstance(im,Image.Image)
 * AttributeError: 'NoneType' object has no attribute 'Image'
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: FAIL (1)   elapsed time: 00.8 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: FAIL (1)   elapsed time: 00.7 seconds
 
 File test_issue_239_2.pdf not generated

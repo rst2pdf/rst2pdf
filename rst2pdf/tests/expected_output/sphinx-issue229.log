@@ -1,0 +1,699 @@
+Process "make" started on Sat Jun  6 07:31:32 2015
+
+        make clean pdf
+
+
+  rm -rf build/*
+  sphinx-build -b pdf -d build/doctrees   source build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 3 source files that are out of date
+  updating environment: 3 added, 0 changed, 0 removed
+  reading sources... [ 33%] Doc1
+  reading sources... [ 66%] Doc2
+  reading sources... [100%] index
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+* [INFO] createpdf.py:1572 Importing extension module 'vectorpdf'
+  processing TestCase... index Doc1 Doc2 
+  resolving references...
+  done
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [INFO] styles.py:82 Using stylesheets: sphinx,letter
+* [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
+* [INFO] styles.py:111 StylePath:[u'/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-issue229/source', '/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
+* [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="/home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-issue229/source/index.rst"><document source="<string>"><paragraph classes="title">A Sphinx Test Case</paragraph><paragraph classes="subtitle">version 1</paragraph><raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw><paragraph classes="author">vorsorge</paragraph><raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw><paragraph classes="author"><inline classes="normal">June 06, 2015</inline></paragraph><raw format="pdf" xml:space="preserve">OddPageBreak</raw></document><raw format="pdf" xml:space="preserve">SetPageCounter 1 lowerroman</raw><topic classes="contents" ids="Contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="doc1">Doc1</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id3" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></list_item><list_item><paragraph><reference ids="id4" refid="doc2">Doc2</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id5" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id6" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></list_item></bullet_list></topic><raw format="pdf" xml:space="preserve">OddPageBreak cutePage</raw><raw format="pdf" xml:space="preserve">SetPageCounter 1 arabic</raw><comment xml:space="preserve">Test Case documentation master file, created by
+* sphinx-quickstart on Mon Nov 02 15:48:51 2009.
+* You can adapt this file completely to your liking, but it should at least
+* contain the root `toctree` directive.</comment><compound classes="toctree-wrapper"><start_of_file docname="Doc1"><section ids="doc1" names="doc1"><title refid="id1">Doc1</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-alpha" names="section\ alpha"><title refid="id2">Section Alpha</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id3">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file><start_of_file docname="Doc2"><section ids="doc2" names="doc2"><title refid="id4">Doc2</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-beta" names="section\ beta"><title refid="id5">Section Beta</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id6">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file></compound></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph classes="title">A Sphinx Test Case</paragraph><paragraph classes="subtitle">version 1</paragraph><raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw><paragraph classes="author">vorsorge</paragraph><raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw><paragraph classes="author"><inline classes="normal">June 06, 2015</inline></paragraph><raw format="pdf" xml:space="preserve">OddPageBreak</raw></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 6 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph classes="title">A Sphinx Test Case</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 6 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph classes="title">A Sphinx Test Case</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: A Sphinx Test Case
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: A Sphinx Test Case
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: A Sphinx Test Case
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 12 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph classes="subtitle">version 1</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 12 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph classes="subtitle">version 1</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: version 1
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: version 1
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: version 1
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 15 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 21 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph classes="author">vorsorge</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 21 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph classes="author">vorsorge</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: vorsorge
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: vorsorge
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: vorsorge
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 24 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">Spacer 0 3cm</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 30 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph classes="author"><inline classes="normal">June 06, 2015</inline></paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 30 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph classes="author"><inline classes="normal">June 06, 2015</inline></paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.inline
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <inline classes="normal">June 06, 2015</inline>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: June 06, 2015
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: June 06, 2015
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleInline.textdispatch: <font face="Helvetica" color="#000000" >June 06, 2015</font>
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: <font face="Helvetica" color="#000000" >June 06, 2015</font>
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 32 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">OddPageBreak</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">SetPageCounter 1 lowerroman</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.topic
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <topic classes="contents" ids="Contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="doc1">Doc1</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id3" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></list_item><list_item><paragraph><reference ids="id4" refid="doc2">Doc2</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id5" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id6" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></list_item></bullet_list></topic>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title>Contents</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Contents
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Contents
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="Contents"/>Contents
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">OddPageBreak cutePage</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.raw
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <raw format="pdf" xml:space="preserve">SetPageCounter 1 arabic</raw>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.comment
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <comment xml:space="preserve">Test Case documentation master file, created by
+* sphinx-quickstart on Mon Nov 02 15:48:51 2009.
+* You can adapt this file completely to your liking, but it should at least
+* contain the root `toctree` directive.</comment>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.compound
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <compound classes="toctree-wrapper"><start_of_file docname="Doc1"><section ids="doc1" names="doc1"><title refid="id1">Doc1</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-alpha" names="section\ alpha"><title refid="id2">Section Alpha</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id3">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file><start_of_file docname="Doc2"><section ids="doc2" names="doc2"><title refid="id4">Doc2</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-beta" names="section\ beta"><title refid="id5">Section Beta</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id6">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file></compound>
+* [DEBUG] basenodehandler.py:177 
+* [INFO] basenodehandler.py:215 Unknown class toctree-wrapper, ignoring. [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: sphinx.addnodes.start_of_file
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <start_of_file docname="Doc1"><section ids="doc1" names="doc1"><title refid="id1">Doc1</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-alpha" names="section\ alpha"><title refid="id2">Section Alpha</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id3">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="doc1" names="doc1"><title refid="id1">Doc1</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-alpha" names="section\ alpha"><title refid="id2">Section Alpha</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id3">Section One</title><paragraph>Some more text.</paragraph></section></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id1">Doc1</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id1">Doc1</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Doc1
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Doc1
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="doc1"/>Doc1
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.topic
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-alpha">Section Alpha</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="section-alpha" names="section\ alpha"><title refid="id2">Section Alpha</title><paragraph>Some text.</paragraph></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id2">Section Alpha</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id2">Section Alpha</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Section Alpha
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Section Alpha
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="contents"/><a name="section-alpha"/>Section Alpha
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>Some text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>Some text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Some text.
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Some text.
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: Some text.
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="section-one" names="section\ one"><title refid="id3">Section One</title><paragraph>Some more text.</paragraph></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id3">Section One</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id3">Section One</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Section One
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Section One
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="section-one"/>Section One
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>Some more text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>Some more text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Some more text.
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Some more text.
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: Some more text.
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: sphinx.addnodes.start_of_file
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <start_of_file docname="Doc2"><section ids="doc2" names="doc2"><title refid="id4">Doc2</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-beta" names="section\ beta"><title refid="id5">Section Beta</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id6">Section One</title><paragraph>Some more text.</paragraph></section></section></start_of_file>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="doc2" names="doc2"><title refid="id4">Doc2</title><topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic><section ids="section-beta" names="section\ beta"><title refid="id5">Section Beta</title><paragraph>Some text.</paragraph></section><section ids="section-one" names="section\ one"><title refid="id6">Section One</title><paragraph>Some more text.</paragraph></section></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id4">Doc2</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id4">Doc2</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Doc2
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Doc2
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="doc2"/>Doc2
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.topic
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <topic classes="contents local" ids="contents" names="contents"><bullet_list><list_item><paragraph><reference ids="id1" refid="section-beta">Section Beta</reference></paragraph></list_item><list_item><paragraph><reference ids="id2" refid="section-one">Section One</reference></paragraph></list_item></bullet_list></topic>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="section-beta" names="section\ beta"><title refid="id5">Section Beta</title><paragraph>Some text.</paragraph></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id5">Section Beta</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id5">Section Beta</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Section Beta
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Section Beta
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: <a name="section-beta"/>Section Beta
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>Some text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>Some text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Some text.
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Some text.
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: Some text.
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.section
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <section ids="section-one" names="section\ one"><title refid="id6">Section One</title><paragraph>Some more text.</paragraph></section>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <title refid="id6">Section One</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.title
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <title refid="id6">Section One</title>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Section One
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Section One
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleTitle.textdispatch: Section One
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>Some more text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>Some more text.</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: Some more text.
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: Some more text.
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: Some more text.
+* 
+* [INFO] createpdf.py:647 Forcing second pass so Total pages work
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 1 [3]
+* [INFO] createpdf.py:1112 Page 2 [4]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 1 [5]
+* [INFO] createpdf.py:1112 Page 2 [6]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 3 [7]
+* [INFO] flowables.py:1034 Number of items in TOC changed from 0 to 6, not satisfied
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 1 [3]
+* [INFO] createpdf.py:1112 Page 2 [4]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 1 [5]
+* [INFO] createpdf.py:1112 Page 2 [6]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 3 [7]
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 1 [3]
+* [INFO] createpdf.py:1112 Page 2 [4]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 1 [5]
+* [INFO] createpdf.py:1112 Page 2 [6]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 3 [7]
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [INFO] createpdf.py:651 Starting build
+* [INFO] createpdf.py:1112 Page 1 [1]
+* [INFO] createpdf.py:1112 Page 2 [2]
+* [INFO] createpdf.py:1112 Page 1 [3]
+* [INFO] createpdf.py:1112 Page 2 [4]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 1 [5]
+* [INFO] createpdf.py:1112 Page 2 [6]
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Section###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Section###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Section###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Section###
+* 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.document
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <document source="<string>"><paragraph>###Page###</paragraph></document>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.elemdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.paragraph
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line 1 in file <string>]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: <paragraph>###Page###</paragraph>
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:171 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: docutils.nodes.Text
+* [DEBUG] basenodehandler.py:172 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: [near line UNKNOWN in file UNKNOWN]
+* [DEBUG] basenodehandler.py:174 rst2pdf.sphinxnodes.SphinxHandler.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:177 
+* [DEBUG] basenodehandler.py:284 rst2pdf.genpdftext.HandleText.textdispatch: ###Page###
+* [DEBUG] basenodehandler.py:284 rst2pdf.genelements.HandleParagraph.textdispatch: ###Page###
+* 
+* [INFO] createpdf.py:1112 Page 3 [7]
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+* [DEBUG] flowables.py:1028 Table Of Contents is stable
+  writing TestCase... done
+  build succeeded.
+  
+  Build finished. The PDF pages are in build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.7 seconds
+
+Validity of file sphinx-issue229.pdf checksum '7bd4bd8b48ddeb31f29220d8a5e8aa05' is unknown.

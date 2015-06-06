@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:58 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:24:58 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_issue_226.txt -s test_issue_226.style -o
@@ -11,16 +11,16 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
 * [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
 * [INFO] findfonts.py:270 Trying to embed Bitstream Charter Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0fb9758> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0fcbbd8> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0fab638> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0f755a8> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4efc710> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4f0fb90> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eee5f0> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eb8560> from CharterBT-Italic
 * [INFO] findfonts.py:300 Embedding as ['CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic']
 * [INFO] findfonts.py:270 Trying to embed Bitstream Charter Oblique
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0f75e18> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0f75dd0> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0f75d88> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f16e0f75cf8> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eb8e18> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eb8dd0> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eb8d88> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7f7da4eb8cf8> from CharterBT-Italic
 * [INFO] findfonts.py:300 Embedding as ['CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic']
 * [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
 * [INFO] createpdf.py:651 Starting build

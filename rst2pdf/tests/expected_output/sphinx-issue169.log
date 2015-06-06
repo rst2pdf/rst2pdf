@@ -1,0 +1,35 @@
+Process "make" started on Sat Jun  6 07:31:29 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 2 source files that are out of date
+  updating environment: 2 added, 0 changed, 0 removed
+  reading sources... [ 50%] index
+  reading sources... [100%] second
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+  processing MyProject... index second 
+  resolving references...
+  done
+* [WARNING] styles.py:548 Using undefined style 'cmdoption', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'desc', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'descname', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'descclassname', aliased to style 'normal'.
+* [WARNING] styles.py:548 Using undefined style 'xref', aliased to style 'normal'.
+  writing MyProject... done
+  build succeeded.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.4 seconds
+
+Validity of file sphinx-issue169.pdf checksum '373c4a6093eb25455d065e9130b41c9d' is unknown.

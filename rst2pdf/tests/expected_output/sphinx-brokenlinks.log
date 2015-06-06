@@ -1,0 +1,85 @@
+Process "make" started on Sat Jun  6 07:31:26 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 4 source files that are out of date
+  updating environment: 4 added, 0 changed, 0 removed
+  reading sources... [ 25%] appendix
+  reading sources... [ 50%] index
+  reading sources... [ 75%] index2
+  reading sources... [100%] modules
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+* /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-brokenlinks/appendix.rst:: WARNING: document isn't included in any toctree
+* /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-brokenlinks/index2.rst:: WARNING: document isn't included in any toctree
+  checking consistency... done
+  processing doc1... index  py-modindex
+  
+  adding appendixes...appendix done
+  
+  resolving references...
+  done
+* [ERROR] pdfbuilder.py:130 list index out of range
+* Traceback (most recent call last):
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/pdfbuilder.py", line 127, in write
+*     docwriter.write(doctree, destination)
+*   File "/home/david/Projects/rst2pdf_py2/.venv/lib/python2.7/site-packages/docutils-0.12-py2.7.egg/docutils/writers/__init__.py", line 80, in write
+*     self.translate()
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/pdfbuilder.py", line 621, in translate
+*     compressed=self.compressed)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 561, in createPdf
+*     elements = self.gen_elements(self.doctree)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 205, in gather_elements
+*     return client.gather_elements(node, style=style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 390, in gather_elements
+*     r.extend(self.gen_elements(n, style=style))
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 250, in elemdispatch
+*     elements = self.getelements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 225, in getelements
+*     elements = self.gather_elements(client, node, style)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/genelements.py", line 188, in gather_elements
+*     return [Paragraph(client.gen_pdftext(node), style)]
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 280, in textdispatch
+*     text = self.get_text(client, node, replaceEnt)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 266, in get_text
+*     return client.gather_pdftext(node)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 380, in gather_pdftext
+*     for n in node.children])
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 280, in textdispatch
+*     text = self.get_text(client, node, replaceEnt)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 266, in get_text
+*     return client.gather_pdftext(node)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/createpdf.py", line 380, in gather_pdftext
+*     for n in node.children])
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/basenodehandler.py", line 279, in textdispatch
+*     pre, post = self.get_pre_post(client, node, replaceEnt)
+*   File "/home/david/Projects/rst2pdf_py2/rst2pdf/genpdftext.py", line 232, in get_pre_post
+*     r = client.styleToTags(node['classes'][0])
+* IndexError: list index out of range
+  writing doc1... FAILED
+  processing doc2... index2 modules  py-modindex
+  
+  adding appendixes...appendix done
+  
+  resolving references...
+  done
+  writing doc2... done
+  build succeeded, 2 warnings.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.8 seconds
+
+Validity of file doc2.pdf checksum 'd41d8cd98f00b204e9800998ecf8427e 554eec670741bcb16a2e048745ecad97' is unknown.

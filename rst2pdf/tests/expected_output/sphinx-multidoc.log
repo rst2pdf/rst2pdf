@@ -1,0 +1,35 @@
+Process "make" started on Sat Jun  6 07:31:43 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 2 source files that are out of date
+  updating environment: 2 added, 0 changed, 0 removed
+  reading sources... [ 50%] index
+  reading sources... [100%] index2
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+* /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-multidoc/index2.rst:: WARNING: document isn't included in any toctree
+  processing MyProject1... index 
+  resolving references...
+  done
+  writing MyProject1... done
+  processing MyProject2... index2 
+  resolving references...
+  done
+  writing MyProject2... done
+  build succeeded, 1 warning.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.6 seconds
+
+Validity of file MyProject2.pdf checksum '061e2fc190c6d06de0d2a9e9acb9d085 000e4141eba31318d3b2a478477548df' is unknown.

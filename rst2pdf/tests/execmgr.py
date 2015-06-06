@@ -317,24 +317,14 @@ def default_logger(resultlist, data=None, data2=None):
         data2 = data
     print(data2)
 
+
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
         them to caller
     '''
     logger = kw.pop('logger', default_logger)
-
-    formatcmd = textwrap.TextWrapper(initial_indent='        ',
-                                    subsequent_indent='        ',
-                                    break_long_words=False).fill
-
     subproc = TextOutExec(*arg, **kw)
-    args = subproc.args
-    procname = args[0]
-    starttime = time.time()
     result = []
-    logger(result,
-        'Process "%s" started on %s\n\n%s\n\n' % (
-         procname, time.asctime(), formatcmd(' '.join(args))))
     errcode = 0
     badexit = '* ' + chr(1)
     for line in subproc:
@@ -345,13 +335,8 @@ def textexec(*arg, **kw):
             logger(result, line)
             continue
         errcode = errcode or int(line.split()[-1])
-        status = errcode and 'FAIL' or 'PASS'
-        logger(result,
-            '\nProgram %s exit code: %s (%d)   elapsed time: %s\n' %
-            (procname, status, errcode, elapsedtime(starttime)))
-        logger(result, None,
-            'Cumulative execution time is %s\n' % elapsedtime())
     return errcode, result
+
 
 if __name__ == '__main__':
 

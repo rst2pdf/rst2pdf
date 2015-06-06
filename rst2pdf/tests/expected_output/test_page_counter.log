@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:30:35 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:25:33 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_page_counter.txt -o
@@ -17,6 +17,6 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] createpdf.py:1112 Page 2 [3]
 * [INFO] createpdf.py:1112 Page 3 [4]
 
-Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.3 seconds
+Program /home/david/Projects/rst2pdf_py2/bin/rst2pdf exit code: PASS (0)   elapsed time: 00.2 seconds
 
 Validity of file test_page_counter.pdf checksum '5041293889011e905ac80ede65d1446f' is good.

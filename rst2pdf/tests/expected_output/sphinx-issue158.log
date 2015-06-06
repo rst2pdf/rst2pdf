@@ -1,0 +1,30 @@
+Process "make" started on Sat Jun  6 07:31:27 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 1 source files that are out of date
+  updating environment: 1 added, 0 changed, 0 removed
+  reading sources... [100%] index
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+  checking consistency... done
+  processing MyProject... index 
+  resolving references...
+  done
+* [WARNING] styles.py:548 Using undefined style 'seealso-heading', aliased to style 'normal'.
+  writing MyProject... done
+  build succeeded.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.4 seconds
+
+Validity of file sphinx-issue158.pdf checksum 'e902940fe489ed5fd79c84ecfa58c24d' is unknown.

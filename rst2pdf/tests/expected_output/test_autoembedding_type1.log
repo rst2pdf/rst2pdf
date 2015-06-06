@@ -1,4 +1,4 @@
-Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:29:31 2015
+Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Sat Jun  6 07:24:31 2015
 
         /home/david/Projects/rst2pdf_py2/bin/rst2pdf --date-invariant
         -v test_autoembedding_type1.txt -s
@@ -12,10 +12,10 @@ Process "/home/david/Projects/rst2pdf_py2/bin/rst2pdf" started on Fri Jun  5 12:
 * [INFO] styles.py:110 FontPath:['/home/david/Projects/rst2pdf_py2/rst2pdf/fonts', '.']
 * [INFO] styles.py:111 StylePath:['/home/david/Projects/rst2pdf_py2/rst2pdf/styles', '/home/david/.rst2pdf/styles', '.']
 * [INFO] findfonts.py:270 Trying to embed CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fb5f68347e8> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fb5f6846c68> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fb5f68266c8> from CharterBT-Italic
-* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fb5f67ef638> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fa4fd4557a0> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fa4fd468c20> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fa4fd447680> from CharterBT-Italic
+* [INFO] findfonts.py:287 Registering font: <reportlab.pdfbase.pdfmetrics.EmbeddedType1Face instance at 0x7fa4fd4105f0> from CharterBT-Italic
 * [INFO] findfonts.py:300 Embedding as ['CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic', 'CharterBT-Italic']
 * [INFO] languages.py:39 Language 'en_US' not supported by Docutils, using 'en' instead.
 * [INFO] createpdf.py:651 Starting build

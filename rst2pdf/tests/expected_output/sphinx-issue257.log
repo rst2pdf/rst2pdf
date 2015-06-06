@@ -1,0 +1,32 @@
+Process "make" started on Sat Jun  6 07:31:35 2015
+
+        make clean pdf
+
+
+  rm -rf _build/*
+  sphinx-build -b pdf -d _build/doctrees   . _build/pdf
+  Running Sphinx v1.3.1
+  making output directory...
+  loading pickled environment... not yet created
+  building [mo]: targets for 0 po files that are out of date
+  building [pdf]: targets for 2 source files that are out of date
+  updating environment: 2 added, 0 changed, 0 removed
+  reading sources... [ 50%] foobar
+* [ERROR] aafigure_directive.py:90 To render the aafigure directive correctly, please install aafigure
+  reading sources... [100%] index
+  
+  looking for now-outdated files... none found
+  pickling environment... done
+* /home/david/Projects/rst2pdf_py2/rst2pdf/tests/input/sphinx-issue257/index.rst:: WARNING: document isn't included in any toctree
+  checking consistency... done
+  processing index... index 
+  resolving references...
+  done
+  writing index... done
+  build succeeded, 1 warning.
+  
+  Build finished. The PDF files are in _build/pdf.
+
+Program make exit code: PASS (0)   elapsed time: 00.6 seconds
+
+Validity of file sphinx-issue257.pdf checksum '634a57848a5d7c30986cbe7cf64841cb' is unknown.
