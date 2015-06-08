@@ -36,12 +36,14 @@ long_description = (
     )
 
 install_requires = [
-    'setuptools',
-    'docutils',
-    'reportlab>=3.0',
     'Pygments',
-    'tenjin',
+    'docutils',
     'pdfrw',
+    'reportlab>=3.0',
+    'rson',
+    'setuptools',
+    'smartypants',
+    'tenjin',
 ]
 
 tests_require = ['pyPdf2', 'nose']
