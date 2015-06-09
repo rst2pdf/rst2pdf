@@ -33,7 +33,7 @@ from docutils.nodes import Element, literal_block
 from docutils.parsers.rst import directives, Directive
 from reportlab.graphics import renderPDF
 
-from rst2pdf.opt_imports import aafigure
+import aafigure
 from rst2pdf.log import log
 
 
@@ -84,21 +84,12 @@ class Aafig(Directive):
         proportional=directives.flag,
     )
 
-    # Flag to prevent multiple warnings
-    _WARNED = False
-
     def run(self):
         if 'textual' in self.options:
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
-        if aafigure is not None:
-            return [Aanode(self.content, self.options)]
-        if not self.__class__._WARNED:
-            log.error('To render the aafigure directive correctly, ' +
-                      'please install aafigure')
-            self.__class__._WARNED = True
-        return [literal_block(text='\n'.join(self.content))]
+        return [Aanode(self.content, self.options)]
 
 
 directives.register_directive('aafig', Aafig)

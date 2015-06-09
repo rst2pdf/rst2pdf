@@ -53,12 +53,6 @@ except ImportError:
     sphinx = None
 
 try:
-    import aafigure
-    import aafigure.pdf
-except ImportError:
-    aafigure = None
-
-try:
     from matplotlib import mathtext
 except ImportError:
     mathtext = None
