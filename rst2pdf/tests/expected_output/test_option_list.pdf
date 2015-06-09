@@ -1,64 +1,32 @@
-%PDF-1.3
+%PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
-<< /F1 2 0 R
- /F2 3 0 R >>
+<< /F1 2 0 R /F2 3 0 R >>
 endobj
 2 0 obj
-<< /BaseFont /Helvetica
- /Encoding /WinAnsiEncoding
- /Name /F1
- /Subtype /Type1
- /Type /Font >>
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
 endobj
 3 0 obj
-<< /BaseFont /Courier
- /Encoding /WinAnsiEncoding
- /Name /F2
- /Subtype /Type1
- /Type /Font >>
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
 endobj
 4 0 obj
-<< /Contents 8 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 7 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
+<< /Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
 endobj
 5 0 obj
-<< /Outlines 9 0 R
- /PageLabels 10 0 R
- /PageMode /UseNone
- /Pages 7 0 R
- /Type /Catalog >>
+<< /Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog >>
 endobj
 6 0 obj
-<< /Author ()
- /CreationDate (D:20000101000000+00'00')
- /Keywords ()
- /Producer (ReportLab http://www.reportlab.com)
- /Subject (\(unspecified\))
- /Title () >>
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7fba47b4cf60> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
 endobj
 7 0 obj
-<< /Count 1
- /Kids [ 4 0 R ]
- /Type /Pages >>
+<< /Count 1 /Kids [ 4 0 R ] /Type /Pages >>
 endobj
 8 0 obj
-<< /Length 3467 >>
+<< /Length 3411 >>
 stream
-1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 749.8236 cm
 0 0 0 rg
@@ -72,7 +40,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (-a) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (-a) Tj T* ET
 Q
 Q
 Q
@@ -82,7 +50,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (command-line option "a") Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (command-line option "a") Tj T* ET
 Q
 Q
 q
@@ -101,7 +69,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (-b file) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (-b file) Tj T* ET
 Q
 Q
 Q
@@ -111,7 +79,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (options can have arguments and long descriptions) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (options can have arguments and long descriptions) Tj T* ET
 Q
 Q
 q
@@ -130,7 +98,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (--long) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (--long) Tj T* ET
 Q
 Q
 Q
@@ -140,7 +108,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (options can be long also) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (options can be long also) Tj T* ET
 Q
 Q
 q
@@ -159,7 +127,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (--input=file) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (--input=file) Tj T* ET
 Q
 Q
 Q
@@ -169,7 +137,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (long options can also have arguments) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (long options can also have arguments) Tj T* ET
 Q
 Q
 q
@@ -188,7 +156,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (--very-long-option) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (--very-long-option) Tj T* ET
 Q
 Q
 Q
@@ -198,14 +166,14 @@ q
 1 0 0 1 240.9449 33 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (The description can also start on the next line.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The description can also start on the next line.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 240.9449 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 16.82 Tm /F1 10 Tf 12 TL 7.240976 Tw (The description may contain multiple body) Tj T* 0 Tw (elements, regardless of where it starts.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 7.240976 Tw (The description may contain multiple body) Tj T* 0 Tw (elements, regardless of where it starts.) Tj T* ET
 Q
 Q
 q
@@ -224,7 +192,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (-x, -y, -z) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (-x, -y, -z) Tj T* ET
 Q
 Q
 Q
@@ -234,7 +202,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (Multiple options are an "option group".) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Multiple options are an "option group".) Tj T* ET
 Q
 Q
 q
@@ -253,7 +221,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (-v, --verbose) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (-v, --verbose) Tj T* ET
 Q
 Q
 Q
@@ -262,7 +230,7 @@ Q
 q
 1 0 0 1 240.9449 3.2 cm
 q
-BT 1 0 0 1 0 4.82 Tm 12 TL /F1 10 Tf 0 0 0 rg (Commonly-seen: short & long options.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Commonly-seen: short & long options.) Tj T* ET
 Q
 Q
 q
@@ -281,7 +249,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (-1 file, --one=file, --two file) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (-1 file, --one=file, --two file) Tj T* ET
 Q
 Q
 Q
@@ -291,7 +259,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (Multiple options with arguments.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Multiple options with arguments.) Tj T* ET
 Q
 Q
 q
@@ -310,7 +278,7 @@ q
 1 0 0 1 .1 .1 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (/V) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (/V) Tj T* ET
 Q
 Q
 Q
@@ -320,7 +288,7 @@ q
 1 0 0 1 240.9449 3.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (DOS/VMS-style options too) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (DOS/VMS-style options too) Tj T* ET
 Q
 Q
 q
@@ -328,42 +296,35 @@ Q
 Q
  
 endstream
-
 endobj
 9 0 obj
-<< /Count 0
- /Type /Outlines >>
+<< /Count 0 /Type /Outlines >>
 endobj
 10 0 obj
-<< /Nums [ 0
- 11 0 R ] >>
+<< /Nums [ 0 11 0 R ] >>
 endobj
 11 0 obj
-<< /S /D
- /St 1 >>
+<< /S /D /St 1 >>
 endobj
 xref
 0 12
 0000000000 65535 f
 0000000075 00000 n
-0000000121 00000 n
-0000000239 00000 n
-0000000355 00000 n
-0000000586 00000 n
-0000000700 00000 n
-0000000882 00000 n
-0000000948 00000 n
-0000004473 00000 n
-0000004524 00000 n
-0000004570 00000 n
+0000000119 00000 n
+0000000229 00000 n
+0000000337 00000 n
+0000000544 00000 n
+0000000650 00000 n
+0000000910 00000 n
+0000000972 00000 n
+0000004439 00000 n
+0000004488 00000 n
+0000004532 00000 n
 trailer
 << /ID 
- % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
- [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)] 
-
- /Info 6 0 R
- /Root 5 0 R
- /Size 12 >>
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 6 0 R /Root 5 0 R /Size 12 >>
 startxref
-4609
+4569
 %%EOF

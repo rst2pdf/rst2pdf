@@ -1,69 +1,37 @@
-%PDF-1.3
+%PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
-<< /F1 2 0 R
- /F2 3 0 R >>
+<< /F1 2 0 R /F2 3 0 R >>
 endobj
 2 0 obj
-<< /BaseFont /Helvetica
- /Encoding /WinAnsiEncoding
- /Name /F1
- /Subtype /Type1
- /Type /Font >>
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
 endobj
 3 0 obj
-<< /BaseFont /Courier
- /Encoding /WinAnsiEncoding
- /Name /F2
- /Subtype /Type1
- /Type /Font >>
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
 endobj
 4 0 obj
-<< /Contents 8 0 R
- /MediaBox [ 0
- 0
- 595.2756
- 841.8898 ]
- /Parent 7 0 R
- /Resources << /Font 1 0 R
- /ProcSet [ /PDF
- /Text
- /ImageB
- /ImageC
- /ImageI ] >>
- /Rotate 0
- /Trans <<  >>
- /Type /Page >>
+<< /Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
 endobj
 5 0 obj
-<< /Outlines 9 0 R
- /PageLabels 10 0 R
- /PageMode /UseNone
- /Pages 7 0 R
- /Type /Catalog >>
+<< /Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog >>
 endobj
 6 0 obj
-<< /Author ()
- /CreationDate (D:20000101000000+00'00')
- /Keywords ()
- /Producer (ReportLab http://www.reportlab.com)
- /Subject (\(unspecified\))
- /Title () >>
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7fba4862f9b0> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
 endobj
 7 0 obj
-<< /Count 1
- /Kids [ 4 0 R ]
- /Type /Pages >>
+<< /Count 1 /Kids [ 4 0 R ] /Type /Pages >>
 endobj
 8 0 obj
-<< /Length 1930 >>
+<< /Length 1907 >>
 stream
-1 0 0 1 0 0 cm BT /F1 12 Tf 14.4 TL ET
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 753.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a regular paragraph) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is a regular paragraph) Tj T* ET
 Q
 Q
 q
@@ -80,14 +48,14 @@ q
 1 0 0 1 6 30.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 30.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a literal block. If it looks badly misaligned, runs off margins, etc, isue 152 is not fixed:) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is a literal block. If it looks badly misaligned, runs off margins, etc, isue 152 is not fixed:) Tj T* ET
 Q
 Q
 q
@@ -105,7 +73,7 @@ n -6 -6 445.6898 24 re B*
 Q
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (This is the literal block.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (This is the literal block.) Tj T* ET
 Q
 Q
 Q
@@ -131,14 +99,14 @@ q
 1 0 0 1 6 30.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 30.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4.82 Tm /F1 10 Tf 12 TL (This is a bullet list, and this is another literal block:) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is a bullet list, and this is another literal block:) Tj T* ET
 Q
 Q
 q
@@ -156,7 +124,7 @@ n -6 -6 445.6898 24 re B*
 Q
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (This is the literal block.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (This is the literal block.) Tj T* ET
 Q
 Q
 Q
@@ -183,7 +151,7 @@ n -6 -6 468.6898 24 re B*
 Q
 q
 0 0 0 rg
-BT 1 0 0 1 0 5.71 Tm /F2 10 Tf 12 TL (This is a literal block outside the list) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (This is a literal block outside the list) Tj T* ET
 Q
 Q
 Q
@@ -191,42 +159,35 @@ Q
 Q
  
 endstream
-
 endobj
 9 0 obj
-<< /Count 0
- /Type /Outlines >>
+<< /Count 0 /Type /Outlines >>
 endobj
 10 0 obj
-<< /Nums [ 0
- 11 0 R ] >>
+<< /Nums [ 0 11 0 R ] >>
 endobj
 11 0 obj
-<< /S /D
- /St 1 >>
+<< /S /D /St 1 >>
 endobj
 xref
 0 12
 0000000000 65535 f
 0000000075 00000 n
-0000000121 00000 n
-0000000239 00000 n
-0000000355 00000 n
-0000000586 00000 n
-0000000700 00000 n
-0000000882 00000 n
-0000000948 00000 n
-0000002936 00000 n
-0000002987 00000 n
-0000003033 00000 n
+0000000119 00000 n
+0000000229 00000 n
+0000000337 00000 n
+0000000544 00000 n
+0000000650 00000 n
+0000000910 00000 n
+0000000972 00000 n
+0000002935 00000 n
+0000002984 00000 n
+0000003028 00000 n
 trailer
 << /ID 
- % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
- [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)] 
-
- /Info 6 0 R
- /Root 5 0 R
- /Size 12 >>
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 6 0 R /Root 5 0 R /Size 12 >>
 startxref
-3072
+3065
 %%EOF

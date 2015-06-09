@@ -70,25 +70,22 @@ def compare_pdfs(got, expect, threshold=0):
     """
     got_pages = pdf_pages(got)
     expect_pages = pdf_pages(expect)
-    iterpages = zip_longest(count(), got_pages, expect_pages)
-    for pagenum, got_page, expect_page in iterpages:
+    iterpages = zip_longest(got_pages, expect_pages)
+    for pagenum, (got_page, expect_page) in enumerate(iterpages):
         assert None not in (got_page, expect_page), 'EOF at page %d' % pagenum
         args = [
-            'convert',
+            'compare',
             got_page.name,
             expect_page.name,
-            '-compose',
-            'difference',
-            '-composite',
-            '-format',
-            "'%[mean]'",
-            "info:"
+            '-metric',
+            'AE',
+            'null:'
         ]
-        diff_percent = subprocess.check_output(args).decode()
-        diff_percent = float(diff_percent.strip("'"))
-        assert diff_percent <= threshold, \
-            'Page {} differs by {:.3f}% (> {:.3f})'.format(
-                pagenum + 1, diff_percent, threshold)
+        match_code = subprocess.call(args, stderr=subprocess.DEVNULL)
+        print(match_code)
+        assert match_code == 0, \
+            'Page match error on page {} (code={})'.format(pagenum + 1,
+                                                          match_code)
 
 
 def build_sphinx(sphinxdir, outpdf):
