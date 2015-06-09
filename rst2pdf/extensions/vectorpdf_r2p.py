@@ -6,25 +6,16 @@ import os
 from weakref import WeakKeyDictionary
 from copy import copy
 
-try:
-    from reportlab.rl_config import _FUZZ
-    from reportlab.platypus import Flowable
-    from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+from reportlab.rl_config import _FUZZ
+from reportlab.platypus import Flowable
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-    from rst2pdf import pdfrw
-    from rst2pdf.pdfrw.toreportlab import makerl
-    from rst2pdf.pdfrw.buildxobj import CacheXObj
+import pdfrw
+from pdfrw.toreportlab import makerl
+from pdfrw.buildxobj import CacheXObj
 
-    from rst2pdf.log import log
-    import rst2pdf.image
-    from rst2pdf.opt_imports import LazyImports
-except ImportError:
-    # This is just to make nosetest happy on the CI server
-    class Flowable:
-        pass
-
-        # TODO:  Looks the same as for other images, because I
-        #        stole it from other image handlers.  Common base class???
+import rst2pdf.image
+from rst2pdf.opt_imports import LazyImports
 
 
 class AnyCache(object):

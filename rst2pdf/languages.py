@@ -4,6 +4,8 @@
 # $Date$
 # $Revision$
 
+# TODO: Check if this module is still necessary
+
 from docutils.languages import get_language as get_language
 
 from rst2pdf.log import log

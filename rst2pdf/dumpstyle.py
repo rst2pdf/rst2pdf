@@ -1,21 +1,22 @@
 #!/usr/bin/env python
-'''
-    Call dumps() to dump a stylesheet to a string.
 
-    Or run the script to dump all .json in the styles directory
-    to .style in the styles directory.
-'''
+"""
+Call dumps() to dump a stylesheet to a string.
 
-import sys
+Or run the script to dump all .json in the styles directory
+to .style in the styles directory.
+"""
+
 import os
 
 from .rson import loads as rloads
 from json import loads as jloads
 
+
 def dumps(obj, forcestyledict=True):
-    ''' If forcestyledict is True, will attempt to
-        turn styles into a dictionary.
-    '''
+    """
+    If forcestyledict is True, attempt to turn styles into a dictionary.
+    """
 
     def dofloat(result, obj, indent):
         s = '%.3f' % obj
@@ -92,10 +93,14 @@ def dumps(obj, forcestyledict=True):
     def donone(result, obj, indent):
         result.append('null')
 
-    dumpfuncs = {float: dofloat, int: doint, str: dostr,
-                     list: dolist, dict: dodict, type(None): donone}
-
-    dumpfuncs = list(dumpfuncs.items())
+    dumpfuncs = [
+        (float, dofloat),
+        (int, doint),
+        (str, dostr),
+        (list, dolist),
+        (dict, dodict),
+        (type(None), donone),
+    ]
 
     def dumprecurse(result, obj, indent='\n', indentnow=True):
         if indentnow:
@@ -111,10 +116,11 @@ def dumps(obj, forcestyledict=True):
     dumprecurse(result, obj, indentnow=False)
     return fixspacing(''.join(result))
 
+
 def fixspacing(s):
-    ''' Try to make the output prettier by inserting blank lines
-        in random places.
-    '''
+    """
+    Try to make the output prettier by inserting blank lines in random places.
+    """
     result = []
     indent = -1
     for line in s.splitlines():
@@ -129,9 +135,11 @@ def fixspacing(s):
     result.append('')
     return '\n'.join(result)
 
+
 def fixstyle(obj):
-    ''' Try to convert styles into a dictionary
-    '''
+    """
+    Try to convert styles into a dictionary.
+    """
     if obj:
         if isinstance(obj, list):
             lengths = [len(x) for x in obj]
@@ -141,9 +149,11 @@ def fixstyle(obj):
             obj['styles'] = dict(obj['styles'])
     return obj
 
+
 def convert(srcname):
-    ''' Convert a single file from .json to .style
-    '''
+    """
+    Convert a single file from .json to .style
+    """
     print(srcname)
     with open(srcname, 'r') as f:
         sstr = f.read()

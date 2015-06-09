@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-"""Singleton config object"""
 
+"""
+Singleton config object
+"""
 
 import configparser
-import os
-from rst2pdf.rson import loads
+import os.path
+
+from rson import loads
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
 cfname = os.path.join(cfdir, 'config')
@@ -26,14 +29,14 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
-conf = configparser.SafeConfigParser()
 
 def parseConfig(extracf=None):
-    global conf
     cflist = ["/etc/rst2pdf.conf", cfname]
     if extracf:
         cflist.append(extracf)
-    conf = configparser.SafeConfigParser()
-    conf.read(cflist)
+    lconf = configparser.SafeConfigParser()
+    lconf.read(cflist)
+    return lconf
 
-parseConfig()
+
+conf = parseConfig()

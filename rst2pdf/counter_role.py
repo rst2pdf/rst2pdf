@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 
+"""
+A docutils node which simply shows a counter.
+"""
+
 from docutils.nodes import Text, target
+from docutils.parsers.rst import roles
 
 values = {}
 
 
 class CounterNode(Text):
+
     children = ()
+
     def __init__(self, data, rawsource=''):
         if ':' in data:
             self.name, value = [s.lower() for s in data.split(':')][:2]
@@ -19,12 +26,13 @@ class CounterNode(Text):
     def astext(self):
         return str(self.value)
 
-def counter_fn(name, rawtext, text, lineno, inliner, options={}, content=[]):
+
+def counter_fn(name, rawtext, text, lineno, inliner, options=None, content=None):
     n = CounterNode(text)
     s = '%s-%s' % (n.name, n.value)
     return [target(ids=[s]), n], []
 
 counter_fn.content = True
 
-from docutils.parsers.rst import roles
+
 roles.register_canonical_role('counter', counter_fn)

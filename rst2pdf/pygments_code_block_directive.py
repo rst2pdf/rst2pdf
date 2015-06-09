@@ -25,8 +25,9 @@
 #
 # ::
 
-"""Define and register a code-block directive using pygments"""
-
+"""
+Define and register a code-block directive using pygments
+"""
 
 # Requirements
 # ------------
@@ -65,7 +66,8 @@ unstyled_tokens = ['']
 # pygments::
 
 class DocutilsInterface(object):
-    """Parse `code` string and yield "classified" tokens.
+    """
+    Parse `code` string and yield "classified" tokens.
 
     Arguments
 
@@ -80,29 +82,28 @@ class DocutilsInterface(object):
 
     """
 
-    def __init__(self, code, language, custom_args={}):
+    def __init__(self, code, language, custom_args=None):
         self.code = code
         self.language = language
-        self.custom_args = custom_args
+        self.custom_args = custom_args or {}
 
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
             if self.language and str(self.language).lower() != 'none':
                 lexer = get_lexer_by_name(self.language.lower(),
-                                        **self.custom_args
-                                        )
+                                          **self.custom_args)
             else:
                 lexer = get_lexer_by_name('text', **self.custom_args)
         except ValueError:
-            log.info("no pygments lexer for %s, using 'text'" \
-                % self.language)
+            log.info("no pygments lexer for %s, using 'text'" % self.language)
             # what happens if pygment isn't present ?
             lexer = get_lexer_by_name('text')
         return pygments.lex(self.code, lexer)
 
     def join(self, tokens):
-        """join subsequent tokens of same token-type
+        """
+        Join subsequent tokens of same token-type
         """
         tokens = iter(tokens)
         (lasttype, lastval) = next(tokens)
@@ -115,7 +116,8 @@ class DocutilsInterface(object):
         yield(lasttype, lastval)
 
     def __iter__(self):
-        """parse code string and yield "clasified" tokens
+        """
+        Parse code string and yield "clasified" tokens
         """
         try:
             tokens = self.lex()
@@ -134,7 +136,7 @@ class DocutilsInterface(object):
 # ::
 
 def code_block_directive(name, arguments, options, content, lineno,
-                       content_offset, block_text, state, state_machine):
+                         content_offset, block_text, state, state_machine):
     """Parse and classify content of a code_block."""
     if 'include' in options:
         try:
@@ -190,7 +192,6 @@ def code_block_directive(name, arguments, options, content, lineno,
                                       'code-block directive:\nText not found.' % options['start-after'])
                 line_offset = len(content[:after_index + len(after_text)].splitlines())
                 content = content[after_index + len(after_text):]
-
 
             # same changes here for the same reason
             before_text = options.get('end-at', None)
@@ -266,6 +267,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 #
 # Move to separated module??
 
+
 def zero_or_positive_int(argument):
     """
     Converts a string into python positive integer including zero.
@@ -292,6 +294,7 @@ def string_list(argument):
         entries = argument.split()
     return entries
 
+
 def string_bool(argument):
     """
     Converts True, true, False, False in python boolean values
@@ -305,19 +308,20 @@ def string_bool(argument):
     elif argument.lower() == 'false':
         return False
     else:
-        raise ValueError('"%s" unknown; choose from "True" or "False"'
-                        % argument)
+        raise ValueError('"%s" unknown; choose from "True" or "False"' %
+                         argument)
+
 
 def csharp_unicodelevel(argument):
     return directives.choice(argument, ('none', 'basic', 'full'))
 
+
 def lhs_litstyle(argument):
     return directives.choice(argument, ('bird', 'latex'))
 
+
 def raw_compress(argument):
     return directives.choice(argument, ('gz', 'bz2'))
-
-
 
 
 # Register Directive
@@ -326,49 +330,49 @@ def raw_compress(argument):
 
 code_block_directive.arguments = (1, 0, 1)
 code_block_directive.content = 1
-code_block_directive.options = {'include': directives.unchanged_required,
-                                'start-at': directives.unchanged_required,
-                                'end-at': directives.unchanged_required,
-                                'start-after': directives.unchanged_required,
-                                'end-before': directives.unchanged_required,
-                                'linenos': directives.unchanged,
-                                'linenos_offset': zero_or_positive_int,
-                                'tab-width': directives.unchanged,
-                                # generic
-                                'stripnl' : string_bool,
-                                'stripall': string_bool,
-                                'ensurenl': string_bool,
-                                'tabsize' : directives.positive_int,
-                                'encoding': directives.encoding,
-                                # Lua
-                                'func_name_hightlighting':string_bool,
-                                'disabled_modules': string_list,
-                                # Python Console
-                                'python3': string_bool,
-                                # Delphi
-                                'turbopascal':string_bool,
-                                'delphi' :string_bool,
-                                'freepascal': string_bool,
-                                'units': string_list,
-                                # Modula2
-                                'pim'   : string_bool,
-                                'iso'   : string_bool,
-                                'objm2' : string_bool,
-                                'gm2ext': string_bool,
-                                # CSharp
-                                'unicodelevel' : csharp_unicodelevel,
-                                # Literate haskell
-                                'litstyle' : lhs_litstyle,
-                                # Raw
-                                'compress': raw_compress,
-                                # Rst
-                                'handlecodeblocks': string_bool,
-                                # Php
-                                'startinline': string_bool,
-                                'funcnamehighlighting': string_bool,
-                                'disabledmodules': string_list,
-                                }
-
+code_block_directive.options = {
+    'include': directives.unchanged_required,
+    'start-at': directives.unchanged_required,
+    'end-at': directives.unchanged_required,
+    'start-after': directives.unchanged_required,
+    'end-before': directives.unchanged_required,
+    'linenos': directives.unchanged,
+    'linenos_offset': zero_or_positive_int,
+    'tab-width': directives.unchanged,
+    # generic
+    'stripnl' : string_bool,
+    'stripall': string_bool,
+    'ensurenl': string_bool,
+    'tabsize' : directives.positive_int,
+    'encoding': directives.encoding,
+    # Lua
+    'func_name_hightlighting':string_bool,
+    'disabled_modules': string_list,
+    # Python Console
+    'python3': string_bool,
+    # Delphi
+    'turbopascal':string_bool,
+    'delphi' :string_bool,
+    'freepascal': string_bool,
+    'units': string_list,
+    # Modula2
+    'pim'   : string_bool,
+    'iso'   : string_bool,
+    'objm2' : string_bool,
+    'gm2ext': string_bool,
+    # CSharp
+    'unicodelevel' : csharp_unicodelevel,
+    # Literate haskell
+    'litstyle' : lhs_litstyle,
+    # Raw
+    'compress': raw_compress,
+    # Rst
+    'handlecodeblocks': string_bool,
+    # Php
+    'startinline': string_bool,
+    'funcnamehighlighting': string_bool,
+    'disabledmodules': string_list,
+}
 
 
 # .. _doctutils: http://docutils.sf.net/

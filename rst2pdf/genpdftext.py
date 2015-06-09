@@ -7,16 +7,16 @@
 # See LICENSE.txt for licensing terms
 
 import os
-from xml.sax.saxutils import escape
-from .log import log, nodeid
-from .basenodehandler import NodeHandler
-import docutils.nodes
-from urllib.parse import urljoin, urlparse
-from reportlab.lib.units import cm
-from .opt_imports import Paragraph
 
-from .image import MyImage, missing
-from .flowables import MySpacer
+from urllib.parse import urljoin, urlparse
+from xml.sax.saxutils import escape
+
+import docutils.nodes
+
+from rst2pdf.basenodehandler import NodeHandler
+from rst2pdf.image import MyImage, missing
+from rst2pdf.opt_imports import Paragraph
+
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
@@ -24,6 +24,7 @@ class FontHandler(NodeHandler):
 
     def get_font_prefix(self, client, node, replaceEnt):
         return client.styleToFont(self.fontstyle)
+
 
 class HandleText(NodeHandler, docutils.nodes.Text):
     def gather_elements(self, client, node, style):
@@ -35,13 +36,16 @@ class HandleText(NodeHandler, docutils.nodes.Text):
             text = escape(text)
         return text
 
+
 class HandleStrong(NodeHandler, docutils.nodes.strong):
     pre = "<b>"
     post = "</b>"
 
+
 class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
     pre = "<i>"
     post = "</i>"
+
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
@@ -62,16 +66,20 @@ class HandleLiteral(NodeHandler, docutils.nodes.literal):
         text = text.replace(' ', '&nbsp;')
         return text
 
+
 class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
     post = "</super>"
+
 
 class HandleSub(NodeHandler, docutils.nodes.subscript):
     pre = '<sub>'
     post = "</sub>"
 
+
 class HandleTitleReference(FontHandler, docutils.nodes.title_reference):
     fontstyle = 'title_reference'
+
 
 class HandleReference(NodeHandler, docutils.nodes.reference):
     def get_pre_post(self, client, node, replaceEnt):
@@ -109,8 +117,10 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
                 post = '</a>' + post
         return pre, post
 
+
 class HandleOptions(HandleText, docutils.nodes.option_string, docutils.nodes.option_argument):
     pass
+
 
 class HandleSysMessage(HandleText, docutils.nodes.system_message, docutils.nodes.problematic):
     pre = '<font color="red">'
@@ -130,6 +140,7 @@ class HandleGenerated(HandleText, docutils.nodes.generated):
 #            # Send the section number up to the title node
 #            node.parent['_sectnum'] = node.astext()
 #        return node.astext()
+
 
 class HandleImage(NodeHandler, docutils.nodes.image):
     def gather_elements(self, client, node, style):
@@ -159,7 +170,12 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         alignment = node.get('align', '').upper()
         if not alignment:
             # There is no JUSTIFY for flowables, of course, so 4:LEFT
-            alignment = {0:'LEFT', 1:'CENTER', 2:'RIGHT', 4:'LEFT'}[style.alignment]
+            alignment = {
+                0: 'LEFT',
+                1: 'CENTER',
+                2: 'RIGHT',
+                4:'LEFT'
+            }[style.alignment]
         if not alignment:
             alignment = 'CENTER'
         node.elements[0].image.hAlign = alignment
@@ -196,7 +212,9 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         return '<img src="%s" width="%f" height="%f" %s/>' % \
             (uri, w, h, align)
 
-class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference, docutils.nodes.citation_reference):
+
+class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference,
+                    docutils.nodes.citation_reference):
     def get_text(self, client, node, replaceEnt):
         # TODO: when used in Sphinx, all footnotes are autonumbered
         anchors = ''
@@ -207,6 +225,7 @@ class HandleFootRef(NodeHandler, docutils.nodes.footnote_reference, docutils.nod
         return '%s<super><a href="%s" color="%s">%s</a></super>' % \
             (anchors, '#' + node.get('refid', node.astext()),
                 client.styles.linkColor, node.astext())
+
 
 class HandleTarget(NodeHandler, docutils.nodes.target):
     def gather_elements(self, client, node, style):
@@ -226,6 +245,7 @@ class HandleTarget(NodeHandler, docutils.nodes.target):
             pre = '<a name="%s"/>' % node['ids'][0]
             client.targets.append(node['ids'][0])
         return pre, ''
+
 
 class HandleInline(NodeHandler, docutils.nodes.inline):
     def get_pre_post(self, client, node, replaceEnt):

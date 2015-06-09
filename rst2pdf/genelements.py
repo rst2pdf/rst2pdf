@@ -39,31 +39,33 @@
 #####################################################################################
 
 
-import os
-import tempfile
-import re
 from copy import copy
 
-from .basenodehandler import NodeHandler
-
 import docutils.nodes
-from .oddeven_directive import OddEvenNode
+
 import reportlab
-
-from .aafigure_directive import Aanode
-
-from .log import log, nodeid
-from .utils import log, parseRaw, parseHTML
-from reportlab.platypus import Paragraph, TableStyle
-from reportlab.lib.units import cm
+from reportlab.platypus import TableStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from .flowables import Table, DelayedTable, SplitTable, Heading, \
-              MyIndenter, MyTableOfContents, MySpacer, \
-              Separation, BoxedContainer, BoundByWidth, \
-              MyPageBreak, Reference, tablepadding, OddEven, \
-              XPreformatted
 
-from .opt_imports import wordaxe, Paragraph, ParagraphStyle
+from rst2pdf.aafigure_directive import Aanode
+from rst2pdf.basenodehandler import NodeHandler
+from rst2pdf.flowables import (
+    BoxedContainer,
+    DelayedTable,
+    Heading,
+    MyPageBreak,
+    MySpacer,
+    MyTableOfContents,
+    OddEven,
+    Separation,
+    SplitTable,
+    Table,
+    XPreformatted,
+    tablepadding,
+)
+from rst2pdf.oddeven_directive import OddEvenNode
+from rst2pdf.opt_imports import Paragraph
+from rst2pdf.utils import parseRaw, parseHTML
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
@@ -86,6 +88,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 class HandleDocument(NodeHandler, docutils.nodes.document):
     pass
 
+
 class HandleTable(NodeHandler, docutils.nodes.table):
     def gather_elements(self, client, node, style):
         if node['classes']:
@@ -95,6 +98,7 @@ class HandleTable(NodeHandler, docutils.nodes.table):
         return [MySpacer(0, client.styles['table'].spaceBefore)] + \
                     client.gather_elements(node, style=style) + \
                     [MySpacer(0, client.styles['table'].spaceAfter)]
+
 
 class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
     def gather_elements(self, client, node, style):
@@ -183,6 +187,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
             t.hAlign = 'RIGHT'
         return [t]
 
+
 class HandleParagraph(NodeHandler, docutils.nodes.paragraph):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gen_pdftext(node), style)]
@@ -247,6 +252,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
 
+
 class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
     def gather_elements(self, client, node, style):
         if isinstance(node.parent, docutils.nodes.sidebar):
@@ -266,10 +272,12 @@ class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
             elements = node.elements  # FIXME Can we get here???
         return elements
 
+
 class HandleDocInfo(NodeHandler, docutils.nodes.docinfo):
     # A docinfo usually contains several fields.
     # We'll render it as a series of elements, one field each.
     pass
+
 
 class HandleField(NodeHandler, docutils.nodes.field):
     def gather_elements(self, client, node, style):
@@ -285,8 +293,10 @@ class HandleField(NodeHandler, docutils.nodes.field):
         return [DelayedTable([[fn, fb]], style=t_style,
             colWidths=client.styles['field-list'].colWidths)]
 
+
 class HandleDecoration(NodeHandler, docutils.nodes.decoration):
     pass
+
 
 class HandleHeader(NodeHandler, docutils.nodes.header):
     stylename = 'header'
@@ -295,8 +305,10 @@ class HandleHeader(NodeHandler, docutils.nodes.header):
             style=client.styles[self.stylename])
         return []
 
+
 class HandleFooter(HandleHeader, docutils.nodes.footer):
     stylename = 'footer'
+
 
 class HandleAuthor(NodeHandler, docutils.nodes.author):
     def gather_elements(self, client, node, style):
@@ -325,7 +337,9 @@ class HandleAuthor(NodeHandler, docutils.nodes.author):
             client.doc_author = node.astext().strip()
         return node.elements
 
+
 class HandleAuthors(NodeHandler, docutils.nodes.authors):
+
     def gather_elements(self, client, node, style):
         # Multiple authors. Create a two-column table.
         # Author references on the right.
@@ -338,9 +352,11 @@ class HandleAuthors(NodeHandler, docutils.nodes.authors):
         return [DelayedTable(td, style=t_style,
             colWidths=colWidths)]
 
+
 class HandleFList(NodeHandler):
     adjustwidths = False
     TableType = DelayedTable
+
     def gather_elements(self, client, node, style):
         fb = client.gather_pdftext(node)
         t_style = TableStyle(client.styles['field-list'].commands)
@@ -353,14 +369,18 @@ class HandleFList(NodeHandler):
                     style=t_style, colWidths=colWidths)
         return [t]
 
+
 class HandleOrganization(HandleFList, docutils.nodes.organization):
     labeltext = "organization"
+
 
 class HandleContact(HandleFList, docutils.nodes.contact):
     labeltext = "contact"
 
+
 class HandleAddress(HandleFList, docutils.nodes.address):
     labeltext = "address"
+
     def gather_elements(self, client, node, style):
         fb = client.gather_pdftext(node)
         t_style = TableStyle(client.styles['field-list'].commands)
@@ -373,22 +393,28 @@ class HandleAddress(HandleFList, docutils.nodes.address):
                     ], style=t_style, colWidths=colWidths)
         return [t]
 
+
 class HandleVersion(HandleFList, docutils.nodes.version):
     labeltext = "version"
+
 
 class HandleRevision(HandleFList, docutils.nodes.revision):
     labeltext = "revision"
     adjustwidths = True
     TableType = Table
 
+
 class HandleStatus(HandleFList, docutils.nodes.status):
     labeltext = "status"
+
 
 class HandleDate(HandleFList, docutils.nodes.date):
     labeltext = "date"
 
+
 class HandleCopyright(HandleFList, docutils.nodes.copyright):
     labeltext = "copyright"
+
 
 class HandleTopic(NodeHandler, docutils.nodes.topic):
     def gather_elements(self, client, node, style):
@@ -432,8 +458,10 @@ class HandleTopic(NodeHandler, docutils.nodes.topic):
             node.elements = client.gather_elements(node, style=style)
         return node.elements
 
+
 class HandleFieldBody(NodeHandler, docutils.nodes.field_body):
     pass
+
 
 class HandleSection(NodeHandler, docutils.nodes.section):
     def gather_elements(self, client, node, style):
@@ -442,6 +470,7 @@ class HandleSection(NodeHandler, docutils.nodes.section):
         elements = client.gather_elements(node)
         client.depth -= 1
         return elements
+
 
 class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
     def gather_elements(self, client, node, style):
@@ -464,14 +493,17 @@ class HandleBulletList(NodeHandler, docutils.nodes.bullet_list):
         node.elements.append(MySpacer(0, sa))
         return node.elements
 
+
 class HandleDefOrOptList(NodeHandler, docutils.nodes.definition_list,
                                 docutils.nodes.option_list):
     pass
+
 
 class HandleFieldList(NodeHandler, docutils.nodes.field_list):
     def gather_elements(self, client, node, style):
         return [MySpacer(0, client.styles['field-list'].spaceBefore)] + \
                 client.gather_elements(node, style=style)
+
 
 class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
     def gather_elements(self, client, node, style):
@@ -493,10 +525,12 @@ class HandleEnumeratedList(NodeHandler, docutils.nodes.enumerated_list):
         node.elements.append(MySpacer(0, sa))
         return node.elements
 
+
 class HandleDefinition(NodeHandler, docutils.nodes.definition):
     def gather_elements(self, client, node, style):
         return client.gather_elements(node,
                        style=style)
+
 
 class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
     def gather_elements(self, client, node, style):
@@ -511,6 +545,7 @@ class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
             optext, client.styles["literal"]), desc]], style=t_style,
             colWidths=colWidths)]
         return node.elements
+
 
 class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
     def gather_elements(self, client, node, style):
@@ -546,6 +581,7 @@ class HandleDefListItem(NodeHandler, docutils.nodes.definition_list_item):
                 DelayedTable([['', dt]] , colWidths=[10, None], style=t_style)]
 
         return node.elements
+
 
 class HandleListItem(NodeHandler, docutils.nodes.list_item):
     def gather_elements(self, client, node, style):
@@ -629,6 +665,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
                                 ]
         return node.elements
 
+
 class HandleTransition(NodeHandler, docutils.nodes.transition):
     def gather_elements(self, client, node, style):
         return [Separation()]
@@ -667,16 +704,19 @@ class HandleBlockQuote(NodeHandler, docutils.nodes.block_quote):
                 ])), MySpacer(0, spaceAfter)]
         return node.elements
 
+
 class HandleAttribution(NodeHandler, docutils.nodes.attribution):
     def gather_elements(self, client, node, style):
         return [
                 Paragraph(client.gather_pdftext(node),
                           client.styles['attribution'])]
 
+
 class HandleComment(NodeHandler, docutils.nodes.comment):
     def gather_elements(self, client, node, style):
         # Class that generates no output
         return []
+
 
 class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
     def gather_elements(self, client, node, style):
@@ -692,6 +732,7 @@ class HandleLineBlock(NodeHandler, docutils.nodes.line_block):
             return [MySpacer(0, client.styles['lineblock'].spaceBefore)] + client.gather_elements(node, style=qstyle) + [MySpacer(0, client.styles['lineblock'].spaceAfter)]
         else:
             return client.gather_elements(node, style=qstyle)
+
 
 class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
@@ -712,8 +753,10 @@ class HandleLine(NodeHandler, docutils.nodes.line):
             text = "<nobr>\xa0</nobr>"
         return [Paragraph(text, style=qstyle)]
 
+
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
                                docutils.nodes.doctest_block):
+
     def gather_elements(self, client, node, style):
         if node['classes']:
             style = client.styles.combinedStyle(['code'] + node['classes'])
@@ -726,6 +769,7 @@ class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
 
 
 class HandleFigure(NodeHandler, docutils.nodes.figure):
+
     def gather_elements(self, client, node, style):
 
         # Either use the figure style or the class
@@ -762,15 +806,18 @@ class HandleCaption(NodeHandler, docutils.nodes.caption):
         return [Paragraph(client.gather_pdftext(node),
                                 style=client.styles['figure-caption'])]
 
+
 class HandleLegend(NodeHandler, docutils.nodes.legend):
     def gather_elements(self, client, node, style):
         return client.gather_elements(node,
             style=client.styles['figure-legend'])
 
+
 class HandleSidebar(NodeHandler, docutils.nodes.sidebar):
     def gather_elements(self, client, node, style):
         return [BoxedContainer(client.gather_elements(node, style=None),
                                   client.styles['sidebar'])]
+
 
 class HandleRubric(NodeHandler, docutils.nodes.rubric):
     def gather_elements(self, client, node, style):
@@ -782,9 +829,11 @@ class HandleRubric(NodeHandler, docutils.nodes.rubric):
             return [Paragraph(client.gather_pdftext(node),
                                 client.styles['rubric'])]
 
+
 class HandleCompound(NodeHandler, docutils.nodes.compound):
     # FIXME think if this is even implementable
     pass
+
 
 class HandleContainer(NodeHandler, docutils.nodes.container):
 
@@ -794,9 +843,11 @@ class HandleContainer(NodeHandler, docutils.nodes.container):
             return NodeHandler.getelements(self, client, node, style)
         return self.gather_elements(client, node, style)
 
+
 class HandleSubstitutionDefinition(NodeHandler, docutils.nodes.substitution_definition):
     def gather_elements(self, client, node, style):
         return []
+
 
 class HandleTBody(NodeHandler, docutils.nodes.tbody):
     def gather_elements(self, client, node, style):
@@ -809,6 +860,7 @@ class HandleTBody(NodeHandler, docutils.nodes.tbody):
         t_style = TableStyle(client.styles['table'].commands)
         colWidths = client.styles['table'].colWidths
         return [DelayedTable(t, style=t_style, colWidths=colWidths)]
+
 
 class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                                   docutils.nodes.citation):
@@ -866,12 +918,15 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
             node.elements = []
         return node.elements
 
+
 class HandleLabel(NodeHandler, docutils.nodes.label):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node), style)]
 
+
 class HandleEntry(NodeHandler, docutils.nodes.entry):
     pass
+
 
 class HandleRaw(NodeHandler, docutils.nodes.raw):
     def gather_elements(self, client, node, style):
@@ -914,12 +969,14 @@ class HandleOddEven (NodeHandler, OddEvenNode):
 
         return [OddEven(odd=odd, even=even)]
 
+
 class HandleAanode(NodeHandler, Aanode):
     def gather_elements(self, client, node, style):
         style_options = {
             'font': client.styles['aafigure'].fontName,
             }
         return [node.gen_flowable(style_options)]
+
 
 class HandleAdmonition(NodeHandler, docutils.nodes.attention,
                 docutils.nodes.caution, docutils.nodes.danger,

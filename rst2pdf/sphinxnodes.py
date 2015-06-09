@@ -6,7 +6,7 @@
 
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 This module contains sphinx-specific node handlers.  An import
 of this module will apparently fail if sphinx.roles hasn't been
 imported.
@@ -16,12 +16,12 @@ which is kept separate from the regular one.
 
 When the SphinxHandler class is instantiated, the two dictionaries
 are combined into the instantiated object.
-'''
+"""
 
 from copy import copy
 
 from .log import nodeid, log
-from .flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
+from .flowables import MySpacer, MyIndenter, Reference, DelayedTable, Table
 from .image import MyImage, VectorPdf
 
 from .opt_imports import Paragraph, sphinx
@@ -33,6 +33,7 @@ import sphinx
 import docutils
 
 ################## NodeHandler subclasses ###################
+
 
 class SphinxHandler(NodeHandler):
     sphinxmode = True
@@ -56,6 +57,7 @@ class SphinxHandler(NodeHandler):
 class SphinxFont(SphinxHandler, FontHandler):
     pass
 
+
 class HandleSphinxDefaults(SphinxHandler, sphinx.addnodes.glossary,
                                         sphinx.addnodes.start_of_file,
                                         sphinx.addnodes.compact_paragraph,
@@ -69,25 +71,33 @@ class SphinxListHandler(SphinxHandler):
             t = t[1:]
         return t
 
+
 class HandleSphinxDescAddname(SphinxFont, sphinx.addnodes.desc_addname):
     fontstyle = "descclassname"
 
+
 class HandleSphinxDescName(SphinxFont, sphinx.addnodes.desc_name):
     fontstyle = "descname"
+
 
 class HandleSphinxDescReturn(SphinxFont, sphinx.addnodes.desc_returns):
     def get_font_prefix(self, client, node, replaceEnt):
         return ' &rarr; ' + client.styleToFont("returns")
 
+
 class HandleSphinxDescType(SphinxFont, sphinx.addnodes.desc_type):
     fontstyle = "desctype"
+
 
 class HandleSphinxDescParamList(SphinxListHandler, sphinx.addnodes.desc_parameterlist):
     pre = ' ('
     post = ')'
 
+
 class HandleSphinxDescParam(SphinxFont, sphinx.addnodes.desc_parameter):
+
     fontstyle = "descparameter"
+
     def get_pre_post(self, client, node, replaceEnt):
         pre, post = FontHandler.get_pre_post(self, client, node, replaceEnt)
         if node.hasattr('noemph'):
@@ -97,16 +107,22 @@ class HandleSphinxDescParam(SphinxFont, sphinx.addnodes.desc_parameter):
             post += '</i>'
         return pre, post
 
+
 class HandleSphinxDescOpt(SphinxListHandler, SphinxFont, sphinx.addnodes.desc_optional):
+
     fontstyle = "optional"
+
     def get_pre_post(self, client, node, replaceEnt):
         prepost = FontHandler.get_pre_post(self, client, node, replaceEnt)
         return '%s[%s, ' % prepost, '%s]%s' % prepost
 
+
 class HandleDescAnnotation(SphinxHandler, HandleEmphasis, sphinx.addnodes.desc_annotation):
     pass
 
+
 class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
+
     def gather_elements(self, client, node, style):
         try:
             for entry in node['entries']:
@@ -117,18 +133,16 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
                     node['entries'], nodeid(node))
         return []
 
-if sphinx.__version__ < '1.0':
-    class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
-        def gather_elements(self, client, node, style):
-            return [Reference('module-' + node['modname'])]
 
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
+
 
 class HandleSphinxCentered(SphinxHandler, sphinx.addnodes.centered):
     def gather_elements(self, client, node, style):
         return [Paragraph(client.gather_pdftext(node),
                 client.styles['centered'])]
+
 
 class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
@@ -138,6 +152,7 @@ class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
             st.spaceBefore = 0
         pre = [MySpacer(0, client.styles['desc'].spaceBefore)]
         return pre + client.gather_elements(node, st)
+
 
 class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
     def gather_elements(self, client, node, style):
@@ -151,11 +166,13 @@ class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
                 client.targets.append(i)
         return [Paragraph(pre + client.gather_pdftext(node), style)]
 
+
 class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
     def gather_elements(self, client, node, style):
         return [MyIndenter(left=10)] + \
                 client.gather_elements(node, client.styles["definition"]) + \
                 [MyIndenter(left=-10)]
+
 
 class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
     def gather_elements(self, client, node, style):
@@ -176,10 +193,13 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
 
 from sphinx.ext import mathbase
 
+
 class HandleHighlightLang(SphinxHandler, sphinx.addnodes.highlightlang):
     pass
 
+
 class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
+
     def gather_elements(self, client, node, style):
         mflow = math_flowable.Math(node.get('latex', ''), node.get('label', None))
         n = node['number']
@@ -197,16 +217,19 @@ class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
         return '<img src="%s" width=%f height=%f valign=%f/>' % (
             img, w, h, -descent)
 
+
 class HandleSphinxEq(SphinxHandler, mathbase.eqref):
 
     def get_text(self, client, node, replaceEnt):
         return '<a href="equation-%s" color="%s">%s</a>' % (node['target'],
             client.styles.linkColor, node.astext())
 
+
 graphviz_warn = False
 
 try:
     x = sphinx.ext.graphviz.graphviz
+
     class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
         def gather_elements(self, client, node, style):
             # Based on the graphviz extension
@@ -233,10 +256,10 @@ try:
                 log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'], client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]
+
 except AttributeError:
     # Probably the graphviz extension is not enabled
     pass
-
 
 
 sphinxhandlers = SphinxHandler()

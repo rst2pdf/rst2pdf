@@ -5,21 +5,51 @@
 # $Revision$
 
 import shlex
+from xml.dom import Node
 
-from .flowables import *
-import rst2pdf.flowables
-from .styles import adjustUnits
-from .log import log, nodeid
+from reportlab.lib.colors import (
+    Color,
+    toColor,
+)
+
+from rst2pdf.flowables import (  # our own reportlab flowables
+    MyPageBreak,
+    MySpacer,
+    PageCounter,
+    Transition,
+)
+from rst2pdf.styles import adjustUnits
+from rst2pdf.log import log, nodeid
+
+
+HAS_XHTML2PDF = True
+try:
+    from xhtml2pdf.util import COLOR_BY_NAME
+    from xhtml2pdf.util import memoized
+    from xhtml2pdf.context import pisaContext
+    from xhtml2pdf.parser import pisaGetAttributes
+    from xhtml2pdf.document import pisaStory
+    import xhtml2pdf.parser as pisa_parser
+except ImportError:
+    try:
+        from sx.pisa3.pisa_util import COLOR_BY_NAME
+        memoized = lambda *a: a
+        from sx.pisa3.pisa_context import pisaContext
+        from sx.pisa3.pisa_parser import pisaGetAttributes
+        from sx.pisa3.pisa_document import pisaStory
+        import sx.pisa3.pisa_parser as pisa_parser
+    except ImportError:
+        HAS_XHTML2PDF = False
+
 
 def parseRaw(data, node):
-    """Parse and process a simple DSL to handle creation of flowables.
+    """
+    Parse and process a simple DSL to handle creation of flowables.
 
     Supported (can add others on request):
 
-    * PageBreak
-
-    * Spacer width, height
-
+      * PageBreak
+      * Spacer width, height
     """
     elements = []
     lines = data.splitlines()
@@ -45,59 +75,27 @@ def parseRaw(data, node):
                 elements.append(MyPageBreak(breakTo='odd'))
             else:
                 elements.append(MyPageBreak(tokens[1], breakTo='odd'))
-        elif command == 'FrameBreak':
-            if len(tokens) == 1:
-                elements.append(CondPageBreak(99999))
-            else:
-                elements.append(CondPageBreak(float(tokens[1])))
+        # TODO: Where does CondPageBreak come from?
+        # elif command == 'FrameBreak':
+        #     if len(tokens) == 1:
+        #         elements.append(CondPageBreak(99999))
+        #     else:
+        #         elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
             elements.append(MySpacer(adjustUnits(tokens[1]),
-                adjustUnits(tokens[2])))
+                                     adjustUnits(tokens[2])))
         elif command == 'Transition':
             elements.append(Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
-            elements.append(flowables.PageCounter(*tokens[1:]))
+            elements.append(PageCounter(*tokens[1:]))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements
-
-from reportlab.lib.colors import Color, CMYKColor, getAllNamedColors, toColor, \
-    HexColor
-
-HAS_XHTML2PDF = True
-try:
-    from xhtml2pdf.util import COLOR_BY_NAME
-    from xhtml2pdf.util import memoized
-    from xhtml2pdf.context import pisaContext
-    from xhtml2pdf.default import DEFAULT_CSS
-    from xhtml2pdf.parser import pisaParser, pisaGetAttributes
-    from xhtml2pdf.document import pisaStory
-    from reportlab.platypus.flowables import Spacer
-    from reportlab.platypus.frames import Frame
-    from xhtml2pdf.xhtml2pdf_reportlab import PmlBaseDoc, PmlPageTemplate
-    from xhtml2pdf.util import pisaTempFile, getBox, pyPdf
-    import xhtml2pdf.parser as pisa_parser
-except ImportError:
-    try:
-        from sx.pisa3.pisa_util import COLOR_BY_NAME
-        memoized = lambda *a: a
-        from sx.pisa3.pisa_context import pisaContext
-        from sx.pisa3.pisa_default import DEFAULT_CSS
-        from sx.pisa3.pisa_parser import pisaParser, pisaGetAttributes
-        from sx.pisa3.pisa_document import pisaStory
-        from reportlab.platypus.flowables import Spacer
-        from reportlab.platypus.frames import Frame
-        from sx.pisa3.pisa_reportlab import PmlBaseDoc, PmlPageTemplate
-        from sx.pisa3.pisa_util import pisaTempFile, getBox, pyPdf
-        import sx.pisa3.pisa_parser as pisa_parser
-    except ImportError:
-        HAS_XHTML2PDF = False
 
 
 if HAS_XHTML2PDF:
 
     COLOR_BY_NAME['initial'] = Color(0, 0, 0)
-
 
     @memoized
     def getColor2(value, default=None):
@@ -124,20 +122,11 @@ if HAS_XHTML2PDF:
             pass
         return toColor(value, default)  # Calling the reportlab function
 
-    # import xhtml2pdf.util
-    # xhtml2pdf.util.getColor = getColor2
-
-    import cgi
-    import logging
-    from xml.dom import Node
-
-
 
     def pisaPreLoop2(node, context, collect=False):
         """
-        Collect all CSS definitions
+        Collect all CSS definitions.
         """
-
         data = ""
         if node.nodeType == Node.TEXT_NODE and collect:
             data = node.data
@@ -391,7 +380,6 @@ if HAS_XHTML2PDF:
     """
 
     def parseHTML(data, node):
-        dest = None
         path = None
         link_callback = None
         debug = 0
@@ -399,7 +387,6 @@ if HAS_XHTML2PDF:
         xhtml = False
         encoding = None
         xml_output = None
-        raise_exception = True
         capacity = 100 * 1024
 
         # Prepare simple context

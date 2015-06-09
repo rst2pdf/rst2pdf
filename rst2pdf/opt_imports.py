@@ -6,10 +6,9 @@
 
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 opt_imports.py contains logic for handling optional imports.
-
-'''
+"""
 
 import os
 
@@ -87,7 +86,7 @@ class LazyImports(object):
 
     def _load_pdfinfo(self):
         try:
-            from pyPdf import pdf
+            from pyPdf2 import pdf
         except ImportError:
             import pdfrw as pdf
         return pdf

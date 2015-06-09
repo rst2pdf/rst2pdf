@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-'''
-Creates a rst2pdf stylesheet for each pygments style.
-'''
 
-import sys
+"""
+Creates a rst2pdf stylesheet for each pygments style.
+"""
+
 import os
 import json
 from pygments.token import STANDARD_TYPES

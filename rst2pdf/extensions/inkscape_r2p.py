@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
 which uses the inkscape program to convert an svg to a PDF, then uses
 the vectorpdf code to process the PDF.
@@ -10,14 +10,19 @@ the vectorpdf code to process the PDF.
 
     The initial version is a proof of concept; uses subprocess in a naive way,
     and doesn't check return from inkscape for errors.
-'''
+"""
 
-import sys, os, tempfile, subprocess
+import os
+import subprocess
+import sys
+import tempfile
+
 from weakref import WeakKeyDictionary
-from rst2pdf.log import log
 
-from rst2pdf.extensions.vectorpdf_r2p import VectorPdf
 import rst2pdf.image
+
+from rst2pdf.log import log
+from rst2pdf.extensions.vectorpdf_r2p import VectorPdf
 
 
 if sys.platform.startswith('win'):
@@ -26,6 +31,7 @@ if sys.platform.startswith('win'):
     progname = os.path.expandvars(r'$PROGRAMFILES\Inkscape\inkscape.exe')
 else:
     progname = 'inkscape'
+
 
 class InkscapeImage(VectorPdf):
 
@@ -83,6 +89,7 @@ class InkscapeImage(VectorPdf):
 
 
 def install(createpdf, options):
-    ''' Monkey-patch our class in to image as a replacement class for SVGImage.
-    '''
+    """
+    Monkey-patch our class in to image as a replacement class for SVGImage.
+    """
     rst2pdf.image.SVGImage = InkscapeImage

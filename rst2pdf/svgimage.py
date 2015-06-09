@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+# TODO: Don't use svg2rlg.  Its unmaintained and outdated.
+
 import os
 
 from reportlab.platypus import Flowable, Paragraph
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-from .log import log
-from .opt_imports import LazyImports
+from rst2pdf.log import log
+from rst2pdf.opt_imports import LazyImports
+
 
 class SVGImage(Flowable):
 
@@ -18,9 +21,8 @@ class SVGImage(Flowable):
         return False
 
     def __init__(self, filename, width=None, height=None, kind='direct',
-                                     mask=None, lazy=True, srcinfo=None):
+                 mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
-        ext = os.path.splitext(filename)[-1]
         self._kind = kind
         # Prefer svg2rlg for SVG, as it works better
         if LazyImports.svg2rlg:
@@ -37,14 +39,16 @@ class SVGImage(Flowable):
                 self.imageHeight = self._h
         else:
             self._mode = None
-            log.error("SVG support not enabled,"
-                " please install svg2rlg.")
+            log.error("SVG support not enabled, please install svg2rlg.")
         self.__ratio = float(self.imageWidth) / self.imageHeight
         if kind in ['direct', 'absolute']:
             self.drawWidth = width or self.imageWidth
             self.drawHeight = height or self.imageHeight
         elif kind in ['bound', 'proportional']:
-            factor = min(float(width) / self.imageWidth, float(height) / self.imageHeight)
+            factor = min(
+                float(width) / self.imageWidth,
+                float(height) / self.imageHeight
+            )
             self.drawWidth = self.imageWidth * factor
             self.drawHeight = self.imageHeight * factor
 
@@ -65,15 +69,3 @@ class SVGImage(Flowable):
         canv.scale(self.drawWidth / self._w, self.drawHeight / self._h)
         self.doc._drawOn(canv)
         canv.restoreState()
-
-if __name__ == "__main__":
-    import sys
-    from reportlab.platypus import SimpleDocTemplate
-    from reportlab.lib.styles import getSampleStyleSheet
-    doc = SimpleDocTemplate('svgtest.pdf')
-    styles = getSampleStyleSheet()
-    style = styles['Normal']
-    Story = [Paragraph("Before the image", style),
-             SVGImage(sys.argv[1]),
-             Paragraph("After the image", style)]
-    doc.build(Story)

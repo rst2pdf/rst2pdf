@@ -5,14 +5,12 @@ import tempfile
 import os
 import re
 
-from reportlab.platypus import *
+from reportlab.platypus import Flowable
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-from .opt_imports import mathtext
-
-
-from .log import log
+from rst2pdf.opt_imports import mathtext
+from rst2pdf.log import log
 
 HAS_MATPLOTLIB = mathtext is not None
 
@@ -21,11 +19,13 @@ if HAS_MATPLOTLIB:
     from matplotlib.colors import ColorConverter
 fonts = {}
 
+
 def enclose(s):
     """Enclose the string in $...$ if needed"""
     if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
         s = "$%s$" % s
     return s
+
 
 class Math(Flowable):
 
@@ -37,18 +37,18 @@ class Math(Flowable):
         if HAS_MATPLOTLIB:
             self.parser = mathtext.MathTextParser("Pdf")
         else:
-            log.error("Math support not available,"
-                " some parts of this document will be rendered incorrectly."
-                " Install matplotlib.")
+            log.error('Math support not available, some parts of this ' +
+                      'document will be rendered incorrectly. Install ' +
+                      'matplotlib.')
         Flowable.__init__(self)
         self.hAlign = 'CENTER'
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
             try:
-                width, height, descent, glyphs, \
-                rects, used_characters = self.parser.parse(
-                    enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
+                width, height, descent, glyphs, rects, used_characters = \
+                    self.parser.parse(enclose(self.s), 72,
+                                      prop=FontProperties(size=self.fontsize))
                 return width, height
             except:
                 pass
@@ -71,11 +71,11 @@ class Math(Flowable):
             canv.saveState()
             canv.translate(x, y)
             try:
-                width, height, descent, glyphs, \
-                rects, used_characters = self.parser.parse(
-                    enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
+                width, height, descent, glyphs, rects, used_characters = \
+                    self.parser.parse(enclose(self.s), 72,
+                                      prop=FontProperties(size=self.fontsize))
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-                    if not fontname in fonts:
+                    if fontname not in fonts:
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
                     canv.setFont(fontname, fontsize)
@@ -108,7 +108,8 @@ class Math(Flowable):
         useful to align it when used inline."""
         if HAS_MATPLOTLIB:
             width, height, descent, glyphs, rects, used_characters = \
-            self.parser.parse(enclose(self.s), 72, prop=FontProperties(size=self.fontsize))
+                self.parser.parse(enclose(self.s), 72,
+                                  prop=FontProperties(size=self.fontsize))
             return descent
         return 0
 
@@ -118,9 +119,7 @@ class Math(Flowable):
         Required so we can put inline math in paragraphs.
         Returns the file name.
         The file is caller's responsability.
-
         """
-
         dpi = 72
         scale = 10
 
@@ -128,22 +127,21 @@ class Math(Flowable):
             import Image
             import ImageFont
             import ImageDraw
-            import ImageColor
         except ImportError:
             from PIL import (
                 Image,
                 ImageFont,
                 ImageDraw,
-                ImageColor,
             )
 
         if not HAS_MATPLOTLIB:
             img = Image.new('RGBA', (120, 120), (255, 255, 255, 0))
         else:
-            width, height, descent, glyphs, \
-            rects, used_characters = self.parser.parse(
-                enclose(self.s), dpi, prop=FontProperties(size=self.fontsize))
-            img = Image.new('RGBA', (int(width * scale), int(height * scale)), (255, 255, 255, 0))
+            width, height, descent, glyphs, rects, used_characters = \
+                self.parser.parse(enclose(self.s), dpi,
+                                  prop=FontProperties(size=self.fontsize))
+            img = Image.new('RGBA', (int(width * scale), int(height * scale)),
+                            (255, 255, 255, 0))
             draw = ImageDraw.Draw(img)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 font = ImageFont.truetype(fontname, int(fontsize * scale))
@@ -153,9 +151,13 @@ class Math(Flowable):
                 # department, that was a numerical solution.
                 col_conv = ColorConverter()
                 fc = col_conv.to_rgb(self.color)
-                rgb_color = (int(fc[0] * 255), int(fc[1] * 255), int(fc[2] * 255))
+                rgb_color = (
+                    int(fc[0] * 255),
+                    int(fc[1] * 255),
+                    int(fc[2] * 255)
+                )
                 draw.text((ox * scale, (height - oy - fontsize + 4) * scale),
-                           chr(num), font=font, fill=rgb_color)
+                          chr(num), font=font, fill=rgb_color)
             for ox, oy, w, h in rects:
                 x1 = ox * scale
                 x2 = x1 + w * scale
@@ -167,10 +169,3 @@ class Math(Flowable):
         os.close(fh)
         img.save(fn)
         return fn
-
-
-if __name__ == "__main__":
-    doc = SimpleDocTemplate("mathtest.pdf")
-    Story = [Math(r'\mathcal{R}\prod_{i=\alpha\mathcal{B}}'\
-                  r'^\infty a_i\sin(2 \pi f x_i)')]
-    doc.build(Story)

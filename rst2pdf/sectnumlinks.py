@@ -1,5 +1,6 @@
 import docutils
 
+
 class SectNumFolder(docutils.nodes.SparseNodeVisitor):
     def __init__(self, document):
         docutils.nodes.SparseNodeVisitor.__init__(self, document)
@@ -8,6 +9,7 @@ class SectNumFolder(docutils.nodes.SparseNodeVisitor):
     def visit_generated(self, node):
         for i in node.parent.parent['ids']:
             self.sectnums[i] = node.parent.astext().replace('\xa0\xa0\xa0', ' ')
+
 
 class SectRefExpander(docutils.nodes.SparseNodeVisitor):
     def __init__(self, document, sectnums):

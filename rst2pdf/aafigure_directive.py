@@ -25,24 +25,27 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+"""
+Docutils directive and element for ASCII-art graphics
+"""
+
 from docutils.nodes import Element, literal_block
-from docutils.parsers.rst import directives
+from docutils.parsers.rst import directives, Directive
 from reportlab.graphics import renderPDF
-from docutils.parsers import rst
-from .opt_imports import aafigure
-from .log import log
 
-
-WARNED = False
+from rst2pdf.opt_imports import aafigure
+from rst2pdf.log import log
 
 
 class Aanode(Element):
+
     children = ()
 
-    def __init__(self, content, options, rawsource='', *children, **attributes):
+    def __init__(self, content, options, rawsource='',
+                 *children, **attributes):
         self.content = content
         self.options = options
-        Element.__init__(self, rawsource, *children, **attributes)
+        super().__init__(rawsource, *children, **attributes)
 
     def copy(self, **attributes):
         return Aanode(self.content, self.options, **self.attributes)
@@ -54,11 +57,12 @@ class Aanode(Element):
         visitor = aafigure.process(
             '\n'.join(self.content),
             aafigure.pdf.PDFOutputVisitor,
-            options=options)
+            options=options
+        )
         return renderPDF.GraphicsFlowable(visitor.drawing)
 
 
-class Aafig(rst.Directive):
+class Aafig(Directive):
 
     """
     Directive to insert an ASCII art figure to be rendered by aafigure.
@@ -80,17 +84,20 @@ class Aafig(rst.Directive):
         proportional=directives.flag,
     )
 
+    # Flag to prevent multiple warnings
+    _WARNED = False
+
     def run(self):
-        global WARNED
         if 'textual' in self.options:
             self.options['textual'] = True
         if 'proportional' in self.options:
             self.options['proportional'] = True
         if aafigure is not None:
             return [Aanode(self.content, self.options)]
-        if not WARNED:
-            log.error('To render the aafigure directive correctly, please install aafigure')
-            WARNED = True
+        if not self.__class__._WARNED:
+            log.error('To render the aafigure directive correctly, ' +
+                      'please install aafigure')
+            self.__class__._WARNED = True
         return [literal_block(text='\n'.join(self.content))]
 
 

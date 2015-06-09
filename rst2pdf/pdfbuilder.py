@@ -1,62 +1,59 @@
 # -*- coding: utf-8 -*-
 """
-      Sphinx rst2pdf builder extension
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sphinx rst2pdf builder extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      Usage:
-      1. In conf.py add 'rst2pdf.pdfbuilder' element to 'extensions' list:
-         extensions = ['rst2pdf.pdfbuilder']
-      2. Modify your Makefile or run it with:
-         $ sphinx-build -d_build/doctrees -bpdf . _build/pdf
+Usage:
 
-    :copyright: Copyright 2009 Roberto Alsina, Wojtek Walczak
-    :license: BSD, see LICENSE for details.
+  1. In conf.py add 'rst2pdf.pdfbuilder' element to 'extensions' list:
+     extensions = ['rst2pdf.pdfbuilder']
+  2. Modify your Makefile or run it with:
+     $ sphinx-build -d_build/doctrees -bpdf . _build/pdf
+
+:copyright: Copyright 2009 Roberto Alsina, Wojtek Walczak
+:license: BSD, see LICENSE for details.
 """
 
-import logging
 try:
     import parser
 except ImportError:
     # parser is not available on Jython
     parser = None
+
+import copy
+import io
+import logging
+import os
+import os.path
 import re
 import sys
-import os
-from os import path
-from os.path import abspath, dirname, expanduser, join
-from pprint import pprint
-from copy import copy, deepcopy
-from xml.sax.saxutils import unescape, escape
+
 from traceback import print_exc
-from io import StringIO
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urlunparse
 
-from pygments.lexers import get_lexer_by_name, guess_lexer
+from pygments.lexers import guess_lexer
 
-from docutils import writers
-from docutils import nodes
-from docutils import languages
-from docutils.transforms.parts import Contents
-from docutils.io import FileOutput
 import docutils.core
 
-import sphinx
+from docutils import nodes
+from docutils import writers
+from docutils.io import FileOutput
+from docutils.transforms.parts import Contents
+
 from sphinx import addnodes
 from sphinx.builders import Builder
-from sphinx.util.console import darkgreen, red
-from sphinx.util import SEP
-from sphinx.util import ustrftime, texescape
 from sphinx.environment import NoUri
-from sphinx.locale import admonitionlabels, versionlabels
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
+from sphinx.locale import versionlabels, _
+from sphinx.util import SEP, ustrftime, texescape
+from sphinx.util.console import darkgreen, red
 
-from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
+from rst2pdf import createpdf, pygments_code_block_directive
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
 
 class PDFBuilder(Builder):
+
     name = 'pdf'
     out_suffix = '.pdf'
 
@@ -65,7 +62,6 @@ class PDFBuilder(Builder):
         self.document_data = []
 
     def write(self, *ignored):
-
         self.init_document_data()
 
         if self.config.pdf_verbosity > 1:
@@ -90,37 +86,43 @@ class PDFBuilder(Builder):
 
                 self.page_template = opts.get('pdf_page_template', self.config.pdf_page_template)
 
-                docwriter = PDFWriter(self,
-                                stylesheets=opts.get('pdf_stylesheets', self.config.pdf_stylesheets),
-                                language=opts.get('pdf_language', self.config.pdf_language),
-                                breaklevel=opts.get('pdf_break_level', self.config.pdf_break_level),
-                                breakside=opts.get('pdf_breakside', self.config.pdf_breakside),
-                                fontpath=opts.get('pdf_font_path', self.config.pdf_font_path),
-                                fitmode=opts.get('pdf_fit_mode', self.config.pdf_fit_mode),
-                                compressed=opts.get('pdf_compressed', self.config.pdf_compressed),
-                                inline_footnotes=opts.get('pdf_inline_footnotes', self.config.pdf_inline_footnotes),
-                                splittables=opts.get('pdf_splittables', self.config.pdf_splittables),
-                                default_dpi=opts.get('pdf_default_dpi', self.config.pdf_default_dpi),
-                                page_template=self.page_template,
-                                invariant=opts.get('pdf_invariant', self.config.pdf_invariant),
-                                real_footnotes=opts.get('pdf_real_footnotes', self.config.pdf_real_footnotes),
-                                use_toc=opts.get('pdf_use_toc', self.config.pdf_use_toc),
-                                toc_depth=opts.get('pdf_toc_depth', self.config.pdf_toc_depth),
-                                use_coverpage=opts.get('pdf_use_coverpage', self.config.pdf_use_coverpage),
-                                use_numbered_links=opts.get('pdf_use_numbered_links', self.config.pdf_use_numbered_links),
-                                fit_background_mode=opts.get('pdf_fit_background_mode', self.config.pdf_fit_background_mode),
-                                baseurl=opts.get('pdf_baseurl', self.config.pdf_baseurl),
-                                section_header_depth=opts.get('section_header_depth', self.config.section_header_depth),
-                                srcdir=self.srcdir,
-                                style_path=opts.get('pdf_style_path', self.config.pdf_style_path),
-                                config=self.config,
-                                )
+                docwriter = PDFWriter(
+                    self,
+                    stylesheets=opts.get('pdf_stylesheets', self.config.pdf_stylesheets),
+                    language=opts.get('pdf_language', self.config.pdf_language),
+                    breaklevel=opts.get('pdf_break_level', self.config.pdf_break_level),
+                    breakside=opts.get('pdf_breakside', self.config.pdf_breakside),
+                    fontpath=opts.get('pdf_font_path', self.config.pdf_font_path),
+                    fitmode=opts.get('pdf_fit_mode', self.config.pdf_fit_mode),
+                    compressed=opts.get('pdf_compressed', self.config.pdf_compressed),
+                    inline_footnotes=opts.get('pdf_inline_footnotes', self.config.pdf_inline_footnotes),
+                    splittables=opts.get('pdf_splittables', self.config.pdf_splittables),
+                    default_dpi=opts.get('pdf_default_dpi', self.config.pdf_default_dpi),
+                    page_template=self.page_template,
+                    invariant=opts.get('pdf_invariant', self.config.pdf_invariant),
+                    real_footnotes=opts.get('pdf_real_footnotes', self.config.pdf_real_footnotes),
+                    use_toc=opts.get('pdf_use_toc', self.config.pdf_use_toc),
+                    toc_depth=opts.get('pdf_toc_depth', self.config.pdf_toc_depth),
+                    use_coverpage=opts.get('pdf_use_coverpage', self.config.pdf_use_coverpage),
+                    use_numbered_links=opts.get('pdf_use_numbered_links', self.config.pdf_use_numbered_links),
+                    fit_background_mode=opts.get('pdf_fit_background_mode', self.config.pdf_fit_background_mode),
+                    baseurl=opts.get('pdf_baseurl', self.config.pdf_baseurl),
+                    section_header_depth=opts.get('section_header_depth', self.config.section_header_depth),
+                    srcdir=self.srcdir,
+                    style_path=opts.get('pdf_style_path', self.config.pdf_style_path),
+                    config=self.config,
+                )
 
-                tgt_file = path.join(self.outdir, targetname + self.out_suffix)
+                tgt_file = os.path.join(self.outdir, targetname + self.out_suffix)
                 with open(tgt_file, 'w') as f:
                     destination = FileOutput(destination=f, encoding='utf-8')
-                    doctree = self.assemble_doctree(docname, title, author,
-                        appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
+                    doctree = self.assemble_doctree(
+                        docname,
+                        title,
+                        author,
+                        appendices=opts.get('pdf_appendices',
+                                            self.config.pdf_appendices) or []
+                    )
                     doctree.settings.author = author
                     doctree.settings.title = title
                     self.info("done")
@@ -135,7 +137,7 @@ class PDFBuilder(Builder):
     def init_document_data(self):
         preliminary_document_data = list(map(list, self.config.pdf_documents))
         if not preliminary_document_data:
-            self.warn('no "pdf_documents" config value found; no documents '
+            self.warn('no "pdf_documents" config value found; no documents ' +
                       'will be written')
             return
         # assign subdirs to titles
@@ -143,7 +145,7 @@ class PDFBuilder(Builder):
         for entry in preliminary_document_data:
             docname = entry[0]
             if docname not in self.env.all_docs:
-                self.warn('"pdf_documents" config value references unknown '
+                self.warn('"pdf_documents" config value references unknown ' +
                           'document %s' % docname)
                 continue
             self.document_data.append(entry)
@@ -152,10 +154,8 @@ class PDFBuilder(Builder):
             self.titles.append((docname, entry[2]))
 
     def assemble_doctree(self, docname, title, author, appendices):
-
         # FIXME: use the new inline_all_trees from Sphinx.
         # check how the LaTeX builder does it.
-
         self.docnames = set([docname])
         self.info(darkgreen(docname) + " ", nonl=1)
         def process_tree(docname, tree):
@@ -195,7 +195,7 @@ class PDFBuilder(Builder):
             # So, we preserve a copy, use just what we need, then
             # restore it.
             # from pudb import set_trace; set_trace()
-            t = copy(self.env.indexentries)
+            t = copy.copy(self.env.indexentries)
             try:
                 self.env.indexentries = {docname:self.env.indexentries[docname + '-gen']}
             except KeyError:
@@ -278,7 +278,6 @@ class PDFBuilder(Builder):
             dt = docutils.core.publish_doctree('\n'.join(output))[1:]
             dt.insert(0, nodes.raw(text='OddPageBreak twoColumn', format='pdf'))
             tree.extend(dt)
-
 
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s' % self.page_template, format='pdf'))
@@ -364,16 +363,17 @@ class PDFBuilder(Builder):
                 continue
             targetname = self.env.doc2path(docname, self.outdir, self.out_suffix)
             try:
-                targetmtime = path.getmtime(targetname)
+                targetmtime = os.path.getmtime(targetname)
             except Exception:
                 targetmtime = 0
             try:
-                srcmtime = path.getmtime(self.env.doc2path(docname))
+                srcmtime = os.path.getmtime(self.env.doc2path(docname))
                 if srcmtime > targetmtime:
                     yield docname
             except EnvironmentError:
                 # source doesn't exist anymore
                 pass
+
 
 def genindex_nodes(genindexentries):
     indexlabel = _('Index')
@@ -401,8 +401,6 @@ def genindex_nodes(genindexentries):
                     else:
                         output.append(subentryname)
                         output.append('')
-
-
     doctree = docutils.core.publish_doctree('\n'.join(output))
     return doctree[1]
 
@@ -460,31 +458,37 @@ class PDFContents(Contents):
 
 
 class PDFWriter(writers.Writer):
+
+    supported = ('pdf')
+    config_section = 'pdf writer'
+    config_section_dependencies = ('writers',)
+
     def __init__(self,
-                builder,
-                stylesheets,
-                language,
-                breaklevel=0,
-                breakside='any',
-                fontpath=[],
-                fitmode='shrink',
-                compressed=False,
-                inline_footnotes=False,
-                splittables=True,
-                srcdir='.',
-                default_dpi=300,
-                page_template='cutePage',
-                invariant=False,
-                real_footnotes=False,
-                use_toc=True,
-                use_coverpage=True,
-                toc_depth=9999,
-                use_numbered_links=False,
-                fit_background_mode="scale",
-                section_header_depth=2,
-                baseurl=urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']),
-                style_path=None,
-                config={}):
+                 builder,
+                 stylesheets,
+                 language,
+                 breaklevel=0,
+                 breakside='any',
+                 fontpath=[],
+                 fitmode='shrink',
+                 compressed=False,
+                 inline_footnotes=False,
+                 splittables=True,
+                 srcdir='.',
+                 default_dpi=300,
+                 page_template='cutePage',
+                 invariant=False,
+                 real_footnotes=False,
+                 use_toc=True,
+                 use_coverpage=True,
+                 toc_depth=9999,
+                 use_numbered_links=False,
+                 fit_background_mode="scale",
+                 section_header_depth=2,
+                 baseurl=urlunparse(['file', os.getcwd() + os.sep,
+                                    '', '', '', '']),
+                 style_path=None,
+                 config={}):
         writers.Writer.__init__(self)
         self.builder = builder
         self.output = ''
@@ -512,18 +516,13 @@ class PDFWriter(writers.Writer):
         self.section_header_depth = section_header_depth
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
         if style_path:
             self.style_path = style_path
         else:
             self.style_path = [self.srcdir]
-
-
-    supported = ('pdf')
-    config_section = 'pdf writer'
-    config_section_dependencies = ('writers',)
 
     def translate(self):
         visitor = PDFTranslator(self.document, self.builder)
@@ -593,33 +592,36 @@ class PDFWriter(writers.Writer):
             cover_tree = docutils.core.publish_doctree(cover_text)
             self.document.insert(0, cover_tree)
 
-        sio = StringIO()
+        sio = io.StringIO()
 
         if self.invariant:
             createpdf.patch_PDFDate()
             createpdf.patch_digester()
 
-        createpdf.RstToPdf(sphinx=True,
-                 stylesheets=self.stylesheets,
-                 language=self.__language,
-                 breaklevel=self.breaklevel,
-                 breakside=self.breakside,
-                 fit_mode=self.fitmode,
-                 font_path=self.fontpath,
-                 inline_footnotes=self.inline_footnotes,
-                 highlightlang=self.highlightlang,
-                 splittables=self.splittables,
-                 style_path=self.style_path,
-                 basedir=self.srcdir,
-                 def_dpi=self.default_dpi,
-                 real_footnotes=self.real_footnotes,
-                 numbered_links=self.use_numbered_links,
-                 background_fit_mode=self.fit_background_mode,
-                 baseurl=self.baseurl,
-                 section_header_depth=self.section_header_depth
-                ).createPdf(doctree=self.document,
-                    output=sio,
-                    compressed=self.compressed)
+        createpdf.RstToPdf(
+            sphinx=True,
+            stylesheets=self.stylesheets,
+            language=self.__language,
+            breaklevel=self.breaklevel,
+            breakside=self.breakside,
+            fit_mode=self.fitmode,
+            font_path=self.fontpath,
+            inline_footnotes=self.inline_footnotes,
+            highlightlang=self.highlightlang,
+            splittables=self.splittables,
+            style_path=self.style_path,
+            basedir=self.srcdir,
+            default_dpi=self.default_dpi,
+            real_footnotes=self.real_footnotes,
+            numbered_links=self.use_numbered_links,
+            background_fit_mode=self.fit_background_mode,
+            baseurl=self.baseurl,
+            section_header_depth=self.section_header_depth
+        ).createPdf(
+            doctree=self.document,
+            output=sio,
+            compressed=self.compressed
+        )
         self.output = sio.getvalue()
 
     def supports(self, format):
@@ -628,6 +630,7 @@ class PDFWriter(writers.Writer):
 
 
 class PDFTranslator(nodes.SparseNodeVisitor):
+
     def __init__(self, document, builder):
         nodes.NodeVisitor.__init__(self, document)
         self.builder = builder
@@ -693,16 +696,16 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             replacement = nodes.literal_block()
             replacement.children = \
                 pygments_code_block_directive.code_block_directive(
-                                    name=None,
-                                    arguments=[lang],
-                                    options=options,
-                                    content=content,
-                                    lineno=False,
-                                    content_offset=None,
-                                    block_text=None,
-                                    state=None,
-                                    state_machine=None,
-                                    )
+                    name=None,
+                    arguments=[lang],
+                    options=options,
+                    content=content,
+                    lineno=False,
+                    content_offset=None,
+                    block_text=None,
+                    state=None,
+                    state_machine=None,
+                )
             node.parent.replace(node, replacement)
 
     def visit_footnote(self, node):
@@ -756,18 +759,22 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             replacement += nodes.Text('\n')
         node.parent.replace(node, replacement)
         raise nodes.SkipNode
+
     def depart_productionlist(self, node):
         pass
 
     def visit_production(self, node):
         pass
+
     def depart_production(self, node):
         pass
 
     def visit_OddEvenNode(self, node):
         pass
+
     def depart_OddEvenNode(self, node):
         pass
+
 
 # This is copied from sphinx.highlighting
 def lang_for_block(source, lang):
@@ -793,6 +800,7 @@ def lang_for_block(source, lang):
             return None
     else:
         return lang
+
 
 def try_parse(src):
     # Make sure it ends in a newline
@@ -828,15 +836,16 @@ def try_parse(src):
     else:
         return True
 
+
 def init_math(app):
     """
-        This is a dummy math extension.
+    This is a dummy math extension.
 
-        It's a hack, but if you want math in a PDF via pdfbuilder, and don't want to
-        enable pngmath or jsmath, then enable this one.
+    It's a hack, but if you want math in a PDF via pdfbuilder, and don't want
+    to enable pngmath or jsmath, then enable this one.
 
-        :copyright: Copyright 2007-2009 by the Sphinx team, see AUTHORS.
-        :license: BSD, see LICENSE for details.
+    :copyright: Copyright 2007-2009 by the Sphinx team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
     """
     from sphinx.errors import SphinxError
     try:
@@ -851,7 +860,6 @@ def init_math(app):
 
     class MathExtError(SphinxError):
         category = 'Math extension error'
-
 
     def html_visit_math(self, node):
         self.body.append(node['latex'])
@@ -876,7 +884,7 @@ def setup(app):
     app.add_config_value('pdf_compressed', False, None)
     app.add_config_value('pdf_font_path', [], None)
     app.add_config_value('pdf_language', 'en_US', None)
-    app.add_config_value('pdf_fit_mode', '', None),
+    app.add_config_value('pdf_fit_mode', '', None)
     app.add_config_value('pdf_break_level', 0, None)
     app.add_config_value('pdf_inline_footnotes', True, None)
     app.add_config_value('pdf_verbosity', 0, None)
@@ -898,12 +906,13 @@ def setup(app):
     app.add_config_value('pdf_use_numbered_links', False, None)
     app.add_config_value('pdf_fit_background_mode', "scale", None)
     app.add_config_value('section_header_depth', 2, None)
-    app.add_config_value('pdf_baseurl', urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']), None)
+    app.add_config_value('pdf_baseurl', urlunparse(
+        ['file', os.getcwd() + os.sep, '', '', '', '']), None)
 
     author_texescaped = str(app.config.copyright)\
-                               .translate(texescape.tex_escape_map)
+        .translate(texescape.tex_escape_map)
     project_doc_texescaped = str(app.config.project + ' Documentation')\
-                                     .translate(texescape.tex_escape_map)
+        .translate(texescape.tex_escape_map)
     app.config.pdf_documents.append((app.config.master_doc,
                                      app.config.project,
                                      project_doc_texescaped,

@@ -7,30 +7,48 @@
 import copy
 import re
 
+from xml.sax.saxutils import unescape
+
 from reportlab.platypus import (
     Frame,
-    FrameBreak,
     Indenter,
-    PageBreak,
     Spacer,
     Table,
     XPreformatted,
 )
-from reportlab.platypus.doctemplate import *
-from reportlab.lib.enums import *
 
-from .opt_imports import Paragraph
+from reportlab.platypus.doctemplate import (
+    FrameActionFlowable,
+)
 
-from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import cm
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable
 from reportlab.platypus.tableofcontents import TableOfContents
-from reportlab.lib.styles import ParagraphStyle
 
-from . import styles
-from .log import log
+from rst2pdf import styles
+from rst2pdf.log import log
+from rst2pdf.opt_imports import Paragraph
 
-from xml.sax.saxutils import unescape
+
+class PageCounter(Flowable):
+
+    counter = None
+    counterstyle = None
+
+    def __init__(self, number=0, style='arabic'):
+        self.style = str(style).lower()
+        self.number = int(number)
+        Flowable.__init__(self)
+
+    def wrap(self, availWidth, availHeight):
+        PageCounter.counterStyle = self.style
+        PageCounter.counter = self.number
+        return (self.width, self.height)
+
+    def drawOn(self, canvas, x, y, _sW):
+        pass
 
 
 class XXPreformatted(XPreformatted):
@@ -430,67 +448,60 @@ class MySpacer(Spacer):
         return w, self.height
 
 
-class MyPageBreak:
-    pass
-# TODO: FrameActionFlowable is no longer in reportlab. Need to figure out
-#       how to recreate this class.
-#
-# class MyPageBreak(FrameActionFlowable):
-#
-#     def __init__(self, templateName=None, breakTo='any'):
-#         """
-#         templateName switches the page template starting in the
-#         next page.
-#
-#         breakTo can be 'any' 'even' or 'odd'.
-#
-#         'even' will break one page if the current page is odd
-#         or two pages if it's even. That way the next flowable
-#         will be in an even page.
-#
-#         'odd' is the opposite of 'even'
-#
-#         'any' is the default, and means it will always break
-#         only one page.
-#         """
-#
-#         self.templateName = templateName
-#         self.breakTo = breakTo
-#         self.forced = False
-#         self.extraContent = []
-#
-#     def frameAction(self, frame):
-#         frame._generated_content = []
-#         if self.breakTo == 'any':  # Break only once. None if at top of page
-#             if not frame._atTop:
-#                 frame._generated_content.append(SetNextTemplate(self.templateName))
-#                 frame._generated_content.append(PageBreak())
-#         elif self.breakTo == 'odd':  # Break once if on even page, twice
-#                                   # on odd page, none if on top of odd page
-#             if frame._pagenum % 2:  # odd pageNum
-#                 if not frame._atTop:
-#                     # Blank pages get no heading or footer
-#                     frame._generated_content.append(SetNextTemplate(self.templateName))
-#                     frame._generated_content.append(SetNextTemplate('emptyPage'))
-#                     frame._generated_content.append(PageBreak())
-#                     frame._generated_content.append(ResetNextTemplate())
-#                     frame._generated_content.append(PageBreak())
-#             else:  # even
-#                 frame._generated_content.append(SetNextTemplate(self.templateName))
-#                 frame._generated_content.append(PageBreak())
-#         elif self.breakTo == 'even':  # Break once if on odd page, twice
-#                                    # on even page, none if on top of even page
-#             if frame._pagenum % 2:  # odd pageNum
-#                 frame._generated_content.append(SetNextTemplate(self.templateName))
-#                 frame._generated_content.append(PageBreak())
-#             else:  # even
-#                 if not frame._atTop:
-#                     # Blank pages get no heading or footer
-#                     frame._generated_content.append(SetNextTemplate(self.templateName))
-#                     frame._generated_content.append(SetNextTemplate('emptyPage'))
-#                     frame._generated_content.append(PageBreak())
-#                     frame._generated_content.append(ResetNextTemplate())
-#                     frame._generated_content.append(PageBreak())
+class MyPageBreak(FrameActionFlowable):
+
+    def __init__(self, templateName=None, breakTo='any'):
+        """
+        templateName switches the page template starting in the
+        next page.
+
+        breakTo can be 'any' 'even' or 'odd'.
+
+        'even' will break one page if the current page is odd
+        or two pages if it's even. That way the next flowable
+        will be in an even page.
+
+        'odd' is the opposite of 'even'
+
+        'any' is the default, and means it will always break only one page.
+        """
+        self.templateName = templateName
+        self.breakTo = breakTo
+        self.forced = False
+        self.extraContent = []
+
+    def frameAction(self, frame):
+        frame._generated_content = []
+        if self.breakTo == 'any':  # Break only once. None if at top of page
+            if not frame._atTop:
+                frame._generated_content.append(SetNextTemplate(self.templateName))
+                frame._generated_content.append(PageBreak())
+        elif self.breakTo == 'odd':  # Break once if on even page, twice
+                                  # on odd page, none if on top of odd page
+            if frame._pagenum % 2:  # odd pageNum
+                if not frame._atTop:
+                    # Blank pages get no heading or footer
+                    frame._generated_content.append(SetNextTemplate(self.templateName))
+                    frame._generated_content.append(SetNextTemplate('emptyPage'))
+                    frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(ResetNextTemplate())
+                    frame._generated_content.append(PageBreak())
+            else:  # even
+                frame._generated_content.append(SetNextTemplate(self.templateName))
+                frame._generated_content.append(PageBreak())
+        elif self.breakTo == 'even':  # Break once if on odd page, twice
+                                   # on even page, none if on top of even page
+            if frame._pagenum % 2:  # odd pageNum
+                frame._generated_content.append(SetNextTemplate(self.templateName))
+                frame._generated_content.append(PageBreak())
+            else:  # even
+                if not frame._atTop:
+                    # Blank pages get no heading or footer
+                    frame._generated_content.append(SetNextTemplate(self.templateName))
+                    frame._generated_content.append(SetNextTemplate('emptyPage'))
+                    frame._generated_content.append(PageBreak())
+                    frame._generated_content.append(ResetNextTemplate())
+                    frame._generated_content.append(PageBreak())
 
 
 class SetNextTemplate(Flowable):
@@ -621,155 +632,146 @@ class SmartFrame(Frame):
     def __deepcopy__(self, *whatever):
         return copy.copy(self)
 
-class FrameCutter:
-    pass
-# TODO: FrameActionFlowable is no longer in reportlab. Need to figure out
-#       how to recreate this class.
-#
-# class FrameCutter(FrameActionFlowable):
-#
-#     def __init__(self, dx, width, flowable, padding, lpad, floatLeft=True):
-#         self.width = width
-#         self.dx = dx
-#         self.f = flowable
-#         self.padding = padding
-#         self.lpad = lpad
-#         self.floatLeft = floatLeft
-#
-#     def frameAction(self, frame):
-#         idx = frame.container.frames.index(frame)
-#         if self.floatLeft:
-#             # Don't bother inserting a silly thin frame
-#             if self.width - self.padding > 30:
-#                 f1 = SmartFrame(
-#                     frame.container,
-#                     frame._x1 + self.dx - 2 * self.padding,
-#                     frame._y2 - self.f.height - 3 * self.padding,
-#                     self.width + 2 * self.padding,
-#                     self.f.height + 3 * self.padding,
-#                     bottomPadding=0, topPadding=0, leftPadding=self.lpad
-#                 )
-#                 f1._atTop = frame._atTop
-#                 # This is a frame next to a sidebar.
-#                 f1.onSidebar = True
-#                 frame.container.frames.insert(idx + 1, f1)
-#             # Don't add silly thin frame
-#             if frame._height - self.f.height - 2 * self.padding > 30:
-#                 frame.container.frames.insert(idx + 2, SmartFrame(
-#                     frame.container,
-#                     frame._x1,
-#                     frame._y1p,
-#                     self.width + self.dx,
-#                     frame._height - self.f.height - 3 * self.padding,
-#                     topPadding=0
-#                 ))
-#         else:
-#             # Don't bother inserting a silly thin frame
-#             if self.width - self.padding > 30:
-#                 f1 = SmartFrame(
-#                     frame.container,
-#                     frame._x1 - self.width,
-#                     frame._y2 - self.f.height - 2 * self.padding,
-#                     self.width,
-#                     self.f.height + 2 * self.padding,
-#                     bottomPadding=0,
-#                     topPadding=0,
-#                     rightPadding=self.lpad
-#                 )
-#                 f1._atTop = frame._atTop
-#                 # This is a frame next to a sidebar.
-#                 f1.onSidebar = True
-#                 frame.container.frames.insert(idx + 1, f1)
-#             if frame._height - self.f.height - 2 * self.padding > 30:
-#                 frame.container.frames.insert(idx + 2, SmartFrame(
-#                     frame.container,
-#                     frame._x1 - self.width,
-#                     frame._y1p,
-#                     self.width + self.dx,
-#                     frame._height - self.f.height - 2 * self.padding,
-#                     topPadding=0
-#                 ))
 
-class Sidebar:
-    pass
+class FrameCutter(FrameActionFlowable):
 
-# TODO: FrameActionFlowable is no longer in reportlab. Need to figure out
-#       how to recreate this class.
-#
-# class Sidebar(FrameActionFlowable):
-#
-#     def __init__(self, flowables, style):
-#         self.style = style
-#         self.width = self.style.width
-#         self.flowables = flowables
-#
-#     def frameAction(self, frame):
-#         if self.style.float not in ('left', 'right'):
-#             return
-#         if frame.onSidebar:  # We are still on the frame next to a sidebar!
-#             frame._generated_content = [FrameBreak(), self]
-#         else:
-#             w = frame.container.styles.adjustUnits(self.width, frame.width)
-#             idx = frame.container.frames.index(frame)
-#             padding = self.style.borderPadding
-#             width = self.style.width
-#             self.style.padding = frame.container.styles.adjustUnits(
-#                 str(padding), frame.width)
-#             self.style.width = frame.container.styles.adjustUnits(
-#                 str(width), frame.width)
-#             self.kif = BoxedContainer(self.flowables, self.style)
-#             if self.style.float == 'left':
-#                 self.style.lpad = frame.leftPadding
-#                 f1 = SmartFrame(
-#                     frame.container,
-#                     frame._x1,
-#                     frame._y1p,
-#                     w - 2 * self.style.padding,
-#                     frame._y - frame._y1p,
-#                     leftPadding=self.style.lpad,
-#                     rightPadding=0,
-#                     bottomPadding=0,
-#                     topPadding=0
-#                 )
-#                 f1._atTop = frame._atTop
-#                 frame.container.frames.insert(idx + 1, f1)
-#                 frame._generated_content = [
-#                     FrameBreak(),
-#                     self.kif,
-#                     FrameCutter(
-#                         w,
-#                         frame.width - w,
-#                         self.kif,
-#                         padding,
-#                         self.style.lpad,
-#                         True
-#                     ),
-#                     FrameBreak()
-#                 ]
-#             elif self.style.float == 'right':
-#                 self.style.lpad = frame.rightPadding
-#                 frame.container.frames.insert(idx + 1, SmartFrame(
-#                     frame.container,
-#                     frame._x1 + frame.width - self.style.width,
-#                     frame._y1p,
-#                     w, frame._y - frame._y1p,
-#                     rightPadding=self.style.lpad,
-#                     leftPadding=0,
-#                     bottomPadding=0,
-#                     topPadding=0
-#                 ))
-#                 frame._generated_content = [
-#                     FrameBreak(),
-#                     self.kif,
-#                     FrameCutter(w,
-#                         frame.width - w,
-#                         self.kif,
-#                         padding,
-#                         self.style.lpad,
-#                         False),
-#                     FrameBreak()
-#                 ]
-#
+    def __init__(self, dx, width, flowable, padding, lpad, floatLeft=True):
+        self.width = width
+        self.dx = dx
+        self.f = flowable
+        self.padding = padding
+        self.lpad = lpad
+        self.floatLeft = floatLeft
+
+    def frameAction(self, frame):
+        idx = frame.container.frames.index(frame)
+        if self.floatLeft:
+            # Don't bother inserting a silly thin frame
+            if self.width - self.padding > 30:
+                f1 = SmartFrame(
+                    frame.container,
+                    frame._x1 + self.dx - 2 * self.padding,
+                    frame._y2 - self.f.height - 3 * self.padding,
+                    self.width + 2 * self.padding,
+                    self.f.height + 3 * self.padding,
+                    bottomPadding=0, topPadding=0, leftPadding=self.lpad
+                )
+                f1._atTop = frame._atTop
+                # This is a frame next to a sidebar.
+                f1.onSidebar = True
+                frame.container.frames.insert(idx + 1, f1)
+            # Don't add silly thin frame
+            if frame._height - self.f.height - 2 * self.padding > 30:
+                frame.container.frames.insert(idx + 2, SmartFrame(
+                    frame.container,
+                    frame._x1,
+                    frame._y1p,
+                    self.width + self.dx,
+                    frame._height - self.f.height - 3 * self.padding,
+                    topPadding=0
+                ))
+        else:
+            # Don't bother inserting a silly thin frame
+            if self.width - self.padding > 30:
+                f1 = SmartFrame(
+                    frame.container,
+                    frame._x1 - self.width,
+                    frame._y2 - self.f.height - 2 * self.padding,
+                    self.width,
+                    self.f.height + 2 * self.padding,
+                    bottomPadding=0,
+                    topPadding=0,
+                    rightPadding=self.lpad
+                )
+                f1._atTop = frame._atTop
+                # This is a frame next to a sidebar.
+                f1.onSidebar = True
+                frame.container.frames.insert(idx + 1, f1)
+            if frame._height - self.f.height - 2 * self.padding > 30:
+                frame.container.frames.insert(idx + 2, SmartFrame(
+                    frame.container,
+                    frame._x1 - self.width,
+                    frame._y1p,
+                    self.width + self.dx,
+                    frame._height - self.f.height - 2 * self.padding,
+                    topPadding=0
+                ))
+
+
+class Sidebar(FrameActionFlowable):
+
+    def __init__(self, flowables, style):
+        self.style = style
+        self.width = self.style.width
+        self.flowables = flowables
+
+    def frameAction(self, frame):
+        if self.style.float not in ('left', 'right'):
+            return
+        if frame.onSidebar:  # We are still on the frame next to a sidebar!
+            frame._generated_content = [FrameBreak(), self]
+        else:
+            w = frame.container.styles.adjustUnits(self.width, frame.width)
+            idx = frame.container.frames.index(frame)
+            padding = self.style.borderPadding
+            width = self.style.width
+            self.style.padding = frame.container.styles.adjustUnits(
+                str(padding), frame.width)
+            self.style.width = frame.container.styles.adjustUnits(
+                str(width), frame.width)
+            self.kif = BoxedContainer(self.flowables, self.style)
+            if self.style.float == 'left':
+                self.style.lpad = frame.leftPadding
+                f1 = SmartFrame(
+                    frame.container,
+                    frame._x1,
+                    frame._y1p,
+                    w - 2 * self.style.padding,
+                    frame._y - frame._y1p,
+                    leftPadding=self.style.lpad,
+                    rightPadding=0,
+                    bottomPadding=0,
+                    topPadding=0
+                )
+                f1._atTop = frame._atTop
+                frame.container.frames.insert(idx + 1, f1)
+                frame._generated_content = [
+                    FrameBreak(),
+                    self.kif,
+                    FrameCutter(
+                        w,
+                        frame.width - w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        True
+                    ),
+                    FrameBreak()
+                ]
+            elif self.style.float == 'right':
+                self.style.lpad = frame.rightPadding
+                frame.container.frames.insert(idx + 1, SmartFrame(
+                    frame.container,
+                    frame._x1 + frame.width - self.style.width,
+                    frame._y1p,
+                    w, frame._y - frame._y1p,
+                    rightPadding=self.style.lpad,
+                    leftPadding=0,
+                    bottomPadding=0,
+                    topPadding=0
+                ))
+                frame._generated_content = [
+                    FrameBreak(),
+                    self.kif,
+                    FrameCutter(w,
+                        frame.width - w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        False),
+                    FrameBreak()
+                ]
+
 
 class BoundByWidth(Flowable):
 
@@ -825,8 +827,8 @@ class BoundByWidth(Flowable):
                 log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                     self.width, maxWidth, self.identity())
             if self.mode == 'shrink' and not self.scale:
-                self.scale = (maxWidth + self.pad[1] + self.pad[3]) / \
-                    (self.width + self.pad[1] + self.pad[3])
+                self.scale = ((maxWidth + self.pad[1] + self.pad[3]) /
+                              (self.width + self.pad[1] + self.pad[3]))
         else:
             self.scale = 1.0
         self.height *= self.scale

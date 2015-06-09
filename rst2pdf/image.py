@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 
+import copy
+import glob
 import os
-from os.path import abspath, dirname, expanduser, join
 import sys
 import tempfile
-from copy import copy
+import urllib.error
+import urllib.parse
+import urllib.request
+
+from os.path import abspath, dirname
+
 from reportlab.platypus.flowables import Image, Flowable
-from .log import log, nodeid
-from reportlab.lib.units import *
-import glob
-import urllib.request, urllib.parse, urllib.error
+from reportlab.lib.units import cm, inch
 
-from .opt_imports import LazyImports
-
-from .svgimage import SVGImage
+from rst2pdf.log import log, nodeid
+from rst2pdf.opt_imports import LazyImports
+from rst2pdf.svgimage import SVGImage
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
@@ -26,24 +29,28 @@ else:
 
 missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
+
 def defaultimage(filename, width=None, height=None, kind='direct',
-                                        mask="auto", lazy=1, srcinfo=None):
-    ''' We have multiple image backends, including the stock reportlab one.
-        This wrapper around the reportlab one allows us to pass the client
-        RstToPdf object and the uri into all our backends, which they can
-        use or not as necessary.
-    '''
+                 mask="auto", lazy=1, srcinfo=None):
+    """
+    We have multiple image backends, including the stock reportlab one.
+
+    This wrapper around the reportlab one allows us to pass the client
+    RstToPdf object and the uri into all our backends, which they can
+    use or not as necessary.
+    """
     return Image(filename, width, height, kind, mask, lazy)
 
-class MyImage (Flowable):
-    """A Image subclass that can:
 
-    1. Take a 'percentage_of_container' kind,
-       which resizes it on wrap() to use... well, a percentage of the
-       container's width.
+class MyImage(Flowable):
 
-    2. Take vector formats and instantiates the right "backend" flowable
+    """
+    A Image subclass that can:
 
+    1.  Take a 'percentage_of_container' kind, which resizes it on wrap()
+        to use... well, a percentage of thec container's width.
+
+    2.  Take vector formats and instantiates the right "backend" flowable
     """
 
     warned = False
@@ -58,11 +65,12 @@ class MyImage (Flowable):
 
     @staticmethod
     def split_uri(uri):
-        ''' A really minimalistic split -- doesn't cope with http:, etc.
-            HOWEVER, it tries to do so in a fashion that allows a clueless
-            user to have '#' inside his filename without screwing anything
-            up.
-        '''
+        """
+        A really minimalistic split -- doesn't cope with http:, etc.
+
+        HOWEVER, it tries to do so in a fashion that allows a clueless
+        user to have '#' inside his filename without screwing anything up.
+        """
         basename, extra = os.path.splitext(uri)
         extra = extra.split('#', 1) + ['']
         fname = basename + extra[0]
@@ -89,23 +97,24 @@ class MyImage (Flowable):
 
         if kind == 'percentage_of_container':
             self.image = self._backend(self.filename, width, height,
-                'direct', mask, lazy, srcinfo)
+                                       'direct', mask, lazy, srcinfo)
             self.image.drawWidth = width
             self.image.drawHeight = height
             self.__width = width
             self.__height = height
         else:
             self.image = self._backend(self.filename, width, height,
-                kind, mask, lazy, srcinfo)
+                                       kind, mask, lazy, srcinfo)
         self.__ratio = float(self.image.imageWidth) / self.image.imageHeight
         self.__wrappedonce = False
         self.target = target
 
     @classmethod
     def raster(self, filename, client):
-        """Takes a filename and converts it to a raster image
-        reportlab can process"""
-
+        """
+        Takes a filename and converts it to a raster image
+        reportlab can process
+        """
         if not os.path.exists(filename):
             log.error("Missing image file: %s", filename)
             return missing
@@ -118,8 +127,6 @@ class MyImage (Flowable):
             pass
 
         # Last resort: try everything
-
-
         PILImage = LazyImports.PILImage
 
         if PILImage:
@@ -138,7 +145,6 @@ class MyImage (Flowable):
                 pass
 
         # PIL can't or isn't here, so try with Magick
-
         PMImage = LazyImports.PMImage
         if PMImage:
             try:
@@ -187,25 +193,21 @@ class MyImage (Flowable):
         log.error("Couldn't load image [%s]" % filename)
         return missing
 
-
     @classmethod
     def get_backend(self, uri, client):
-        '''Given the filename of an image, returns (fname, backend)
-        where fname is the filename to be used (could be the same as
-        filename, or something different if the image had to be converted
-        or is missing), and backend is an Image class that can handle
-        fname.
+        """
+        Given the filename of an image, return (fname, backend).
 
+        fname is the filename to be used (could be the same as filename,
+        or something different if the image had to be converted or is
+        missing), and backend is an Image class that can handle fname.
 
-        If uri ensd with '.*' then the returned filename will be the best
+        If uri ends with '.*' then the returned filename will be the best
         quality supported at the moment.
 
         That means:  PDF > SVG > anything else
-
-        '''
-
+        """
         backend = defaultimage
-
 
         # Extract all the information from the URI
         filename, extension, options = self.split_uri(uri)
@@ -259,8 +261,9 @@ class MyImage (Flowable):
             elif LazyImports.PMImage or LazyImports.gfx:
                 filename = self.raster(filename, client)
             else:
-                log.warning("Minimal PDF image support "\
-                    "requires PythonMagick or the vectorpdf extension [%s]", filename)
+                log.warning('Minimal PDF image support requires ' +
+                            'PythonMagick or the vectorpdf extension [%s]',
+                            filename)
                 filename = missing
         elif extension != 'jpg' and not LazyImports.PILImage:
             if LazyImports.PMImage:
@@ -268,17 +271,18 @@ class MyImage (Flowable):
                 filename = self.raster(filename, client)
             else:
                 # No way to make this work
-                log.error('To use a %s image you need PIL installed [%s]', extension, filename)
+                log.error('To use a %s image you need PIL installed [%s]',
+                          extension, filename)
                 filename = missing
         return filename, backend
 
-
     @classmethod
     def size_for_node(self, node, client):
-        '''Given a docutils image node, returns the size the image should have
+        """
+        Given a docutils image node, return the size the image should have
         in the PDF document, and what 'kind' of size that is.
-        That involves lots of guesswork'''
-
+        That involves lots of guesswork.
+        """
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http', 'ftp', 'https'):
             uri = os.path.join(client.basedir, uri)
@@ -294,7 +298,6 @@ class MyImage (Flowable):
             imgname = missing
 
         scale = float(node.get('scale', 100)) / 100
-        size_known = False
 
         # Figuring out the size to display of an image is ... annoying.
         # If the user provides a size with a unit, it's simple, adjustUnits
@@ -323,13 +326,12 @@ class MyImage (Flowable):
                 if pdf is None:
                     log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
                     return 0, 0, 'direct'
-                reader = pdf.PdfFileReader(open(imgname, 'r'))
+                reader = pdf.PdfFileReader(open(imgname, 'rb'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]
                 iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px
             iw = iw * xdpi / 72.0
             ih = ih * ydpi / 72.0
-            size_known = True  # Assume size from original PDF is OK
 
         else:
             keeptrying = True
@@ -378,8 +380,8 @@ class MyImage (Flowable):
         if h is None and w is None:  # Nothing specified
             # Guess from iw, ih
             log.debug("Using image %s without specifying size."
-                "Calculating based on image size at %ddpi [%s]",
-                imgname, xdpi, nodeid(node))
+                      "Calculating based on image size at %ddpi [%s]",
+                      imgname, xdpi, nodeid(node))
             w = iw * inch / xdpi
             h = ih * inch / ydpi
         elif w is not None:
@@ -395,7 +397,7 @@ class MyImage (Flowable):
                 # this is what LaTeX does, according to the
                 # docutils mailing list discussion
                 w = client.styles.adjustUnits(w, client.styles.tw,
-                                            default_unit='px')
+                                              default_unit='px')
 
             if h is None:
                 # h is set from w with right aspect ratio
@@ -409,7 +411,7 @@ class MyImage (Flowable):
                 # w is set from h with right aspect ratio
                 w = h * iw / ih
             else:
-                log.error('Setting height as a percentage does **not** work. '\
+                log.error('Setting height as a percentage does **not** work. ' +
                           'ignoring height parameter [%s]', nodeid(node))
                 # Set both from image data
                 w = iw * inch / xdpi
@@ -421,7 +423,7 @@ class MyImage (Flowable):
 
         # And now we have this probably completely bogus size!
         log.info("Image %s size calculated:  %fcm by %fcm [%s]",
-            imgname, w / cm, h / cm, nodeid(node))
+                 imgname, w / cm, h / cm, nodeid(node))
 
         return w, h, kind
 
@@ -434,7 +436,7 @@ class MyImage (Flowable):
     def __deepcopy__(self, *whatever):
         # ImageCore class is not deep copyable.  Stop the copy at this
         # class.  If you remove this, re-test for issue #126.
-        return copy(self)
+        return copy.copy(self)
 
     def wrap(self, availWidth, availHeight):
         if self.__kind == 'percentage_of_container':
@@ -477,12 +479,13 @@ class MyImage (Flowable):
                 offset = _sW / 2.
             elif self.image.hAlign == 'RIGHT':
                 offset = _sW
-            canv.linkURL(self.target,
-                    (
-                    x + offset, y,
+            canv.linkURL(self.target, (
+                    x + offset,
+                    y,
                     x + offset + self.image.drawWidth,
-                    y + self.image.drawHeight),
-                    relative=True,
-                    # thickness = 3,
-                    )
+                    y + self.image.drawHeight
+                ),
+                relative=True,
+                # thickness = 3,
+            )
         return self.image.drawOn(canv, x, y, _sW)

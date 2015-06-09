@@ -49,6 +49,7 @@ def make_pdf_path(pdfpath, paths):
             pdfpath.close()
     return pdfpath
 
+
 class PDFDevice:
 
     has_axial_gradient = 0
@@ -133,7 +134,6 @@ class PDFDevice:
 
     def FillBezierPath(self, path, rect=None):
         self.pdf.drawPath(make_pdf_path(self.pdf.beginPath(), (path,)), 0, 1)
-
 
 
 class PDFGenSaver:
@@ -371,7 +371,6 @@ class PDFGenSaver:
                 self.raster_image(object)
             elif object.is_Bezier or object.is_Rectangle or object.is_Ellipse:
                 self.polybezier(object.Paths(), object.Properties(), object.bounding_rect)
-
 
 
 def save(document, file, filename, options={}):

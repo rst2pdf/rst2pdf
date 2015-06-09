@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
+import codecs
+import tempfile
+
+import docutils
+import reportlab
+
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
 from rst2pdf.image import MyImage
-import docutils
 from rst2pdf.opt_imports import Paragraph
-import reportlab
-import tempfile
-import re
-from xml.sax.saxutils import unescape
-import codecs
+
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
-    '''
+
+    """
     This class will handle title nodes.
 
     It takes a "titletemplate.svg", replaces TITLEGOESHERE with
@@ -20,7 +22,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
 
     Since this class is defined in an extension, it
     effectively replaces rst2pdf.genelements.HandleTitle.
-    '''
+    """
 
     def gather_elements(self, client, node, style):
         # This method is copied from the HandleTitle class
@@ -36,26 +38,25 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
             client.doc_title_clean = node.astext().strip()
         elif isinstance(node.parent, docutils.nodes.topic):
             node.elements = [Paragraph(client.gen_pdftext(node),
-                                        client.styles['topic-title'])]
+                                       client.styles['topic-title'])]
         elif isinstance(node.parent, docutils.nodes.Admonition):
             node.elements = [Paragraph(client.gen_pdftext(node),
-                                        client.styles['admonition-title'])]
+                                       client.styles['admonition-title'])]
         elif isinstance(node.parent, docutils.nodes.table):
             node.elements = [Paragraph(client.gen_pdftext(node),
-                                        client.styles['table-title'])]
+                                       client.styles['table-title'])]
         elif isinstance(node.parent, docutils.nodes.sidebar):
             node.elements = [Paragraph(client.gen_pdftext(node),
-                                        client.styles['sidebar-title'])]
+                                       client.styles['sidebar-title'])]
         else:
             # Section/Subsection/etc.
             text = client.gen_pdftext(node)
             fch = node.children[0]
             if isinstance(fch, docutils.nodes.generated) and \
-                fch['classes'] == ['sectnum']:
+                    fch['classes'] == ['sectnum']:
                 snum = fch.astext()
             else:
                 snum = None
-            key = node.get('refid')
             maxdepth = 4
             if reportlab.Version > '2.1':
                 maxdepth = 6
@@ -78,32 +79,36 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 tfname = tfile.name
                 tfile.write(tdata.replace('TITLEGOESHERE', text).encode('utf-8'))
                 tfile.close()
-
                 # Now tfname contains a SVG with the right title.
                 # Make rst2pdf delete it later.
                 client.to_unlink.append(tfname)
-
-                e = FancyHeading(tfname,
+                e = FancyHeading(
+                    tfname,
                     width=700,
                     height=100,
                     client=client,
                     snum=snum,
                     parent_id=parent_id,
                     text=text,
-                    hstyle=client.styles['heading%d' % min(client.depth, maxdepth)])
-
+                    hstyle=client.styles['heading%d' % min(client.depth,
+                                                           maxdepth)]
+                )
                 node.elements = [e]
 
             if client.depth <= client.breaklevel:
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
 
+
 class FancyHeading(MyImage, Heading):
-    '''This is a cross between the Heading flowable, that adds outline
-    entries so you have a PDF TOC, and MyImage, that draws images'''
+
+    """
+    This is a cross between the Heading flowable, that adds outline
+    entries so you have a PDF TOC, and MyImage, that draws images.
+    """
 
     def __init__(self, *args, **kwargs):
-        # The inicialization is taken from rst2pdf.flowables.Heading
+        # The initialization is taken from rst2pdf.flowables.Heading
         hstyle = kwargs.pop('hstyle')
         level = 0
         text = kwargs.pop('text')
@@ -111,7 +116,7 @@ class FancyHeading(MyImage, Heading):
         self.parent_id = kwargs.pop('parent_id')
         # self.stext =
         Heading.__init__(self, text, hstyle, level=level,
-            parent_id=self.parent_id)
+                         parent_id=self.parent_id)
         # Cleanup title text
         # self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
         # self.stext = self.stext.strip()
@@ -137,8 +142,8 @@ class FancyHeading(MyImage, Heading):
                 canv.sectNum = ""
 
         canv.addOutlineEntry(self.stext.encode('utf-8', 'replace'),
-                                  self.parent_id.encode('utf-8', 'replace'),
-                                  int(self.level), False)
+                             self.parent_id.encode('utf-8', 'replace'),
+                             int(self.level), False)
 
         # And let MyImage do all the drawing
         MyImage.drawOn(self, canv, x, y, _sW)

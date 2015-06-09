@@ -4,7 +4,7 @@
 # $Date$
 # $Revision$
 
-'''
+"""
 This module provides one useful class:  NodeHandler
 
 The NodeHandler class is designed to be subclassed.  Each subclass
@@ -32,53 +32,59 @@ to handle the given docutils node instance.
 If no NodeHandler subclass has been created to handle that particular
 type of docutils node, then default processing will occur and a warning
 will be logged.
-'''
+"""
 
-import types
 import inspect
-from .log import log, nodeid
-from .smartypants import smartyPants
+import types
+
 import docutils.nodes
-from .flowables import BoundByWidth, TocEntry
+# TODO: Use Attrs instead of _str_attr_to_int
+from smartypants import smartypants, _str_attr_to_int
+
+from rst2pdf.flowables import BoundByWidth, TocEntry
+from rst2pdf.log import log, nodeid
 
 
 class MetaHelper(type):
-    ''' MetaHelper is designed to generically enable a few of the benefits of
-        using metaclasses by encapsulating some of the complexity of setting
-        them up.
 
-        If a base class uses MetaHelper (by assigning __metaclass__ = MetaHelper),
-        then that class (and its metaclass inheriting subclasses) can control
-        class creation behavior by defining a couple of helper functions.
+    """
+    MetaHelper is designed to generically enable a few of the benefits of
+    using metaclasses by encapsulating some of the complexity of setting
+    them up.
 
-        1) A base class can define a _classpreinit function.  This function
-           is called during __new__ processing of the class object itself,
-           but only during subclass creation (not when the class defining
-           the _classpreinit is itself created).
+    If a base class uses MetaHelper (by assigning __metaclass__ = MetaHelper),
+    then that class (and its metaclass inheriting subclasses) can control
+    class creation behavior by defining a couple of helper functions.
 
-           The subclass object does not yet exist at the time _classpreinit
-           is called.  _classpreinit accepts all the parameters of the
-           __new__ function for the class itself (not the same as the __new__
-           function for the instantiation of class objects!) and must return
-           a tuple of the same objects.  A typical use of this would be to
-           modify the class bases before class creation.
+    1) A base class can define a _classpreinit function.  This function
+       is called during __new__ processing of the class object itself,
+       but only during subclass creation (not when the class defining
+       the _classpreinit is itself created).
 
-        2) Either a base class or a subclass can define a _classinit() function.
-           This function will be called immediately after the actual class has
-           been created, and can do whatever setup is required for the class.
-           Note that every base class (but not every subclass) which uses
-           MetaHelper MUST define _classinit, even if that definition is None.
+       The subclass object does not yet exist at the time _classpreinit
+       is called.  _classpreinit accepts all the parameters of the
+       __new__ function for the class itself (not the same as the __new__
+       function for the instantiation of class objects!) and must return
+       a tuple of the same objects.  A typical use of this would be to
+       modify the class bases before class creation.
 
-         MetaHelper also places an attribute into each class created with it.
-         _baseclass is set to None if this class has no superclasses which
-         also use MetaHelper, or to the first such MetaHelper-using baseclass.
-         _baseclass can be explicitly set inside the class definition, in
-         which case MetaHelper will not override it.
-    '''
+    2) Either a base class or a subclass can define a _classinit() function.
+       This function will be called immediately after the actual class has
+       been created, and can do whatever setup is required for the class.
+       Note that every base class (but not every subclass) which uses
+       MetaHelper MUST define _classinit, even if that definition is None.
+
+     MetaHelper also places an attribute into each class created with it.
+     _baseclass is set to None if this class has no superclasses which
+     also use MetaHelper, or to the first such MetaHelper-using baseclass.
+     _baseclass can be explicitly set inside the class definition, in
+     which case MetaHelper will not override it.
+    """
+
     def __new__(clstype, name, bases, clsdict):
         # Our base class is the first base in the class definition which
         # uses MetaHelper, or None if no such base exists.
-        base = ([x for x in bases if type(x) is MetaHelper] + [None])[0]
+        base = ([x for x in bases if isinstance(x, MetaHelper)] + [None])[0]
 
         # Only set our base into the class if it has not been explicitly
         # set
@@ -102,18 +108,21 @@ class MetaHelper(type):
 
 
 class NodeHandler(object, metaclass=MetaHelper):
-    ''' NodeHandler classes are used to dispatch
-       to the correct class to handle some node class
-       type, via a dispatchdict in the main class.
-    '''
+
+    """
+    NodeHandler classes are used to dispatch to the correct class to handle
+    some node class type, via a dispatchdict in the main class.
+    """
 
     @classmethod
     def _classpreinit(baseclass, clstype, name, bases, clsdict):
-        # _classpreinit is called before the actual class is built
-        # Perform triage on the class bases to separate actual
-        # inheritable bases from the target docutils node classes
-        # which we want to dispatch for.
+        """
+        This is called before the actual class is built.
 
+        Perform triage on the class bases to separate actual inheritable
+        bases from the target docutils node classes which we want to
+        dispatch for.
+        """
         new_bases = []
         targets = []
         for target in bases:
@@ -124,10 +133,11 @@ class NodeHandler(object, metaclass=MetaHelper):
 
     @classmethod
     def _classinit(cls):
-        # _classinit() is called once the subclass has actually
-        # been created.
+        """
+        This is called once the subclass has actually been created.
 
-        # For the base class, just add a dispatch dictionary
+        For the base class, just add a dispatch dictionary
+        """
         if cls._baseclass is None:
             cls.dispatchdict = {}
             return
@@ -159,7 +169,7 @@ class NodeHandler(object, metaclass=MetaHelper):
         if not cln in self.unkn_node:
             self.unkn_node.add(cln)
             log.warning("Unkn. node (self.%s): %s [%s]",
-                during, cln, nodeid(node))
+                        during, cln, nodeid(node))
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
@@ -172,7 +182,7 @@ class NodeHandler(object, metaclass=MetaHelper):
         try:
             log.debug("%s: %s", handlerinfo, node)
         except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("%s: %r", handlerninfo, node)
+            log.debug("%s: %r", handlerinfo, node)
         log.debug("")
 
         # Dispatch to the first matching class in the MRO
@@ -266,9 +276,13 @@ class NodeHandler(object, metaclass=MetaHelper):
 
     def apply_smartypants(self, text, smarty, node):
         # Try to be clever about when to use smartypants
-        if node.__class__ in (docutils.nodes.paragraph,
-                docutils.nodes.block_quote, docutils.nodes.title):
-            return smartyPants(text, smarty)
+        if isinstance(node, (
+            docutils.nodes.paragraph,
+            docutils.nodes.block_quote,
+            docutils.nodes.title
+        )):
+            smarty = _str_attr_to_int(smarty)
+            return smartypants(text, smarty)
         return text
 
     # End overridable attributes and methods for textdispatch

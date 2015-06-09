@@ -11,10 +11,16 @@ import os
 import sys
 
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont, TTFontFile, TTFError, FF_FORCEBOLD, FF_ITALIC
+from reportlab.pdfbase.ttfonts import (
+    TTFont,
+    TTFontFile,
+    TTFError,
+    FF_FORCEBOLD,
+    FF_ITALIC
+)
 from reportlab.lib.fonts import addMapping
 
-from .log import log
+from rst2pdf.log import log
 
 flist = []
 afmList = []
@@ -28,7 +34,8 @@ Alias = {
     'itc avant garde gothic': 'urw gothic l',
     'palatino': 'urw palladio l',
     'new century schoolbook': 'century schoolbook l',
-    'itc zapf chancery': 'urw chancery l'}
+    'itc zapf chancery': 'urw chancery l'
+}
 
 # Standard PDF fonts, so no need to embed them
 Ignored = ['times', 'itc zapf dingbats', 'symbol', 'helvetica', 'courier']
@@ -43,7 +50,6 @@ def loadFonts():
     """
     Search the system and build lists of available fonts.
     """
-
     if not afmList and not pfbList and not ttfList:
         # Find all ".afm" and ".pfb" files files
         def findFontFiles(_, folder, names):
@@ -60,7 +66,7 @@ def loadFonts():
             os.walk(folder, findFontFiles, None)
 
         for ttf in ttfList:
-            '''Find out how to process these'''
+            #Find out how to process these
             try:
                 font = TTFontFile(ttf)
             except TTFError:
@@ -134,7 +140,8 @@ def loadFonts():
             # So now we have a font we know we can embed.
             fonts[fontName.lower()] = (afm, pfbList[baseName], family)
             fonts[fullName.lower()] = (afm, pfbList[baseName], family)
-            fonts[fullName.lower().replace('italic', 'oblique')] = (afm, pfbList[baseName], family)
+            fonts[fullName.lower().replace('italic', 'oblique')] = \
+                (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
             if family not in families:
@@ -149,6 +156,7 @@ def loadFonts():
             # weights? We get a random one.
             else:
                 families[family][0] = fontName
+
 
 def findFont(fname):
     loadFonts()
@@ -166,8 +174,8 @@ def findFont(fname):
             return None
     return font
 
-def findTTFont(fname):
 
+def findTTFont(fname):
     def get_family(query):
         data = os.popen("fc-match \"%s\"" % query, "r").read()
         for line in data.splitlines():
@@ -215,8 +223,10 @@ def findTTFont(fname):
 
         def get_nt_fname(ftname):
             import winreg as _w
-            fontkey = _w.OpenKey(_w.HKEY_LOCAL_MACHINE,
-                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
+            fontkey = _w.OpenKey(
+                _w.HKEY_LOCAL_MACHINE,
+                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+            )
             fontname = ftname + " (TrueType)"
             try:
                 fname = _w.QueryValueEx(fontkey, fontname)[0]
@@ -227,7 +237,7 @@ def findTTFont(fname):
                 fontdir += "\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
-            except WindowsError as err:
+            except WindowsError:
                 fontkey.Close()
                 return None
 
@@ -253,38 +263,38 @@ def findTTFont(fname):
         variants = [
             get_nt_fname(family) or fontfile,
             get_nt_fname(family + " Bold") or fontfile,
-            get_nt_fname(family + " Italic") or \
+            get_nt_fname(family + " Italic") or
                 get_nt_fname(family + " Oblique") or fontfile,
-            get_nt_fname(family + " Bold Italic") or \
+            get_nt_fname(family + " Bold Italic") or
                 get_nt_fname(family + " Bold Oblique") or fontfile,
         ]
         return variants
 
+
 def autoEmbed(fname):
-    """Given a font name, does a best-effort of embedding
-    said font and its variants.
+    """
+    Given a font name, do a best-effort of embedding the font and its variants.
 
-    Returns a list of the font names it registered with ReportLab.
-
+    Return a list of the font names it registered with ReportLab.
     """
     log.info('Trying to embed %s' % fname)
     fontList = []
     variants = []
-    f = findFont(fname)
-    if f :  # We have this font located
-        if f[0].lower()[-4:] == '.afm':  # Type 1 font
-            family = families[f[2]]
+    font = findFont(fname)
+    if font:  # We have this font located
+        if font[0].lower()[-4:] == '.afm':  # Type 1 font
+            family = families[font[2]]
 
             # Register the whole family of faces
-            faces = [pdfmetrics.EmbeddedType1Face(*fonts[fn.lower()][:2]) for fn in family]
+            faces = [pdfmetrics.EmbeddedType1Face(*fonts[fn.lower()][:2])
+                     for fn in family]
             for face in faces:
                 pdfmetrics.registerTypeFace(face)
 
             for face, name in zip(faces, family):
                 fontList.append(name)
                 font = pdfmetrics.Font(face, name, "WinAnsiEncoding")
-                log.info('Registering font: %s from %s' % \
-                            (face, name))
+                log.info('Registering font: %s from %s' % (face, name))
                 pdfmetrics.registerFont(font)
 
             # Map the variants
@@ -300,7 +310,7 @@ def autoEmbed(fname):
             log.info('Embedding as %s' % fontList)
             return fontList
         else:  # A TTF font
-            variants = [fonts[f.lower()][0] for f in families[f[2]]]
+            variants = [fonts[f.lower()][0] for f in families[font[2]]]
     if not variants:  # Try fc-match
         variants = findTTFont(fname)
     # It is a TT Font and we found it using fc-match (or found *something*)
@@ -310,8 +320,7 @@ def autoEmbed(fname):
             try:
                 if vname not in pdfmetrics._fonts:
                     _font = TTFont(vname, variant)
-                    log.info('Registering font: %s from %s' % \
-                            (vname, variant))
+                    log.info('Registering font: %s from %s' % (vname, variant))
                     pdfmetrics.registerFont(_font)
             except TTFError:
                 log.error('Error registering font: %s from %s' % (vname, variant))
@@ -328,21 +337,28 @@ def autoEmbed(fname):
 
 
 def guessFont(fname):
-    """Given a font name like "Tahoma-BoldOblique", "Bitstream Charter Italic"
-    or "Perpetua Bold Italic" guess what it means.
+    """
+    Guess what a font name means.
 
-    Returns (family, x) where x is
+    Font names may be, for example, "Tahoma-BoldOblique", "Bitstream Charter
+    Italic" or "Perpetua Bold Italic".
+
+    Returs (family, x) where x is
         0: regular
         1: bold
         2: italic
         3: bolditalic
-
     """
     italic = 0
     bold = 0
     if '-' not in fname:
-        sfx = {"Bold":1, "Bold Italic":3, "Bold Oblique":3, "Italic":2,
-            "Oblique":2}
+        sfx = {
+            "Bold": 1,
+            "Bold Italic": 3,
+            "Bold Oblique": 3,
+            "Italic": 2,
+            "Oblique": 2
+        }
         for key in sfx:
             if fname.endswith(" " + key):
                 return fname.rpartition(key)[0], sfx[key]

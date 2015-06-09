@@ -4,7 +4,6 @@
 Creates a rst2pdf stylesheet for each pygments style.
 '''
 
-import sys
 import os
 from . import dumpstyle
 from pygments.token import STANDARD_TYPES
@@ -65,7 +64,6 @@ def css2rl(css):
         styles.append([sname, style])
 
     return dumpstyle.dumps({'styles': styles})
-
 
 
 for name in list(pstyles.get_all_styles()):

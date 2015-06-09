@@ -45,7 +45,6 @@ import importlib
 import logging
 import os
 import os.path
-import re
 import string
 import sys
 import urllib.parse as urllib_parse
@@ -57,11 +56,7 @@ import docutils.readers.doctree
 from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
-
-try:
-    from roman import toRoman
-except ImportError:
-    from docutils.utils.roman import toRoman
+from docutils.utils.roman import toRoman
 
 from reportlab.lib.units import cm
 
@@ -77,6 +72,9 @@ from reportlab.platypus import (
 
 # Private functions used from these
 from reportlab.platypus import doctemplate, flowables as reportlab_flowables
+
+# TODO: Use Attrs instead of _str_attr_to_int
+from smartypants import smartypants, _str_attr_to_int
 
 from rst2pdf import (
     config,
@@ -101,6 +99,7 @@ from rst2pdf.flowables import (  # our own reportlab flowables
     MySpacer,
     MyTableOfContents,
     OddEven,
+    PageCounter,
     Reference,
     ResetNextTemplate,
     Separation,
@@ -125,11 +124,10 @@ from rst2pdf.opt_imports import (
 )
 from rst2pdf.nodehandlers import nodehandlers
 from rst2pdf.sinker import Sinker
-from rst2pdf.smartypants import smartyPants
 
 # Small template engine for covers
 # The obvious import doesn't work for complicated reasons ;-)
-from rst2pdf import tenjin
+import tenjin
 to_str = tenjin.helpers.generate_tostrfunc('utf-8')
 escape = tenjin.helpers.escape
 templateEngine = tenjin.Engine()
@@ -459,24 +457,18 @@ class RstToPdf(object):
             if b == "None":
                 b = ""
             t = 'bullet'
-
         elif node.parent.get('enumtype') == 'arabic':
             b = str(node.parent.children.index(node) + start) + '.'
-
         elif node.parent.get('enumtype') == 'lowerroman':
             b = toRoman(node.parent.children.index(node) + start).lower() + '.'
-
         elif node.parent.get('enumtype') == 'upperroman':
             b = toRoman(node.parent.children.index(node) + start).upper() + '.'
-
         elif node.parent.get('enumtype') == 'loweralpha':
             b = string.ascii_lowercase[node.parent.children.index(node) +
                                        start - 1] + '.'
-
         elif node.parent.get('enumtype') == 'upperalpha':
             b = string.ascii_uppercase[node.parent.children.index(node) +
                                        start - 1] + '.'
-
         else:
             log.critical("Unknown kind of list_item %s [%s]",
                          node.parent, nodeid(node))
@@ -575,14 +567,15 @@ class RstToPdf(object):
         write method, (like a StringIO, or a file object), the data is
         saved there.
         """
-        self.decoration = {'header': self.header,
-                           'footer': self.footer,
-                           'endnotes': [],
-                           'extraflowables': []}
+        self.decoration = {
+            'header': self.header,
+            'footer': self.footer,
+            'endnotes': [],
+            'extraflowables': [],
+        }
 
         self.pending_targets = []
         self.targets = []
-
         self.debugLinesPdf = debugLinesPdf
 
         if doctree is None:
@@ -600,7 +593,6 @@ class RstToPdf(object):
                     source_path=source_path,
                     settings_overrides=settings_overrides
                 )
-                # import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
@@ -608,9 +600,10 @@ class RstToPdf(object):
         else:
             self.doctree = doctree
 
+        # TODO: Why are we importing here?
         if self.numbered_links:
             # Transform all links to sections so they show numbers
-            from .sectnumlinks import SectNumFolder, SectRefExpander
+            from rst2pdf.sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
@@ -672,7 +665,6 @@ class RstToPdf(object):
                                 style=t_style, colWidths=colWidths))
 
         if self.floating_images:
-            # from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
             new_elem = []
             for e in elements[::-1]:
@@ -701,11 +693,11 @@ class RstToPdf(object):
         pdfdoc = FancyDocTemplate(
             output,
             pageTemplates=[FP],
-            showBoundary=0,
             pagesize=self.styles.ps,
             title=self.doc_title_clean,
             author=self.doc_author,
-            pageCompression=compressed)
+            pageCompression=compressed,
+        )
         pdfdoc.client = self
 
         if getattr(self, 'mustMultiBuild', False):
@@ -783,7 +775,6 @@ class RstToPdf(object):
 class FancyDocTemplate(BaseDocTemplate):
 
     def afterFlowable(self, flowable):
-
         if isinstance(flowable, Heading):
             # Notify TOC entry for headings/abstracts/dedications.
             level, text = flowable.level, flowable.text
@@ -792,122 +783,22 @@ class FancyDocTemplate(BaseDocTemplate):
             pagenum = setPageCounter()
             self.notify('TOCEntry', (level, text, pagenum, parent_id, node))
 
-    def handle_flowable(self, flowables):
-        """
-        try to handle one flowable from the front of list flowables.
-        """
-        # this method is copied from reportlab
-
-        # allow document a chance to look at, modify or ignore
-        # the object(s) about to be processed
-        self.filterFlowables(flowables)
-        self.handle_breakBefore(flowables)
-        self.handle_keepWithNext(flowables)
-        f = flowables[0]
-        del flowables[0]
-        if f is None:
-            return
-
-        if isinstance(f, PageBreak):
-            if isinstance(f, SlowPageBreak):
-                self.handle_pageBreak(slow=1)
-            else:
-                self.handle_pageBreak()
-            self.afterFlowable(f)
-        elif isinstance(f, ActionFlowable):
-            f.apply(self)
-            self.afterFlowable(f)
-        else:
-            frame = self.frame
-            canv = self.canv
-            # try to fit it then draw it
-            if frame.add(f, canv, trySplit=self.allowSplitting):
-                # TODO: Currently nothing is a FrameActionFlowable because the
-                #       class doesn't exist in reportlab anymore
-                if True: #not isinstance(f, FrameActionFlowable):
-                    self._curPageFlowableCount += 1
-                    self.afterFlowable(f)
-                doctemplate._addGeneratedContent(flowables, frame)
-            else:
-                if self.allowSplitting:
-                    # see if this is a splittable thing
-                    S = frame.split(f, canv)
-                    n = len(S)
-                else:
-                    n = 0
-                if n:
-                    if not isinstance(S[0], (PageBreak, SlowPageBreak, ActionFlowable)):
-                        if frame.add(S[0], canv, trySplit=0):
-                            self._curPageFlowableCount += 1
-                            self.afterFlowable(S[0])
-                            doctemplate._addGeneratedContent(flowables, frame)
-                        else:
-                            ident = "Splitting error(n==%d) on page %d in\n%s" % (
-                                n, self.page, self._fIdent(f, 60, frame))
-                            # leave to keep apart from the raise
-                            raise LayoutError(ident)
-                        del S[0]
-                    for i, f in enumerate(S):
-                        flowables.insert(i, f)  # put split flowables back on the list
-                else:
-                    if hasattr(f, '_postponed') and f._postponed > 4:
-                        ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % (
-                            self._fIdent(f, 60, frame), doctemplate._fSizeString(f), self.page,
-                            self.frame.id, self.frame._aSpaceString(), self.pageTemplate.id)
-                        # leave to keep apart from the raise
-                        raise LayoutError(ident)
-                    # this ought to be cleared when they are finally drawn!
-                    f._postponed = 1
-                    mbe = getattr(self, '_multiBuildEdits', None)
-                    if mbe:
-                        mbe((delattr, f, '_postponed'))
-                    flowables.insert(0, f)  # put the flowable back
-                    self.handle_frameEnd()
-
-
-_counter = 0
-_counterStyle = 'arabic'
-
-
-class PageCounter(Flowable):
-
-    def __init__(self, number=0, style='arabic'):
-        self.style = str(style).lower()
-        self.number = int(number)
-        Flowable.__init__(self)
-
-    def wrap(self, availWidth, availHeight):
-        global _counter, _counterStyle
-        _counterStyle = self.style
-        _counter = self.number
-        return (self.width, self.height)
-
-    def drawOn(self, canvas, x, y, _sW):
-        pass
-
-
-flowables.PageCounter = PageCounter
-
-
 def setPageCounter(counter=None, style=None):
-
-    global _counter, _counterStyle
-
     if counter is not None:
-        _counter = counter
+        PageCounter.counter = counter
     if style is not None:
-        _counterStyle = style
+        PageCounter.counterStyle = style
 
-    if _counterStyle == 'lowerroman':
-        ptext = toRoman(_counter).lower()
-    elif _counterStyle == 'roman':
-        ptext = toRoman(_counter).upper()
-    elif _counterStyle == 'alpha':
-        ptext = string.uppercase[_counter % 26]
-    elif _counterStyle == 'loweralpha':
-        ptext = string.lowercase[_counter % 26]
+    if PageCounter.counterStyle == 'lowerroman':
+        ptext = toRoman(PageCounter.counter).lower()
+    elif PageCounter.counterStyle == 'roman':
+        ptext = toRoman(PageCounter.counter).upper()
+    elif PageCounter.counterStyle == 'alpha':
+        ptext = string.ascii_uppercase[PageCounter.counter % 26]
+    elif PageCounter.counterStyle == 'loweralpha':
+        ptext = string.ascii_lowercase[PageCounter.counter % 26]
     else:
-        ptext = str(_counter)
+        ptext = str(PageCounter.counter)
     return ptext
 
 
@@ -915,36 +806,34 @@ class MyContainer(reportlab_flowables._Container, Flowable):
     pass
 
 
-# TODO: IndexingFlowable doens't exist in reportlab any more.  Instead, it
-#       looks like the approach is to include an `<index>` tag in
-#       paragraphs.  Need to figure out what this class does and how to
-#       replace it
-#
-# class UnhappyOnce(IndexingFlowable):
-#
-#     """
-#     An indexing flowable that is only unsatisfied once.
-#     If added to a story, it will make multiBuild run
-#     at least two passes. Useful for ###Total###
-#     """
-#
-#     _unhappy = True
-#
-#     def isSatisfied(self):
-#         if self._unhappy:
-#             self._unhappy = False
-#             return False
-#         return True
-#
-#     def draw(self):
-#         pass
+class UnhappyOnce(doctemplate.IndexingFlowable):
+
+    """
+    An indexing flowable that is only unsatisfied once.
+    If added to a story, it will make multiBuild run
+    at least two passes. Useful for ###Total###
+    """
+
+    _unhappy = True
+
+    def isSatisfied(self):
+        if self._unhappy:
+            self._unhappy = False
+            return False
+        return True
+
+    def draw(self):
+        pass
 
 
 class HeaderOrFooter(object):
-    """ A helper object for FancyPage (below)
-        HeaderOrFooter handles operations which are common
-        to both headers and footers
+
     """
+    A helper object for FancyPage (below)
+    HeaderOrFooter handles operations which are common
+    to both headers and footers
+    """
+
     def __init__(self, items=None, isfooter=False, client=None):
         self.items = items
         if isfooter:
@@ -981,8 +870,9 @@ class HeaderOrFooter(object):
         return height
 
     def replaceTokens(self, elems, canv, doc, smarty):
-        """Put doc_title/page number/etc in text of header/footer."""
-
+        """
+        Put doc_title/page number/etc in text of header/footer.
+        """
         # Make sure page counter is up to date
         pnum = setPageCounter()
 
@@ -1004,7 +894,8 @@ class HeaderOrFooter(object):
                                 getattr(canv, 'sectName', ''))
             text = text.replace("###SectNum###",
                                 getattr(canv, 'sectNum', ''))
-            text = smartyPants(text, smarty)
+            smarty = _str_attr_to_int(smarty)
+            text = smartypants(text, smarty)
             return text
 
         for i, e in enumerate(elems):
@@ -1127,8 +1018,6 @@ class FancyPage(PageTemplate):
 
         Gutter margins on left or right as needed
         """
-        global _counter, _counterStyle
-
         styles = self.styles
         self.tw = styles.pw - styles.lm - styles.rm - styles.gm
         # What page template to use?
@@ -1141,9 +1030,9 @@ class FancyPage(PageTemplate):
         canv._doctemplate = None  # to make _listWrapOn work
 
         if doc.page == 1:
-            _counter = 0
-            _counterStyle = 'arabic'
-        _counter += 1
+            PageCounter.counter = 0
+            PageCounter.counterStyle = 'arabic'
+        PageCounter.counter += 1
 
         # Adjust text space accounting for header/footer
 
@@ -1191,10 +1080,10 @@ class FancyPage(PageTemplate):
         Draw header/footer.
         """
         # Adjust for gutter margin
-        canv.addPageLabel(canv._pageNumber - 1, numberingstyles[_counterStyle],
-                          _counter)
+        canv.addPageLabel(canv._pageNumber - 1, numberingstyles[PageCounter.counterStyle],
+                          PageCounter.counter)
 
-        log.info('Page %s [%s]' % (_counter, doc.page))
+        log.info('Page %s [%s]' % (PageCounter.counter, doc.page))
         if self.is_left(doc.page):  # Left page
             hx = self.hx
             fx = self.fx
