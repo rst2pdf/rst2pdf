@@ -100,8 +100,5 @@ class LazyImports(object):
         import gfx
         return gfx
 
-    def _load_svg2rlg(self):
-        import svg2rlg
-        return svg2rlg
 
 LazyImports = LazyImports()

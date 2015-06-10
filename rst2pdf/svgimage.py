@@ -1,45 +1,29 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-# TODO: Don't use svg2rlg.  Its unmaintained and outdated.
+from svg2rlg import svg2rlg
 
-import os
-
-from reportlab.platypus import Flowable, Paragraph
+from reportlab.platypus import Flowable
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-
-from rst2pdf.log import log
-from rst2pdf.opt_imports import LazyImports
 
 
 class SVGImage(Flowable):
-
-    @classmethod
-    def available(self):
-        if LazyImports.svg2rlg:
-            return True
-        return False
 
     def __init__(self, filename, width=None, height=None, kind='direct',
                  mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
-        # Prefer svg2rlg for SVG, as it works better
-        if LazyImports.svg2rlg:
-            self._mode = 'svg2rlg'
-            self.doc = LazyImports.svg2rlg.svg2rlg(filename)
-            self.imageWidth = width
-            self.imageHeight = height
-            x1, y1, x2, y2 = self.doc.getBounds()
-            # Actually, svg2rlg's getBounds seems broken.
-            self._w, self._h = x2, y2
-            if not self.imageWidth:
-                self.imageWidth = self._w
-            if not self.imageHeight:
-                self.imageHeight = self._h
-        else:
-            self._mode = None
-            log.error("SVG support not enabled, please install svg2rlg.")
+        self._mode = 'svg2rlg'
+        self.doc = svg2rlg(filename)
+        self.imageWidth = width
+        self.imageHeight = height
+        x1, y1, x2, y2 = self.doc.getBounds()
+        # Actually, svg2rlg's getBounds seems broken.
+        self._w, self._h = x2, y2
+        if not self.imageWidth:
+            self.imageWidth = self._w
+        if not self.imageHeight:
+            self.imageHeight = self._h
         self.__ratio = float(self.imageWidth) / self.imageHeight
         if kind in ['direct', 'absolute']:
             self.drawWidth = width or self.imageWidth
