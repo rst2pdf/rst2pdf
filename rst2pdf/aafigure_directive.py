@@ -34,6 +34,7 @@ from docutils.parsers.rst import directives, Directive
 from reportlab.graphics import renderPDF
 
 import aafigure
+import aafigure.pdf
 from rst2pdf.log import log
 
 
