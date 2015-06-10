@@ -52,18 +52,16 @@ def loadFonts():
     """
     if not afmList and not pfbList and not ttfList:
         # Find all ".afm" and ".pfb" files files
-        def findFontFiles(_, folder, names):
-            for f in os.listdir(folder):
-                ext = os.path.splitext(f)[-1]
-                if ext in ['.ttf', '.ttc']:
-                    ttfList.append(os.path.join(folder, f))
-                if ext == '.afm':
-                    afmList.append(os.path.join(folder, f))
-                if ext == '.pfb':
-                    pfbList[f[:-4]] = os.path.join(folder, f)
-
-        for folder in flist:
-            os.walk(folder, findFontFiles, None)
+        for root in flist:
+            for folder, _, names in os.walk(root):
+                for f in names:
+                    ext = os.path.splitext(f)[-1]
+                    if ext in ['.ttf', '.ttc']:
+                        ttfList.append(os.path.join(folder, f))
+                    if ext == '.afm':
+                        afmList.append(os.path.join(folder, f))
+                    if ext == '.pfb':
+                        pfbList[f[:-4]] = os.path.join(folder, f)
 
         for ttf in ttfList:
             #Find out how to process these
@@ -72,11 +70,10 @@ def loadFonts():
             except TTFError:
                 continue
 
-            # print ttf, font.name, font.fullName, font.styleName, font.familyName
-            family = font.familyName.lower()
-            fontName = font.name
+            family = font.familyName.lower().decode()
+            fontName = font.name.decode()
             baseName = os.path.basename(ttf)[:-4]
-            fullName = font.fullName
+            fullName = font.fullName.decode()
 
             fonts[fontName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower()] = (ttf, ttf, family)
