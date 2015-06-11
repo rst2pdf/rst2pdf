@@ -57,12 +57,11 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 snum = fch.astext()
             else:
                 snum = None
-            maxdepth = 4
-            if reportlab.Version > '2.1':
-                maxdepth = 6
+            maxdepth = 6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id = (node.parent.get('ids', [None]) or [None])[0] + '-' + str(id(node))
+            parent_id = (node.parent.get('ids', [None]) or
+                         [None])[0] + '-' + str(id(node))
             if client.depth > 1:
                 node.elements = [ Heading(text,
                         client.styles['heading%d' % min(client.depth, maxdepth)],
@@ -75,7 +74,8 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 tfile = codecs.open('titletemplate.svg', 'r', 'utf-8')
                 tdata = tfile.read()
                 tfile.close()
-                tfile = tempfile.NamedTemporaryFile(dir='.', delete=False, suffix='.svg')
+                tfile = tempfile.NamedTemporaryFile(dir='.', delete=False,
+                                                    suffix='.svg')
                 tfname = tfile.name
                 tfile.write(tdata.replace('TITLEGOESHERE', text).encode('utf-8'))
                 tfile.close()

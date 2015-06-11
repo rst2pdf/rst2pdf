@@ -235,9 +235,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
             else:
                 snum = None
             key = node.get('refid')
-            maxdepth = 4
-            if reportlab.Version > '2.1':
-                maxdepth = 6
+            maxdepth = 6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id = (node.parent.get('ids', [None]) or [None])[0] + '-' + str(id(node))

@@ -12,6 +12,7 @@ from xml.sax.saxutils import unescape
 from reportlab.platypus import (
     Frame,
     Indenter,
+    PageBreak,
     Spacer,
     Table,
     XPreformatted,
@@ -1029,11 +1030,8 @@ class MyTableOfContents(TableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            if reportlab.Version <= '2.3':
-                _tempEntries = [(0, 'Placeholder for table of contents', 0)]
-            else:
-                _tempEntries = [(0, 'Placeholder for table of contents',
-                                 0, None)]
+            _tempEntries = [(0, 'Placeholder for table of contents',
+                             0, None)]
         else:
             _tempEntries = self._lastEntries
 

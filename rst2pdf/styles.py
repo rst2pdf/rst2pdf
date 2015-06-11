@@ -816,7 +816,7 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
 
     Example::
 
-        >>> adjustUnits('50%',200)
+        >>> adjustUnits('50%', 200)
         100
     """
     if v is None or v == "":

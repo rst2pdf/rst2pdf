@@ -815,10 +815,6 @@ def try_parse(src):
     # lines beginning with "..." are probably placeholders for suite
     src = re.sub(r"(?m)^(\s*)" + mark + "(.)", r"\1" + mark + r"# \2", src)
 
-    # if we're using 2.5, use the with statement
-    if sys.version_info >= (2, 5):
-        src = 'from __future__ import with_statement\n' + src
-
     if isinstance(src, str):
         # Non-ASCII chars will only occur in string literals
         # and comments.  If we wanted to give them to the parser
