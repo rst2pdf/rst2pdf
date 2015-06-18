@@ -1,0 +1,210 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R /F2 3 0 R /F3 4 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+6 0 obj
+<< /Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog >>
+endobj
+7 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7efe43084208> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+8 0 obj
+<< /Count 1 /Kids [ 5 0 R ] /Type /Pages >>
+endobj
+9 0 obj
+<< /Length 1217 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 706.2394 cm
+q
+q
+q
+1 0 0 1 4.4 4.4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 -4 514.4441 92 re B*
+Q
+q
+.933333 1 .8 rg
+n 150 60 30 12 re f*
+.933333 1 .8 rg
+n 156 48 60 12 re f*
+.933333 1 .8 rg
+n 252 48 36 12 re f*
+.933333 1 .8 rg
+n 330 48 30 12 re f*
+.933333 1 .8 rg
+n 162 36 30 12 re f*
+.933333 1 .8 rg
+n 180 24 30 12 re f*
+.933333 1 .8 rg
+n 150 12 30 12 re f*
+.933333 1 .8 rg
+n 174 0 30 12 re f*
+BT 1 0 0 1 0 74 Tm 12 TL /F2 10 Tf 0 0 0 rg (try_stmt ) Tj /F3 10 Tf ( ::=  try1_stmt | try2_stmt) Tj T* /F2 10 Tf (try1_stmt) Tj /F3 10 Tf ( ::=  "try" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf  T* (               \("except" [) Tj /F2 10 Tf (expression) Tj /F3 10 Tf ( ["," ) Tj /F2 10 Tf (target) Tj /F3 10 Tf (]] ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (\)+) Tj T* (               ["else" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (]) Tj T* (               ["finally" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (]) Tj T* /F2 10 Tf (try2_stmt) Tj /F3 10 Tf ( ::=  "try" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf  T* (               "finally" ":" ) Tj /F2 10 Tf (suite) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 698.2394 cm
+Q
+ 
+endstream
+endobj
+10 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+11 0 obj
+<< /Nums [ 0 12 0 R ] >>
+endobj
+12 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 13
+0000000000 65535 f
+0000000075 00000 n
+0000000129 00000 n
+0000000239 00000 n
+0000000352 00000 n
+0000000460 00000 n
+0000000667 00000 n
+0000000774 00000 n
+0000001034 00000 n
+0000001096 00000 n
+0000002369 00000 n
+0000002419 00000 n
+0000002463 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 7 0 R /Root 6 0 R /Size 13 >>
+startxref
+2500
+%%EOF
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R /F2 3 0 R /F3 4 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+6 0 obj
+<< /Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog >>
+endobj
+7 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7efe43084a58> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+8 0 obj
+<< /Count 1 /Kids [ 5 0 R ] /Type /Pages >>
+endobj
+9 0 obj
+<< /Length 1217 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 706.2394 cm
+q
+q
+q
+1 0 0 1 4.4 4.4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 -4 514.4441 92 re B*
+Q
+q
+.933333 1 .8 rg
+n 150 60 30 12 re f*
+.933333 1 .8 rg
+n 156 48 60 12 re f*
+.933333 1 .8 rg
+n 252 48 36 12 re f*
+.933333 1 .8 rg
+n 330 48 30 12 re f*
+.933333 1 .8 rg
+n 162 36 30 12 re f*
+.933333 1 .8 rg
+n 180 24 30 12 re f*
+.933333 1 .8 rg
+n 150 12 30 12 re f*
+.933333 1 .8 rg
+n 174 0 30 12 re f*
+BT 1 0 0 1 0 74 Tm 12 TL /F2 10 Tf 0 0 0 rg (try_stmt ) Tj /F3 10 Tf ( ::=  try1_stmt | try2_stmt) Tj T* /F2 10 Tf (try1_stmt) Tj /F3 10 Tf ( ::=  "try" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf  T* (               \("except" [) Tj /F2 10 Tf (expression) Tj /F3 10 Tf ( ["," ) Tj /F2 10 Tf (target) Tj /F3 10 Tf (]] ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (\)+) Tj T* (               ["else" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (]) Tj T* (               ["finally" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf (]) Tj T* /F2 10 Tf (try2_stmt) Tj /F3 10 Tf ( ::=  "try" ":" ) Tj /F2 10 Tf (suite) Tj /F3 10 Tf  T* (               "finally" ":" ) Tj /F2 10 Tf (suite) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 698.2394 cm
+Q
+ 
+endstream
+endobj
+10 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+11 0 obj
+<< /Nums [ 0 12 0 R ] >>
+endobj
+12 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 13
+0000000000 65535 f
+0000000075 00000 n
+0000000129 00000 n
+0000000239 00000 n
+0000000352 00000 n
+0000000460 00000 n
+0000000667 00000 n
+0000000774 00000 n
+0000001034 00000 n
+0000001096 00000 n
+0000002369 00000 n
+0000002419 00000 n
+0000002463 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 7 0 R /Root 6 0 R /Size 13 >>
+startxref
+2500
+%%EOF

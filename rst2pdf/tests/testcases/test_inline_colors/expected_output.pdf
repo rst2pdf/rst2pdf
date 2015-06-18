@@ -1,0 +1,74 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /Contents 7 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 6 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+4 0 obj
+<< /Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog >>
+endobj
+5 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7f6275f04a58> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+6 0 obj
+<< /Count 1 /Kids [ 3 0 R ] /Type /Pages >>
+endobj
+7 0 obj
+<< /Length 473 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+1 0 0 rg
+n 115.6 0 54.47 12 re f*
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This is ) Tj 1 0 0 rg (red text ) Tj 0 0 0 rg (and this is ) Tj 1 1 1 rg (white on red) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 735.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (If the background color fails, that\264s a reportlab limitation. It works with wordaxe \(may require RL 2.3\).) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+8 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+9 0 obj
+<< /Nums [ 0 10 0 R ] >>
+endobj
+10 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 11
+0000000000 65535 f
+0000000075 00000 n
+0000000109 00000 n
+0000000219 00000 n
+0000000426 00000 n
+0000000531 00000 n
+0000000791 00000 n
+0000000853 00000 n
+0000001381 00000 n
+0000001430 00000 n
+0000001473 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 5 0 R /Root 4 0 R /Size 11 >>
+startxref
+1510
+%%EOF

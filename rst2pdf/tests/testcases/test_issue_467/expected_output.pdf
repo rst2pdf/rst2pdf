@@ -1,0 +1,83 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R /F2 3 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
+endobj
+4 0 obj
+<< /Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+5 0 obj
+<< /Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog >>
+endobj
+6 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7faaba4ea208> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+7 0 obj
+<< /Count 1 /Kids [ 4 0 R ] /Type /Pages >>
+endobj
+8 0 obj
+<< /Length 598 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+.960784 .960784 .862745 rg
+n 51.13 0 18 12 re f*
+.960784 .960784 .862745 rg
+n 69.13 0 6 12 re f*
+.960784 .960784 .862745 rg
+n 75.13 0 6 12 re f*
+.960784 .960784 .862745 rg
+n 81.13 0 6 12 re f*
+.960784 .960784 .862745 rg
+n 87.13 0 12 12 re f*
+.960784 .960784 .862745 rg
+n 99.13 0 6 12 re f*
+.960784 .960784 .862745 rg
+n 105.13 0 54 12 re f*
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Test inline: ) Tj /F2 10 Tf (for) Tj ( ) Tj (i) Tj ( ) Tj (in) Tj ( ) Tj (range\(5\):) Tj /F1 10 Tf (.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+9 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+10 0 obj
+<< /Nums [ 0 11 0 R ] >>
+endobj
+11 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 12
+0000000000 65535 f
+0000000075 00000 n
+0000000119 00000 n
+0000000229 00000 n
+0000000337 00000 n
+0000000544 00000 n
+0000000650 00000 n
+0000000910 00000 n
+0000000972 00000 n
+0000001625 00000 n
+0000001674 00000 n
+0000001718 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 6 0 R /Root 5 0 R /Size 12 >>
+startxref
+1755
+%%EOF

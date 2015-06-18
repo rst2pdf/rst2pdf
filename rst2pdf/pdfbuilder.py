@@ -114,7 +114,7 @@ class PDFBuilder(Builder):
                 )
 
                 tgt_file = os.path.join(self.outdir, targetname + self.out_suffix)
-                with open(tgt_file, 'w') as f:
+                with open(tgt_file, 'wb') as f:
                     destination = FileOutput(destination=f, encoding='utf-8')
                     doctree = self.assemble_doctree(
                         docname,
@@ -197,7 +197,9 @@ class PDFBuilder(Builder):
             # from pudb import set_trace; set_trace()
             t = copy.copy(self.env.indexentries)
             try:
-                self.env.indexentries = {docname:self.env.indexentries[docname + '-gen']}
+                self.env.indexentries = {
+                    docname: self.env.indexentries[docname + '-gen']
+                }
             except KeyError:
                 self.env.indexentries = {}
                 for dname in self.docnames:
@@ -582,17 +584,20 @@ class PDFWriter(writers.Writer):
             authors = self.document.settings.author.split('\\')
 
             # Feed data to the template, get restructured text.
-            cover_text = createpdf.renderTemplate(tname=cover_file,
-                                title=self.document.settings.title or visitor.elements['title'],
-                                subtitle='%s %s' % (_('version'), self.config.version),
-                                authors=authors,
-                                date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
-                                )
+            today = self.config.today or \
+                ustrftime(self.config.today_fmt or _('%B %d, %Y'))
+            cover_text = createpdf.renderTemplate(
+                tname=cover_file,
+                title=self.document.settings.title or visitor.elements['title'],
+                subtitle='%s %s' % (_('version'), self.config.version),
+                authors=authors,
+                date=today
+            )
 
             cover_tree = docutils.core.publish_doctree(cover_text)
             self.document.insert(0, cover_tree)
 
-        sio = io.StringIO()
+        sio = io.BytesIO()
 
         if self.invariant:
             createpdf.patch_PDFDate()
@@ -814,14 +819,6 @@ def try_parse(src):
 
     # lines beginning with "..." are probably placeholders for suite
     src = re.sub(r"(?m)^(\s*)" + mark + "(.)", r"\1" + mark + r"# \2", src)
-
-    if isinstance(src, str):
-        # Non-ASCII chars will only occur in string literals
-        # and comments.  If we wanted to give them to the parser
-        # correctly, we'd have to find out the correct source
-        # encoding.  Since it may not even be given in a snippet,
-        # just replace all non-ASCII characters.
-        src = src.encode('ascii', 'replace')
 
     if parser is None:
         return True

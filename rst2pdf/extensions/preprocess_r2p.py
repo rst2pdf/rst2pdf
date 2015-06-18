@@ -4,7 +4,7 @@
 # Copyright 2010, Patrick Maupin
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 preprocess is a rst2pdf extension module (invoked by -e preprocess
 on the rst2pdf command line.
 
@@ -99,7 +99,7 @@ messages from docutils will refer to line numbers in it, rather than
 in the original source, so debugging could be difficult if the
 file were automatically removed.
 
-'''
+"""
 
 import os
 import re
@@ -108,19 +108,26 @@ from rson import loads as rson_loads
 
 from rst2pdf.log import log
 
+
+# TODO: not really overkill to use StringIO...
 class DummyFile(str):
-    ''' We could use stringio, but that's really overkill for what
-        we need here.
-    '''
+
+    """
+    We could use stringio, but that's really overkill for what we need here.
+    """
+
     def read(self):
         return self
 
-class Preprocess(object):
+
+class Preprocess:
+
     def __init__(self, sourcef, incfile=False, widthcount=0):
-        ''' Process a file and decorate the resultant Preprocess instance with
-            self.result (the preprocessed file) and self.styles (extracted stylesheet
-            information) for the caller.
-        '''
+        """
+        Process a file and decorate the resultant Preprocess instance with
+        self.result (the preprocessed file) and self.styles (extracted stylesheet
+        information) for the caller.
+        """
         self.widthcount = widthcount
 
         name = sourcef.name
@@ -128,7 +135,6 @@ class Preprocess(object):
 
         # Make the determination if an include file is a stylesheet or
         # another restructured text file, and handle stylesheets appropriately.
-
         if incfile:
             try:
                 self.styles = styles = rson_loads(source)
@@ -148,7 +154,6 @@ class Preprocess(object):
 
         # Use a regular expression on the source, to take it apart
         # and put it back together again.
-
         self.source = source = [x for x in self.splitter(source) if x]
         self.result = result = []
         self.styles = {}
@@ -208,14 +213,8 @@ class Preprocess(object):
         # Ugly, violates DRY, etc., but I'm not about to go
         # figure out how to re-use docutils include file
         # path processing!
-
         for prefix in ('', os.path.dirname(self.sourcef.name)):
-            try:
-                with open(os.path.join(prefix, fname), 'r'):
-                    pass
-            except IOError:
-                continue
-            else:
+            if os.path.exists(os.path.join(prefix, fname)):
                 break
         else:
             log.error("Could not find include file %s", fname)
@@ -224,18 +223,18 @@ class Preprocess(object):
 
         # Recursively call this class to process include files.
         # Extract all the information from the included file.
-
-        inc = Preprocess(f, True, self.widthcount)
-        self.widthcount = inc.widthcount
-        if 'styles' in self.styles and 'styles' in inc.styles:
-            self.styles['styles'].update(inc.styles.pop('styles'))
-        self.styles.update(inc.styles)
-        if inc.changed:
-            self.changed = True
-            if not inc.keep:
-                return
-            fname = inc.result.name
-        self.result.extend(['', '', '.. include:: ' + fname, ''])
+        with open(os.path.join(prefix, fname), 'r') as f:
+            inc = Preprocess(f, True, self.widthcount)
+            self.widthcount = inc.widthcount
+            if 'styles' in self.styles and 'styles' in inc.styles:
+                self.styles['styles'].update(inc.styles.pop('styles'))
+            self.styles.update(inc.styles)
+            if inc.changed:
+                self.changed = True
+                if not inc.keep:
+                    return
+                fname = inc.result.name
+            self.result.extend(['', '', '.. include:: ' + fname, ''])
 
     def handle_single(self, word):
         ''' Prepend the singleword class in front of the word.
@@ -248,7 +247,7 @@ class Preprocess(object):
         '''
         self.changed = True
         self.result.extend(['', '', '.. raw:: pdf', '',
-                    '    PageBreak ' + chunk, ''])
+                            '    PageBreak ' + chunk, ''])
 
     def handle_space(self, chunk):
         ''' Insert a raw space
@@ -329,38 +328,46 @@ class Preprocess(object):
         source.append('\n'.join(data))
         source.append('\n')
 
-    # Automatically generate our keywords from methods prefixed with 'handle_'
-    keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
 
-    # Generate the regular expression for parsing, and a split function using it.
-    blankline = r'^([ \t]*\n)'
-    singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
-    comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
-    expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
-    splitter = re.compile(expression, re.MULTILINE).split
+# Automatically generate our keywords from methods prefixed with 'handle_'
+__v = Preprocess.__dict__
+__keywords = [x[7:] for x in __v if x.startswith('handle_')]
 
-    # Once we have used the keywords in our regular expression,
-    # fix them up for use by the parser.
-    v = vars()
-    keywords = dict([(x + '::', v['handle_' + x]) for x in keywords])
+# Generate the regular expression for parsing, and a split function using it.
+__blankline = r'^([ \t]*\n)'
+__singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
+__comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(__keywords)
+__expression = '(?:%s)' % '|'.join([__blankline, __singleword, __comment])
+Preprocess.splitter = re.compile(__expression, re.MULTILINE).split
+
+# Once we have used the keywords in our regular expression,
+# fix them up for use by the parser.
+Preprocess.keywords = dict((x + '::', __v['handle_' + x]) for x in __keywords)
+
 
 class MyStyles(str):
-    ''' This class conforms to the styles.py processing requirements
-        for a stylesheet that is not really a file.  It must be callable(),
-        and str(x) must return the name of the stylesheet.
-    '''
+
+    """
+    This class conforms to the styles.py processing requirements
+    for a stylesheet that is not really a file.  It must be callable(),
+    and str(x) must return the name of the stylesheet.
+    """
+
     def __new__(cls, styles):
         self = str.__new__(cls, 'Embedded Preprocess Styles')
         self.data = styles
         return self
+
     def __call__(self):
         return self.data
 
+
 def install(createpdf, options):
-    ''' This is where we intercept the document conversion.
-        Preprocess the restructured text, and insert our
-        new styles (if any).
-    '''
+    """
+    This is where we intercept the document conversion.
+
+    Preprocess the restructured text, and insert our new styles (if any).
+    """
     data = Preprocess(options.infile)
     options.infile = data.result
     if data.styles:

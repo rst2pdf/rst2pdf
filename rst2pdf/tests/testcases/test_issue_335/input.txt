@@ -1,0 +1,10 @@
+.. |mitellogo| image:: biohazard.jpg
+
+.. footer::
+
+   +-----------------+
+   | |mitellogo|     |
+   +-----------------+
+
+
+Some stuff.

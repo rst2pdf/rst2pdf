@@ -51,7 +51,7 @@ styles:
         allowWidows: false
         backColor: #EEFFCC
         borderColor: #AACC99
-        borderPadding: [6, 0, 0, 4]
+        borderPadding: [4, 4, 4, 4]
         borderWidth: 0.3
         spaceBefore: 0
 
@@ -68,13 +68,14 @@ styles:
     heading:
         backColor: #F2F2F2
         borderColor: #CCCCCC
-        borderPadding: [6, 0, 0, 10]
+        borderPadding: [6, 10, 4, 10]
         borderWidth: 0.3
         fontName: stdSansBold
         fontSize: 10
         leading: 10
         leftIndent: 0
         spaceBefore: 16
+        spaceAfter: 16
         textColor: #20435C
 
     heading1: fontSize: 200%

@@ -1,0 +1,183 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R /F2 3 0 R /F3 4 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+6 0 obj
+<< /Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog >>
+endobj
+7 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7f6275f11b38> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+8 0 obj
+<< /Count 1 /Kids [ 5 0 R ] /Type /Pages >>
+endobj
+9 0 obj
+<< /Length 3644 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 655.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 108 re B*
+Q
+q
+.960784 .960784 .862745 rg
+n 0 84 72 12 re f*
+.960784 .960784 .862745 rg
+n 72 84 6 12 re f*
+.960784 .960784 .862745 rg
+n 84 84 48 12 re f*
+.960784 .960784 .862745 rg
+n 138 84 12 12 re f*
+.960784 .960784 .862745 rg
+n 0 60 66 12 re f*
+.960784 .960784 .862745 rg
+n 66 60 6 12 re f*
+.960784 .960784 .862745 rg
+n 78 60 48 12 re f*
+.960784 .960784 .862745 rg
+n 132 60 12 12 re f*
+.960784 .960784 .862745 rg
+n 0 24 66 12 re f*
+.960784 .960784 .862745 rg
+n 66 24 6 12 re f*
+.960784 .960784 .862745 rg
+n 78 24 30 12 re f*
+.960784 .960784 .862745 rg
+n 120 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 138 24 54 12 re f*
+.960784 .960784 .862745 rg
+n 198 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 216 24 48 12 re f*
+.960784 .960784 .862745 rg
+n 276 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 294 24 30 12 re f*
+.960784 .960784 .862745 rg
+n 336 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 378 12 6 12 re f*
+BT 1 0 0 1 0 86 Tm 12 TL /F2 10 Tf 0 0 1 rg (traducciones) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio_es) Tj (.) Tj (qm) Tj  T*  T* 0 0 1 rg (radio_es.qm) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio_es) Tj (.) Tj (ts) Tj  T* (        lrelease radio_es.ts -compress -qm radio_es.qm) Tj T*  T* 0 0 1 rg (radio_es.ts) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio) Tj (8.) Tj (py) Tj ( ) Tj (plsparser) Tj (.) Tj (py) Tj ( ) Tj (addradio) Tj (2.) Tj (ui) Tj ( ) Tj (radio) Tj (3.) Tj (ui) Tj ( ) Tj T* (        pylupdate4 -verbose radio8.py plsparser.py addradio2.ui) Tj /F3 10 Tf .733333 .4 .133333 rg (\\) Tj T* /F2 10 Tf 0 0 0 rg (        radio3.ui -ts radio_es.ts) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 538.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 108 re B*
+Q
+q
+.960784 .960784 .862745 rg
+n 0 84 72 12 re f*
+.960784 .960784 .862745 rg
+n 72 84 6 12 re f*
+.960784 .960784 .862745 rg
+n 84 84 48 12 re f*
+.960784 .960784 .862745 rg
+n 138 84 12 12 re f*
+.960784 .960784 .862745 rg
+n 0 60 66 12 re f*
+.960784 .960784 .862745 rg
+n 66 60 6 12 re f*
+.960784 .960784 .862745 rg
+n 78 60 48 12 re f*
+.960784 .960784 .862745 rg
+n 132 60 12 12 re f*
+.960784 .960784 .862745 rg
+n 0 24 66 12 re f*
+.960784 .960784 .862745 rg
+n 66 24 6 12 re f*
+.960784 .960784 .862745 rg
+n 78 24 30 12 re f*
+.960784 .960784 .862745 rg
+n 120 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 138 24 54 12 re f*
+.960784 .960784 .862745 rg
+n 198 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 216 24 48 12 re f*
+.960784 .960784 .862745 rg
+n 276 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 294 24 30 12 re f*
+.960784 .960784 .862745 rg
+n 336 24 12 12 re f*
+.960784 .960784 .862745 rg
+n 354 12 6 12 re f*
+BT 1 0 0 1 0 86 Tm 12 TL /F2 10 Tf 0 0 1 rg (traducciones) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio_es) Tj (.) Tj (qm) Tj  T*  T* 0 0 1 rg (radio_es.qm) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio_es) Tj (.) Tj (ts) Tj  T* (    lrelease radio_es.ts -compress -qm radio_es.qm) Tj T*  T* 0 0 1 rg (radio_es.ts) Tj .4 .4 .4 rg (:) Tj 0 0 0 rg ( ) Tj (radio) Tj (8.) Tj (py) Tj ( ) Tj (plsparser) Tj (.) Tj (py) Tj ( ) Tj (addradio) Tj (2.) Tj (ui) Tj ( ) Tj (radio) Tj (3.) Tj (ui) Tj ( ) Tj T* (    pylupdate4 -verbose radio8.py plsparser.py addradio2.ui) Tj /F3 10 Tf .733333 .4 .133333 rg (\\) Tj T* /F2 10 Tf 0 0 0 rg (        radio3.ui -ts radio_es.ts) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+10 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+11 0 obj
+<< /Nums [ 0 12 0 R ] >>
+endobj
+12 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 13
+0000000000 65535 f
+0000000075 00000 n
+0000000129 00000 n
+0000000239 00000 n
+0000000347 00000 n
+0000000460 00000 n
+0000000667 00000 n
+0000000774 00000 n
+0000001034 00000 n
+0000001096 00000 n
+0000004796 00000 n
+0000004846 00000 n
+0000004890 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 7 0 R /Root 6 0 R /Size 13 >>
+startxref
+4927
+%%EOF

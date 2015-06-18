@@ -1,0 +1,73 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /Contents 7 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 6 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+4 0 obj
+<< /Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog >>
+endobj
+5 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7faab9829828> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+6 0 obj
+<< /Count 1 /Kids [ 3 0 R ] /Type /Pages >>
+endobj
+7 0 obj
+<< /Length 1088 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 12 Tm /F1 12 Tf 12 TL 5.79522 Tw (Using test_issue_68_1.style the paragraphs whould have normal leading. Using) Tj T* 0 Tw (test_issue_68_2.style they should have double spacing.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 651.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 72 Tm /F1 12 Tf 12 TL 1.490706 Tw (Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus magna. Aliquam sit) Tj T* 0 Tw 2.31384 Tw (amet orci eu urna luctus faucibus. Cras eu enim. Donec eu ligula. Aliquam velit mi,) Tj T* 0 Tw .761979 Tw (sollicitudin id, elementum id, cursus in, dolor. Mauris vel sapien. Pellentesque hendrerit) Tj T* 0 Tw 1.620443 Tw (eros nec diam. Mauris sagittis pede eu dui. Mauris sit amet velit. Vestibulum tristique) Tj T* 0 Tw 1.70048 Tw (ipsum ut nulla. Maecenas ac turpis. Vivamus vel mauris sed purus tristique convallis.) Tj T* 0 Tw 2.21616 Tw (Fusce porta, eros sollicitudin faucibus tincidunt, libero urna dapibus tellus, vel mattis) Tj T* 0 Tw (lacus purus at sem.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+8 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+9 0 obj
+<< /Nums [ 0 10 0 R ] >>
+endobj
+10 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 11
+0000000000 65535 f
+0000000075 00000 n
+0000000109 00000 n
+0000000219 00000 n
+0000000426 00000 n
+0000000531 00000 n
+0000000791 00000 n
+0000000853 00000 n
+0000001997 00000 n
+0000002046 00000 n
+0000002089 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 5 0 R /Root 4 0 R /Size 11 >>
+startxref
+2126
+%%EOF

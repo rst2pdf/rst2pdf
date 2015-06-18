@@ -1,0 +1,45 @@
+.. image:: biohazard.png
+   :align: right
+
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+
+.. image:: biohazard.png
+   :align: left
+
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+
+.. image:: biohazard.png
+
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.
+Test text.

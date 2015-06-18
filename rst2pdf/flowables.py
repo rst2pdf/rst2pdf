@@ -15,6 +15,7 @@ from reportlab.platypus import (
     PageBreak,
     Spacer,
     Table,
+    TableStyle,
     XPreformatted,
 )
 

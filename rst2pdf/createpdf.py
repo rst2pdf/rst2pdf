@@ -1697,6 +1697,8 @@ def patch_PDFDate():
 
 
 def add_extensions(options):
+    # TODO: Clean up the implementation of extensions - there has to be
+    # a better way than this!
     extensions = []
     for ext in options.extensions:
         if not ext.startswith('!'):

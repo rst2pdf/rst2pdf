@@ -1,0 +1,139 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<< /F1 2 0 R /F2 3 0 R /F3 4 0 R >>
+endobj
+2 0 obj
+<< /BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font >>
+endobj
+3 0 obj
+<< /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font >>
+endobj
+4 0 obj
+<< /BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font >>
+endobj
+5 0 obj
+<< /Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources << /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ] >> /Rotate 0 /Trans <<  >> 
+  /Type /Page >>
+endobj
+6 0 obj
+<< /Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog >>
+endobj
+7 0 obj
+<< /Author () /CreationDate <rst2pdf.createpdf.patch_PDFDate.<locals>.PDFDate object at 0x7f46b0314668> /Creator (\(unspecified\)) /Keywords () /Producer (ReportLab PDF Library - www.reportlab.com) /Subject (\(unspecified\)) 
+  /Title () >>
+endobj
+8 0 obj
+<< /Count 1 /Kids [ 5 0 R ] /Type /Pages >>
+endobj
+9 0 obj
+<< /Length 2007 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 715.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+.960784 .960784 .862745 rg
+n 0 24 30 12 re f*
+.960784 .960784 .862745 rg
+n 36 24 18 12 re f*
+.960784 .960784 .862745 rg
+n 60 24 6 12 re f*
+.960784 .960784 .862745 rg
+n 12 12 18 12 re f*
+.960784 .960784 .862745 rg
+n 36 12 18 12 re f*
+.960784 .960784 .862745 rg
+n 60 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 72 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 0 0 6 12 re f*
+BT 1 0 0 1 0 26 Tm 12 TL /F2 10 Tf 0 .501961 0 rg (class) Tj /F3 10 Tf 0 0 0 rg ( ) Tj /F2 10 Tf 0 0 1 rg (Foo) Tj /F3 10 Tf 0 0 0 rg ( ) Tj .4 .4 .4 rg ({) Tj 0 0 0 rg  T* (  ) Tj /F2 10 Tf 0 .501961 0 rg (val) Tj /F3 10 Tf 0 0 0 rg ( ) Tj (bar) Tj ( ) Tj /F2 10 Tf 0 .501961 0 rg (=) Tj /F3 10 Tf 0 0 0 rg ( ) Tj .4 .4 .4 rg (0) Tj 0 0 0 rg  T* .4 .4 .4 rg (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 633.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 73.2 re B*
+Q
+q
+.960784 .960784 .862745 rg
+n 0 40.8 51 20.4 re f*
+.960784 .960784 .862745 rg
+n 61.2 40.8 30.6 20.4 re f*
+.960784 .960784 .862745 rg
+n 102 40.8 10.2 20.4 re f*
+.960784 .960784 .862745 rg
+n 20.4 20.4 30.6 20.4 re f*
+.960784 .960784 .862745 rg
+n 61.2 20.4 30.6 20.4 re f*
+.960784 .960784 .862745 rg
+n 102 20.4 10.2 20.4 re f*
+.960784 .960784 .862745 rg
+n 122.4 20.4 10.2 20.4 re f*
+.960784 .960784 .862745 rg
+n 0 0 10.2 20.4 re f*
+BT 1 0 0 1 0 44.2 Tm 20.4 TL /F2 17 Tf 0 .501961 0 rg (class) Tj /F3 17 Tf 0 0 0 rg ( ) Tj /F2 17 Tf 0 0 1 rg (Foo) Tj /F3 17 Tf 0 0 0 rg ( ) Tj .4 .4 .4 rg ({) Tj 0 0 0 rg  T* (  ) Tj /F2 17 Tf 0 .501961 0 rg (val) Tj /F3 17 Tf 0 0 0 rg ( ) Tj (bar) Tj ( ) Tj /F2 17 Tf 0 .501961 0 rg (=) Tj /F3 17 Tf 0 0 0 rg ( ) Tj .4 .4 .4 rg (0) Tj 0 0 0 rg  T* .4 .4 .4 rg (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+10 0 obj
+<< /Count 0 /Type /Outlines >>
+endobj
+11 0 obj
+<< /Nums [ 0 12 0 R ] >>
+endobj
+12 0 obj
+<< /S /D /St 1 >>
+endobj
+xref
+0 13
+0000000000 65535 f
+0000000075 00000 n
+0000000129 00000 n
+0000000239 00000 n
+0000000352 00000 n
+0000000460 00000 n
+0000000667 00000 n
+0000000774 00000 n
+0000001034 00000 n
+0000001096 00000 n
+0000003159 00000 n
+0000003209 00000 n
+0000003253 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com)
+ [(-\270/\215\023\374\232\255\017j\310\301DYu\363) (-\270/\215\023\374\232\255\017j\310\301DYu\363)]
+ /Info 7 0 R /Root 6 0 R /Size 13 >>
+startxref
+3290
+%%EOF

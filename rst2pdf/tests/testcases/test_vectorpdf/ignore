@@ -1,0 +1,1 @@
+Fails because of a bug in pdfrw (https://github.com/pmaupin/pdfrw/pull/23).  Wail until bug is fixed, or monkey-patch it .

@@ -1,0 +1,9 @@
+
+.. image:: biohazard.png
+   :align: right
+
+.. image:: biohazard.png
+   :align: left
+
+Test text.
+

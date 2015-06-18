@@ -1,54 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import glob
 import os
 import shlex
 import shutil
 import subprocess
 import tempfile
 
-from itertools import zip_longest, count
+from itertools import zip_longest
+from pathlib import Path
 
 import nose.plugins.skip
 import PyPDF2
 
-from execmgr import textexec
-
-from rst2pdf import createpdf as rst2pdf
-
-
-def dirname(path):
-    # os.path.dirname('abc') returns '', which is completely
-    # useless for most purposes...
-    return os.path.dirname(path) or '.'
-
-
-def globjoin(*parts):
-    # A very common pattern in this module
-    return sorted(glob.glob(os.path.join(*parts)))
-
-
-class PathInfo:
-
-    """
-    This class is just a namespace to avoid cluttering up the
-    module namespace.  It is never instantiated.
-    """
-
-    rootdir = os.path.realpath(dirname(__file__))
-    bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
-    inpdir = os.path.join(rootdir, 'input')
-    outdir = os.path.join(rootdir, 'output')
-    expectdir = os.path.join(rootdir, 'expected_output')
-    md5dir = os.path.join(rootdir, 'md5')
-    runcmd = ['rst2pdf']
-
+# TODO:  rst2pdf currently does some crazy magic with extensions and globals
+# that mean everything must be completely reloaded for each test to keep them
+# isolated.  The easiest way at the moment is to simply call the executable
+# rather than try to load `rst2pdf.main`, but this will need to change once
+# the handling of globals is fixed.
 
 def pdf_pages(pdf):
     """
     Open a PDF file and yield each page as a temporary PDF file.
     """
-    with open(pdf, 'rb') as fh:
+    with pdf.open('rb') as fh:
         reader = PyPDF2.PdfFileReader(fh)
         for pagenum in range(reader.getNumPages()):
             page = reader.getPage(pagenum)
@@ -60,7 +34,7 @@ def pdf_pages(pdf):
                 yield tmp
 
 
-def compare_pdfs(got, expect, threshold=0):
+def compare_files(got, expect):
     """
     Compare two pdfs page by page and determine percentage difference.
 
@@ -71,163 +45,128 @@ def compare_pdfs(got, expect, threshold=0):
     got_pages = pdf_pages(got)
     expect_pages = pdf_pages(expect)
     iterpages = zip_longest(got_pages, expect_pages)
+    error_pages = []
     for pagenum, (got_page, expect_page) in enumerate(iterpages):
         assert None not in (got_page, expect_page), 'EOF at page %d' % pagenum
+        diff_page = got.parent / ('diff_%d.png' % (pagenum + 1))
         args = [
             'compare',
             got_page.name,
             expect_page.name,
             '-metric',
             'AE',
-            'null:'
+            str(diff_page)
         ]
         match_code = subprocess.call(args, stderr=subprocess.DEVNULL)
-        print(match_code)
-        assert match_code == 0, \
-            'Page match error on page {} (code={})'.format(pagenum + 1,
-                                                          match_code)
+        if match_code != 0:
+            error_pages.append(pagenum + 1)
+    assert len(error_pages) == 0, \
+        'Page match error on pages {}'.format(str(error_pages))
 
 
-def build_sphinx(sphinxdir, outpdf):
-    def getbuilddirs():
-        return globjoin(sphinxdir, '*build*')
-
-    for builddir in getbuilddirs():
-        shutil.rmtree(builddir)
-    errcode = textexec('make clean pdf', cwd=sphinxdir)
-    builddirs = getbuilddirs()
-    if len(builddirs) != 1:
-        return 1
-    builddir, = builddirs
-    pdfdir = os.path.join(builddir, 'pdf')
-    pdffiles = globjoin(pdfdir, '*.pdf')
-    if len(pdffiles) == 1:
-        shutil.copyfile(pdffiles[0], outpdf)
-    elif not pdffiles:
-        errcode = 1
-    else:
-        shutil.copytree(pdfdir, outpdf)
-    return errcode
-
-
-def build_txt(iprefix, outpdf):
-    inpfname = iprefix + '.txt'
-    style = iprefix + '.style'
-    cli = iprefix + '.cli'
-    if os.path.isfile(cli):
-        with open(cli, 'r') as f:
-            extraargs = shlex.split(f.read())
-    else:
-        extraargs = []
-    args = ['--date-invariant', '-v', inpfname] + extraargs
-    if os.path.exists(style):
-        args += ['-s', style]
-    args.extend(['-o', outpdf])
-    return rst2pdf.main(args)
+def build_sphinx(path):
+    sphinx_path = path / 'sphinx'
+    os.chdir(str(sphinx_path))
+    env = os.environ.copy()
+    env['SPHINXOPTS'] = '-Q'
+    proc = subprocess.Popen(
+        ['make', 'clean', 'pdf'],
+        cwd=str(sphinx_path),
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    try:
+        out, err = proc.communicate(5)
+    except subprocess.TimeoutExpired:
+        print('-----> STDOUT')
+        print(out)
+        print('-----> STDERR')
+        print(err)
+        raise
+    pdfs = list(sphinx_path.glob('_build/pdf/*.pdf'))
+    if len(pdfs) > 1:
+        (path / 'output.pdf').mkdir()
+    for pdf in pdfs:
+        shutil.copy(str(pdf), str(path / 'output.pdf'))
+    return proc.returncode
 
 
-def run_single(inpfname):
-    use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
-    if use_sphinx:
-        sphinxdir = inpfname
-        if sphinxdir.endswith('Makefile'):
-            sphinxdir = dirname(sphinxdir)
-        basename = os.path.basename(sphinxdir)
-        if not basename:
-            sphinxdir = os.path.dirname(sphinxdir)
-            basename = os.path.basename(sphinxdir)
-    else:
-        iprefix = os.path.splitext(inpfname)[0]
-        basename = os.path.basename(iprefix)
-        if os.path.exists(iprefix + '.ignore'):
-            raise nose.plugins.skip.SkipTest
-
-    oprefix = os.path.join(PathInfo.outdir, basename)
-    expect_pdf = os.path.join(PathInfo.expectdir, basename) + '.pdf'
-    outpdf = oprefix + '.pdf'
-    outtext = oprefix + '.log'
-
-    for fname in (outtext, outpdf):
-        if os.path.exists(fname):
-            if os.path.isdir(fname):
-                shutil.rmtree(fname)
-            else:
-                os.remove(fname)
-
-    if use_sphinx:
-        errcode = build_sphinx(sphinxdir, outpdf)
-    else:
-        errcode = build_txt(iprefix, outpdf)
-    assert errcode == 0
-    compare_pdfs(outpdf, expect_pdf)
+def build_txt(path):
+    os.chdir(str(path))
+    inpfname = path / 'input.txt'
+    style = path / 'input.style'
+    cli = path / 'input.cli'
+    outname = path / 'output.pdf'
+    args = ['rst2pdf', '--date-invariant', '-v', str(inpfname), '-o', str(outname)]
+    if cli.is_file():
+        with cli.open('r') as f:
+            args += shlex.split(f.read())
+    if style.is_file():
+        args += ['-s', str(style)]
+    proc = subprocess.Popen(
+        args,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+    try:
+        out, err = proc.communicate(5)
+    except subprocess.TimeoutExpired:
+        print('-----> STDOUT')
+        print(out)
+        print('-----> STDERR')
+        print(err)
+        raise
+    return proc.returncode
 
 
 class RunTest:
 
-    def __init__(self, f):
-        basename = os.path.basename(f)
-        self.description = basename
-        mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
-        md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir, basename[:-4]) + '.ignore'
-        self.skip = False
-        self.openIssue = False
-        if os.path.exists(ignfile):
-            self.skip = True
-        info = {}
-        if os.path.exists(md5file):
-            with open(md5file, 'r') as f:
-                exec(f.read(), info)
-        if info.get('good_md5') in [[], ['sentinel']]:
-            # This is an open issue or something that can't be checked automatically
-            self.openIssue = True
+    def __init__(self, path):
+        self.path = path
+        self.description = path.name
 
-    def __call__(self, f):
-        if self.skip:
+    def __call__(self):
+        if (self.path / 'ignore').exists():
             raise nose.plugins.skip.SkipTest
-        elif self.openIssue:
-            assert False, 'Test has no known good output (Open Issue)'
+        use_sphinx = self.path.stem.startswith('sphinx')
+        if use_sphinx:
+            errcode = build_sphinx(self.path)
         else:
-            run_single(f)
+            errcode = build_txt(self.path)
+        assert errcode == 0
+        self.compare()
+
+    def compare(self):
+        got = self.path / 'output.pdf'
+        expect = self.path / 'expected_output.pdf'
+        if got.is_dir():
+            for gotpdf in got.iterdir():
+                expectpdf = expect / gotpdf.name
+                assert expectpdf.exists()
+                compare_files(gotpdf, expectpdf)
+        else:
+            compare_files(got, expect)
 
 
-class RunSphinxTest(RunTest):
-
-    def __init__(self, f):
-        basename = os.path.basename(f[:-1])
-        self.description = basename
-        mprefix = os.path.join(PathInfo.md5dir, basename)
-        md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir, basename) + '.ignore'
-        self.skip = False
-        self.openIssue = False
-
-        if os.path.exists(ignfile):
-            self.skip = True
-        info = {}
-        if os.path.exists(md5file):
-            with open(md5file, 'r') as f:
-                exec(f.read(), info)
-        if info.get('good_md5') in [[], ['sentinel']]:
-            # This is an open issue or something that can't be checked automatically
-            self.openIssue = True
-
-
-def test_regular():
+def test_files():
     """
-    Test all regular text files
+    Runs all PDF tests
     """
-    os.chdir(PathInfo.inpdir)
-    testfiles = globjoin(PathInfo.inpdir, '*.txt')
-    for fname in testfiles:
-        yield RunTest(fname), fname
+    root = Path(__file__).parent / 'testcases'
+    # Clean old files.  Don't do this as part of teardown, because they will
+    # probably be useful for post-mortems.
+    for f in root.glob('*/output.pdf'):
+        if f.is_dir():
+            shutil.rmtree(str(f))
+        else:
+            f.unlink()
+    for f in root.glob('*/diff*.png'):
+        f.unlink()
+    for d in root.glob('*/sphinx/_build'):
+        shutil.rmtree(str(d))
 
-
-def test_sphinx():
-    """
-    Test files which need to be compiled by sphinx
-    """
-    testfiles = globjoin(PathInfo.inpdir, 'sphinx*/')
-    for fname in testfiles:
-        os.chdir(fname)
-        yield RunSphinxTest(fname), fname
+    tests = sorted((d for d in root.iterdir() if d.is_dir()),
+                   key=lambda p: p.name)
+    for path in tests:
+        yield RunTest(path)
