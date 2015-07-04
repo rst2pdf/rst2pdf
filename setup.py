@@ -17,7 +17,7 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('README.txt')
+    read('README.rst')
     + '\n' +
     'Contributors\n'
     '************\n'
@@ -42,7 +42,7 @@ install_requires = [
         'Pygments',
         'pdfrw',
         ]
-        
+
 try:
     import json
 except ImportError:
