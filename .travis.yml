@@ -4,6 +4,9 @@
 
 language: python
 
+addons:
+  artifacts: true
+
 matrix:
   include:
 
@@ -42,6 +45,7 @@ install:
 script:
 
   - cd rst2pdf/tests
-  - ./autotest.py -e >& /dev/null
+  - ./autotest.py -e -f >& /dev/null
   - ./parselogs.py > log.txt
+  - rm `find ../.. -name '*.pyc'`
   - cmp log__py27_rl25.txt  log.txt

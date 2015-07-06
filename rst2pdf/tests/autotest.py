@@ -342,11 +342,11 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
         if do_text:
             testfiles = globjoin(PathInfo.inpdir, '*.txt')
             testfiles += globjoin(PathInfo.inpdir, '*', '*.txt')
-            testfiles = [x for x in testfiles if 'sphinx' not in x]
+            testfiles = [(x, fastfork) for x in testfiles if 'sphinx' not in x]
         if do_sphinx:
-            testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
+            testfiles += [(x, None) for x in globjoin(PathInfo.inpdir, 'sphinx*')]
     results = {}
-    for fname in testfiles:
+    for fname, fastfork in testfiles:
         key, errcode = run_single(fname, incremental, fastfork, updatemd5)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
@@ -399,6 +399,11 @@ def main(args=None):
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
+        for x in 'PIL reportlab docutils aafigure svg2rlg pdfrw pdfrw.toreportlab'.split():
+            try:
+                __import__(x)
+            except ImportError:
+                pass
     updatemd5 = options.updatemd5
     if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
         raise SystemExit('Unexpected value for updatemd5: %s' % updatemd5)
