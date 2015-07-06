@@ -1,0 +1,9 @@
+*.pyc
+build/
+dist/
+rst2pdf.egg-info
+_build
+rst2pdf/tests/output
+*.build_temp
+tmp*.svg
+log.txt

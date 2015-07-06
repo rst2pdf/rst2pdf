@@ -64,7 +64,13 @@ class PathInfo(object):
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
-    assert os.path.exists(runfile), 'Executable not found -- Use bootstrap.py and buildout to create it.'
+    if not os.path.exists(runfile):
+        import distutils.spawn
+        runfile = distutils.spawn.find_executable('rst2pdf')
+        assert runfile, 'Executable not found -- Use bootstrap.py and buildout to create it.'
+
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
 
     runcmd = [runfile]
 
