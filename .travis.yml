@@ -47,5 +47,7 @@ script:
   - cd rst2pdf/tests
   - ./autotest.py -e -f >& /dev/null
   - ./parselogs.py > log.txt
+  - zip artifacts -r input output
+  - rm -Rf input output
   - rm `find ../.. -name '*.pyc'`
   - cmp log__py27_rl25.txt  log.txt
