@@ -1,5 +1,7 @@
 bad_md5 = [
         '194a3ca345fae65727ce0eec0efc9432',
+        '5184e0d442e31681f3212abb92f5ef95',
+        '9e7615d190de51e98e8c84d42c03e082',
         'ba9909d3bf5807ab3826283d7b2d1331',
         'sentinel'
 ]

@@ -2,8 +2,11 @@ bad_md5 = [
         '0a1cdc3f7affcb77d1a39b3bee24da1d',
         '0d96a396e61c64b0dfd6b921b0f2ef27',
         '13b7a7e16089df651e5a0545d8c90197',
+        '70f0cdfb0bfa25e3e7459a18092bf865',
         '8d8cbb04dce466bd1552c2e966453d54',
         '985e67183617a4b8d0f7152748d9936f',
+        'b2eede16af2e98fb122dd41ccec17b5c',
+        'c9fb0c1ae094aa728f8fcbe8bba57bbe',
         'sentinel'
 ]
 

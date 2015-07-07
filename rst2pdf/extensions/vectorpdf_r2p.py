@@ -19,12 +19,26 @@ try:
     import rst2pdf.image
     from rst2pdf.opt_imports import LazyImports
 except ImportError:
+    pdfrw = None
     # This is just to make nosetest happy on the CI server
     class Flowable:
         pass
 
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
+
+if pdfrw is not None and pdfrw.__version__ == '0.2':
+    ''' A fix that was made on this function when moving
+        from 0.1 to 0.2 was too aggressive.  Should back
+        it out in the next version of pdfrw, but will
+        fix it here for now since pdfrw is released.
+    '''
+    def _makestr(rldoc, pdfobj):
+        assert isinstance(pdfobj, (float, int, str)), repr(pdfobj)
+        if isinstance(pdfrw, str):
+            return str(getattr(pdfobj, 'encoded', pdfobj))
+        return pdfobj
+    pdfrw.toreportlab._makestr = _makestr
 
 
 class AnyCache(object):
@@ -36,7 +50,7 @@ class AnyCache(object):
 # This is monkey-patched into reportlab IFF we are using
 # PDF files inside paragraphs.
 
-def drawImage(self, image, x, y, width=None, height=None, mask=None, 
+def drawImage(self, image, x, y, width=None, height=None, mask=None,
             preserveAspectRatio=False, anchor='c'):
     if not isinstance(image, VectorPdf):
         return self._drawImageNotVectorPDF(image, x, y, width, height, mask,

@@ -8,7 +8,10 @@ good_md5 = [
         '37789edc624e427082a2a85130d39dfc',
         '43da9cf7c4985789b9981c009e1390f1',
         '7624ca9c3ab73a4adcb56adc49cb97de',
+        'a8b75e22fc35fea100bd8a3e6e8a82bf',
+        'be6b7a556a8d4d4df4c624b886c2da1a',
         'c2530919040693a6c90c143195589c0e',
+        'c5d41ed971659f9362f83f9d04a7ac01',
         'e41823398a0a5088f41110ffe0742465',
         'sentinel'
 ]

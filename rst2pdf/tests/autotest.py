@@ -23,6 +23,7 @@ from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
 from pythonpaths import setpythonpaths
+from pdfrw import PdfReader, PdfWriter
 
 # md5 module deprecated, but hashlib not available in 2.4
 try:
@@ -200,6 +201,38 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
+def cleanfile(fname):
+    ''' Use pdfrw to make a canonical version of the file.
+         - Renumber PDF objects to be same
+         - Change filenames in links
+    '''
+    try:
+        trailer = PdfReader(fname)
+        trailer.Info = None  # Kill metadata
+        prefix = 'file:///home/travis/build/rst2pdf/rst2pdf/rst2pdf/tests'
+    except Exception:
+        return
+    if not trailer.pages:
+        return
+
+    for page in trailer.pages:
+        annots = page.Annots
+        if annots is None:
+            continue
+        for annot in annots:
+            a = annot.A
+            if a is None:
+                continue
+            uri = a.URI
+            if uri is None:
+                continue
+            uri = uri.decode()
+            if not uri.startswith('file:///'):
+                continue
+            a.URI = prefix + uri.split('rst2pdf/tests', 1)[-1]
+    PdfWriter().write(fname, trailer)
+
+
 def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     ''' checkmd5 validates the checksum of a generated PDF
         against the database, both reporting the results,
@@ -232,6 +265,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     # Generate the current MD5
     md5s = []
     for pdfpath in pdffiles:
+        cleanfile(pdfpath)
         f = open(pdfpath, 'rb')
         data = f.read()
         f.close()
@@ -302,6 +336,8 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
         if not basename:
             sphinxdir = os.path.dirname(sphinxdir)
             basename = os.path.basename(sphinxdir)
+        if os.path.exists(sphinxdir + '.ignore'):
+            return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
