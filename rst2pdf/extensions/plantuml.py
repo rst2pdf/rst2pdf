@@ -39,8 +39,10 @@ class UmlDirective(rst.Directive):
     the SVG plantuml generates doesn't look very good to me.
     """
     has_content = True
-    option_spec = {'alt': directives.unchanged}
-    option_spec = {'format': directives.unchanged}
+    option_spec = {
+        'alt': directives.unchanged,
+        'format': directives.unchanged,
+    }
 
     def run(self):
         node = plantuml()
