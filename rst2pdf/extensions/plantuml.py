@@ -50,6 +50,10 @@ class UmlDirective(rst.Directive):
         return [node]
 
 
+class PlantUmlError(Exception):
+    pass
+
+
 class UMLHandler(genelements.NodeHandler, plantuml):
     """Class to handle UML nodes"""
 
@@ -66,8 +70,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         except OSError, err:
             if err.errno != errno.ENOENT:
                 raise
-            raise PlantUmlError('plantuml command %r cannot be run'
-                                % self.builder.config.plantuml)
+            raise PlantUmlError('plantuml command %r cannot be run' % args)
         serr = p.communicate(node['uml'].encode('utf-8'))[1]
         if p.returncode != 0:
             raise PlantUmlError('error while running plantuml\n\n' + serr)
