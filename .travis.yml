@@ -1,0 +1,88 @@
+# Recipe info from:
+#   http://conda.pydata.org/docs/travis.html
+#   https://github.com/astrofrog/example-travis-conda
+
+language: python
+
+addons:
+  artifacts: true
+
+matrix:
+  include:
+
+    # Here you can add or remove specific builds, and Python versions. You
+    # should currently be able to use Python 2.6, 2.7, or 3.3 or later. The
+    # NUMPY and SCIPY versions are set here as an example, but you can
+    # add/remove environment variables, and use them below during the install.
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=2.5
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=2.5
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=2.6
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=2.6
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=2.7
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=2.7
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=3.0
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=3.0
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=3.1.44
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=3.1.44
+
+    - python: 2.7
+      env: PDFRW=0.1 RLAB=3.2.0
+
+    - python: 2.7
+      env: PDFRW=0.2 RLAB=3.2.0
+
+before_install:
+
+  - sudo apt-get update
+  - sudo apt-get install inkscape
+
+  # Here we just install Miniconda, which you shouldn't have to change.
+
+  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda install -q PIL
+  # Useful for debugging any issues with conda
+  - conda info -a
+
+install:
+
+  - pip install reportlab==$RLAB docutils sphinx aafigure svg2rlg pdfrw==$PDFRW
+  - python setup.py install
+
+script:
+
+  - cd rst2pdf/tests
+  - ./autotest.py -e -f >& /dev/null
+  - ./parselogs.py > log.txt
+  - cmp log__py27_rl25.txt  log.txt
+
+after_script:
+
+  - zip artifacts -r -q output log.txt
+  - rm -Rf input output log.txt
+  - rm `find ../.. -name '*.pyc'`

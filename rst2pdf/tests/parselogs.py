@@ -16,6 +16,7 @@ sorted list of tests, with checksums.
 
 '''
 import os
+import sys
 import glob
 
 def getchecksuminfo():
@@ -40,15 +41,17 @@ def getcategories():
     return mydict
 
 def dumpinfo():
+    summaries = []
     mydict = getcategories()
     if not mydict:
         print '\nNo log files found'
     for name, values in sorted(mydict.iteritems()):
+        summaries.append('%s -- %s tests' % (name, len(values)))
         print '\nCategory "%s"\n        (%d tests)\n' % (name, len(values))
         fmt = '%%-%ds  %%s' % max(len(x[0]) for x in values)
         for item in sorted(values):
             print fmt % (item[0], repr(item[1]))
-    print
+    sys.stderr.write('\n\n%s\n' % '\n'.join(summaries))
 
 if __name__ == '__main__':
     dumpinfo()

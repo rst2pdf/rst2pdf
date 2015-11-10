@@ -3,6 +3,8 @@ bad_md5 = [
 ]
 
 good_md5 = [
+        '238c1a3995868a1ebd936fe7dec6415e',
+        '5b30015fdb1b765b65f530413f0eccbc',
         '6241dd76ef875655fa95969036011955',
         'ebba39ed8c64bdcd85967b897892b670',
         'f4681efb6259445bcdb5f49cba34da3f',
