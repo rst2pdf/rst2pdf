@@ -281,7 +281,11 @@ class MyImage (Flowable):
 
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
-            uri = os.path.join(client.basedir,uri)
+            rel_uri = os.path.join(os.getcwd(), uri)
+            if os.path.exists(rel_uri):
+                uri = rel_uri
+            else:
+                uri = os.path.join(client.basedir, uri)
         else:
             uri, _ = urllib.urlretrieve(uri)
             client.to_unlink.append(uri)
