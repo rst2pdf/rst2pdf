@@ -999,6 +999,9 @@ class FancyPage(PageTemplate):
         info = self.image_cache.get(uri)
         if info is None:
             fname, _, _ = MyImage.split_uri(uri)
+            rel_fname = os.path.join(os.getcwd(), fname)
+            if os.path.exists(rel_fname):
+                fname = rel_fname
             if not os.path.exists(fname):
                 del self.template[which]
                 log.error("Missing %s image file: %s", which, uri)
