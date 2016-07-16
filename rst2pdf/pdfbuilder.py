@@ -126,7 +126,8 @@ class PDFBuilder(Builder):
                 self.info("writing " + targetname + "... ", nonl=1)
                 docwriter.write(doctree, destination)
                 self.info("done")
-            except Exception, e:
+            except Exception:
+                _, e, _ = sys.exc_info()
                 log.error(str(e))
                 print_exc()
                 self.info(red("FAILED"))
@@ -845,7 +846,8 @@ def init_math(app):
         try:
             # Sphinx 0.6.3
             from sphinx.ext.mathbase import setup as mathbase_setup
-        except ImportError, e:
+        except ImportError:
+            _, e, _ = sys.exc_info()
             log.error('Error importing sphinx math extension: %s', e)
 
     class MathExtError(SphinxError):

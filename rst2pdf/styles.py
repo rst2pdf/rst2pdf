@@ -298,7 +298,8 @@ class StyleSheet(object):
                         bold = pdfmetrics.EmbeddedType1Face(*font[3])
                         bolditalic = pdfmetrics.EmbeddedType1Face(*font[4])
 
-                except Exception, e:
+                except Exception:
+                    _, e, _ = sys.exc_info()
                     try:
                         if isinstance(font, list):
                             fname = font[0]
@@ -308,7 +309,8 @@ class StyleSheet(object):
                             os.path.splitext(fname)[0], str(e))
                         log.error("Registering %s as Helvetica alias", fname)
                         self.fontsAlias[fname] = 'Helvetica'
-                    except Exception, e:
+                    except Exception:
+                        _, e, _ = sys.exc_info()
                         log.critical("Error processing font %s: %s",
                             fname, str(e))
                         continue
@@ -591,10 +593,12 @@ class StyleSheet(object):
             if fname:
                 try:
                     return rson_loads(open(fname).read())
-                except ValueError, e: # Error parsing the JSON data
+                except ValueError: # Error parsing the JSON data
+                    _, e, _ = sys.exc_info()
                     log.critical('Error parsing stylesheet "%s": %s'%\
                         (fname, str(e)))
-                except IOError, e: #Error opening the ssheet
+                except IOError: #Error opening the ssheet
+                    _, e, _ = sys.exc_info()
                     log.critical('Error opening stylesheet "%s": %s'%\
                         (fname, str(e)))
 

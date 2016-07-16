@@ -57,12 +57,14 @@ try:
     import fcntl
     def _lock_file(file, content):
         fcntl.flock(file.fileno(), fcntl.LOCK_EX)
-except ImportError, ex:
+except ImportError:
+    _, ex, _ = sys.exc_info()
     try:
         import msvcrt
         def _lock_file(file, content):
             msvcrt.locking(file.fileno(), msvcrt.LK_LOCK, len(content))
-    except ImportError, ex:
+    except ImportError:
+        _, ex, _ = sys.exc_info()
         def _lock_file(file, content):
             pass
 

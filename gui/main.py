@@ -96,7 +96,8 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
                     settings_overrides={'warning_stream':warnings})
                 doctree_queue.put([doctree,warnings.getvalue()])
                 pdf_queue.put(render(doctree, preview))
-            except Exception, e:
+            except Exception:
+                _, e, _ = sys.exc_info()
                 # Don't crash ever ;-)
                 print e
                 pass
@@ -498,7 +499,8 @@ class Main(QtGui.QMainWindow):
         try:
             json.loads(style)
             self.statusMessage.setText('')
-        except ValueError, e:
+        except ValueError:
+            _, e, _ = sys.exc_info()
             s=str(e)
             if s == 'No JSON object could be decoded':
                 pos=0
