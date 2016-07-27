@@ -141,6 +141,7 @@ class RstToPdf(object):
                  show_frame=False,
                  highlightlang='python', # this one is only used by Sphinx
                  basedir=os.getcwd(),
+                 outdir=os.getcwd(),
                  splittables=False,
                  blank_first_page=False,
                  first_page_on_right=False,
@@ -159,6 +160,7 @@ class RstToPdf(object):
         self.blank_first_page=blank_first_page
         self.splittables=splittables
         self.basedir=basedir
+        self.outdir=outdir
         self.language, self.docutils_language = get_language_available(
             language)[:2]
         self.doc_title = ""

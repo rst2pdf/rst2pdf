@@ -145,6 +145,11 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             imgname = os.path.join(client.basedir,uri)
+            # Sphinx extensions 'normally' put generated images in outdir,
+            # and insert relevant (to outdir) image file name to the doc node.
+            # Here, we have no idea which is the case. Try both.
+            if not os.path.isfile(imgname):
+                imgname = os.path.join(client.outdir, uri)
         else:
             imgname = uri
         try:

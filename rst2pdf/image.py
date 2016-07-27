@@ -281,17 +281,17 @@ class MyImage (Flowable):
 
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
-            uri = os.path.join(client.basedir,uri)
+            imgname = os.path.join(client.basedir,uri)
+            if not os.path.isfile(imgname):
+                imgname = os.path.join(client.outdir, uri)
+                if not os.path.isfile(imgname):
+                    imgname = missing
+
         else:
-            uri, _ = urllib.urlretrieve(uri)
-            client.to_unlink.append(uri)
+            imgname, _ = urllib.urlretrieve(uri)
+            client.to_unlink.append(imgname)
 
-        srcinfo = client, uri
-        # Extract all the information from the URI
-        imgname, extension, options = self.split_uri(uri)
-
-        if not os.path.isfile(imgname):
-            imgname = missing
+        srcinfo = client, imgname
 
         scale = float(node.get('scale', 100))/100
         size_known = False
