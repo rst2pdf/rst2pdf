@@ -1513,7 +1513,7 @@ def patch_PDFDate():
     '''Patch reportlab.pdfdoc.PDFDate so the invariant dates work correctly'''
     from reportlab.pdfbase import pdfdoc
     import reportlab
-    class PDFDate:
+    class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
         # gmt offset now suppported
         def __init__(self, invariant=True, dateFormatter=None):
