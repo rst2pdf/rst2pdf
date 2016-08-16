@@ -51,7 +51,7 @@ except ImportError:
 tests_require = ['pyPdf']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
-images_require = ['PIL']
+images_require = ['PILLOW']
 pdfimages_require = ['pyPdf','PythonMagick']
 pdfimages2_require = ['pyPdf','SWFTools']
 svgsupport_require = ['svg2rlg']
