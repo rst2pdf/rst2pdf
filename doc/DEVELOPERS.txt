@@ -16,7 +16,7 @@ The best way to do *that* is through testing and documenting.
 So, if you want to do something inside rst2pdf, you are welcome, but...
 
 * Create an Issue for the task. That's easy, just go to 
-  http://rst2pdf.googlecode.com and do it.
+  https://github.com/rst2pdf/rst2pdf/issues and do it.
 
 * If you intend to fix a bug:
 
