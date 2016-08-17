@@ -43,7 +43,7 @@ def loadFonts():
     """
     Search the system and build lists of available fonts.
     """
-    
+
     if not afmList and not pfbList and not ttfList:
         # Find all ".afm" and ".pfb" files files
         def findFontFiles(_, folder, names):
@@ -65,13 +65,13 @@ def loadFonts():
                 font = TTFontFile(ttf)
             except TTFError:
                 continue
-            
+
             #print ttf, font.name, font.fullName, font.styleName, font.familyName
             family=font.familyName.lower()
             fontName=font.name
             baseName = os.path.basename(ttf)[:-4]
             fullName=font.fullName
-            
+
             fonts[fontName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower().replace('italic','oblique')] = (ttf, ttf, family)
@@ -91,7 +91,7 @@ def loadFonts():
             # weights? We get a random one.
             else:
                 families[family][0] = fontName
-                
+
         # Now we have full afm and pbf lists, process the
         # afm list to figure out family name, weight and if
         # it's italic or not, as well as where the
@@ -227,7 +227,8 @@ def findTTFont(fname):
                 fontdir += u"\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
-            except WindowsError, err:
+            except WindowsError:
+                _, err, _ = sys.exc_info()
                 fontkey.Close()
                 return None
 
@@ -350,13 +351,13 @@ def guessFont(fname):
 
     else:
         family, mod = fname.rsplit('-', 1)
-        
+
     mod = mod.lower()
     if "oblique" in mod or "italic" in mod:
         italic = 1
     if "bold" in mod:
         bold = 1
-     
+
     if bold+italic == 0: #Not really a modifier
         return fname, 0
     return family, bold + 2*italic

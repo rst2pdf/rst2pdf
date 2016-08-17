@@ -229,7 +229,8 @@ try:
                     # Something went very wrong with graphviz, and
                     # sphinx should have given an error already
                     return []
-            except sphinx.ext.graphviz.GraphvizError, exc:
+            except sphinx.ext.graphviz.GraphvizError:
+                _, exc, _ = sys.exc_info()
                 log.error('dot code %r: ' % node['code'] + str(exc))
                 return [Paragraph(node['code'],client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]

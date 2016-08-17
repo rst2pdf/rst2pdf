@@ -65,7 +65,8 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         try:
             p = subprocess.Popen(args.split(), stdout=tfile,
                                  stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        except OSError, err:
+        except OSError:
+            _, err, _ = sys.exc_info()
             if err.errno != errno.ENOENT:
                 raise
             raise PlantUmlError('plantuml command %r cannot be run'
@@ -73,7 +74,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         serr = p.communicate(node['uml'].encode('utf-8'))[1]
         if p.returncode != 0:
             raise PlantUmlError('error while running plantuml\n\n' + serr)
-        
+
         # Add Image node with the right image
         return [MyImage(tfile.name, client=client)]
 

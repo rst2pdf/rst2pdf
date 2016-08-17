@@ -44,7 +44,7 @@ class BaseExec(object):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 preexec_fn=None,   # Callable object in child process
-                close_fds=False,   
+                close_fds=False,
                 shell=False,
                 cwd=None,
                 env=None,
@@ -80,7 +80,8 @@ class BaseExec(object):
                 sys.stdout.flush()
                 print >> sys.stderr, traceback.format_exc()
                 sys.stderr.write(chr(1))
-            except SystemExit, s:
+            except SystemExit:
+                _, s, _ = sys.exc_info()
                 sys.stdout.flush()
                 code = s.code
                 try:
