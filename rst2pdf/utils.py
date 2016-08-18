@@ -75,8 +75,12 @@ try:
     from reportlab.platypus.flowables import Spacer
     from reportlab.platypus.frames import Frame
     from xhtml2pdf.xhtml2pdf_reportlab import PmlBaseDoc, PmlPageTemplate
-    from xhtml2pdf.util import pisaTempFile, getBox, pyPdf
+    from xhtml2pdf.util import pisaTempFile, getBox
     import xhtml2pdf.parser as pisa_parser
+    try:
+        from xhtml2pdf.util import pyPdf
+    except ImportError:
+        from xhtml2pdf.util import PyPDF2 as pyPdf
 except ImportError:
     try:
         from sx.pisa3.pisa_util import COLOR_BY_NAME
