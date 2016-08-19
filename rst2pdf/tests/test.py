@@ -3,13 +3,14 @@
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import object
 from autotest import MD5Info, PathInfo, globjoin
 from autotest import run_single, dirname, checkmd5
 
 import sys, os
 import nose.plugins.skip
 
-class RunTest:
+class RunTest(object):
     def __init__(self,f):
         basename = os.path.basename(f)
         self.description = basename 
@@ -82,7 +83,7 @@ def run_installed_single(inpfname):
     return checkinfo, errcode
 
 
-class RunInstalledTest:
+class RunInstalledTest(object):
     def __init__(self,f):
         basename = os.path.basename(f)
         self.description = basename 
@@ -113,7 +114,7 @@ class RunInstalledTest:
                 raise nose.plugins.skip.SkipTest
             assert key == 'good', '%s is not good: %s'%(f,key)
 
-class RunSphinxTest:
+class RunSphinxTest(object):
     def __init__(self,f):
         basename = os.path.basename(f[:-1])
         self.description = basename 

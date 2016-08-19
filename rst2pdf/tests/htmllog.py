@@ -25,7 +25,7 @@ def dumpinfo():
     if not mydict:
         print('\nNo log files found')
     exts = '.txt .style .cli'.split()
-    for name, values in sorted(mydict.iteritems()):
+    for name, values in sorted(mydict.items()):
         print('<h2>')
         print('\nCategory "%s"\n        (%d tests)\n' % (name, len(values)))
         print('</h2>')

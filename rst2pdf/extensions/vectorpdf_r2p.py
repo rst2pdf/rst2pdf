@@ -4,6 +4,8 @@
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import str
+from builtins import object
 import sys
 import os
 from weakref import WeakKeyDictionary
@@ -23,7 +25,7 @@ try:
     from rst2pdf.opt_imports import LazyImports
 except ImportError:
     # This is just to make nosetest happy on the CI server
-    class Flowable:
+    class Flowable(object):
         pass
 
         # TODO:  Looks the same as for other images, because I
