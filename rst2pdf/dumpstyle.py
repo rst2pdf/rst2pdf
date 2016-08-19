@@ -9,6 +9,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import division
+from builtins import str
+from past.builtins import basestring
 
 import sys
 import os
@@ -72,7 +74,7 @@ def dumps(obj, forcestyledict=True):
         if not obj:
             result.append('{}')
             return
-        obj = sorted(obj.iteritems())
+        obj = sorted(obj.items())
         multiline = indent and ( len(obj) > 2 or
                     len(obj) == 2 and (
                          isinstance(obj[0][-1], (list, dict)) or
@@ -99,7 +101,7 @@ def dumps(obj, forcestyledict=True):
     dumpfuncs = {float: dofloat, int: doint, basestring: dostr,
                      list: dolist, dict: dodict, type(None): donone}
 
-    dumpfuncs = dumpfuncs.items()
+    dumpfuncs = list(dumpfuncs.items())
 
     def dumprecurse(result, obj, indent='\n', indentnow=True):
         if indentnow:

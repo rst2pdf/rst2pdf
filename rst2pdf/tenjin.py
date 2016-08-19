@@ -43,6 +43,10 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"
@@ -111,7 +115,7 @@ def _create_helpers_module():
         """
         if val is None:              return ''
         if isinstance(val, str):     return val
-        if isinstance(val, unicode): return val
+        if isinstance(val, str): return val
         return str(val)
 
     def generate_tostrfunc(encoding):
@@ -128,7 +132,7 @@ def _create_helpers_module():
         def to_str(val):
             if val is None:               return ''
             if isinstance(val, str):      return val
-            if isinstance(val, unicode):  return val.encode(encoding)
+            if isinstance(val, str):  return val.encode(encoding)
             return str(val)
         return to_str
 
@@ -211,7 +215,7 @@ def _create_helpers_module():
 
     def _decode_params(s):
         """decode <`#...#`> and <`$...$`> into #{...} and ${...}"""
-        from urllib import unquote
+        from urllib.parse import unquote
         dct = { 'lt':'<', 'gt':'>', 'amp':'&', 'quot':'"', '#039':"'", }
         def unescape(s):
             #return s.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&#039;', "'").replace('&amp;',  '&')
@@ -952,7 +956,7 @@ class Engine(object):
 
     def _store_cachefile_for_script(self, cache_filename, template):
         s = template.script
-        if template.encoding and isinstance(s, unicode):
+        if template.encoding and isinstance(s, str):
             s = s.encode(template.encoding)
             #s = s.encode('utf-8')
         if template.args is not None:
