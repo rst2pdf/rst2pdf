@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 from autotest import MD5Info, PathInfo, globjoin
 from autotest import run_single, dirname, checkmd5
 
@@ -20,7 +23,7 @@ class RunTest:
             self.skip=True
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
-            exec f in info
+            exec(f, info)
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
@@ -93,7 +96,7 @@ class RunInstalledTest:
             self.skip=True
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
-            exec f in info
+            exec(f, info)
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
@@ -125,7 +128,7 @@ class RunSphinxTest:
             self.skip=True
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
-            exec f in info
+            exec(f, info)
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically

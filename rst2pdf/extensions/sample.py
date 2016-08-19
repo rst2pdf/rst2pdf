@@ -1,4 +1,7 @@
-print '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+print('''
 This is a sample rst2pdf extension.
 
 Because it is named 'sample.py' you can get rst2pdf to import it by
@@ -9,7 +12,7 @@ monkey-patch any necessary changes into rst2pdf.
 
 An extension can live either in the extensions subdirectory, or
 anywhere on the python path.
-'''
+''')
 
 def install(createpdf, options):
     ''' This function is called with an object with the createpdf

@@ -18,6 +18,9 @@ A wrapper around subprocess that performs two functions:
 Currently only works under Linux.
 
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import sys
 import subprocess
@@ -78,7 +81,7 @@ class BaseExec(object):
                 preexec_fn()
             except Exception:
                 sys.stdout.flush()
-                print >> sys.stderr, traceback.format_exc()
+                print(traceback.format_exc(), file=sys.stderr)
                 sys.stderr.write(chr(1))
             except SystemExit:
                 _, s, _ = sys.exc_info()
@@ -89,7 +92,7 @@ class BaseExec(object):
                 except:
                     pass
                 if code:
-                    print >> sys.stderr, code
+                    print(code, file=sys.stderr)
                     sys.stderr.write(chr(1))
             else:
                 sys.stdout.flush()
@@ -314,7 +317,7 @@ def default_logger(resultlist, data=None, data2=None):
         resultlist.append(data)
     if data2 is None:
         data2 = data
-    print data2
+    print(data2)
 
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
@@ -355,36 +358,36 @@ def textexec(*arg, **kw):
 if __name__ == '__main__':
 
     def goodfunc():
-        print "Good func", sys.argv
+        print("Good func", sys.argv)
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
         #raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
-        print "Starting subprocess"
+        print("Starting subprocess")
         sys.stdout.flush()
         for i in range(10):
             time.sleep(0.2)
-            print "This is line", i
+            print("This is line", i)
             sys.stdout.flush()
-        print >> sys.stderr, "This is an error message"
-        print "Ending subprocess"
+        print("This is an error message", file=sys.stderr)
+        print("Ending subprocess")
         if sys.argv[1] == 'die':
             raise SystemExit('Deliberately croaking')
     else:
-        print 'Calling good python_proc 1'
+        print('Calling good python_proc 1')
         textexec('goodfunc', '1', python_proc=goodfunc)
-        print 'Calling bad python_proc 1'
+        print('Calling bad python_proc 1')
         textexec('badfunc', '1', python_proc=badfunc)
-        print 'Calling good python_proc 2'
+        print('Calling good python_proc 2')
         textexec('goodfunc', '2', python_proc=goodfunc)
-        print 'Calling bad python_proc 2'
+        print('Calling bad python_proc 2')
         textexec('badfunc', '2', python_proc=badfunc)
-        print "Calling myself"
+        print("Calling myself")
         textexec(__file__, 'subprocess')
-        print "Calling myself with kill time"
+        print("Calling myself with kill time")
         textexec(__file__, 'subprocess', timeout=0.8)
-        print "Calling myself with forced error exit"
+        print("Calling myself with forced error exit")
         textexec(__file__, 'die')
-        print 'All Done'
+        print('All Done')
