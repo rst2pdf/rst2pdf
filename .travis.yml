@@ -8,7 +8,7 @@ before_install:
   -O /home/travis/.cache/miniconda.sh
 - bash /home/travis/.cache/miniconda.sh -b -p /home/travis/miniconda
 - export PATH=/home/travis/miniconda/bin:$PATH
-- conda install -y pytest reportlab Pygments
+- conda install -y pytest reportlab Pygments future
 - pip install pdfrw pyPdf
 - python setup.py install
 
