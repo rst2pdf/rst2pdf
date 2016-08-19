@@ -3,6 +3,7 @@
 '''
 Creates a rst2pdf stylesheet for each pygments style.
 '''
+from __future__ import unicode_literals
 
 import sys
 import os

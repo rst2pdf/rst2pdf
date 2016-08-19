@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''A completely generic, data-driven, configuration dialog'''
+from __future__ import unicode_literals
 
 class ConfigDialog(QtGui.QDialog):
   def __init__(self, parent):

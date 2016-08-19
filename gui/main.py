@@ -3,6 +3,7 @@
 
 """The user interface for our app"""
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import os,sys,tempfile,re,functools,time,types,glob,codecs
 from pprint import pprint

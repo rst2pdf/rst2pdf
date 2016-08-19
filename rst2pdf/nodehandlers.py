@@ -8,6 +8,7 @@
 # The act of importing them wires them in.
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 #$URL$

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 # See LICENSE.txt for licensing terms
 try:
     import pkg_resources

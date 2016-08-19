@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 """Singleton config object"""
+from __future__ import unicode_literals
 
 
 import ConfigParser

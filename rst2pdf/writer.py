@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from __future__ import unicode_literals
 from StringIO import StringIO
 
 from docutils import writers

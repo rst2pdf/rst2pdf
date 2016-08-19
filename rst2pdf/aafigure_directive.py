@@ -26,6 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 from docutils import nodes
 from docutils.nodes import General, Inline, Element, literal_block
 from docutils.parsers.rst import directives

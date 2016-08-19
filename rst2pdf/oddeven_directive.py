@@ -2,6 +2,7 @@
 
 """A custom directive that allows alternative contents to be generated
 on odd and even pages."""
+from __future__ import unicode_literals
 
 from docutils.parsers import rst
 from docutils.nodes import Admonition, Element

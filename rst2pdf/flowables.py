@@ -5,6 +5,7 @@
 #$Revision$
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 __docformat__ = 'reStructuredText'
 
 from copy import copy

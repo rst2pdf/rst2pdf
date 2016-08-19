@@ -39,6 +39,7 @@
 
    See help of tenjin.Template and tenjin.Engine for details.
 """
+from __future__ import unicode_literals
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"

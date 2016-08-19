@@ -2,6 +2,7 @@
 # See LICENSE.txt for licensing terms
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
 from docutils.nodes import General, Inline, Element

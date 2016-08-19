@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import docutils
 
 class SectNumFolder(docutils.nodes.SparseNodeVisitor):

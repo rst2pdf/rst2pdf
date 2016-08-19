@@ -27,6 +27,7 @@
 
 """Define and register a code-block directive using pygments"""
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 
 # Requirements

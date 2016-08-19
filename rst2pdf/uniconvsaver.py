@@ -25,6 +25,7 @@
 #unload = 1
 ###End
 
+from __future__ import unicode_literals
 from math import atan2, pi
 import PIL
 from app import _,Bezier, EmptyPattern, Rotation, Translation, _sketch

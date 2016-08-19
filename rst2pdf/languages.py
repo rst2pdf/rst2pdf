@@ -4,6 +4,7 @@
 #$Date$
 #$Revision$
 
+from __future__ import unicode_literals
 from docutils.languages import get_language as get_language
 
 from rst2pdf.log import log

@@ -18,6 +18,7 @@ When the SphinxHandler class is instantiated, the two dictionaries
 are combined into the instantiated object.
 '''
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 from copy import copy
 

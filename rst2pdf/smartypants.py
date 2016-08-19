@@ -372,6 +372,7 @@ smartypants.py license::
 
 """
 from __future__ import print_function
+from __future__ import unicode_literals
 
 default_smartypants_attr = "1"
 

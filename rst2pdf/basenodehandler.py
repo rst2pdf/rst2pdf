@@ -34,6 +34,7 @@ type of docutils node, then default processing will occur and a warning
 will be logged.
 '''
 from __future__ import absolute_import
+from __future__ import unicode_literals
 
 import types
 import inspect
