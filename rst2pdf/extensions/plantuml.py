@@ -9,6 +9,9 @@ Ergo:
     :license: BSD, (he says see LICENSE but the file is not there ;-)
 
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import errno
 from docutils import nodes

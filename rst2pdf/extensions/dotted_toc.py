@@ -37,6 +37,9 @@
 #
 #####################################################################################
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 from copy import copy
 import reportlab
 from reportlab.platypus.tableofcontents import drawPageNumbers

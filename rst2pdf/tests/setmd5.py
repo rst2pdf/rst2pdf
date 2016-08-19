@@ -15,6 +15,9 @@ setmd5 takes a result code and a list of tests, and changes
 the test results to that code.
 
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import sys
 import os
