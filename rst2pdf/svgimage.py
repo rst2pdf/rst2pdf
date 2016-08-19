@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from __future__ import absolute_import
 import os
 
 from reportlab.platypus import Flowable, Paragraph
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-from log import log
-from opt_imports import LazyImports
+from .log import log
+from .opt_imports import LazyImports
 
 class SVGImage(Flowable):
 

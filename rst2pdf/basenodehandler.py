@@ -33,13 +33,14 @@ If no NodeHandler subclass has been created to handle that particular
 type of docutils node, then default processing will occur and a warning
 will be logged.
 '''
+from __future__ import absolute_import
 
 import types
 import inspect
-from log import log, nodeid
-from smartypants import smartyPants
+from .log import log, nodeid
+from .smartypants import smartyPants
 import docutils.nodes
-from flowables import BoundByWidth, TocEntry
+from .flowables import BoundByWidth, TocEntry
 
 
 class MetaHelper(type):
@@ -208,7 +209,7 @@ class NodeHandler(object):
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
-                if client.styles.StyleSheet.has_key(node['classes'][0]):
+                if node['classes'][0] in client.styles.StyleSheet:
                     style = client.styles[node['classes'][0]]
                 else:
                     log.info("Unknown class %s, ignoring. [%s]",

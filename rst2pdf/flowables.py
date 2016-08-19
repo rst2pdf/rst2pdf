@@ -4,6 +4,7 @@
 #$Date$
 #$Revision$
 
+from __future__ import absolute_import
 __docformat__ = 'reStructuredText'
 
 from copy import copy
@@ -12,7 +13,7 @@ from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
 
-from opt_imports import Paragraph, NullDraw
+from .opt_imports import Paragraph, NullDraw
 
 from reportlab.lib.units import *
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
@@ -20,8 +21,8 @@ from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
 
-import styles
-from log import log
+from . import styles
+from .log import log
 
 import re
 from xml.sax.saxutils import unescape, escape
@@ -264,7 +265,7 @@ def tablepadding(padding):
 
 class SplitTable(DelayedTable):
     def __init__(self, data, colWidths, style, padding=3):
-        if len(data) <>1 or len(data[0]) <>2:
+        if len(data) !=1 or len(data[0]) !=2:
             log.error('SplitTable can only be 1 row and two columns!')
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
@@ -728,7 +729,7 @@ class BoundByWidth(Flowable):
         maxWidth -= (self.pad[1]+self.pad[3])
         self.width, self.height = _listWrapOn(self.content, maxWidth, None)
         if self.width > maxWidth:
-            if self.mode <> 'shrink':
+            if self.mode != 'shrink':
                 self.scale = 1.0
                 log.warning("BoundByWidth too wide to fit in frame (%s > %s): %s",
                     self.width,maxWidth,self.identity())
@@ -913,7 +914,7 @@ if reportlab.Version == '2.1':
         xs.link = None
 
     # Look behind you! A three-headed monkey!
-    pla_para._do_post_text.func_code = _do_post_text.func_code
+    pla_para._do_post_text.__code__ = _do_post_text.__code__
     ############### End of the ugly
 
 class MyTableOfContents(TableOfContents):

@@ -17,17 +17,18 @@ which is kept separate from the regular one.
 When the SphinxHandler class is instantiated, the two dictionaries
 are combined into the instantiated object.
 '''
+from __future__ import absolute_import
 
 from copy import copy
 
-from log import nodeid, log
-from flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
-from image import MyImage, VectorPdf
+from .log import nodeid, log
+from .flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
+from .image import MyImage, VectorPdf
 
-from opt_imports import Paragraph, sphinx
+from .opt_imports import Paragraph, sphinx
 
-from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
-import math_flowable
+from .nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+from . import math_flowable
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 import docutils

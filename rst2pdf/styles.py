@@ -4,6 +4,7 @@
 #$Date$
 #$Revision$
 
+from __future__ import absolute_import
 import os
 import sys
 import re
@@ -27,10 +28,10 @@ import reportlab.rl_config
 
 from rst2pdf.rson import loads as rson_loads
 
-import findfonts
-from log import log
+from . import findfonts
+from .log import log
 
-from opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
 
 HAS_WORDAXE = wordaxe is not None
 
@@ -538,7 +539,7 @@ class StyleSheet(object):
         if not re.match("^[a-z](-?[a-z0-9]+)*$", key):
             key = docutils.nodes.make_id(key)
 
-        if self.StyleSheet.has_key(key):
+        if key in self.StyleSheet:
             return self.StyleSheet[key]
         else:
             if key.startswith('pygments'):
@@ -779,7 +780,7 @@ class StyleSheet(object):
         The styles that are *later* in the list will have priority.
         '''
 
-        validst = [x for x in styles if self.StyleSheet.has_key(x)]
+        validst = [x for x in styles if x in self.StyleSheet]
         newname = '_'.join(['merged']+validst)
         validst = [self[x] for x in validst]
         newst=copy(validst[0])

@@ -371,6 +371,7 @@ smartypants.py license::
 .. _Movable Type: http://www.movabletype.org/
 
 """
+from __future__ import print_function
 
 default_smartypants_attr = "1"
 
@@ -857,7 +858,7 @@ if __name__ == "__main__":
 	from docutils.core import publish_string
 	docstring_html = publish_string(__doc__, writer_name='html')
 
-	print docstring_html
+	print(docstring_html)
 
 
 	# Unit test output goes out stderr.  No worries.

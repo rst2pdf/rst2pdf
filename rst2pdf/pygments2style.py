@@ -3,10 +3,11 @@
 '''
 Creates a rst2pdf stylesheet for each pygments style.
 '''
+from __future__ import absolute_import
 
 import sys
 import os
-import dumpstyle
+from . import dumpstyle
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
 

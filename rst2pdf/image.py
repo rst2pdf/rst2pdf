@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 import os
 from os.path import abspath, dirname, expanduser, join
 import sys
 import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
-from log import log, nodeid
+from .log import log, nodeid
 from reportlab.lib.units import *
 import glob
 import urllib
 
-from opt_imports import LazyImports
+from .opt_imports import LazyImports
 
-from svgimage import SVGImage
+from .svgimage import SVGImage
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
