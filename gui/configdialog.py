@@ -2,6 +2,9 @@
 
 '''A completely generic, data-driven, configuration dialog'''
 from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 class ConfigDialog(QtGui.QDialog):
   def __init__(self, parent):

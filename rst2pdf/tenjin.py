@@ -40,6 +40,9 @@
    See help of tenjin.Template and tenjin.Engine for details.
 """
 from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"
