@@ -24,8 +24,9 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
-from builtins import str
-from builtins import next
+from future.utils import implements_iterator
+
+from builtins import str, bytes, next
 from past.builtins import basestring
 from builtins import object
 
@@ -147,8 +148,10 @@ class Tokenizer(list):
             self.client = client
 
             # Deal with 8 bit bytes for now
-            if isinstance(source, str):
-                source = source.encode('utf-8')
+            if isinstance(source, bytes):
+                source = str(source)
+            # if isinstance(source, str):
+            #     source = source.encode('utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
             source = source.replace('\r\n', '\n').replace('\r', '\n')
@@ -174,7 +177,7 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            self *= len(sourcelist) / 2 + 1
+            self *= len(sourcelist) // 2 + 1
             index = 0
 
             # Create all the tokens
@@ -274,7 +277,7 @@ class BaseObjects(object):
         ''' By default, RSON objects are dictionaries that
             allow attribute access to their existing contents.
         '''
-        
+
         def __getattr__(self, key):
             return self[key]
         def __setattr__(self, key, value):
@@ -902,8 +905,8 @@ class RsonParser(object):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
-            next = tokens.__next__
-            value, token = parse_recurse([next()], next, tokens)
+            nextval = iter(tokens).__next__
+            value, token = parse_recurse([nextval()], nextval, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)
 
