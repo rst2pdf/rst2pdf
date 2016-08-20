@@ -1,0 +1,15 @@
+language: python
+python:
+- 2.7
+- 3.5
+
+before_install:
+- pip install nose reportlab Pygments sphinx pillow pdfrw pyPdf Jinja2 coverage
+- pip install -e git+https://github.com/NEOatNHNG/wordaxe.git@futurize#egg=wordaxe
+- python setup.py install
+- python bootstrap.py
+- ./bin/buildout
+
+script:
+- nosetests -i regulartest -i sphinxtest
+

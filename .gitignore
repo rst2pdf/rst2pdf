@@ -1,3 +1,6 @@
-*.egg-info
-__pycache__
 *.pyc
+__pycache__
+*.egg-info
+bin/
+develop-eggs/
+eggs/
