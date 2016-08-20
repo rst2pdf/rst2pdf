@@ -14,5 +14,5 @@ before_install:
 - python setup.py install
 
 script:
-- python bootstrap.py && ./bin/buildout && ./bin/nosestests -i regulartest -i sphinxtest
+- python bootstrap.py && ./bin/buildout && nosestests -i regulartest -i sphinxtest
 
