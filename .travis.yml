@@ -4,17 +4,11 @@ python:
 - 3.5
 
 before_install:
-# - wget http://repo.continuum.io/miniconda/Miniconda${TRAVIS_PYTHON_VERSION:0:1}-latest-Linux-x86_64.sh
-#   -O /home/travis/.cache/miniconda.sh
-# - bash /home/travis/.cache/miniconda.sh -b -p /home/travis/miniconda
-# - export PATH=/home/travis/miniconda/bin:$PATH
-# - conda install -y nose reportlab Pygments sphinx
-# - conda install -y -c anaconda pillow
-- pip install nose reportlab Pygments sphinx pillow pdfrw pyPdf Jinja2
+- pip install nose reportlab Pygments sphinx pillow pdfrw pyPdf Jinja2 coverage
 - python setup.py install
 - python bootstrap.py
 - ./bin/buildout
 
 script:
-- nosestests -i regulartest -i sphinxtest
+- ./bin/nosestests -i regulartest -i sphinxtest
 
