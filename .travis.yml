@@ -7,8 +7,7 @@ before_install:
 - pip install nose reportlab Pygments sphinx pillow pdfrw pyPdf Jinja2 coverage
 - python setup.py install
 - python bootstrap.py
-- ./bin/buildout
 
 script:
-- ./bin/nosestests -i regulartest -i sphinxtest
+- ./bin/buildout && ./bin/nosestests -i regulartest -i sphinxtest
 
