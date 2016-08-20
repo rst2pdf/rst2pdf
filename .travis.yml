@@ -8,8 +8,9 @@ before_install:
   -O /home/travis/.cache/miniconda.sh
 - bash /home/travis/.cache/miniconda.sh -b -p /home/travis/miniconda
 - export PATH=/home/travis/miniconda/bin:$PATH
-- conda install -y nose reportlab Pygments
-- pip install pdfrw pyPdf
+- conda install -y nose reportlab Pygments sphinx
+- conda install -c anaconda pillow
+- pip install pdfrw pyPdf Jinja2
 - python setup.py install
 
 script:
