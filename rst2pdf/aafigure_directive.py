@@ -25,14 +25,18 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
 from docutils import nodes
 from docutils.nodes import General, Inline, Element, literal_block
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
-from opt_imports import aafigure
-from log import log
+from .opt_imports import aafigure
+from .log import log
 
 WARNED=False
 

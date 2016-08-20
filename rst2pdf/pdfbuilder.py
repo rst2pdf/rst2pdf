@@ -12,6 +12,10 @@
     :copyright: Copyright 2009 Roberto Alsina, Wojtek Walczak
     :license: BSD, see LICENSE for details.
 """
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
 
 import logging
 try:
@@ -250,7 +254,7 @@ class PDFBuilder(Builder):
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
             self.info(' ' + indexname, nonl=1)
-            print
+            print()
 
             output=['DUMMY','=====','',
                     '.. _modindex:\n\n']
@@ -823,7 +827,7 @@ def try_parse(src):
         return True
     try:
         parser.suite(src)
-    except SyntaxError, UnicodeEncodeError:
+    except SyntaxError as UnicodeEncodeError:
         return False
     else:
         return True

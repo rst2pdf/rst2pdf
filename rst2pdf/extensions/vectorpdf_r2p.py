@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import sys
 import os
 from weakref import WeakKeyDictionary

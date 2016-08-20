@@ -33,6 +33,9 @@ Usage:
       tkdiff oldlog.txt newlog.txt
 10) Check in the fixed checksums
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import os
 import glob
@@ -62,7 +65,7 @@ def getcategories():
 def dumpinfo():
     mydict = getcategories()
     if not mydict:
-        print '\nNo log files found'
+        print('\nNo log files found')
     migrate = set('good bad incomplete'.split())
     for checksum_result, values in sorted(mydict.iteritems()):
         if checksum_result not in migrate:

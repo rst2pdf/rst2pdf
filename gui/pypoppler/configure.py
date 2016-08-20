@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import os
 import sipconfig
 import PyQt4.pyqtconfig as pyqtconfig
@@ -11,7 +14,7 @@ build_file = "QtPoppler.sbf"
 config = pyqtconfig.Configuration()
 
 
-print dir(config)
+print(dir(config))
 # Get the extra SIP flags needed by the imported qt module.  Note that
 # this normally only includes those flags (-x and -t) that relate to SIP's
 # versioning system.

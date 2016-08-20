@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """The user interface for our app"""
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
 
 import os,sys,tempfile,re,functools,time,types,glob,codecs
 from pprint import pprint
@@ -67,7 +71,7 @@ from pygments import highlight
 from pygments.lexers import *
 from pygments.formatters import HtmlFormatter
 
-StringTypes=types.StringTypes+(QtCore.QString,)
+StringTypes=str+(QtCore.QString,)
 
 
 def renderQueue(render_queue, pdf_queue, doctree_queue):
@@ -99,7 +103,7 @@ def renderQueue(render_queue, pdf_queue, doctree_queue):
             except Exception:
                 _, e, _ = sys.exc_info()
                 # Don't crash ever ;-)
-                print e
+                print(e)
                 pass
         if os.getppid()==1: # Parent died
             sys.exit(0)
@@ -119,12 +123,12 @@ class Main(QtGui.QMainWindow):
         # We get doctrees for the outline viewer
         self.doctree_queue = Queue()
 
-        print 'Starting background renderer...',
+        print('Starting background renderer...', end=' ')
         self.renderProcess=Process(target = renderQueue,
             args=(self.render_queue, self.pdf_queue, self.doctree_queue))
         self.renderProcess.daemon=True
         self.renderProcess.start()
-        print 'DONE'
+        print('DONE')
 
         # This is always the same
         self.ui=Ui_MainWindow()
@@ -240,7 +244,7 @@ class Main(QtGui.QMainWindow):
 
     def returnFocus(self):
         """after the search bar closes, focus on the editing widget"""
-        print 'RF:', self.ui.tabs.currentIndex()
+        print('RF:', self.ui.tabs.currentIndex())
         if self.ui.tabs.currentIndex()==0:
             self.ui.text.setFocus()
         else:
@@ -252,7 +256,7 @@ class Main(QtGui.QMainWindow):
     def doFind(self, backwards=False):
 
         flags=QtGui.QTextDocument.FindFlags()
-        print flags
+        print(flags)
         if backwards:
             flags=QtGui.QTextDocument.FindBackward
         if self.ui.searchWidget.ui.matchCase.isChecked():
@@ -260,7 +264,7 @@ class Main(QtGui.QMainWindow):
 
         text=unicode(self.ui.searchWidget.ui.text.text())
 
-        print 'Serching for:',text
+        print('Serching for:',text)
 
         if self.ui.tabs.currentIndex()==0:
             r=self.ui.text.find(text,flags)
@@ -467,14 +471,14 @@ class Main(QtGui.QMainWindow):
             self.on_actionSave_PDF_triggered()
 
     def on_tabs_currentChanged(self, i=None):
-        print 'IDX:',self.ui.tabs.currentIndex()
+        print('IDX:',self.ui.tabs.currentIndex())
         if self.ui.tabs.currentIndex() == 0:
             self.on_text_cursorPositionChanged()
-            print 'hooking text editor'
+            print('hooking text editor')
             self.hookEditToolbar(self.ui.text)
         else:
             self.on_style_cursorPositionChanged()
-            print 'hooking style editor'
+            print('hooking style editor')
             self.hookEditToolbar(self.ui.style)
 
     def on_style_cursorPositionChanged(self):
@@ -536,7 +540,7 @@ class Main(QtGui.QMainWindow):
             fd, style_file=tempfile.mkstemp()
             os.write(fd,style)
             os.close(fd)
-            print 'Loading styles from style_file'
+            print('Loading styles from style_file')
             flag = True
         if flag:
             if not preview:
@@ -568,7 +572,7 @@ class Main(QtGui.QMainWindow):
                     docutils.nodes.SparseNodeVisitor.__init__(self, document)
 
                 def visit_section(self, node):
-                    print 'SECTION:',node.line,
+                    print('SECTION:',node.line, end=' ')
                     item=QtGui.QTreeWidgetItem(["",str(node.line)])
                     if node.parent==self.doctree:
                         # Top level section
@@ -583,12 +587,12 @@ class Main(QtGui.QMainWindow):
                         self.nodeDict[id(node.parent)].setText(0,node.astext())
 
                 def visit_document(self,node):
-                    print 'DOC:',node.line
+                    print('DOC:',node.line)
 
-            print self.doctree.__class__
+            print(self.doctree.__class__)
             self.visitor=Visitor(self.doctree, self.ui.tree)
             self.doctree.walkabout(self.visitor)
-            print self.visitor.nodeDict
+            print(self.visitor.nodeDict)
 
         except Empty:
             pass
@@ -950,7 +954,7 @@ class PageTemplates(QtGui.QWidget):
         self.updatePreview()
 
     def on_frames_currentIndexChanged(self, index):
-        if type(index) != types.IntType: return
+        if type(index) != int: return
         if not self.template: return
         self.frameIndex=index
         self.frame=self.template['frames'][index]

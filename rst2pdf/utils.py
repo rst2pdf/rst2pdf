@@ -4,12 +4,16 @@
 #$Date$
 #$Revision$
 
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import division
 import shlex
 
-from flowables import *
+from .flowables import *
 import rst2pdf.flowables
-from styles import adjustUnits
-from log import log, nodeid
+from .styles import adjustUnits
+from .log import log, nodeid
 
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.
@@ -152,7 +156,7 @@ if HAS_XHTML2PDF:
             # print name, node.attributes.items()
             if name in ("style", "link"):
                 attr = pisaGetAttributes(context, name, node.attributes)
-                print " ", attr
+                print(" ", attr)
                 media = [x.strip() for x in attr.media.lower().split(",") if x.strip()]
                 # print repr(media)
 

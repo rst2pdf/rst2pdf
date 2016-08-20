@@ -26,6 +26,10 @@
 # ::
 
 """Define and register a code-block directive using pygments"""
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
 
 
 # Requirements
@@ -43,7 +47,7 @@ try:
 except ImportError:
     pass
 
-from log import log
+from .log import log
 
 
 # Customisation
@@ -88,7 +92,7 @@ class DocutilsInterface(object):
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
-            if self.language and unicode(self.language).lower() <> 'none':
+            if self.language and unicode(self.language).lower() != 'none':
                 lexer = get_lexer_by_name(self.language.lower(),
                                         **self.custom_args
                                         )
@@ -105,7 +109,7 @@ class DocutilsInterface(object):
         """join subsequent tokens of same token-type
         """
         tokens = iter(tokens)
-        (lasttype, lastval) = tokens.next()
+        (lasttype, lastval) = next(tokens)
         for ttype, value in tokens:
             if ttype is lasttype:
                 lastval += value

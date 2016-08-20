@@ -39,31 +39,35 @@
 #####################################################################################
 
 
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
 import os
 import tempfile
 import re
 from copy import copy
 
-from basenodehandler import NodeHandler
+from .basenodehandler import NodeHandler
 
 import docutils.nodes
-from oddeven_directive import OddEvenNode
+from .oddeven_directive import OddEvenNode
 import reportlab
 
-from aafigure_directive import Aanode
+from .aafigure_directive import Aanode
 
-from log import log, nodeid
-from utils import log, parseRaw, parseHTML
+from .log import log, nodeid
+from .utils import log, parseRaw, parseHTML
 from reportlab.platypus import Paragraph, TableStyle
 from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from flowables import Table, DelayedTable, SplitTable, Heading, \
+from .flowables import Table, DelayedTable, SplitTable, Heading, \
               MyIndenter, MyTableOfContents, MySpacer, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding, OddEven, \
               XPreformatted
 
-from opt_imports import wordaxe, Paragraph, ParagraphStyle
+from .opt_imports import wordaxe, Paragraph, ParagraphStyle
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):

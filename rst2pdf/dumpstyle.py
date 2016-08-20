@@ -5,11 +5,15 @@
     Or run the script to dump all .json in the styles directory
     to .style in the styles directory.
 '''
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import division
 
 import sys
 import os
 
-from rson import loads as rloads
+from .rson import loads as rloads
 from json import loads as jloads
 
 def dumps(obj, forcestyledict=True):
@@ -144,7 +148,7 @@ def fixstyle(obj):
 def convert(srcname):
     ''' Convert a single file from .json to .style
     '''
-    print srcname
+    print(srcname)
     sstr = open(srcname, 'rb').read()
     sdata = fixstyle(jloads(sstr))
     dstr = dumps(sdata)

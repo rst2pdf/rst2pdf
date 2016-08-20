@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 '''Run all tests under a profiling environment'''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import os
 import cProfile
@@ -15,7 +18,7 @@ def run():
 
     for f in os.listdir(inpdir):
         if f.endswith('.txt'): # Test case
-            print 'Running: ', f
+            print('Running: ', f)
             sheet=os.path.join(inpdir, f[:-4]+'.style')
             if os.path.exists(sheet):
                 sheet=[sheet]
@@ -31,6 +34,6 @@ def run():
                     source_path=fname,
                     )
             except:
-                print 'FAIL'
+                print('FAIL')
 
 cProfile.runctx( "run()", globals(), locals(), filename="rst2pdf.profile" )

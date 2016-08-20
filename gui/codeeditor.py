@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
 import sys
 from PyQt4 import QtGui, QtCore
 
@@ -54,7 +58,7 @@ class CodeEditor(QtGui.QPlainTextEdit):
                     self.fontMetrics().height(),
                     QtCore.Qt.AlignRight, number)
 
-            block = block.next()
+            block = next(block)
             top = bottom
             bottom = top + int(self.blockBoundingRect(block).height())
             blockNumber+=1
@@ -144,7 +148,7 @@ if __name__ == "__main__":
         except ValueError:
             _, e, _ = sys.exc_info()
             s=str(e)
-            print s
+            print(s)
             if s == 'No JSON object could be decoded':
                 pos=0
             elif s.startswith('Expecting '):
@@ -152,7 +156,7 @@ if __name__ == "__main__":
             elif s.startswith('Extra data'):
                 pos=int(s.split(' ')[-3])
             else:
-                print 'UNKNOWN ERROR'
+                print('UNKNOWN ERROR')
 
         # This makes a red bar appear in the line
         # containing position pos

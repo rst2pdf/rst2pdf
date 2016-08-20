@@ -39,10 +39,14 @@
 #####################################################################################
 
 
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import division
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
-from opt_imports import psyco
+from .opt_imports import psyco
 psyco.full()
 
 import sys
@@ -50,7 +54,7 @@ import os
 import tempfile
 import re
 import string
-import config
+from . import config
 import logging
 from cStringIO import StringIO
 from os.path import abspath, dirname, expanduser, join
@@ -214,14 +218,14 @@ class RstToPdf(object):
         # to do it only if it's requested
         if sphinx and sphinx_module:
             import sphinx.roles
-            from sphinxnodes import sphinxhandlers
+            from .sphinxnodes import sphinxhandlers
             self.highlightlang = highlightlang
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
             directives.register_directive('code', pygments_code_block_directive.code_block_directive)
-            import math_directive
+            from . import math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
@@ -548,7 +552,7 @@ class RstToPdf(object):
 
         if self.numbered_links:
             # Transform all links to sections so they show numbers
-            from sectnumlinks import SectNumFolder, SectRefExpander
+            from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
@@ -1356,7 +1360,7 @@ def main(_args=None):
 
     if options.version:
         from rst2pdf import version
-        print version
+        print(version)
         sys.exit(0)
 
     if options.quiet:
@@ -1374,7 +1378,7 @@ def main(_args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        print open(join(PATH, 'styles', 'styles.style')).read()
+        print(open(join(PATH, 'styles', 'styles.style')).read())
         sys.exit(0)
 
     filename = False
@@ -1519,7 +1523,7 @@ def patch_PDFDate():
         __PDFObject__ = True
         # gmt offset now suppported
         def __init__(self, invariant=True, dateFormatter=None):
-            now = (2000,01,01,00,00,00,0)
+            now = (2000,0o1,0o1,00,00,00,0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter
 

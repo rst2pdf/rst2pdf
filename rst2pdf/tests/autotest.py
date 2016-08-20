@@ -13,6 +13,9 @@ Automated testing for rst2pdf
 
 See LICENSE.txt for licensing terms
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 import os
 import sys
@@ -220,7 +223,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     info = MD5Info()
     if os.path.exists(md5path):
         f = open(md5path, 'rb')
-        exec f in info
+        exec(f, info)
         f.close()
 
     # Generate the current MD5
@@ -240,7 +243,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     resulttype = info.find(m, new_category)
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
-        print "Updating MD5 file"
+        print("Updating MD5 file")
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
@@ -345,10 +348,10 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
-    print
-    print 'Final checksum statistics:',
-    print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
-    print
+    print()
+    print('Final checksum statistics:', end=' ')
+    print(', '.join(sorted('%s=%s' % x for x in results.iteritems())))
+    print()
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'

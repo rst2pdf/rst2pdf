@@ -39,6 +39,10 @@
 
    See help of tenjin.Template and tenjin.Engine for details.
 """
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"
@@ -191,7 +195,7 @@ def _create_helpers_module():
         """
         frame = sys._getframe(1)
         context = frame.f_locals
-        if context.has_key(name):
+        if name in context:
             _buf = context['_buf']
             _buf.append(context[name])
             return True
@@ -748,7 +752,7 @@ class Template(object):
             locals = context.copy()
         else:
             locals = {}
-            if context.has_key('_engine'):
+            if '_engine' in context:
                 context.get('_engine').hook_context(locals)
         locals['_context'] = context
         if globals is None:
@@ -759,7 +763,7 @@ class Template(object):
         locals['_buf'] = _buf
         if not self.bytecode:
             self.compile()
-        exec self.bytecode in globals, locals
+        exec(self.bytecode, globals, locals)
         if bufarg is None:
             s = ''.join(_buf)
             #if self.encoding:
@@ -987,7 +991,7 @@ class Engine(object):
             return open(filename).read()
         if _context is None:
             _context = {}
-        if not _context.has_key('_engine'):
+        if '_engine' not in _context:
             self.hook_context(_context)
         if _globals is None:
             _globals = sys._getframe(2).f_globals
@@ -1027,7 +1031,7 @@ class Engine(object):
         frame = sys._getframe(1)
         locals  = frame.f_locals
         globals = frame.f_globals
-        assert locals.has_key('_context')
+        assert '_context' in locals
         context = locals['_context']
         # context and globals are passed to get_template() only for preprocessing.
         template = self.get_template(template_name, context, globals)

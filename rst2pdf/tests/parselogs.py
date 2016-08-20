@@ -15,6 +15,9 @@ a header showing number of tests in that category.  Then prints
 sorted list of tests, with checksums.
 
 '''
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import os
 import glob
 
@@ -42,13 +45,13 @@ def getcategories():
 def dumpinfo():
     mydict = getcategories()
     if not mydict:
-        print '\nNo log files found'
+        print('\nNo log files found')
     for name, values in sorted(mydict.iteritems()):
-        print '\nCategory "%s"\n        (%d tests)\n' % (name, len(values))
+        print('\nCategory "%s"\n        (%d tests)\n' % (name, len(values)))
         fmt = '%%-%ds  %%s' % max(len(x[0]) for x in values)
         for item in sorted(values):
-            print fmt % (item[0], repr(item[1]))
-    print
+            print(fmt % (item[0], repr(item[1])))
+    print()
 
 if __name__ == '__main__':
     dumpinfo()

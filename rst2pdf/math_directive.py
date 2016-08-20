@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
 from docutils.nodes import General, Inline, Element
 from docutils import utils
 from docutils.parsers.rst import roles
 
-import basenodehandler, math_flowable
+from . import basenodehandler, math_flowable
 
 if 'Directive' in rst.__dict__:
 

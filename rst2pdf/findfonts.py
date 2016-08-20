@@ -6,6 +6,10 @@
 Scan a list of folders and find all .afm files,
 then create rst2pdf-ready font-aliases.
 """
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from __future__ import division
 
 import os
 import sys
@@ -14,7 +18,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont, TTFontFile, TTFError, FF_FORCEBOLD, FF_ITALIC
 from reportlab.lib.fonts import addMapping
 
-from log import log
+from .log import log
 
 flist = []
 afmList = []
@@ -366,7 +370,7 @@ def guessFont(fname):
 def main():
     global flist
     if len(sys.argv) != 2:
-        print "Usage: findfont fontName"
+        print("Usage: findfont fontName")
         sys.exit(1)
     if os.name == 'nt':
         flist = [".", os.environ.get("SystemRoot", "C:\\Windows")+"\\Fonts"]
@@ -377,9 +381,9 @@ def main():
     if not f:
         f = findTTFont(fn)
     if f:
-        print f
+        print(f)
     else:
-        print "Unknown font %s" % sys.argv[1]
+        print("Unknown font %s" % sys.argv[1])
 
 
 if __name__ == "__main__":
