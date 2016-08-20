@@ -6,7 +6,9 @@ python:
 before_install:
  - pip install -r requirements.txt
  - python setup.py install
+ - python bootstrap.py
+ - ./bin/buildout
 
 script:
  - nosetests -x -i regulartest -i sphinxtest
-
+ 
