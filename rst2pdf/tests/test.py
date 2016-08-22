@@ -3,7 +3,7 @@
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
-from builtins import object
+from builtins import object, str, open
 from autotest import MD5Info, PathInfo, globjoin
 from autotest import run_single, dirname, checkmd5
 
@@ -23,9 +23,8 @@ class RunTest(object):
         if os.path.exists(ignfile):
             self.skip=True
         if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            exec(f, info)
-            f.close()
+            with open(md5file, 'rb') as f:
+                exec(f.read(), info)
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue=True
