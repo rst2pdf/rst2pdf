@@ -11,4 +11,3 @@ before_install:
 
 script:
  - nosetests -x -i regulartest -i sphinxtest
- 
