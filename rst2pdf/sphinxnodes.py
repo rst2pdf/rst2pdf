@@ -21,6 +21,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from builtins import str
 
 from copy import copy
 
@@ -49,7 +50,7 @@ class SphinxHandler(NodeHandler):
             sphinx-specific handlers.
         '''
         mydict = {}
-        for key, value in self._baseclass.dispatchdict.iteritems():
+        for key, value in self._baseclass.dispatchdict.items():
             value = copy(value)
             value.sphinxmode = True
             mydict[key] = value

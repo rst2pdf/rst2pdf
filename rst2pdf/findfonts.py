@@ -10,6 +10,9 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import zip
 
 import os
 import sys
@@ -218,7 +221,7 @@ def findTTFont(fname):
         # ctypes with EnumFontFamiliesEx
 
         def get_nt_fname(ftname):
-            import _winreg as _w
+            import winreg as _w
             fontkey = _w.OpenKey(_w.HKEY_LOCAL_MACHINE,
                 "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
             fontname = ftname + " (TrueType)"

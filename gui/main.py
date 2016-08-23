@@ -6,14 +6,18 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
 
 import os,sys,tempfile,re,functools,time,types,glob,codecs
 from pprint import pprint
 from copy import copy
 from multiprocessing import Process, Queue
-from Queue import Empty
+from queue import Empty
 from hashlib import md5
-from StringIO import StringIO
+from io import StringIO
 from rst2pdf.createpdf import RstToPdf
 from rst2pdf.styles import StyleSheet
 from rst2pdf.log import log
@@ -157,7 +161,7 @@ class Main(QtGui.QMainWindow):
 
         self.ui.pdfbar.addAction(self.pdf.ui.previous)
         self.ui.pdfbar.addWidget(self.ui.pageNum)
-        self.ui.pdfbar.addAction(self.pdf.ui.next)
+        self.ui.pdfbar.addAction(self.pdf.ui.__next__)
         self.ui.pdfbar.addSeparator()
         self.ui.pdfbar.addAction(self.pdf.ui.zoomin)
         self.ui.pdfbar.addAction(self.pdf.ui.zoomout)
@@ -262,7 +266,7 @@ class Main(QtGui.QMainWindow):
         if self.ui.searchWidget.ui.matchCase.isChecked():
             flags=flags|QtGui.QTextDocument.FindCaseSensitively
 
-        text=unicode(self.ui.searchWidget.ui.text.text())
+        text=str(self.ui.searchWidget.ui.text.text())
 
         print('Serching for:',text)
 
@@ -278,7 +282,7 @@ class Main(QtGui.QMainWindow):
     def clipChanged(self, mode=None):
         if mode is None: return
         if mode == QtGui.QClipboard.Clipboard:
-            if unicode(self.clipBoard.text()):
+            if str(self.clipBoard.text()):
                 self.ui.actionPaste1.setEnabled(True)
                 self.ui.actionPaste2.setEnabled(True)
             else:
@@ -334,7 +338,7 @@ class Main(QtGui.QMainWindow):
         # the current stylesheet
 
         try:
-            data=json.loads(unicode(self.ui.style.toPlainText()))
+            data=json.loads(str(self.ui.style.toPlainText()))
         except: # TODO: fail if sheet doesn't validate
             data={}
         config=ConfigDialog(data=copy(data))
@@ -375,7 +379,7 @@ class Main(QtGui.QMainWindow):
         if self.text_fname is not None:
             f=codecs.open(self.text_fname,'w+','utf-8')
             f.seek(0)
-            f.write(unicode(self.ui.text.toPlainText()))
+            f.write(str(self.ui.text.toPlainText()))
             f.close()
         else:
             self.on_actionSaveAs_Text_triggered()
@@ -384,7 +388,7 @@ class Main(QtGui.QMainWindow):
     def on_actionSaveAs_Text_triggered(self, b=None):
         if b is not None: return
 
-        fname=unicode(QtGui.QFileDialog.getSaveFileName(self,
+        fname=str(QtGui.QFileDialog.getSaveFileName(self,
                             'Save As',
                             os.getcwd(),
                             'reSt files (*.txt *.rst)'
@@ -411,7 +415,7 @@ class Main(QtGui.QMainWindow):
         if self.style_fname is not None:
             f=codecs.open(self.style_fname,'w+','utf-8')
             f.seek(0)
-            f.write(unicode(self.ui.style.toPlainText()))
+            f.write(str(self.ui.style.toPlainText()))
             f.close()
         else:
             self.on_actionSaveAs_Style_triggered()
@@ -420,7 +424,7 @@ class Main(QtGui.QMainWindow):
     def on_actionSaveAs_Style_triggered(self, b=None):
         if b is not None: return
 
-        fname=unicode(QtGui.QFileDialog.getSaveFileName(self,
+        fname=str(QtGui.QFileDialog.getSaveFileName(self,
                             'Save As',
                             os.getcwd(),
                             'style files (*.json *.style)'
@@ -461,7 +465,7 @@ class Main(QtGui.QMainWindow):
     def on_actionSaveAs_PDF_triggered(self, b=None):
         if b is not None: return
 
-        fname=unicode(QtGui.QFileDialog.getSaveFileName(self,
+        fname=str(QtGui.QFileDialog.getSaveFileName(self,
                             'Save As',
                             os.getcwd(),
                             'PDF files (*.pdf)'
@@ -495,7 +499,7 @@ class Main(QtGui.QMainWindow):
         if m:
             self.pdf.gotoPosition(*m)
     def validateStyle(self):
-        style=unicode(self.ui.style.toPlainText())
+        style=str(self.ui.style.toPlainText())
         if not style.strip(): #no point in validating an empty string
             self.statusMessage.setText('')
             return
@@ -524,8 +528,8 @@ class Main(QtGui.QMainWindow):
 
     def on_actionRender_triggered(self, b=None, preview=True):
         if b is not None: return
-        text=unicode(self.ui.text.toPlainText())
-        style=unicode(self.ui.style.toPlainText())
+        text=str(self.ui.text.toPlainText())
+        style=str(self.ui.style.toPlainText())
         self.hl1.rehighlight()
         m1=md5()
         m1.update(text.encode('utf-8'))
@@ -862,7 +866,7 @@ class ConfigDialog(QtGui.QDialog):
             'Page Setup':PageSetup,
             'Page Templates':PageTemplates,
         }
-        keys=self.pages.keys()
+        keys=list(self.pages.keys())
         keys.sort()
         for page in keys:
             self.ui.pagelist.addItem(page)
@@ -876,7 +880,7 @@ class ConfigDialog(QtGui.QDialog):
         self.styles = StyleSheet([style_file])
         os.unlink(style_file)
 
-        text=unicode(text)
+        text=str(text)
         if self.curPageWidget:
             self.curPageWidget.hide()
             self.curPageWidget.deleteLater()
@@ -928,7 +932,7 @@ class PageTemplates(QtGui.QWidget):
 
     def applyChanges(self):
         # TODO: validate everything
-        self.frame=[unicode(w.text()) for w in [
+        self.frame=[str(w.text()) for w in [
             self.ui.left,
             self.ui.top,
             self.ui.width,
@@ -937,13 +941,13 @@ class PageTemplates(QtGui.QWidget):
         self.template["frames"][self.frameIndex]=self.frame
         self.template['showFooter']=self.ui.footer.isChecked()
         self.template['showHeader']=self.ui.header.isChecked()
-        if unicode(self.ui.background.text()):
-            self.template['background']=unicode(self.ui.background.text())
+        if str(self.ui.background.text()):
+            self.template['background']=str(self.ui.background.text())
         self.updatePreview()
 
     def on_templates_currentIndexChanged(self, text):
         if not isinstance(text,StringTypes): return
-        text=unicode(text)
+        text=str(text)
         self.template=self.templates[text]
         self.ui.frames.clear()
         for i in range(0, len(self.template['frames'])):
@@ -1063,37 +1067,37 @@ class PageSetup(QtGui.QWidget):
 
         self.ui.firstTemplate.insertItem(0,ft)
         self.ui.firstTemplate.setCurrentIndex(0)
-        self.ui.margin_top.setText(unicode(self.stylesheet.page['margin-top']))
-        self.ui.margin_bottom.setText(unicode(self.stylesheet.page['margin-bottom']))
-        self.ui.margin_left.setText(unicode(self.stylesheet.page['margin-left']))
-        self.ui.margin_right.setText(unicode(self.stylesheet.page['margin-right']))
-        self.ui.margin_gutter.setText(unicode(self.stylesheet.page['margin-gutter']))
-        self.ui.spacing_header.setText(unicode(self.stylesheet.page['spacing-header']))
-        self.ui.spacing_footer.setText(unicode(self.stylesheet.page['spacing-footer']))
+        self.ui.margin_top.setText(str(self.stylesheet.page['margin-top']))
+        self.ui.margin_bottom.setText(str(self.stylesheet.page['margin-bottom']))
+        self.ui.margin_left.setText(str(self.stylesheet.page['margin-left']))
+        self.ui.margin_right.setText(str(self.stylesheet.page['margin-right']))
+        self.ui.margin_gutter.setText(str(self.stylesheet.page['margin-gutter']))
+        self.ui.spacing_header.setText(str(self.stylesheet.page['spacing-header']))
+        self.ui.spacing_footer.setText(str(self.stylesheet.page['spacing-footer']))
         self.pageImage=None
         self.applyChanges()
 
     def applyChanges(self):
-        if unicode(self.ui.size.currentText())==u'Custom':
+        if str(self.ui.size.currentText())==u'Custom':
             # FIXME: % makes no sense for page size
             self.ui.width.setEnabled(True)
             self.ui.height.setEnabled(True)
-            self.pw=self.stylesheet.adjustUnits(unicode(self.ui.width.text()),1000) or 0
-            self.ph=self.stylesheet.adjustUnits(unicode(self.ui.height.text()),1000) or 0
+            self.pw=self.stylesheet.adjustUnits(str(self.ui.width.text()),1000) or 0
+            self.ph=self.stylesheet.adjustUnits(str(self.ui.height.text()),1000) or 0
         else:
             self.ui.width.setEnabled(False)
             self.ui.height.setEnabled(False)
-            self.size=unicode(self.ui.size.currentText())
+            self.size=str(self.ui.size.currentText())
             self.pw=pagesizes.__dict__[self.size.upper()][0]
             self.ph=pagesizes.__dict__[self.size.upper()][1]
 
-        self.lm=self.stylesheet.adjustUnits(unicode(self.ui.margin_left.text()),self.pw) or 0
-        self.rm=self.stylesheet.adjustUnits(unicode(self.ui.margin_right.text()),self.pw) or 0
-        self.tm=self.stylesheet.adjustUnits(unicode(self.ui.margin_top.text()),self.ph) or 0
-        self.bm=self.stylesheet.adjustUnits(unicode(self.ui.margin_bottom.text()),self.ph) or 0
-        self.ts=self.stylesheet.adjustUnits(unicode(self.ui.spacing_header.text()),self.ph) or 0
-        self.bs=self.stylesheet.adjustUnits(unicode(self.ui.spacing_footer.text()),self.ph) or 0
-        self.gm=self.stylesheet.adjustUnits(unicode(self.ui.margin_gutter.text()),self.pw) or 0
+        self.lm=self.stylesheet.adjustUnits(str(self.ui.margin_left.text()),self.pw) or 0
+        self.rm=self.stylesheet.adjustUnits(str(self.ui.margin_right.text()),self.pw) or 0
+        self.tm=self.stylesheet.adjustUnits(str(self.ui.margin_top.text()),self.ph) or 0
+        self.bm=self.stylesheet.adjustUnits(str(self.ui.margin_bottom.text()),self.ph) or 0
+        self.ts=self.stylesheet.adjustUnits(str(self.ui.spacing_header.text()),self.ph) or 0
+        self.bs=self.stylesheet.adjustUnits(str(self.ui.spacing_footer.text()),self.ph) or 0
+        self.gm=self.stylesheet.adjustUnits(str(self.ui.margin_gutter.text()),self.pw) or 0
         self.pageImage=QtGui.QImage(int(self.pw),
                                     int(self.ph),
                                     QtGui.QImage.Format_RGB32)
@@ -1127,17 +1131,17 @@ class PageSetup(QtGui.QWidget):
         self.ui.preview.setPixmap(pm.scaled(self.pw*self.scale,self.ph*self.scale))
 
         self.data["pageSetup"]= {
-            "size": unicode(self.ui.size.currentText()).lower(),
-            "width": unicode(self.ui.width.text()),
-            "height": unicode(self.ui.height.text()),
-            "margin-top": unicode(self.ui.margin_top.text()),
-            "margin-bottom": unicode(self.ui.margin_bottom.text()),
-            "margin-left": unicode(self.ui.margin_left.text()),
-            "margin-right": unicode(self.ui.margin_right.text()),
-            "margin-gutter": unicode(self.ui.margin_gutter.text()),
-            "spacing-header": unicode(self.ui.spacing_header.text()),
-            "spacing-footer": unicode(self.ui.spacing_footer.text()),
-            "firstTemplate": unicode(self.ui.firstTemplate.currentText())
+            "size": str(self.ui.size.currentText()).lower(),
+            "width": str(self.ui.width.text()),
+            "height": str(self.ui.height.text()),
+            "margin-top": str(self.ui.margin_top.text()),
+            "margin-bottom": str(self.ui.margin_bottom.text()),
+            "margin-left": str(self.ui.margin_left.text()),
+            "margin-right": str(self.ui.margin_right.text()),
+            "margin-gutter": str(self.ui.margin_gutter.text()),
+            "spacing-header": str(self.ui.spacing_header.text()),
+            "spacing-footer": str(self.ui.spacing_footer.text()),
+            "firstTemplate": str(self.ui.firstTemplate.currentText())
           }
 
         if self.data['pageSetup']['size']==u'custom':
@@ -1246,7 +1250,7 @@ class StyleSheets(QtGui.QWidget):
         '''%(head,body))
 
     def applyChanges(self):
-        self.data.update({'options':{'stylesheets':[unicode(self.ui.custom.item(x).text()) \
+        self.data.update({'options':{'stylesheets':[str(self.ui.custom.item(x).text()) \
             for x in range(self.ui.custom.count())]}})
         self.updatePreview()
 

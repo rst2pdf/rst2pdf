@@ -41,6 +41,7 @@ install_requires = [
         'reportlab>=2.4',
         'Pygments',
         'pdfrw',
+        'future',
         ]
 
 try:

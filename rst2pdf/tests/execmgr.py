@@ -21,6 +21,10 @@ Currently only works under Linux.
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import chr
+from builtins import str
+from builtins import range
+from builtins import object
 
 import sys
 import subprocess
@@ -198,7 +202,7 @@ class PipeReader(object):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         ready = self.ready
         if not ready:
             allpipes = list(self.by_pipenum)
@@ -240,7 +244,7 @@ class LineSplitter(object):
 
     def __iter__(self):
         return self
-    def next(self):
+    def __next__(self):
         try:
             return self.prefix, self.lines.pop()
         except IndexError:
@@ -286,7 +290,7 @@ class TextOutExec(BaseExec):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         lines = self.lines
         while not lines:
             self.checktimeout()

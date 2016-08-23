@@ -43,6 +43,11 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
@@ -56,9 +61,9 @@ import re
 import string
 from . import config
 import logging
-from cStringIO import StringIO
+from io import StringIO
 from os.path import abspath, dirname, expanduser, join
-from urlparse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 from copy import copy, deepcopy
 from optparse import OptionParser
 from pprint import pprint
@@ -633,7 +638,7 @@ class RstToPdf(object):
 
         def cleantags(s):
             re.sub(r'<[^>]*?>', '',
-                unicode(s).strip())
+                str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -845,7 +850,7 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='loweralpha':
         ptext=string.lowercase[_counter%26]
     else:
-        ptext=unicode(_counter)
+        ptext=str(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -912,13 +917,13 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, unicode):
+            if not isinstance(text, str):
                 try:
-                    text = unicode(text, e.encoding)
+                    text = str(text, e.encoding)
                 except AttributeError:
-                    text = unicode(text, 'utf-8')
+                    text = str(text, 'utf-8')
                 except TypeError:
-                    text = unicode(text, 'utf-8')
+                    text = str(text, 'utf-8')
 
             text = text.replace(u'###Page###', pnum)
             if '###Total###' in text:

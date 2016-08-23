@@ -4,6 +4,9 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 import os
 from os.path import abspath, dirname, expanduser, join
 import sys
@@ -13,7 +16,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from .log import log, nodeid
 from reportlab.lib.units import *
 import glob
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from .opt_imports import LazyImports
 
@@ -82,7 +85,7 @@ class MyImage (Flowable):
 
         if filename.split("://")[0].lower() in ('http','ftp','https'):
             try:
-                filename2, _ = urllib.urlretrieve(filename)
+                filename2, _ = urllib.request.urlretrieve(filename)
                 if filename != filename2:
                     client.to_unlink.append(filename2)
                     filename = filename2
@@ -287,7 +290,7 @@ class MyImage (Flowable):
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             uri = os.path.join(client.basedir,uri)
         else:
-            uri, _ = urllib.urlretrieve(uri)
+            uri, _ = urllib.request.urlretrieve(uri)
             client.to_unlink.append(uri)
 
         srcinfo = client, uri

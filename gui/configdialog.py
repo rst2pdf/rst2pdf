@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import zip
+from builtins import str
 
 class ConfigDialog(QtGui.QDialog):
   def __init__(self, parent):
@@ -50,20 +52,20 @@ class ConfigDialog(QtGui.QDialog):
           label=QtGui.QLabel(optionName+":")
           label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
           text=QtGui.QLineEdit()
-          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))          
+          text.setText(str(config.getValue(sectionName, optionName, definition[1])))          
           layout.addWidget(label, row, 0, 1, 1)
           layout.addWidget(text, row, 1, 1, 1)
-          self.values[sectionName+'/'+optionName]=[text, lambda text: unicode(text.text())]
+          self.values[sectionName+'/'+optionName]=[text, lambda text: str(text.text())]
 
         elif definition[0]=='password':
           label=QtGui.QLabel(optionName+":")
           label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
           text=QtGui.QLineEdit()
           text.setEchoMode(QtGui.QLineEdit.Password)
-          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))          
+          text.setText(str(config.getValue(sectionName, optionName, definition[1])))          
           layout.addWidget(label, row, 0, 1, 1)
           layout.addWidget(text, row, 1, 1, 1)
-          self.values[sectionName+'/'+optionName]=[text, lambda text: unicode(text.text())]
+          self.values[sectionName+'/'+optionName]=[text, lambda text: str(text.text())]
 
         help=QtGui.QLabel(definition[2])
         help.setWordWrap(True)

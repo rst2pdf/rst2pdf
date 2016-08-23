@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.platypus.doctemplate import Indenter
 from reportlab.platypus.flowables import *

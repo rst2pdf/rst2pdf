@@ -5,9 +5,11 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 
 
-import ConfigParser
+import configparser
 import os
 from rst2pdf.rson import loads
 
@@ -30,14 +32,14 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
-conf = ConfigParser.SafeConfigParser()
+conf = configparser.SafeConfigParser()
 
 def parseConfig(extracf=None):
     global conf
     cflist = ["/etc/rst2pdf.conf", cfname]
     if extracf:
         cflist.append(extracf)
-    conf = ConfigParser.SafeConfigParser()
+    conf = configparser.SafeConfigParser()
     conf.read(cflist)
     
 parseConfig()
