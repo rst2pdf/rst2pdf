@@ -69,7 +69,7 @@ if is_jython:
            quote(tmpeggs), 'zc.buildout' + VERSION],
            env=dict(os.environ,
                PYTHONPATH=
-               ws.find(pkg_resources.Requirement.parse(requirement)).location
+               ws.find(pkg_resources.Requirement.parse('setuptools')).location
                ),
            ).wait() == 0
 
@@ -79,7 +79,7 @@ else:
         '-c', quote (cmd), '-mqNxd', quote (tmpeggs), 'zc.buildout' + VERSION,
         dict(os.environ,
             PYTHONPATH=
-            ws.find(pkg_resources.Requirement.parse(requirement)).location
+            ws.find(pkg_resources.Requirement.parse('setuptools')).location
             ),
         ) == 0
 
