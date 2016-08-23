@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import str
 
 __version__ = '0.08'
 
@@ -134,7 +135,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=unicode, isinstance=isinstance):
+    def factory(cls, len=len, iter=iter, unicode=str, isinstance=isinstance):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -143,8 +144,8 @@ class Tokenizer(list):
             self.client = client
 
             # Deal with 8 bit bytes for now
-            if isinstance(source, unicode):
-                source = source.encode('utf-8')
+            if isinstance(source, bytes):
+                source = str(source, 'utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
             source = source.replace('\r\n', '\n').replace('\r', '\n')
@@ -170,7 +171,7 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            self *= len(sourcelist) / 2 + 1
+            self *= len(sourcelist) // 2 + 1
             index = 0
 
             # Create all the tokens
@@ -270,7 +271,7 @@ class BaseObjects(object):
         ''' By default, RSON objects are dictionaries that
             allow attribute access to their existing contents.
         '''
-        
+
         def __getattr__(self, key):
             return self[key]
         def __setattr__(self, key, value):
@@ -364,7 +365,7 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, unicode=unicode: unicode(s, 'utf-8'))
+          lambda token, s, unicode=str: str(s, 'utf-8'))
     parse_encoded_chr = unichr
     parse_join_str = u''.join
     cachestrings = False
@@ -440,7 +441,8 @@ class QuotedToken(object):
                 nonmatch2 = next()
             except:
                 ok = False
-            ok = ok and not nonmatch and uni2.startswith(r'\u') and len(uni2) == 6
+
+            ok = ok and not nonmatch and uni2.startswith('\\u') and len(uni2) == 6
             if ok:
                 nonmatch = uni2
                 uni = 0x10000 + (((uni - 0xd800) << 10) | (int(uni2[2:], 16) - 0xdc00))
@@ -493,7 +495,7 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+        lambda token, unicode=str: str(token[2], 'utf-8'))
 
     special_strings = dict(true = True, false = False, null = None)
 
