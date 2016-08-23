@@ -1,3 +1,4 @@
+fugure
 pyhyphen
 nose
 reportlab
