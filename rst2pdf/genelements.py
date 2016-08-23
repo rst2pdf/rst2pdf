@@ -43,6 +43,10 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from builtins import zip
+from builtins import map
+from builtins import str
+from builtins import range
 import os
 import tempfile
 import re
@@ -134,7 +138,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         # colWidths are in no specific unit, really. Maybe ems.
         # Convert them to %
-        colWidths=map(int, colWidths)
+        colWidths=list(map(int, colWidths))
         tot=sum(colWidths)
         colWidths=["%s%%"%((100.*w)/tot) for w in colWidths]
 
@@ -145,7 +149,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         data = []
         cellStyles = []
-        rowids = range(0, len(rows))
+        rowids = list(range(0, len(rows)))
         for row, i in zip(rows, rowids):
             r = []
             j = 0
@@ -239,7 +243,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+unicode(id(node))
+            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
             node.elements = [ Heading(text,
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
@@ -318,8 +322,8 @@ class HandleAuthor(NodeHandler, docutils.nodes.author):
             fb = client.gather_pdftext(node)
 
             t_style=TableStyle(client.styles['field-list'].commands)
-            colWidths=map(client.styles.adjustUnits,
-                client.styles['field-list'].colWidths)
+            colWidths=list(map(client.styles.adjustUnits,
+                client.styles['field-list'].colWidths))
 
             node.elements = [Table(
                 [[Paragraph(client.text_for_label("author", style)+":",
@@ -350,7 +354,7 @@ class HandleFList(NodeHandler):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = list(map(client.styles.adjustUnits, colWidths))
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                     Paragraph(fb, style)]],
@@ -370,7 +374,7 @@ class HandleAddress(HandleFList, docutils.nodes.address):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = list(map(client.styles.adjustUnits, colWidths))
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                              XPreformatted(fb, style)]

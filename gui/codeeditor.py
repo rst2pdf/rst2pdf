@@ -4,6 +4,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
+from builtins import next
+from builtins import str
 import sys
 from PyQt4 import QtGui, QtCore
 
@@ -139,7 +141,7 @@ if __name__ == "__main__":
     js.show()
 
     def validateJSON():
-        style=unicode(js.toPlainText())
+        style=str(js.toPlainText())
         if not style.strip(): #no point in validating an empty string
             return
         pos=None

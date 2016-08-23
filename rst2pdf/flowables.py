@@ -8,6 +8,11 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from builtins import zip
+from builtins import map
+from builtins import hex
+from builtins import str
+from builtins import range
 __docformat__ = 'reStructuredText'
 
 from copy import copy
@@ -231,7 +236,7 @@ class DelayedTable(Table):
             kwargs['total']=w
             return styles.adjustUnits(*args, **kwargs)
         #adjust=functools.partial(styles.adjustUnits, total=w)
-        self.colWidths=map(adjust, self._colWidths)
+        self.colWidths=list(map(adjust, self._colWidths))
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows,
@@ -256,7 +261,7 @@ class DelayedTable(Table):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0])[:180])
+                str(self.data[0])[:180])
 
 def tablepadding(padding):
     if not isinstance(padding,(list,tuple)):
@@ -283,7 +288,7 @@ class SplitTable(DelayedTable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0][1])[:180])
+                str(self.data[0][1])[:180])
 
     def split(self,w,h):
         _w,_h=self.wrap(w, h)
@@ -720,7 +725,7 @@ class BoundByWidth(Flowable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode([c.identity() for c in self.content])[:80])
+                str([c.identity() for c in self.content])[:80])
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
@@ -812,7 +817,7 @@ class BoxedContainer(BoundByWidth):
         self.mode = mode
 
     def identity(self, maxLen=None):
-        return unicode([u"BoxedContainer containing: ",
+        return str([u"BoxedContainer containing: ",
             [c.identity() for c in self.content]])[:80]
 
     def draw(self):
@@ -1002,8 +1007,8 @@ class MyTableOfContents(TableOfContents):
             if label:
                 pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
                 post = u'</a>'
-                if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
+                if not isinstance(text, str):
+                    text = str(text, 'utf-8')
                 text = pre + text + post
             else:
                 pre = ''
@@ -1039,7 +1044,7 @@ class MyTableOfContents(TableOfContents):
                 return False
 
             log.info('TOC entries that moved in this pass:')
-            for i in xrange(len(self._entries)):
+            for i in range(len(self._entries)):
                 if self._entries[i] != self._lastEntries[i]:
                     log.info(str(self._entries[i]))
                     log.info(str(self._lastEntries[i]))

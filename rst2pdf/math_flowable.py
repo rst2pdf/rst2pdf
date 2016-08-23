@@ -5,6 +5,8 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from builtins import str
+from builtins import chr
 import tempfile
 import os
 import re
@@ -86,7 +88,7 @@ class Math(Flowable):
                     col_conv=ColorConverter()
                     rgb_color=col_conv.to_rgb(self.color)
                     canv.setFillColorRGB(rgb_color[0],rgb_color[1],rgb_color[2])
-                    canv.drawString(ox, oy, unichr(num))
+                    canv.drawString(ox, oy, chr(num))
 
                 canv.setLineWidth(0)
                 canv.setDash([])
@@ -151,7 +153,7 @@ class Math(Flowable):
             draw = ImageDraw.Draw(img)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 font = ImageFont.truetype(fontname, int(fontsize*scale))
-                tw, th = draw.textsize(unichr(num), font=font)
+                tw, th = draw.textsize(chr(num), font=font)
                 # No, I don't understand why that 4 is there.
                 # As we used to say in the pure math
                 # department, that was a numerical solution.
@@ -159,7 +161,7 @@ class Math(Flowable):
                 fc=col_conv.to_rgb(self.color)
                 rgb_color=(int(fc[0]*255),int(fc[1]*255),int(fc[2]*255))
                 draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
-                           unichr(num), font=font,fill=rgb_color)
+                           chr(num), font=font,fill=rgb_color)
             for ox, oy, w, h in rects:
                 x1 = ox*scale
                 x2 = x1 + w*scale

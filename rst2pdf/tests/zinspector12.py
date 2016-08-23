@@ -82,7 +82,7 @@ def getimports(importf, ignore):
         exec(code, newdir)
         for key in basedir:
             del newdir[key]
-        for key, value in newdir.iteritems():
+        for key, value in newdir.items():
             oldcode = importinfo.setdefault(key, code)
             if oldcode is not code:
                 badimports.append((key, oldcode, code, globaldir[key], value))
@@ -105,7 +105,7 @@ def checkimports(importf, ignore):
     printed = False
 
     fmt = "\nSame '%s' imported twice:\n\n%s\n%s"
-    for (oldcode, code), deflist in sorted(same.iteritems()):
+    for (oldcode, code), deflist in sorted(same.items()):
         nevermind = set()
         x, y = oldcode.split('.', 1)[0], code.split('.', 1)[0]
         if ('.' in oldcode and '.' in code and
@@ -117,7 +117,7 @@ def checkimports(importf, ignore):
             printed = True
 
     fmt = "\nConflicting definitions for %s:\n\n%s\n%s"
-    for (oldcode, code), deflist in sorted(diff.iteritems()):
+    for (oldcode, code), deflist in sorted(diff.items()):
         deflist = ', '.join(sorted(deflist))
         print(fmt % (deflist, oldcode, code))
         printed = True

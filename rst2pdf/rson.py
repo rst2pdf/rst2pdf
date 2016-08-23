@@ -25,6 +25,12 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 
+from future.utils import implements_iterator
+
+from builtins import str, bytes, next, object
+from past.builtins import basestring
+
+
 __version__ = '0.08'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'
@@ -134,7 +140,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=unicode, isinstance=isinstance):
+    def factory(cls, len=len, iter=iter, unicode=str, isinstance=isinstance):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -143,8 +149,8 @@ class Tokenizer(list):
             self.client = client
 
             # Deal with 8 bit bytes for now
-            if isinstance(source, unicode):
-                source = source.encode('utf-8')
+            if isinstance(source, bytes):
+                source = str(source, 'utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
             source = source.replace('\r\n', '\n').replace('\r', '\n')
@@ -157,7 +163,7 @@ class Tokenizer(list):
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
-            next = sourceiter.next
+            next = sourceiter.__next__
             offset -= len(next())
 
             # Strip comment from first line
@@ -170,7 +176,7 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            self *= len(sourcelist) / 2 + 1
+            self *= len(sourcelist) // 2 + 1
             index = 0
 
             # Create all the tokens
@@ -243,7 +249,7 @@ def make_hashable(what):
         return what
     except TypeError:
         if isinstance(what, dict):
-            return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+            return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
 class BaseObjects(object):
@@ -270,7 +276,7 @@ class BaseObjects(object):
         ''' By default, RSON objects are dictionaries that
             allow attribute access to their existing contents.
         '''
-        
+
         def __getattr__(self, key):
             return self[key]
         def __setattr__(self, key, value):
@@ -345,7 +351,7 @@ class Dispatcher(object):
             if not kw:
                 return default_loads(s)
 
-            key = tuple(sorted(kw.iteritems()))
+            key = tuple(sorted(kw.items()))
             func = cached(key)
             if func is None:
                 # Begin some real ugliness here -- just modify our instance to
@@ -364,9 +370,9 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, unicode=unicode: unicode(s, 'utf-8'))
-    parse_encoded_chr = unichr
-    parse_join_str = u''.join
+          lambda token, s, unicode=str: str(s, 'utf-8'))
+    parse_encoded_chr = chr
+    parse_join_str = ''.join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
@@ -408,7 +414,7 @@ class QuotedToken(object):
                 result = [result]
                 append = result.append
                 s = iter(s)
-                next = s.next
+                next = s.__next__
                 next()
                 for special in s:
                     nonmatch = next()
@@ -440,7 +446,8 @@ class QuotedToken(object):
                 nonmatch2 = next()
             except:
                 ok = False
-            ok = ok and not nonmatch and uni2.startswith(r'\u') and len(uni2) == 6
+
+            ok = ok and not nonmatch and uni2.startswith('\\u') and len(uni2) == 6
             if ok:
                 nonmatch = uni2
                 uni = 0x10000 + (((uni - 0xd800) << 10) | (int(uni2[2:], 16) - 0xdc00))
@@ -493,7 +500,7 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+        lambda token, unicode=str: str(token[2], 'utf-8'))
 
     special_strings = dict(true = True, false = False, null = None)
 
@@ -898,8 +905,8 @@ class RsonParser(object):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
-            next = tokens.next
-            value, token = parse_recurse([next()], next, tokens)
+            nextval = iter(tokens).__next__
+            value, token = parse_recurse([nextval()], nextval, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)
 

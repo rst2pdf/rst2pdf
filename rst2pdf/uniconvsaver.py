@@ -29,6 +29,8 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import range
+from builtins import object
 from math import atan2, pi
 import PIL
 from app import _,Bezier, EmptyPattern, Rotation, Translation, _sketch
@@ -53,7 +55,7 @@ def make_pdf_path(pdfpath, paths):
 			pdfpath.close()
 	return pdfpath
 
-class PDFDevice:
+class PDFDevice(object):
 
 	has_axial_gradient = 0
 	has_radial_gradient = 0
@@ -140,7 +142,7 @@ class PDFDevice:
 
 
 
-class PDFGenSaver:
+class PDFGenSaver(object):
 
 	def __init__(self, file, filename, document, options):
 		self.file = file

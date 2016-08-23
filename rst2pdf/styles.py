@@ -8,6 +8,10 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
+from builtins import map
+from builtins import zip
+from builtins import str
+from builtins import object
 import os
 import sys
 import re
@@ -52,7 +56,7 @@ class StyleSheet(object):
         '''
         styles = data.get('styles', {})
         try:
-            stylenames = styles.keys()
+            stylenames = list(styles.keys())
         except AttributeError:
             for style in styles:
                 yield style
@@ -101,13 +105,13 @@ class StyleSheet(object):
         if font_path is None:
             font_path=[]
         font_path+=['.', os.path.join(self.PATH, 'fonts')]
-        self.FontSearchPath = map(os.path.expanduser, font_path)
+        self.FontSearchPath = list(map(os.path.expanduser, font_path))
 
         if style_path is None:
             style_path=[]
         style_path+=['.', os.path.join(self.PATH, 'styles'),
                       '~/.rst2pdf/styles']
-        self.StyleSearchPath = map(os.path.expanduser, style_path)
+        self.StyleSearchPath = list(map(os.path.expanduser, style_path))
         self.FontSearchPath=list(set(self.FontSearchPath))
         self.StyleSearchPath=list(set(self.StyleSearchPath))
 
@@ -224,7 +228,7 @@ class StyleSheet(object):
             for font in embedded:
                 try:
                     # Just a font name, try to embed it
-                    if isinstance(font, unicode):
+                    if isinstance(font, str):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:
