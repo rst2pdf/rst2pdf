@@ -10,4 +10,4 @@ before_install:
  - ./bin/buildout
 
 script:
- - nosetests -x -i regulartest -i sphinxtest
+ - nosetests -i regulartest -i sphinxtest

@@ -45,8 +45,8 @@ from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
-from builtins import object
+
+from builtins import str, bytes, object
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"
@@ -89,7 +89,7 @@ def _write_file_with_lock(filename, content):
 def _create_module(module_name):
     """ex. mod = _create_module('tenjin.util')"""
     from types import ModuleType
-    mod = ModuleType(module_name.split('.')[-1])
+    mod = ModuleType(module_name.split('.')[-1].encode())
     sys.modules[module_name] = mod
     return mod
 
@@ -113,10 +113,11 @@ def _create_helpers_module():
              >>> to_str(123)
              '123'
         """
-        if val is None:              return ''
-        if isinstance(val, str):     return val
-        if isinstance(val, str): return val
-        return str(val)
+        if val is None:
+            return ''
+        if isinstance(val, str):
+            return val
+        return str(val, 'utf-8')
 
     def generate_tostrfunc(encoding):
         """Generate 'to_str' function which encodes unicode to str.
@@ -130,10 +131,11 @@ def _create_helpers_module():
               print output
         """
         def to_str(val):
-            if val is None:               return ''
-            if isinstance(val, str):      return val
-            if isinstance(val, str):  return val.encode(encoding)
-            return str(val)
+            if val is None:
+                return ''
+            if isinstance(val, str):
+                return val
+            return str(val, 'utf-8')
         return to_str
 
     def echo(string):
@@ -493,7 +495,7 @@ class Template(object):
              >>> script = template.convert(input, filename)   # filename is optional
              >>> print script
         """
-        if self.encoding and isinstance(input, str):
+        if self.encoding and isinstance(input, bytes):
             input = input.decode(self.encoding)
         self._reset(input, filename)
         buf = []
@@ -956,8 +958,8 @@ class Engine(object):
 
     def _store_cachefile_for_script(self, cache_filename, template):
         s = template.script
-        if template.encoding and isinstance(s, str):
-            s = s.encode(template.encoding)
+        if template.encoding and isinstance(s, bytes):
+            s = str(s, template.encoding)
             #s = s.encode('utf-8')
         if template.args is not None:
             s = "#@ARGS %s\n%s" % (', '.join(template.args), s)

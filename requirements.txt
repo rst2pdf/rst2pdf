@@ -1,3 +1,4 @@
+future
 pyhyphen
 nose
 reportlab
