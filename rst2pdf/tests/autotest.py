@@ -18,7 +18,7 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from builtins import str, object, open
+from builtins import str, object, open, bytes
 from past.builtins import execfile
 import os
 import sys
@@ -239,7 +239,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         md5s.append(m.hexdigest())
     m = ' '.join(md5s)
 
-    new_category = (updatemd5 and isinstance(updatemd5, str)
+    new_category = (updatemd5 and isinstance(updatemd5, (str, bytes))
                         and updatemd5 or info.new_category)
     # Check MD5 against database and update if necessary
     resulttype = info.find(m, new_category)
