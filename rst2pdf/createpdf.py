@@ -43,21 +43,22 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import division
+from builtins import str, range, object
+
+import sys
+import os
+import tempfile
+import re
+
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
-from builtins import range
-from builtins import object
+
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
 from .opt_imports import psyco
 psyco.full()
 
-import sys
-import os
-import tempfile
-import re
 import string
 from . import config
 import logging
@@ -279,7 +280,7 @@ class RstToPdf(object):
         self.pending_targets=[]
         self.targets=[]
 
-    def loadStyles(self, styleSheets=None ):
+    def loadStyles(self, styleSheets=None):
 
         if styleSheets is None:
             styleSheets=[]
@@ -1181,7 +1182,7 @@ def parse_commandline():
         help='A list of folders to search for fonts, separated using "%s".'
             ' Default="%s"' % (os.pathsep, def_fontpath))
 
-    def_baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','',''])
+    def_baseurl = urlunparse(['file', '{}{}'.format(os.getcwd(), os.sep),'','','',''])
     parser.add_option('--baseurl', dest='baseurl', metavar='URL',
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)

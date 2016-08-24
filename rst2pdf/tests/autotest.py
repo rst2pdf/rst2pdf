@@ -18,9 +18,8 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from builtins import str
-from builtins import object
-
+from builtins import str, object, open
+from past.builtins import execfile
 import os
 import sys
 import glob
@@ -226,16 +225,15 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     # Read the database
     info = MD5Info()
     if os.path.exists(md5path):
-        f = open(md5path, 'rb')
-        exec(f, info)
-        f.close()
+        with open(md5path, 'r') as f:
+            exec(f.read(), info)
 
     # Generate the current MD5
     md5s = []
     for pdfpath in pdffiles:
-        f = open(pdfpath, 'rb')
-        data = f.read()
-        f.close()
+        with open(pdfpath, 'rb') as f:
+            data = f.read()
+
         m = hashlib.md5()
         m.update(data)
         md5s.append(m.hexdigest())
@@ -248,9 +246,8 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
         print("Updating MD5 file")
-        f = open(md5path, 'wb')
-        f.write(str(info))
-        f.close()
+        with open(md5path, 'wb') as f:
+            f.write(str(info))
     return resulttype
 
 
@@ -282,9 +279,8 @@ def build_txt(iprefix, outpdf, fastfork):
         style = iprefix + '.style'
         cli = iprefix + '.cli'
         if os.path.isfile(cli):
-            f = open(cli)
-            extraargs=shlex.split(f.read())
-            f.close()
+            with open(cli, 'r') as f:
+                extraargs=shlex.split(f.read())
         else:
             extraargs=[]
         args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
@@ -332,9 +328,8 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
         errcode, result = build_txt(iprefix, outpdf, fastfork)
         checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
     log(result, '')
-    outf = open(outtext, 'wb')
-    outf.write('\n'.join(result))
-    outf.close()
+    with open(outtext, 'w') as outf:
+        outf.write('\n'.join(result))
     return checkinfo, errcode
 
 def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None):
