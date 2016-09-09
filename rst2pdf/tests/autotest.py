@@ -246,8 +246,8 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
         print("Updating MD5 file")
-        with open(md5path, 'wb') as f:
-            f.write(str(info))
+        with open(md5path, 'w') as f:
+            f.write('{}'.format(info))
     return resulttype
 
 
