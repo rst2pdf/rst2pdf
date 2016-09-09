@@ -9,6 +9,9 @@ dependencies:
 test:
   override:
     - nosetests -i regulartest -i sphinxtest --with-xunit --xunit-file=${CIRCLE_TEST_REPORTS}/nose/${CIRCLE_PROJECT_REPONAME}.xml
+  post:
+    - ./parselogs.py > ~/log.txt
 general:
   artifacts:
     - "~/rst2pdf/rst2pdf/tests/output/"
+    - "~/log.txt"
