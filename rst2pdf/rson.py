@@ -371,7 +371,7 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, unicode=str: str(s, 'utf-8'))
+          lambda token, s, unicode=str: str(s))
     parse_encoded_chr = chr
     parse_join_str = ''.join
     cachestrings = False
@@ -501,7 +501,7 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, unicode=str: str(token[2], 'utf-8'))
+        lambda token, unicode=str: str(token[2]))
 
     special_strings = dict(true = True, false = False, null = None)
 

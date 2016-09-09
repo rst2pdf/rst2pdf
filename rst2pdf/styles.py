@@ -934,11 +934,11 @@ def validateCommands(commands):
             continue
 
         # See if start and stop are the right types
-        if type(command[1]) not in (ListType,TupleType):
+        if type(command[1]) not in (list,tuple):
             log.error('Start cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
 
-        if type(command[2]) not in (ListType,TupleType):
+        if type(command[2]) not in (list,tuple):
             log.error('Stop cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
 
