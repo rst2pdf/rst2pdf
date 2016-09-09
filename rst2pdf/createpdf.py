@@ -1467,6 +1467,7 @@ def main(_args=None):
             ' The suggested version is 2.3 or higher' % reportlab.Version)
 
     if options.invariant:
+        log.info('Invariant option is set')
         patch_PDFDate()
         patch_digester()
 
@@ -1511,7 +1512,7 @@ reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
 
 def patch_digester():
     ''' Patch digester so that we can get the same results when image
-filenames change'''
+    filenames change'''
     import reportlab.pdfgen.canvas as canvas
 
     cache = {}
@@ -1540,6 +1541,7 @@ def patch_PDFDate():
                     lambda yyyy,mm,dd,hh,m,s:
                         "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'" % (yyyy,mm,dd,hh,m,s,0,0))
             return pdfdoc.format(pdfdoc.PDFString(dfmt(*self.date)), doc)
+
 
     pdfdoc.PDFDate = PDFDate
     reportlab.rl_config.invariant = 1

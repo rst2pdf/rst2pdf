@@ -89,7 +89,7 @@ def _write_file_with_lock(filename, content):
 def _create_module(module_name):
     """ex. mod = _create_module('tenjin.util')"""
     from types import ModuleType
-    mod = ModuleType(module_name.split('.')[-1])
+    mod = ModuleType((module_name.split('.')[-1]).encode('utf-8'))
     sys.modules[module_name] = mod
     return mod
 
