@@ -44,7 +44,7 @@ if 'Directive' in rst.__dict__:
                               rawsource=''.join(self.content))]
 
         def __repr__(self):
-            return u''.join(self.content)
+            return ''.join(self.content)
 
 else:
 

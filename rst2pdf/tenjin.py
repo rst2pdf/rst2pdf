@@ -43,18 +43,20 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from builtins import str, bytes, object
+
 from future import standard_library
 standard_library.install_aliases()
 
-from builtins import str, bytes, object
+import re, sys, os, time, marshal
+
 
 __revision__ = "$Rev: 137 $"[6:-2]
 __release__  = "0.6.2"
 __license__  = "MIT License"
 __all__      = ['Template', 'Engine', 'helpers', 'html', ]
 
-
-import re, sys, os, time, marshal
+PY2 = sys.version_info[0] < 3
 
 
 ##
@@ -89,7 +91,10 @@ def _write_file_with_lock(filename, content):
 def _create_module(module_name):
     """ex. mod = _create_module('tenjin.util')"""
     from types import ModuleType
-    mod = ModuleType((module_name.split('.')[-1]).encode('utf-8'))
+    module_name = module_name.split('.')[-1]
+    if PY2:
+        module_name = module_name.encode('utf-8')
+    mod = ModuleType(module_name)
     sys.modules[module_name] = mod
     return mod
 
@@ -108,8 +113,8 @@ def _create_helpers_module():
              ''
              >>> to_str("foo")
              'foo'
-             >>> to_str(u"\u65e5\u672c\u8a9e")
-             u'\u65e5\u672c\u8a9e'
+             >>> to_str("\u65e5\u672c\u8a9e")
+             '\u65e5\u672c\u8a9e'
              >>> to_str(123)
              '123'
         """
@@ -126,7 +131,7 @@ def _create_helpers_module():
               from tenjin.helpers import escape
               to_str = tenjin.generate_tostrfunc('utf-8')
               engine = tenjin.Engine()
-              context = { 'items': [u'AAA', u'BBB', u'CCC'] }
+              context = { 'items': ['AAA', 'BBB', 'CCC'] }
               output = engine.render('example.pyhtml')
               print output
         """
@@ -672,7 +677,7 @@ class Template(object):
         if not text:
             return;
         if self.encoding:
-            buf.append("u'''")
+            buf.append("'''")
         else:
             buf.append("'''")
         #text = re.sub(r"(['\\\\])", r"\\\1", text)

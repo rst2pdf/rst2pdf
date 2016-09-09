@@ -419,7 +419,7 @@ class RstToPdf(object):
             t = 'bullet'
 
         elif node.parent.get('enumtype') == 'arabic':
-            b = str(node.parent.children.index(node) + start) + '.'
+            b = '{}{}.'.format(node.parent.children.index(node), start) + '.'
 
         elif node.parent.get('enumtype') == 'lowerroman':
             b = toRoman(node.parent.children.index(node) + start).lower() + '.'
@@ -461,7 +461,7 @@ class RstToPdf(object):
         for y in range(0, len(rows)):
             for x in range(len(rows[y])-1, -1, -1):
                 cell = rows[y][x]
-                if isinstance(cell, str):
+                if isinstance(cell, (bytes, str)):
                     continue
                 if cell.get("morecols"):
                     for i in range(0, cell.get("morecols")):
@@ -490,7 +490,7 @@ class RstToPdf(object):
         for y in range(0, len(rows)):
             for x in range(0, len(rows[y])):
                 cell = rows[y][x]
-                if isinstance(cell, str):
+                if isinstance(cell, (bytes, str)):
                     continue
                 if cell.get("morecols"):
                     mc = cell.get("morecols")
@@ -557,6 +557,7 @@ class RstToPdf(object):
             self.doctree = doctree
 
         if self.numbered_links:
+            log.info('Document has numbered links')
             # Transform all links to sections so they show numbers
             from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
@@ -638,8 +639,7 @@ class RstToPdf(object):
         FP = FancyPage("fancypage", head, foot, self)
 
         def cleantags(s):
-            re.sub(r'<[^>]*?>', '',
-                str(s).strip())
+            re.sub(r'<[^>]*?>', '', str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -918,7 +918,7 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, str):
+            if not isinstance(text, (bytes, str)):
                 try:
                     text = str(text, e.encoding)
                 except AttributeError:
@@ -926,14 +926,14 @@ class HeaderOrFooter(object):
                 except TypeError:
                     text = str(text, 'utf-8')
 
-            text = text.replace(u'###Page###', pnum)
+            text = text.replace('###Page###', pnum)
             if '###Total###' in text:
-                text = text.replace(u'###Total###', str(self.totalpages))
+                text = text.replace('###Total###', str(self.totalpages))
                 self.client.mustMultiBuild=True
-            text = text.replace(u"###Title###", doc.title)
-            text = text.replace(u"###Section###",
+            text = text.replace("###Title###", doc.title)
+            text = text.replace("###Section###",
                 getattr(canv, 'sectName', ''))
-            text = text.replace(u"###SectNum###",
+            text = text.replace("###SectNum###",
                 getattr(canv, 'sectNum', ''))
             text = smartyPants(text, smarty)
             return text

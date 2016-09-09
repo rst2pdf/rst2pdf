@@ -244,7 +244,7 @@ class PDFBuilder(Builder):
         # this:
         # [('py-modindex',
         #    <class 'sphinx.domains.python.PythonModuleIndex'>,
-        #   [(u'p', [[u'parrot', 0, 'test', u'module-parrot', 'Unix, Windows',
+        #   [('p', [['parrot', 0, 'test', 'module-parrot', 'Unix, Windows',
         #   '', 'Analyze and reanimate dead parrots.']])], True)]
 
         # Now this in the HTML builder is passed onto write_domain_indices.

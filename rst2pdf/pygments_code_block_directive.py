@@ -154,7 +154,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             content = codecs.open(options['include'], 'r', encoding).read().rstrip()
         except (IOError, UnicodeError): # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
-            content = u''
+            content = ''
         line_offset = 0
         if content:
             # here we define the start-at and end-at options
@@ -182,7 +182,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                     # in '\r\n'.
                     # Going with .splitlines() seems more appropriate
                     # but needs a few more changes.
-                    if char == u'\n' or char == u'\r':
+                    if char == '\n' or char == '\r':
                         break
                     after_index -= 1
                 # patch mmueller end
@@ -222,7 +222,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     else:
         line_offset = options.get('linenos_offset')
-        content = u'\n'.join(content)
+        content = '\n'.join(content)
 
     if 'tabsize' in options:
         tabw = options['tabsize']
@@ -275,17 +275,17 @@ def code_block_directive(name, arguments, options, content, lineno,
 #
 # Move to separated module??
 
-def zero_or_positive_int(argument): 
-    """ 
-    Converts a string into python positive integer including zero. 
-    None is a special case; it is regarded as zero. 
-    """ 
-    if argument is None: 
-        return 0 
-    elif argument == '0': 
-        return 0 
-    else: 
-        return directives.positive_int(argument) 
+def zero_or_positive_int(argument):
+    """
+    Converts a string into python positive integer including zero.
+    None is a special case; it is regarded as zero.
+    """
+    if argument is None:
+        return 0
+    elif argument == '0':
+        return 0
+    else:
+        return directives.positive_int(argument)
 
 
 def string_list(argument):

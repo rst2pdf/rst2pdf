@@ -243,7 +243,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
+            parent_id='{}-{}'.format((node.parent.get('ids', [None]) or [None])[0], id(node))
             node.elements = [ Heading(text,
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
@@ -564,7 +564,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
         # FIXME: use different unicode bullets depending on b
         if b and b in "*+-":
-            b = getattr(bStyle, 'bulletText', u'\u2022')
+            b = getattr(bStyle, 'bulletText', '\u2022')
 
         # The style has information about the bullet:
         #
@@ -705,7 +705,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
         # line nodes have no classes, they have to inherit from the outermost lineblock (sigh)
         # For more info see Issue 471 and its test case.
-        
+
         parent = node
         while isinstance(parent.parent, (docutils.nodes.line, docutils.nodes.line_block)):
             parent=parent.parent

@@ -377,14 +377,14 @@ class QuotedToken(object):
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
-    quoted_mapper = { '\\\\' : u'\\',
-               r'\"' : u'"',
-               r'\/' : u'/',
-               r'\b' : u'\b',
-               r'\f' : u'\f',
-               r'\n' : u'\n',
-               r'\r' : u'\r',
-               r'\t' : u'\t'}.get
+    quoted_mapper = { '\\\\' : '\\',
+               r'\"' : '"',
+               r'\/' : '/',
+               r'\b' : '\b',
+               r'\f' : '\f',
+               r'\n' : '\n',
+               r'\r' : '\r',
+               r'\t' : '\t'}.get
 
     def quoted_parse_factory(self, int=int, iter=iter, len=len):
         quoted_splitter = self.quoted_splitter
