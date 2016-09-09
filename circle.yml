@@ -1,0 +1,17 @@
+dependencies:
+  pre:
+    - mkdir -p ${CIRCLE_TEST_REPORTS}/nose
+    - pip install -r requirements.txt
+  override:
+    - pip install -e .
+    - python bootstrap.py
+    - ./bin/buildout
+test:
+  override:
+    - nosetests -i regulartest -i sphinxtest --with-xunit --xunit-file=${CIRCLE_TEST_REPORTS}/nose/${CIRCLE_PROJECT_REPONAME}.xml
+  post:
+    - ./parselogs.py > ~/log.txt
+general:
+  artifacts:
+    - "~/rst2pdf/rst2pdf/tests/output/"
+    - "~/log.txt"
