@@ -4,6 +4,7 @@ bad_md5 = [
 
 good_md5 = [
         'c8b6075e5429f6e568c1aa483cfc6a33',
+        'da7e96ce0626ebc5b828548e16d49f2a',
         'e939229ce80f5b582e34fa28bc425e14',
         'sentinel'
 ]
