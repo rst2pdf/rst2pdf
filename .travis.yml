@@ -1,9 +1,14 @@
+cache:
+- apt
+
 language: python
 python:
  - 2.7
  - 3.5
 
 before_install:
+ - sudo apt-get -y update
+ - sudo apt-get install -y inkscape imagemagick
  - pip install -r requirements.txt
  - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
  - python bootstrap.py
