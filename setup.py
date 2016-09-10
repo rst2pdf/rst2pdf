@@ -36,29 +36,34 @@ long_description = (
     )
 
 install_requires = [
-        'setuptools',
-        'docutils',
-        'reportlab>=2.4',
-        'Pygments',
-        'pdfrw',
-        'future',
-        ]
+    'setuptools',
+    'docutils',
+    'reportlab>=2.4',
+    'Pygments',
+    'pdfrw',
+    'future',
+    'Jinja2'
+]
 
 try:
     import json
 except ImportError:
     install_requires.append('simplejson')
 
-tests_require = ['pyPdf']
-sphinx_require = ['sphinx']
-hyphenation_require = ['wordaxe>=1.0']
-images_require = ['PILLOW']
-pdfimages_require = ['pyPdf','PythonMagick']
-pdfimages2_require = ['pyPdf','SWFTools']
-svgsupport_require = ['svg2rlg']
-aafiguresupport_require = ['aafigure>=0.4']
-mathsupport_require = ['matplotlib']
-rawhtmlsupport_require = ['xhtml2pdf']
+tests_require = ['pyPdf', 'nose', 'coverage']
+
+EXTRAS_REQUIRE = {
+    'tests': tests_require,
+    'sphinx': ['sphinx'],
+    'hyphenation': ['wordaxe>=1.0', 'pyhyphen'],
+    'images': ['pillow'],
+    'pdfimages': ['pyPdf'], # , 'PythonMagick'],
+    'pdfimages2': ['pyPdf'], # , 'SWFTools'],
+    'svgsupport': ['svg2rlg'],
+    'aafiguresupport': ['aafigure>=0.4'],
+    'mathsupport': ['matplotlib'],
+    'rawhtmlsupport': ['xhtml2pdf']
+}
 
 setup(
     name="rst2pdf",
@@ -75,18 +80,7 @@ setup(
     ],
     install_requires=install_requires,
     tests_require=tests_require,
-    extras_require=dict(
-        tests=tests_require,
-        sphinx=sphinx_require,
-        hyphenation=hyphenation_require,
-        images=images_require,
-        pdfimages=pdfimages_require,
-        pdfimages2=pdfimages2_require,
-        svgsupport=svgsupport_require,
-        aafiguresupport=aafiguresupport_require,
-        mathsupport=mathsupport_require,
-        rawhtmlsupport=rawhtmlsupport_require,
-    ),
+    extras_require=EXTRAS_REQUIRE,
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[

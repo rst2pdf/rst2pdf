@@ -19,9 +19,9 @@ from builtins import str
 import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
 
-from .. import image
-from ..log import log
-from ..extensions.vectorpdf_r2p import VectorPdf
+from rst2pdf import image
+from rst2pdf.log import log
+from rst2pdf.extensions.vectorpdf_r2p import VectorPdf
 
 
 if sys.platform.startswith('win'):

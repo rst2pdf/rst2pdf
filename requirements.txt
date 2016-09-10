@@ -1,15 +1,5 @@
-future
-pyhyphen
-nose
-reportlab
-Pygments
-sphinx
-pillow
-pdfrw
 pyPdf
-Jinja2
+nose
 coverage
-aafigure
-svg2rlg
-docutils
+zc.buildout
 git+https://github.com/NEOatNHNG/wordaxe.git@futurize#egg=wordaxe
