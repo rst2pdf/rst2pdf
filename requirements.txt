@@ -1,3 +1,4 @@
+setuptools>=18.5
 pyPdf
 nose
 coverage

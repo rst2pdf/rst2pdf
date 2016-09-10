@@ -414,8 +414,7 @@ class QuotedToken(object):
             if len(s) > 1:
                 result = [result]
                 append = result.append
-                s = iter(s)
-                next = s.__next__
+                next = iter(s).__next__
                 next()
                 for special in s:
                     nonmatch = next()
