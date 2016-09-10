@@ -5,7 +5,7 @@ python:
 
 before_install:
  - pip install -r requirements.txt
- - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,rawhtmlsupport]
+ - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
  - python bootstrap.py
  - ./bin/buildout
 
