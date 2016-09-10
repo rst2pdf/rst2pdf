@@ -26,6 +26,8 @@ import subprocess
 class plantuml(nodes.General, nodes.Element):
     pass
 
+class PlantUmlError(RuntimeError):
+    pass
 
 class UmlDirective(rst.Directive):
     """Directive to insert PlantUML markup
