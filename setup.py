@@ -36,7 +36,7 @@ long_description = (
     )
 
 install_requires = [
-        'setuptools',
+        'setuptools>=18.5',
         'docutils',
         'reportlab>=2.4',
         'Pygments',
@@ -58,7 +58,7 @@ pdfimages2_require = ['pyPdf','SWFTools']
 svgsupport_require = ['svg2rlg']
 aafiguresupport_require = ['aafigure>=0.4']
 mathsupport_require = ['matplotlib']
-rawhtmlsupport_require = ['xhtml2pdf']
+rawhtmlsupport_require = ['setuptools>=18.5', 'xhtml2pdf']
 
 setup(
     name="rst2pdf",
