@@ -11,6 +11,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import sys, os
 
 import pkg_resources
@@ -45,8 +48,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'german test'
-copyright = u'2010, Werner'
+project = 'german test'
+copyright = '2010, Werner'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +186,8 @@ htmlhelp_basename = 'germantestdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'germantest.tex', u'german test Documentation',
-   u'Werner', 'manual'),
+  ('index', 'germantest.tex', 'german test Documentation',
+   'Werner', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -216,8 +219,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'germantest', u'german test Documentation',
-     [u'Werner'], 1)
+    ('index', 'germantest', 'german test Documentation',
+     ['Werner'], 1)
 ]
 
 # -- Options for PDF output --------------------------------------------------
@@ -230,12 +233,12 @@ man_pages = [
 # The options element is a dictionary that lets you override
 # this config per-document.
 # For example,
-# ('index', u'MyProject', u'My Project', u'Author Name',
+# ('index', 'MyProject', 'My Project', 'Author Name',
 # dict(pdf_compressed = True))
 # would mean that specific document would be compressed
 # regardless of the global pdf_compressed setting.
 pdf_documents = [
-('index', u'twcb-de', u'Das Weinkellerbuch', u'Werner F Bruhin'),
+('index', 'twcb-de', 'Das Weinkellerbuch', 'Werner F Bruhin'),
 ]
 # A comma-separated list of custom stylesheets. Example:
 pdf_stylesheets = ['sphinx', 'sphinx-mine']

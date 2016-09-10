@@ -11,6 +11,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import sys, os
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -37,8 +40,8 @@ source_encoding = 'utf-8'
 master_doc = 'foobar'
 
 # General information about the project.
-project = u'Foobar'
-copyright = u'2009, Jason S'
+project = 'Foobar'
+copyright = '2009, Jason S'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +175,8 @@ htmlhelp_basename = 'Foobardoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('foobar', 'Foobar.tex', u'Foobar Documentation',
-   u'Jason S', 'manual'),
+  ('foobar', 'Foobar.tex', 'Foobar Documentation',
+   'Jason S', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -207,12 +210,12 @@ graphviz_dot='C:/appl/graphics/graphviz/2.24/bin/dot.exe'
 # The options element is a dictionary that lets you override
 # this config per-document.
 # For example,
-# ('index', u'MyProject', u'My Project', u'Author Name',
+# ('index', 'MyProject', 'My Project', 'Author Name',
 # dict(pdf_compressed = True))
 # would mean that specific document would be compressed
 # regardless of the global pdf_compressed setting.
 pdf_documents = [
-('index', u'index', u'index', u'lorenzo'),
+('index', 'index', 'index', 'lorenzo'),
 ]
 # A comma-separated list of custom stylesheets. Example:
 # pdf_stylesheets = ['sphinx','kerning','a4']
