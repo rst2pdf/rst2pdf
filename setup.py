@@ -36,7 +36,7 @@ long_description = (
     )
 
 install_requires = [
-    'setuptools',
+    'setuptools>=18.5',
     'docutils',
     'reportlab>=2.4',
     'Pygments',
