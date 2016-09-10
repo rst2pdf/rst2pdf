@@ -88,7 +88,7 @@ class Atajo(object):
         self.user = user
         self.activo = True
         # Test por default, verifica que la página exista.
-        self.test = u'code 200'
+        self.test = 'code 200'
         if r.count():
             # FIXME: esto creo que es una race condition
             # Existe la misma URL para el mismo usuario,
@@ -238,7 +238,7 @@ def alta():
         
         # Mensaje para el usuario de que el acortamiento
         # tuvo éxito.
-        data['mensaje'] = u'''La URL <a href="%(url)s">%(url)s</a>
+        data['mensaje'] = '''La URL <a href="%(url)s">%(url)s</a>
         se convirtió en:
         <a href="%(baseurl)s%(short)s">%(baseurl)s%(short)s</a>'''%data
 

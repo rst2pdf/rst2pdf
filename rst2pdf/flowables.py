@@ -817,7 +817,7 @@ class BoxedContainer(BoundByWidth):
         self.mode = mode
 
     def identity(self, maxLen=None):
-        return str([u"BoxedContainer containing: ",
+        return str(["BoxedContainer containing: ",
             [c.identity() for c in self.content]])[:80]
 
     def draw(self):

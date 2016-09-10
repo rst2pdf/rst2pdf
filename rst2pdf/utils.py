@@ -147,7 +147,7 @@ if HAS_XHTML2PDF:
         Collect all CSS definitions
         """
 
-        data = u""
+        data = ""
         if node.nodeType == Node.TEXT_NODE and collect:
             data = node.data
 
@@ -171,7 +171,7 @@ if HAS_XHTML2PDF:
                         for node in node.childNodes:
                             data += pisaPreLoop2(node, context, collect=True)
                         #context.addCSS(data)
-                        return u""
+                        return ""
                         #collect = True
 
                     if name == "link" and attr.href and attr.rel.lower() == "stylesheet":

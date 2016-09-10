@@ -584,7 +584,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         el = client.gather_elements(node, item_st)
         # FIXME: this is really really not good code
         if not el:
-            el = [Paragraph(u"<nobr>\xa0</nobr>", item_st)]
+            el = [Paragraph("<nobr> </nobr>", item_st)]
 
 
         idx=node.parent.children.index(node)
@@ -717,7 +717,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
         qstyle.leftIndent += client.styles.adjustUnits("0.5em")*i
         text = client.gather_pdftext(node)
         if not text: # empty line
-            text=u"<nobr>\xa0</nobr>"
+            text="<nobr> </nobr>"
         return [Paragraph(text, style=qstyle)]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
