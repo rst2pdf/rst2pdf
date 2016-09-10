@@ -1,5 +1,11 @@
+
 dependencies:
+  cache_directories:
+    - "~/.apt-cache"
   pre:
+    # Let CircleCI cache the apt archive
+    - mkdir -p ~/.apt-cache/partial && sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives
+    - sudo apt-get -y update && sudo apt-get install -y inkscape
     - mkdir -p ${CIRCLE_TEST_REPORTS}/nose ~/pdf/
     - pip install -r requirements.txt
   override:
