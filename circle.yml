@@ -1,0 +1,26 @@
+
+dependencies:
+  cache_directories:
+    - "~/.apt-cache"
+  pre:
+    # Let CircleCI cache the apt archive
+    - mkdir -p ~/.apt-cache/partial && sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives
+    - sudo apt-get -y update && sudo apt-get install -y inkscape
+    - mkdir -p ${CIRCLE_TEST_REPORTS}/nose ~/pdf/
+    - pip install -r requirements.txt
+  override:
+    - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    - python bootstrap.py
+    - ./bin/buildout
+test:
+  override:
+    - nosetests -i regulartest -i sphinxtest --with-xunit --xunit-file=${CIRCLE_TEST_REPORTS}/nose/${CIRCLE_PROJECT_REPONAME}.xml
+  post:
+#    - ./rst2pdf/tests/parselogs.py > ~/log.txt
+    - cat ./rst2pdf/tests/output/*.log >> ~/log.txt
+    - mv ./rst2pdf/tests/output/*.pdf ~/pdf/
+general:
+  artifacts:
+    - "~/pdf/"
+    - "~/log.txt"
+    - "~/rst2pdf/rst2pdf/tests/output/"
