@@ -1,15 +1,4 @@
 setuptools>=18.5
-<<<<<<< HEAD
-=======
-future
-pyhyphen
-nose
-reportlab
-Pygments
-sphinx
-pillow
-pdfrw
->>>>>>> tests/circleci-master
 pyPdf
 nose
 coverage
