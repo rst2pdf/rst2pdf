@@ -1,3 +1,4 @@
+setuptools>=18.5
 future
 pyhyphen
 nose

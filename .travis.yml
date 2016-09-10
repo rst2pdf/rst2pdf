@@ -4,6 +4,7 @@ python:
  - 3.5
 
 before_install:
+ - apt-get install inkscape
  - pip install -r requirements.txt
  - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
  - python bootstrap.py
