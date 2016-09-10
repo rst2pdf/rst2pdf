@@ -9,7 +9,7 @@ dependencies:
     - mkdir -p ${CIRCLE_TEST_REPORTS}/nose ~/pdf/
     - pip install -r requirements.txt
   override:
-    - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,rawhtmlsupport]
+    - pip install -e .[tests,sphinx,hyphenation,images,pdfimages,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
     - python bootstrap.py
     - ./bin/buildout
 test:
