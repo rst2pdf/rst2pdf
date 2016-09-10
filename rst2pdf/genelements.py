@@ -944,7 +944,7 @@ class HandleAdmonition(NodeHandler, docutils.nodes.attention,
                 style=client.styles['%s-heading'%node.tagname])]
         rows=title + client.gather_elements(node, style=style)
         st=client.styles[node.tagname]
-        if 'commands' in dir(st):
+        if 'commands' in str(st):
             t_style = TableStyle(st.commands)
         else:
             t_style = TableStyle()
