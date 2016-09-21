@@ -639,7 +639,7 @@ class RstToPdf(object):
         FP = FancyPage("fancypage", head, foot, self)
 
         def cleantags(s):
-            re.sub(r'<[^>]*?>', '', str(s).strip())
+            re.sub(r'<[^>]*?>', '', s.strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -818,7 +818,7 @@ _counterStyle='arabic'
 class PageCounter(Flowable):
 
     def __init__(self, number=0, style='arabic'):
-        self.style=str(style).lower()
+        self.style=style.lower()
         self.number=int(number)
         Flowable.__init__(self)
 
@@ -851,7 +851,7 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='loweralpha':
         ptext=string.lowercase[_counter%26]
     else:
-        ptext=str(_counter)
+        ptext='{}'.format(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -928,7 +928,7 @@ class HeaderOrFooter(object):
 
             text = text.replace('###Page###', pnum)
             if '###Total###' in text:
-                text = text.replace('###Total###', str(self.totalpages))
+                text = text.replace('###Total###', self.totalpages)
                 self.client.mustMultiBuild=True
             text = text.replace("###Title###", doc.title)
             text = text.replace("###Section###",
@@ -1264,21 +1264,21 @@ def parse_commandline():
     parser.add_option('--no-footnote-backlinks', action='store_false',
         dest='footnote_backlinks', default=def_footnote_backlinks,
         help='Disable footnote backlinks.'
-            ' Default=%s' % str(not def_footnote_backlinks))
+            ' Default={0!s}'.format(not def_footnote_backlinks))
 
     def_inline_footnotes = config.getValue("general",
         "inline_footnotes", False)
     parser.add_option('--inline-footnotes', action='store_true',
         dest='inline_footnotes', default=def_inline_footnotes,
         help='Show footnotes inline.'
-            ' Default=%s' % str(not def_inline_footnotes))
+            ' Default={0!s}'.format(not def_inline_footnotes))
 
     def_real_footnotes = config.getValue("general",
         "real_footnotes", False)
     parser.add_option('--real-footnotes', action='store_true',
         dest='real_footnotes', default=def_real_footnotes,
         help='Show footnotes at the bottom of the page where they are defined.'
-            ' Default=%s' % str(def_real_footnotes))
+            ' Default={0!s}'.format(def_real_footnotes))
 
     def_dpi = config.getValue("general", "default_dpi", 300)
     parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
@@ -1482,7 +1482,7 @@ def main(_args=None):
         baseurl=options.baseurl,
         fit_mode=options.fit_mode,
         background_fit_mode = options.background_fit_mode,
-        smarty=str(options.smarty),
+        smarty='{}'.format(options.smarty),
         font_path=options.fpath,
         style_path=options.stylepath,
         repeat_table_rows=options.repeattablerows,
