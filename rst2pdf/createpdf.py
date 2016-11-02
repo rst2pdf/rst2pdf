@@ -658,6 +658,17 @@ class RstToPdf(object):
         while True:
             try:
                 log.info("Starting build")
+                # XXX output may be a file name (when this is run as a
+                # command line script), or a StringIO object.
+                # When it is a file name, PDFDocument opens the file
+                # with mode "wb" (i.e. the file gets overwritten completely),
+                # but when it is a file-like object, PDFDocument simply
+                # calls .write() on it.
+                # We run the builder repeatedly, and StringIO accumulates
+                # output from several runs.  To avoid that, reset at each run.
+                if not isinstance(output, basestring):
+                    output.seek(0)
+                    output.truncate()
                 # See if this *must* be multipass
                 pdfdoc.multiBuild(elements)
                 # Force a multibuild pass
