@@ -1,0 +1,15 @@
+future
+pyhyphen
+nose
+reportlab
+Pygments
+sphinx
+pillow
+pdfrw
+pyPdf
+Jinja2
+coverage
+aafigure
+svg2rlg
+docutils
+git+https://github.com/NEOatNHNG/wordaxe.git@futurize#egg=wordaxe
