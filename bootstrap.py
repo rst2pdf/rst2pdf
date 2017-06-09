@@ -25,6 +25,7 @@ from __future__ import absolute_import
 from future import standard_library
 standard_library.install_aliases()
 
+
 import os, shutil, sys, tempfile, urllib.request, urllib.error, urllib.parse
 from optparse import OptionParser
 
@@ -68,7 +69,17 @@ except ImportError:
         ez['use_setuptools'](to_dir=tmpeggs, download_delay=0)
 
     if to_reload:
+        try:
+            from importlib import reload        # Python3 >= 3.4
+        except ImportError:
+            try:
+                from imp import reload          # Python3 < 3.4
+            except:				# Python2
+                pass
+
         reload(pkg_resources)
+
+
     else:
         import pkg_resources
 
