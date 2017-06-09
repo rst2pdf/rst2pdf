@@ -63,7 +63,7 @@ except ImportError:
                          ).read(), ez)
         ez['use_setuptools'](to_dir=tmpeggs, download_delay=0, no_fake=True)
     else:
-        exec(urllib.request.urlopen('http://peak.telecommunity.com/dist/ez_setup.py'
+        exec(urllib.request.urlopen('http://bootstrap.pypa.io/ez_setup.py'
                              ).read(), ez)
         ez['use_setuptools'](to_dir=tmpeggs, download_delay=0)
 

@@ -5,6 +5,7 @@ python:
 
 before_install:
  - pip install -r requirements.txt
+ - pip install --upgrade setuptools
  - python setup.py install
  - python bootstrap.py
  - ./bin/buildout
