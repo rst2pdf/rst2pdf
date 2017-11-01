@@ -197,7 +197,7 @@ latex_documents = [
 
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
-pdf_documents = [ 
+pdf_documents = [
     ('index', u'MyProject1', u'My Project', u'Author Name'),
     ('index2', u'MyProject2', u'My Project', u'Author Name'),
 ]

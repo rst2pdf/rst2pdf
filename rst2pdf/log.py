@@ -11,7 +11,7 @@ logging.basicConfig(
 log = logging.getLogger('rst2pdf')
 
 def nodeid(node):
-    """Given a node, tries to return a way to see where it was in the 
+    """Given a node, tries to return a way to see where it was in the
     source text"""
     fname='UNKNOWN'
     line='UNKNOWN'

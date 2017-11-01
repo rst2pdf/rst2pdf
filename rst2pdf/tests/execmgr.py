@@ -44,7 +44,7 @@ class BaseExec(object):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 preexec_fn=None,   # Callable object in child process
-                close_fds=False,   
+                close_fds=False,
                 shell=False,
                 cwd=None,
                 env=None,

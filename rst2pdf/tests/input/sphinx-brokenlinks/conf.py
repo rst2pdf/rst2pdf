@@ -197,7 +197,7 @@ latex_appendices = ['appendix']
 
 # Grouping the document tree into PDF files. List of tuples
 # (source start file, target name, title, author).
-pdf_documents = [ 
+pdf_documents = [
     ('index', u'doc1', u'doc1', u'Author Name'),
     ('index2', 'doc2', '', u'Author Name'),
 ]

@@ -75,7 +75,7 @@ class PDFDevice:
 
 	def Scale(self, scale):
 		self.pdf.scale(scale, scale)
-	
+
 	def PopTrafo(self):
 		self.pdf.restoreState()
 
@@ -108,7 +108,7 @@ class PDFDevice:
 		self.pdf.line(x1, y1, x2, y2)
 
 	def DrawRectangle(self, start, end):
-		self.pdf.rectangle(start.x, start.y, end.x - start.x, end.y - start.y, 
+		self.pdf.rectangle(start.x, start.y, end.x - start.x, end.y - start.y,
 						   1, 0)
 
 	def FillRectangle(self, left, bottom, right, top):
@@ -205,11 +205,11 @@ class PDFGenSaver:
 		trafo = rot(Translation(center))
 		image = PIL.Image.new('RGB', (1, 200))
 		border = int(round(100 * pattern.Border()))
-		_sketch.fill_axial_gradient(image.im, pattern.Gradient().Colors(), 
+		_sketch.fill_axial_gradient(image.im, pattern.Gradient().Colors(),
 									0, border, 0, 200 - border)
 		self.pdf.saveState()
 		apply(self.pdf.transform, trafo.coeff())
-		self.pdf.drawInlineImage(image, (left - right) / 2, (bottom - top) / 2, 
+		self.pdf.drawInlineImage(image, (left - right) / 2, (bottom - top) / 2,
 								 right - left, top - bottom)
 		self.pdf.restoreState()
 
@@ -237,7 +237,7 @@ class PDFGenSaver:
 				method = self.pdf.clipPath
 			else:
 				method = self.pdf.drawPath
-			method(self.make_pdf_path(paths), properties.HasLine(), 
+			method(self.make_pdf_path(paths), properties.HasLine(),
 				   properties.HasFill())
 		# draw the arrows
 		if properties.HasLine():
@@ -256,7 +256,7 @@ class PDFGenSaver:
 						self.draw_arrow(arrow1, t1)
 					if arrow2 and t2 is not None:
 						self.draw_arrow(arrow2, t2)
-					
+
 	def draw_arrow(self, arrow, trafo):
 		path = arrow.Paths()[0].Duplicate()
 		path.Transform(trafo)
@@ -280,7 +280,7 @@ class PDFGenSaver:
 			if mask.has_line and mask.Properties().HasLine():
 				prop = mask.Properties().Duplicate()
 				prop.SetProperty(fill_pattern = EmptyPattern)
-				self.polybezier(mask.Paths(), prop, mask.bounding_rect, 
+				self.polybezier(mask.Paths(), prop, mask.bounding_rect,
 								clip = 1)
 			self.pdf.restoreState()
 
@@ -366,7 +366,7 @@ class PDFGenSaver:
 				obj=object.AsBezier()
 				self.polybezier(obj.Paths(), obj.Properties(), obj.bounding_rect)
 			elif object.is_PathTextText:
-				self.path_text(object)				
+				self.path_text(object)
 			elif object.is_Image:
 				self.raster_image(object)
 			elif object.is_Bezier or object.is_Rectangle or object.is_Ellipse:

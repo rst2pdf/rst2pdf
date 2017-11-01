@@ -47,7 +47,7 @@ Paragraph = genelements.Paragraph
 
 '''
 
-.. NOTE:  
+.. NOTE:
 
     THIS IS A HUGE HACK HACK HACK
 

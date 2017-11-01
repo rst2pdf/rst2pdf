@@ -45,7 +45,7 @@ class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
-        
+
         if node['classes']:
             pre = client.styleToFont(node['classes'][0])
         else:
@@ -61,7 +61,7 @@ class HandleLiteral(NodeHandler, docutils.nodes.literal):
         text = escape(node.astext())
         text = text.replace(' ', '&nbsp;')
         return text
-        
+
 class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
     post = "</super>"
@@ -165,7 +165,7 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         node.elements[0].image.hAlign = alignment
         node.elements[0].spaceBefore = style.spaceBefore
         node.elements[0].spaceAfter = style.spaceAfter
-        
+
         # Image flowables don't support valign (makes no sense for them?)
         # elif alignment in ('TOP','MIDDLE','BOTTOM'):
         #    i.vAlign = alignment

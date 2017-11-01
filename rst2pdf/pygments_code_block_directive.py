@@ -266,17 +266,17 @@ def code_block_directive(name, arguments, options, content, lineno,
 #
 # Move to separated module??
 
-def zero_or_positive_int(argument): 
-    """ 
-    Converts a string into python positive integer including zero. 
-    None is a special case; it is regarded as zero. 
-    """ 
-    if argument is None: 
-        return 0 
-    elif argument == '0': 
-        return 0 
-    else: 
-        return directives.positive_int(argument) 
+def zero_or_positive_int(argument):
+    """
+    Converts a string into python positive integer including zero.
+    None is a special case; it is regarded as zero.
+    """
+    if argument is None:
+        return 0
+    elif argument == '0':
+        return 0
+    else:
+        return directives.positive_int(argument)
 
 
 def string_list(argument):

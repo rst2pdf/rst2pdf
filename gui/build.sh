@@ -2,7 +2,7 @@
 #!/bin/sh
 
 for a in *.ui
-do 
+do
 	pyuic4 $a -o Ui_`basename $a .ui`.py -x
  	sed -i 's/^# Created.*$//' Ui_`basename $a .ui`.py
 done

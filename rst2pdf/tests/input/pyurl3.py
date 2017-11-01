@@ -24,12 +24,12 @@ def minitwill(url, script):
     >>> minitwill('http://google.com','code 200')
     ==> at http://www.google.com.ar/
     True
-    
+
     >>> minitwill('http://google.com','title bing')
     ==> at http://www.google.com.ar/
     title is 'Google'.
     False
-    
+
     '''
     go (url)
     for line in script.splitlines():
@@ -50,7 +50,7 @@ from storm.locals import *
 
 class Atajo(object):
     '''Representa una relación slug <=> URL
-    
+
     Miembros:
 
     id     = Único, creciente, entero (primary key)
@@ -79,7 +79,7 @@ class Atajo(object):
         _id es automático.'''
 
         # Hace falta crear esto?
-        r = self.store.find(Atajo, user = user, url = url) 
+        r = self.store.find(Atajo, user = user, url = url)
         self.url = url
         self.user = user
         self.activo = True
@@ -160,13 +160,13 @@ class Atajo(object):
             Si url es None, devuelve la lista de sus atajos
             Si url no es None , devuelve *ese* atajo
         '''
-        
+
         if slug is not None:
             i = 0
             for p,l in enumerate(slug):
                 i += 62 ** p * cls.validos.index(l)
             return cls.store.find(cls, id = i, activo = True).one()
-            
+
         if user is not None:
             if url is None:
                 return cls.store.find(cls, user = user, activo = True)
@@ -221,17 +221,17 @@ def alta():
 
     # Si tenemos un parámetro URL, estamos en esta
     # funcion porque el usuario envió una URL a acortar.
-    
+
     if 'url' in bottle.request.GET:
         # La acortamos
         url = bottle.request.GET['url'].decode('utf8')
-        a = Atajo(url=url, user=usuario)    
+        a = Atajo(url=url, user=usuario)
         data['short'] = a.slug()
         data['url'] = url
 
         # La probamos
         a.run_test()
-        
+
         # Mensaje para el usuario de que el acortamiento
         # tuvo éxito.
         data['mensaje'] = u'''La URL <a href="%(url)s">%(url)s</a>
@@ -273,7 +273,7 @@ def editar(slug):
         a.test = bottle.request.GET['test'].decode('utf-8')
         a.save()
         bottle.redirect('/')
-        
+
     return {'atajo':a,
             'mensaje':'',
             }
@@ -284,7 +284,7 @@ def borrar(slug):
     if not 'REMOTE_USER' in bottle.request.environ:
         bottle.abort(401, "Sorry, access denied.")
     usuario = bottle.request.environ['REMOTE_USER'].decode('utf8')
-    
+
     # Solo el dueño de un atajo puede borrarlo
     a = Atajo.get(slug)
     if a and a.user == usuario:

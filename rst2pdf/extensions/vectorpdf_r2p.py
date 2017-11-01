@@ -36,7 +36,7 @@ class AnyCache(object):
 # This is monkey-patched into reportlab IFF we are using
 # PDF files inside paragraphs.
 
-def drawImage(self, image, x, y, width=None, height=None, mask=None, 
+def drawImage(self, image, x, y, width=None, height=None, mask=None,
             preserveAspectRatio=False, anchor='c'):
     if not isinstance(image, VectorPdf):
         return self._drawImageNotVectorPDF(image, x, y, width, height, mask,

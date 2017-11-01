@@ -7,7 +7,7 @@ from reportlab.platypus.tables import *
 def go():
         Story=[]
         doc = SimpleDocTemplate("phello.pdf")
-        
+
         cell=[Paragraph('A',ParagraphStyle(name='Normal',
                                   fontName='Helvetica',
                                   fontSize=10,

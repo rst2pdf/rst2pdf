@@ -9,7 +9,7 @@ import nose.plugins.skip
 class RunTest:
     def __init__(self,f):
         basename = os.path.basename(f)
-        self.description = basename 
+        self.description = basename
         mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
         md5file = mprefix + '.json'
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
@@ -25,7 +25,7 @@ class RunTest:
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue=True
-            
+
     def __call__(self,f):
         if self.skip:
             raise nose.plugins.skip.SkipTest
@@ -49,13 +49,13 @@ def run_installed_single(inpfname):
     basename = os.path.basename(iprefix)
     if os.path.exists(iprefix + '.ignore'):
         return 'ignored', 0
-        
+
     oprefix = os.path.join(PathInfo.outdir, basename)
     mprefix = os.path.join(PathInfo.md5dir, basename)
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
     md5file = mprefix + '.json'
-    
+
     inpfname = iprefix + '.txt'
     style = iprefix + '.style'
     cli = iprefix + '.cli'
@@ -82,7 +82,7 @@ def run_installed_single(inpfname):
 class RunInstalledTest:
     def __init__(self,f):
         basename = os.path.basename(f)
-        self.description = basename 
+        self.description = basename
         mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
         md5file = mprefix + '.json'
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
@@ -98,7 +98,7 @@ class RunInstalledTest:
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue=True
-            
+
     def __call__(self,f):
         if self.skip:
             raise nose.plugins.skip.SkipTest
@@ -113,14 +113,14 @@ class RunInstalledTest:
 class RunSphinxTest:
     def __init__(self,f):
         basename = os.path.basename(f[:-1])
-        self.description = basename 
+        self.description = basename
         mprefix = os.path.join(PathInfo.md5dir, basename)
         md5file = mprefix + '.json'
         ignfile = os.path.join(PathInfo.inpdir , basename)+'.ignore'
         info=MD5Info()
         self.skip=False
         self.openIssue=False
-        
+
         if os.path.exists(ignfile):
             self.skip=True
         if os.path.exists(md5file):
@@ -130,7 +130,7 @@ class RunSphinxTest:
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
             self.openIssue=True
-            
+
     def __call__(self,f):
         if self.skip:
             raise nose.plugins.skip.SkipTest

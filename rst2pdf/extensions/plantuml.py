@@ -73,7 +73,7 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         serr = p.communicate(node['uml'].encode('utf-8'))[1]
         if p.returncode != 0:
             raise PlantUmlError('error while running plantuml\n\n' + serr)
-        
+
         # Add Image node with the right image
         return [MyImage(tfile.name, client=client)]
 

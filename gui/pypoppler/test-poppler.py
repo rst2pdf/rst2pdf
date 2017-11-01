@@ -34,7 +34,7 @@ class PDFDisplay(QtGui.QWidget):
             print r
         elif (event.key() == QtCore.Qt.Key_Q):
             sys.exit(0)
-    
+
     def display(self):
         if self.doc is not None:
             page = self.doc.page(self.currentPage)

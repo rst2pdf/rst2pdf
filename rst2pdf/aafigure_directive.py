@@ -56,7 +56,7 @@ class Aanode(Element):
             aafigure.pdf.PDFOutputVisitor,
             options=options)
         return renderPDF.GraphicsFlowable(visitor.drawing)
-        
+
 
 class Aafig(rst.Directive):
     """

@@ -21,11 +21,11 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
     Since this class is defined in an extension, it
     effectively replaces rst2pdf.genelements.HandleTitle.
     '''
-    
+
     def gather_elements(self, client, node, style):
         # This method is copied from the HandleTitle class
         # in rst2pdf.genelements.
-        
+
         # Special cases: (Not sure this is right ;-)
         if isinstance(node.parent, docutils.nodes.document):
             #node.elements = [Paragraph(client.gen_pdftext(node),
@@ -82,7 +82,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 # Now tfname contains a SVG with the right title.
                 # Make rst2pdf delete it later.
                 client.to_unlink.append(tfname)
-                
+
                 e = FancyHeading(tfname,
                     width=700,
                     height=100,
@@ -91,9 +91,9 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                     parent_id=parent_id,
                     text=text,
                     hstyle=client.styles['heading%d'%min(client.depth, maxdepth)])
-                
+
                 node.elements = [e]
-                
+
             if client.depth <= client.breaklevel:
                 node.elements.insert(0, MyPageBreak(breakTo=client.breakside))
         return node.elements
@@ -109,7 +109,7 @@ class FancyHeading(MyImage, Heading):
         text = kwargs.pop('text')
         self.snum = kwargs.pop('snum')
         self.parent_id= kwargs.pop('parent_id')
-        #self.stext = 
+        #self.stext =
         Heading.__init__(self,text,hstyle,level=level,
             parent_id=self.parent_id)
         # Cleanup title text
@@ -124,7 +124,7 @@ class FancyHeading(MyImage, Heading):
         ## These two lines are magic.
         #if isinstance(self.parent_id, tuple):
             #self.parent_id=self.parent_id[0]
-        
+
         # Add outline entry. This is copied from rst2pdf.flowables.heading
         canv.bookmarkHorizontal(self.parent_id,0,y+self.image.height)
 

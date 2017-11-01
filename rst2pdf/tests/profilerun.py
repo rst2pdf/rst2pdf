@@ -10,7 +10,7 @@ from rst2pdf.createpdf import RstToPdf
 def run():
     inpdir=os.path.abspath('./input')
     outdir=os.path.abspath('./tmp')
-    # Discard output, this is not about whether things 
+    # Discard output, this is not about whether things
     # work or not, that's testing ;-)
 
     for f in os.listdir(inpdir):
@@ -21,7 +21,7 @@ def run():
                 sheet=[sheet]
             else:
                 sheet=[]
-            
+
             r2p=RstToPdf(stylesheets=sheet)
             try:
                 fname=os.path.join(inpdir, f)

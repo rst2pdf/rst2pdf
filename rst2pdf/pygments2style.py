@@ -63,10 +63,10 @@ def css2rl(css):
         style = dstyles.get(sname, {'parent': 'code'})
         style['textColor']='black'
         styles.append([sname, style])
-        
+
     return dumpstyle.dumps({'styles': styles})
 
-    
+
 
 for name in list(pstyles.get_all_styles()):
     css=os.popen('pygmentize -S %s -f html'%name, 'r').read()

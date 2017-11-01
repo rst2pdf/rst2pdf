@@ -35,5 +35,5 @@ def parseConfig(extracf=None):
         cflist.append(extracf)
     conf = ConfigParser.SafeConfigParser()
     conf.read(cflist)
-    
+
 parseConfig()

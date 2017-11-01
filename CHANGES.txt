@@ -2,7 +2,7 @@ New in 0.93
 -----------
 
 * Fixed Issue 447: Double-sided always starts on the right (By Rob Ludwick)
-  
+
   * Removed --first-page-even as it was not used anywhere.
   * Added --first-page-on-right
 
@@ -54,7 +54,7 @@ New in 0.90
 * Added raw HTML support, by Dimitri Christodoulou
 * Fixed Issue 422: Having no .afm files made font lookup slow.
 * Fixed Issue 411: Sometimes the windows registry has the font's abspath.
-* Fixed Issue 430: Using --config option caused other options to 
+* Fixed Issue 430: Using --config option caused other options to
   be ignored (by charles at cstanhope dot com)
 * Fixed Issue 436: Add pdf_style_path to sphinx (by tyler@datastax.com)
 * Fixed Issue 428: page numbers logged as errors
@@ -84,7 +84,7 @@ New in 0.16
   with the same title, at the same level, in the same page, in different files
   where the links will break.
 * Fixed Issue 367: german-localized dates are MM. DD. YYYY so when used in sphinx's
-  template cover they appeared weird, like a list item. Fixed with a minor workaround in 
+  template cover they appeared weird, like a list item. Fixed with a minor workaround in
   the template.
 * Fixed Issue 366: links to "#" make no sense on a PDF file
 * Made definitions from definition lists more stylable.
@@ -126,7 +126,7 @@ New in 0.16
 * Fixed Issue 335: ugly crash when using images in some
   specific places (looks like a reportlab bug)
 * Fixed Issue 329: make the figure alignment/class attributes
-  work more like LaTeX than HTML. 
+  work more like LaTeX than HTML.
 * Fixed Issue 328: list item styles were being ignored.
 * Fixed Issue 186: new --use-floating-images makes images with
   :align: set work like in HTML, with the next flowable flowing
@@ -137,15 +137,15 @@ New in 0.16
 * New pdf_use_toc option for Sphinx/pdfbuilder
 * Fixed Issue 308: compatibility with reportlab from SVN
 * Fixed Issue 323: errors in the config.sample made it work weird.
-* Fixed Issue 322: Image substitutions didn't work in document title. 
+* Fixed Issue 322: Image substitutions didn't work in document title.
 * Implemented Issue 321: underline and strikethrough available
   in stylesheet.
 * Fixed Issue 317: Ugly error message when file does not exist
- 
+
 New in 0.15
 -----------
 
-* Fixed Issue 315: crash when using an undefined class for 
+* Fixed Issue 315: crash when using an undefined class for
   a list.
 * Implemented Issue 279: images can be specified as URLs.
 * Fixed Issue 313: new --fit-background-mode option.
@@ -183,7 +183,7 @@ New in 0.14
 * Fixed Issue 297: styles from default.json leaked onto other syntax
   highlighting stylesheets.
 * Fixed Issue 295: keyword replacement in headers/footers didn't work
-  if ###Page### and others was inside a table. 
+  if ###Page### and others was inside a table.
 * New feature: oddeven directive to display alternative content on
   odd/even pages (good for headers/footers!)
 * Switched all stylesheets to more readable RSON format.
@@ -199,7 +199,7 @@ New in 0.14
 * Documented extensions in the manual
 * Better styling of bullets/items (Issue 289)
 * Fixed Issue 290: don't fail on broken images
-* Better font finding in windows (patch by techtonik, Issue 282). 
+* Better font finding in windows (patch by techtonik, Issue 282).
 * Fixed Issue 166: Implemented Sphinx's hlist (horizontal lists)
 * Fixed Issue 284: Implemented production lists for sphinx
 * Fixed Issue 165: Definition lists not properly indented inside
@@ -263,7 +263,7 @@ New in 0.12.2
 * Added pdf_default_dpi option for pdfbuilder
 * More style docs in the manual
 * Better styling of lists
-* Fix bug reported in comments in my blog where a stylesheet with 
+* Fix bug reported in comments in my blog where a stylesheet with
   showHeader=True and no explicit header caused an exception.
 * Fixed Issue 215: crashes in bookrest's background renderer.
 
@@ -283,7 +283,7 @@ New in 0.12
 * Fixed Issue 202: broken processing of HTML raw nodes
 * New "options" section in stylesheets. New ["options"]["stylesheets"] subsection,
   which works similar to -s or to an include file: a list of stylesheets to be
-  processed before the current one.   
+  processed before the current one.
 * New --config option
 * Fix for Issue 200 (position of frames was miscalculated)
 * Fix For Issue 188 (uniconvertor "'unicode' object has no attribute 'readline'" error)
@@ -316,7 +316,7 @@ New in 0.12
 * Fixed Issue 158 (Some admonitions crashed pdfbuilder)
 * Fixed Issue 154 (incompatibility with RL 2.1)
 * Fixed Issue 155 (crash when sidebars split in a certain way)
-* Fixed issue 152 (padding and alignment of table styles, like 
+* Fixed issue 152 (padding and alignment of table styles, like
   when using literal blocks inside lists)
 * Integrated pdfbuilder sphinx extension (more work needed)
 * Kerning support for true type fonts (thanks to wordaxe!), added
@@ -338,7 +338,7 @@ New in 0.12
 * Make it work (in a slightly degraded mode) without PIL, as
   long as you are only using JPGs or have PythonMagick installed.
   This is good for OS X, where "installing PIL is a PITA"
-* Fixed issue 134: entities were replaced in interpreted roles 
+* Fixed issue 134: entities were replaced in interpreted roles
   (not needed)
 * Support for aafigure (http://launchpad.net/aafigure)
 * Spacers support units
@@ -354,7 +354,7 @@ New in 0.11
   markup, for instance).
 * New stylesheet no-compact-lists to make lists... less compact
 * SVG images now handle % as a width unit correctly.
-* Implemented issue 127: support images in PDF format. Right now they 
+* Implemented issue 127: support images in PDF format. Right now they
   are rasterized, so it's not ideal. Perhaps something better will come up
   later.
 * Fixed issue 129: make it work around a prblem with KeepTogether in RL 2.1
@@ -364,11 +364,11 @@ New in 0.11
   in disk names (and we still pay for DOS idiocy, in 2009)
 * Fixed issue 128: headings level 3+ all looked the same
 * Ugly bugfix for Issue 126: crashes when using images in header + TOC
-* New tstyles section in the stylesheet provides more configurable list layouts 
+* New tstyles section in the stylesheet provides more configurable list layouts
   and more powerful table styling.
 * Better syntax highlighting (supports bold/italic)
 * Workaround for issue 103 so you can use borderPadding as a list (but it will look wrong
-  if you are using wordaxe <= 0.3.2) 
+  if you are using wordaxe <= 0.3.2)
 * Added fieldvalue style for field lists
 * Added optionlist tstyle, for option lists
 * Added collection of utility stylesheets and documented it
@@ -388,7 +388,7 @@ New in 0.11
 * Issue 119: Fix placement of headers and footers
 * New background property for page templates (nice for presentations, for example)
 * Default to px for image width specifications instead of pt
-* Support all required measurement units ("em" "ex" "px" "in" "cm" 
+* Support all required measurement units ("em" "ex" "px" "in" "cm"
   "mm" "pt" "pc" "%" "")
 * New automated scripts to check test cases for "visual differences"
 * Respect images DPI property a bit like rst2latex does.
@@ -398,7 +398,7 @@ New in 0.11
   svglib is preferred (for SVG, of course). Patch originally by rute.
 * Issue 109: Separate styles for each kind of admonition
 * For Issue 109: missing styles are not a fatal error
-* Issue 117: TOCs with more than 6 levels now supported (raised limit to 9, which 
+* Issue 117: TOCs with more than 6 levels now supported (raised limit to 9, which
   is silly deep)
 
 New in 0.10.1
@@ -433,7 +433,7 @@ New in 0.10
 * Issue 80: Send warnings to stderr, not stdout
 * Issue 66: Implemented "smart quotes"
 * Issue 77: Work around missing matplotlib
-* Proper translation of labels (such as "Author", "Version" etc.) using the 
+* Proper translation of labels (such as "Author", "Version" etc.) using the
   docutils languages package. (r473)
 * Fixed problems with wrong or non-existing fonts. (r484)
 * Page transition effect support for presentations (r423)
@@ -451,7 +451,7 @@ New in 0.9
 New in 0.8.1
 ------------
 
-* Support for more complex headers and footers 
+* Support for more complex headers and footers
   (including image directives and tables)
 * Optional inline links
 * Wordaxe 0.2.6 support
@@ -514,7 +514,7 @@ New in 0.5
 * Support for captions in tables
 * Support for multi-row headers in tables
 * Improved definition lists
-* Fixed bug in image directive 
+* Fixed bug in image directive
 * Whitespace conforming to PEP8
 * Fixed bug in text size on code-block
 * Package is more setuptools compliant
@@ -525,20 +525,20 @@ New in 0.5
 New in 0.4
 ----------
 
-* Fixed bullet and item lists indentation/nesting. 
-* Implemented citations 
-* Working links between footnotes and its references 
-* Justification enabled by default 
-* Fixed table bug (demo.txt works now) 
-* Title and author support in PDF properties 
-* Support for document title in header/footer 
-* Custom page sizes and margins 
+* Fixed bullet and item lists indentation/nesting.
+* Implemented citations
+* Working links between footnotes and its references
+* Justification enabled by default
+* Fixed table bug (demo.txt works now)
+* Title and author support in PDF properties
+* Support for document title in header/footer
+* Custom page sizes and margins
 
 New in 0.3
 ----------
 
-* Font embedding (use any True Type font in your PDFs) 
-* Syntax highlighter using Pygments 
-* User's manual 
-* External/custom stylesheets 
-* Support for page numbers in header/footer 
+* Font embedding (use any True Type font in your PDFs)
+* Syntax highlighter using Pygments
+* User's manual
+* External/custom stylesheets
+* Support for page numbers in header/footer

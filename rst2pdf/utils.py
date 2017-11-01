@@ -130,7 +130,7 @@ if HAS_XHTML2PDF:
 
     #import xhtml2pdf.util
     #xhtml2pdf.util.getColor = getColor2
-    
+
     import cgi
     import logging
     from xml.dom import Node
@@ -186,7 +186,7 @@ if HAS_XHTML2PDF:
 
     pisa_parser.pisaPreLoop = pisaPreLoop2
 
-        
+
     HTML_CSS = """
     html {
         font-family: Helvetica;
@@ -395,9 +395,9 @@ if HAS_XHTML2PDF:
     """
 
     def parseHTML(data, node):
-        dest=None 
-        path=None 
-        link_callback=None 
+        dest=None
+        path=None
+        link_callback=None
         debug=0
         default_css=HTML_CSS
         xhtml=False

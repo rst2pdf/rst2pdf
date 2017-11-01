@@ -13,11 +13,11 @@ def go():
                      )
         styles = getSampleStyleSheet()
         doc = SimpleDocTemplate("phello.pdf")
-        
+
         cell=[Paragraph('This is not indented',styles['Normal']),
               Indenter(100,100),
               Paragraph('This should be indented',styles['Normal'])]
-        
+
         Story=cell+[Table([[cell]],style=ts)]
         doc.build(Story)
 

@@ -11,7 +11,7 @@ from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
 def go():
     styles = getSampleStyleSheet()
     style=styles['Normal']
-    
+
     p1 = Paragraph('This is a paragraph', style )
     print p1.wrap(500,701)
     print p1._cache['avail']

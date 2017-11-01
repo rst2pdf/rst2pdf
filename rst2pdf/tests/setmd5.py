@@ -56,7 +56,7 @@ def main(args=None):
 
     for testname in args:
         if code != setcode(testname, code):
-            raise SystemExit('\nCould not update %s; checksum already marked %s\n' % 
+            raise SystemExit('\nCould not update %s; checksum already marked %s\n' %
                     (testname, repr(code)))
 
 if __name__ == '__main__':

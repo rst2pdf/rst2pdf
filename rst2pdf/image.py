@@ -480,7 +480,7 @@ class MyImage (Flowable):
             canv.linkURL(self.target,
                     (
                     x + offset, y,
-                    x + offset + self.image.drawWidth, 
+                    x + offset + self.image.drawWidth,
                     y + self.image.drawHeight),
                     relative = True,
                     #thickness = 3,

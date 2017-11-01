@@ -17,7 +17,7 @@
         "fontName": "White Rabbit",
         "fontSize": 96
     }],
-        
+
     ["thin" , {
     "parent" : "bodytext",
     "width" : "65%",

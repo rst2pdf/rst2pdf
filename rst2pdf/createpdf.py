@@ -545,7 +545,7 @@ class RstToPdf(object):
                 return
         else:
             self.doctree = doctree
-            
+
         if self.numbered_links:
             # Transform all links to sections so they show numbers
             from sectnumlinks import SectNumFolder, SectRefExpander
@@ -557,7 +557,7 @@ class RstToPdf(object):
             from docutils.transforms.universal import StripClassesAndElements
             sce = StripClassesAndElements(self.doctree)
             sce.apply()
-            
+
         elements = self.gen_elements(self.doctree)
 
         # Find cover template, save it in cover_file
@@ -1030,8 +1030,8 @@ class FancyPage(PageTemplate):
         bg.drawOn(canv, x, y)
 
     def is_left(self, page_num):
-        """Default behavior is that the first page is on the left.   
-           
+        """Default behavior is that the first page is on the left.
+
            If the user has --first_page_on_right, the calculation is reversed.
         """
         val = page_num % 2 == 1
@@ -1332,7 +1332,7 @@ def parse_commandline():
     parser.add_option('--use-numbered-links', action='store_true', default=def_numbered_links,
         help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s'%def_numbered_links,
         dest='numbered_links')
-        
+
     parser.add_option('--strip-elements-with-class', action='append', dest='strip_elements_with_classes',
         metavar='CLASS', help='Remove elements with this CLASS from the output. Can be used multiple times.')
 

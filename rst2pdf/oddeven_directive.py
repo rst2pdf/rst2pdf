@@ -27,7 +27,7 @@ class OddEven(rst.Directive):
         node = OddEvenNode()
         self.state.nested_parse(self.content, self.content_offset, node)
         return [node]
-    
+
 
 directives.register_directive("oddeven", OddEven)
-    
+

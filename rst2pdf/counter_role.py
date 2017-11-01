@@ -15,7 +15,7 @@ class CounterNode(Text):
             self.name=data.lower()
             self.value=values.get(self.name,1)
         values[self.name]=self.value+1
-        
+
     def astext(self):
         return unicode(self.value)
 

@@ -41,12 +41,12 @@ class ConfigDialog(QtGui.QDialog):
           layout.addWidget(label, row, 0, 1, 1)
           layout.addWidget(spin, row, 1, 1, 1)
           self.values[sectionName+'/'+optionName]=[spin, lambda(spin): spin.value()]
-          
+
         elif definition[0]=='string':
           label=QtGui.QLabel(optionName+":")
           label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
           text=QtGui.QLineEdit()
-          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))          
+          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))
           layout.addWidget(label, row, 0, 1, 1)
           layout.addWidget(text, row, 1, 1, 1)
           self.values[sectionName+'/'+optionName]=[text, lambda(text): unicode(text.text())]
@@ -56,7 +56,7 @@ class ConfigDialog(QtGui.QDialog):
           label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
           text=QtGui.QLineEdit()
           text.setEchoMode(QtGui.QLineEdit.Password)
-          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))          
+          text.setText(unicode(config.getValue(sectionName, optionName, definition[1])))
           layout.addWidget(label, row, 0, 1, 1)
           layout.addWidget(text, row, 1, 1, 1)
           self.values[sectionName+'/'+optionName]=[text, lambda(text): unicode(text.text())]
@@ -80,7 +80,7 @@ class ConfigDialog(QtGui.QDialog):
     self.ui.tabs.setCurrentIndex(1)
     self.ui.tabs.removeTab(0)
 
-    
+
 
   def accept(self):
     for k in self.values:

@@ -697,7 +697,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
         # line nodes have no classes, they have to inherit from the outermost lineblock (sigh)
         # For more info see Issue 471 and its test case.
-        
+
         parent = node
         while isinstance(parent.parent, (docutils.nodes.line, docutils.nodes.line_block)):
             parent=parent.parent

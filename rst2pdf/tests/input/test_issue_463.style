@@ -6,7 +6,7 @@ pageSetup:
     margin-top: 8mm
 
 pageTemplates:
-    myLayout: 
+    myLayout:
         frames:  [[0cm, 0cm, 100%, 100%]]
         defaultHeader =
             Biohazard PDF in the header: |img|

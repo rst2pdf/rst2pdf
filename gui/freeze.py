@@ -5,12 +5,12 @@ import sys
 base = None
 if sys.platform == "win32":
     base = "Win32GUI"
-includes = [ "sip", 
+includes = [ "sip",
              "PyQt4.QtXml"
 ]
-packages = [ "pygments" , 
-             "pygments.lexers", 
-             "pygments.styles", 
+packages = [ "pygments" ,
+             "pygments.lexers",
+             "pygments.styles",
              "docutils.writers",
              "docutils.readers",
              "docutils.languages",
@@ -22,7 +22,7 @@ excludes = [ "matplotlib",
 ]
 
 executables = [
-        cx_Freeze.Executable("main.py", 
+        cx_Freeze.Executable("main.py",
                              base = base, )
 ]
 
@@ -33,10 +33,10 @@ includeFiles = [
 options = dict(
     #copyDependentFiles = True,
     include_files = includeFiles,
-    includes = includes, 
+    includes = includes,
     excludes = excludes,
     packages = packages)
-    
+
 cx_Freeze.setup(
         name = "bookrest",
         version = "0.1",
