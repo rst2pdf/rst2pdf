@@ -100,7 +100,7 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
         descent = mf.descent()
         img = mf.genImage()
         client.to_unlink.append(img)
-        return '<img src="%s" width=%f height=%f valign=%f/>' % (
+        return '<img src="%s" width="%f" height="%f" valign="%f"/>' % (
             img, w, h, -descent)
 
 class HandleEq(basenodehandler.NodeHandler, eq_node):
