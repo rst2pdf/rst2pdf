@@ -1,3 +1,14 @@
+New in {next}
+-------------
+
+* Fixed issue 567: <img> now uses quoted attributes.
+* Fixed issue 566: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4.
+* Fixed issue 555: :alt: option now works for plantuml extension
+* Fixed issue 525: CreationDate metadata shows correct date using Sphinx
+* Fixed issue 487: uniconverter is no longer in setup
+* Fixed: :linenos_offset: now works again.
+* Removed debugging print statement when using line blocks
+
 New in 0.93
 -----------
 
