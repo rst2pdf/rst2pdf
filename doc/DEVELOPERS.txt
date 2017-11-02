@@ -98,7 +98,7 @@ while in project::
 
   pip install nose coverage
   pip install -r requirements.txt
-  python setup.py develop
+  pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
   nosetests -x -i regulartest -i sphinxtest
 
 next runs
