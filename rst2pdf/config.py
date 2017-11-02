@@ -8,8 +8,7 @@ from __future__ import absolute_import
 from future import standard_library
 standard_library.install_aliases()
 
-
-import configparser
+from configparser import ConfigParser
 import os
 from rst2pdf.rson import loads
 
@@ -32,7 +31,7 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
-conf = configparser.SafeConfigParser()
+conf = ConfigParser.SafeConfigParser()
 
 def parseConfig(extracf=None):
     global conf
