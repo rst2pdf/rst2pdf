@@ -108,6 +108,19 @@ while in project::
 
   nosetests -x -i regulartest -i sphinxtest
 
+Using autotest directly
+~~~~~~~~~~~~~~~~~~~~~~~
+
+You can also run the tests using autorun directly::
+
+  cd rst2pdf/tests
+  ./autotest.py -e -f >& /dev/null
+  ./parselogs.py > log.txt
+
+
+Now look at the output of log.txt
+
+
 
 Getting commit rights
 ---------------------
