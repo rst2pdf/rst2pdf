@@ -4,7 +4,7 @@ matplotlib
 pdfrw
 pillow
 pygments
-pypdf
+pyPdf2
 reportlab
 sphinx
 svg2rlg
