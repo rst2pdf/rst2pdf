@@ -331,6 +331,8 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
         if not basename:
             sphinxdir = os.path.dirname(sphinxdir)
             basename = os.path.basename(sphinxdir)
+        if os.path.exists(sphinxdir + '.ignore'):
+            return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
@@ -371,11 +373,11 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
         if do_text:
             testfiles = globjoin(PathInfo.inpdir, '*.txt')
             testfiles += globjoin(PathInfo.inpdir, '*', '*.txt')
-            testfiles = [x for x in testfiles if 'sphinx' not in x]
+            testfiles = [(x, fastfork) for x in testfiles if 'sphinx' not in x]
         if do_sphinx:
-            testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
+            testfiles += [(x, None) for x in globjoin(PathInfo.inpdir, 'sphinx*')]
     results = {}
-    for fname in testfiles:
+    for fname, fastfork in testfiles:
         key, errcode = run_single(fname, incremental, fastfork, updatemd5)
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
