@@ -19,6 +19,7 @@ import sys
 import glob
 import shutil
 import shlex
+import distutils.spawn
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
@@ -53,24 +54,6 @@ def globjoin(*parts):
     # A very common pattern in this module
     return sorted(glob.glob(os.path.join(*parts)))
 
-def which(program):
-    # Determine full path to an application
-    def is_exe(fpath):
-        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
-
-    fpath, fname = os.path.split(program)
-    if fpath:
-        if is_exe(program):
-            return program
-    else:
-        for path in os.environ["PATH"].split(os.pathsep):
-            path = path.strip('"')
-            exe_file = os.path.join(path, program)
-            if is_exe(exe_file):
-                return exe_file
-
-    return None
-
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
          module namespace.  It is never instantiated.
@@ -80,7 +63,11 @@ class PathInfo(object):
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
-    runfile = which('rst2pdf')
+    runfile = distutils.spawn.find_executable('rst2pdf')
+    assert runfile, 'Executable not found -- Use bootstrap.py and buildout to create it.'
+
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
 
     runcmd = [runfile]
 
