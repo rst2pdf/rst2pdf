@@ -449,7 +449,7 @@ def main(args=None):
         fastfork = PathInfo.load_subprocess()
     updatemd5 = options.updatemd5
     if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
-        raise SystemExit('Unexpected value for updatemd5: %s' % updatemd5)
+        raise SystemExit('Unexpected value for updatemd5: %s. Expected one of: "good", "bad", "incomplete", "unknown" or "deprecated"' % updatemd5, )
     errcode = run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
     exit(errcode)
 
