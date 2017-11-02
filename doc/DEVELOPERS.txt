@@ -93,16 +93,19 @@ first run
 
 while in project::
 
-  python bootstrap.py
-  ./bin/buildout
-  ./bin/nosetests -i regulartest -i sphinxtest
+  virtualenv --no-site-packages --python=/usr/local/bin/python2 env
+  . env/bin/activate
+
+  pip install nose coverage
+  python setup.py develop
+  nosetests -x -i regulartest -i sphinxtest
 
 next runs
 ~~~~~~~~~
 
 while in project::
 
-  ./bin/nosetests -i regulartest -i sphinxtest
+  nosetests -x -i regulartest -i sphinxtest
 
 
 Getting commit rights
