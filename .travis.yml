@@ -8,7 +8,7 @@ before_install:
  - pip install --upgrade setuptools
  - pip install nose coverage
  - pip install -r requirements.txt
- - pip install -e .[tests,sphinx,images,pdfimages2,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+ - pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 
 script:
  - nosetests -i regulartest -i sphinxtest
