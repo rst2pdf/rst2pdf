@@ -93,16 +93,33 @@ first run
 
 while in project::
 
-  python bootstrap.py
-  ./bin/buildout
-  ./bin/nosetests -i regulartest -i sphinxtest
+  virtualenv --no-site-packages --python=/usr/local/bin/python2 env
+  . env/bin/activate
+
+  pip install nose coverage
+  pip install -r requirements.txt
+  pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+  nosetests -x -i regulartest -i sphinxtest
 
 next runs
 ~~~~~~~~~
 
 while in project::
 
-  ./bin/nosetests -i regulartest -i sphinxtest
+  nosetests -x -i regulartest -i sphinxtest
+
+Using autotest directly
+~~~~~~~~~~~~~~~~~~~~~~~
+
+You can also run the tests using autorun directly::
+
+  cd rst2pdf/tests
+  ./autotest.py -e -f >& /dev/null
+  ./parselogs.py > log.txt
+
+
+Now look at the output of log.txt
+
 
 
 Getting commit rights

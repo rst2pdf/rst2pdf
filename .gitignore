@@ -1,3 +1,11 @@
 *.pyc
 __pycache__
 *.egg-info
+.coverage
+_build
+*.build_temp
+tmp*.svg
+log.txt
+rst2pdf/tests/output/*.pdf
+rst2pdf/tests/output/*.log
+rst2pdf/tests/input/*/_build

@@ -19,6 +19,7 @@ import sys
 import glob
 import shutil
 import shlex
+import distutils.spawn
 from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
@@ -58,13 +59,15 @@ class PathInfo(object):
          module namespace.  It is never instantiated.
     '''
     rootdir = os.path.realpath(dirname(__file__))
-    bindir = os.path.abspath(os.path.join(rootdir, '..', '..', 'bin'))
-    runfile = os.path.join(bindir, 'rst2pdf')
     inpdir = os.path.join(rootdir, 'input')
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
-    assert os.path.exists(runfile), 'Executable not found -- Use bootstrap.py and buildout to create it.'
+    runfile = distutils.spawn.find_executable('rst2pdf')
+    assert runfile, 'Executable not found -- Use bootstrap.py and buildout to create it.'
+
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
 
     runcmd = [runfile]
 
@@ -194,6 +197,37 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
+def cleanfile(fname):
+    ''' Use pdfrw to make a canonical version of the file.
+         - Renumber PDF objects to be same
+         - Change filenames in links
+    '''
+    try:
+        trailer = PdfReader(fname)
+        trailer.Info = None  # Kill metadata
+        prefix = 'file:///home/travis/build/rst2pdf/rst2pdf/rst2pdf/tests'
+    except Exception:
+        return
+    if not trailer.pages:
+        return
+
+    for page in trailer.pages:
+        annots = page.Annots
+        if annots is None:
+            continue
+        for annot in annots:
+            a = annot.A
+            if a is None:
+                continue
+            uri = a.URI
+            if uri is None:
+                continue
+            uri = uri.decode()
+            if not uri.startswith('file:///'):
+                continue
+            a.URI = prefix + uri.split('rst2pdf/tests', 1)[-1]
+    PdfWriter().write(fname, trailer)
+
 def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     ''' checkmd5 validates the checksum of a generated PDF
         against the database, both reporting the results,
@@ -204,13 +238,14 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         It updates the resultlist with information to be
         printed and added to the log file, and returns
         a result of 'good', 'bad', 'fail', or 'unknown'
+        and an errcode of 0 for success, 1 for bad, 2 for fail and 3 for unknown
     '''
     if not os.path.exists(pdfpath):
         if not failcode and os.path.exists(iprefix + '.nopdf'):
             log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
-            return 'good'
+            return ('good', 0)
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
-        return 'fail'
+        return ('fail', 2)
     if os.path.isdir(pdfpath):
         pdffiles = globjoin(pdfpath, '*.pdf')
     else:
@@ -226,6 +261,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     # Generate the current MD5
     md5s = []
     for pdfpath in pdffiles:
+        cleanfile(pdfpath)
         f = open(pdfpath, 'rb')
         data = f.read()
         f.close()
@@ -244,7 +280,14 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
-    return resulttype
+
+    errorCodes = ['good', 'bad', 'fail', 'unknown']
+    try:
+        errcode = errorCodes.index(resulttype)
+    except ValueError:
+        errcode = 4
+
+    return (resulttype, errcode)
 
 
 def build_sphinx(sphinxdir, outpdf):
@@ -296,6 +339,8 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
         if not basename:
             sphinxdir = os.path.dirname(sphinxdir)
             basename = os.path.basename(sphinxdir)
+        if os.path.exists(sphinxdir + '.ignore'):
+            return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
@@ -320,28 +365,35 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
-        checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-        checkinfo = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
     log(result, '')
     outf = open(outtext, 'wb')
     outf.write('\n'.join(result))
     outf.close()
+
     return checkinfo, errcode
 
 def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None):
+    returnErrorCode = 0
     if not testfiles:
         testfiles = []
         if do_text:
             testfiles = globjoin(PathInfo.inpdir, '*.txt')
             testfiles += globjoin(PathInfo.inpdir, '*', '*.txt')
-            testfiles = [x for x in testfiles if 'sphinx' not in x]
+            testfiles = [(x, fastfork) for x in testfiles if 'sphinx' not in x]
         if do_sphinx:
-            testfiles += globjoin(PathInfo.inpdir, 'sphinx*')
+            testfiles += [(x, None) for x in globjoin(PathInfo.inpdir, 'sphinx*')]
+    else:
+        testfiles = [(x, fastfork) for x in testfiles]
+
     results = {}
-    for fname in testfiles:
+    for fname, fastfork in testfiles:
         key, errcode = run_single(fname, incremental, fastfork, updatemd5)
+        if errcode != 0:
+            returnErrorCode = errcode
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
@@ -349,6 +401,8 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
     print 'Final checksum statistics:',
     print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
     print
+
+    return returnErrorCode
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
@@ -395,8 +449,9 @@ def main(args=None):
         fastfork = PathInfo.load_subprocess()
     updatemd5 = options.updatemd5
     if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
-        raise SystemExit('Unexpected value for updatemd5: %s' % updatemd5)
-    run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
+        raise SystemExit('Unexpected value for updatemd5: %s. Expected one of: "good", "bad", "incomplete", "unknown" or "deprecated"' % updatemd5, )
+    errcode = run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
+    exit(errcode)
 
 if __name__ == '__main__':
     main()
