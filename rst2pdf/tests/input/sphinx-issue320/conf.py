@@ -11,6 +11,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import sys, os
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -37,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'issue 320'
-copyright = u'2010, Roberto Alsina'
+project = 'issue 320'
+copyright = '2010, Roberto Alsina'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +175,8 @@ htmlhelp_basename = 'issue320doc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'issue320.tex', u'issue 320 Documentation',
-   u'Roberto Alsina', 'manual'),
+  ('index', 'issue320.tex', 'issue 320 Documentation',
+   'Roberto Alsina', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

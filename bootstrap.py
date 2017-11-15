@@ -22,11 +22,14 @@ $Id$
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
-from future import standard_library
-standard_library.install_aliases()
+from __future__ import unicode_literals
 
-import os, shutil, sys, tempfile, urllib.request, urllib.error, urllib.parse
+import os
+import shutil
+import sys
+import tempfile
 from optparse import OptionParser
+import pkg_resources
 
 tmpeggs = tempfile.mkdtemp()
 
@@ -36,9 +39,6 @@ is_jython = sys.platform.startswith('java')
 parser = OptionParser()
 parser.add_option("-v", "--version", dest="version",
                           help="use a specific zc.buildout version")
-parser.add_option("-d", "--distribute",
-                   action="store_true", dest="distribute", default=False,
-                   help="Use Disribute rather than Setuptools.")
 
 options, args = parser.parse_args()
 
@@ -47,30 +47,7 @@ if options.version is not None:
 else:
     VERSION = ''
 
-USE_DISTRIBUTE = options.distribute
 args = args + ['bootstrap']
-
-to_reload = False
-try:
-    import pkg_resources
-    if not hasattr(pkg_resources, '_distribute'):
-        to_reload = True
-        raise ImportError
-except ImportError:
-    ez = {}
-    if USE_DISTRIBUTE:
-        exec(urllib.request.urlopen('http://python-distribute.org/distribute_setup.py'
-                         ).read(), ez)
-        ez['use_setuptools'](to_dir=tmpeggs, download_delay=0, no_fake=True)
-    else:
-        exec(urllib.request.urlopen('http://peak.telecommunity.com/dist/ez_setup.py'
-                             ).read(), ez)
-        ez['use_setuptools'](to_dir=tmpeggs, download_delay=0)
-
-    if to_reload:
-        reload(pkg_resources)
-    else:
-        import pkg_resources
 
 if sys.platform == 'win32':
     def quote(c):
@@ -85,11 +62,6 @@ else:
 cmd = 'from setuptools.command.easy_install import main; main()'
 ws  = pkg_resources.working_set
 
-if USE_DISTRIBUTE:
-    requirement = 'distribute'
-else:
-    requirement = 'setuptools'
-
 if is_jython:
     import subprocess
 
@@ -97,7 +69,7 @@ if is_jython:
            quote(tmpeggs), 'zc.buildout' + VERSION],
            env=dict(os.environ,
                PYTHONPATH=
-               ws.find(pkg_resources.Requirement.parse(requirement)).location
+               ws.find(pkg_resources.Requirement.parse('setuptools')).location
                ),
            ).wait() == 0
 
@@ -107,7 +79,7 @@ else:
         '-c', quote (cmd), '-mqNxd', quote (tmpeggs), 'zc.buildout' + VERSION,
         dict(os.environ,
             PYTHONPATH=
-            ws.find(pkg_resources.Requirement.parse(requirement)).location
+            ws.find(pkg_resources.Requirement.parse('setuptools')).location
             ),
         ) == 0
 

@@ -13,6 +13,7 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 
+import sys
 import errno
 from docutils import nodes
 from docutils.parsers import rst
@@ -25,6 +26,8 @@ import subprocess
 class plantuml(nodes.General, nodes.Element):
     pass
 
+class PlantUmlError(RuntimeError):
+    pass
 
 class UmlDirective(rst.Directive):
     """Directive to insert PlantUML markup

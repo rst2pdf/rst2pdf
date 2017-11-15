@@ -43,21 +43,22 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import division
+from builtins import str, range, object
+
+import sys
+import os
+import tempfile
+import re
+
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
-from builtins import range
-from builtins import object
+
 __docformat__ = 'reStructuredText'
 
 # Import Psyco if available
 from .opt_imports import psyco
 psyco.full()
 
-import sys
-import os
-import tempfile
-import re
 import string
 from . import config
 import logging
@@ -279,7 +280,7 @@ class RstToPdf(object):
         self.pending_targets=[]
         self.targets=[]
 
-    def loadStyles(self, styleSheets=None ):
+    def loadStyles(self, styleSheets=None):
 
         if styleSheets is None:
             styleSheets=[]
@@ -418,7 +419,7 @@ class RstToPdf(object):
             t = 'bullet'
 
         elif node.parent.get('enumtype') == 'arabic':
-            b = str(node.parent.children.index(node) + start) + '.'
+            b = '{}{}.'.format(node.parent.children.index(node), start) + '.'
 
         elif node.parent.get('enumtype') == 'lowerroman':
             b = toRoman(node.parent.children.index(node) + start).lower() + '.'
@@ -460,7 +461,7 @@ class RstToPdf(object):
         for y in range(0, len(rows)):
             for x in range(len(rows[y])-1, -1, -1):
                 cell = rows[y][x]
-                if isinstance(cell, str):
+                if isinstance(cell, (bytes, str)):
                     continue
                 if cell.get("morecols"):
                     for i in range(0, cell.get("morecols")):
@@ -489,7 +490,7 @@ class RstToPdf(object):
         for y in range(0, len(rows)):
             for x in range(0, len(rows[y])):
                 cell = rows[y][x]
-                if isinstance(cell, str):
+                if isinstance(cell, (bytes, str)):
                     continue
                 if cell.get("morecols"):
                     mc = cell.get("morecols")
@@ -556,6 +557,7 @@ class RstToPdf(object):
             self.doctree = doctree
 
         if self.numbered_links:
+            log.info('Document has numbered links')
             # Transform all links to sections so they show numbers
             from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
@@ -637,8 +639,7 @@ class RstToPdf(object):
         FP = FancyPage("fancypage", head, foot, self)
 
         def cleantags(s):
-            re.sub(r'<[^>]*?>', '',
-                str(s).strip())
+            re.sub(r'<[^>]*?>', '', s.strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -817,7 +818,7 @@ _counterStyle='arabic'
 class PageCounter(Flowable):
 
     def __init__(self, number=0, style='arabic'):
-        self.style=str(style).lower()
+        self.style=style.lower()
         self.number=int(number)
         Flowable.__init__(self)
 
@@ -850,7 +851,7 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='loweralpha':
         ptext=string.lowercase[_counter%26]
     else:
-        ptext=str(_counter)
+        ptext='{}'.format(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -917,7 +918,7 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, str):
+            if not isinstance(text, (bytes, str)):
                 try:
                     text = str(text, e.encoding)
                 except AttributeError:
@@ -925,14 +926,14 @@ class HeaderOrFooter(object):
                 except TypeError:
                     text = str(text, 'utf-8')
 
-            text = text.replace(u'###Page###', pnum)
+            text = text.replace('###Page###', pnum)
             if '###Total###' in text:
-                text = text.replace(u'###Total###', str(self.totalpages))
+                text = text.replace('###Total###', self.totalpages)
                 self.client.mustMultiBuild=True
-            text = text.replace(u"###Title###", doc.title)
-            text = text.replace(u"###Section###",
+            text = text.replace("###Title###", doc.title)
+            text = text.replace("###Section###",
                 getattr(canv, 'sectName', ''))
-            text = text.replace(u"###SectNum###",
+            text = text.replace("###SectNum###",
                 getattr(canv, 'sectNum', ''))
             text = smartyPants(text, smarty)
             return text
@@ -1181,7 +1182,7 @@ def parse_commandline():
         help='A list of folders to search for fonts, separated using "%s".'
             ' Default="%s"' % (os.pathsep, def_fontpath))
 
-    def_baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','',''])
+    def_baseurl = urlunparse(['file', '{}{}'.format(os.getcwd(), os.sep),'','','',''])
     parser.add_option('--baseurl', dest='baseurl', metavar='URL',
         default=def_baseurl,
         help='The base URL for relative URLs. Default="%s"'%def_baseurl)
@@ -1263,21 +1264,21 @@ def parse_commandline():
     parser.add_option('--no-footnote-backlinks', action='store_false',
         dest='footnote_backlinks', default=def_footnote_backlinks,
         help='Disable footnote backlinks.'
-            ' Default=%s' % str(not def_footnote_backlinks))
+            ' Default={0!s}'.format(not def_footnote_backlinks))
 
     def_inline_footnotes = config.getValue("general",
         "inline_footnotes", False)
     parser.add_option('--inline-footnotes', action='store_true',
         dest='inline_footnotes', default=def_inline_footnotes,
         help='Show footnotes inline.'
-            ' Default=%s' % str(not def_inline_footnotes))
+            ' Default={0!s}'.format(not def_inline_footnotes))
 
     def_real_footnotes = config.getValue("general",
         "real_footnotes", False)
     parser.add_option('--real-footnotes', action='store_true',
         dest='real_footnotes', default=def_real_footnotes,
         help='Show footnotes at the bottom of the page where they are defined.'
-            ' Default=%s' % str(def_real_footnotes))
+            ' Default={0!s}'.format(def_real_footnotes))
 
     def_dpi = config.getValue("general", "default_dpi", 300)
     parser.add_option('--default-dpi', dest='def_dpi', metavar='NUMBER',
@@ -1466,6 +1467,7 @@ def main(_args=None):
             ' The suggested version is 2.3 or higher' % reportlab.Version)
 
     if options.invariant:
+        log.info('Invariant option is set')
         patch_PDFDate()
         patch_digester()
 
@@ -1480,7 +1482,7 @@ def main(_args=None):
         baseurl=options.baseurl,
         fit_mode=options.fit_mode,
         background_fit_mode = options.background_fit_mode,
-        smarty=str(options.smarty),
+        smarty='{}'.format(options.smarty),
         font_path=options.fpath,
         style_path=options.stylepath,
         repeat_table_rows=options.repeattablerows,
@@ -1510,7 +1512,7 @@ reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
 
 def patch_digester():
     ''' Patch digester so that we can get the same results when image
-filenames change'''
+    filenames change'''
     import reportlab.pdfgen.canvas as canvas
 
     cache = {}
@@ -1539,6 +1541,7 @@ def patch_PDFDate():
                     lambda yyyy,mm,dd,hh,m,s:
                         "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'" % (yyyy,mm,dd,hh,m,s,0,0))
             return pdfdoc.format(pdfdoc.PDFString(dfmt(*self.date)), doc)
+
 
     pdfdoc.PDFDate = PDFDate
     reportlab.rl_config.invariant = 1

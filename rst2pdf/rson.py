@@ -29,7 +29,9 @@ from future.utils import implements_iterator
 
 from builtins import str, bytes, next, object
 from past.builtins import basestring
-
+import logging
+from rst2pdf.log import log
+log.setLevel(logging.DEBUG)
 
 __version__ = '0.08'
 
@@ -140,7 +142,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=str, isinstance=isinstance):
+    def factory(cls):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -163,15 +165,14 @@ class Tokenizer(list):
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
-            next = sourceiter.__next__
-            offset -= len(next())
+            offset -= len(next(sourceiter))
 
             # Strip comment from first line
             if len(sourcelist) > 1 and sourcelist[1].startswith('#'):
                 i = 1
                 while len(sourcelist) > i and not sourcelist[i].startswith('\n'):
                     i += 1
-                    offset -= len(next())
+                    offset -= len(next(sourceiter))
 
 
             # Preallocate the list
@@ -181,7 +182,7 @@ class Tokenizer(list):
 
             # Create all the tokens
             for token in sourceiter:
-                whitespace = next()
+                whitespace = next(sourceiter)
                 t0 = token[0]
                 if t0 not in delimiterset:
                     if t0 == '\n':
@@ -370,20 +371,20 @@ class QuotedToken(object):
     '''
 
     parse_quoted_str = staticmethod(
-          lambda token, s, unicode=str: str(s, 'utf-8'))
+          lambda token, s, unicode=str: str(s))
     parse_encoded_chr = chr
     parse_join_str = ''.join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
-    quoted_mapper = { '\\\\' : u'\\',
-               r'\"' : u'"',
-               r'\/' : u'/',
-               r'\b' : u'\b',
-               r'\f' : u'\f',
-               r'\n' : u'\n',
-               r'\r' : u'\r',
-               r'\t' : u'\t'}.get
+    quoted_mapper = { '\\\\' : '\\',
+               r'\"' : '"',
+               r'\/' : '/',
+               r'\b' : '\b',
+               r'\f' : '\f',
+               r'\n' : '\n',
+               r'\r' : '\r',
+               r'\t' : '\t'}.get
 
     def quoted_parse_factory(self, int=int, iter=iter, len=len):
         quoted_splitter = self.quoted_splitter
@@ -413,8 +414,7 @@ class QuotedToken(object):
             if len(s) > 1:
                 result = [result]
                 append = result.append
-                s = iter(s)
-                next = s.__next__
+                next = iter(s).__next__
                 next()
                 for special in s:
                     nonmatch = next()
@@ -500,7 +500,7 @@ class UnquotedToken(object):
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
     parse_unquoted_str = staticmethod(
-        lambda token, unicode=str: str(token[2], 'utf-8'))
+        lambda token, unicode=str: str(token[2]))
 
     special_strings = dict(true = True, false = False, null = None)
 
@@ -647,7 +647,6 @@ class RsonParser(object):
         pass
 
     def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
-
         Tokenizer = self.Tokenizer
         tokenizer = Tokenizer.factory()
         error = Tokenizer.error
@@ -872,43 +871,44 @@ class RsonParser(object):
                 stack[-1] = token
                 token = parse_one_dict_entry(stack, next, next(), [key], result)
 
-        def parse_recurse(stack, next, tokens=None):
+        def parse_recurse(stack, next_token, tokens=None):
             ''' parse_recurse ALWAYS returns a list or a dict.
                 (or the user variants thereof)
                 It is up to the caller to determine that it was an array
                 of length 1 and strip the contents out of the array.
             '''
             firsttok = stack[-1]
-            value = rson_value_dispatch(firsttok[1], bad_top_value)(firsttok, next)
+            value = rson_value_dispatch(firsttok[1], bad_top_value)(firsttok, next_token)
 
             # We return an array if the next value is on a new line and either
             # is at the same indentation, or the current value is an empty list
 
-            token = next()
+            token = next_token()
             if (token[5] != firsttok[5] and
                     (token[4] <= firsttok[4] or
                      value in empties) and disallow_missing_object_keys):
                 result = new_array([value], firsttok)
                 if tokens is not None:
                     tokens.top_object = result
-                return parse_recurse_array(stack, next, token, result)
+                return parse_recurse_array(stack, next_token, token, result)
 
             # Otherwise, return a dict
             result = new_object()
             if tokens is not None:
                 tokens.top_object = result
-            token = parse_one_dict_entry(stack, next, token, [value], result)
-            return parse_recurse_dict(stack, next, token, result)
+            token = parse_one_dict_entry(stack, next_token, token, [value], result)
+            return parse_recurse_dict(stack, next_token, token, result)
 
 
         def parse(source):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
-            nextval = iter(tokens).__next__
+            nextval = tokens.next
             value, token = parse_recurse([nextval()], nextval, tokens)
             if token[1] != '@':
                 error('Unexpected additional data', token)
+
 
             # If it's a single item and we don't have a specialized
             # object builder, just strip the outer list.

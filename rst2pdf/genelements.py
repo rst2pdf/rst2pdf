@@ -243,7 +243,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
+            parent_id='{}-{}'.format((node.parent.get('ids', [None]) or [None])[0], id(node))
             node.elements = [ Heading(text,
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
@@ -564,7 +564,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
         # FIXME: use different unicode bullets depending on b
         if b and b in "*+-":
-            b = getattr(bStyle, 'bulletText', u'\u2022')
+            b = getattr(bStyle, 'bulletText', '\u2022')
 
         # The style has information about the bullet:
         #
@@ -584,7 +584,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         el = client.gather_elements(node, item_st)
         # FIXME: this is really really not good code
         if not el:
-            el = [Paragraph(u"<nobr>\xa0</nobr>", item_st)]
+            el = [Paragraph("<nobr> </nobr>", item_st)]
 
 
         idx=node.parent.children.index(node)
@@ -705,7 +705,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
     def gather_elements(self, client, node, style):
         # line nodes have no classes, they have to inherit from the outermost lineblock (sigh)
         # For more info see Issue 471 and its test case.
-        
+
         parent = node
         while isinstance(parent.parent, (docutils.nodes.line, docutils.nodes.line_block)):
             parent=parent.parent
@@ -717,7 +717,7 @@ class HandleLine(NodeHandler, docutils.nodes.line):
         qstyle.leftIndent += client.styles.adjustUnits("0.5em")*i
         text = client.gather_pdftext(node)
         if not text: # empty line
-            text=u"<nobr>\xa0</nobr>"
+            text="<nobr> </nobr>"
         return [Paragraph(text, style=qstyle)]
 
 class HandleLiteralBlock(NodeHandler, docutils.nodes.literal_block,
@@ -944,7 +944,7 @@ class HandleAdmonition(NodeHandler, docutils.nodes.attention,
                 style=client.styles['%s-heading'%node.tagname])]
         rows=title + client.gather_elements(node, style=style)
         st=client.styles[node.tagname]
-        if 'commands' in dir(st):
+        if 'commands' in str(st):
             t_style = TableStyle(st.commands)
         else:
             t_style = TableStyle()

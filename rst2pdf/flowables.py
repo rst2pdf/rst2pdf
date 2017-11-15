@@ -817,7 +817,7 @@ class BoxedContainer(BoundByWidth):
         self.mode = mode
 
     def identity(self, maxLen=None):
-        return str([u"BoxedContainer containing: ",
+        return str(["BoxedContainer containing: ",
             [c.identity() for c in self.content]])[:80]
 
     def draw(self):
@@ -1005,8 +1005,8 @@ class MyTableOfContents(TableOfContents):
                 leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text, pageNum), None)
             if label:
-                pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
-                post = u'</a>'
+                pre = '<a href="%s" color="%s">' % (label, self.linkColor)
+                post = '</a>'
                 if not isinstance(text, str):
                     text = str(text, 'utf-8')
                 text = pre + text + post

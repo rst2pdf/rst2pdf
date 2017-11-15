@@ -65,7 +65,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
+            parent_id=(node.parent.get('ids', [None]) or [None])[0]+'-'+str(id(node))
             if client.depth > 1:
                 node.elements = [ Heading(text,
                         client.styles['heading%d'%min(client.depth, maxdepth)],

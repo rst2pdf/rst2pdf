@@ -30,7 +30,7 @@ fonts = {}
 def enclose(s):
     """Enclose the string in $...$ if needed"""
     if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
-        s = u"$%s$" % s
+        s = "$%s$" % s
     return s
 
 class Math(Flowable):

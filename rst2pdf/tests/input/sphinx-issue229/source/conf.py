@@ -11,6 +11,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 import sys, os
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -37,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Test Case'
-copyright = u'2009, vorsorge'
+project = 'Test Case'
+copyright = '2009, vorsorge'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,8 +175,8 @@ htmlhelp_basename = 'TestCasedoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'TestCase.tex', u'Test Case Documentation',
-   u'vorsorge', 'manual'),
+  ('index', 'TestCase.tex', 'Test Case Documentation',
+   'vorsorge', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -205,13 +208,13 @@ latex_documents = [
 # The options element is a dictionary that lets you override 
 # this config per-document.
 # For example, 
-# ('index', u'MyProject', u'My Project', u'Author Name', 
+# ('index', 'MyProject', 'My Project', 'Author Name', 
 #  dict(pdf_compressed = True))
 # would mean that specific document would be compressed
 # regardless of the global pdf_compressed setting.
    
 pdf_documents = [ 
-    ('index', 'TestCase', u'A Sphinx Test Case', u'vorsorge'),
+    ('index', 'TestCase', 'A Sphinx Test Case', 'vorsorge'),
 ]
 
 # A comma-separated list of custom stylesheets. Example:

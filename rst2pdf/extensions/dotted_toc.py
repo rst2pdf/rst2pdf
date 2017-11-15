@@ -140,7 +140,7 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             if key:
                 if not isinstance(text, str):
                     text = str(text, 'utf-8')
-                text = u'<a href="#%s">%s</a>' % (key, text)
+                text = '<a href="#%s">%s</a>' % (key, text)
 
             para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
             end_info.append((style, pageNum, key, dot))

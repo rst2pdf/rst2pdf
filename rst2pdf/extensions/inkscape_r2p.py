@@ -18,10 +18,10 @@ from builtins import str
 
 import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
-from rst2pdf.log import log
 
-from .vectorpdf_r2p import VectorPdf
-import rst2pdf.image
+from rst2pdf import image
+from rst2pdf.log import log
+from rst2pdf.extensions.vectorpdf_r2p import VectorPdf
 
 
 if sys.platform.startswith('win'):
@@ -91,4 +91,4 @@ class InkscapeImage(VectorPdf):
 def install(createpdf, options):
     ''' Monkey-patch our class in to image as a replacement class for SVGImage.
     '''
-    rst2pdf.image.SVGImage = InkscapeImage
+    image.SVGImage = InkscapeImage

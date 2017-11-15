@@ -230,8 +230,8 @@ def findTTFont(fname):
                 if os.path.isabs(fname):
                     fontkey.close()
                     return fname
-                fontdir = os.environ.get("SystemRoot", u"C:\\Windows")
-                fontdir += u"\\Fonts"
+                fontdir = os.environ.get("SystemRoot", "C:\\Windows")
+                fontdir += "\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
             except WindowsError:

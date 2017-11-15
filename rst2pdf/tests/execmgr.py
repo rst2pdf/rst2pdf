@@ -21,10 +21,8 @@ Currently only works under Linux.
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
-from builtins import chr
-from builtins import str
-from builtins import range
-from builtins import object
+from __future__ import unicode_literals
+from builtins import chr, str, range, object
 
 import sys
 import subprocess
@@ -232,6 +230,9 @@ class LineSplitter(object):
                 chunk = '\n'
             else:
                 return self
+
+        if isinstance(chunk, bytes):
+            chunk = str(chunk)
         chunk = chunk.replace('\r\n', '\n').replace('\r', '\n')
         chunk = self.leftovers + chunk
         newlines = chunk.split('\n')
@@ -244,6 +245,7 @@ class LineSplitter(object):
 
     def __iter__(self):
         return self
+
     def __next__(self):
         try:
             return self.prefix, self.lines.pop()

@@ -8,10 +8,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
-from builtins import map
-from builtins import zip
-from builtins import str
-from builtins import object
+from builtins import map, zip, str, object, open, bytes
 import os
 import sys
 import re
@@ -87,7 +84,6 @@ class StyleSheet(object):
                 yield name, styles[name]
 
     def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
-        log.info('Using stylesheets: %s' % ','.join(flist))
         # find base path
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
@@ -100,6 +96,7 @@ class StyleSheet(object):
         # be loaded first
         flist = [join(self.PATH, 'styles', 'styles.style'),
                 join(self.PATH, 'styles', 'default.style')] + flist
+        log.info('Using stylesheets: %s', ','.join(flist))
 
         self.def_dpi=def_dpi
         if font_path is None:
@@ -115,8 +112,8 @@ class StyleSheet(object):
         self.FontSearchPath=list(set(self.FontSearchPath))
         self.StyleSearchPath=list(set(self.StyleSearchPath))
 
-        log.info('FontPath:%s'%self.FontSearchPath)
-        log.info('StylePath:%s'%self.StyleSearchPath)
+        log.info('FontPath: %s', self.FontSearchPath)
+        log.info('StylePath: %s', self.StyleSearchPath)
 
         findfonts.flist = self.FontSearchPath
         # Page width, height
@@ -551,12 +548,14 @@ class StyleSheet(object):
         else:
             if key.startswith('pygments'):
                 log.info("Using undefined style '%s'"
-                            ", aliased to style 'code'."%key)
+                            ", aliased to style 'code'.", key)
                 newst=copy(self.StyleSheet['code'])
             else:
                 log.warning("Using undefined style '%s'"
-                            ", aliased to style 'normal'."%key)
+                            ", aliased to style 'normal'.", key)
+
                 newst=copy(self.StyleSheet['normal'])
+
             newst.name=key
             self.StyleSheet.add(newst)
             return newst
@@ -599,16 +598,19 @@ class StyleSheet(object):
 
             fname = self.findStyle(ssname)
             if fname:
+                with open(fname) as f:
+                    stylestr = f.read()
+
                 try:
-                    return rson_loads(open(fname).read())
+                    return rson_loads(stylestr)
                 except ValueError: # Error parsing the JSON data
                     _, e, _ = sys.exc_info()
-                    log.critical('Error parsing stylesheet "%s": %s'%\
-                        (fname, str(e)))
+                    log.critical('Error parsing stylesheet "%s": %s\n',
+                                 fname, str(e))
                 except IOError: #Error opening the ssheet
                     _, e, _ = sys.exc_info()
-                    log.critical('Error opening stylesheet "%s": %s'%\
-                        (fname, str(e)))
+                    log.critical('Error opening stylesheet "%s": %s',
+                                 fname, str(e))
 
     def findStyle(self, fn):
         """Find the absolute file name for a given style filename.
@@ -932,11 +934,11 @@ def validateCommands(commands):
             continue
 
         # See if start and stop are the right types
-        if type(command[1]) not in (ListType,TupleType):
+        if type(command[1]) not in (list,tuple):
             log.error('Start cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
 
-        if type(command[2]) not in (ListType,TupleType):
+        if type(command[2]) not in (list,tuple):
             log.error('Stop cell in table command should be list or tuple, got %s [%s]',type(command[1]),command[1])
             flag=True
 
