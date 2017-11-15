@@ -1504,7 +1504,8 @@ def main(_args=None):
                     source_path=options.infile.name,
                     output=options.outfile,
                     compressed=options.compressed)
-
+    options.infile.close()
+                    
 # Ugly hack that fixes Issue 335
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
 
