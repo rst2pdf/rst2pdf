@@ -2,7 +2,7 @@ Highlight lines
 ---------------
 
 The following code snippet should dim all lines that are not marked with
-``hl_lines`, and so the effect is to highlight the selected lines
+``hl_lines``, and so the effect is to highlight the selected lines
 
 .. code-block:: python
    :linenos:
