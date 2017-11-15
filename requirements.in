@@ -1,0 +1,11 @@
+aafigure
+docutils
+matplotlib
+pdfrw
+pillow
+pygments
+pyPdf2
+reportlab
+sphinx
+svg2rlg
+xhtml2pdf
