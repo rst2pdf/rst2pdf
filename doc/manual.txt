@@ -928,6 +928,19 @@ You can use the ``linenos`` option to display line numbers:
    def myFun(x,y):
        print x+y
 
+You can use the ``hl_lines`` option to emphasize certain lines by dimming the
+other lines. This parameter takes a space separated list of line numbers. The
+other lines are then styled with the class ``pygments_diml`` that defaults to
+gray. e.g. to highlight ``print "line a"`` and ``print "line b"``:
+
+.. code-block:: python
+   :hl_lines: 2 3
+
+   def myFun(x,y):
+       print "line a"
+       print "line b"
+       print "line c"
+
 Rst2pdf includes several stylesheets for highlighting code:
 
 * autumn

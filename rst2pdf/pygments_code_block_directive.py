@@ -222,6 +222,7 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     content = content.replace('\t',' '*tabw)
 
+    hl_lines = options.get('hl_lines', [])
     withln = "linenos" in options
     if not "linenos_offset" in options:
         line_offset = 0
@@ -230,16 +231,24 @@ def code_block_directive(name, arguments, options, content, lineno,
     # create a literal block element and set class argument
     code_block = nodes.literal_block(classes=["code", language])
 
+    lineno = 1 + line_offset
+    total_lines = content.count('\n') + 1 + line_offset
     if withln:
-        lineno = 1 + line_offset
-        total_lines = content.count('\n') + 1 + line_offset
         lnwidth = len(str(total_lines))
         fstr = "\n%%%dd " % lnwidth
-        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno,   classes=['linenumber'])
+        linenumber_cls = 'linenumber'
+        if hl_lines and lineno not in hl_lines:
+            linenumber_cls = 'pygments-diml'
+        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno, classes=[linenumber_cls])
 
     # parse content with pygments and add to code_block element
     for cls, value in DocutilsInterface(content, language, options):
+        if hl_lines and lineno not in hl_lines:
+            cls = "diml"
         if withln and "\n" in value:
+            linenumber_cls = 'linenumber'
+            if hl_lines and (lineno+1) not in hl_lines: # use lineno+1 as we're on the previous line when we render the next line number
+                linenumber_cls = 'pygments-diml'
             # Split on the "\n"s
             values = value.split("\n")
             # The first piece, pass as-is
@@ -248,14 +257,18 @@ def code_block_directive(name, arguments, options, content, lineno,
             linenos = range(lineno, lineno + len(values))
             for chunk, ln in zip(values, linenos)[1:]:
                 if ln <= total_lines:
-                    code_block += nodes.inline(fstr % ln, fstr % ln, classes=['linenumber'])
+                    code_block += nodes.inline(fstr % ln, fstr % ln, classes=[linenumber_cls])
                     code_block += nodes.Text(chunk, chunk)
             lineno += len(values) - 1
 
         elif cls in unstyled_tokens:
+            if "\n" in value:
+                lineno = lineno + value.count("\n")
             # insert as Text to decrease the verbosity of the output.
             code_block += nodes.Text(value, value)
         else:
+            if "\n" in value:
+                lineno = lineno + value.count("\n")
             code_block += nodes.inline(value, value, classes=["pygments-" + cls])
 
     return [code_block]
@@ -334,6 +347,7 @@ code_block_directive.options = {'include': directives.unchanged_required,
                                 'linenos': directives.unchanged,
                                 'linenos_offset': zero_or_positive_int,
                                 'tab-width': directives.unchanged,
+                                'hl_lines': directives.positive_int_list,
                                 # generic
                                 'stripnl' : string_bool,
                                 'stripall': string_bool,
