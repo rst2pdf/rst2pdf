@@ -1,0 +1,168 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+>>
+endobj
+7 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+8 0 obj
+<<
+/Count 1 /Kids [ 5 0 R ] /Type /Pages
+>>
+endobj
+9 0 obj
+<<
+/Length 1993
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (To fix Issue 223, the ') Tj (<) Tj (module) Tj (>) Tj (' in the code fragment below should be in a monospaced font.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 683.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+.960784 .960784 .862745 rg
+n 0 36 6 12 re f*
+.960784 .960784 .862745 rg
+n 6 36 6 12 re f*
+.960784 .960784 .862745 rg
+n 12 36 6 12 re f*
+.960784 .960784 .862745 rg
+n 18 36 0 12 re f*
+.960784 .960784 .862745 rg
+n 24 36 30 12 re f*
+.960784 .960784 .862745 rg
+n 60 36 54 12 re f*
+.960784 .960784 .862745 rg
+n 114 36 6 12 re f*
+.960784 .960784 .862745 rg
+n 120 36 42 12 re f*
+.960784 .960784 .862745 rg
+n 162 36 6 12 re f*
+.960784 .960784 .862745 rg
+n 0 24 204 12 re f*
+.960784 .960784 .862745 rg
+n 42 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 48 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 54 12 30 12 re f*
+.960784 .960784 .862745 rg
+n 84 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 90 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 138 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 174 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 180 12 36 12 re f*
+.960784 .960784 .862745 rg
+n 216 12 6 12 re f*
+.960784 .960784 .862745 rg
+n 0 0 54 12 re f*
+.960784 .960784 .862745 rg
+n 66 0 30 12 re f*
+BT 1 0 0 1 0 38 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (>) Tj (>) Tj (>) Tj ( ) Tj 0 .501961 0 rg (raise) Tj /F3 10 Tf 0 0 0 rg ( ) Tj /F2 10 Tf .823529 .254902 .227451 rg (Exception) Tj /F3 10 Tf 0 0 0 rg (\() Tj .729412 .129412 .129412 rg ("Texto") Tj 0 0 0 rg (\)) Tj 0 0 0 rg  T* 0 .25098 .815686 rg (Traceback \(most recent call last\):) Tj T* 0 0 0 rg (  File ) Tj 0 .501961 0 rg (") Tj (<) Tj (stdin) Tj (>) Tj (") Tj 0 0 0 rg (, line ) Tj .4 .4 .4 rg (1) Tj 0 0 0 rg (, in ) Tj 0 0 0 rg (<) Tj (module) Tj (>) Tj 0 0 0 rg  T* 1 0 0 rg (Exception) Tj 0 0 0 rg (: ) Tj 0 0 0 rg (Texto) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+10 0 obj
+<<
+/Count 0 /Type /Outlines
+>>
+endobj
+11 0 obj
+<<
+/Nums [ 0 12 0 R ]
+>>
+endobj
+12 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000341 00000 n 
+0000000446 00000 n 
+0000000649 00000 n 
+0000000753 00000 n 
+0000001010 00000 n 
+0000001069 00000 n 
+0000003113 00000 n 
+0000003160 00000 n 
+0000003201 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 7 0 R
+/Root 6 0 R
+/Size 13
+>>
+startxref
+3235
+%%EOF
