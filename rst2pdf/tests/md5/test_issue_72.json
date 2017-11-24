@@ -10,10 +10,10 @@ good_md5 = [
         'd6d2a9f78765b9284616db24474ff95b',
         'd8fd775b3c2a786bd9fadfa37beaecf7',
         'ecac52d47ba4dfbb0e2c70e16bac7c0a',
+        '6ac6e40f14315e6a0b3bf1cd9b4a5015',
         'sentinel'
 ]
 
 unknown_md5 = [
         'sentinel'
 ]
-
