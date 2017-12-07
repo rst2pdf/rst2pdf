@@ -17,8 +17,13 @@ def parseRaw(data, node):
     Supported (can add others on request):
 
     * PageBreak
-
+    * EvenPageBreak
+    * OddPageBreak
+    * FrameBreak
     * Spacer width, height
+    * Transition
+    * SetPageCounter
+    * TextAnnotation "text of annotation"
 
     """
     elements = []
@@ -57,6 +62,8 @@ def parseRaw(data, node):
             elements.append(Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
             elements.append(flowables.PageCounter(*tokens[1:]))
+        elif command == 'TextAnnotation':
+            elements.append(TextAnnotation(*tokens[1:]))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]'%(command,nodeid(node)))
     return elements
