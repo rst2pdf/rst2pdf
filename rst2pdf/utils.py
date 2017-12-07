@@ -23,7 +23,7 @@ def parseRaw(data, node):
     * Spacer width, height
     * Transition
     * SetPageCounter
-    * TextAnnotation "text of annotation"
+    * TextAnnotation "text of annotation" x_begin=-1 y_begin=-1 x_end=-1 y_end=-1
 
     """
     elements = []

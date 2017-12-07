@@ -140,7 +140,7 @@ Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
 There is a real complicated technical reason for this: I can't figure out a
 clean way to do it right.
 
-You can get the same behaviour as with rst2html by specifying --inline-footnotes, 
+You can get the same behaviour as with rst2html by specifying --inline-footnotes,
 and then the footnotes will appear where you put them (in other words, not footnotes,
 but "in-the-middle-of-text-notes" or just plain notes.)
 
@@ -192,33 +192,33 @@ vector files are usually smaller and look better, specially when printed.
 Image Size
 ----------
 
-PDFs are meant to reflect paper. A PDF has a specific size in centimeters or inches. 
+PDFs are meant to reflect paper. A PDF has a specific size in centimeters or inches.
 
-Images usually are measured in pixels, which are meaningless in a PDF. To convert 
+Images usually are measured in pixels, which are meaningless in a PDF. To convert
 between pixels and inches or centimeters, we use a DPI (dots-per-inch) value.
 
 For example, 300 pixels, with a 300DPI, are exactly one inch. 300 pixels at 100DPI
 are 3 inches.
 
-For that reason, to achieve a nice layout of the page, it's usually a good idea 
-to specify the size of your images in those units, or as a percentage of the 
+For that reason, to achieve a nice layout of the page, it's usually a good idea
+to specify the size of your images in those units, or as a percentage of the
 available width and you can ignore all this DPI nonsense ;-)
 
 The rst2pdf default is 300DPI, but you can change it using the --default-dpi option
 or the default_dpi setting in the config file.
 
 Examples of images with specified sizes::
-    
+
   .. image:: home.png
      :width: 3in
-     
+
   .. image:: home.png
      :width: 80%
-  
+
   .. image:: home.png
      :width: 7cm
- 
-  
+
+
 The valid units you can use are:
 
 "em" "ex" "px" "in" "cm" "mm" "pt" "pc" "%" "".
@@ -226,38 +226,38 @@ The valid units you can use are:
 
 * px: Pixels. If you specify the size using this unit, rst2pdf will convert it to
   inches using the default DPI explained above.
-  
-* No unit. If you just use a number, it will be considered as pixels. (**IMPORTANT:** 
+
+* No unit. If you just use a number, it will be considered as pixels. (**IMPORTANT:**
   this used to default to points. It was changed to be more compatible with rst2html)
-  
+
 * em: This is the same as your base style's font size. By default: 10 points.
 
 * ex: rst2pdf will use the same broken definition as IE: em/2. In truth this should
   be the height of the lower-case x character in your base style.
-  
+
 * in: Inches (1 inch = 2.54 cm).
 
 * cm: centimeters (1cm = 0.39 inches)
-  
+
 * mm: millimeters (10mm = 1cm)
 
 * pt: 1/72 inch
 
 * pc: 1/6 inch
 
-* %: percentage of available width in the frame. Setting a percentage as a height 
+* %: percentage of available width in the frame. Setting a percentage as a height
   does **not** work and probably never will.
-  
+
 If you don't specify a size at all, rst2pdf will do its best to figure out what it should do:
-    
+
 Since there is no specified size, rst2pdf will try to convert the image's pixel size to
-inches using the DPI information available in the image itself. You can set that value 
+inches using the DPI information available in the image itself. You can set that value
 using most image editors. For example, using Gimp, it's in the Image -> Print Size menu.
 
 So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5 inches wide.
 
 If your image doesn't have a DPI property set, and doesn't have it's desired size specified,
-rst2pdf will arbitrarily decide it should use 300DPI (or whatever you choose with 
+rst2pdf will arbitrarily decide it should use 300DPI (or whatever you choose with
 the --default-dpi option).
 
 
@@ -287,7 +287,7 @@ You can make rst2pdf print the default stylesheet::
 
   rst2pdf --print-stylesheet
 
-If you want to add styles, just create a stylesheet, (or take the standard 
+If you want to add styles, just create a stylesheet, (or take the standard
 stylesheet and modify it) and pass it with the -s option::
 
   rst2pdf mydoc.txt -s mystyles.txt
@@ -311,13 +311,13 @@ so the *last* one has priority.
 Included StyleSheets
 --------------------
 
-To make some of the more common adjustments easier, rst2pdf includes a 
+To make some of the more common adjustments easier, rst2pdf includes a
 collection of stylesheets you can use:
 
 Font styles
     These stylesheets modfy your font settings.
-    
-    * ``serif`` uses the PDF serif font (Times) instead of the default Sans 
+
+    * ``serif`` uses the PDF serif font (Times) instead of the default Sans
       Serif (Arial)
     * ``freetype-sans`` uses your system's default TrueType Sans Serif font
     * ``freetype-serif`` uses your system's default TrueType Serif font
@@ -325,18 +325,18 @@ Font styles
     * ``tenpoint`` makes the base font 10pt
     * ``eightpoint`` makes the base font 8pt
     * ``kerning`` switches to document to DejaVu Sans font and enables kerning.
-    
+
 Page layout styles
     These stylesheets modify your page layout.
-    
+
     * ``twocolumn`` uses the twoColumn layout as the initial page layout.
     * ``double-sided`` adds a gutter margin (margin at the "in side" of the pages)
 
 Page size styles
     Stylesheets that change the paper size.
-    
+
     The usual standard paper sizes are supported:
-        
+
     * A0
     * A1
     * A2
@@ -361,7 +361,7 @@ Code block styles
     See `Syntax Highlighting`_
 
 So, if you want to have a two-column, legal size, serif document with code in murphy style::
-    
+
     rst2pdf mydoc.txt -s twocolumn,serif,murphy,legal
 
 StyleSheet Syntax
@@ -598,7 +598,7 @@ above. Example::
 Or you can be explicit and tell rst2pdf the files that contain each variant of the
 font.
 
-Suppose you want to use the nice public domain `Tuffy font`_, then you need to give the 
+Suppose you want to use the nice public domain `Tuffy font`_, then you need to give the
 filenames of all variants::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
@@ -610,7 +610,7 @@ aliases similar to those of the standard PDF fonts (Tuffy-Bold/Tuffy-Oblique/Tuf
 Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it will use
 Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and
 you should put them in **that** order. If your font lacks a variant, use the
-"normal" variant instead. 
+"normal" variant instead.
 
 For example, if you only had Tuffy.ttf::
 
@@ -704,32 +704,32 @@ This is new in 0.12.
 
 These are a few extra options in styles that are only used when the style is applied to a table.
 This happens in two cases:
-    
+
 1) You are using the class directive on a table:
-    
+
 .. code-block:: rest
 
    .. class:: thick
-   
+
    +-------+---------+
    |   A   |   B     |
    +-----------------+
-   
-2) It's a style that automatically applies to something that is *drawn* using a table. 
+
+2) It's a style that automatically applies to something that is *drawn* using a table.
    Currently these include:
-       
+
    * Footnotes / endnotes (endnote style)
    * Lists (item_list, bullet_list option_list and field_list styles)
-   
+
 The options are as follows:
 
-Commands   
-   For a full reference of these, please check the Reportlab User Guide 
-   specifically the TableStyle Commands section (section 7.4 in the manual 
+Commands
+   For a full reference of these, please check the Reportlab User Guide
+   specifically the TableStyle Commands section (section 7.4 in the manual
    for version 2.3)
-    
+
    Here, however, is a list of the possible commands::
-       
+
         BOX (or OUTLINE)
         FONT
         FONTNAME (or FACE)
@@ -752,26 +752,26 @@ Commands
         COLBACKGROUNDS
         VALIGN
 
-   Each takes as argument a couple of coordinates, where (0,0) is top-left, and (-1,-1) is 
+   Each takes as argument a couple of coordinates, where (0,0) is top-left, and (-1,-1) is
    bottom-right, and 0 or more extra arguments.
-   
+
    For example, INNERGRID takes a linewidth and a color::
-       
-       [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ], 
+
+       [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ],
 
    That would mean "draw all lines inside the table with .25pt black"
 
 colWidths
    A list of the column widths you want, in the unit you prefer (default unit is pt).
-   
+
    Example::
-       
+
        "colWidths": ["3cm",null]
 
    If your colWidths has fewer values than columns in your table, the rest are autocalculated.
    A column width of null means "guess".
-   
-   If you don't specify column widths, the table will try to look proportional to the restructured 
+
+   If you don't specify column widths, the table will try to look proportional to the restructured
    text source.
 
 Multiple Stylesheets
@@ -799,10 +799,10 @@ be enough:
     }
 
 .. Note::
-    
+
     The ``command`` option used for table styles is not kept across stylesheets.
     For example, the default stylesheet defines endnote with this command list::
-        
+
         "commands": [ [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ] ]
 
 
@@ -810,14 +810,14 @@ be enough:
     the endnote's columns::
 
         "commands": [ [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ] ]
-        
+
     Then the footnotes will **not** have VALIGN TOP!
-    
+
     To do that, you **MUST** use all commands in your stylesheet::
 
-        "commands": [ 
+        "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ] 
+            [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ]
         ]
 
 .. raw:: pdf
@@ -834,28 +834,28 @@ The Base Styles
 ~~~~~~~~~~~~~~~
 
 There are three styles which have great effect, they are ``base``,
-``normal`` and ``bodytext``. 
+``normal`` and ``bodytext``.
 
 Here's an example, the twelvepoint stylesheet::
-    
+
     {"styles": [["base", {"fontSize": 12}]]}
-    
-Since all other styles inherit ``base``, changing the fontSize changes the fontSize 
+
+Since all other styles inherit ``base``, changing the fontSize changes the fontSize
 for everything in your document.
 
 The ``normal`` style is meant for most elements, so usually it's the same as changing
-``base``. 
+``base``.
 
 The ``bodytext`` style is for elements that form paragraphs. So, for example, you can set
 your document to be left-aligned like this::
-    
+
     {"styles": [["bodytext", {"alignment": "left"}]]}
-    
+
 There are elements, however, that don't inherit from bodytext, for example headings and the
 styles used in the table of contents. Those are elements that are not real paragraphs, so
 they should not follow the indentation and spacing you use for your document's main content.
 
-The ``heading`` style is inherited by all sorts of titles: section titles, topic titles, 
+The ``heading`` style is inherited by all sorts of titles: section titles, topic titles,
 admonition titles, etc.
 
 Lists
@@ -864,40 +864,40 @@ Lists
 Styling lists is mostly a matter of spacing and indentation.
 
 The space before and after a list is taken from the ``item_list`` and ``bullet_list`` styles::
-    
-    ["item_list", { 
+
+    ["item_list", {
       "parent": "bodytext",
       "spaceBefore": 0,
       "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ], 
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
+            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
         ],
         "colWidths": ["20pt",null]
     }]
-    
+
     ["bullet_list", {
       "parent": "bodytext",
       "spaceBefore": 0,
       "commands": [
             [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ] 
-        ], 
+            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
+        ],
         "colWidths": ["20",null]
     }],
 
 Yes, these are table styles, because they are implemented as tables. The RIGHTPADDING command
 and the colWidths option can be used to adjust the position of the bullet/item number.
 
-To control the separation between items, you use the item_list_item and 
+To control the separation between items, you use the item_list_item and
 ``bullet_list_item`` styles' spaceBefore and spaceAfter options, for example::
 
     ["bullet_list_item" , {
       "parent": "bodytext",
       "spaceBefore": 20
     }]
-    
-Remember that this is only used **between items** and not before the first or after the 
-last items. 
+
+Remember that this is only used **between items** and not before the first or after the
+last items.
 
 Syntax Highlighting
 ===================
@@ -968,7 +968,7 @@ If you already are using a custom stylesheet, use both::
 The default is the same as "emacs".
 
 There is an online demo of pygments showing these styles:
-    
+
     http://pygments.org/demo/1817/
 
 The overal look of a code box is controlled by the "code" style or by a class you apply to it using the ``.. class::`` directive.
@@ -1128,7 +1128,7 @@ The syntax is shell-like, here's an example::
 
     And another paragraph.
 
-The unit used by the spacer by default is points, and using a space or a comma is the same thing 
+The unit used by the spacer by default is points, and using a space or a comma is the same thing
 in all cases.
 
 Page Counters
@@ -1142,32 +1142,32 @@ where your first section starts.
 To do that, you have to use the SetPageCounter command.
 
 Here is a syntax example::
-    
+
     .. raw:: pdf
 
         SetPageCounter 0 lowerroman
-        
+
 This sets the counter to 0, and makes it display in lower roman characters (i, ii, iii, etc)
-which is a style often used for the pages before the document proper (for example, TOCs and 
+which is a style often used for the pages before the document proper (for example, TOCs and
 abstracts).
 
 It can take zero or two arguments.
 
 SetPageCounter
     When used with no arguments, it sets the counter to 0, and the style to arabic numerals.
-    
+
 SetPageCounter number style
-    When used with two arguments, the first argument must be a number, it sets the page counter 
+    When used with two arguments, the first argument must be a number, it sets the page counter
     to that number.
-    
+
     The second number is a style of counter. Valid values are:
-        
+
     * lowerroman: i, ii, iii, iv, v ...
     * roman: I, II, III, IV, V ...
     * arabic: 1, 2, 3, 4, 5 ...
     * loweralpha: a, b, c, d, e ... [Don't use for numbers above 26]
     * alpha: A, B, C, D, E ... [Don't use for numbers above 26]
-    
+
 .. note:: Page counter changes take effect on the **current** page.
 
 Page Breaks
@@ -1180,14 +1180,14 @@ PageBreak
 
 EvenPageBreak
     Break to the next **even** numbered page
-    
+
 OddPageBreak
     Break to the next **odd** numbered page
 
 Each of them can take an additional number which is the name of the next page template.
 
 For example::
-    
+
     PageBreak twoColumn
 
 Frame Breaks
@@ -1256,11 +1256,25 @@ natural thing is to use it before a PageBreak::
        Transition Dissolve 1
        PageBreak
 
+Text Annotations
+----------------
+
+Text annotations are meta notes added to a page.
+
+The syntax is this:
+
+    .. raw:: pdf
+
+       TextAnnotation "text to add" [optional position]
+
+The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`, ``x_end`` and ``y_end``
+
+
 Raw HTML
 --------
 
-If you have a document that contais raw HTML, andhave xhtml2pdf installed, rst2pdf 
-will try to render that HTML inside your documet. To enable this, use 
+If you have a document that contais raw HTML, andhave xhtml2pdf installed, rst2pdf
+will try to render that HTML inside your documet. To enable this, use
 the --raw-html command line option.
 
 The counter role
@@ -1393,7 +1407,7 @@ Rst2pdf doesn't support numbering equations yet.
 
 The math directive supports the following options:
 
-``:fontsize:`` 
+``:fontsize:``
     Sets the font size used in the math directive. By default it will use the paragraph's
     font and size.
 
@@ -1430,7 +1444,7 @@ For english, this should be enough::
       "hyphenation": true
     }],
 
-If you are not an english speaker, you need to change the language using 
+If you are not an english speaker, you need to change the language using
 the -l or --language option.
 
 Since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
@@ -1457,20 +1471,20 @@ And all paragraps declared of bodytext_es style would have spanish hyphenation::
 
     .. class:: bodytext_es
 
-    Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar. 
-    El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona, 
+    Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar.
+    El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona,
     en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
-    (New York, 1917) y es una reimpresión literal, pero también morosa, de la 
+    (New York, 1917) y es una reimpresión literal, pero también morosa, de la
     *Encyclopaedia Britannica* de 1902.
-    
+
 Here is the result (made thinner to force hyphenation):
 
 .. class:: thin
 
-Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar. 
-El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona, 
+Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar.
+El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona,
 en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
-(New York, 1917) y es una reimpresión literal, pero también morosa, de la 
+(New York, 1917) y es una reimpresión literal, pero también morosa, de la
 *Encyclopaedia Britannica* de 1902.
 
 BTW: That's the beginning of "Tlön, Uqbar, Orbis Tertius", read it, it's cool.
@@ -1598,31 +1612,31 @@ Quoted from the smartypants_ documentation:
     Backticks-style quotes (\`\`like this'') into "curly" quote HTML entities
     Dashes (-- and ---) into en- and em-dash entities
     Three consecutive dots (... or . . .) into an ellipsis entity
-    This means you can write, edit, and save your posts using plain old ASCII straight 
-    quotes, plain dashes, and plain dots, but your published posts (and final PDF 
+    This means you can write, edit, and save your posts using plain old ASCII straight
+    quotes, plain dashes, and plain dots, but your published posts (and final PDF
     output) will appear with smart quotes, em-dashes, and proper ellipses.
 
-You can enable this by passing the ``--smart-quotes`` option in the command line. 
+You can enable this by passing the ``--smart-quotes`` option in the command line.
 By default, it's disabled.
 Here are the different values you can use (again, from the smartypants docs):
 
     0
         Suppress all transformations. (Do nothing.)
     1
-        Performs default SmartyPants transformations: quotes 
-        (including \`\`backticks'' -style), em-dashes, and ellipses. 
-        "--" (dash dash) is used to signify an em-dash; there is no 
+        Performs default SmartyPants transformations: quotes
+        (including \`\`backticks'' -style), em-dashes, and ellipses.
+        "--" (dash dash) is used to signify an em-dash; there is no
         support for en-dashes.
     2
-        Same as smarty_pants="1", except that it uses the old-school 
+        Same as smarty_pants="1", except that it uses the old-school
         typewriter shorthand for dashes: "--" (dash dash) for en-dashes,
         "---" (dash dash dash) for em-dashes.
     3
-        Same as smarty_pants="2", but inverts the shorthand for dashes: 
-        "--" (dash dash) for em-dashes, and "---" (dash dash dash) 
+        Same as smarty_pants="2", but inverts the shorthand for dashes:
+        "--" (dash dash) for em-dashes, and "---" (dash dash dash)
         for en-dashes.
 
-Currently, even if you enable it, this transformation will only take place in 
+Currently, even if you enable it, this transformation will only take place in
 regular paragraphs, titles, headers, footers and block quotes.
 
 .. _smartypants: http://web.chad.org/projects/smartypants.py/
@@ -1633,18 +1647,18 @@ Kerning
 Kerning is the process of adjusting letter spacing. It is usually accepted that
 kerning makes your text look better.
 
-For example, if you are using proper kerning, the As and Ws in AWAWA will overlap 
+For example, if you are using proper kerning, the As and Ws in AWAWA will overlap
 slightly.
 
 If you want kerning in your PDFs, you need to do the following:
-    
+
 * Use wordaxe at least 1.0.0
 
 * Use a TrueType font
 
 * Set kerning to true in your style. For example, if you want **all**
   text to be kerned, you can set it in the "base" style.
-  
+
 For convenience, a stylesheet that uses DejaVu fonts with kerning is provided
 as kerning.json, so you can copy and adapt to your needs, or just use it
 with the ``-s`` option.
@@ -1653,24 +1667,24 @@ Sphinx
 ======
 
 Sphinx_ is a very popular tool. This is the description from its website:
-    
-    Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, 
+
+    Sphinx is a tool that makes it easy to create intelligent and beautiful documentation,
     written by Georg Brandl and licensed under the BSD license.
 
-    It was originally created to translate the new Python documentation, and it 
-    has excellent support for the documentation of Python projects, but other 
+    It was originally created to translate the new Python documentation, and it
+    has excellent support for the documentation of Python projects, but other
     documents can be written with it too.
-    
+
 Rst2pdf includes an experimental PDF extension for sphinx.
 
 To use it in your existing sphinx project you need to do the following:
-    
+
 1. Add rst2pdf.pdfbuilder in your conf.py's extensions. For example::
-    
+
     extensions = ['sphinx.ext.autodoc','rst2pdf.pdfbuilder']
 
 2. Add the PDF options at the end of conf.py, adapted to your project::
-    
+
     # -- Options for PDF output --------------------------------------------------
 
     # Grouping the document tree into PDF files. List of tuples
@@ -1679,15 +1693,15 @@ To use it in your existing sphinx project you need to do the following:
     # If there is more than one author, separate them with \\.
     # For example: r'Guido van Rossum\\Fred L. Drake, Jr., editor'
     #
-    # The options element is a dictionary that lets you override 
+    # The options element is a dictionary that lets you override
     # this config per-document.
-    # For example, 
-    # ('index', u'MyProject', u'My Project', u'Author Name', 
+    # For example,
+    # ('index', u'MyProject', u'My Project', u'Author Name',
     #  dict(pdf_compressed = True))
     # would mean that specific document would be compressed
     # regardless of the global pdf_compressed setting.
-    
-    pdf_documents = [ 
+
+    pdf_documents = [
         ('index', u'MyProject', u'My Project', u'Author Name'),
     ]
 
@@ -1707,7 +1721,7 @@ To use it in your existing sphinx project you need to do the following:
 
     # Language to be used for hyphenation support
     #pdf_language = "en_US"
-    
+
     # Mode for literal blocks wider than the frame. Can be
     # overflow, shrink or truncate
     #pdf_fit_mode = "shrink"
@@ -1721,7 +1735,7 @@ To use it in your existing sphinx project you need to do the following:
     # or just use 'any'
     #pdf_breakside = 'any'
 
-    # Insert footnotes where they are defined instead of 
+    # Insert footnotes where they are defined instead of
     # at the end.
     #pdf_inline_footnotes = True
 
@@ -1736,24 +1750,24 @@ To use it in your existing sphinx project you need to do the following:
 
     # If false, no coverpage is generated.
     #pdf_use_coverpage = True
-   
+
     # Name of the cover page template to use
     #pdf_cover_template = 'sphinxcover.tmpl'
- 
-    # Documents to append as an appendix to all manuals.    
+
+    # Documents to append as an appendix to all manuals.
     #pdf_appendices = []
-    
+
     # Enable experimental feature to split table cells. Use it
     # if you get "DelayedTable too big" errors
     #pdf_splittables = False
-   
+
     # Set the default DPI for images
     #pdf_default_dpi = 72
-   
+
     # Enable rst2pdf extension modules (default is only vectorpdf)
     # you need vectorpdf if you want to use sphinx's graphviz support
     #pdf_extensions = ['vectorpdf']
-    
+
     # Page template name for "regular" pages
     #pdf_page_template = 'cutePage'
 
@@ -1770,18 +1784,18 @@ To use it in your existing sphinx project you need to do the following:
     pdf_fit_background_mode = 'scale'
 
 3. (Maybe) add this in your Makefile (on unix-like systems):
-    
+
     .. code-block:: makefile
-    
+
         pdf:
             $(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) _build/pdf
             @echo
             @echo "Build finished. The PDF files are in _build/pdf."
 
 4. (Maybe) add this to your make.bat (on windows):
-    
+
     .. code-block:: bat
-    
+
         if "%1" == "pdf" (
             %SPHINXBUILD% -b pdf %ALLSPHINXOPTS% %BUILDDIR%/pdf
             echo.
@@ -1790,7 +1804,7 @@ To use it in your existing sphinx project you need to do the following:
         )
 
 
-Then you can run ``make pdf`` or ``sphinx-build -b pdf ...`` similar 
+Then you can run ``make pdf`` or ``sphinx-build -b pdf ...`` similar
 to how you did it before.
 
 .. _sphinx: http://sphinx.pocoo.org
@@ -1836,7 +1850,7 @@ Licenses
 ========
 
 This is the license for rst2pdf::
-    
+
     Copyright (c) 2007,2008,2009 Roberto Alsina
     Nicolas Laurance, Christoph Zwerschke, Yasushi Masuda, Josh VanderLinden,
     Patrick Maupin.
@@ -1862,7 +1876,7 @@ This is the license for rst2pdf::
 
 
 Some fragments of rstpdf are copied from ReportLab under the following license::
-    
+
        Copyright (c) 2000-2008, ReportLab Inc.
        All rights reserved.
 
