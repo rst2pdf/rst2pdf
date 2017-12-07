@@ -486,6 +486,25 @@ class ResetNextTemplate(Flowable):
     def wrap(self, aW, aH):
         return 0,0
 
+class TextAnnotation(Flowable):
+    """Add text annotation flowable"""
+
+    def __init__(self, *args):
+        self.annotationText = ""
+        self.position = [-1, -1, -1, -1]
+        if len(args) >= 1:
+            self.annotationText = args[0].lstrip('"').rstrip('"')
+        if len(args) >= 5:
+            self.position = args[1:]
+
+    def wrap(self, w, h):
+        return 0, 0
+
+    def draw(self):
+        # Format of Reportlab's textAnnotation():
+        # textAnnotation("Your content", Rect=[x_begin, y_begin, x_end, y_end], relative=1)
+        self.canv.textAnnotation(self.annotationText, self.position, 1)
+
 class Transition(Flowable):
     """Wrap canvas.setPageTransition.
 
