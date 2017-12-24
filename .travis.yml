@@ -1,4 +1,5 @@
 sudo: false
+filter_secrets: false
 
 language: python
 python:
