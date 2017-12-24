@@ -1,6 +1,11 @@
 sudo: false
 filter_secrets: false
 
+addons:
+  apt:
+    packages:
+    - inkscape
+
 language: python
 python:
  - 2.7
