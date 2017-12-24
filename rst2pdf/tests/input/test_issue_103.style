@@ -3,6 +3,7 @@ styles:
         borderColor: black
         borderPadding: 0
         borderWidth: 1
+        spaceAfter: 10
 
     pad2:
         borderColor: black
