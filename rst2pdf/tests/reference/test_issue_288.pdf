@@ -1,0 +1,2399 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 26 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 27 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 13 0 R /XYZ 68.69291 528.9843 0 ] /Rect [ 216.2829 158.4236 233.1709 170.4236 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/Annots [ 8 0 R ] /Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://trac.osgeo.org/mapserver/ticket/1477)
+>> /Border [ 0 0 0 ] /Rect [ 83.26291 183.0236 105.5029 195.0236 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/Annots [ 10 0 R ] /Contents 30 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+12 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 216.2829 172.4236 0 ] /Rect [ 68.69291 514.9843 89.80291 526.9843 ] /Subtype /Link /Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/Annots [ 12 0 R ] /Contents 31 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 25 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+14 0 obj
+<<
+/Outlines 16 0 R /PageLabels 32 0 R /PageMode /UseNone /Pages 25 0 R /Type /Catalog
+>>
+endobj
+15 0 obj
+<<
+/Author (Jani Averbach) /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title (MS RFC 3: Feature Layer Plug-in Architecture) /Trapped /False
+>>
+endobj
+16 0 obj
+<<
+/Count 8 /First 17 0 R /Last 24 0 R /Type /Outlines
+>>
+endobj
+17 0 obj
+<<
+/Dest [ 5 0 R /XYZ 62.69291 614.0236 0 ] /Next 18 0 R /Parent 16 0 R /Title (Abstract Solution)
+>>
+endobj
+18 0 obj
+<<
+/Dest [ 5 0 R /XYZ 62.69291 527.0236 0 ] /Next 19 0 R /Parent 16 0 R /Prev 17 0 R /Title (Technical Solution)
+>>
+endobj
+19 0 obj
+<<
+/Dest [ 11 0 R /XYZ 62.69291 765.0236 0 ] /Next 20 0 R /Parent 16 0 R /Prev 18 0 R /Title (Files and objects affected)
+>>
+endobj
+20 0 obj
+<<
+/Dest [ 11 0 R /XYZ 62.69291 456.0236 0 ] /Next 21 0 R /Parent 16 0 R /Prev 19 0 R /Title (Backwards compatibility issues)
+>>
+endobj
+21 0 obj
+<<
+/Dest [ 11 0 R /XYZ 62.69291 345.0236 0 ] /Next 22 0 R /Parent 16 0 R /Prev 20 0 R /Title (Implementation Issues)
+>>
+endobj
+22 0 obj
+<<
+/Dest [ 11 0 R /XYZ 62.69291 222.0236 0 ] /Next 23 0 R /Parent 16 0 R /Prev 21 0 R /Title (Bug ID)
+>>
+endobj
+23 0 obj
+<<
+/Dest [ 11 0 R /XYZ 62.69291 171.0236 0 ] /Next 24 0 R /Parent 16 0 R /Prev 22 0 R /Title (Voting history)
+>>
+endobj
+24 0 obj
+<<
+/Dest [ 13 0 R /XYZ 62.69291 765.0236 0 ] /Parent 16 0 R /Prev 23 0 R /Title (Open questions)
+>>
+endobj
+25 0 obj
+<<
+/Count 6 /Kids [ 5 0 R 6 0 R 7 0 R 9 0 R 11 0 R 13 0 R ] /Type /Pages
+>>
+endobj
+26 0 obj
+<<
+/Length 5805
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 18.23488 0 Td (MS RFC 3: Feature Layer Plug-in Architecture) Tj T* -18.23488 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 716.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 48.03937 0 Td (Date:) Tj T* -48.03937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2005/08/22) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 701.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 36.93937 0 Td (Author:) Tj T* -36.93937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Jani Averbach) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 686.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 32.48937 0 Td (Contact:) Tj T* -32.48937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (javerbach at extendthereach.com) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 671.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 15.80937 0 Td (Last Edited:) Tj T* -15.80937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2008-12-23) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 656.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 39.14937 0 Td (Status:) Tj T* -39.14937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Adopted) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 641.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 33.02937 0 Td (Version:) Tj T* -33.02937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (MapServer 4.8) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 626.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 60.81937 0 Td (Id:) Tj T* -60.81937 0 Td ET
+Q
+Q
+q
+1 0 0 1 91.03937 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (ms-rfc-3.txt 8278 2008-12-23 21:34:31Z hobu) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 593.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Abstract Solution) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 539.0236 cm
+q
+BT 1 0 0 1 0 38 Tm .560651 Tw 12 TL /F1 10 Tf 0 0 0 rg (Implement a virtual table structure for ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (. This structure will contain function pointers for all layer) Tj T* 0 Tw .36311 Tw (specific operations. This structure will be populated when the layer is opened or first time accessed. After) Tj T* 0 Tw 1.09186 Tw (that all back-end format specific layer operations will happen through this vtable which is cached in the) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( struct.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 506.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Technical Solution) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 488.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (All file names and numbers are against released MapServer 4.6.0 source code.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 482.0236 cm
+Q
+q
+1 0 0 1 62.69291 482.0236 cm
+Q
+q
+1 0 0 1 62.69291 458.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm .143876 Tw 12 TL /F1 10 Tf 0 0 0 rg (Add new field to the ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (. It will be pointer to the vtable, which will contain function pointers for) Tj T* 0 Tw (this layer.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 452.0236 cm
+Q
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 360.1575 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 360.1575 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Add the virtual table architecture) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 318.1575 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .279987 Tw (The vtable will be initialized when the layer is accessed at the first time. The vtable will be populated) Tj T* 0 Tw .10811 Tw (with dummies when it is created and these dummies will implement feasible default actions if there is) Tj T* 0 Tw (any \(e.g. do nothing\) or return error by default.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 300.1575 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.1. Standard functions which are found currently from ) Tj /F3 10 Tf 0 0 0 rg (maplayer.c) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 294.1575 cm
+Q
+q
+1 0 0 1 23 177.7575 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 104.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.1. InitItemInfo) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 98.4 cm
+Q
+q
+1 0 0 1 20 73.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerInitItemInfo\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 73.2 cm
+Q
+q
+1 0 0 1 20 55.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.2. FreeItemInfo) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 49.2 cm
+Q
+q
+1 0 0 1 20 24 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (void \(*LayerFreeItemInfo\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.3. Open) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+27 0 obj
+<<
+/Length 6186
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 675.1575 Tm  T* ET
+q
+1 0 0 1 23 49.15748 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 453.6 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 157.2 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 390.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerOpen\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 119.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .480697 Tw (Currently there are two layers which accept more than the generic layer arg for LayerOpen) Tj T* 0 Tw (function:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 38 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 72 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F3 10 Tf 12 TL (int msOGRLayerOpen\(layerObj *layer,) Tj T* (                   const char *pszOverrideConnection\);) Tj T* (int msWFSLayerOpen\(layerObj *lp,) Tj T* (                   const char *pszGMLFilename,) Tj T* (                   rectObj *defaultBBOX\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 14 Tm 1.588443 Tw 12 TL /F1 10 Tf 0 0 0 rg (However, these are called from ) Tj /F3 10 Tf 0 0 0 rg (msLayerOpen) Tj /F1 10 Tf 0 0 0 rg ( with ) Tj /F3 10 Tf 0 0 0 rg (NULL) Tj /F1 10 Tf 0 0 0 rg ( args, so I think that proposed) Tj T* 0 Tw (interface for this virtual table function should be fine.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 453.6 cm
+Q
+q
+1 0 0 1 20 435.6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.4. IsOpen) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 429.6 cm
+Q
+q
+1 0 0 1 20 404.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerIsOpen\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 404.4 cm
+Q
+q
+1 0 0 1 20 386.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.5. WhichShapes) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 380.4 cm
+Q
+q
+1 0 0 1 20 343.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (int \(*LayerWhichShapes\)\(layerObj *layer,) Tj T* (                        rectObj rect\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 343.2 cm
+Q
+q
+1 0 0 1 20 325.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.6. NextShape) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 319.2 cm
+Q
+q
+1 0 0 1 20 294 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerNextShape\)\(layerObj *layer, shapeObj *shape\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 294 cm
+Q
+q
+1 0 0 1 20 276 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.7. GetShape) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 270 cm
+Q
+q
+1 0 0 1 20 232.8 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (int \(*LayerGetShape\)\(layerObj *layer, shapeObj *shape,) Tj T* (                     int tile, long record\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 232.8 cm
+Q
+q
+1 0 0 1 20 214.8 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.8. LayerClose) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 208.8 cm
+Q
+q
+1 0 0 1 20 183.6 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerClose\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 183.6 cm
+Q
+q
+1 0 0 1 20 165.6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.9. LayerGetItems) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 159.6 cm
+Q
+q
+1 0 0 1 20 134.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerGetItems\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 134.4 cm
+Q
+q
+1 0 0 1 20 116.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.10. GetExtent) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 110.4 cm
+Q
+q
+1 0 0 1 20 73.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (int \(*LayerGetExtent\)\(layerObj *layer,) Tj T* (                      rectObj *extent\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 73.2 cm
+Q
+q
+1 0 0 1 20 55.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.1.11. GetAutoStyle) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 49.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL (int \(*LayerGetAutoStyle\)\(mapObj *map, layerObj *layer,) Tj T* (                         classObj *c, int tile,) Tj T* (                         long record\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 49.15748 cm
+Q
+q
+1 0 0 1 23 31.15748 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.2. New functions and/or fields for vtable) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 25.15748 cm
+Q
+q
+1 0 0 1 23 7.15748 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.2.1. CloseConnection) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+28 0 obj
+<<
+/Length 6213
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 675.1575 Tm  T* ET
+q
+1 0 0 1 23 81.15748 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 302.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 253.6 cm
+q
+BT 1 0 0 1 0 38 Tm .837126 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to actually close the connection, in case that layer implements some) Tj T* 0 Tw 2.04784 Tw (kind of connection pooling by its own. If layer doesn't use any connection pooling, this) Tj T* 0 Tw -0.090787 Tw (function should be implemented as no-op. Caller should first call layer's "close" function, and) Tj T* 0 Tw (finally at the very end ) Tj /F3 10 Tf 0 0 0 rg (CloseConnection) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 235.6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The signature of function is) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 202.4 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*LayerCloseConnection\)\(layerObj *layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 176.4 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (And the main place where this function will be called, is ) Tj /F3 10 Tf 0 0 0 rg (mapfile.c:) Tj ( ) Tj (4822) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 143.2 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (void msCloseConnections\(mapObj *map\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 105.2 cm
+q
+BT 1 0 0 1 0 14 Tm 1.30229 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is needed because e.g. ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( is implementing this usage pattern at the) Tj T* 0 Tw (moment ) Tj /F3 10 Tf 0 0 0 rg (maplayer.c:599) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 396.6898 96 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F3 10 Tf 12 TL ( void msLayerClose\(layerObj *layer\)) Tj T* ( ...) Tj T* (/*) Tj T* ( * Due to connection sharing, we need to close the results) Tj T* ( * and free the cursor, but not close the connection.) Tj T* ( */) Tj T* ( msPOSTGISLayerResultClose\(layer\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 302.4 cm
+Q
+q
+1 0 0 1 20 284.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.2.2. SetTimeFilter) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 278.4 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 254.4 cm
+q
+BT 1 0 0 1 0 14 Tm .787633 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to create a time filter for layer. At the moment we have three special) Tj T* 0 Tw (cases \() Tj /F3 10 Tf 0 0 0 rg (maplayer.c:) Tj ( ) Tj (1635) Tj /F1 10 Tf 0 0 0 rg (\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 248.4 cm
+Q
+q
+1 0 0 1 20 248.4 cm
+Q
+q
+1 0 0 1 20 236.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( with it's own function) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 230.4 cm
+Q
+q
+1 0 0 1 20 218.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Layers with backticks delimited expressions) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 212.4 cm
+Q
+q
+1 0 0 1 20 200.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Layers without backticks) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 200.4 cm
+Q
+q
+1 0 0 1 20 182.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The idea is provide a generic helper function,) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 113.2 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F3 10 Tf 12 TL (int makeTimeFilter\(layerObj *lp,) Tj T* (                   const char *timestring,) Tj T* (                   const char *timefield,) Tj T* (                   const bool bBackTicks\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 75.2 cm
+q
+BT 1 0 0 1 0 14 Tm 2.389069 Tw 12 TL /F1 10 Tf 0 0 0 rg (And the actual layer's ) Tj /F3 10 Tf 0 0 0 rg (SetTimeFilter) Tj /F1 10 Tf 0 0 0 rg ( could use the above, or implement something) Tj T* 0 Tw (totally different as ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( is doing at the moment.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 57.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The signature for layer's vtable function is) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL (int \(*LayerSetTimeFilter\)\(layerObj *lp,) Tj T* (                          const char *timestring,) Tj T* (                          const char *timefield\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 81.15748 cm
+Q
+q
+1 0 0 1 23 63.15748 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.3. Extra functions to add to the vtable) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 57.15748 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 48.15748 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.1. FLTApplyFilterToLayer \() Tj /F3 10 Tf 0 0 0 rg (mapogcfilter.c:) Tj ( ) Tj (1084) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 42.15748 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 14 Tm -0.05689 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is the main filter interface for layers. We will provide two helper functions, one for "SQL") Tj T* 0 Tw 5.126647 Tw (case and the another for "non-SQL" case, and set all layers, except ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg (,) Tj T* 0 Tw ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+29 0 obj
+<<
+/Length 6830
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 197.4236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 554.6 Tm  T* ET
+q
+1 0 0 1 23 325.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 173.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 42 cm
+q
+BT 1 0 0 1 0 14 Tm 2.018314 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (OGR) Tj /F1 10 Tf 0 0 0 rg ( to call directly this "non-SQL" version of this helper function) Tj T* 0 Tw (\(else-branch of if\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 26 Tm .13748 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (OGR) Tj /F1 10 Tf 0 0 0 rg ( could use "SQL" version of the helper function \(actual) Tj T* 0 Tw .671318 Tw (if-branch\) if the conditions for this are met, otherwise they will use Non-SQL version of the) Tj T* 0 Tw (function.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 173.2 cm
+Q
+q
+1 0 0 1 20 155.2 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.2. layerObj-) Tj (>) Tj (items allocation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 149.2 cm
+Q
+q
+1 0 0 1 20 48 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 77.2 cm
+q
+BT 1 0 0 1 0 14 Tm 1.229213 Tw 12 TL /F1 10 Tf 0 0 0 rg (There will be vtable function for allocation ) Tj /F3 10 Tf 0 0 0 rg (items) Tj /F1 10 Tf 0 0 0 rg ( and initialization for ) Tj /F3 10 Tf 0 0 0 rg (numitems) Tj /F1 10 Tf 0 0 0 rg (. If layer) Tj T* 0 Tw (has some special needs for these objects it can override default function.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 59.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The signature for function will be:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 26 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 402.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int \(*CreateItems\)\(layerObj *\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (which does the allocation and set numitems to correct value.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 48 cm
+Q
+q
+1 0 0 1 20 30 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.3. msCheckConnection \() Tj /F3 10 Tf 0 0 0 rg (mapfile.c:) Tj ( ) Tj (4779) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 14 Tm .41284 Tw 12 TL /F1 10 Tf 0 0 0 rg (This API is deprecated. It is called only from ) Tj /F3 10 Tf 0 0 0 rg (msMYGISLayerOpen) Tj /F1 10 Tf 0 0 0 rg (. We will not provide this) Tj T* 0 Tw (functionality through vtable.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 325.4 cm
+Q
+q
+1 0 0 1 23 307.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.4. Interface functions for internal layers) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 301.4 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 292.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (We have to add some new interface functions to access layers.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 274.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.4.1 Function interface to initialize internal layer type) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 268.4 cm
+Q
+q
+1 0 0 1 20 173.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 71.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .729431 Tw (We need a per layer type a function which will be called when the layer's vtable has to be) Tj T* 0 Tw (initialized. These functions will be) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 38 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 405.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (int msXXXInitializeLayerVirtualTable\(layerObj *\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .891235 Tw (where XXX will be name of the layer. This function is called anytime when the vtable isn't) Tj T* 0 Tw (initialized and the layer is accessed at the first time.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 173.2 cm
+Q
+q
+1 0 0 1 20 155.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (2.4.2 Function interface to change the connectiontype of layer) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 149.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 125.2 cm
+q
+BT 1 0 0 1 0 14 Tm .777984 Tw 12 TL /F1 10 Tf 0 0 0 rg (To change the connection type of layer, it has to be done by function interface. Accessing) Tj T* 0 Tw (directly ) Tj /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( field is not supported anymore.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 95.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.184269 Tw (To change the connectiontype and to connect to the new layer, there will be following) Tj T* 0 Tw (interface function) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 50 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 405.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (int msConnectLayer\(int connectiontype,) Tj T* (                   const char *library_str\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 26 Tm .087126 Tw 12 TL /F1 10 Tf 0 0 0 rg (where ) Tj /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( is the type of new layer, and ) Tj /F3 10 Tf 0 0 0 rg (library_str) Tj /F1 10 Tf 0 0 0 rg ( is the name of library) Tj T* 0 Tw 2.656905 Tw (which will prodive functionality for this new layer. For internal layer types this second) Tj T* 0 Tw (argument is ignored.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 191.4236 cm
+Q
+q
+1 0 0 1 62.69291 119.4236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 57 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 57 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Remove unwanted interfaces) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 39 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Frank Warmerdam proposed ) Tj /F1 8 Tf 0 0 .501961 rg 5 Ts (FW1) Tj /F1 10 Tf 0 0 0 rg 0 Ts ( that we remove all layer specific interface functions from ) Tj /F3 10 Tf 0 0 0 rg (map.h) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 33 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 3.346905 Tw (I see each "built-in" module such as mapsde.c providing a registration function such as) Tj T* 0 Tw 1.782706 Tw ("msSDEInitializeLayerVirtualTable" so that none of the layer type specific definitions need to) Tj T* 0 Tw (appear in map.h any more.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 119.4236 cm
+Q
+ 
+endstream
+endobj
+30 0 obj
+<<
+/Length 8416
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 744.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Files and objects affected) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 726.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This proposal will affect at least following files and objects:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 720.0236 cm
+Q
+q
+1 0 0 1 62.69291 720.0236 cm
+Q
+q
+1 0 0 1 62.69291 690.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 15 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 15 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (map.h) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 9 cm
+Q
+q
+1 0 0 1 23 9 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( will contain new fields. There will be a new object ) Tj /F3 10 Tf 0 0 0 rg (vtableObj) Tj /F1 10 Tf 0 0 0 rg ( in the ) Tj /F3 10 Tf 0 0 0 rg (map.h) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 684.0236 cm
+Q
+q
+1 0 0 1 62.69291 642.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 27 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 27 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (maplayer.c) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 21 cm
+Q
+q
+1 0 0 1 23 21 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 1.511797 Tw 12 TL /F1 10 Tf 0 0 0 rg (Various changes, layer specific ) Tj /F3 10 Tf 0 0 0 rg (switch) Tj /F1 10 Tf 0 0 0 rg (-statements will go away, vtable handling and layers) Tj T* 0 Tw (vtable initialization will be added.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 636.0236 cm
+Q
+q
+1 0 0 1 62.69291 588.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 33 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 33 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (mapfile.c) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 27 cm
+Q
+q
+1 0 0 1 23 27 cm
+Q
+q
+1 0 0 1 23 15 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Cleaning of ) Tj /F3 10 Tf 0 0 0 rg (msCheckConnection) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 9 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Vtable for ) Tj /F3 10 Tf 0 0 0 rg (msCloseConnection) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 582.0236 cm
+Q
+q
+1 0 0 1 62.69291 552.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 15 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 15 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (mapogcfilter.c) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 9 cm
+Q
+q
+1 0 0 1 23 9 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Remove layer-logic from ) Tj /F3 10 Tf 0 0 0 rg (FLTApplyFilterToLayer) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 546.0236 cm
+Q
+q
+1 0 0 1 62.69291 468.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 63 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 63 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (mapXXX.c) Tj /F1 10 Tf 0 0 0 rg (, where ) Tj /F3 10 Tf 0 0 0 rg (XXX) Tj /F1 10 Tf 0 0 0 rg ( is the name of layer.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 57 cm
+Q
+q
+1 0 0 1 23 57 cm
+Q
+q
+1 0 0 1 23 45 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Add new initialization function) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 39 cm
+Q
+q
+1 0 0 1 23 27 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Add all new interface functions) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 21 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 4.876342 Tw 12 TL /F1 10 Tf 0 0 0 rg (Fix existing interface functions, if needed / add wrappers for ) Tj /F3 10 Tf 0 0 0 rg (msOGRLayerOpen) Tj /F1 10 Tf 0 0 0 rg ( and) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (msWFSLayerOpen) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 468.0236 cm
+Q
+q
+1 0 0 1 62.69291 435.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Backwards compatibility issues) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 405.0236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.924983 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is binary and source code level backward incompatible change. The proposal will remove some) Tj T* 0 Tw (previously public functions, and add new field\(s\) to the ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( struct.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 375.0236 cm
+q
+BT 1 0 0 1 0 14 Tm 4.126905 Tw 12 TL /F1 10 Tf 0 0 0 rg (This proposal is not MapScript backward compatible, it will break scripts which change directly) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( field in ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 357.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The proposal is MAP-file backward compatible.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 324.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Implementation Issues) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 312.0236 cm
+Q
+q
+1 0 0 1 62.69291 312.0236 cm
+Q
+q
+1 0 0 1 62.69291 264.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 33 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .299318 Tw (Biggest problem is probably that the author has ignored or missed something by oversight which will) Tj T* 0 Tw 1.624147 Tw (show up during implementation. However, there is a prototype implementation of external plug-in) Tj T* 0 Tw .001163 Tw (architecture which works at the moment and is based on ideas presented in this proposal. So there is) Tj T* 0 Tw (some real life experience that this architecture change is feasible thing to do.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 258.0236 cm
+Q
+q
+1 0 0 1 62.69291 234.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm .923516 Tw 12 TL /F1 10 Tf 0 0 0 rg (I also like to note that this proposal won't remove all layer specific code from MapServer e.g. ) Tj /F3 10 Tf 0 0 0 rg (WMF) Tj /F1 10 Tf 0 0 0 rg (,) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (WMS) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (GRATICULE) Tj /F1 10 Tf 0 0 0 rg ( are used as special cases from place to place.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 234.0236 cm
+Q
+q
+1 0 0 1 62.69291 201.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Bug ID) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 183.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Bug ) Tj 0 0 .501961 rg (1477) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 150.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Voting history) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 132.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Vote proposed by Jani Averbach on 9/19/2005, result was +4 \(3 non-voting members\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 114.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Voting +1: Howard Butler, Frank Warmerdam, Yewondwossen Assefa, Daniel Morissette) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 96.02362 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Proposal passes and will move forward.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+31 0 obj
+<<
+/Length 3356
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 744.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Open questions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 732.0236 cm
+Q
+q
+1 0 0 1 62.69291 732.0236 cm
+Q
+q
+1 0 0 1 62.69291 630.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 87 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 75 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .632093 Tw (How do we like to expose layer's virtual table to the layers. We have at least two different routes to) Tj T* 0 Tw (go:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 69 cm
+Q
+q
+1 0 0 1 23 69 cm
+Q
+q
+1 0 0 1 23 57 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (expose it as a struct, layers will fill vtable pointers by accessing directly struct's field.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 51 cm
+Q
+q
+1 0 0 1 23 27 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 2.883555 Tw 12 TL /F1 10 Tf 0 0 0 rg (expose it as a complete opaque type, vtable pointers will be set by accessing functions) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (setLayerOpenFP) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (setLayerCloseFP) Tj /F1 10 Tf 0 0 0 rg ( and so on.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 27 cm
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .643672 Tw (The advance of second option is that this way we could easily add new functions to the struct if we) Tj T* 0 Tw (refactor code more or found some logic which is ignored by oversight in this proposal.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 624.0236 cm
+Q
+q
+1 0 0 1 62.69291 612.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Are there any special issues with the raster query layer support which is handled via the layer API?) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 612.0236 cm
+Q
+q
+1 0 0 1 62.69291 555.3307 cm
+Q
+q
+1 0 0 1 62.69291 526.9843 cm
+n 0 14.17323 m 469.8898 14.17323 l S
+Q
+q
+1 0 0 1 62.69291 472.9843 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 42 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (FW1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 48 cm
+Q
+q
+1 0 0 1 91.03937 36 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (Frank) Tj ( ) Tj (Warmerdam) Tj ( ) Tj (on) Tj ( ) Tj (the) Tj ( ) Tj (mapserver-dev:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 24 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (Message-Id:) Tj ( ) Tj (<) Tj (smtpd.490f.4303f2ee.d8246.1@mtaout-c.tc.umn.edu) Tj (>) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 12 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (Date:) Tj ( ) Tj ( ) Tj ( ) Tj ( ) Tj ( ) Tj ( ) Tj ( ) Tj (Wed,) Tj ( ) Tj (17) Tj ( ) Tj (Aug) Tj ( ) Tj (2005) Tj ( ) Tj (22:31:09) Tj ( ) Tj (-0400) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 0 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (Subject:) Tj ( ) Tj ( ) Tj ( ) Tj ( ) Tj (Re:) Tj ( ) Tj (Mapserver) Tj ( ) Tj (Plug-in) Tj ( ) Tj (Infastructure:) Tj ( ) Tj (RFC) Tj ( ) Tj (and) Tj ( ) Tj (PATCH) Tj T* ET
+Q
+Q
+q
+1 0 0 1 91.03937 0 cm
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+32 0 obj
+<<
+/Nums [ 0 33 0 R 1 34 0 R 2 35 0 R 3 36 0 R 4 37 0 R 
+  5 38 0 R ]
+>>
+endobj
+33 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+34 0 obj
+<<
+/S /D /St 2
+>>
+endobj
+35 0 obj
+<<
+/S /D /St 3
+>>
+endobj
+36 0 obj
+<<
+/S /D /St 4
+>>
+endobj
+37 0 obj
+<<
+/S /D /St 5
+>>
+endobj
+38 0 obj
+<<
+/S /D /St 6
+>>
+endobj
+xref
+0 39
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000448 00000 n 
+0000000653 00000 n 
+0000000858 00000 n 
+0000001063 00000 n 
+0000001231 00000 n 
+0000001454 00000 n 
+0000001650 00000 n 
+0000001875 00000 n 
+0000002043 00000 n 
+0000002268 00000 n 
+0000002374 00000 n 
+0000002689 00000 n 
+0000002763 00000 n 
+0000002881 00000 n 
+0000003013 00000 n 
+0000003154 00000 n 
+0000003299 00000 n 
+0000003435 00000 n 
+0000003556 00000 n 
+0000003685 00000 n 
+0000003801 00000 n 
+0000003893 00000 n 
+0000009750 00000 n 
+0000015988 00000 n 
+0000022253 00000 n 
+0000029135 00000 n 
+0000037603 00000 n 
+0000041011 00000 n 
+0000041100 00000 n 
+0000041134 00000 n 
+0000041168 00000 n 
+0000041202 00000 n 
+0000041236 00000 n 
+0000041270 00000 n 
+trailer
+<<
+/ID 
+[<74370dd06241f5f3cd33861683d1d5c9><74370dd06241f5f3cd33861683d1d5c9>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 15 0 R
+/Root 14 0 R
+/Size 39
+>>
+startxref
+41304
+%%EOF
