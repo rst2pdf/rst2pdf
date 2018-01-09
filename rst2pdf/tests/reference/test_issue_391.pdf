@@ -1,0 +1,324 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 7 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 19 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+5 0 obj
+<<
+/Contents 20 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 21 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+8 0 obj
+<<
+/Contents 22 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/Contents 23 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 18 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Outlines 12 0 R /PageLabels 24 0 R /PageMode /UseNone /Pages 18 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 7 /First 13 0 R /Last 17 0 R /Type /Outlines
+>>
+endobj
+13 0 obj
+<<
+/Count 3 /Dest [ 4 0 R /XYZ 62.69291 753.0236 0 ] /First 14 0 R /Last 15 0 R /Next 17 0 R /Parent 12 0 R 
+  /Title (A section)
+>>
+endobj
+14 0 obj
+<<
+/Dest [ 5 0 R /XYZ 62.69291 753.0236 0 ] /Next 15 0 R /Parent 13 0 R /Title (A subsection)
+>>
+endobj
+15 0 obj
+<<
+/Count 1 /Dest [ 6 0 R /XYZ 62.69291 753.0236 0 ] /First 16 0 R /Last 16 0 R /Parent 13 0 R /Prev 14 0 R 
+  /Title (A subsection)
+>>
+endobj
+16 0 obj
+<<
+/Dest [ 8 0 R /XYZ 62.69291 753.0236 0 ] /Parent 15 0 R /Title (A subsubsection)
+>>
+endobj
+17 0 obj
+<<
+/Dest [ 9 0 R /XYZ 62.69291 753.0236 0 ] /Parent 12 0 R /Prev 13 0 R /Title (A section)
+>>
+endobj
+18 0 obj
+<<
+/Count 5 /Kids [ 4 0 R 5 0 R 6 0 R 8 0 R 9 0 R ] /Type /Pages
+>>
+endobj
+19 0 obj
+<<
+/Length 477
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 732.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (A section) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 714.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (If there is a page with "a subsubsection" in the header, issue 391 is open.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 714.0236 cm
+Q
+q
+1 0 0 1 56.69291 773.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 220.3799 0 Td (A section) Tj T* -220.3799 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+20 0 obj
+<<
+/Length 312
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 735.0236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (A subsection) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 729.0236 cm
+Q
+q
+1 0 0 1 56.69291 773.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 212.3199 0 Td (A subsection) Tj T* -212.3199 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+21 0 obj
+<<
+/Length 312
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 735.0236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (A subsection) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 729.0236 cm
+Q
+q
+1 0 0 1 56.69291 773.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 212.3199 0 Td (A subsection) Tj T* -212.3199 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+22 0 obj
+<<
+/Length 319
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 738.0236 cm
+q
+BT 1 0 0 1 0 2.5 Tm 15 TL /F3 12.5 Tf 0 0 0 rg (A subsubsection) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 732.0236 cm
+Q
+q
+1 0 0 1 56.69291 773.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 212.3199 0 Td (A subsection) Tj T* -212.3199 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+23 0 obj
+<<
+/Length 277
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 732.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (A section) Tj T* ET
+Q
+Q
+q
+1 0 0 1 56.69291 773.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 220.3799 0 Td (A section) Tj T* -220.3799 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+24 0 obj
+<<
+/Nums [ 0 25 0 R 1 26 0 R 2 27 0 R 3 28 0 R 4 29 0 R ]
+>>
+endobj
+25 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+26 0 obj
+<<
+/S /D /St 2
+>>
+endobj
+27 0 obj
+<<
+/S /D /St 3
+>>
+endobj
+28 0 obj
+<<
+/S /D /St 4
+>>
+endobj
+29 0 obj
+<<
+/S /D /St 5
+>>
+endobj
+xref
+0 30
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000548 00000 n 
+0000000753 00000 n 
+0000000958 00000 n 
+0000001077 00000 n 
+0000001282 00000 n 
+0000001487 00000 n 
+0000001593 00000 n 
+0000001851 00000 n 
+0000001925 00000 n 
+0000002074 00000 n 
+0000002187 00000 n 
+0000002339 00000 n 
+0000002442 00000 n 
+0000002552 00000 n 
+0000002636 00000 n 
+0000003164 00000 n 
+0000003527 00000 n 
+0000003890 00000 n 
+0000004260 00000 n 
+0000004588 00000 n 
+0000004665 00000 n 
+0000004699 00000 n 
+0000004733 00000 n 
+0000004767 00000 n 
+0000004801 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 30
+>>
+startxref
+4835
+%%EOF
