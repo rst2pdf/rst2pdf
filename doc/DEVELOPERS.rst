@@ -88,10 +88,12 @@ Or at least, we hope so, this is a work in progress ;-)
 Running tests
 -------------
 
-first run
+The rst2pdf test suite generates PDFs, then calculates a checksum (an md5) of the resulting file and checks it against known lists of good and bad md5s. These known outcomes are in `rst2pdf/tests/md5/[test_name].json` (warning, not actually a json file).
+
+First run
 ~~~~~~~~~
 
-while in project::
+To run the tests for the first time, you will need to do some setup (after this, you can just work on your given virtualenv each time).
 
   virtualenv --no-site-packages --python=/usr/local/bin/python2 env
   . env/bin/activate
@@ -101,7 +103,7 @@ while in project::
   pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
   nosetests -x -i regulartest -i sphinxtest
 
-next runs
+Next runs
 ~~~~~~~~~
 
 while in project::
@@ -120,7 +122,30 @@ You can also run the tests using autorun directly::
 
 Now look at the output of log.txt
 
+Running a single test
+~~~~~~~~~~~~~~~~~~~~~
 
+To run one test only, try this::
+
+  cd rst2pdf/tests
+  ./autotest.py input/[test].txt
+
+This will run one test and show the output.
+
+Skipping tests
+~~~~~~~~~~~~~~
+
+To skip a test, simply create a text file in the `tests/input` directory called `[test].ignore` containing a note on why the test is skipped. This will mark the test as skipped when the test suite runs. This could be useful for inherited tests that we aren't confident of the correct output for, but where we don't want to delete/lose the test entirely.
+
+Marking a failing test as good
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes the local combination of software versions will create the "right" PDF but the binary file will have some minor differences. If your file looks good, then you can store the checksum of it as a valid outcome with a command like this:
+
+  cd rst2pdf/tests
+  ./autotest.py -u good input/[test].txt
+
+You'll see from `git diff` that you now have a new entry in the related `md5/[test].json` file. Commit this to a new branch and open a pull request explaining what you did.
 
 Getting commit rights
 ---------------------
