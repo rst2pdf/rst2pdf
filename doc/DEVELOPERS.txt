@@ -135,7 +135,7 @@ This will run one test and show the output.
 Skipping tests
 ~~~~~~~~~~~~~~
 
-To skip a test, simply create an empty file in the `tests/input` directory called `[test].ignore`.  This will mark the test as skipped when the test suite runs.  This could be useful for inherited tests that we aren't confident of the correct output for, but where we don't want to delete/lose the test entirely.
+To skip a test, simply create a text file in the `tests/input` directory called `[test].ignore` containing a note on why the test is skipped.  This will mark the test as skipped when the test suite runs.  This could be useful for inherited tests that we aren't confident of the correct output for, but where we don't want to delete/lose the test entirely.
 
 Marking a failing test as good
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
