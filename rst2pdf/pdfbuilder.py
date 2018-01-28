@@ -51,6 +51,7 @@ from sphinx.locale import admonitionlabels, versionlabels
 if sphinx.__version__ >= '1.':
     from sphinx.locale import _
 
+import rst2pdf
 from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
@@ -909,3 +910,9 @@ def setup(app):
                                      project_doc_texescaped,
                                      author_texescaped,
                                      'manual'))
+
+    return {
+        'version', rst2pdf.version,
+        'parallel_read_safe': True,
+        'parallel_write_safe': False,
+    }
