@@ -1,0 +1,386 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+4 0 obj
+<<
+/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+5 0 obj
+<<
+/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+>>
+endobj
+6 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+7 0 obj
+<<
+/Count 2 /Kids [ 3 0 R 4 0 R ] /Type /Pages
+>>
+endobj
+8 0 obj
+<<
+/Length 2634
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This file tests the preprocesor extension \("-e preprocess"\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 735.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is one paragraph.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 717.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is the next paragraph. Now, we will test that we can add a bit of space using the new syntax:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 677.0236 cm
+Q
+q
+1 0 0 1 62.69291 659.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Now, we're going to test that we can use the syntax to include both restructured text and stylesheets:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 634.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 -5.9 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+1 1 1 rg
+n 0 18 116.9724 -18 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (50% width) Tj T* ET
+Q
+Q
+q
+1 0 0 1 64.48622 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (50% width) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 58.48622 0 m 58.48622 18 l S
+n 0 18 m 116.9724 18 l S
+n 0 0 m 116.9724 0 l S
+n 0 0 m 0 18 l S
+n 116.9724 0 m 116.9724 18 l S
+Q
+Q
+Q
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 544.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F1 10 Tf 12 TL 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw 1.62061 Tw (This is a paragraph that should be half-page wide.) Tj T* 0 Tw (This is a paragraph that should be half-page wide.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 478.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 .1 .1 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL .802488 Tw (This is a paragraph that should be 3/4ths of a page wide. This is a paragraph) Tj T* 0 Tw .319155 Tw (that should be 3/4ths of a page wide. This is a paragraph that should be 3/4ths) Tj T* 0 Tw .508583 Tw (of a page wide. This is a paragraph that should be 3/4ths of a page wide. This) Tj T* 0 Tw .949822 Tw (is a paragraph that should be 3/4ths of a page wide. This is a paragraph that) Tj T* 0 Tw (should be 3/4ths of a page wide.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 460.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Now we're going to try to do a pagebreak:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 460.2236 cm
+Q
+ 
+endstream
+endobj
+9 0 obj
+<<
+/Length 2292
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Now, we're going to test the single word styling:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 724.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.8 Tm /F1 24 Tf 28.8 TL (SingleWord) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 706.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (this is a paragraph) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 677.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4.8 Tm /F1 24 Tf 28.8 TL (AnotherSingleWord) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 659.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Another paragraph) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 641.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Finally, we're going to try setting table widths to 20%, 80%, and then the other way around:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 635.4236 cm
+Q
+q
+1 0 0 1 62.69291 599.4236 cm
+1 1 1 rg
+n 0 36 469.8898 -18 re f*
+.878431 .878431 .878431 rg
+n 0 18 469.8898 -18 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Hi) Tj T* ET
+Q
+Q
+q
+1 0 0 1 99.97795 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (there) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (How) Tj T* ET
+Q
+Q
+q
+1 0 0 1 99.97795 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (are you?) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 0 18 m 469.8898 18 l S
+n 93.97795 0 m 93.97795 36 l S
+n 0 36 m 469.8898 36 l S
+n 0 0 m 469.8898 0 l S
+n 0 0 m 0 36 l S
+n 469.8898 0 m 469.8898 36 l S
+Q
+Q
+q
+1 0 0 1 62.69291 599.4236 cm
+Q
+q
+1 0 0 1 62.69291 593.4236 cm
+Q
+q
+1 0 0 1 62.69291 557.4236 cm
+1 1 1 rg
+n 0 36 469.8898 -18 re f*
+.878431 .878431 .878431 rg
+n 0 18 469.8898 -18 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Hi) Tj T* ET
+Q
+Q
+q
+1 0 0 1 381.9118 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (there) Tj T* ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (How) Tj T* ET
+Q
+Q
+q
+1 0 0 1 381.9118 3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (are you?) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+0 0 0 RG
+.25 w
+n 0 18 m 469.8898 18 l S
+n 375.9118 0 m 375.9118 36 l S
+n 0 36 m 469.8898 36 l S
+n 0 0 m 469.8898 0 l S
+n 0 0 m 0 36 l S
+n 469.8898 0 m 469.8898 36 l S
+Q
+Q
+q
+1 0 0 1 62.69291 557.4236 cm
+Q
+ 
+endstream
+endobj
+10 0 obj
+<<
+/Count 0 /Type /Outlines
+>>
+endobj
+11 0 obj
+<<
+/Nums [ 0 12 0 R 1 13 0 R ]
+>>
+endobj
+12 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+13 0 obj
+<<
+/S /D /St 2
+>>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000073 00000 n 
+0000000104 00000 n 
+0000000211 00000 n 
+0000000414 00000 n 
+0000000617 00000 n 
+0000000721 00000 n 
+0000000978 00000 n 
+0000001043 00000 n 
+0000003728 00000 n 
+0000006071 00000 n 
+0000006118 00000 n 
+0000006168 00000 n 
+0000006202 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 6 0 R
+/Root 5 0 R
+/Size 14
+>>
+startxref
+6236
+%%EOF
