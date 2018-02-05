@@ -1,0 +1,3 @@
+SVGIMage is backend, but cannot load warning.svg:
+
+[ERROR] image.py:187 Couldn't load image [/Users/rob/Projects/python/rst2pdf/rst2pdf/tests/input/warning.svg]
