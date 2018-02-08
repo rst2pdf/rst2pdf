@@ -912,7 +912,7 @@ def setup(app):
                                      'manual'))
 
     return {
-        'version', rst2pdf.version,
+        'version': rst2pdf.version,
         'parallel_read_safe': True,
         'parallel_write_safe': False,
     }
