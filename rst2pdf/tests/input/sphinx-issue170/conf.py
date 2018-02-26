@@ -211,6 +211,7 @@ pdf_stylesheets = ['buggy']
 
 # A colon-separated list of folders to search for fonts. Example:
 # pdf_font_path=['/usr/share/fonts', '/usr/share/texmf-dist/fonts/']
+pdf_font_path=['../']
 
 # Language to be used for hyphenation support
 #pdf_language="en_US"
