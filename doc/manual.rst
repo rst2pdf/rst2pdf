@@ -1261,7 +1261,7 @@ Text Annotations
 
 Text annotations are meta notes added to a page.
 
-The syntax is this:
+The syntax is this::
 
     .. raw:: pdf
 
