@@ -22,30 +22,32 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
 
   + Create a **minimal** test case that shows the bug.
 
-  + Put it inside rst2pdf/tests/input like the others:
+  + Put it inside ``rst2pdf/tests/input`` like the others:
 
-    - mytest.txt is the test itself
+    - ``mytest.txt`` is the test itself
 
-    - mytest.cli is any needed command line arguments (if needed)
+    - ``mytest.cli`` is any needed command line arguments (if needed)
 
-    - mytest.style is a custom stylesheet (if needed)
+    - ``mytest.style`` is a custom stylesheet (if needed)
 
   + Run the test suite on it::
 
       cd rst2pdf/tests
       ./autotest.py input/mytest.txt
 
-  + Check the output:
+  + Check the output::
 
       less output/mytest.log
       acroread output/mytest.pdf
 
-  + If it's really a bug, mark the test as *bad* and save everything in SVN::
+  + If it's really a bug, mark the test as *bad* and save everything in git::
 
       setmd5 bad input/mytest.txt
-      svn add input/mytest.*
-      svn add md5/mytest.json
-      svn commit -m "Test case for Issue X"
+      git checkout -b issue-X
+      git add input/mytest.*
+      git add md5/mytest.json
+      git commit -m "Test case for Issue X"
+      git push -u origin issue-X # then open a Pull Request
 
 * Always, when committing something, check for regressions running the full test suite,
   it takes only a minute or two. Keep in mind that regressions can be trivial!
@@ -57,13 +59,13 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
   all means post it in the issue. There's no issue about it? You were meant to
   create one, remember? ;-)
 
-* If you added a command line option, document it in doc/rst2pdf.txt.
+* If you added a command line option, document it in ``doc/rst2pdf.txt``.
   That will make it appear in the manual and in the man page.
 
   Maybe it should also be available for sphinx users, let me know about it.
 
-* If you implemented a new feature, please document it in manual.txt
-  (or in a separate file and add an include in manual.txt)
+* If you implemented a new feature, please document it in ``manual.rst``
+  (or in a separate file and add an include in ``manual.rst``)
 
 * If you implement an extension, make the docstring valid restructured text
   and link it to the manual like the others.
@@ -75,38 +77,32 @@ It's important that you do it this way because it means that the rest of us know
 Continuous Integration
 ----------------------
 
-rst2pdf has a semi-public CI server running Hudson. What's CI? It's a server running
-the test suite all the time. That means that if a commit breaks something, we can
-find out about it.
-
-And yes, you are supposed to check for regressions yourself, but will you test
-against ReportLab 2.3? How about Python 2.4? Hudson allows us to have all those
-builds (and more) running every day, so we know it doesn't break for anyone else.
-
-Or at least, we hope so, this is a work in progress ;-)
+There's a Travis build - see https://github.com/rst2pdf/rst2pdf/issues/621 for more information on the current status
 
 Running tests
 -------------
 
-The rst2pdf test suite generates PDFs, then calculates a checksum (an md5) of the resulting file and checks it against known lists of good and bad md5s. These known outcomes are in `rst2pdf/tests/md5/[test_name].json` (warning, not actually a json file).
+The rst2pdf test suite generates PDFs, then calculates a checksum (an md5) of the resulting file and checks it against known lists of good and bad md5s. These known outcomes are in ``rst2pdf/tests/md5/[test_name].json`` (warning, not actually a json file).
 
 First run
 ~~~~~~~~~
 
 To run the tests for the first time, you will need to do some setup (after this, you can just work on your given virtualenv each time).
 
-  virtualenv --no-site-packages --python=/usr/local/bin/python2 env
-  . env/bin/activate
+::
 
-  pip install nose coverage
-  pip install -r requirements.txt
-  pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-  nosetests -x -i regulartest -i sphinxtest
+    virtualenv --python=/usr/local/bin/python2 env
+    . env/bin/activate
+
+    pip install nose coverage
+    pip install -r requirements.txt
+    pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    nosetests -x -i regulartest -i sphinxtest
 
 Next runs
 ~~~~~~~~~
 
-while in project::
+While in project::
 
   nosetests -x -i regulartest -i sphinxtest
 
@@ -120,7 +116,7 @@ You can also run the tests using autorun directly::
   ./parselogs.py > log.txt
 
 
-Now look at the output of log.txt
+Now look at the output of ``log.txt``
 
 Running a single test
 ~~~~~~~~~~~~~~~~~~~~~
@@ -135,17 +131,17 @@ This will run one test and show the output.
 Skipping tests
 ~~~~~~~~~~~~~~
 
-To skip a test, simply create a text file in the `tests/input` directory called `[test].ignore` containing a note on why the test is skipped. This will mark the test as skipped when the test suite runs. This could be useful for inherited tests that we aren't confident of the correct output for, but where we don't want to delete/lose the test entirely.
+To skip a test, simply create a text file in the ``tests/input`` directory called ``[test].ignore`` containing a note on why the test is skipped. This will mark the test as skipped when the test suite runs. This could be useful for inherited tests that we aren't confident of the correct output for, but where we don't want to delete/lose the test entirely.
 
 Marking a failing test as good
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes the local combination of software versions will create the "right" PDF but the binary file will have some minor differences. If your file looks good, then you can store the checksum of it as a valid outcome with a command like this:
+Sometimes the local combination of software versions will create the "right" PDF but the binary file will have some minor differences. If your file looks good, then you can store the checksum of it as a valid outcome with a command like this::
 
   cd rst2pdf/tests
   ./autotest.py -u good input/[test].txt
 
-You'll see from `git diff` that you now have a new entry in the related `md5/[test].json` file. Commit this to a new branch and open a pull request explaining what you did.
+You'll see from ``git diff`` that you now have a new entry in the related ``md5/[test].json`` file. Commit this to a new branch and open a pull request explaining what you did.
 
 Getting commit rights
 ---------------------
