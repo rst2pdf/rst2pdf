@@ -75,15 +75,7 @@ It's important that you do it this way because it means that the rest of us know
 Continuous Integration
 ----------------------
 
-rst2pdf has a semi-public CI server running Hudson. What's CI? It's a server running
-the test suite all the time. That means that if a commit breaks something, we can
-find out about it.
-
-And yes, you are supposed to check for regressions yourself, but will you test
-against ReportLab 2.3? How about Python 2.4? Hudson allows us to have all those
-builds (and more) running every day, so we know it doesn't break for anyone else.
-
-Or at least, we hope so, this is a work in progress ;-)
+There's a Travis build - see https://github.com/rst2pdf/rst2pdf/issues/621 for more information on the current status
 
 Running tests
 -------------
