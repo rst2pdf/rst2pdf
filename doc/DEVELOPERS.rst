@@ -40,12 +40,14 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
       less output/mytest.log
       acroread output/mytest.pdf
 
-  + If it's really a bug, mark the test as *bad* and save everything in SVN::
+  + If it's really a bug, mark the test as *bad* and save everything in git::
 
       setmd5 bad input/mytest.txt
-      svn add input/mytest.*
-      svn add md5/mytest.json
-      svn commit -m "Test case for Issue X"
+      git checkout -b issue-X
+      git add input/mytest.*
+      git add md5/mytest.json
+      git commit -m "Test case for Issue X"
+      git push -u origin issue-X # then open a Pull Request
 
 * Always, when committing something, check for regressions running the full test suite,
   it takes only a minute or two. Keep in mind that regressions can be trivial!
