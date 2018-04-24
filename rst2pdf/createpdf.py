@@ -636,8 +636,8 @@ class RstToPdf(object):
             pageTemplates=[FP],
             showBoundary=0,
             pagesize=self.styles.ps,
-            title=self.doc_title_clean,
-            author=self.doc_author,
+            title=doctree.settings.title,
+            author=doctree.settings.author,
             pageCompression=compressed)
         pdfdoc.client =self
 
