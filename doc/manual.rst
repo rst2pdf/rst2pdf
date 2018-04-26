@@ -58,7 +58,7 @@ Command line options
 ====================
 
 
-.. include:: rst2pdf.txt
+.. include:: rst2pdf.rst
    :start-line: 30
    :end-before: EXAMPLES
 
@@ -1842,7 +1842,7 @@ Dotted_TOC (``-e dotted_toc``)
 Developers
 ==========
 
-.. include:: DEVELOPERS.txt
+.. include:: DEVELOPERS.rst
    :start-line: 8
 
 
