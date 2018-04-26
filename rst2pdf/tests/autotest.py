@@ -329,7 +329,7 @@ def build_txt(iprefix, outpdf, fastfork):
         args.extend(('-o', outpdf))
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
-def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
+def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
@@ -340,12 +340,18 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
             sphinxdir = os.path.dirname(sphinxdir)
             basename = os.path.basename(sphinxdir)
         if os.path.exists(sphinxdir + '.ignore'):
-            return 'ignored', 0
+            if (ignore_ignorefile):
+                log([], 'Ingoring ' + sphinxdir + '.ignore file')
+            else:
+                return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
         if os.path.exists(iprefix + '.ignore'):
-            return 'ignored', 0
+            if (ignore_ignorefile):
+                log([], 'Ingoring ' + iprefix + '.ignore file')
+            else:
+                return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
     mprefix = os.path.join(PathInfo.md5dir, basename)
@@ -376,7 +382,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None):
 
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None):
+def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None, ignore_ignorefile=False):
     returnErrorCode = 0
     if not testfiles:
         testfiles = []
@@ -391,7 +397,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
 
     results = {}
     for fname, fastfork in testfiles:
-        key, errcode = run_single(fname, incremental, fastfork, updatemd5)
+        key, errcode = run_single(fname, incremental, fastfork, updatemd5, ignore_ignorefile)
         if errcode != 0:
             returnErrorCode = errcode
         results[key] = results.get(key, 0) + 1
@@ -416,6 +422,9 @@ def parse_commandline():
     parser.add_option('-i', '--incremental', action="store_true",
         dest='incremental', default=False,
         help='Incremental build -- ignores existing PDFs')
+    parser.add_option('-I', '--ignore-ignore', action="store_true",
+        dest='ignore_ignorefile', default=False,
+        help='Ignore .ignore file')
     parser.add_option('-f', '--fast', action="store_true",
         dest='fastfork', default=False,
         help='Fork and reuse process information')
@@ -450,7 +459,7 @@ def main(args=None):
     updatemd5 = options.updatemd5
     if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
         raise SystemExit('Unexpected value for updatemd5: %s. Expected one of: "good", "bad", "incomplete", "unknown" or "deprecated"' % updatemd5, )
-    errcode = run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5)
+    errcode = run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5, options.ignore_ignorefile)
     exit(errcode)
 
 if __name__ == '__main__':

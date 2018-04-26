@@ -1,0 +1,4 @@
+headers have keeptogether attribute set, however if the next
+item is a table, then the headers do not keep with it.
+
+Believed to be a ReportLab bug.
