@@ -4,12 +4,18 @@
 #$LastChangedRevision$
 
 import os
-from setuptools import setup, find_packages
+import sys
+
+from setuptools import find_packages, setup
 
 version = '0.93'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+if sys.version_info[0] > 2:
+    sys.stderr.write('rst2pdf is python2-only for now.')
+    exit(1)
 
 long_description = (
     read('LICENSE.txt')
