@@ -692,7 +692,7 @@ class RstToPdf(object):
 
 
                 break
-            except ValueError, v:
+            except ValueError as v:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
                 #if v.args and str(v.args[0]).startswith('format not resolved'):
@@ -1400,7 +1400,7 @@ def main(_args=None):
         options.basedir=os.path.dirname(os.path.abspath(filename))
         try:
             infile = open(filename)
-        except IOError, e:
+        except IOError as e:
             log.error(e)
             sys.exit(1)
     options.infile = infile
@@ -1574,11 +1574,11 @@ def add_extensions(options):
         try:
             try:
                 module = __import__(firstname, globals(), locals())
-            except ImportError, e:
+            except ImportError as e:
                 if firstname != str(e).split()[-1]:
                     raise
                 module = __import__(modname, globals(), locals())
-        except ImportError, e:
+        except ImportError as e:
             if str(e).split()[-1] not in [firstname, modname]:
                 raise
             raise SystemExit('\nError: Could not find module %s '

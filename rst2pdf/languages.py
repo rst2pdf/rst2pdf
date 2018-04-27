@@ -13,7 +13,7 @@ def get_language_silent(lang):
     """Docutils get_language() with patches for older versions."""
     try:
         return get_language(lang)
-    except TypeError, err: # Docutils 0.8.1
+    except TypeError as err: # Docutils 0.8.1
         if 'get_language() takes exactly 2 arguments' in str(err):
             class SilentReporter(object):
                 def warning(self, msg):

@@ -80,7 +80,7 @@ class BaseExec(object):
                 sys.stdout.flush()
                 print >> sys.stderr, traceback.format_exc()
                 sys.stderr.write(chr(1))
-            except SystemExit, s:
+            except SystemExit as s:
                 sys.stdout.flush()
                 code = s.code
                 try:
