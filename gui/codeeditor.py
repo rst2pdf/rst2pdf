@@ -141,7 +141,7 @@ if __name__ == "__main__":
         pos=None
         try:
             json.loads(style)
-        except ValueError, e:
+        except ValueError as e:
             s=str(e)
             print s
             if s == 'No JSON object could be decoded':

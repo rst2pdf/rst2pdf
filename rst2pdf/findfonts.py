@@ -227,7 +227,7 @@ def findTTFont(fname):
                 fontdir += u"\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
-            except WindowsError, err:
+            except WindowsError as err:
                 fontkey.Close()
                 return None
 

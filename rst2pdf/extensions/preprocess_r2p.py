@@ -301,7 +301,7 @@ class Preprocess(object):
             log.error("Empty .. style:: block found")
         try:
             styles = rson_loads(mystyles)
-        except ValueError, e: # Error parsing the JSON data
+        except ValueError as e: # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s'%\
                     (mystyles, str(e)))
         else:
