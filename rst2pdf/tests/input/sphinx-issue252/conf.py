@@ -23,9 +23,9 @@ import sys, os
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 
-# It's probably a good idea to use pdfbuilder BEFORE pngmath
+# It's probably a good idea to ensure that pdfbuilder is LAST
 
-extensions = ['rst2pdf.pdfbuilder','sphinx.ext.pngmath']
+extensions = ['sphinx.ext.imgmath','rst2pdf.pdfbuilder']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
