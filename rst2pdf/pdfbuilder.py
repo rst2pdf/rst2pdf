@@ -839,6 +839,11 @@ def init_math(app):
         :copyright: Copyright 2007-2009 by the Sphinx team, see AUTHORS.
         :license: BSD, see LICENSE for details.
     """
+
+    if hasattr(app.config, 'math_number_all'):
+        # Another math package is already loaded, so skip our built-in one
+        return
+
     from sphinx.errors import SphinxError
     try:
         # Sphinx 0.6.4 and later
