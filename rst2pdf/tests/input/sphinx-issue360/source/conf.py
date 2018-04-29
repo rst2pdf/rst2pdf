@@ -218,4 +218,6 @@ man_pages = [
 pdf_documents = [
     ('index', u'sample', u'sample Documentation', u'sample'),
 ]
-pdf_stylesheets = ['sphinx','kerning','a4','ja']
+pdf_stylesheets = ['sphinx','a4','ja']
+
+pdf_font_path = ['../..']
