@@ -1,4 +1,4 @@
-Sphynx example document
+Sphinx example document
 -----------------------
 
 Nothing interesting here
