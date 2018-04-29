@@ -13,18 +13,20 @@ class RunTest:
         mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
         md5file = mprefix + '.json'
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
-        info=MD5Info()
+        nopdffile = os.path.join(PathInfo.inpdir , basename[:-4])+'.nopdf'
         self.skip=False
         self.openIssue=False
-        if os.path.exists(ignfile):
-            self.skip=True
-        if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            exec f in info
-            f.close()
-        if info.good_md5 in [[],['sentinel']]:
-            # This is an open issue or something that can't be checked automatically
-            self.openIssue=True
+        if not os.path.exists(nopdffile):
+            info=MD5Info()
+            if os.path.exists(ignfile):
+                self.skip=True
+            if os.path.exists(md5file):
+                f = open(md5file, 'rb')
+                exec f in info
+                f.close()
+            if info.good_md5 in [[],['sentinel']]:
+                # This is an open issue or something that can't be checked automatically
+                self.openIssue=True
 
     def __call__(self,f):
         if self.skip:
