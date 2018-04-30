@@ -97,14 +97,20 @@ To run the tests for the first time, you will need to do some setup (after this,
     pip install nose coverage
     pip install -r requirements.txt
     pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-    nosetests -x -i regulartest -i sphinxtest
+    nosetests -v -i regulartest -i sphinxtest
 
 Next runs
 ~~~~~~~~~
 
 While in project::
 
+  nosetests -v -i regulartest -i sphinxtest
+
+
+To stop the tests on the first failure, use the ``-x`` switch::
+
   nosetests -x -i regulartest -i sphinxtest
+
 
 Using autotest directly
 ~~~~~~~~~~~~~~~~~~~~~~~
