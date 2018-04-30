@@ -1,0 +1,850 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 8 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 133.9157 766.0394 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/Annots [ 4 0 R 5 0 R ] /Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Outlines 12 0 R /PageLabels 18 0 R /PageMode /UseNone /Pages 14 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 1 /First 13 0 R /Last 13 0 R /Type /Outlines
+>>
+endobj
+13 0 obj
+<<
+/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 12 0 R /Title (Syntax Highlighting)
+>>
+endobj
+14 0 obj
+<<
+/Count 3 /Kids [ 6 0 R 7 0 R 9 0 R ] /Type /Pages
+>>
+endobj
+15 0 obj
+<<
+/Length 597
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 775.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 443.2441 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+Q
+ 
+endstream
+endobj
+16 0 obj
+<<
+/Length 75
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 799.0394 cm
+Q
+ 
+endstream
+endobj
+17 0 obj
+<<
+/Length 4170
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 763.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 738.2394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("Some code without linenos.") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 711.4394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.933333 1 .8 rg
+n 0 0 6 12 re f*
+1 .941176 .941176 rg
+n 12 0 150 12 re f*
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (1 ) Tj .729412 .129412 .129412 rg ("Some code with linenos.") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 684.6394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This has less than 5 lines, so no linenos") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 585.8394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 90 re B*
+Q
+q
+.933333 1 .8 rg
+n 0 72 6 12 re f*
+1 .941176 .941176 rg
+n 12 72 282 12 re f*
+.933333 1 .8 rg
+n 294 72 0 12 re f*
+.933333 1 .8 rg
+n 0 60 6 12 re f*
+1 .941176 .941176 rg
+n 12 60 282 12 re f*
+.933333 1 .8 rg
+n 294 60 0 12 re f*
+.933333 1 .8 rg
+n 0 48 6 12 re f*
+1 .941176 .941176 rg
+n 12 48 282 12 re f*
+.933333 1 .8 rg
+n 294 48 0 12 re f*
+.933333 1 .8 rg
+n 0 36 6 12 re f*
+1 .941176 .941176 rg
+n 12 36 282 12 re f*
+.933333 1 .8 rg
+n 294 36 0 12 re f*
+.933333 1 .8 rg
+n 0 24 6 12 re f*
+1 .941176 .941176 rg
+n 12 24 282 12 re f*
+.933333 1 .8 rg
+n 294 24 0 12 re f*
+.933333 1 .8 rg
+n 0 12 6 12 re f*
+1 .941176 .941176 rg
+n 12 12 282 12 re f*
+.933333 1 .8 rg
+n 294 12 0 12 re f*
+.933333 1 .8 rg
+n 0 0 6 12 re f*
+1 .941176 .941176 rg
+n 12 0 282 12 re f*
+BT 1 0 0 1 0 74 Tm 12 TL /F3 10 Tf 0 0 0 rg (1 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (2 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (3 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (4 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (5 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (6 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (7 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 559.0394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This is before a highlight:: none, so it has highlight") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 532.2394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This is after a highlight:: none, so no highlight") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 373.4394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 150 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 134 Tm /F3 10 Tf 12 TL (# -*- coding: utf-8 -*-) Tj T* (# Foobar documentation build configuration file, created by) Tj T* (#) Tj T* (# All configuration values have a default; values that are commented out) Tj T* (# serve to show the default.) Tj T*  T* (import sys, os) Tj T*  T* (# If extensions \(or modules to document with autodoc\) are in another directory,) Tj T* (# add these directories to sys.path here. If the directory is relative to the) Tj T* (# documentation root, use os.path.abspath to make it absolute, like shown here.) Tj T* (#sys.path.append\(os.path.abspath\('.'\)\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 365.4394 cm
+Q
+q
+1 0 0 1 34.01575 807.2126 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 34.01575 22.67717 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (1) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+18 0 obj
+<<
+/Nums [ 0 19 0 R 1 20 0 R 2 21 0 R ]
+>>
+endobj
+19 0 obj
+<<
+/S /r /St 1
+>>
+endobj
+20 0 obj
+<<
+/S /r /St 2
+>>
+endobj
+21 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000510 00000 n 
+0000000677 00000 n 
+0000000906 00000 n 
+0000001111 00000 n 
+0000001216 00000 n 
+0000001421 00000 n 
+0000001527 00000 n 
+0000001785 00000 n 
+0000001859 00000 n 
+0000001966 00000 n 
+0000002038 00000 n 
+0000002686 00000 n 
+0000002811 00000 n 
+0000007033 00000 n 
+0000007092 00000 n 
+0000007126 00000 n 
+0000007160 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 22
+>>
+startxref
+7194
+%%EOF
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 8 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 133.9157 766.0394 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/Annots [ 4 0 R 5 0 R ] /Contents 15 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 14 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Outlines 12 0 R /PageLabels 18 0 R /PageMode /UseNone /Pages 14 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 1 /First 13 0 R /Last 13 0 R /Type /Outlines
+>>
+endobj
+13 0 obj
+<<
+/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 12 0 R /Title (Syntax Highlighting)
+>>
+endobj
+14 0 obj
+<<
+/Count 3 /Kids [ 6 0 R 7 0 R 9 0 R ] /Type /Pages
+>>
+endobj
+15 0 obj
+<<
+/Length 597
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 775.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 443.2441 3 cm
+q
+0 0 .501961 rg
+0 0 .501961 RG
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+Q
+q
+1 0 0 1 40.01575 751.0394 cm
+Q
+ 
+endstream
+endobj
+16 0 obj
+<<
+/Length 75
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 799.0394 cm
+Q
+ 
+endstream
+endobj
+17 0 obj
+<<
+/Length 4170
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 763.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 738.2394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("Some code without linenos.") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 711.4394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.933333 1 .8 rg
+n 0 0 6 12 re f*
+1 .941176 .941176 rg
+n 12 0 150 12 re f*
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (1 ) Tj .729412 .129412 .129412 rg ("Some code with linenos.") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 684.6394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This has less than 5 lines, so no linenos") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 585.8394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 90 re B*
+Q
+q
+.933333 1 .8 rg
+n 0 72 6 12 re f*
+1 .941176 .941176 rg
+n 12 72 282 12 re f*
+.933333 1 .8 rg
+n 294 72 0 12 re f*
+.933333 1 .8 rg
+n 0 60 6 12 re f*
+1 .941176 .941176 rg
+n 12 60 282 12 re f*
+.933333 1 .8 rg
+n 294 60 0 12 re f*
+.933333 1 .8 rg
+n 0 48 6 12 re f*
+1 .941176 .941176 rg
+n 12 48 282 12 re f*
+.933333 1 .8 rg
+n 294 48 0 12 re f*
+.933333 1 .8 rg
+n 0 36 6 12 re f*
+1 .941176 .941176 rg
+n 12 36 282 12 re f*
+.933333 1 .8 rg
+n 294 36 0 12 re f*
+.933333 1 .8 rg
+n 0 24 6 12 re f*
+1 .941176 .941176 rg
+n 12 24 282 12 re f*
+.933333 1 .8 rg
+n 294 24 0 12 re f*
+.933333 1 .8 rg
+n 0 12 6 12 re f*
+1 .941176 .941176 rg
+n 12 12 282 12 re f*
+.933333 1 .8 rg
+n 294 12 0 12 re f*
+.933333 1 .8 rg
+n 0 0 6 12 re f*
+1 .941176 .941176 rg
+n 12 0 282 12 re f*
+BT 1 0 0 1 0 74 Tm 12 TL /F3 10 Tf 0 0 0 rg (1 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (2 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (3 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (4 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (5 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (6 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj 0 0 0 rg  T* (7 ) Tj .729412 .129412 .129412 rg ("This has more than 5 lines, so it has linenos") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 559.0394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+.729412 .129412 .129412 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This is before a highlight:: none, so it has highlight") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 532.2394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 18 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL ("This is after a highlight:: none, so no highlight") Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 373.4394 cm
+q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
+.666667 .8 .6 RG
+.3 w
+.933333 1 .8 rg
+n -4 0 514.4441 150 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 134 Tm /F3 10 Tf 12 TL (# -*- coding: utf-8 -*-) Tj T* (# Foobar documentation build configuration file, created by) Tj T* (#) Tj T* (# All configuration values have a default; values that are commented out) Tj T* (# serve to show the default.) Tj T*  T* (import sys, os) Tj T*  T* (# If extensions \(or modules to document with autodoc\) are in another directory,) Tj T* (# add these directories to sys.path here. If the directory is relative to the) Tj T* (# documentation root, use os.path.abspath to make it absolute, like shown here.) Tj T* (#sys.path.append\(os.path.abspath\('.'\)\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 365.4394 cm
+Q
+q
+1 0 0 1 34.01575 807.2126 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Syntax Highlighting) Tj T* ET
+Q
+Q
+q
+1 0 0 1 34.01575 22.67717 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (1) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+18 0 obj
+<<
+/Nums [ 0 19 0 R 1 20 0 R 2 21 0 R ]
+>>
+endobj
+19 0 obj
+<<
+/S /r /St 1
+>>
+endobj
+20 0 obj
+<<
+/S /r /St 2
+>>
+endobj
+21 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000510 00000 n 
+0000000677 00000 n 
+0000000906 00000 n 
+0000001111 00000 n 
+0000001216 00000 n 
+0000001421 00000 n 
+0000001527 00000 n 
+0000001785 00000 n 
+0000001859 00000 n 
+0000001966 00000 n 
+0000002038 00000 n 
+0000002686 00000 n 
+0000002811 00000 n 
+0000007033 00000 n 
+0000007092 00000 n 
+0000007126 00000 n 
+0000007160 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 22
+>>
+startxref
+7194
+%%EOF

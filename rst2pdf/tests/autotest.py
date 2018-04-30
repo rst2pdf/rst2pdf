@@ -343,6 +343,10 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
             if (ignore_ignorefile):
                 log([], 'Ingoring ' + sphinxdir + '.ignore file')
             else:
+                f = open(sphinxdir + '.ignore', 'r')
+                data=f.read()
+                f.close()
+                log([], 'Ignored: ' + data)
                 return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
@@ -351,6 +355,10 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
             if (ignore_ignorefile):
                 log([], 'Ingoring ' + iprefix + '.ignore file')
             else:
+                f = open(iprefix + '.ignore', 'r')
+                data=f.read()
+                f.close()
+                log([], 'Ignored: ' + data)
                 return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
