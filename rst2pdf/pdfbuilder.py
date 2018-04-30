@@ -583,12 +583,18 @@ class PDFWriter(writers.Writer):
             # Latex does a manual linebreak. This sucks.
             authors=self.document.settings.author.split('\\')
 
+            # Honour the "today" config setting
+            if self.config.today :
+                date = self.config.today
+            else:
+                date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
+
             # Feed data to the template, get restructured text.
             cover_text = createpdf.renderTemplate(tname=cover_file,
                                 title=self.document.settings.title or visitor.elements['title'],
                                 subtitle='%s %s'%(_('version'),self.config.version),
                                 authors=authors,
-                                date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
+                                date=date
                                 )
 
             cover_tree = docutils.core.publish_doctree(cover_text)
