@@ -179,7 +179,7 @@ def code_block_directive(name, arguments, options, content, lineno,
                 # patch mmueller end
 
                 content = content[after_index:]
-                line_offset = len(content[:after_index].splitlines())
+                line_offset = len(content[:after_index].splitlines()) - 1
 
             after_text = options.get('start-after', None)
             if after_text:
