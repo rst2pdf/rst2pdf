@@ -15,11 +15,13 @@ class RunTest:
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
         nopdffile = os.path.join(PathInfo.inpdir , basename[:-4])+'.nopdf'
         self.skip=False
+        self.whySkip = ""
         self.openIssue=False
         if not os.path.exists(nopdffile):
             info=MD5Info()
             if os.path.exists(ignfile):
                 self.skip=True
+                with open(ignfile,"r") as f: self.whySkip=f.read()
             if os.path.exists(md5file):
                 f = open(md5file, 'rb')
                 exec f in info
@@ -30,7 +32,7 @@ class RunTest:
 
     def __call__(self,f):
         if self.skip:
-            raise nose.plugins.skip.SkipTest
+            raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
         elif self.openIssue:
             assert False, 'Test has no known good output (Open Issue)'
         else:
@@ -90,9 +92,11 @@ class RunInstalledTest:
         ignfile = os.path.join(PathInfo.inpdir , basename[:-4])+'.ignore'
         info=MD5Info()
         self.skip=False
+        self.whySkip = ""
         self.openIssue=False
         if os.path.exists(ignfile):
             self.skip=True
+            with open(ignfile,"r") as f: self.whySkip=f.read()
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
             exec f in info
@@ -103,7 +107,7 @@ class RunInstalledTest:
 
     def __call__(self,f):
         if self.skip:
-            raise nose.plugins.skip.SkipTest
+            raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
         elif self.openIssue:
             assert False, 'Test has no known good output (Open Issue)'
         else:
@@ -121,10 +125,12 @@ class RunSphinxTest:
         ignfile = os.path.join(PathInfo.inpdir , basename)+'.ignore'
         info=MD5Info()
         self.skip=False
+        self.whySkip = ""
         self.openIssue=False
 
         if os.path.exists(ignfile):
             self.skip=True
+            with open(ignfile,"r") as f: self.whySkip=f.read()
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
             exec f in info
@@ -135,7 +141,7 @@ class RunSphinxTest:
 
     def __call__(self,f):
         if self.skip:
-            raise nose.plugins.skip.SkipTest
+            raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
         elif self.openIssue:
             assert False, 'Test has no known good output (Open Issue)'
         else:
