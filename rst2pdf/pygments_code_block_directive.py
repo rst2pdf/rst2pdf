@@ -188,8 +188,16 @@ def code_block_directive(name, arguments, options, content, lineno,
                 if after_index < 0:
                     raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
                                       'code-block directive:\nText not found.' % options['start-after'])
-                line_offset = len(content[:after_index + len(after_text)].splitlines())
-                content = content[after_index + len(after_text):]
+                after_index = after_index + len(after_text)
+
+                # Move the after_index to the start of the line after the match
+                for char in content[after_index:]:
+                    if char == u'\n':
+                        break
+                    after_index += 1
+
+                line_offset = len(content[:after_index].splitlines())
+                content = content[after_index:]
 
 
             # same changes here for the same reason
