@@ -1,16 +1,25 @@
-New in {next}
--------------
 
-* Fixed issue 567: <img> now uses quoted attributes.
-* Fixed issue 566: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4.
-* Fixed issue 555: :alt: option now works for plantuml extension
-* Fixed issue 525: CreationDate metadata shows correct date using Sphinx
-* Fixed issue 487: uniconverter is no longer in setup
-* Fixed: :linenos_offset: now works again.
-* Removed debugging print statement when using line blocks
+{next}
+------
 
-New in 0.93
------------
+* Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
+* Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)
+* Added: The Sphinx ``today`` config setting is now used if it is set
+* Changed: ``:start-after:`` will now render the next line
+* Changed: We now use PILLOW rather than PIL
+* Fixed: Using ``:start-after:`` with ``linenos_offset`` now displays the correct line number
+* Fixed: Using ``:start-at:`` with ``linenos_offset`` now displays the correct line number
+* Fixed: Inline ``:math:` works again as we now use quoted attributes for HTML ``<img>`` tags (issue 567)
+* Fixed: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4 (issue 566)
+* Fixed: CreationDate metadata shows correct date using Sphinx (issue 525)
+* Fixed: ``:alt:`` option now works for plantuml extension
+* Fixed: ``:linenos_offset:`` now works again
+* Fixed: Removed debugging print statement when using line blocks
+* Fixed: Removed uniconverter from setup (issue 487)
+
+
+0.93 (2012-12-18)
+-----------------
 
 * Fixed Issue 447: Double-sided always starts on the right (By Rob Ludwick)
 
@@ -45,8 +54,9 @@ New in 0.93
 * Fixed Issue 410: always include full lines in code-blocks (mmueller patch)
 * Regression in fancytitles extension: Issue 486
 
-New in 0.92
------------
+
+0.92 (2012-06-01)
+-----------------
 
 * Fixed Issue 394; missing _restrictSize method with RL 2.5
 * Fixed Issue 452: applying missing classes to lists crashed rst2pdf
@@ -54,13 +64,15 @@ New in 0.92
 * Fixed Issue 451: roman.py was moved in docutils 0.9
 * Fixed Issue 446: made it work again with python 2.4
 
-New in 0.91
------------
+
+0.91 (2012-03-06)
+-----------------
 
 * Fixed Issue 438: sphinx support was completely broken in 0.90
 
-New in 0.90
------------
+
+0.90 (2012-03-04)
+-----------------
 
 * Added raw HTML support, by Dimitri Christodoulou
 * Fixed Issue 422: Having no .afm files made font lookup slow.
@@ -87,8 +99,9 @@ New in 0.90
 * Fixed Issue 369: crash in hyphenator when specifying "en" as a language.
 * Compatibility fix to Sphinx 0.6.x (For python 2.7 docs)
 
-New in 0.16
------------
+
+0.16 (2010-10-06)
+-----------------
 
 * Fixed Issue 343: Plugged memory leak in the RSON parser.
 * Fix for Issue 287: there is still a corner case if you have two sections
@@ -153,8 +166,9 @@ New in 0.16
   in stylesheet.
 * Fixed Issue 317: Ugly error message when file does not exist
 
-New in 0.15
------------
+
+0.15
+----
 
 * Fixed Issue 315: crash when using an undefined class for
   a list.
@@ -172,8 +186,9 @@ New in 0.15
 * Improved widow/orphan support for literal blocks
 * Fixed Issue 304: Code blocks didn't respect fontSize in class.
 
-New in 0.14.2
--------------
+
+0.14.2 (2010-03-26)
+-------------------
 
 * Regained compatibility with reportlab 2.3
 * Fixed regression in Issue 152: right-edege of boxes not aligned inside
@@ -181,14 +196,16 @@ New in 0.14.2
 
 * Fixed Issue 301: accept padding parameters in bullet/item lists
 
-New in 0.14.1
--------------
+
+0.14.1 (2010-03-25)
+-------------------
 
 * Make it compatible with Sphinx 0.6.3 again
 * Fixed Issue 300: image-missing.jpg was not installed
 
-New in 0.14
------------
+
+0.14 (2010-03-24)
+-----------------
 
 * Fixed Issue 197: Table borders were confusing.
 * Fixed Issue 297: styles from default.json leaked onto other syntax
@@ -220,8 +237,9 @@ New in 0.14
 * Fixed Issue 281: sphinx test automation was broken
 * Fixed Issue 280: wrong page templates used in sphinx
 
-New in 0.13
------------
+
+0.13 (2010-03-15)
+-----------------
 
 * New TOC code (supports dots between title and page number)
 * New extension framework
@@ -257,8 +275,9 @@ New in 0.13
 * Fixed Issue 232 (HTML tags in title metadata)
 * Fixed Issue 247 (printing stylesheet)
 
-New in 0.12.3
--------------
+
+0.12.3
+------
 
 * Fixed Issue 230 (Admonition titles were not translated)
 * Fixed Issue 228 (page labels and numbers match, so page ii is the
@@ -267,8 +286,9 @@ New in 0.12.3
 * Fixed Issue 225 (bad spacing in lineblocks)
 * Fixed Issue 223 (non-monospaced styles used in code)
 
-New in 0.12.2
--------------
+
+0.12.2 (2009-10-19)
+-------------------
 
 * Fix Issue 219 (incompatibility with reportlab 2.1)
 * Added pdf_default_dpi option for pdfbuilder
@@ -278,8 +298,9 @@ New in 0.12.2
   showHeader=True and no explicit header caused an exception.
 * Fixed Issue 215: crashes in bookrest's background renderer.
 
-New in 0.12.1
--------------
+
+0.12.1 (2009-10-14)
+-------------------
 
 * Ship local patched copy of pypoppler-qt4
 * Partial fix for Issue 205: KeyError: 'format'
@@ -288,8 +309,9 @@ New in 0.12.1
 * Switched --enable-splittables to True by default
 * Fixed Issue 204: syntax error on font importing code
 
-New in 0.12
------------
+
+0.12 (2009-10-10)
+-----------------
 
 * Fixed Issue 202: broken processing of HTML raw nodes
 * New "options" section in stylesheets. New ["options"]["stylesheets"] subsection,
@@ -355,8 +377,9 @@ New in 0.12
 * Spacers support units
 * TOC styles now configurable in stylesheet
 
-New in 0.11
------------
+
+0.11 (2009-06-20)
+-----------------
 
 * Degrade more gracefully when one or more wordaxe hyphenators are
   broken (currently DWC is the broken one)
@@ -412,13 +435,15 @@ New in 0.11
 * Issue 117: TOCs with more than 6 levels now supported (raised limit to 9, which
   is silly deep)
 
-New in 0.10.1
--------------
+
+0.10.1 (2009-05-16)
+-------------------
 
 * Issue 114: Fixed bug in PDF TOC for sections containing ampersands
 
-New in 0.10
------------
+
+0.10 (2009-05-15)
+-----------------
 
 * Issue 87: Table headers can be repeated in each page (thanks to Yasushi Masuda)
 * Issue 93: Line number support for code blocks (:linenos: true)
@@ -450,8 +475,9 @@ New in 0.10
 * Page transition effect support for presentations (r423)
 
 
-New in 0.9
-----------
+
+0.9 (2008-09-26)
+----------------
 
 * Math support via Mathplotlib
 * Huge bug in header/footer page numbers/section names fixed
@@ -459,8 +485,9 @@ New in 0.9
 * Lists that don't start at 1 work now
 * Nicer definition lists
 
-New in 0.8.1
-------------
+
+0.8.1 (2008-09-19)
+------------------
 
 * Support for more complex headers and footers
   (including image directives and tables)
@@ -470,8 +497,9 @@ New in 0.8.1
 * Support for system-wide config file
 * Better author metadata
 
-New in 0.8
-----------
+
+0.8 (2008-09-12)
+----------------
 
 * Support for vector graphics: SVG, EPS, PS, CDR and others (requires uniconvertor)
 * Support for stdin and stdout, so you can use rst2pdf in pipes.
@@ -484,8 +512,9 @@ New in 0.8
 * Font sizes can be expressed in units or % of parent style's size
 * Larger font size in the default stylesheet
 
-New in 0.7
-----------
+
+0.7 (2008-09-05)
+----------------
 
 * Automatic Type1 and True Type font embedding. Just use the font or family name, and (with a little luck), it will be embedded for you.
 * width attribute in styles, to create narrow paragraphs/tables
@@ -496,8 +525,9 @@ New in 0.7
 * Real sidebars and "floating" elements.
 * Fixed link style (no ugly black underlining!)
 
-New in 0.6
-----------
+
+0.6 (2008-08-30)
+----------------
 
 * Stylesheet-defined page layout (For example, multicolumn) and layout switching
 * Cascading Stylesheets (change exactly what you need changed)
@@ -518,8 +548,9 @@ New in 0.6
 * code-block now supports including files (whole or in part) so you can highlight external code.
 
 
-New in 0.5
-----------
+
+0.5 (2008-08-27)
+----------------
 
 * Support for :widths: in tables
 * Support for captions in tables
@@ -533,8 +564,9 @@ New in 0.5
 * Citations support
 * Title reference role fix
 
-New in 0.4
-----------
+
+0.4 (2008-08-25)
+----------------
 
 * Fixed bullet and item lists indentation/nesting.
 * Implemented citations
@@ -545,8 +577,9 @@ New in 0.4
 * Support for document title in header/footer
 * Custom page sizes and margins
 
-New in 0.3
-----------
+
+0.3 (2008-08-25)
+----------------
 
 * Font embedding (use any True Type font in your PDFs)
 * Syntax highlighter using Pygments
