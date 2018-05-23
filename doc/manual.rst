@@ -1273,9 +1273,9 @@ The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`, ``x_end
 Raw HTML
 --------
 
-If you have a document that contais raw HTML, andhave xhtml2pdf installed, rst2pdf
-will try to render that HTML inside your documet. To enable this, use
-the --raw-html command line option.
+If you have a document that contais raw HTML, and have ``xhtml2pdf`` installed, 
+``rst2pdf`` will try to render that HTML inside your document. To enable this, 
+use the ``--raw-html`` command line option.
 
 The counter role
 ================
