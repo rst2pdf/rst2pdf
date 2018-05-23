@@ -52,7 +52,7 @@ because you are done with it. If you are reading this in a PDF,
 it was generated using those default settings.
 
 However, if you want to customize the output, or are just curious to see
-what can be done, let´s continue.
+what can be done, let's continue.
 
 Command line options
 ====================
@@ -99,7 +99,7 @@ If no input argument is provided, stdin will be used::
 
     cat readme.txt | rst2pdf -o readme.pdf
 
-If outpufile is set to dash '-', output goes to stdout::
+If output is set to dash '-', output goes to stdout::
 
     rst2pdf -o - readme.txt > output.pdf
 
@@ -121,9 +121,9 @@ magic tokens will be replaced (More may be added as rst2pdf evolves):
 ###Title###
     Replaced by the document title
 ###Section###
-    Replaced by the currect section title
+    Replaced by the current section title
 ###SectNum###
-    Replaced by the currect section number. **Important:** You must use the sectnum directive for this to work.
+    Replaced by the current section number. **Important:** You must use the sectnum directive for this to work.
 ###Total###
     Replaced by the total number of pages in the document. Keep in mind that this is the **real** number of pages, not the displayed number, so if you play with `page counters`_ this number will probably be wrong.
 
@@ -315,7 +315,7 @@ To make some of the more common adjustments easier, rst2pdf includes a
 collection of stylesheets you can use:
 
 Font styles
-    These stylesheets modfy your font settings.
+    These stylesheets modify your font settings.
 
     * ``serif`` uses the PDF serif font (Times) instead of the default Sans
       Serif (Arial)
@@ -367,7 +367,7 @@ So, if you want to have a two-column, legal size, serif document with code in mu
 StyleSheet Syntax
 -----------------
 
-It´s a JSON file with several elements in it.
+It's a JSON file with several elements in it.
 
 Font Alias
 ----------
@@ -384,7 +384,7 @@ This is the fontsAlias element. By default, it uses some of the standard PDF fon
 
 This defines the fonts used in the styles. You can use, for example, Helvetica
 directly in a style, but if later you want to use another font all through
-your document, you will haveto change it in each style. So, I suggest you
+your document, you will have to change it in each style. So, I suggest you
 use aliases.
 
 The standard PDF fonts are these:
@@ -474,7 +474,7 @@ Orphan
 
 Rst2pdf has *some* widow/orphan control. Specifically, here's what's currently implemented:
 
-On ordinary paragraphs, allowWidows ans allowOrphans is passed to reportlab, which is supposed to do something about it if they are non-zero. In practice, it doesn't seem to have much effect.
+On ordinary paragraphs, allowWidows and allowOrphans is passed to reportlab, which is supposed to do something about it if they are non-zero. In practice, it doesn't seem to have much effect.
 
 The plan is to change the semantics of those settings, so that they mean the minimum number of lines that can be left alone at the beginning of a page (widows) or at the end (orphans).
 
@@ -498,7 +498,7 @@ In future versions this may extend to ordinary paragraphs.
 Font Embedding
 --------------
 
-There are thousands of excelent free True Type and Type 1 fonts available on the
+There are thousands of excellent free True Type and Type 1 fonts available on the
 web, and you can use many of them in your documents by declaring them in your
 stylesheet.
 
@@ -691,7 +691,7 @@ margin in the center of a two-page spread.
 
 This value is added to the left margin of odd pages and the right margin of
 even pages, adding (or removing, if it's negative) space "in the middle" of
-opposingpages.
+opposing pages.
 
 If you intend to bound a printed copy, you may need extra space there. OTOH,
 if you will display it on-screen on a two-page format (common in many PDF
@@ -971,8 +971,8 @@ There is an online demo of pygments showing these styles:
 
     http://pygments.org/demo/1817/
 
-The overal look of a code box is controlled by the "code" style or by a class you apply to it using the ``.. class::`` directive.
-Aditionally, if you want to change some properties when using different languages, you can define styles with the name of the language.
+The overall look of a code box is controlled by the "code" style or by a class you apply to it using the ``.. class::`` directive.
+Additionally, if you want to change some properties when using different languages, you can define styles with the name of the language.
 For example, a ``python`` style will be applied to code blocks created with ``.. code-block:: python``.
 
 The look of the line numbers is controlled by the "linenumbers" style.
@@ -1060,16 +1060,16 @@ you can add selectors to limit the inclusion to a portion of the file.
 the options are:
 
 :start-at: string
-    will include file beginning at the first occurence of string, string **included**
+    will include file beginning at the first occurrence of string, string **included**
 
 :start-after: string
-    will include file beginning at the first occurence of string, string **excluded**
+    will include file beginning at the first occurrence of string, string **excluded**
 
 :end-before: string
-    will include file up to the first occurence of string, string **excluded**
+    will include file up to the first occurrence of string, string **excluded**
 
 :end-at: string
-    will include file up to the first occurence of string, string **included**
+    will include file up to the first occurrence of string, string **included**
 
 Let's display a class from rst2pdf::
 
@@ -1246,7 +1246,7 @@ For example::
 
        Transition Glitter 3 90
 
-Uses the Glitter effect, for 3 seconds, at direction 90 degress (from the right?)
+Uses the Glitter effect, for 3 seconds, at direction 90 degrees (from the right?)
 
 Keep in mind that Transition sets the transition *from this page to the next* so the
 natural thing is to use it before a PageBreak::
@@ -1273,8 +1273,8 @@ The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`, ``x_end
 Raw HTML
 --------
 
-If you have a document that contais raw HTML, and have ``xhtml2pdf`` installed, 
-``rst2pdf`` will try to render that HTML inside your document. To enable this, 
+If you have a document that contains raw HTML, and have ``xhtml2pdf`` installed,
+``rst2pdf`` will try to render that HTML inside your document. To enable this,
 use the ``--raw-html`` command line option.
 
 The counter role
@@ -1458,7 +1458,7 @@ For example, this will enable german hyphenation globally:
     rst2pdf -l de_DE mydocument.txt
 
 If you are creating a multilingual document, you can declare styles with specific languages.
-For example, you could inherit bodytext for spanish::
+For example, you could inherit bodytext for Spanish::
 
     ["bodytext_es" , {
       "parent": "bodytext",
@@ -1467,7 +1467,7 @@ For example, you could inherit bodytext for spanish::
       "language": "es_ES"
     }],
 
-And all paragraps declared of bodytext_es style would have spanish hyphenation::
+And all paragraphs declared of bodytext_es style would have Spanish hyphenation::
 
     .. class:: bodytext_es
 
