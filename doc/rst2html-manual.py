@@ -19,6 +19,9 @@ from docutils.parsers.rst import directives
 import rst2pdf.pygments_code_block_directive
 directives.register_directive('code-block', rst2pdf.pygments_code_block_directive.code_block_directive)
 
+import rst2pdf.noop_directive
+directives.register_directive('oddeven', rst2pdf.noop_directive.noop_directive)
+
 description = ('Generates (X)HTML documents from standalone reStructuredText '
                'sources.  ' + default_description)
 
