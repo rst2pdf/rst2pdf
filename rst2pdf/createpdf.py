@@ -1445,7 +1445,7 @@ def main(_args=None):
         fpath.append(options.ffolder)
     options.fpath = fpath
 
-    spath = []
+    spath = [options.basedir]
     if options.stylepath:
         spath = options.stylepath.split(os.pathsep)
     options.stylepath = spath
