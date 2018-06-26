@@ -323,11 +323,12 @@ def build_txt(iprefix, outpdf, fastfork):
             f.close()
         else:
             extraargs=[]
-        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
+        inpfname = inpfname.replace(PathInfo.inpdir + "/", '', 1)
+        args = PathInfo.runcmd + ['--date-invariant', '-v', inpfname]+extraargs
         if os.path.exists(style):
             args.extend(('-s', os.path.basename(style)))
         args.extend(('-o', outpdf))
-        return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
+        return textexec(args, cwd=PathInfo.inpdir, python_proc=fastfork)
 
 def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)

@@ -144,7 +144,11 @@ class HandleImage(NodeHandler, docutils.nodes.image):
         style=client.styles[st_name]
         uri = str(node.get("uri"))
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
-            imgname = os.path.join(client.basedir,uri)
+            rel_uri = os.path.join(os.getcwd(), uri)
+            if os.path.exists(rel_uri):
+                imgname = rel_uri
+            else:
+                imgname = os.path.join(client.basedir, uri)
         else:
             imgname = uri
         try:

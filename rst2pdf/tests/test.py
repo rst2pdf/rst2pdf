@@ -154,7 +154,7 @@ class RunSphinxTest:
 def regulartest():
     '''To run these tests (similar to autotest), run
     nosetests -i regulartest'''
-    testfiles = globjoin(PathInfo.inpdir, '*.txt')
+    testfiles = globjoin(PathInfo.inpdir, '*.txt') + globjoin(PathInfo.inpdir, 'relative_paths/*.txt')
     results = {}
     for fname in testfiles:
         yield RunTest(fname), fname
