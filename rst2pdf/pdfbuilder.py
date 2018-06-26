@@ -618,6 +618,7 @@ class PDFWriter(writers.Writer):
                  splittables=self.splittables,
                  style_path=self.style_path,
                  basedir=self.srcdir,
+                 outdir=self.builder.outdir,
                  def_dpi=self.default_dpi,
                  real_footnotes=self.real_footnotes,
                  numbered_links=self.use_numbered_links,
