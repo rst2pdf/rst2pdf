@@ -227,6 +227,5 @@ pdf_use_coverpage = False
 pdf_verbosity=0
 pdf_invariant = True
 
-
-# If True, then the table header is repeated on tables that cross a page boundary
+# Repeat table header on tables that cross a page boundary?
 pdf_repeat_table_rows = True
