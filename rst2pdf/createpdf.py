@@ -1389,6 +1389,7 @@ def main(_args=None):
             sys.exit(1)
         options.output = args.pop()
 
+    close_infile = False
     if args[0] == '-':
         infile = sys.stdin
         options.basedir=os.getcwd()
@@ -1400,6 +1401,7 @@ def main(_args=None):
         options.basedir=os.path.dirname(os.path.abspath(filename))
         try:
             infile = open(filename)
+            close_infile = True
         except IOError as e:
             log.error(e)
             sys.exit(1)
@@ -1493,6 +1495,9 @@ def main(_args=None):
                     source_path=options.infile.name,
                     output=options.outfile,
                     compressed=options.compressed)
+
+    if close_infile:
+        options.infile.close()
 
 # Ugly hack that fixes Issue 335
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
