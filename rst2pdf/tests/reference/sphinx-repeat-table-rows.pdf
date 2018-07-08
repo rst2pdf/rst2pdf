@@ -17,7 +17,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 167.2657 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 187.2757 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
@@ -88,7 +88,7 @@ endobj
 endobj
 14 0 obj
 <<
-/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 13 0 R /Title (Testing \205repeat-table-rows)
+/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 13 0 R /Title (Testing pdf_repeat_table_rows)
 >>
 endobj
 15 0 obj
@@ -121,7 +121,7 @@ BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -158,7 +158,7 @@ endstream
 endobj
 18 0 obj
 <<
-/Length 10050
+/Length 10167
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -171,13 +171,13 @@ q
 n -10 0 525.2441 30 re B*
 Q
 q
-BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 733.0394 cm
 q
-BT 1 0 0 1 0 14 Tm 2.148381 Tw 12 TL /F1 10 Tf 0 0 0 rg (This table spans two pages. As the ) Tj /F3 10 Tf 0 0 0 rg (--repeat-table-rows) Tj /F1 10 Tf 0 0 0 rg ( option is enabled, we expect that the header is) Tj T* 0 Tw (repeated on page 2.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .573182 Tw 12 TL /F1 10 Tf 0 0 0 rg (This table spans two pages. As the ) Tj /F3 10 Tf 0 0 0 rg (pdf_repeat_table_rows) Tj /F1 10 Tf 0 0 0 rg ( setting in ) Tj /F3 10 Tf 0 0 0 rg (conf.py) Tj /F1 10 Tf 0 0 0 rg ( is set to ) Tj /F3 10 Tf 0 0 0 rg (True) Tj /F1 10 Tf 0 0 0 rg (, we expect that) Tj T* 0 Tw (the header is repeated on page 2.) Tj T* ET
 Q
 Q
 q
@@ -588,7 +588,7 @@ q
 1 0 0 1 34.01575 807.2126 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -764,7 +764,7 @@ q
 1 0 0 1 34.01575 807.2126 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -823,12 +823,12 @@ xref
 0000002261 00000 n 
 0000002919 00000 n 
 0000003044 00000 n 
-0000013147 00000 n 
-0000016711 00000 n 
-0000016779 00000 n 
-0000016813 00000 n 
-0000016847 00000 n 
-0000016881 00000 n 
+0000013264 00000 n 
+0000016828 00000 n 
+0000016896 00000 n 
+0000016930 00000 n 
+0000016964 00000 n 
+0000016998 00000 n 
 trailer
 <<
 /ID 
@@ -840,7 +840,7 @@ trailer
 /Size 25
 >>
 startxref
-16915
+17032
 %%EOF
 %PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
@@ -861,7 +861,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 167.2657 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 187.2757 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
@@ -932,7 +932,7 @@ endobj
 endobj
 14 0 obj
 <<
-/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 13 0 R /Title (Testing \205repeat-table-rows)
+/Dest [ 9 0 R /XYZ 40.01575 787.0394 0 ] /Parent 13 0 R /Title (Testing pdf_repeat_table_rows)
 >>
 endobj
 15 0 obj
@@ -965,7 +965,7 @@ BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -1002,7 +1002,7 @@ endstream
 endobj
 18 0 obj
 <<
-/Length 10050
+/Length 10167
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1015,13 +1015,13 @@ q
 n -10 0 525.2441 30 re B*
 Q
 q
-BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 733.0394 cm
 q
-BT 1 0 0 1 0 14 Tm 2.148381 Tw 12 TL /F1 10 Tf 0 0 0 rg (This table spans two pages. As the ) Tj /F3 10 Tf 0 0 0 rg (--repeat-table-rows) Tj /F1 10 Tf 0 0 0 rg ( option is enabled, we expect that the header is) Tj T* 0 Tw (repeated on page 2.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .573182 Tw 12 TL /F1 10 Tf 0 0 0 rg (This table spans two pages. As the ) Tj /F3 10 Tf 0 0 0 rg (pdf_repeat_table_rows) Tj /F1 10 Tf 0 0 0 rg ( setting in ) Tj /F3 10 Tf 0 0 0 rg (conf.py) Tj /F1 10 Tf 0 0 0 rg ( is set to ) Tj /F3 10 Tf 0 0 0 rg (True) Tj /F1 10 Tf 0 0 0 rg (, we expect that) Tj T* 0 Tw (the header is repeated on page 2.) Tj T* ET
 Q
 Q
 q
@@ -1432,7 +1432,7 @@ q
 1 0 0 1 34.01575 807.2126 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -1608,7 +1608,7 @@ q
 1 0 0 1 34.01575 807.2126 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing \226repeat-table-rows) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Testing pdf_repeat_table_rows) Tj T* ET
 Q
 Q
 q
@@ -1667,12 +1667,12 @@ xref
 0000002261 00000 n 
 0000002919 00000 n 
 0000003044 00000 n 
-0000013147 00000 n 
-0000016711 00000 n 
-0000016779 00000 n 
-0000016813 00000 n 
-0000016847 00000 n 
-0000016881 00000 n 
+0000013264 00000 n 
+0000016828 00000 n 
+0000016896 00000 n 
+0000016930 00000 n 
+0000016964 00000 n 
+0000016998 00000 n 
 trailer
 <<
 /ID 
@@ -1684,5 +1684,5 @@ trailer
 /Size 25
 >>
 startxref
-16915
+17032
 %%EOF

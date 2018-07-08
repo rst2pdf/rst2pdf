@@ -1,7 +1,7 @@
-Testing --repeat-table-rows
-===========================
+Testing pdf_repeat_table_rows
+=============================
 
-This table spans two pages. As the ``--repeat-table-rows`` option is enabled, we expect that the header is repeated on page 2.
+This table spans two pages. As the ``pdf_repeat_table_rows`` setting in ``conf.py`` is set to ``True``, we expect that the header is repeated on page 2.
 
 
 .. widths:: 20 80
