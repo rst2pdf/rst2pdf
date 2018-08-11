@@ -1280,7 +1280,9 @@ use the ``--raw-html`` command line option.
 The counter role
 ================
 
-This is a nonstandard interpreted text role, which means it will only work with rst2pdf. It implements an unlimited number of counters you can use in your text.
+.. note:: The counter role only works in PDF, if you're reading the HTML version of the manual then this section is broken. Sorry :/
+
+This is a nonstandard interpreted text role, which means it will only work with ``rst2pdf``. It implements an unlimited number of counters you can use in your text.
 For example, you could use it to have numbered figures, or numbered tables.
 
 The syntax is this:
