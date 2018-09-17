@@ -16,6 +16,7 @@
 * Fixed: ``:linenos_offset:`` now works again
 * Fixed: Removed debugging print statement when using line blocks
 * Fixed: Removed uniconverter from setup (issue 487)
+* Fixed: Error when using --date-invariant with newer reportlab versions (Issue 678)
 
 
 0.93 (2012-12-18)

@@ -1521,7 +1521,7 @@ def patch_PDFDate():
     class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
         # gmt offset now suppported
-        def __init__(self, invariant=True, dateFormatter=None):
+        def __init__(self, invariant=True, ts=None, dateFormatter=None):
             now = (2000,01,01,00,00,00,0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter
