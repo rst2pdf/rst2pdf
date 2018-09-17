@@ -101,6 +101,7 @@ class PDFBuilder(Builder):
                                 compressed=opts.get('pdf_compressed',self.config.pdf_compressed),
                                 inline_footnotes=opts.get('pdf_inline_footnotes',self.config.pdf_inline_footnotes),
                                 splittables=opts.get('pdf_splittables',self.config.pdf_splittables),
+                                repeat_table_rows=opts.get('pdf_repeat_table_rows',self.config.pdf_repeat_table_rows),
                                 default_dpi=opts.get('pdf_default_dpi',self.config.pdf_default_dpi),
                                 page_template=self.page_template,
                                 invariant=opts.get('pdf_invariant',self.config.pdf_invariant),
@@ -485,6 +486,7 @@ class PDFWriter(writers.Writer):
                 section_header_depth = 2,
                 baseurl = urlunparse(['file',os.getcwd()+os.sep,'','','','']),
                 style_path = None,
+                repeat_table_rows = False,
                 config = {}):
         writers.Writer.__init__(self)
         self.builder = builder
@@ -511,6 +513,7 @@ class PDFWriter(writers.Writer):
         self.use_numbered_links=use_numbered_links
         self.fit_background_mode=fit_background_mode
         self.section_header_depth=section_header_depth
+        self.repeat_table_rows = repeat_table_rows
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
             self.PATH = abspath(dirname(sys.executable))
@@ -617,6 +620,7 @@ class PDFWriter(writers.Writer):
                  highlightlang=self.highlightlang,
                  splittables=self.splittables,
                  style_path=self.style_path,
+                 repeat_table_rows=self.repeat_table_rows,
                  basedir=self.srcdir,
                  def_dpi=self.default_dpi,
                  real_footnotes=self.real_footnotes,
@@ -899,6 +903,7 @@ def setup(app):
     app.add_config_value('pdf_cover_template', 'sphinxcover.tmpl', None)
     app.add_config_value('pdf_appendices', [], None)
     app.add_config_value('pdf_splittables', True, None)
+    app.add_config_value('pdf_repeat_table_rows', False, None)
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
     app.add_config_value('pdf_extensions',['vectorpdf'], None)

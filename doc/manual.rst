@@ -1783,6 +1783,9 @@ To use it in your existing sphinx project you need to do the following:
     # Background images fitting mode
     pdf_fit_background_mode = 'scale'
 
+    # Repeat table header on tables that cross a page boundary?
+    pdf_repeat_table_rows = True
+
 3. (Maybe) add this in your Makefile (on unix-like systems):
 
     .. code-block:: makefile
