@@ -1497,7 +1497,7 @@ def main(_args=None):
                     compressed=options.compressed)
 
     if close_infile:
-        options.infile.close()
+        infile.close()
 
 # Ugly hack that fixes Issue 335
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
