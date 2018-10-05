@@ -45,14 +45,17 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
+
 def dirname(path):
     # os.path.dirname('abc') returns '', which is completely
     # useless for most purposes...
     return os.path.dirname(path) or '.'
 
+
 def globjoin(*parts):
     # A very common pattern in this module
     return sorted(glob.glob(os.path.join(*parts)))
+
 
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
@@ -85,6 +88,7 @@ class PathInfo(object):
         import rst2pdf.createpdf
         return rst2pdf.createpdf.main
 
+
 class MD5Info(dict):
     ''' The MD5Info class is used to round-trip good, bad, unknown
         information to/from a .json file.
@@ -112,7 +116,7 @@ class MD5Info(dict):
             if not name.endswith(self.suffix):
                 continue
             result.append('%s = [' % name)
-            result.append(',\n'.join(["        '%s'"%item for item in sorted(value)]))
+            result.append(',\n'.join(["        '%s'" % item for item in sorted(value)]))
             result.append(']\n')
         result.append('')
         return '\n'.join(result)
@@ -155,11 +159,11 @@ class MD5Info(dict):
         # Create sets and strip the sentinels while
         # working with the dictionary.
         newinfo = dict((key, set(values) - sentinel)
-                    for (key, values) in oldinfo.iteritems())
+                       for (key, values) in oldinfo.iteritems())
 
         # Create an inverse mapping of MD5s to key names
         inverse = {}
-        for key,values in newinfo.iteritems():
+        for key, values in newinfo.iteritems():
             for value in values:
                 inverse.setdefault(value, set()).add(key)
 
@@ -197,6 +201,7 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
+
 def cleanfile(fname):
     ''' Use pdfrw to make a canonical version of the file.
          - Renumber PDF objects to be same
@@ -227,6 +232,7 @@ def cleanfile(fname):
                 continue
             a.URI = prefix + uri.split('rst2pdf/tests', 1)[-1]
     PdfWriter().write(fname, trailer)
+
 
 def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     ''' checkmd5 validates the checksum of a generated PDF
@@ -312,6 +318,7 @@ def build_sphinx(sphinxdir, outpdf):
     else:
         shutil.copytree(pdfdir, outpdf)
     return errcode, result
+
 
 def build_txt(iprefix, outpdf, fastfork):
         inpfname = iprefix + '.txt'
