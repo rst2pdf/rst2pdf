@@ -14,7 +14,7 @@ opt_imports.py contains logic for handling optional imports.
 import os
 import sys
 
-from log import log
+from .log import log
 
 PyHyphenHyphenator = None
 DCWHyphenator = None

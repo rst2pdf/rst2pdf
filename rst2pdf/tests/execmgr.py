@@ -28,6 +28,9 @@ import textwrap
 from signal import SIGTERM, SIGKILL
 import traceback
 
+import six
+
+
 class BaseExec(object):
     ''' BaseExec is designed to be subclassed.
         It wraps subprocess.Popen, and adds the
@@ -78,7 +81,7 @@ class BaseExec(object):
                 preexec_fn()
             except Exception:
                 sys.stdout.flush()
-                print >> sys.stderr, traceback.format_exc()
+                six.print_(traceback.format_exc(), file=sys.stderr)
                 sys.stderr.write(chr(1))
             except SystemExit as s:
                 sys.stdout.flush()
@@ -88,7 +91,7 @@ class BaseExec(object):
                 except:
                     pass
                 if code:
-                    print >> sys.stderr, code
+                    six.print_(code, file=sys.stderr)
                     sys.stderr.write(chr(1))
             else:
                 sys.stdout.flush()
@@ -165,6 +168,7 @@ class PipeReader(object):
     '''
     TIMEOUT = 1.0     # Poll interval in seconds
     BUFSIZE = 100000
+
     def __init__(self, *pipes, **kw):
         self.timeout = kw.pop('timeout', self.TIMEOUT)
         self.bufsize = kw.pop('bufsize', self.BUFSIZE)
@@ -205,6 +209,9 @@ class PipeReader(object):
                 return None, None   # Allow code to execute after timeout
         return self.by_pipenum[ready.pop()]()
 
+    def __next__(self):
+        return self.next()
+
 
 class LineSplitter(object):
     ''' LineSplitter takes arbitrary string
@@ -224,7 +231,12 @@ class LineSplitter(object):
                 chunk = '\n'
             else:
                 return self
-        chunk = chunk.replace('\r\n', '\n').replace('\r', '\n')
+        if six.PY2:
+            chunk = chunk.replace('\r\n', '\n').replace('\r', '\n')
+        else:
+            chunk = chunk.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+            chunk = chunk.decode()
+
         chunk = self.leftovers + chunk
         newlines = chunk.split('\n')
         self.leftovers = newlines.pop()
@@ -236,11 +248,15 @@ class LineSplitter(object):
 
     def __iter__(self):
         return self
-    def next(self):
+
+    def __next__(self):
         try:
             return self.prefix, self.lines.pop()
         except IndexError:
             raise StopIteration
+
+    next = __next__
+
 
 
 class TextOutExec(BaseExec):
@@ -282,7 +298,7 @@ class TextOutExec(BaseExec):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         lines = self.lines
         while not lines:
             self.checktimeout()
@@ -299,6 +315,9 @@ class TextOutExec(BaseExec):
                     lines.append(('**', str(self.proc.wait())))
         return '%s %s' % lines.pop()
 
+    next = __next__
+
+
 def elapsedtime(when=time.time()):
     mins, secs = divmod(round(time.time() - when, 1), 60)
     hrs, mins = divmod(mins, 60)
@@ -313,7 +332,7 @@ def default_logger(resultlist, data=None, data2=None):
         resultlist.append(data)
     if data2 is None:
         data2 = data
-    print data2
+        six.print_(data2)
 
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
@@ -354,36 +373,36 @@ def textexec(*arg, **kw):
 if __name__ == '__main__':
 
     def goodfunc():
-        print "Good func", sys.argv
+        six.print_("Good func", sys.argv)
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
         #raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
-        print "Starting subprocess"
+        six.print_("Starting subprocess")
         sys.stdout.flush()
         for i in range(10):
             time.sleep(0.2)
-            print "This is line", i
+            six.print_("This is line", i)
             sys.stdout.flush()
-        print >> sys.stderr, "This is an error message"
-        print "Ending subprocess"
+        six.print_("This is an error message", file=sys.stderr)
+        six.print_("Ending subprocess")
         if sys.argv[1] == 'die':
             raise SystemExit('Deliberately croaking')
     else:
-        print 'Calling good python_proc 1'
+        six.print_('Calling good python_proc 1')
         textexec('goodfunc', '1', python_proc=goodfunc)
-        print 'Calling bad python_proc 1'
+        six.print_('Calling bad python_proc 1')
         textexec('badfunc', '1', python_proc=badfunc)
-        print 'Calling good python_proc 2'
+        six.print_('Calling good python_proc 2')
         textexec('goodfunc', '2', python_proc=goodfunc)
-        print 'Calling bad python_proc 2'
+        six.print_('Calling bad python_proc 2')
         textexec('badfunc', '2', python_proc=badfunc)
-        print "Calling myself"
+        six.print_("Calling myself")
         textexec(__file__, 'subprocess')
-        print "Calling myself with kill time"
+        six.print_("Calling myself with kill time")
         textexec(__file__, 'subprocess', timeout=0.8)
-        print "Calling myself with forced error exit"
+        six.print_("Calling myself with forced error exit")
         textexec(__file__, 'die')
-        print 'All Done'
+        six.print_('All Done')

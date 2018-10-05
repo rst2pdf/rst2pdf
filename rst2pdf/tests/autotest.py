@@ -15,7 +15,6 @@ See LICENSE.txt for licensing terms
 '''
 
 import os
-import sys
 import glob
 import shutil
 import shlex
@@ -24,7 +23,8 @@ from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
 from pythonpaths import setpythonpaths
-
+import six
+from six import print_
 # md5 module deprecated, but hashlib not available in 2.4
 try:
     import hashlib
@@ -261,7 +261,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     info = MD5Info()
     if os.path.exists(md5path):
         f = open(md5path, 'rb')
-        exec f in info
+        six.exec_(f, info)
         f.close()
 
     # Generate the current MD5
@@ -282,7 +282,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     resulttype = info.find(m, new_category)
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
-        print "Updating MD5 file"
+        six.print_("Updating MD5 file")
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
@@ -418,10 +418,9 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
-    print
-    print 'Final checksum statistics:',
-    print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
-    print
+    print_('\nFinal checksum statistics:',)
+    print_(', '.join(sorted('%s=%s' % x for x in results.iteritems())))
+    print_('\n')
 
     return returnErrorCode
 
