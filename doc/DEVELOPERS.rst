@@ -153,3 +153,5 @@ Getting commit rights
 ---------------------
 
 Just ask in the mailing list.
+
+.. note:: some tests require the execution of the ``dot`` command, you should install the package graphviz from your packages manager.
