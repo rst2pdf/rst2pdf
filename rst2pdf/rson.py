@@ -54,8 +54,16 @@ import bisect
 import re
 import sys
 
+import six
+
+if six.PY3:
+    unicode = str
+    basestring = str
+
+
 class RSONDecodeError(ValueError):
     pass
+
 
 class Tokenizer(list):
     ''' The RSON tokenizer uses re.split() to rip the source string
@@ -359,21 +367,39 @@ class QuotedToken(object):
     ''' Subclass or replace this if you don't like quoted string handling
     '''
 
-    parse_quoted_str = staticmethod(
-          lambda token, s, unicode=unicode: unicode(s, 'utf-8'))
-    parse_encoded_chr = unichr
+    if six.PY3:
+        parse_encoded_chr = chr
+        parse_quoted_str = staticmethod(
+                                        lambda token, s, str=str: str(s, 'utf-8'))
+    else:
+        parse_quoted_str = staticmethod(
+                                        lambda token, s,
+                                        unicode=unicode: unicode(s, 'utf-8'))
+
+        parse_encoded_chr = unichr
+
     parse_join_str = u''.join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
-    quoted_mapper = { '\\\\' : u'\\',
-               r'\"' : u'"',
-               r'\/' : u'/',
-               r'\b' : u'\b',
-               r'\f' : u'\f',
-               r'\n' : u'\n',
-               r'\r' : u'\r',
-               r'\t' : u'\t'}.get
+    if six.PY3:
+        quoted_mapper = {'\\\\': '\\',
+                         r'\"': '"',
+                         r'\/': '/',
+                         r'\b': '\b',
+                         r'\f': '\f',
+                         r'\n': '\n',
+                         r'\r': '\r',
+                         r'\t': '\t'}.get
+    else:
+        quoted_mapper = {'\\\\': u'\\',
+                         r'\"': u'"',
+                         r'\/': u'/',
+                         r'\b': u'\b',
+                         r'\f': u'\f',
+                         r'\n': u'\n',
+                         r'\r': u'\r',
+                         r'\t': u'\t'}.get
 
     def quoted_parse_factory(self, int=int, iter=iter, len=len):
         quoted_splitter = self.quoted_splitter

@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
-
-
 '''
 Copyright (c) 2009, Patrick Maupin, Austin, Texas
 
@@ -336,7 +331,9 @@ def build_txt(iprefix, outpdf, fastfork):
         args.extend(('-o', outpdf))
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
-def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False):
+
+def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
+               ignore_ignorefile=False):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
@@ -363,7 +360,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
                 log([], 'Ingoring ' + iprefix + '.ignore file')
             else:
                 f = open(iprefix + '.ignore', 'r')
-                data=f.read()
+                data = f.read()
                 f.close()
                 log([], 'Ignored: ' + data)
                 return 'ignored', 0
@@ -386,18 +383,23 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
+                                      errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
+                                      errcode, iprefix)
     log(result, '')
-    outf = open(outtext, 'wb')
+    outf = open(outtext, 'w')
     outf.write('\n'.join(result))
     outf.close()
 
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None, ignore_ignorefile=False):
+
+def run_testlist(testfiles=None, incremental=False, fastfork=None,
+                 do_text=False, do_sphinx=False, updatemd5=None,
+                 ignore_ignorefile=False):
     returnErrorCode = 0
     if not testfiles:
         testfiles = []
@@ -423,6 +425,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
     print_('\n')
 
     return returnErrorCode
+
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
@@ -455,6 +458,7 @@ def parse_commandline():
         dest='updatemd5', default=None,
         help='Update MD5 checksum files')
     return parser
+
 
 def main(args=None):
     parser = parse_commandline()
