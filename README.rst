@@ -7,7 +7,7 @@ library.
 
 More information is available `at the main website`__
 
-__ http://rst2pdf.ralsina.me/stories/index.html
+__ http://rst2pdf.github.io
 
 Features
 ========
