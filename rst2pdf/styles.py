@@ -27,10 +27,10 @@ import reportlab.rl_config
 
 from rst2pdf.rson import loads as rson_loads
 
-import findfonts
-from log import log
+from . import findfonts
+from .log import log
 
-from opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
 
 HAS_WORDAXE = wordaxe is not None
 

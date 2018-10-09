@@ -372,9 +372,11 @@ smartypants.py license::
 
 """
 
+import re
+
+
 default_smartypants_attr = "1"
 
-import re
 
 tags_to_skip_regex = re.compile(r"<(/)?(pre|code|kbd|script|math)[^>]*>", re.I)
 
@@ -857,7 +859,7 @@ if __name__ == "__main__":
 	from docutils.core import publish_string
 	docstring_html = publish_string(__doc__, writer_name='html')
 
-	print docstring_html
+	print(docstring_html)
 
 
 	# Unit test output goes out stderr.  No worries.

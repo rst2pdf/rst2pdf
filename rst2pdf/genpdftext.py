@@ -7,16 +7,23 @@
 # See LICENSE.txt for licensing terms
 
 import os
-from xml.sax.saxutils import escape
-from log import log, nodeid
-from basenodehandler import NodeHandler
 import docutils.nodes
-from urlparse import urljoin, urlparse
-from reportlab.lib.units import cm
-from opt_imports import Paragraph
+from xml.sax.saxutils import escape
 
-from image import MyImage, missing
-from flowables import MySpacer
+import six
+
+if six.PY3:
+    from urllib.parse import urljoin, urlparse
+else:
+    from urlparse import urljoin, urlparse
+
+from reportlab.lib.units import cm
+from .opt_imports import Paragraph
+
+from .basenodehandler import NodeHandler
+from .flowables import MySpacer
+from .image import MyImage, missing
+from .log import log, nodeid
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
