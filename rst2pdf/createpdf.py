@@ -939,7 +939,7 @@ class HeaderOrFooter(object):
                         if isinstance (cell, list):
                             data[r][c]=self.replaceTokens(cell, canv, doc, smarty)
                         else:
-                            row[r]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+                            row[c]=self.replaceTokens([cell,], canv, doc, smarty)[0]
                 elems[i]=DelayedTable(data, e._colWidths, e.style)
 
             elif isinstance(e, BoundByWidth):
