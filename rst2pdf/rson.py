@@ -151,8 +151,12 @@ class Tokenizer(list):
                 source = source.encode('utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
-            source = source.replace('\r\n', '\n').replace('\r', '\n')
-            sourcelist = splitter(source)
+            if six.PY2:
+                source = source.replace('\r\n', '\n').replace('\r', '\n')
+                sourcelist = splitter(source)
+            else:
+                source = source.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+                sourcelist = splitter(source.decode())
 
             # Get the indentation at the start of the file
             indentation = '\n' + sourcelist[0]
@@ -161,15 +165,19 @@ class Tokenizer(list):
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
-            next = sourceiter.next
-            offset -= len(next())
+            if six.PY2:
+                next_ = sourceiter.next
+                offset -= len(next_())
+            else:
+                next_ = sourceiter.__next__
+                offset -= len(next_())
 
             # Strip comment from first line
             if len(sourcelist) > 1 and sourcelist[1].startswith('#'):
                 i = 1
                 while len(sourcelist) > i and not sourcelist[i].startswith('\n'):
                     i += 1
-                    offset -= len(next())
+                    offset -= len(next_())
 
 
             # Preallocate the list
@@ -179,7 +187,7 @@ class Tokenizer(list):
 
             # Create all the tokens
             for token in sourceiter:
-                whitespace = next()
+                whitespace = next_()
                 t0 = token[0]
                 if t0 not in delimiterset:
                     if t0 == '\n':
@@ -420,7 +428,7 @@ class QuotedToken(object):
                 result = token[-1].stringcache(result, result)
             return result
 
-        def parse(token, next):
+        def parse(token, next_):
             s = token[2]
             if len(s) < 2 or not (s[0] == s[-1] == '"'):
                 token[-1].error('No end quote on string', token)
@@ -430,16 +438,21 @@ class QuotedToken(object):
                 result = [result]
                 append = result.append
                 s = iter(s)
-                next = s.next
-                next()
+                if six.PY2:
+                    next_ = s.next
+                    next_()
+                else:
+                    next_ = s.__next__
+                    next_()
+
                 for special in s:
-                    nonmatch = next()
+                    nonmatch = next_()
                     remap = quoted_mapper(special)
                     if remap is None:
                         if len(special) == 6:
                             uni = int(special[2:], 16)
                             if 0xd800 <= uni <= 0xdbff and allow_double:
-                                uni, nonmatch = parse_double_unicode(uni, nonmatch, next, token)
+                                uni, nonmatch = parse_double_unicode(uni, nonmatch, next_, token)
                             remap = parse_encoded_chr(uni)
                         else:
                             return badstring(token, special)
@@ -451,15 +464,14 @@ class QuotedToken(object):
                 result = token[-1].stringcache(result, result)
             return result
 
-
-        def parse_double_unicode(uni, nonmatch, next, token):
+        def parse_double_unicode(uni, nonmatch, next_, token):
             ''' Munged version of UCS-4 code pair stuff from
                 simplejson.
             '''
             ok = True
             try:
-                uni2 = next()
-                nonmatch2 = next()
+                uni2 = next_()
+                nonmatch2 = next_()
             except:
                 ok = False
             ok = ok and not nonmatch and uni2.startswith(r'\u') and len(uni2) == 6
@@ -517,7 +529,7 @@ class UnquotedToken(object):
     parse_unquoted_str = staticmethod(
         lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
 
-    special_strings = dict(true = True, false = False, null = None)
+    special_strings = dict(true=True, false=False, null=None)
 
     unquoted_pattern = r'''
     (?:
@@ -544,7 +556,7 @@ class UnquotedToken(object):
 
     def unquoted_parse_factory(self):
         unquoted_match = re.compile(self.unquoted_pattern,
-                        re.VERBOSE).match
+                                    re.VERBOSE).match
 
         parse_unquoted_str = self.parse_unquoted_str
         parse_float = self.parse_float
@@ -555,7 +567,7 @@ class UnquotedToken(object):
             from decimal import Decimal
             parse_float = Decimal
 
-        def parse(token, next):
+        def parse(token, next_):
             s = token[2]
             m = unquoted_match(s)
             if m is None:
@@ -623,14 +635,14 @@ class EqualToken(object):
         if encoder is None:
             encoder = read_unquoted
 
-        def parse(firsttok, next):
+        def parse(firsttok, next_):
             tokens = firsttok[-1]
             indent, linenum = firsttok[4:6]
-            token = next()
+            token = next_()
             while token[5] == linenum:
-                token = next()
+                token = next_()
             while  token[4] > indent:
-                token = next()
+                token = next_()
             tokens.push(token)
 
             # Get rid of \n, and indent one past =
