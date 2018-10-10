@@ -167,10 +167,10 @@ class Tokenizer(list):
             sourceiter = iter(sourcelist)
             if six.PY2:
                 next_ = sourceiter.next
-                offset -= len(next_())
             else:
                 next_ = sourceiter.__next__
-                offset -= len(next_())
+
+            offset -= len(next_())
 
             # Strip comment from first line
             if len(sourcelist) > 1 and sourcelist[1].startswith('#'):
@@ -178,7 +178,6 @@ class Tokenizer(list):
                 while len(sourcelist) > i and not sourcelist[i].startswith('\n'):
                     i += 1
                     offset -= len(next_())
-
 
             # Preallocate the list
             self.append(None)
@@ -285,8 +284,9 @@ class BaseObjects(object):
 
         def __getattr__(self, key):
             return self[key]
+
         def __setattr__(self, key, value):
-            self[key]=value
+            self[key] = value
 
         def append(self, itemlist):
             mydict = self
@@ -648,7 +648,7 @@ class EqualToken(object):
             # Get rid of \n, and indent one past =
             indent = indent[1:] + ' '
 
-            bigstring = tokens.source[-firsttok[0] + 1 : -token[0]]
+            bigstring = tokens.source[-firsttok[0] + 1: -token[0]]
             stringlist = bigstring.split('\n')
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)
