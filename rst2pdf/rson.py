@@ -181,7 +181,8 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            self *= len(sourcelist) / 2 + 1
+            print(len(sourcelist) / 2)
+            self *= len(sourcelist) // 2 + 1
             index = 0
 
             # Create all the tokens
@@ -378,7 +379,7 @@ class QuotedToken(object):
     if six.PY3:
         parse_encoded_chr = chr
         parse_quoted_str = staticmethod(
-                                        lambda token, s, str=str: str(s, 'utf-8'))
+                                        lambda token, s, str=str: str(s))
     else:
         parse_quoted_str = staticmethod(
                                         lambda token, s,
@@ -526,8 +527,12 @@ class UnquotedToken(object):
     parse_int = staticmethod(
         lambda s: int(s.replace('_', ''), 0))
     parse_float = float
-    parse_unquoted_str = staticmethod(
-        lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+    if six.PY2:
+        parse_unquoted_str = staticmethod(
+            lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+    else:
+        parse_unquoted_str = staticmethod(
+            lambda token, unicode=str: str(token[2]))
 
     special_strings = dict(true=True, false=False, null=None)
 
