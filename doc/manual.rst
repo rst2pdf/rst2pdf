@@ -1381,17 +1381,6 @@ as text, the math role embeds an image. That means:
 
 So, use it only in emergencies ;-)
 
-You can also use an inline substitution of the math directive for things you use often,
-which is the same as using the math role::
-
-    This is the square of x: |xsq|
-
-    .. |xsq| math:: x^2
-
-This is the square of x: |xsq|
-
-.. |xsq| math:: x^2
-
 You don't need to worry about fonts, the correct math fonts will be used and embedded in
 your PDF automatically (they are included with matplotlib).
 
