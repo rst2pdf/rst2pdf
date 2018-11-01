@@ -19,6 +19,10 @@ from docutils.parsers.rst import directives
 import rst2pdf.pygments_code_block_directive
 directives.register_directive('code-block', rst2pdf.pygments_code_block_directive.code_block_directive)
 
+from docutils.parsers.rst import roles
+import rst2pdf.counter_off_role
+roles.register_canonical_role('counter', rst2pdf.counter_off_role.counter_fn) 
+
 import rst2pdf.noop_directive
 directives.register_directive('oddeven', rst2pdf.noop_directive.noop_directive)
 
