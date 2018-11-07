@@ -16,14 +16,17 @@ for name in list(pstyles.get_all_styles()):
     css=os.popen('pygmentize -S %s -f html'%name, 'r').read()
     for line in css.splitlines():
         line = line.strip()
-        sname = "pygments-" + line.split(' ')[0][1:]
+        ssname = line.split(' ')[0][1:]
+        sname = "pygments-" + ssname
         classnames.add(sname)
+        classnames.add(ssname)
 
 def css2rl(css):
     dstyles = {}
     # First create a dumb stylesheet
     for key in STANDARD_TYPES:
         dstyles["pygments-" + STANDARD_TYPES[key]] = {'parent': 'code'}
+        dstyles[STANDARD_TYPES[key]] = {'parent': "pygments-" + STANDARD_TYPES[key]}
     seenclassnames=set()
     styles = []
     for line in css.splitlines():
@@ -64,7 +67,6 @@ def css2rl(css):
     # Now add default styles for all unseen class names
     for sname in classnames-seenclassnames:
         style = dstyles.get(sname, {'parent': 'code'})
-        style['textColor']='black'
         styles.append([sname, style])
 
 
