@@ -2,18 +2,23 @@ styles:
     pygments-bp: {parent: code, textColor: #658b00}
     pygments-c: {parent: code, textColor: #228B22}
     pygments-c1: {parent: code, textColor: #228B22}
+    pygments-ch: {parent: code, textColor: #228B22}
     pygments-cm: {parent: code, textColor: #228B22}
     pygments-cp: {parent: code, textColor: #1e889b}
+    pygments-cpf: {parent: code, textColor: #228B22}
     pygments-cs:
         fontName: stdMonoBold
         parent: code
         textColor: #8B008B
 
+    pygments-dl: {parent: code, textColor: #CD5555}
     pygments-err:
         backColor: #e3d2d2
         parent: code
         textColor: #a61717
 
+    pygments-esc: {parent: code, textColor: black}
+    pygments-fm: {parent: code, textColor: #008b45}
     pygments-g: {parent: code, textColor: black}
     pygments-gd: {parent: code, textColor: #aa0000}
     pygments-ge:
@@ -80,11 +85,12 @@ styles:
     pygments-kt:
         fontName: stdMonoBold
         parent: code
-        textColor: #a7a7a7
+        textColor: #00688B
 
     pygments-l: {parent: code, textColor: black}
     pygments-ld: {parent: code, textColor: black}
     pygments-m: {parent: code, textColor: #B452CD}
+    pygments-mb: {parent: code, textColor: #B452CD}
     pygments-mf: {parent: code, textColor: #B452CD}
     pygments-mh: {parent: code, textColor: #B452CD}
     pygments-mi: {parent: code, textColor: #B452CD}
@@ -122,6 +128,7 @@ styles:
     pygments-s: {parent: code, textColor: #CD5555}
     pygments-s1: {parent: code, textColor: #CD5555}
     pygments-s2: {parent: code, textColor: #CD5555}
+    pygments-sa: {parent: code, textColor: #CD5555}
     pygments-sb: {parent: code, textColor: #CD5555}
     pygments-sc: {parent: code, textColor: #CD5555}
     pygments-sd: {parent: code, textColor: #CD5555}
@@ -138,5 +145,6 @@ styles:
     pygments-vc: {parent: code, textColor: #00688B}
     pygments-vg: {parent: code, textColor: #00688B}
     pygments-vi: {parent: code, textColor: #00688B}
+    pygments-vm: {parent: code, textColor: #00688B}
     pygments-w: {parent: code, textColor: #bbbbbb}
     pygments-x: {parent: code, textColor: black}
