@@ -9,8 +9,20 @@ styles:
     cs: parent: pygments-cs
     dl: parent: pygments-dl
     err: parent: pygments-err
+    esc: parent: pygments-esc
     fm: parent: pygments-fm
-    hll: parent: pygments-hll
+    g: parent: pygments-g
+    gd: parent: pygments-gd
+    ge: parent: pygments-ge
+    gh: parent: pygments-gh
+    gi: parent: pygments-gi
+    go: parent: pygments-go
+    gp: parent: pygments-gp
+    gr: parent: pygments-gr
+    gs: parent: pygments-gs
+    gt: parent: pygments-gt
+    gu: parent: pygments-gu
+    hll: parent: code
     il: parent: pygments-il
     k: parent: pygments-k
     kc: parent: pygments-kc
@@ -43,6 +55,7 @@ styles:
     nx: parent: pygments-nx
     o: parent: pygments-o
     ow: parent: pygments-ow
+    p: parent: pygments-p
     py: parent: pygments-py
     pygments-bp: {parent: code, textColor: #5B269A}
     pygments-c: {parent: code, textColor: #177500}
@@ -54,19 +67,19 @@ styles:
     pygments-cs: {parent: code, textColor: #177500}
     pygments-dl: {parent: code, textColor: #C41A16}
     pygments-err: {parent: code, textColor: #000000}
-    pygments-esc: {parent: code, textColor: black}
+    pygments-esc: parent: code
     pygments-fm: {parent: code, textColor: #000000}
-    pygments-g: {parent: code, textColor: black}
-    pygments-gd: {parent: code, textColor: black}
-    pygments-ge: {parent: code, textColor: black}
-    pygments-gh: {parent: code, textColor: black}
-    pygments-gi: {parent: code, textColor: black}
-    pygments-go: {parent: code, textColor: black}
-    pygments-gp: {parent: code, textColor: black}
-    pygments-gr: {parent: code, textColor: black}
-    pygments-gs: {parent: code, textColor: black}
-    pygments-gt: {parent: code, textColor: black}
-    pygments-gu: {parent: code, textColor: black}
+    pygments-g: parent: code
+    pygments-gd: parent: code
+    pygments-ge: parent: code
+    pygments-gh: parent: code
+    pygments-gi: parent: code
+    pygments-go: parent: code
+    pygments-gp: parent: code
+    pygments-gr: parent: code
+    pygments-gs: parent: code
+    pygments-gt: parent: code
+    pygments-gu: parent: code
     pygments-hll:
         backColor: #ffffcc
         parent: code
@@ -104,7 +117,7 @@ styles:
     pygments-nx: {parent: code, textColor: #000000}
     pygments-o: {parent: code, textColor: #000000}
     pygments-ow: {parent: code, textColor: #000000}
-    pygments-p: {parent: code, textColor: black}
+    pygments-p: parent: code
     pygments-py: {parent: code, textColor: #000000}
     pygments-s: {parent: code, textColor: #C41A16}
     pygments-s1: {parent: code, textColor: #C41A16}
@@ -123,8 +136,8 @@ styles:
     pygments-vg: {parent: code, textColor: #000000}
     pygments-vi: {parent: code, textColor: #000000}
     pygments-vm: {parent: code, textColor: #000000}
-    pygments-w: {parent: code, textColor: black}
-    pygments-x: {parent: code, textColor: black}
+    pygments-w: parent: code
+    pygments-x: parent: code
     s: parent: pygments-s
     s1: parent: pygments-s1
     s2: parent: pygments-s2
@@ -142,3 +155,5 @@ styles:
     vg: parent: pygments-vg
     vi: parent: pygments-vi
     vm: parent: pygments-vm
+    w: parent: pygments-w
+    x: parent: pygments-x

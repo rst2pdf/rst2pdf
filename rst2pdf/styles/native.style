@@ -22,7 +22,7 @@ styles:
     gs: parent: pygments-gs
     gt: parent: pygments-gt
     gu: parent: pygments-gu
-    hll: parent: pygments-hll
+    hll: parent: code
     il: parent: pygments-il
     k: parent: pygments-k
     kc: parent: pygments-kc

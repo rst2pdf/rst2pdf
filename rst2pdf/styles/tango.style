@@ -9,6 +9,7 @@ styles:
     cs: parent: pygments-cs
     dl: parent: pygments-dl
     err: parent: pygments-err
+    esc: parent: pygments-esc
     fm: parent: pygments-fm
     g: parent: pygments-g
     gd: parent: pygments-gd
@@ -21,7 +22,7 @@ styles:
     gs: parent: pygments-gs
     gt: parent: pygments-gt
     gu: parent: pygments-gu
-    hll: parent: pygments-hll
+    hll: parent: code
     il: parent: pygments-il
     k: parent: pygments-k
     kc: parent: pygments-kc
@@ -94,7 +95,7 @@ styles:
 
     pygments-dl: {parent: code, textColor: #4e9a06}
     pygments-err: {parent: code, textColor: #a40000}
-    pygments-esc: {parent: code, textColor: black}
+    pygments-esc: parent: code
     pygments-fm: {parent: code, textColor: #000000}
     pygments-g: {parent: code, textColor: #000000}
     pygments-gd: {parent: code, textColor: #a40000}
