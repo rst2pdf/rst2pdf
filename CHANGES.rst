@@ -2,6 +2,8 @@
 {next}
 ------
 
+* Support inline syntax highlighting (Issue #467)
+* Updated stylesheets to match current version of pygments.
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
 * Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)
 * Added: The Sphinx ``today`` config setting is now used if it is set
