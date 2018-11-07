@@ -10,6 +10,11 @@ styles:
         parent: code
         textColor: #999988
 
+    pygments-ch:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #999988
+
     pygments-cm:
         fontName: stdMonoItalic
         parent: code
@@ -20,15 +25,27 @@ styles:
         parent: code
         textColor: #999999
 
+    pygments-cpf:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #999988
+
     pygments-cs:
         fontName: stdMonoItalic
         parent: code
         textColor: #999999
 
+    pygments-dl: {parent: code, textColor: #bb8844}
     pygments-err:
         backColor: #e3d2d2
         parent: code
         textColor: #a61717
+
+    pygments-esc: {parent: code, textColor: black}
+    pygments-fm:
+        fontName: stdMonoBold
+        parent: code
+        textColor: #990000
 
     pygments-g: {parent: code, textColor: black}
     pygments-gd:
@@ -101,6 +118,7 @@ styles:
     pygments-l: {parent: code, textColor: black}
     pygments-ld: {parent: code, textColor: black}
     pygments-m: {parent: code, textColor: #009999}
+    pygments-mb: {parent: code, textColor: #009999}
     pygments-mf: {parent: code, textColor: #009999}
     pygments-mh: {parent: code, textColor: #009999}
     pygments-mi: {parent: code, textColor: #009999}
@@ -146,6 +164,7 @@ styles:
     pygments-s: {parent: code, textColor: #bb8844}
     pygments-s1: {parent: code, textColor: #bb8844}
     pygments-s2: {parent: code, textColor: #bb8844}
+    pygments-sa: {parent: code, textColor: #bb8844}
     pygments-sb: {parent: code, textColor: #bb8844}
     pygments-sc: {parent: code, textColor: #bb8844}
     pygments-sd: {parent: code, textColor: #bb8844}
@@ -158,5 +177,6 @@ styles:
     pygments-vc: {parent: code, textColor: #008080}
     pygments-vg: {parent: code, textColor: #008080}
     pygments-vi: {parent: code, textColor: #008080}
+    pygments-vm: {parent: code, textColor: #008080}
     pygments-w: {parent: code, textColor: #bbbbbb}
     pygments-x: {parent: code, textColor: black}
