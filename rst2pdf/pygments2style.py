@@ -28,7 +28,8 @@ def css2rl(css):
     styles = []
     for line in css.splitlines():
         line = line.strip()
-        sname = "pygments-" + line.split(' ')[0][1:]
+        ssname = line.split(' ')[0][1:]
+        sname = "pygments-" + ssname
         seenclassnames.add(sname)
         style = dstyles.get(sname, {'parent': 'code'})
         options = line.split('{')[1].split('}')[0].split(';')
@@ -57,12 +58,15 @@ def css2rl(css):
         if style.get('textColor', None) is None:
             style['textColor']='black'
         styles.append([sname, style])
+        # Alias for inline styles (Issue #467)
+        styles.append([ssname, {'parent': sname}])
 
     # Now add default styles for all unseen class names
     for sname in classnames-seenclassnames:
         style = dstyles.get(sname, {'parent': 'code'})
         style['textColor']='black'
         styles.append([sname, style])
+
 
     return dumpstyle.dumps({'styles': styles})
 

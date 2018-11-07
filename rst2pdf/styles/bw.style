@@ -1,4 +1,29 @@
 styles:
+    c: parent: pygments-c
+    c1: parent: pygments-c1
+    ch: parent: pygments-ch
+    cm: parent: pygments-cm
+    cpf: parent: pygments-cpf
+    cs: parent: pygments-cs
+    dl: parent: pygments-dl
+    err: parent: pygments-err
+    ge: parent: pygments-ge
+    gh: parent: pygments-gh
+    gp: parent: pygments-gp
+    gs: parent: pygments-gs
+    gu: parent: pygments-gu
+    hll: parent: pygments-hll
+    k: parent: pygments-k
+    kc: parent: pygments-kc
+    kd: parent: pygments-kd
+    kn: parent: pygments-kn
+    kr: parent: pygments-kr
+    nc: parent: pygments-nc
+    ne: parent: pygments-ne
+    ni: parent: pygments-ni
+    nn: parent: pygments-nn
+    nt: parent: pygments-nt
+    ow: parent: pygments-ow
     pygments-bp: {parent: code, textColor: black}
     pygments-c:
         fontName: stdMonoItalic
@@ -224,3 +249,16 @@ styles:
     pygments-vm: {parent: code, textColor: black}
     pygments-w: {parent: code, textColor: black}
     pygments-x: {parent: code, textColor: black}
+    s: parent: pygments-s
+    s1: parent: pygments-s1
+    s2: parent: pygments-s2
+    sa: parent: pygments-sa
+    sb: parent: pygments-sb
+    sc: parent: pygments-sc
+    sd: parent: pygments-sd
+    se: parent: pygments-se
+    sh: parent: pygments-sh
+    si: parent: pygments-si
+    sr: parent: pygments-sr
+    ss: parent: pygments-ss
+    sx: parent: pygments-sx

@@ -537,7 +537,10 @@ class RstToPdf(object):
         if doctree is None:
             if text is not None:
                 if self.language:
-                    settings_overrides={'language_code': self.docutils_language}
+                    settings_overrides={
+                        'language_code': self.docutils_language,
+                        'syntax_highlight': 'short',
+                    }
                 else:
                     settings_overrides={}
                 settings_overrides['strip_elements_with_classes']=self.strip_elements_with_classes

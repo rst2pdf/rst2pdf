@@ -1,4 +1,61 @@
 styles:
+    bp: parent: pygments-bp
+    c: parent: pygments-c
+    c1: parent: pygments-c1
+    ch: parent: pygments-ch
+    cm: parent: pygments-cm
+    cp: parent: pygments-cp
+    cpf: parent: pygments-cpf
+    cs: parent: pygments-cs
+    dl: parent: pygments-dl
+    err: parent: pygments-err
+    fm: parent: pygments-fm
+    g: parent: pygments-g
+    gd: parent: pygments-gd
+    ge: parent: pygments-ge
+    gh: parent: pygments-gh
+    gi: parent: pygments-gi
+    go: parent: pygments-go
+    gp: parent: pygments-gp
+    gr: parent: pygments-gr
+    gs: parent: pygments-gs
+    gt: parent: pygments-gt
+    gu: parent: pygments-gu
+    hll: parent: pygments-hll
+    il: parent: pygments-il
+    k: parent: pygments-k
+    kc: parent: pygments-kc
+    kd: parent: pygments-kd
+    kn: parent: pygments-kn
+    kp: parent: pygments-kp
+    kr: parent: pygments-kr
+    kt: parent: pygments-kt
+    l: parent: pygments-l
+    ld: parent: pygments-ld
+    m: parent: pygments-m
+    mb: parent: pygments-mb
+    mf: parent: pygments-mf
+    mh: parent: pygments-mh
+    mi: parent: pygments-mi
+    mo: parent: pygments-mo
+    n: parent: pygments-n
+    na: parent: pygments-na
+    nb: parent: pygments-nb
+    nc: parent: pygments-nc
+    nd: parent: pygments-nd
+    ne: parent: pygments-ne
+    nf: parent: pygments-nf
+    ni: parent: pygments-ni
+    nl: parent: pygments-nl
+    nn: parent: pygments-nn
+    no: parent: pygments-no
+    nt: parent: pygments-nt
+    nv: parent: pygments-nv
+    nx: parent: pygments-nx
+    o: parent: pygments-o
+    ow: parent: pygments-ow
+    p: parent: pygments-p
+    py: parent: pygments-py
     pygments-bp: {parent: code, textColor: #3465a4}
     pygments-c:
         fontName: stdMonoItalic
@@ -216,3 +273,22 @@ styles:
     pygments-vm: {parent: code, textColor: #000000}
     pygments-w: {parent: code, textColor: #f8f8f8}
     pygments-x: {parent: code, textColor: #000000}
+    s: parent: pygments-s
+    s1: parent: pygments-s1
+    s2: parent: pygments-s2
+    sa: parent: pygments-sa
+    sb: parent: pygments-sb
+    sc: parent: pygments-sc
+    sd: parent: pygments-sd
+    se: parent: pygments-se
+    sh: parent: pygments-sh
+    si: parent: pygments-si
+    sr: parent: pygments-sr
+    ss: parent: pygments-ss
+    sx: parent: pygments-sx
+    vc: parent: pygments-vc
+    vg: parent: pygments-vg
+    vi: parent: pygments-vi
+    vm: parent: pygments-vm
+    w: parent: pygments-w
+    x: parent: pygments-x
