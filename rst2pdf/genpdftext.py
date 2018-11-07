@@ -45,7 +45,6 @@ class HandleEmphasis(NodeHandler, docutils.nodes.emphasis):
 
 class HandleLiteral(NodeHandler, docutils.nodes.literal):
     def get_pre_post(self, client, node, replaceEnt):
-
         if node['classes']:
             pre = client.styleToFont(node['classes'][0])
         else:
@@ -55,12 +54,6 @@ class HandleLiteral(NodeHandler, docutils.nodes.literal):
             pre = '<nobr>' + pre
             post += '</nobr>'
         return pre, post
-
-    def get_text(self, client, node, replaceEnt):
-        text = node.astext()
-        text = escape(node.astext())
-        text = text.replace(' ', '&nbsp;')
-        return text
 
 class HandleSuper(NodeHandler, docutils.nodes.superscript):
     pre = '<super>'
