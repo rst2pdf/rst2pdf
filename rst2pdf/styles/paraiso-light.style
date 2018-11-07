@@ -9,15 +9,20 @@ styles:
     cs: parent: pygments-cs
     dl: parent: pygments-dl
     err: parent: pygments-err
+    esc: parent: pygments-esc
     fm: parent: pygments-fm
+    g: parent: pygments-g
     gd: parent: pygments-gd
     ge: parent: pygments-ge
     gh: parent: pygments-gh
     gi: parent: pygments-gi
+    go: parent: pygments-go
     gp: parent: pygments-gp
+    gr: parent: pygments-gr
     gs: parent: pygments-gs
+    gt: parent: pygments-gt
     gu: parent: pygments-gu
-    hll: parent: pygments-hll
+    hll: parent: code
     il: parent: pygments-il
     k: parent: pygments-k
     kc: parent: pygments-kc
@@ -62,9 +67,9 @@ styles:
     pygments-cs: {parent: code, textColor: #8d8687}
     pygments-dl: {parent: code, textColor: #48b685}
     pygments-err: {parent: code, textColor: #ef6155}
-    pygments-esc: {parent: code, textColor: black}
+    pygments-esc: parent: code
     pygments-fm: {parent: code, textColor: #06b6ef}
-    pygments-g: {parent: code, textColor: black}
+    pygments-g: parent: code
     pygments-gd: {parent: code, textColor: #ef6155}
     pygments-ge:
         fontName: stdMonoItalic
@@ -77,19 +82,19 @@ styles:
         textColor: #2f1e2e
 
     pygments-gi: {parent: code, textColor: #48b685}
-    pygments-go: {parent: code, textColor: black}
+    pygments-go: parent: code
     pygments-gp:
         fontName: stdMonoBold
         parent: code
         textColor: #8d8687
 
-    pygments-gr: {parent: code, textColor: black}
+    pygments-gr: parent: code
     pygments-gs:
         fontName: stdMonoBold
         parent: code
         textColor: black
 
-    pygments-gt: {parent: code, textColor: black}
+    pygments-gt: parent: code
     pygments-gu:
         fontName: stdMonoBold
         parent: code
@@ -152,7 +157,7 @@ styles:
     pygments-vi: {parent: code, textColor: #ef6155}
     pygments-vm: {parent: code, textColor: #ef6155}
     pygments-w: {parent: code, textColor: #2f1e2e}
-    pygments-x: {parent: code, textColor: black}
+    pygments-x: parent: code
     s: parent: pygments-s
     s1: parent: pygments-s1
     s2: parent: pygments-s2
@@ -171,3 +176,4 @@ styles:
     vi: parent: pygments-vi
     vm: parent: pygments-vm
     w: parent: pygments-w
+    x: parent: pygments-x
