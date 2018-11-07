@@ -4,6 +4,7 @@
 
 * Support inline syntax highlighting (Issue #467)
 * Updated stylesheets to match current version of pygments.
+* Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
 * Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)
 * Added: The Sphinx ``today`` config setting is now used if it is set
@@ -18,6 +19,7 @@
 * Fixed: ``:linenos_offset:`` now works again
 * Fixed: Removed debugging print statement when using line blocks
 * Fixed: Removed uniconverter from setup (issue 487)
+* Fixed: Error when using --date-invariant with newer reportlab versions (Issue 678)
 
 
 0.93 (2012-12-18)

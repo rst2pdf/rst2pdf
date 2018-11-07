@@ -942,7 +942,7 @@ class HeaderOrFooter(object):
                         if isinstance (cell, list):
                             data[r][c]=self.replaceTokens(cell, canv, doc, smarty)
                         else:
-                            row[r]=self.replaceTokens([cell,], canv, doc, smarty)[0]
+                            row[c]=self.replaceTokens([cell,], canv, doc, smarty)[0]
                 elems[i]=DelayedTable(data, e._colWidths, e.style)
 
             elif isinstance(e, BoundByWidth):
@@ -1500,7 +1500,7 @@ def main(_args=None):
                     compressed=options.compressed)
 
     if close_infile:
-        options.infile.close()
+        infile.close()
 
 # Ugly hack that fixes Issue 335
 reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self,*x: copy(self)
@@ -1524,7 +1524,7 @@ def patch_PDFDate():
     class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
         # gmt offset now suppported
-        def __init__(self, invariant=True, dateFormatter=None):
+        def __init__(self, invariant=True, ts=None, dateFormatter=None):
             now = (2000,01,01,00,00,00,0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter

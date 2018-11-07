@@ -1423,8 +1423,8 @@ If you want good looking documents, you want to enable hyphenation.
 
 To do it, you need to install Wordaxe [#]_.
 
-.. [#] You can get Wordaxe from http://deco-cow.sf.net. Version 1.0.0 or later is
-       recommended.
+.. [#] Use Roberto Alsina's fork of Wordaxe from https://github.com/ralsina/wordaxe as
+       this works with later versions of ReportLab.
 
 If after installing it you get the letter "s" or a black square instead of a hyphen,
 that means you need to replace the rl_codecs.py file from reportlab with the one from
@@ -1782,6 +1782,9 @@ To use it in your existing sphinx project you need to do the following:
 
     # Background images fitting mode
     pdf_fit_background_mode = 'scale'
+
+    # Repeat table header on tables that cross a page boundary?
+    pdf_repeat_table_rows = True
 
 3. (Maybe) add this in your Makefile (on unix-like systems):
 
