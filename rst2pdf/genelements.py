@@ -84,11 +84,7 @@ class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
 
 
 class HandleDocument(NodeHandler, docutils.nodes.document):
-    def gather_elements(self, client, node, style):
-        if not node.children:   # Empty document, Issue #547
-            return [Paragraph("", style=style)]
-        else:
-            return client.gather_elements(node, style=style)
+    pass
 
 class HandleTable(NodeHandler, docutils.nodes.table):
     def gather_elements(self, client, node, style):
