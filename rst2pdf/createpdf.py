@@ -885,13 +885,7 @@ class HeaderOrFooter(object):
             if not items:
                 items = pageobj.template.get(self.defaultloc)
                 if items:
-                    secondary_doctree = publish_secondary_doctree(items, self.client.doctree, None)
-                    # Empty doctrees now generate a page, because of Issue #547, so
-                    # we need to ignore empty doctrees here.
-                    if secondary_doctree.children:
-                        items = self.client.gen_elements(secondary_doctree)
-                    else:
-                        items = []
+                    items = self.client.gen_elements(publish_secondary_doctree(items, self.client.doctree, None))
             if items:
                 if isinstance(items, list):
                     items = items[:]
