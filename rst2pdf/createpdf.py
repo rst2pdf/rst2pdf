@@ -538,7 +538,6 @@ class RstToPdf(object):
                 self.doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
                     settings_overrides=settings_overrides)
-                #import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
@@ -884,7 +883,13 @@ class HeaderOrFooter(object):
             if not items:
                 items = pageobj.template.get(self.defaultloc)
                 if items:
-                    items = self.client.gen_elements(publish_secondary_doctree(items, self.client.doctree, None))
+                    secondary_doctree = publish_secondary_doctree(items, self.client.doctree, None)
+                    # Empty doctrees now generate a page, because of Issue #547, so
+                    # we need to ignore empty doctrees here.
+                    if secondary_doctree.children:
+                        items = self.client.gen_elements(secondary_doctree)
+                    else:
+                        items = []
             if items:
                 if isinstance(items, list):
                     items = items[:]
