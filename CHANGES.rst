@@ -5,6 +5,7 @@
 * Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
 * Do not use logging.basicConfig (Issue 509)
+* Removed Tenjin and switched to Jinja2 (Issue #696)
 * Made literal block shrinking work again (Issue #560)
 * Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
