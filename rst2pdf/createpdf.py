@@ -106,10 +106,6 @@ def renderTemplate(tname, **context):
     template =jinja_env.get_template(tname)
     return template.render(**context)
 
-#def escape (x,y):
-#    "Dummy escape function to test for excessive escaping"
-#    return x
-
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
                   'lowerroman': 'ROMAN_LOWER',
