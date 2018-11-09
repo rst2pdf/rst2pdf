@@ -98,7 +98,7 @@ from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
 # Template engine for covers
 import jinja2
 jinja_env = jinja2.Environment(
-    loader=jinja2.PackageLoader('rst2pdf', 'templates'),
+    loader=jinja2.FileSystemLoader('/'),
     autoescape=jinja2.select_autoescape(['html', 'xml'])
 )
 
