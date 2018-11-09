@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Removed Tenjin and switched to Jinja2 (Issue #696)
 * Made literal block shrinking work again (Issue #560)
 * Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
