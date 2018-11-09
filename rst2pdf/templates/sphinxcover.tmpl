@@ -1,20 +1,20 @@
 .. role:: normal
 
-<?py if title: ?>
+{% if title: %}
 
 .. cssclass:: title
 
-#{title}
+{{title}}
 
-<?py #end ?>
+{% endif %}
 
-<?py if subtitle: ?>
+{% if subtitle: %}
 
 .. cssclass:: subtitle
 
-#{subtitle}
+{{subtitle}}
 
-<?py #end ?>
+{% endif %}
 
 .. raw:: pdf
 
@@ -23,9 +23,9 @@
 <?py for author in authors: ?>
 .. cssclass:: author
 
-#{author}
+{{author}}
 
-<?py #end ?>
+{% endfor %}
 
 .. raw:: pdf
 
@@ -33,7 +33,7 @@
 
 .. cssclass:: author
 
-:normal:`#{date}`
+:normal:`{{date}}`
 
 .. raw:: pdf
 
