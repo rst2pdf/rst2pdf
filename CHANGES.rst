@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Removed copy of smartypants, use PyPI package instead (Issue 694)
 * Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
 * Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)
