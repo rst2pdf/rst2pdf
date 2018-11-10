@@ -88,7 +88,7 @@ from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
 from rst2pdf.aafigure_directive import Aanode
 from rst2pdf.log import log, nodeid
-from rst2pdf.smartypants import smartyPants
+from smartypants import smartypants
 from rst2pdf import styles as sty
 from rst2pdf.nodehandlers import nodehandlers
 from rst2pdf.languages import get_language_available
@@ -924,7 +924,7 @@ class HeaderOrFooter(object):
                 getattr(canv, 'sectName', ''))
             text = text.replace(u"###SectNum###",
                 getattr(canv, 'sectNum', ''))
-            text = smartyPants(text, smarty)
+            text = smartypants(text, smarty)
             return text
 
         for i,e  in enumerate(elems):
