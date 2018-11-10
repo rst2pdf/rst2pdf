@@ -36,6 +36,8 @@ will be logged.
 import inspect
 import types
 
+from log import log, nodeid
+import smartypants
 import docutils.nodes
 
 from .flowables import BoundByWidth, TocEntry
@@ -270,7 +272,7 @@ class NodeHandler(object):
         # Try to be clever about when to use smartypants
         if node.__class__ in (docutils.nodes.paragraph,
                 docutils.nodes.block_quote, docutils.nodes.title):
-            return smartyPants(text, smarty)
+            return smartypants.smartypants(text, smarty)
         return text
 
     # End overridable attributes and methods for textdispatch
