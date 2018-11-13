@@ -1623,7 +1623,7 @@ Here are the different values you can use (again, from the smartypants docs):
     0
         Suppress all transformations. (Do nothing.)
     1
-        Performs default SmartyPants transformations: quotes
+        Performs these transformations: quotes
         (including \`\`backticks'' -style), em-dashes, and ellipses.
         "--" (dash dash) is used to signify an em-dash; there is no
         support for en-dashes.
