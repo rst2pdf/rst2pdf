@@ -940,7 +940,7 @@ class HeaderOrFooter(object):
                 getattr(canv, 'sectName', ''))
             text = text.replace(u"###SectNum###",
                 getattr(canv, 'sectNum', ''))
-            text = smrtypants.smartypants(text, smarty)
+            text = smartypants.smartypants(text, smarty)
             return text
 
         for i,e  in enumerate(elems):
