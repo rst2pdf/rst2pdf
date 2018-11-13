@@ -200,11 +200,11 @@ class RstToPdf(object):
 
         # See https://pythonhosted.org/smartypants/reference.html#smartypants-module
         self.smarty = 0
-        if smarty == 1:
+        if smarty == '1':
             self.smarty = 75
-        elif smarty == 2:
+        elif smarty == '2':
             self.smarty = 91
-        elif smarty == 3:
+        elif smarty == '3':
             self.smarty = 107
 
         self.baseurl = baseurl
