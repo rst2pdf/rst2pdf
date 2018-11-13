@@ -201,11 +201,11 @@ class RstToPdf(object):
         # See https://pythonhosted.org/smartypants/reference.html#smartypants-module
         self.smarty = 0
         if smarty == '1':
-            self.smarty = 75
+            self.smarty = 1 | 6 | 8 | 64 | 512
         elif smarty == '2':
-            self.smarty = 91
+            self.smarty = 1 | 6 | 24 | 64 | 512
         elif smarty == '3':
-            self.smarty = 107
+            self.smarty = 1 | 6 | 40 | 64 | 512
 
         self.baseurl = baseurl
         self.repeat_table_rows = repeat_table_rows
