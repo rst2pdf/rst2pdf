@@ -191,7 +191,16 @@ class RstToPdf(object):
         self.fit_mode = fit_mode
         self.background_fit_mode = background_fit_mode
         self.to_unlink = []
-        self.smarty = smarty
+
+        # See https://pythonhosted.org/smartypants/reference.html#smartypants-module
+        self.smarty = 0
+        if smarty == 1:
+            self.smarty = 75
+        elif smarty == 2:
+            self.smarty = 91
+        elif smarty == 3:
+            self.smarty = 107
+
         self.baseurl = baseurl
         self.repeat_table_rows = repeat_table_rows
         self.footnote_backlinks = footnote_backlinks
