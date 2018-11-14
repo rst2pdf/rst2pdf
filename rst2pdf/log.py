@@ -4,11 +4,13 @@
 import logging
 import sys
 
-logging.basicConfig(
-    format='[%(levelname)s] %(filename)s:%(lineno)d %(message)s',
-    level=logging.WARNING)
-
 log = logging.getLogger('rst2pdf')
+_fmt = logging.Formatter('[%(levelname)s] %(filename)s:%(lineno)d %(message)s')
+_hdlr = logging.StreamHandler()
+_hdlr.setFormatter(_fmt)
+log.addHandler(_hdlr)
+log.setLevel(logging.WARNING)
+
 
 def nodeid(node):
     """Given a node, tries to return a way to see where it was in the
