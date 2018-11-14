@@ -35,6 +35,11 @@
 import codecs
 from docutils import nodes
 from docutils.parsers.rst import directives
+import six
+
+if six.PY3:
+    unicode = str
+    basestring = str
 
 try:
     import pygments
@@ -43,7 +48,7 @@ try:
 except ImportError:
     pass
 
-from log import log
+from .log import log
 
 
 # Customisation
@@ -88,7 +93,7 @@ class DocutilsInterface(object):
     def lex(self):
         # Get lexer for language (use text as fallback)
         try:
-            if self.language and unicode(self.language).lower() <> 'none':
+            if self.language and unicode(self.language).lower() != 'none':
                 lexer = get_lexer_by_name(self.language.lower(),
                                         **self.custom_args
                                         )
