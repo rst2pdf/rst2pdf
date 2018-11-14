@@ -2,10 +2,17 @@
 # See LICENSE.txt for licensing terms
 """Singleton config object"""
 
-
-import ConfigParser
 import os
+import six
+
+if six.PY2:
+    import ConfigParser
+else:
+    import configparser as ConfigParser
+
+
 from rst2pdf.rson import loads
+
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
 cfname = os.path.join(cfdir, 'config')
@@ -26,7 +33,9 @@ class ConfigError(Exception):
         self.modulename = modulename
         self.msg = msg
 
+
 conf = ConfigParser.SafeConfigParser()
+
 
 def parseConfig(extracf=None):
     global conf
@@ -35,5 +44,6 @@ def parseConfig(extracf=None):
         cflist.append(extracf)
     conf = ConfigParser.SafeConfigParser()
     conf.read(cflist)
+
 
 parseConfig()

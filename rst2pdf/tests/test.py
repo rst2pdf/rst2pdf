@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+import six
+
 from autotest import MD5Info, PathInfo, globjoin
 from autotest import run_single, dirname, checkmd5
 
-import sys, os
+
 import nose.plugins.skip
 
 class RunTest:
@@ -24,7 +28,11 @@ class RunTest:
                 with open(ignfile,"r") as f: self.whySkip=f.read()
             if os.path.exists(md5file):
                 f = open(md5file, 'rb')
-                exec f in info
+                if six.PY3:
+                    six.exec_(f.read(), info)
+                else:
+                    six.exec_(f.read(), info)
+
                 f.close()
             if info.good_md5 in [[],['sentinel']]:
                 # This is an open issue or something that can't be checked automatically
@@ -99,7 +107,10 @@ class RunInstalledTest:
             with open(ignfile,"r") as f: self.whySkip=f.read()
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
-            exec f in info
+            if six.PY3:
+                six.exec_(f.read(), info)
+            else:
+                six.exec_(f.read(), info)
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically
@@ -133,7 +144,11 @@ class RunSphinxTest:
             with open(ignfile,"r") as f: self.whySkip=f.read()
         if os.path.exists(md5file):
             f = open(md5file, 'rb')
-            exec f in info
+            if six.PY3:
+                six.exec_(f.read(), info)
+            else:
+                six.exec_(f.read(), info)
+
             f.close()
         if info.good_md5 in [[],['sentinel']]:
             # This is an open issue or something that can't be checked automatically

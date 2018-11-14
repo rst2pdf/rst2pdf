@@ -3,6 +3,9 @@
 import os
 import sys
 
+import six
+
+
 def setpythonpaths(execfn, rootdir=None):
     ''' There is probably a cleaner way to do this.
         maybe have buildout give us a json or something.
@@ -14,7 +17,7 @@ def setpythonpaths(execfn, rootdir=None):
     '''
     pathlen = len(sys.path)
     f = open(execfn, 'rb')
-    exec f in {'__name__':'testing'}
+    six.exec_(f.read(), {'__name__': 'testing'})
     f.close()
     newpaths = sys.path[:len(sys.path)-pathlen]
     ppath = os.environ.get('PYTHONPATH')
