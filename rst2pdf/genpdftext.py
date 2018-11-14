@@ -98,11 +98,11 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
                 if uri in [node.astext(),"mailto:"+node.astext()]:
                     # No point on repeating it
                     post = u''
-                elif uri.startswith('http://') or uri.startswith('ftp://'):
-                    post = u' (%s)' % uri
                 elif uri.startswith('mailto:'):
                     #No point on showing "mailto:"
                     post = u' (%s)' % uri[7:]
+                else:
+                    post = u' (%s)' % uri
             else:
                 # A plain old link
                 pre += u'<a href="%s" color="%s">' %\
