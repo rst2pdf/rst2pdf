@@ -25,12 +25,14 @@ from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 import reportlab.rl_config
 
+import six
+
 from rst2pdf.rson import loads as rson_loads
 
-import findfonts
-from log import log
+from . import findfonts
+from .log import log
 
-from opt_imports import ParagraphStyle, wordaxe, wordaxe_version
+from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
 
 HAS_WORDAXE = wordaxe is not None
 
@@ -48,7 +50,10 @@ class StyleSheet(object):
         '''
         styles = data.get('styles', {})
         try:
-            stylenames = styles.keys()
+            if six.PY2:
+                stylenames = styles.keys()
+            if six.PY3:
+                stylenames = list(styles.keys())
         except AttributeError:
             for style in styles:
                 yield style

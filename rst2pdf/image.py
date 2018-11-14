@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
+import glob
 import os
 from os.path import abspath, dirname, expanduser, join
 import sys
 import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
-from log import log, nodeid
 from reportlab.lib.units import *
-import glob
 import urllib
 
-from opt_imports import LazyImports
+from .opt_imports import LazyImports
+from .log import log, nodeid
 
-from svgimage import SVGImage
+from .svgimage import SVGImage
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
@@ -26,6 +26,7 @@ else:
 
 missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
+
 def defaultimage(filename, width=None, height=None, kind='direct',
                                         mask="auto", lazy=1, srcinfo=None):
     ''' We have multiple image backends, including the stock reportlab one.
@@ -34,6 +35,7 @@ def defaultimage(filename, width=None, height=None, kind='direct',
         use or not as necessary.
     '''
     return Image(filename, width, height, kind, mask, lazy)
+
 
 class MyImage (Flowable):
     """A Image subclass that can:
