@@ -746,7 +746,7 @@ class BoundByWidth(Flowable):
                                availWidth))
         self.maxWidth = maxWidth
         maxWidth -= (self.pad[1]+self.pad[3])
-        self.width, self.height = _listWrapOn(self.content, maxWidth, None)
+        self.width, self.height = _listWrapOn(self.content, maxWidth, None, fakeWidth=False)
         if self.width > maxWidth:
             if self.mode != 'shrink':
                 self.scale = 1.0
