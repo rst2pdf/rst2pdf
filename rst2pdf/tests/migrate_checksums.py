@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL: http://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
-#$LastChangedDate: 2009-10-31 00:53:18 -0500 (Sat, 31 Oct 2009) $
-#$LastChangedRevision: 1271 $
-
-# See LICENSE.txt for licensing terms
-
 '''
 This program is designed to migrate checksums to new versions of software,
 when it is known that all the checksum changes are irrelevant to the visual
 aspects of the PDF.  An example of this is when the PDF version number is
 incremented from 1.3 to 1.4 for no good reason :-)
 
-Usage:
+Old Usage:
 
 1) Clean the output directory -- rm -Rf output/*
 2) Run autotest with the old version of the software, to populate
@@ -32,44 +26,87 @@ Usage:
 9) Check the logs to make sure no files moved to a different category:
       tkdiff oldlog.txt newlog.txt
 10) Check in the fixed checksums
+
+New Usage:
+
+1) Clean the output directory -- rm -Rf output/*
+2) Run this script. It runs all the tests.
+   - if a test passes, Yay!
+   - if a test fails, it compares the output against the reference PDF and
+    if they are visually similar, adds this as a known good MD5
+   - if the PDFs are not similar, the difference is stored as an image and
+    information about it added to a log
+
 '''
 
 import os
 import glob
 import subprocess
+import sys
+import glob
 
-def getchecksuminfo():
-    for fn in sorted(glob.glob(os.path.join('old', '*.log'))):
-        f = open(fn, 'rb')
-        data = f.read()
-        f.close()
-        fn = os.path.splitext(os.path.basename(fn))[0]
-        data = data.rsplit('\n', 2)[1]
-        if data.startswith('File'):
-            yield fn, 'fail', None
+
+def mark_test_good(testname):
+    cmd = './autotest.py -u good %s' %  ('input/' + testname + ".txt")
+    # print cmd
+
+    try:
+        devnull = open(os.devnull, 'w')
+        result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
+    except subprocess.CalledProcessError as e:
+        print e.output
+
+def compare_output_and_reference(testname):
+    devnull = open(os.devnull, 'w')
+    rfile = "reference/" + testname + ".pdf"
+    ofile = "output/" + testname + ".pdf"
+    diffimg = "output/" + testname + "-differences.jpg"
+
+    # requires image magick, this command is for v6.9
+    cmd = 'compare ' + rfile + ' ' + ofile + ' -compose src -fuzz 5% -metric PHASH ' + diffimg
+    # print cmd
+
+    # run the command and capture the output
+    p = subprocess.Popen(cmd.split(), stderr=subprocess.PIPE)
+    output = p.communicate()
+
+    try:
+        score = float(output[1])
+        if score == 0:
+            print testname + " PDFs are identical: update hash";
+            mark_test_good(testname)
         else:
-            yield fn, data.rsplit(' ', 1)[-1][:-1], data.split("'")[1]
+            print testname + " PDFs differ with score: " + str(score)
+    except ValueError:
+        # it wasn't a number, just print the output
+        print testname + " comparison failed with error: " + output[1]
 
-def getcategories():
-    mydict = {}
-    for fn, category, checksum in getchecksuminfo():
-        myset = mydict.get(category)
-        if myset is None:
-            mydict[category] = myset = set()
-        myset.add((fn, checksum))
-    return mydict
+def checkalltests():
+    i=0
 
-def dumpinfo():
-    mydict = getcategories()
-    if not mydict:
-        print '\nNo log files found'
-    migrate = set('good bad incomplete'.split())
-    for checksum_result, values in sorted(mydict.iteritems()):
-        if checksum_result not in migrate:
-            continue
-        names = ' '.join('input/%s' % x[0] for x in values)
-        cmd = './autotest.py -f -u %s %s' %  (checksum_result, names)
-        subprocess.call(cmd.split())
+    # what should we test? Start with input/*.txt
+    testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))]
+
+    for filename in testfiles:
+        testname = os.path.splitext(filename)[0]
+
+        # run the test once, see what happens
+        cmd = './autotest.py %s' %  ('input/' + testname + ".txt")
+        # print cmd
+        try:
+            devnull = open(os.devnull, 'w')
+            result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
+            print "*** " + testname + " test passes"
+        except subprocess.CalledProcessError as e:
+            # something to react to
+            if(e.returncode == 3):
+                # The result was unknown. This is where it gets interesting
+                differences = compare_output_and_reference(testname)
+            else:
+                print testname + " returned status " + str(e.returncode)
+
+        i = i+1
+    
 
 if __name__ == '__main__':
-    dumpinfo()
+    checkalltests()
