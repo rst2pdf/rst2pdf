@@ -3,6 +3,7 @@
 ------
 
 * Do not use logging.basicConfig (Issue 509)
+* Made literal block shrinking work again (Issue #560)
 * Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
 * Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)

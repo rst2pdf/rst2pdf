@@ -48,6 +48,7 @@ __all__      = ['Template', 'Engine', 'helpers', 'html', ]
 
 import re, sys, os, time, marshal
 
+import six
 
 ##
 ## utilities
@@ -757,7 +758,7 @@ class Template(object):
         locals['_buf'] = _buf
         if not self.bytecode:
             self.compile()
-        exec self.bytecode in globals, locals
+        six.exec_(self.bytecode, globals, locals)
         if bufarg is None:
             s = ''.join(_buf)
             #if self.encoding:

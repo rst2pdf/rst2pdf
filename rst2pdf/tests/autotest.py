@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
-
-
 '''
 Copyright (c) 2009, Patrick Maupin, Austin, Texas
 
@@ -15,7 +10,6 @@ See LICENSE.txt for licensing terms
 '''
 
 import os
-import sys
 import glob
 import shutil
 import shlex
@@ -24,7 +18,8 @@ from copy import copy
 from optparse import OptionParser
 from execmgr import textexec, default_logger as log
 from pythonpaths import setpythonpaths
-
+import six
+from six import print_
 # md5 module deprecated, but hashlib not available in 2.4
 try:
     import hashlib
@@ -45,14 +40,17 @@ Use of the -c and -a options can cause usage of an external coverage package
 to generate a .coverage file for code coverage.
 '''
 
+
 def dirname(path):
     # os.path.dirname('abc') returns '', which is completely
     # useless for most purposes...
     return os.path.dirname(path) or '.'
 
+
 def globjoin(*parts):
     # A very common pattern in this module
     return sorted(glob.glob(os.path.join(*parts)))
+
 
 class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
@@ -64,7 +62,7 @@ class PathInfo(object):
     md5dir = os.path.join(rootdir, 'md5')
 
     runfile = distutils.spawn.find_executable('rst2pdf')
-    assert runfile, 'Executable not found -- Use bootstrap.py and buildout to create it.'
+    assert runfile, 'rst2pdf executable not found, install it with setup.py'
 
     if not os.path.exists(outdir):
         os.mkdir(outdir)
@@ -84,6 +82,7 @@ class PathInfo(object):
     def load_subprocess(cls):
         import rst2pdf.createpdf
         return rst2pdf.createpdf.main
+
 
 class MD5Info(dict):
     ''' The MD5Info class is used to round-trip good, bad, unknown
@@ -112,7 +111,7 @@ class MD5Info(dict):
             if not name.endswith(self.suffix):
                 continue
             result.append('%s = [' % name)
-            result.append(',\n'.join(["        '%s'"%item for item in sorted(value)]))
+            result.append(',\n'.join(["        '%s'" % item for item in sorted(value)]))
             result.append(']\n')
         result.append('')
         return '\n'.join(result)
@@ -155,11 +154,11 @@ class MD5Info(dict):
         # Create sets and strip the sentinels while
         # working with the dictionary.
         newinfo = dict((key, set(values) - sentinel)
-                    for (key, values) in oldinfo.iteritems())
+                       for (key, values) in oldinfo.iteritems())
 
         # Create an inverse mapping of MD5s to key names
         inverse = {}
-        for key,values in newinfo.iteritems():
+        for key, values in newinfo.iteritems():
             for value in values:
                 inverse.setdefault(value, set()).add(key)
 
@@ -197,6 +196,7 @@ class MD5Info(dict):
         assert result.endswith(suffix), result
         return result[:-len(suffix)]
 
+
 def cleanfile(fname):
     ''' Use pdfrw to make a canonical version of the file.
          - Renumber PDF objects to be same
@@ -228,6 +228,7 @@ def cleanfile(fname):
             a.URI = prefix + uri.split('rst2pdf/tests', 1)[-1]
     PdfWriter().write(fname, trailer)
 
+
 def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     ''' checkmd5 validates the checksum of a generated PDF
         against the database, both reporting the results,
@@ -255,7 +256,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     info = MD5Info()
     if os.path.exists(md5path):
         f = open(md5path, 'rb')
-        exec f in info
+        six.exec_(f, info)
         f.close()
 
     # Generate the current MD5
@@ -276,7 +277,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     resulttype = info.find(m, new_category)
     log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
-        print "Updating MD5 file"
+        six.print_("Updating MD5 file")
         f = open(md5path, 'wb')
         f.write(str(info))
         f.close()
@@ -313,6 +314,7 @@ def build_sphinx(sphinxdir, outpdf):
         shutil.copytree(pdfdir, outpdf)
     return errcode, result
 
+
 def build_txt(iprefix, outpdf, fastfork):
         inpfname = iprefix + '.txt'
         style = iprefix + '.style'
@@ -329,7 +331,9 @@ def build_txt(iprefix, outpdf, fastfork):
         args.extend(('-o', outpdf))
         return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
-def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False):
+
+def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
+               ignore_ignorefile=False):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
@@ -356,7 +360,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
                 log([], 'Ingoring ' + iprefix + '.ignore file')
             else:
                 f = open(iprefix + '.ignore', 'r')
-                data=f.read()
+                data = f.read()
                 f.close()
                 log([], 'Ignored: ' + data)
                 return 'ignored', 0
@@ -379,18 +383,23 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None, ignor
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
+                                      errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode, iprefix)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
+                                      errcode, iprefix)
     log(result, '')
-    outf = open(outtext, 'wb')
+    outf = open(outtext, 'w')
     outf.write('\n'.join(result))
     outf.close()
 
     return checkinfo, errcode
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= False, do_sphinx=False, updatemd5=None, ignore_ignorefile=False):
+
+def run_testlist(testfiles=None, incremental=False, fastfork=None,
+                 do_text=False, do_sphinx=False, updatemd5=None,
+                 ignore_ignorefile=False):
     returnErrorCode = 0
     if not testfiles:
         testfiles = []
@@ -411,12 +420,12 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None, do_text= Fals
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
-    print
-    print 'Final checksum statistics:',
-    print ', '.join(sorted('%s=%s' % x for x in results.iteritems()))
-    print
+    print_('\nFinal checksum statistics:',)
+    print_(', '.join(sorted('%s=%s' % x for x in results.iteritems())))
+    print_('\n')
 
     return returnErrorCode
+
 
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
@@ -449,6 +458,7 @@ def parse_commandline():
         dest='updatemd5', default=None,
         help='Update MD5 checksum files')
     return parser
+
 
 def main(args=None):
     parser = parse_commandline()
