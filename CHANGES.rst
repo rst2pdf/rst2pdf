@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
 * Do not use logging.basicConfig (Issue 509)
 * Made literal block shrinking work again (Issue #560)

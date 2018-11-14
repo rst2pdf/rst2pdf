@@ -544,7 +544,6 @@ class RstToPdf(object):
                 self.doctree = docutils.core.publish_doctree(text,
                     source_path=source_path,
                     settings_overrides=settings_overrides)
-                #import pdb; pdb.set_trace()
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
@@ -591,7 +590,6 @@ class RstToPdf(object):
         # This crashes sphinx because .. class:: in sphinx is
         # something else. Ergo, pdfbuilder does it in its own way.
         if not self.sphinx:
-
             elements = self.gen_elements(
                 publish_secondary_doctree(cover_text, self.doctree, source_path)) + elements
 
@@ -610,7 +608,6 @@ class RstToPdf(object):
                     style=t_style, colWidths=colWidths))
 
         if self.floating_images:
-            #from pudb import set_trace; set_trace()
             # Handle images with alignment more like in HTML
             new_elem=[]
             for i,e in enumerate(elements[::-1]):
@@ -646,6 +643,10 @@ class RstToPdf(object):
             author=self.doc_author,
             pageCompression=compressed)
         pdfdoc.client =self
+
+        # Handle totally empty documents (Issue #547)
+        if not elements:
+            elements.append(Paragraph("", style=self.styles['base']))
 
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
