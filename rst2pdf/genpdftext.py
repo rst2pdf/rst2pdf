@@ -7,16 +7,23 @@
 # See LICENSE.txt for licensing terms
 
 import os
-from xml.sax.saxutils import escape
-from log import log, nodeid
-from basenodehandler import NodeHandler
 import docutils.nodes
-from urlparse import urljoin, urlparse
-from reportlab.lib.units import cm
-from opt_imports import Paragraph
+from xml.sax.saxutils import escape
 
-from image import MyImage, missing
-from flowables import MySpacer
+import six
+
+if six.PY3:
+    from urllib.parse import urljoin, urlparse
+else:
+    from urlparse import urljoin, urlparse
+
+from reportlab.lib.units import cm
+from .opt_imports import Paragraph
+
+from .basenodehandler import NodeHandler
+from .flowables import MySpacer
+from .image import MyImage, missing
+from .log import log, nodeid
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):
@@ -84,11 +91,11 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
                 if uri in [node.astext(),"mailto:"+node.astext()]:
                     # No point on repeating it
                     post = u''
-                elif uri.startswith('http://') or uri.startswith('ftp://'):
-                    post = u' (%s)' % uri
                 elif uri.startswith('mailto:'):
                     #No point on showing "mailto:"
                     post = u' (%s)' % uri[7:]
+                else:
+                    post = u' (%s)' % uri
             else:
                 # A plain old link
                 pre += u'<a href="%s" color="%s">' %\
@@ -215,9 +222,13 @@ class HandleTarget(NodeHandler, docutils.nodes.target):
 
     def get_pre_post(self, client, node, replaceEnt):
         pre = ''
-        if node['ids'][0] not in client.targets:
-            pre = u'<a name="%s"/>' % node['ids'][0]
-            client.targets.append(node['ids'][0])
+        if node['ids']:
+            if node['ids'][0] not in client.targets:
+                pre = u'<a name="%s"/>' % node['ids'][0]
+                client.targets.append(node['ids'][0])
+        else:
+            pre = u'<a name="%s"/>' % node['refuri']
+            client.targets.append(node['refuri'])
         return pre, ''
 
 class HandleInline(NodeHandler, docutils.nodes.inline):

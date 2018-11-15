@@ -33,13 +33,14 @@ If no NodeHandler subclass has been created to handle that particular
 type of docutils node, then default processing will occur and a warning
 will be logged.
 '''
-
-import types
 import inspect
-from log import log, nodeid
-from smartypants import smartyPants
+import types
+
 import docutils.nodes
-from flowables import BoundByWidth, TocEntry
+
+from .flowables import BoundByWidth, TocEntry
+from .smartypants import smartyPants
+from .log import log, nodeid
 
 
 class MetaHelper(type):

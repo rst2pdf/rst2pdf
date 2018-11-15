@@ -6,8 +6,9 @@ import os
 from reportlab.platypus import Flowable, Paragraph
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-from log import log
-from opt_imports import LazyImports
+from .log import log
+from .opt_imports import LazyImports
+
 
 class SVGImage(Flowable):
 
@@ -65,6 +66,7 @@ class SVGImage(Flowable):
         canv.scale(self.drawWidth/self._w, self.drawHeight/self._h)
         self.doc._drawOn(canv)
         canv.restoreState()
+
 
 if __name__ == "__main__":
     import sys
