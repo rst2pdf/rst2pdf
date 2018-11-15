@@ -2,6 +2,8 @@
 {next}
 ------
 
+* Support inline syntax highlighting (Issue #467)
+* Updated stylesheets to match current version of pygments.
 * Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
 * Do not use logging.basicConfig (Issue 509)
