@@ -94,7 +94,7 @@ The possible values are:
 
 --fit-background-mode=MODE
                         How to fit the background image to the page. One of
-                        scale or center. Default="center"
+                        scale, scale_width or center. Default="center"
                                         
 --inline-links
                     Shows target between parenthesis instead of active link
