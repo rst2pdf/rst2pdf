@@ -1,0 +1,13 @@
+Pagebreak in a nested list: fails with AttributeError
+
+- point 1
+
+  - page 1
+
+  .. raw:: pdf
+
+     PageBreak
+
+  - page 2
+
+- point 2
