@@ -5,6 +5,7 @@
 * Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
 * Do not use logging.basicConfig (Issue 509)
+* Removed copy of smartypants, use PyPI package instead (Issue 694)
 * Made literal block shrinking work again (Issue #560)
 * Removed copy of smartypants, use PyPI package instead (Issue 694)
 * Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
