@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 Copyright (c) 2009,  Patrick Maupin, Austin, Texas
 
 A wrapper around subprocess that performs two functions:
@@ -17,7 +17,7 @@ A wrapper around subprocess that performs two functions:
 
 Currently only works under Linux.
 
-'''
+"""
 
 import sys
 import subprocess
@@ -32,31 +32,31 @@ import six
 
 
 class BaseExec(object):
-    ''' BaseExec is designed to be subclassed.
+    """ BaseExec is designed to be subclassed.
         It wraps subprocess.Popen, and adds the
         ability to kill a process and to manage
         timeouts.  By default, it uses pipes for
         the new process, but doesn't do anything
         with them.
-    '''
+    """
     is_python_proc = False
     defaults = dict(
-                bufsize=0,
-                executable=None,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                preexec_fn=None,   # Callable object in child process
-                close_fds=False,
-                shell=False,
-                cwd=None,
-                env=None,
-                universal_newlines=False,
-                startupinfo=None,
-                creationflags=0,
-                timeout=500.0,    # Time in seconds before termination
-                killdelay=20.0,   # Time in seconds after termination before kill
-                python_proc=None,
+        bufsize=0,
+        executable=None,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        preexec_fn=None,  # Callable object in child process
+        close_fds=False,
+        shell=False,
+        cwd=None,
+        env=None,
+        universal_newlines=False,
+        startupinfo=None,
+        creationflags=0,
+        timeout=500.0,  # Time in seconds before termination
+        killdelay=20.0,  # Time in seconds after termination before kill
+        python_proc=None,
     )
 
     def before_init(self, keywords):
@@ -104,7 +104,7 @@ class BaseExec(object):
         # Allow flexible args handling.
         if len(args) < 2:
             try:
-                args[0] + ''
+                args[0] + ""
             except TypeError:
                 args = args[0]
             else:
@@ -117,16 +117,16 @@ class BaseExec(object):
 
         # Get our timeout information, and call
         # subclass to get other parameters
-        self.timeout = keywords.pop('timeout') + time.time()
-        self.killdelay = keywords.pop('killdelay')
+        self.timeout = keywords.pop("timeout") + time.time()
+        self.killdelay = keywords.pop("killdelay")
         self.before_init(keywords)
 
         # Handle any special Python proc
-        python_proc = keywords.pop('python_proc')
+        python_proc = keywords.pop("python_proc")
         if python_proc is not None:
-            assert keywords.pop('preexec_fn') is None
-            keywords['preexec_fn'] = self.wrap_python_exec(python_proc)
-            args = ['true']
+            assert keywords.pop("preexec_fn") is None
+            keywords["preexec_fn"] = self.wrap_python_exec(python_proc)
+            args = ["true"]
 
         # Start the process and let subclass execute
         proc = subprocess.Popen(args, **keywords)
@@ -150,7 +150,7 @@ class BaseExec(object):
 
 
 class PipeReader(object):
-    ''' PipeReader is an iterator class designed to read from
+    """ PipeReader is an iterator class designed to read from
         the next ready pipe.
 
         It can handle as many pipes at a time as desired,
@@ -165,16 +165,16 @@ class PipeReader(object):
         A logical extension would be to handle output pipes as well,
         such as the subprocess's stdin, but the initial version is
         input pipes only (the subprocess's stdout and stderr).
-    '''
-    TIMEOUT = 1.0     # Poll interval in seconds
+    """
+    TIMEOUT = 1.0  # Poll interval in seconds
     BUFSIZE = 100000
 
     def __init__(self, *pipes, **kw):
-        self.timeout = kw.pop('timeout', self.TIMEOUT)
-        self.bufsize = kw.pop('bufsize', self.BUFSIZE)
+        self.timeout = kw.pop("timeout", self.TIMEOUT)
+        self.bufsize = kw.pop("bufsize", self.BUFSIZE)
         self.by_pipenum = {}  # Dictionary of read functions
-        self.ready = []       # List of ready pipes
-        assert not kw, kw     # Check for mispelings :)
+        self.ready = []  # List of ready pipes
+        assert not kw, kw  # Check for mispelings :)
         for pipe in pipes:
             self.addpipe(pipe)
 
@@ -187,6 +187,7 @@ class PipeReader(object):
             chunk = os.read(pipenum, bufsize)
             if chunk:
                 return pipe, chunk
+
             else:
                 # Here, we're done.  Remove ourselves from
                 # the dictionary and return None as a notification
@@ -204,9 +205,11 @@ class PipeReader(object):
             allpipes = list(self.by_pipenum)
             if not allpipes:
                 raise StopIteration
-            ready[:] = select.select(allpipes,[],[],self.timeout)[0]
+
+            ready[:] = select.select(allpipes, [], [], self.timeout)[0]
             if not ready:
-                return None, None   # Allow code to execute after timeout
+                return None, None  # Allow code to execute after timeout
+
         return self.by_pipenum[ready.pop()]()
 
     def __next__(self):
@@ -214,31 +217,33 @@ class PipeReader(object):
 
 
 class LineSplitter(object):
-    ''' LineSplitter takes arbitrary string
+    """ LineSplitter takes arbitrary string
         data and splits it into text lines.
         It manages the case where a single
         line of data returned from a pipe is
         split across multiple reads.
-    '''
+    """
+
     def __init__(self, prefix):
         self.prefix = prefix
-        self.leftovers = ''
+        self.leftovers = ""
         self.lines = []
 
     def __call__(self, chunk):
         if not chunk:
             if self.leftovers:
-                chunk = '\n'
+                chunk = "\n"
             else:
                 return self
+
         if six.PY2:
-            chunk = chunk.replace('\r\n', '\n').replace('\r', '\n')
+            chunk = chunk.replace("\r\n", "\n").replace("\r", "\n")
         else:
-            chunk = chunk.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+            chunk = chunk.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
             chunk = chunk.decode()
 
         chunk = self.leftovers + chunk
-        newlines = chunk.split('\n')
+        newlines = chunk.split("\n")
         self.leftovers = newlines.pop()
         oldlines = self.lines
         oldlines.reverse()
@@ -252,15 +257,15 @@ class LineSplitter(object):
     def __next__(self):
         try:
             return self.prefix, self.lines.pop()
+
         except IndexError:
             raise StopIteration
 
     next = __next__
 
 
-
 class TextOutExec(BaseExec):
-    ''' TextOutExec is used for when an executed subprocess's
+    """ TextOutExec is used for when an executed subprocess's
         stdout and stderr are line-oriented text output.
         This class is its own iterator.  Each line from
         the subprocess is yielded from here, with a prefix:
@@ -275,23 +280,20 @@ class TextOutExec(BaseExec):
              If this proves to be a problem in real life, we
              can add timeout checking to the "wait for things
              to finish up" logic.
-    '''
-    defaults = dict(
-                pollinterval=1.0,
-                readbufsize=100000,
-    )
+    """
+    defaults = dict(pollinterval=1.0, readbufsize=100000)
     defaults.update(BaseExec.defaults)
 
     def before_init(self, keywords):
-        self.pollinterval = keywords.pop('pollinterval')
-        self.bufsize = keywords.pop('readbufsize')
+        self.pollinterval = keywords.pop("pollinterval")
+        self.bufsize = keywords.pop("readbufsize")
 
     def after_init(self):
         proc = self.proc
-        self.pipes = PipeReader(proc.stdout, proc.stderr,
-                      timeout=self.pollinterval, bufsize=self.bufsize)
-        self.pipedir = {proc.stdout : LineSplitter(' '),
-                        proc.stderr : LineSplitter('*')}
+        self.pipes = PipeReader(
+            proc.stdout, proc.stderr, timeout=self.pollinterval, bufsize=self.bufsize
+        )
+        self.pipedir = {proc.stdout: LineSplitter(" "), proc.stderr: LineSplitter("*")}
         self.lines = []
         self.finished = False
 
@@ -307,13 +309,15 @@ class TextOutExec(BaseExec):
                     lines.extend(self.pipedir[pipe](data))
                     lines.reverse()
                 break
+
             else:
                 if self.finished:
                     raise StopIteration
+
                 else:
                     self.finished = True
-                    lines.append(('**', str(self.proc.wait())))
-        return '%s %s' % lines.pop()
+                    lines.append(("**", str(self.proc.wait())))
+        return "%s %s" % lines.pop()
 
     next = __next__
 
@@ -321,11 +325,12 @@ class TextOutExec(BaseExec):
 def elapsedtime(when=time.time()):
     mins, secs = divmod(round(time.time() - when, 1), 60)
     hrs, mins = divmod(mins, 60)
-    hrs = hrs and ('%02d:' % int(round(hrs))) or ''
-    mins = mins and ('%02d:' % int(round(mins))) or ''
-    secs = '%04.1f' % secs
-    units = hrs and 'hours' or mins and 'minutes' or 'seconds'
-    return '%s%s%s %s' % (hrs, mins, secs, units)
+    hrs = hrs and ("%02d:" % int(round(hrs))) or ""
+    mins = mins and ("%02d:" % int(round(mins))) or ""
+    secs = "%04.1f" % secs
+    units = hrs and "hours" or mins and "minutes" or "seconds"
+    return "%s%s%s %s" % (hrs, mins, secs, units)
+
 
 def default_logger(resultlist, data=None, data2=None):
     if data is not None:
@@ -334,50 +339,58 @@ def default_logger(resultlist, data=None, data2=None):
         data2 = data
         six.print_(data2)
 
-def textexec(*arg, **kw):
-    ''' Exec a subprocess, print lines, and also return
-        them to caller
-    '''
-    logger = kw.pop('logger', default_logger)
 
-    formatcmd = textwrap.TextWrapper(initial_indent='        ',
-                                    subsequent_indent='        ',
-                                    break_long_words=False).fill
+def textexec(*arg, **kw):
+    """ Exec a subprocess, print lines, and also return
+        them to caller
+    """
+    logger = kw.pop("logger", default_logger)
+
+    formatcmd = textwrap.TextWrapper(
+        initial_indent="        ", subsequent_indent="        ", break_long_words=False
+    ).fill
 
     subproc = TextOutExec(*arg, **kw)
     args = subproc.args
     procname = args[0]
     starttime = time.time()
     result = []
-    logger(result,
-        'Process "%s" started on %s\n\n%s\n\n' % (
-         procname, time.asctime(), formatcmd(' '.join(args))))
+    logger(
+        result,
+        'Process "%s" started on %s\n\n%s\n\n'
+        % (procname, time.asctime(), formatcmd(" ".join(args))),
+    )
     errcode = 0
-    badexit = '* ' + chr(1)
+    badexit = "* " + chr(1)
     for line in subproc:
         if line == badexit and subproc.is_python_proc:
             errcode = 1
             continue
-        if not line.startswith('**'):
+
+        if not line.startswith("**"):
             logger(result, line)
             continue
+
         errcode = errcode or int(line.split()[-1])
-        status = errcode and 'FAIL' or 'PASS'
-        logger(result,
-            '\nProgram %s exit code: %s (%d)   elapsed time: %s\n' %
-            (procname, status, errcode, elapsedtime(starttime)))
-        logger(result, None,
-            'Cumulative execution time is %s\n' % elapsedtime())
+        status = errcode and "FAIL" or "PASS"
+        logger(
+            result,
+            "\nProgram %s exit code: %s (%d)   elapsed time: %s\n"
+            % (procname, status, errcode, elapsedtime(starttime)),
+        )
+        logger(result, None, "Cumulative execution time is %s\n" % elapsedtime())
     return errcode, result
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
 
     def goodfunc():
         six.print_("Good func", sys.argv)
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
-        #raise SystemExit('I am bad')
+
+    # raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
         six.print_("Starting subprocess")
@@ -388,21 +401,22 @@ if __name__ == '__main__':
             sys.stdout.flush()
         six.print_("This is an error message", file=sys.stderr)
         six.print_("Ending subprocess")
-        if sys.argv[1] == 'die':
-            raise SystemExit('Deliberately croaking')
+        if sys.argv[1] == "die":
+            raise SystemExit("Deliberately croaking")
+
     else:
-        six.print_('Calling good python_proc 1')
-        textexec('goodfunc', '1', python_proc=goodfunc)
-        six.print_('Calling bad python_proc 1')
-        textexec('badfunc', '1', python_proc=badfunc)
-        six.print_('Calling good python_proc 2')
-        textexec('goodfunc', '2', python_proc=goodfunc)
-        six.print_('Calling bad python_proc 2')
-        textexec('badfunc', '2', python_proc=badfunc)
+        six.print_("Calling good python_proc 1")
+        textexec("goodfunc", "1", python_proc=goodfunc)
+        six.print_("Calling bad python_proc 1")
+        textexec("badfunc", "1", python_proc=badfunc)
+        six.print_("Calling good python_proc 2")
+        textexec("goodfunc", "2", python_proc=goodfunc)
+        six.print_("Calling bad python_proc 2")
+        textexec("badfunc", "2", python_proc=badfunc)
         six.print_("Calling myself")
-        textexec(__file__, 'subprocess')
+        textexec(__file__, "subprocess")
         six.print_("Calling myself with kill time")
-        textexec(__file__, 'subprocess', timeout=0.8)
+        textexec(__file__, "subprocess", timeout=0.8)
         six.print_("Calling myself with forced error exit")
-        textexec(__file__, 'die')
-        six.print_('All Done')
+        textexec(__file__, "die")
+        six.print_("All Done")

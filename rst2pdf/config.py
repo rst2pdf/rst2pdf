@@ -14,8 +14,8 @@ else:
 from rst2pdf.rson import loads
 
 
-cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
-cfname = os.path.join(cfdir, 'config')
+cfdir = os.path.join(os.path.expanduser("~"), ".rst2pdf")
+cfname = os.path.join(cfdir, "config")
 
 
 def getValue(section, key, default=None):
@@ -23,6 +23,7 @@ def getValue(section, key, default=None):
     key = key.lower()
     try:
         return loads(conf.get(section, key))
+
     except Exception:
         return default
 

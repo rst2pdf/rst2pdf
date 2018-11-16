@@ -7,7 +7,7 @@
 ####                                                                        ####
 ################################################################################
 
-'''
+"""
 RSON -- readable serial object notation
 
 RSON is a superset of JSON with relaxed syntax for human readability.
@@ -19,13 +19,13 @@ Simple usage example:
 Additional documentation available at:
 
 http://code.google.com/p/rson/
-'''
+"""
 
-__version__ = '0.08'
+__version__ = "0.08"
 
-__author__ = 'Patrick Maupin <pmaupin@gmail.com>'
+__author__ = "Patrick Maupin <pmaupin@gmail.com>"
 
-__copyright__ = '''
+__copyright__ = """
 Copyright (c) 2010, Patrick Maupin.  All rights reserved.
 
  Permission is hereby granted, free of charge, to any person
@@ -48,7 +48,7 @@ Copyright (c) 2010, Patrick Maupin.  All rights reserved.
  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
- '''
+ """
 
 import bisect
 import re
@@ -66,7 +66,7 @@ class RSONDecodeError(ValueError):
 
 
 class Tokenizer(list):
-    ''' The RSON tokenizer uses re.split() to rip the source string
+    """ The RSON tokenizer uses re.split() to rip the source string
         apart into smaller strings which may or may not be true standalone
         tokens.  Sufficient information is maintained to put Humpty-Dumpty
         back together when necessary.
@@ -87,7 +87,7 @@ class Tokenizer(list):
                             (\n followed by 0 or more spaces)
            [5] Line number of token
            [6] Tokenizer object that the token belongs to (for error reporting)
-    '''
+    """
 
     # Like Python, indentation is special.  I originally planned on making
     # the space character the only valid indenter, but that got messy
@@ -98,15 +98,15 @@ class Tokenizer(list):
     # An indentation is always the preceding EOL plus optional spaces,
     # so we create a dummy EOL for the very start of the string.
     # Could also have an embedded comment
-    indentation = r'\n[ \t\v\f]*(?:#.*)?'
+    indentation = r"\n[ \t\v\f]*(?:#.*)?"
 
     # RSON syntax delimiters are tokenized separately from everything else.
-    delimiterset = set(' { } [ ] : = , '.split())
+    delimiterset = set(" { } [ ] : = , ".split())
 
-    re_delimiterset = ''.join(delimiterset).replace(']', r'\]')
+    re_delimiterset = "".join(delimiterset).replace("]", r"\]")
 
     # Create a RE pattern for the delimiters
-    delimiter_pattern = '[%s]' % re_delimiterset
+    delimiter_pattern = "[%s]" % re_delimiterset
 
     # A regular quoted string must terminate before the end of the line,
     # and \ can be used as the internal escape character.
@@ -125,15 +125,11 @@ class Tokenizer(list):
     # category.  This group can have embedded whitespace, but ends on a
     # non-whitespace character.
 
-    other = r'[\S](?:[^%s\n]*[^%s\s])*' % (re_delimiterset, re_delimiterset)
+    other = r"[\S](?:[^%s\n]*[^%s\s])*" % (re_delimiterset, re_delimiterset)
 
-    pattern = '(%s)' % '|'.join([
-      delimiter_pattern,
-      triple_quoted_string,
-      quoted_string,
-      other,
-      indentation,
-    ])
+    pattern = "(%s)" % "|".join(
+        [delimiter_pattern, triple_quoted_string, quoted_string, other, indentation]
+    )
 
     splitter = re.compile(pattern).split
 
@@ -148,18 +144,18 @@ class Tokenizer(list):
 
             # Deal with 8 bit bytes for now
             if isinstance(source, unicode):
-                source = source.encode('utf-8')
+                source = source.encode("utf-8")
 
             # Convert MS-DOS or Mac line endings to the one true way
             if six.PY2:
-                source = source.replace('\r\n', '\n').replace('\r', '\n')
+                source = source.replace("\r\n", "\n").replace("\r", "\n")
                 sourcelist = splitter(source)
             else:
-                source = source.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+                source = source.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
                 sourcelist = splitter(source.decode())
 
             # Get the indentation at the start of the file
-            indentation = '\n' + sourcelist[0]
+            indentation = "\n" + sourcelist[0]
             linenum = 1
             linestart = offset = 0
 
@@ -173,9 +169,9 @@ class Tokenizer(list):
             offset -= len(next_())
 
             # Strip comment from first line
-            if len(sourcelist) > 1 and sourcelist[1].startswith('#'):
+            if len(sourcelist) > 1 and sourcelist[1].startswith("#"):
                 i = 1
-                while len(sourcelist) > i and not sourcelist[i].startswith('\n'):
+                while len(sourcelist) > i and not sourcelist[i].startswith("\n"):
                     i += 1
                     offset -= len(next_())
 
@@ -189,21 +185,24 @@ class Tokenizer(list):
                 whitespace = next_()
                 t0 = token[0]
                 if t0 not in delimiterset:
-                    if t0 == '\n':
+                    if t0 == "\n":
                         linenum += 1
                         indentation = token
                         offset -= len(token)
                         linestart = offset
                         continue
+
                     else:
-                        t0 = 'X'
-                self[index] = (offset, t0, token, whitespace, indentation, linenum, self)
+                        t0 = "X"
+                self[index] = (
+                    offset, t0, token, whitespace, indentation, linenum, self
+                )
                 index += 1
                 offset -= len(token) + len(whitespace)
 
             # Add a sentinel
-            self[index] = (offset, '@', '@', '', '', linenum + 1, self)
-            self[index+1:] = []
+            self[index] = (offset, "@", "@", "", "", linenum + 1, self)
+            self[index + 1:] = []
 
             # Put everything we need in the actual object instantiation
             self.reverse()
@@ -211,6 +210,7 @@ class Tokenizer(list):
             self.next = self.pop
             self.push = self.append
             return self
+
         return newstring
 
     def peek(self):
@@ -221,27 +221,27 @@ class Tokenizer(list):
 
     @staticmethod
     def sourceloc(token):
-        ''' Return the source location for a given token
-        '''
+        """ Return the source location for a given token
+        """
         lineno = token[5]
         colno = offset = -token[0] + 1
         if lineno != 1:
-            colno -= token[-1].source.rfind('\n', 0, offset) + 1
+            colno -= token[-1].source.rfind("\n", 0, offset) + 1
         return offset, lineno, colno
 
     @classmethod
     def error(cls, s, token):
-        ''' error performs generic error reporting for tokens
-        '''
+        """ error performs generic error reporting for tokens
+        """
         offset, lineno, colno = cls.sourceloc(token)
 
-        if token[1] == '@':
-            loc = 'at end of string'
+        if token[1] == "@":
+            loc = "at end of string"
         else:
             text = token[2]
-            loc = 'line %s, column %s, text %s' % (lineno, colno, repr(text[:20]))
+            loc = "line %s, column %s, text %s" % (lineno, colno, repr(text[:20]))
 
-        err = RSONDecodeError('%s: %s' % (s, loc))
+        err = RSONDecodeError("%s: %s" % (s, loc))
         err.pos = offset
         err.lineno = lineno
         err.colno = colno
@@ -252,10 +252,13 @@ def make_hashable(what):
     try:
         hash(what)
         return what
+
     except TypeError:
         if isinstance(what, dict):
             return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+
         return tuple(make_hashable(x) for x in what)
+
 
 class BaseObjects(object):
 
@@ -274,13 +277,14 @@ class BaseObjects(object):
     disallow_nonstring_keys = True
 
     class default_array(list):
+
         def __new__(self, startlist, token):
             return list(startlist)
 
     class default_object(dict):
-        ''' By default, RSON objects are dictionaries that
+        """ By default, RSON objects are dictionaries that
             allow attribute access to their existing contents.
-        '''
+        """
 
         def __getattr__(self, key):
             return self[key]
@@ -307,29 +311,36 @@ class BaseObjects(object):
                 if isinstance(oldvalue, dict):
                     oldvalue.update(value)
                     return
+
             mydict[lastkey] = value
 
         def get_result(self, token):
             return self
 
     def object_type_factory(self, dict=dict, tuple=tuple):
-        ''' This function returns constructors for RSON objects and arrays.
+        """ This function returns constructors for RSON objects and arrays.
             It handles simplejson compatible hooks as well.
-        '''
+        """
         object_hook = self.object_hook
         object_pairs_hook = self.object_pairs_hook
 
         if object_pairs_hook is not None:
+
             class build_object(list):
+
                 def get_result(self, token):
                     return object_pairs_hook([tuple(x) for x in self])
+
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         elif object_hook is not None:
             mydict = dict
+
             class build_object(list):
+
                 def get_result(self, token):
                     return object_hook(mydict(self))
+
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         else:
@@ -340,9 +351,9 @@ class BaseObjects(object):
 
 
 class Dispatcher(object):
-    ''' Assumes that this is mixed-in to a class with an
+    """ Assumes that this is mixed-in to a class with an
         appropriate parser_factory() method.
-    '''
+    """
 
     @classmethod
     def dispatcher_factory(cls, hasattr=hasattr, tuple=tuple, sorted=sorted):
@@ -363,7 +374,7 @@ class Dispatcher(object):
                 # Begin some real ugliness here -- just modify our instance to
                 # have the correct user variables for the initialization functions.
                 # Seems to speed up simplejson testcases a bit.
-                self.__dict__ = dict((x,y) for (x,y) in key if y is not None)
+                self.__dict__ = dict((x, y) for (x, y) in key if y is not None)
                 func = parsercache[key] = parser_factory()
 
             return func(s)
@@ -372,42 +383,45 @@ class Dispatcher(object):
 
 
 class QuotedToken(object):
-    ''' Subclass or replace this if you don't like quoted string handling
-    '''
+    """ Subclass or replace this if you don't like quoted string handling
+    """
 
     if six.PY3:
         parse_encoded_chr = chr
-        parse_quoted_str = staticmethod(
-                                        lambda token, s, str=str: str(s))
+        parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
     else:
         parse_quoted_str = staticmethod(
-                                        lambda token, s,
-                                        unicode=unicode: unicode(s, 'utf-8'))
+            lambda token, s, unicode=unicode: unicode(s, "utf-8")
+        )
 
         parse_encoded_chr = unichr
 
-    parse_join_str = u''.join
+    parse_join_str = u"".join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
     if six.PY3:
-        quoted_mapper = {'\\\\': '\\',
-                         r'\"': '"',
-                         r'\/': '/',
-                         r'\b': '\b',
-                         r'\f': '\f',
-                         r'\n': '\n',
-                         r'\r': '\r',
-                         r'\t': '\t'}.get
+        quoted_mapper = {
+            "\\\\": "\\",
+            r'\"': '"',
+            r"\/": "/",
+            r"\b": "\b",
+            r"\f": "\f",
+            r"\n": "\n",
+            r"\r": "\r",
+            r"\t": "\t",
+        }.get
     else:
-        quoted_mapper = {'\\\\': u'\\',
-                         r'\"': u'"',
-                         r'\/': u'/',
-                         r'\b': u'\b',
-                         r'\f': u'\f',
-                         r'\n': u'\n',
-                         r'\r': u'\r',
-                         r'\t': u'\t'}.get
+        quoted_mapper = {
+            "\\\\": u"\\",
+            r'\"': u'"',
+            r"\/": u"/",
+            r"\b": u"\b",
+            r"\f": u"\f",
+            r"\n": u"\n",
+            r"\r": u"\r",
+            r"\t": u"\t",
+        }.get
 
     def quoted_parse_factory(self, int=int, iter=iter, len=len):
         quoted_splitter = self.quoted_splitter
@@ -422,7 +436,9 @@ class QuotedToken(object):
 
         def badstring(token, special):
             if token[2] != '"""' or triplequoted is None:
-                token[-1].error('Invalid character in quoted string: %s' % repr(special), token)
+                token[-1].error(
+                    "Invalid character in quoted string: %s" % repr(special), token
+                )
             result = parse_quoted_str(token, triplequoted(token))
             if cachestrings:
                 result = token[-1].stringcache(result, result)
@@ -431,7 +447,7 @@ class QuotedToken(object):
         def parse(token, next_):
             s = token[2]
             if len(s) < 2 or not (s[0] == s[-1] == '"'):
-                token[-1].error('No end quote on string', token)
+                token[-1].error("No end quote on string", token)
             s = quoted_splitter(s[1:-1])
             result = parse_quoted_str(token, s[0])
             if len(s) > 1:
@@ -452,10 +468,13 @@ class QuotedToken(object):
                         if len(special) == 6:
                             uni = int(special[2:], 16)
                             if 0xd800 <= uni <= 0xdbff and allow_double:
-                                uni, nonmatch = parse_double_unicode(uni, nonmatch, next_, token)
+                                uni, nonmatch = parse_double_unicode(
+                                    uni, nonmatch, next_, token
+                                )
                             remap = parse_encoded_chr(uni)
                         else:
                             return badstring(token, special)
+
                     append(remap)
                     append(parse_quoted_str(token, nonmatch))
 
@@ -465,21 +484,24 @@ class QuotedToken(object):
             return result
 
         def parse_double_unicode(uni, nonmatch, next_, token):
-            ''' Munged version of UCS-4 code pair stuff from
+            """ Munged version of UCS-4 code pair stuff from
                 simplejson.
-            '''
+            """
             ok = True
             try:
                 uni2 = next_()
                 nonmatch2 = next_()
             except:
                 ok = False
-            ok = ok and not nonmatch and uni2.startswith(r'\u') and len(uni2) == 6
+            ok = ok and not nonmatch and uni2.startswith(r"\u") and len(uni2) == 6
             if ok:
                 nonmatch = uni2
                 uni = 0x10000 + (((uni - 0xd800) << 10) | (int(uni2[2:], 16) - 0xdc00))
                 return uni, nonmatch2
-            token[-1].error('Invalid second ch in double sequence: %s' % repr(nonmatch), token)
+
+            token[-1].error(
+                "Invalid second ch in double sequence: %s" % repr(nonmatch), token
+            )
 
         return parse
 
@@ -492,20 +514,21 @@ class QuotedToken(object):
         while 1:
             end = source.find('"""', start)
             if end < 0:
-                tokens.error('Did not find end for triple-quoted string', token)
-            if source[end-1] != '\\':
+                tokens.error("Did not find end for triple-quoted string", token)
+            if source[end - 1] != "\\":
                 break
-            result.append(source[start:end-1])
+
+            result.append(source[start:end - 1])
             result.append('"""')
             start = end + 3
         result.append(source[start:end])
-        offset = bisect.bisect(tokens, (- end -2, ))
+        offset = bisect.bisect(tokens, (-end - 2,))
         tokens[offset:] = []
-        return ''.join(result)
+        return "".join(result)
 
 
 class UnquotedToken(object):
-    ''' Subclass or replace this if you don't like the unquoted
+    """ Subclass or replace this if you don't like the unquoted
         token handling.  This is designed to be a superset of JSON:
 
           - Integers allowed to be expressed in octal, binary, or hex
@@ -520,22 +543,21 @@ class UnquotedToken(object):
           - Numbers can be left-zero-filled
           - If a decimal point is present, digits are required on either side,
             but not both sides
-    '''
+    """
 
     use_decimal = False
-    parse_int = staticmethod(
-        lambda s: int(s.replace('_', ''), 0))
+    parse_int = staticmethod(lambda s: int(s.replace("_", ""), 0))
     parse_float = float
     if six.PY2:
         parse_unquoted_str = staticmethod(
-            lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+            lambda token, unicode=unicode: unicode(token[2], "utf-8")
+        )
     else:
-        parse_unquoted_str = staticmethod(
-            lambda token, unicode=str: str(token[2]))
+        parse_unquoted_str = staticmethod(lambda token, unicode=str: str(token[2]))
 
     special_strings = dict(true=True, false=False, null=None)
 
-    unquoted_pattern = r'''
+    unquoted_pattern = r"""
     (?:
         true | false | null       |     # Special JSON names
         (?P<num>
@@ -556,11 +578,10 @@ class UnquotedToken(object):
             )
         )
     )  \Z                               # Match end of string
-    '''
+    """
 
     def unquoted_parse_factory(self):
-        unquoted_match = re.compile(self.unquoted_pattern,
-                                    re.VERBOSE).match
+        unquoted_match = re.compile(self.unquoted_pattern, re.VERBOSE).match
 
         parse_unquoted_str = self.parse_unquoted_str
         parse_float = self.parse_float
@@ -569,6 +590,7 @@ class UnquotedToken(object):
 
         if self.use_decimal:
             from decimal import Decimal
+
             parse_float = Decimal
 
         def parse(token, next_):
@@ -576,26 +598,29 @@ class UnquotedToken(object):
             m = unquoted_match(s)
             if m is None:
                 return parse_unquoted_str(token)
-            if m.group('num') is None:
+
+            if m.group("num") is None:
                 return special[s]
-            if m.group('float') is None:
-                return parse_int(s.replace('_', ''))
+
+            if m.group("float") is None:
+                return parse_int(s.replace("_", ""))
+
             return parse_float(s)
 
         return parse
 
 
 class EqualToken(object):
-    ''' Subclass or replace this if you don't like the = string handling
-    '''
+    """ Subclass or replace this if you don't like the = string handling
+    """
 
     encode_equals_str = None
 
     @staticmethod
     def parse_equals(stringlist, indent, token):
-        ''' token probably not needed except maybe for error reporting.
+        """ token probably not needed except maybe for error reporting.
             Replace this with something that does what you want.
-        '''
+        """
         # Strip any trailing whitespace to the right
         stringlist = [x.rstrip() for x in stringlist]
 
@@ -608,7 +633,8 @@ class EqualToken(object):
 
         # Special cases for single line
         if not stringlist:
-            return ''
+            return ""
+
         if len(stringlist) == 1:
             return stringlist[0].strip()
 
@@ -626,10 +652,10 @@ class EqualToken(object):
 
         # Give every line its own linefeed (keeps later parsing from
         # treating this as a number, for example)
-        stringlist.append('')
+        stringlist.append("")
 
         # Return all joined up as a single unicode string
-        return '\n'.join(stringlist)
+        return "\n".join(stringlist)
 
     def equal_parse_factory(self, read_unquoted):
 
@@ -645,26 +671,26 @@ class EqualToken(object):
             token = next_()
             while token[5] == linenum:
                 token = next_()
-            while  token[4] > indent:
+            while token[4] > indent:
                 token = next_()
             tokens.push(token)
 
             # Get rid of \n, and indent one past =
-            indent = indent[1:] + ' '
+            indent = indent[1:] + " "
 
-            bigstring = tokens.source[-firsttok[0] + 1: -token[0]]
-            stringlist = bigstring.split('\n')
+            bigstring = tokens.source[-firsttok[0] + 1:-token[0]]
+            stringlist = bigstring.split("\n")
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)
-            token[1:3] = '=', parse_equals(stringlist, indent, firsttok)
+            token[1:3] = "=", parse_equals(stringlist, indent, firsttok)
             return encoder(token, next)
 
         return parse
 
 
 class RsonParser(object):
-    ''' Parser for RSON
-    '''
+    """ Parser for RSON
+    """
 
     disallow_trailing_commas = True
     disallow_rson_sublists = False
@@ -677,7 +703,14 @@ class RsonParser(object):
     def client_info(self, parse_locals):
         pass
 
-    def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
+    def parser_factory(
+        self,
+        len=len,
+        type=type,
+        isinstance=isinstance,
+        list=list,
+        basestring=basestring,
+    ):
 
         Tokenizer = self.Tokenizer
         tokenizer = Tokenizer.factory()
@@ -689,28 +722,29 @@ class RsonParser(object):
         new_object, new_array = self.object_type_factory()
         disallow_trailing_commas = self.disallow_trailing_commas
         disallow_missing_object_keys = self.disallow_missing_object_keys
-        key_handling = [disallow_missing_object_keys, self.disallow_multiple_object_keys]
+        key_handling = [
+            disallow_missing_object_keys, self.disallow_multiple_object_keys
+        ]
         disallow_nonstring_keys = self.disallow_nonstring_keys
         post_parse = self.post_parse
 
-
         def bad_array_element(token, next):
-            error('Expected array element', token)
+            error("Expected array element", token)
 
         def bad_dict_key(token, next):
-            error('Expected dictionary key', token)
+            error("Expected dictionary key", token)
 
         def bad_dict_value(token, next):
-            error('Expected dictionary value', token)
+            error("Expected dictionary value", token)
 
         def bad_top_value(token, next):
-            error('Expected start of object', token)
+            error("Expected start of object", token)
 
         def bad_unindent(token, next):
-            error('Unindent does not match any outer indentation level', token)
+            error("Unindent does not match any outer indentation level", token)
 
         def bad_indent(token, next):
-            error('Unexpected indentation', token)
+            error("Unexpected indentation", token)
 
         def read_json_array(firsttok, next):
             result = new_array([], firsttok)
@@ -718,20 +752,23 @@ class RsonParser(object):
             while 1:
                 token = next()
                 t0 = token[1]
-                if t0 == ']':
+                if t0 == "]":
                     if result and disallow_trailing_commas:
-                        error('Unexpected trailing comma', token)
+                        error("Unexpected trailing comma", token)
                     break
-                append(json_value_dispatch(t0,  bad_array_element)(token, next))
+
+                append(json_value_dispatch(t0, bad_array_element)(token, next))
                 delim = next()
                 t0 = delim[1]
-                if t0 == ',':
+                if t0 == ",":
                     continue
-                if t0 != ']':
-                    if t0 == '@':
+
+                if t0 != "]":
+                    if t0 == "@":
                         error('Unterminated list (no matching "]")', firsttok)
                     error('Expected "," or "]"', delim)
                 break
+
             return result
 
         def read_json_dict(firsttok, next):
@@ -740,16 +777,17 @@ class RsonParser(object):
             while 1:
                 token = next()
                 t0 = token[1]
-                if t0  == '}':
+                if t0 == "}":
                     if result and disallow_trailing_commas:
-                        error('Unexpected trailing comma', token)
+                        error("Unexpected trailing comma", token)
                     break
+
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
                 if disallow_nonstring_keys and not isinstance(key, basestring):
-                    error('Non-string key %s not supported' % repr(key), token)
+                    error("Non-string key %s not supported" % repr(key), token)
                 token = next()
                 t0 = token[1]
-                if t0 != ':':
+                if t0 != ":":
                     error('Expected ":" after dict key %s' % repr(key), token)
                 token = next()
                 t0 = token[1]
@@ -757,13 +795,15 @@ class RsonParser(object):
                 append([key, value])
                 delim = next()
                 t0 = delim[1]
-                if t0 == ',':
+                if t0 == ",":
                     continue
-                if t0 != '}':
-                    if t0 == '@':
+
+                if t0 != "}":
+                    if t0 == "@":
                         error('Unterminated dict (no matching "}")', firsttok)
                     error('Expected "," or "}"', delim)
                 break
+
             return result.get_result(firsttok)
 
         def read_rson_unquoted(firsttok, next):
@@ -771,37 +811,46 @@ class RsonParser(object):
             linenum = firsttok[5]
             while 1:
                 token = next()
-                if token[5] != linenum or token[1] in ':=':
+                if token[5] != linenum or token[1] in ":=":
                     break
+
                 toklist.append(token)
             firsttok[-1].push(token)
             if not toklist:
                 return read_unquoted(firsttok, next)
+
             s = list(firsttok[2:4])
             for tok in toklist:
                 s.extend(tok[2:4])
             result = list(firsttok)
             result[3] = s.pop()
-            result[2] = ''.join(s)
+            result[2] = "".join(s)
             return read_unquoted(result, next)
 
-        json_value_dispatch = {'X':read_unquoted, '[':read_json_array,
-                               '{': read_json_dict, '"':read_quoted}.get
+        json_value_dispatch = {
+            "X": read_unquoted,
+            "[": read_json_array,
+            "{": read_json_dict,
+            '"': read_quoted,
+        }.get
 
-
-        rson_value_dispatch = {'X':read_rson_unquoted, '[':read_json_array,
-                                  '{': read_json_dict, '"':read_quoted,
-                                   '=': parse_equals}
+        rson_value_dispatch = {
+            "X": read_rson_unquoted,
+            "[": read_json_array,
+            "{": read_json_dict,
+            '"': read_quoted,
+            "=": parse_equals,
+        }
 
         if self.disallow_rson_sublists:
-            rson_value_dispatch['['] = read_rson_unquoted
+            rson_value_dispatch["["] = read_rson_unquoted
 
         if self.disallow_rson_subdicts:
-            rson_value_dispatch['{'] = read_rson_unquoted
+            rson_value_dispatch["{"] = read_rson_unquoted
 
         rson_key_dispatch = rson_value_dispatch.copy()
         if disallow_missing_object_keys:
-            del rson_key_dispatch['=']
+            del rson_key_dispatch["="]
 
         rson_value_dispatch = rson_value_dispatch.get
         rson_key_dispatch = rson_key_dispatch.get
@@ -819,13 +868,18 @@ class RsonParser(object):
                 if thisindent != arrayindent:
                     if thisindent < arrayindent:
                         return result, token
+
                     if result:
                         stack.append(token)
                         lastitem = result[-1]
                         if lastitem == empty_array:
-                            result[-1], token = parse_recurse_array(stack, next, token, lastitem)
+                            result[-1], token = parse_recurse_array(
+                                stack, next, token, lastitem
+                            )
                         elif lastitem == empty_object:
-                            result[-1], token = parse_recurse_dict(stack, next, token, lastitem)
+                            result[-1], token = parse_recurse_dict(
+                                stack, next, token, lastitem
+                            )
                         else:
                             result = None
                     if result:
@@ -833,12 +887,19 @@ class RsonParser(object):
                         thisindent, newlinenum = token[4:6]
                         if thisindent <= arrayindent:
                             continue
+
                         bad_unindent(token, next)
                     bad_indent(token, next)
                 if newlinenum <= linenum:
-                    if token[1] in '=:':
-                        error('Cannot mix list elements with dict (key/value) elements', token)
-                    error('Array elements must either be on separate lines or enclosed in []', token)
+                    if token[1] in "=:":
+                        error(
+                            "Cannot mix list elements with dict (key/value) elements",
+                            token,
+                        )
+                    error(
+                        "Array elements must either be on separate lines or enclosed in []",
+                        token,
+                    )
                 linenum = newlinenum
                 value = rson_value_dispatch(token[1], bad_top_value)(token, next)
                 result.append(value)
@@ -846,7 +907,7 @@ class RsonParser(object):
 
         def parse_one_dict_entry(stack, next, token, entry, mydict):
             arrayindent, linenum = stack[-1][4:6]
-            while token[1] == ':':
+            while token[1] == ":":
                 tok1 = next()
                 thisindent, newlinenum = tok1[4:6]
                 if newlinenum == linenum:
@@ -854,15 +915,16 @@ class RsonParser(object):
                     token = next()
                     entry.append(value)
                     continue
+
                 if thisindent <= arrayindent:
                     error('Expected indented line after ":"', token)
                 token = tok1
 
             if not entry:
-                error('Expected key', token)
+                error("Expected key", token)
 
             thisindent, newlinenum = token[4:6]
-            if newlinenum == linenum and token[1] == '=':
+            if newlinenum == linenum and token[1] == "=":
                 value = rson_value_dispatch(token[1], bad_top_value)(token, next)
                 entry.append(value)
                 token = next()
@@ -873,21 +935,27 @@ class RsonParser(object):
                     if type(entry[-1]) is type(value):
                         entry[-1] = value
                     else:
-                        error('Cannot load %s into %s' % (type(value), type(entry[-1])), stack[-1])
+                        error(
+                            "Cannot load %s into %s" % (type(value), type(entry[-1])),
+                            stack[-1],
+                        )
                 elif len(value) == 1 and type(value) is empty_array_type:
                     entry.extend(value)
                 else:
                     entry.append(value)
                 stack.pop()
             length = len(entry)
-            if length != 2  and key_handling[length > 2]:
+            if length != 2 and key_handling[length > 2]:
                 if length < 2:
                     error('Expected ":" or "=", or indented line', token)
-                error("rson client's object handlers do not support chained objects", token)
+                error(
+                    "rson client's object handlers do not support chained objects",
+                    token,
+                )
             if disallow_nonstring_keys:
                 for key in entry[:-1]:
                     if not isinstance(key, basestring):
-                        error('Non-string key %s not supported' % repr(key), token)
+                        error("Non-string key %s not supported" % repr(key), token)
             mydict.append(entry)
             return token
 
@@ -898,17 +966,18 @@ class RsonParser(object):
                 if thisindent != arrayindent:
                     if thisindent < arrayindent:
                         return result.get_result(token), token
+
                     bad_unindent(token, next)
                 key = rson_key_dispatch(token[1], bad_top_value)(token, next)
                 stack[-1] = token
                 token = parse_one_dict_entry(stack, next, next(), [key], result)
 
         def parse_recurse(stack, next, tokens=None):
-            ''' parse_recurse ALWAYS returns a list or a dict.
+            """ parse_recurse ALWAYS returns a list or a dict.
                 (or the user variants thereof)
                 It is up to the caller to determine that it was an array
                 of length 1 and strip the contents out of the array.
-            '''
+            """
             firsttok = stack[-1]
             value = rson_value_dispatch(firsttok[1], bad_top_value)(firsttok, next)
 
@@ -916,9 +985,11 @@ class RsonParser(object):
             # is at the same indentation, or the current value is an empty list
 
             token = next()
-            if (token[5] != firsttok[5] and
-                    (token[4] <= firsttok[4] or
-                     value in empties) and disallow_missing_object_keys):
+            if (
+                token[5] != firsttok[5]
+                and (token[4] <= firsttok[4] or value in empties)
+                and disallow_missing_object_keys
+            ):
                 result = new_array([value], firsttok)
                 if tokens is not None:
                     tokens.top_object = result
@@ -931,20 +1002,22 @@ class RsonParser(object):
             token = parse_one_dict_entry(stack, next, token, [value], result)
             return parse_recurse_dict(stack, next, token, result)
 
-
         def parse(source):
             tokens = tokenizer(source, None)
             tokens.stringcache = {}.setdefault
             tokens.client_info = client_info
             next = tokens.next
             value, token = parse_recurse([next()], next, tokens)
-            if token[1] != '@':
-                error('Unexpected additional data', token)
+            if token[1] != "@":
+                error("Unexpected additional data", token)
 
             # If it's a single item and we don't have a specialized
             # object builder, just strip the outer list.
-            if (len(value) == 1 and isinstance(value, list)
-                   and disallow_missing_object_keys):
+            if (
+                len(value) == 1
+                and isinstance(value, list)
+                and disallow_missing_object_keys
+            ):
                 value = value[0]
             return post_parse(tokens, value)
 
@@ -953,7 +1026,10 @@ class RsonParser(object):
         return parse
 
 
-class RsonSystem(RsonParser, UnquotedToken, QuotedToken, EqualToken, Dispatcher, BaseObjects):
+class RsonSystem(
+    RsonParser, UnquotedToken, QuotedToken, EqualToken, Dispatcher, BaseObjects
+):
     Tokenizer = Tokenizer
+
 
 loads = RsonSystem.dispatcher_factory()

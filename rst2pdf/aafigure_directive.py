@@ -34,12 +34,13 @@ from docutils.parsers import rst
 from .opt_imports import aafigure
 from .log import log
 
-WARNED=False
+WARNED = False
+
 
 class Aanode(Element):
     children = ()
 
-    def __init__(self, content, options, rawsource='', *children, **attributes):
+    def __init__(self, content, options, rawsource="", *children, **attributes):
         self.content = content
         self.options = options
         Element.__init__(self, rawsource, *children, **attributes)
@@ -52,9 +53,8 @@ class Aanode(Element):
         # explicit :option: always precedes
         options.update(self.options)
         visitor = aafigure.process(
-            '\n'.join(self.content),
-            aafigure.pdf.PDFOutputVisitor,
-            options=options)
+            "\n".join(self.content), aafigure.pdf.PDFOutputVisitor, options=options
+        )
         return renderPDF.GraphicsFlowable(visitor.drawing)
 
 
@@ -67,30 +67,33 @@ class Aafig(rst.Directive):
     optional_arguments = 0
     final_argument_whitespace = False
     option_spec = dict(
-        scale = float,
-        line_width = float,
-        background = str,
-        foreground = str,
-        fill = str,
-        name = str,
-        aspect = float,
-        textual = directives.flag,
-        proportional = directives.flag,
+        scale=float,
+        line_width=float,
+        background=str,
+        foreground=str,
+        fill=str,
+        name=str,
+        aspect=float,
+        textual=directives.flag,
+        proportional=directives.flag,
     )
 
     def run(self):
         global WARNED
-        if 'textual' in self.options:
-            self.options['textual'] = True
-        if 'proportional' in self.options:
-            self.options['proportional'] = True
+        if "textual" in self.options:
+            self.options["textual"] = True
+        if "proportional" in self.options:
+            self.options["proportional"] = True
         if aafigure is not None:
             return [Aanode(self.content, self.options)]
+
         if not WARNED:
-            log.error('To render the aafigure directive correctly, please install aafigure')
-            WARNED=True
-        return [literal_block(text='\n'.join(self.content))]
+            log.error(
+                "To render the aafigure directive correctly, please install aafigure"
+            )
+            WARNED = True
+        return [literal_block(text="\n".join(self.content))]
 
 
-directives.register_directive('aafig', Aafig)
-directives.register_directive('aafigure', Aafig)
+directives.register_directive("aafig", Aafig)
+directives.register_directive("aafigure", Aafig)

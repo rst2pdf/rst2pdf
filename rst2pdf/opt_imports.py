@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 opt_imports.py contains logic for handling optional imports.
 
-'''
+"""
 
 import os
 import sys
@@ -23,17 +23,18 @@ try:
     from wordaxe import version as wordaxe_version
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+
     # PyHnjHyphenator is broken for non-ascii characters, so
     # let's not use it and avoid useless crashes (http://is.gd/19efQ)
 
-    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    # from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     # If basehyphenator doesn't load, wordaxe is broken
     # pyhyphenator and DCW *may* not load.
 
     from wordaxe.BaseHyphenator import BaseHyphenator
+
     try:
-        from wordaxe.plugins.PyHyphenHyphenator \
-            import PyHyphenHyphenator
+        from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
     except:
         pass
     try:
@@ -58,10 +59,13 @@ except ImportError:
 try:
     import psyco
 except ImportError:
+
     class psyco(object):
+
         @staticmethod
         def full():
             pass
+
 
 try:
     import aafigure
@@ -71,7 +75,7 @@ except ImportError:
 
 try:
     from reportlab.platypus.flowables import NullDraw
-except ImportError: # Probably RL 2.1
+except ImportError:  # Probably RL 2.1
     from reportlab.platypus.flowables import Flowable as NullDraw
 
 try:
@@ -79,16 +83,18 @@ try:
 except ImportError:
     mathtext = None
 
+
 class LazyImports(object):
-    ''' Only import some things if we need them.
-    '''
+    """ Only import some things if we need them.
+    """
 
     def __getattr__(self, name):
-        if name.startswith('_load_'):
+        if name.startswith("_load_"):
             raise AttributeError
+
         value = None
-        if not os.environ.get('DISABLE_' + name.upper()):
-            func = getattr(self, '_load_' + name)
+        if not os.environ.get("DISABLE_" + name.upper()):
+            func = getattr(self, "_load_" + name)
             try:
                 value = func()
             except ImportError:
@@ -122,5 +128,6 @@ class LazyImports(object):
     def _load_svg2rlg(self):
         import svg2rlg
         return svg2rlg
+
 
 LazyImports = LazyImports()

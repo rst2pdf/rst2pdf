@@ -4,7 +4,7 @@
 # Copyright 2010, Patrick Maupin
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 preprocess is a rst2pdf extension module (invoked by -e preprocess
 on the rst2pdf command line.
 
@@ -99,7 +99,7 @@ messages from docutils will refer to line numbers in it, rather than
 in the original source, so debugging could be difficult if the
 file were automatically removed.
 
-'''
+"""
 
 import os
 import re
@@ -108,23 +108,27 @@ from rst2pdf.rson import loads as rson_loads
 
 from rst2pdf.log import log
 
+
 class DummyFile(str):
-    ''' We could use stringio, but that's really overkill for what
+    """ We could use stringio, but that's really overkill for what
         we need here.
-    '''
+    """
+
     def read(self):
         return self
 
+
 class Preprocess(object):
+
     def __init__(self, sourcef, incfile=False, widthcount=0):
-        ''' Process a file and decorate the resultant Preprocess instance with
+        """ Process a file and decorate the resultant Preprocess instance with
             self.result (the preprocessed file) and self.styles (extracted stylesheet
             information) for the caller.
-        '''
+        """
         self.widthcount = widthcount
 
         name = sourcef.name
-        source = sourcef.read().replace('\r\n', '\n').replace('\r', '\n')
+        source = sourcef.read().replace("\r\n", "\n").replace("\r", "\n")
 
         # Make the determination if an include file is a stylesheet or
         # another restructured text file, and handle stylesheets appropriately.
@@ -132,9 +136,9 @@ class Preprocess(object):
         if incfile:
             try:
                 self.styles = styles = rson_loads(source)
-                substyles = styles.get('styles')
+                substyles = styles.get("styles")
                 if substyles is not None:
-                    styles['styles'] = dict(substyles)
+                    styles["styles"] = dict(substyles)
             except:
                 pass
             else:
@@ -158,7 +162,7 @@ class Preprocess(object):
         source.reverse()
         isblank = False
         keywords = self.keywords
-        handle_single = keywords['single::']
+        handle_single = keywords["single::"]
         while source:
             wasblank = isblank
             isblank = False
@@ -166,21 +170,25 @@ class Preprocess(object):
             result.append(chunk)
 
             # Only process single lines
-            if not chunk.endswith('\n'):
+            if not chunk.endswith("\n"):
                 continue
+
             result[-1] = chunk[:-1]
-            if chunk.index('\n') != len(chunk)-1:
+            if chunk.index("\n") != len(chunk) - 1:
                 continue
 
             # Parse the line to look for one of our keywords.
             tokens = chunk.split()
             isblank = not tokens
-            if len(tokens) >= 2 and tokens[0] == '..' and tokens[1].endswith('::'):
+            if len(tokens) >= 2 and tokens[0] == ".." and tokens[1].endswith("::"):
                 func = keywords.get(tokens[1])
                 if func is None:
                     continue
-                chunk = chunk.split('::', 1)[1]
-            elif wasblank and len(tokens) == 1 and chunk[0].isalpha() and tokens[0].isalpha():
+
+                chunk = chunk.split("::", 1)[1]
+            elif wasblank and len(tokens) == 1 and chunk[0].isalpha() and tokens[
+                0
+            ].isalpha():
                 func = handle_single
                 chunk = tokens[0]
             else:
@@ -193,12 +201,12 @@ class Preprocess(object):
         # if not.  Otherwise, write the results to disk (so the user can use them
         # for debugging) and return them.
         if self.changed:
-            result.append('')
-            result = DummyFile('\n'.join(result))
-            result.name = name + '.build_temp'
+            result.append("")
+            result = DummyFile("\n".join(result))
+            result.name = name + ".build_temp"
             self.keep = keep = len(result.strip())
             if keep:
-                f = open(result.name, 'wb')
+                f = open(result.name, "wb")
                 f.write(result)
                 f.close()
             self.result = result
@@ -210,13 +218,15 @@ class Preprocess(object):
         # figure out how to re-use docutils include file
         # path processing!
 
-        for prefix in ('', os.path.dirname(self.sourcef.name)):
+        for prefix in ("", os.path.dirname(self.sourcef.name)):
             try:
-                f = open(os.path.join(prefix, fname), 'rb')
+                f = open(os.path.join(prefix, fname), "rb")
             except IOError:
                 continue
+
             else:
                 break
+
         else:
             log.error("Could not find include file %s", fname)
             self.changed = True
@@ -227,48 +237,48 @@ class Preprocess(object):
 
         inc = Preprocess(f, True, self.widthcount)
         self.widthcount = inc.widthcount
-        if 'styles' in self.styles and 'styles' in inc.styles:
-            self.styles['styles'].update(inc.styles.pop('styles'))
+        if "styles" in self.styles and "styles" in inc.styles:
+            self.styles["styles"].update(inc.styles.pop("styles"))
         self.styles.update(inc.styles)
         if inc.changed:
             self.changed = True
             if not inc.keep:
                 return
+
             fname = inc.result.name
-        self.result.extend(['', '', '.. include:: ' + fname, ''])
+        self.result.extend(["", "", ".. include:: " + fname, ""])
 
     def handle_single(self, word):
-        ''' Prepend the singleword class in front of the word.
-        '''
+        """ Prepend the singleword class in front of the word.
+        """
         self.changed = True
-        self.result.extend(['', '', '.. class:: singleword', '', word, ''])
+        self.result.extend(["", "", ".. class:: singleword", "", word, ""])
 
     def handle_page(self, chunk):
-        ''' Insert a raw pagebreak
-        '''
+        """ Insert a raw pagebreak
+        """
         self.changed = True
-        self.result.extend(['', '', '.. raw:: pdf', '',
-                    '    PageBreak ' + chunk, ''])
+        self.result.extend(["", "", ".. raw:: pdf", "", "    PageBreak " + chunk, ""])
 
     def handle_space(self, chunk):
-        ''' Insert a raw space
-        '''
+        """ Insert a raw space
+        """
         self.changed = True
-        if len(chunk.replace(',', ' ').split()) == 1:
-            chunk = '0 ' + chunk
-        self.result.extend(['', '', '.. raw:: pdf', '',
-                    '    Spacer ' + chunk, ''])
+        if len(chunk.replace(",", " ").split()) == 1:
+            chunk = "0 " + chunk
+        self.result.extend(["", "", ".. raw:: pdf", "", "    Spacer " + chunk, ""])
 
     def handle_widths(self, chunk):
-        ''' Insert a unique style in the stylesheet, and reference it
+        """ Insert a unique style in the stylesheet, and reference it
             from a .. class:: comment.
-        '''
+        """
         self.changed = True
-        chunk = chunk.replace(',', ' ').replace('%', ' ').split()
+        chunk = chunk.replace(",", " ").replace("%", " ").split()
         if not chunk:
-            log.error('no widths specified in .. widths ::')
+            log.error("no widths specified in .. widths ::")
             return
-        parent = chunk[0][0].isalpha() and chunk.pop(0) or 'table'
+
+        parent = chunk[0][0].isalpha() and chunk.pop(0) or "table"
         values = [float(x) for x in chunk]
         total = sum(values)
         values = [int(round(100 * x / total)) for x in values]
@@ -281,37 +291,38 @@ class Preprocess(object):
             else:
                 break
 
-        values = ['%s%%' % x for x in values]
+        values = ["%s%%" % x for x in values]
         self.widthcount += 1
-        stylename = 'embeddedtablewidth%d' % self.widthcount
-        self.styles.setdefault('styles', {})[stylename] = dict(parent=parent, colWidths=values)
-        self.result.extend(['', '', '.. class:: ' + stylename, ''])
+        stylename = "embeddedtablewidth%d" % self.widthcount
+        self.styles.setdefault("styles", {})[stylename] = dict(
+            parent=parent, colWidths=values
+        )
+        self.result.extend(["", "", ".. class:: " + stylename, ""])
 
     def handle_style(self, chunk):
-        ''' Parse through the source until we find lines that are no longer indented,
+        """ Parse through the source until we find lines that are no longer indented,
             then pass our indented lines to the RSON parser.
-        '''
+        """
         self.changed = True
         if chunk:
             log.error(".. style:: does not recognize string %s" % repr(chunk))
             return
 
-        mystyles = '\n'.join(self.read_indented())
+        mystyles = "\n".join(self.read_indented())
         if not mystyles:
             log.error("Empty .. style:: block found")
         try:
             styles = rson_loads(mystyles)
-        except ValueError as e: # Error parsing the JSON data
-                log.critical('Error parsing stylesheet "%s": %s'%\
-                    (mystyles, str(e)))
+        except ValueError as e:  # Error parsing the JSON data
+            log.critical('Error parsing stylesheet "%s": %s' % (mystyles, str(e)))
         else:
-            self.styles.setdefault('styles', {}).update(styles)
+            self.styles.setdefault("styles", {}).update(styles)
 
     def read_indented(self):
-        ''' Read data from source while it is indented (or blank).
+        """ Read data from source while it is indented (or blank).
             Stop on the first non-indented line, and leave the rest
             on the source.
-        '''
+        """
         source = self.source
         data = None
         while source and not data:
@@ -322,44 +333,50 @@ class Preprocess(object):
                 if not line or line.lstrip() != line:
                     yield line
                     continue
+
                 data.append(line)
                 break
+
         data.reverse()
-        data.append('')
-        source.append('\n'.join(data))
-        source.append('\n')
+        data.append("")
+        source.append("\n".join(data))
+        source.append("\n")
 
     # Automatically generate our keywords from methods prefixed with 'handle_'
-    keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
+    keywords = list(x[7:] for x in vars() if x.startswith("handle_"))
 
     # Generate the regular expression for parsing, and a split function using it.
-    blankline  = r'^([ \t]*\n)'
-    singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
-    comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
-    expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
+    blankline = r"^([ \t]*\n)"
+    singleword = r"^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)"
+    comment = r"^(\.\.[ \t]+(?:%s)\:\:.*\n)" % "|".join(keywords)
+    expression = "(?:%s)" % "|".join([blankline, singleword, comment])
     splitter = re.compile(expression, re.MULTILINE).split
 
     # Once we have used the keywords in our regular expression,
     # fix them up for use by the parser.
-    keywords = dict([(x + '::', vars()['handle_' + x]) for x in keywords])
+    keywords = dict([(x + "::", vars()["handle_" + x]) for x in keywords])
+
 
 class MyStyles(str):
-    ''' This class conforms to the styles.py processing requirements
+    """ This class conforms to the styles.py processing requirements
         for a stylesheet that is not really a file.  It must be callable(),
         and str(x) must return the name of the stylesheet.
-    '''
+    """
+
     def __new__(cls, styles):
-        self = str.__new__(cls, 'Embedded Preprocess Styles')
+        self = str.__new__(cls, "Embedded Preprocess Styles")
         self.data = styles
         return self
+
     def __call__(self):
         return self.data
 
+
 def install(createpdf, options):
-    ''' This is where we intercept the document conversion.
+    """ This is where we intercept the document conversion.
         Preprocess the restructured text, and insert our
         new styles (if any).
-    '''
+    """
     data = Preprocess(options.infile)
     options.infile = data.result
     if data.styles:

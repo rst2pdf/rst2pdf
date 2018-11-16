@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # See LICENSE.txt for licensing terms
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
+# $HeadURL$
+# $LastChangedDate$
+# $LastChangedRevision$
 
 # Some fragments of code are copied from Reportlab under this license:
 #
@@ -45,7 +45,7 @@ import rst2pdf.genelements as genelements
 Table = genelements.Table
 Paragraph = genelements.Paragraph
 
-'''
+"""
 
 .. NOTE:
 
@@ -77,7 +77,8 @@ Mind you, the original RL implementation is a complete hack in any case:
 - It uses a single name in the canvas for the callback function
     (this is what kills multiple TOC capability) when it would be
     extremely easy to generate a unique name.
-'''
+"""
+
 
 class DottedTableOfContents(genelements.MyTableOfContents):
 
@@ -91,11 +92,10 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            if reportlab.Version <= '2.3':
-                _tempEntries = [(0, 'Placeholder for table of contents', 0)]
+            if reportlab.Version <= "2.3":
+                _tempEntries = [(0, "Placeholder for table of contents", 0)]
             else:
-                _tempEntries = [(0, 'Placeholder for table of contents',
-                                 0, None)]
+                _tempEntries = [(0, "Placeholder for table of contents", 0, None)]
         else:
             _tempEntries = self._lastEntries
 
@@ -105,14 +105,14 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             base_level = 0
 
         def drawTOCEntryEnd(canvas, kind, label):
-            '''Callback to draw dots and page numbers after each entry.'''
+            """Callback to draw dots and page numbers after each entry."""
 
             style, page, key, dot = end_info[int(label)]
             drawPageNumbers(canvas, style, [(page, key)], availWidth, availHeight, dot)
 
         toc_counter = self.toc_counter
         toc_counter[0] += 1
-        funcname = 'drawTOCEntryEnd%s' % toc_counter[0]
+        funcname = "drawTOCEntryEnd%s" % toc_counter[0]
         setattr(self.canv, funcname, drawTOCEntryEnd)
 
         end_info = []
@@ -120,33 +120,37 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            if reportlab.Version > '2.3': # For ReportLab post-2.3
-                style=self.getLevelStyle(left_col_level)
-            else: # For ReportLab <= 2.3
+            if reportlab.Version > "2.3":  # For ReportLab post-2.3
+                style = self.getLevelStyle(left_col_level)
+            else:  # For ReportLab <= 2.3
                 style = self.levelStyles[left_col_level]
 
             if self.dotsMinLevel >= 0 and left_col_level >= self.dotsMinLevel:
-                dot = ' . '
+                dot = " . "
             else:
-                dot = ''
+                dot = ""
 
             style = copy(style)
             style.textColor = self.linkColor
             key = self.refid_lut.get((level, text, pageNum), None)
             if key:
                 if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
+                    text = unicode(text, "utf-8")
                 text = u'<a href="#%s">%s</a>' % (key, text)
 
-            para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
+            para = Paragraph(
+                '%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)),
+                style,
+            )
             end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
-                tableData.append([Spacer(1, style.spaceBefore),])
-            tableData.append([para,])
+                tableData.append([Spacer(1, style.spaceBefore)])
+            tableData.append([para])
 
         self._table = Table(tableData, colWidths=(availWidth,), style=self.tableStyle)
 
-        self.width, self.height = self._table.wrapOn(self.canv,availWidth, availHeight)
+        self.width, self.height = self._table.wrapOn(self.canv, availWidth, availHeight)
         return (self.width, self.height)
+
 
 genelements.MyTableOfContents = DottedTableOfContents
