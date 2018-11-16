@@ -181,7 +181,6 @@ class Tokenizer(list):
 
             # Preallocate the list
             self.append(None)
-            print(len(sourcelist) / 2)
             self *= len(sourcelist) // 2 + 1
             index = 0
 
