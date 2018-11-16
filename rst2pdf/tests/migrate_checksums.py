@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
+"""
 This program is designed to migrate checksums to new versions of software,
 when it is known that all the checksum changes are irrelevant to the visual
 aspects of the PDF.  An example of this is when the PDF version number is
@@ -37,7 +37,7 @@ New Usage:
    - if the PDFs are not similar, the difference is stored as an image and
     information about it added to a log
 
-'''
+"""
 
 import os
 import glob
@@ -47,23 +47,24 @@ import glob
 
 
 def mark_test_good(testname):
-    cmd = './autotest.py -u good %s' %  ('input/' + testname + ".txt")
+    cmd = "./autotest.py -u good %s" % ("input/" + testname + ".txt")
     # print cmd
 
     try:
-        devnull = open(os.devnull, 'w')
+        devnull = open(os.devnull, "w")
         result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
     except subprocess.CalledProcessError as e:
         print e.output
 
+
 def compare_output_and_reference(testname):
-    devnull = open(os.devnull, 'w')
+    devnull = open(os.devnull, "w")
     rfile = "reference/" + testname + ".pdf"
     ofile = "output/" + testname + ".pdf"
     diffimg = "output/" + testname + "-differences.jpg"
 
     # requires image magick, this command is for v6.9
-    cmd = 'compare ' + rfile + ' ' + ofile + ' -compose src -fuzz 5% -metric PHASH ' + diffimg
+    cmd = "compare " + rfile + " " + ofile + " -compose src -fuzz 5% -metric PHASH " + diffimg
     # print cmd
 
     # run the command and capture the output
@@ -73,7 +74,7 @@ def compare_output_and_reference(testname):
     try:
         score = float(output[1])
         if score == 0:
-            print testname + " PDFs are identical: update hash";
+            print testname + " PDFs are identical: update hash"
             mark_test_good(testname)
         else:
             print testname + " PDFs differ with score: " + str(score)
@@ -81,32 +82,33 @@ def compare_output_and_reference(testname):
         # it wasn't a number, just print the output
         print testname + " comparison failed with error: " + output[1]
 
+
 def checkalltests():
-    i=0
+    i = 0
 
     # what should we test? Start with input/*.txt
-    testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))]
+    testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", "*.txt"))]
 
     for filename in testfiles:
         testname = os.path.splitext(filename)[0]
 
         # run the test once, see what happens
-        cmd = './autotest.py %s' %  ('input/' + testname + ".txt")
+        cmd = "./autotest.py %s" % ("input/" + testname + ".txt")
         # print cmd
         try:
-            devnull = open(os.devnull, 'w')
+            devnull = open(os.devnull, "w")
             result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
             print "*** " + testname + " test passes"
         except subprocess.CalledProcessError as e:
             # something to react to
-            if(e.returncode == 3):
+            if (e.returncode == 3):
                 # The result was unknown. This is where it gets interesting
                 differences = compare_output_and_reference(testname)
             else:
                 print testname + " returned status " + str(e.returncode)
 
-        i = i+1
-    
+        i = i + 1
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     checkalltests()
