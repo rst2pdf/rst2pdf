@@ -1020,6 +1020,9 @@ class FancyPage(PageTemplate):
             elif self.client.background_fit_mode == 'scale':
                 x, y = 0, 0
                 sw, sh = pw, ph
+            elif self.client.background_fit_mode == 'scale_width':
+                x, y = 0, 0
+                sw, sh = pw, h
             else:
                 log.error('Unknown background fit mode: %s'% self.client.background_fit_mode)
                 # Do scale anyway
@@ -1219,7 +1222,7 @@ def parse_commandline():
     parser.add_option('--fit-background-mode', metavar='MODE',
         default=def_fit_background, dest='background_fit_mode',
         help='How to fit the background image to the page.'
-            ' One of scale or center. Default="%s"' % def_fit_background)
+            ' One of scale, scale_width or center. Default="%s"' % def_fit_background)
 
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,
