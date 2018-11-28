@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R
 >>
 endobj
 2 0 obj
@@ -12,19 +12,17 @@ endobj
 endobj
 3 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (http://lateral.netmanagers.com.ar/../target.html)
->> /Border [ 0 0 0 ] /Rect [ 137.7129 753.0236 152.7129 765.0236 ] /Subtype /Link /Type /Annot
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Annots [ 3 0 R ] /Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
+>> /Rotate 0 /Trans <<
 
->> /Type /Page
+>> 
+  /Type /Page
 >>
 endobj
 5 0 obj
@@ -45,14 +43,14 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 230
+/Length 233
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 62.69291 753.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This is a relative ) Tj 0 0 .501961 rg (link) Tj 0 0 0 rg ( it only works if you set a base url.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This should be a ) Tj /F2 10 Tf 0 .501961 0 rg (green) Tj ( ) Tj (literal) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
 Q
 Q
  
@@ -77,16 +75,16 @@ xref
 0 12
 0000000000 65535 f 
 0000000073 00000 n 
-0000000104 00000 n 
-0000000211 00000 n 
-0000000411 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000326 00000 n 
+0000000529 00000 n 
 0000000632 00000 n 
-0000000735 00000 n 
-0000000992 00000 n 
-0000001051 00000 n 
-0000001331 00000 n 
-0000001377 00000 n 
-0000001418 00000 n 
+0000000889 00000 n 
+0000000948 00000 n 
+0000001231 00000 n 
+0000001277 00000 n 
+0000001318 00000 n 
 trailer
 <<
 /ID 
@@ -98,5 +96,5 @@ trailer
 /Size 12
 >>
 startxref
-1452
+1352
 %%EOF

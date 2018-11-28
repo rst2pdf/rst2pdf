@@ -1,0 +1,16 @@
+{"pageSetup": {
+    "width": "16cm",
+    "height": "9cm",
+    "firstTemplate": "cutePage"
+  },
+  "pageTemplates" : {
+    "cutePage": {
+        "frames": [
+            ["0", "0", "100%", "100%"]
+        ],
+        "background" : "images/wide_image.png",
+        "showHeader" : false,
+        "showFooter" : false
+    }
+  }
+}
