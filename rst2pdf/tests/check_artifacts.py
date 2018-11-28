@@ -15,6 +15,8 @@ for artifact in artifacts:
     if res != 'good':
         print 'BAD ARTIFACT: %s ' % res, artifact
 
+# Check if any output file is good and has no matching artifact
+
 for new_artifact in glob.glob('output/*.pdf'):
     artifact = new_artifact.replace('output/', 'reference/')
     md5_path = artifact.replace('.pdf', '.json').replace('reference/', 'md5/')
