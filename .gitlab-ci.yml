@@ -10,4 +10,4 @@ test:
   - nosetests -i regulartest -i sphinxtest --with-xunit
   artifacts:
     reports:
-      junit: rspec.xml
+      junit: nosetests.xml
