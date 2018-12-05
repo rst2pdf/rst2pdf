@@ -1,5 +1,5 @@
 before_script:
- - apt-get update -qq && apt-get install -y -qq inkscape
+ - apt-get update -qq && apt-get install -y -qq inkscape python-dev python-pip
  - pip install --upgrade setuptools
  - pip install nose coverage
  - pip install -r requirements.txt
