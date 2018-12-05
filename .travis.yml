@@ -1,5 +1,6 @@
 sudo: false
 filter_secrets: false
+dist: xenial
 
 addons:
   apt:
