@@ -6,5 +6,8 @@ before_script:
  - pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 
 test:
- script:
- - nosetests -i regulartest -i sphinxtest
+  script:
+  - nosetests -i regulartest -i sphinxtest --with-xunit
+  artifacts:
+    reports:
+      junit: rspec.xml
