@@ -10,4 +10,7 @@ test:
   - nosetests -i regulartest -i sphinxtest --with-xunit
   artifacts:
     reports:
-      xunit: nosetests.xml
+      junit: nosetests.xml
+    paths:
+    - rst2pdf/tests/output/*pdf
+    expire_in: 1 week
