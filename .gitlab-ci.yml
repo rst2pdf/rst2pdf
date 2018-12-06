@@ -15,4 +15,3 @@ test:
     - rst2pdf/tests/output/*pdf
     expire_in: 1 week
     when: on_failure
-
