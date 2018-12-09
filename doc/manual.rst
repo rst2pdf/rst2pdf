@@ -80,7 +80,7 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
 Here's an example file showing some of the currently available options:
 
 .. code-block:: ini
-   :include: config.sample
+   :include: assets/config.sample
 
 Pipe usage
 ==========
@@ -154,11 +154,11 @@ You can insert images in the middle of your text like this::
 
   This |biohazard| means you have to run.
 
-  .. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
+  .. |biohazard| image:: assets/biohazard.png
 
 This |biohazard| means you have to run.
 
-.. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
+.. |biohazard| image:: assets/biohazard.png
 
 This only works correctly with reportlab 2.2 or later.
 
@@ -1074,14 +1074,14 @@ the options are:
 Let's display a class from rst2pdf::
 
       .. code-block:: python
-         :include: ../rst2pdf/flowables.py
+         :include: assets/flowables.py
          :start-at: class Separation(Flowable):
          :end-before: class Reference(Flowable):
 
 this command gives
 
 .. code-block:: python
-    :include: ../rst2pdf/flowables.py
+    :include: assets/flowables.py
     :start-at: class Separation(Flowable):
     :end-before: class Reference(Flowable):
 
