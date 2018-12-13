@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Updated reportlab dependency to 3.5.10 (Issue #714)
 * Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
 * Do not use logging.basicConfig (Issue 509)

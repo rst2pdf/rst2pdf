@@ -11,3 +11,7 @@ test:
   artifacts:
     reports:
       junit: nosetests.xml
+    paths:
+    - rst2pdf/tests/output/*pdf
+    expire_in: 1 week
+    when: on_failure
