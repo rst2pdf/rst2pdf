@@ -224,3 +224,4 @@ man_pages = [
      [u'Roberto Alsina'], 1)
 ]
 
+pdf_invariant = True
