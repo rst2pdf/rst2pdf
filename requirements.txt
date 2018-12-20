@@ -32,7 +32,7 @@ reportlab==3.5.12
 requests==2.21.0          # via sphinx
 six==1.12.0               # via cycler, html5lib, matplotlib, packaging, python-dateutil, sphinx, xhtml2pdf
 snowballstemmer==1.2.1    # via sphinx
-sphinx==1.8.2
+sphinx==1.7.9
 sphinxcontrib-websupport==1.1.0  # via sphinx
 subprocess32==3.5.3       # via matplotlib
 svg2rlg==0.3
