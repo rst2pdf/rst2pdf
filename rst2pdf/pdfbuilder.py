@@ -64,6 +64,7 @@ class PDFBuilder(Builder):
     def init(self):
         self.docnames = []
         self.document_data = []
+        self.spinx_logger = sphinx.util.logging.getLogger(__name__)
 
     def write(self, *ignored):
 
@@ -82,7 +83,7 @@ class PDFBuilder(Builder):
                     opts=entry[4]
                 else:
                     opts={}
-                self.info("processing " + targetname + "... ", nonl=1)
+                self.spinx_logger.info("processing " + targetname + "... ")
                 self.opts = opts
                 class dummy:
                     extensions=self.config.pdf_extensions
@@ -124,14 +125,14 @@ class PDFBuilder(Builder):
                     appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
                 doctree.settings.author=author
                 doctree.settings.title=title
-                self.info("done")
-                self.info("writing " + targetname + "... ", nonl=1)
+                self.spinx_logger.info("done")
+                self.spinx_logger.info("writing " + targetname + "... ")
                 docwriter.write(doctree, destination)
-                self.info("done")
+                self.spinx_logger.info("done")
             except Exception as e:
                 log.error(str(e))
                 print_exc()
-                self.info(red("FAILED"))
+                self.spinx_logger.info(red("FAILED"))
 
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
@@ -158,7 +159,7 @@ class PDFBuilder(Builder):
         # check how the LaTeX builder does it.
 
         self.docnames = set([docname])
-        self.info(darkgreen(docname) + " ", nonl=1)
+        self.spinx_logger.info(darkgreen(docname) + " ")
         def process_tree(docname, tree):
             tree = tree.deepcopy()
             for toctreenode in tree.traverse(addnodes.toctree):
@@ -166,7 +167,7 @@ class PDFBuilder(Builder):
                 includefiles = map(str, toctreenode['includefiles'])
                 for includefile in includefiles:
                     try:
-                        self.info(darkgreen(includefile) + " ", nonl=1)
+                        self.spinx_logger.info(darkgreen(includefile) + " ")
                         subtree = process_tree(includefile,
                         self.env.get_doctree(includefile))
                         self.docnames.add(includefile)
@@ -250,7 +251,7 @@ class PDFBuilder(Builder):
             )
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
-            self.info(' ' + indexname, nonl=1)
+            self.spinx_logger.info(' ' + indexname)
             print
 
             output=['DUMMY','=====','',
@@ -283,17 +284,16 @@ class PDFBuilder(Builder):
 
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
-            self.info()
-            self.info('adding appendixes...', nonl=1)
+            self.spinx_logger.info()
+            self.spinx_logger.info('adding appendixes...')
             for docname in appendices:
-                self.info(darkgreen(docname) + " ", nonl=1)
+                self.spinx_logger.info(darkgreen(docname) + " ")
                 appendix = self.env.get_doctree(docname)
                 appendix['docname'] = docname
                 tree.append(appendix)
-            self.info('done')
+            self.spinx_logger.info('done')
 
-        self.info()
-        self.info("resolving references...")
+        self.spinx_logger.info("resolving references...")
         #print tree
         #print '--------------'
         self.env.resolve_references(tree, docname, self)
