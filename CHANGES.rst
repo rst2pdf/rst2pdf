@@ -2,6 +2,8 @@
 {next}
 ------
 
+* Sphinx config setting pdf_invariant works properly now (Issue #718)
+* Updated reportlab dependency to 3.5.12 and Sphinx to 1.7.9 (Issue #718)
 * Updated reportlab dependency to 3.5.10 (Issue #714)
 * Fixed handling of empty documents, they now generate a single empty page (Issue 547)
 * Fix handling of non-http/ftp URLs (Issue #549)
@@ -16,7 +18,7 @@
 * Changed: We now use PILLOW rather than PIL
 * Fixed: Using ``:start-after:`` with ``linenos_offset`` now displays the correct line number
 * Fixed: Using ``:start-at:`` with ``linenos_offset`` now displays the correct line number
-* Fixed: Inline ``:math:` works again as we now use quoted attributes for HTML ``<img>`` tags (issue 567)
+* Fixed: Inline ``:math:`` works again as we now use quoted attributes for HTML ``<img>`` tags (issue 567)
 * Fixed: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4 (issue 566)
 * Fixed: CreationDate metadata shows correct date using Sphinx (issue 525)
 * Fixed: ``:alt:`` option now works for plantuml extension

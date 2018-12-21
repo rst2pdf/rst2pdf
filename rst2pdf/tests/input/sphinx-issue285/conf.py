@@ -220,3 +220,5 @@ man_pages = [
     ('index', 'issue285', u'Issue 285 Documentation',
      [u'Roberto Alsina'], 1)
 ]
+
+pdf_invariant = True

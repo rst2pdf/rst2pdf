@@ -16,7 +16,7 @@ Contents:
 
    Describes a method with parameters and types.
 
-.. cpp:function:: bool namespaced::theclass::method(arg1, arg2)
+.. cpp:function:: bool namespaced::theclass::method2(arg1, arg2)
 
    Describes a method without types.
 

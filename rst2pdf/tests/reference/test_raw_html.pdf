@@ -17,33 +17,47 @@ endobj
 endobj
 4 0 obj
 <<
-/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (mailto:pedro@address.es)
+>> /Border [ 0 0 0 ] /Rect [ 304.6378 732.5979 358.6918 740.4729 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/A <<
+/S /URI /Type /Action /URI (mailto:dimitr@mail.es)
+>> /Border [ 0 0 0 ] /Rect [ 304.6378 714.5979 358.0985 722.4729 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
+<<
+/Annots [ 4 0 R 5 0 R ] /Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
-7 0 obj
+9 0 obj
 <<
-/Count 1 /Kids [ 4 0 R ] /Type /Pages
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
 >>
 endobj
-8 0 obj
+10 0 obj
 <<
-/Length 1073
+/Length 1471
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -93,10 +107,38 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Pedro) Tj T* ET
 Q
 Q
 q
+1 0 0 1 240.9449 23.125 cm
+q
+1 0 0 1 1 -1 cm
+q
+.492188 w
+0 0 1 RG
+n 0 5.121125 m 54.054 5.121125 l S
+BT 1 0 0 1 0 6.1055 Tm 7.875 TL /F1 5.25 Tf 0 0 1 rg (pedro@mailaddress.es) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Dimitri) Tj T* ET
+Q
+Q
+q
+1 0 0 1 240.9449 5.125 cm
+q
+1 0 0 1 1 -1 cm
+q
+.492188 w
+0 0 1 RG
+n 0 5.121125 m 53.46075 5.121125 l S
+BT 1 0 0 1 0 6.1055 Tm 7.875 TL /F1 5.25 Tf 0 0 1 rg (dimitr@mailaddress.es) Tj T* ET
+Q
+Q
+q
 Q
 Q
 q
@@ -119,45 +161,41 @@ Q
  
 endstream
 endobj
-9 0 obj
-<<
-/Count 0 /Type /Outlines
->>
-endobj
-10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
 11 0 obj
+<<
+/Nums [ 0 12 0 R ]
+>>
+endobj
+12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 13
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
 0000000333 00000 n 
-0000000536 00000 n 
-0000000639 00000 n 
-0000000896 00000 n 
-0000000955 00000 n 
-0000002079 00000 n 
-0000002125 00000 n 
-0000002166 00000 n 
+0000000508 00000 n 
+0000000681 00000 n 
+0000000909 00000 n 
+0000000996 00000 n 
+0000001253 00000 n 
+0000001312 00000 n 
+0000002835 00000 n 
+0000002876 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 6 0 R
-/Root 5 0 R
-/Size 12
+/Info 8 0 R
+/Root 7 0 R
+/Size 13
 >>
 startxref
-2200
+2910
 %%EOF
