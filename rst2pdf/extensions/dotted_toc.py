@@ -38,9 +38,11 @@
 #####################################################################################
 
 from copy import copy
+
 import reportlab
-from reportlab.platypus.tableofcontents import drawPageNumbers
 import rst2pdf.genelements as genelements
+from reportlab.platypus import Spacer
+from reportlab.platypus.tableofcontents import drawPageNumbers
 
 Table = genelements.Table
 Paragraph = genelements.Paragraph
