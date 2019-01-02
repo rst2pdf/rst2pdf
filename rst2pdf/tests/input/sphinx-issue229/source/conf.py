@@ -266,3 +266,5 @@ pdf_use_coverpage = True
 
 # Set the default DPI for images
 #pdf_default_dpi = 72
+
+pdf_invariant = True

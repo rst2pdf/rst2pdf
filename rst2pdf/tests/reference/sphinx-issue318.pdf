@@ -158,37 +158,37 @@ endobj
 endobj
 26 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 699.0394 0 ] /Rect [ 40.01575 581.4394 244.5557 593.4394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 729.0394 0 ] /Rect [ 40.01575 581.4394 244.5557 593.4394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 27 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 729.0394 0 ] /Rect [ 247.3357 581.4394 258.4557 593.4394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 699.0394 0 ] /Rect [ 40.01575 563.4394 250.1157 575.4394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 28 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 639.0394 0 ] /Rect [ 40.01575 533.0394 165.0757 545.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 639.0394 0 ] /Rect [ 40.01575 515.0394 165.0757 527.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 29 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 484.6394 108.3657 496.6394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 466.6394 108.3657 478.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 30 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 436.2394 152.8157 448.2394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 418.2394 152.8157 430.2394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 31 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 387.8394 192.8557 399.8394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 369.8394 192.8557 381.8394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 32 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 369.8394 175.0557 381.8394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 351.8394 175.0557 363.8394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 33 0 obj
@@ -342,7 +342,7 @@ endstream
 endobj
 47 0 obj
 <<
-/Length 1308
+/Length 1248
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -372,7 +372,6 @@ q
 1 0 0 1 443.2441 57 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -386,7 +385,6 @@ q
 1 0 0 1 443.2441 39 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -400,7 +398,6 @@ q
 1 0 0 1 443.2441 21 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (3) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -414,7 +411,6 @@ q
 1 0 0 1 443.2441 3 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (5) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -444,7 +440,7 @@ endstream
 endobj
 49 0 obj
 <<
-/Length 7151
+/Length 7152
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -488,7 +484,7 @@ Q
 q
 1 0 0 1 40.01575 697.0394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (bool ) Tj /F3 10 Tf 0 0 0 rg (namespaced::theclass::) Tj /F4 10 Tf 0 0 0 rg (method) Tj /F1 10 Tf 0 0 0 rg ( \() Tj /F3 10 Tf 0 0 0 rg (arg1) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (arg2) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (bool ) Tj /F3 10 Tf 0 0 0 rg (namespaced::theclass::) Tj /F4 10 Tf 0 0 0 rg (method2) Tj /F1 10 Tf 0 0 0 rg ( \() Tj /F3 10 Tf 0 0 0 rg (arg1) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (arg2) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
 Q
 Q
 q
@@ -847,7 +843,7 @@ endstream
 endobj
 51 0 obj
 <<
-/Length 3038
+/Length 3143
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -936,11 +932,17 @@ Q
 q
 1 0 0 1 40.01575 581.4394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method \(C++ function\)) Tj 0 0 0 rg ( ) Tj 0 0 .501961 rg ([1]) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method \(C++ function\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 551.0394 cm
+1 0 0 1 40.01575 563.4394 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method2 \(C++ function\)) Tj  T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 533.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -953,13 +955,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (O) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 533.0394 cm
+1 0 0 1 40.01575 515.0394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (operator bool \(C++ function\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 502.6394 cm
+1 0 0 1 40.01575 484.6394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -972,13 +974,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (P) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 484.6394 cm
+1 0 0 1 40.01575 466.6394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (parrot \(module\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 454.2394 cm
+1 0 0 1 40.01575 436.2394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -991,13 +993,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (S) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 436.2394 cm
+1 0 0 1 40.01575 418.2394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (spam\(\) \(in module parrot\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 405.8394 cm
+1 0 0 1 40.01575 387.8394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -1010,22 +1012,22 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (T) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 387.8394 cm
+1 0 0 1 40.01575 369.8394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (theclass::const_iterator \(C++ type\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (theclass::name \(C++ member\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 Q
  
 endstream
@@ -1201,22 +1203,22 @@ xref
 0000007251 00000 n 
 0000008190 00000 n 
 0000008315 00000 n 
-0000009675 00000 n 
-0000009800 00000 n 
-0000017003 00000 n 
-0000017128 00000 n 
-0000020218 00000 n 
-0000020343 00000 n 
-0000021199 00000 n 
-0000021315 00000 n 
-0000021349 00000 n 
-0000021383 00000 n 
-0000021417 00000 n 
-0000021451 00000 n 
-0000021485 00000 n 
-0000021519 00000 n 
-0000021553 00000 n 
-0000021587 00000 n 
+0000009615 00000 n 
+0000009740 00000 n 
+0000016944 00000 n 
+0000017069 00000 n 
+0000020264 00000 n 
+0000020389 00000 n 
+0000021245 00000 n 
+0000021361 00000 n 
+0000021395 00000 n 
+0000021429 00000 n 
+0000021463 00000 n 
+0000021497 00000 n 
+0000021531 00000 n 
+0000021565 00000 n 
+0000021599 00000 n 
+0000021633 00000 n 
 trailer
 <<
 /ID 
@@ -1228,7 +1230,7 @@ trailer
 /Size 64
 >>
 startxref
-21621
+21667
 %%EOF
 %PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
@@ -1390,37 +1392,37 @@ endobj
 endobj
 26 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 699.0394 0 ] /Rect [ 40.01575 581.4394 244.5557 593.4394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 729.0394 0 ] /Rect [ 40.01575 581.4394 244.5557 593.4394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 27 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 729.0394 0 ] /Rect [ 247.3357 581.4394 258.4557 593.4394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 699.0394 0 ] /Rect [ 40.01575 563.4394 250.1157 575.4394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 28 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 639.0394 0 ] /Rect [ 40.01575 533.0394 165.0757 545.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 639.0394 0 ] /Rect [ 40.01575 515.0394 165.0757 527.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 29 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 484.6394 108.3657 496.6394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 466.6394 108.3657 478.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 30 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 436.2394 152.8157 448.2394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 435.0394 0 ] /Rect [ 40.01575 418.2394 152.8157 430.2394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 31 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 387.8394 192.8557 399.8394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 369.8394 192.8557 381.8394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 32 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 369.8394 175.0557 381.8394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 20 0 R /XYZ 50.01575 573.0394 0 ] /Rect [ 40.01575 351.8394 175.0557 363.8394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 33 0 obj
@@ -1574,7 +1576,7 @@ endstream
 endobj
 47 0 obj
 <<
-/Length 1308
+/Length 1248
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1604,7 +1606,6 @@ q
 1 0 0 1 443.2441 57 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -1618,7 +1619,6 @@ q
 1 0 0 1 443.2441 39 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -1632,7 +1632,6 @@ q
 1 0 0 1 443.2441 21 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (3) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -1646,7 +1645,6 @@ q
 1 0 0 1 443.2441 3 cm
 q
 0 0 .501961 rg
-0 0 .501961 RG
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (5) Tj T* -66.44 0 Td ET
 Q
 Q
@@ -1676,7 +1674,7 @@ endstream
 endobj
 49 0 obj
 <<
-/Length 7151
+/Length 7152
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1720,7 +1718,7 @@ Q
 q
 1 0 0 1 40.01575 697.0394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (bool ) Tj /F3 10 Tf 0 0 0 rg (namespaced::theclass::) Tj /F4 10 Tf 0 0 0 rg (method) Tj /F1 10 Tf 0 0 0 rg ( \() Tj /F3 10 Tf 0 0 0 rg (arg1) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (arg2) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (bool ) Tj /F3 10 Tf 0 0 0 rg (namespaced::theclass::) Tj /F4 10 Tf 0 0 0 rg (method2) Tj /F1 10 Tf 0 0 0 rg ( \() Tj /F3 10 Tf 0 0 0 rg (arg1) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (arg2) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
 Q
 Q
 q
@@ -2079,7 +2077,7 @@ endstream
 endobj
 51 0 obj
 <<
-/Length 3038
+/Length 3143
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2168,11 +2166,17 @@ Q
 q
 1 0 0 1 40.01575 581.4394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method \(C++ function\)) Tj 0 0 0 rg ( ) Tj 0 0 .501961 rg ([1]) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method \(C++ function\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 551.0394 cm
+1 0 0 1 40.01575 563.4394 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (namespaced::theclass::method2 \(C++ function\)) Tj  T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 533.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2185,13 +2189,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (O) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 533.0394 cm
+1 0 0 1 40.01575 515.0394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (operator bool \(C++ function\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 502.6394 cm
+1 0 0 1 40.01575 484.6394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2204,13 +2208,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (P) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 484.6394 cm
+1 0 0 1 40.01575 466.6394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (parrot \(module\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 454.2394 cm
+1 0 0 1 40.01575 436.2394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2223,13 +2227,13 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (S) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 436.2394 cm
+1 0 0 1 40.01575 418.2394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (spam\(\) \(in module parrot\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 405.8394 cm
+1 0 0 1 40.01575 387.8394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2242,22 +2246,22 @@ BT 1 0 0 1 0 2.4 Tm /F7 12 Tf 14.4 TL (T) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 387.8394 cm
+1 0 0 1 40.01575 369.8394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (theclass::const_iterator \(C++ type\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (theclass::name \(C++ member\)) Tj  T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 Q
 q
-1 0 0 1 40.01575 369.8394 cm
+1 0 0 1 40.01575 351.8394 cm
 Q
  
 endstream
@@ -2433,22 +2437,22 @@ xref
 0000007251 00000 n 
 0000008190 00000 n 
 0000008315 00000 n 
-0000009675 00000 n 
-0000009800 00000 n 
-0000017003 00000 n 
-0000017128 00000 n 
-0000020218 00000 n 
-0000020343 00000 n 
-0000021199 00000 n 
-0000021315 00000 n 
-0000021349 00000 n 
-0000021383 00000 n 
-0000021417 00000 n 
-0000021451 00000 n 
-0000021485 00000 n 
-0000021519 00000 n 
-0000021553 00000 n 
-0000021587 00000 n 
+0000009615 00000 n 
+0000009740 00000 n 
+0000016944 00000 n 
+0000017069 00000 n 
+0000020264 00000 n 
+0000020389 00000 n 
+0000021245 00000 n 
+0000021361 00000 n 
+0000021395 00000 n 
+0000021429 00000 n 
+0000021463 00000 n 
+0000021497 00000 n 
+0000021531 00000 n 
+0000021565 00000 n 
+0000021599 00000 n 
+0000021633 00000 n 
 trailer
 <<
 /ID 
@@ -2460,5 +2464,5 @@ trailer
 /Size 64
 >>
 startxref
-21621
+21667
 %%EOF

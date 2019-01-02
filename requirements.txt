@@ -5,41 +5,42 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 aafigure==0.6
-alabaster==0.7.10         # via sphinx
-babel==2.5.1              # via sphinx
-backports.functools-lru-cache==1.4  # via matplotlib
-certifi==2017.11.5        # via requests
+alabaster==0.7.12         # via sphinx
+babel==2.6.0              # via sphinx
+backports.functools-lru-cache==1.5  # via matplotlib
+certifi==2018.11.29       # via requests
 chardet==3.0.4            # via requests
 cycler==0.10.0            # via matplotlib
 docutils==0.14
-html5lib==0.999999999     # via xhtml2pdf
-idna==2.6                 # via requests
-imagesize==0.7.1          # via sphinx
+html5lib==1.0.1           # via xhtml2pdf
+idna==2.8                 # via requests
+imagesize==1.1.0          # via sphinx
 jinja2==2.10              # via sphinx
-markupsafe==1.0           # via jinja2
-matplotlib==2.1.0
-numpy==1.13.3             # via matplotlib
-olefile==0.44             # via pillow
+kiwisolver==1.0.1         # via matplotlib
+markupsafe==1.1.0         # via jinja2
+matplotlib==2.2.3
+numpy==1.15.4             # via matplotlib
+packaging==18.0           # via sphinx
 pdfrw==0.4
-pillow==4.3.0
-pygments==2.2.0
-pyparsing==2.2.0          # via matplotlib
-pypdf2==1.26.0            # via xhtml2pdf
-python-dateutil==2.6.1    # via matplotlib
-pytz==2017.3              # via babel, matplotlib
-reportlab==3.4.0
-requests==2.20         # via sphinx
-six==1.11.0               # via cycler, html5lib, matplotlib, python-dateutil, sphinx
+pillow==5.3.0
+pygments==2.3.0
+pyparsing==2.3.0          # via matplotlib, packaging
+pypdf2==1.26.0
+python-dateutil==2.7.5    # via matplotlib
+pytz==2018.7              # via babel, matplotlib
+reportlab==3.5.12
+requests==2.21.0          # via sphinx
+six==1.12.0               # via cycler, html5lib, matplotlib, packaging, python-dateutil, sphinx, xhtml2pdf
 snowballstemmer==1.2.1    # via sphinx
-sphinx==1.6.5
-sphinxcontrib-websupport==1.0.1  # via sphinx
-subprocess32==3.2.7       # via matplotlib
+sphinx==1.7.9
+sphinxcontrib-websupport==1.1.0  # via sphinx
+subprocess32==3.5.3       # via matplotlib
 svg2rlg==0.3
-typing==3.6.2             # via sphinx
-urllib3==1.22             # via requests
+typing==3.6.6             # via sphinx
+urllib3==1.24.1           # via requests
 webencodings==0.5.1       # via html5lib
-xhtml2pdf==0.0.6
 smartypants==2.0.1
+xhtml2pdf==0.2.3
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip                       # via reportlab

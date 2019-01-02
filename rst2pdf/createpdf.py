@@ -101,21 +101,16 @@ from rst2pdf.languages import get_language_available
 from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
     DCWHyphenator, sphinx as sphinx_module, wordaxe
 
-# Small template engine for covers
-# The obvious import doesn't work for complicated reasons ;-)
-from rst2pdf import tenjin
-to_str = tenjin.helpers.generate_tostrfunc('utf-8')
-escape = tenjin.helpers.escape
-templateEngine = tenjin.Engine()
+# Template engine for covers
+import jinja2
+jinja_env = jinja2.Environment(
+    loader=jinja2.FileSystemLoader('/'),
+    autoescape=jinja2.select_autoescape(['html', 'xml'])
+)
 
 def renderTemplate(tname, **context):
-  context['to_str'] = to_str
-  context['escape'] = escape
-  return templateEngine.render(tname, context)
-
-#def escape (x,y):
-#    "Dummy escape function to test for excessive escaping"
-#    return x
+    template =jinja_env.get_template(tname)
+    return template.render(**context)
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -1034,6 +1029,9 @@ class FancyPage(PageTemplate):
             elif self.client.background_fit_mode == 'scale':
                 x, y = 0, 0
                 sw, sh = pw, ph
+            elif self.client.background_fit_mode == 'scale_width':
+                x, y = 0, 0
+                sw, sh = pw, h
             else:
                 log.error('Unknown background fit mode: %s'% self.client.background_fit_mode)
                 # Do scale anyway
@@ -1233,7 +1231,7 @@ def parse_commandline():
     parser.add_option('--fit-background-mode', metavar='MODE',
         default=def_fit_background, dest='background_fit_mode',
         help='How to fit the background image to the page.'
-            ' One of scale or center. Default="%s"' % def_fit_background)
+            ' One of scale, scale_width or center. Default="%s"' % def_fit_background)
 
     parser.add_option('--inline-links', action="store_true",
     dest='inlinelinks', default=False,

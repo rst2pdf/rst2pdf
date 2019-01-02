@@ -81,11 +81,12 @@ def compare_output_and_reference(testname):
         # it wasn't a number, just print the output
         print testname + " comparison failed with error: " + output[1]
 
-def checkalltests():
+def checkalltests(testfiles = None):
     i=0
 
     # what should we test? Start with input/*.txt
-    testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))]
+    if testfiles is None:
+        testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))]
 
     for filename in testfiles:
         testname = os.path.splitext(filename)[0]
@@ -109,4 +110,5 @@ def checkalltests():
     
 
 if __name__ == '__main__':
-    checkalltests()
+    if len(sys.argv) > 1:  # we have a list of tests
+        checkalltests(sys.argv[1:])

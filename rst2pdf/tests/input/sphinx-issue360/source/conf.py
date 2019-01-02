@@ -221,3 +221,5 @@ pdf_documents = [
 pdf_stylesheets = ['sphinx','a4','ja']
 
 pdf_font_path = ['../..']
+
+pdf_invariant = True

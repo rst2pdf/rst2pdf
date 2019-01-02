@@ -55,7 +55,7 @@ except ImportError:
     install_requires.append('simplejson')
 
 tests_require = ['pyPdf2']
-sphinx_require = ['sphinx']
+sphinx_require = ['sphinx<1.8.0']
 hyphenation_require = ['wordaxe>=1.0']
 images_require = ['pillow']
 pdfimages_require = ['pyPdf2','PythonMagick']

@@ -291,3 +291,4 @@ pdf_default_dpi = 300
 
 pdf_page_template = 'customPage'
 
+pdf_invariant = True

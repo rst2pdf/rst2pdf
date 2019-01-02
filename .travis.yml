@@ -1,10 +1,13 @@
 sudo: false
 filter_secrets: false
+dist: xenial
 
 addons:
   apt:
     packages:
     - inkscape
+    - texlive-latex-base
+    - dvipng
 
 language: python
 python:

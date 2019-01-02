@@ -1,39 +1,39 @@
 .. role:: normal
 
-<?py if title: ?>
+{% if title: %}
 
 .. cssclass:: title
 
-#{title}
+{{title}}
 
-<?py #end ?>
+{% endif %}
 
-<?py if subtitle: ?>
+{% if subtitle: %}
 
 .. cssclass:: subtitle
 
-#{subtitle}
+{{subtitle}}
 
-<?py #end ?>
-
-.. raw:: pdf
-
-   Spacer 0 3cm
-
-<?py for author in authors: ?>
-.. cssclass:: author
-
-#{author}
-
-<?py #end ?>
+{% endif %}
 
 .. raw:: pdf
 
    Spacer 0 3cm
 
+{% for author in authors: %}
 .. cssclass:: author
 
-:normal:`#{date}`
+{{author}}
+
+{% endfor %}
+
+.. raw:: pdf
+
+   Spacer 0 3cm
+
+.. cssclass:: author
+
+:normal:`{{date}}`
 
 .. raw:: pdf
 
