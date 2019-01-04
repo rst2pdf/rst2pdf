@@ -36,7 +36,6 @@ will be logged.
 import inspect
 import types
 
-from log import log, nodeid
 from smartypants import smartypants
 import docutils.nodes
 
@@ -287,6 +286,6 @@ class NodeHandler(object):
         except UnicodeDecodeError:
             pass
 
-        text = self.apply_smartypants(text, client.smarty, node)
+        text = self.apply_smartypants(text, client.smartypants_attributes, node)
         node.pdftext = text
         return text
