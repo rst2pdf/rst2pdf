@@ -39,4 +39,9 @@ svg2rlg==0.3
 typing==3.6.6             # via sphinx
 urllib3==1.24.1           # via requests
 webencodings==0.5.1       # via html5lib
+smartypants==2.0.1
 xhtml2pdf==0.2.3
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip                       # via reportlab
+# setuptools                # via html5lib, reportlab, sphinx

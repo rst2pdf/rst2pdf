@@ -94,7 +94,7 @@ from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
 from rst2pdf.aafigure_directive import Aanode
 from rst2pdf.log import log, nodeid
-from rst2pdf.smartypants import smartyPants
+from smartypants import smartypants
 from rst2pdf import styles as sty
 from rst2pdf.nodehandlers import nodehandlers
 from rst2pdf.languages import get_language_available
@@ -192,7 +192,16 @@ class RstToPdf(object):
         self.fit_mode = fit_mode
         self.background_fit_mode = background_fit_mode
         self.to_unlink = []
-        self.smarty = smarty
+
+        # See https://pythonhosted.org/smartypants/reference.html#smartypants-module
+        self.smartypants_attributes = 0
+        if smarty == '1':
+            self.smartypants_attributes = 1 | 6 | 8 | 64 | 512
+        elif smarty == '2':
+            self.smartypants_attributes = 1 | 6 | 24 | 64 | 512
+        elif smarty == '3':
+            self.smartypants_attributes = 1 | 6 | 40 | 64 | 512
+
         self.baseurl = baseurl
         self.repeat_table_rows = repeat_table_rows
         self.footnote_backlinks = footnote_backlinks
@@ -926,7 +935,7 @@ class HeaderOrFooter(object):
                 getattr(canv, 'sectName', ''))
             text = text.replace(u"###SectNum###",
                 getattr(canv, 'sectNum', ''))
-            text = smartyPants(text, smarty)
+            text = smartypants(text, smarty)
             return text
 
         for i,e  in enumerate(elems):
@@ -960,7 +969,7 @@ class HeaderOrFooter(object):
         self.totalpages = max(self.totalpages, doc.page)
         items = self.prepared
         if items:
-            self.replaceTokens(items, canv, doc, pageobj.smarty)
+            self.replaceTokens(items, canv, doc, pageobj.smartypants_attributes)
             container = MyContainer()
             container._content = items
             container.width = width
@@ -977,7 +986,7 @@ class FancyPage(PageTemplate):
         self.styles = client.styles
         self._head = HeaderOrFooter(_head, client=client)
         self._foot = HeaderOrFooter(_foot, True, client)
-        self.smarty = client.smarty
+        self.smartypants_attributes = client.smartypants_attributes
         self.show_frame = client.show_frame
         self.image_cache = {}
         PageTemplate.__init__(self, _id, [])
