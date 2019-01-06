@@ -31,6 +31,7 @@ pytz==2018.7              # via babel, matplotlib
 reportlab==3.5.12
 requests==2.21.0          # via sphinx
 six==1.12.0               # via cycler, html5lib, matplotlib, packaging, python-dateutil, sphinx, xhtml2pdf
+smartypants==2.0.1
 snowballstemmer==1.2.1    # via sphinx
 sphinx==1.7.9
 sphinxcontrib-websupport==1.1.0  # via sphinx
