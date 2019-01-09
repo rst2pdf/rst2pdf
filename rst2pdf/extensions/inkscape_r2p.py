@@ -53,7 +53,7 @@ class InkscapeImage(VectorPdf):
             cmd = [progname, os.path.abspath(filename), '-A', pdffname]
             try:
                 subprocess.call(cmd)
-            except OSError as e:
+            except OSError:
                 log.error("Failed to run command: %s", ' '.join(cmd))
                 raise
             self.load_xobj((client, pdffname))

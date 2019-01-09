@@ -52,6 +52,9 @@ class UmlDirective(rst.Directive):
         return [node]
 
 
+class PlantUmlError(Exception):
+    pass
+
 class UMLHandler(genelements.NodeHandler, plantuml):
     """Class to handle UML nodes"""
 

@@ -43,7 +43,6 @@ import os
 import glob
 import subprocess
 import sys
-import glob
 
 
 def mark_test_good(testname):
@@ -52,12 +51,11 @@ def mark_test_good(testname):
 
     try:
         devnull = open(os.devnull, 'w')
-        result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
+        subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
     except subprocess.CalledProcessError as e:
         print e.output
 
 def compare_output_and_reference(testname):
-    devnull = open(os.devnull, 'w')
     rfile = "reference/" + testname + ".pdf"
     ofile = "output/" + testname + ".pdf"
     diffimg = "output/" + testname + "-differences.jpg"
@@ -96,18 +94,18 @@ def checkalltests(testfiles = None):
         # print cmd
         try:
             devnull = open(os.devnull, 'w')
-            result = subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
+            subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
             print "*** " + testname + " test passes"
         except subprocess.CalledProcessError as e:
             # something to react to
             if(e.returncode == 3):
                 # The result was unknown. This is where it gets interesting
-                differences = compare_output_and_reference(testname)
+                compare_output_and_reference(testname)
             else:
                 print testname + " returned status " + str(e.returncode)
 
         i = i+1
-    
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:  # we have a list of tests
