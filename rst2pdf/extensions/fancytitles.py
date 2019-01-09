@@ -55,7 +55,6 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 snum = fch.astext()
             else:
                 snum = None
-            key = node.get('refid')
             maxdepth=4
             if reportlab.Version > '2.1':
                 maxdepth=6

@@ -170,7 +170,6 @@ def regulartest():
     '''To run these tests (similar to autotest), run
     nosetests -i regulartest'''
     testfiles = globjoin(PathInfo.inpdir, '*.txt')
-    results = {}
     for fname in testfiles:
         yield RunTest(fname), fname
 
@@ -178,14 +177,12 @@ def releasetest():
     '''To run these tests (after you run setup.py install), run
     nosetests -i releasetest'''
     testfiles = globjoin(PathInfo.inpdir, '*.txt')
-    results = {}
     for fname in testfiles:
         yield RunInstalledTest(fname), fname
 
 def sphinxtest():
     '''To run these tests , run nosetests -i sphinxtest'''
     testfiles = globjoin(PathInfo.inpdir, 'sphinx*/')
-    results = {}
     for fname in testfiles:
         yield RunSphinxTest(fname), fname
 
