@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-import os
-
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.platypus import Flowable, Paragraph
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 from .log import log
 from .opt_imports import LazyImports
@@ -18,10 +16,15 @@ class SVGImage(Flowable):
             return True
         return False
 
-    def __init__(self, filename, width=None, height=None, kind='direct',
-                                     mask=None, lazy=True, srcinfo=None):
+    def __init__(self,
+                 filename,
+                 width=None,
+                 height=None,
+                 kind='direct',
+                 mask=None,
+                 lazy=True,
+                 srcinfo=None):
         Flowable.__init__(self)
-        ext = os.path.splitext(filename)[-1]
         self._kind = kind
         # Prefer svg2rlg for SVG, as it works better
         if LazyImports.svg2rlg:
@@ -39,14 +42,16 @@ class SVGImage(Flowable):
         else:
             self._mode = None
             log.error("SVG support not enabled,"
-                " please install svg2rlg.")
+                      " please install svg2rlg.")
         self.__ratio = float(self.imageWidth)/self.imageHeight
-        if kind in ['direct','absolute']:
+        if kind in ['direct', 'absolute']:
             self.drawWidth = width or self.imageWidth
             self.drawHeight = height or self.imageHeight
-        elif kind in ['bound','proportional']:
-            factor = min(float(width)/self.imageWidth,float(height)/self.imageHeight)
-            self.drawWidth = self.imageWidth*factor
+        elif kind in ['bound', 'proportional']:
+            factor = min(
+                float(width) / self.imageWidth,
+                float(height) / self.imageHeight)
+            self.drawWidth = self.imageWidth * factor
             self.drawHeight = self.imageHeight*factor
 
     def wrap(self, aW, aH):
