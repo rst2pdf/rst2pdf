@@ -686,15 +686,6 @@ class StyleSheet(object):
                 (-1, rows - 1),
                 self['table-heading'].valign)]
 
-    def adjustFieldStyle(self):
-        """Merges fieldname and fieldvalue styles into the field table style"""
-        tstyle = self.tstyles['field']
-        extras = self.pStyleToTStyle(self['fieldname'], 0, 0) +\
-            self.pStyleToTStyle(self['fieldvalue'], 1, 0)
-        for e in extras:
-            tstyle.add(*e)
-        return tstyle
-
     def pStyleToTStyle(self, style, x, y):
         """Return a table style similar to a given paragraph style.
 
