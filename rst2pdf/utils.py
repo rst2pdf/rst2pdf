@@ -6,10 +6,10 @@
 
 import shlex
 
-from .flowables import *
-import rst2pdf.flowables
-from .styles import adjustUnits
+from reportlab.lib.colors import (Color, toColor)
+
 from .log import log, nodeid
+from .styles import adjustUnits
 
 
 def parseRaw(data, node):
@@ -70,38 +70,21 @@ def parseRaw(data, node):
     return elements
 
 
-from reportlab.lib.colors import Color, CMYKColor, getAllNamedColors, toColor, \
-    HexColor
-
 HAS_XHTML2PDF = True
 try:
     from xhtml2pdf.util import COLOR_BY_NAME
     from xhtml2pdf.util import memoized
     from xhtml2pdf.context import pisaContext
-    from xhtml2pdf.default import DEFAULT_CSS
-    from xhtml2pdf.parser import pisaParser, pisaGetAttributes
+    from xhtml2pdf.parser import pisaGetAttributes
     from xhtml2pdf.document import pisaStory
-    from reportlab.platypus.flowables import Spacer
-    from reportlab.platypus.frames import Frame
-    from xhtml2pdf.xhtml2pdf_reportlab import PmlBaseDoc, PmlPageTemplate
-    from xhtml2pdf.util import pisaTempFile, getBox
     import xhtml2pdf.parser as pisa_parser
-    try:
-        from xhtml2pdf.util import pyPdf
-    except ImportError:
-        from xhtml2pdf.util import PyPDF2 as pyPdf
 except ImportError:
     try:
         from sx.pisa3.pisa_util import COLOR_BY_NAME
         memoized = lambda *a: a
         from sx.pisa3.pisa_context import pisaContext
-        from sx.pisa3.pisa_default import DEFAULT_CSS
-        from sx.pisa3.pisa_parser import pisaParser, pisaGetAttributes
+        from sx.pisa3.pisa_parser import pisaGetAttributes
         from sx.pisa3.pisa_document import pisaStory
-        from reportlab.platypus.flowables import Spacer
-        from reportlab.platypus.frames import Frame
-        from sx.pisa3.pisa_reportlab import PmlBaseDoc, PmlPageTemplate
-        from sx.pisa3.pisa_util import pisaTempFile, getBox, pyPdf
         import sx.pisa3.pisa_parser as pisa_parser
     except ImportError:
         HAS_XHTML2PDF = False
@@ -136,8 +119,6 @@ if HAS_XHTML2PDF:
             pass
         return toColor(value, default)   # Calling the reportlab function
 
-    import cgi
-    import logging
     from xml.dom import Node
 
     def pisaPreLoop2(node, context, collect=False):
