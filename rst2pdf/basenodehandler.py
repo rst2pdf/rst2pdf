@@ -174,7 +174,7 @@ class NodeHandler(object):
         try:
             log.debug("%s: %s", handlerinfo, node)
         except (UnicodeDecodeError, UnicodeEncodeError):
-            log.debug("%s: %r", handlerninfo, node)
+            log.debug("%s: %r", handlerinfo, node)
         log.debug("")
 
         # Dispatch to the first matching class in the MRO
