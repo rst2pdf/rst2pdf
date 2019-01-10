@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$URL$
-#$Date$
-#$Revision$
 
 import shlex
 
-from reportlab.lib.colors import (Color, toColor)
+from reportlab.lib.colors import Color
+from reportlab.platypus.flowables import CondPageBreak
 
+from rst2pdf import flowables
 from .log import log, nodeid
 from .styles import adjustUnits
 
@@ -34,37 +33,37 @@ def parseRaw(data, node):
         lexer.whitespace += ','
         tokens = list(lexer)
         if not tokens:
-            continue # Empty line
+            continue  # Empty line
         command = tokens[0]
         if command == 'PageBreak':
             if len(tokens) == 1:
-                elements.append(MyPageBreak())
+                elements.append(flowables.MyPageBreak())
             else:
-                elements.append(MyPageBreak(tokens[1]))
+                elements.append(flowables.MyPageBreak(tokens[1]))
         elif command == 'EvenPageBreak':
             if len(tokens) == 1:
-                elements.append(MyPageBreak(breakTo='even'))
+                elements.append(flowables.MyPageBreak(breakTo='even'))
             else:
-                elements.append(MyPageBreak(tokens[1], breakTo='even'))
+                elements.append(flowables.MyPageBreak(tokens[1], breakTo='even'))
         elif command == 'OddPageBreak':
             if len(tokens) == 1:
-                elements.append(MyPageBreak(breakTo='odd'))
+                elements.append(flowables.MyPageBreak(breakTo='odd'))
             else:
-                elements.append(MyPageBreak(tokens[1], breakTo='odd'))
+                elements.append(flowables.MyPageBreak(tokens[1], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
-                elements.append(CondPageBreak(99999))
+                elements.append(flowables.CondPageBreak(99999))
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
-            elements.append(MySpacer(adjustUnits(tokens[1]),
-                adjustUnits(tokens[2])))
+            elements.append(
+                flowables.MySpacer(adjustUnits(tokens[1]), adjustUnits(tokens[2])))
         elif command == 'Transition':
-            elements.append(Transition(*tokens[1:]))
+            elements.append(flowables.Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
             elements.append(flowables.PageCounter(*tokens[1:]))
         elif command == 'TextAnnotation':
-            elements.append(TextAnnotation(*tokens[1:]))
+            elements.append(flowables.TextAnnotation(*tokens[1:]))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements
@@ -81,7 +80,10 @@ try:
 except ImportError:
     try:
         from sx.pisa3.pisa_util import COLOR_BY_NAME
-        memoized = lambda *a: a
+
+        def memoized(*a):
+            return a
+
         from sx.pisa3.pisa_context import pisaContext
         from sx.pisa3.pisa_parser import pisaGetAttributes
         from sx.pisa3.pisa_document import pisaStory
@@ -93,31 +95,6 @@ except ImportError:
 if HAS_XHTML2PDF:
 
     COLOR_BY_NAME['initial'] = Color(0, 0, 0)
-
-    @memoized
-    def getColor2(value, default=None):
-        """
-        Convert to color value.
-        This returns a Color object instance from a text bit.
-        """
-
-        if isinstance(value, Color):
-            return value
-        value = str(value).strip().lower()
-        if value == "transparent" or value == "none":
-            return default
-        if value in COLOR_BY_NAME:
-            return COLOR_BY_NAME[value]
-        if value.startswith("#") and len(value) == 4:
-            value = "#" + value[1] + value[1] + value[2] + value[2] + value[3] + value[3]
-        elif rgb_re.search(value):
-            # e.g., value = "<css function: rgb(153, 51, 153)>", go figure:
-            r, g, b = [int(x) for x in rgb_re.search(value).groups()]
-            value = "#%02x%02x%02x" % (r, g, b)
-        else:
-            # Shrug
-            pass
-        return toColor(value, default)   # Calling the reportlab function
 
     from xml.dom import Node
 
@@ -369,7 +346,6 @@ if HAS_XHTML2PDF:
     """
 
     def parseHTML(data, node):
-        dest = None
         path = None
         link_callback = None
         debug = 0
@@ -377,7 +353,6 @@ if HAS_XHTML2PDF:
         xhtml = False
         encoding = None
         xml_output = None
-        raise_exception = True
         capacity = 100 * 1024
 
         # Prepare simple context
