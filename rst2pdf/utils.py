@@ -11,6 +11,7 @@ import rst2pdf.flowables
 from .styles import adjustUnits
 from .log import log, nodeid
 
+
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.
 
@@ -44,12 +45,12 @@ def parseRaw(data, node):
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='even'))
             else:
-                elements.append(MyPageBreak(tokens[1],breakTo='even'))
+                elements.append(MyPageBreak(tokens[1], breakTo='even'))
         elif command == 'OddPageBreak':
             if len(tokens) == 1:
                 elements.append(MyPageBreak(breakTo='odd'))
             else:
-                elements.append(MyPageBreak(tokens[1],breakTo='odd'))
+                elements.append(MyPageBreak(tokens[1], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
                 elements.append(CondPageBreak(99999))
@@ -65,8 +66,9 @@ def parseRaw(data, node):
         elif command == 'TextAnnotation':
             elements.append(TextAnnotation(*tokens[1:]))
         else:
-            log.error('Unknown command %s in raw pdf directive [%s]'%(command,nodeid(node)))
+            log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements
+
 
 from reportlab.lib.colors import Color, CMYKColor, getAllNamedColors, toColor, \
     HexColor
@@ -77,7 +79,7 @@ try:
     from xhtml2pdf.util import memoized
     from xhtml2pdf.context import pisaContext
     from xhtml2pdf.default import DEFAULT_CSS
-    from xhtml2pdf.parser import pisaParser,pisaGetAttributes
+    from xhtml2pdf.parser import pisaParser, pisaGetAttributes
     from xhtml2pdf.document import pisaStory
     from reportlab.platypus.flowables import Spacer
     from reportlab.platypus.frames import Frame
@@ -94,7 +96,7 @@ except ImportError:
         memoized = lambda *a: a
         from sx.pisa3.pisa_context import pisaContext
         from sx.pisa3.pisa_default import DEFAULT_CSS
-        from sx.pisa3.pisa_parser import pisaParser,pisaGetAttributes
+        from sx.pisa3.pisa_parser import pisaParser, pisaGetAttributes
         from sx.pisa3.pisa_document import pisaStory
         from reportlab.platypus.flowables import Spacer
         from reportlab.platypus.frames import Frame
@@ -108,7 +110,6 @@ except ImportError:
 if HAS_XHTML2PDF:
 
     COLOR_BY_NAME['initial'] = Color(0, 0, 0)
-
 
     @memoized
     def getColor2(value, default=None):
@@ -133,16 +134,11 @@ if HAS_XHTML2PDF:
         else:
             # Shrug
             pass
-        return toColor(value, default) # Calling the reportlab function
-
-    #import xhtml2pdf.util
-    #xhtml2pdf.util.getColor = getColor2
+        return toColor(value, default)   # Calling the reportlab function
 
     import cgi
     import logging
     from xml.dom import Node
-
-
 
     def pisaPreLoop2(node, context, collect=False):
         """
@@ -163,25 +159,17 @@ if HAS_XHTML2PDF:
                 media = [x.strip() for x in attr.media.lower().split(",") if x.strip()]
                 # print repr(media)
 
-                if (attr.get("type", "").lower() in ("", "text/css") and (
-                    not media or
-                    "all" in media or
-                    "print" in media or
-                    "pdf" in media)):
+                if (attr.get("type", "").lower() in ("", "text/css")
+                        and (not media or "all" in media or "print" in media
+                             or "pdf" in media)):
 
                     if name == "style":
                         for node in node.childNodes:
                             data += pisaPreLoop2(node, context, collect=True)
-                        #context.addCSS(data)
                         return u""
-                        #collect = True
 
                     if name == "link" and attr.href and attr.rel.lower() == "stylesheet":
-                        # print "CSS LINK", attr
                         context.addCSS('\n@import "%s" %s;' % (attr.href, ",".join(media)))
-                        # context.addCSS(unicode(file(attr.href, "rb").read(), attr.charset))
-        #else:
-        #    print node.nodeType
 
         for node in node.childNodes:
             result = pisaPreLoop2(node, context, collect=collect)
@@ -190,9 +178,7 @@ if HAS_XHTML2PDF:
 
         return data
 
-
     pisa_parser.pisaPreLoop = pisaPreLoop2
-
 
     HTML_CSS = """
     html {
@@ -402,16 +388,16 @@ if HAS_XHTML2PDF:
     """
 
     def parseHTML(data, node):
-        dest=None
-        path=None
-        link_callback=None
-        debug=0
-        default_css=HTML_CSS
-        xhtml=False
-        encoding=None
-        xml_output=None
-        raise_exception=True
-        capacity=100*1024
+        dest = None
+        path = None
+        link_callback = None
+        debug = 0
+        default_css = HTML_CSS
+        xhtml = False
+        encoding = None
+        xml_output = None
+        raise_exception = True
+        capacity = 100 * 1024
 
         # Prepare simple context
         context = pisaContext(path, debug=debug, capacity=capacity)
@@ -422,7 +408,7 @@ if HAS_XHTML2PDF:
                             encoding, context=context, xml_output=xml_output)
         return context.story
 
-else: # no xhtml2pdf
+else:  # no xhtml2pdf
     def parseHTML(data, none):
         log.error("You need xhtml2pdf installed to use the raw HTML directive.")
         return []
