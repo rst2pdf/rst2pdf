@@ -10,6 +10,7 @@ from rst2pdf import flowables
 from .log import log, nodeid
 from .styles import adjustUnits
 
+PageCounter = None
 
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.
@@ -26,6 +27,12 @@ def parseRaw(data, node):
     * TextAnnotation "text of annotation" x_begin=-1 y_begin=-1 x_end=-1 y_end=-1
 
     """
+    global PageCounter
+    if PageCounter is None:
+        from rst2pdf.createpdf import PageCounter as pc
+        PageCounter = pc
+
+
     elements = []
     lines = data.splitlines()
     for line in lines:
@@ -61,7 +68,7 @@ def parseRaw(data, node):
         elif command == 'Transition':
             elements.append(flowables.Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
-            elements.append(flowables.PageCounter(*tokens[1:]))
+            elements.append(PageCounter(*tokens[1:]))
         elif command == 'TextAnnotation':
             elements.append(flowables.TextAnnotation(*tokens[1:]))
         else:
