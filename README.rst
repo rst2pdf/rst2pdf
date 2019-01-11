@@ -43,7 +43,7 @@ Installation and use
 Install from PyPI
 -----------------
 
-The latest released version, 0.93, may be installed from PyPI by using
+The latest released version, 0.94, may be installed from PyPI by using
 pip or easy_install.  It does not support Python 3::
 
   sudo pip install rst2pdf

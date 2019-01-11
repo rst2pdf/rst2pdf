@@ -2,6 +2,9 @@
 {next}
 ------
 
+{0.94 2019-01-12}
+-----------------
+
 * Sphinx config setting pdf_invariant works properly now (Issue #718)
 * Updated reportlab dependency to 3.5.12 and Sphinx to 1.7.9 (Issue #718)
 * Updated reportlab dependency to 3.5.10 (Issue #714)
