@@ -1,5 +1,5 @@
-Intro
-=====
+rst2pdf: Use a text editor.  Make a PDF.
+========================================
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX.
 This tool provides an alternative by producing PDF directly using the ReportLab
