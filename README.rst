@@ -7,7 +7,7 @@ library.
 
 More information is available `at the main website`__
 
-__ http://rst2pdf.github.io
+__ https://rst2pdf.org
 
 Features
 ========
@@ -35,7 +35,7 @@ Features
 
 * `Full user's manual`__
 
-__ http://ralsina.me/static/manual.pdf
+__ https://rst2pdf.org/static/manual.pdf
 
 Installation and use
 ====================

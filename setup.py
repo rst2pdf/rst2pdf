@@ -113,7 +113,7 @@ setup(
     long_description=long_description,
     license="MIT",
     keywords="restructured convert rst pdf docutils pygments reportlab",
-    url="http://rst2pdf.github.io",
+    url="https://rst2pdf.org",
     download_url="https://github.com/rst2pdf/rst2pdf/releases",
     entry_points={'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
     test_suite='rst2pdf.tests.test_rst2pdf.test_suite',  # TODO: this needs to be updated
