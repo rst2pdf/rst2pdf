@@ -1,4 +1,4 @@
-rst2pdf: Use a text editor.  Make a PDF.
+rst2pdf: Use a text editor. Make a PDF.
 ========================================
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX.
@@ -43,8 +43,8 @@ Installation and use
 Install from PyPI
 -----------------
 
-The latest released version, 0.94, may be installed from PyPI by using
-pip or easy_install.  It does not support Python 3::
+The latest released version may be installed from PyPI by using
+pip or easy_install. It does not support Python 3::
 
   sudo pip install rst2pdf
 
