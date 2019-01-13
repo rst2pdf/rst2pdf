@@ -20,12 +20,14 @@ if sys.version_info[0] > 2:
 long_description = read('README.rst')
 
 install_requires = [
-        'setuptools',
         'docutils',
         'pdfrw',
         'pygments',
         'reportlab',
+        'setuptools',
+        'six',
         'smartypants',
+        'jinja2',
         ]
 
 try:
