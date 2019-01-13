@@ -22,7 +22,7 @@ matplotlib==2.2.3
 numpy==1.15.4             # via matplotlib
 packaging==18.0           # via sphinx
 pdfrw==0.4
-pillow==5.3.0
+pillow==5.3.0             # via reportlab, xhtml2pdf
 pygments==2.3.0
 pyparsing==2.3.0          # via matplotlib, packaging
 pypdf2==1.26.0
@@ -30,7 +30,7 @@ python-dateutil==2.7.5    # via matplotlib
 pytz==2018.7              # via babel, matplotlib
 reportlab==3.5.12
 requests==2.21.0          # via sphinx
-six==1.12.0               # via cycler, html5lib, matplotlib, packaging, python-dateutil, sphinx, xhtml2pdf
+six==1.12.0
 smartypants==2.0.1
 snowballstemmer==1.2.1    # via sphinx
 sphinx==1.7.9
@@ -40,9 +40,4 @@ svg2rlg==0.3
 typing==3.6.6             # via sphinx
 urllib3==1.24.1           # via requests
 webencodings==0.5.1       # via html5lib
-smartypants==2.0.1
 xhtml2pdf==0.2.3
-
-# The following packages are considered to be unsafe in a requirements file:
-# pip                       # via reportlab
-# setuptools                # via html5lib, reportlab, sphinx

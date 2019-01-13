@@ -2,7 +2,6 @@ aafigure
 docutils
 matplotlib
 pdfrw
-pillow
 pygments
 pyPdf2
 reportlab

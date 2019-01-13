@@ -21,13 +21,13 @@ long_description = read('README.rst')
 
 install_requires = [
         'docutils',
+        'jinja2',
         'pdfrw',
         'pygments',
         'reportlab',
         'setuptools',
         'six',
         'smartypants',
-        'jinja2',
         ]
 
 try:
@@ -38,7 +38,6 @@ except ImportError:
 tests_require = ['pyPdf2']
 sphinx_require = ['sphinx<1.8.0']
 hyphenation_require = ['wordaxe>=1.0']
-images_require = ['pillow']
 pdfimages_require = ['pyPdf2','PythonMagick']
 pdfimages2_require = ['pyPdf2','SWFTools']
 svgsupport_require = ['svg2rlg']
@@ -66,7 +65,6 @@ setup(
         tests=tests_require,
         sphinx=sphinx_require,
         hyphenation=hyphenation_require,
-        images=images_require,
         pdfimages=pdfimages_require,
         pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
