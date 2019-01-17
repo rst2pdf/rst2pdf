@@ -2,9 +2,10 @@
 How to use rst2pdf
 ==================
 
-:author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.93
-:revision: $LastChangedRevision$
+.. meta::
+  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>;
+  :version: 0.94
+  :revision: 2019011700
 
 .. header::
 
