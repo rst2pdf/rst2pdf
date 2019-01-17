@@ -2,8 +2,8 @@
 {next}
 ------
 
-{0.94 2019-01-12}
------------------
+0.94 2019-01-17
+---------------
 
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (Issue #623)
 * Added: ``repeat_table_rows`` is now supported in Sphinx (Issue #505)
