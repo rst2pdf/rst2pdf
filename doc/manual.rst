@@ -16,7 +16,7 @@ How to use rst2pdf
       +---+---------------------+----------------+
       |   |.. class:: centered  |.. class:: right|
       |   |                     |                |
-      |   |Section ###Section###|Page ###Page### |
+      |   |        ###Section###|Page ###Page### |
       +---+---------------------+----------------+
 
       .. class:: headertable
@@ -24,11 +24,12 @@ How to use rst2pdf
       +---------------+---------------------+---+
       |               |.. class:: centered  |   |
       |               |                     |   |
-      |Page ###Page###|Section ###Section###|   |
+      |Page ###Page###|        ###Section###|   |
       +---------------+---------------------+---+
 
 
 .. contents::
+  :class: toc-root
 
 .. section-numbering::
 
