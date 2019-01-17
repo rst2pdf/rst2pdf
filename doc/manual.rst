@@ -80,7 +80,7 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
 Here's an example file showing some of the currently available options:
 
 .. code-block:: ini
-   :include: config.sample
+   :include: assets/config.sample
 
 Pipe usage
 ==========
@@ -154,11 +154,11 @@ You can insert images in the middle of your text like this::
 
   This |biohazard| means you have to run.
 
-  .. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
+  .. |biohazard| image:: assets/biohazard.png
 
 This |biohazard| means you have to run.
 
-.. |biohazard| image:: ../rst2pdf/tests/input/images/biohazard.png
+.. |biohazard| image:: assets/biohazard.png
 
 This only works correctly with reportlab 2.2 or later.
 
@@ -1074,14 +1074,14 @@ the options are:
 Let's display a class from rst2pdf::
 
       .. code-block:: python
-         :include: ../rst2pdf/flowables.py
+         :include: assets/flowables.py
          :start-at: class Separation(Flowable):
          :end-before: class Reference(Flowable):
 
 this command gives
 
 .. code-block:: python
-    :include: ../rst2pdf/flowables.py
+    :include: assets/flowables.py
     :start-at: class Separation(Flowable):
     :end-before: class Reference(Flowable):
 
@@ -1280,7 +1280,9 @@ use the ``--raw-html`` command line option.
 The counter role
 ================
 
-This is a nonstandard interpreted text role, which means it will only work with rst2pdf. It implements an unlimited number of counters you can use in your text.
+.. note:: The counter role only works in PDF, if you're reading the HTML version of the manual then this section is broken. Sorry :/
+
+This is a nonstandard interpreted text role, which means it will only work with ``rst2pdf``. It implements an unlimited number of counters you can use in your text.
 For example, you could use it to have numbered figures, or numbered tables.
 
 The syntax is this:
@@ -1378,17 +1380,6 @@ as text, the math role embeds an image. That means:
 * Inline math will look worse when printed, or make your file larger.
 
 So, use it only in emergencies ;-)
-
-You can also use an inline substitution of the math directive for things you use often,
-which is the same as using the math role::
-
-    This is the square of x: |xsq|
-
-    .. |xsq| math:: x^2
-
-This is the square of x: |xsq|
-
-.. |xsq| math:: x^2
 
 You don't need to worry about fonts, the correct math fonts will be used and embedded in
 your PDF automatically (they are included with matplotlib).
