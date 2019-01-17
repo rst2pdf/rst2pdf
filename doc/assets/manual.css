@@ -100,3 +100,12 @@ code, tt {
 kbd {
   color: #101010;
 }
+
+.auto-toc {
+  list-style-type: none;
+  list-style: none;
+}
+
+.toc-root > ul {
+  padding-left: 10px;
+}
