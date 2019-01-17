@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 # See LICENSE.txt for licensing terms
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
 
 # Some fragments of code are copied from Reportlab under this license:
 #

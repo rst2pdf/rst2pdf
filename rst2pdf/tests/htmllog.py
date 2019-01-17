@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL: https://rst2pdf.googlecode.com/svn/trunk/rst2pdf/tests/parselogs.py $
-#$LastChangedDate: 2010-03-07 21:25:16 -0600 (Sun, 07 Mar 2010) $
-#$LastChangedRevision: 1730 $
-
 # See LICENSE.txt for licensing terms
 
 '''

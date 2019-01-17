@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
 
 import os
 import sys

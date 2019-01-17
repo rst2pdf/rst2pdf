@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
-
-
 '''
 Copyright (c) 2009, Patrick Maupin, Austin, Texas
 
