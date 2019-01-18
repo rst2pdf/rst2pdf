@@ -3,31 +3,51 @@ Release Process for rst2pdf
 
 This is an outline of what needs to be done in order to release rst2pdf.
 
-1. Update version number in setup.py
-2. Update CHANGES.rst
+1. Update version number in ``setup.py``
+2. Update ``CHANGES.rst``
 3. Update version number and revision in manual
-4. Build manual and upload to HTML and PDF to the website
-   via a PR on the rst2pdf.github.io repo.
-5. Ensure all PRs are attached to the milestone
-6. Close the milestone and create next one
-7. Use changelog-generator_ (or similar) to create a changelog
-8. Tag release with version number
-9. Update Releases section on GitHub project and paste in changelog
-10. Create rc1 distribution package
+4. Build manual
+
+   ::
+
+     $ cd doc; ./gen_docs.sh
+
+   Add subject and autor to manual PDF's meta data using ExifTool_
+
+   ::
+
+     $ exiftool -PDF:Subject="v0.94 r2019011700" output/pdf/manual.pdf
+     $ exiftool -PDF:Author="rst2pdf project; Roberto Alsina" output/pdf/manual.pdf
+
+   and upload to HTML and PDF to the website
+   via a PR on the rst2pdf.github.io_ repo.
+
+6. Ensure all PRs are attached to the milestone
+7. Close the milestone and create next one
+8. Use changelog-generator_ (or similar) to create a changelog
+9. Tag release with version number
+
+   ::
+
+      $ git tag -s 0.94
+      $ git push upstream 0.94
+
+10. Update Releases section on GitHub project and paste in changelog
+11. Create rc distribution package
 
     ::
 
        $ python setup.py egg_info -b "rc1" sdist bdist_wheel
 
-    If you're doing an alphaX, betaX or postX, then change ``-b ""`` to ``-b "RC1"`` (or whatever)
+    If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
 
-11. Upload rc1 to Test-PyPI_
+11. Upload the rc distribution to Test-PyPI_
 
     ::
 
        $ twine upload --repository testpypi dist/*
 
-    Check that it all looks correct on TestPyPI. If not, fix and release a new rc.
+    Check that it all looks correct on Test-PyPI. If not, fix and release a new rc.
 
 12. Test Test-PyPI release into a clean virtual env
 
@@ -45,7 +65,8 @@ This is an outline of what needs to be done in order to release rst2pdf.
        $ python setup.py egg_info -b "" sdist bdist_wheel
        $ twine upload --repository pypi dist/*
 
-
+|
+|
 
 *Note:* create a ``~/.pypirc`` file to make the ``--repository`` switch work with ``twine``.
 It should contain the following:
@@ -61,9 +82,12 @@ It should contain the following:
 
 
 
+.. _ExifTool: https://www.sno.phy.queensu.ca/~phil/exiftool/
+.. _rst2pdf.github.io: https://github.com/rst2pdf/rst2pdf.github.io
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
 .. _Test-PyPI: https://test.pypi.org
 .. _PyPI: https://test.pypi.org
+
 
 
 
