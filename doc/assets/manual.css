@@ -4,8 +4,6 @@ Based on ``blue_box.css`` by Ian Bicking
 and ``html4css1.css`` revision 1.46.
 */
 
-@import url(html4css1.css);
-
 body {
   font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
 }
