@@ -2,32 +2,38 @@
 {next}
 ------
 
-* Sphinx config setting pdf_invariant works properly now (Issue #718)
-* Updated reportlab dependency to 3.5.12 and Sphinx to 1.7.9 (Issue #718)
-* Updated reportlab dependency to 3.5.10 (Issue #714)
-* Fixed handling of empty documents, they now generate a single empty page (Issue 547)
-* Fix handling of non-http/ftp URLs (Issue #549)
-* Do not use logging.basicConfig (Issue 509)
-* Removed Tenjin and switched to Jinja2 (Issue #696)
-* Made literal block shrinking work again (Issue #560)
-* Removed copy of smartypants, use PyPI package instead (Issue 694)
-* Fixed bug in token replacement that broke tables in headers/footers (Issue 612)
-* Added: ``:hl_lines:`` code directive allows highlighting of specific lines (issue 623)
-* Added: Extension metadata for Sphinx is now returned in pdfbuilder (issue 640)
+0.94 2019-01-17
+---------------
+
+* Added: ``:hl_lines:`` code directive allows highlighting of specific lines (Issue #623)
+* Added: ``repeat_table_rows`` is now supported in Sphinx (Issue #505)
+* Added: ``scale_width`` is now supported for ``--fit-background-mode`` (Issue #505)
+* Added: Extension metadata for Sphinx is now returned in pdfbuilder (Issue 640)
 * Added: The Sphinx ``today`` config setting is now used if it is set
 * Changed: ``:start-after:`` will now render the next line
+* Changed: Updated reportlab dependency to 3.5.12 and Sphinx to 1.7.9 (Issue #718)
+* Changed: We no longer logging.basicConfig configuration (Issue #509)
 * Changed: We now use PILLOW rather than PIL
-* Fixed: Using ``:start-after:`` with ``linenos_offset`` now displays the correct line number
-* Fixed: Using ``:start-at:`` with ``linenos_offset`` now displays the correct line number
-* Fixed: Inline ``:math:`` works again as we now use quoted attributes for HTML ``<img>`` tags (issue 567)
-* Fixed: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4 (issue 566)
-* Fixed: CreationDate metadata shows correct date using Sphinx (issue 525)
+* Fixed bug in token replacement that broke tables in headers/footers (Issue #612)
+* Fixed handling of empty documents, they now generate a single empty page (Issue #547)
 * Fixed: ``:alt:`` option now works for plantuml extension
 * Fixed: ``:linenos_offset:`` now works again
+* Fixed: `rst2pdf.createpdf.main` now releases the input file handle
+* Fixed: CreationDate metadata shows correct date using Sphinx (Issue #525)
+* Fixed: Error when using --date-invariant with newer reportlab versions (Issue #678)
+* Fixed: handling of non-http/ftp URLs (Issue #549)
+* Fixed: Inline ``:math:`` works again as we now use quoted attributes for HTML ``<img>`` tags (Issue 567)
+* Fixed: Made literal block shrinking work again (Issue #560)
 * Fixed: Removed debugging print statement when using line blocks
-* Fixed: Removed uniconverter from setup (issue 487)
-* Fixed: Error when using --date-invariant with newer reportlab versions (Issue 678)
-
+* Fixed: Removed uniconverter from setup (Issue #487)
+* Fixed: Renamed links now work (Issue #569)
+* Fixed: Sphinx config setting pdf_invariant works properly now (Issue #718)
+* Fixed: sphinx+rst2pdf now works with automodule directive Sphinx >= 1.4 (Issue #566)
+* Fixed: Using ``:start-after:`` with ``linenos_offset`` now displays the correct line number
+* Fixed: Using ``:start-at:`` with ``linenos_offset`` now displays the correct line number
+* Removed: Our own copy of smartypants. We now use the PyPI package instead (Issue #694)
+* Removed: Tenjin has been switched to Jinja2 (Issue #696)
+* Removed: The QT4 GUI is no more (Issue #690)
 
 0.93 (2012-12-18)
 -----------------

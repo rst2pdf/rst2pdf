@@ -2,9 +2,10 @@
 How to use rst2pdf
 ==================
 
-:author: Roberto Alsina <ralsina@netmanagers.com.ar>
-:version: 0.93
-:revision: $LastChangedRevision$
+.. meta::
+  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>;
+  :version: 0.94
+  :revision: 2019011700
 
 .. header::
 
@@ -15,7 +16,7 @@ How to use rst2pdf
       +---+---------------------+----------------+
       |   |.. class:: centered  |.. class:: right|
       |   |                     |                |
-      |   |Section ###Section###|Page ###Page### |
+      |   |        ###Section###|Page ###Page### |
       +---+---------------------+----------------+
 
       .. class:: headertable
@@ -23,11 +24,12 @@ How to use rst2pdf
       +---------------+---------------------+---+
       |               |.. class:: centered  |   |
       |               |                     |   |
-      |Page ###Page###|Section ###Section###|   |
+      |Page ###Page###|        ###Section###|   |
       +---------------+---------------------+---+
 
 
 .. contents::
+  :class: toc-root
 
 .. section-numbering::
 

@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-#$HeadURL$
-#$LastChangedDate$
-#$LastChangedRevision$
 
 import os
 import sys
 
 from setuptools import find_packages, setup
 
-version = '0.93'
+version = '0.94'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -17,36 +14,17 @@ if sys.version_info[0] > 2:
     sys.stderr.write('rst2pdf is python2-only for now.')
     exit(1)
 
-long_description = (
-    read('LICENSE.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('README.rst')
-    + '\n' +
-    'Contributors\n'
-    '************\n'
-
-
-    + '\n' +
-    read('Contributors.txt')
-    + '\n' +
-    'Change history\n'
-    '**************\n'
-    + '\n' +
-    read('CHANGES.rst')
-    + '\n' +
-   'Download\n'
-    '********\n'
-    )
+long_description = read('README.rst')
 
 install_requires = [
-        'setuptools',
         'docutils',
-        'reportlab>=2.4',
-        'Pygments',
+        'jinja2',
         'pdfrw',
+        'pygments',
+        'reportlab',
+        'setuptools',
+        'six',
+        'smartypants',
         ]
 
 try:
@@ -57,7 +35,6 @@ except ImportError:
 tests_require = ['pyPdf2']
 sphinx_require = ['sphinx<1.8.0']
 hyphenation_require = ['wordaxe>=1.0']
-images_require = ['pillow']
 pdfimages_require = ['pyPdf2','PythonMagick']
 pdfimages2_require = ['pyPdf2','SWFTools']
 svgsupport_require = ['svg2rlg']
@@ -68,6 +45,7 @@ rawhtmlsupport_require = ['xhtml2pdf']
 setup(
     name="rst2pdf",
     version=version,
+    python_requires='~=2.7',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data=dict(rst2pdf=['styles/*.json',
 	'styles/*.style',
@@ -84,7 +62,6 @@ setup(
         tests=tests_require,
         sphinx=sphinx_require,
         hyphenation=hyphenation_require,
-        images=images_require,
         pdfimages=pdfimages_require,
         pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
@@ -97,23 +74,27 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
-        'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python:: 2',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Topic :: Documentation',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing',
         'Topic :: Utilities',
     ],
-    author="Roberto Alsina",
-    author_email="ralsina at netmanagers dot com dot ar",
-    description="Convert restructured text to PDF via reportlab.",
+    author="rst2pdf maintainers",
+    author_email="maintainers@rstpdf.org",
+    description="Convert reStructured Text to PDF via ReportLab.",
     long_description=long_description,
+    long_description_content_type="text/x-rst",
     license="MIT",
     keywords="restructured convert rst pdf docutils pygments reportlab",
-    url="http://rst2pdf.github.io",
+    url="https://rst2pdf.org",
+    project_urls={
+        'Bug Reports': 'https://github.com/rst2pdf/rst2pdf/issues',
+        'Source': 'https://github.com/rst2pdf/rst2pdf',
+    },
     download_url="https://github.com/rst2pdf/rst2pdf/releases",
     entry_points={'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
     test_suite='rst2pdf.tests.test_rst2pdf.test_suite',  # TODO: this needs to be updated

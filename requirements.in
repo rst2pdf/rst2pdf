@@ -2,11 +2,11 @@ aafigure
 docutils
 matplotlib
 pdfrw
-pillow
 pygments
 pyPdf2
 reportlab
-sphinx
+six
+smartypants
+sphinx<1.80
 svg2rlg
 xhtml2pdf
-smartypants

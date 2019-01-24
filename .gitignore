@@ -12,3 +12,4 @@ rst2pdf/tests/input/*/_build
 .vscode/
 .python-version
 .venv/
+dist/
