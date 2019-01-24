@@ -2,7 +2,7 @@
 {next}
 ------
 
-0.94 2019-01-17
+0.94 2019-01-24
 ---------------
 
 * Added: ``:hl_lines:`` code directive allows highlighting of specific lines (Issue #623)
