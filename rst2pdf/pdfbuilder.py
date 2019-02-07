@@ -841,51 +841,8 @@ def try_parse(src):
     else:
         return True
 
-def init_math(app):
-    """
-        This is a dummy math extension.
-
-        It's a hack, but if you want math in a PDF via pdfbuilder, and don't want to
-        enable pngmath or jsmath, then enable this one.
-
-        :copyright: Copyright 2007-2009 by the Sphinx team, see AUTHORS.
-        :license: BSD, see LICENSE for details.
-    """
-
-    if hasattr(app.config, 'math_number_all'):
-        # Another math package is already loaded, so skip our built-in one
-        return
-
-    from sphinx.errors import SphinxError
-    try:
-        # Sphinx 0.6.4 and later
-        from sphinx.ext.mathbase import setup_math as mathbase_setup
-    except ImportError:
-        try:
-            # Sphinx 0.6.3
-            from sphinx.ext.mathbase import setup as mathbase_setup
-        except ImportError as e:
-            log.error('Error importing sphinx math extension: %s', e)
-
-    class MathExtError(SphinxError):
-        category = 'Math extension error'
-
-
-    def html_visit_math(self, node):
-        self.body.append(node['latex'])
-        raise nodes.SkipNode
-
-    def html_visit_displaymath(self, node):
-        self.body.append(node['latex'])
-        raise nodes.SkipNode
-
-    mathbase_setup(app, (html_visit_math, None), (html_visit_displaymath, None))
-
 
 def setup(app):
-    #Init dummy math extension
-    init_math(app)
-
     app.add_builder(PDFBuilder)
     # PDF options
     app.add_config_value('pdf_documents', [], None)

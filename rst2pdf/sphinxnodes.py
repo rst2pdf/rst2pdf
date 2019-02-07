@@ -27,7 +27,6 @@ from rst2pdf.image import MyImage, VectorPdf
 from rst2pdf.opt_imports import Paragraph, sphinx
 
 from rst2pdf.nodehandlers import NodeHandler, FontHandler, HandleEmphasis
-from rst2pdf import math_flowable
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 import docutils
@@ -174,34 +173,8 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
             style=t_style
             )]
 
-from sphinx.ext import mathbase
-
 class HandleHighlightLang(SphinxHandler, sphinx.addnodes.highlightlang):
     pass
-
-class HandleSphinxMath(SphinxHandler, mathbase.math, mathbase.displaymath):
-    def gather_elements(self, client, node, style):
-        mflow=math_flowable.Math(node.get('latex',''),node.get('label',None))
-        n=node['number']
-        if n is not None:
-            number='(%s)'%node['number']
-            return [Table([[mflow,number]],)]
-        return [mflow]
-
-    def get_text(self, client, node, replaceEnt):
-        mf = math_flowable.Math(node.get('latex',''))
-        w, h = mf.wrap(0, 0)
-        descent = mf.descent()
-        img = mf.genImage()
-        client.to_unlink.append(img)
-        return '<img src="%s" width="%f" height="%f" valign="%f"/>' % (
-            img, w, h, -descent)
-
-class HandleSphinxEq(SphinxHandler, mathbase.eqref):
-
-    def get_text(self, client, node, replaceEnt):
-        return '<a href="equation-%s" color="%s">%s</a>'%(node['target'],
-            client.styles.linkColor, node.astext())
 
 graphviz_warn = False
 
