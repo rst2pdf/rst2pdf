@@ -455,10 +455,6 @@ class StyleSheet(object):
 
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
-        # Patch to make the code compatible with reportlab from SVN 2.4+ and
-        # 2.4
-        if not hasattr(self.StyleSheet, 'has_key'):
-            self.StyleSheet.__class__.has_key = lambda s, k: k in s
         for s in self.styles:
             if 'parent' in s:
                 if s['parent'] is None:
