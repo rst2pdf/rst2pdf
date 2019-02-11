@@ -235,7 +235,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 maxdepth=6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
-            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+unicode(id(node))
+            parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
             node.elements = [ Heading(text,
                     client.styles['heading%d'%min(client.depth, maxdepth)],
                     level=client.depth-1,
