@@ -35,7 +35,7 @@ requests==2.22.0          # via sphinx
 six==1.12.0
 smartypants==2.0.1
 snowballstemmer==1.2.1    # via sphinx
-sphinx
+sphinx==1.8.4
 sphinxcontrib-websupport==1.1.2  # via sphinx
 subprocess32==3.5.4       # via matplotlib
 svglib==0.9.0
