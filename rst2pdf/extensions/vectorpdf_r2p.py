@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-from weakref import WeakKeyDictionary
 from copy import copy
+from weakref import WeakKeyDictionary
 
 try:
     from reportlab.rl_config import _FUZZ
