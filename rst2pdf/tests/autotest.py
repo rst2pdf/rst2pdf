@@ -225,7 +225,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     info = MD5Info()
     if os.path.exists(md5path):
         f = open(md5path, 'rb')
-        six.exec_(f, info)
+        exec(f.read(), info)
         f.close()
 
     # Generate the current MD5
