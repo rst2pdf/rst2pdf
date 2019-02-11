@@ -109,6 +109,8 @@ class NodeHandler(object):
     '''
     __metaclass__ = MetaHelper
 
+    dispatchdict = {}
+
     @classmethod
     def _classpreinit(baseclass, clstype, name, bases, clsdict):
         # _classpreinit is called before the actual class is built

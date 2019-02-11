@@ -455,63 +455,73 @@ class StyleSheet(object):
 
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
-        for s in self.styles:
-            if 'parent' in s:
-                if s['parent'] is None:
-                    if s['name'] != 'base':
-                        s['parent'] = self.StyleSheet['base']
+
+        dirty = True
+        while dirty:
+            dirty = False
+            for s in self.styles:
+                if s['name'] in self.StyleSheet:
+                    continue
+                try:
+                    if 'parent' in s:
+                        if s['parent'] is None:
+                            if s['name'] != 'base':
+                                s['parent'] = self.StyleSheet['base']
+                            else:
+                                del(s['parent'])
+                        else:
+                            s['parent'] = self.StyleSheet[s['parent']]
                     else:
-                        del(s['parent'])
+                        if s['name'] != 'base':
+                            s['parent'] = self.StyleSheet['base']
+                except KeyError:
+                    dirty = True
+                    continue
+
+                # If the style has no bulletFontName but it has a fontName, set it
+                if ('bulletFontName' not in s) and ('fontName' in s):
+                    s['bulletFontName'] = s['fontName']
+
+                hasFS = True
+                # Adjust fontsize units
+                if 'fontSize' not in s:
+                    s['fontSize'] = s['parent'].fontSize
+                    s['trueFontSize'] = None
+                    hasFS = False
+                elif 'parent' in s:
+                    # This means you can set the fontSize to
+                    # "2cm" or to "150%" which will be calculated
+                    # relative to the parent style
+                    s['fontSize'] = self.adjustUnits(s['fontSize'],
+                                                    s['parent'].fontSize)
+                    s['trueFontSize'] = s['fontSize']
                 else:
-                    s['parent'] = self.StyleSheet[s['parent']]
-            else:
-                if s['name'] != 'base':
-                    s['parent'] = self.StyleSheet['base']
+                    # If s has no parent, it's base, which has
+                    # an explicit point size by default and %
+                    # makes no sense, but guess it as % of 10pt
+                    s['fontSize'] = self.adjustUnits(s['fontSize'], 10)
 
-            # If the style has no bulletFontName but it has a fontName, set it
-            if ('bulletFontName' not in s) and ('fontName' in s):
-                s['bulletFontName'] = s['fontName']
+                # If the leading is not set, but the size is, set it
+                if 'leading' not in s and hasFS:
+                    s['leading'] = 1.2*s['fontSize']
 
-            hasFS = True
-            # Adjust fontsize units
-            if 'fontSize' not in s:
-                s['fontSize'] = s['parent'].fontSize
-                s['trueFontSize'] = None
-                hasFS = False
-            elif 'parent' in s:
-                # This means you can set the fontSize to
-                # "2cm" or to "150%" which will be calculated
-                # relative to the parent style
-                s['fontSize'] = self.adjustUnits(s['fontSize'],
-                                                 s['parent'].fontSize)
-                s['trueFontSize'] = s['fontSize']
-            else:
-                # If s has no parent, it's base, which has
-                # an explicit point size by default and %
-                # makes no sense, but guess it as % of 10pt
-                s['fontSize'] = self.adjustUnits(s['fontSize'], 10)
+                # If the bullet font size is not set, set it as fontSize
+                if ('bulletFontSize' not in s) and ('fontSize' in s):
+                    s['bulletFontSize'] = s['fontSize']
 
-            # If the leading is not set, but the size is, set it
-            if 'leading' not in s and hasFS:
-                s['leading'] = 1.2*s['fontSize']
+                # If the borderPadding is a list and wordaxe <=0.3.2,
+                # convert it to an integer. Workaround for Issue
+                if 'borderPadding' in s and (
+                    ((HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
+                    or reportlab.Version < "2.3")
+                        and isinstance(s['borderPadding'], list)):
+                    log.warning(
+                        'Using a borderPadding list in '
+                        'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
+                        'supported, so it will probably look wrong' % s['name'])
+                    s['borderPadding'] = s['borderPadding'][0]
 
-            # If the bullet font size is not set, set it as fontSize
-            if ('bulletFontSize' not in s) and ('fontSize' in s):
-                s['bulletFontSize'] = s['fontSize']
-
-            # If the borderPadding is a list and wordaxe <=0.3.2,
-            # convert it to an integer. Workaround for Issue
-            if 'borderPadding' in s and (
-                ((HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
-                 or reportlab.Version < "2.3")
-                    and isinstance(s['borderPadding'], list)):
-                log.warning(
-                    'Using a borderPadding list in '
-                    'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
-                    'supported, so it will probably look wrong' % s['name'])
-                s['borderPadding'] = s['borderPadding'][0]
-
-            self.StyleSheet.add(ParagraphStyle(**s))
+                self.StyleSheet.add(ParagraphStyle(**s))
 
         self.emsize = self['base'].fontSize
         # Make stdFont the basefont, for Issue 65
