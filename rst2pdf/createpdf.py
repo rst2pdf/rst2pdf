@@ -920,7 +920,7 @@ class HeaderOrFooter(object):
             if not isinstance(text, str):
                 try:
                     text = text.decode(e.encoding)
-                except AttributeError, TypeError:
+                except (AttributeError, TypeError):
                     text = text.decode('utf-8')
 
             text = text.replace(u'###Page###', pnum)
