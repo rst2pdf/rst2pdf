@@ -228,7 +228,7 @@ class DelayedTable(Table):
             kwargs['total']=w
             return styles.adjustUnits(*args, **kwargs)
         #adjust=functools.partial(styles.adjustUnits, total=w)
-        self.colWidths=map(adjust, self._colWidths)
+        self.colWidths = [adjust(x) for x in self._colWidths]
         #colWidths = [_w * _tw for _w in self.colWidths]
         self.t = Table(self.data, colWidths=self.colWidths,
             style=self.style, repeatRows=self.repeatrows,
