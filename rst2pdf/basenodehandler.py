@@ -102,14 +102,11 @@ class MetaHelper(type):
             cls._classinit()
 
 
-class NodeHandler(object):
+class NodeHandler(metaclass=MetaHelper):
     ''' NodeHandler classes are used to dispatch
        to the correct class to handle some node class
        type, via a dispatchdict in the main class.
     '''
-    __metaclass__ = MetaHelper
-
-    dispatchdict = {}
 
     @classmethod
     def _classpreinit(baseclass, clstype, name, bases, clsdict):
