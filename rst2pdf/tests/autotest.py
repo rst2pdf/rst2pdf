@@ -108,7 +108,7 @@ class MD5Info(dict):
     def __str__(self):
         ''' Return the string to output to the MD5 file '''
         result = []
-        for name, value in sorted(self.iteritems()):
+        for name, value in sorted(self.items()):
             if not name.endswith(self.suffix):
                 continue
             result.append('%s = [' % name)
@@ -149,17 +149,17 @@ class MD5Info(dict):
         # Create a dictionary of relevant current information
         # in the database.
         oldinfo = dict((key, values)
-                        for (key, values) in self.iteritems()
+                        for (key, values) in self.items()
                             if key.endswith(suffix))
 
         # Create sets and strip the sentinels while
         # working with the dictionary.
         newinfo = dict((key, set(values) - sentinel)
-                       for (key, values) in oldinfo.iteritems())
+                       for (key, values) in oldinfo.items())
 
         # Create an inverse mapping of MD5s to key names
         inverse = {}
-        for key, values in newinfo.iteritems():
+        for key, values in newinfo.items():
             for value in values:
                 inverse.setdefault(value, set()).add(key)
 
@@ -169,7 +169,7 @@ class MD5Info(dict):
         # either report an error, or just remove one of
         # the possible answers if it is the same answer
         # we give by default.
-        for value, keys in inverse.iteritems():
+        for value, keys in inverse.items():
             if len(keys) > 1 and new_key in keys:
                 keys.remove(new_key)
                 newinfo[new_key].remove(value)
@@ -185,7 +185,7 @@ class MD5Info(dict):
 
         # Create a canonical version of the dictionary,
         # by adding sentinels and sorting the results.
-        for key, value in newinfo.iteritems():
+        for key, value in newinfo.items():
             newinfo[key] = sorted(value | sentinel)
 
         # See if we changed anything
@@ -389,7 +389,7 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None,
         if incremental and errcode and 0:
             break
     print_('\nFinal checksum statistics:',)
-    print_(', '.join(sorted('%s=%s' % x for x in results.iteritems())))
+    print_(', '.join(sorted('%s=%s' % x for x in results.items())))
     print_('\n')
 
     return returnErrorCode
