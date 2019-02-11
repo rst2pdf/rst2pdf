@@ -686,47 +686,6 @@ class StyleSheet(object):
                 (-1, rows - 1),
                 self['table-heading'].valign)]
 
-    def pStyleToTStyle(self, style, x, y):
-        """Return a table style similar to a given paragraph style.
-
-        Given a reportlab paragraph style, returns a spec for a table style
-        that adopts some of its features (for example, the background color).
-
-        """
-        results = []
-        if style.backColor:
-            results.append(('BACKGROUND', (x, y), (x, y), style.backColor))
-        if style.borderWidth:
-            bw = style.borderWidth
-            del style.__dict__['borderWidth']
-            if style.borderColor:
-                bc = style.borderColor
-                del style.__dict__['borderColor']
-            else:
-                bc = colors.black
-            bc = str(bc)
-            results.append(('BOX', (x, y), (x, y), bw, bc))
-        if style.borderPadding:
-            if isinstance(style.borderPadding, list):
-                results.append(('TOPPADDING', (x, y), (x, y),
-                                style.borderPadding[0]))
-                results.append(('RIGHTPADDING', (x, y), (x, y),
-                                style.borderPadding[1]))
-                results.append(('BOTTOMPADDING', (x, y), (x, y),
-                                style.borderPadding[2]))
-                results.append(('LEFTPADDING', (x, y), (x, y),
-                                style.borderPadding[3]))
-            else:
-                results.append(('TOPPADDING', (x, y), (x, y),
-                                style.borderPadding))
-                results.append(('RIGHTPADDING', (x, y), (x, y),
-                                style.borderPadding))
-                results.append(('BOTTOMPADDING', (x, y), (x, y),
-                                style.borderPadding))
-                results.append(('LEFTPADDING', (x, y), (x, y),
-                                style.borderPadding))
-        return results
-
     def adjustUnits(self, v, total=None, default_unit='pt'):
         if total is None:
             total = self.tw

@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-import sys
-import os
-from weakref import WeakKeyDictionary
 from copy import copy
+from weakref import WeakKeyDictionary
 
 try:
     from reportlab.rl_config import _FUZZ
@@ -15,7 +13,6 @@ try:
     from pdfrw.toreportlab import makerl
     from pdfrw.buildxobj import CacheXObj
 
-    from rst2pdf.log import log
     import rst2pdf.image
     from rst2pdf.opt_imports import LazyImports
 except ImportError:
@@ -36,12 +33,14 @@ class AnyCache(object):
 # This is monkey-patched into reportlab IFF we are using
 # PDF files inside paragraphs.
 
+
 def drawImage(self, image, x, y, width=None, height=None, mask=None,
-            preserveAspectRatio=False, anchor='c'):
+              preserveAspectRatio=False, anchor='c'):
     if not isinstance(image, VectorPdf):
         return self._drawImageNotVectorPDF(image, x, y, width, height, mask,
-                  preserveAspectRatio, anchor)
+                                           preserveAspectRatio, anchor)
     image.drawOn(self, x, y, width=width, height=height)
+
 
 class VectorPdf(Flowable):
 
@@ -61,15 +60,15 @@ class VectorPdf(Flowable):
         return loader(uri)
 
     def __init__(self, filename, width=None, height=None, kind='direct',
-                                     mask=None, lazy=True, srcinfo=None):
+                 mask=None, lazy=True, srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
         self.xobj = xobj = self.load_xobj(srcinfo)
         self.imageWidth, self.imageHeight = imageWidth, imageHeight = xobj.w, xobj.h
         width = width or imageWidth
         height = height or imageHeight
-        if kind in ['bound','proportional']:
-            factor = min(float(width)/imageWidth,float(height)/imageHeight)
+        if kind in ['bound', 'proportional']:
+            factor = min(float(width) / imageWidth, float(height) / imageHeight)
             width = factor * imageWidth
             height = factor * imageHeight
         self.drawWidth = width
@@ -102,10 +101,10 @@ class VectorPdf(Flowable):
         canv.doForm(xobj_name)
         canv.restoreState()
 
-    def _restrictSize(self,aW,aH):
-        if self.drawWidth>aW+_FUZZ or self.drawHeight>aH+_FUZZ:
+    def _restrictSize(self, aW, aH):
+        if self.drawWidth > aW+_FUZZ or self.drawHeight > aH+_FUZZ:
             self._oldDrawSize = self.drawWidth, self.drawHeight
-            factor = min(float(aW)/self.drawWidth,float(aH)/self.drawHeight)
+            factor = min(float(aW) / self.drawWidth, float(aH) / self.drawHeight)
             self.drawWidth *= factor
             self.drawHeight *= factor
         return self.drawWidth, self.drawHeight
@@ -115,7 +114,7 @@ class VectorPdf(Flowable):
 
     @staticmethod
     def SleazyPDFCheck(fname):
-        return fname.split('#',1)[0].rsplit('.',1)[1].lower() == 'pdf'
+        return fname.split('#', 1)[0].rsplit('.', 1)[1].lower() == 'pdf'
 
     OldImageReader = None
 

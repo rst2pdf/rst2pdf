@@ -78,6 +78,7 @@ Mind you, the original RL implementation is a complete hack in any case:
     extremely easy to generate a unique name.
 '''
 
+
 class DottedTableOfContents(genelements.MyTableOfContents):
 
     toc_counter = [0]
@@ -119,9 +120,9 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            if reportlab.Version > '2.3': # For ReportLab post-2.3
-                style=self.getLevelStyle(left_col_level)
-            else: # For ReportLab <= 2.3
+            if reportlab.Version > '2.3':  # For ReportLab post-2.3
+                style = self.getLevelStyle(left_col_level)
+            else:  # For ReportLab <= 2.3
                 style = self.levelStyles[left_col_level]
 
             if self.dotsMinLevel >= 0 and left_col_level >= self.dotsMinLevel:
@@ -140,12 +141,13 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
             end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
-                tableData.append([Spacer(1, style.spaceBefore),])
-            tableData.append([para,])
+                tableData.append([Spacer(1, style.spaceBefore), ])
+            tableData.append([para, ])
 
         self._table = Table(tableData, colWidths=(availWidth,), style=self.tableStyle)
 
-        self.width, self.height = self._table.wrapOn(self.canv,availWidth, availHeight)
+        self.width, self.height = self._table.wrapOn(self.canv, availWidth, availHeight)
         return (self.width, self.height)
+
 
 genelements.MyTableOfContents = DottedTableOfContents
