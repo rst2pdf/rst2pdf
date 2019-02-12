@@ -5,7 +5,6 @@ import os
 import sys
 import re
 from copy import copy
-from types import (TupleType, ListType)
 from os.path import abspath, dirname, join
 
 import docutils.nodes
@@ -555,6 +554,7 @@ class StyleSheet(object):
             Orders included sheets in front
             of including sheets.
         '''
+
         # Process from end of flist
         flist.reverse()
         # Keep previously seen sheets in sheetdict
@@ -852,11 +852,11 @@ def validateCommands(commands):
             continue
 
         # See if start and stop are the right types
-        if type(command[1]) not in (ListType, TupleType):
+        if not isinstance(command[1], (list, tuple)):
             log.error('Start cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
             flag = True
 
-        if type(command[2]) not in (ListType, TupleType):
+        if not isinstance(command[2], (list, tuple)):
             log.error('Stop cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
             flag = True
 
