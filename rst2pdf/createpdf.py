@@ -224,7 +224,7 @@ class RstToPdf(object):
         # to do it only if it's requested
         if sphinx and sphinx_module:
             import sphinx.roles
-            from sphinxnodes import sphinxhandlers
+            from rst2pdf.sphinxnodes import sphinxhandlers
             self.highlightlang = highlightlang
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
