@@ -254,7 +254,7 @@ def make_hashable(what):
         return what
     except TypeError:
         if isinstance(what, dict):
-            return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+            return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
 class BaseObjects(object):
@@ -357,7 +357,7 @@ class Dispatcher(object):
             if not kw:
                 return default_loads(s)
 
-            key = tuple(sorted(kw.iteritems()))
+            key = tuple(sorted(kw.items()))
             func = cached(key)
             if func is None:
                 # Begin some real ugliness here -- just modify our instance to

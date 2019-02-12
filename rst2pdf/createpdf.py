@@ -556,7 +556,7 @@ class RstToPdf(object):
 
         if self.numbered_links:
             # Transform all links to sections so they show numbers
-            from sectnumlinks import SectNumFolder, SectRefExpander
+            from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
@@ -849,7 +849,7 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='loweralpha':
         ptext=string.lowercase[_counter%26]
     else:
-        ptext=unicode(_counter)
+        ptext=str(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -916,13 +916,11 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, unicode):
+            if not isinstance(text, str):
                 try:
-                    text = unicode(text, e.encoding)
-                except AttributeError:
-                    text = unicode(text, 'utf-8')
-                except TypeError:
-                    text = unicode(text, 'utf-8')
+                    text = text.decode(e.encoding)
+                except (AttributeError, TypeError):
+                    text = text.decode('utf-8')
 
             text = text.replace(u'###Page###', pnum)
             if '###Total###' in text:

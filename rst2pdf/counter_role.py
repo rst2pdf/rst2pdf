@@ -17,7 +17,7 @@ class CounterNode(Text):
         values[self.name]=self.value+1
 
     def astext(self):
-        return unicode(self.value)
+        return str(self.value)
 
 def counter_fn(name, rawtext, text, lineno, inliner, options={}, content=[]):
     n=CounterNode(text)

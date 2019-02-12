@@ -45,7 +45,7 @@ class SphinxHandler(NodeHandler):
             sphinx-specific handlers.
         '''
         mydict = {}
-        for key, value in self._baseclass.dispatchdict.iteritems():
+        for key, value in self._baseclass.dispatchdict.items():
             value = copy(value)
             value.sphinxmode = True
             mydict[key] = value
