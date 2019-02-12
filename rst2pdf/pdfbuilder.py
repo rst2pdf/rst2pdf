@@ -828,7 +828,7 @@ def try_parse(src):
     if sys.version_info >= (2, 5):
         src = 'from __future__ import with_statement\n' + src
 
-    if isinstance(src, unicode):
+    if not isinstance(src, bytes):
         # Non-ASCII chars will only occur in string literals
         # and comments.  If we wanted to give them to the parser
         # correctly, we'd have to find out the correct source
@@ -923,9 +923,8 @@ def setup(app):
     app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
 
-    author_texescaped = unicode(app.config.copyright)\
-                               .translate(texescape.tex_escape_map)
-    project_doc_texescaped = unicode(app.config.project + ' Documentation')\
+    author_texescaped = app.config.copyright.decode('utf-8').translate(texescape.tex_escape_map)
+    project_doc_texescaped = app.config.project + ' Documentation'.decode('utf-8')\
                                      .translate(texescape.tex_escape_map)
     app.config.pdf_documents.append((app.config.master_doc,
                                      app.config.project,
