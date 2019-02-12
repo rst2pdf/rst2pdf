@@ -36,6 +36,7 @@ will be logged.
 import inspect
 import types
 
+from six import with_metaclass
 from smartypants import smartypants
 import docutils.nodes
 
@@ -102,12 +103,11 @@ class MetaHelper(type):
             cls._classinit()
 
 
-class NodeHandler(object):
+class NodeHandler(with_metaclass(MetaHelper, object)):
     ''' NodeHandler classes are used to dispatch
        to the correct class to handle some node class
        type, via a dispatchdict in the main class.
     '''
-    __metaclass__ = MetaHelper
 
     dispatchdict = {}
 
