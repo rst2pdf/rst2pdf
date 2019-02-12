@@ -916,7 +916,8 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, str):
+            # Ensure text is unicode
+            if isinstance(text, bytes):
                 try:
                     text = text.decode(e.encoding)
                 except (AttributeError, TypeError):
