@@ -88,7 +88,7 @@ class HandleMath(rst2pdf.basenodehandler.NodeHandler, math_node):
             node.fontsize=style.fontSize
         if not node.color:
             node.color=style.textColor.rgb()
-        return [math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
+        return [rst2pdf.math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
 
     def get_text(self, client, node, replaceEnt):
         #get style for current node
