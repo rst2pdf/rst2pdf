@@ -9,10 +9,10 @@ from reportlab.platypus import *
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-from opt_imports import mathtext
+from rst2pdf.opt_imports import mathtext
 
 
-from log import log
+from rst2pdf.log import log
 
 HAS_MATPLOTLIB = mathtext is not None
 
@@ -64,7 +64,7 @@ class Math(Flowable):
             elif a in ('RIGHT',TA_RIGHT):
                 x = x + _sW
             elif a not in ('LEFT',TA_LEFT):
-                raise ValueError, "Bad hAlign value "+str(a)
+                raise ValueError("Bad hAlign value "+str(a))
         height = 0
         if HAS_MATPLOTLIB:
             global fonts
