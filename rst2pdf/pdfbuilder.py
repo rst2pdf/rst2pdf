@@ -28,8 +28,13 @@ from pprint import pprint
 from copy import copy, deepcopy
 from xml.sax.saxutils import unescape, escape
 from traceback import print_exc
-from cStringIO import StringIO
-from urlparse import urljoin, urlparse, urlunparse
+
+if six.PY2:
+    from cStringIO import StringIO
+    from urllib.parse import urljoin, urlparse, urlunparse
+else:
+    from io import StringIO
+    from urllib.parse import urljoin, urlparse, urlunparse
 
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
