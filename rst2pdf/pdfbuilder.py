@@ -32,7 +32,7 @@ from traceback import print_exc
 
 if six.PY2:
     from cStringIO import StringIO
-    from urllib.parse import urljoin, urlparse, urlunparse
+    from urlparse import urljoin, urlparse, urlunparse
 else:
     from io import StringIO
     from urllib.parse import urljoin, urlparse, urlunparse
@@ -51,7 +51,7 @@ from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
-from sphinx.util import ustrftime, texescape
+from sphinx.util import ustrftime
 from sphinx.environment import NoUri
 from sphinx.locale import admonitionlabels, versionlabels
 if sphinx.__version__ >= '1.':
@@ -224,7 +224,7 @@ class PDFBuilder(Builder):
         # html_domain_indices can be False/True or a list of index names
         indices_config = self.config.pdf_domain_indices
         if indices_config and hasattr(self.env, 'domains'):
-            for domain in self.env.domains.itervalues():
+            for domain in self.env.domains.values():
                 for indexcls in domain.indices:
                     indexname = '%s-%s' % (domain.name, indexcls.name)
                     if isinstance(indices_config, list):
@@ -923,13 +923,11 @@ def setup(app):
     app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
 
-    author_texescaped = app.config.copyright.decode('utf-8').translate(texescape.tex_escape_map)
-    project_doc_texescaped = app.config.project + ' Documentation'.decode('utf-8')\
-                                     .translate(texescape.tex_escape_map)
+    project_doc = app.config.project + ' Documentation'
     app.config.pdf_documents.append((app.config.master_doc,
                                      app.config.project,
-                                     project_doc_texescaped,
-                                     author_texescaped,
+                                     project_doc,
+                                     app.config.copyright,
                                      'manual'))
 
     return {
