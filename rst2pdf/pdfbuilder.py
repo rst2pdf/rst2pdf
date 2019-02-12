@@ -15,10 +15,13 @@
 
 import six
 import logging
-try:
-    import parser
-except ImportError:
-    # parser is not available on Jython
+if six.PY2:
+    try:
+        import parser
+    except ImportError:
+        # parser is not available on Jython
+        parser = None
+else:
     parser = None
 import re
 import sys
