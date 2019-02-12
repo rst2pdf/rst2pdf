@@ -13,6 +13,7 @@
     :license: BSD, see LICENSE for details.
 """
 
+import six
 import logging
 try:
     import parser
