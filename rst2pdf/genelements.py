@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
 
 # See LICENSE.txt for licensing terms
 
@@ -130,7 +127,7 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
 
         # colWidths are in no specific unit, really. Maybe ems.
         # Convert them to %
-        colWidths=map(int, colWidths)
+        colWidths=[int(x) for x in colWidths]
         tot=sum(colWidths)
         colWidths=["%s%%"%((100.*w)/tot) for w in colWidths]
 
@@ -314,8 +311,7 @@ class HandleAuthor(NodeHandler, docutils.nodes.author):
             fb = client.gather_pdftext(node)
 
             t_style=TableStyle(client.styles['field-list'].commands)
-            colWidths=map(client.styles.adjustUnits,
-                client.styles['field-list'].colWidths)
+            colWidths=[client.styles.adjustUnits(x) for x in client.styles['field-list'].colWidths]
 
             node.elements = [Table(
                 [[Paragraph(client.text_for_label("author", style)+":",
@@ -346,7 +342,7 @@ class HandleFList(NodeHandler):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = [client.styles.adjustUnits(x) for x in colWidths]
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                     Paragraph(fb, style)]],
@@ -366,7 +362,7 @@ class HandleAddress(HandleFList, docutils.nodes.address):
         t_style=TableStyle(client.styles['field-list'].commands)
         colWidths=client.styles['field-list'].colWidths
         if self.adjustwidths:
-            colWidths = map(client.styles.adjustUnits, colWidths)
+            colWidths = [client.styles.adjustUnits(x) for x in colWidths]
         label=client.text_for_label(self.labeltext, style)+":"
         t = self.TableType([[Paragraph(label, style=client.styles['fieldname']),
                              XPreformatted(fb, style)]
@@ -598,7 +594,6 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         t_style = TableStyle(style.commands)
         # The -3 here is to compensate for padding, 0 doesn't work :-(
         t_style._cmds.extend([
-            #["GRID", [ 0, 0 ], [ -1, -1 ], .25, "black" ],
             ["BOTTOMPADDING", [ 0, 0 ], [ -1, -1 ], -3 ]]
         )
         if extra_space >0:
@@ -609,8 +604,6 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # The bullet is smaller, move down the bullet
             sbb = -extra_space
 
-        #colWidths = map(client.styles.adjustUnits,
-            #client.styles['item_list'].colWidths)
         colWidths = getattr(style,'colWidths',[])
         while len(colWidths) < 2:
             colWidths.append(client.styles['item_list'].colWidths[len(colWidths)])
