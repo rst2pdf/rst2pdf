@@ -136,8 +136,7 @@ class PDFBuilder(Builder):
                 docwriter.write(doctree, destination)
                 self.spinx_logger.info("done")
             except Exception as e:
-                log.error(str(e))
-                print_exc()
+                log.exception(e)
                 self.spinx_logger.info(red("FAILED"))
 
     def init_document_data(self):
