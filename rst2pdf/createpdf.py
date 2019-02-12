@@ -426,10 +426,10 @@ class RstToPdf(object):
         elif node.parent.get('enumtype') == 'upperroman':
             b = toRoman(node.parent.children.index(node) + start).upper() + '.'
         elif node.parent.get('enumtype') == 'loweralpha':
-            b = string.lowercase[node.parent.children.index(node)
+            b = 'abcdefghijklmnopqrstuvwxyz'[node.parent.children.index(node)
                 + start - 1] + '.'
         elif node.parent.get('enumtype') == 'upperalpha':
-            b = string.uppercase[node.parent.children.index(node)
+            b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[node.parent.children.index(node)
                 + start - 1] + '.'
         else:
             log.critical("Unknown kind of list_item %s [%s]",
@@ -846,9 +846,9 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='roman':
         ptext=toRoman(_counter).upper()
     elif _counterStyle=='alpha':
-        ptext=string.uppercase[_counter%26]
+        ptext='ABCDEFGHIJKLMNOPQRSTUVWXYZ'[_counter%26]
     elif _counterStyle=='loweralpha':
-        ptext=string.lowercase[_counter%26]
+        ptext='abcdefghijklmnopqrstuvwxyz'[_counter%26]
     else:
         ptext=str(_counter)
     return ptext
