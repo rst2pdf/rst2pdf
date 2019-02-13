@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
-
 # See LICENSE.txt for licensing terms
 
 # Some fragments of code are copied from Reportlab under this license:
@@ -40,6 +36,7 @@
 
 
 __docformat__ = 'reStructuredText'
+from importlib import import_module
 import six
 # Import Psyco if available
 from .opt_imports import psyco
@@ -1602,13 +1599,11 @@ def add_extensions(options):
         firstname = path_given and modname or (modname + '_r2p')
         try:
             try:
-                module = __import__(firstname, globals(), locals())
+                module = import_module(firstname)
             except ImportError as e:
-                if firstname != str(e).split()[-1]:
-                    raise
-                module = __import__(modname, globals(), locals())
+                module = import_module(modname)
         except ImportError as e:
-            if str(e).split()[-1] not in [firstname, modname]:
+            if str(e).split()[-1].replace("'", '') not in [firstname, modname]:
                 raise
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %
