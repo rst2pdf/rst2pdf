@@ -33,11 +33,10 @@ from copy import copy, deepcopy
 from xml.sax.saxutils import unescape, escape
 from traceback import print_exc
 
+from io import BytesIO
 if six.PY2:
-    from cStringIO import StringIO
     from urlparse import urljoin, urlparse, urlunparse
 else:
-    from io import StringIO
     from urllib.parse import urljoin, urlparse, urlunparse
 
 from pygments.lexers import get_lexer_by_name, guess_lexer
@@ -611,7 +610,7 @@ class PDFWriter(writers.Writer):
             cover_tree = docutils.core.publish_doctree(cover_text)
             self.document.insert(0, cover_tree)
 
-        sio=StringIO()
+        sio=BytesIO()
 
         if self.invariant:
             createpdf.patch_PDFDate()
