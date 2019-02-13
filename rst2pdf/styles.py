@@ -226,7 +226,7 @@ class StyleSheet(object):
             for font in embedded:
                 try:
                     # Just a font name, try to embed it
-                    if isinstance(font, unicode):
+                    if isinstance(font, six.string_types):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:
@@ -401,9 +401,6 @@ class StyleSheet(object):
                     # Handle color references by name
                     if key == 'color' or key.endswith('Color') and style[key]:
                         style[key] = formatColor(style[key])
-
-                    # Yet another workaround for the unicode bug in
-                    # reportlab's toColor
                     elif key == 'commands':
                         style[key] = validateCommands(style[key])
 
@@ -425,8 +422,7 @@ class StyleSheet(object):
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
 
-                    # Make keys str instead of unicode (required by reportlab)
-                    sdict[str(key)] = style[key]
+                    sdict[key] = style[key]
                     sdict['name'] = skey
                 # If the style already exists, update it
                 if skey in self.stylesheet:
@@ -887,8 +883,7 @@ def validateCommands(commands):
             elif typ == "number":
                 pass
             elif typ == "string":
-                # Force string, not unicode
-                command[3+pos] = str(arg)
+                command[3+pos] = arg
             else:
                 log.error("This should never happen: wrong type %s", typ)
 
