@@ -199,9 +199,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
     def gather_elements(self, client, node, style):
         # Special cases: (Not sure this is right ;-)
         if isinstance(node.parent, docutils.nodes.document):
-            #node.elements = [Paragraph(client.gen_pdftext(node),
-                                        #client.styles['title'])]
-            # The visible output is now done by the cover template
+            # The visible output is done by the cover template
             node.elements = []
             client.doc_title = node.rawsource
             client.doc_title_clean = node.astext().strip()
@@ -226,11 +224,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                 snum = fch.astext()
             else:
                 snum = None
-            key = node.get('refid')
-            maxdepth=4
-            if reportlab.Version > '2.1':
-                maxdepth=6
-
+            maxdepth=6
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id=(node.parent.get('ids', [None]) or [None])[0]+u'-'+str(id(node))
             node.elements = [ Heading(text,
@@ -882,7 +876,6 @@ class HandleOddEven (NodeHandler, OddEvenNode):
     def gather_elements(self, client, node, style):
         odd=[]
         even=[]
-        #from pudb import set_trace; set_trace()
         if node.children:
             if isinstance (node.children[0], docutils.nodes.paragraph):
                 if node.children[0].get('classes'):

@@ -112,9 +112,8 @@ class Heading(Paragraph):
                 self.canv.sectNum = self.snum
             else:
                 self.canv.sectNum = ""
-
-        self.canv.addOutlineEntry(self.stext.encode('utf-8','replace'),
-                                  self.parent_id.encode('utf-8','replace'),
+        self.canv.addOutlineEntry(self.stext,
+                                  self.parent_id,
                                   int(self.level), False)
         Paragraph.draw(self)
 

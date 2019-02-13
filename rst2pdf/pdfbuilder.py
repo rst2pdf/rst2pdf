@@ -203,7 +203,6 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
-            #from pudb import set_trace; set_trace()
             t=copy(self.env.indexentries)
             try:
                 self.env.indexentries={docname:self.env.indexentries[docname+'-gen']}
@@ -389,7 +388,6 @@ def genindex_nodes(genindexentries):
     output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
 
     for key, entries in genindexentries:
-        #from pudb import set_trace; set_trace()
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
         for entryname, entryvalue in entries:
             links, subitems = entryvalue[0:2]

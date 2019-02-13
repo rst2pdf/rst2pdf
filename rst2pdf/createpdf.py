@@ -393,7 +393,6 @@ class RstToPdf(object):
         if 'float' in style.__dict__:
             style = None # Don't pass floating styles to children!
         for n in node.children:
-            # import pdb; pdb.set_trace()
             r.extend(self.gen_elements(n, style=style))
         return r
 
@@ -452,8 +451,6 @@ class RstToPdf(object):
 
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
-
-        #from pudb import set_trace; set_trace()
 
         for y in range(0, len(rows)):
             for x in range(len(rows[y])-1, -1, -1):
@@ -647,7 +644,6 @@ class RstToPdf(object):
         # Handle totally empty documents (Issue #547)
         if not elements:
             elements.append(Paragraph("", style=self.styles['base']))
-
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
             if not isinstance(elements[-1],UnhappyOnce):
