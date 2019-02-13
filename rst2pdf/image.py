@@ -213,10 +213,7 @@ class MyImage (Flowable):
         filename, extension, options = self.split_uri(uri)
 
         if '*' in filename:
-            preferred=['gif','jpg','png']
-            if SVGImage.available():
-                preferred.append('svg')
-            preferred.append('pdf')
+            preferred=['gif','jpg','png', 'svg', 'pdf']
 
             # Find out what images are available
             available = glob.glob(filename)
@@ -243,11 +240,8 @@ class MyImage (Flowable):
             filename = missing
 
         if extension in ['svg','svgz']:
-            if SVGImage.available():
-                log.info('Backend for %s is SVGIMage'%filename)
-                backend=SVGImage
-            else:
-                filename = missing
+            log.info('Backend for %s is SVGIMage'%filename)
+            backend=SVGImage
 
         elif extension in ['pdf']:
             if VectorPdf is not None and filename is not missing:
@@ -310,7 +304,7 @@ class MyImage (Flowable):
         kind = 'direct'
         xdpi, ydpi = client.styles.def_dpi, client.styles.def_dpi
         extension = imgname.split('.')[-1].lower()
-        if extension in ['svg','svgz'] and SVGImage.available():
+        if extension in ['svg','svgz']:
             iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72

@@ -7,14 +7,9 @@ from reportlab.platypus import Flowable, Paragraph
 from .log import log
 from .opt_imports import LazyImports
 
+from svglib.svglib import svg2rlg
 
 class SVGImage(Flowable):
-
-    @classmethod
-    def available(self):
-        if LazyImports.svg2rlg:
-            return True
-        return False
 
     def __init__(self,
                  filename,
@@ -26,23 +21,17 @@ class SVGImage(Flowable):
                  srcinfo=None):
         Flowable.__init__(self)
         self._kind = kind
-        # Prefer svg2rlg for SVG, as it works better
-        if LazyImports.svg2rlg:
-            self._mode = 'svg2rlg'
-            self.doc = LazyImports.svg2rlg.svg2rlg(filename)
-            self.imageWidth = width
-            self.imageHeight = height
-            x1, y1, x2, y2 = self.doc.getBounds()
-            # Actually, svg2rlg's getBounds seems broken.
-            self._w, self._h = x2, y2
-            if not self.imageWidth:
-                self.imageWidth = self._w
-            if not self.imageHeight:
-                self.imageHeight = self._h
-        else:
-            self._mode = None
-            log.error("SVG support not enabled,"
-                      " please install svg2rlg.")
+        self._mode = 'svg2rlg'
+        self.doc = svg2rlg(filename)
+        self.imageWidth = width
+        self.imageHeight = height
+        x1, y1, x2, y2 = self.doc.getBounds()
+        # Actually, svg2rlg's getBounds seems broken.
+        self._w, self._h = x2, y2
+        if not self.imageWidth:
+            self.imageWidth = self._w
+        if not self.imageHeight:
+            self.imageHeight = self._h
         self.__ratio = float(self.imageWidth)/self.imageHeight
         if kind in ['direct', 'absolute']:
             self.drawWidth = width or self.imageWidth
