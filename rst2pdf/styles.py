@@ -739,7 +739,7 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
         return None
 
     v = str(v)
-    length = re.split(r'(-?[0-9.]*)', v)
+    length = re.split(r'(-?[0-9.]+)', v)
     n = length[1]
     u = default_unit
     if len(length) == 3 and length[2]:

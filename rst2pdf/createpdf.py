@@ -1088,7 +1088,6 @@ class FancyPage(PageTemplate):
         self.fy = styles.bm
         self.th = styles.ph - styles.tm - styles.bm - self.hh \
                     - self.fh - styles.ts - styles.bs
-
         # Adjust gutter margins
         if self.is_left(doc.page): # Left page
             x1 = styles.lm
