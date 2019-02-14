@@ -247,7 +247,10 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     if info.changed and updatemd5:
         six.print_("Updating MD5 file")
         f = open(md5path, 'wb')
-        f.write(str(info))
+        if six.PY2:
+            f.write(str(info))
+        else:
+            f.write(str(info).encode('utf-8'))
         f.close()
 
     errorCodes = ['good', 'bad', 'fail', 'unknown']
