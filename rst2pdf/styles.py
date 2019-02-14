@@ -98,16 +98,18 @@ class StyleSheet(object):
         if font_path is None:
             font_path = []
         font_path += ['.', os.path.join(self.PATH, 'fonts')]
-        self.FontSearchPath = map(os.path.expanduser, font_path)
+        self.FontSearchPath = list(map(os.path.expanduser, font_path))
 
         if style_path is None:
             style_path = []
         style_path += [
             '.', os.path.join(self.PATH, 'styles'), '~/.rst2pdf/styles'
         ]
-        self.StyleSearchPath = map(os.path.expanduser, style_path)
-        self.FontSearchPath = list(set(self.FontSearchPath))
-        self.StyleSearchPath = list(set(self.StyleSearchPath))
+        self.StyleSearchPath = list(map(os.path.expanduser, style_path))
+
+        # Remove duplicates but preserve order. Not very efficient, but these are short lists
+        self.FontSearchPath = [x for (i,x) in enumerate(self.FontSearchPath) if self.FontSearchPath.index(x) == i]
+        self.StyleSearchPath = [x for (i,x) in enumerate(self.StyleSearchPath) if self.StyleSearchPath.index(x) == i]
 
         log.info('FontPath:%s' % self.FontSearchPath)
         log.info('StylePath:%s' % self.StyleSearchPath)
