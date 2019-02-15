@@ -173,7 +173,6 @@ def findFont(fname):
 def findTTFont(fname):
 
     def get_family(query):
-        import pdb; pdb.set_trace()
         data = os.popen("fc-match \"%s\""%query, "r").read()
         for line in data.splitlines():
             line = line.strip()
