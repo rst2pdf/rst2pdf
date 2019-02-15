@@ -66,12 +66,13 @@ def loadFonts():
             '''Find out how to process these'''
             try:
                 font = TTFontFile(ttf)
-            except TTFError:
+            except TTFError as e:
                 continue
 
-            #print ttf, font.name, font.fullName, font.styleName, font.familyName
             family=font.familyName.lower()
             fontName=font.name
+            if isinstance(fontName, bytes):
+                fontName = fontName.decode('utf-8')
             baseName = os.path.basename(ttf)[:-4]
             fullName=font.fullName
 
@@ -172,6 +173,7 @@ def findFont(fname):
 def findTTFont(fname):
 
     def get_family(query):
+        import pdb; pdb.set_trace()
         data = os.popen("fc-match \"%s\""%query, "r").read()
         for line in data.splitlines():
             line = line.strip()
