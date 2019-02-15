@@ -135,8 +135,8 @@ class FancyHeading(MyImage, Heading):
             else:
                 canv.sectNum = ""
 
-        canv.addOutlineEntry(self.stext.encode('utf-8','replace'),
-                                  self.parent_id.encode('utf-8','replace'),
+        canv.addOutlineEntry(self.stext,
+                                  self.parent_id,
                                   int(self.level), False)
 
         # And let MyImage do all the drawing
