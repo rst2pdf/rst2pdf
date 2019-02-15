@@ -128,7 +128,10 @@ class Preprocess(object):
         self.widthcount = widthcount
 
         name = sourcef.name
-        source = sourcef.read().replace('\r\n', '\n').replace('\r', '\n')
+        source = sourcef.read()
+        if isinstance(source, bytes):
+            source = source.decode('utf8')
+        source = source.replace('\r\n', '\n').replace('\r', '\n')
 
         # Make the determination if an include file is a stylesheet or
         # another restructured text file, and handle stylesheets appropriately.
