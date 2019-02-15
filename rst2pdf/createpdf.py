@@ -1413,7 +1413,7 @@ def main(_args=None):
         filename = args[0]
         options.basedir=os.path.dirname(os.path.abspath(filename))
         try:
-            infile = open(filename)
+            infile = open(filename, 'rb')
             close_infile = True
         except IOError as e:
             log.error(e)
