@@ -6,6 +6,7 @@ before_script:
  - pip3 install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 
 test:
+  image: python:3.6
   script:
   - nosetests -i regulartest -i sphinxtest --with-xunit
   artifacts:
