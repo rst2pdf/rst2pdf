@@ -41,7 +41,7 @@ rawhtmlsupport_require = ['xhtml2pdf']
 setup(
     name="rst2pdf",
     version=version,
-    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*',
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data=dict(rst2pdf=['styles/*.json',
 	'styles/*.style',
