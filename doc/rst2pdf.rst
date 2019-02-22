@@ -160,7 +160,7 @@ The possible values are:
                         cover.tmpl
 
 --use-floating-images
-                        Makes images with :aling: attribute work more like in
+                        Makes images with :align: attribute work more like in
                         rst2html. Default: False
 
 --use-numbered-links  When using numbered sections, adds the numbers to all
