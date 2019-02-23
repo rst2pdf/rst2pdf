@@ -2,6 +2,8 @@
 {next}
 ------
 
+* Allow specifying frame padding in stylesheets (Issue #753)
+
 0.94 (2019-01-24)
 -----------------
 

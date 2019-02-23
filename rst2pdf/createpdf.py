@@ -568,7 +568,6 @@ class RstToPdf(object):
             sce.apply()
 
         elements = self.gen_elements(self.doctree)
-
         # Find cover template, save it in cover_file
         def find_cover(name):
             cover_path=[self.basedir, os.path.expanduser('~/.rst2pdf'),
@@ -1107,12 +1106,19 @@ class FancyPage(PageTemplate):
 
         self.frames = []
         for frame in self.template['frames']:
+            frame = frame[:]
+            while len(frame) < 8:
+                frame.append(6)
             self.frames.append(SmartFrame(self,
                 styles.adjustUnits(frame[0], self.tw) + x1,
                 styles.adjustUnits(frame[1], self.th) + y1,
                 styles.adjustUnits(frame[2], self.tw),
                 styles.adjustUnits(frame[3], self.th),
-                    showBoundary=self.show_frame))
+                leftPadding=styles.adjustUnits(frame[4], self.tw),
+                bottomPadding=styles.adjustUnits(frame[5], self.th),
+                rightPadding=styles.adjustUnits(frame[6], self.tw),
+                topPadding=styles.adjustUnits(frame[7], self.th),
+                showBoundary=self.show_frame))
         canv.firstSect = True
         canv._pagenum = doc.page
         for frame in self.frames:
