@@ -1,0 +1,21 @@
+.. image:: images/biohazard.png
+    :width: 8cm
+    :height: 9cm
+
+.. raw:: PageBreak padbottom
+
+.. image:: images/biohazard.png
+    :width: 9cm
+    :height: 8cm
+
+.. raw:: PageBreak padright
+
+.. image:: images/biohazard.png
+    :width: 8cm
+    :height: 9cm
+
+.. raw:: PageBreak padtop
+
+.. image:: images/biohazard.png
+    :width: 9cm
+    :height: 8cm
