@@ -8,5 +8,5 @@ reportlab
 six
 smartypants
 sphinx<1.80
-svg2rlg
+svglib
 xhtml2pdf
