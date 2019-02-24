@@ -2,6 +2,8 @@
 {next}
 ------
 
+* Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
+
 0.94 (2019-01-24)
 -----------------
 
