@@ -1108,6 +1108,8 @@ class FancyPage(PageTemplate):
         for frame in self.template['frames']:
             frame = frame[:]
             while len(frame) < 8:
+                # This is the default in SmartFrame. At some point in the future we
+                # may want to change this to 0.
                 frame.append(6)
             self.frames.append(SmartFrame(self,
                 styles.adjustUnits(frame[0], self.tw) + x1,

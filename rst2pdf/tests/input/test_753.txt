@@ -2,19 +2,25 @@
     :width: 8cm
     :height: 9cm
 
-.. raw:: PageBreak padbottom
+.. raw:: pdf
+
+   PageBreak padbottom
 
 .. image:: images/biohazard.png
     :width: 9cm
     :height: 8cm
 
-.. raw:: PageBreak padright
+.. raw:: pdf
+
+   PageBreak padright
 
 .. image:: images/biohazard.png
     :width: 8cm
     :height: 9cm
 
-.. raw:: PageBreak padtop
+.. raw:: pdf
+
+   PageBreak padtop
 
 .. image:: images/biohazard.png
     :width: 9cm
