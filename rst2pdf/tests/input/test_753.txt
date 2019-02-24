@@ -1,3 +1,14 @@
+In the following pages, the image should touch all the borders except for, respectively:
+
+* left padding
+* bottom padding
+* right padding
+* top padding
+
+.. raw:: pdf
+
+   PageBreak padleft
+
 .. image:: images/biohazard.png
     :width: 8cm
     :height: 9cm
