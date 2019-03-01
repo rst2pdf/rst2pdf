@@ -1531,7 +1531,9 @@ stylesheet already has 3 of them::
 A page template has a name (oneColumn, twoColumn), some options, and a list of frames.
 A frame is a list containing this::
 
-    [ left position, bottom position, width, height ]
+    [ left position, bottom position, width, height, left padding, bottom padding, right padding, top padding]
+
+All the padding values are optional and default to 6 points.
 
 For example, this defines a frame "at the very left", "at the very bottom", "a bit less than half
 a page wide" and "as tall as possible"::

@@ -1,0 +1,33 @@
+pageSetup:
+    width: 9cm
+    height: 9cm
+    margin-top: 0cm
+    margin-bottom: 0cm
+    margin-left: 0cm
+    margin-right: 0cm
+    margin-gutter: 0cm
+    spacing-header: 0cm
+    spacing-footer: 0cm
+    firstTemplate: padleft
+
+pageTemplates:
+    padleft:
+        frames: []
+            [0cm, 0cm, 100%, 100%,1cm,0cm,0cm,0cm]
+        showHeader : false
+        showFooter : false
+    padbottom:
+        frames: []
+            [0cm, 0cm, 100%, 100%,0cm,1cm,0cm,0cm]
+        showHeader : false
+        showFooter : false
+    padright:
+        frames: []
+            [0cm, 0cm, 100%, 100%,0cm,0cm,1cm,0cm]
+        showHeader : false
+        showFooter : false
+    padtop:
+        frames: []
+            [0cm, 0cm, 100%, 100%,0cm,0cm,0cm,1cm]
+        showHeader : false
+        showFooter : false
