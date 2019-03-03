@@ -2,8 +2,12 @@
 {next}
 ------
 
+
+0.95 (2019-12-30)
+-----------------
+
+* Fixed: Allow the code-block's language attribute to be optional (Issue #823)
 * Add support for Inkscape 1.x in the inkscape extension (Issue #821)
-* Fixed: Allow the code-block's language attribute to be optional (Issue #819)
 * Fixed: Add Python 3.6 and 3.7 to the setup file  (Issue #814)
 * Fixed: Support the preprocess extension on Python 3 (Issue #811)
 * Fixed: Fix findfonts on Windows in Python 3 (Issue #807)
@@ -16,8 +20,8 @@
 * Remove support for Psyco (Issue #756)
 * Remove support for PythonMagick, GFX and SWFTools (Issue #756)
 * Allow specifying frame padding in stylesheets (Issue #753)
+* Added: Python 3 is now supported (Issue #744)
 * Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
-
 
 0.94.1 (2019-05-25)
 -------------------
