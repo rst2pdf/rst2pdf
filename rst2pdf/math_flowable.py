@@ -5,14 +5,16 @@ import tempfile
 import os
 import re
 
+import six
+
 from reportlab.platypus import *
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-from opt_imports import mathtext
+from rst2pdf.opt_imports import mathtext
 
 
-from log import log
+from rst2pdf.log import log
 
 HAS_MATPLOTLIB = mathtext is not None
 
@@ -64,7 +66,7 @@ class Math(Flowable):
             elif a in ('RIGHT',TA_RIGHT):
                 x = x + _sW
             elif a not in ('LEFT',TA_LEFT):
-                raise ValueError, "Bad hAlign value "+str(a)
+                raise ValueError("Bad hAlign value "+str(a))
         height = 0
         if HAS_MATPLOTLIB:
             global fonts
@@ -82,7 +84,10 @@ class Math(Flowable):
                     col_conv=ColorConverter()
                     rgb_color=col_conv.to_rgb(self.color)
                     canv.setFillColorRGB(rgb_color[0],rgb_color[1],rgb_color[2])
-                    canv.drawString(ox, oy, unichr(num))
+                    if six.PY2:
+                        canv.drawString(ox, oy, unichr(num))
+                    else:
+                        canv.drawString(ox, oy, chr(num))
 
                 canv.setLineWidth(0)
                 canv.setDash([])
@@ -147,15 +152,22 @@ class Math(Flowable):
             draw = ImageDraw.Draw(img)
             for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
                 font = ImageFont.truetype(fontname, int(fontsize*scale))
-                tw, th = draw.textsize(unichr(num), font=font)
+                if six.PY2:
+                    tw, th = draw.textsize(unichr(num), font=font)
+                else:
+                    tw, th = draw.textsize(chr(num), font=font)
                 # No, I don't understand why that 4 is there.
                 # As we used to say in the pure math
                 # department, that was a numerical solution.
                 col_conv=ColorConverter()
                 fc=col_conv.to_rgb(self.color)
                 rgb_color=(int(fc[0]*255),int(fc[1]*255),int(fc[2]*255))
-                draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
-                           unichr(num), font=font,fill=rgb_color)
+                if six.PY2:
+                    draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
+                            unichr(num), font=font,fill=rgb_color)
+                else:
+                    draw.text((ox*scale, (height - oy - fontsize + 4)*scale),
+                            chr(num), font=font,fill=rgb_color)
             for ox, oy, w, h in rects:
                 x1 = ox*scale
                 x2 = x1 + w*scale

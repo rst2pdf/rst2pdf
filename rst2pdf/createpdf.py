@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
-
 # See LICENSE.txt for licensing terms
 
 # Some fragments of code are copied from Reportlab under this license:
@@ -40,6 +36,7 @@
 
 
 __docformat__ = 'reStructuredText'
+from importlib import import_module
 import six
 # Import Psyco if available
 from .opt_imports import psyco
@@ -224,14 +221,14 @@ class RstToPdf(object):
         # to do it only if it's requested
         if sphinx and sphinx_module:
             import sphinx.roles
-            from sphinxnodes import sphinxhandlers
+            from rst2pdf.sphinxnodes import sphinxhandlers
             self.highlightlang = highlightlang
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', pygments_code_block_directive.code_block_directive)
             directives.register_directive('code', pygments_code_block_directive.code_block_directive)
-            import math_directive
+            import rst2pdf.math_directive
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
@@ -396,7 +393,6 @@ class RstToPdf(object):
         if 'float' in style.__dict__:
             style = None # Don't pass floating styles to children!
         for n in node.children:
-            # import pdb; pdb.set_trace()
             r.extend(self.gen_elements(n, style=style))
         return r
 
@@ -426,10 +422,10 @@ class RstToPdf(object):
         elif node.parent.get('enumtype') == 'upperroman':
             b = toRoman(node.parent.children.index(node) + start).upper() + '.'
         elif node.parent.get('enumtype') == 'loweralpha':
-            b = string.lowercase[node.parent.children.index(node)
+            b = 'abcdefghijklmnopqrstuvwxyz'[node.parent.children.index(node)
                 + start - 1] + '.'
         elif node.parent.get('enumtype') == 'upperalpha':
-            b = string.uppercase[node.parent.children.index(node)
+            b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[node.parent.children.index(node)
                 + start - 1] + '.'
         else:
             log.critical("Unknown kind of list_item %s [%s]",
@@ -455,8 +451,6 @@ class RstToPdf(object):
 
         # If there is a multicol cell, we need to insert Continuation Cells
         # to make all rows the same length
-
-        #from pudb import set_trace; set_trace()
 
         for y in range(0, len(rows)):
             for x in range(len(rows[y])-1, -1, -1):
@@ -557,7 +551,7 @@ class RstToPdf(object):
 
         if self.numbered_links:
             # Transform all links to sections so they show numbers
-            from sectnumlinks import SectNumFolder, SectRefExpander
+            from .sectnumlinks import SectNumFolder, SectRefExpander
             snf = SectNumFolder(self.doctree)
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
@@ -650,7 +644,6 @@ class RstToPdf(object):
         # Handle totally empty documents (Issue #547)
         if not elements:
             elements.append(Paragraph("", style=self.styles['base']))
-
         if getattr(self, 'mustMultiBuild', False):
             # Force a multibuild pass
             if not isinstance(elements[-1],UnhappyOnce):
@@ -846,11 +839,11 @@ def setPageCounter(counter=None, style=None):
     elif _counterStyle=='roman':
         ptext=toRoman(_counter).upper()
     elif _counterStyle=='alpha':
-        ptext=string.uppercase[_counter%26]
+        ptext='ABCDEFGHIJKLMNOPQRSTUVWXYZ'[_counter%26]
     elif _counterStyle=='loweralpha':
-        ptext=string.lowercase[_counter%26]
+        ptext='abcdefghijklmnopqrstuvwxyz'[_counter%26]
     else:
-        ptext=unicode(_counter)
+        ptext=str(_counter)
     return ptext
 
 class MyContainer(_Container, Flowable):
@@ -917,13 +910,12 @@ class HeaderOrFooter(object):
         pnum=setPageCounter()
 
         def replace(text):
-            if not isinstance(text, unicode):
+            # Ensure text is unicode
+            if isinstance(text, bytes):
                 try:
-                    text = unicode(text, e.encoding)
-                except AttributeError:
-                    text = unicode(text, 'utf-8')
-                except TypeError:
-                    text = unicode(text, 'utf-8')
+                    text = text.decode(e.encoding)
+                except (AttributeError, TypeError):
+                    text = text.decode('utf-8')
 
             text = text.replace(u'###Page###', pnum)
             if '###Total###' in text:
@@ -1092,7 +1084,6 @@ class FancyPage(PageTemplate):
         self.fy = styles.bm
         self.th = styles.ph - styles.tm - styles.bm - self.hh \
                     - self.fh - styles.ts - styles.bs
-
         # Adjust gutter margins
         if self.is_left(doc.page): # Left page
             x1 = styles.lm
@@ -1422,7 +1413,7 @@ def main(_args=None):
         filename = args[0]
         options.basedir=os.path.dirname(os.path.abspath(filename))
         try:
-            infile = open(filename)
+            infile = open(filename, 'rb')
             close_infile = True
         except IOError as e:
             log.error(e)
@@ -1603,13 +1594,11 @@ def add_extensions(options):
         firstname = path_given and modname or (modname + '_r2p')
         try:
             try:
-                module = __import__(firstname, globals(), locals())
+                module = import_module(firstname)
             except ImportError as e:
-                if firstname != str(e).split()[-1]:
-                    raise
-                module = __import__(modname, globals(), locals())
+                module = import_module(modname)
         except ImportError as e:
-            if str(e).split()[-1] not in [firstname, modname]:
+            if str(e).split()[-1].replace("'", '') not in [firstname, modname]:
                 raise
             raise SystemExit('\nError: Could not find module %s '
                                 'in sys.path [\n    %s\n]\nExiting...\n' %

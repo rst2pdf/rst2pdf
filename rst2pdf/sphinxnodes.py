@@ -20,14 +20,14 @@ are combined into the instantiated object.
 
 from copy import copy
 
-from log import nodeid, log
-from flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
-from image import MyImage, VectorPdf
+from rst2pdf.log import nodeid, log
+from rst2pdf.flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
+from rst2pdf.image import MyImage, VectorPdf
 
-from opt_imports import Paragraph, sphinx
+from rst2pdf.opt_imports import Paragraph, sphinx
 
-from nodehandlers import NodeHandler, FontHandler, HandleEmphasis
-import math_flowable
+from rst2pdf.nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+from rst2pdf import math_flowable
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 import docutils
@@ -45,7 +45,7 @@ class SphinxHandler(NodeHandler):
             sphinx-specific handlers.
         '''
         mydict = {}
-        for key, value in self._baseclass.dispatchdict.iteritems():
+        for key, value in self._baseclass.dispatchdict.items():
             value = copy(value)
             value.sphinxmode = True
             mydict[key] = value

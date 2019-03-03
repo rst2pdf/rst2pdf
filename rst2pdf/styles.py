@@ -5,7 +5,6 @@ import os
 import sys
 import re
 from copy import copy
-from types import (TupleType, ListType)
 from os.path import abspath, dirname, join
 
 import docutils.nodes
@@ -99,16 +98,18 @@ class StyleSheet(object):
         if font_path is None:
             font_path = []
         font_path += ['.', os.path.join(self.PATH, 'fonts')]
-        self.FontSearchPath = map(os.path.expanduser, font_path)
+        self.FontSearchPath = list(map(os.path.expanduser, font_path))
 
         if style_path is None:
             style_path = []
         style_path += [
             '.', os.path.join(self.PATH, 'styles'), '~/.rst2pdf/styles'
         ]
-        self.StyleSearchPath = map(os.path.expanduser, style_path)
-        self.FontSearchPath = list(set(self.FontSearchPath))
-        self.StyleSearchPath = list(set(self.StyleSearchPath))
+        self.StyleSearchPath = list(map(os.path.expanduser, style_path))
+
+        # Remove duplicates but preserve order. Not very efficient, but these are short lists
+        self.FontSearchPath = [x for (i,x) in enumerate(self.FontSearchPath) if self.FontSearchPath.index(x) == i]
+        self.StyleSearchPath = [x for (i,x) in enumerate(self.StyleSearchPath) if self.StyleSearchPath.index(x) == i]
 
         log.info('FontPath:%s' % self.FontSearchPath)
         log.info('StylePath:%s' % self.StyleSearchPath)
@@ -227,7 +228,7 @@ class StyleSheet(object):
             for font in embedded:
                 try:
                     # Just a font name, try to embed it
-                    if isinstance(font, unicode):
+                    if isinstance(font, six.string_types):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:
@@ -402,9 +403,6 @@ class StyleSheet(object):
                     # Handle color references by name
                     if key == 'color' or key.endswith('Color') and style[key]:
                         style[key] = formatColor(style[key])
-
-                    # Yet another workaround for the unicode bug in
-                    # reportlab's toColor
                     elif key == 'commands':
                         style[key] = validateCommands(style[key])
 
@@ -426,8 +424,7 @@ class StyleSheet(object):
                         if not style[key] in self.languages:
                             self.languages.append(style[key])
 
-                    # Make keys str instead of unicode (required by reportlab)
-                    sdict[str(key)] = style[key]
+                    sdict[key] = style[key]
                     sdict['name'] = skey
                 # If the style already exists, update it
                 if skey in self.stylesheet:
@@ -456,67 +453,73 @@ class StyleSheet(object):
 
         # And create  reportlabs stylesheet
         self.StyleSheet = StyleSheet1()
-        # Patch to make the code compatible with reportlab from SVN 2.4+ and
-        # 2.4
-        if not hasattr(self.StyleSheet, 'has_key'):
-            self.StyleSheet.__class__.has_key = lambda s, k: k in s
-        for s in self.styles:
-            if 'parent' in s:
-                if s['parent'] is None:
-                    if s['name'] != 'base':
-                        s['parent'] = self.StyleSheet['base']
+
+        dirty = True
+        while dirty:
+            dirty = False
+            for s in self.styles:
+                if s['name'] in self.StyleSheet:
+                    continue
+                try:
+                    if 'parent' in s:
+                        if s['parent'] is None:
+                            if s['name'] != 'base':
+                                s['parent'] = self.StyleSheet['base']
+                            else:
+                                del(s['parent'])
+                        else:
+                            s['parent'] = self.StyleSheet[s['parent']]
                     else:
-                        del(s['parent'])
+                        if s['name'] != 'base':
+                            s['parent'] = self.StyleSheet['base']
+                except KeyError:
+                    dirty = True
+                    continue
+
+                # If the style has no bulletFontName but it has a fontName, set it
+                if ('bulletFontName' not in s) and ('fontName' in s):
+                    s['bulletFontName'] = s['fontName']
+
+                hasFS = True
+                # Adjust fontsize units
+                if 'fontSize' not in s:
+                    s['fontSize'] = s['parent'].fontSize
+                    s['trueFontSize'] = None
+                    hasFS = False
+                elif 'parent' in s:
+                    # This means you can set the fontSize to
+                    # "2cm" or to "150%" which will be calculated
+                    # relative to the parent style
+                    s['fontSize'] = self.adjustUnits(s['fontSize'],
+                                                    s['parent'].fontSize)
+                    s['trueFontSize'] = s['fontSize']
                 else:
-                    s['parent'] = self.StyleSheet[s['parent']]
-            else:
-                if s['name'] != 'base':
-                    s['parent'] = self.StyleSheet['base']
+                    # If s has no parent, it's base, which has
+                    # an explicit point size by default and %
+                    # makes no sense, but guess it as % of 10pt
+                    s['fontSize'] = self.adjustUnits(s['fontSize'], 10)
 
-            # If the style has no bulletFontName but it has a fontName, set it
-            if ('bulletFontName' not in s) and ('fontName' in s):
-                s['bulletFontName'] = s['fontName']
+                # If the leading is not set, but the size is, set it
+                if 'leading' not in s and hasFS:
+                    s['leading'] = 1.2*s['fontSize']
 
-            hasFS = True
-            # Adjust fontsize units
-            if 'fontSize' not in s:
-                s['fontSize'] = s['parent'].fontSize
-                s['trueFontSize'] = None
-                hasFS = False
-            elif 'parent' in s:
-                # This means you can set the fontSize to
-                # "2cm" or to "150%" which will be calculated
-                # relative to the parent style
-                s['fontSize'] = self.adjustUnits(s['fontSize'],
-                                                 s['parent'].fontSize)
-                s['trueFontSize'] = s['fontSize']
-            else:
-                # If s has no parent, it's base, which has
-                # an explicit point size by default and %
-                # makes no sense, but guess it as % of 10pt
-                s['fontSize'] = self.adjustUnits(s['fontSize'], 10)
+                # If the bullet font size is not set, set it as fontSize
+                if ('bulletFontSize' not in s) and ('fontSize' in s):
+                    s['bulletFontSize'] = s['fontSize']
 
-            # If the leading is not set, but the size is, set it
-            if 'leading' not in s and hasFS:
-                s['leading'] = 1.2*s['fontSize']
+                # If the borderPadding is a list and wordaxe <=0.3.2,
+                # convert it to an integer. Workaround for Issue
+                if 'borderPadding' in s and (
+                    ((HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
+                    or reportlab.Version < "2.3")
+                        and isinstance(s['borderPadding'], list)):
+                    log.warning(
+                        'Using a borderPadding list in '
+                        'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
+                        'supported, so it will probably look wrong' % s['name'])
+                    s['borderPadding'] = s['borderPadding'][0]
 
-            # If the bullet font size is not set, set it as fontSize
-            if ('bulletFontSize' not in s) and ('fontSize' in s):
-                s['bulletFontSize'] = s['fontSize']
-
-            # If the borderPadding is a list and wordaxe <=0.3.2,
-            # convert it to an integer. Workaround for Issue
-            if 'borderPadding' in s and (
-                ((HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
-                 or reportlab.Version < "2.3")
-                    and isinstance(s['borderPadding'], list)):
-                log.warning(
-                    'Using a borderPadding list in '
-                    'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
-                    'supported, so it will probably look wrong' % s['name'])
-                s['borderPadding'] = s['borderPadding'][0]
-
-            self.StyleSheet.add(ParagraphStyle(**s))
+                self.StyleSheet.add(ParagraphStyle(**s))
 
         self.emsize = self['base'].fontSize
         # Make stdFont the basefont, for Issue 65
@@ -555,6 +558,7 @@ class StyleSheet(object):
             Orders included sheets in front
             of including sheets.
         '''
+
         # Process from end of flist
         flist.reverse()
         # Keep previously seen sheets in sheetdict
@@ -737,7 +741,7 @@ def adjustUnits(v, total=None, dpi=300, default_unit='pt', emsize=10):
         return None
 
     v = str(v)
-    length = re.split(r'(-?[0-9.]*)', v)
+    length = re.split(r'(-?[0-9.]+)', v)
     n = length[1]
     u = default_unit
     if len(length) == 3 and length[2]:
@@ -852,11 +856,11 @@ def validateCommands(commands):
             continue
 
         # See if start and stop are the right types
-        if type(command[1]) not in (ListType, TupleType):
+        if not isinstance(command[1], (list, tuple)):
             log.error('Start cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
             flag = True
 
-        if type(command[2]) not in (ListType, TupleType):
+        if not isinstance(command[2], (list, tuple)):
             log.error('Stop cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
             flag = True
 
@@ -881,8 +885,7 @@ def validateCommands(commands):
             elif typ == "number":
                 pass
             elif typ == "string":
-                # Force string, not unicode
-                command[3+pos] = str(arg)
+                command[3+pos] = arg
             else:
                 log.error("This should never happen: wrong type %s", typ)
 

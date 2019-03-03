@@ -7,6 +7,8 @@ Scan a list of folders and find all .afm files,
 then create rst2pdf-ready font-aliases.
 """
 
+from __future__ import unicode_literals
+
 import os
 import sys
 
@@ -57,26 +59,35 @@ def loadFonts():
                     pfbList[f[:-4]] = os.path.join(folder, f)
 
         for folder in flist:
-            os.path.walk(folder, findFontFiles, None)
+            for root, _, files in os.walk(folder):
+                findFontFiles(None, root, files)
 
         for ttf in ttfList:
             '''Find out how to process these'''
             try:
                 font = TTFontFile(ttf)
-            except TTFError:
+            except TTFError as e:
                 continue
 
-            #print ttf, font.name, font.fullName, font.styleName, font.familyName
             family=font.familyName.lower()
+            if isinstance(family, bytes):
+                family = family.decode('utf-8')
             fontName=font.name
+            if isinstance(fontName, bytes):
+                fontName = fontName.decode('utf-8')
             baseName = os.path.basename(ttf)[:-4]
             fullName=font.fullName
+            if isinstance(fullName, bytes):
+                fullName = fullName.decode('utf-8')
 
             fonts[fontName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower()] = (ttf, ttf, family)
-            fonts[fullName.lower().replace('italic','oblique')] = (ttf, ttf, family)
+            fonts[fullName.lower().replace('italic', 'oblique')] = (ttf, ttf, family)
             bold = (FF_FORCEBOLD == FF_FORCEBOLD & font.flags)
             italic = (FF_ITALIC == FF_ITALIC & font.flags)
+
+            if isinstance(family, bytes):
+                family = family.decode('utf8')
 
             # And we can try to build/fill the family mapping
             if family not in families:

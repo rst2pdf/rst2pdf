@@ -7,7 +7,7 @@ from docutils.nodes import General, Inline, Element
 from docutils import utils
 from docutils.parsers.rst import roles
 
-import basenodehandler, math_flowable
+import rst2pdf.basenodehandler, rst2pdf.math_flowable
 
 if 'Directive' in rst.__dict__:
 
@@ -82,20 +82,20 @@ def eq_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
 roles.register_local_role('eq', eq_role)
 
 
-class HandleMath(basenodehandler.NodeHandler, math_node):
+class HandleMath(rst2pdf.basenodehandler.NodeHandler, math_node):
     def gather_elements(self, client, node, style):
         if not node.fontsize:
             node.fontsize=style.fontSize
         if not node.color:
             node.color=style.textColor.rgb()
-        return [math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
+        return [rst2pdf.math_flowable.Math(node.math_data,node.label,node.fontsize,node.color)]
 
     def get_text(self, client, node, replaceEnt):
         #get style for current node
         sty=client.styles.styleForNode(node)
         node_fontsize=sty.fontSize
         node_color='#'+sty.textColor.hexval()[2:]
-        mf = math_flowable.Math(node.math_data,label=node.label,fontsize=node_fontsize,color=node_color)
+        mf = rst2pdf.math_flowable.Math(node.math_data,label=node.label,fontsize=node_fontsize,color=node_color)
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()
@@ -103,7 +103,7 @@ class HandleMath(basenodehandler.NodeHandler, math_node):
         return '<img src="%s" width="%f" height="%f" valign="%f"/>' % (
             img, w, h, -descent)
 
-class HandleEq(basenodehandler.NodeHandler, eq_node):
+class HandleEq(rst2pdf.basenodehandler.NodeHandler, eq_node):
 
     def get_text(self, client, node, replaceEnt):
         return '<a href="equation-%s" color="%s">%s</a>'%(node.label,

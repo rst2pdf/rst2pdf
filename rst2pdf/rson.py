@@ -21,6 +21,8 @@ Additional documentation available at:
 http://code.google.com/p/rson/
 '''
 
+from __future__ import unicode_literals
+
 __version__ = '0.08'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'
@@ -254,7 +256,7 @@ def make_hashable(what):
         return what
     except TypeError:
         if isinstance(what, dict):
-            return tuple(sorted(make_hashable(x) for x in what.iteritems()))
+            return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
 class BaseObjects(object):
@@ -357,7 +359,7 @@ class Dispatcher(object):
             if not kw:
                 return default_loads(s)
 
-            key = tuple(sorted(kw.iteritems()))
+            key = tuple(sorted(kw.items()))
             func = cached(key)
             if func is None:
                 # Begin some real ugliness here -- just modify our instance to
@@ -377,13 +379,9 @@ class QuotedToken(object):
 
     if six.PY3:
         parse_encoded_chr = chr
-        parse_quoted_str = staticmethod(
-                                        lambda token, s, str=str: str(s))
+        parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
     else:
-        parse_quoted_str = staticmethod(
-                                        lambda token, s,
-                                        unicode=unicode: unicode(s, 'utf-8'))
-
+        parse_quoted_str = staticmethod(lambda token, s: s.decode('utf-8'))
         parse_encoded_chr = unichr
 
     parse_join_str = u''.join
@@ -474,7 +472,7 @@ class QuotedToken(object):
                 nonmatch2 = next_()
             except:
                 ok = False
-            ok = ok and not nonmatch and uni2.startswith(r'\u') and len(uni2) == 6
+            ok = ok and not nonmatch and uni2.startswith(b'\\u') and len(uni2) == 6
             if ok:
                 nonmatch = uni2
                 uni = 0x10000 + (((uni - 0xd800) << 10) | (int(uni2[2:], 16) - 0xdc00))
@@ -528,7 +526,7 @@ class UnquotedToken(object):
     parse_float = float
     if six.PY2:
         parse_unquoted_str = staticmethod(
-            lambda token, unicode=unicode: unicode(token[2], 'utf-8'))
+            lambda token: token[2].decode('utf-8'))
     else:
         parse_unquoted_str = staticmethod(
             lambda token, unicode=str: str(token[2]))
@@ -653,6 +651,8 @@ class EqualToken(object):
             indent = indent[1:] + ' '
 
             bigstring = tokens.source[-firsttok[0] + 1: -token[0]]
+            if six.PY3:
+                bigstring = bigstring.decode('utf-8')
             stringlist = bigstring.split('\n')
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)

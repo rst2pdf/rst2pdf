@@ -10,10 +10,6 @@ version = '0.95'
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-if sys.version_info[0] > 2:
-    sys.stderr.write('rst2pdf is python2-only for now.')
-    exit(1)
-
 long_description = read('README.rst')
 
 install_requires = [
@@ -45,7 +41,7 @@ rawhtmlsupport_require = ['xhtml2pdf']
 setup(
     name="rst2pdf",
     version=version,
-    python_requires='~=2.7',
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data=dict(rst2pdf=['styles/*.json',
 	'styles/*.style',

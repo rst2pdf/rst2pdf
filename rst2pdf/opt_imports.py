@@ -14,6 +14,8 @@ opt_imports.py contains logic for handling optional imports.
 import os
 import sys
 
+import six
+
 from .log import log
 
 PyHyphenHyphenator = None
@@ -120,7 +122,9 @@ class LazyImports(object):
         return gfx
 
     def _load_svg2rlg(self):
-        import svg2rlg
-        return svg2rlg
+        if six.PY2:
+            import svg2rlg
+            return svg2rlg
+        return None
 
 LazyImports = LazyImports()

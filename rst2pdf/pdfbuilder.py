@@ -13,11 +13,15 @@
     :license: BSD, see LICENSE for details.
 """
 
+import six
 import logging
-try:
-    import parser
-except ImportError:
-    # parser is not available on Jython
+if six.PY2:
+    try:
+        import parser
+    except ImportError:
+        # parser is not available on Jython
+        parser = None
+else:
     parser = None
 import re
 import sys
@@ -28,8 +32,12 @@ from pprint import pprint
 from copy import copy, deepcopy
 from xml.sax.saxutils import unescape, escape
 from traceback import print_exc
-from cStringIO import StringIO
-from urlparse import urljoin, urlparse, urlunparse
+
+from io import BytesIO
+if six.PY2:
+    from urlparse import urljoin, urlparse, urlunparse
+else:
+    from urllib.parse import urljoin, urlparse, urlunparse
 
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
@@ -45,7 +53,7 @@ from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
-from sphinx.util import ustrftime, texescape
+from sphinx.util import ustrftime
 from sphinx.environment import NoUri
 from sphinx.locale import admonitionlabels, versionlabels
 if sphinx.__version__ >= '1.':
@@ -130,8 +138,7 @@ class PDFBuilder(Builder):
                 docwriter.write(doctree, destination)
                 self.spinx_logger.info("done")
             except Exception as e:
-                log.error(str(e))
-                print_exc()
+                log.exception(e)
                 self.spinx_logger.info(red("FAILED"))
 
     def init_document_data(self):
@@ -196,7 +203,6 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
-            #from pudb import set_trace; set_trace()
             t=copy(self.env.indexentries)
             try:
                 self.env.indexentries={docname:self.env.indexentries[docname+'-gen']}
@@ -218,7 +224,7 @@ class PDFBuilder(Builder):
         # html_domain_indices can be False/True or a list of index names
         indices_config = self.config.pdf_domain_indices
         if indices_config and hasattr(self.env, 'domains'):
-            for domain in self.env.domains.itervalues():
+            for domain in self.env.domains.values():
                 for indexcls in domain.indices:
                     indexname = '%s-%s' % (domain.name, indexcls.name)
                     if isinstance(indices_config, list):
@@ -382,7 +388,6 @@ def genindex_nodes(genindexentries):
     output=['DUMMY','=====','.. _genindex:\n\n',indexlabel,indexunder,'']
 
     for key, entries in genindexentries:
-        #from pudb import set_trace; set_trace()
         output.append('.. cssclass:: heading4\n\n%s\n\n'%key) # initial
         for entryname, entryvalue in entries:
             links, subitems = entryvalue[0:2]
@@ -603,7 +608,7 @@ class PDFWriter(writers.Writer):
             cover_tree = docutils.core.publish_doctree(cover_text)
             self.document.insert(0, cover_tree)
 
-        sio=StringIO()
+        sio=BytesIO()
 
         if self.invariant:
             createpdf.patch_PDFDate()
@@ -822,7 +827,7 @@ def try_parse(src):
     if sys.version_info >= (2, 5):
         src = 'from __future__ import with_statement\n' + src
 
-    if isinstance(src, unicode):
+    if not isinstance(src, bytes):
         # Non-ASCII chars will only occur in string literals
         # and comments.  If we wanted to give them to the parser
         # correctly, we'd have to find out the correct source
@@ -917,14 +922,11 @@ def setup(app):
     app.add_config_value('section_header_depth',2, None)
     app.add_config_value('pdf_baseurl', urlunparse(['file',os.getcwd()+os.sep,'','','','']), None)
 
-    author_texescaped = unicode(app.config.copyright)\
-                               .translate(texescape.tex_escape_map)
-    project_doc_texescaped = unicode(app.config.project + ' Documentation')\
-                                     .translate(texescape.tex_escape_map)
+    project_doc = app.config.project + ' Documentation'
     app.config.pdf_documents.append((app.config.master_doc,
                                      app.config.project,
-                                     project_doc_texescaped,
-                                     author_texescaped,
+                                     project_doc,
+                                     app.config.copyright,
                                      'manual'))
 
     return {

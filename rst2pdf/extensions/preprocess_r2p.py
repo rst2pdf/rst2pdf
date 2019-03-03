@@ -121,10 +121,17 @@ class Preprocess(object):
             self.result (the preprocessed file) and self.styles (extracted stylesheet
             information) for the caller.
         '''
+
+        # fix keywords dict for use by the parser.
+        self.keywords = dict([(x + '::', getattr(self, 'handle_' + x)) for x in self.keywords])
+
         self.widthcount = widthcount
 
         name = sourcef.name
-        source = sourcef.read().replace('\r\n', '\n').replace('\r', '\n')
+        source = sourcef.read()
+        if isinstance(source, bytes):
+            source = source.decode('utf8')
+        source = source.replace('\r\n', '\n').replace('\r', '\n')
 
         # Make the determination if an include file is a stylesheet or
         # another restructured text file, and handle stylesheets appropriately.
@@ -187,7 +194,7 @@ class Preprocess(object):
                 continue
 
             result.pop()
-            func(self, chunk.strip())
+            func(chunk.strip())
 
         # Determine if we actually did anything or not.  Just use our source file
         # if not.  Otherwise, write the results to disk (so the user can use them
@@ -198,7 +205,7 @@ class Preprocess(object):
             result.name = name + '.build_temp'
             self.keep = keep = len(result.strip())
             if keep:
-                f = open(result.name, 'wb')
+                f = open(result.name, 'w')
                 f.write(result)
                 f.close()
             self.result = result
@@ -212,7 +219,7 @@ class Preprocess(object):
 
         for prefix in ('', os.path.dirname(self.sourcef.name)):
             try:
-                f = open(os.path.join(prefix, fname), 'rb')
+                f = open(os.path.join(prefix, fname), 'r')
             except IOError:
                 continue
             else:
@@ -339,9 +346,6 @@ class Preprocess(object):
     expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
     splitter = re.compile(expression, re.MULTILINE).split
 
-    # Once we have used the keywords in our regular expression,
-    # fix them up for use by the parser.
-    keywords = dict([(x + '::', vars()['handle_' + x]) for x in keywords])
 
 class MyStyles(str):
     ''' This class conforms to the styles.py processing requirements
