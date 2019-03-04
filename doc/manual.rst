@@ -172,15 +172,16 @@ Supported Image Types
 For raster images, rst2pdf supports anything PIL (The Python Imaging Library) supports.
 The exact list of supported formats varies according to your PIL version and system.
 
-For SVG support, you need to install svg2rlg or use the inkscape extension.
+For SVG support, you need to install svglib_ or use the inkscape extension.
 
-Some features will not work when using these images.For example, gradients will not
-display, and text may cause problems depending on font availability.
+Note that text may cause problems depending on font availability.
 
 You can also use PDF images, via pdfrw.
 
 If you can choose between raster and vectorial images, for non-photographic images,
 vector files are usually smaller and look better, specially when printed.
+
+.. _svglib: https://pypi.org/project/svglib/
 
 .. note:: Image URLs
 
