@@ -174,7 +174,8 @@ The exact list of supported formats varies according to your PIL version and sys
 
 For SVG support, you need to install svglib_ or use the inkscape extension.
 
-Note that text may cause problems depending on font availability.
+Some features will not work when using these images. For example, gradients will not
+display, and text may cause problems depending on font availability.
 
 You can also use PDF images, via pdfrw.
 
