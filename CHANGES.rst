@@ -2,7 +2,7 @@
 {next}
 ------
 
-* Remove support for PythonMagick (Issue #756)
+* Remove support for PythonMagick, GFX and SWFTools (Issue #756)
 * Allow specifying frame padding in stylesheets (Issue #753)
 * Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
 
