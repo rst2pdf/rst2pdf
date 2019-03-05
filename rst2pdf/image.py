@@ -139,52 +139,7 @@ class MyImage (Flowable):
                 # Can't read it
                 pass
 
-        # PIL can't or isn't here, so try with Magick
-
-        PMImage = LazyImports.PMImage
-        if PMImage:
-            try:
-                img = PMImage()
-                # Adjust density to pixels/cm
-                dpi=client.styles.def_dpi
-                img.density("%sx%s"%(dpi,dpi))
-                img.read(str(filename))
-                _, tmpname = tempfile.mkstemp(suffix=ext)
-                img.write(tmpname)
-                client.to_unlink.append(tmpname)
-                return tmpname
-            except:
-                # Magick couldn't
-                pass
-        elif PILImage:
-            # Try to use gfx, which produces PNGs, and then
-            # pass them through PIL.
-            # This only really matters for PDFs but it's worth trying
-            gfx = LazyImports.gfx
-            try:
-                # Need to convert the DPI to % where 100% is 72DPI
-                gfx.setparameter( "zoom", str(client.styles.def_dpi/.72))
-                if extension == 'pdf':
-                    doc = gfx.open("pdf", filename)
-                elif extension == 'swf':
-                    doc = gfx.open("swf", filename)
-                else:
-                    doc = None
-                if doc:
-                    img = gfx.ImageList()
-                    img.setparameter("antialise", "1") # turn on antialising
-                    page = doc.getPage(1)
-                    img.startpage(page.width,page.height)
-                    page.render(img)
-                    img.endpage()
-                    _, tmpname = tempfile.mkstemp(suffix='.png')
-                    img.save(tmpname)
-                    client.to_unlink.append(tmpname)
-                    return tmpname
-            except: # Didn't work
-                pass
-
-        # PIL can't and Magick can't, so we can't
+        # PIL can't, so we can't
         self.support_warning()
         log.error("Couldn't load image [%s]"%filename)
         return missing
@@ -247,25 +202,14 @@ class MyImage (Flowable):
             if VectorPdf is not None and filename is not missing:
                 backend = VectorPdf
                 filename = uri
-
-            # PDF images are implemented by converting via PythonMagick
-            # w,h are in pixels. I need to set the density
-            # of the image to  the right dpi so this
-            # looks decent
-            elif LazyImports.PMImage or LazyImports.gfx:
-                filename=self.raster(filename, client)
             else:
                 log.warning("Minimal PDF image support "\
-                    "requires PythonMagick or the vectorpdf extension [%s]", filename)
+                    "requires the vectorpdf extension [%s]", filename)
                 filename = missing
         elif extension != 'jpg' and not LazyImports.PILImage:
-            if LazyImports.PMImage:
-                # Need to convert to JPG via PythonMagick
-                filename=self.raster(filename, client)
-            else:
-                # No way to make this work
-                log.error('To use a %s image you need PIL installed [%s]',extension,filename)
-                filename=missing
+            # No way to make this work
+            log.error('To use a %s image you need Pillow installed [%s]',extension,filename)
+            filename=missing
         return filename, backend
 
 
@@ -338,15 +282,6 @@ class MyImage (Flowable):
                     keeptrying = False
                 except IOError: # PIL throws this when it's a broken/unknown image
                     pass
-            if keeptrying and LazyImports.PMImage:
-                img = LazyImports.PMImage(imgname)
-                iw = img.size().width()
-                ih = img.size().height()
-                density=img.density()
-                # The density is in pixelspercentimeter (!?)
-                xdpi=density.width()*2.54
-                ydpi=density.height()*2.54
-                keeptrying = False
             if keeptrying:
                 if extension not in ['jpg', 'jpeg']:
                     log.error("The image (%s, %s) is broken or in an unknown format"
