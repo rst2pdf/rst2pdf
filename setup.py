@@ -57,7 +57,6 @@ setup(
         tests=tests_require,
         sphinx=sphinx_require,
         hyphenation=hyphenation_require,
-        pdfimages=pdfimages_require,
         pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
         aafiguresupport=aafiguresupport_require,
