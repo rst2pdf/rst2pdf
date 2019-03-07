@@ -31,8 +31,6 @@ except ImportError:
 tests_require = ['pyPdf2']
 sphinx_require = ['sphinx<1.8.0']
 hyphenation_require = ['wordaxe>=1.0']
-pdfimages_require = ['pyPdf2','PythonMagick']
-pdfimages2_require = ['pyPdf2','SWFTools']
 svgsupport_require = ['svglib']
 aafiguresupport_require = ['aafigure>=0.4']
 mathsupport_require = ['matplotlib']
@@ -58,8 +56,6 @@ setup(
         tests=tests_require,
         sphinx=sphinx_require,
         hyphenation=hyphenation_require,
-        pdfimages=pdfimages_require,
-        pdfimages2=pdfimages2_require,
         svgsupport=svgsupport_require,
         aafiguresupport=aafiguresupport_require,
         mathsupport=mathsupport_require,

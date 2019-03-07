@@ -113,14 +113,6 @@ class LazyImports(object):
             import Image as PILImage
         return PILImage
 
-    def _load_PMImage(self):
-        from PythonMagick import Image
-        return Image
-
-    def _load_gfx(self):
-        import gfx
-        return gfx
-
     def _load_svg2rlg(self):
         if six.PY2:
             import svg2rlg
