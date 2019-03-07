@@ -11,6 +11,7 @@ from __future__ import unicode_literals
 import six
 
 import os
+import subprocess
 import sys
 
 from reportlab.pdfbase import pdfmetrics
@@ -181,7 +182,7 @@ def findFont(fname):
 def findTTFont(fname):
 
     def get_family(query):
-        data = os.popen("fc-match \"%s\""%query, "r").read()
+        data = subprocess.check_output(["fc-match", query])
         if six.PY2:
             data = data.decode('UTF-8')
         for line in data.splitlines():
@@ -195,7 +196,7 @@ def findTTFont(fname):
         return None
 
     def get_fname(query):
-        data = os.popen("fc-match -v \"%s\""%query, "r").read()
+        data = subprocess.check_output(["fc-match", "-v", query])
         if six.PY2:
             data = data.decode('UTF-8')
         for line in data.splitlines():
