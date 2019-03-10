@@ -38,9 +38,6 @@
 __docformat__ = 'reStructuredText'
 from importlib import import_module
 import six
-# Import Psyco if available
-from .opt_imports import psyco
-psyco.full()
 
 import sys
 import os

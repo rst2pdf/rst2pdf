@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#$URL$
-#$Date$
-#$Revision$
-
 # See LICENSE.txt for licensing terms
 
 '''
@@ -56,14 +52,6 @@ try:
     import sphinx
 except ImportError:
     sphinx = None
-
-try:
-    import psyco
-except ImportError:
-    class psyco(object):
-        @staticmethod
-        def full():
-            pass
 
 try:
     import aafigure
