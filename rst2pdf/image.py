@@ -270,7 +270,7 @@ class MyImage (Flowable):
 
         else:
             keeptrying = True
-            if LazyImports.PILImage:
+            if PILImage:
                 try:
                     img = PILImage.open(imgname)
                     img.load()
