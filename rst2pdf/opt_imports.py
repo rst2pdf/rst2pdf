@@ -108,3 +108,5 @@ class LazyImports(object):
     #     return None
 
 LazyImports = LazyImports()
+
+from PIL import Image as PILImage
