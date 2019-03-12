@@ -10,7 +10,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
 import urllib
 
-from .opt_imports import LazyImports, PILImage, pdfinfo
+from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid
 
 from .svgimage import SVGImage

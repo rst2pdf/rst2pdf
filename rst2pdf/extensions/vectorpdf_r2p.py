@@ -14,7 +14,6 @@ try:
     from pdfrw.buildxobj import CacheXObj
 
     import rst2pdf.image
-    from rst2pdf.opt_imports import LazyImports
 except ImportError:
     # This is just to make nosetest happy on the CI server
     class Flowable:
