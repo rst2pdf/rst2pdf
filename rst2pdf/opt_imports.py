@@ -94,12 +94,12 @@ class LazyImports(object):
             import pdfrw as pdf
         return pdf
 
-    def _load_PILImage(self):
-        try:
-            from PIL import Image as PILImage
-        except ImportError:
-            import Image as PILImage
-        return PILImage
+    # def _load_PILImage(self):
+    #     try:
+    #         from PIL import Image as PILImage
+    #     except ImportError:
+    #         import Image as PILImage
+    #     return PILImage
 
     # def _load_svg2rlg(self):
     #     if six.PY2:
