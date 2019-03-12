@@ -150,5 +150,4 @@ class VectorPdf(Flowable):
 def install(createpdf, options):
     ''' Monkey-patch this PDF handling into rst2pdf
     '''
-    LazyImports.pdfinfo = pdfrw
     rst2pdf.image.VectorPdf = VectorPdf

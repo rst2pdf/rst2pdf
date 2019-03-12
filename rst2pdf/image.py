@@ -10,7 +10,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
 import urllib
 
-from .opt_imports import LazyImports, PILImage
+from .opt_imports import LazyImports, PILImage, pdfinfo
 from .log import log, nodeid
 
 from .svgimage import SVGImage
@@ -256,9 +256,9 @@ class MyImage (Flowable):
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
             else:
-                pdf = LazyImports.pdfinfo
+                pdf = pdfinfo
                 if pdf is None:
-                    log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
+                    log.warning('PDF images are not supported without pdfrw [%s]', nodeid(node))
                     return 0, 0, 'direct'
                 reader = pdf.PdfFileReader(open(imgname, 'rb'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]

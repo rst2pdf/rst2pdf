@@ -87,12 +87,12 @@ class LazyImports(object):
         setattr(self, name, value)
         return value
 
-    def _load_pdfinfo(self):
-        try:
-            from pyPdf import pdf
-        except ImportError:
-            import pdfrw as pdf
-        return pdf
+    # def _load_pdfinfo(self):
+    #     try:
+    #         from pyPdf import pdf
+    #     except ImportError:
+    #         import pdfrw as pdf
+    #     return pdf
 
     # def _load_PILImage(self):
     #     try:
@@ -109,4 +109,5 @@ class LazyImports(object):
 
 LazyImports = LazyImports()
 
+import pdfrw as pdfinfo
 from PIL import Image as PILImage
