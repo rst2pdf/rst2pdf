@@ -256,11 +256,7 @@ class MyImage (Flowable):
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
             else:
-                pdf = pdfinfo
-                if pdf is None:
-                    log.warning('PDF images are not supported without pdfrw [%s]', nodeid(node))
-                    return 0, 0, 'direct'
-                reader = pdf.PdfFileReader(open(imgname, 'rb'))
+                reader = pdfinfo.PdfFileReader(open(imgname, 'rb'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]
                 iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px
