@@ -72,8 +72,8 @@ def loadFonts():
             """Find out how to process these"""
             try:
                 font = TTFontFile(ttf)
-            except TTFError as e:
-                continue
+            except TTFError:
+                log.warning("Error processing %s", ttf)
 
             family = font.familyName.lower()
             if isinstance(family, bytes):
@@ -245,7 +245,7 @@ def findTTFont(fname):
 
             fontkey = _w.OpenKey(
                 _w.HKEY_LOCAL_MACHINE,
-                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts",
+                r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts",
             )
             fontname = ftname + " (TrueType)"
             try:
@@ -257,7 +257,7 @@ def findTTFont(fname):
                 fontdir += "\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
-            except WindowsError as err:
+            except WindowsError:
                 fontkey.Close()
                 return None
 
