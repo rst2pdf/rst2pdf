@@ -25,7 +25,7 @@ from reportlab.pdfbase.ttfonts import (
     TTFontFile,
 )
 
-from .log import log
+from rst2pdf.log import log
 
 flist = []
 afmList = []
@@ -185,7 +185,7 @@ def findFont(fname):
 
 def findTTFont(fname):
     def get_family(query):
-        data = subprocess.check_output(["fc-match", query])
+        data = make_string(subprocess.check_output(["fc-match", query]))
         if six.PY2:
             data = data.decode("UTF-8")
         for line in data.splitlines():
@@ -198,7 +198,7 @@ def findTTFont(fname):
         return None
 
     def get_fname(query):
-        data = subprocess.check_output(["fc-match", "-v", query])
+        data = make_string(subprocess.check_output(["fc-match", "-v", query]))
         if six.PY2:
             data = data.decode("UTF-8")
         for line in data.splitlines():
@@ -300,7 +300,7 @@ def autoEmbed(fname):
     variants = []
     f = findFont(fname)
     if f:  # We have this font located
-        if f[0].lower()[-4:] == ".afm":  # Type 1 font
+        if f[0].lower().endswith(".afm"):  # Type 1 font
             family = families[f[2]]
 
             # Register the whole family of faces
@@ -318,14 +318,11 @@ def autoEmbed(fname):
 
             # Map the variants
             regular, italic, bold, bolditalic = family
-            addMapping(fname, 0, 0, regular)
-            addMapping(fname, 0, 1, italic)
-            addMapping(fname, 1, 0, bold)
-            addMapping(fname, 1, 1, bolditalic)
-            addMapping(regular, 0, 0, regular)
-            addMapping(regular, 0, 1, italic)
-            addMapping(regular, 1, 0, bold)
-            addMapping(regular, 1, 1, bolditalic)
+            for n in fname, regular:
+                addMapping(n, 0, 0, regular)
+                addMapping(n, 0, 1, italic)
+                addMapping(n, 1, 0, bold)
+                addMapping(n, 1, 1, bolditalic)
             log.info("Embedding as %s" % fontList)
             return fontList
         else:  # A TTF font
@@ -405,14 +402,15 @@ def main():
         flist = [".", os.environ.get("SystemRoot", "C:\\Windows") + "\\Fonts"]
     else:
         flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
-    fn, _ = guessFont(sys.argv[1])
+    fname = make_string(sys.argv[1])
+    fn, _ = guessFont(fname)
     f = findFont(fn)
     if not f:
         f = findTTFont(fn)
     if f:
         print(f)
     else:
-        print("Unknown font %s" % sys.argv[1])
+        print("Unknown font %s" % fname)
 
 
 if __name__ == "__main__":
