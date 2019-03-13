@@ -51,6 +51,12 @@ families = {}
 fontMappings = {}
 
 
+def make_string(b):
+    if isinstance(b, bytes):
+        return b.decode('utf-8')
+    return b
+
+
 def loadFonts():
     """
     Search the system and build lists of available fonts.
@@ -69,31 +75,21 @@ def loadFonts():
                         pfbList[f[:-4]] = os.path.join(root, f)
 
         for ttf in ttfList:
-            """Find out how to process these"""
             try:
                 font = TTFontFile(ttf)
             except TTFError:
                 log.warning("Error processing %s", ttf)
 
-            family = font.familyName.lower()
-            if isinstance(family, bytes):
-                family = family.decode("utf-8")
-            fontName = font.name
-            if isinstance(fontName, bytes):
-                fontName = fontName.decode("utf-8")
+            family = make_string(font.familyName.lower())
+            fontName = make_string(font.name).lower()
             baseName = os.path.basename(ttf)[:-4]
-            fullName = font.fullName
-            if isinstance(fullName, bytes):
-                fullName = fullName.decode("utf-8")
+            fullName = make_string(font.fullName).lower()
 
-            fonts[fontName.lower()] = (ttf, ttf, family)
-            fonts[fullName.lower()] = (ttf, ttf, family)
-            fonts[fullName.lower().replace("italic", "oblique")] = (ttf, ttf, family)
+            for k in (fontName, fullName, fullName.replace("italic", "oblique")):
+                fonts[k] = (ttf, ttf, family)
+
             bold = FF_FORCEBOLD == FF_FORCEBOLD & font.flags
             italic = FF_ITALIC == FF_ITALIC & font.flags
-
-            if isinstance(family, bytes):
-                family = family.decode("utf8")
 
             # And we can try to build/fill the family mapping
             if family not in families:
