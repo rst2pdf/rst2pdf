@@ -82,6 +82,7 @@ def loadFonts():
             if isinstance(fullName, bytes):
                 fullName = fullName.decode('utf-8')
 
+            fonts[fontName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower().replace('italic', 'oblique')] = (ttf, ttf, family)
             bold = (FF_FORCEBOLD == FF_FORCEBOLD & font.flags)
