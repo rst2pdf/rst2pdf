@@ -143,13 +143,8 @@ def loadFonts():
                 continue
 
             # So now we have a font we know we can embed.
-            fonts[fontName.lower()] = (afm, pfbList[baseName], family)
-            fonts[fullName.lower()] = (afm, pfbList[baseName], family)
-            fonts[fullName.lower().replace("italic", "oblique")] = (
-                afm,
-                pfbList[baseName],
-                family,
-            )
+            for n in (fontName.lower(), fullName.lower(), fullName.lower().replace("italic", "oblique")):
+                fonts[n] = (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
             if family not in families:
