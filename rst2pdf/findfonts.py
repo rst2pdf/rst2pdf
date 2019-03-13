@@ -131,9 +131,7 @@ def loadFonts():
                     italic = line.split(" ")[1] != "0.0"
 
             baseName = os.path.basename(afm)[:-4]
-            if family in Ignored:
-                continue
-            if family in Alias:
+            if family in Ignored or family in Alias:
                 continue
             if baseName not in pfbList:
                 log.info("afm file without matching pfb file: %s" % baseName)
