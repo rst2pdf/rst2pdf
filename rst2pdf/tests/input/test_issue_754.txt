@@ -1,0 +1,3 @@
+This image below should overlap this line
+
+.. image:: images/biohazard.png
