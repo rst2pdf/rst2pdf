@@ -126,12 +126,9 @@ def loadFonts():
                 elif line.startswith("FullName"):
                     fullName = line.split(" ", 1)[1]
                 elif line.startswith("Weight"):
-                    w = line.split(" ")[1]
-                    if w == "Bold":
-                        bold = True
+                    bold = line.split(" ")[1] == "Bold"
                 elif line.startswith("ItalicAngle"):
-                    if line.split(" ")[1] != "0.0":
-                        italic = True
+                    italic = line.split(" ")[1] != "0.0"
 
             baseName = os.path.basename(afm)[:-4]
             if family in Ignored:
