@@ -313,7 +313,7 @@ def autoEmbed(fname):
             for face, name in zip(faces, family):
                 fontList.append(name)
                 font = pdfmetrics.Font(face, name, "WinAnsiEncoding")
-                log.info("Registering font: %s from %s" % (face, name))
+                log.info("Registering font: %s from %s" % (name, face.getFontFiles()))
                 pdfmetrics.registerFont(font)
 
             # Map the variants
