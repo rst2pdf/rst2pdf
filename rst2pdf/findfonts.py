@@ -8,15 +8,17 @@ then create rst2pdf-ready font-aliases.
 """
 
 from __future__ import unicode_literals
-import six
 
 import os
 import subprocess
 import sys
+from fnmatch import fnmatch
 
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont, TTFontFile, TTFError, FF_FORCEBOLD, FF_ITALIC
+import six
 from reportlab.lib.fonts import addMapping
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import (FF_FORCEBOLD, FF_ITALIC, TTFError,
+                                       TTFont, TTFontFile)
 
 from .log import log
 
@@ -48,21 +50,16 @@ def loadFonts():
     Search the system and build lists of available fonts.
     """
 
-    if not afmList and not pfbList and not ttfList:
-        # Find all ".afm" and ".pfb" files files
-        def findFontFiles(_, folder, names):
-            for f in os.listdir(folder):
-                ext=os.path.splitext(f)[-1]
-                if ext in ['.ttf','.ttc']:
-                    ttfList.append(os.path.join(folder, f))
-                if ext=='.afm':
-                    afmList.append(os.path.join(folder, f))
-                if ext=='.pfb':
-                    pfbList[f[:-4]] = os.path.join(folder, f)
-
+    if not any([afmList, pfbList, ttfList]):
         for folder in flist:
             for root, _, files in os.walk(folder):
-                findFontFiles(None, root, files)
+                for f in files:
+                    if fnmatch(f, '*.ttf') or fnmatch(f, '*.ttc'):
+                        ttfList.append(os.path.join(root, f))
+                    elif fnmatch(f, '*.afm'):
+                        afmList.append(os.path.join(root, f))
+                    elif fnmatch(f, '*.pfb'):
+                        pfbList[f[:-4]] = os.path.join(root, f)
 
         for ttf in ttfList:
             '''Find out how to process these'''
