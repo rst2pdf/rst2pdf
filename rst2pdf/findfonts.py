@@ -123,8 +123,6 @@ def loadFonts():
                     family = " ".join(line.split(" ")[1:]).lower()
                 elif line.startswith("FontName"):
                     fontName = line.split(" ")[1]
-                # TODO: find a way to alias the fullname to this font
-                # so you can use names like "Bitstream Charter Italic"
                 elif line.startswith("FullName"):
                     fullName = " ".join(line.split(" ")[1:])
                 elif line.startswith("Weight"):
