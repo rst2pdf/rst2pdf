@@ -198,8 +198,7 @@ def findTTFont(fname):
             line = line.strip()
             if not line:
                 continue
-            fname, family, _, variant = line.split('"')[:4]
-            family = family.replace('"', "")
+            family = line.split('"')[1].replace('"', "")
             if family:
                 return family
         return None
@@ -412,7 +411,7 @@ def main():
         flist = [".", os.environ.get("SystemRoot", "C:\\Windows") + "\\Fonts"]
     else:
         flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
-    fn, pos = guessFont(sys.argv[1])
+    fn, _ = guessFont(sys.argv[1])
     f = findFont(fn)
     if not f:
         f = findTTFont(fn)
