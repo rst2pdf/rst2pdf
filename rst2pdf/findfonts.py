@@ -122,9 +122,9 @@ def loadFonts():
                 elif line.startswith("FamilyName"):
                     family = " ".join(line.split(" ")[1:]).lower()
                 elif line.startswith("FontName"):
-                    fontName = line.split(" ")[1]
+                    fontName = line.split(" ")[1].lower()
                 elif line.startswith("FullName"):
-                    fullName = " ".join(line.split(" ")[1:])
+                    fullName = " ".join(line.split(" ")[1:]).lower()
                 elif line.startswith("Weight"):
                     w = line.split(" ")[1]
                     if w == "Bold":
@@ -143,7 +143,7 @@ def loadFonts():
                 continue
 
             # So now we have a font we know we can embed.
-            for n in (fontName.lower(), fullName.lower(), fullName.lower().replace("italic", "oblique")):
+            for n in (fontName, fullName, fullName.replace("italic", "oblique")):
                 fonts[n] = (afm, pfbList[baseName], family)
 
             # And we can try to build/fill the family mapping
