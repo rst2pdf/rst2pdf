@@ -17,8 +17,13 @@ from fnmatch import fnmatch
 import six
 from reportlab.lib.fonts import addMapping
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import (FF_FORCEBOLD, FF_ITALIC, TTFError,
-                                       TTFont, TTFontFile)
+from reportlab.pdfbase.ttfonts import (
+    FF_FORCEBOLD,
+    FF_ITALIC,
+    TTFError,
+    TTFont,
+    TTFontFile,
+)
 
 from .log import log
 
@@ -30,14 +35,15 @@ ttfList = []
 # Aliases defined by GhostScript, so if you use Palatino or whatever you
 # may get **something**. They are family name aliases.
 Alias = {
-    'itc bookman': 'urw bookman l',
-    'itc avant garde gothic': 'urw gothic l',
-    'palatino': 'urw palladio l',
-    'new century schoolbook': 'century schoolbook l',
-    'itc zapf chancery': 'urw chancery l'}
+    "itc bookman": "urw bookman l",
+    "itc avant garde gothic": "urw gothic l",
+    "palatino": "urw palladio l",
+    "new century schoolbook": "century schoolbook l",
+    "itc zapf chancery": "urw chancery l",
+}
 
 # Standard PDF fonts, so no need to embed them
-Ignored = ['times', 'itc zapf dingbats', 'symbol', 'helvetica', 'courier']
+Ignored = ["times", "itc zapf dingbats", "symbol", "helvetica", "courier"]
 
 
 fonts = {}
@@ -51,42 +57,43 @@ def loadFonts():
     """
 
     if not any([afmList, pfbList, ttfList]):
+        # FIXME: When we drop support por py2, use recursive globs
         for folder in flist:
             for root, _, files in os.walk(folder):
                 for f in files:
-                    if fnmatch(f, '*.ttf') or fnmatch(f, '*.ttc'):
+                    if fnmatch(f, "*.ttf") or fnmatch(f, "*.ttc"):
                         ttfList.append(os.path.join(root, f))
-                    elif fnmatch(f, '*.afm'):
+                    elif fnmatch(f, "*.afm"):
                         afmList.append(os.path.join(root, f))
-                    elif fnmatch(f, '*.pfb'):
+                    elif fnmatch(f, "*.pfb"):
                         pfbList[f[:-4]] = os.path.join(root, f)
 
         for ttf in ttfList:
-            '''Find out how to process these'''
+            """Find out how to process these"""
             try:
                 font = TTFontFile(ttf)
             except TTFError as e:
                 continue
 
-            family=font.familyName.lower()
+            family = font.familyName.lower()
             if isinstance(family, bytes):
-                family = family.decode('utf-8')
-            fontName=font.name
+                family = family.decode("utf-8")
+            fontName = font.name
             if isinstance(fontName, bytes):
-                fontName = fontName.decode('utf-8')
+                fontName = fontName.decode("utf-8")
             baseName = os.path.basename(ttf)[:-4]
-            fullName=font.fullName
+            fullName = font.fullName
             if isinstance(fullName, bytes):
-                fullName = fullName.decode('utf-8')
+                fullName = fullName.decode("utf-8")
 
             fonts[fontName.lower()] = (ttf, ttf, family)
             fonts[fullName.lower()] = (ttf, ttf, family)
-            fonts[fullName.lower().replace('italic', 'oblique')] = (ttf, ttf, family)
-            bold = (FF_FORCEBOLD == FF_FORCEBOLD & font.flags)
-            italic = (FF_ITALIC == FF_ITALIC & font.flags)
+            fonts[fullName.lower().replace("italic", "oblique")] = (ttf, ttf, family)
+            bold = FF_FORCEBOLD == FF_FORCEBOLD & font.flags
+            italic = FF_ITALIC == FF_ITALIC & font.flags
 
             if isinstance(family, bytes):
-                family = family.decode('utf8')
+                family = family.decode("utf8")
 
             # And we can try to build/fill the family mapping
             if family not in families:
@@ -112,24 +119,24 @@ def loadFonts():
             fontName = None
             italic = False
             bold = False
-            for line in open(afm, 'r'):
+            for line in open(afm, "r"):
                 line = line.strip()
-                if line.startswith('StartCharMetrics'):
+                if line.startswith("StartCharMetrics"):
                     break
-                elif line.startswith('FamilyName'):
-                    family = ' '.join(line.split(' ')[1:]).lower()
-                elif line.startswith('FontName'):
-                    fontName = line.split(' ')[1]
+                elif line.startswith("FamilyName"):
+                    family = " ".join(line.split(" ")[1:]).lower()
+                elif line.startswith("FontName"):
+                    fontName = line.split(" ")[1]
                 # TODO: find a way to alias the fullname to this font
                 # so you can use names like "Bitstream Charter Italic"
-                elif line.startswith('FullName'):
-                    fullName = ' '.join(line.split(' ')[1:])
-                elif line.startswith('Weight'):
-                    w = line.split(' ')[1]
-                    if w == 'Bold':
+                elif line.startswith("FullName"):
+                    fullName = " ".join(line.split(" ")[1:])
+                elif line.startswith("Weight"):
+                    w = line.split(" ")[1]
+                    if w == "Bold":
                         bold = True
-                elif line.startswith('ItalicAngle'):
-                    if line.split(' ')[1] != '0.0':
+                elif line.startswith("ItalicAngle"):
+                    if line.split(" ")[1] != "0.0":
                         italic = True
 
             baseName = os.path.basename(afm)[:-4]
@@ -138,13 +145,17 @@ def loadFonts():
             if family in Alias:
                 continue
             if baseName not in pfbList:
-                log.info("afm file without matching pfb file: %s"% baseName)
+                log.info("afm file without matching pfb file: %s" % baseName)
                 continue
 
             # So now we have a font we know we can embed.
             fonts[fontName.lower()] = (afm, pfbList[baseName], family)
             fonts[fullName.lower()] = (afm, pfbList[baseName], family)
-            fonts[fullName.lower().replace('italic','oblique')] = (afm, pfbList[baseName], family)
+            fonts[fullName.lower().replace("italic", "oblique")] = (
+                afm,
+                pfbList[baseName],
+                family,
+            )
 
             # And we can try to build/fill the family mapping
             if family not in families:
@@ -160,11 +171,12 @@ def loadFonts():
             else:
                 families[family][0] = fontName
 
+
 def findFont(fname):
     loadFonts()
     # So now we are sure we know the families and font
     # names. Well, return some data!
-    fname=fname.lower()
+    fname = fname.lower()
     if fname in fonts:
         font = fonts[fname.lower()]
     else:
@@ -176,18 +188,18 @@ def findFont(fname):
             return None
     return font
 
-def findTTFont(fname):
 
+def findTTFont(fname):
     def get_family(query):
         data = subprocess.check_output(["fc-match", query])
         if six.PY2:
-            data = data.decode('UTF-8')
+            data = data.decode("UTF-8")
         for line in data.splitlines():
             line = line.strip()
             if not line:
                 continue
             fname, family, _, variant = line.split('"')[:4]
-            family = family.replace('"', '')
+            family = family.replace('"', "")
             if family:
                 return family
         return None
@@ -195,7 +207,7 @@ def findTTFont(fname):
     def get_fname(query):
         data = subprocess.check_output(["fc-match", "-v", query])
         if six.PY2:
-            data = data.decode('UTF-8')
+            data = data.decode("UTF-8")
         for line in data.splitlines():
             line = line.strip()
             if line.startswith("file: "):
@@ -207,16 +219,17 @@ def findTTFont(fname):
             get_fname(family + ":style=Roman"),
             get_fname(family + ":style=Bold"),
             get_fname(family + ":style=Oblique"),
-            get_fname(family + ":style=Bold Oblique")]
+            get_fname(family + ":style=Bold Oblique"),
+        ]
         if variants[2] == variants[0]:
             variants[2] = get_fname(family + ":style=Italic")
         if variants[3] == variants[0]:
             variants[3] = get_fname(family + ":style=Bold Italic")
-        if variants[0].endswith('.pfb') or variants[0].endswith('.gz'):
+        if variants[0].endswith(".pfb") or variants[0].endswith(".gz"):
             return None
         return variants
 
-    if os.name != 'nt':
+    if os.name != "nt":
         family = get_family(fname)
         if not family:
             log.error("Unknown font: %s", fname)
@@ -229,16 +242,19 @@ def findTTFont(fname):
 
         def get_nt_fname(ftname):
             import _winreg as _w
-            fontkey = _w.OpenKey(_w.HKEY_LOCAL_MACHINE,
-                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
+
+            fontkey = _w.OpenKey(
+                _w.HKEY_LOCAL_MACHINE,
+                "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts",
+            )
             fontname = ftname + " (TrueType)"
             try:
                 fname = _w.QueryValueEx(fontkey, fontname)[0]
                 if os.path.isabs(fname):
                     fontkey.close()
                     return fname
-                fontdir = os.environ.get("SystemRoot", u"C:\\Windows")
-                fontdir += u"\\Fonts"
+                fontdir = os.environ.get("SystemRoot", "C:\\Windows")
+                fontdir += "\\Fonts"
                 fontkey.Close()
                 return fontdir + "\\" + fname
             except WindowsError as err:
@@ -253,11 +269,13 @@ def findTTFont(fname):
             elif pos == 1:
                 fontfile = get_nt_fname(family + " Bold")
             elif pos == 2:
-                fontfile = get_nt_fname(family + " Italic") or \
-                    get_nt_fname(family + " Oblique")
+                fontfile = get_nt_fname(family + " Italic") or get_nt_fname(
+                    family + " Oblique"
+                )
             else:
-                fontfile = get_nt_fname(family + " Bold Italic") or \
-                    get_nt_fname(family + " Bold Oblique")
+                fontfile = get_nt_fname(family + " Bold Italic") or get_nt_fname(
+                    family + " Bold Oblique"
+                )
 
             if not fontfile:
                 log.error("Unknown font: %s", fname)
@@ -266,13 +284,16 @@ def findTTFont(fname):
         family, pos = guessFont(fname)
         variants = [
             get_nt_fname(family) or fontfile,
-            get_nt_fname(family+" Bold") or fontfile,
-            get_nt_fname(family+" Italic") or \
-                get_nt_fname(family+" Oblique") or fontfile,
-            get_nt_fname(family+" Bold Italic") or \
-                get_nt_fname(family+" Bold Oblique") or fontfile,
+            get_nt_fname(family + " Bold") or fontfile,
+            get_nt_fname(family + " Italic")
+            or get_nt_fname(family + " Oblique")
+            or fontfile,
+            get_nt_fname(family + " Bold Italic")
+            or get_nt_fname(family + " Bold Oblique")
+            or fontfile,
         ]
         return variants
+
 
 def autoEmbed(fname):
     """Given a font name, does a best-effort of embedding
@@ -281,24 +302,25 @@ def autoEmbed(fname):
     Returns a list of the font names it registered with ReportLab.
 
     """
-    log.info('Trying to embed %s'%fname)
+    log.info("Trying to embed %s" % fname)
     fontList = []
-    variants=[]
+    variants = []
     f = findFont(fname)
-    if f : # We have this font located
-        if f[0].lower()[-4:]=='.afm': #Type 1 font
+    if f:  # We have this font located
+        if f[0].lower()[-4:] == ".afm":  # Type 1 font
             family = families[f[2]]
 
             # Register the whole family of faces
-            faces = [pdfmetrics.EmbeddedType1Face(*fonts[fn.lower()][:2]) for fn in family]
+            faces = [
+                pdfmetrics.EmbeddedType1Face(*fonts[fn.lower()][:2]) for fn in family
+            ]
             for face in faces:
                 pdfmetrics.registerTypeFace(face)
 
             for face, name in zip(faces, family):
                 fontList.append(name)
                 font = pdfmetrics.Font(face, name, "WinAnsiEncoding")
-                log.info('Registering font: %s from %s'%\
-                            (face,name))
+                log.info("Registering font: %s from %s" % (face, name))
                 pdfmetrics.registerFont(font)
 
             # Map the variants
@@ -311,11 +333,11 @@ def autoEmbed(fname):
             addMapping(regular, 0, 1, italic)
             addMapping(regular, 1, 0, bold)
             addMapping(regular, 1, 1, bolditalic)
-            log.info('Embedding as %s'%fontList)
+            log.info("Embedding as %s" % fontList)
             return fontList
-        else: # A TTF font
+        else:  # A TTF font
             variants = [fonts[f.lower()][0] for f in families[f[2]]]
-    if not variants: # Try fc-match
+    if not variants:  # Try fc-match
         variants = findTTFont(fname)
     # It is a TT Font and we found it using fc-match (or found *something*)
     if variants:
@@ -323,21 +345,21 @@ def autoEmbed(fname):
             vname = os.path.basename(variant)[:-4]
             try:
                 if vname not in pdfmetrics._fonts:
-                    _font=TTFont(vname, variant)
-                    log.info('Registering font: %s from %s'%\
-                            (vname,variant))
+                    _font = TTFont(vname, variant)
+                    log.info("Registering font: %s from %s" % (vname, variant))
                     pdfmetrics.registerFont(_font)
             except TTFError:
-                log.error('Error registering font: %s from %s'%(vname,variant))
+                log.error("Error registering font: %s from %s" % (vname, variant))
             else:
                 fontList.append(vname)
         regular, bold, italic, bolditalic = [
-            os.path.basename(variant)[:-4] for variant in variants]
+            os.path.basename(variant)[:-4] for variant in variants
+        ]
         addMapping(regular, 0, 0, regular)
         addMapping(regular, 0, 1, italic)
         addMapping(regular, 1, 0, bold)
         addMapping(regular, 1, 1, bolditalic)
-        log.info('Embedding via findTTFont as %s'%fontList)
+        log.info("Embedding via findTTFont as %s" % fontList)
     return fontList
 
 
@@ -354,16 +376,21 @@ def guessFont(fname):
     """
     italic = 0
     bold = 0
-    if '-' not in fname:
-        sfx = {"Bold":1, "Bold Italic":3, "Bold Oblique":3, "Italic":2,
-            "Oblique":2}
+    if "-" not in fname:
+        sfx = {
+            "Bold": 1,
+            "Bold Italic": 3,
+            "Bold Oblique": 3,
+            "Italic": 2,
+            "Oblique": 2,
+        }
         for key in sfx:
-            if fname.endswith(" "+key):
+            if fname.endswith(" " + key):
                 return fname.rpartition(key)[0], sfx[key]
         return fname, 0
 
     else:
-        family, mod = fname.rsplit('-', 1)
+        family, mod = fname.rsplit("-", 1)
 
     mod = mod.lower()
     if "oblique" in mod or "italic" in mod:
@@ -371,9 +398,9 @@ def guessFont(fname):
     if "bold" in mod:
         bold = 1
 
-    if bold+italic == 0: #Not really a modifier
+    if bold + italic == 0:  # Not really a modifier
         return fname, 0
-    return family, bold + 2*italic
+    return family, bold + 2 * italic
 
 
 def main():
@@ -381,8 +408,8 @@ def main():
     if len(sys.argv) != 2:
         print("Usage: findfont fontName")
         sys.exit(1)
-    if os.name == 'nt':
-        flist = [".", os.environ.get("SystemRoot", "C:\\Windows")+"\\Fonts"]
+    if os.name == "nt":
+        flist = [".", os.environ.get("SystemRoot", "C:\\Windows") + "\\Fonts"]
     else:
         flist = [".", "/usr/share/fonts", "/usr/share/texmf-dist/fonts"]
     fn, pos = guessFont(sys.argv[1])
