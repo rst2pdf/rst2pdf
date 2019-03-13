@@ -396,7 +396,7 @@ def guessFont(fname):
 def main():
     global flist
     if len(sys.argv) != 2:
-        print("Usage: findfont fontName")
+        print("Usage: findfonts.py fontName")
         sys.exit(1)
     if os.name == "nt":
         flist = [".", os.environ.get("SystemRoot", "C:\\Windows") + "\\Fonts"]
