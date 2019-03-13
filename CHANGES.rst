@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Add support for units in spaceBefore/spaceAfter for stylesheets (Issue #754)
 * Remove support for Psyco (Issue #756)
 * Remove support for PythonMagick, GFX and SWFTools (Issue #756)
 * Allow specifying frame padding in stylesheets (Issue #753)
