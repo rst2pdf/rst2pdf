@@ -10,7 +10,7 @@ from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
 import urllib
 
-from .opt_imports import LazyImports
+from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid
 
 from .svgimage import SVGImage
@@ -52,11 +52,11 @@ class MyImage (Flowable):
 
     @classmethod
     def support_warning(cls):
-        if cls.warned or LazyImports.PILImage:
+        if cls.warned or PILImage:
             return
         cls.warned = True
         log.warning("Support for images other than JPG,"
-            " is now limited. Please install PIL.")
+            " is now limited. Please install Pillow.")
 
     @staticmethod
     def split_uri(uri):
@@ -120,9 +120,6 @@ class MyImage (Flowable):
             pass
 
         # Last resort: try everything
-
-
-        PILImage = LazyImports.PILImage
 
         if PILImage:
             ext='.png'
@@ -206,7 +203,7 @@ class MyImage (Flowable):
                 log.warning("Minimal PDF image support "\
                     "requires the vectorpdf extension [%s]", filename)
                 filename = missing
-        elif extension != 'jpg' and not LazyImports.PILImage:
+        elif extension != 'jpg' and not PILImage:
             # No way to make this work
             log.error('To use a %s image you need Pillow installed [%s]',extension,filename)
             filename=missing
@@ -259,11 +256,7 @@ class MyImage (Flowable):
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
             else:
-                pdf = LazyImports.pdfinfo
-                if pdf is None:
-                    log.warning('PDF images are not supported without pyPdf or pdfrw [%s]', nodeid(node))
-                    return 0, 0, 'direct'
-                reader = pdf.PdfFileReader(open(imgname, 'rb'))
+                reader = pdfinfo.PdfFileReader(open(imgname, 'rb'))
                 box = [float(x) for x in reader.getPage(0)['/MediaBox']]
                 iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px
@@ -273,9 +266,9 @@ class MyImage (Flowable):
 
         else:
             keeptrying = True
-            if LazyImports.PILImage:
+            if PILImage:
                 try:
-                    img = LazyImports.PILImage.open(imgname)
+                    img = PILImage.open(imgname)
                     img.load()
                     iw, ih = img.size
                     xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))

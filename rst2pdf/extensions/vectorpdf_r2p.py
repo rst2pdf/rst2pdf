@@ -14,7 +14,6 @@ try:
     from pdfrw.buildxobj import CacheXObj
 
     import rst2pdf.image
-    from rst2pdf.opt_imports import LazyImports
 except ImportError:
     # This is just to make nosetest happy on the CI server
     class Flowable:
@@ -150,5 +149,4 @@ class VectorPdf(Flowable):
 def install(createpdf, options):
     ''' Monkey-patch this PDF handling into rst2pdf
     '''
-    LazyImports.pdfinfo = pdfrw
     rst2pdf.image.VectorPdf = VectorPdf
