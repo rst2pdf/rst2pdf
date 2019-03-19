@@ -518,6 +518,14 @@ class StyleSheet(object):
                         'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
                         'supported, so it will probably look wrong' % s['name'])
                     s['borderPadding'] = s['borderPadding'][0]
+                if 'spaceBefore' in s:
+                    if isinstance(s['spaceBefore'], str) and s['spaceBefore'].startswith('-'):
+                        log.warning('A negative spaceBefore is the same as 0')
+                    s['spaceBefore'] = self.adjustUnits(s['spaceBefore'])
+                if 'spaceAfter' in s:
+                    if isinstance(s['spaceAfter'], str) and s['spaceAfter'].startswith('-'):
+                        log.warning('A negative spaceAfter is the same as 0')
+                    s['spaceAfter'] = self.adjustUnits(s['spaceAfter'])
 
                 self.StyleSheet.add(ParagraphStyle(**s))
 
