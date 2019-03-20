@@ -189,8 +189,6 @@ def findTTFont(fname):
 
     def get_fname(query):
         data = make_string(subprocess.check_output(["fc-match", "-v", query]))
-        if six.PY2:
-            data = data.decode("UTF-8")
         for line in data.splitlines():
             line = line.strip()
             if line.startswith("file: "):
