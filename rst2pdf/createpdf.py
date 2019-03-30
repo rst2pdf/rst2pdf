@@ -97,14 +97,6 @@ from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
 
 # Template engine for covers
 import jinja2
-jinja_env = jinja2.Environment(
-    loader=jinja2.FileSystemLoader('/'),
-    autoescape=jinja2.select_autoescape(['html', 'xml'])
-)
-
-def renderTemplate(tname, **context):
-    template =jinja_env.get_template(tname)
-    return template.render(**context)
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -559,27 +551,24 @@ class RstToPdf(object):
             sce.apply()
 
         elements = self.gen_elements(self.doctree)
-        # Find cover template, save it in cover_file
-        def find_cover(name):
-            cover_path=[self.basedir, os.path.expanduser('~/.rst2pdf'),
-                os.path.join(self.PATH,'templates')]
-            cover_file=None
-            for d in cover_path:
-                if os.path.exists(os.path.join(d,name)):
-                    cover_file=os.path.join(d,name)
-                    break
-            return cover_file
 
-        cover_file=find_cover(self.custom_cover)
-        if cover_file is None:
+        # Find cover template, save it in cover_file
+        jinja_env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader([
+                    self.basedir, os.path.expanduser('~/.rst2pdf'),
+                    os.path.join(self.PATH,'templates')]),
+            autoescape=jinja2.select_autoescape(['html', 'xml'])
+        )
+
+        try:
+            template = jinja_env.get_template(self.custom_cover)
+        except jinja2.TemplateNotFound:
             log.error("Can't find cover template %s, using default"%self.custom_cover)
-            cover_file=find_cover('cover.tmpl')
+            template = jinja_env.get_template('cover.tmpl')
 
         # Feed data to the template, get restructured text.
-        cover_text = renderTemplate(tname=cover_file,
-                            title=self.doc_title,
-                            subtitle=self.doc_subtitle
-                        )
+        cover_text = template.render(title=self.doc_title,
+                                     subtitle=self.doc_subtitle)
 
         # This crashes sphinx because .. class:: in sphinx is
         # something else. Ergo, pdfbuilder does it in its own way.
