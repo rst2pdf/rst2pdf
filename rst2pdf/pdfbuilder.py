@@ -573,7 +573,7 @@ class PDFWriter(writers.Writer):
                 loader=jinja2.FileSystemLoader([
                         self.srcdir, os.path.expanduser('~/.rst2pdf'),
                         os.path.join(self.PATH,'templates')] +
-                        map(add_template_path, self.config.templates_path)),
+                        list(map(add_template_path, self.config.templates_path))),
                 autoescape=jinja2.select_autoescape(['html', 'xml'])
             )
 
