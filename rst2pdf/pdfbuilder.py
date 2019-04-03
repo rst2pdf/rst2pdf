@@ -64,6 +64,8 @@ from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
+# Template engine for covers
+import jinja2
 
 class PDFBuilder(Builder):
     name = 'pdf'
@@ -563,29 +565,23 @@ class PDFWriter(writers.Writer):
             # Generate cover page
 
             # FIXME: duplicate from createpdf, refactor!
+            # Add the Sphinx template paths
+            def add_template_path(path):
+                return os.path.join(self.srcdir, path)
 
-            # Find cover template, save it in cover_file
-            def find_cover(name):
-                cover_path=[self.srcdir, os.path.expanduser('~/.rst2pdf'),
-                                            os.path.join(self.PATH,'templates')]
+            jinja_env = jinja2.Environment(
+                loader=jinja2.FileSystemLoader([
+                        self.srcdir, os.path.expanduser('~/.rst2pdf'),
+                        os.path.join(self.PATH,'templates')] +
+                        list(map(add_template_path, self.config.templates_path))),
+                autoescape=jinja2.select_autoescape(['html', 'xml'])
+            )
 
-                # Add the Sphinx template paths
-                def add_template_path(path):
-                    return os.path.join(self.srcdir, path)
-
-                cover_path.extend(map(add_template_path, self.config.templates_path))
-
-                cover_file=None
-                for d in cover_path:
-                    if os.path.exists(os.path.join(d,name)):
-                        cover_file=os.path.join(d,name)
-                        break
-                return cover_file
-
-            cover_file=find_cover(self.config.pdf_cover_template)
-            if cover_file is None:
+            try:
+                template = jinja_env.get_template(self.config.pdf_cover_template)
+            except jinja2.TemplateNotFound:
                 log.error("Can't find cover template %s, using default"%self.custom_cover)
-                cover_file=find_cover('sphinxcover.tmpl')
+                template = jinja_env.get_template('sphinxcover.tmpl')
 
             # This is what's used in the python docs because
             # Latex does a manual linebreak. This sucks.
@@ -598,7 +594,7 @@ class PDFWriter(writers.Writer):
                 date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
 
             # Feed data to the template, get restructured text.
-            cover_text = createpdf.renderTemplate(tname=cover_file,
+            cover_text = template.render(
                                 title=self.document.settings.title or visitor.elements['title'],
                                 subtitle='%s %s'%(_('version'),self.config.version),
                                 authors=authors,
