@@ -70,20 +70,42 @@ try:
 except ImportError:
     from docutils.utils.roman import toRoman
 
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import IndexingFlowable
-from reportlab.platypus.flowables import _listWrapOn, _Container
+import reportlab
+
 from reportlab.pdfbase.pdfdoc import PDFPageLabel
-#from reportlab.lib.enums import *
-#from reportlab.lib.units import *
-#from reportlab.lib.pagesizes import *
+from reportlab.lib import units
 
 from . import config
 
 from rst2pdf import counter_role, oddeven_directive
-from rst2pdf import pygments_code_block_directive # code-block directive
-from rst2pdf import flowables
-from rst2pdf.flowables import * # our own reportlab flowables
+from rst2pdf import pygments_code_block_directive  # code-block directive
+
+from rst2pdf.flowables import (
+    Heading,
+    BoundByWidth,
+    DelayedTable,
+    MyPageBreak,
+    MySpacer,
+    OddEven,
+    PageCounter,
+    Separation,
+    SmartFrame,
+    XXPreformatted,
+    Flowable,
+    ImageAndFlowables,
+    PageBreak,
+    TableStyle,
+    ActionFlowable,
+    FrameActionFlowable,
+    IndexingFlowable,
+    LayoutError,
+    SlowPageBreak,
+    BaseDocTemplate,
+    PageTemplate,
+    _listWrapOn,
+    _Container,
+)
+
 from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
 from rst2pdf.aafigure_directive import Aanode
@@ -491,7 +513,7 @@ class RstToPdf(object):
         """Preformatted section that gets horizontally compressed if needed."""
         # Pass a ridiculous size, then it will shrink to what's available
         # in the frame
-        return BoundByWidth(2000*cm,
+        return BoundByWidth(2000 * units.cm,
             content=[XXPreformatted(text, style)],
             mode=self.fit_mode, style=style)
 
@@ -582,7 +604,7 @@ class RstToPdf(object):
         # Put the endnotes at the end ;-)
         endnotes = self.decoration['endnotes']
         if endnotes:
-            elements.append(MySpacer(1, 2*cm))
+            elements.append(MySpacer(1, 2 * units.cm))
             elements.append(Separation())
             for n in self.decoration['endnotes']:
                 t_style = TableStyle(self.styles['endnote'].commands)
@@ -615,7 +637,7 @@ class RstToPdf(object):
 
         def cleantags(s):
             re.sub(r'<[^>]*?>', '',
-                unicode(s).strip())
+                six.text(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
@@ -735,8 +757,8 @@ class FancyDocTemplate(BaseDocTemplate):
         if f is None:
             return
 
-        if isinstance(f,PageBreak):
-            if isinstance(f,SlowPageBreak):
+        if isinstance(f, PageBreak):
+            if isinstance(f, SlowPageBreak):
                 self.handle_pageBreak(slow=1)
             else:
                 self.handle_pageBreak()
@@ -793,23 +815,6 @@ class FancyDocTemplate(BaseDocTemplate):
 _counter=0
 _counterStyle='arabic'
 
-class PageCounter(Flowable):
-
-    def __init__(self, number=0, style='arabic'):
-        self.style=str(style).lower()
-        self.number=int(number)
-        Flowable.__init__(self)
-
-    def wrap(self, availWidth, availHeight):
-        global _counter, _counterStyle
-        _counterStyle=self.style
-        _counter=self.number
-        return (self.width, self.height)
-
-    def drawOn(self, canvas, x, y, _sW):
-        pass
-
-flowables.PageCounter = PageCounter
 
 def setPageCounter(counter=None, style=None):
 

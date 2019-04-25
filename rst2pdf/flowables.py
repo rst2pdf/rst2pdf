@@ -1,22 +1,92 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
+from __future__ import absolute_import
 
 __docformat__ = 'reStructuredText'
+__all__ = [
+    'XXPreformatted',
+    'MyIndenter',
+    'TocEntry',
+    'Heading',
+    'Separation',
+    'Reference',
+    'OddEven',
+    'DelayedTable',
+    'tablepadding',
+    'SplitTable',
+    'MySpacer',
+    'MyPageBreak',
+    'SetNextTemplate',
+    'ResetNextTemplate',
+    'TextAnnotation',
+    'Transition',
+    'SmartFrame',
+    'FrameCutter',
+    'Sidebar',
+    'BoundByWidth',
+    'BoxedContainer',
+    'MyTableOfContents',
+    'PageCounter',
+    # re-export reportlab flowables for easier imports
+    'Flowable',
+    'ImageAndFlowables',
+    'PageBreak',
+    'CondPageBreak',
+    'SlowPageBreak',
+    'Spacer',
+    'ActionFlowable',
+    'FrameActionFlowable'
+    'FrameBreak',
+    'Indenter',
+    'IndexingFlowable',
+    'LayoutError',
+    'BaseDocTemplate',
+    'PageTemplate',
+    'Table',
+    'TableStyle',
+    'XPreformatted',
+    '_Container',
+    '_listWrapOn',
+    ''
+]
 
 from copy import copy
 import re
+import sys
 
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import *
-from reportlab.lib.enums import *
-
-
-from reportlab.lib.units import *
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ
-from reportlab.platypus.tableofcontents import TableOfContents
+import reportlab
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
+from reportlab.lib import units
 from reportlab.lib.styles import ParagraphStyle
-from xml.sax.saxutils import unescape, escape
+
+from reportlab.platypus.doctemplate import (
+    ActionFlowable,
+    FrameActionFlowable,
+    FrameBreak,
+    Indenter,
+    IndexingFlowable,
+    LayoutError,
+    BaseDocTemplate,
+    PageTemplate,
+)
+from reportlab.platypus.flowables import (
+    Flowable,
+    ImageAndFlowables,
+    PageBreak,
+    SlowPageBreak,
+    CondPageBreak,
+    Spacer,
+    _listWrapOn,
+    _FUZZ,
+    _Container,
+)
+from reportlab.platypus.frames import Frame
+from reportlab.platypus.paragraph import _doLink
+from reportlab.platypus.tables import Table, TableStyle
+from reportlab.platypus.tableofcontents import TableOfContents
+from reportlab.platypus.xpreformatted import XPreformatted
+
+from xml.sax.saxutils import unescape
 
 from . import styles
 
@@ -122,10 +192,10 @@ class Separation(Flowable):
 
     def wrap(self, w, h):
         self.w = w
-        return w, 1*cm
+        return w, 1 * units.cm
 
     def draw(self):
-        self.canv.line(0, 0.5*cm, self.w, 0.5*cm)
+        self.canv.line(0, 0.5 * units.cm, self.w, 0.5 * units.cm)
 
 
 class Reference(Flowable):
@@ -1058,3 +1128,18 @@ class MyTableOfContents(TableOfContents):
 
         return False
 
+class PageCounter(Flowable):
+
+    def __init__(self, number=0, style='arabic'):
+        self.style=str(style).lower()
+        self.number=int(number)
+        Flowable.__init__(self)
+
+    def wrap(self, availWidth, availHeight):
+        global _counter, _counterStyle
+        _counterStyle=self.style
+        _counter=self.number
+        return (self.width, self.height)
+
+    def drawOn(self, canvas, x, y, _sW):
+        pass
