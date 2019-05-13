@@ -5,6 +5,7 @@ __docformat__ = 'reStructuredText'
 
 from copy import copy
 import re
+import reportlab
 
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
