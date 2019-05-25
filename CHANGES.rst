@@ -5,6 +5,7 @@
 0.94.1 2019-05-25
 -----------------
 
+* Update urllib3 and Jinja2 dependencies in requirements.txt (Issue #775)
 * Fix "reportlab is not defined" error when using ReportLab 3.5.20+ (Issue #774)
 
 
