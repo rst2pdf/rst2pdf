@@ -2,6 +2,12 @@
 {next}
 ------
 
+0.94.1 2019-05-25
+-----------------
+
+* Fix "reportlab is not defined" error when using ReportLab 3.5.20+ (Issue #774)
+
+
 0.94 2019-01-24
 ---------------
 
