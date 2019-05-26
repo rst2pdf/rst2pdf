@@ -8,6 +8,13 @@
 * Allow specifying frame padding in stylesheets (Issue #753)
 * Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
 
+
+0.94.1 (2019-05-25)
+-------------------
+
+* Update urllib3 and Jinja2 dependencies in requirements.txt (Issue #775)
+* Fix "reportlab is not defined" error when using ReportLab 3.5.20+ (Issue #774)
+
 0.94 (2019-01-24)
 -----------------
 
