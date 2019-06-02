@@ -7,6 +7,6 @@ pyPdf2
 reportlab
 six
 smartypants
-sphinx<1.80
+sphinx<1.8.0
 svglib
 xhtml2pdf

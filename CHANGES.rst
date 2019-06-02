@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Changed: Update tested dependencies to include ReportLab 3.5.23 (Issue #779)
 * Fixed: Internal links work when using ReportLab 3.5.19+ (Issue #772)
 * Add support for units in spaceBefore/spaceAfter for stylesheets (Issue #754)
 * Remove support for Psyco (Issue #756)
