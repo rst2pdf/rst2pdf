@@ -1013,7 +1013,7 @@ class MyTableOfContents(TableOfContents):
                 leftColStyle = self.levelStyles[left_col_level]
             label = self.refid_lut.get((level, text, pageNum), None)
             if label:
-                pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
+                pre = u'<a href="#%s" color="%s">' % (label, self.linkColor)
                 post = u'</a>'
                 if isinstance(text, bytes):
                     text = text.decode('utf-8')

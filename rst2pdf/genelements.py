@@ -822,7 +822,7 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote,
                 client.targets.append(ltext)
         elif len(node['backrefs'])==1 and client.footnote_backlinks:
             if ltext not in client.targets:
-                label = Paragraph(ids+'<a href="%s" color="%s">%s</a>' % (
+                label = Paragraph(ids+'<a href="#%s" color="%s">%s</a>' % (
                                     node['backrefs'][0],
                                     client.styles.linkColor,
                                     ltext), client.styles["endnote"])
