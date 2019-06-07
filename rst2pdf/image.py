@@ -8,7 +8,13 @@ import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
-import urllib
+
+import six
+
+if six.PY3:
+    from urllib.request import urlretrieve
+else:
+    from urllib import urlretrieve
 
 from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid
@@ -78,7 +84,7 @@ class MyImage (Flowable):
 
         if filename.split("://")[0].lower() in ('http','ftp','https'):
             try:
-                filename2, _ = urllib.urlretrieve(filename)
+                filename2, _ = urlretrieve(filename)
                 if filename != filename2:
                     client.to_unlink.append(filename2)
                     filename = filename2
@@ -219,7 +225,7 @@ class MyImage (Flowable):
         if uri.split("://")[0].lower() not in ('http','ftp','https'):
             uri = os.path.join(client.basedir,uri)
         else:
-            uri, _ = urllib.urlretrieve(uri)
+            uri, _ = urlretrieve(uri)
             client.to_unlink.append(uri)
 
         srcinfo = client, uri
