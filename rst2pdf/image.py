@@ -19,7 +19,11 @@ else:
 from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid
 
-from .svgimage import SVGImage
+try:
+    from .svgimage import SVGImage
+except ModuleNotFoundError:
+    # svglib may optionally not be installed, which causes this error
+    pass
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
