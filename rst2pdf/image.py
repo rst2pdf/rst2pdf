@@ -19,6 +19,8 @@ else:
 from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid
 
+from .svgimage import SVGImage
+
 # This assignment could be overridden by an extension module
 VectorPdf = None
 
@@ -197,7 +199,6 @@ class MyImage (Flowable):
 
         if extension in ['svg','svgz']:
             log.info('Backend for %s is SVGIMage'%filename)
-            from .svgimage import SVGImage
             backend=SVGImage
 
         elif extension in ['pdf']:
@@ -251,7 +252,6 @@ class MyImage (Flowable):
         xdpi, ydpi = client.styles.def_dpi, client.styles.def_dpi
         extension = imgname.split('.')[-1].lower()
         if extension in ['svg','svgz']:
-            from .svgimage import SVGImage
             iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
