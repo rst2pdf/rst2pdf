@@ -55,6 +55,7 @@ from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
 from sphinx.util import ustrftime
 from sphinx.environment import NoUri
+from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import admonitionlabels, versionlabels
 if sphinx.__version__ >= '1.':
     from sphinx.locale import _
@@ -212,7 +213,7 @@ class PDFBuilder(Builder):
                 self.env.indexentries={}
                 for dname in self.docnames:
                     self.env.indexentries[dname]=t.get(dname,[])
-            genindex = self.env.create_index(self)
+            genindex = IndexEntries(self.env).create_index(self)
             self.env.indexentries=t
             # EOH (End Of Hack)
 
