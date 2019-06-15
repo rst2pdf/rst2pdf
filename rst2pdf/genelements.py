@@ -59,7 +59,7 @@ from .flowables import Table, DelayedTable, SplitTable, Heading, \
               Separation, BoxedContainer, BoundByWidth, \
               MyPageBreak, Reference, tablepadding, OddEven, \
               XPreformatted
-import math_flowable
+from rst2pdf.math_flowable import Math
 
 from .opt_imports import wordaxe, Paragraph, ParagraphStyle
 
@@ -954,7 +954,7 @@ class HandleAdmonition(NodeHandler, docutils.nodes.attention,
 class HandleMath(NodeHandler, docutils.nodes.math_block,  docutils.nodes.math):
     def gather_elements(self, client, node, style):
         label = node.attributes.get('label')
-        return [math_flowable.Math(node.astext(), label, style.fontSize, style.textColor.rgb())]
+        return [Math(node.astext(), label, style.fontSize, style.textColor.rgb())]
 
     def get_text(self, client, node, replaceEnt):
         #get style for current node
@@ -962,7 +962,7 @@ class HandleMath(NodeHandler, docutils.nodes.math_block,  docutils.nodes.math):
         node_fontsize=sty.fontSize
         node_color='#'+sty.textColor.hexval()[2:]
         label = node.attributes.get('label')
-        mf = math_flowable.Math(node.astext(),label=label,fontsize=node_fontsize,color=node_color)
+        mf = Math(node.astext(),label=label,fontsize=node_fontsize,color=node_color)
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()

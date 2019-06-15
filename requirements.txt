@@ -10,7 +10,6 @@ babel==2.7.0              # via sphinx
 backports.functools-lru-cache==1.5  # via matplotlib
 certifi==2019.3.9         # via requests
 chardet==3.0.4            # via requests
-cssselect2==0.2.1         # via svglib
 cycler==0.10.0            # via matplotlib
 docutils==0.14
 html5lib==1.0.1           # via xhtml2pdf
@@ -18,7 +17,6 @@ idna==2.8                 # via requests
 imagesize==1.1.0          # via sphinx
 jinja2==2.10.1            # via sphinx
 kiwisolver==1.1.0         # via matplotlib
-lxml==4.3.3               # via svglib
 markupsafe==1.1.1         # via jinja2
 matplotlib==2.2.4
 numpy==1.16.4             # via matplotlib
@@ -35,12 +33,11 @@ requests==2.22.0          # via sphinx
 six==1.12.0
 smartypants==2.0.1
 snowballstemmer==1.2.1    # via sphinx
-sphinx==1.8.4
+sphinx==1.8.5
 sphinxcontrib-websupport==1.1.2  # via sphinx
 subprocess32==3.5.4       # via matplotlib
-svglib==0.9.0
-tinycss2==0.6.1           # via cssselect2, svglib
+svg2rlg==0.3
 typing==3.6.6             # via sphinx
 urllib3==1.25.3           # via requests
-webencodings==0.5.1       # via html5lib, tinycss2
+webencodings==0.5.1       # via html5lib
 xhtml2pdf==0.2.3
