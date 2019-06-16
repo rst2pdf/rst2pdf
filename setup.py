@@ -29,7 +29,7 @@ except ImportError:
     install_requires.append('simplejson')
 
 tests_require = ['pyPdf2']
-sphinx_require = ['sphinx<1.8.0']
+sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 svgsupport_require = ['svglib']
 aafiguresupport_require = ['aafigure>=0.4']
