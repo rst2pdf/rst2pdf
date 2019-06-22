@@ -57,6 +57,7 @@ from sphinx.util import ustrftime
 from sphinx.environment import NoUri
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import admonitionlabels, versionlabels
+from sphinx.transforms import SphinxTransform
 if sphinx.__version__ >= '1.':
     from sphinx.locale import _
 
@@ -302,11 +303,17 @@ class PDFBuilder(Builder):
                 tree.append(appendix)
             self.spinx_logger.info('done')
 
+        # Replace Sphinx's HighlightLanguageTransform with our own for Spinx version between 1.8.0 & less than 2.0.0 as
+        # Sphinx's HighlightLanguageTransform breaks linenothreshold setting in the highlight directive (See issue #721)
+        # This code can be removed when we drop support for Python 2
+        if sphinx.__version__ > '1.7.9' and sphinx.__version__ < '2.0.0':
+            for i in range(len(self.env.app.registry.post_transforms)):
+                if self.env.app.registry.post_transforms[i].__name__ == 'HighlightLanguageTransform':
+                    self.env.app.registry.post_transforms[i] = HighlightLanguageTransform
+                    break
+
         self.spinx_logger.info("resolving references...")
-        #print tree
-        #print '--------------'
         self.env.resolve_references(tree, docname, self)
-        #print tree
 
         for pendingnode in tree.traverse(addnodes.pending_xref):
             # This needs work, need to keep track of all targets
@@ -781,6 +788,30 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         pass
     def depart_OddEvenNode(self, node):
         pass
+
+
+class HighlightLanguageTransform(SphinxTransform):
+    """
+    This is a copy of Sphinx's HighlightLanguageTransform for use with Sphinx versions between 1.8.0 & less than 2.0.0
+    as the Sphinx version of this class breaks the linenothreshold setting in the highlight directive (See issue #721).
+    This code can be removed when we drop support for Python 2
+
+    Apply highlight_language to all literal_block nodes.
+
+    This refers both :confval:`highlight_language` setting and
+    :rst:dir:`highlightlang` directive.
+
+    After processing, this overridden transform DOES NOT REMOVE ``highlightlang`` node from doctree in order to allow
+    pdfbuilder's visit_highlightlang to work as before.
+    """
+    default_priority = 400
+
+    def apply(self):
+        from sphinx.transforms.post_transforms.code import HighlightLanguageVisitor
+        visitor = HighlightLanguageVisitor(self.document,
+                                           self.config.highlight_language)
+        self.document.walkabout(visitor)
+
 
 # This is copied from sphinx.highlighting
 def lang_for_block(source,lang):
