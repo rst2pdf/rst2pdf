@@ -37,7 +37,9 @@ def parseRaw(data, node, client):
     elements = []
     lines = data.splitlines()
     for line in lines:
-        tokens = shlex.split(line)
+        lexer = shlex.shlex(line)
+        lexer.whitespace += ','
+        tokens = list(lexer)
         if not tokens:
             continue  # Empty line
         command = tokens[0]
@@ -62,9 +64,8 @@ def parseRaw(data, node, client):
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
-            w, h = tokens[1].split(',')
             elements.append(
-                flowables.MySpacer(adjustUnits(w), adjustUnits(h)))
+                flowables.MySpacer(adjustUnits(tokens[1]), adjustUnits(tokens[2])))
         elif command == 'Transition':
             elements.append(flowables.Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
@@ -72,7 +73,8 @@ def parseRaw(data, node, client):
         elif command == 'TextAnnotation':
             elements.append(flowables.TextAnnotation(*tokens[1:]))
         elif command == 'IncludePDF':
-            elements.append(flowables.IncludePDF(*tokens[1:], client=client))
+            args = shlex.split(line)[1:]
+            elements.append(flowables.IncludePDF(*args, client=client))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements
