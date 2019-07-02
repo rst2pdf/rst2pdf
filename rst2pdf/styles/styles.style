@@ -36,8 +36,6 @@
             [0cm, 0cm, 100%, 100%]
         showHeader : false
         showFooter : false
-        showHeader : false
-        showFooter : false
 
     oneColumn:
         frames: []
