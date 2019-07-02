@@ -394,25 +394,33 @@ class IncludePDF(FrameActionFlowable):
 
     def frameAction(self, frame):
         from rst2pdf.image import VectorPdf
+        from opt_imports import pdfinfo
         frame._generated_content = []
-        # Insert a page break and switch to no-margin-at-all pages
-        frame._generated_content.append(MyPageBreak())
         # Insert all the pages of the included PDF
         w = frame._width - frame.leftPadding - frame.rightPadding
         h = frame._height - frame.topPadding - frame.bottomPadding
-        try:
-            for p in range(1,5000):
-                path = self.pdf_path + '#page=%d' % p
-                if self.trim:
-                    path += '&viewrect=%d,%d,%d,%d' % (frame._x1, frame._y1, w, h)
-                if self.rotation is not None:
-                    path += '&rotate=%s' % self.rotation
 
-                frame._generated_content.append(
-                    VectorPdf(path, w, h, 'direct', 'auto', 1, (self.client, path))
-                )
-        except IndexError:  # we ran out of pages
-            pass
+        with open(self.pdf_path, 'rb') as _pdf:
+            doc = pdfinfo.PdfFileReader(_pdf)
+            page_count = int(doc['/Root']['/Pages']['/Count'])
+            _, _, dw, dh = [int(x) for x in doc.getPage(0)['/MediaBox']]
+        # dw and dh are from the inserted doc.
+        # need to scale it to fit in the current frame, keeping aspect ratio.
+        adjustment = min(w / dw, h / dh)
+        dw = dw * adjustment
+        dh = dh * adjustment
+        frame._generated_content.append(MyPageBreak())
+        for p in range(1, page_count + 1):
+            path = self.pdf_path + '#page=%d' % p
+            if self.trim:
+                path += '&viewrect=%d,%d,%d,%d' % (frame._x1, frame._y1, w, h)
+            if self.rotation is not None:
+                path += '&rotate=%s' % self.rotation
+
+            frame._generated_content.append(
+                VectorPdf(path, dw, dh, 'direct', 'auto', 1, (self.client, path))
+            )
+            frame._generated_content.append(MyPageBreak())
 
 class MyPageBreak(FrameActionFlowable):
 
