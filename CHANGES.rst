@@ -11,6 +11,7 @@
 * Remove support for PythonMagick, GFX and SWFTools (Issue #756)
 * Allow specifying frame padding in stylesheets (Issue #753)
 * Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
+* Added raw directive to support including external PDF documents.
 
 
 0.94.1 (2019-05-25)

@@ -12,7 +12,7 @@ from .styles import adjustUnits
 
 PageCounter = None
 
-def parseRaw(data, node):
+def parseRaw(data, node, client):
     """Parse and process a simple DSL to handle creation of flowables.
 
     Supported (can add others on request):
@@ -25,6 +25,7 @@ def parseRaw(data, node):
     * Transition
     * SetPageCounter
     * TextAnnotation "text of annotation" x_begin=-1 y_begin=-1 x_end=-1 y_end=-1
+    * IncludePDF path/to/file.pdf
 
     """
     global PageCounter
@@ -71,6 +72,8 @@ def parseRaw(data, node):
             elements.append(PageCounter(*tokens[1:]))
         elif command == 'TextAnnotation':
             elements.append(flowables.TextAnnotation(*tokens[1:]))
+        elif command == 'IncludePDF':
+            elements.append(flowables.IncludePDF(''.join(tokens[1:]), client))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements

@@ -59,7 +59,7 @@ class VectorPdf(Flowable):
         return loader(uri)
 
     def __init__(self, filename, width=None, height=None, kind='direct',
-                 mask=None, lazy=True, srcinfo=None):
+                 mask=None, lazy=True, srcinfo=None, page=None):
         Flowable.__init__(self)
         self._kind = kind
         self.xobj = xobj = self.load_xobj(srcinfo)

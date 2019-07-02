@@ -1,0 +1,7 @@
+This is before the PDF. In the next page there should be an embedded PDF with many pages.
+
+.. raw:: pdf
+
+   IncludePDF images/demo.pdf
+
+This is the end of the PDF and should be in a single page.

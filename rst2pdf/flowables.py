@@ -11,7 +11,6 @@ from reportlab.platypus import *
 from reportlab.platypus.doctemplate import *
 from reportlab.lib.enums import *
 
-
 from reportlab.lib.units import *
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
@@ -383,6 +382,27 @@ class MySpacer(Spacer):
         return w, self.height
 
 
+class IncludePDF(FrameActionFlowable):
+    def __init__(self, pdf_path, client):
+        self.pdf_path = pdf_path
+        self.client = client
+
+    def frameAction(self, frame):
+        from rst2pdf.image import VectorPdf
+        frame._generated_content = []
+        # Insert a page break and switch to no-margin-at-all pages
+        frame._generated_content.append(MyPageBreak())
+        # Insert all the pages of the included PDF
+        w = frame._width - frame.leftPadding - frame.rightPadding
+        h = frame._height - frame.topPadding - frame.bottomPadding
+        try:
+            for p in range(1,5000):
+                p = self.pdf_path + '#page=%d&viewrect=%d,%d,%d,%d' % (p, frame._x1, frame._y1, w, h)
+                frame._generated_content.append(
+                    VectorPdf(p, w, h, 'direct', 'auto', 1, (self.client, p))
+                )
+        except IndexError:  # we ran out of pages
+            pass
 
 class MyPageBreak(FrameActionFlowable):
 

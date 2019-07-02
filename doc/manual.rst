@@ -1281,6 +1281,19 @@ If you have a document that contains raw HTML, and have ``xhtml2pdf`` installed,
 ``rst2pdf`` will try to render that HTML inside your document. To enable this,
 use the ``--raw-html`` command line option.
 
+PDF inclusion
+-------------
+
+If you have a separate PDF document and want to include it inside the current one::
+
+    .. raw:: pdf
+
+       IncludePDF path/to/file.pdf
+
+This will take that PDF, cut it out matching the current frame and insert its contents in the current document. Any titles/sections in the included document will **not** be part of the main document's structure.
+
+What happens with page counters, unusual page templates and so on is still in flux. This feature is experimental.
+
 The counter role
 ================
 

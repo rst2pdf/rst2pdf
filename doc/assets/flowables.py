@@ -264,7 +264,7 @@ def tablepadding(padding):
 
 class SplitTable(DelayedTable):
     def __init__(self, data, colWidths, style, padding=3):
-        if len(data) <>1 or len(data[0]) <>2:
+        if len(data) !=1 or len(data[0]) !=2:
             log.error('SplitTable can only be 1 row and two columns!')
             sys.exit(1)
         DelayedTable.__init__(self,data,colWidths,style)
