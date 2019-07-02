@@ -62,8 +62,9 @@ def parseRaw(data, node, client):
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
+            w, h = tokens[1].split(',')
             elements.append(
-                flowables.MySpacer(adjustUnits(tokens[1]), adjustUnits(tokens[2])))
+                flowables.MySpacer(adjustUnits(w), adjustUnits(h)))
         elif command == 'Transition':
             elements.append(flowables.Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
