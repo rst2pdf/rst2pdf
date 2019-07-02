@@ -394,7 +394,7 @@ class IncludePDF(FrameActionFlowable):
 
     def frameAction(self, frame):
         from rst2pdf.image import VectorPdf
-        from opt_imports import pdfinfo
+        from .opt_imports import pdfinfo
         frame._generated_content = []
         # Insert all the pages of the included PDF
         w = frame._width - frame.leftPadding - frame.rightPadding
