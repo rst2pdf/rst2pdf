@@ -403,7 +403,7 @@ class IncludePDF(FrameActionFlowable):
         with open(self.pdf_path, 'rb') as _pdf:
             doc = pdfinfo.PdfFileReader(_pdf)
             page_count = int(doc['/Root']['/Pages']['/Count'])
-            _, _, dw, dh = [int(x) for x in doc.getPage(0)['/MediaBox']]
+            _, _, dw, dh = [float(x) for x in doc.getPage(0)['/MediaBox']]
         # dw and dh are from the inserted doc.
         # need to scale it to fit in the current frame, keeping aspect ratio.
         adjustment = min(w / dw, h / dh)
