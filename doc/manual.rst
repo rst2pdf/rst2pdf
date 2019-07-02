@@ -1288,9 +1288,13 @@ If you have a separate PDF document and want to include it inside the current on
 
     .. raw:: pdf
 
-       IncludePDF path/to/file.pdf
+       IncludePDF path/to/file.pdf 90 yes
 
-This will take that PDF, cut it out matching the current frame and insert its contents in the current document. Any titles/sections in the included document will **not** be part of the main document's structure.
+This will take that PDF and insert its contents in the current document. Any titles/sections in the included document will **not** be part of the main document's structure.
+
+The 90 means "rotate the PDF 90 degrees clockwise" and the "yes" means to cut the current page margins off the inserted PDF. That way if the inserted PDF has similar page size and frame positions as the main document it should look ok-ish.
+
+The default is no rotation and cutting the page margins.
 
 What happens with page counters, unusual page templates and so on is still in flux. This feature is experimental.
 

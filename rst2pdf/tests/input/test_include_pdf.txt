@@ -2,6 +2,6 @@ This is before the PDF. In the next page there should be an embedded PDF with ma
 
 .. raw:: pdf
 
-   IncludePDF images/demo.pdf
+   IncludePDF images/demo.pdf 180
 
 This is the end of the PDF and should be in a single page.

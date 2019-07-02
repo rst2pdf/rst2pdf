@@ -37,9 +37,7 @@ def parseRaw(data, node, client):
     elements = []
     lines = data.splitlines()
     for line in lines:
-        lexer = shlex.shlex(line)
-        lexer.whitespace += ','
-        tokens = list(lexer)
+        tokens = shlex.split(line)
         if not tokens:
             continue  # Empty line
         command = tokens[0]
@@ -73,7 +71,7 @@ def parseRaw(data, node, client):
         elif command == 'TextAnnotation':
             elements.append(flowables.TextAnnotation(*tokens[1:]))
         elif command == 'IncludePDF':
-            elements.append(flowables.IncludePDF(''.join(tokens[1:]), client))
+            elements.append(flowables.IncludePDF(*tokens[1:], client=client))
         else:
             log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
     return elements

@@ -383,9 +383,14 @@ class MySpacer(Spacer):
 
 
 class IncludePDF(FrameActionFlowable):
-    def __init__(self, pdf_path, client):
+    def __init__(self, pdf_path, rotation=None, trim='yes', client=None):
         self.pdf_path = pdf_path
         self.client = client
+        self.rotation = rotation
+        if trim.lower() in ['1', 'true', 'yes']:
+            self.trim = True
+        else:
+            self.trim = False
 
     def frameAction(self, frame):
         from rst2pdf.image import VectorPdf
@@ -397,9 +402,14 @@ class IncludePDF(FrameActionFlowable):
         h = frame._height - frame.topPadding - frame.bottomPadding
         try:
             for p in range(1,5000):
-                p = self.pdf_path + '#page=%d&viewrect=%d,%d,%d,%d' % (p, frame._x1, frame._y1, w, h)
+                path = self.pdf_path + '#page=%d' % p
+                if self.trim:
+                    path += '&viewrect=%d,%d,%d,%d' % (frame._x1, frame._y1, w, h)
+                if self.rotation is not None:
+                    path += '&rotate=%s' % self.rotation
+
                 frame._generated_content.append(
-                    VectorPdf(p, w, h, 'direct', 'auto', 1, (self.client, p))
+                    VectorPdf(path, w, h, 'direct', 'auto', 1, (self.client, path))
                 )
         except IndexError:  # we ran out of pages
             pass
