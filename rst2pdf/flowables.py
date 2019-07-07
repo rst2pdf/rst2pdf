@@ -413,7 +413,7 @@ class IncludePDF(FrameActionFlowable):
         for p in range(1, page_count + 1):
             path = self.pdf_path + '#page=%d' % p
             if self.trim:
-                path += '&viewrect=%d,%d,%d,%d' % (frame._x1, frame._y1, w, h)
+                path += '&viewrect=%d,%d,%d,%d' % (frame._x1, frame._y1, frame._width, frame._height)
             if self.rotation is not None:
                 path += '&rotate=%s' % self.rotation
 
