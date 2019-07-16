@@ -1,4 +1,7 @@
-# See LICENSE.txt for licensing terms
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 try:
     import pkg_resources
     try:

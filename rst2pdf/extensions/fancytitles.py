@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
 from rst2pdf.image import MyImage
@@ -6,9 +9,8 @@ import docutils
 from rst2pdf.opt_imports import Paragraph
 import reportlab
 import tempfile
-import re
-from xml.sax.saxutils import unescape
 import codecs
+
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
     '''

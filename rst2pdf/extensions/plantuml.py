@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 '''
 A rst2pdf extension to implement something similar to sphinx's plantuml extension
 (see http://pypi.python.org/pypi/sphinxcontrib-plantuml)

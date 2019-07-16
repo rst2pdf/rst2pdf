@@ -1,41 +1,32 @@
 # -*- coding: utf-8 -*-
-#$URL$
-#$Date$
-#$Revision$
-
-# :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
-# :Date: $Date$
-# :Copyright: This module has been placed in the public domain.
 #
-# This is a merge of `Using Pygments in ReST documents`_ from the pygments_
-# documentation, and a `proof of concept`_ by Felix Wiemann.
-#
-# ========== ===========================================================
-# 2007-06-01 Removed redundancy from class values.
-# 2007-06-04 Merge of successive tokens of same type
-#            (code taken from pygments.formatters.others).
-# 2007-06-05 Separate docutils formatter script
-#            Use pygments' CSS class names (like the html formatter)
-#            allowing the use of pygments-produced style sheets.
-# 2007-06-07 Merge in the formatting of the parsed tokens
-#            (misnamed as docutils_formatter) as class DocutilsInterface
-# 2007-06-08 Failsave implementation (fallback to a standard literal block
-#            if pygments not found)
-# ========== ===========================================================
-#
-# ::
+# SPDX-License-Identifier: Unlicense
 
-"""Define and register a code-block directive using pygments"""
+"""Define and register a code-block directive using pygments.
 
+This is a merge of `Using Pygments in ReST documents`_ from the pygments_
+documentation, and a `proof of concept`_ by Felix Wiemann.
 
-# Requirements
-# ------------
-# ::
+========== ===========================================================
+2007-06-01 Removed redundancy from class values.
+2007-06-04 Merge of successive tokens of same type
+           (code taken from pygments.formatters.others).
+2007-06-05 Separate docutils formatter script
+           Use pygments' CSS class names (like the html formatter)
+           allowing the use of pygments-produced style sheets.
+2007-06-07 Merge in the formatting of the parsed tokens
+           (misnamed as docutils_formatter) as class DocutilsInterface
+2007-06-08 Failsave implementation (fallback to a standard literal block
+           if pygments not found)
+========== ===========================================================
+"""
 
 import codecs
 from docutils import nodes
 from docutils.parsers.rst import directives
 import six
+
+from .log import log
 
 if six.PY3:
     unicode = str
@@ -47,8 +38,6 @@ try:
     from pygments.formatters.html import _get_ttype_class
 except ImportError:
     pass
-
-from .log import log
 
 
 # Customisation

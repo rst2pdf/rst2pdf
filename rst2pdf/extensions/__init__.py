@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 '''
 This place-holder module makes the extensions directory
 into a Python "package", so that external user-specific

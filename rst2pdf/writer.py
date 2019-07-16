@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 from StringIO import StringIO
 

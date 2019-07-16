@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 __docformat__ = 'reStructuredText'
 
@@ -13,11 +14,11 @@ from reportlab.lib.enums import *
 
 
 from reportlab.lib.units import *
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib.styles import ParagraphStyle
-from xml.sax.saxutils import unescape, escape
+from xml.sax.saxutils import unescape
 
 from . import styles
 

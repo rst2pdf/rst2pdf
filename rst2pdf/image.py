@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
 
 import glob
 import os
-from os.path import abspath, dirname, expanduser, join
+from os.path import abspath, dirname
 import sys
-import tempfile
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
 
 import six
 
+from .opt_imports import PILImage, pdfinfo
+from .log import log, nodeid
+
 if six.PY3:
     from urllib.request import urlretrieve
 else:
     from urllib import urlretrieve
-
-from .opt_imports import PILImage, pdfinfo
-from .log import log, nodeid
 
 try:
     from .svgimage import SVGImage

@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
 
-# See LICENSE.txt for licensing terms
-
-'''
+"""
 opt_imports.py contains logic for handling optional imports.
-
-'''
-
-import os
-import sys
-
-import six
+"""
 
 from .log import log
 

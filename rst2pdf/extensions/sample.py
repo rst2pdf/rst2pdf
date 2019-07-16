@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 print('''
 This is a sample rst2pdf extension.
 
@@ -10,6 +14,7 @@ monkey-patch any necessary changes into rst2pdf.
 An extension can live either in the extensions subdirectory, or
 anywhere on the python path.
 ''')
+
 
 def install(createpdf, options):
     ''' This function is called with an object with the createpdf

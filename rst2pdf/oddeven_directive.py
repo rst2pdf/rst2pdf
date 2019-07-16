@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
 
 """A custom directive that allows alternative contents to be generated
 on odd and even pages."""

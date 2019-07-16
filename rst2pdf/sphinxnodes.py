@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
 
-#$URL$
-#$Date$
-#$Revision$
-
-# See LICENSE.txt for licensing terms
 
 '''
 This module contains sphinx-specific node handlers.  An import
@@ -21,17 +18,14 @@ are combined into the instantiated object.
 from copy import copy
 
 from rst2pdf.log import nodeid, log
-from rst2pdf.flowables import  MySpacer, MyIndenter, Reference, DelayedTable, Table
+from rst2pdf.flowables import MySpacer, MyIndenter, Reference, DelayedTable
 from rst2pdf.image import MyImage, VectorPdf
-
-from rst2pdf.opt_imports import Paragraph, sphinx
 
 from rst2pdf.nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 import docutils
 
-################## NodeHandler subclasses ###################
 
 class SphinxHandler(NodeHandler):
     sphinxmode = True

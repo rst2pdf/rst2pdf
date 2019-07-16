@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 """
 Scan a list of folders and find all .afm files,

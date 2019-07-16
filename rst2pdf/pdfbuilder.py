@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 """
       Sphinx rst2pdf builder extension
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -13,42 +16,24 @@
     :license: BSD, see LICENSE for details.
 """
 
-import six
 import logging
-if six.PY2:
-    try:
-        import parser
-    except ImportError:
-        # parser is not available on Jython
-        parser = None
-else:
-    parser = None
+import os
 import re
 import sys
-import os
-from os import path
-from os.path import abspath, dirname, expanduser, join
-from pprint import pprint
-from copy import copy, deepcopy
-from xml.sax.saxutils import unescape, escape
-from traceback import print_exc
-
+from copy import copy
 from io import BytesIO
-if six.PY2:
-    from urlparse import urljoin, urlparse, urlunparse
-else:
-    from urllib.parse import urljoin, urlparse, urlunparse
-
-from pygments.lexers import get_lexer_by_name, guess_lexer
+from os import path
+from os.path import abspath, dirname
 
 from docutils import writers
 from docutils import nodes
-from docutils import languages
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
-
+import jinja2
+from pygments.lexers import guess_lexer
 import sphinx
+import six
 from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
@@ -56,17 +41,27 @@ from sphinx.util import SEP
 from sphinx.util import ustrftime
 from sphinx.environment import NoUri
 from sphinx.environment.adapters.indexentries import IndexEntries
-from sphinx.locale import admonitionlabels, versionlabels
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
+from sphinx.locale import versionlabels
 
 import rst2pdf
-from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
+from rst2pdf import createpdf, pygments_code_block_directive
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
-# Template engine for covers
-import jinja2
+if sphinx.__version__ >= '1.':
+    from sphinx.locale import _
+
+if six.PY2:
+    try:
+        import parser
+    except ImportError:
+        # parser is not available on Jython
+        parser = None
+    from urlparse import urlunparse
+else:
+    parser = None
+    from urllib.parse import urlunparse
+
 
 class PDFBuilder(Builder):
     name = 'pdf'

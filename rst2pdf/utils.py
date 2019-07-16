@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 import shlex
 
@@ -11,6 +12,7 @@ from .log import log, nodeid
 from .styles import adjustUnits
 
 PageCounter = None
+
 
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.

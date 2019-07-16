@@ -1,11 +1,6 @@
-
-################################################################################
-####  NOTE:  THIS IS STILL IN DEVELOPMENT:                                  ####
-####                                                                        ####
-####    - No encoder                                                        ####
-####    - Needs more tests!                                                 ####
-####                                                                        ####
-################################################################################
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
 
 '''
 RSON -- readable serial object notation

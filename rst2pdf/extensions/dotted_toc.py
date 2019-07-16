@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 # Some fragments of code are copied from Reportlab under this license:
 #

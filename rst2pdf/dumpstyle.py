@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# SPDX-License-Identifier: MIT
+
 '''
     Call dumps() to dump a stylesheet to a string.
 
@@ -11,6 +15,7 @@ import os
 
 from rson import loads as rloads
 from json import loads as jloads
+
 
 def dumps(obj, forcestyledict=True):
     ''' If forcestyledict is True, will attempt to

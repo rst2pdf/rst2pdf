@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
-# An extension module for rst2pdf
+#
+# SPDX-License-Identifier: MIT
 # Copyright 2010, Patrick Maupin
-# See LICENSE.txt for licensing terms
 
-'''
+'''An extension module for rst2pdf.
+
 preprocess is a rst2pdf extension module (invoked by ``-e preprocess``
 on the rst2pdf command line).
 

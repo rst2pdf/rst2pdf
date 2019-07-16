@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 from copy import copy
 from weakref import WeakKeyDictionary
@@ -9,7 +10,6 @@ try:
     from reportlab.platypus import Flowable
     from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-    import pdfrw
     from pdfrw.toreportlab import makerl
     from pdfrw.buildxobj import CacheXObj
 

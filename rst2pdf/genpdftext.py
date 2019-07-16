@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-
-#$URL$
-#$Date$
-#$Revision$
-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 import os
 import docutils.nodes
@@ -12,18 +8,15 @@ from xml.sax.saxutils import escape
 
 import six
 
+from .basenodehandler import NodeHandler
+from .opt_imports import Paragraph
+from .image import MyImage, missing
+
 if six.PY3:
     from urllib.parse import urljoin, urlparse
 else:
     from urlparse import urljoin, urlparse
 
-from reportlab.lib.units import cm
-from .opt_imports import Paragraph
-
-from .basenodehandler import NodeHandler
-from .flowables import MySpacer
-from .image import MyImage, missing
-from .log import log, nodeid
 
 class FontHandler(NodeHandler):
     def get_pre_post(self, client, node, replaceEnt):

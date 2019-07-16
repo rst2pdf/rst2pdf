@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
-'''
-Creates a rst2pdf stylesheet for each pygments style.
-'''
+#
+# SPDX-License-Identifier: MIT
 
-import sys
+"""
+Creates a rst2pdf stylesheet for each pygments style.
+"""
+
 import os
 import dumpstyle
 from pygments.token import STANDARD_TYPES

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 '''
 inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
@@ -12,7 +13,10 @@ the vectorpdf code to process the PDF.
     and doesn't check return from inkscape for errors.
 '''
 
-import sys, os, tempfile, subprocess
+import os
+import subprocess
+import sys
+import tempfile
 from weakref import WeakKeyDictionary
 from rst2pdf.log import log
 

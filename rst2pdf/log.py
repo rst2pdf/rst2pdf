@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+#
+# SPDX-License-Identifier: MIT
 
 import logging
-import sys
 
 log = logging.getLogger('rst2pdf')
 _fmt = logging.Formatter('[%(levelname)s] %(filename)s:%(lineno)d %(message)s')
