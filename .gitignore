@@ -9,5 +9,6 @@ rst2pdf/tests/output/*.log
 .vscode/
 .python-version
 .venv/
+.tox/
 dist/
 snap/.snapcraft
