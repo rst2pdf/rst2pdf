@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.platypus import Flowable, Paragraph

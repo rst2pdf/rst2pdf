@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
-'''
+"""
 This module contains sphinx-specific node handlers.  An import
 of this module will apparently fail if sphinx.roles hasn't been
 imported.
@@ -11,7 +10,7 @@ which is kept separate from the regular one.
 
 When the SphinxHandler class is instantiated, the two dictionaries
 are combined into the instantiated object.
-'''
+"""
 
 from copy import copy
 

@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
 """Singleton config object"""
 
@@ -7,7 +6,6 @@ import configparser
 import os
 
 from rst2pdf.rson import loads
-
 
 cfdir = os.path.join(os.path.expanduser('~'), '.rst2pdf')
 cfname = os.path.join(cfdir, 'config')

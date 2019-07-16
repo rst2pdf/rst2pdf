@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
-'''
+"""
 This module provides one useful class:  NodeHandler
 
 The NodeHandler class is designed to be subclassed.  Each subclass
@@ -29,7 +28,7 @@ to handle the given docutils node instance.
 If no NodeHandler subclass has been created to handle that particular
 type of docutils node, then default processing will occur and a warning
 will be logged.
-'''
+"""
 
 import inspect
 import types

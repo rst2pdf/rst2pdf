@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+
 """
       Sphinx rst2pdf builder extension
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

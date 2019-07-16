@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#
+# SPDX-License-Identifier: MIT
+
 '''
     Call dumps() to dump a stylesheet to a string.
 

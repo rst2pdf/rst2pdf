@@ -1,9 +1,8 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2020, Stephen Finucane <stephen@that.guru>
+
 """
-Copyright (c) 2020, Stephen Finucane <stephen@that.guru>
-
 Automated testing for rst2pdf.
-
-See LICENSE.txt for licensing terms
 """
 
 import glob

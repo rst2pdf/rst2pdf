@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 print(
     '''
 This is a sample rst2pdf extension.

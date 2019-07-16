@@ -1,4 +1,4 @@
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
 # TODO(stephenfin): Switch to 'importlib.metadata' once we drop support for
 # Python < 3.8

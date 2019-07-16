@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 
 from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable
 

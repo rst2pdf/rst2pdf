@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# See LICENSE.txt for licensing terms
+# SPDX-License-Identifier: MIT
 
 from docutils.languages import get_language as get_language
 
