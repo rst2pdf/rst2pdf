@@ -13,6 +13,7 @@ import os
 import glob
 import shutil
 import shlex
+import tempfile
 import distutils.spawn
 from copy import copy
 
@@ -263,26 +264,17 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
 
 
 def build_sphinx(sphinxdir, outpdf):
-    def getbuilddirs():
-        return globjoin(sphinxdir, '*build*')
-
-    for builddir in getbuilddirs():
-        shutil.rmtree(builddir)
-    errcode, result = textexec('make clean pdf', cwd=sphinxdir)
-    builddirs = getbuilddirs()
-    if len(builddirs) != 1:
-        log(result, 'Cannot determine build directory')
-        return 1, result
-    builddir, = builddirs
-    pdfdir = os.path.join(builddir, 'pdf')
-    pdffiles = globjoin(pdfdir, '*.pdf')
+    builddir = tempfile.mkdtemp(prefix='rst2pdf-sphinx-')
+    errcode, result = textexec("sphinx-build -b pdf %s %s" % (
+        os.path.abspath(sphinxdir), builddir))
+    pdffiles = globjoin(builddir, '*.pdf')
     if len(pdffiles) == 1:
         shutil.copyfile(pdffiles[0], outpdf)
     elif not pdffiles:
         log(result, 'Output PDF apparently not generated')
         errcode = 1
     else:
-        shutil.copytree(pdfdir, outpdf)
+        shutil.copytree(builddir, outpdf)
     return errcode, result
 
 
