@@ -144,7 +144,7 @@ def fixstyle(obj):
 def convert(srcname):
     ''' Convert a single file from .json to .style
     '''
-    print srcname
+    print(srcname)
     sstr = open(srcname, 'rb').read()
     sdata = fixstyle(jloads(sstr))
     dstr = dumps(sdata)
