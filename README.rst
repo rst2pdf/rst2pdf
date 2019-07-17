@@ -1,5 +1,10 @@
-rst2pdf: Use a text editor. Make a PDF.
-========================================
+=======
+rst2pdf
+=======
+
+------------------------------
+Use a text editor. Make a PDF.
+------------------------------
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX.
 This tool provides an alternative by producing PDF directly using the ReportLab
@@ -9,8 +14,9 @@ More information is available `at the main website`__
 
 __ https://rst2pdf.org
 
+
 Features
-========
+--------
 
 * User-defined page layout. Multiple frames per page, multiple layouts per
   document.
@@ -37,35 +43,37 @@ Features
 
 __ https://rst2pdf.org/static/manual.pdf
 
-Installation and use
-====================
+
+Installation
+------------
 
 Install from PyPI
------------------
+~~~~~~~~~~~~~~~~~
 
 The latest released version may be installed from PyPI by using
-pip or easy_install. It does not support Python 3::
+``pip``. It does not support Python 3::
 
-  sudo pip install rst2pdf
+    $ pip install --user rst2pdf
 
-Install from github
---------------------
+Install from GitHub
+~~~~~~~~~~~~~~~~~~~
 
-Work on rst2pdf has restarted on github, with the goals of supporting
+Work on rst2pdf has restarted on GitHub, with the goals of supporting
 Python 3, addressing outstanding issues, and not breaking anything. You
 can clone the repository and install this version::
 
-  git clone https://github.com/rst2pdf/rst2pdf my_clone_name
-  cd my_clone_name
-  git checkout <desired-branch> # if you want something other than master
-  sudo python setup.py install
+    $ git clone https://github.com/rst2pdf/rst2pdf rst2pdf
+    $ cd rst2pdf
+    $ git checkout <desired-branch> # if you want something other than master
+    $ pip install --user .
 
 You may want to install it in a virtualenv, but that is beyond the scope
 of this readme.
 
-Quick-start
-------------
 
-To convert a restructuredText document to a PDF, simply::
+Usage
+-----
 
-  rst2pdf <document name> output.pdf
+To convert a restructuredText document to a PDF, simply run::
+
+    $ rst2pdf <document name> output.pdf

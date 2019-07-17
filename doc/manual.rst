@@ -38,34 +38,35 @@ How to use rst2pdf
    PageBreak oneColumn
 
 Introduction
-============
+------------
 
 This document explains how to use rst2pdf. Here is the very short version::
 
     rst2pdf.py mydocument.txt -o mydocument.pdf
 
-That will, as long as mydocument.txt is a valid Restructured Text (ReST)
-document, produce a file called mydocument.pdf which is a PDF
-version of your document.
+That will, as long as ``mydocument.txt`` is a valid reStructured Text (rST)
+document, produce a file called ``mydocument.pdf`` which is a PDF version of
+your document.
 
-Of course, that means you just used default styles and settings. If it
-looks good enough for you, then you may stop reading this document,
-because you are done with it. If you are reading this in a PDF,
-it was generated using those default settings.
+Of course, that means you just used default styles and settings. If it looks
+good enough for you, then you may stop reading this document, because you are
+done with it. If you are reading this in a PDF, it was generated using those
+default settings.
 
-However, if you want to customize the output, or are just curious to see
-what can be done, let's continue.
+However, if you want to customize the output, or are just curious to see what
+can be done, let's continue.
+
 
 Command line options
-====================
-
+--------------------
 
 .. include:: rst2pdf.rst
    :start-line: 30
    :end-before: EXAMPLES
 
+
 Configuration File
-==================
+-------------------
 
 Since version 0.8, rst2pdf will read (if it is available) configuration files in
 ``/etc/rst2pdf.conf`` and ``~/.rst2pdf/config``.
@@ -73,21 +74,21 @@ Since version 0.8, rst2pdf will read (if it is available) configuration files in
 The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
 ``/etc/rst2pdf.conf`` [#]_
 
-.. [#] The ``/etc/rst2pdf.conf`` location makes sense for Linux and linux-like systems.
-       if you are using rst2pdf in other systems, please contact me and tell me where
-       the system-wide config file should be.
-
-
+.. [#] The ``/etc/rst2pdf.conf`` location makes sense for Linux and linux-like
+       systems. if you are using rst2pdf in other systems, please contact me and
+       tell me where the system-wide config file should be.
 
 Here's an example file showing some of the currently available options:
 
 .. code-block:: ini
    :include: assets/config.sample
 
-Pipe usage
-==========
 
-If no input nor output are provided, stdin and stdout will be used respectively
+Pipe usage
+----------
+
+If no input nor output are provided, ``stdin`` and ``stdout`` will be used
+respectively.
 
 You may want to use rst2pdf in a linux pipe as such::
 
@@ -97,19 +98,19 @@ or::
 
     curl http://docutils.sourceforge.net/docs/user/rst/quickstart.txt | rst2pdf > quickstart.pdf
 
-If no input argument is provided, stdin will be used::
+If no input argument is provided, ``stdin`` will be used::
 
     cat readme.txt | rst2pdf -o readme.pdf
 
-If output is set to dash '-', output goes to stdout::
+If output is set to dash (``-``), output goes to ``stdout``::
 
     rst2pdf -o - readme.txt > output.pdf
 
 
 Headers and Footers
-===================
+-------------------
 
-ReST supports headers and footers, using the header and footer directive::
+rST supports headers and footers, using the header and footer directive::
 
   .. header::
 
@@ -118,39 +119,50 @@ ReST supports headers and footers, using the header and footer directive::
 Often, you may want to put a page number there, or a section name.The following
 magic tokens will be replaced (More may be added as rst2pdf evolves):
 
-###Page###
+``###Page###``
     Replaced by the current page number.
-###Title###
+
+``###Title###``
     Replaced by the document title
-###Section###
+
+``###Section###``
     Replaced by the current section title
-###SectNum###
-    Replaced by the current section number. **Important:** You must use the sectnum directive for this to work.
-###Total###
-    Replaced by the total number of pages in the document. Keep in mind that this is the **real** number of pages, not the displayed number, so if you play with `page counters`_ this number will probably be wrong.
+
+``###SectNum###``
+    Replaced by the current section number. **Important:** You must use the
+    sectnum directive for this to work.
+
+``###Total###``
+    Replaced by the total number of pages in the document. Keep in mind that
+    this is the **real** number of pages, not the displayed number, so if you
+    play with `page counters`_ this number will probably be wrong.
 
 Headers and footers are visible by default but they can be disabled by specific
 `Page Templates`_ for example, cover pages. You can also set headers and footers
 via `command line options` or the `configuration file`_.
 
-If you want to do things like "put the page number on the *out* side of the page, check `The oddeven directive`_
+If you want to do things like "put the page number on the *out* side of the
+page, check `The oddeven directive`_
+
 
 Footnotes
-=========
+---------
 
 Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
 There is a real complicated technical reason for this: I can't figure out a
 clean way to do it right.
 
-You can get the same behaviour as with rst2html by specifying --inline-footnotes,
-and then the footnotes will appear where you put them (in other words, not footnotes,
-but "in-the-middle-of-text-notes" or just plain notes.)
+You can get the same behaviour as with rst2html by specifying
+``--inline-footnotes``, and then the footnotes will appear where you put them
+(in other words, not footnotes, but "in-the-middle-of-text-notes" or just plain
+notes.)
+
 
 Images
-======
+------
 
 Inline
-------
+~~~~~~
 
 You can insert images in the middle of your text like this::
 
@@ -162,25 +174,23 @@ This |biohazard| means you have to run.
 
 .. |biohazard| image:: assets/biohazard.png
 
-This only works correctly with reportlab 2.2 or later.
-
-
-
 Supported Image Types
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
-For raster images, rst2pdf supports anything PIL (The Python Imaging Library) supports.
-The exact list of supported formats varies according to your PIL version and system.
+For raster images, rst2pdf supports anything PIL (The Python Imaging Library)
+supports.  The exact list of supported formats varies according to your PIL
+version and system.
 
 For SVG support, you need to install svglib_ or use the inkscape extension.
 
-Some features will not work when using these images. For example, gradients will not
-display, and text may cause problems depending on font availability.
+Some features will not work when using these images. For example, gradients will
+not display, and text may cause problems depending on font availability.
 
 You can also use PDF images, via pdfrw.
 
-If you can choose between raster and vectorial images, for non-photographic images,
-vector files are usually smaller and look better, specially when printed.
+If you can choose between raster and vectorial images, for non-photographic
+images, vector files are usually smaller and look better, specially when
+printed.
 
 .. _svglib: https://pypi.org/project/svglib/
 
@@ -190,26 +200,28 @@ vector files are usually smaller and look better, specially when printed.
    to handle images specified as HTTP or FTP URLs by downloading them
    to a temporary file and including them in the PDF.
 
-   This is probably not a good idea unless you are **really** sure
-   the image won't go away.
+   This is probably not a good idea unless you are **really** sure the image
+   won't go away.
 
 Image Size
-----------
+~~~~~~~~~~
 
-PDFs are meant to reflect paper. A PDF has a specific size in centimeters or inches.
+PDFs are meant to reflect paper. A PDF has a specific size in centimeters or
+inches.
 
-Images usually are measured in pixels, which are meaningless in a PDF. To convert
-between pixels and inches or centimeters, we use a DPI (dots-per-inch) value.
+Images usually are measured in pixels, which are meaningless in a PDF. To
+convert between pixels and inches or centimeters, we use a DPI (dots-per-inch)
+value.
 
-For example, 300 pixels, with a 300DPI, are exactly one inch. 300 pixels at 100DPI
-are 3 inches.
+For example, 300 pixels, with a 300DPI, are exactly one inch. 300 pixels at
+100DPI are 3 inches.
 
 For that reason, to achieve a nice layout of the page, it's usually a good idea
 to specify the size of your images in those units, or as a percentage of the
 available width and you can ignore all this DPI nonsense ;-)
 
-The rst2pdf default is 300DPI, but you can change it using the --default-dpi option
-or the default_dpi setting in the config file.
+The rst2pdf default is 300DPI, but you can change it using the --default-dpi
+option or the default_dpi setting in the config file.
 
 Examples of images with specified sizes::
 
@@ -222,51 +234,52 @@ Examples of images with specified sizes::
   .. image:: home.png
      :width: 7cm
 
+The valid units you can use are: ``em``, ``ex``, ``px``, ``in``, ``cm``, ``mm``,
+``pt``, ``pc``, ``%``, ``""``.
 
-The valid units you can use are:
+* ``px``: Pixels. If you specify the size using this unit, rst2pdf will convert
+  it to inches using the default DPI explained above.
 
-"em" "ex" "px" "in" "cm" "mm" "pt" "pc" "%" "".
+* No unit. If you just use a number, it will be considered as pixels.
+  (**IMPORTANT:** this used to default to points. It was changed to be more
+  compatible with rst2html)
 
+* ``em``: This is the same as your base style's font size. By default: 10
+  points.
 
-* px: Pixels. If you specify the size using this unit, rst2pdf will convert it to
-  inches using the default DPI explained above.
+* ``ex``: rst2pdf will use the same broken definition as IE: em/2. In truth this
+  should be the height of the lower-case x character in your base style.
 
-* No unit. If you just use a number, it will be considered as pixels. (**IMPORTANT:**
-  this used to default to points. It was changed to be more compatible with rst2html)
+* ``in``: Inches (1 inch = 2.54 cm).
 
-* em: This is the same as your base style's font size. By default: 10 points.
+* ``cm``: centimeters (1cm = 0.39 inches)
 
-* ex: rst2pdf will use the same broken definition as IE: em/2. In truth this should
-  be the height of the lower-case x character in your base style.
+* ``mm``: millimeters (10mm = 1cm)
 
-* in: Inches (1 inch = 2.54 cm).
+* ``pt``: 1/72 inch
 
-* cm: centimeters (1cm = 0.39 inches)
+* ``pc``: 1/6 inch
 
-* mm: millimeters (10mm = 1cm)
+* ``%``: percentage of available width in the frame. Setting a percentage as a
+  height does **not** work and probably never will.
 
-* pt: 1/72 inch
+If you don't specify a size at all, rst2pdf will do its best to figure out what
+it should do:
 
-* pc: 1/6 inch
+Since there is no specified size, rst2pdf will try to convert the image's pixel
+size to inches using the DPI information available in the image itself. You can
+set that value using most image editors. For example, using Gimp, it's in the
+Image -> Print Size menu.
 
-* %: percentage of available width in the frame. Setting a percentage as a height
-  does **not** work and probably never will.
+So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5
+inches wide.
 
-If you don't specify a size at all, rst2pdf will do its best to figure out what it should do:
-
-Since there is no specified size, rst2pdf will try to convert the image's pixel size to
-inches using the DPI information available in the image itself. You can set that value
-using most image editors. For example, using Gimp, it's in the Image -> Print Size menu.
-
-So, if your image is 6000 pixels wide, and is set to 1200DPI, it will be 5 inches wide.
-
-If your image doesn't have a DPI property set, and doesn't have it's desired size specified,
-rst2pdf will arbitrarily decide it should use 300DPI (or whatever you choose with
-the --default-dpi option).
-
+If your image doesn't have a DPI property set, and doesn't have it's desired
+size specified, rst2pdf will arbitrarily decide it should use 300DPI (or
+whatever you choose with the ``--default-dpi`` option).
 
 Styles
-======
+~~~~~~
 
 You can style paragraphs with a style using the class directive::
 
@@ -282,7 +295,7 @@ Or inline styles using custom interpreted roles::
 
    I like color :redtext:`red`.
 
-For more information about this, please check the ReST docs.
+For more information about this, please check the rST docs.
 
 The only special thing about using rst2pdf here is the syntax of
 the stylesheet.
@@ -298,22 +311,22 @@ stylesheet and modify it) and pass it with the -s option::
 
 Those styles will always be searched in these places, in order:
 
-* What you specify using --stylesheet_path
+* What you specify using ``--stylesheet_path``
 
-* The option stylesheet_path in the config file
+* The option ``stylesheet_path`` in the config file
 
 * The current folder
 
-* ~/.rst2pdf/styles
+* ``~/.rst2pdf/styles``
 
 * The styles folder within rst2pdf's installation folder.
 
-You can use multiple -s options, or pass more than one stylesheet
+You can use multiple ``-s`` options, or pass more than one stylesheet
 separated with commas. They are processed in the order you give them
 so the *last* one has priority.
 
 Included StyleSheets
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 To make some of the more common adjustments easier, rst2pdf includes a
 collection of stylesheets you can use:
@@ -339,44 +352,30 @@ Page layout styles
 Page size styles
     Stylesheets that change the paper size.
 
-    The usual standard paper sizes are supported:
-
-    * A0
-    * A1
-    * A2
-    * A3
-    * A4 (default)
-    * A5
-    * A6
-    * B0
-    * B1
-    * B2
-    * B3
-    * B4
-    * B5
-    * B6
-    * Letter
-    * Legal
-    * 11x17
+    The usual standard paper sizes are supported: ``A0``, ``A1``, ``A2``,
+    ``A3``, ``A4`` (default), ``A5``, ``A6``, ``B0``, ``B1``, ``B2``, ``B3``,
+    ``B4``, ``B5``, ``B6``, ``Letter``, ``Legal``, ``11x17``
 
     The name of the stylesheet is lowercase.
 
 Code block styles
     See `Syntax Highlighting`_
 
-So, if you want to have a two-column, legal size, serif document with code in murphy style::
+So, if you want to have a two-column, legal size, serif document with code in
+``murphy`` style::
 
     rst2pdf mydoc.txt -s twocolumn,serif,murphy,legal
 
 StyleSheet Syntax
------------------
+~~~~~~~~~~~~~~~~~
 
 It's a JSON file with several elements in it.
 
 Font Alias
-----------
+~~~~~~~~~~
 
-This is the fontsAlias element. By default, it uses some of the standard PDF fonts::
+This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
+fonts::
 
   "fontsAlias" : {
     "stdFont": "Helvetica",
@@ -393,41 +392,42 @@ use aliases.
 
 The standard PDF fonts are these:
 
-  Times_Roman
-  Times-Bold
-  Times-Italic
-  Times-Bold-Italic
-  Helvetica
-  Helvetica_Bold
-  Helvetica-Oblique
-  Helvetica-Bold-Oblique
-  Courier
-  Courier-Bold
-  Courier-Oblique
-  Courier-Bold-Oblique
-  Symbol
-  Zapf-Dingbats
+- ``Times_Roman``
+- ``Times-Bold``
+- ``Times-Italic``
+- ``Times-Bold-Italic``
+- ``Helvetica``
+- ``Helvetica_Bold``
+- ``Helvetica-Oblique``
+- ``Helvetica-Bold-Oblique``
+- ``Courier``
+- ``Courier-Bold``
+- ``Courier-Oblique``
+- ``Courier-Bold-Oblique``
+- ``Symbol``
+- ``Zapf-Dingbats``
 
 Style Definition
-----------------
+~~~~~~~~~~~~~~~~
 
-Then you have a 'styles' which is a list of [ stylename, styleproperties ]. For example::
+Then you have a ``styles`` which is a list of ``[ stylename, styleproperties
+]``. For example::
 
     ["normal" , {
       "parent": "base"
     }],
 
-This means that the style called "normal" inherits style "base". So, each property
-not defined in the normal style will be taken from the base style.
+This means that the style called ``normal`` inherits style ``base``. So, each
+property not defined in the normal style will be taken from the base style.
 
-I suggest you do not remove any style from the default stylesheet. Add or modify at
-will, though.
+I suggest you do not remove any style from the default stylesheet. Add or modify
+at will, though.
 
-If your document requires a style that is not defined in your stylesheet, it will
-print a warning and use bodytext instead.
+If your document requires a style that is not defined in your stylesheet, it
+will print a warning and use ``bodytext`` instead.
 
-Also, the order of the styles is important: if styleA is the parent of styleB,
-styleA should be earlier in the stylesheet.
+Also, the order of the styles is important: if ``styleA`` is the parent of
+``styleB``, ``styleA`` should be earlier in the stylesheet.
 
 These are all the possible attributes for a style and their default values.
 Some of them, like alignment, apply only when used to paragraphs,
@@ -456,31 +456,34 @@ and not on inline styles::
     "allowWidows": 5,
     "allowOrphans": 4
 
-The following are the only attributes that work on styles when used for interpreted roles
-(inline styles):
+The following are the only attributes that work on styles when used for
+interpreted roles (inline styles):
 
-* fontName
-
-* fontSize
-
-* textColor
-
-* backColor (if your reportlab is version 2.3 or newer)
+* ``fontName``
+* ``fontSize``
+* ``textColor``
+* ``backColor``
 
 Widows and Orphans
-------------------
+~~~~~~~~~~~~~~~~~~
 
-Widow
-    A paragraph-ending line that falls at the beginning of the following page/column, thus separated from the remainder of the text.
+``Widow``
+    A paragraph-ending line that falls at the beginning of the following
+    page/column, thus separated from the remainder of the text.
 
-Orphan
+``Orphan``
     A paragraph-opening line that appears by itself at the bottom of a page/column.
 
-Rst2pdf has *some* widow/orphan control. Specifically, here's what's currently implemented:
+rst2pdf has *some* widow/orphan control. Specifically, here's what's currently
+implemented:
 
-On ordinary paragraphs, allowWidows and allowOrphans is passed to reportlab, which is supposed to do something about it if they are non-zero. In practice, it doesn't seem to have much effect.
+On ordinary paragraphs, ``allowWidows`` and ``allowOrphans`` is passed to
+reportlab, which is supposed to do something about it if they are non-zero. In
+practice, it doesn't seem to have much effect.
 
-The plan is to change the semantics of those settings, so that they mean the minimum number of lines that can be left alone at the beginning of a page (widows) or at the end (orphans).
+The plan is to change the semantics of those settings, so that they mean the
+minimum number of lines that can be left alone at the beginning of a page
+(widows) or at the end (orphans).
 
 Currently, these semantics only work for literal blocks and code blocks.
 
@@ -500,15 +503,14 @@ Currently, these semantics only work for literal blocks and code blocks.
 In future versions this may extend to ordinary paragraphs.
 
 Font Embedding
---------------
+~~~~~~~~~~~~~~
 
-There are thousands of excellent free True Type and Type 1 fonts available on the
-web, and you can use many of them in your documents by declaring them in your
-stylesheet.
-
+There are thousands of excellent free True Type and Type 1 fonts available on
+the web, and you can use many of them in your documents by declaring them in
+your stylesheet.
 
 The Easy Way
-~~~~~~~~~~~~
+************
 
 Just use the font name in your style. For example, you can define this::
 
@@ -524,33 +526,34 @@ Fonty is a True Type font:
 """"""""""""""""""""""""""
 
 1. You need to have it installed in your system, and have the fc-match
-    utility available (it's part of fontconfig_). You can test if it is
-    so by running this command::
+   utility available (it's part of fontconfig_). You can test if it is
+   so by running this command::
 
         $ fc-match fonty
         fonty.ttf: "Fonty" "Normal"
 
-    If you are in Windows, I need your help ;-) or you can use `The Harder Way (True Type)`_
+   If you are in Windows, I need your help ;-) or you can use `The Harder Way (True Type)`_
 
-2. The folder where fonty.ttf is located needs to be in your font path. You can set it
-    using the --font-path option. For example::
+2. The folder where ``fonty.ttf`` is located needs to be in your font path. You
+   can set it using the ``--font-path`` option. For example::
 
         rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/fonts
 
-    You don't need to put the *exact* folder, just something that is above it. In my own case,
-    fonty is in /usr/share/fonts/TTF
+   You don't need to put the *exact* folder, just something that is above it.
+   In my own case, fonty is in ``/usr/share/fonts/TTF``
 
-Whenever a font is embedded, you can refer to it in a style by its name, and
-to its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique.
+Whenever a font is embedded, you can refer to it in a style by its name, and to
+its variants by the aliases ``Name-Oblique``, ``Name-Bold``,
+``Name-BoldOblique``.
 
 Fonty is a Type 1 font:
 """""""""""""""""""""""
 
-You need it installed, and the folders where its font metric (.afm) and binary (.pfb) files
-are located need to be in your font fath.
+You need it installed, and the folders where its font metric (``.afm``) and
+binary (``.pfb``) files are located need to be in your font fath.
 
-For example, the "URW Palladio L" font that came with my installation of TeX consists of
-the following files::
+For example, the "URW Palladio L" font that came with my installation of TeX
+consists of the following files::
 
     /usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
     /usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb
@@ -577,54 +580,53 @@ There are some standard aliases defined so you can use other names::
     'New Century Schoolbook' : 'Century Schoolbook L',
     'ITC Zapf Chancery'      : 'URW Chancery L'
 
-So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique`` And it will mean
-``URWPalladioL`` or ``CenturySchL-Ital``, respectively.
+So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique``
+And it will mean ``URWPalladioL`` or ``CenturySchL-Ital``, respectively.
 
-Whenever a font is embedded, you can refer to it in a style by its name, and
-to its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique.
+Whenever a font is embedded, you can refer to it in a style by its name, and to
+its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique.
 
 The Harder Way (True Type)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+**************************
 
-The stylesheet has an element is "embeddedFonts" that handles embedding True Type
-fonts in your PDF.
-
-Usually, it's empty, because with the default styles you are not using any font
-beyond the standard PDF fonts::
+The stylesheet has an element is ``embeddedFonts`` that handles embedding True
+Type fonts in your PDF. Usually, it's empty, because with the default styles you
+are not using any font beyond the standard PDF fonts::
 
   "embeddedFonts" : [ ],
 
-You can put there the name of the font, and rst2pdf will try to embed it as described
-above. Example::
+You can put there the name of the font, and rst2pdf will try to embed it as
+described above. Example::
 
   "embeddedFonts" : [ "Tuffy" ],
 
-Or you can be explicit and tell rst2pdf the files that contain each variant of the
-font.
+Or you can be explicit and tell rst2pdf the files that contain each variant of
+the font.
 
-Suppose you want to use the nice public domain `Tuffy font`_, then you need to give the
-filenames of all variants::
+Suppose you want to use the nice public domain `Tuffy font`_, then you need to
+give the filenames of all variants::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
 
-This will provide your styles with fonts called "Tuffy" "Tuffy_Bold" and so on. They will
-be available with the names based on the filenames (Tuffy_Bold) and also by standard
-aliases similar to those of the standard PDF fonts (Tuffy-Bold/Tuffy-Oblique/Tuffy-BoldOblique).
+This will provide your styles with fonts called ``Tuffy``, ``Tuffy_Bold`` and so
+on.  They will be available with the names based on the filenames
+(``Tuffy_Bold``) and also by standard aliases similar to those of the standard
+PDF fonts (``Tuffy-Bold``, ``Tuffy-Oblique``, ``Tuffy-BoldOblique``, etc..)
 
-Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it will use
-Tuffy_Italic. That's why it's better if you use fonts that provide the four variants, and
-you should put them in **that** order. If your font lacks a variant, use the
-"normal" variant instead.
+Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it
+will use ``Tuffy_Italic``. That's why it's better if you use fonts that provide
+the four variants, and you should put them in **that** order. If your font lacks
+a variant, use the "normal" variant instead.
 
-For example, if you only had Tuffy.ttf::
+For example, if you only had ``Tuffy.ttf``::
 
   "embeddedFonts" : [ ["Tuffy.ttf","Tuffy.ttf","Tuffy.ttf","Tuffy.ttf"] ],
 
-However, that means that italics and bold in styles using Tuffy will not work correctly (they will
-display as regular text).
+However, that means that italics and bold in styles using Tuffy will not work
+correctly (they will display as regular text).
 
-If you want to use this as the base font for your document, you should change the fontsAlias
-section accordingly. For example::
+If you want to use this as the base font for your document, you should change
+the ``fontsAlias`` section accordingly. For example::
 
       "fontsAlias" : {
         "stdFont": "Tuffy",
@@ -634,8 +636,8 @@ section accordingly. For example::
         "stdMono": "Courier"
       },
 
-If, on the other hand, you only want a specific style to use the Tuffy
-font, don't change the fontAlias, and set the fontName properties for
+If, on the other hand, you only want a specific style to use the Tuffy font,
+don't change the ``fontAlias`` but rather set the ``fontName`` properties for
 that style. For example::
 
     ["heading1" , {
@@ -648,21 +650,21 @@ that style. For example::
 
 .. _tuffy font: http://tulrich.com/fonts/
 
-By default, rst2pdf will search for the fonts in its fonts folder and
-in the current folder. You can make it search another folder by passing
-the --font-folder option, or you can use absolute paths in your stylesheet.
+By default, rst2pdf will search for the fonts in its fonts folder and in the
+current folder. You can make it search another folder by passing the
+``--font-folder`` option, or you can use absolute paths in your stylesheet.
 
 The Harder Way (Type1)
-~~~~~~~~~~~~~~~~~~~~~~
+**********************
 
 To be written (and implemented and tested)
 
 Page Size and Margins
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
-In your stylesheet, the pageSetup element controls your page layout.
+In your stylesheet, the ``pageSetup`` element controls your page layout.
 
-Here's the default stylesheet's::
+Here's the default stylesheet's element::
 
   "pageSetup" : {
     "size": "A4",
@@ -677,10 +679,11 @@ Here's the default stylesheet's::
     "margin-gutter": "0cm"
   },
 
-Size is one of the standard paper sizes, like A4 or LETTER.
+Size is one of the standard paper sizes, like ``A4`` or ``LETTER``.
 
-Here's a list: A0, A1, A2, A3, A4, A5, A6, B0, B1, B2, B3, B4, B5, B6,
-LETTER, LEGAL, ELEVENSEVENTEEN.
+Here's a list: ``A0``, ``A1``, ``A2``, ``A3``, ``A4``, ``A5``, ``A6``, ``B0``,
+``B1``, ``B2``, ``B3``, ``B4``, ``B5``, ``B6``, ``LETTER``, ``LEGAL``,
+``ELEVENSEVENTEEN``.
 
 If you want a non-standard size, set size to null and use width and height.
 
@@ -702,16 +705,16 @@ if you will display it on-screen on a two-page format (common in many PDF
 readers, nice for ebooks), a negative value may be pleasant.
 
 Advanced: table styles
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 This is new in 0.12.
 
-These are a few extra options in styles that are only used when the style is applied to a table.
-This happens in two cases:
+These are a few extra options in styles that are only used when the style is
+applied to a table.  This happens in two cases:
 
 1) You are using the class directive on a table:
 
-.. code-block:: rest
+.. code-block:: rst
 
    .. class:: thick
 
@@ -719,8 +722,8 @@ This happens in two cases:
    |   A   |   B     |
    +-----------------+
 
-2) It's a style that automatically applies to something that is *drawn* using a table.
-   Currently these include:
+2) It's a style that automatically applies to something that is *drawn* using a
+   table. Currently these include:
 
    * Footnotes / endnotes (endnote style)
    * Lists (item_list, bullet_list option_list and field_list styles)
@@ -756,35 +759,36 @@ Commands
         COLBACKGROUNDS
         VALIGN
 
-   Each takes as argument a couple of coordinates, where (0,0) is top-left, and (-1,-1) is
-   bottom-right, and 0 or more extra arguments.
+   Each takes as argument a couple of coordinates, where ``(0,0)`` is top-left,
+   and ``(-1,-1)`` is bottom-right, and 0 or more extra arguments.
 
-   For example, INNERGRID takes a linewidth and a color::
+   For example, ``INNERGRID`` takes a line width and a color::
 
        [ "INNERGRID", [ 0, 0 ], [ -1, -1 ], 0.25, "black" ],
 
    That would mean "draw all lines inside the table with .25pt black"
 
-colWidths
-   A list of the column widths you want, in the unit you prefer (default unit is pt).
+``colWidths``
+   A list of the column widths you want, in the unit you prefer (default unit is
+   ``pt``).
 
    Example::
 
        "colWidths": ["3cm",null]
 
-   If your colWidths has fewer values than columns in your table, the rest are autocalculated.
-   A column width of null means "guess".
+   If your ``colWidths`` has fewer values than columns in your table, the rest
+   are auto-calculated.  A column width of null means "guess".
 
-   If you don't specify column widths, the table will try to look proportional to the restructured
-   text source.
+   If you don't specify column widths, the table will try to look proportional
+   to the restructured text source.
 
 Multiple Stylesheets
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 When you use a custom stylesheet, you don't need to define *everything* in it.
-Whatever you don't define will be taken from the default stylesheet. For example,
-if you only want to change page size, default font and font size, this would
-be enough:
+Whatever you don't define will be taken from the default stylesheet. For
+example, if you only want to change page size, default font and font size, this
+would be enough:
 
 .. code-block:: js
 
@@ -802,16 +806,15 @@ be enough:
         ]
     }
 
-.. Note::
+.. note::
 
     The ``command`` option used for table styles is not kept across stylesheets.
     For example, the default stylesheet defines endnote with this command list::
 
         "commands": [ [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ] ]
 
-
-    If you redefine endnote in another stylesheet and use this to create a vertical line between
-    the endnote's columns::
+    If you redefine endnote in another stylesheet and use this to create a
+    vertical line between the endnote's columns::
 
         "commands": [ [ "LINEAFTER", [ 0, 0 ], [ 1, -1 ], .25, "black" ] ]
 
@@ -829,45 +832,47 @@ be enough:
     PageBreak
 
 Styling Your Document
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 Which styles you need to modify to achieve your desired result is not obvious.
 In this section, you will see some hints and pointers to that effect.
 
 The Base Styles
-~~~~~~~~~~~~~~~
+***************
 
 There are three styles which have great effect, they are ``base``,
 ``normal`` and ``bodytext``.
 
-Here's an example, the twelvepoint stylesheet::
+Here's an example, the ``twelvepoint`` stylesheet::
 
     {"styles": [["base", {"fontSize": 12}]]}
 
-Since all other styles inherit ``base``, changing the fontSize changes the fontSize
-for everything in your document.
+Since all other styles inherit ``base``, changing the ``fontSize`` changes the
+``fontSize`` for everything in your document.
 
-The ``normal`` style is meant for most elements, so usually it's the same as changing
-``base``.
+The ``normal`` style is meant for most elements, so usually it's the same as
+changing ``base``.
 
-The ``bodytext`` style is for elements that form paragraphs. So, for example, you can set
-your document to be left-aligned like this::
+The ``bodytext`` style is for elements that form paragraphs. So, for example,
+you can set your document to be left-aligned like this::
 
     {"styles": [["bodytext", {"alignment": "left"}]]}
 
-There are elements, however, that don't inherit from bodytext, for example headings and the
-styles used in the table of contents. Those are elements that are not real paragraphs, so
-they should not follow the indentation and spacing you use for your document's main content.
+There are elements, however, that don't inherit from ``bodytext``, for example
+headings and the styles used in the table of contents. Those are elements that
+are not real paragraphs, so they should not follow the indentation and spacing
+you use for your document's main content.
 
-The ``heading`` style is inherited by all sorts of titles: section titles, topic titles,
-admonition titles, etc.
+The ``heading`` style is inherited by all sorts of titles: section titles, topic
+titles, admonition titles, etc.
 
 Lists
-~~~~~
+*****
 
 Styling lists is mostly a matter of spacing and indentation.
 
-The space before and after a list is taken from the ``item_list`` and ``bullet_list`` styles::
+The space before and after a list is taken from the ``item_list`` and
+``bullet_list`` styles::
 
     ["item_list", {
       "parent": "bodytext",
@@ -889,27 +894,30 @@ The space before and after a list is taken from the ``item_list`` and ``bullet_l
         "colWidths": ["20",null]
     }],
 
-Yes, these are table styles, because they are implemented as tables. The RIGHTPADDING command
-and the colWidths option can be used to adjust the position of the bullet/item number.
+Yes, these are table styles, because they are implemented as tables. The
+``RIGHTPADDING`` command and the ``colWidths`` option can be used to adjust the
+position of the bullet/item number.
 
-To control the separation between items, you use the item_list_item and
-``bullet_list_item`` styles' spaceBefore and spaceAfter options, for example::
+To control the separation between items, you use the ``item_list_item`` and
+``bullet_list_item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
+example::
 
     ["bullet_list_item" , {
       "parent": "bodytext",
       "spaceBefore": 20
     }]
 
-Remember that this is only used **between items** and not before the first or after the
-last items.
+Remember that this is only used **between items** and not before the first or
+after the last items.
+
 
 Syntax Highlighting
-===================
+-------------------
 
-Rst2pdf adds a non-standard directive, called code-block, which produces syntax
-highlighted for many languages using Pygments_.
+rst2pdf adds a non-standard directive, called ``code-block``, which produces
+syntax highlighted for many languages using Pygments_.
 
-For example, if you want to include a python fragment::
+For example, if you want to include a Python fragment::
 
     .. code-block:: python
 
@@ -935,7 +943,7 @@ You can use the ``linenos`` option to display line numbers:
 You can use the ``hl_lines`` option to emphasize certain lines by dimming the
 other lines. This parameter takes a space separated list of line numbers. The
 other lines are then styled with the class ``pygments_diml`` that defaults to
-gray. e.g. to highlight ``print "line a"`` and ``print "line b"``:
+gray. For example, to highlight ``print "line a"`` and ``print "line b"``:
 
 .. code-block:: python
    :hl_lines: 2 3
@@ -945,43 +953,46 @@ gray. e.g. to highlight ``print "line a"`` and ``print "line b"``:
        print "line b"
        print "line c"
 
-Rst2pdf includes several stylesheets for highlighting code:
+rst2pdf includes several stylesheets for highlighting code:
 
-* autumn
-* borland
-* bw
-* colorful
-* emacs
-* friendly
-* fruity
-* manni
-* murphy
-* native
-* pastie
-* perldoc
-* trac
-* vs
+* ``autumn``
+* ``borland``
+* ``bw``
+* ``colorful``
+* ``emacs``
+* ``friendly``
+* ``fruity``
+* ``manni``
+* ``murphy``
+* ``native``
+* ``pastie``
+* ``perldoc``
+* ``trac``
+* ``vs``
 
-You can use any of them instead of the default by adding, for example, a ``-s murphy`` to
-the command line.
+You can use any of them instead of the default by adding, for example, a ``-s
+murphy`` to the command line.
 
 If you already are using a custom stylesheet, use both::
 
     rst2pdf mydoc.rst -o mydoc.pdf -s mystyle.json,murphy
 
-The default is the same as "emacs".
+The default is the same as ``emacs``.
 
 There is an online demo of pygments showing these styles:
 
     http://pygments.org/demo/1817/
 
-The overall look of a code box is controlled by the "code" style or by a class you apply to it using the ``.. class::`` directive.
-Additionally, if you want to change some properties when using different languages, you can define styles with the name of the language.
-For example, a ``python`` style will be applied to code blocks created with ``.. code-block:: python``.
+The overall look of a code box is controlled by the "code" style or by a class
+you apply to it using the ``.. class::`` directive.  Additionally, if you want
+to change some properties when using different languages, you can define styles
+with the name of the language.  For example, a ``python`` style will be applied
+to code blocks created with ``.. code-block:: python``.
 
-The look of the line numbers is controlled by the "linenumbers" style.
+The look of the line numbers is controlled by the ``linenumbers`` style.
 
-As rst2pdf is written in python let's see some examples and variations around python.
+As rst2pdf is written in Python, let's see some examples and variations around
+Python.
 
 Python in console
 
@@ -1007,9 +1018,9 @@ Python traceback
     ZeroDivisionError: integer division or modulo by zero
     Exit 1
 
-The code-block directive supports many options, that mirror pygments'::
+The code-block directive supports many options, that mirror Pygments'::
 
-	FIXME: fix this to really explain them all. This is a placeholder.
+    FIXME: fix this to really explain them all. This is a placeholder.
 
                                 'stripnl' : string_bool,
                                 'stripall': string_bool,
@@ -1047,32 +1058,34 @@ The code-block directive supports many options, that mirror pygments'::
 You can find more information about them in the pygments manual.
 
 File inclusion
---------------
+**************
 
-Also, you can use the code-block directive with an external file, using
-the :include: option::
+You can use the ``code-block`` directive with an external file, using the
+``:include:`` option::
 
   .. code-block:: python
      :include: setup.py
 
-This will give a warning if setup.py doesn't exist or can't be opened.
+This will give a warning if ``setup.py`` doesn't exist or can't be opened.
 
 Include with Boundaries
-~~~~~~~~~~~~~~~~~~~~~~~
+***********************
 
-you can add selectors to limit the inclusion to a portion of the file.
-the options are:
+You can add selectors to limit the inclusion to a portion of the file.
+The options are:
 
-:start-at: string
-    will include file beginning at the first occurrence of string, string **included**
+``:start-at: string``
+    will include file beginning at the first occurrence of string, string
+    **included**
 
-:start-after: string
-    will include file beginning at the first occurrence of string, string **excluded**
+``:start-after: string``
+    will include file beginning at the first occurrence of string, string
+    **excluded**
 
-:end-before: string
+``:end-before: string``
     will include file up to the first occurrence of string, string **excluded**
 
-:end-at: string
+``:end-at: string``
     will include file up to the first occurrence of string, string **included**
 
 Let's display a class from rst2pdf::
@@ -1082,38 +1095,39 @@ Let's display a class from rst2pdf::
          :start-at: class Separation(Flowable):
          :end-before: class Reference(Flowable):
 
-this command gives
+This command gives
 
 .. code-block:: python
     :include: assets/flowables.py
     :start-at: class Separation(Flowable):
     :end-before: class Reference(Flowable):
 
-
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
 
 Options
-~~~~~~~
+*******
 
-linenos
+``linenos``
     Display line numbers along the code
 
-linenos_offset
-    If you include a file and are skipping the beginning, using the linenos_offset
-    makes the line count start from the real line number, instead of 1.
+``linenos_offset``
+    If you include a file and are skipping the beginning, using the
+    ``linenos_offset`` makes the line count start from the real line number,
+    instead of 1.
 
 
 Raw Directive
-=============
+-------------
 
 Raw PDF
--------
+*******
 
-Rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF generation library.
-You can use the raw directive to insert pagebreaks and spacers (other reportlab flowables
-may be added if there's interest), and set page transitions.
+rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF
+generation library.  You can use the raw directive to insert pagebreaks and
+spacers (other reportlab flowables may be added if there's interest), and set
+page transitions.
 
 The syntax is shell-like, here's an example::
 
@@ -1132,18 +1146,19 @@ The syntax is shell-like, here's an example::
 
     And another paragraph.
 
-The unit used by the spacer by default is points, and using a space or a comma is the same thing
-in all cases.
+The unit used by the spacer by default is points, and using a space or a comma
+is the same thing in all cases.
 
 Page Counters
--------------
+*************
 
-In some documents, you may not want your page counter to start in the first page.
+In some documents, you may not want your page counter to start in the first
+page.
 
-For example, if the first pages are a coverpage and a table of contents, you want page 1 to be
-where your first section starts.
+For example, if the first pages are a coverpage and a table of contents, you
+want page 1 to be where your first section starts.
 
-To do that, you have to use the SetPageCounter command.
+To do that, you have to use the ``SetPageCounter`` command.
 
 Here is a syntax example::
 
@@ -1151,18 +1166,19 @@ Here is a syntax example::
 
         SetPageCounter 0 lowerroman
 
-This sets the counter to 0, and makes it display in lower roman characters (i, ii, iii, etc)
-which is a style often used for the pages before the document proper (for example, TOCs and
-abstracts).
+This sets the counter to 0, and makes it display in lower roman characters (i,
+ii, iii, etc) which is a style often used for the pages before the document
+proper (for example, TOCs and abstracts).
 
 It can take zero or two arguments.
 
-SetPageCounter
-    When used with no arguments, it sets the counter to 0, and the style to arabic numerals.
+``SetPageCounter``
+    When used with no arguments, it sets the counter to 0, and the style to
+    arabic numerals.
 
-SetPageCounter number style
-    When used with two arguments, the first argument must be a number, it sets the page counter
-    to that number.
+``SetPageCounter number style``
+    When used with two arguments, the first argument must be a number, it sets
+    the page counter to that number.
 
     The second number is a style of counter. Valid values are:
 
@@ -1175,47 +1191,48 @@ SetPageCounter number style
 .. note:: Page counter changes take effect on the **current** page.
 
 Page Breaks
------------
+***********
 
 There are three kinds of page breaks:
 
-PageBreak
+``PageBreak``
     Break to the next page
 
-EvenPageBreak
+``EvenPageBreak``
     Break to the next **even** numbered page
 
-OddPageBreak
+``OddPageBreak``
     Break to the next **odd** numbered page
 
-Each of them can take an additional number which is the name of the next page template.
-
-For example::
+Each of them can take an additional number which is the name of the next page
+template. For example::
 
     PageBreak twoColumn
 
 Frame Breaks
-------------
+************
 
-If you want to jump to the next frame in the page (or the next page if the current
-frame is the last), you can use the FrameBreak command. It takes an optional
-height in points, and then it only breaks the frame if there is less than that
-vertical space available.
+If you want to jump to the next frame in the page (or the next page if the
+current frame is the last), you can use the ``FrameBreak`` command. It takes an
+optional height in points, and then it only breaks the frame if there is less
+than that vertical space available.
 
-For example, if you don't want a paragraph to begin if it's less than 50 points from the
-bottom of the frame::
+For example, if you don't want a paragraph to begin if it's less than 50 points
+from the bottom of the frame::
 
     .. raw:: pdf
 
        FrameBreak 50
 
-    This paragraph is so important that I don't want it at the very bottom of the page...
+    This paragraph is so important that I don't want it at the very bottom of
+    the page...
 
 Page Transitions
-----------------
+****************
 
-Page transitions are effects used when you change pages in *Presentation* or *Full Screen* mode (depends on the viewer).
-You can use it when creating a presentation using PDF files.
+Page transitions are effects used when you change pages in *Presentation* or
+*Full Screen* mode (depends on the viewer).  You can use it when creating a
+presentation using PDF files.
 
 The syntax is this::
 
@@ -1225,15 +1242,14 @@ The syntax is this::
 
 The optional arguments are:
 
-direction:
+``direction``
     Can be 0,90,180 or 270 (top,right,bottom,left)
 
-dimension:
+``dimension``
     Can be H or V
 
-motion:
+``motion``
     Can be I or O (Inside or Outside)
-
 
 The effects with their arguments are:
 
@@ -1250,10 +1266,11 @@ For example::
 
        Transition Glitter 3 90
 
-Uses the Glitter effect, for 3 seconds, at direction 90 degrees (from the right?)
+Uses the Glitter effect, for 3 seconds, at direction 90 degrees (from the
+right?)
 
-Keep in mind that Transition sets the transition *from this page to the next* so the
-natural thing is to use it before a PageBreak::
+Keep in mind that ``Transition`` sets the transition *from this page to the
+next* so the natural thing is to use it before a ``PageBreak``::
 
     .. raw:: pdf
 
@@ -1261,7 +1278,7 @@ natural thing is to use it before a PageBreak::
        PageBreak
 
 Text Annotations
-----------------
+****************
 
 Text annotations are meta notes added to a page.
 
@@ -1271,23 +1288,29 @@ The syntax is this::
 
        TextAnnotation "text to add" [optional position]
 
-The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`, ``x_end`` and ``y_end``
-
+The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`,
+``x_end`` and ``y_end``
 
 Raw HTML
---------
+********
 
 If you have a document that contains raw HTML, and have ``xhtml2pdf`` installed,
 ``rst2pdf`` will try to render that HTML inside your document. To enable this,
 use the ``--raw-html`` command line option.
 
+
 The counter role
-================
+----------------
 
-.. note:: The counter role only works in PDF, if you're reading the HTML version of the manual then this section is broken. Sorry :/
+.. note::
 
-This is a nonstandard interpreted text role, which means it will only work with ``rst2pdf``. It implements an unlimited number of counters you can use in your text.
-For example, you could use it to have numbered figures, or numbered tables.
+   The counter role only works in PDF, if you're reading the HTML version of
+   the manual then this section is broken. Sorry :/
+
+This is a nonstandard interpreted text role, which means it will only work with
+``rst2pdf``. It implements an unlimited number of counters you can use in your
+text.  For example, you could use it to have numbered figures, or numbered
+tables.
 
 The syntax is this:
 
@@ -1304,25 +1327,31 @@ The syntax is this:
 
 The output is:
 
-Start a counter called seq1 that starts from 1: :counter:`seq1`
-Now this should print 2: :counter:`seq1`
+Start a counter called seq1 that starts from 1: :counter:`seq1` Now this should
+print 2: :counter:`seq1`
 
 You can start counters from any number (this prints 12): :counter:`seq2:12`
 
 And have any number of counters with any name: :counter:`figures`
 
-Also, the counters create targets for links with this scheme: #countername-number.
+Also, the counters create targets for links with this scheme:
+``#countername-number``.
 
 So ``#seq1-2`` should link to `the number 2 above <#seq1-2>`_
 
+
 The oddeven directive
-=====================
+---------------------
 
-This is a nonstandard directive, which means it will only work with rst2pdf, and not with rst2html or any other docutils tool.
+This is a nonstandard directive, which means it will only work with rst2pdf, and
+not with rst2html or any other docutils tool.
 
-The contents of oddeven should consist of **exactly** two things (in this case, two paragraphs). The first will be used on odd pages, and the second one on even pages.
+The contents of oddeven should consist of **exactly** two things (in this case,
+two paragraphs). The first will be used on odd pages, and the second one on even
+pages.
 
-If you want to use more complex content, you should wrap it with containers, like in this example:
+If you want to use more complex content, you should wrap it with containers,
+like in this example:
 
 .. code-block:: rst
 
@@ -1334,7 +1363,8 @@ If you want to use more complex content, you should wrap it with containers, lik
 
             Both paragraphs in the container are for odd pages.
 
-        This will appear on even pages. It's a single paragraph, so no need for containers.
+        This will appear on even pages. It's a single paragraph, so no need for
+        containers.
 
 This directive has several limitations.
 
@@ -1346,15 +1376,17 @@ This directive has several limitations.
   one is small and the other large, it **will** look wrong. I may be able to
   fix this though.
 
-* If you try to generate HTML (or anything other than a PDF via rst2pdf) from a file
-  containing this, it will not do what you want.
+* If you try to generate HTML (or anything other than a PDF via rst2pdf) from a
+  file containing this, it will not do what you want.
+
 
 Mathematics
-===========
+-----------
 
-If you have Matplotlib_ installed, rst2pdf supports a math role and a math directive. You can use
-them to insert formulae and mathematical notation in your documents using a subset of LaTeX
-syntax, but doesn't require you have LaTeX installed.
+If you have Matplotlib_ installed, rst2pdf supports a math role and a math
+directive. You can use them to insert formulae and mathematical notation in your
+documents using a subset of LaTeX syntax, but doesn't require you have LaTeX
+installed.
 
 For example, here's how you use the math directive::
 
@@ -1368,16 +1400,16 @@ And here's the result:
 
    \frac{2 \pm \sqrt{7}}{3}
 
-If you want to insert mathematical notation in your text like this: :math:`\pi` that is the job
-of the math *role*::
+If you want to insert mathematical notation in your text like this: :math:`\pi`
+that is the job of the math *role*::
 
     This is :math:`\pi`
 
 Produces: This is :math:`\pi`
 
-Currently, the math role is slightly buggy, and in some cases will produce misaligned and
-generally broken output. Also, while the math directive embeds fonts and draws your formula
-as text, the math role embeds an image. That means:
+Currently, the math role is slightly buggy, and in some cases will produce
+misaligned and generally broken output. Also, while the math directive embeds
+fonts and draws your formula as text, the math role embeds an image. That means:
 
 * You can't copy the text of inline math
 
@@ -1385,34 +1417,34 @@ as text, the math role embeds an image. That means:
 
 So, use it only in emergencies ;-)
 
-You don't need to worry about fonts, the correct math fonts will be used and embedded in
-your PDF automatically (they are included with matplotlib).
+You don't need to worry about fonts, the correct math fonts will be used and
+embedded in your PDF automatically (they are included with ``matplotlib``).
 
 .. _matplotlib: http://matplotlib.sf.net
 
-For an introduction to LaTeX syntax, see the "Typesetting Mathematical Formulae" chapter
-in "The Not So Short Introduction to LaTeX 2e":
+For an introduction to LaTeX syntax, see the "Typesetting Mathematical Formulae"
+chapter in "The Not So Short Introduction to LaTeX 2e":
 
 http://www.tex.ac.uk/tex-archive/info/lshort/english/lshort.pdf
 
-Basically, the inline form ``$a^2$`` is similar to the math role, and the display form
-is similar to the math directive.
+Basically, the inline form ``$a^2$`` is similar to the math role, and the
+display form is similar to the math directive.
 
-Rst2pdf doesn't support numbering equations yet.
+rst2pdf doesn't support numbering equations yet.
 
 The math directive supports the following options:
 
 ``:fontsize:``
-    Sets the font size used in the math directive. By default it will use the paragraph's
-    font and size.
+    Sets the font size used in the math directive. By default it will use the
+    paragraph's font and size.
 
 ``:color:``
-    Can change the color of the math directive's output. Can take either a color by name
-    like ``red`` or a hex code like ``#4c050f``
+    Can change the color of the math directive's output. Can take either a color
+    by name like ``red`` or a hex code like ``#4c050f``
 
 
 Hyphenation
-===========
+-----------
 
 If you want good looking documents, you want to enable hyphenation.
 
@@ -1421,26 +1453,26 @@ To do it, you need to install Wordaxe [#]_.
 .. [#] Use Roberto Alsina's fork of Wordaxe from https://github.com/ralsina/wordaxe as
        this works with later versions of ReportLab.
 
-If after installing it you get the letter "s" or a black square instead of a hyphen,
-that means you need to replace the rl_codecs.py file from reportlab with the one from
-wordaxe.
+If after installing it you get the letter "s" or a black square instead of a
+hyphen, that means you need to replace the rl_codecs.py file from reportlab with
+the one from wordaxe.
 
 For more information, see `this issue`_ in rst2pdf's bug tracker.
 
 .. _this issue: http://code.google.com/p/rst2pdf/issues/detail?id=5
 
-Also, you may need to set hyphenation to true in one or more styles, and the language
-for hyphenation via the command line or paragraph styles.
+Also, you may need to set hyphenation to true in one or more styles, and the
+language for hyphenation via the command line or paragraph styles.
 
-For english, this should be enough::
+For English, this should be enough::
 
     ["bodytext" , {
       "alignment": "justify",
       "hyphenation": true
     }],
 
-If you are not an english speaker, you need to change the language using
-the -l or --language option.
+If you are not an English speaker, you need to change the language using
+the ``-l`` or ``--language`` option.
 
 Since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
 available. PyHyphen can use any OpenOffice dictionary, and can even download
@@ -1448,12 +1480,12 @@ them automatically. [#]_
 
 .. [#] For more information, please check the PyHyphen website at http://pyhyphen.googlecode.com
 
-For example, this will enable german hyphenation globally:
+For example, this will enable German hyphenation globally::
 
     rst2pdf -l de_DE mydocument.txt
 
-If you are creating a multilingual document, you can declare styles with specific languages.
-For example, you could inherit bodytext for Spanish::
+If you are creating a multilingual document, you can declare styles with
+specific languages.  For example, you could inherit ``bodytext`` for Spanish::
 
     ["bodytext_es" , {
       "parent": "bodytext",
@@ -1462,7 +1494,7 @@ For example, you could inherit bodytext for Spanish::
       "language": "es_ES"
     }],
 
-And all paragraphs declared of bodytext_es style would have Spanish hyphenation::
+And all paragraphs declared of ``bodytext_es`` style would have Spanish hyphenation::
 
     .. class:: bodytext_es
 
@@ -1498,7 +1530,7 @@ language in the command line, the style has priority, so remember:
 
 
 Page Layout
-===========
+-----------
 
 By default, your document will have a single column of text covering the space
 between the margins. You can change that, though, in fact you can do so even in
@@ -1507,7 +1539,7 @@ the middle of your document!
 .. _page templates:
 
 To do it, you need to define *Page Templates* in your stylesheet. The default
-stylesheet already has 3 of them::
+stylesheet already has three of them::
 
   "pageTemplates" : {
     "coverPage": {
@@ -1530,15 +1562,15 @@ stylesheet already has 3 of them::
     }
   }
 
-A page template has a name (oneColumn, twoColumn), some options, and a list of frames.
-A frame is a list containing this::
+A page template has a name (``oneColumn``, ``twoColumn``), some options, and a
+list of frames.  A frame is a list containing this::
 
     [ left position, bottom position, width, height, left padding, bottom padding, right padding, top padding]
 
 All the padding values are optional and default to 6 points.
 
-For example, this defines a frame "at the very left", "at the very bottom", "a bit less than half
-a page wide" and "as tall as possible"::
+For example, this defines a frame "at the very left", "at the very bottom", "a
+bit less than half a page wide" and "as tall as possible"::
 
     ["0cm", "0cm", "49%", "100%"]
 
@@ -1546,23 +1578,23 @@ And this means "the top third of the page"::
 
     ["0cm", "66.66%", "100%", "33.34%"]
 
-You can use all the usual units, cm, mm, inch, and % which means "percentage of
-the page (excluding margins and headers or footers)". Using % is probably the smartest
-for columns and gives you a fluid layout, while the other units are better for more
-"fixed" elements.
+You can use all the usual units, ``cm``, ``mm``, ``inch``, and ``%``, which
+means "percentage of the page (excluding margins and headers or footers)". Using
+``%`` is probably the smartest for columns and gives you a fluid layout, while
+the other units are better for more "fixed" elements.
 
-Since we can have more than one template, there is a way to specify which one we want
-to use, and a way to change from one to another.
+Since we can have more than one template, there is a way to specify which one we
+want to use, and a way to change from one to another.
 
-To specify the first template, do it in your stylesheet, in pageSetup (oneColumn is
-the default)::
+To specify the first template, do it in your stylesheet, in ``pageSetup``
+(``oneColumn`` is the default)::
 
   "pageSetup" : {
     "firstTemplate": "oneColumn"
   }
 
-Then, to change to another template, in your document use this syntax (will change soon,
-though):
+Then, to change to another template, in your document use this syntax (will
+change soon, though):
 
 .. code-block:: rst
 
@@ -1570,52 +1602,58 @@ though):
 
       PageBreak twoColumn
 
-That will trigger a page break, and the new page will use the twoColumn template.
+That will trigger a page break, and the new page will use the twoColumn
+template.
 
-You can see an example of this in the *Montecristo* folder in the source package.
+You can see an example of this in the *Montecristo* folder in the source
+package.
 
 The supported page template options and their defaults are:
 
-* showHeader : True
+* ``showHeader`` : True
 
-* defaultHeader : None
+* ``defaultHeader`` : None
 
   Has the same effect as the header directive in the document.
 
-* showFooter : True
+* ``showFooter`` : True
 
-* defaultFooter : None
+* ``defaultFooter`` : None
 
   Has the same effect as the footer directive in the document.
 
-* background: None
+* ``background``: None
 
   The background should be an image, which will be centered in your page or
   stretched to match your page size, depending on the ``--fit-background-mode``
   option, so use with caution.
 
-
 .. _fontconfig: http://www.freedesktop.org/fontconfig/
 
 
 Smart Quotes
-============
+------------
 
 Quoted from the smartypants_ documentation:
 
     This feature can perform the following transformations:
 
-    Straight quotes ( " and ' ) into "curly" quote HTML entities
-    Backticks-style quotes (\`\`like this'') into "curly" quote HTML entities
-    Dashes (-- and ---) into en- and em-dash entities
-    Three consecutive dots (... or . . .) into an ellipsis entity
-    This means you can write, edit, and save your posts using plain old ASCII straight
-    quotes, plain dashes, and plain dots, but your published posts (and final PDF
-    output) will appear with smart quotes, em-dashes, and proper ellipses.
+    Straight quotes ( ``"`` and ``'`` ) into "curly" quote HTML entities
 
-You can enable this by passing the ``--smart-quotes`` option in the command line.
-By default, it's disabled.
-Here are the different values you can use (again, from the smartypants docs):
+    Backticks-style quotes (\`\`like this'') into "curly" quote HTML entities
+
+    Dashes (``--`` and ``---``) into en- and em-dash entities
+
+    Three consecutive dots (``...`` or ``. . .``) into an ellipsis entity
+
+    This means you can write, edit, and save your posts using plain old ASCII
+    straight quotes, plain dashes, and plain dots, but your published posts (and
+    final PDF output) will appear with smart quotes, em-dashes, and proper
+    ellipses.
+
+You can enable this by passing the ``--smart-quotes`` option in the command
+line.  By default, it's disabled.  Here are the different values you can use
+(again, from the smartypants docs):
 
     0
         Suppress all transformations. (Do nothing.)
@@ -1638,14 +1676,15 @@ regular paragraphs, titles, headers, footers and block quotes.
 
 .. _smartypants: http://web.chad.org/projects/smartypants.py/
 
+
 Kerning
-=======
+-------
 
 Kerning is the process of adjusting letter spacing. It is usually accepted that
 kerning makes your text look better.
 
-For example, if you are using proper kerning, the As and Ws in AWAWA will overlap
-slightly.
+For example, if you are using proper kerning, the As and Ws in AWAWA will
+overlap slightly.
 
 If you want kerning in your PDFs, you need to do the following:
 
@@ -1656,31 +1695,33 @@ If you want kerning in your PDFs, you need to do the following:
 * Set kerning to true in your style. For example, if you want **all**
   text to be kerned, you can set it in the "base" style.
 
-For convenience, a stylesheet that uses DejaVu fonts with kerning is provided
-as kerning.json, so you can copy and adapt to your needs, or just use it
-with the ``-s`` option.
+For convenience, a stylesheet that uses DejaVu fonts with kerning is provided as
+``kerning.json``, so you can copy and adapt to your needs, or just use it with
+the ``-s`` option.
+
 
 Sphinx
-======
+------
 
 Sphinx_ is a very popular tool. This is the description from its website:
 
-    Sphinx is a tool that makes it easy to create intelligent and beautiful documentation,
-    written by Georg Brandl and licensed under the BSD license.
+    Sphinx is a tool that makes it easy to create intelligent and beautiful
+    documentation, written by Georg Brandl and licensed under the BSD license.
 
     It was originally created to translate the new Python documentation, and it
     has excellent support for the documentation of Python projects, but other
     documents can be written with it too.
 
-Rst2pdf includes an experimental PDF extension for sphinx.
+rst2pdf includes an experimental PDF extension for sphinx.
 
-To use it in your existing sphinx project you need to do the following:
+To use it in your existing Sphinx project you need to do the following:
 
-1. Add rst2pdf.pdfbuilder in your conf.py's extensions. For example::
+1. Add ``rst2pdf.pdfbuilder`` to ``extensions`` in your ``conf.py``. For
+   example::
 
     extensions = ['sphinx.ext.autodoc','rst2pdf.pdfbuilder']
 
-2. Add the PDF options at the end of conf.py, adapted to your project::
+2. Add the PDF options at the end of ``conf.py``, adapted to your project::
 
     # -- Options for PDF output --------------------------------------------------
 
@@ -1783,7 +1824,9 @@ To use it in your existing sphinx project you need to do the following:
     # Repeat table header on tables that cross a page boundary?
     pdf_repeat_table_rows = True
 
-3. (Maybe) add this in your Makefile (on unix-like systems):
+3. (Optional) Modify your ``Makefile`` or ``make.bat`` file
+
+    For ``Makefile`` (on \*nix systems)
 
     .. code-block:: makefile
 
@@ -1792,7 +1835,7 @@ To use it in your existing sphinx project you need to do the following:
             @echo
             @echo "Build finished. The PDF files are in _build/pdf."
 
-4. (Maybe) add this to your make.bat (on windows):
+    For ``make.bat`` (on Windows):
 
     .. code-block:: bat
 
@@ -1803,36 +1846,36 @@ To use it in your existing sphinx project you need to do the following:
             goto end
         )
 
-
-Then you can run ``make pdf`` or ``sphinx-build -b pdf ...`` similar
-to how you did it before.
+Then you can run ``make pdf`` or ``sphinx-build -b pdf ...`` similar to how you
+did it before.
 
 .. _sphinx: http://sphinx.pocoo.org
 
-Extensions
-==========
 
-Rst2pdf can get new features from *extensions*. Extensions are python modules that can be enabled with the -e option.
+Extensions
+----------
+
+rst2pdf can get new features from *extensions*. Extensions are python modules
+that can be enabled with the ``-e`` option.
 
 Several are included with rst2pdf.
 
 Preprocess (``-e preprocess``)
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: ../rst2pdf/extensions/preprocess_r2p.py
    :start-after:  '''
    :end-before: '''
 
 Inkscape (``-e inkscape``)
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: ../rst2pdf/extensions/inkscape_r2p.py
    :start-after:  '''
    :end-before: '''
 
-
 Dotted_TOC (``-e dotted_toc``)
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: ../rst2pdf/extensions/dotted_toc.py
    :start-after:  '''
@@ -1840,21 +1883,20 @@ Dotted_TOC (``-e dotted_toc``)
 
 
 Developers
-==========
+----------
 
 .. include:: DEVELOPERS.rst
    :start-line: 8
 
 
 Licenses
-========
+--------
 
 This is the license for rst2pdf::
 
     Copyright (c) 2007,2008,2009 Roberto Alsina
     Nicolas Laurance, Christoph Zwerschke, Yasushi Masuda, Josh VanderLinden,
     Patrick Maupin.
-
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -1877,28 +1919,28 @@ This is the license for rst2pdf::
 
 Some fragments of rstpdf are copied from ReportLab under the following license::
 
-       Copyright (c) 2000-2008, ReportLab Inc.
-       All rights reserved.
+    Copyright (c) 2000-2008, ReportLab Inc.
+    All rights reserved.
 
-       Redistribution and use in source and binary forms, with or without modification,
-       are permitted provided that the following conditions are met:
+    Redistribution and use in source and binary forms, with or without modification,
+    are permitted provided that the following conditions are met:
 
-               *       Redistributions of source code must retain the above copyright notice,
-                       this list of conditions and the following disclaimer.
-               *       Redistributions in binary form must reproduce the above copyright notice,
-                       this list of conditions and the following disclaimer in the documentation
-                       and/or other materials provided with the distribution.
-               *       Neither the name of the company nor the names of its contributors may be
-                       used to endorse or promote products derived from this software without
-                       specific prior written permission.
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+    * Neither the name of the company nor the names of its contributors may be
+      used to endorse or promote products derived from this software without
+      specific prior written permission.
 
-       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-       ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-       WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-       IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-       INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-       TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-       OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-       IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-       IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-       SUCH DAMAGE.
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+    IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+    INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+    OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+    IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+    IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE.

@@ -1,3 +1,4 @@
+===========================
 Release Process for rst2pdf
 ===========================
 
@@ -81,14 +82,8 @@ It should contain the following:
    username: {your PyPi username}
 
 
-
 .. _ExifTool: https://www.sno.phy.queensu.ca/~phil/exiftool/
 .. _rst2pdf.github.io: https://github.com/rst2pdf/rst2pdf.github.io
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
 .. _Test-PyPI: https://test.pypi.org
 .. _PyPI: https://test.pypi.org
-
-
-
-
-
