@@ -10,7 +10,11 @@ import six
 
 from .basenodehandler import NodeHandler
 from .image import MyImage, missing
-from .opt_imports import Paragraph
+
+try:
+    from wordaxe.rl.paragraph import Paragraph
+except ImportError:
+    from reportlab.platypus.paragraph import Paragraph
 
 if six.PY3:
     from urllib.parse import urljoin, urlparse

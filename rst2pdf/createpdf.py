@@ -94,14 +94,6 @@ from rst2pdf.image import MyImage, missing
 from rst2pdf.languages import get_language_available
 from rst2pdf.log import log, nodeid
 from rst2pdf.nodehandlers import nodehandlers
-from rst2pdf.opt_imports import (
-    BaseHyphenator,
-    DCWHyphenator,
-    Paragraph,
-    PyHyphenHyphenator,
-)
-from rst2pdf.opt_imports import sphinx as sphinx_module
-from rst2pdf.opt_imports import wordaxe
 from rst2pdf.sinker import Sinker
 
 from . import config
@@ -110,6 +102,27 @@ try:
     from roman import toRoman
 except ImportError:
     from docutils.utils.roman import toRoman
+
+try:
+    from wordaxe.rl.paragraph import Paragraph
+except ImportError:
+    from reportlab.platypus.paragraph import Paragraph
+
+try:
+    import wordaxe
+    from wordaxe.BaseHyphenator import BaseHyphenator
+    from wordaxe.DCWHyphenator import DCWHyphenator
+    from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
+except ImportError:
+    wordaxe = None
+    BaseHyphenator = None
+    DCWHyphenator = None
+    PyHyphenHyphenator = None
+
+try:
+    import sphinx as sphinx_module
+except ImportError:
+    sphinx = None
 
 
 if six.PY2:

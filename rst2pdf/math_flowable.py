@@ -13,13 +13,16 @@ from reportlab.platypus.flowables import Flowable
 from six import unichr
 
 from rst2pdf.log import log
-from rst2pdf.opt_imports import mathtext
+
+try:
+    from matplotlib import mathtext
+    from matplotlib.font_manager import FontProperties
+    from matplotlib.colors import ColorConverter
+except ImportError:
+    mathtext = None
 
 HAS_MATPLOTLIB = mathtext is not None
 
-if HAS_MATPLOTLIB:
-    from matplotlib.font_manager import FontProperties
-    from matplotlib.colors import ColorConverter
 fonts = {}
 
 

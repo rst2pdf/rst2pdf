@@ -14,7 +14,14 @@ from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.platypus.doctemplate import FrameActionFlowable, FrameBreak, Indenter
-from reportlab.platypus.flowables import _FUZZ, Flowable, PageBreak, Spacer, _listWrapOn
+from reportlab.platypus.flowables import (
+    _FUZZ,
+    Flowable,
+    NullDraw,
+    PageBreak,
+    Spacer,
+    _listWrapOn,
+)
 from reportlab.platypus.frames import Frame
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.platypus.tables import Table, TableStyle
@@ -22,7 +29,11 @@ from reportlab.platypus.xpreformatted import XPreformatted
 
 from . import styles
 from .log import log
-from .opt_imports import NullDraw, Paragraph
+
+try:
+    from wordaxe.rl.paragraph import Paragraph
+except ImportError:
+    from reportlab.platypus.paragraph import Paragraph
 
 
 class XXPreformatted(XPreformatted):
@@ -222,7 +233,7 @@ class DelayedTable(Table):
         self.hAlign = TA_CENTER
         self.splitByRow = splitByRow
 
-        ## Try to look more like a Table
+        # Try to look more like a Table
         # self._ncols = 2
         # self._nosplitCmds= []
         # self._nrows= 1

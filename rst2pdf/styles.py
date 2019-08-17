@@ -24,9 +24,11 @@ from rst2pdf.rson import loads as rson_loads
 
 from . import findfonts
 from .log import log
-from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
 
-HAS_WORDAXE = wordaxe is not None
+try:
+    from wordaxe.rl.styles import ParagraphStyle
+except ImportError:
+    from reportlab.lib.styles import ParagraphStyle
 
 unit_separator = re.compile('(-?[0-9.]*)')
 
@@ -527,21 +529,6 @@ class StyleSheet(object):
                 if ('bulletFontSize' not in s) and ('fontSize' in s):
                     s['bulletFontSize'] = s['fontSize']
 
-                # If the borderPadding is a list and wordaxe <=0.3.2,
-                # convert it to an integer. Workaround for Issue
-                if 'borderPadding' in s and (
-                    (
-                        (HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
-                        or reportlab.Version < "2.3"
-                    )
-                    and isinstance(s['borderPadding'], list)
-                ):
-                    log.warning(
-                        'Using a borderPadding list in '
-                        'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
-                        'supported, so it will probably look wrong' % s['name']
-                    )
-                    s['borderPadding'] = s['borderPadding'][0]
                 if 'spaceBefore' in s:
                     if isinstance(s['spaceBefore'], str) and s[
                         'spaceBefore'

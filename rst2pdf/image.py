@@ -11,9 +11,9 @@ from os.path import abspath, dirname
 import six
 from reportlab.lib.units import cm, inch
 from reportlab.platypus.flowables import Flowable, Image
+from PIL import Image as PILImage
 
 from .log import log, nodeid
-from .opt_imports import PILImage
 
 if six.PY3:
     from urllib.request import urlretrieve

@@ -11,7 +11,11 @@ import reportlab
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
 from rst2pdf.image import MyImage
-from rst2pdf.opt_imports import Paragraph
+
+try:
+    from wordaxe.rl.paragraph import Paragraph
+except ImportError:
+    from reportlab.platypus.paragraph import Paragraph
 
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
