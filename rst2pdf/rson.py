@@ -483,7 +483,7 @@ class QuotedToken(object):
             try:
                 uni2 = next_()
                 nonmatch2 = next_()
-            except:
+            except Exception:
                 ok = False
             ok = ok and not nonmatch and uni2.startswith(b'\\u') and len(uni2) == 6
             if ok:
@@ -874,7 +874,8 @@ class RsonParser(object):
                             token,
                         )
                     error(
-                        'Array elements must either be on separate lines or enclosed in []',
+                        'Array elements must either be on separate lines or enclosed '
+                        'in []',
                         token,
                     )
                 linenum = newlinenum

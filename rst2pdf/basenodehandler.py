@@ -212,7 +212,7 @@ class NodeHandler(with_metaclass(MetaHelper, object)):
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
-                if client.styles.StyleSheet.has_key(node['classes'][0]):
+                if node['classes'][0] in client.styles.StyleSheet:
                     style = client.styles[node['classes'][0]]
                 else:
                     log.info(

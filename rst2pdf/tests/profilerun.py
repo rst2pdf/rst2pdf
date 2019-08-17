@@ -32,7 +32,7 @@ def run():
                     output=os.path.join(outdir, f + '.pdf'),
                     source_path=fname,
                 )
-            except:
+            except Exception:
                 print('FAIL')
 
 

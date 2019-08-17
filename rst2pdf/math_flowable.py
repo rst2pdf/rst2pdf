@@ -53,11 +53,11 @@ class Math(Flowable):
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
             try:
-                width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+                width, height, _, _, _, _ = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 return width, height
-            except:
+            except Exception:
                 pass
                 # FIXME: report error
         return 10, 10
@@ -79,7 +79,7 @@ class Math(Flowable):
             canv.saveState()
             canv.translate(x, y)
             try:
-                width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+                width, height, _, glyphs, rects, _ = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
@@ -96,7 +96,7 @@ class Math(Flowable):
                 canv.setDash([])
                 for ox, oy, width, height in rects:
                     canv.rect(ox, oy + 2 * height, width, height, fill=1)
-            except:
+            except Exception:
                 # FIXME: report error
                 col_conv = ColorConverter()
                 rgb_color = col_conv.to_rgb(self.color)
@@ -115,7 +115,7 @@ class Math(Flowable):
         """Return the descent of this flowable,
         useful to align it when used inline."""
         if HAS_MATPLOTLIB:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            _, _, descent, _, _, _ = self.parser.parse(
                 enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
             )
             return descent
@@ -143,7 +143,7 @@ class Math(Flowable):
         if not HAS_MATPLOTLIB:
             img = Image.new('RGBA', (120, 120), (255, 255, 255, 0))
         else:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            width, height, _, glyphs, rects, _ = self.parser.parse(
                 enclose(self.s), dpi, prop=FontProperties(size=self.fontsize)
             )
             img = Image.new(
@@ -181,6 +181,6 @@ class Math(Flowable):
 if __name__ == "__main__":
     doc = SimpleDocTemplate("mathtest.pdf")
     Story = [
-        Math(r'\mathcal{R}\prod_{i=\alpha\mathcal{B}}' r'^\infty a_i\sin(2 \pi f x_i)')
+        Math(r'\mathcal{R}\prod_{i=\alpha\mathcal{B}}^\infty a_i\sin(2 \pi f x_i)')
     ]
     doc.build(Story)

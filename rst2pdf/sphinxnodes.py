@@ -212,7 +212,8 @@ try:
                     # Use bitmap
                     if not graphviz_warn:
                         log.warning(
-                            'Using graphviz with PNG output. You get much better results if you enable the vectorpdf extension.'
+                            'Using graphviz with PNG output. You get much better '
+                            'results if you enable the vectorpdf extension.'
                         )
                         graphviz_warn = True
                     fname, outfn = sphinx.ext.graphviz.render_dot(

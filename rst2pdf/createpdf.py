@@ -4,33 +4,33 @@
 
 # Some fragments of code are copied from Reportlab under this license:
 #
-#####################################################################################
+####################################################################################
 #
-#       Copyright (c) 2000-2008, ReportLab Inc.
-#       All rights reserved.
+# Copyright (c) 2000-2008, ReportLab Inc.
+# All rights reserved.
 #
-#       Redistribution and use in source and binary forms, with or without modification,
-#       are permitted provided that the following conditions are met:
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
 #
-#               *       Redistributions of source code must retain the above copyright notice,
-#                       this list of conditions and the following disclaimer.
-#               *       Redistributions in binary form must reproduce the above copyright notice,
-#                       this list of conditions and the following disclaimer in the documentation
-#                       and/or other materials provided with the distribution.
-#               *       Neither the name of the company nor the names of its contributors may be
-#                       used to endorse or promote products derived from this software without
-#                       specific prior written permission.
+# * Redistributions of source code must retain the above copyright notice,
+#   this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * Neither the name of the company nor the names of its contributors may be
+#   used to endorse or promote products derived from this software without
+#   specific prior written permission.
 #
-#       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-#       ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-#       WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-#       IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-#       INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
-#       TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-#       OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-#       IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-#       IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-#       SUCH DAMAGE.
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE OFFICERS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+# TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+# IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
 #
 #####################################################################################
 
@@ -729,7 +729,7 @@ class RstToPdf(object):
                         log.info('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
-                ## Rearrange footnotes if needed
+                # Rearrange footnotes if needed
                 if self.real_footnotes:
                     newStory = []
                     fnPile = []
@@ -759,19 +759,8 @@ class RstToPdf(object):
             except ValueError:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
-                # if v.args and str(v.args[0]).startswith('format not resolved'):
-                # missing=str(v.args[0]).split(' ')[-1]
-                # log.error('Adding missing reference to %s and rebuilding. This is slow!'%missing)
-                # elements.append(Reference(missing))
-                # for e in elements:
-                # if hasattr(e,'_postponed'):
-                # delattr(e,'_postponed')
-                # else:
-                # raise
                 raise
 
-        # doc = SimpleDocTemplate("phello.pdf")
-        # doc.build(elements)
         for fn in self.to_unlink:
             try:
                 os.unlink(fn)
@@ -851,7 +840,8 @@ class FancyDocTemplate(BaseDocTemplate):
                 else:
                     if hasattr(f, '_postponed') and f._postponed > 4:
                         ident = (
-                            "Flowable %s%s too large on page %d in frame %r%s of template %r"
+                            "Flowable %s%s too large on page %d in frame %r%s of "
+                            "template %r"
                             % (
                                 self._fIdent(f, 60, frame),
                                 doctemplate._fSizeString(f),
@@ -1359,8 +1349,8 @@ def parse_commandline():
         metavar='N',
         default=def_section_header_depth,
         dest='section_header_depth',
-        help='''Sections up to this depth will be used in the header and footer's replacement of ###Section###. Default=%s'''
-        % def_section_header_depth,
+        help="Sections up to this depth will be used in the header and footer's "
+        "replacement of ###Section###. Default=%s" % def_section_header_depth,
     )
 
     def_smartquotes = config.getValue("general", "smartquotes", "0")
@@ -1584,8 +1574,8 @@ def parse_commandline():
         '--use-floating-images',
         action='store_true',
         default=def_floating_images,
-        help='Makes images with :align: attribute work more like in rst2html. Default: %s'
-        % def_floating_images,
+        help='Makes images with :align: attribute work more like in rst2html. '
+        'Default: %s' % def_floating_images,
         dest='floating_images',
     )
 
@@ -1594,8 +1584,8 @@ def parse_commandline():
         '--use-numbered-links',
         action='store_true',
         default=def_numbered_links,
-        help='When using numbered sections, adds the numbers to all links referring to the section headers. Default: %s'
-        % def_numbered_links,
+        help='When using numbered sections, adds the numbers to all links '
+        'referring to the section headers. Default: %s' % def_numbered_links,
         dest='numbered_links',
     )
 
@@ -1604,7 +1594,8 @@ def parse_commandline():
         action='append',
         dest='strip_elements_with_classes',
         metavar='CLASS',
-        help='Remove elements with this CLASS from the output. Can be used multiple times.',
+        help='Remove elements with this CLASS from the output. Can be used multiple '
+        'times.',
     )
 
     return parser
@@ -1943,6 +1934,7 @@ def publish_secondary_doctree(text, main_tree, source_path):
     # in the document are available when we process the cover
     # page. See Issue 322
     dt = main_tree
+
     # Add substitutions  from the main doctree
     class addSubsts(Transform):
         default_priority = 219

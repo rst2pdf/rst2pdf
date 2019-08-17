@@ -20,11 +20,11 @@ def nodeid(node):
     try:
         if node.line:
             line = str(node.line)
-    except:
+    except Exception:
         pass
     try:
         if node.source:
             fname = str(node.source)
-    except:
+    except Exception:
         pass
     return 'near line %s in file %s' % (line, fname)

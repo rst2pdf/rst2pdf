@@ -22,7 +22,7 @@ else:
 
 try:
     from .svgimage import SVGImage
-except ModuleNotFoundError:
+except Exception:
     # svglib may optionally not be installed, which causes this error
     pass
 
@@ -141,7 +141,7 @@ class MyImage(Flowable):
             # First try to rasterize using the suggested backend
             backend = self.get_backend(filename, client)[1]
             return backend.raster(filename, client)
-        except:
+        except Exception:
             pass
 
         # Last resort: try everything
@@ -155,7 +155,7 @@ class MyImage(Flowable):
             try:
                 PILImage.open(filename)
                 return filename
-            except:
+            except Exception:
                 # Can't read it
                 pass
 
@@ -305,7 +305,8 @@ class MyImage(Flowable):
                 else:
                     # Can be handled by reportlab
                     log.warning(
-                        "Can't figure out size of the image (%s, %s). Install PIL for better results.",
+                        "Can't figure out size of the image (%s, %s). Install PIL for "
+                        "better results.",
                         imgname,
                         nodeid(node),
                     )

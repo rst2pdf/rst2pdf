@@ -268,9 +268,9 @@ def code_block_directive(
             cls = "diml"
         if withln and "\n" in value:
             linenumber_cls = 'linenumber'
-            if (
-                hl_lines and (lineno + 1) not in hl_lines
-            ):  # use lineno+1 as we're on the previous line when we render the next line number
+            # use lineno+1 as we're on the previous line when we render the
+            # next line number
+            if hl_lines and (lineno + 1) not in hl_lines:
                 linenumber_cls = 'pygments-diml'
             # Split on the "\n"s
             values = value.split("\n")

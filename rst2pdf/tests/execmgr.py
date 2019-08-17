@@ -84,7 +84,7 @@ class BaseExec(object):
                 code = s.code
                 try:
                     code = int(code)
-                except:
+                except ValueError:
                     pass
                 if code:
                     sys.stderr.write(str(code))

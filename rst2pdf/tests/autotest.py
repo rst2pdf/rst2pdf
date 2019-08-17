@@ -526,8 +526,8 @@ def main(args=None):
         and updatemd5 not in 'good bad incomplete unknown deprecated'.split()
     ):
         raise SystemExit(
-            'Unexpected value for updatemd5: %s. Expected one of: "good", "bad", "incomplete", "unknown" or "deprecated"'
-            % updatemd5
+            'Unexpected value for updatemd5: %s. Expected one of: "good", "bad", '
+            '"incomplete", "unknown" or "deprecated"' % updatemd5
         )
     errcode = run_testlist(
         args,

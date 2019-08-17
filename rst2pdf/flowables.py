@@ -413,13 +413,6 @@ class SplitTable(DelayedTable):
                             )
                         ]
                         if l2[1:] + text[l + 1 :]:
-                            ## Workaround for Issue 180 with wordaxe:
-                            # if wordaxe is not None:
-                            # l3.append(
-                            # Table([['',l2[1:]+text[l+1:]]],
-                            # colWidths=self.colWidths,
-                            # style=self.style))
-                            # else:
                             l3.append(
                                 SplitTable(
                                     [['', l2[1:] + text[l + 1 :]]],
@@ -514,7 +507,7 @@ class SetNextTemplate(Flowable):
         if self.templateName:
             try:
                 self.canv.oldTemplateName = self.canv.templateName
-            except:
+            except Exception:
                 self.canv.oldTemplateName = 'oneColumn'
             self.canv.templateName = self.templateName
 
@@ -561,8 +554,6 @@ class TextAnnotation(Flowable):
         return 0, 0
 
     def draw(self):
-        # Format of Reportlab's textAnnotation():
-        # textAnnotation("Your content", Rect=[x_begin, y_begin, x_end, y_end], relative=1)
         self.canv.textAnnotation(self.annotationText, self.position, 1)
 
 

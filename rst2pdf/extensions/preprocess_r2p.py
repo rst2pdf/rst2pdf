@@ -146,7 +146,7 @@ class Preprocess(object):
                 substyles = styles.get('styles')
                 if substyles is not None:
                     styles['styles'] = dict(substyles)
-            except:
+            except Exception:
                 pass
             else:
                 self.changed = True

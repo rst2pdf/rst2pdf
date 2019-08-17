@@ -105,7 +105,8 @@ class StyleSheet(object):
         style_path += ['.', os.path.join(self.PATH, 'styles'), '~/.rst2pdf/styles']
         self.StyleSearchPath = list(map(os.path.expanduser, style_path))
 
-        # Remove duplicates but preserve order. Not very efficient, but these are short lists
+        # Remove duplicates but preserve order. Not very efficient, but these
+        # are short lists
         self.FontSearchPath = [
             x
             for (i, x) in enumerate(self.FontSearchPath)

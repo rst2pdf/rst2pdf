@@ -122,27 +122,17 @@ class FancyHeading(MyImage, Heading):
     entries so you have a PDF TOC, and MyImage, that draws images'''
 
     def __init__(self, *args, **kwargs):
-        # The inicialization is taken from rst2pdf.flowables.Heading
+        # The initialization is taken from rst2pdf.flowables.Heading
         hstyle = kwargs.pop('hstyle')
         level = 0
         text = kwargs.pop('text')
         self.snum = kwargs.pop('snum')
         self.parent_id = kwargs.pop('parent_id')
-        # self.stext =
-        Heading.__init__(self, text, hstyle, level=level, parent_id=self.parent_id)
-        # Cleanup title text
-        # self.stext = re.sub(r'<[^>]*?>', '', unescape(self.stext))
-        # self.stext = self.stext.strip()
 
-        # Stuff needed for the outline entry
+        Heading.__init__(self, text, hstyle, level=level, parent_id=self.parent_id)
         MyImage.__init__(self, *args, **kwargs)
 
     def drawOn(self, canv, x, y, _sW):
-
-        ## These two lines are magic.
-        # if isinstance(self.parent_id, tuple):
-        # self.parent_id=self.parent_id[0]
-
         # Add outline entry. This is copied from rst2pdf.flowables.heading
         canv.bookmarkHorizontal(self.parent_id, 0, y + self.image.height)
 
