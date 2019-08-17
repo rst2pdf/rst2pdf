@@ -39,7 +39,7 @@ def dumpinfo():
     mydict = getcategories()
     if not mydict:
         print('\nNo log files found')
-    for name, values in sorted(mydict.iteritems()):
+    for name, values in sorted(mydict.items()):
         print('\nCategory "%s"\n        (%d tests)\n' % (name, len(values)))
         fmt = '%%-%ds  %%s' % max(len(x[0]) for x in values)
         for item in sorted(values):
