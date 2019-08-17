@@ -19,7 +19,7 @@ def setpythonpaths(execfn, rootdir=None):
     f = open(execfn, 'rb')
     exec(f.read(), {'__name__': 'testing'})
     f.close()
-    newpaths = sys.path[:len(sys.path)-pathlen]
+    newpaths = sys.path[: len(sys.path) - pathlen]
     ppath = os.environ.get('PYTHONPATH')
     if ppath is not None:
         newpaths.append(ppath)

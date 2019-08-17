@@ -37,10 +37,11 @@
 from copy import copy
 
 import reportlab
-import rst2pdf.genelements as genelements
 import six
 from reportlab.platypus import Spacer
 from reportlab.platypus.tableofcontents import drawPageNumbers
+
+import rst2pdf.genelements as genelements
 
 Table = genelements.Table
 Paragraph = genelements.Paragraph
@@ -95,8 +96,7 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             if reportlab.Version <= '2.3':
                 _tempEntries = [(0, 'Placeholder for table of contents', 0)]
             else:
-                _tempEntries = [(0, 'Placeholder for table of contents',
-                                 0, None)]
+                _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
         else:
             _tempEntries = self._lastEntries
 
@@ -139,11 +139,14 @@ class DottedTableOfContents(genelements.MyTableOfContents):
                     text = six.text_type(text, 'utf-8')
                 text = u'<a href="#%s">%s</a>' % (key, text)
 
-            para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
+            para = Paragraph(
+                '%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)),
+                style,
+            )
             end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
-                tableData.append([Spacer(1, style.spaceBefore), ])
-            tableData.append([para, ])
+                tableData.append([Spacer(1, style.spaceBefore)])
+            tableData.append([para])
 
         self._table = Table(tableData, colWidths=(availWidth,), style=self.tableStyle)
 

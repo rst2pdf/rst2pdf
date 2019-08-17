@@ -6,6 +6,9 @@
 opt_imports.py contains logic for handling optional imports.
 """
 
+import pdfrw as pdfinfo
+from PIL import Image as PILImage
+
 from .log import log
 
 PyHyphenHyphenator = None
@@ -15,17 +18,18 @@ try:
     from wordaxe import version as wordaxe_version
     from wordaxe.rl.paragraph import Paragraph
     from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
+
     # PyHnjHyphenator is broken for non-ascii characters, so
     # let's not use it and avoid useless crashes (http://is.gd/19efQ)
 
-    #from wordaxe.PyHnjHyphenator import PyHnjHyphenator
+    # from wordaxe.PyHnjHyphenator import PyHnjHyphenator
     # If basehyphenator doesn't load, wordaxe is broken
     # pyhyphenator and DCW *may* not load.
 
     from wordaxe.BaseHyphenator import BaseHyphenator
+
     try:
-        from wordaxe.plugins.PyHyphenHyphenator \
-            import PyHyphenHyphenator
+        from wordaxe.plugins.PyHyphenHyphenator import PyHyphenHyphenator
     except:
         pass
     try:
@@ -55,13 +59,10 @@ except ImportError:
 
 try:
     from reportlab.platypus.flowables import NullDraw
-except ImportError: # Probably RL 2.1
+except ImportError:  # Probably RL 2.1
     from reportlab.platypus.flowables import Flowable as NullDraw
 
 try:
     from matplotlib import mathtext
 except ImportError:
     mathtext = None
-
-import pdfrw as pdfinfo
-from PIL import Image as PILImage

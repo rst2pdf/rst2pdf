@@ -11,8 +11,9 @@ a header showing number of tests in that category.  Then prints
 sorted list of tests, with checksums.
 
 '''
-import os
 import glob
+import os
+
 
 def getchecksuminfo():
     for fn in sorted(glob.glob(os.path.join('output', '*.log'))):
@@ -26,6 +27,7 @@ def getchecksuminfo():
         else:
             yield fn, data.rsplit(' ', 1)[-1][:-1], data.split("'")[1]
 
+
 def getcategories():
     mydict = {}
     for fn, category, checksum in getchecksuminfo():
@@ -34,6 +36,7 @@ def getcategories():
             mydict[category] = myset = set()
         myset.add((fn, checksum))
     return mydict
+
 
 def dumpinfo():
     mydict = getcategories()
@@ -45,6 +48,7 @@ def dumpinfo():
         for item in sorted(values):
             print(fmt % (item[0], repr(item[1])))
     print()
+
 
 if __name__ == '__main__':
     dumpinfo()

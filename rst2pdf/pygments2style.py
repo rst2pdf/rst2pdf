@@ -7,25 +7,28 @@ Creates a rst2pdf stylesheet for each pygments style.
 """
 
 import os
-import dumpstyle
-from pygments.token import STANDARD_TYPES
+
 from pygments import styles as pstyles
+from pygments.token import STANDARD_TYPES
+
+import dumpstyle
 
 # First get a list of all possible classes
-classnames=set()
+classnames = set()
 for name in list(pstyles.get_all_styles()):
-    css=os.popen('pygmentize -S %s -f html'%name, 'r').read()
+    css = os.popen('pygmentize -S %s -f html' % name, 'r').read()
     for line in css.splitlines():
         line = line.strip()
         sname = "pygments-" + line.split(' ')[0][1:]
         classnames.add(sname)
+
 
 def css2rl(css):
     dstyles = {}
     # First create a dumb stylesheet
     for key in STANDARD_TYPES:
         dstyles["pygments-" + STANDARD_TYPES[key]] = {'parent': 'code'}
-    seenclassnames=set()
+    seenclassnames = set()
     styles = []
     for line in css.splitlines():
         line = line.strip()
@@ -36,8 +39,8 @@ def css2rl(css):
         for option in options:
             option = option.strip()
             option, argument = option.split(':')
-            option=option.strip()
-            argument=argument.strip()
+            option = option.strip()
+            argument = argument.strip()
             if option == 'color':
                 style['textColor'] = argument.strip()
             if option == 'background-color':
@@ -45,8 +48,7 @@ def css2rl(css):
 
             # These two can come in any order
             if option == 'font-weight' and argument == 'bold':
-                if 'fontName' in style and \
-                    style['fontName'] == 'stdMonoItalic':
+                if 'fontName' in style and style['fontName'] == 'stdMonoItalic':
                     style['fontName'] = 'stdMonoBoldItalic'
                 else:
                     style['fontName'] = 'stdMonoBold'
@@ -56,19 +58,18 @@ def css2rl(css):
                 else:
                     style['fontName'] = 'stdMonoItalic'
         if style.get('textColor', None) is None:
-            style['textColor']='black'
+            style['textColor'] = 'black'
         styles.append([sname, style])
 
     # Now add default styles for all unseen class names
-    for sname in classnames-seenclassnames:
+    for sname in classnames - seenclassnames:
         style = dstyles.get(sname, {'parent': 'code'})
-        style['textColor']='black'
+        style['textColor'] = 'black'
         styles.append([sname, style])
 
     return dumpstyle.dumps({'styles': styles})
 
 
-
 for name in list(pstyles.get_all_styles()):
-    css=os.popen('pygmentize -S %s -f html'%name, 'r').read()
-    open(name+'.style', 'w').write(css2rl(css))
+    css = os.popen('pygmentize -S %s -f html' % name, 'r').read()
+    open(name + '.style', 'w').write(css2rl(css))

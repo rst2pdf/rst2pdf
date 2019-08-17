@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable
+from reportlab.platypus.flowables import _FUZZ, Flowable, _listWrapOn
 
 
 class Sinker(Flowable):
@@ -13,11 +13,11 @@ class Sinker(Flowable):
     def __init__(self, content):
         self.content = content
 
-    def wrap (self, aW, aH):
+    def wrap(self, aW, aH):
         self.width, self.height = _listWrapOn(self.content, aW, None)
         return self.width, aH
 
-    def draw (self):
+    def draw(self):
         canv = self.canv
         canv.saveState()
         x = canv._x
@@ -25,7 +25,7 @@ class Sinker(Flowable):
         y += self.height
         aW = self.width
         for c in self.content:
-            w, h = c.wrapOn(canv, aW, 0xfffffff)
+            w, h = c.wrapOn(canv, aW, 0xFFFFFFF)
             if (w < _FUZZ or h < _FUZZ) and not getattr(c, '_ZEROSIZE', None):
                 continue
             y -= h

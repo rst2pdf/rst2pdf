@@ -14,9 +14,9 @@ class SectNumFolder(docutils.nodes.SparseNodeVisitor):
         for i in node.parent.parent['ids']:
             self.sectnums[i] = node.parent.astext().replace(u'\xa0\xa0\xa0', ' ')
 
-
     def unknown_visit(self, node):
         pass
+
 
 class SectRefExpander(docutils.nodes.SparseNodeVisitor):
     def __init__(self, document, sectnums):
@@ -25,7 +25,9 @@ class SectRefExpander(docutils.nodes.SparseNodeVisitor):
 
     def visit_reference(self, node):
         if node.get('refid', None) in self.sectnums:
-            node.children = [docutils.nodes.Text('%s ' % self.sectnums[node.get('refid')])]
+            node.children = [
+                docutils.nodes.Text('%s ' % self.sectnums[node.get('refid')])
+            ]
 
     def unknown_visit(self, node):
         pass

@@ -44,11 +44,10 @@ setup(
             "images/*png",
             "images/*jpg",
             "templates/*tmpl",
-        ],
+        ]
     },
     include_package_data=True,
-    dependency_links=[
-    ],
+    dependency_links=[],
     install_requires=install_requires,
     tests_require=tests_require,
     extras_require=dict(

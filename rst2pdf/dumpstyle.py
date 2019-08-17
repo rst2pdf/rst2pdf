@@ -10,11 +10,10 @@
     to .style in the styles directory.
 '''
 
-import sys
 import os
+from json import loads as jloads
 
 from rson import loads as rloads
-from json import loads as jloads
 
 
 def dumps(obj, forcestyledict=True):
@@ -74,10 +73,14 @@ def dumps(obj, forcestyledict=True):
             result.append('{}')
             return
         obj = sorted(obj.items())
-        multiline = indent and ( len(obj) > 2 or
-                    len(obj) == 2 and (
-                         isinstance(obj[0][-1], (list, dict)) or
-                         isinstance(obj[-1][-1], (list, dict))))
+        multiline = indent and (
+            len(obj) > 2
+            or len(obj) == 2
+            and (
+                isinstance(obj[0][-1], (list, dict))
+                or isinstance(obj[-1][-1], (list, dict))
+            )
+        )
         if not multiline and (not indent or len(obj) != 1):
             result.append('{')
             obj = [[x, ', '] for x in obj]
@@ -97,8 +100,14 @@ def dumps(obj, forcestyledict=True):
     def donone(result, obj, indent):
         result.append('null')
 
-    dumpfuncs = {float: dofloat, int: doint, str: dostr,
-                 list: dolist, dict: dodict, type(None): donone}
+    dumpfuncs = {
+        float: dofloat,
+        int: doint,
+        str: dostr,
+        list: dolist,
+        dict: dodict,
+        type(None): donone,
+    }
 
     dumpfuncs = dumpfuncs.items()
 
@@ -115,6 +124,7 @@ def dumps(obj, forcestyledict=True):
         obj = fixstyle(obj)
     dumprecurse(result, obj, indentnow=False)
     return fixspacing(''.join(result))
+
 
 def fixspacing(s):
     ''' Try to make the output prettier by inserting blank lines
@@ -134,6 +144,7 @@ def fixspacing(s):
     result.append('')
     return '\n'.join(result)
 
+
 def fixstyle(obj):
     ''' Try to convert styles into a dictionary
     '''
@@ -145,6 +156,7 @@ def fixstyle(obj):
         elif isinstance(obj, dict) and 'styles' in obj:
             obj['styles'] = dict(obj['styles'])
     return obj
+
 
 def convert(srcname):
     ''' Convert a single file from .json to .style
@@ -162,5 +174,7 @@ def convert(srcname):
 
 
 if __name__ == '__main__':
-    for fname in [os.path.join('styles', x) for x in os.listdir('styles') if x.endswith('.json')]:
+    for fname in [
+        os.path.join('styles', x) for x in os.listdir('styles') if x.endswith('.json')
+    ]:
         convert(fname)

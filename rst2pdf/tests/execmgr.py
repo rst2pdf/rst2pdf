@@ -14,14 +14,14 @@ Currently only works under Linux.
 
 '''
 
-import sys
-import subprocess
-import select
 import os
-import time
+import select
+import subprocess
+import sys
 import textwrap
-from signal import SIGTERM, SIGKILL
+import time
 import traceback
+from signal import SIGKILL, SIGTERM
 
 import six
 
@@ -34,24 +34,25 @@ class BaseExec(object):
         the new process, but doesn't do anything
         with them.
     '''
+
     is_python_proc = False
     defaults = dict(
-                bufsize=0,
-                executable=None,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                preexec_fn=None,   # Callable object in child process
-                close_fds=False,
-                shell=False,
-                cwd=None,
-                env=None,
-                universal_newlines=False,
-                startupinfo=None,
-                creationflags=0,
-                timeout=500.0,    # Time in seconds before termination
-                killdelay=20.0,   # Time in seconds after termination before kill
-                python_proc=None,
+        bufsize=0,
+        executable=None,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        preexec_fn=None,  # Callable object in child process
+        close_fds=False,
+        shell=False,
+        cwd=None,
+        env=None,
+        universal_newlines=False,
+        startupinfo=None,
+        creationflags=0,
+        timeout=500.0,  # Time in seconds before termination
+        killdelay=20.0,  # Time in seconds after termination before kill
+        python_proc=None,
     )
 
     def before_init(self, keywords):
@@ -161,15 +162,16 @@ class PipeReader(object):
         such as the subprocess's stdin, but the initial version is
         input pipes only (the subprocess's stdout and stderr).
     '''
-    TIMEOUT = 1.0     # Poll interval in seconds
+
+    TIMEOUT = 1.0  # Poll interval in seconds
     BUFSIZE = 100000
 
     def __init__(self, *pipes, **kw):
         self.timeout = kw.pop('timeout', self.TIMEOUT)
         self.bufsize = kw.pop('bufsize', self.BUFSIZE)
         self.by_pipenum = {}  # Dictionary of read functions
-        self.ready = []       # List of ready pipes
-        assert not kw, kw     # Check for mispelings :)
+        self.ready = []  # List of ready pipes
+        assert not kw, kw  # Check for mispelings :)
         for pipe in pipes:
             self.addpipe(pipe)
 
@@ -199,9 +201,9 @@ class PipeReader(object):
             allpipes = list(self.by_pipenum)
             if not allpipes:
                 raise StopIteration
-            ready[:] = select.select(allpipes,[],[],self.timeout)[0]
+            ready[:] = select.select(allpipes, [], [], self.timeout)[0]
             if not ready:
-                return None, None   # Allow code to execute after timeout
+                return None, None  # Allow code to execute after timeout
         return self.by_pipenum[ready.pop()]()
 
     def __next__(self):
@@ -215,6 +217,7 @@ class LineSplitter(object):
         line of data returned from a pipe is
         split across multiple reads.
     '''
+
     def __init__(self, prefix):
         self.prefix = prefix
         self.leftovers = ''
@@ -253,7 +256,6 @@ class LineSplitter(object):
     next = __next__
 
 
-
 class TextOutExec(BaseExec):
     ''' TextOutExec is used for when an executed subprocess's
         stdout and stderr are line-oriented text output.
@@ -271,10 +273,8 @@ class TextOutExec(BaseExec):
              can add timeout checking to the "wait for things
              to finish up" logic.
     '''
-    defaults = dict(
-                pollinterval=1.0,
-                readbufsize=100000,
-    )
+
+    defaults = dict(pollinterval=1.0, readbufsize=100000)
     defaults.update(BaseExec.defaults)
 
     def before_init(self, keywords):
@@ -283,10 +283,10 @@ class TextOutExec(BaseExec):
 
     def after_init(self):
         proc = self.proc
-        self.pipes = PipeReader(proc.stdout, proc.stderr,
-                      timeout=self.pollinterval, bufsize=self.bufsize)
-        self.pipedir = {proc.stdout : LineSplitter(' '),
-                        proc.stderr : LineSplitter('*')}
+        self.pipes = PipeReader(
+            proc.stdout, proc.stderr, timeout=self.pollinterval, bufsize=self.bufsize
+        )
+        self.pipedir = {proc.stdout: LineSplitter(' '), proc.stderr: LineSplitter('*')}
         self.lines = []
         self.finished = False
 
@@ -322,6 +322,7 @@ def elapsedtime(when=time.time()):
     units = hrs and 'hours' or mins and 'minutes' or 'seconds'
     return '%s%s%s %s' % (hrs, mins, secs, units)
 
+
 def default_logger(resultlist, data=None, data2=None):
     if data is not None:
         resultlist.append(data)
@@ -329,24 +330,27 @@ def default_logger(resultlist, data=None, data2=None):
         data2 = data
         print(data2)
 
+
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
         them to caller
     '''
     logger = kw.pop('logger', default_logger)
 
-    formatcmd = textwrap.TextWrapper(initial_indent='        ',
-                                    subsequent_indent='        ',
-                                    break_long_words=False).fill
+    formatcmd = textwrap.TextWrapper(
+        initial_indent='        ', subsequent_indent='        ', break_long_words=False
+    ).fill
 
     subproc = TextOutExec(*arg, **kw)
     args = subproc.args
     procname = args[0]
     starttime = time.time()
     result = []
-    logger(result,
-        'Process "%s" started on %s\n\n%s\n\n' % (
-         procname, time.asctime(), formatcmd(' '.join(args))))
+    logger(
+        result,
+        'Process "%s" started on %s\n\n%s\n\n'
+        % (procname, time.asctime(), formatcmd(' '.join(args))),
+    )
     errcode = 0
     badexit = '* ' + chr(1)
     for line in subproc:
@@ -358,12 +362,14 @@ def textexec(*arg, **kw):
             continue
         errcode = errcode or int(line.split()[-1])
         status = errcode and 'FAIL' or 'PASS'
-        logger(result,
-            '\nProgram %s exit code: %s (%d)   elapsed time: %s\n' %
-            (procname, status, errcode, elapsedtime(starttime)))
-        logger(result, None,
-            'Cumulative execution time is %s\n' % elapsedtime())
+        logger(
+            result,
+            '\nProgram %s exit code: %s (%d)   elapsed time: %s\n'
+            % (procname, status, errcode, elapsedtime(starttime)),
+        )
+        logger(result, None, 'Cumulative execution time is %s\n' % elapsedtime())
     return errcode, result
+
 
 if __name__ == '__main__':
 
@@ -372,7 +378,7 @@ if __name__ == '__main__':
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
-        #raise SystemExit('I am bad')
+        # raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
         print("Starting subprocess")

@@ -29,15 +29,26 @@ class AnyCache(object):
         sure how to define scope on these cached items.
     '''
 
+
 # This is monkey-patched into reportlab IFF we are using
 # PDF files inside paragraphs.
 
 
-def drawImage(self, image, x, y, width=None, height=None, mask=None,
-              preserveAspectRatio=False, anchor='c'):
+def drawImage(
+    self,
+    image,
+    x,
+    y,
+    width=None,
+    height=None,
+    mask=None,
+    preserveAspectRatio=False,
+    anchor='c',
+):
     if not isinstance(image, VectorPdf):
-        return self._drawImageNotVectorPDF(image, x, y, width, height, mask,
-                                           preserveAspectRatio, anchor)
+        return self._drawImageNotVectorPDF(
+            image, x, y, width, height, mask, preserveAspectRatio, anchor
+        )
     image.drawOn(self, x, y, width=width, height=height)
 
 
@@ -58,8 +69,16 @@ class VectorPdf(Flowable):
             loader = cls.filecache[client] = CacheXObj().load
         return loader(uri)
 
-    def __init__(self, filename, width=None, height=None, kind='direct',
-                 mask=None, lazy=True, srcinfo=None):
+    def __init__(
+        self,
+        filename,
+        width=None,
+        height=None,
+        kind='direct',
+        mask=None,
+        lazy=True,
+        srcinfo=None,
+    ):
         Flowable.__init__(self)
         self._kind = kind
         self.xobj = xobj = self.load_xobj(srcinfo)
@@ -80,7 +99,7 @@ class VectorPdf(Flowable):
         if _sW > 0 and hasattr(self, 'hAlign'):
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
-                x += 0.5*_sW
+                x += 0.5 * _sW
             elif a in ('RIGHT', TA_RIGHT):
                 x += _sW
             elif a not in ('LEFT', TA_LEFT):
@@ -101,7 +120,7 @@ class VectorPdf(Flowable):
         canv.restoreState()
 
     def _restrictSize(self, aW, aH):
-        if self.drawWidth > aW+_FUZZ or self.drawHeight > aH+_FUZZ:
+        if self.drawWidth > aW + _FUZZ or self.drawHeight > aH + _FUZZ:
             self._oldDrawSize = self.drawWidth, self.drawHeight
             factor = min(float(aW) / self.drawWidth, float(aH) / self.drawHeight)
             self.drawWidth *= factor
@@ -132,9 +151,11 @@ class VectorPdf(Flowable):
         '''
         if cls.OldImageReader is None:
             import reportlab.platypus.paraparser as p
+
             cls.OldImageReader = p.ImageReader
             p.ImageReader = cls.NewImageReader
             from reportlab.pdfgen.canvas import Canvas as c
+
             c._drawImageNotVectorPDF = c.drawImage
             c.drawImage = drawImage
         return fname

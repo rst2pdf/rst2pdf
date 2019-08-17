@@ -16,8 +16,6 @@ import shutil
 
 from autotest import checkmd5
 
-
-
 # First, let's check that the existing artifacts are "good"
 
 artifacts = glob.glob('reference/*.pdf')

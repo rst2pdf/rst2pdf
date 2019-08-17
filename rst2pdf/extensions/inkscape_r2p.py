@@ -18,11 +18,10 @@ import subprocess
 import sys
 import tempfile
 from weakref import WeakKeyDictionary
-from rst2pdf.log import log
 
-from vectorpdf_r2p import VectorPdf
 import rst2pdf.image
-
+from rst2pdf.log import log
+from vectorpdf_r2p import VectorPdf
 
 if sys.platform.startswith('win'):
     # note: this is the default "all users" install location,
@@ -30,6 +29,7 @@ if sys.platform.startswith('win'):
     progname = os.path.expandvars(r'$PROGRAMFILES\Inkscape\inkscape.exe')
 else:
     progname = 'inkscape'
+
 
 class InkscapeImage(VectorPdf):
 
@@ -44,8 +44,16 @@ class InkscapeImage(VectorPdf):
     def available(self):
         return True
 
-    def __init__(self, filename, width=None, height=None, kind='direct',
-                                 mask=None, lazy=True, srcinfo=None):
+    def __init__(
+        self,
+        filename,
+        width=None,
+        height=None,
+        kind='direct',
+        mask=None,
+        lazy=True,
+        srcinfo=None,
+    ):
         client, uri = srcinfo
         cache = self.source_filecache.setdefault(client, {})
         pdffname = cache.get(filename)
@@ -70,13 +78,20 @@ class InkscapeImage(VectorPdf):
     def raster(self, filename, client):
         """Returns a URI to a rasterized version of the image"""
         cache = self.source_filecache.setdefault(client, {})
-        pngfname = cache.get(filename+'_raster')
+        pngfname = cache.get(filename + '_raster')
         if pngfname is None:
             tmpf, pngfname = tempfile.mkstemp(suffix='.png')
             os.close(tmpf)
             client.to_unlink.append(pngfname)
-            cache[filename+'_raster'] = pngfname
-            cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
+            cache[filename + '_raster'] = pngfname
+            cmd = [
+                progname,
+                os.path.abspath(filename),
+                '-e',
+                pngfname,
+                '-d',
+                str(client.def_dpi),
+            ]
             try:
                 subprocess.call(cmd)
                 return pngfname

@@ -39,14 +39,14 @@ New Usage:
 
 '''
 
-import os
 import glob
+import os
 import subprocess
 import sys
 
 
 def mark_test_good(testname):
-    cmd = './autotest.py -u good %s' %  ('input/' + testname + ".txt")
+    cmd = './autotest.py -u good %s' % ('input/' + testname + ".txt")
     # print cmd
 
     try:
@@ -55,13 +55,21 @@ def mark_test_good(testname):
     except subprocess.CalledProcessError as e:
         print(e.output)
 
+
 def compare_output_and_reference(testname):
     rfile = "reference/" + testname + ".pdf"
     ofile = "output/" + testname + ".pdf"
     diffimg = "output/" + testname + "-differences.jpg"
 
     # requires image magick, this command is for v6.9
-    cmd = 'compare ' + rfile + ' ' + ofile + ' -compose src -fuzz 5% -metric PHASH ' + diffimg
+    cmd = (
+        'compare '
+        + rfile
+        + ' '
+        + ofile
+        + ' -compose src -fuzz 5% -metric PHASH '
+        + diffimg
+    )
     # print cmd
 
     # run the command and capture the output
@@ -79,18 +87,21 @@ def compare_output_and_reference(testname):
         # it wasn't a number, just print the output
         print(testname + " comparison failed with error: " + output[1])
 
-def checkalltests(testfiles = None):
-    i=0
+
+def checkalltests(testfiles=None):
+    i = 0
 
     # what should we test? Start with input/*.txt
     if testfiles is None:
-        testfiles = [os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))]
+        testfiles = [
+            os.path.basename(x) for x in glob.glob(os.path.join("input", '*.txt'))
+        ]
 
     for filename in testfiles:
         testname = os.path.splitext(filename)[0]
 
         # run the test once, see what happens
-        cmd = './autotest.py %s' %  ('input/' + testname + ".txt")
+        cmd = './autotest.py %s' % ('input/' + testname + ".txt")
         # print cmd
         try:
             devnull = open(os.devnull, 'w')
@@ -98,13 +109,13 @@ def checkalltests(testfiles = None):
             print("*** " + testname + " test passes")
         except subprocess.CalledProcessError as e:
             # something to react to
-            if(e.returncode == 3):
+            if e.returncode == 3:
                 # The result was unknown. This is where it gets interesting
                 compare_output_and_reference(testname)
             else:
                 print(testname + " returned status " + str(e.returncode))
 
-        i = i+1
+        i = i + 1
 
 
 if __name__ == '__main__':

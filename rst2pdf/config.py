@@ -5,6 +5,7 @@
 """Singleton config object"""
 
 import os
+
 import six
 
 from rst2pdf.rson import loads
@@ -29,7 +30,6 @@ def getValue(section, key, default=None):
 
 
 class ConfigError(Exception):
-
     def __init__(self, modulename, msg):
         self.modulename = modulename
         self.msg = msg

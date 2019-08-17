@@ -9,7 +9,7 @@ from . import genelements  # noqa
 from . import genpdftext  # noqa
 
 # sphinxnodes needs these
-from .genpdftext import NodeHandler, FontHandler, HandleEmphasis  # noqa
+from .genpdftext import FontHandler, HandleEmphasis, NodeHandler  # noqa
 
 # createpdf needs this
 nodehandlers = NodeHandler()

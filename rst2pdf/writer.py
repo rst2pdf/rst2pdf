@@ -11,23 +11,23 @@ from rst2pdf import createpdf
 
 
 class PdfWriter(writers.Writer):
-
     def __init__(self, builder):
         writers.Writer.__init__(self)
         self.builder = builder
         self.output = u''
 
-    supported = ('pdf')
+    supported = 'pdf'
     """Formats this writer supports."""
 
     config_section = 'pdf writer'
-    config_section_dependencies = ('writers')
+    config_section_dependencies = 'writers'
     """Final translated form of `document`."""
 
     def translate(self):
         sio = StringIO('')
         createpdf.RstToPdf(sphinx=True).createPdf(
-            doctree=self.document, output=sio, compressed=False)
+            doctree=self.document, output=sio, compressed=False
+        )
         self.output = six.text_type(sio.getvalue(), 'utf-8', 'ignore')
 
     def supports(self, format):
