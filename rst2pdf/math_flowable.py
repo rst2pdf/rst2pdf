@@ -83,7 +83,7 @@ class Math(Flowable):
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-                    if not fontname in fonts:
+                    if fontname not in fonts:
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
                     canv.setFont(fontname, fontsize)

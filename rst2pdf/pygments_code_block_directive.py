@@ -243,7 +243,7 @@ def code_block_directive(
 
     hl_lines = options.get('hl_lines', [])
     withln = "linenos" in options
-    if not "linenos_offset" in options:
+    if "linenos_offset" not in options:
         line_offset = 0
 
     language = arguments[0]

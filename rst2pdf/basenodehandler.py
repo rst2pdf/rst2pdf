@@ -162,7 +162,7 @@ class NodeHandler(with_metaclass(MetaHelper, object)):
         if not hasattr(self, 'unkn_node'):
             self.unkn_node = set()
         cln = self.getclassname(node)
-        if not cln in self.unkn_node:
+        if cln not in self.unkn_node:
             self.unkn_node.add(cln)
             log.warning("Unkn. node (self.%s): %s [%s]", during, cln, nodeid(node))
             try:
