@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-from docutils.nodes import Text, target
 from docutils.parsers.rst import roles
 
 

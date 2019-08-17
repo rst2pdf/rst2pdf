@@ -9,7 +9,6 @@ import sys
 from copy import copy
 from xml.sax.saxutils import unescape
 
-import reportlab
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import cm

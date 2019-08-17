@@ -21,7 +21,7 @@ import docutils
 import sphinx
 from reportlab.platypus import Paragraph, TableStyle
 
-from rst2pdf.flowables import DelayedTable, MyIndenter, MySpacer, Reference
+from rst2pdf.flowables import DelayedTable, MyIndenter, MySpacer
 from rst2pdf.image import MyImage, VectorPdf
 from rst2pdf.log import log, nodeid
 from rst2pdf.nodehandlers import FontHandler, HandleEmphasis, NodeHandler

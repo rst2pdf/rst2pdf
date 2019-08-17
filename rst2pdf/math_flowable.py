@@ -64,7 +64,7 @@ class Math(Flowable):
 
     def drawOn(self, canv, x, y, _sW=0):
         if _sW and hasattr(self, 'hAlign'):
-            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
@@ -137,9 +137,8 @@ class Math(Flowable):
             import Image
             import ImageFont
             import ImageDraw
-            import ImageColor
         except ImportError:
-            from PIL import Image, ImageFont, ImageDraw, ImageColor
+            from PIL import Image, ImageFont, ImageDraw
 
         if not HAS_MATPLOTLIB:
             img = Image.new('RGBA', (120, 120), (255, 255, 255, 0))

@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
-from reportlab.lib.colors import Color
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus.flowables import _FUZZ, _listWrapOn
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus.paragraph import Paragraph
-
-from wordaxe.rl.NewParagraph import Paragraph
-from wordaxe.rl.styles import ParagraphStyle, getSampleStyleSheet
 
 
 def go():

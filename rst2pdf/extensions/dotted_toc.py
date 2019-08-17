@@ -36,7 +36,6 @@
 
 from copy import copy
 
-import reportlab
 import six
 from reportlab.platypus import Spacer
 from reportlab.platypus.tableofcontents import drawPageNumbers

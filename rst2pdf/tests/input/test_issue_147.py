@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from reportlab.lib.enums import TA_JUSTIFY
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate
 
 

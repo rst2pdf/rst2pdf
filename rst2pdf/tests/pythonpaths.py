@@ -3,8 +3,6 @@
 import os
 import sys
 
-import six
-
 
 def setpythonpaths(execfn, rootdir=None):
     ''' There is probably a cleaner way to do this.

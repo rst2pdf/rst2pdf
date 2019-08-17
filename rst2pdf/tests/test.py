@@ -4,7 +4,6 @@ import os
 import shlex
 
 import nose.plugins.skip
-import six
 
 from autotest import MD5Info, PathInfo, checkmd5, dirname, globjoin, run_single
 from execmgr import default_logger as log

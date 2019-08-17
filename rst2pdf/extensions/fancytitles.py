@@ -6,7 +6,6 @@ import codecs
 import tempfile
 
 import docutils
-import reportlab
 
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
