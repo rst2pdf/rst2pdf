@@ -613,8 +613,7 @@ class RstToPdf(object):
         FP = FancyPage("fancypage", head, foot, self)
 
         def cleantags(s):
-            re.sub(r'<[^>]*?>', '',
-                unicode(s).strip())
+            re.sub(r'<[^>]*?>', '', six.text_type(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,

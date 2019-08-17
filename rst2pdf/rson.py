@@ -61,6 +61,7 @@ import six
 if six.PY3:
     unicode = str
     basestring = str
+    unichr = chr
 
 
 class RSONDecodeError(ValueError):
@@ -377,12 +378,11 @@ class QuotedToken(object):
     ''' Subclass or replace this if you don't like quoted string handling
     '''
 
+    parse_encoded_chr = unichr
     if six.PY3:
-        parse_encoded_chr = chr
         parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
     else:
         parse_quoted_str = staticmethod(lambda token, s: s.decode('utf-8'))
-        parse_encoded_chr = unichr
 
     parse_join_str = u''.join
     cachestrings = False

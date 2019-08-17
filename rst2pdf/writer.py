@@ -4,6 +4,7 @@
 from StringIO import StringIO
 
 from docutils import writers
+import six
 
 from rst2pdf import createpdf
 
@@ -26,7 +27,7 @@ class PdfWriter(writers.Writer):
         sio = StringIO('')
         createpdf.RstToPdf(sphinx=True).createPdf(
             doctree=self.document, output=sio, compressed=False)
-        self.output = unicode(sio.getvalue(), 'utf-8', 'ignore')
+        self.output = six.text_type(sio.getvalue(), 'utf-8', 'ignore')
 
     def supports(self, format):
         """This writer supports all format-specific elements."""

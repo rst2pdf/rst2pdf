@@ -92,8 +92,8 @@ def dumps(obj, forcestyledict=True):
     def donone(result, obj, indent):
         result.append('null')
 
-    dumpfuncs = {float: dofloat, int: doint, basestring: dostr,
-                     list: dolist, dict: dodict, type(None): donone}
+    dumpfuncs = {float: dofloat, int: doint, str: dostr,
+                 list: dolist, dict: dodict, type(None): donone}
 
     dumpfuncs = dumpfuncs.items()
 

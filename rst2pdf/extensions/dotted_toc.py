@@ -38,6 +38,7 @@ from copy import copy
 
 import reportlab
 import rst2pdf.genelements as genelements
+import six
 from reportlab.platypus import Spacer
 from reportlab.platypus.tableofcontents import drawPageNumbers
 
@@ -134,8 +135,8 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             style.textColor = self.linkColor
             key = self.refid_lut.get((level, text, pageNum), None)
             if key:
-                if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
+                if not isinstance(text, six.text_type):
+                    text = six.text_type(text, 'utf-8')
                 text = u'<a href="#%s">%s</a>' % (key, text)
 
             para = Paragraph('%s<onDraw name="%s" label="%s"/>' % (text, funcname, len(end_info)), style)
