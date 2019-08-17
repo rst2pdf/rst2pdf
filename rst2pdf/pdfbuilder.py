@@ -38,6 +38,7 @@ from sphinx.builders import Builder
 from sphinx.environment import NoUri
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import versionlabels
+from sphinx.locale import _
 from sphinx.util import SEP, ustrftime
 from sphinx.util.console import darkgreen, red
 
@@ -46,8 +47,6 @@ from rst2pdf import createpdf, pygments_code_block_directive
 from rst2pdf.languages import get_language_available
 from rst2pdf.log import log
 
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
 
 if six.PY2:
     try:

@@ -1019,51 +1019,6 @@ class BoxedContainer(BoundByWidth):
             return [candidate, remainder]
 
 
-if reportlab.Version == '2.1':
-    import reportlab.platypus.paragraph as pla_para
-
-    ################Ugly stuff below
-    def _do_post_text(i, t_off, tx):
-        """From reportlab's paragraph.py, patched to avoid underlined links"""
-        xs = tx.XtraState
-        leading = xs.style.leading
-        ff = 0.125 * xs.f.fontSize
-        y0 = xs.cur_y - i * leading
-        y = y0 - ff
-        ulc = None
-        for x1, x2, c in xs.underlines:
-            if c != ulc:
-                tx._canvas.setStrokeColor(c)
-                ulc = c
-            tx._canvas.line(t_off + x1, y, t_off + x2, y)
-        xs.underlines = []
-        xs.underline = 0
-        xs.underlineColor = None
-
-        ys = y0 + 2 * ff
-        ulc = None
-        for x1, x2, c in xs.strikes:
-            if c != ulc:
-                tx._canvas.setStrokeColor(c)
-                ulc = c
-            tx._canvas.line(t_off + x1, ys, t_off + x2, ys)
-        xs.strikes = []
-        xs.strike = 0
-        xs.strikeColor = None
-
-        yl = y + leading
-        for x1, x2, link in xs.links:
-            # This is the bad line
-            # tx._canvas.line(t_off+x1, y, t_off+x2, y)
-            pla_para._doLink(tx, link, (t_off + x1, y, t_off + x2, yl))
-        xs.links = []
-        xs.link = None
-
-    # Look behind you! A three-headed monkey!
-    pla_para._do_post_text.func_code = _do_post_text.func_code
-    # ############## End of the ugly
-
-
 class MyTableOfContents(TableOfContents):
     """
     Subclass of reportlab.platypus.tableofcontents.TableOfContents
@@ -1121,10 +1076,7 @@ class MyTableOfContents(TableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            if reportlab.Version <= '2.3':
-                _tempEntries = [(0, 'Placeholder for table of contents', 0)]
-            else:
-                _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
+            _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
         else:
             _tempEntries = self._lastEntries
 
@@ -1136,10 +1088,7 @@ class MyTableOfContents(TableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            if reportlab.Version > '2.3':  # For ReportLab post-2.3
-                leftColStyle = self.getLevelStyle(left_col_level)
-            else:  # For ReportLab <= 2.3
-                leftColStyle = self.levelStyles[left_col_level]
+            leftColStyle = self.getLevelStyle(left_col_level)
             label = self.refid_lut.get((level, text, pageNum), None)
             if label:
                 pre = u'<a href="#%s" color="%s">' % (label, self.linkColor)

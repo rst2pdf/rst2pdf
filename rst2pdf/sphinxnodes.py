@@ -130,13 +130,6 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
         return []
 
 
-if sphinx.__version__ < '1.0':
-
-    class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
-        def gather_elements(self, client, node, style):
-            return [Reference('module-' + node['modname'])]
-
-
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
 

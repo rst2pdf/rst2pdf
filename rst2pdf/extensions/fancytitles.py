@@ -68,9 +68,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 snum = fch.astext()
             else:
                 snum = None
-            maxdepth = 4
-            if reportlab.Version > '2.1':
-                maxdepth = 6
+            maxdepth = 6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id = (node.parent.get('ids', [None]) or [None])[0] + u'-%s' % id(
