@@ -8,7 +8,8 @@ import tempfile
 
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import *
+from reportlab.platypus.doctemplate import SimpleDocTemplate
+from reportlab.platypus.flowables import Flowable
 from six import unichr
 
 from rst2pdf.log import log

@@ -51,19 +51,45 @@ import docutils.readers.doctree
 
 # Template engine for covers
 import jinja2
+import reportlab
 import six
 from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
-from reportlab.platypus import *
+from reportlab.lib.units import cm
 from reportlab.platypus import doctemplate
-from reportlab.platypus.doctemplate import IndexingFlowable
-from reportlab.platypus.flowables import _Container, _listWrapOn
+from reportlab.platypus.doctemplate import (
+    ActionFlowable,
+    BaseDocTemplate,
+    FrameActionFlowable,
+    IndexingFlowable,
+    LayoutError,
+    PageTemplate,
+)
+from reportlab.platypus.flowables import (
+    Flowable,
+    ImageAndFlowables,
+    PageBreak,
+    SlowPageBreak,
+    _Container,
+    _listWrapOn,
+)
+from reportlab.platypus.tables import TableStyle
 from smartypants import smartypants
 
 from rst2pdf import flowables, pygments_code_block_directive
 from rst2pdf import styles as sty
-from rst2pdf.flowables import *
+from rst2pdf.flowables import (
+    BoundByWidth,
+    DelayedTable,
+    Heading,
+    MyPageBreak,
+    MySpacer,
+    OddEven,
+    Separation,
+    SmartFrame,
+    XXPreformatted,
+)
 from rst2pdf.image import MyImage, missing
 from rst2pdf.languages import get_language_available
 from rst2pdf.log import log, nodeid

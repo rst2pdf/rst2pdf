@@ -62,7 +62,7 @@ def parseRaw(data, node):
                 elements.append(flowables.MyPageBreak(tokens[1], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
-                elements.append(flowables.CondPageBreak(99999))
+                elements.append(CondPageBreak(99999))
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':

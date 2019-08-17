@@ -5,18 +5,20 @@
 __docformat__ = 'reStructuredText'
 
 import re
+import sys
 from copy import copy
 from xml.sax.saxutils import unescape
 
 import reportlab
-from reportlab.lib.enums import *
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import *
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import *
-from reportlab.platypus.flowables import _FUZZ, _listWrapOn
+from reportlab.lib.units import cm
+from reportlab.platypus.doctemplate import FrameActionFlowable, FrameBreak, Indenter
+from reportlab.platypus.flowables import _FUZZ, Flowable, PageBreak, Spacer, _listWrapOn
+from reportlab.platypus.frames import Frame
 from reportlab.platypus.tableofcontents import TableOfContents
+from reportlab.platypus.tables import Table, TableStyle
+from reportlab.platypus.xpreformatted import XPreformatted
 
 from . import styles
 from .log import log
@@ -1042,13 +1044,13 @@ if reportlab.Version == '2.1':
         for x1, x2, link in xs.links:
             # This is the bad line
             # tx._canvas.line(t_off+x1, y, t_off+x2, y)
-            _doLink(tx, link, (t_off + x1, y, t_off + x2, yl))
+            pla_para._doLink(tx, link, (t_off + x1, y, t_off + x2, yl))
         xs.links = []
         xs.link = None
 
     # Look behind you! A three-headed monkey!
     pla_para._do_post_text.func_code = _do_post_text.func_code
-    ############### End of the ugly
+    # ############## End of the ugly
 
 
 class MyTableOfContents(TableOfContents):

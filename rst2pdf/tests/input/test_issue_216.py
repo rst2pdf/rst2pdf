@@ -5,9 +5,7 @@ from copy import copy
 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate
-from reportlab.platypus.doctemplate import Indenter
-from reportlab.platypus.flowables import *
-from reportlab.platypus.xpreformatted import *
+from reportlab.platypus.xpreformatted import XPreformatted
 
 
 def go():

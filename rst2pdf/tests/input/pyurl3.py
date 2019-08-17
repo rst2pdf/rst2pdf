@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# flake8: noqa
 '''Un acortador de URLs pero que permite:
 
 * Editar adonde apunta el atajo más tarde

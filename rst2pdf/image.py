@@ -9,11 +9,11 @@ from copy import copy
 from os.path import abspath, dirname
 
 import six
-from reportlab.lib.units import *
+from reportlab.lib.units import cm, inch
 from reportlab.platypus.flowables import Flowable, Image
 
 from .log import log, nodeid
-from .opt_imports import PILImage, pdfinfo
+from .opt_imports import PILImage
 
 if six.PY3:
     from urllib.request import urlretrieve
@@ -258,7 +258,6 @@ class MyImage(Flowable):
             imgname = missing
 
         scale = float(node.get('scale', 100)) / 100
-        size_known = False
 
         # Figuring out the size to display of an image is ... annoying.
         # If the user provides a size with a unit, it's simple, adjustUnits
@@ -282,14 +281,9 @@ class MyImage(Flowable):
             if VectorPdf is not None:
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
-            else:
-                reader = pdfinfo.PdfFileReader(open(imgname, 'rb'))
-                [float(x) for x in reader.getPage(0)['/MediaBox']]
-                iw, ih = x2 - x1, y2 - y1
             # These are in pt, so convert to px
             iw = iw * xdpi / 72.0
             ih = ih * ydpi / 72.0
-            size_known = True  # Assume size from original PDF is OK
 
         else:
             keeptrying = True
