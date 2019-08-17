@@ -1,33 +1,29 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 
 from setuptools import find_packages, setup
 
-version = '0.95'
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as fh:
+        return fh.read()
+
+
+version = '0.95'
 
 long_description = read('README.rst')
 
 install_requires = [
-        'docutils',
-        'jinja2',
-        'pdfrw',
-        'pygments',
-        'reportlab',
-        'setuptools',
-        'six',
-        'smartypants',
-        ]
-
-try:
-    import json
-except ImportError:
-    install_requires.append('simplejson')
-
+    'docutils',
+    'jinja2',
+    'pdfrw',
+    'pygments',
+    'reportlab',
+    'setuptools',
+    'six',
+    'smartypants',
+]
 tests_require = ['pyPdf2']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
@@ -41,12 +37,15 @@ setup(
     version=version,
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-    package_data=dict(rst2pdf=['styles/*.json',
-	'styles/*.style',
-	'images/*png',
-	'images/*jpg',
-	'templates/*tmpl'
-	]),
+    package_data={
+        "rst2pdf": [
+            "styles/*.json",
+            "styles/*.style",
+            "images/*png",
+            "images/*jpg",
+            "templates/*tmpl",
+        ],
+    },
     include_package_data=True,
     dependency_links=[
     ],
@@ -89,5 +88,4 @@ setup(
     },
     download_url="https://github.com/rst2pdf/rst2pdf/releases",
     entry_points={'console_scripts': ['rst2pdf = rst2pdf.createpdf:main']},
-    test_suite='rst2pdf.tests.test_rst2pdf.test_suite',  # TODO: this needs to be updated
 )
