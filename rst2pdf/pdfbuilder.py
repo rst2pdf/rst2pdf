@@ -287,9 +287,6 @@ class PDFBuilder(Builder):
         # We handle it right here
 
         for indexname, indexcls, content, collapse in self.domain_indices:
-            indexcontext = dict(
-                indextitle=indexcls.localname, content=content, collapse_index=collapse
-            )
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
             self.spinx_logger.info(' ' + indexname)

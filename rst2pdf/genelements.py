@@ -856,11 +856,6 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         else:
             pass
 
-        if len(node.children) > 2:
-            legend = node.children[2:]
-        else:
-            pass
-
         w = node.get('width', client.styles['figure'].colWidths[0])
         cw = [w]
         sub_elems = client.gather_elements(node, style=None)

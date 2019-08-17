@@ -151,8 +151,6 @@ class MyImage(Flowable):
         else:
             pass
 
-        extension = os.path.splitext(filename)[-1][1:].lower()
-
         if PILImage:  # See if pil can process it
             try:
                 PILImage.open(filename)

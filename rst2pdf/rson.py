@@ -156,7 +156,7 @@ class Tokenizer(list):
             # Get the indentation at the start of the file
             indentation = '\n' + sourcelist[0]
             linenum = 1
-            linestart = offset = 0
+            offset = 0
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)

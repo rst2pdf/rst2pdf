@@ -27,7 +27,6 @@ class OddEven(rst.Directive):
 
     def run(self):
         self.assert_has_content()
-        text = '\n'.join(self.content)
         node = OddEvenNode()
         self.state.nested_parse(self.content, self.content_offset, node)
         return [node]

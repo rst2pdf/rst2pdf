@@ -1072,7 +1072,7 @@ class FancyPage(PageTemplate):
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
-                w, h, kind = 100, 100, 'direct'
+                w, h = 100, 100
 
             pw, ph = self.styles.pw, self.styles.ph
             if self.client.background_fit_mode == 'center':
@@ -1792,6 +1792,7 @@ def patch_PDFDate():
     class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
         # gmt offset now suppported
+
         def __init__(self, invariant=True, ts=None, dateFormatter=None):
             # if six.PY2:
             #    now = (2000,01,01,00,00,00,0)
@@ -1801,9 +1802,6 @@ def patch_PDFDate():
             self.dateFormatter = dateFormatter
 
         def format(self, doc):
-            from time import timezone
-
-            dhh, dmm = timezone // 3600, (timezone % 3600) % 60
             dfmt = self.dateFormatter or (
                 lambda yyyy, mm, dd, hh, m, s: "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'"
                 % (yyyy, mm, dd, hh, m, s, 0, 0)
