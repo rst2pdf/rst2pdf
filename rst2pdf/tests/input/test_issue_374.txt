@@ -35,8 +35,8 @@ h2h2h2h2
                 if status == ' ':  #Chequeamos que la balanza esté en equilibrio
                     neto = decimal_from_nc3m(neto)
                     totalizador += neto
-                    print "Peso Neto: %s Peso Acumulado: %s" % ( neto, totalizador)
+                    print("Peso Neto: %s Peso Acumulado: %s" % ( neto, totalizador))
 
     if __name__ == "__main__":
-        print "Cliente serie para balanza NC3M"
+        print("Cliente serie para balanza NC3M")
         main()

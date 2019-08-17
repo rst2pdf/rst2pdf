@@ -26,7 +26,7 @@ for artifact in artifacts:
     md5_path = artifact.replace('.pdf', '.json').replace('reference/', 'md5/')
     res, _ = checkmd5(artifact, md5_path, [], False)
     if res != 'good':
-        print 'BAD ARTIFACT: %s ' % res, artifact
+        print('BAD ARTIFACT: %s ' % res, artifact)
 
 # Check if any output file is good and has no matching artifact
 
@@ -38,5 +38,5 @@ for new_artifact in glob.glob('output/*.pdf'):
         md5_path = artifact.replace('.pdf', '.json').replace('reference/', 'md5/')
         res, _ = checkmd5(new_artifact, md5_path, [], False)
         if res == 'good':
-            print 'GOOD ARTIFACT: %s ' % res, new_artifact
+            print('GOOD ARTIFACT: %s ' % res, new_artifact)
             shutil.copy(new_artifact, artifact)

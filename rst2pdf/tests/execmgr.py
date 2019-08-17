@@ -76,7 +76,7 @@ class BaseExec(object):
                 preexec_fn()
             except Exception:
                 sys.stdout.flush()
-                six.print_(traceback.format_exc(), file=sys.stderr)
+                sys.stderr.write(traceback.format_exc())
                 sys.stderr.write(chr(1))
             except SystemExit as s:
                 sys.stdout.flush()
@@ -86,7 +86,7 @@ class BaseExec(object):
                 except:
                     pass
                 if code:
-                    six.print_(code, file=sys.stderr)
+                    sys.stderr.write(str(code))
                     sys.stderr.write(chr(1))
             else:
                 sys.stdout.flush()
@@ -327,7 +327,7 @@ def default_logger(resultlist, data=None, data2=None):
         resultlist.append(data)
     if data2 is None:
         data2 = data
-        six.print_(data2)
+        print(data2)
 
 def textexec(*arg, **kw):
     ''' Exec a subprocess, print lines, and also return
@@ -368,36 +368,37 @@ def textexec(*arg, **kw):
 if __name__ == '__main__':
 
     def goodfunc():
-        six.print_("Good func", sys.argv)
+        print("Good func", sys.argv)
 
     def badfunc():
         assert 0, "Boo! %s" % sys.argv
         #raise SystemExit('I am bad')
 
     if len(sys.argv) > 1:
-        six.print_("Starting subprocess")
+        print("Starting subprocess")
         sys.stdout.flush()
         for i in range(10):
             time.sleep(0.2)
-            six.print_("This is line", i)
+            print("This is line", i)
             sys.stdout.flush()
-        six.print_("This is an error message", file=sys.stderr)
-        six.print_("Ending subprocess")
+        sys.stderr.write("This is an error message")
+        sys.stderr.flush()
+        print("Ending subprocess")
         if sys.argv[1] == 'die':
             raise SystemExit('Deliberately croaking')
     else:
-        six.print_('Calling good python_proc 1')
+        print('Calling good python_proc 1')
         textexec('goodfunc', '1', python_proc=goodfunc)
-        six.print_('Calling bad python_proc 1')
+        print('Calling bad python_proc 1')
         textexec('badfunc', '1', python_proc=badfunc)
-        six.print_('Calling good python_proc 2')
+        print('Calling good python_proc 2')
         textexec('goodfunc', '2', python_proc=goodfunc)
-        six.print_('Calling bad python_proc 2')
+        print('Calling bad python_proc 2')
         textexec('badfunc', '2', python_proc=badfunc)
-        six.print_("Calling myself")
+        print("Calling myself")
         textexec(__file__, 'subprocess')
-        six.print_("Calling myself with kill time")
+        print("Calling myself with kill time")
         textexec(__file__, 'subprocess', timeout=0.8)
-        six.print_("Calling myself with forced error exit")
+        print("Calling myself with forced error exit")
         textexec(__file__, 'die')
-        six.print_('All Done')
+        print('All Done')

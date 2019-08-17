@@ -7,16 +7,16 @@ Because of Issue 303, there would be two lines of the next code fragment at the 
 .. code-block:: python
 
    def a():
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
-       print "XX" 
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
 
 .. raw:: pdf
 
@@ -31,16 +31,16 @@ Because of Issue 303, there would be just two lines of the next code fragment in
 .. code-block:: python
 
    def a():
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
-       print "XX"
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
+       print("XX")
 
 .. raw:: pdf
 
@@ -55,5 +55,5 @@ The next code fragment **should** be in this page.
 .. code-block:: python
 
    def a():
-       print "XX"
-       print "XX"
+       print("XX")
+       print("XX")

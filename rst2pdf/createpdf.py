@@ -1353,7 +1353,7 @@ def main(_args=None):
 
     if options.version:
         from rst2pdf import version
-        six.print_(version)
+        print(version)
         sys.exit(0)
 
     if options.quiet:
@@ -1371,7 +1371,8 @@ def main(_args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        six.print_(open(join(PATH, 'styles', 'styles.style')).read())
+        with open(join(PATH, 'styles', 'styles.style')) as fh:
+            print(fh.read())
         sys.exit(0)
 
     filename = False

@@ -15,7 +15,7 @@ rst2pdf can display code nicely:
 .. code-block:: python
 
     for x in range(7):
-        print "cute!"
+        print("cute!")
 
 This is my third slide
 ----------------------

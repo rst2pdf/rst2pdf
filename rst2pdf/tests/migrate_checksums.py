@@ -53,7 +53,7 @@ def mark_test_good(testname):
         devnull = open(os.devnull, 'w')
         subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
     except subprocess.CalledProcessError as e:
-        print e.output
+        print(e.output)
 
 def compare_output_and_reference(testname):
     rfile = "reference/" + testname + ".pdf"
@@ -71,13 +71,13 @@ def compare_output_and_reference(testname):
     try:
         score = float(output[1])
         if score == 0:
-            print testname + " PDFs are identical: update hash";
+            print(testname + " PDFs are identical: update hash")
             mark_test_good(testname)
         else:
-            print testname + " PDFs differ with score: " + str(score)
+            print(testname + " PDFs differ with score: " + str(score))
     except ValueError:
         # it wasn't a number, just print the output
-        print testname + " comparison failed with error: " + output[1]
+        print(testname + " comparison failed with error: " + output[1])
 
 def checkalltests(testfiles = None):
     i=0
@@ -95,14 +95,14 @@ def checkalltests(testfiles = None):
         try:
             devnull = open(os.devnull, 'w')
             subprocess.check_call(cmd.split(), stdout=devnull, stderr=devnull)
-            print "*** " + testname + " test passes"
+            print("*** " + testname + " test passes")
         except subprocess.CalledProcessError as e:
             # something to react to
             if(e.returncode == 3):
                 # The result was unknown. This is where it gets interesting
                 compare_output_and_reference(testname)
             else:
-                print testname + " returned status " + str(e.returncode)
+                print(testname + " returned status " + str(e.returncode))
 
         i = i+1
 
