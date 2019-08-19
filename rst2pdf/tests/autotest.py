@@ -9,31 +9,27 @@ Automated testing for rst2pdf
 See LICENSE.txt for licensing terms
 '''
 
-import os
-import glob
-import shutil
-import shlex
-import tempfile
 import distutils.spawn
+import glob
+import hashlib
+import os
+import shlex
+import shutil
+import tempfile
 from copy import copy
-
 from optparse import OptionParser
-from execmgr import textexec, default_logger as log
-from pythonpaths import setpythonpaths
+
 import six
+from execmgr import default_logger as log
+from execmgr import textexec
+from pythonpaths import setpythonpaths
 from six import print_
-# md5 module deprecated, but hashlib not available in 2.4
-try:
-    import hashlib
-except ImportError:
-    import md5 as hashlib
 
 description = '''
 autotest.py reads .txt files (and optional associated .style and other files)
 from the input directory and generates throw-away results (.pdf and .log) in
-the output subdirectory.  It also maintains (with the help of the developers)
-a database of unknown, good, and bad MD5 checksums for the .pdf output files
-in the md5 subdirectory.
+the output subdirectory. These are visually compared to the reference PDFs
+found in ``reference`` and any differences are flagged as errors.
 
 By default, it will process all the files in the input directory, but one or
 more individual files can be explicitly specified on the command line.
@@ -58,6 +54,7 @@ class PathInfo(object):
     '''  This class is just a namespace to avoid cluttering up the
          module namespace.  It is never instantiated.
     '''
+
     rootdir = os.path.realpath(dirname(__file__))
     inpdir = os.path.join(rootdir, 'input')
     outdir = os.path.join(rootdir, 'output')
@@ -83,6 +80,7 @@ class PathInfo(object):
     @classmethod
     def load_subprocess(cls):
         import rst2pdf.createpdf
+
         return rst2pdf.createpdf.main
 
 
@@ -149,14 +147,15 @@ class MD5Info(dict):
 
         # Create a dictionary of relevant current information
         # in the database.
-        oldinfo = dict((key, values)
-                        for (key, values) in self.items()
-                            if key.endswith(suffix))
+        oldinfo = dict(
+            (key, values) for (key, values) in self.items() if key.endswith(suffix)
+        )
 
         # Create sets and strip the sentinels while
         # working with the dictionary.
-        newinfo = dict((key, set(values) - sentinel)
-                       for (key, values) in oldinfo.items())
+        newinfo = dict(
+            (key, set(values) - sentinel) for (key, values) in oldinfo.items()
+        )
 
         # Create an inverse mapping of MD5s to key names
         inverse = {}
@@ -175,8 +174,10 @@ class MD5Info(dict):
                 keys.remove(new_key)
                 newinfo[new_key].remove(value)
             if len(keys) > 1:
-                raise SystemExit('MD5 %s is stored in multiple categories: %s' %
-                    (value, ', '.join(keys)))
+                raise SystemExit(
+                    'MD5 %s is stored in multiple categories: %s'
+                    % (value, ', '.join(keys))
+                )
 
         # Find the result in the dictionary.  If it's not
         # there we have to add it.
@@ -196,7 +197,7 @@ class MD5Info(dict):
 
         # And return the key associated with the MD5
         assert result.endswith(suffix), result
-        return result[:-len(suffix)]
+        return result[: -len(suffix)]
 
 
 def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
@@ -213,7 +214,11 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     '''
     if not os.path.exists(pdfpath):
         if not failcode and os.path.exists(iprefix + '.nopdf'):
-            log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
+            log(
+                resultlist,
+                "Validity of file %s checksum '(none generated)' is good."
+                % os.path.basename(pdfpath),
+            )
             return ('good', 0)
         log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return ('fail', 2)
@@ -240,11 +245,16 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
         md5s.append(m.hexdigest())
     m = ' '.join(md5s)
 
-    new_category = (updatemd5 and isinstance(updatemd5, str)
-                        and updatemd5 or info.new_category)
+    new_category = (
+        updatemd5 and isinstance(updatemd5, str) and updatemd5 or info.new_category
+    )
     # Check MD5 against database and update if necessary
     resulttype = info.find(m, new_category)
-    log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
+    log(
+        resultlist,
+        "Validity of file %s checksum '%s' is %s."
+        % (os.path.basename(pdfpath), m, resulttype),
+    )
     if info.changed and updatemd5:
         six.print_("Updating MD5 file")
         f = open(md5path, 'wb')
@@ -265,8 +275,9 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
 
 def build_sphinx(sphinxdir, outpdf):
     builddir = tempfile.mkdtemp(prefix='rst2pdf-sphinx-')
-    errcode, result = textexec("sphinx-build -b pdf %s %s" % (
-        os.path.abspath(sphinxdir), builddir))
+    errcode, result = textexec(
+        "sphinx-build -b pdf %s %s" % (os.path.abspath(sphinxdir), builddir)
+    )
     pdffiles = globjoin(builddir, '*.pdf')
     if len(pdffiles) == 1:
         shutil.copyfile(pdffiles[0], outpdf)
@@ -279,24 +290,29 @@ def build_sphinx(sphinxdir, outpdf):
 
 
 def build_txt(iprefix, outpdf, fastfork):
-        inpfname = iprefix + '.txt'
-        style = iprefix + '.style'
-        cli = iprefix + '.cli'
-        if os.path.isfile(cli):
-            f = open(cli)
-            extraargs=shlex.split(f.read())
-            f.close()
-        else:
-            extraargs=[]
-        args = PathInfo.runcmd + ['--date-invariant', '-v', os.path.basename(inpfname)]+extraargs
-        if os.path.exists(style):
-            args.extend(('-s', os.path.basename(style)))
-        args.extend(('-o', outpdf))
-        return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
+    inpfname = iprefix + '.txt'
+    style = iprefix + '.style'
+    cli = iprefix + '.cli'
+    if os.path.isfile(cli):
+        f = open(cli)
+        extraargs = shlex.split(f.read())
+        f.close()
+    else:
+        extraargs = []
+    args = (
+        PathInfo.runcmd
+        + ['--date-invariant', '-v', os.path.basename(inpfname)]
+        + extraargs
+    )
+    if os.path.exists(style):
+        args.extend(('-s', os.path.basename(style)))
+    args.extend(('-o', outpdf))
+    return textexec(args, cwd=dirname(inpfname), python_proc=fastfork)
 
 
-def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
-               ignore_ignorefile=False):
+def run_single(
+    inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False
+):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
@@ -307,11 +323,11 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
             sphinxdir = os.path.dirname(sphinxdir)
             basename = os.path.basename(sphinxdir)
         if os.path.exists(sphinxdir + '.ignore'):
-            if (ignore_ignorefile):
-                log([], 'Ingoring ' + sphinxdir + '.ignore file')
+            if ignore_ignorefile:
+                log([], 'Ignoring ' + sphinxdir + '.ignore file')
             else:
                 f = open(sphinxdir + '.ignore', 'r')
-                data=f.read()
+                data = f.read()
                 f.close()
                 log([], 'Ignored: ' + data)
                 return 'ignored', 0
@@ -319,7 +335,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
         if os.path.exists(iprefix + '.ignore'):
-            if (ignore_ignorefile):
+            if ignore_ignorefile:
                 log([], 'Ingoring ' + iprefix + '.ignore file')
             else:
                 f = open(iprefix + '.ignore', 'r')
@@ -346,12 +362,12 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
-                                      errcode)
+        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
-                                      errcode, iprefix)
+        checkinfo, errcode = checkmd5(
+            outpdf, md5file, result, updatemd5, errcode, iprefix
+        )
     log(result, '')
     outf = open(outtext, 'w')
     outf.write('\n'.join(result))
@@ -360,9 +376,15 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
     return checkinfo, errcode
 
 
-def run_testlist(testfiles=None, incremental=False, fastfork=None,
-                 do_text=False, do_sphinx=False, updatemd5=None,
-                 ignore_ignorefile=False):
+def run_testlist(
+    testfiles=None,
+    incremental=False,
+    fastfork=None,
+    do_text=False,
+    do_sphinx=False,
+    updatemd5=None,
+    ignore_ignorefile=False,
+):
     returnErrorCode = 0
     if not testfiles:
         testfiles = []
@@ -371,19 +393,23 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None,
             testfiles += globjoin(PathInfo.inpdir, '*', '*.txt')
             testfiles = [(x, fastfork) for x in testfiles if 'sphinx' not in x]
         if do_sphinx:
-            testfiles += [(x, None) for x in globjoin(PathInfo.inpdir, 'sphinx*')]
+            testfiles += [
+                (x, None) for x in globjoin(PathInfo.inpdir, 'sphinx*')
+            ]
     else:
         testfiles = [(x, fastfork) for x in testfiles]
 
     results = {}
     for fname, fastfork in testfiles:
-        key, errcode = run_single(fname, incremental, fastfork, updatemd5, ignore_ignorefile)
+        key, errcode = run_single(
+            fname, incremental, fastfork, updatemd5, ignore_ignorefile
+        )
         if errcode != 0:
             returnErrorCode = errcode
         results[key] = results.get(key, 0) + 1
         if incremental and errcode and 0:
             break
-    print_('\nFinal checksum statistics:',)
+    print_('\nFinal checksum statistics:')
     print_(', '.join(sorted('%s=%s' % x for x in results.items())))
     print_('\n')
 
@@ -393,33 +419,79 @@ def run_testlist(testfiles=None, incremental=False, fastfork=None,
 def parse_commandline():
     usage = '%prog [options] [<input.txt file> [<input.txt file>]...]'
     parser = OptionParser(usage, description=description)
-    parser.add_option('-c', '--coverage', action="store_true",
-        dest='coverage', default=False,
-        help='Generate new coverage information.')
-    parser.add_option('-a', '--add-coverage', action="store_true",
-        dest='add_coverage', default=False,
-        help='Add coverage information to previous runs.')
-    parser.add_option('-i', '--incremental', action="store_true",
-        dest='incremental', default=False,
-        help='Incremental build -- ignores existing PDFs')
-    parser.add_option('-I', '--ignore-ignore', action="store_true",
-        dest='ignore_ignorefile', default=False,
-        help='Ignore .ignore file')
-    parser.add_option('-f', '--fast', action="store_true",
-        dest='fastfork', default=False,
-        help='Fork and reuse process information')
-    parser.add_option('-s', '--sphinx', action="store_true",
-        dest='sphinx', default=False,
-        help='Run sphinx tests only')
-    parser.add_option('-e', '--everything', action="store_true",
-        dest='everything', default=False,
-        help='Run both rst2pdf and sphinx tests')
-    parser.add_option('-p', '--python-path', action="store_true",
-        dest='nopythonpath', default=False,
-        help='Do not set up PYTHONPATH env variable')
-    parser.add_option('-u', '--update-md5', action="store", type="string",
-        dest='updatemd5', default=None,
-        help='Update MD5 checksum files')
+    parser.add_option(
+        '-c',
+        '--coverage',
+        action="store_true",
+        dest='coverage',
+        default=False,
+        help='Generate new coverage information.',
+    )
+    parser.add_option(
+        '-a',
+        '--add-coverage',
+        action="store_true",
+        dest='add_coverage',
+        default=False,
+        help='Add coverage information to previous runs.',
+    )
+    parser.add_option(
+        '-i',
+        '--incremental',
+        action="store_true",
+        dest='incremental',
+        default=False,
+        help='Incremental build -- ignores existing PDFs',
+    )
+    parser.add_option(
+        '-I',
+        '--ignore-ignore',
+        action="store_true",
+        dest='ignore_ignorefile',
+        default=False,
+        help='Ignore .ignore file',
+    )
+    parser.add_option(
+        '-f',
+        '--fast',
+        action="store_true",
+        dest='fastfork',
+        default=False,
+        help='Fork and reuse process information',
+    )
+    parser.add_option(
+        '-s',
+        '--sphinx',
+        action="store_true",
+        dest='sphinx',
+        default=False,
+        help='Run sphinx tests only',
+    )
+    parser.add_option(
+        '-e',
+        '--everything',
+        action="store_true",
+        dest='everything',
+        default=False,
+        help='Run both rst2pdf and sphinx tests',
+    )
+    parser.add_option(
+        '-p',
+        '--python-path',
+        action="store_true",
+        dest='nopythonpath',
+        default=False,
+        help='Do not set up PYTHONPATH env variable',
+    )
+    parser.add_option(
+        '-u',
+        '--update-md5',
+        action="store",
+        type="string",
+        dest='updatemd5',
+        default=None,
+        help='Update MD5 checksum files',
+    )
     return parser
 
 
@@ -432,16 +504,33 @@ def main(args=None):
     do_sphinx = options.sphinx or options.everything
     do_text = options.everything or not options.sphinx
     if options.coverage or options.add_coverage:
-        assert not options.fastfork, "Cannot fastfork and run coverage simultaneously"
+        assert (
+            not options.fastfork
+        ), "Cannot fastfork and run coverage simultaneously"
         assert not do_sphinx, "Cannot run sphinx and coverage simultaneously"
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
     updatemd5 = options.updatemd5
-    if updatemd5 is not None and updatemd5 not in 'good bad incomplete unknown deprecated'.split():
-        raise SystemExit('Unexpected value for updatemd5: %s. Expected one of: "good", "bad", "incomplete", "unknown" or "deprecated"' % updatemd5, )
-    errcode = run_testlist(args, options.incremental, fastfork, do_text, do_sphinx, options.updatemd5, options.ignore_ignorefile)
+    if (
+        updatemd5 is not None
+        and updatemd5 not in 'good bad incomplete unknown deprecated'.split()
+    ):
+        raise SystemExit(
+            'Unexpected value for updatemd5: %s. Expected one of: "good", '
+            '"bad", "incomplete", "unknown" or "deprecated"' % updatemd5
+        )
+    errcode = run_testlist(
+        args,
+        options.incremental,
+        fastfork,
+        do_text,
+        do_sphinx,
+        options.updatemd5,
+        options.ignore_ignorefile,
+    )
     exit(errcode)
+
 
 if __name__ == '__main__':
     main()
