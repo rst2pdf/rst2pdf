@@ -15,6 +15,7 @@ import hashlib
 import os
 import shlex
 import shutil
+import subprocess
 import tempfile
 from copy import copy
 from optparse import OptionParser
@@ -57,6 +58,7 @@ class PathInfo(object):
 
     rootdir = os.path.realpath(dirname(__file__))
     inpdir = os.path.join(rootdir, 'input')
+    refdir = os.path.join(rootdir, 'reference')
     outdir = os.path.join(rootdir, 'output')
     md5dir = os.path.join(rootdir, 'md5')
 
@@ -273,6 +275,135 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     return (resulttype, errcode)
 
 
+def _get_error_code(result_type):
+    error_codes = ['good', 'bad', 'fail', 'unknown']
+    try:
+        error_code = error_codes.index(result_type)
+    except ValueError:
+        error_code = 4
+
+    return error_code
+
+
+def validate_pdf(test_name, ref_dir=None, out_dir=None):
+    # https://stackoverflow.com/q/5132749/
+
+    ref_dir = ref_dir or PathInfo.refdir
+    out_dir = out_dir or PathInfo.outdir
+
+    ref_pdf = os.path.join(ref_dir, test_name + '.pdf')
+    out_pdf = os.path.join(out_dir, test_name + '.pdf')
+
+    if os.path.isdir(ref_pdf):
+        ref_pdfs = [os.path.splitext(x)[0] for x in os.listdir(ref_pdf)]
+        for ref in ref_pdfs:
+            validate_pdf(ref, ref_dir=ref_pdf, out_dir=out_pdf)
+
+        return
+
+    # make sure we actually have something to work with first
+
+    if not all(os.path.exists(x) for x in (ref_pdf, out_pdf)):
+        log([], 'Not all files exist; is a reference missing?')
+        return ('fail', _get_error_code('fail'))
+
+    # figure out how many pages are in each PDF - it should be identical
+
+    cmd = ['pdfinfo']
+
+    ref_pages = 0
+    out_pages = 0
+
+    for pdf in (ref_pdf, out_pdf):
+        try:
+            out = subprocess.check_output(
+                cmd + [pdf], stderr=subprocess.STDOUT
+            )
+        except subprocess.CalledProcessError as exc:
+            log(
+                [],
+                'Failed to count number of pages in PDF - is pdfinfo installed?',
+            )
+            log([], str(exc))
+            return ('fail', _get_error_code('fail'))
+
+        pages = 0
+        for line in out.split('\n'):
+            if line.startswith('Pages:'):
+                pages = int(line.split()[1])
+                break
+
+        if pdf == ref_pdf:
+            ref_pages = pages
+        else:
+            out_pages = pages
+
+    if ref_pages != out_pages:
+        log(
+            [],
+            'PDFs appear to have different page counts (reference=%d, '
+            'output=%d)' % (ref_pages, out_pages),
+        )
+        return ('bad', _get_error_code('bad'))
+
+    diffs = []
+
+    for page in range(ref_pages):
+        diff_png = os.path.join(out_dir, test_name + '-%d.diff.png' % page)
+
+        # we have minimal amount of fuzzing and grayscale colorspace since that limits
+        # the possibility of false positives due to changes in imagemagick or similar
+        cmd = [
+            'compare',
+            '-colorspace',
+            'GRAY',
+            '-metric',
+            'AE',
+            '-fuzz',
+            '5%',
+            '%s[%d]' % (ref_pdf, page),
+            '%s[%d]' % (out_pdf, page),
+            diff_png,
+        ]
+
+        try:
+            out = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as exc:
+            # if this returned with a non-zero 0 code, we either have a
+            # different PDF or there was an issue with the command
+            if not exc.output.isdigit():
+                log(
+                    [],
+                    'Failed to convert PDFs to PNG - is ImageMagick installed?',
+                )
+                log([], str(exc))
+                return ('fail', _get_error_code('fail'))
+
+            out = exc.output
+
+        diffs.append((int(out.strip()), diff_png))
+
+    # if there's no difference on any page, we're good and can return success
+    if not any(ae for ae, _ in diffs):
+        log([], 'PDFs appear to be identical')
+        return ('good', _get_error_code('good'))
+
+    # otherwise we log the absolute error (AE) for each page that's incorrect
+    log(
+        [],
+        'PDFs appear to be different (%s)'
+        % ', '.join(
+            [
+                'page %d = %f' % (page + 1, result[0])
+                for page, result in enumerate(diffs)
+                if result[0]
+            ]
+        ),
+    )
+    log([], 'Diffs saved to %s' % out_dir)
+    return ('bad', _get_error_code('bad'))
+
+
 def build_sphinx(sphinxdir, outpdf):
     builddir = tempfile.mkdtemp(prefix='rst2pdf-sphinx-')
     errcode, result = textexec(
@@ -336,7 +467,7 @@ def run_single(
         basename = os.path.basename(iprefix)
         if os.path.exists(iprefix + '.ignore'):
             if ignore_ignorefile:
-                log([], 'Ingoring ' + iprefix + '.ignore file')
+                log([], 'Ignoring ' + iprefix + '.ignore file')
             else:
                 f = open(iprefix + '.ignore', 'r')
                 data = f.read()
@@ -362,9 +493,11 @@ def run_single(
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
+        validate_pdf(basename)
         checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
+        validate_pdf(basename)
         checkinfo, errcode = checkmd5(
             outpdf, md5file, result, updatemd5, errcode, iprefix
         )
