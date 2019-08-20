@@ -442,7 +442,7 @@ def build_txt(iprefix, outpdf, fastfork):
 
 
 def run_single(
-    inpfname, incremental=False, fastfork=None, updatemd5=None, ignore_ignorefile=False
+    inpfname, incremental=False, fastfork=None, ignore_ignorefile=False
 ):
     use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
     if use_sphinx:
@@ -476,10 +476,8 @@ def run_single(
                 return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
-    mprefix = os.path.join(PathInfo.md5dir, basename)
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
-    md5file = mprefix + '.json'
 
     if incremental and os.path.exists(outpdf):
         return 'preexisting', 0
@@ -493,14 +491,11 @@ def run_single(
 
     if use_sphinx:
         errcode, result = build_sphinx(sphinxdir, outpdf)
-        validate_pdf(basename)
-        checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5, errcode)
+        checkinfo, errcode = validate_pdf(basename)
     else:
         errcode, result = build_txt(iprefix, outpdf, fastfork)
-        validate_pdf(basename)
-        checkinfo, errcode = checkmd5(
-            outpdf, md5file, result, updatemd5, errcode, iprefix
-        )
+        checkinfo, errcode = validate_pdf(basename)
+
     log(result, '')
     outf = open(outtext, 'w')
     outf.write('\n'.join(result))
@@ -515,7 +510,6 @@ def run_testlist(
     fastfork=None,
     do_text=False,
     do_sphinx=False,
-    updatemd5=None,
     ignore_ignorefile=False,
 ):
     returnErrorCode = 0
@@ -535,7 +529,7 @@ def run_testlist(
     results = {}
     for fname, fastfork in testfiles:
         key, errcode = run_single(
-            fname, incremental, fastfork, updatemd5, ignore_ignorefile
+            fname, incremental, fastfork, ignore_ignorefile
         )
         if errcode != 0:
             returnErrorCode = errcode
@@ -616,15 +610,6 @@ def parse_commandline():
         default=False,
         help='Do not set up PYTHONPATH env variable',
     )
-    parser.add_option(
-        '-u',
-        '--update-md5',
-        action="store",
-        type="string",
-        dest='updatemd5',
-        default=None,
-        help='Update MD5 checksum files',
-    )
     return parser
 
 
@@ -644,22 +629,12 @@ def main(args=None):
         PathInfo.add_coverage(options.add_coverage)
     elif options.fastfork:
         fastfork = PathInfo.load_subprocess()
-    updatemd5 = options.updatemd5
-    if (
-        updatemd5 is not None
-        and updatemd5 not in 'good bad incomplete unknown deprecated'.split()
-    ):
-        raise SystemExit(
-            'Unexpected value for updatemd5: %s. Expected one of: "good", '
-            '"bad", "incomplete", "unknown" or "deprecated"' % updatemd5
-        )
     errcode = run_testlist(
         args,
         options.incremental,
         fastfork,
         do_text,
         do_sphinx,
-        options.updatemd5,
         options.ignore_ignorefile,
     )
     exit(errcode)
