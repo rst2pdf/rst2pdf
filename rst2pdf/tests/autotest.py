@@ -11,7 +11,6 @@ See LICENSE.txt for licensing terms
 
 import distutils.spawn
 import glob
-import hashlib
 import os
 import shlex
 import shutil
@@ -20,7 +19,6 @@ import tempfile
 from copy import copy
 from optparse import OptionParser
 
-import six
 from execmgr import default_logger as log
 from execmgr import textexec
 from pythonpaths import setpythonpaths
@@ -60,7 +58,6 @@ class PathInfo(object):
     inpdir = os.path.join(rootdir, 'input')
     refdir = os.path.join(rootdir, 'reference')
     outdir = os.path.join(rootdir, 'output')
-    md5dir = os.path.join(rootdir, 'md5')
 
     runfile = distutils.spawn.find_executable('rst2pdf')
     assert runfile, 'rst2pdf executable not found, install it with setup.py'
@@ -84,195 +81,6 @@ class PathInfo(object):
         import rst2pdf.createpdf
 
         return rst2pdf.createpdf.main
-
-
-class MD5Info(dict):
-    ''' The MD5Info class is used to round-trip good, bad, unknown
-        information to/from a .json file.
-        For formatting reasons, the json module isn't used for writing,
-        and since we're not worried about security, we don't bother using
-        it for reading, either.
-    '''
-
-    # Category to dump new data into
-    new_category = 'unknown'
-    # Categories which always should be in file
-    mandatory_categories = 'good bad'.split()
-
-    # Sentinel to make manual changes and diffs easy
-    sentinel = 'sentinel'
-    # An empty list is one which is truly empty or which has a sentinel
-    empty = [[], ['sentinel']]
-    # Suffix for file items
-    suffix = '_md5'
-
-    def __str__(self):
-        ''' Return the string to output to the MD5 file '''
-        result = []
-        for name, value in sorted(self.items()):
-            if not name.endswith(self.suffix):
-                continue
-            result.append('%s = [' % name)
-            result.append(',\n'.join(["        '%s'" % item for item in sorted(value)]))
-            result.append(']\n')
-        result.append('')
-        return '\n'.join(result)
-
-    def __init__(self):
-        self.__dict__ = self
-        self.changed = False
-        for name in self.mandatory_categories:
-            setattr(self, name + self.suffix, [self.sentinel])
-
-    def find(self, checksum, new_category=new_category):
-        ''' find() has some serious side-effects.  If the checksum
-            is found, the category it was found in is returned.
-            If the checksum is not found, then it is automagically
-            added to the unknown category.  In all cases, the
-            data is prepped to output to the file (if necessary),
-            and self.changed is set if the data is modified during
-            this process.  Functional programming this isn't...
-
-            A quick word about the 'sentinel'.  This value starts
-            with an 's', which happens to sort > highest hexadecimal
-            digit of 'f', so it is always a the end of the list.
-
-            The only reason for the sentinel is to make the database
-            either to work with.  Both to modify (by moving an MD5
-            line from one category to another) and to diff.  This
-            is because every hexadecimal line (every line except
-            the sentinel) is guaranteed to end with a comma.
-        '''
-        suffix = self.suffix
-        new_key = new_category + suffix
-        sentinel = set([self.sentinel])
-
-        # Create a dictionary of relevant current information
-        # in the database.
-        oldinfo = dict(
-            (key, values) for (key, values) in self.items() if key.endswith(suffix)
-        )
-
-        # Create sets and strip the sentinels while
-        # working with the dictionary.
-        newinfo = dict(
-            (key, set(values) - sentinel) for (key, values) in oldinfo.items()
-        )
-
-        # Create an inverse mapping of MD5s to key names
-        inverse = {}
-        for key, values in newinfo.items():
-            for value in values:
-                inverse.setdefault(value, set()).add(key)
-
-        # In general, inverse should be a function (there
-        # should only be one answer to the question "What
-        # key name goes with this MD5?")   If not,
-        # either report an error, or just remove one of
-        # the possible answers if it is the same answer
-        # we give by default.
-        for value, keys in inverse.items():
-            if len(keys) > 1 and new_key in keys:
-                keys.remove(new_key)
-                newinfo[new_key].remove(value)
-            if len(keys) > 1:
-                raise SystemExit(
-                    'MD5 %s is stored in multiple categories: %s'
-                    % (value, ', '.join(keys))
-                )
-
-        # Find the result in the dictionary.  If it's not
-        # there we have to add it.
-        result, = inverse.get(checksum, [new_key])
-        if result == new_key:
-            newinfo.setdefault(result, set()).add(checksum)
-
-        # Create a canonical version of the dictionary,
-        # by adding sentinels and sorting the results.
-        for key, value in newinfo.items():
-            newinfo[key] = sorted(value | sentinel)
-
-        # See if we changed anything
-        if newinfo != oldinfo:
-            self.update(newinfo)
-            self.changed = True
-
-        # And return the key associated with the MD5
-        assert result.endswith(suffix), result
-        return result[: -len(suffix)]
-
-
-def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
-    ''' checkmd5 validates the checksum of a generated PDF
-        against the database, both reporting the results,
-        and updating the database to add this MD5 into the
-        unknown category if this checksum is not currently
-        in the database.
-
-        It updates the resultlist with information to be
-        printed and added to the log file, and returns
-        a result of 'good', 'bad', 'fail', or 'unknown'
-        and an errcode of 0 for success, 1 for bad, 2 for fail and 3 for unknown
-    '''
-    if not os.path.exists(pdfpath):
-        if not failcode and os.path.exists(iprefix + '.nopdf'):
-            log(
-                resultlist,
-                "Validity of file %s checksum '(none generated)' is good."
-                % os.path.basename(pdfpath),
-            )
-            return ('good', 0)
-        log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
-        return ('fail', 2)
-    if os.path.isdir(pdfpath):
-        pdffiles = globjoin(pdfpath, '*.pdf')
-    else:
-        pdffiles = [pdfpath]
-
-    # Read the database
-    info = MD5Info()
-    if os.path.exists(md5path):
-        f = open(md5path, 'rb')
-        exec(f.read(), info)
-        f.close()
-
-    # Generate the current MD5
-    md5s = []
-    for pdfpath in pdffiles:
-        f = open(pdfpath, 'rb')
-        data = f.read()
-        f.close()
-        m = hashlib.md5()
-        m.update(data)
-        md5s.append(m.hexdigest())
-    m = ' '.join(md5s)
-
-    new_category = (
-        updatemd5 and isinstance(updatemd5, str) and updatemd5 or info.new_category
-    )
-    # Check MD5 against database and update if necessary
-    resulttype = info.find(m, new_category)
-    log(
-        resultlist,
-        "Validity of file %s checksum '%s' is %s."
-        % (os.path.basename(pdfpath), m, resulttype),
-    )
-    if info.changed and updatemd5:
-        six.print_("Updating MD5 file")
-        f = open(md5path, 'wb')
-        if six.PY2:
-            f.write(str(info))
-        else:
-            f.write(str(info).encode('utf-8'))
-        f.close()
-
-    errorCodes = ['good', 'bad', 'fail', 'unknown']
-    try:
-        errcode = errorCodes.index(resulttype)
-    except ValueError:
-        errcode = 4
-
-    return (resulttype, errcode)
 
 
 def _get_error_code(result_type):

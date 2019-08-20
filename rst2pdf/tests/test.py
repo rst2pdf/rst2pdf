@@ -4,9 +4,8 @@ import os
 import shlex
 
 import nose.plugins.skip
-import six
 
-from autotest import MD5Info, PathInfo, checkmd5, dirname, globjoin, run_single
+from autotest import PathInfo, dirname, globjoin, run_single, validate_pdf
 from execmgr import default_logger as log
 from execmgr import textexec
 
@@ -14,42 +13,30 @@ from execmgr import textexec
 class RunTest:
     def __init__(self, f):
         basename = os.path.basename(f)
-        self.description = basename
-        mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
-        md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir, basename[:-4]) + '.ignore'
-        nopdffile = os.path.join(PathInfo.inpdir, basename[:-4]) + '.nopdf'
-        self.skip = False
-        self.whySkip = ""
-        self.openIssue = False
-        if not os.path.exists(nopdffile):
-            info = MD5Info()
-            if os.path.exists(ignfile):
-                self.skip = True
-                with open(ignfile, "r") as f:
-                    self.whySkip = f.read()
-            if os.path.exists(md5file):
-                f = open(md5file, 'rb')
-                if six.PY3:
-                    six.exec_(f.read(), info)
-                else:
-                    six.exec_(f.read(), info)
 
-                f.close()
-            if info.good_md5 in [[], ['sentinel']]:
-                # This is an open issue or something that can't be checked automatically
-                self.openIssue = True
+        self.description = basename
+        self.skip = False
+        self.whySkip = ''
+
+        no_pdf_file = os.path.join(PathInfo.inpdir, basename[:-4]) + '.nopdf'
+        if os.path.exists(no_pdf_file):
+            return
+
+        ignore_file = os.path.join(PathInfo.inpdir, basename[:-4]) + '.ignore'
+        if os.path.exists(ignore_file):
+            self.skip = True
+            with open(ignore_file, "r") as f:
+                self.whySkip = f.read()
 
     def __call__(self, f):
         if self.skip:
             raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
-        elif self.openIssue:
-            assert False, 'Test has no known good output (Open Issue)'
-        else:
-            key, errcode = run_single(f)
-            if key in ['incomplete']:
-                raise nose.plugins.skip.SkipTest
-            assert key == 'good', '%s is not good: %s' % (f, key)
+
+        key, errcode = run_single(f)
+        if key in ['incomplete']:
+            raise nose.plugins.skip.SkipTest
+
+        assert key == 'good', '%s is not good: %s' % (f, key)
 
 
 def run_installed_single(inpfname):
@@ -64,112 +51,82 @@ def run_installed_single(inpfname):
         return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
-    mprefix = os.path.join(PathInfo.md5dir, basename)
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
-    md5file = mprefix + '.json'
 
     inpfname = iprefix + '.txt'
     style = iprefix + '.style'
     cli = iprefix + '.cli'
-    if os.path.isfile(cli):
-        f = open(cli)
-        extraargs = shlex.split(f.read())
-        f.close()
-    else:
-        extraargs = []
-    args = (
-        ['rst2pdf'] + ['--date-invariant', '-v', os.path.basename(inpfname)] + extraargs
-    )
-    if os.path.exists(style):
-        args.extend(('-s', os.path.basename(style)))
-    args.extend(('-o', outpdf))
-    errcode, result = textexec(args, cwd=dirname(inpfname), python_proc=None)
 
-    checkinfo = checkmd5(outpdf, md5file, result, None, errcode, iprefix)
+    cmd = ['rst2pdf', '--date-invariant', '-v', os.path.basename(inpfname)]
+
+    if os.path.isfile(cli):
+        with open(cli) as fh:
+            cmd.extend(shlex.split(fh.read()))
+
+    if os.path.exists(style):
+        cmd.extend(('-s', os.path.basename(style)))
+
+    cmd.extend(('-o', outpdf))
+
+    errcode, result = textexec(cmd, cwd=dirname(inpfname), python_proc=None)
+    checkinfo, errcode = validate_pdf(basename)
+
     log(result, '')
-    outf = open(outtext, 'wb')
-    outf.write('\n'.join(result))
-    outf.close()
+    with open(outtext, 'wb') as fh:
+        fh.write('\n'.join(result))
+
     return checkinfo, errcode
 
 
 class RunInstalledTest:
     def __init__(self, f):
         basename = os.path.basename(f)
+
         self.description = basename
-        mprefix = os.path.join(PathInfo.md5dir, basename)[:-4]
-        md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir, basename[:-4]) + '.ignore'
-        info = MD5Info()
         self.skip = False
-        self.whySkip = ""
-        self.openIssue = False
-        if os.path.exists(ignfile):
+        self.whySkip = ''
+
+        ignore_file = os.path.join(PathInfo.inpdir, basename[:-4]) + '.ignore'
+        if os.path.exists(ignore_file):
             self.skip = True
-            with open(ignfile, "r") as f:
+            with open(ignore_file, 'r') as f:
                 self.whySkip = f.read()
-        if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            if six.PY3:
-                six.exec_(f.read(), info)
-            else:
-                six.exec_(f.read(), info)
-            f.close()
-        if info.good_md5 in [[], ['sentinel']]:
-            # This is an open issue or something that can't be checked automatically
-            self.openIssue = True
 
     def __call__(self, f):
         if self.skip:
             raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
-        elif self.openIssue:
-            assert False, 'Test has no known good output (Open Issue)'
-        else:
-            key, errcode = run_installed_single(f)
-            if key in ['incomplete']:
-                raise nose.plugins.skip.SkipTest
-            assert key == 'good', '%s is not good: %s' % (f, key)
+
+        key, errcode = run_installed_single(f)
+        if key in ['incomplete']:
+            raise nose.plugins.skip.SkipTest
+
+        assert key == 'good', '%s is not good: %s' % (f, key)
 
 
 class RunSphinxTest:
     def __init__(self, f):
         basename = os.path.basename(f[:-1])
+
         self.description = basename
-        mprefix = os.path.join(PathInfo.md5dir, basename)
-        md5file = mprefix + '.json'
-        ignfile = os.path.join(PathInfo.inpdir, basename) + '.ignore'
-        info = MD5Info()
         self.skip = False
-        self.whySkip = ""
-        self.openIssue = False
+        self.whySkip = ''
 
-        if os.path.exists(ignfile):
+        ignore_file = os.path.join(PathInfo.inpdir, basename) + '.ignore'
+        if os.path.exists(ignore_file):
             self.skip = True
-            with open(ignfile, "r") as f:
+            with open(ignore_file, 'r') as f:
                 self.whySkip = f.read()
-        if os.path.exists(md5file):
-            f = open(md5file, 'rb')
-            if six.PY3:
-                six.exec_(f.read(), info)
-            else:
-                six.exec_(f.read(), info)
-
-            f.close()
-        if info.good_md5 in [[], ['sentinel']]:
-            # This is an open issue or something that can't be checked automatically
-            self.openIssue = True
 
     def __call__(self, f):
         if self.skip:
             raise nose.plugins.skip.SkipTest(self.whySkip.rstrip())
-        elif self.openIssue:
-            assert False, 'Test has no known good output (Open Issue)'
-        else:
-            key, errcode = run_single(f)
-            if key in ['incomplete']:
-                raise nose.plugins.skip.SkipTest
-            assert key == 'good', '%s is not good: %s' % (f, key)
+
+        key, errcode = run_single(f)
+        if key in ['incomplete']:
+            raise nose.plugins.skip.SkipTest
+
+        assert key == 'good', '%s is not good: %s' % (f, key)
 
 
 def regulartest():
