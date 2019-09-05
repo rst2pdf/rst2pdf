@@ -1,3 +1,15 @@
+.. image:: https://travis-ci.org/rst2pdf/rst2pdf.svg?branch=master
+    :target: https://travis-ci.org/rst2pdf/rst2pdf
+
+.. image:: https://img.shields.io/pypi/v/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
+.. image:: https://img.shields.io/pypi/pyversions/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
+.. image:: https://img.shields.io/pypi/l/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
 rst2pdf: Use a text editor. Make a PDF.
 ========================================
 
