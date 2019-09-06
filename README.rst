@@ -1,10 +1,19 @@
-=======
-rst2pdf
-=======
+.. image:: https://travis-ci.org/rst2pdf/rst2pdf.svg?branch=master
+    :target: https://travis-ci.org/rst2pdf/rst2pdf
 
-------------------------------
-Use a text editor. Make a PDF.
-------------------------------
+.. image:: https://img.shields.io/pypi/v/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
+.. image:: https://img.shields.io/pypi/pyversions/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
+.. image:: https://img.shields.io/pypi/l/rst2pdf.svg
+    :target: https://pypi.python.org/pypi/rst2pdf/rst2pdf
+
+
+========================================
+rst2pdf: Use a text editor. Make a PDF.
+========================================
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX.
 This tool provides an alternative by producing PDF directly using the ReportLab
