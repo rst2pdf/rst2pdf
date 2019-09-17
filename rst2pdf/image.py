@@ -21,7 +21,7 @@ from .log import log, nodeid
 
 try:
     from .svgimage import SVGImage
-except ModuleNotFoundError:
+except ImportError:
     # svglib may optionally not be installed, which causes this error
     pass
 
