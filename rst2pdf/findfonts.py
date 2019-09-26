@@ -222,7 +222,7 @@ def findTTFont(fname):
         # ctypes with EnumFontFamiliesEx
 
         def get_nt_fname(ftname):
-            import _winreg as _w
+            import winreg as _w
 
             fontkey = _w.OpenKey(
                 _w.HKEY_LOCAL_MACHINE,
