@@ -26,6 +26,7 @@ else:
 import re
 import sys
 import os
+import time
 from os import path
 from os.path import abspath, dirname, expanduser, join
 from pprint import pprint
@@ -53,8 +54,11 @@ from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
-from sphinx.util import ustrftime
-from sphinx.environment import NoUri
+if sphinx.__version__ >= '2.1':
+    from sphinx.errors import NoUri
+else:
+    from sphinx.environment import NoUri
+
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import admonitionlabels, versionlabels
 from sphinx.transforms import SphinxTransform
@@ -599,7 +603,7 @@ class PDFWriter(writers.Writer):
             if self.config.today :
                 date = self.config.today
             else:
-                date=ustrftime(self.config.today_fmt or _('%B %d, %Y'))
+                date=time.strftime(self.config.today_fmt or _('%B %d, %Y'))
 
             # Feed data to the template, get restructured text.
             cover_text = template.render(

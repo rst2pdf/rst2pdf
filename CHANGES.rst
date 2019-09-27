@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Fixed: Support Sphinx 2.1+ on Python 3 (Issue #788)
 * Changed: Support docutils math directive instead of rst2pdf's (Issue #722)
 * Fixed: HTTPS images using image directive now works with Python 3 (Issue #780)
 * Changed: Update tested dependencies to include ReportLab 3.5.23 (Issue #779)
@@ -35,7 +36,7 @@
 * Fixed handling of empty documents, they now generate a single empty page (Issue #547)
 * Fixed: ``:alt:`` option now works for plantuml extension
 * Fixed: ``:linenos_offset:`` now works again
-* Fixed: `rst2pdf.createpdf.main` now releases the input file handle
+* Fixed: ``rst2pdf.createpdf.main`` now releases the input file handle
 * Fixed: CreationDate metadata shows correct date using Sphinx (Issue #525)
 * Fixed: Error when using --date-invariant with newer reportlab versions (Issue #678)
 * Fixed: handling of non-http/ftp URLs (Issue #549)
