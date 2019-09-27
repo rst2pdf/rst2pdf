@@ -222,7 +222,10 @@ def findTTFont(fname):
         # ctypes with EnumFontFamiliesEx
 
         def get_nt_fname(ftname):
-            import winreg as _w
+            if six.PY3:
+                import winreg as _w
+            else:
+                import _winreg as _w            
 
             fontkey = _w.OpenKey(
                 _w.HKEY_LOCAL_MACHINE,
