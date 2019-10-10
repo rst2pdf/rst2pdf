@@ -108,12 +108,17 @@ from rst2pdf.rson import loads as rson_loads
 
 from rst2pdf.log import log
 
-class DummyFile(str):
+
+class DummyFile(object):
     ''' We could use stringio, but that's really overkill for what
         we need here.
     '''
+    def __init__(self, value):
+        self._str = value
+
     def read(self):
-        return self
+        return self._str
+
 
 class Preprocess(object):
     def __init__(self, sourcef, incfile=False, widthcount=0):
