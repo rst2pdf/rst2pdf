@@ -119,6 +119,9 @@ class DummyFile(object):
     def read(self):
         return self._str
 
+    def strip(self):
+        return self._str.strip()
+
 
 class Preprocess(object):
     def __init__(self, sourcef, incfile=False, widthcount=0):
@@ -211,7 +214,7 @@ class Preprocess(object):
             self.keep = keep = len(result.strip())
             if keep:
                 f = open(result.name, 'w')
-                f.write(result)
+                f.write(result.read())
                 f.close()
             self.result = result
         else:
