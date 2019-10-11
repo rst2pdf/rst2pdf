@@ -11,3 +11,5 @@ rst2pdf/tests/output/*.log
 .python-version
 .venv/
 dist/
+_build/
+
