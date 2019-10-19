@@ -162,6 +162,7 @@ class Preprocess(object):
         # Use a regular expression on the source, to take it apart
         # and put it back together again.
         self.source = source = [x for x in self.splitter(source) if x]
+        self.result = result = []
         self.styles = {}
         self.changed = False
 
