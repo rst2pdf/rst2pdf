@@ -111,15 +111,15 @@ from rst2pdf.log import log
 
 
 class DummyFile(object):
-    ''' Stores the path and contents of a file which may,
-    or may not, have been written to disk.
+    ''' Stores the path and content of a file which may, or may not,
+        have been written to disk.
     '''
-    def __init__(self, name, value):
+    def __init__(self, name, content):
         self.name = name
-        self._str = value
+        self._content = content
 
     def read(self):
-        return self._str
+        return self._content
 
 
 class Preprocess(object):
