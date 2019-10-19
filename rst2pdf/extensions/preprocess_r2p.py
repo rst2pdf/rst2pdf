@@ -101,6 +101,7 @@ file were automatically removed.
 
 '''
 
+from collections import namedtuple
 import os
 import re
 
@@ -108,12 +109,18 @@ from rst2pdf.rson import loads as rson_loads
 
 from rst2pdf.log import log
 
-class DummyFile(str):
-    ''' We could use stringio, but that's really overkill for what
-        we need here.
+
+class DummyFile(object):
+    ''' Stores the path and content of a file which may, or may not,
+        have been written to disk.
     '''
+    def __init__(self, name, content):
+        self.name = name
+        self._content = content
+
     def read(self):
-        return self
+        return self._content
+
 
 class Preprocess(object):
     def __init__(self, sourcef, incfile=False, widthcount=0):
@@ -150,12 +157,10 @@ class Preprocess(object):
                 return
 
         # Read the whole file and wrap it in a DummyFile
-        self.sourcef = DummyFile(source)
-        self.sourcef.name = name
+        self.sourcef = DummyFile(name, source)
 
         # Use a regular expression on the source, to take it apart
         # and put it back together again.
-
         self.source = source = [x for x in self.splitter(source) if x]
         self.result = result = []
         self.styles = {}
@@ -201,12 +206,12 @@ class Preprocess(object):
         # for debugging) and return them.
         if self.changed:
             result.append('')
-            result = DummyFile('\n'.join(result))
-            result.name = name + '.build_temp'
-            self.keep = keep = len(result.strip())
+            result = DummyFile(name + '.build_temp', '\n'.join(result))
+            self.keep = keep = len(result.read().strip())
             if keep:
                 f = open(result.name, 'w')
-                f.write(result)
+                # Can call read a second time here because it's a DummyFile:
+                f.write(result.read())
                 f.close()
             self.result = result
         else:

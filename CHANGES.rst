@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Fixed: Support the preprocess extension on Python 3 (Issue #811)
 * Fixed: Fix findfonts on Windows in Python 3 (Issue #807)
 * Fixed: Support Sphinx 2.1+ on Python 3 (Issue #788)
 * Changed: Support docutils math directive instead of rst2pdf's (Issue #722)
