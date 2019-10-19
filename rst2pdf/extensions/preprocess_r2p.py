@@ -101,6 +101,7 @@ file were automatically removed.
 
 '''
 
+from collections import namedtuple
 import os
 import re
 
@@ -110,17 +111,15 @@ from rst2pdf.log import log
 
 
 class DummyFile(object):
-    ''' We could use stringio, but that's really overkill for what
-        we need here.
+    ''' Stores the path and contents of a file which may,
+    or may not, have been written to disk.
     '''
-    def __init__(self, value):
+    def __init__(self, name, value):
+        self.name = name
         self._str = value
 
     def read(self):
         return self._str
-
-    def strip(self):
-        return self._str.strip()
 
 
 class Preprocess(object):
@@ -158,14 +157,11 @@ class Preprocess(object):
                 return
 
         # Read the whole file and wrap it in a DummyFile
-        self.sourcef = DummyFile(source)
-        self.sourcef.name = name
+        self.sourcef = DummyFile(name, source)
 
         # Use a regular expression on the source, to take it apart
         # and put it back together again.
-
         self.source = source = [x for x in self.splitter(source) if x]
-        self.result = result = []
         self.styles = {}
         self.changed = False
 
@@ -209,11 +205,11 @@ class Preprocess(object):
         # for debugging) and return them.
         if self.changed:
             result.append('')
-            result = DummyFile('\n'.join(result))
-            result.name = name + '.build_temp'
-            self.keep = keep = len(result.strip())
+            result = DummyFile(name + '.build_temp', '\n'.join(result))
+            self.keep = keep = len(result.read().strip())
             if keep:
                 f = open(result.name, 'w')
+                # Can call read a second time here because it's a DummyFile:
                 f.write(result.read())
                 f.close()
             self.result = result
