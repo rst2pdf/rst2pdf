@@ -1,0 +1,28 @@
+name: rst2pdf
+base: core18 
+adopt-info: rst2pdf
+summary: Use a text editor. Make a PDF.
+description: |
+  The usual way of creating PDF from reStructuredText is by going through
+  LaTeX. This tool provides an alternative by producing PDF directly using
+  the ReportLab library.
+
+grade: stable
+confinement: strict
+
+parts:
+  rst2pdf:
+    plugin: python
+    python-version: python2
+    source: .
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version $(git describe --tags)
+
+apps:
+  rst2pdf:
+    command: rst2pdf
+    plugs:
+      - home
+      - removable-media
+      - network
