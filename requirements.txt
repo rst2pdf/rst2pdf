@@ -7,7 +7,6 @@
 aafigure==0.6
 alabaster==0.7.12         # via sphinx
 babel==2.7.0              # via sphinx
-backports.functools-lru-cache==1.5  # via matplotlib
 certifi==2019.3.9         # via requests
 chardet==3.0.4            # via requests
 cycler==0.10.0            # via matplotlib
@@ -22,7 +21,7 @@ matplotlib==2.2.4
 numpy==1.16.4             # via matplotlib
 packaging==19.0           # via sphinx
 pdfrw==0.4
-pillow==6.0.0             # via reportlab, xhtml2pdf
+pillow==6.2.0             # via reportlab, xhtml2pdf
 pygments==2.4.2
 pyparsing==2.4.0          # via matplotlib, packaging
 pypdf2==1.26.0
@@ -35,9 +34,7 @@ smartypants==2.0.1
 snowballstemmer==1.2.1    # via sphinx
 sphinx==1.8.5
 sphinxcontrib-websupport==1.1.2  # via sphinx
-subprocess32==3.5.4       # via matplotlib
 svg2rlg==0.3
-typing==3.6.6             # via sphinx
 urllib3==1.25.3           # via requests
 webencodings==0.5.1       # via html5lib
 xhtml2pdf==0.2.3
