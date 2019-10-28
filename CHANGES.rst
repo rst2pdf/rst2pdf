@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Fixed: Add Python 3.6 and 3.7 to the setup file  (Issue #814)
 * Fixed: Support the preprocess extension on Python 3 (Issue #811)
 * Fixed: Fix findfonts on Windows in Python 3 (Issue #807)
 * Fixed: Support Sphinx 2.1+ on Python 3 (Issue #788)
