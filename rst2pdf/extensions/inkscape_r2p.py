@@ -50,9 +50,19 @@ class InkscapeImage(VectorPdf):
             os.close(tmpf)
             client.to_unlink.append(pdffname)
             cache[filename] = pdffname
-            cmd = [progname, os.path.abspath(filename), '-A', pdffname]
+            # which version of inkscape?
+            cmd = [progname, '--version']
+            exitcode, out, err = InkscapeImage.run_cmd(cmd)
+            if out.startswith('Inkscape 0.'):
+                # Inkscape 0.x uses -A
+                cmd = [progname, os.path.abspath(filename), '-A', pdffname]
+            else:
+                # Inkscape 1.x uses --export-file
+                cmd = [progname, os.path.abspath(filename), '--export-file=%s' % pdffname]
             try:
-                subprocess.call(cmd)
+                result = subprocess.call(cmd)
+                if result != 0:
+                    log.error("Failed to run command: %s", ' '.join(cmd))
             except OSError:
                 log.error("Failed to run command: %s", ' '.join(cmd))
                 raise
@@ -72,7 +82,15 @@ class InkscapeImage(VectorPdf):
             os.close(tmpf)
             client.to_unlink.append(pngfname)
             cache[filename+'_raster'] = pngfname
-            cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
+            # which version of inkscape?
+            cmd = [progname, '--version']
+            exitcode, out, err = InkscapeImage.run_cmd(cmd)
+            if out.startswith('Inkscape 0.'):
+                # Inkscape 0.x uses -A
+                cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
+            else:
+                # Inkscape 1.x uses --export-file
+                cmd = [progname, os.path.abspath(filename), '--export-file=%s' % pngfname, '-d', str(client.def_dpi)]
             try:
                 subprocess.call(cmd)
                 return pngfname
@@ -81,6 +99,15 @@ class InkscapeImage(VectorPdf):
                 raise
         return None
 
+    @staticmethod
+    def run_cmd(cmd):
+        """
+        Execute a command and return exitcode, stdout and stderr.
+        """
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = proc.communicate()
+        exitcode = proc.returncode
+        return exitcode, out.decode(), err.decode()
 
 def install(createpdf, options):
     ''' Monkey-patch our class in to image as a replacement class for SVGImage.
