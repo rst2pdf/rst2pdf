@@ -7,6 +7,7 @@ bad_md5 = [
 good_md5 = [
         '3ddba1b9358cf7972e8eb0d52372bac2',
         '509284277dc15228b629388249f6453a',
+        '51c298c6af218900a0abb3066b08823c',
         '5386e164e5a952f88980a1089cf92fee',
         '651349f0143b26986707ef8a374a4d2b',
         '6645b78157c295d50dad176d8e31324e',
@@ -17,6 +18,7 @@ good_md5 = [
         'a217398fa299ae19259fbcaf41f8e585',
         'a29a17c9d3b73d20209b424d95ae922d',
         'a77136a819c03f358dfffdbddaea5a81',
+        'b7990fbd73619441ff49478453e902aa',
         'b96b278b6cec29d579b12576b22e60b6',
         'bcada59a905c2b719254eb936cad0d24',
         'cff6d1519da3a90d4523e7be5c0a749c',
