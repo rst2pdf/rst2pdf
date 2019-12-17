@@ -37,6 +37,7 @@ sphinx==1.8.5
 sphinxcontrib-websupport==1.1.2  # via sphinx
 subprocess32==3.5.4       # via matplotlib
 svg2rlg==0.3
+svglib==0.9.3
 typing==3.6.6             # via sphinx
 urllib3==1.25.3           # via requests
 webencodings==0.5.1       # via html5lib
