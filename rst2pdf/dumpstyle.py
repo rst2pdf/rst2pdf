@@ -6,10 +6,11 @@
     to .style in the styles directory.
 '''
 
+from __future__ import absolute_import
 import sys
 import os
 
-from rson import loads as rloads
+from .rson import loads as rloads
 from json import loads as jloads
 
 def dumps(obj, forcestyledict=True):
@@ -155,7 +156,8 @@ def convert(srcname):
     dstf.write(dstr)
     dstf.close()
 
-
 if __name__ == '__main__':
-    for fname in [os.path.join('styles', x) for x in os.listdir('styles') if x.endswith('.json')]:
+    _dir =  os.path.dirname(sys.argv[0])
+    _stylesdir = os.path.join(_dir, 'styles')
+    for fname in [os.path.join('styles', x) for x in os.listdir(_stylesdir) if x.endswith('.json')]:
         convert(fname)
