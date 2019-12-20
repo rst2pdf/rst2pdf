@@ -13,6 +13,11 @@ import os
 from .rson import loads as rloads
 from json import loads as jloads
 
+try:
+    basestring # py27
+except:
+    basestring = str # Py3+
+
 def dumps(obj, forcestyledict=True):
     ''' If forcestyledict is True, will attempt to
         turn styles into a dictionary.
