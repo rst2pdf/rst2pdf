@@ -1,13 +1,11 @@
-===========================
+---------------------------
 Help for rst2pdf developers
-===========================
+---------------------------
 
------------------------------
 Or, how do I hack this thing?
------------------------------
 
 Guidelines
-----------
+~~~~~~~~~~
 
 In rst2pdf we want many things. We want ponies and icecream. But most of all,
 we want rst2pdf to kick ass. The best way to achieve that is making rst2pdf
@@ -78,14 +76,14 @@ know what you are doing. It also means you don't break rst2pdf.
 
 
 Continuous Integration
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 There's a Travis build - see https://github.com/rst2pdf/rst2pdf/issues/621 for
 more information on the current status
 
 
 Running tests
--------------
+~~~~~~~~~~~~~
 
 The rst2pdf test suite generates PDFs, then calculates a checksum (an md5) of
 the resulting file and checks it against known lists of good and bad md5s.
@@ -93,7 +91,7 @@ These known outcomes are in ``rst2pdf/tests/md5/[test_name].json`` (warning,
 not actually a JSON file).
 
 First run
-~~~~~~~~~
+*********
 
 To run the tests for the first time, you will need to do some setup (after
 this, you can just work on your given virtualenv each time)::
@@ -107,7 +105,7 @@ this, you can just work on your given virtualenv each time)::
     nosetests -v -i regulartest -i sphinxtest
 
 Next runs
-~~~~~~~~~
+*********
 
 While in project::
 
@@ -118,7 +116,7 @@ To stop the tests on the first failure, use the ``-x`` switch::
   nosetests -x -i regulartest -i sphinxtest
 
 Using autotest directly
-~~~~~~~~~~~~~~~~~~~~~~~
+***********************
 
 You can also run the tests using autorun directly::
 
@@ -129,7 +127,7 @@ You can also run the tests using autorun directly::
 Now look at the output of ``log.txt``
 
 Running a single test
-~~~~~~~~~~~~~~~~~~~~~
+*********************
 
 To run one test only, try this::
 
@@ -139,7 +137,7 @@ To run one test only, try this::
 This will run one test and show the output.
 
 Skipping tests
-~~~~~~~~~~~~~~
+**************
 
 To skip a test, simply create a text file in the ``tests/input`` directory
 called ``[test].ignore`` containing a note on why the test is skipped. This
@@ -148,7 +146,7 @@ for inherited tests that we aren't confident of the correct output for, but
 where we don't want to delete/lose the test entirely.
 
 Marking a failing test as good
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+******************************
 
 Sometimes the local combination of software versions will create the "right"
 PDF but the binary file will have some minor differences. If your file looks
@@ -164,7 +162,7 @@ explaining what you did.
 
 
 Getting commit rights
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 Just ask in the mailing list.
 
