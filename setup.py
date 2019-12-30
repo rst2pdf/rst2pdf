@@ -5,7 +5,7 @@ import sys
 
 from setuptools import find_packages, setup
 
-version = '0.96.dev'
+version = '0.96'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
