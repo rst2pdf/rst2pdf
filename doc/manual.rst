@@ -1886,7 +1886,7 @@ Developers
 ----------
 
 .. include:: DEVELOPERS.rst
-   :start-line: 8
+   :start-line: 4
 
 
 Licenses
