@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 .. meta::
-  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>;
+  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>  and the contributors to the rst2pdf project;
   :version: 0.96.dev
   :revision: 2019011700
 
@@ -1894,9 +1894,7 @@ Licenses
 
 This is the license for rst2pdf::
 
-    Copyright (c) 2007,2008,2009 Roberto Alsina
-    Nicolas Laurance, Christoph Zwerschke, Yasushi Masuda, Josh VanderLinden,
-    Patrick Maupin.
+    Copyright (c) 2007-2019 Roberto Alsina and the contributors to the rst2pdf project
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
