@@ -60,7 +60,7 @@ Install from PyPI
 ~~~~~~~~~~~~~~~~~
 
 The latest released version may be installed from PyPI by using
-``pip``. It does not support Python 3::
+``pip``. It supports Python 2.7 or 3.6+::
 
     $ pip install --user rst2pdf
 

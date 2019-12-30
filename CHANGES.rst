@@ -2,22 +2,20 @@
 {next}
 ------
 
-* Add support for Inkscape 1.x in the inkscape extension (Issue #821)
-* Fixed: Allow the code-block's language attribute to be optional (Issue #819)
-* Fixed: Add Python 3.6 and 3.7 to the setup file  (Issue #814)
-* Fixed: Support the preprocess extension on Python 3 (Issue #811)
-* Fixed: Fix findfonts on Windows in Python 3 (Issue #807)
-* Fixed: Support Sphinx 2.1+ on Python 3 (Issue #788)
-* Changed: Support docutils math directive instead of rst2pdf's (Issue #722)
-* Fixed: HTTPS images using image directive now works with Python 3 (Issue #780)
-* Changed: Update tested dependencies to include ReportLab 3.5.23 (Issue #779)
-* Fixed: Internal links work when using ReportLab 3.5.19+ (Issue #772)
-* Add support for units in spaceBefore/spaceAfter for stylesheets (Issue #754)
-* Remove support for Psyco (Issue #756)
-* Remove support for PythonMagick, GFX and SWFTools (Issue #756)
-* Allow specifying frame padding in stylesheets (Issue #753)
-* Changed: migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
 
+0.95 (2019-12-30)
+-----------------
+
+* Added: Python 3 is now supported (Issues #744, #745, #780, #788, #811, #814)
+* Added: The code-block's language attribute is now optional (Issue #823)
+* Added: Inkscape 1.x is now supported by the inkscape extension (Issue #821)
+* Added: Units can now be specified in spaceBefore/spaceAfter for stylesheets (Issue #754)
+* Added: Frame padding can now be specified  in stylesheets (Issue #753)
+* Changed: Migrated from svg2rlg to svglib, which is maintained and supports python 3 (Issue #745)
+* Changed: We now use docutils math directive instead of rst2pdf's (Issue #722)
+* Fixed: Internal links now work when using ReportLab 3.5.19+ (Issue #772)
+* Removed: Support Psyco has been removed (Issue #756)
+* Removed: Support for PythonMagick, GFX and SWFTools has been removed (Issue #756)
 
 0.94.1 (2019-05-25)
 -------------------
