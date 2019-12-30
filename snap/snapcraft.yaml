@@ -13,8 +13,9 @@ confinement: strict
 parts:
   rst2pdf:
     plugin: python
-    python-version: python2
     source: .
+    build-packages:
+      - git # needed for the version trick
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags)
@@ -26,3 +27,4 @@ apps:
       - home
       - removable-media
       - network
+

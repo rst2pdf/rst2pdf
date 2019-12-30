@@ -11,3 +11,4 @@ rst2pdf/tests/output/*.log
 .python-version
 .venv/
 dist/
+snap/.snapcraft
