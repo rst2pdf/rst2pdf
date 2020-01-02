@@ -3,7 +3,7 @@ How to use rst2pdf
 ==================
 
 .. meta::
-  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>;
+  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>  and the contributors to the rst2pdf project;
   :version: 0.96.dev
   :revision: 2019011700
 
@@ -279,7 +279,7 @@ size specified, rst2pdf will arbitrarily decide it should use 300DPI (or
 whatever you choose with the ``--default-dpi`` option).
 
 Styles
-~~~~~~
+------
 
 You can style paragraphs with a style using the class directive::
 
@@ -1058,7 +1058,7 @@ The code-block directive supports many options, that mirror Pygments'::
 You can find more information about them in the pygments manual.
 
 File inclusion
-**************
+~~~~~~~~~~~~~~
 
 You can use the ``code-block`` directive with an external file, using the
 ``:include:`` option::
@@ -1122,7 +1122,7 @@ Raw Directive
 -------------
 
 Raw PDF
-*******
+~~~~~~~
 
 rst2pdf has a very limited mechanism to pass commands to reportlab, the PDF
 generation library.  You can use the raw directive to insert pagebreaks and
@@ -1150,7 +1150,7 @@ The unit used by the spacer by default is points, and using a space or a comma
 is the same thing in all cases.
 
 Page Counters
-*************
+~~~~~~~~~~~~~
 
 In some documents, you may not want your page counter to start in the first
 page.
@@ -1191,7 +1191,7 @@ It can take zero or two arguments.
 .. note:: Page counter changes take effect on the **current** page.
 
 Page Breaks
-***********
+~~~~~~~~~~~
 
 There are three kinds of page breaks:
 
@@ -1210,7 +1210,7 @@ template. For example::
     PageBreak twoColumn
 
 Frame Breaks
-************
+~~~~~~~~~~~~
 
 If you want to jump to the next frame in the page (or the next page if the
 current frame is the last), you can use the ``FrameBreak`` command. It takes an
@@ -1228,7 +1228,7 @@ from the bottom of the frame::
     the page...
 
 Page Transitions
-****************
+~~~~~~~~~~~~~~~~
 
 Page transitions are effects used when you change pages in *Presentation* or
 *Full Screen* mode (depends on the viewer).  You can use it when creating a
@@ -1278,7 +1278,7 @@ next* so the natural thing is to use it before a ``PageBreak``::
        PageBreak
 
 Text Annotations
-****************
+~~~~~~~~~~~~~~~~
 
 Text annotations are meta notes added to a page.
 
@@ -1292,7 +1292,7 @@ The optional position is a set of 4 numbers for ``x_begin``, ``y_begin`,
 ``x_end`` and ``y_end``
 
 Raw HTML
-********
+~~~~~~~~
 
 If you have a document that contains raw HTML, and have ``xhtml2pdf`` installed,
 ``rst2pdf`` will try to render that HTML inside your document. To enable this,
@@ -1886,7 +1886,7 @@ Developers
 ----------
 
 .. include:: DEVELOPERS.rst
-   :start-line: 8
+   :start-line: 4
 
 
 Licenses
@@ -1894,9 +1894,7 @@ Licenses
 
 This is the license for rst2pdf::
 
-    Copyright (c) 2007,2008,2009 Roberto Alsina
-    Nicolas Laurance, Christoph Zwerschke, Yasushi Masuda, Josh VanderLinden,
-    Patrick Maupin.
+    Copyright (c) 2007-2019 Roberto Alsina and the contributors to the rst2pdf project
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
