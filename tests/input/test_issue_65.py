@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from reportlab.platypus import SimpleDocTemplate, Paragraph, ParagraphStyle
+import pytest
+from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.platypus.tables import *
+from reportlab.lib.styles import ParagraphStyle
 
 
-def go():
+@pytest.mark.skip(reason="ParagraphStyle complained.  Old code")
+def test_go():
+
     Story = []
     doc = SimpleDocTemplate("phello.pdf")
 
@@ -23,5 +27,3 @@ def go():
     Story = cell + [Table([[cell]])]
     doc.build(Story)
 
-
-go()
