@@ -1,34 +1,34 @@
+import sys
 import pytest
+import logging as log
+from autotest import run_single, dirname, checkmd5
 
 
-# callback that returns a test file of the form {...}/rst2pdf/tests/input/test{n}.txt
+# hook (callback) that returns a test file of the form {...}/rst2pdf/tests/input/test{n}.txt
 def pytest_collect_file(parent, path):
-    print(path.ext, path.basename)
     if path.ext == ".txt" and path.basename.startswith("test"):
         return FunctionalTestFile(path, parent)
 
 
 class FunctionalTestFile(pytest.File):
     def collect(self):
-        print("collect", self.fspath, type(self.fspath))
-
+        log.debug("FunctionalTestFile: %s", self.fspath)
         yield FunctionalTestItem(self.name, self, self.fspath)
 
 
 class FunctionalTestItem(pytest.Item):
-    def __init__(self, name, parent, spec):
+    def __init__(self, name, parent, testFile):
         super().__init__(name, parent)
-        self.txtFile = spec.dirpath()
-        print("TestItem", self.txtFile)
+        self.testFile = testFile
+        log.debug("FunctionalTestItem %s", self.testFile)
 
     def runtest(self):
-        txtFile = open(self.spec)
-        print(txtFile.readlines())
-        # print(self.spec.open)
-        for name, value in sorted(self.spec.items()):
-            # some custom test execution (dumb example follows)
-            if name != value:
-                raise FunctionalTestException(self, name, value)
+        # log.debug(self.testFile.open().readlines())
+        key, errcode = run_single(self.testFile)
+        log.debug("%s, %d", key, errcode)
+        if key in ["incomplete"]:
+            raise FunctionalTestException(key, errcode)
+        assert key == "good", "%s is not good: %s" % (self.name, key)
 
     def repr_failure(self, excinfo):
         """ called when self.runtest() raises an exception. """
