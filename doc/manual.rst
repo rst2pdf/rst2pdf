@@ -4,8 +4,8 @@ How to use rst2pdf
 
 .. meta::
   :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>  and the contributors to the rst2pdf project;
-  :version: 0.96.dev
-  :revision: 2019011700
+  :version: 0.96
+  :revision: 2020010500
 
 .. header::
 
