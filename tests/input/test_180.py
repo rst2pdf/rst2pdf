@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import pytest
+
+wordaxe = pytest.importorskip("wordaxe")
+
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus.paragraph import Paragraph
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
