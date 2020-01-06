@@ -694,7 +694,7 @@ class RstToPdf(object):
                     #raise
                 raise
 
-        #doc = SimpleDocTemplate("phello.pdf")
+        #doc = SimpleDocTemplate("tests/output/phello.pdf")
         #doc.build(elements)
         for fn in self.to_unlink:
             try:

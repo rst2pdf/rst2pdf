@@ -11,7 +11,7 @@ from reportlab.lib.styles import ParagraphStyle
 def test_go():
 
     Story = []
-    doc = SimpleDocTemplate("phello.pdf")
+    doc = SimpleDocTemplate("tests/output/test_issue_65.pdf")
 
     cell = [
         Paragraph(

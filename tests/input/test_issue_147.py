@@ -6,7 +6,7 @@ from reportlab.lib.enums import TA_JUSTIFY
 
 def go():
     styles = getSampleStyleSheet()
-    doc = SimpleDocTemplate("phello.pdf")
+    doc = SimpleDocTemplate("tests/output/test_issue_147.pdf")
     style = styles['Normal']
     style.alignment=TA_JUSTIFY
     p1 = Paragraph('''PADDING PADDING PADDING PADDING PADDING PADDING The computer will always be better than you at parsing SQL

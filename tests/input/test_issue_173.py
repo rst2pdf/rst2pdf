@@ -12,7 +12,7 @@ def go():
                       ('BOX',(0,0),(-1,-1),0.25,"black")]
                      )
         styles = getSampleStyleSheet()
-        doc = SimpleDocTemplate("phello.pdf")
+        doc = SimpleDocTemplate("tests/output/test_issue_173.pdf")
 
         cell=[Paragraph('This is not indented',styles['Normal']),
               Indenter(100,100),
