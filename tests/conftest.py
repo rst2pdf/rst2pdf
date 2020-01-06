@@ -27,22 +27,13 @@ class FunctionalTestItem(pytest.Item):
         log.debug("runtest")
         key, errcode = run_single(self.testFile)
         log.debug("%s, %d", key, errcode)
-        # if errcode !=0:
-        #     raise FunctionalTestException(key, errcode)
-        assert key == "good" and errcode == 0
-            
-        
+        if errcode !=0:
+            raise FunctionalTestException(key, errcode)
 
     def repr_failure(self, excinfo):
         """ called when self.runtest() raises an exception. """
         if isinstance(excinfo.value, FunctionalTestException):
-            return "\n".join(
-                [
-                    "usecase execution failed",
-                    "   spec failed: {1!r}: {2!r}".format(*excinfo.value.args),
-                    "   no further details known at this point.",
-                ]
-            )
+            return f"Functional Test Failed {excinfo} "
         else:
             log.debug(f"unknown failure {excinfo}")
             print(str(excinfo))
