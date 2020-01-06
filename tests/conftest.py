@@ -24,11 +24,14 @@ class FunctionalTestItem(pytest.Item):
 
     def runtest(self):
         # log.debug(self.testFile.open().readlines())
+        log.debug("runtest")
         key, errcode = run_single(self.testFile)
         log.debug("%s, %d", key, errcode)
-        if key in ["incomplete"]:
-            raise FunctionalTestException(key, errcode)
-        assert key == "good", "%s is not good: %s" % (self.name, key)
+        # if errcode !=0:
+        #     raise FunctionalTestException(key, errcode)
+        assert key == "good" and errcode == 0
+            
+        
 
     def repr_failure(self, excinfo):
         """ called when self.runtest() raises an exception. """
@@ -40,6 +43,10 @@ class FunctionalTestItem(pytest.Item):
                     "   no further details known at this point.",
                 ]
             )
+        else:
+            log.debug(f"unknown failure {excinfo}")
+            print(str(excinfo))
+            print(excinfo.getrepr())
 
     def reportinfo(self):
         return self.fspath, 0, "usecase: {}".format(self.name)

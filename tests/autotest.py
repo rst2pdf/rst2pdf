@@ -18,7 +18,8 @@ import distutils.spawn
 from copy import copy
 
 from optparse import OptionParser
-from execmgr import textexec, default_logger as log
+from execmgr import textexec, default_logger as outputLog
+import logging as log # for debugging the tests
 from pythonpaths import setpythonpaths
 import six
 from six import print_
@@ -213,9 +214,9 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
     '''
     if not os.path.exists(pdfpath):
         if not failcode and os.path.exists(iprefix + '.nopdf'):
-            log(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
+            outputLog(resultlist, "Validity of file %s checksum '(none generated)' is good." % os.path.basename(pdfpath))
             return ('good', 0)
-        log(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
+        outputLog(resultlist, 'File %s not generated' % os.path.basename(pdfpath))
         return ('fail', 2)
     if os.path.isdir(pdfpath):
         pdffiles = globjoin(pdfpath, '*.pdf')
@@ -244,7 +245,7 @@ def checkmd5(pdfpath, md5path, resultlist, updatemd5, failcode=1, iprefix=None):
                         and updatemd5 or info.new_category)
     # Check MD5 against database and update if necessary
     resulttype = info.find(m, new_category)
-    log(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
+    outputLog(resultlist, "Validity of file %s checksum '%s' is %s." % (os.path.basename(pdfpath), m, resulttype))
     if info.changed and updatemd5:
         six.print_("Updating MD5 file")
         f = open(md5path, 'wb')
@@ -271,7 +272,7 @@ def build_sphinx(sphinxdir, outpdf):
     if len(pdffiles) == 1:
         shutil.copyfile(pdffiles[0], outpdf)
     elif not pdffiles:
-        log(result, 'Output PDF apparently not generated')
+        outputLog(result, 'Output PDF apparently not generated')
         errcode = 1
     else:
         shutil.copytree(builddir, outpdf)
@@ -297,7 +298,8 @@ def build_txt(iprefix, outpdf, fastfork):
 
 def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
                ignore_ignorefile=False):
-    use_sphinx = 'sphinx' in inpfname and os.path.isdir(inpfname)
+    log.debug(f"run_single {inpfname}")
+    use_sphinx = 'sphinx' in str(inpfname) and os.path.isdir(inpfname)
     if use_sphinx:
         sphinxdir = inpfname
         if sphinxdir.endswith('Makefile'):
@@ -308,24 +310,24 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
             basename = os.path.basename(sphinxdir)
         if os.path.exists(sphinxdir + '.ignore'):
             if (ignore_ignorefile):
-                log([], 'Ingoring ' + sphinxdir + '.ignore file')
+                outputLog([], 'Ingoring ' + sphinxdir + '.ignore file')
             else:
                 f = open(sphinxdir + '.ignore', 'r')
                 data=f.read()
                 f.close()
-                log([], 'Ignored: ' + data)
+                outputLog([], 'Ignored: ' + data)
                 return 'ignored', 0
     else:
         iprefix = os.path.splitext(inpfname)[0]
         basename = os.path.basename(iprefix)
         if os.path.exists(iprefix + '.ignore'):
             if (ignore_ignorefile):
-                log([], 'Ingoring ' + iprefix + '.ignore file')
+                outputLog([], 'Ingoring ' + iprefix + '.ignore file')
             else:
                 f = open(iprefix + '.ignore', 'r')
                 data = f.read()
                 f.close()
-                log([], 'Ignored: ' + data)
+                outputLog([], 'Ignored: ' + data)
                 return 'ignored', 0
 
     oprefix = os.path.join(PathInfo.outdir, basename)
@@ -333,6 +335,11 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
     outpdf = oprefix + '.pdf'
     outtext = oprefix + '.log'
     md5file = mprefix + '.json'
+    log.debug(f"{oprefix}")
+    log.debug(f"{mprefix}")
+    log.debug(f"{outpdf}")
+    log.debug(f"{outtext}")
+    log.debug(f"{md5file}")
 
     if incremental and os.path.exists(outpdf):
         return 'preexisting', 0
@@ -352,7 +359,7 @@ def run_single(inpfname, incremental=False, fastfork=None, updatemd5=None,
         errcode, result = build_txt(iprefix, outpdf, fastfork)
         checkinfo, errcode = checkmd5(outpdf, md5file, result, updatemd5,
                                       errcode, iprefix)
-    log(result, '')
+    outputLog(result, '')
     outf = open(outtext, 'w')
     outf.write('\n'.join(result))
     outf.close()
