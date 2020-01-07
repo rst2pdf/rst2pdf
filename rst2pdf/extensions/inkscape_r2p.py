@@ -12,12 +12,14 @@ the vectorpdf code to process the PDF.
     and doesn't check return from inkscape for errors.
 '''
 
-from __future__ import absolute_import
 import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
 from rst2pdf.log import log
-
-from .vectorpdf_r2p import VectorPdf
+try:
+    from  vectorpdf_r2p import VectorPdf
+except:
+    from  .vectorpdf_r2p import VectorPdf
+    
 import rst2pdf.image
 
 
