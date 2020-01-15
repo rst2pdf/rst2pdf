@@ -18,7 +18,7 @@ imagesize==1.1.0          # via sphinx
 jinja2==2.10.1            # via sphinx
 kiwisolver==1.1.0         # via matplotlib
 markupsafe==1.1.1         # via jinja2
-matplotlib==3.1.1
+matplotlib==2.2.4
 numpy==1.16.4             # via matplotlib
 packaging==19.0           # via sphinx
 pdfrw==0.4
