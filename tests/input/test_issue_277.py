@@ -12,7 +12,7 @@ from copy import copy
 def go():
         Story=[]
         styles = getSampleStyleSheet()
-        doc = SimpleDocTemplate("issue277.pdf")
+        doc = SimpleDocTemplate("tests/output/issue277.pdf")
         ts=TableStyle()
         knstyle=copy(styles['Normal'])
         heading=Paragraph('A heading at the beginning of the document',knstyle)
