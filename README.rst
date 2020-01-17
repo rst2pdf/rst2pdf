@@ -60,7 +60,8 @@ Install from PyPI
 ~~~~~~~~~~~~~~~~~
 
 The latest released version may be installed from PyPI by using
-``pip``. It supports Python 2.7 or 3.6+::
+``pip``. Version 0.96 was the last version to support Python 2.7.
+Subsequent versions support Python 3.6+::
 
     $ pip install --user rst2pdf
 
@@ -75,8 +76,8 @@ then you can install from there with::
 Install from GitHub
 ~~~~~~~~~~~~~~~~~~~
 
-Work on rst2pdf has restarted on GitHub, with the goals of supporting
-Python 3, addressing outstanding issues, and not breaking anything. You
+Work on rst2pdf has restarted on GitHub, with the goals of adding new
+features, addressing outstanding issues, and not breaking anything. You
 can clone the repository and install this version::
 
     $ git clone https://github.com/rst2pdf/rst2pdf rst2pdf

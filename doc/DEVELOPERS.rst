@@ -123,7 +123,7 @@ First run
 To run the tests for the first time, you will need to do some setup (after
 this, you can just work on your given virtualenv each time)::
 
-    virtualenv --python=/usr/local/bin/python2 env
+    python -m venv env
     . env/bin/activate
 
     pip install pytest pytest-xdist
