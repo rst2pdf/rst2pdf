@@ -195,3 +195,4 @@ latex_documents = [
 
 pdf_toc_depth = 2
 pdf_invariant = True
+pdf_real_footnotes = True

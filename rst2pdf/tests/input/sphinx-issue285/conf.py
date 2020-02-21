@@ -222,3 +222,4 @@ man_pages = [
 ]
 
 pdf_invariant = True
+pdf_real_footnotes = True
