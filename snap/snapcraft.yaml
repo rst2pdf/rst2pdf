@@ -1,0 +1,27 @@
+name: rst2pdf
+base: core18 
+version: '0.96'
+summary: Use a text editor. Make a PDF.
+description: |
+  Create PDF reports, slide decks and other documents from the command line using **rst2pdf**.
+
+  With simple ReStructured Text format, a stylesheet of your choosing, and rst2pdf, creating PDFs is fast and easy. The familiarity of your favorite text editor, the separation of the presentation layer from your content, and the simplicity of running a single command to get the PDF output will make rst2pdf an excellent tool for your day-to-day use.
+
+  Python and ReportLab power this open source project; find out more at https://rst2pdf.org.
+
+grade: stable
+confinement: strict
+
+parts:
+  rst2pdf:
+    plugin: python
+    source: .
+
+apps:
+  rst2pdf:
+    command: rst2pdf
+    plugs:
+      - home
+      - removable-media
+      - network
+

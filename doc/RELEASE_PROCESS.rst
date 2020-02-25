@@ -87,3 +87,13 @@ It should contain the following:
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
 .. _Test-PyPI: https://test.pypi.org
 .. _PyPI: https://test.pypi.org
+
+
+Releasing as a Snap
+~~~~~~~~~~~~~~~~~~~
+
+1. Update the version string in ``snap/snapcraft.yml`` as desired (probably to match the new release tag)
+
+2. Run ``snapcraft`` and note the filename of the output
+
+3. Now publish (the ``rst2pdf`` namespace is associated with @lornajane's Ubuntu account) by doing ``snapcraft push --release=stable [the snape filename from the previous step]``
