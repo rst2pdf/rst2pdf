@@ -67,7 +67,7 @@ The latest released version may be installed from PyPI by using
 Install from Snap
 ~~~~~~~~~~~~~~~~~
 
-If you are using a system that supports [snaps](https://snapcraft.io/)
+If you are using a system that supports `snaps <https://snapcraft.io/>`__
 then you can install from there with::
 
     $ snap install rst2pdf
