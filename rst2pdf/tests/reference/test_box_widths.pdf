@@ -57,7 +57,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Outlines 15 0 R /PageLabels 16 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
+/PageLabels 15 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
 >>
 endobj
 10 0 obj
@@ -395,7 +395,7 @@ endstream
 endobj
 14 0 obj
 <<
-/Length 3152
+/Length 3008
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -512,14 +512,10 @@ n 78 36 12 12 re f*
 .960784 .960784 .862745 rg
 n 30 24 60 12 re f*
 .960784 .960784 .862745 rg
-n 96 24 108 12 re f*
-.960784 .960784 .862745 rg
 n 30 12 60 12 re f*
 .960784 .960784 .862745 rg
-n 96 12 6 12 re f*
-.960784 .960784 .862745 rg
 n 30 0 60 12 re f*
-BT 1 0 0 1 0 158 Tm 12 TL /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (Release Notes) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T*  T* /F4 10 Tf 0 0 .501961 rg (Release X) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=========) Tj /F2 10 Tf 0 0 0 rg  T* (Following issues have been fixed in this release:) Tj T*  T* (Fixes) Tj T*  T* 0 0 0 rg (  ..) Tj 0 0 0 rg ( ) Tj /F4 10 Tf .666667 .133333 1 rg (rolelist) Tj /F2 10 Tf 0 0 0 rg (::) Tj 0 0 0 rg ( bug) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:template:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (#${value}: ${text}) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:levelsup:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (2) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:siblings:) Tj T* ET
+BT 1 0 0 1 0 158 Tm 12 TL /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (Release Notes) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T*  T* /F4 10 Tf 0 0 .501961 rg (Release X) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=========) Tj /F2 10 Tf 0 0 0 rg  T* (Following issues have been fixed in this release:) Tj T*  T* (Fixes) Tj T*  T* 0 0 0 rg (  ..) Tj 0 0 0 rg ( ) Tj /F4 10 Tf .666667 .133333 1 rg (rolelist) Tj /F2 10 Tf 0 0 0 rg (::) Tj 0 0 0 rg ( bug) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:template:) Tj /F2 10 Tf 0 0 0 rg ( #${value}: ${text}) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:levelsup:) Tj /F2 10 Tf 0 0 0 rg ( 2) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:siblings:) Tj T* ET
 Q
 Q
 Q
@@ -542,31 +538,26 @@ endstream
 endobj
 15 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 16 0 R 1 17 0 R 2 18 0 R ]
 >>
 endobj
 16 0 obj
 <<
-/Nums [ 0 17 0 R 1 18 0 R 2 19 0 R ]
+/S /D /St 1
 >>
 endobj
 17 0 obj
 <<
-/S /D /St 1
->>
-endobj
-18 0 obj
-<<
 /S /D /St 2
 >>
 endobj
-19 0 obj
+18 0 obj
 <<
 /S /D /St 3
 >>
 endobj
 xref
-0 20
+0 19
 0000000000 65535 f 
 0000000073 00000 n 
 0000000134 00000 n 
@@ -577,16 +568,15 @@ xref
 0000000868 00000 n 
 0000000978 00000 n 
 0000001183 00000 n 
-0000001288 00000 n 
-0000001546 00000 n 
-0000001618 00000 n 
-0000006852 00000 n 
-0000011319 00000 n 
-0000014523 00000 n 
-0000014570 00000 n 
-0000014629 00000 n 
-0000014663 00000 n 
-0000014697 00000 n 
+0000001271 00000 n 
+0000001529 00000 n 
+0000001601 00000 n 
+0000006835 00000 n 
+0000011302 00000 n 
+0000014362 00000 n 
+0000014421 00000 n 
+0000014455 00000 n 
+0000014489 00000 n 
 trailer
 <<
 /ID 
@@ -595,8 +585,8 @@ trailer
 
 /Info 10 0 R
 /Root 9 0 R
-/Size 20
+/Size 19
 >>
 startxref
-14731
+14523
 %%EOF
