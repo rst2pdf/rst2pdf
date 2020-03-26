@@ -26,6 +26,11 @@ from log import log
 import re
 from xml.sax.saxutils import unescape, escape
 
+import six
+ 
+if six.PY3:
+    unicode = str
+
 class XXPreformatted(XPreformatted):
     """An extended XPreformattedFit"""
     def __init__(self, *args, **kwargs):
