@@ -34,7 +34,6 @@
 #
 #####################################################################################
 
-
 __docformat__ = 'reStructuredText'
 from importlib import import_module
 import six
@@ -1577,11 +1576,13 @@ def add_extensions(options):
             sys.path.insert(0, prefix)
         log.info('Importing extension module %s', repr(modname))
         firstname = path_given and modname or (modname + '_r2p')
+        _names = [firstname, modname]
         try:
-            try:
-                module = import_module(firstname)
-            except ImportError as e:
-                module = import_module(modname)
+            for _name in _names:
+                try:
+                    module = import_module(_name, 'rst2pdf')
+                except ImportError:
+                    continue
         except ImportError as e:
             if str(e).split()[-1].replace("'", '') not in [firstname, modname]:
                 raise

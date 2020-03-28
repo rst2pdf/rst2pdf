@@ -15,8 +15,11 @@ the vectorpdf code to process the PDF.
 import sys, os, tempfile, subprocess
 from weakref import WeakKeyDictionary
 from rst2pdf.log import log
-
-from vectorpdf_r2p import VectorPdf
+try:
+    from  vectorpdf_r2p import VectorPdf
+except:
+    from  .vectorpdf_r2p import VectorPdf
+    
 import rst2pdf.image
 
 
