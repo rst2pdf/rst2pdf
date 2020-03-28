@@ -9,12 +9,15 @@ Automated testing for rst2pdf
 See LICENSE.txt for licensing terms
 '''
 
+from __future__ import print_function
+
 import distutils.spawn
 import glob
 import os
 import shlex
 import shutil
 import subprocess
+import sys
 import tempfile
 from copy import copy
 from optparse import OptionParser
@@ -154,10 +157,28 @@ def validate_pdf(test_name, ref_dir=None, out_dir=None):
         )
         return ('bad', _get_error_code('bad'))
 
+    # convert to PNG
+    # this generates files with a '-%d.png' suffix, where '%d' is the page num
+    for pdf, suffix in ((ref_pdf, '.ref'), (out_pdf, '.out')):
+        cmd = [
+            'pdftoppm', '-png', pdf, os.path.join(out_dir, test_name + suffix),
+        ]
+        try:
+            out = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        except (OSError, subprocess.CalledProcessError) as exc:
+            log(
+                [],
+                'Failed to convert PDF to PNG - is pdftoppm installed?',
+            )
+            log([], str(exc))
+            return ('fail', _get_error_code('fail'))
+
     diffs = []
 
-    for page in range(ref_pages):
-        diff_png = os.path.join(out_dir, test_name + '-%d.diff.png' % page)
+    for page in range(1, ref_pages + 1):
+        ref_png = os.path.join(out_dir, test_name + '.ref-%d.png' % page)
+        out_png = os.path.join(out_dir, test_name + '.ref-%d.png' % page)
+        diff_png = os.path.join(out_dir, test_name + '.diff-%d.png' % page)
 
         # we have minimal amount of fuzzing and grayscale colorspace since that limits
         # the possibility of false positives due to changes in imagemagick or similar
@@ -169,8 +190,8 @@ def validate_pdf(test_name, ref_dir=None, out_dir=None):
             'AE',
             '-fuzz',
             '5%',
-            '%s[%d]' % (ref_pdf, page),
-            '%s[%d]' % (out_pdf, page),
+            ref_png,
+            out_png,
             diff_png,
         ]
 
