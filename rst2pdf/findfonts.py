@@ -79,6 +79,7 @@ def loadFonts():
                 font = TTFontFile(ttf)
             except TTFError:
                 log.warning("Error processing %s", ttf)
+                continue
 
             family = make_string(font.familyName.lower())
             fontName = make_string(font.name).lower()

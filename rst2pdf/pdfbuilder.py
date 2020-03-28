@@ -592,7 +592,7 @@ class PDFWriter(writers.Writer):
             try:
                 template = jinja_env.get_template(self.config.pdf_cover_template)
             except jinja2.TemplateNotFound:
-                log.error("Can't find cover template %s, using default"%self.custom_cover)
+                log.error("Can't find cover template %s, using default"%self.config.pdf_cover_template)
                 template = jinja_env.get_template('sphinxcover.tmpl')
 
             # This is what's used in the python docs because
