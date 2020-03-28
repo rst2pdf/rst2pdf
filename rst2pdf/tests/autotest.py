@@ -127,7 +127,7 @@ def validate_pdf(test_name, ref_dir=None, out_dir=None):
             out = subprocess.check_output(
                 cmd + [pdf], stderr=subprocess.STDOUT
             )
-        except subprocess.CalledProcessError as exc:
+        except (OSError, subprocess.CalledProcessError) as exc:
             log(
                 [],
                 'Failed to count number of pages in PDF - is pdfinfo installed?',
@@ -176,10 +176,10 @@ def validate_pdf(test_name, ref_dir=None, out_dir=None):
 
         try:
             out = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError as exc:
+        except (OSError, subprocess.CalledProcessError) as exc:
             # if this returned with a non-zero 0 code, we either have a
             # different PDF or there was an issue with the command
-            if not exc.output.isdigit():
+            if isinstance(exc, OSError) or not exc.output.isdigit():
                 log(
                     [],
                     'Failed to convert PDFs to PNG - is ImageMagick installed?',
