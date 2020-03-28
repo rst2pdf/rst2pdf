@@ -9,6 +9,7 @@ addons:
     - texlive-latex-base
     - dvipng
     - poppler-utils
+    - imagemagick
 
 language: python
 python:
