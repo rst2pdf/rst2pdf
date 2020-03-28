@@ -8,6 +8,7 @@ addons:
     - inkscape
     - texlive-latex-base
     - dvipng
+    - poppler-utils
 
 language: python
 python:
