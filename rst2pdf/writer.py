@@ -7,6 +7,11 @@ from docutils import writers
 
 from rst2pdf import createpdf
 
+import six
+ 
+if six.PY3:
+    unicode = str
+    basestring = str
 
 class PdfWriter(writers.Writer):
 
