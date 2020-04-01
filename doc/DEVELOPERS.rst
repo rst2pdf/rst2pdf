@@ -30,20 +30,23 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
 
   + Run the test suite on it::
 
-      cd rst2pdf/tests
-      ./autotest.py input/mytest.txt
+      pytest rst2pdf/tests/input/mytest.txt
 
   + Check the output::
 
-      less output/mytest.log
-      acroread output/mytest.pdf
+      less rst2pdf/tests/output/mytest.log
+      acroread rst2pdf/tests/output/mytest.pdf
 
   + If it's really a bug, mark the test as *bad* and save everything in git::
 
-      setmd5 bad input/mytest.txt
+      echo <<< EOF > rst2pdf/tests/md5/mytest.json
+      bad_md5 = [
+              # bad checksum here
+      ]
+      EOF
       git checkout -b issue-X
-      git add input/mytest.*
-      git add md5/mytest.json
+      git add rst2pdf/tests/input/mytest.*
+      git add rst2pdf/tests/md5/mytest.json
       git commit -m "Test case for Issue X"
       git push -u origin issue-X # then open a Pull Request
 
@@ -99,40 +102,27 @@ this, you can just work on your given virtualenv each time)::
     virtualenv --python=/usr/local/bin/python2 env
     . env/bin/activate
 
-    pip install nose coverage
-    pip install -r requirements.txt
-    pip install -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-    nosetests -v -i regulartest -i sphinxtest
+    pip install pytest pytest-xdist
+    pip install -c requirements.txt .[tests,sphinx,hyphenation,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    pytest
 
 Next runs
 *********
 
-While in project::
+To run all tests, run::
 
-  nosetests -v -i regulartest -i sphinxtest
+  pytest
 
-To stop the tests on the first failure, use the ``-x`` switch::
+You can also run tests in parallel by passing the ``-n auto`` flag::
 
-  nosetests -x -i regulartest -i sphinxtest
-
-Using autotest directly
-***********************
-
-You can also run the tests using autorun directly::
-
-  cd rst2pdf/tests
-  ./autotest.py -e -f >& /dev/null
-  ./parselogs.py > log.txt
-
-Now look at the output of ``log.txt``
+  pytest -n auto
 
 Running a single test
 *********************
 
-To run one test only, try this::
+To run one test only, simply pass the file or directory to pytest. For example::
 
-  cd rst2pdf/tests
-  ./autotest.py input/[test].txt
+  pytest rst2pdf/tests/input/sphinx-repeat-table-rows
 
 This will run one test and show the output.
 
@@ -144,21 +134,6 @@ called ``[test].ignore`` containing a note on why the test is skipped. This
 will mark the test as skipped when the test suite runs. This could be useful
 for inherited tests that we aren't confident of the correct output for, but
 where we don't want to delete/lose the test entirely.
-
-Marking a failing test as good
-******************************
-
-Sometimes the local combination of software versions will create the "right"
-PDF but the binary file will have some minor differences. If your file looks
-good, then you can store the checksum of it as a valid outcome with a command
-like this::
-
-  cd rst2pdf/tests
-  ./autotest.py -u good input/[test].txt
-
-You'll see from ``git diff`` that you now have a new entry in the related
-``md5/[test].json`` file. Commit this to a new branch and open a pull request
-explaining what you did.
 
 
 Getting commit rights
