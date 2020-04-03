@@ -20,7 +20,7 @@ Contents:
 
    Describes a method without types.
 
-.. cpp:function:: const T &array<T>::operator[]() const
+.. cpp:function:: const T& array::operator[] (int index) const
 
    Describes the constant indexing operator of a templated array.
 

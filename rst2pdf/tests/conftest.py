@@ -252,14 +252,7 @@ class SphinxItem(Item):
 
         input_dir = os.path.join(INPUT_DIR, self.name)
         build_dir = tempfile.mkdtemp(prefix='rst2pdf-sphinx-')
-        # TODO(stephenfin): Add '-W' once we fix the failing tests and update
-        # the PDFs
-        #
-        # sphinx-issue257
-        # sphinx-issue318
-        # sphinx-issue364
-        # sphinx-multidoc
-        # sphinx-repeat-table-rows
+
         cmd = ['sphinx-build', '-b', 'pdf', input_dir, build_dir]
 
         try:
