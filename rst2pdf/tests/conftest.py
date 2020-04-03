@@ -336,6 +336,8 @@ class SphinxItem(Item):
         else:
             pytest.fail('Output PDF not generated', pytrace=False)
 
+        shutil.rmtree(build_dir)
+
         return retcode, output
 
 
