@@ -1,5 +1,5 @@
-sudo: false
 filter_secrets: false
+os: linux
 dist: xenial
 
 addons:
