@@ -5,7 +5,8 @@
 0.96 (2020-01-05)
 -----------------
 
- * Fixed: Manual now builds again (Issue #834)
+* Fixed: Manual now builds again (Issue #834)
+* Changed: We have moved to pytest (Issue #850:wq)
 
 
 0.95 (2019-12-30)
