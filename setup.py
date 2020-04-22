@@ -41,13 +41,13 @@ setup(
     version=version,
     python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+    package_dir={'': '.'},
     package_data=dict(rst2pdf=['styles/*.json',
 	'styles/*.style',
 	'images/*png',
 	'images/*jpg',
 	'templates/*tmpl'
 	]),
-    include_package_data=True,
     dependency_links=[
     ],
     install_requires=install_requires,
