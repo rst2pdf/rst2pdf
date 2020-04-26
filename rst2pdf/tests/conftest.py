@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import tempfile
 
+from packaging import version
 import pytest
 import six
 
@@ -144,25 +145,34 @@ class MD5Info(dict):
         return result[:-len(suffix)]
 
 
-class TxtFile(pytest.File):
+class File(pytest.File):
+
+    if version.parse(pytest.__version__) < version.parse('5.4.0'):
+        @classmethod
+        def from_parent(cls, parent, fspath):
+            return cls(parent=parent, fspath=fspath)
+
+
+class TxtFile(File):
 
     def collect(self):
         name = os.path.splitext(self.fspath.basename)[0]
-        # TODO(stephenfin): Switch to 'from_parent' when pytest minimum is
-        # 5.4.0
-        yield TxtItem(parent=self, name=name)
+        yield TxtItem.from_parent(parent=self, name=name)
 
 
-class SphinxFile(pytest.File):
+class SphinxFile(File):
 
     def collect(self):
         name = os.path.split(self.fspath.dirname)[-1]
-        # TODO(stephenfin): Switch to 'from_parent' when pytest minimum is
-        # 5.4.0
-        yield SphinxItem(parent=self, name=name)
+        yield SphinxItem.from_parent(parent=self, name=name)
 
 
 class Item(pytest.Item):
+
+    if version.parse(pytest.__version__) < version.parse('5.4.0'):
+        @classmethod
+        def from_parent(cls, parent, name):
+            return cls(parent=parent, name=name)
 
     def _build(self):
         raise NotImplementedError
@@ -326,6 +336,8 @@ class SphinxItem(Item):
         else:
             pytest.fail('Output PDF not generated', pytrace=False)
 
+        shutil.rmtree(build_dir)
+
         return retcode, output
 
 
@@ -336,13 +348,9 @@ def pytest_collect_file(parent, path):
     parent_dir = os.path.split(path.dirname)[-1]
 
     if path.ext == '.txt' and parent_dir == 'input':
-        # TODO(stephenfin): Switch to 'from_parent' when pytest minimum is
-        # 5.4.0
-        return TxtFile(parent=parent, fspath=path)
+        return TxtFile.from_parent(parent=parent, fspath=path)
     elif path.basename == 'conf.py' and parent_dir.startswith('sphinx'):
-        # TODO(stephenfin): Switch to 'from_parent' when pytest minimum is
-        # 5.4.0
-        return SphinxFile(parent=parent, fspath=path)
+        return SphinxFile.from_parent(parent=parent, fspath=path)
 
 
 collect_ignore = ['rst2pdf/tests/input/*.py']
