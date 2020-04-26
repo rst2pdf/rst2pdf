@@ -210,3 +210,4 @@ pdf_use_index = False
 pdf_use_modindex = False
 pdf_use_coverpage = False
 pdf_invariant = True
+pdf_real_footnotes = True

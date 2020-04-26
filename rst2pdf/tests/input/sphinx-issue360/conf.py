@@ -223,3 +223,4 @@ pdf_stylesheets = ['sphinx','a4','ja']
 pdf_font_path = ['../..']
 
 pdf_invariant = True
+pdf_real_footnotes = True

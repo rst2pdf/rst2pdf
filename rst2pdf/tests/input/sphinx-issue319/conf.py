@@ -194,3 +194,4 @@ latex_documents = [
 #latex_use_modindex = True
 
 pdf_invariant = True
+pdf_real_footnotes = True

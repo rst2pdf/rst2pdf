@@ -268,3 +268,4 @@ pdf_use_coverpage = True
 #pdf_default_dpi = 72
 
 pdf_invariant = True
+pdf_real_footnotes = True

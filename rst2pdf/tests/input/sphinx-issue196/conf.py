@@ -227,3 +227,4 @@ pdf_use_coverpage = False
 pdf_verbosity=0
 pdf_break_level = 1
 pdf_invariant = True
+pdf_real_footnotes = True

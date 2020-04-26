@@ -251,3 +251,4 @@ pdf_verbosity = 0
 # if you get "DelayedTable too big" errors
 #pdf_splittables = False
 pdf_invariant = True
+pdf_real_footnotes = True

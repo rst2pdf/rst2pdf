@@ -229,3 +229,4 @@ pdf_invariant = True
 
 # Repeat table header on tables that cross a page boundary?
 pdf_repeat_table_rows = True
+pdf_real_footnotes = True

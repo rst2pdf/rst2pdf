@@ -253,3 +253,4 @@ pdf_use_coverpage = False
 
 pdf_page_template = 'customPage'
 pdf_invariant = True
+pdf_real_footnotes = True

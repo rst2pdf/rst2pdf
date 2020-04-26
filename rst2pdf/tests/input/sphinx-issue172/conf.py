@@ -228,3 +228,4 @@ pdf_break_level = 1
 
 pdf_verbosity=0
 pdf_invariant = True
+pdf_real_footnotes = True

@@ -2,12 +2,14 @@
 {next}
 ------
 
+* Fixed: Sphinx config settings pdf_real_footnotes and pdf_use_toc are now boolean. Note
+  that value of pdf_real_footnotes is not False if not explicitly set. (Issue #846)
+* Changed: We have moved to pytest (Issue #850)
+
 0.96 (2020-01-05)
 -----------------
 
 * Fixed: Manual now builds again (Issue #834)
-* Changed: We have moved to pytest (Issue #850:wq)
-
 
 0.95 (2019-12-30)
 -----------------
