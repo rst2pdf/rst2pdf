@@ -1,6 +1,6 @@
 name: rst2pdf
 base: core18 
-version: '0.96'
+version: '0.97'
 summary: Use a text editor. Make a PDF.
 description: |
   Create PDF reports, slide decks and other documents from the command line using **rst2pdf**.

@@ -2,6 +2,9 @@
 {next}
 ------
 
+0.97 (2020-05-09)
+-----------------
+
 * Update Pillow dependency in requirements.txt. (Issue #858)
 * Fixed: The styles directory is now packaged with the release tarball. (Issue 857)
 * Fixed: Sphinx config settings pdf_real_footnotes and pdf_use_toc are now boolean. Note
