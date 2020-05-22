@@ -59,12 +59,25 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     It should install and be able to create PDF documents from rst files
 
+    Delete the build artifacts and dist files with:
+
+    ::
+
+        $ rm -rf build/ rst2pdf.egg-info/ dist/
+
 13. Once rc version is working, release to PyPI_ by generating official release and uploading
 
     ::
 
        $ python setup.py egg_info -b "" sdist bdist_wheel
        $ twine upload --repository pypi dist/*
+
+
+    Check that the release is correct on PyPI_ and then delete the build artifacts and dist files with:
+
+    ::
+
+        $ rm -rf build/ rst2pdf.egg-info/ dist/
 
 |
 |
