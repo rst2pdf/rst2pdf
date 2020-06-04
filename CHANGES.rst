@@ -2,6 +2,9 @@
 {next}
 ------
 
+* Use content-based comparison in tests. (Issue #854)
+
+
 0.97 (2020-05-09)
 -----------------
 

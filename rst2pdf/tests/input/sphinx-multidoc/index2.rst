@@ -1,6 +1,6 @@
+:orphan:
+
 Index 2
-
-
 
 .. glossary::
 
@@ -11,4 +11,3 @@ Index 2
         A term in 2nd place
 
 :term:`term3` and :term:`term2` link to the glossary
-

@@ -28,7 +28,7 @@ try:
 except ImportError:
     install_requires.append('simplejson')
 
-tests_require = ['pyPdf2']
+tests_require = ['pyPdf2', 'pymupdf']
 sphinx_require = ['sphinx']
 hyphenation_require = ['wordaxe>=1.0']
 svgsupport_require = ['svglib']

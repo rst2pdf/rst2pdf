@@ -7,142 +7,86 @@ See LICENSE.txt for licensing terms
 """
 
 import glob
-import hashlib
 import os
 import shlex
 import shutil
 import subprocess
 import tempfile
 
+import fitz
 from packaging import version
 import pytest
-import six
 
 
 ROOT_DIR = os.path.realpath(os.path.dirname(__file__))
 INPUT_DIR = os.path.join(ROOT_DIR, 'input')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'output')
-MD5_DIR = os.path.join(ROOT_DIR, 'md5')
+REFERENCE_DIR = os.path.join(ROOT_DIR, 'reference')
 
 
-class MD5Info(dict):
-    """Round-trip good, bad, unknown information to/from a .json file.
+def _get_metadata(pdf):
+    metadata = pdf.metadata
 
-    For formatting reasons, the json module isn't used for writing, and since
-    we're not worried about security, we don't bother using it for reading,
-    either.
-    """
+    del metadata['creationDate']
+    del metadata['modDate']
 
-    # Category to dump new data into
-    new_category = 'unknown'
-    # Categories which always should be in file
-    mandatory_categories = ['good', 'bad']
+    return metadata
 
-    # Sentinel to make manual changes and diffs easy
-    sentinel = 'sentinel'
-    # An empty list is one which is truly empty or which has a sentinel
-    empty = [[], ['sentinel']]
-    # Suffix for file items
-    suffix = '_md5'
 
-    def __init__(self):
-        self.__dict__ = self
-        self.changed = False
-        for name in self.mandatory_categories:
-            setattr(self, name + self.suffix, [self.sentinel])
+def _get_pages(pdf):
+    pages = []
 
-    def __str__(self):
-        """Return the string to output to the MD5 file."""
-        result = []
+    for page in pdf.pages():
+        pages.append(page.getText('blocks'))
 
-        for name, value in sorted(self.items()):
-            if not name.endswith(self.suffix):
-                continue
+    return pages
 
-            result.append('%s = [' % name)
-            result.append(
-                ',\n'.join(["        '%s'" % item for item in sorted(value)])
-            )
-            result.append(']\n')
 
-        result.append('')
-        return '\n'.join(result)
+def compare_pdfs(path_a, path_b):
+    pdf_a = fitz.open(path_a)
+    pdf_b = fitz.open(path_b)
 
-    def find(self, checksum, new_category=new_category):
-        """Find the given checksum.
+    # sanity check
 
-        find() has some serious side-effects. If the checksum is found, the
-        category it was found in is returned. If the checksum is not found,
-        then it is automagically added to the unknown category. In all cases,
-        the data is prepped to output to the file (if necessary), and
-        self.changed is set if the data is modified during this process.
-        Functional programming this isn't...
+    assert pdf_a.isPDF
+    assert pdf_b.isPDF
 
-        A quick word about the 'sentinel'. This value starts with an 's',
-        which happens to sort > highest hexadecimal digit of 'f', so it is
-        always a the end of the list.
+    # compare metadata
 
-        The only reason for the sentinel is to make the database either to work
-        with. Both to modify (by moving an MD5 line from one category to
-        another) and to diff. This is because every hexadecimal line (every
-        line except the sentinel) is guaranteed to end with a comma.
-        """
-        suffix = self.suffix
-        new_key = new_category + suffix
-        sentinel = set([self.sentinel])
+    assert _get_metadata(pdf_a) == _get_metadata(pdf_b)
 
-        # Create a dictionary of relevant current information
-        # in the database.
-        oldinfo = {k: v for k, v in self.items() if k.endswith(suffix)}
+    # compare content
 
-        # Create sets and strip the sentinels while
-        # working with the dictionary.
-        newinfo = {k: set(v) - sentinel for k, v in oldinfo.items()}
+    pages_a = _get_pages(pdf_a)
+    pages_b = _get_pages(pdf_b)
 
-        # Create an inverse mapping of MD5s to key names
-        inverse = {}
-        for key, values in newinfo.items():
-            for value in values:
-                inverse.setdefault(value, set()).add(key)
+    def fuzzy_coord_diff(coord_a, coord_b):
+        diff = abs(coord_a - coord_b)
+        assert diff / max(coord_a, coord_b) < 0.04  # allow an arbitrary diff
 
-        # In general, inverse should be a function (there
-        # should only be one answer to the question "What
-        # key name goes with this MD5?")   If not,
-        # either report an error, or just remove one of
-        # the possible answers if it is the same answer
-        # we give by default.
-        for value, keys in inverse.items():
-            if len(keys) > 1 and new_key in keys:
-                keys.remove(new_key)
-                newinfo[new_key].remove(value)
+    def fuzzy_string_diff(string_a, string_b):
+        words_a = string_a.split()
+        words_b = string_a.split()
+        assert words_a == words_b
 
-            if len(keys) > 1:
-                raise SystemExit(
-                    'MD5 %s is stored in multiple categories: %s' % (
-                        value, ', '.join(keys),
-                    )
-                )
-
-        # Find the result in the dictionary.  If it's not
-        # there we have to add it.
-        result, = inverse.get(checksum, [new_key])
-        if result == new_key:
-            newinfo.setdefault(result, set()).add(checksum)
-
-        # Create a canonical version of the dictionary,
-        # by adding sentinels and sorting the results.
-        for key, value in newinfo.items():
-            newinfo[key] = sorted(value | sentinel)
-
-        # See if we changed anything
-        if newinfo != oldinfo:
-            self.update(newinfo)
-            self.changed = True
-
-        # And return the key associated with the MD5
-        assert result.endswith(suffix), result
-
-        return result[:-len(suffix)]
+    assert len(pages_a) == len(pages_b)
+    for page_a, page_b in zip(pages_a, pages_b):
+        assert len(page_a) == len(page_b)
+        for block_a, block_b in zip(page_a, page_b):
+            # each block has the following format:
+            #
+            # (x0, y0, x1, y1, "lines in block", block_type, block_no)
+            #
+            # block_type and block_no should remain unchanged, but it's
+            # possible for the blocks to move around the document slightly and
+            # the text refold without breaking entirely
+            fuzzy_coord_diff(block_a[0], block_b[0])
+            fuzzy_coord_diff(block_a[1], block_b[1])
+            fuzzy_coord_diff(block_a[2], block_b[2])
+            fuzzy_coord_diff(block_a[3], block_b[3])
+            fuzzy_string_diff(block_a[4], block_b[4])
+            assert block_a[5] == block_b[5]
+            assert block_a[6] == block_b[6]
 
 
 class File(pytest.File):
@@ -178,6 +122,8 @@ class Item(pytest.Item):
         raise NotImplementedError
 
     def runtest(self):
+        __tracebackhide__ = True
+
         # if '.ignore' file present, skip test
 
         ignore_file = os.path.join(INPUT_DIR, self.name + '.ignore')
@@ -187,25 +133,6 @@ class Item(pytest.Item):
 
             pytest.skip(ignore_reason)
 
-        # load MD5 info
-
-        info = MD5Info()
-
-        md5_file = os.path.join(MD5_DIR, self.name + '.json')
-        if os.path.exists(md5_file):
-            with open(md5_file, 'rb') as fh:
-                six.exec_(fh.read(), info)
-
-        # if we have a PDF file output, we must have a MD5 checksum stored
-
-        no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
-
-        if info.good_md5 in ([], ['sentinel']) and not no_pdf:
-            pytest.fail(
-                'Test has no known good output (open issue)',
-                pytrace=False,
-            )
-
         # run the actual test
 
         retcode, output = self._build()
@@ -213,37 +140,47 @@ class Item(pytest.Item):
         # verify results
 
         if retcode:
-            pytest.fail(
-                'Call failed with %d:\n\n%s' % (retcode, output),
-                pytrace=False,
-            )
+            pytest.fail('Call failed with %d:\n\n%s' % (retcode, output))
 
+        no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         if no_pdf:
             return
 
         output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
+        reference_file = os.path.join(REFERENCE_DIR, self.name + '.pdf')
+
         if os.path.isdir(output_file):
-            output_files = list(glob.glob(os.path.join(output_file, '*.pdf')))
-        else:
-            output_files = [output_file]
-
-        hashes = []
-        for output_file in output_files:
-            with open(output_file, 'rb') as fh:
-                m = hashlib.md5()
-                m.update(fh.read())
-                hashes.append(m.hexdigest())
-
-        result_type = info.find(' '.join(hashes), '')
-
-        if result_type == 'bad':
-            pytest.fail('Generated a known bad checksum', pytrace=False)
-
-        if not result_type:
-            pytest.fail(
-                "Couldn't find a matching checksum for %s" % ' '.join(hashes),
-                pytrace=False,
+            assert os.path.isdir(reference_file), (
+                'Mismatch between type of output (dir) and reference (file)'
             )
+            output_files = glob.glob(os.path.join(output_file, '*.pdf'))
+            reference_files = glob.glob(os.path.join(reference_file, '*.pdf'))
+        else:
+            assert os.path.isfile(reference_file), (
+                'Mismatch between type of output (file) and reference (dir)'
+            )
+            output_files = [output_file]
+            reference_files = [reference_file]
+
+        assert len(reference_files) == len(output_files), (
+            'Mismatch between number of files expected and number generated'
+        )
+
+        reference_files.sort()
+        output_files.sort()
+
+        for ref_pdf, out_pdf in zip(reference_files, output_files):
+            try:
+                compare_pdfs(ref_pdf, out_pdf)
+            except AssertionError as exc:
+                raise CompareException(exc)
+
+    def repr_failure(self, excinfo):
+        """ called when self.runtest() raises an exception. """
+        if isinstance(excinfo.value, CompareException):
+            return excinfo.exconly()
+
+        return super(Item, self).repr_failure(excinfo)
 
     def reportinfo(self):
         return self.fspath, 0, self.name
@@ -301,6 +238,8 @@ class TxtItem(Item):
 class SphinxItem(Item):
 
     def _build(self):
+        __tracebackhide__ = True
+
         output_pdf = os.path.join(OUTPUT_DIR, self.name + '.pdf')
         output_log = os.path.join(OUTPUT_DIR, self.name + '.log')
 
@@ -313,6 +252,7 @@ class SphinxItem(Item):
 
         input_dir = os.path.join(INPUT_DIR, self.name)
         build_dir = tempfile.mkdtemp(prefix='rst2pdf-sphinx-')
+
         cmd = ['sphinx-build', '-b', 'pdf', input_dir, build_dir]
 
         try:
@@ -334,11 +274,15 @@ class SphinxItem(Item):
             else:
                 shutil.copytree(build_dir, output_pdf)
         else:
-            pytest.fail('Output PDF not generated', pytrace=False)
+            pytest.fail('Output PDF not generated')
 
         shutil.rmtree(build_dir)
 
         return retcode, output
+
+
+class CompareException(Exception):
+    """Custom exception for error reporting."""
 
 
 def pytest_collect_file(parent, path):

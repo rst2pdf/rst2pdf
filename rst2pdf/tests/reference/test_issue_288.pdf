@@ -52,7 +52,7 @@ endobj
 endobj
 8 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 13 0 R /XYZ 68.69291 528.9843 0 ] /Rect [ 216.2829 158.4236 233.1709 170.4236 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 13 0 R /XYZ 68.69291 528.9843 0 ] /Rect [ 216.2829 163.8236 233.1709 173.4236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 9 0 obj
@@ -160,7 +160,7 @@ endobj
 endobj
 26 0 obj
 <<
-/Length 5805
+/Length 5742
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -326,7 +326,7 @@ Q
 q
 1 0 0 1 62.69291 539.0236 cm
 q
-BT 1 0 0 1 0 38 Tm .560651 Tw 12 TL /F1 10 Tf 0 0 0 rg (Implement a virtual table structure for ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (. This structure will contain function pointers for all layer) Tj T* 0 Tw .36311 Tw (specific operations. This structure will be populated when the layer is opened or first time accessed. After) Tj T* 0 Tw 1.09186 Tw (that all back-end format specific layer operations will happen through this vtable which is cached in the) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( struct.) Tj T* ET
+BT 1 0 0 1 0 38 Tm .560651 Tw 12 TL /F1 10 Tf 0 0 0 rg (Implement a virtual table structure for ) Tj /F3 10 Tf (layerObj) Tj /F1 10 Tf (. This structure will contain function pointers for all layer) Tj T* 0 Tw .36311 Tw (specific operations. This structure will be populated when the layer is opened or first time accessed. After) Tj T* 0 Tw 1.09186 Tw (that all back-end format specific layer operations will happen through this vtable which is cached in the) Tj T* 0 Tw /F3 10 Tf (layerObj) Tj /F1 10 Tf ( struct.) Tj T* ET
 Q
 Q
 q
@@ -362,7 +362,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm .143876 Tw 12 TL /F1 10 Tf 0 0 0 rg (Add new field to the ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (. It will be pointer to the vtable, which will contain function pointers for) Tj T* 0 Tw (this layer.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .143876 Tw 12 TL /F1 10 Tf 0 0 0 rg (Add new field to the ) Tj /F3 10 Tf (layerObj) Tj /F1 10 Tf (. It will be pointer to the vtable, which will contain function pointers for) Tj T* 0 Tw (this layer.) Tj T* ET
 Q
 Q
 q
@@ -399,7 +399,7 @@ Q
 q
 1 0 0 1 23 300.1575 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.1. Standard functions which are found currently from ) Tj /F3 10 Tf 0 0 0 rg (maplayer.c) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.1. Standard functions which are found currently from ) Tj /F3 10 Tf (maplayer.c) Tj T* ET
 Q
 Q
 q
@@ -515,7 +515,7 @@ endstream
 endobj
 27 0 obj
 <<
-/Length 6186
+/Length 6150
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -586,7 +586,7 @@ Q
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 14 Tm 1.588443 Tw 12 TL /F1 10 Tf 0 0 0 rg (However, these are called from ) Tj /F3 10 Tf 0 0 0 rg (msLayerOpen) Tj /F1 10 Tf 0 0 0 rg ( with ) Tj /F3 10 Tf 0 0 0 rg (NULL) Tj /F1 10 Tf 0 0 0 rg ( args, so I think that proposed) Tj T* 0 Tw (interface for this virtual table function should be fine.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.588443 Tw 12 TL /F1 10 Tf 0 0 0 rg (However, these are called from ) Tj /F3 10 Tf (msLayerOpen) Tj /F1 10 Tf ( with ) Tj /F3 10 Tf (NULL) Tj /F1 10 Tf ( args, so I think that proposed) Tj T* 0 Tw (interface for this virtual table function should be fine.) Tj T* ET
 Q
 Q
 q
@@ -973,7 +973,7 @@ endstream
 endobj
 28 0 obj
 <<
-/Length 6213
+/Length 6060
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -995,7 +995,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 253.6 cm
 q
-BT 1 0 0 1 0 38 Tm .837126 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to actually close the connection, in case that layer implements some) Tj T* 0 Tw 2.04784 Tw (kind of connection pooling by its own. If layer doesn't use any connection pooling, this) Tj T* 0 Tw -0.090787 Tw (function should be implemented as no-op. Caller should first call layer's "close" function, and) Tj T* 0 Tw (finally at the very end ) Tj /F3 10 Tf 0 0 0 rg (CloseConnection) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 38 Tm .837126 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to actually close the connection, in case that layer implements some) Tj T* 0 Tw 2.04784 Tw (kind of connection pooling by its own. If layer doesn't use any connection pooling, this) Tj T* 0 Tw -0.090787 Tw (function should be implemented as no-op. Caller should first call layer's "close" function, and) Tj T* 0 Tw (finally at the very end ) Tj /F3 10 Tf (CloseConnection) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
@@ -1029,7 +1029,7 @@ Q
 q
 1 0 0 1 20 176.4 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (And the main place where this function will be called, is ) Tj /F3 10 Tf 0 0 0 rg (mapfile.c:) Tj ( ) Tj (4822) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (And the main place where this function will be called, is ) Tj /F3 10 Tf (mapfile.c:) Tj ( ) Tj (4822) Tj T* ET
 Q
 Q
 q
@@ -1056,7 +1056,7 @@ Q
 q
 1 0 0 1 20 105.2 cm
 q
-BT 1 0 0 1 0 14 Tm 1.30229 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is needed because e.g. ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( is implementing this usage pattern at the) Tj T* 0 Tw (moment ) Tj /F3 10 Tf 0 0 0 rg (maplayer.c:599) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.30229 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is needed because e.g. ) Tj /F3 10 Tf (POSTGIS) Tj /F1 10 Tf ( is implementing this usage pattern at the) Tj T* 0 Tw (moment ) Tj /F3 10 Tf (maplayer.c:599) Tj T* ET
 Q
 Q
 q
@@ -1104,7 +1104,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 254.4 cm
 q
-BT 1 0 0 1 0 14 Tm .787633 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to create a time filter for layer. At the moment we have three special) Tj T* 0 Tw (cases \() Tj /F3 10 Tf 0 0 0 rg (maplayer.c:) Tj ( ) Tj (1635) Tj /F1 10 Tf 0 0 0 rg (\):) Tj T* ET
+BT 1 0 0 1 0 14 Tm .787633 Tw 12 TL /F1 10 Tf 0 0 0 rg (This function is used to create a time filter for layer. At the moment we have three special) Tj T* 0 Tw (cases \() Tj /F3 10 Tf (maplayer.c:) Tj ( ) Tj (1635) Tj /F1 10 Tf (\):) Tj T* ET
 Q
 Q
 q
@@ -1127,7 +1127,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( with it's own function) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf ( with it's own function) Tj T* ET
 Q
 Q
 q
@@ -1215,7 +1215,7 @@ Q
 q
 1 0 0 1 20 75.2 cm
 q
-BT 1 0 0 1 0 14 Tm 2.389069 Tw 12 TL /F1 10 Tf 0 0 0 rg (And the actual layer's ) Tj /F3 10 Tf 0 0 0 rg (SetTimeFilter) Tj /F1 10 Tf 0 0 0 rg ( could use the above, or implement something) Tj T* 0 Tw (totally different as ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( is doing at the moment.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 2.389069 Tw 12 TL /F1 10 Tf 0 0 0 rg (And the actual layer's ) Tj /F3 10 Tf (SetTimeFilter) Tj /F1 10 Tf ( could use the above, or implement something) Tj T* 0 Tw (totally different as ) Tj /F3 10 Tf (POSTGIS) Tj /F1 10 Tf ( is doing at the moment.) Tj T* ET
 Q
 Q
 q
@@ -1276,7 +1276,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 48.15748 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.1. FLTApplyFilterToLayer \() Tj /F3 10 Tf 0 0 0 rg (mapogcfilter.c:) Tj ( ) Tj (1084) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.1. FLTApplyFilterToLayer \() Tj /F3 10 Tf (mapogcfilter.c:) Tj ( ) Tj (1084) Tj /F1 10 Tf (\)) Tj T* ET
 Q
 Q
 q
@@ -1290,7 +1290,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 14 Tm -0.05689 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is the main filter interface for layers. We will provide two helper functions, one for "SQL") Tj T* 0 Tw 5.126647 Tw (case and the another for "non-SQL" case, and set all layers, except ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg (,) Tj T* 0 Tw ET
+BT 1 0 0 1 0 14 Tm -0.05689 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is the main filter interface for layers. We will provide two helper functions, one for "SQL") Tj T* 0 Tw 5.126647 Tw (case and the another for "non-SQL" case, and set all layers, except ) Tj /F3 10 Tf (POSTGIS) Tj /F1 10 Tf (,) Tj T* 0 Tw ET
 Q
 Q
 q
@@ -1307,7 +1307,7 @@ endstream
 endobj
 29 0 obj
 <<
-/Length 6830
+/Length 6614
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1329,13 +1329,13 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 42 cm
 q
-BT 1 0 0 1 0 14 Tm 2.018314 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (OGR) Tj /F1 10 Tf 0 0 0 rg ( to call directly this "non-SQL" version of this helper function) Tj T* 0 Tw (\(else-branch of if\).) Tj T* ET
+BT 1 0 0 1 0 14 Tm 2.018314 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (OGR) Tj /F1 10 Tf ( to call directly this "non-SQL" version of this helper function) Tj T* 0 Tw (\(else-branch of if\).) Tj T* ET
 Q
 Q
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 26 Tm .13748 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (POSTGIS) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (OGR) Tj /F1 10 Tf 0 0 0 rg ( could use "SQL" version of the helper function \(actual) Tj T* 0 Tw .671318 Tw (if-branch\) if the conditions for this are met, otherwise they will use Non-SQL version of the) Tj T* 0 Tw (function.) Tj T* ET
+BT 1 0 0 1 0 26 Tm .13748 Tw 12 TL /F3 10 Tf 0 0 0 rg (ORACLESPATIAL) Tj /F1 10 Tf (, ) Tj /F3 10 Tf (POSTGIS) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (OGR) Tj /F1 10 Tf ( could use "SQL" version of the helper function \(actual) Tj T* 0 Tw .671318 Tw (if-branch\) if the conditions for this are met, otherwise they will use Non-SQL version of the) Tj T* 0 Tw (function.) Tj T* ET
 Q
 Q
 q
@@ -1361,7 +1361,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 77.2 cm
 q
-BT 1 0 0 1 0 14 Tm 1.229213 Tw 12 TL /F1 10 Tf 0 0 0 rg (There will be vtable function for allocation ) Tj /F3 10 Tf 0 0 0 rg (items) Tj /F1 10 Tf 0 0 0 rg ( and initialization for ) Tj /F3 10 Tf 0 0 0 rg (numitems) Tj /F1 10 Tf 0 0 0 rg (. If layer) Tj T* 0 Tw (has some special needs for these objects it can override default function.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.229213 Tw 12 TL /F1 10 Tf 0 0 0 rg (There will be vtable function for allocation ) Tj /F3 10 Tf (items) Tj /F1 10 Tf ( and initialization for ) Tj /F3 10 Tf (numitems) Tj /F1 10 Tf (. If layer) Tj T* 0 Tw (has some special needs for these objects it can override default function.) Tj T* ET
 Q
 Q
 q
@@ -1408,7 +1408,7 @@ Q
 q
 1 0 0 1 20 30 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.3. msCheckConnection \() Tj /F3 10 Tf 0 0 0 rg (mapfile.c:) Tj ( ) Tj (4779) Tj /F1 10 Tf 0 0 0 rg (\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (2.3.3. msCheckConnection \() Tj /F3 10 Tf (mapfile.c:) Tj ( ) Tj (4779) Tj /F1 10 Tf (\)) Tj T* ET
 Q
 Q
 q
@@ -1422,7 +1422,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 14 Tm .41284 Tw 12 TL /F1 10 Tf 0 0 0 rg (This API is deprecated. It is called only from ) Tj /F3 10 Tf 0 0 0 rg (msMYGISLayerOpen) Tj /F1 10 Tf 0 0 0 rg (. We will not provide this) Tj T* 0 Tw (functionality through vtable.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .41284 Tw 12 TL /F1 10 Tf 0 0 0 rg (This API is deprecated. It is called only from ) Tj /F3 10 Tf (msMYGISLayerOpen) Tj /F1 10 Tf (. We will not provide this) Tj T* 0 Tw (functionality through vtable.) Tj T* ET
 Q
 Q
 q
@@ -1533,7 +1533,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 125.2 cm
 q
-BT 1 0 0 1 0 14 Tm .777984 Tw 12 TL /F1 10 Tf 0 0 0 rg (To change the connection type of layer, it has to be done by function interface. Accessing) Tj T* 0 Tw (directly ) Tj /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( field is not supported anymore.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .777984 Tw 12 TL /F1 10 Tf 0 0 0 rg (To change the connection type of layer, it has to be done by function interface. Accessing) Tj T* 0 Tw (directly ) Tj /F3 10 Tf (connectiontype) Tj /F1 10 Tf ( field is not supported anymore.) Tj T* ET
 Q
 Q
 q
@@ -1567,7 +1567,7 @@ Q
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 26 Tm .087126 Tw 12 TL /F1 10 Tf 0 0 0 rg (where ) Tj /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( is the type of new layer, and ) Tj /F3 10 Tf 0 0 0 rg (library_str) Tj /F1 10 Tf 0 0 0 rg ( is the name of library) Tj T* 0 Tw 2.656905 Tw (which will prodive functionality for this new layer. For internal layer types this second) Tj T* 0 Tw (argument is ignored.) Tj T* ET
+BT 1 0 0 1 0 26 Tm .087126 Tw 12 TL /F1 10 Tf 0 0 0 rg (where ) Tj /F3 10 Tf (connectiontype) Tj /F1 10 Tf ( is the type of new layer, and ) Tj /F3 10 Tf (library_str) Tj /F1 10 Tf ( is the name of library) Tj T* 0 Tw 2.656905 Tw (which will prodive functionality for this new layer. For internal layer types this second) Tj T* 0 Tw (argument is ignored.) Tj T* ET
 Q
 Q
 q
@@ -1609,7 +1609,7 @@ Q
 q
 1 0 0 1 23 39 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Frank Warmerdam proposed ) Tj /F1 8 Tf 0 0 .501961 rg 5 Ts (FW1) Tj /F1 10 Tf 0 0 0 rg 0 Ts ( that we remove all layer specific interface functions from ) Tj /F3 10 Tf 0 0 0 rg (map.h) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Frank Warmerdam proposed ) Tj /F1 8 Tf 0 0 .501961 rg 5 Ts (FW1) Tj /F1 10 Tf 0 0 0 rg 0 Ts ( that we remove all layer specific interface functions from ) Tj /F3 10 Tf (map.h) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
@@ -1644,7 +1644,7 @@ endstream
 endobj
 30 0 obj
 <<
-/Length 8416
+/Length 8155
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1705,7 +1705,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( will contain new fields. There will be a new object ) Tj /F3 10 Tf 0 0 0 rg (vtableObj) Tj /F1 10 Tf 0 0 0 rg ( in the ) Tj /F3 10 Tf 0 0 0 rg (map.h) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf ( will contain new fields. There will be a new object ) Tj /F3 10 Tf (vtableObj) Tj /F1 10 Tf ( in the ) Tj /F3 10 Tf (map.h) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
@@ -1758,7 +1758,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm 1.511797 Tw 12 TL /F1 10 Tf 0 0 0 rg (Various changes, layer specific ) Tj /F3 10 Tf 0 0 0 rg (switch) Tj /F1 10 Tf 0 0 0 rg (-statements will go away, vtable handling and layers) Tj T* 0 Tw (vtable initialization will be added.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.511797 Tw 12 TL /F1 10 Tf 0 0 0 rg (Various changes, layer specific ) Tj /F3 10 Tf (switch) Tj /F1 10 Tf (-statements will go away, vtable handling and layers) Tj T* 0 Tw (vtable initialization will be added.) Tj T* ET
 Q
 Q
 q
@@ -1811,7 +1811,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Cleaning of ) Tj /F3 10 Tf 0 0 0 rg (msCheckConnection) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Cleaning of ) Tj /F3 10 Tf (msCheckConnection) Tj T* ET
 Q
 Q
 q
@@ -1834,7 +1834,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Vtable for ) Tj /F3 10 Tf 0 0 0 rg (msCloseConnection) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Vtable for ) Tj /F3 10 Tf (msCloseConnection) Tj T* ET
 Q
 Q
 q
@@ -1887,7 +1887,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Remove layer-logic from ) Tj /F3 10 Tf 0 0 0 rg (FLTApplyFilterToLayer) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Remove layer-logic from ) Tj /F3 10 Tf (FLTApplyFilterToLayer) Tj T* ET
 Q
 Q
 q
@@ -1916,7 +1916,7 @@ Q
 q
 1 0 0 1 23 63 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (mapXXX.c) Tj /F1 10 Tf 0 0 0 rg (, where ) Tj /F3 10 Tf 0 0 0 rg (XXX) Tj /F1 10 Tf 0 0 0 rg ( is the name of layer.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (mapXXX.c) Tj /F1 10 Tf (, where ) Tj /F3 10 Tf (XXX) Tj /F1 10 Tf ( is the name of layer.) Tj T* ET
 Q
 Q
 q
@@ -1987,7 +1987,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm 4.876342 Tw 12 TL /F1 10 Tf 0 0 0 rg (Fix existing interface functions, if needed / add wrappers for ) Tj /F3 10 Tf 0 0 0 rg (msOGRLayerOpen) Tj /F1 10 Tf 0 0 0 rg ( and) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (msWFSLayerOpen) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 4.876342 Tw 12 TL /F1 10 Tf 0 0 0 rg (Fix existing interface functions, if needed / add wrappers for ) Tj /F3 10 Tf (msOGRLayerOpen) Tj /F1 10 Tf ( and) Tj T* 0 Tw /F3 10 Tf (msWFSLayerOpen) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
@@ -2011,13 +2011,13 @@ Q
 q
 1 0 0 1 62.69291 405.0236 cm
 q
-BT 1 0 0 1 0 14 Tm 1.924983 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is binary and source code level backward incompatible change. The proposal will remove some) Tj T* 0 Tw (previously public functions, and add new field\(s\) to the ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg ( struct.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.924983 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is binary and source code level backward incompatible change. The proposal will remove some) Tj T* 0 Tw (previously public functions, and add new field\(s\) to the ) Tj /F3 10 Tf (layerObj) Tj /F1 10 Tf ( struct.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 375.0236 cm
 q
-BT 1 0 0 1 0 14 Tm 4.126905 Tw 12 TL /F1 10 Tf 0 0 0 rg (This proposal is not MapScript backward compatible, it will break scripts which change directly) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (connectiontype) Tj /F1 10 Tf 0 0 0 rg ( field in ) Tj /F3 10 Tf 0 0 0 rg (layerObj) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 4.126905 Tw 12 TL /F1 10 Tf 0 0 0 rg (This proposal is not MapScript backward compatible, it will break scripts which change directly) Tj T* 0 Tw /F3 10 Tf (connectiontype) Tj /F1 10 Tf ( field in ) Tj /F3 10 Tf (layerObj) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
@@ -2077,7 +2077,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm .923516 Tw 12 TL /F1 10 Tf 0 0 0 rg (I also like to note that this proposal won't remove all layer specific code from MapServer e.g. ) Tj /F3 10 Tf 0 0 0 rg (WMF) Tj /F1 10 Tf 0 0 0 rg (,) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (WMS) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (GRATICULE) Tj /F1 10 Tf 0 0 0 rg ( are used as special cases from place to place.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .923516 Tw 12 TL /F1 10 Tf 0 0 0 rg (I also like to note that this proposal won't remove all layer specific code from MapServer e.g. ) Tj /F3 10 Tf (WMF) Tj /F1 10 Tf (,) Tj T* 0 Tw /F3 10 Tf (WMS) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (GRATICULE) Tj /F1 10 Tf ( are used as special cases from place to place.) Tj T* ET
 Q
 Q
 q
@@ -2130,7 +2130,7 @@ endstream
 endobj
 31 0 obj
 <<
-/Length 3356
+/Length 3320
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2208,7 +2208,7 @@ Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm 2.883555 Tw 12 TL /F1 10 Tf 0 0 0 rg (expose it as a complete opaque type, vtable pointers will be set by accessing functions) Tj T* 0 Tw /F3 10 Tf 0 0 0 rg (setLayerOpenFP) Tj /F1 10 Tf 0 0 0 rg (, ) Tj /F3 10 Tf 0 0 0 rg (setLayerCloseFP) Tj /F1 10 Tf 0 0 0 rg ( and so on.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 2.883555 Tw 12 TL /F1 10 Tf 0 0 0 rg (expose it as a complete opaque type, vtable pointers will be set by accessing functions) Tj T* 0 Tw /F3 10 Tf (setLayerOpenFP) Tj /F1 10 Tf (, ) Tj /F3 10 Tf (setLayerCloseFP) Tj /F1 10 Tf ( and so on.) Tj T* ET
 Q
 Q
 q
@@ -2372,18 +2372,18 @@ xref
 0000003685 00000 n 
 0000003801 00000 n 
 0000003893 00000 n 
-0000009750 00000 n 
-0000015988 00000 n 
-0000022253 00000 n 
-0000029135 00000 n 
-0000037603 00000 n 
-0000041011 00000 n 
-0000041100 00000 n 
-0000041134 00000 n 
-0000041168 00000 n 
-0000041202 00000 n 
-0000041236 00000 n 
-0000041270 00000 n 
+0000009687 00000 n 
+0000015889 00000 n 
+0000022001 00000 n 
+0000028667 00000 n 
+0000036874 00000 n 
+0000040246 00000 n 
+0000040335 00000 n 
+0000040369 00000 n 
+0000040403 00000 n 
+0000040437 00000 n 
+0000040471 00000 n 
+0000040505 00000 n 
 trailer
 <<
 /ID 
@@ -2395,5 +2395,5 @@ trailer
 /Size 39
 >>
 startxref
-41304
+40539
 %%EOF
