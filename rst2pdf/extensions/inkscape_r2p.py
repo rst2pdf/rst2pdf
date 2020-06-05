@@ -13,8 +13,8 @@ the vectorpdf code to process the PDF.
 """
 
 import os
+import shutil
 import subprocess
-import sys
 import tempfile
 from weakref import WeakKeyDictionary
 
@@ -25,14 +25,6 @@ try:
     from vectorpdf_r2p import VectorPdf
 except Exception:
     from .vectorpdf_r2p import VectorPdf
-
-
-if sys.platform.startswith('win'):
-    # note: this is the default "all users" install location,
-    # we might want to provide an option for this
-    progname = os.path.expandvars(r'$PROGRAMFILES\Inkscape\inkscape.exe')
-else:
-    progname = 'inkscape'
 
 
 class InkscapeImage(VectorPdf):
@@ -58,10 +50,12 @@ class InkscapeImage(VectorPdf):
         cache = self.source_filecache.setdefault(client, {})
         pdffname = cache.get(filename)
         if pdffname is None:
+            progname = shutil.which('inkscape')
             tmpf, pdffname = tempfile.mkstemp(suffix='.pdf')
             os.close(tmpf)
             client.to_unlink.append(pdffname)
             cache[filename] = pdffname
+
             # which version of inkscape?
             cmd = [progname, '--version']
             exitcode, out, err = InkscapeImage.run_cmd(cmd)
@@ -76,6 +70,7 @@ class InkscapeImage(VectorPdf):
                     '--export-filename',
                     pdffname,
                 ]
+
             try:
                 result = subprocess.call(cmd)
                 if result != 0:
@@ -83,6 +78,7 @@ class InkscapeImage(VectorPdf):
             except OSError:
                 log.error("Failed to run command: %s", ' '.join(cmd))
                 raise
+
             self.load_xobj((client, pdffname))
 
         pdfuri = uri.replace(filename, pdffname)
@@ -102,10 +98,12 @@ class InkscapeImage(VectorPdf):
         cache = self.source_filecache.setdefault(client, {})
         pngfname = cache.get(filename_png)
         if pngfname is None:
+            progname = shutil.which('inkscape')
             tmpf, pngfname = tempfile.mkstemp(suffix='.png')
             os.close(tmpf)
             client.to_unlink.append(pngfname)
             cache[filename_png] = pngfname
+
             # which version of inkscape?
             cmd = [progname, '--version']
             exitcode, out, err = InkscapeImage.run_cmd(cmd)
@@ -129,6 +127,7 @@ class InkscapeImage(VectorPdf):
                     '-d',
                     str(client.def_dpi),
                 ]
+
             try:
                 subprocess.call(cmd)
                 return pngfname
