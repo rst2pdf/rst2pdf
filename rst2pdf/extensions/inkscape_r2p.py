@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-'''
+"""
 inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
 which uses the inkscape program to convert an svg to a PDF, then uses
 the vectorpdf code to process the PDF.
@@ -10,17 +10,21 @@ the vectorpdf code to process the PDF.
 
     The initial version is a proof of concept; uses subprocess in a naive way,
     and doesn't check return from inkscape for errors.
-'''
+"""
 
-import sys, os, tempfile, subprocess
+import os
+import subprocess
+import sys
+import tempfile
 from weakref import WeakKeyDictionary
-from rst2pdf.log import log
-try:
-    from  vectorpdf_r2p import VectorPdf
-except:
-    from  .vectorpdf_r2p import VectorPdf
-    
+
 import rst2pdf.image
+from rst2pdf.log import log
+
+try:
+    from vectorpdf_r2p import VectorPdf
+except Exception:
+    from .vectorpdf_r2p import VectorPdf
 
 
 if sys.platform.startswith('win'):
@@ -29,6 +33,7 @@ if sys.platform.startswith('win'):
     progname = os.path.expandvars(r'$PROGRAMFILES\Inkscape\inkscape.exe')
 else:
     progname = 'inkscape'
+
 
 class InkscapeImage(VectorPdf):
 
@@ -39,12 +44,16 @@ class InkscapeImage(VectorPdf):
 
     source_filecache = WeakKeyDictionary()
 
-    @classmethod
-    def available(self):
-        return True
-
-    def __init__(self, filename, width=None, height=None, kind='direct',
-                                 mask=None, lazy=True, srcinfo=None):
+    def __init__(
+        self,
+        filename,
+        width=None,
+        height=None,
+        kind='direct',
+        mask=None,
+        lazy=True,
+        srcinfo=None,
+    ):
         client, uri = srcinfo
         cache = self.source_filecache.setdefault(client, {})
         pdffname = cache.get(filename)
@@ -61,7 +70,11 @@ class InkscapeImage(VectorPdf):
                 cmd = [progname, os.path.abspath(filename), '-A', pdffname]
             else:
                 # Inkscape 1.x uses --export-file
-                cmd = [progname, os.path.abspath(filename), '--export-file=%s' % pdffname]
+                cmd = [
+                    progname,
+                    os.path.abspath(filename),
+                    '--export-file=%s' % pdffname,
+                ]
             try:
                 result = subprocess.call(cmd)
                 if result != 0:
@@ -73,46 +86,67 @@ class InkscapeImage(VectorPdf):
 
         pdfuri = uri.replace(filename, pdffname)
         pdfsrc = client, pdfuri
-        VectorPdf.__init__(self, pdfuri, width, height, kind, mask, lazy, pdfsrc)
+        VectorPdf.__init__(
+            self, pdfuri, width, height, kind, mask, lazy, pdfsrc
+        )
+
+    @classmethod
+    def available(self):
+        return True
 
     @classmethod
     def raster(self, filename, client):
-        """Returns a URI to a rasterized version of the image"""
+        """Returns a URI to a rasterized version of the image."""
+        filename_png = '_'.join([filename, 'raster'])
         cache = self.source_filecache.setdefault(client, {})
-        pngfname = cache.get(filename+'_raster')
+        pngfname = cache.get(filename_png)
         if pngfname is None:
             tmpf, pngfname = tempfile.mkstemp(suffix='.png')
             os.close(tmpf)
             client.to_unlink.append(pngfname)
-            cache[filename+'_raster'] = pngfname
+            cache[filename_png] = pngfname
             # which version of inkscape?
             cmd = [progname, '--version']
             exitcode, out, err = InkscapeImage.run_cmd(cmd)
             if out.startswith('Inkscape 0.'):
                 # Inkscape 0.x uses -A
-                cmd = [progname, os.path.abspath(filename), '-e', pngfname, '-d', str(client.def_dpi)]
+                cmd = [
+                    progname,
+                    os.path.abspath(filename),
+                    '-e',
+                    pngfname,
+                    '-d',
+                    str(client.def_dpi),
+                ]
             else:
                 # Inkscape 1.x uses --export-file
-                cmd = [progname, os.path.abspath(filename), '--export-file=%s' % pngfname, '-d', str(client.def_dpi)]
+                cmd = [
+                    progname,
+                    os.path.abspath(filename),
+                    '--export-file=%s' % pngfname,
+                    '-d',
+                    str(client.def_dpi),
+                ]
             try:
                 subprocess.call(cmd)
                 return pngfname
             except OSError:
                 log.error("Failed to run command: %s", ' '.join(cmd))
                 raise
+
         return None
 
     @staticmethod
     def run_cmd(cmd):
-        """
-        Execute a command and return exitcode, stdout and stderr.
-        """
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        """Execute a command and return exitcode, stdout and stderr."""
+        proc = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         out, err = proc.communicate()
         exitcode = proc.returncode
         return exitcode, out.decode(), err.decode()
 
+
 def install(createpdf, options):
-    ''' Monkey-patch our class in to image as a replacement class for SVGImage.
-    '''
+    """Monkey-patch our class as a replacement class for SVGImage."""
     rst2pdf.image.SVGImage = InkscapeImage
