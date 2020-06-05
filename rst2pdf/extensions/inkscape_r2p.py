@@ -69,11 +69,12 @@ class InkscapeImage(VectorPdf):
                 # Inkscape 0.x uses -A
                 cmd = [progname, os.path.abspath(filename), '-A', pdffname]
             else:
-                # Inkscape 1.x uses --export-file
+                # Inkscape 1.x uses --export-filename
                 cmd = [
                     progname,
                     os.path.abspath(filename),
-                    '--export-file=%s' % pdffname,
+                    '--export-filename',
+                    pdffname,
                 ]
             try:
                 result = subprocess.call(cmd)
@@ -119,11 +120,12 @@ class InkscapeImage(VectorPdf):
                     str(client.def_dpi),
                 ]
             else:
-                # Inkscape 1.x uses --export-file
+                # Inkscape 1.x uses --export-filename
                 cmd = [
                     progname,
                     os.path.abspath(filename),
-                    '--export-file=%s' % pngfname,
+                    '--export-filename',
+                    pngfname,
                     '-d',
                     str(client.def_dpi),
                 ]
