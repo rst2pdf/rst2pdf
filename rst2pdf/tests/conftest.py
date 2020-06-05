@@ -140,7 +140,10 @@ class Item(pytest.Item):
         # verify results
 
         if retcode:
-            pytest.fail('Call failed with %d:\n\n%s' % (retcode, output))
+            pytest.fail(
+                'Call failed with %d:\n\n%s' % (retcode, output),
+                pytrace=False,
+            )
 
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         if no_pdf:
@@ -150,21 +153,29 @@ class Item(pytest.Item):
         reference_file = os.path.join(REFERENCE_DIR, self.name + '.pdf')
 
         if os.path.isdir(output_file):
-            assert os.path.isdir(reference_file), (
-                'Mismatch between type of output (dir) and reference (file)'
-            )
+            if not os.path.isdir(reference_file):
+                pytest.fail(
+                    'Mismatch between type of output (dir) and reference '
+                    '(file)',
+                    pytrace=False,
+                )
             output_files = glob.glob(os.path.join(output_file, '*.pdf'))
             reference_files = glob.glob(os.path.join(reference_file, '*.pdf'))
         else:
-            assert os.path.isfile(reference_file), (
-                'Mismatch between type of output (file) and reference (dir)'
-            )
+            if not os.path.isfile(reference_file):
+                pytest.fail(
+                    'Mismatch between type of output (file) and reference '
+                    '(dir)',
+                    pytrace=False,
+                )
             output_files = [output_file]
             reference_files = [reference_file]
 
-        assert len(reference_files) == len(output_files), (
-            'Mismatch between number of files expected and number generated'
-        )
+        if len(reference_files) != len(output_files):
+            pytest.fail(
+                'Mismatch between number of files expected and generated',
+                pytrace=False,
+            )
 
         reference_files.sort()
         output_files.sort()
@@ -176,7 +187,7 @@ class Item(pytest.Item):
                 raise CompareException(exc)
 
     def repr_failure(self, excinfo):
-        """ called when self.runtest() raises an exception. """
+        """Called when self.runtest() raises an exception."""
         if isinstance(excinfo.value, CompareException):
             return excinfo.exconly()
 
@@ -227,9 +238,23 @@ class TxtItem(Item):
 
         output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
-        if not os.path.exists(output_file):
-            assert no_pdf, 'File %s not generated' % os.path.basename(
-                output_file
+        if not os.path.exists(output_file) and not no_pdf:
+            pytest.fail(
+                'File %r was not generated. Refer to the logs at %r for more '
+                'information.' % (
+                    os.path.relpath(output_file, ROOT_DIR),
+                    os.path.relpath(output_log, ROOT_DIR),
+                ),
+                pytrace=False,
+            )
+        elif os.path.exists(output_file) and no_pdf:
+            pytest.fail(
+                'File %r was erroneously generated. Refer to the logs at %r '
+                'for more information.' % (
+                    os.path.relpath(output_file, ROOT_DIR),
+                    os.path.relpath(output_log, ROOT_DIR),
+                ),
+                pytrace=False,
             )
 
         return retcode, output
@@ -274,7 +299,7 @@ class SphinxItem(Item):
             else:
                 shutil.copytree(build_dir, output_pdf)
         else:
-            pytest.fail('Output PDF not generated')
+            pytest.fail('Output PDF not generated', pytrace=False)
 
         shutil.rmtree(build_dir)
 
