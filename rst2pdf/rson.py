@@ -58,10 +58,6 @@ import sys
 
 import six
 
-if six.PY3:
-    unicode = str
-    basestring = str
-
 
 class RSONDecodeError(ValueError):
     pass
@@ -748,7 +744,7 @@ class RsonParser(object):
                         error('Unexpected trailing comma', token)
                     break
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
-                if disallow_nonstring_keys and not isinstance(key, basestring):
+                if disallow_nonstring_keys and not isinstance(key, str):
                     error('Non-string key %s not supported' % repr(key), token)
                 token = next()
                 t0 = token[1]
@@ -889,7 +885,7 @@ class RsonParser(object):
                 error("rson client's object handlers do not support chained objects", token)
             if disallow_nonstring_keys:
                 for key in entry[:-1]:
-                    if not isinstance(key, basestring):
+                    if not isinstance(key, str):
                         error('Non-string key %s not supported' % repr(key), token)
             mydict.append(entry)
             return token

@@ -97,8 +97,6 @@ from rst2pdf.opt_imports import Paragraph, BaseHyphenator, PyHyphenHyphenator, \
 # Template engine for covers
 import jinja2
 
-if six.PY3:
-    unicode = str
 
 numberingstyles={ 'arabic': 'ARABIC',
                   'roman': 'ROMAN_UPPER',
@@ -615,8 +613,7 @@ class RstToPdf(object):
         FP = FancyPage("fancypage", head, foot, self)
 
         def cleantags(s):
-            re.sub(r'<[^>]*?>', '',
-                unicode(s).strip())
+            re.sub(r'<[^>]*?>', '', str(s).strip())
 
         pdfdoc = FancyDocTemplate(
             output,
