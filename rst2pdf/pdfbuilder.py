@@ -80,7 +80,7 @@ class PDFBuilder(Builder):
     def init(self):
         self.docnames = []
         self.document_data = []
-        self.spinx_logger = sphinx.util.logging.getLogger(__name__)
+        self.sphinx_logger = sphinx.util.logging.getLogger(__name__)
 
     def write(self, *ignored):
 
@@ -99,7 +99,7 @@ class PDFBuilder(Builder):
                     opts=entry[4]
                 else:
                     opts={}
-                self.spinx_logger.info("processing " + targetname + "... ")
+                self.sphinx_logger.info("processing " + targetname + "... ")
                 self.opts = opts
                 class dummy:
                     extensions=self.config.pdf_extensions
@@ -141,13 +141,13 @@ class PDFBuilder(Builder):
                     appendices=opts.get('pdf_appendices', self.config.pdf_appendices) or [])
                 doctree.settings.author=author
                 doctree.settings.title=title
-                self.spinx_logger.info("done")
-                self.spinx_logger.info("writing " + targetname + "... ")
+                self.sphinx_logger.info("done")
+                self.sphinx_logger.info("writing " + targetname + "... ")
                 docwriter.write(doctree, destination)
-                self.spinx_logger.info("done")
+                self.sphinx_logger.info("done")
             except Exception:
                 log.exception('Failed to build doc')
-                self.spinx_logger.info(red("FAILED"))
+                self.sphinx_logger.info(red("FAILED"))
 
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
@@ -174,7 +174,7 @@ class PDFBuilder(Builder):
         # check how the LaTeX builder does it.
 
         self.docnames = set([docname])
-        self.spinx_logger.info(darkgreen(docname) + " ")
+        self.sphinx_logger.info(darkgreen(docname) + " ")
         def process_tree(docname, tree):
             tree = tree.deepcopy()
             for toctreenode in tree.traverse(addnodes.toctree):
@@ -182,7 +182,7 @@ class PDFBuilder(Builder):
                 includefiles = map(str, toctreenode['includefiles'])
                 for includefile in includefiles:
                     try:
-                        self.spinx_logger.info(darkgreen(includefile) + " ")
+                        self.sphinx_logger.info(darkgreen(includefile) + " ")
                         subtree = process_tree(includefile,
                         self.env.get_doctree(includefile))
                         self.docnames.add(includefile)
@@ -265,7 +265,7 @@ class PDFBuilder(Builder):
             )
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
-            self.spinx_logger.info(' ' + indexname)
+            self.sphinx_logger.info(' ' + indexname)
             print
 
             output=['DUMMY','=====','',
@@ -298,16 +298,16 @@ class PDFBuilder(Builder):
 
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
-            self.spinx_logger.info('')
-            self.spinx_logger.info('adding appendixes...')
+            self.sphinx_logger.info('')
+            self.sphinx_logger.info('adding appendixes...')
             for docname in appendices:
-                self.spinx_logger.info(darkgreen(docname) + " ")
+                self.sphinx_logger.info(darkgreen(docname) + " ")
                 appendix = self.env.get_doctree(docname)
                 appendix['docname'] = docname
                 tree.append(appendix)
-            self.spinx_logger.info('done')
+            self.sphinx_logger.info('done')
 
-        # Replace Sphinx's HighlightLanguageTransform with our own for Spinx version between 1.8.0 & less than 2.0.0 as
+        # Replace Sphinx's HighlightLanguageTransform with our own for sphinx version between 1.8.0 & less than 2.0.0 as
         # Sphinx's HighlightLanguageTransform breaks linenothreshold setting in the highlight directive (See issue #721)
         # This code can be removed when we drop support for Python 2
         if sphinx.__version__ > '1.7.9' and sphinx.__version__ < '2.0.0':
@@ -316,7 +316,7 @@ class PDFBuilder(Builder):
                     self.env.app.registry.post_transforms[i] = HighlightLanguageTransform
                     break
 
-        self.spinx_logger.info("resolving references...")
+        self.sphinx_logger.info("resolving references...")
         self.env.resolve_references(tree, docname, self)
 
         for pendingnode in tree.traverse(addnodes.pending_xref):
