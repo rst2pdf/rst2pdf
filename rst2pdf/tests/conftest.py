@@ -152,6 +152,14 @@ class Item(pytest.Item):
         output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
         reference_file = os.path.join(REFERENCE_DIR, self.name + '.pdf')
 
+        if not os.path.exists(reference_file):
+            pytest.fail(
+                'No reference file at %r to compare against' % (
+                    os.path.relpath(output_file, ROOT_DIR),
+                ),
+                pytrace=False,
+            )
+
         if os.path.isdir(output_file):
             if not os.path.isdir(reference_file):
                 pytest.fail(
