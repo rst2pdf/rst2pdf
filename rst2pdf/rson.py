@@ -140,7 +140,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=unicode, isinstance=isinstance):
+    def factory(cls):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -259,6 +259,7 @@ def make_hashable(what):
             return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
+
 class BaseObjects(object):
 
     # These hooks allow compatibility with simplejson
@@ -314,7 +315,7 @@ class BaseObjects(object):
         def get_result(self, token):
             return self
 
-    def object_type_factory(self, dict=dict, tuple=tuple):
+    def object_type_factory(self):
         ''' This function returns constructors for RSON objects and arrays.
             It handles simplejson compatible hooks as well.
         '''
@@ -329,9 +330,11 @@ class BaseObjects(object):
             self.disallow_nonstring_keys = True
         elif object_hook is not None:
             mydict = dict
+
             class build_object(list):
                 def get_result(self, token):
                     return object_hook(mydict(self))
+
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         else:
@@ -347,7 +350,7 @@ class Dispatcher(object):
     '''
 
     @classmethod
-    def dispatcher_factory(cls, hasattr=hasattr, tuple=tuple, sorted=sorted):
+    def dispatcher_factory(cls):
 
         self = cls()
         parser_factory = self.parser_factory
@@ -407,7 +410,7 @@ class QuotedToken(object):
                          r'\r': u'\r',
                          r'\t': u'\t'}.get
 
-    def quoted_parse_factory(self, int=int, iter=iter, len=len):
+    def quoted_parse_factory(self):
         quoted_splitter = self.quoted_splitter
         quoted_mapper = self.quoted_mapper
         parse_quoted_str = self.parse_quoted_str
@@ -529,7 +532,7 @@ class UnquotedToken(object):
             lambda token: token[2].decode('utf-8'))
     else:
         parse_unquoted_str = staticmethod(
-            lambda token, unicode=str: str(token[2]))
+            lambda token: str(token[2]))
 
     special_strings = dict(true=True, false=False, null=None)
 
@@ -677,7 +680,7 @@ class RsonParser(object):
     def client_info(self, parse_locals):
         pass
 
-    def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
+    def parser_factory(self):
 
         Tokenizer = self.Tokenizer
         tokenizer = Tokenizer.factory()
