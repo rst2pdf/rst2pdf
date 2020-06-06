@@ -21,8 +21,6 @@ Additional documentation available at:
 http://code.google.com/p/rson/
 '''
 
-from __future__ import unicode_literals
-
 __version__ = '0.08'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'

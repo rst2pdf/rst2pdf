@@ -7,8 +7,6 @@ Scan a list of folders and find all .afm files,
 then create rst2pdf-ready font-aliases.
 """
 
-from __future__ import unicode_literals
-
 import os
 import subprocess
 import sys
