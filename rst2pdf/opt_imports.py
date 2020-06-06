@@ -10,8 +10,6 @@ opt_imports.py contains logic for handling optional imports.
 import os
 import sys
 
-import six
-
 from .log import log
 
 PyHyphenHyphenator = None

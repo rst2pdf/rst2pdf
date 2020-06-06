@@ -10,12 +10,7 @@ import os
 import docutils.nodes
 from xml.sax.saxutils import escape
 
-import six
-
-if six.PY3:
-    from urllib.parse import urljoin, urlparse
-else:
-    from urlparse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse
 
 from reportlab.lib.units import cm
 from .opt_imports import Paragraph

@@ -19,8 +19,6 @@ from reportlab.pdfbase import pdfmetrics
 import reportlab.lib.pagesizes as pagesizes
 import reportlab.rl_config
 
-import six
-
 from rst2pdf.rson import loads as rson_loads
 
 from . import findfonts
@@ -44,10 +42,7 @@ class StyleSheet(object):
         '''
         styles = data.get('styles', {})
         try:
-            if six.PY2:
-                stylenames = styles.keys()
-            if six.PY3:
-                stylenames = list(styles.keys())
+            stylenames = list(styles.keys())
         except AttributeError:
             for style in styles:
                 yield style
@@ -228,7 +223,7 @@ class StyleSheet(object):
             for font in embedded:
                 try:
                     # Just a font name, try to embed it
-                    if isinstance(font, six.string_types):
+                    if isinstance(font, str):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(font)
                         if font in embedded_fontnames:

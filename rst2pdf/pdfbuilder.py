@@ -13,16 +13,7 @@
     :license: BSD, see LICENSE for details.
 """
 
-import six
 import logging
-if six.PY2:
-    try:
-        import parser
-    except ImportError:
-        # parser is not available on Jython
-        parser = None
-else:
-    parser = None
 import re
 import sys
 import os
@@ -35,10 +26,7 @@ from xml.sax.saxutils import unescape, escape
 from traceback import print_exc
 
 from io import BytesIO
-if six.PY2:
-    from urlparse import urljoin, urlparse, urlunparse
-else:
-    from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 from pygments.lexers import get_lexer_by_name, guess_lexer
 
@@ -867,14 +855,7 @@ def try_parse(src):
         # just replace all non-ASCII characters.
         src = src.encode('ascii', 'replace')
 
-    if parser is None:
-        return True
-    try:
-        parser.suite(src)
-    except (SyntaxError, UnicodeEncodeError):
-        return False
-    else:
-        return True
+    return True
 
 
 def setup(app):

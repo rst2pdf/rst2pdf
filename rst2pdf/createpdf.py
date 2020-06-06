@@ -36,7 +36,6 @@
 
 __docformat__ = 'reStructuredText'
 from importlib import import_module
-import six
 
 import sys
 import os
@@ -45,12 +44,8 @@ import re
 import string
 import logging
 
-if six.PY2:
-    from cStringIO import StringIO
-    from urlparse import urljoin, urlparse, urlunparse
-else:
-    from io import StringIO
-    from urllib.parse import urljoin, urlparse, urlunparse
+from io import StringIO
+from urllib.parse import urljoin, urlparse, urlunparse
 from os.path import abspath, dirname, expanduser, join
 from copy import copy, deepcopy
 from optparse import OptionParser
@@ -1352,7 +1347,7 @@ def main(_args=None):
 
     if options.version:
         from rst2pdf import version
-        six.print_(version)
+        print(version)
         sys.exit(0)
 
     if options.quiet:
@@ -1370,7 +1365,8 @@ def main(_args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        six.print_(open(join(PATH, 'styles', 'styles.style')).read())
+        with open(join(PATH, 'styles', 'styles.style')) as fh:
+            print(fh.read())
         sys.exit(0)
 
     filename = False
@@ -1519,9 +1515,6 @@ def patch_PDFDate():
         __PDFObject__ = True
         # gmt offset now suppported
         def __init__(self, invariant=True, ts=None, dateFormatter=None):
-            #if six.PY2:
-            #    now = (2000,01,01,00,00,00,0)
-            #else:
             now = (2000,0o1,0o1,00,00,00,0)
             self.date = now[:6]
             self.dateFormatter = dateFormatter

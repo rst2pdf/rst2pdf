@@ -14,7 +14,6 @@ import subprocess
 import sys
 from fnmatch import fnmatch
 
-import six
 from reportlab.lib.fonts import addMapping
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import (
@@ -177,8 +176,6 @@ def findFont(fname):
 def findTTFont(fname):
     def get_family(query):
         data = make_string(subprocess.check_output(["fc-match", query]))
-        if six.PY2:
-            data = data.decode("UTF-8")
         for line in data.splitlines():
             line = line.strip()
             if not line:
@@ -223,10 +220,7 @@ def findTTFont(fname):
         # ctypes with EnumFontFamiliesEx
 
         def get_nt_fname(ftname):
-            if six.PY3:
-                import winreg as _w
-            else:
-                import _winreg as _w            
+            import winreg as _w
 
             fontkey = _w.OpenKey(
                 _w.HKEY_LOCAL_MACHINE,

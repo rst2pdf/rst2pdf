@@ -31,7 +31,6 @@ python-dateutil==2.8.1    # via matplotlib
 pytz==2019.3              # via babel
 reportlab==3.5.34
 requests==2.22.0          # via sphinx
-six==1.14.0
 smartypants==2.0.1
 snowballstemmer==2.0.0    # via sphinx
 sphinx==1.8.5

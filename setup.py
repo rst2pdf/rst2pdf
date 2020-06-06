@@ -34,7 +34,6 @@ setup(
         'pygments',
         'reportlab',
         'setuptools',
-        'six',
         'smartypants',
     ],
     extras_require={
