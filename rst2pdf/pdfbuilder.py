@@ -145,8 +145,8 @@ class PDFBuilder(Builder):
                 self.spinx_logger.info("writing " + targetname + "... ")
                 docwriter.write(doctree, destination)
                 self.spinx_logger.info("done")
-            except Exception as e:
-                log.exception(e)
+            except Exception:
+                log.exception('Failed to build doc')
                 self.spinx_logger.info(red("FAILED"))
 
     def init_document_data(self):
@@ -298,7 +298,7 @@ class PDFBuilder(Builder):
 
         if appendices:
             tree.append(nodes.raw(text='OddPageBreak %s'%self.page_template, format='pdf'))
-            self.spinx_logger.info()
+            self.spinx_logger.info('')
             self.spinx_logger.info('adding appendixes...')
             for docname in appendices:
                 self.spinx_logger.info(darkgreen(docname) + " ")
