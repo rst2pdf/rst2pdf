@@ -1,1 +1,0 @@
-Returns different results in Python 2 and Python 3 due to Reportlab internals.
