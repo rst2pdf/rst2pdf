@@ -22,33 +22,48 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
 
   + Put it inside ``rst2pdf/tests/input`` like the others:
 
-    - ``mytest.txt`` is the test itself
+    For tests that don't involve Sphinx (e.g. reproducible with `rst2pdf`):
 
-    - ``mytest.cli`` is any needed command line arguments (if needed)
+    - ``test_issue_NNN.txt`` is the test itself
 
-    - ``mytest.style`` is a custom stylesheet (if needed)
+    - ``test_issue_NNN.cli`` is any needed command line arguments (if needed)
 
-  + Run the test suite on it::
+    - ``test_issue_NNN.style`` is a custom stylesheet (if needed)
 
-      pytest rst2pdf/tests/input/mytest.txt
+    (where ``NNN`` is the number of the issue created earlier)
 
-  + Check the output::
+    For tests that affect the Sphinx integration only, create a new Sphinx
+    "project" in the ``rst2pdf/tests/input`` directory using the
+    ``sphinx-quickstart`` tool. Name the directory ``sphinx-issueNNN``, where
+    ``NNN``` is once again the number of the issue created earlier. Use a
+    combined source and build directory and use dummy project and author names.
+    Don't include ``Makefile`` or ``make.bat`` file since they won't be used.
+    For example::
 
-      less rst2pdf/tests/output/mytest.log
-      acroread rst2pdf/tests/output/mytest.pdf
+      sphinx-quickstart rst2pdf/tests/input/sphinx-issue123 \
+        --project foo --author 'Joe Bloggs' -v 1.0.0 --language en \
+        --no-makefile --no-batchfile
 
-  + If it's really a bug, mark the test as *bad* and save everything in git::
+    Once complete, remove all unnecessary configuration from the generated
+    ``conf.py`` file to allow us focus on the issue.
 
-      echo <<< EOF > rst2pdf/tests/md5/mytest.json
-      bad_md5 = [
-              # bad checksum here
-      ]
-      EOF
-      git checkout -b issue-X
-      git add rst2pdf/tests/input/mytest.*
-      git add rst2pdf/tests/md5/mytest.json
-      git commit -m "Test case for Issue X"
-      git push -u origin issue-X # then open a Pull Request
+  + Fix the bug
+
+    During this process, you can run the individual test case to quickly
+    iterate. For example::
+
+      pytest rst2pdf/tests/input/test_issue_NNN.txt
+
+    You may also wish to check the logs and output::
+
+      less rst2pdf/tests/output/test_issue_NNN.log
+      xdg-open rst2pdf/tests/output/test_issue_NNN.pdf  # or 'open' on MacOS
+
+  + Once resolved, copy the generated output PDF, if any, to
+    ``rst2pdf/tests/reference`` and commit this along with the files in
+    ``rst2pdf/tests/input``.
+
+  + Submit a pull request.
 
 * Always, when committing something, check for regressions running the full
   test suite, it takes only a minute or two. Keep in mind that regressions can
@@ -88,10 +103,19 @@ more information on the current status
 Running tests
 ~~~~~~~~~~~~~
 
-The rst2pdf test suite generates PDFs, then calculates a checksum (an md5) of
-the resulting file and checks it against known lists of good and bad md5s.
-These known outcomes are in ``rst2pdf/tests/md5/[test_name].json`` (warning,
-not actually a JSON file).
+The *rst2pdf* test suite generates PDFs - stored in ``rst2pdf/tests/output`` -
+which are then compared against reference PDFs - stored in
+``rst2pdf/tests/reference`` - using the `PyMuPDF`__ Python bindings for the
+`MuPDF`__ library. *rst2pdf* depends on a number of different tools and
+libraries, such as `ReportLab`__ and `Inkscape`__, and the output of these can
+vary slightly between releases. The *PyMuPDF* library allows us to compare the
+structure of the PDFs, with a minor amount of fuzzing to allow for minor
+differences caused by these changes in underlying dependencies.
+
+.. __: https://pymupdf.readthedocs.io/en/latest/
+.. __: https://mupdf.com/
+.. __: https://www.reportlab.com/
+.. __: https://inkscape.org/
 
 First run
 *********
