@@ -2,8 +2,8 @@
 {next}
 ------
 
-* Use content-based comparison in tests. (Issue #854)
-
+* Changed: Use content-based comparison in tests. (Issue #854)
+* Changed: Inkscape 1.0 final supported properly and use path on Windows. (Issue #870)
 
 0.97 (2020-05-09)
 -----------------
