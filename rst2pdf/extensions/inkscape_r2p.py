@@ -6,6 +6,9 @@ inkscape.py is an rst2pdf extension (e.g. rst2pdf -e inkscape xxx xxxx)
 which uses the inkscape program to convert an svg to a PDF, then uses
 the vectorpdf code to process the PDF.
 
+In order for this exention to work, you must ensure that inkscape is
+on your PATH.
+
 .. NOTE::
 
     The initial version is a proof of concept; uses subprocess in a naive way,
