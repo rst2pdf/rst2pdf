@@ -1871,8 +1871,8 @@ Inkscape (``-e inkscape``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. include:: ../rst2pdf/extensions/inkscape_r2p.py
-   :start-after:  '''
-   :end-before: '''
+   :start-after: """
+   :end-before: """
 
 Dotted_TOC (``-e dotted_toc``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

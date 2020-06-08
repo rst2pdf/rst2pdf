@@ -1,3 +1,4 @@
+---
 filter_secrets: false
 os: linux
 dist: xenial
@@ -5,20 +6,20 @@ dist: xenial
 addons:
   apt:
     packages:
-    - inkscape
-    - texlive-latex-base
-    - dvipng
-    - plantuml
+      - inkscape
+      - texlive-latex-base
+      - dvipng
+      - plantuml
 
 language: python
 python:
- - 3.6
- - 3.7
+  - 3.6
+  - 3.7
 
 before_install:
- - pip install --upgrade setuptools
- - pip install pytest
- - pip install -c requirements.txt -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+  - pip install --upgrade setuptools
+  - pip install pytest
+  - pip install -c requirements.txt -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 
 script:
- - pytest
+  - pytest
