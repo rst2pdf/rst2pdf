@@ -7,8 +7,10 @@ from docutils.parsers import rst
 from docutils.nodes import Admonition, Element
 from docutils.parsers.rst import directives
 
+
 class OddEvenNode(Admonition, Element):
     pass
+
 
 class OddEven(rst.Directive):
     """A custom directive that allows alternative contents to be generated
@@ -30,4 +32,3 @@ class OddEven(rst.Directive):
 
 
 directives.register_directive("oddeven", OddEven)
-

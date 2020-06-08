@@ -86,7 +86,7 @@ class StyleSheet(object):
         # be loaded first
         flist = [
             join(self.PATH, 'styles', 'styles.style'),
-            join(self.PATH, 'styles', 'default.style')
+            join(self.PATH, 'styles', 'default.style'),
         ] + flist
 
         self.def_dpi = def_dpi
@@ -98,13 +98,23 @@ class StyleSheet(object):
         if style_path is None:
             style_path = []
         style_path += [
-            '.', os.path.join(self.PATH, 'styles'), '~/.rst2pdf/styles'
+            '.',
+            os.path.join(self.PATH, 'styles'),
+            '~/.rst2pdf/styles',
         ]
         self.StyleSearchPath = list(map(os.path.expanduser, style_path))
 
         # Remove duplicates but preserve order. Not very efficient, but these are short lists
-        self.FontSearchPath = [x for (i,x) in enumerate(self.FontSearchPath) if self.FontSearchPath.index(x) == i]
-        self.StyleSearchPath = [x for (i,x) in enumerate(self.StyleSearchPath) if self.StyleSearchPath.index(x) == i]
+        self.FontSearchPath = [
+            x
+            for (i, x) in enumerate(self.FontSearchPath)
+            if self.FontSearchPath.index(x) == i
+        ]
+        self.StyleSearchPath = [
+            x
+            for (i, x) in enumerate(self.StyleSearchPath)
+            if self.StyleSearchPath.index(x) == i
+        ]
 
         log.info('FontPath:%s' % self.FontSearchPath)
         log.info('StylePath:%s' % self.StyleSearchPath)
@@ -148,23 +158,27 @@ class StyleSheet(object):
                         self.ps = list(pagesizes.__dict__[pgs])
                         self.psname = pgs
                         if 'width' in self.page:
-                            del(self.page['width'])
+                            del self.page['width']
                         if 'height' in self.page:
-                            del(self.page['height'])
+                            del self.page['height']
                     elif pgs.endswith('-LANDSCAPE'):
                         self.psname = pgs.split('-')[0]
-                        self.ps = list(pagesizes.landscape(pagesizes.__dict__[self.psname]))
+                        self.ps = list(
+                            pagesizes.landscape(pagesizes.__dict__[self.psname])
+                        )
                         if 'width' in self.page:
-                            del(self.page['width'])
+                            del self.page['width']
                         if 'height' in self.page:
-                            del(self.page['height'])
+                            del self.page['height']
                     else:
-                        log.critical('Unknown page size %s in stylesheet %s' %
-                                     (page['size'], ssname))
+                        log.critical(
+                            'Unknown page size %s in stylesheet %s'
+                            % (page['size'], ssname)
+                        )
                         continue
                 else:  # A custom size
-                    if 'size'in self.page:
-                        del(self.page['size'])
+                    if 'size' in self.page:
+                        del self.page['size']
                     # The sizes are expressed in some unit.
                     # For example, 2cm is 2 centimeters, and we need
                     # to do 2*cm (cm comes from reportlab.lib.units)
@@ -246,8 +260,8 @@ class StyleSheet(object):
                             if not fontList[0].startswith(font):
                                 # We need to create font aliases, and use them
                                 for fname, aliasname in zip(
-                                        fontList,
-                                        [font + suffix for suffix in suff]):
+                                    fontList, [font + suffix for suffix in suff],
+                                ):
                                     self.fontsAlias[aliasname] = fname
                         continue
 
@@ -273,14 +287,18 @@ class StyleSheet(object):
                         for variant in font:
                             location = self.findFont(variant)
                             pdfmetrics.registerFont(
-                                TTFont(str(variant.split('.')[0]), location))
-                            log.info('Registering font: %s from %s' % (str(
-                                variant.split('.')[0]), location))
+                                TTFont(str(variant.split('.')[0]), location)
+                            )
+                            log.info(
+                                'Registering font: %s from %s'
+                                % (str(variant.split('.')[0]), location)
+                            )
                             self.embedded.append(str(variant.split('.')[0]))
 
                         # And map them all together
                         regular, bold, italic, bolditalic = [
-                            variant.split('.')[0] for variant in font]
+                            variant.split('.')[0] for variant in font
+                        ]
                         addMapping(regular, 0, 0, regular)
                         addMapping(regular, 0, 1, italic)
                         addMapping(regular, 1, 0, bold)
@@ -305,13 +323,15 @@ class StyleSheet(object):
                             fname = font[0]
                         else:
                             fname = font
-                        log.error("Error processing font %s: %s",
-                                  os.path.splitext(fname)[0], str(e))
+                        log.error(
+                            "Error processing font %s: %s",
+                            os.path.splitext(fname)[0],
+                            str(e),
+                        )
                         log.error("Registering %s as Helvetica alias", fname)
                         self.fontsAlias[fname] = 'Helvetica'
                     except Exception as e:
-                        log.critical("Error processing font %s: %s", fname,
-                                     str(e))
+                        log.critical("Error processing font %s: %s", fname, str(e))
                         continue
 
         # Go though all styles in all stylesheets and find all fontNames.
@@ -328,20 +348,21 @@ class StyleSheet(object):
                             continue
                         # Standard font, nothing to do
                         if style[key] in (
-                                    "Courier",
-                                    "Courier-Bold",
-                                    "Courier-BoldOblique",
-                                    "Courier-Oblique",
-                                    "Helvetica",
-                                    "Helvetica-Bold",
-                                    "Helvetica-BoldOblique",
-                                    "Helvetica-Oblique",
-                                    "Symbol",
-                                    "Times-Bold",
-                                    "Times-BoldItalic",
-                                    "Times-Italic",
-                                    "Times-Roman",
-                                    "ZapfDingbats"):
+                            "Courier",
+                            "Courier-Bold",
+                            "Courier-BoldOblique",
+                            "Courier-Oblique",
+                            "Helvetica",
+                            "Helvetica-Bold",
+                            "Helvetica-BoldOblique",
+                            "Helvetica-Oblique",
+                            "Symbol",
+                            "Times-Bold",
+                            "Times-BoldItalic",
+                            "Times-Italic",
+                            "Times-Roman",
+                            "ZapfDingbats",
+                        ):
                             continue
                         # Now we need to do something
                         # See if we can find the font
@@ -369,14 +390,15 @@ class StyleSheet(object):
                                 # We need to create font aliases, and use them
                                 basefname = style[key].split('-')[0]
                                 for fname, aliasname in zip(
-                                        fontList,
-                                        [basefname + suffix for suffix in suff]):
+                                    fontList, [basefname + suffix for suffix in suff],
+                                ):
                                     self.fontsAlias[aliasname] = fname
-                                style[key] = self.fontsAlias[basefname +
-                                                             suff[pos]]
+                                style[key] = self.fontsAlias[basefname + suff[pos]]
                         else:
-                            log.error("Unknown font: \"%s\","
-                                      "replacing with Helvetica", style[key])
+                            log.error(
+                                "Unknown font: \"%s\"," "replacing with Helvetica",
+                                style[key],
+                            )
                             style[key] = "Helvetica"
 
         # Get styles from all stylesheets in order
@@ -403,17 +425,19 @@ class StyleSheet(object):
 
                     # Handle alignment constants
                     elif key == 'alignment':
-                        style[key] = dict(TA_LEFT=0,
-                                          LEFT=0,
-                                          TA_CENTER=1,
-                                          CENTER=1,
-                                          TA_CENTRE=1,
-                                          CENTRE=1,
-                                          TA_RIGHT=2,
-                                          RIGHT=2,
-                                          TA_JUSTIFY=4,
-                                          JUSTIFY=4,
-                                          DECIMAL=8, )[style[key].upper()]
+                        style[key] = dict(
+                            TA_LEFT=0,
+                            LEFT=0,
+                            TA_CENTER=1,
+                            CENTER=1,
+                            TA_CENTRE=1,
+                            CENTRE=1,
+                            TA_RIGHT=2,
+                            RIGHT=2,
+                            TA_JUSTIFY=4,
+                            JUSTIFY=4,
+                            DECIMAL=8,
+                        )[style[key].upper()]
 
                     elif key == 'language':
                         if not style[key] in self.languages:
@@ -441,8 +465,9 @@ class StyleSheet(object):
                 s2 = copy(s)
                 s2['name'] = docutils.nodes.make_id(s['name'])
                 log.warning(
-                    '%s is an invalid docutils class name, adding alias %s' %
-                    (s['name'], s2['name']))
+                    '%s is an invalid docutils class name, adding alias %s'
+                    % (s['name'], s2['name'])
+                )
                 styles2.append(s2)
         self.styles.extend(styles2)
 
@@ -461,7 +486,7 @@ class StyleSheet(object):
                             if s['name'] != 'base':
                                 s['parent'] = self.StyleSheet['base']
                             else:
-                                del(s['parent'])
+                                del s['parent']
                         else:
                             s['parent'] = self.StyleSheet[s['parent']]
                     else:
@@ -485,8 +510,9 @@ class StyleSheet(object):
                     # This means you can set the fontSize to
                     # "2cm" or to "150%" which will be calculated
                     # relative to the parent style
-                    s['fontSize'] = self.adjustUnits(s['fontSize'],
-                                                    s['parent'].fontSize)
+                    s['fontSize'] = self.adjustUnits(
+                        s['fontSize'], s['parent'].fontSize
+                    )
                     s['trueFontSize'] = s['fontSize']
                 else:
                     # If s has no parent, it's base, which has
@@ -496,7 +522,7 @@ class StyleSheet(object):
 
                 # If the leading is not set, but the size is, set it
                 if 'leading' not in s and hasFS:
-                    s['leading'] = 1.2*s['fontSize']
+                    s['leading'] = 1.2 * s['fontSize']
 
                 # If the bullet font size is not set, set it as fontSize
                 if ('bulletFontSize' not in s) and ('fontSize' in s):
@@ -505,20 +531,28 @@ class StyleSheet(object):
                 # If the borderPadding is a list and wordaxe <=0.3.2,
                 # convert it to an integer. Workaround for Issue
                 if 'borderPadding' in s and (
-                    ((HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
-                    or reportlab.Version < "2.3")
-                        and isinstance(s['borderPadding'], list)):
+                    (
+                        (HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
+                        or reportlab.Version < "2.3"
+                    )
+                    and isinstance(s['borderPadding'], list)
+                ):
                     log.warning(
                         'Using a borderPadding list in '
                         'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
-                        'supported, so it will probably look wrong' % s['name'])
+                        'supported, so it will probably look wrong' % s['name']
+                    )
                     s['borderPadding'] = s['borderPadding'][0]
                 if 'spaceBefore' in s:
-                    if isinstance(s['spaceBefore'], str) and s['spaceBefore'].startswith('-'):
+                    if isinstance(s['spaceBefore'], str) and s[
+                        'spaceBefore'
+                    ].startswith('-'):
                         log.warning('A negative spaceBefore is the same as 0')
                     s['spaceBefore'] = self.adjustUnits(s['spaceBefore'])
                 if 'spaceAfter' in s:
-                    if isinstance(s['spaceAfter'], str) and s['spaceAfter'].startswith('-'):
+                    if isinstance(s['spaceAfter'], str) and s['spaceAfter'].startswith(
+                        '-'
+                    ):
                         log.warning('A negative spaceAfter is the same as 0')
                     s['spaceAfter'] = self.adjustUnits(s['spaceAfter'])
 
@@ -543,12 +577,14 @@ class StyleSheet(object):
             return self.StyleSheet[key]
         else:
             if key.startswith('pygments'):
-                log.info("Using undefined style '%s'"
-                         ", aliased to style 'code'." % key)
+                log.info(
+                    "Using undefined style '%s'" ", aliased to style 'code'." % key
+                )
                 newst = copy(self.StyleSheet['code'])
             else:
-                log.warning("Using undefined style '%s'"
-                            ", aliased to style 'normal'." % key)
+                log.warning(
+                    "Using undefined style '%s'" ", aliased to style 'normal'." % key
+                )
                 newst = copy(self.StyleSheet['normal'])
             newst.name = key
             self.StyleSheet.add(newst)
@@ -618,8 +654,9 @@ class StyleSheet(object):
                     if os.path.isfile(tfn):
                         return tfn
             return None
+
         for ext in ['', '.style', '.json']:
-            result = innerFind(self.StyleSearchPath, fn+ext)
+            result = innerFind(self.StyleSearchPath, fn + ext)
             if result:
                 break
         if result is None:
@@ -653,7 +690,7 @@ class StyleSheet(object):
             n.figure: 'figure',
             n.tgroup: 'table',
             n.table: 'table',
-            n.Admonition: 'admonition'
+            n.Admonition: 'admonition',
         }
 
         return self[styles.get(node.__class__, 'bodytext')]
@@ -666,40 +703,28 @@ class StyleSheet(object):
         """
         # This alignment thing is exactly backwards from
         # the alignment for paragraphstyles
-        alignment = {
-            0: 'LEFT', 1: 'CENTER', 2: 'RIGHT',
-            4: 'JUSTIFY', 8: 'DECIMAL'}[self['table-heading'].alignment]
+        alignment = {0: 'LEFT', 1: 'CENTER', 2: 'RIGHT', 4: 'JUSTIFY', 8: 'DECIMAL',}[
+            self['table-heading'].alignment
+        ]
         return [
-            ('BACKGROUND',
-                (0, 0),
-                (-1, rows - 1),
-                self['table-heading'].backColor),
-            ('ALIGN',
-                (0, 0),
-                (-1, rows - 1),
-                alignment),
-            ('TEXTCOLOR',
-                (0, 0),
-                (-1, rows - 1),
-                self['table-heading'].textColor),
-            ('FONT',
+            ('BACKGROUND', (0, 0), (-1, rows - 1), self['table-heading'].backColor,),
+            ('ALIGN', (0, 0), (-1, rows - 1), alignment),
+            ('TEXTCOLOR', (0, 0), (-1, rows - 1), self['table-heading'].textColor,),
+            (
+                'FONT',
                 (0, 0),
                 (-1, rows - 1),
                 self['table-heading'].fontName,
                 self['table-heading'].fontSize,
-                self['table-heading'].leading),
-            ('VALIGN',
-                (0, 0),
-                (-1, rows - 1),
-                self['table-heading'].valign)]
+                self['table-heading'].leading,
+            ),
+            ('VALIGN', (0, 0), (-1, rows - 1), self['table-heading'].valign),
+        ]
 
     def adjustUnits(self, v, total=None, default_unit='pt'):
         if total is None:
             total = self.tw
-        return adjustUnits(v, total,
-                           self.def_dpi,
-                           default_unit,
-                           emsize=self.emsize)
+        return adjustUnits(v, total, self.def_dpi, default_unit, emsize=self.emsize)
 
     def combinedStyle(self, styles):
         '''Given a list of style names, it merges them (the existing ones)
@@ -782,15 +807,16 @@ def formatColor(value, numeric=True):
         while len(c) < 6:
             c = '0' + c
         if numeric:
-            r = int(c[:2], 16)/255.
-            g = int(c[2:4], 16)/255.
-            b = int(c[4:6], 16)/255.
+            r = int(c[:2], 16) / 255.0
+            g = int(c[2:4], 16) / 255.0
+            b = int(c[4:6], 16) / 255.0
             if len(c) >= 8:
-                alpha = int(c[6:8], 16)/255.
+                alpha = int(c[6:8], 16) / 255.0
                 return colors.Color(r, g, b, alpha=alpha)
             return colors.Color(r, g, b)
         else:
-            return str("#"+c)
+            return str("#" + c)
+
 
 # The values are:
 # * Minimum number of arguments
@@ -860,11 +886,19 @@ def validateCommands(commands):
 
         # See if start and stop are the right types
         if not isinstance(command[1], (list, tuple)):
-            log.error('Start cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
+            log.error(
+                'Start cell in table command should be list or tuple, got %s [%s]',
+                type(command[1]),
+                command[1],
+            )
             flag = True
 
         if not isinstance(command[2], (list, tuple)):
-            log.error('Stop cell in table command should be list or tuple, got %s [%s]', type(command[1]), command[1])
+            log.error(
+                'Stop cell in table command should be list or tuple, got %s [%s]',
+                type(command[1]),
+                command[1],
+            )
             flag = True
 
         # See if the number of arguments is right
@@ -888,7 +922,7 @@ def validateCommands(commands):
             elif typ == "number":
                 pass
             elif typ == "string":
-                command[3+pos] = arg
+                command[3 + pos] = arg
             else:
                 log.error("This should never happen: wrong type %s", typ)
 
@@ -904,6 +938,7 @@ class CallableStyleSheet(str):
         which returns the pre-digested stylesheet data
         when called.
     '''
+
     def __new__(cls, name, value=''):
         self = str.__new__(cls, name)
         self.value = value

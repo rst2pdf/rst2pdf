@@ -34,7 +34,8 @@ from docutils.parsers import rst
 from .opt_imports import aafigure
 from .log import log
 
-WARNED=False
+WARNED = False
+
 
 class Aanode(Element):
     children = ()
@@ -52,9 +53,8 @@ class Aanode(Element):
         # explicit :option: always precedes
         options.update(self.options)
         visitor = aafigure.process(
-            '\n'.join(self.content),
-            aafigure.pdf.PDFOutputVisitor,
-            options=options)
+            '\n'.join(self.content), aafigure.pdf.PDFOutputVisitor, options=options,
+        )
         return renderPDF.GraphicsFlowable(visitor.drawing)
 
 
@@ -62,20 +62,21 @@ class Aafig(rst.Directive):
     """
     Directive to insert an ASCII art figure to be rendered by aafigure.
     """
+
     has_content = True
     required_arguments = 0
     optional_arguments = 0
     final_argument_whitespace = False
     option_spec = dict(
-        scale = float,
-        line_width = float,
-        background = str,
-        foreground = str,
-        fill = str,
-        name = str,
-        aspect = float,
-        textual = directives.flag,
-        proportional = directives.flag,
+        scale=float,
+        line_width=float,
+        background=str,
+        foreground=str,
+        fill=str,
+        name=str,
+        aspect=float,
+        textual=directives.flag,
+        proportional=directives.flag,
     )
 
     def run(self):
@@ -87,8 +88,10 @@ class Aafig(rst.Directive):
         if aafigure is not None:
             return [Aanode(self.content, self.options)]
         if not WARNED:
-            log.error('To render the aafigure directive correctly, please install aafigure')
-            WARNED=True
+            log.error(
+                'To render the aafigure directive correctly, please install aafigure'
+            )
+            WARNED = True
         return [literal_block(text='\n'.join(self.content))]
 
 

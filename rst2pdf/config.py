@@ -22,7 +22,6 @@ def getValue(section, key, default=None):
 
 
 class ConfigError(Exception):
-
     def __init__(self, modulename, msg):
         self.modulename = modulename
         self.msg = msg

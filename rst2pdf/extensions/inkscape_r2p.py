@@ -86,9 +86,7 @@ class InkscapeImage(VectorPdf):
 
         pdfuri = uri.replace(filename, pdffname)
         pdfsrc = client, pdfuri
-        VectorPdf.__init__(
-            self, pdfuri, width, height, kind, mask, lazy, pdfsrc
-        )
+        VectorPdf.__init__(self, pdfuri, width, height, kind, mask, lazy, pdfsrc)
 
     @classmethod
     def available(self):
@@ -143,9 +141,7 @@ class InkscapeImage(VectorPdf):
     @staticmethod
     def run_cmd(cmd):
         """Execute a command and return exitcode, stdout and stderr."""
-        proc = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = proc.communicate()
         exitcode = proc.returncode
         return exitcode, out.decode(), err.decode()

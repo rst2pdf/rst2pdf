@@ -92,20 +92,19 @@ def compare_pdfs(path_a, path_b):
 class File(pytest.File):
 
     if version.parse(pytest.__version__) < version.parse('5.4.0'):
+
         @classmethod
         def from_parent(cls, parent, fspath):
             return cls(parent=parent, fspath=fspath)
 
 
 class TxtFile(File):
-
     def collect(self):
         name = os.path.splitext(self.fspath.basename)[0]
         yield TxtItem.from_parent(parent=self, name=name)
 
 
 class SphinxFile(File):
-
     def collect(self):
         name = os.path.split(self.fspath.dirname)[-1]
         yield SphinxItem.from_parent(parent=self, name=name)
@@ -114,6 +113,7 @@ class SphinxFile(File):
 class Item(pytest.Item):
 
     if version.parse(pytest.__version__) < version.parse('5.4.0'):
+
         @classmethod
         def from_parent(cls, parent, name):
             return cls(parent=parent, name=name)
@@ -123,8 +123,7 @@ class Item(pytest.Item):
 
     def _fail(self, msg, output=None):
         pytest.fail(
-            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg,
-            pytrace=False,
+            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg, pytrace=False,
         )
 
     def runtest(self):
@@ -157,9 +156,8 @@ class Item(pytest.Item):
 
         if not os.path.exists(reference_file):
             self._fail(
-                'No reference file at %r to compare against.' % (
-                    os.path.relpath(output_file, ROOT_DIR),
-                ),
+                'No reference file at %r to compare against.'
+                % (os.path.relpath(output_file, ROOT_DIR),),
             )
 
         if os.path.isdir(output_file):
@@ -183,8 +181,7 @@ class Item(pytest.Item):
 
         if len(reference_files) != len(output_files):
             self._fail(
-                'Mismatch between number of files expected and generated',
-                output,
+                'Mismatch between number of files expected and generated', output,
             )
 
         reference_files.sort()
@@ -208,7 +205,6 @@ class Item(pytest.Item):
 
 
 class TxtItem(Item):
-
     def _build(self):
         input_ref = self.name + '.txt'
         output_pdf = os.path.join(OUTPUT_DIR, self.name + '.pdf')
@@ -250,16 +246,13 @@ class TxtItem(Item):
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         if not os.path.exists(output_file) and not no_pdf:
             self._fail(
-                'File %r was not generated' % (
-                    os.path.relpath(output_file, ROOT_DIR),
-                ),
+                'File %r was not generated' % (os.path.relpath(output_file, ROOT_DIR),),
                 output,
             )
         elif os.path.exists(output_file) and no_pdf:
             self._fail(
-                'File %r was erroneously generated' % (
-                    os.path.relpath(output_file, ROOT_DIR),
-                ),
+                'File %r was erroneously generated'
+                % (os.path.relpath(output_file, ROOT_DIR),),
                 output,
             )
 
@@ -267,7 +260,6 @@ class TxtItem(Item):
 
 
 class SphinxItem(Item):
-
     def _build(self):
         __tracebackhide__ = True
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 '''
 This module provides one useful class:  NodeHandler
@@ -76,6 +76,7 @@ class MetaHelper(type):
          _baseclass can be explicitly set inside the class definition, in
          which case MetaHelper will not override it.
     '''
+
     def __new__(clstype, name, bases, clsdict):
         # Our base class is the first base in the class definition which
         # uses MetaHelper, or None if no such base exists.
@@ -143,8 +144,10 @@ class NodeHandler(metaclass=MetaHelper):
                 t = repr(target)
                 old = repr(cls.dispatchdict[target])
                 new = repr(self)
-                log.debug('Dispatch handler %s for node type %s overridden by %s' %
-                    (old, t, new))
+                log.debug(
+                    'Dispatch handler %s for node type %s overridden by %s'
+                    % (old, t, new)
+                )
                 cls.dispatchdict[target] = self
 
     @staticmethod
@@ -158,11 +161,10 @@ class NodeHandler(metaclass=MetaHelper):
     def log_unknown(self, node, during):
         if not hasattr(self, 'unkn_node'):
             self.unkn_node = set()
-        cln=self.getclassname(node)
+        cln = self.getclassname(node)
         if not cln in self.unkn_node:
             self.unkn_node.add(cln)
-            log.warning("Unkn. node (self.%s): %s [%s]",
-                during, cln, nodeid(node))
+            log.warning("Unkn. node (self.%s): %s [%s]", during, cln, nodeid(node))
             try:
                 log.debug(node)
             except (UnicodeDecodeError, UnicodeEncodeError):
@@ -213,9 +215,12 @@ class NodeHandler(metaclass=MetaHelper):
                 if client.styles.StyleSheet.has_key(node['classes'][0]):
                     style = client.styles[node['classes'][0]]
                 else:
-                    log.info("Unknown class %s, ignoring. [%s]",
-                        node['classes'][0], nodeid(node))
-        except TypeError: # Happens when a docutils.node.Text reaches here
+                    log.info(
+                        "Unknown class %s, ignoring. [%s]",
+                        node['classes'][0],
+                        nodeid(node),
+                    )
+        except TypeError:  # Happens when a docutils.node.Text reaches here
             pass
 
         if style is None or style == client.styles['bodytext']:
@@ -227,13 +232,12 @@ class NodeHandler(metaclass=MetaHelper):
         elements = self.gather_elements(client, node, style)
 
         # Make all the sidebar cruft unreachable
-        #if style.__dict__.get('float','None').lower() !='none':
-            #node.elements=[Sidebar(node.elements,style)]
-        #elif 'width' in style.__dict__:
+        # if style.__dict__.get('float','None').lower() !='none':
+        # node.elements=[Sidebar(node.elements,style)]
+        # elif 'width' in style.__dict__:
 
         if 'width' in style.__dict__:
-            elements = [BoundByWidth(style.width,
-                elements, style, mode="shrink")]
+            elements = [BoundByWidth(style.width, elements, style, mode="shrink")]
 
         return elements
 
@@ -246,13 +250,13 @@ class NodeHandler(metaclass=MetaHelper):
         try:
             for i in node['ids']:
                 client.pending_targets.append(i)
-        except TypeError: #Happens with docutils.node.Text
+        except TypeError:  # Happens with docutils.node.Text
             pass
 
         elements = self.getelements(client, node, style)
 
         if node.line and client.debugLinesPdf:
-            elements.insert(0,TocEntry(client.depth-1,'LINE-%s'%node.line))
+            elements.insert(0, TocEntry(client.depth - 1, 'LINE-%s' % node.line))
         node.elements = elements
         return elements
 
@@ -269,8 +273,11 @@ class NodeHandler(metaclass=MetaHelper):
 
     def apply_smartypants(self, text, smarty, node):
         # Try to be clever about when to use smartypants
-        if node.__class__ in (docutils.nodes.paragraph,
-                docutils.nodes.block_quote, docutils.nodes.title):
+        if node.__class__ in (
+            docutils.nodes.paragraph,
+            docutils.nodes.block_quote,
+            docutils.nodes.title,
+        ):
             return smartypants(text, smarty)
         return text
 
