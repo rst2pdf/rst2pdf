@@ -19,18 +19,17 @@ import locale
 from docutils.core import default_description
 from docutils.core import publish_cmdline
 from docutils.parsers.rst import directives
-from docutils.parsers.rst import roles
 
 from rst2pdf.directives import code_block
 from rst2pdf.directives import noop
-from rst2pdf.roles import counter_off
+from rst2pdf.roles import counter_off  # noqa
+from rst2pdf.roles import package  # noqa
 
 
 locale.setlocale(locale.LC_ALL, '')
 
 directives.register_directive('code-block', code_block.code_block_directive)
 directives.register_directive('oddeven', noop.noop_directive)
-roles.register_canonical_role('counter', counter_off.counter_fn)
 
 description = (
     'Generates HTML5 documents from standalone reStructuredText '

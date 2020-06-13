@@ -31,6 +31,7 @@ setup(
         'docutils',
         'importlib_metadata',
         'jinja2',
+        'packaging',
         'pdfrw',
         'pygments',
         'reportlab',
