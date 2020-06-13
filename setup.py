@@ -13,7 +13,6 @@ def read(*rnames):
 
 setup(
     name='rst2pdf',
-    version='0.98',
     python_requires='>=3.6',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_dir={'': '.'},
@@ -27,6 +26,7 @@ setup(
         ],
     },
     dependency_links=[],
+    use_scm_version=True,
     install_requires=[
         'docutils',
         'jinja2',
