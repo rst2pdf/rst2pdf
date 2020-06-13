@@ -29,11 +29,11 @@ setup(
     use_scm_version=True,
     install_requires=[
         'docutils',
+        'importlib_metadata',
         'jinja2',
         'pdfrw',
         'pygments',
         'reportlab',
-        'setuptools',
         'smartypants',
     ],
     extras_require={
