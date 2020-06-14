@@ -1894,7 +1894,7 @@ Licenses
 
 This is the license for rst2pdf::
 
-    Copyright (c) 2007-2019 Roberto Alsina and the contributors to the rst2pdf project
+    Copyright (c) 2007-2020 Roberto Alsina and the contributors to the rst2pdf project
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

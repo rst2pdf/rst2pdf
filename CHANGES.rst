@@ -4,6 +4,7 @@
 
 * Changed: Use content-based comparison in tests. (Issue #854)
 * Changed: Inkscape 1.0 final supported properly and use path on Windows. (Issue #870)
+* Fixed: The README, LICENSE and CHANGES files are now packaged with the release tarball. (Issue 867)
 
 0.97 (2020-05-09)
 -----------------
