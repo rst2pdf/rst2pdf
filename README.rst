@@ -10,10 +10,9 @@
 .. image:: https://img.shields.io/pypi/l/rst2pdf.svg
     :target: https://pypi.org/project/rst2pdf/
 
-
-========================================
+=======================================
 rst2pdf: Use a text editor. Make a PDF.
-========================================
+=======================================
 
 The usual way of creating PDF from reStructuredText is by going through LaTeX.
 This tool provides an alternative by producing PDF directly using the ReportLab
@@ -48,8 +47,11 @@ Features
 
 * Supports hyphenation and kerning (using wordaxe).
 
+* `Sphinx`__ integration
+
 * `Full user's manual`__
 
+__ https://www.sphinx-doc.org/
 __ https://rst2pdf.org/static/manual.pdf
 
 
@@ -96,10 +98,35 @@ To convert a reStructuredText document to a PDF, simply run::
 
     $ rst2pdf <document name> output.pdf
 
+For information on available options, use ``-h``::
+
+    $ rst2pdf -h
+
+To enable basic integration with Sphinx, modify your ``conf.py`` file to enable
+the ``rst2pdf.pdfbuilder`` extension and configure the ``pdf_documents``
+option. For example::
+
+    extensions = [
+        # ...
+        'rst2pdf.pdfbuilder',
+    ]
+
+    # Grouping the document tree into PDF files. List of tuples
+    # (source start file, target name, title, author, options).
+    pdf_documents = [
+        ('index', 'MyProject', 'My Project', 'Author Name'),
+    ]
+
+For information on the ``pdf_documents`` option and the many other options
+available, refer to the `manual`__.
+
+__ https://rst2pdf.org/static/manual.pdf
+
 
 Contributing
 ------------
 
-rst2pdf wishes to be a welcoming community. With that in mind, please refer to our `CODE_OF_CONDUCT`__.
+rst2pdf wishes to be a welcoming community. With that in mind, please refer to our `Community Code of Conduct`__.
 
 __ CODE_OF_CONDUCT.rst
+
