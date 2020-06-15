@@ -61,8 +61,7 @@ Installation
 Install from PyPI
 ~~~~~~~~~~~~~~~~~
 
-The latest released version may be installed from PyPI by using
-``pip``.
+The latest released version may be installed from PyPI by using ``pip``::
 
     $ pip install --user rst2pdf
 
@@ -93,7 +92,7 @@ of this readme.
 Usage
 -----
 
-To convert a restructuredText document to a PDF, simply run::
+To convert a reStructuredText document to a PDF, simply run::
 
     $ rst2pdf <document name> output.pdf
 
