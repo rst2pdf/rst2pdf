@@ -14,11 +14,10 @@ from reportlab.lib.units import cm, inch
 from .log import log, nodeid
 
 try:
-    # FIXME: We should handle this being missing or make it a requirement
     from .svgimage import SVGImage
 except ImportError:
     # svglib may optionally not be installed, which causes this error
-    pass
+    SVGImage = None
 
 # This assignment could be overridden by an extension module
 VectorPdf = None
@@ -33,25 +32,24 @@ missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
 
 def defaultimage(
-    filename, width=None, height=None, kind='direct', mask="auto", lazy=1, srcinfo=None,
+    filename, width=None, height=None, kind='direct', mask='auto', lazy=1, srcinfo=None,
 ):
-    ''' We have multiple image backends, including the stock reportlab one.
-        This wrapper around the reportlab one allows us to pass the client
-        RstToPdf object and the uri into all our backends, which they can
-        use or not as necessary.
-    '''
+    """Get default image backend.
+
+    We have multiple image backends, including the stock ReportLab one.  This
+    wrapper around the ReportLab one allows us to pass the client ``RstToPdf``
+    object and the URI into all our backends, which they can use (or not) as
+    necessary.
+    """
     return Image(filename, width, height, kind, mask, lazy)
 
 
 class MyImage(Flowable):
     """A Image subclass that can:
 
-    1. Take a 'percentage_of_container' kind,
-       which resizes it on wrap() to use... well, a percentage of the
-       container's width.
-
-    2. Take vector formats and instantiates the right "backend" flowable
-
+    1. Take a ``percentage_of_container`` kind, which resizes it on ``wrap(``
+       to use a percentage of the container's width.
+    2. Take vector formats and instantiates the right "backend" flowable.
     """
 
     warned = False
@@ -62,17 +60,18 @@ class MyImage(Flowable):
             return
         cls.warned = True
         log.warning(
-            "Support for images other than JPG,"
-            " is now limited. Please install Pillow."
+            'Support for images other than JPG is now limited. Please install '
+            'Pillow.'
         )
 
     @staticmethod
     def split_uri(uri):
-        ''' A really minimalistic split -- doesn't cope with http:, etc.
-            HOWEVER, it tries to do so in a fashion that allows a clueless
-            user to have '#' inside his filename without screwing anything
-            up.
-        '''
+        """Split provided URI.
+
+        A really minimalistic split -- doesn't cope with http:, etc.  HOWEVER,
+        it tries to do so in a fashion that allows a clueless user to have
+        ``#`` inside his filename without screwing anything up.
+        """
         basename, extra = os.path.splitext(uri)
         extra = extra.split('#', 1) + ['']
         fname = basename + extra[0]
@@ -86,7 +85,7 @@ class MyImage(Flowable):
         width=None,
         height=None,
         kind='direct',
-        mask="auto",
+        mask='auto',
         lazy=1,
         client=None,
         target=None,
@@ -124,11 +123,14 @@ class MyImage(Flowable):
 
     @classmethod
     def raster(self, filename, client):
-        """Takes a filename and converts it to a raster image
-        reportlab can process"""
+        """Convert image to raster image.
+
+        Takes a filename and converts it to a raster image reportlab can
+        process.
+        """
 
         if not os.path.exists(filename):
-            log.error("Missing image file: %s", filename)
+            log.error('Missing image file: %s', filename)
             return missing
 
         try:
@@ -150,22 +152,23 @@ class MyImage(Flowable):
 
         # PIL can't, so we can't
         self.support_warning()
-        log.error("Couldn't load image [%s]" % filename)
+        log.error('Could not load image: %s', filename)
         return missing
 
     @classmethod
     def get_backend(self, uri, client):
-        '''Given the filename of an image, returns (fname, backend)
-        where fname is the filename to be used (could be the same as
-        filename, or something different if the image had to be converted
-        or is missing), and backend is an Image class that can handle
-        fname.
+        """Get backend for an image.
 
-        If uri ensd with '.*' then the returned filename will be the best
+        Given the filename of an image, returns ``(fname, backend)``, where
+        ``fname`` is the filename to be used (could be the same as filename, or
+        something different if the image had to be converted or is missing),
+        and ``backend`` is an ``Image`` class that can handle ``fname``.
+
+        If ``uri`` ends with '.*' then the returned filename will be the best
         quality supported at the moment.
 
-        That means:  PDF > SVG > anything else
-        '''
+        That means: PDF > SVG > anything else
+        """
 
         backend = defaultimage
 
@@ -188,48 +191,56 @@ class MyImage(Flowable):
                 if v > cv:
                     cv = v
                     cfn = fn
-            # cfn should have our favourite type of
-            # those available
+
+            # cfn should have our favourite type of those available
             filename = cfn
             extension = cfn.split('.')[-1]
             uri = filename
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
-            log.error("Missing image file: %s", filename)
+            log.error('Missing image file: %s', filename)
             filename = missing
 
-        if extension in ['svg', 'svgz']:
-            log.info('Backend for %s is SVGIMage' % filename)
-            backend = SVGImage
+            return filename, backend
 
+        if extension in ['svg', 'svgz']:
+            if SVGImage is not None:
+                log.info('Backend for %s is SVGImage', filename)
+                backend = SVGImage
+            else:
+                log.error('SVG image support requires svglib: %s', filename)
+                filename = missing
         elif extension in ['pdf']:
-            if VectorPdf is not None and filename is not missing:
+            if VectorPdf is not None:
+                log.debug('Backend for %s is VectorPdf', filename)
                 backend = VectorPdf
                 filename = uri
             else:
-                log.warning(
-                    "Minimal PDF image support "
-                    "requires the vectorpdf extension [%s]",
-                    filename,
+                log.error(
+                    'PDF image support requires the vectorpdf extension: %s', filename,
                 )
                 filename = missing
         elif extension != 'jpg' and not PILImage:
             # No way to make this work
             log.error(
-                'To use a %s image you need Pillow installed [%s]', extension, filename,
+                '%s image support requires Pillow: %s', extension.upper(), filename,
             )
             filename = missing
+
         return filename, backend
 
     @classmethod
     def size_for_node(self, node, client):
-        '''Given a docutils image node, returns the size the image should have
-        in the PDF document, and what 'kind' of size that is.
-        That involves lots of guesswork'''
+        """Get size for image node.
 
-        uri = str(node.get("uri"))
-        if uri.split("://")[0].lower() not in ('http', 'ftp', 'https'):
+        Given a docutils image node, returns the size the image should have in
+        the PDF document, and what "kind" of size that is. That involves lots
+        of guesswork.
+        """
+
+        uri = str(node.get('uri'))
+        if uri.split('://')[0].lower() not in ('http', 'ftp', 'https'):
             uri = os.path.join(client.basedir, uri)
         else:
             uri, _ = urlretrieve(uri)
@@ -257,6 +268,11 @@ class MyImage(Flowable):
         xdpi, ydpi = client.styles.def_dpi, client.styles.def_dpi
         extension = imgname.split('.')[-1].lower()
         if extension in ['svg', 'svgz']:
+            if not SVGImage:
+                raise RuntimeError(
+                    'Documentation uses SVG image but svglib is not installed.'
+                )
+
             iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
@@ -266,13 +282,17 @@ class MyImage(Flowable):
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
             else:
-                raise Exception('Need VectorPDF extension')
+                raise Exception(
+                    'Documentation uses embedded PDFs which require the VectorPDF '
+                    'extension'
+                )
 
             # These are in pt, so convert to px
             iw = iw * xdpi / 72.0
             ih = ih * ydpi / 72.0
         else:
             keeptrying = True
+
             if PILImage:
                 try:
                     img = PILImage.open(imgname)
@@ -282,6 +302,7 @@ class MyImage(Flowable):
                     keeptrying = False
                 except IOError:  # PIL throws this when it's a broken/unknown image
                     pass
+
             if keeptrying:
                 if extension not in ['jpg', 'jpeg']:
                     log.error(
@@ -364,7 +385,7 @@ class MyImage(Flowable):
 
         # And now we have this probably completely bogus size!
         log.info(
-            "Image %s size calculated:  %fcm by %fcm [%s]",
+            'Image %s size calculated: %fcm by %fcm [%s]',
             imgname,
             w / cm,
             h / cm,
@@ -389,7 +410,7 @@ class MyImage(Flowable):
             w, h = self.__width, self.__height
             if not w:
                 log.warning(
-                    'Scaling image as % of container with w unset.'
+                    'Scaling image as % of container with w unset. '
                     'This should not happen, setting to 100'
                 )
                 w = 100
@@ -409,14 +430,13 @@ class MyImage(Flowable):
                     # FIXME get rst file info (line number)
                     # here for better error message
                     log.warning(
-                        'image %s is too tall for the '
-                        'frame, rescaling' % self.filename
+                        'Image %s is too tall for the frame, rescaling', self.filename
                     )
                     self.image.drawHeight = availHeight
                     self.image.drawWidth = availHeight * self.__ratio
             elif self.image.drawWidth > availWidth:
                 log.warning(
-                    'image %s is too wide for the frame, rescaling' % self.filename
+                    'Image %s is too wide for the frame, rescaling', self.filename
                 )
                 self.image.drawWidth = availWidth
                 self.image.drawHeight = availWidth / self.__ratio
