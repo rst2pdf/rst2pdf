@@ -260,7 +260,13 @@ class HandleSubTitle(HandleParagraph, docutils.nodes.subtitle):
             # work.
             client.doc_subtitle = getattr(node, 'rawtext', node.astext()).strip()
         else:
-            elements = node.elements  # FIXME Can we get here???
+            elements = [
+                Paragraph(
+                    client.gen_pdftext(node),
+                    client.styles['%s-subtitle' % node.parent.tagname],
+                )
+            ]
+
         return elements
 
 
