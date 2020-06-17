@@ -99,4 +99,7 @@ To convert a restructuredText document to a PDF, simply run::
 
 Contributing
 -----
-Please refer to the [CODE_OF_CONDUCT.rst](CODE_OF_CONDUCT.rst) file.
+Please refer to:
+`CODE_OF_CONDUCT.rst`__
+
+__ CODE_OF_CONDUCT.rst
