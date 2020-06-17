@@ -96,3 +96,7 @@ Usage
 To convert a restructuredText document to a PDF, simply run::
 
     $ rst2pdf <document name> output.pdf
+
+Contributing
+-----
+Please refer to the [CODE_OF_CONDUCT.rst](CODE_OF_CONDUCT.rst) file.
