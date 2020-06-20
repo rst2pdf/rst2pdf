@@ -2,14 +2,8 @@
 # See LICENSE.txt for licensing terms
 """Singleton config object"""
 
+import configparser
 import os
-import six
-
-if six.PY2:
-    import ConfigParser
-else:
-    import configparser as ConfigParser
-
 
 from rst2pdf.rson import loads
 
@@ -34,7 +28,7 @@ class ConfigError(Exception):
         self.msg = msg
 
 
-conf = ConfigParser.SafeConfigParser()
+conf = configparser.SafeConfigParser()
 
 
 def parseConfig(extracf=None):
@@ -42,7 +36,7 @@ def parseConfig(extracf=None):
     cflist = ["/etc/rst2pdf.conf", cfname]
     if extracf:
         cflist.append(extracf)
-    conf = ConfigParser.SafeConfigParser()
+    conf = configparser.SafeConfigParser()
     conf.read(cflist)
 
 

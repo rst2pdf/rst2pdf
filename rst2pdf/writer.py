@@ -7,11 +7,6 @@ from docutils import writers
 
 from rst2pdf import createpdf
 
-import six
- 
-if six.PY3:
-    unicode = str
-    basestring = str
 
 class PdfWriter(writers.Writer):
 
@@ -31,7 +26,7 @@ class PdfWriter(writers.Writer):
         sio = StringIO('')
         createpdf.RstToPdf(sphinx=True).createPdf(
             doctree=self.document, output=sio, compressed=False)
-        self.output = unicode(sio.getvalue(), 'utf-8', 'ignore')
+        self.output = str(sio.getvalue(), 'utf-8', 'ignore')
 
     def supports(self, format):
         """This writer supports all format-specific elements."""

@@ -26,10 +26,6 @@ from log import log
 import re
 from xml.sax.saxutils import unescape, escape
 
-import six
- 
-if six.PY3:
-    unicode = str
 
 class XXPreformatted(XPreformatted):
     """An extended XPreformattedFit"""
@@ -257,7 +253,7 @@ class DelayedTable(Table):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0])[:180])
+                str(self.data[0])[:180])
 
 def tablepadding(padding):
     if not isinstance(padding,(list,tuple)):
@@ -284,7 +280,7 @@ class SplitTable(DelayedTable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode(self.data[0][1])[:180])
+                str(self.data[0][1])[:180])
 
     def split(self,w,h):
         _w,_h=self.wrap(w, h)
@@ -740,7 +736,7 @@ class BoundByWidth(Flowable):
             hex(id(self)), self._frameName(),
             getattr(self, 'name', '')
                 and (' name="%s"' % getattr(self, 'name', '')) or '',
-                unicode([c.identity() for c in self.content])[:80])
+                str([c.identity() for c in self.content])[:80])
 
     def wrap(self, availWidth, availHeight):
         """If we need more width than we have, complain, keep a scale"""
@@ -832,7 +828,7 @@ class BoxedContainer(BoundByWidth):
         self.mode = mode
 
     def identity(self, maxLen=None):
-        return unicode([u"BoxedContainer containing: ",
+        return str([u"BoxedContainer containing: ",
             [c.identity() for c in self.content]])[:80]
 
     def draw(self):
@@ -1022,8 +1018,8 @@ class MyTableOfContents(TableOfContents):
             if label:
                 pre = u'<a href="%s" color="%s">' % (label, self.linkColor)
                 post = u'</a>'
-                if not isinstance(text, unicode):
-                    text = unicode(text, 'utf-8')
+                if not isinstance(text, str):
+                    text = str(text, 'utf-8')
                 text = pre + text + post
             else:
                 pre = ''

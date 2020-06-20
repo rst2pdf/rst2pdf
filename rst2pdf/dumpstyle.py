@@ -6,17 +6,12 @@
     to .style in the styles directory.
 '''
 
-from __future__ import absolute_import
 import sys
 import os
 
 from .rson import loads as rloads
 from json import loads as jloads
 
-try:
-    basestring # py27
-except:
-    basestring = str # Py3+
 
 def dumps(obj, forcestyledict=True):
     ''' If forcestyledict is True, will attempt to
@@ -98,8 +93,14 @@ def dumps(obj, forcestyledict=True):
     def donone(result, obj, indent):
         result.append('null')
 
-    dumpfuncs = {float: dofloat, int: doint, basestring: dostr,
-                     list: dolist, dict: dodict, type(None): donone}
+    dumpfuncs = {
+        float: dofloat,
+        int: doint,
+        str: dostr,
+        list: dolist,
+        dict: dodict,
+        type(None): donone,
+    }
 
     dumpfuncs = dumpfuncs.items()
 

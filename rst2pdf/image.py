@@ -9,12 +9,7 @@ from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import *
 
-import six
-
-if six.PY3:
-    from urllib.request import urlretrieve
-else:
-    from urllib import urlretrieve
+from urllib.request import urlretrieve
 
 from .opt_imports import PILImage, pdfinfo
 from .log import log, nodeid

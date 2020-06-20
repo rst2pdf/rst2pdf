@@ -21,8 +21,6 @@ Additional documentation available at:
 http://code.google.com/p/rson/
 '''
 
-from __future__ import unicode_literals
-
 __version__ = '0.08'
 
 __author__ = 'Patrick Maupin <pmaupin@gmail.com>'
@@ -55,12 +53,6 @@ Copyright (c) 2010, Patrick Maupin.  All rights reserved.
 import bisect
 import re
 import sys
-
-import six
-
-if six.PY3:
-    unicode = str
-    basestring = str
 
 
 class RSONDecodeError(ValueError):
@@ -140,7 +132,7 @@ class Tokenizer(list):
     splitter = re.compile(pattern).split
 
     @classmethod
-    def factory(cls, len=len, iter=iter, unicode=unicode, isinstance=isinstance):
+    def factory(cls):
         splitter = cls.splitter
         delimiterset = set(cls.delimiterset) | set('"')
 
@@ -149,16 +141,12 @@ class Tokenizer(list):
             self.client = client
 
             # Deal with 8 bit bytes for now
-            if isinstance(source, unicode):
+            if isinstance(source, str):
                 source = source.encode('utf-8')
 
             # Convert MS-DOS or Mac line endings to the one true way
-            if six.PY2:
-                source = source.replace('\r\n', '\n').replace('\r', '\n')
-                sourcelist = splitter(source)
-            else:
-                source = source.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
-                sourcelist = splitter(source.decode())
+            source = source.replace(b'\r\n', b'\n').replace(b'\r', b'\n')
+            sourcelist = splitter(source.decode())
 
             # Get the indentation at the start of the file
             indentation = '\n' + sourcelist[0]
@@ -167,10 +155,7 @@ class Tokenizer(list):
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
-            if six.PY2:
-                next_ = sourceiter.next
-            else:
-                next_ = sourceiter.__next__
+            next_ = sourceiter.__next__
 
             offset -= len(next_())
 
@@ -259,6 +244,7 @@ def make_hashable(what):
             return tuple(sorted(make_hashable(x) for x in what.items()))
         return tuple(make_hashable(x) for x in what)
 
+
 class BaseObjects(object):
 
     # These hooks allow compatibility with simplejson
@@ -314,7 +300,7 @@ class BaseObjects(object):
         def get_result(self, token):
             return self
 
-    def object_type_factory(self, dict=dict, tuple=tuple):
+    def object_type_factory(self):
         ''' This function returns constructors for RSON objects and arrays.
             It handles simplejson compatible hooks as well.
         '''
@@ -329,9 +315,11 @@ class BaseObjects(object):
             self.disallow_nonstring_keys = True
         elif object_hook is not None:
             mydict = dict
+
             class build_object(list):
                 def get_result(self, token):
                     return object_hook(mydict(self))
+
             self.disallow_multiple_object_keys = True
             self.disallow_nonstring_keys = True
         else:
@@ -347,7 +335,7 @@ class Dispatcher(object):
     '''
 
     @classmethod
-    def dispatcher_factory(cls, hasattr=hasattr, tuple=tuple, sorted=sorted):
+    def dispatcher_factory(cls):
 
         self = cls()
         parser_factory = self.parser_factory
@@ -377,37 +365,25 @@ class QuotedToken(object):
     ''' Subclass or replace this if you don't like quoted string handling
     '''
 
-    if six.PY3:
-        parse_encoded_chr = chr
-        parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
-    else:
-        parse_quoted_str = staticmethod(lambda token, s: s.decode('utf-8'))
-        parse_encoded_chr = unichr
+    parse_encoded_chr = chr
+    parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
 
     parse_join_str = u''.join
     cachestrings = False
 
     quoted_splitter = re.compile(r'(\\u[0-9a-fA-F]{4}|\\.|")').split
-    if six.PY3:
-        quoted_mapper = {'\\\\': '\\',
-                         r'\"': '"',
-                         r'\/': '/',
-                         r'\b': '\b',
-                         r'\f': '\f',
-                         r'\n': '\n',
-                         r'\r': '\r',
-                         r'\t': '\t'}.get
-    else:
-        quoted_mapper = {'\\\\': u'\\',
-                         r'\"': u'"',
-                         r'\/': u'/',
-                         r'\b': u'\b',
-                         r'\f': u'\f',
-                         r'\n': u'\n',
-                         r'\r': u'\r',
-                         r'\t': u'\t'}.get
+    quoted_mapper = {
+        '\\\\': '\\',
+        r'\"': '"',
+        r'\/': '/',
+        r'\b': '\b',
+        r'\f': '\f',
+        r'\n': '\n',
+        r'\r': '\r',
+        r'\t': '\t',
+    }.get
 
-    def quoted_parse_factory(self, int=int, iter=iter, len=len):
+    def quoted_parse_factory(self):
         quoted_splitter = self.quoted_splitter
         quoted_mapper = self.quoted_mapper
         parse_quoted_str = self.parse_quoted_str
@@ -436,12 +412,9 @@ class QuotedToken(object):
                 result = [result]
                 append = result.append
                 s = iter(s)
-                if six.PY2:
-                    next_ = s.next
-                    next_()
-                else:
-                    next_ = s.__next__
-                    next_()
+
+                next_ = s.__next__
+                next_()
 
                 for special in s:
                     nonmatch = next_()
@@ -521,15 +494,9 @@ class UnquotedToken(object):
     '''
 
     use_decimal = False
-    parse_int = staticmethod(
-        lambda s: int(s.replace('_', ''), 0))
+    parse_int = staticmethod(lambda s: int(s.replace('_', ''), 0))
     parse_float = float
-    if six.PY2:
-        parse_unquoted_str = staticmethod(
-            lambda token: token[2].decode('utf-8'))
-    else:
-        parse_unquoted_str = staticmethod(
-            lambda token, unicode=str: str(token[2]))
+    parse_unquoted_str = staticmethod(lambda token: str(token[2]))
 
     special_strings = dict(true=True, false=False, null=None)
 
@@ -643,7 +610,7 @@ class EqualToken(object):
             token = next_()
             while token[5] == linenum:
                 token = next_()
-            while  token[4] > indent:
+            while token[4] > indent:
                 token = next_()
             tokens.push(token)
 
@@ -651,8 +618,7 @@ class EqualToken(object):
             indent = indent[1:] + ' '
 
             bigstring = tokens.source[-firsttok[0] + 1: -token[0]]
-            if six.PY3:
-                bigstring = bigstring.decode('utf-8')
+            bigstring = bigstring.decode('utf-8')
             stringlist = bigstring.split('\n')
             stringlist[0] = indent + stringlist[0]
             token = list(firsttok)
@@ -677,7 +643,7 @@ class RsonParser(object):
     def client_info(self, parse_locals):
         pass
 
-    def parser_factory(self, len=len, type=type, isinstance=isinstance, list=list, basestring=basestring):
+    def parser_factory(self):
 
         Tokenizer = self.Tokenizer
         tokenizer = Tokenizer.factory()
@@ -745,7 +711,7 @@ class RsonParser(object):
                         error('Unexpected trailing comma', token)
                     break
                 key = json_value_dispatch(t0, bad_dict_key)(token, next)
-                if disallow_nonstring_keys and not isinstance(key, basestring):
+                if disallow_nonstring_keys and not isinstance(key, str):
                     error('Non-string key %s not supported' % repr(key), token)
                 token = next()
                 t0 = token[1]
@@ -886,7 +852,7 @@ class RsonParser(object):
                 error("rson client's object handlers do not support chained objects", token)
             if disallow_nonstring_keys:
                 for key in entry[:-1]:
-                    if not isinstance(key, basestring):
+                    if not isinstance(key, str):
                         error('Non-string key %s not supported' % repr(key), token)
             mydict.append(entry)
             return token
