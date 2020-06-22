@@ -64,7 +64,7 @@ Install from PyPI
 The latest released version may be installed from PyPI by using
 ``pip``.
 
-    $ pip install --user rst2pdf
+    $ pip3 install --user rst2pdf
 
 Install from Snap
 ~~~~~~~~~~~~~~~~~
@@ -84,7 +84,7 @@ can clone the repository and install this version::
     $ git clone https://github.com/rst2pdf/rst2pdf
     $ cd rst2pdf
     $ git checkout <desired-branch> # if you want something other than master
-    $ pip install --user .
+    $ pip3 install --user .
 
 You may want to install it in a virtualenv, but that is beyond the scope
 of this readme.
