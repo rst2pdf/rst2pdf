@@ -1,75 +1,67 @@
 styles:
-    pygments-bp: {parent: code, textColor: black}
-    pygments-c:
+    pygments-bp:
         fontName: stdMonoItalic
         parent: code
         textColor: black
+
+    pygments-c:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #888888
 
     pygments-c1:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #888888
 
     pygments-ch:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #888888
 
     pygments-cm:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #888888
 
-    pygments-cp: {parent: code, textColor: black}
+    pygments-cp:
+        fontName: stdMonoBold
+        parent: code
+        textColor: #888888
+
     pygments-cpf:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #888888
 
     pygments-cs:
-        fontName: stdMonoItalic
+        fontName: stdMonoBold
         parent: code
-        textColor: black
+        textColor: #888888
 
     pygments-dl:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-err: {parent: code, textColor: black}
     pygments-esc: {parent: code, textColor: black}
-    pygments-fm: {parent: code, textColor: black}
-    pygments-g: {parent: code, textColor: black}
-    pygments-gd: {parent: code, textColor: black}
-    pygments-ge:
+    pygments-fm:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
-    pygments-gh:
-        fontName: stdMonoBold
-        parent: code
-        textColor: black
-
+    pygments-g: {parent: code, textColor: black}
+    pygments-gd: {parent: code, textColor: black}
+    pygments-ge: {parent: code, textColor: black}
+    pygments-gh: {parent: code, textColor: black}
     pygments-gi: {parent: code, textColor: black}
     pygments-go: {parent: code, textColor: black}
-    pygments-gp:
-        fontName: stdMonoBold
-        parent: code
-        textColor: black
-
+    pygments-gp: {parent: code, textColor: black}
     pygments-gr: {parent: code, textColor: black}
-    pygments-gs:
-        fontName: stdMonoBold
-        parent: code
-        textColor: black
-
+    pygments-gs: {parent: code, textColor: black}
     pygments-gt: {parent: code, textColor: black}
-    pygments-gu:
-        fontName: stdMonoBold
-        parent: code
-        textColor: black
-
+    pygments-gu: {parent: code, textColor: black}
     pygments-hll:
         backColor: #ffffcc
         parent: code
@@ -87,7 +79,7 @@ styles:
         textColor: black
 
     pygments-kd:
-        fontName: stdMonoBold
+        fontName: stdMonoItalic
         parent: code
         textColor: black
 
@@ -96,13 +88,21 @@ styles:
         parent: code
         textColor: black
 
-    pygments-kp: {parent: code, textColor: black}
+    pygments-kp:
+        fontName: stdMonoBold
+        parent: code
+        textColor: black
+
     pygments-kr:
         fontName: stdMonoBold
         parent: code
         textColor: black
 
-    pygments-kt: {parent: code, textColor: black}
+    pygments-kt:
+        fontName: stdMonoBold
+        parent: code
+        textColor: black
+
     pygments-l: {parent: code, textColor: black}
     pygments-ld: {parent: code, textColor: black}
     pygments-m: {parent: code, textColor: black}
@@ -113,37 +113,41 @@ styles:
     pygments-mo: {parent: code, textColor: black}
     pygments-n: {parent: code, textColor: black}
     pygments-na: {parent: code, textColor: black}
-    pygments-nb: {parent: code, textColor: black}
-    pygments-nc:
-        fontName: stdMonoBold
+    pygments-nb:
+        fontName: stdMonoItalic
         parent: code
         textColor: black
+
+    pygments-nc:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
 
     pygments-nd: {parent: code, textColor: black}
-    pygments-ne:
-        fontName: stdMonoBold
+    pygments-ne: {parent: code, textColor: black}
+    pygments-nf:
+        fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
-    pygments-nf: {parent: code, textColor: black}
-    pygments-ni:
-        fontName: stdMonoBold
-        parent: code
-        textColor: black
-
+    pygments-ni: {parent: code, textColor: black}
     pygments-nl: {parent: code, textColor: black}
     pygments-nn:
-        fontName: stdMonoBold
+        fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
-    pygments-no: {parent: code, textColor: black}
-    pygments-nt:
-        fontName: stdMonoBold
+    pygments-no:
+        fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
-    pygments-nv: {parent: code, textColor: black}
+    pygments-nt: {parent: code, textColor: black}
+    pygments-nv:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
+
     pygments-nx: {parent: code, textColor: black}
     pygments-o: {parent: code, textColor: black}
     pygments-ow:
@@ -156,71 +160,87 @@ styles:
     pygments-s:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-s1:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-s2:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sa:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sb:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sc:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sd:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-se:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sh:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-si:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sr:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-ss:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
     pygments-sx:
         fontName: stdMonoItalic
         parent: code
-        textColor: black
+        textColor: #666666
 
-    pygments-vc: {parent: code, textColor: black}
-    pygments-vg: {parent: code, textColor: black}
-    pygments-vi: {parent: code, textColor: black}
-    pygments-vm: {parent: code, textColor: black}
+    pygments-vc:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
+
+    pygments-vg:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
+
+    pygments-vi:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
+
+    pygments-vm:
+        fontName: stdMonoItalic
+        parent: code
+        textColor: #666666
+
     pygments-w: {parent: code, textColor: black}
     pygments-x: {parent: code, textColor: black}

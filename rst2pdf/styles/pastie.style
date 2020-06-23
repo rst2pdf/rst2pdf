@@ -2,22 +2,35 @@ styles:
     pygments-bp: {parent: code, textColor: #003388}
     pygments-c: {parent: code, textColor: #888888}
     pygments-c1: {parent: code, textColor: #888888}
+    pygments-ch: {parent: code, textColor: #888888}
     pygments-cm: {parent: code, textColor: #888888}
     pygments-cp:
         fontName: stdMonoBold
         parent: code
         textColor: #cc0000
 
+    pygments-cpf: {parent: code, textColor: #888888}
     pygments-cs:
         backColor: #fff0f0
         fontName: stdMonoBold
         parent: code
         textColor: #cc0000
 
+    pygments-dl:
+        backColor: #fff0f0
+        parent: code
+        textColor: #dd2200
+
     pygments-err:
         backColor: #e3d2d2
         parent: code
         textColor: #a61717
+
+    pygments-esc: {parent: code, textColor: black}
+    pygments-fm:
+        fontName: stdMonoBold
+        parent: code
+        textColor: #0066bb
 
     pygments-g: {parent: code, textColor: black}
     pygments-gd:
@@ -30,7 +43,7 @@ styles:
         parent: code
         textColor: black
 
-    pygments-gh: {parent: code, textColor: #303030}
+    pygments-gh: {parent: code, textColor: #333333}
     pygments-gi:
         backColor: #ddffdd
         parent: code
@@ -45,7 +58,7 @@ styles:
         textColor: black
 
     pygments-gt: {parent: code, textColor: #aa0000}
-    pygments-gu: {parent: code, textColor: #606060}
+    pygments-gu: {parent: code, textColor: #666666}
     pygments-hll:
         backColor: #ffffcc
         parent: code
@@ -90,6 +103,11 @@ styles:
     pygments-l: {parent: code, textColor: black}
     pygments-ld: {parent: code, textColor: black}
     pygments-m:
+        fontName: stdMonoBold
+        parent: code
+        textColor: #0000DD
+
+    pygments-mb:
         fontName: stdMonoBold
         parent: code
         textColor: #0000DD
@@ -179,6 +197,11 @@ styles:
         parent: code
         textColor: #dd2200
 
+    pygments-sa:
+        backColor: #fff0f0
+        parent: code
+        textColor: #dd2200
+
     pygments-sb:
         backColor: #fff0f0
         parent: code
@@ -227,5 +250,6 @@ styles:
     pygments-vc: {parent: code, textColor: #336699}
     pygments-vg: {parent: code, textColor: #dd7700}
     pygments-vi: {parent: code, textColor: #3333bb}
+    pygments-vm: {parent: code, textColor: #336699}
     pygments-w: {parent: code, textColor: #bbbbbb}
     pygments-x: {parent: code, textColor: black}
