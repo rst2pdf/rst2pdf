@@ -93,6 +93,22 @@ It's important that you do it this way because it means that the rest of us
 know what you are doing. It also means you don't break rst2pdf.
 
 
+Pre-commit
+~~~~~~~~~~
+
+*rst2pdf* uses the `pre-commit`__ framework to automate various style checkers.
+This must be enabled locally. You can install this using *pip* or your local
+package manager. For example, to install using *pip*::
+
+    pip install pre-commit
+
+Once installed, enable it like so::
+
+    pre-commit install --allow-missing-config
+
+.. __: https://pre-commit.com/
+
+
 Continuous Integration
 ~~~~~~~~~~~~~~~~~~~~~~
 

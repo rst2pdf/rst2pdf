@@ -1,0 +1,17 @@
+[tool.black]
+line-length = 88
+target-version = ['py36']
+skip-string-normalization = true
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.tox
+    | \.venv
+    | build
+    | dist
+  )/
+  | rst2pdf/tests/input
+)
+'''
