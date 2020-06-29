@@ -2,7 +2,6 @@
 filter_secrets: false
 os: linux
 dist: xenial
-
 addons:
   apt:
     packages:
@@ -10,17 +9,28 @@ addons:
       - texlive-latex-base
       - dvipng
       - plantuml
-
 language: python
-python:
-  - 3.6
-  - 3.7
-  - 3.8
-
-before_install:
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pre-commit
+install:
   - pip install --upgrade setuptools
-  - pip install pytest
-  - pip install -c requirements.txt -e .[tests,sphinx,images,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-
+  - pip install pytest pre-commit
+  - pip install -c requirements.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+env:
+  - TEST_CMD="pytest"
 script:
-  - pytest
+  - $TEST_CMD
+matrix:
+  include:
+    - name: "lint"
+      python: 3.6
+      env:
+        - TEST_CMD="pre-commit run --all-files"
+    - name: "3.6"
+      python: 3.6
+    - name: "3.7"
+      python: 3.7
+    - name: "3.8"
+      python: 3.8
