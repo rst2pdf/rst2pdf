@@ -1,0 +1,14 @@
+# Commits to be ignored when running `git blame`
+#
+# Use by setting this config locally:
+#     git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# or by on the command line:
+#     git blame --ignore-revs-file .git-blame-ignore-revs <filename>
+
+
+# Run code through black
+825ba00bb95c0a9bb801ccb4c6dd74ec7b59b59e
+
+# Resolve various style issues
+a6aff6bf8da21a4e6377238ae95b3c9bb941d655

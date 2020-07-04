@@ -93,6 +93,17 @@ It's important that you do it this way because it means that the rest of us
 know what you are doing. It also means you don't break rst2pdf.
 
 
+Git config
+~~~~~~~~~~
+
+After the mass-reformatting in PR 877, it is helpful to ignore the relevant
+commits that simply reformatted the code when using git blame.
+
+The ``..git-blame-ignore-revs`` file contains the list of commits to ignore
+and you can use this git config line to make ``git blame`` work more usefully::
+
+    git config blame.ignoreRevsFile .git-blame-ignore-revs
+
 Pre-commit
 ~~~~~~~~~~
 
