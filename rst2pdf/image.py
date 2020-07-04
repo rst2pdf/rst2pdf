@@ -32,8 +32,9 @@ else:
 missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
 
-def defaultimage(filename, width=None, height=None, kind='direct',
-                                        mask="auto", lazy=1, srcinfo=None):
+def defaultimage(
+    filename, width=None, height=None, kind='direct', mask="auto", lazy=1, srcinfo=None,
+):
     ''' We have multiple image backends, including the stock reportlab one.
         This wrapper around the reportlab one allows us to pass the client
         RstToPdf object and the uri into all our backends, which they can
@@ -42,7 +43,7 @@ def defaultimage(filename, width=None, height=None, kind='direct',
     return Image(filename, width, height, kind, mask, lazy)
 
 
-class MyImage (Flowable):
+class MyImage(Flowable):
     """A Image subclass that can:
 
     1. Take a 'percentage_of_container' kind,
@@ -60,8 +61,10 @@ class MyImage (Flowable):
         if cls.warned or PILImage:
             return
         cls.warned = True
-        log.warning("Support for images other than JPG,"
-            " is now limited. Please install Pillow.")
+        log.warning(
+            "Support for images other than JPG,"
+            " is now limited. Please install Pillow."
+        )
 
     @staticmethod
     def split_uri(uri):
@@ -77,13 +80,22 @@ class MyImage (Flowable):
         options = extra[1]
         return fname, extension, options
 
-    def __init__(self, filename, width=None, height=None,
-                 kind='direct', mask="auto", lazy=1, client=None, target=None):
+    def __init__(
+        self,
+        filename,
+        width=None,
+        height=None,
+        kind='direct',
+        mask="auto",
+        lazy=1,
+        client=None,
+        target=None,
+    ):
         # Client is mandatory.  Perhaps move it farther up if we refactor
         assert client is not None
-        self.__kind=kind
+        self.__kind = kind
 
-        if filename.split("://")[0].lower() in ('http','ftp','https'):
+        if filename.split("://")[0].lower() in ('http', 'ftp', 'https'):
             try:
                 filename2, _ = urlretrieve(filename)
                 if filename != filename2:
@@ -91,21 +103,23 @@ class MyImage (Flowable):
                     filename = filename2
             except IOError:
                 filename = missing
-        self.filename, self._backend=self.get_backend(filename, client)
+        self.filename, self._backend = self.get_backend(filename, client)
         srcinfo = client, self.filename
 
         if kind == 'percentage_of_container':
-            self.image=self._backend(self.filename, width, height,
-                'direct', mask, lazy, srcinfo)
-            self.image.drawWidth=width
-            self.image.drawHeight=height
-            self.__width=width
-            self.__height=height
+            self.image = self._backend(
+                self.filename, width, height, 'direct', mask, lazy, srcinfo
+            )
+            self.image.drawWidth = width
+            self.image.drawHeight = height
+            self.__width = width
+            self.__height = height
         else:
-            self.image=self._backend(self.filename, width, height,
-                kind, mask, lazy, srcinfo)
-        self.__ratio=float(self.image.imageWidth)/self.image.imageHeight
-        self.__wrappedonce=False
+            self.image = self._backend(
+                self.filename, width, height, kind, mask, lazy, srcinfo
+            )
+        self.__ratio = float(self.image.imageWidth) / self.image.imageHeight
+        self.__wrappedonce = False
         self.target = target
 
     @classmethod
@@ -114,7 +128,7 @@ class MyImage (Flowable):
         reportlab can process"""
 
         if not os.path.exists(filename):
-            log.error("Missing image file: %s",filename)
+            log.error("Missing image file: %s", filename)
             return missing
 
         try:
@@ -127,13 +141,13 @@ class MyImage (Flowable):
         # Last resort: try everything
 
         if PILImage:
-            ext='.png'
+            ext = '.png'
         else:
-            ext='.jpg'
+            ext = '.jpg'
 
         extension = os.path.splitext(filename)[-1][1:].lower()
 
-        if PILImage: # See if pil can process it
+        if PILImage:  # See if pil can process it
             try:
                 PILImage.open(filename)
                 return filename
@@ -143,9 +157,8 @@ class MyImage (Flowable):
 
         # PIL can't, so we can't
         self.support_warning()
-        log.error("Couldn't load image [%s]"%filename)
+        log.error("Couldn't load image [%s]" % filename)
         return missing
-
 
     @classmethod
     def get_backend(self, uri, client):
@@ -165,26 +178,25 @@ class MyImage (Flowable):
 
         backend = defaultimage
 
-
         # Extract all the information from the URI
         filename, extension, options = self.split_uri(uri)
 
         if '*' in filename:
-            preferred=['gif','jpg','png', 'svg', 'pdf']
+            preferred = ['gif', 'jpg', 'png', 'svg', 'pdf']
 
             # Find out what images are available
             available = glob.glob(filename)
-            cfn=available[0]
-            cv=-10
+            cfn = available[0]
+            cv = -10
             for fn in available:
-                ext=fn.split('.')[-1]
+                ext = fn.split('.')[-1]
                 if ext in preferred:
-                    v=preferred.index(ext)
+                    v = preferred.index(ext)
                 else:
-                    v=-1
+                    v = -1
                 if v > cv:
-                    cv=v
-                    cfn=fn
+                    cv = v
+                    cfn = fn
             # cfn should have our favourite type of
             # those available
             filename = cfn
@@ -193,27 +205,31 @@ class MyImage (Flowable):
 
         # If the image doesn't exist, we use a 'missing' image
         if not os.path.exists(filename):
-            log.error("Missing image file: %s",filename)
+            log.error("Missing image file: %s", filename)
             filename = missing
 
-        if extension in ['svg','svgz']:
-            log.info('Backend for %s is SVGIMage'%filename)
-            backend=SVGImage
+        if extension in ['svg', 'svgz']:
+            log.info('Backend for %s is SVGIMage' % filename)
+            backend = SVGImage
 
         elif extension in ['pdf']:
             if VectorPdf is not None and filename is not missing:
                 backend = VectorPdf
                 filename = uri
             else:
-                log.warning("Minimal PDF image support "\
-                    "requires the vectorpdf extension [%s]", filename)
+                log.warning(
+                    "Minimal PDF image support "
+                    "requires the vectorpdf extension [%s]",
+                    filename,
+                )
                 filename = missing
         elif extension != 'jpg' and not PILImage:
             # No way to make this work
-            log.error('To use a %s image you need Pillow installed [%s]',extension,filename)
-            filename=missing
+            log.error(
+                'To use a %s image you need Pillow installed [%s]', extension, filename,
+            )
+            filename = missing
         return filename, backend
-
 
     @classmethod
     def size_for_node(self, node, client):
@@ -222,8 +238,8 @@ class MyImage (Flowable):
         That involves lots of guesswork'''
 
         uri = str(node.get("uri"))
-        if uri.split("://")[0].lower() not in ('http','ftp','https'):
-            uri = os.path.join(client.basedir,uri)
+        if uri.split("://")[0].lower() not in ('http', 'ftp', 'https'):
+            uri = os.path.join(client.basedir, uri)
         else:
             uri, _ = urlretrieve(uri)
             client.to_unlink.append(uri)
@@ -235,7 +251,7 @@ class MyImage (Flowable):
         if not os.path.isfile(imgname):
             imgname = missing
 
-        scale = float(node.get('scale', 100))/100
+        scale = float(node.get('scale', 100)) / 100
         size_known = False
 
         # Figuring out the size to display of an image is ... annoying.
@@ -250,7 +266,7 @@ class MyImage (Flowable):
         kind = 'direct'
         xdpi, ydpi = client.styles.def_dpi, client.styles.def_dpi
         extension = imgname.split('.')[-1].lower()
-        if extension in ['svg','svgz']:
+        if extension in ['svg', 'svgz']:
             iw, ih = SVGImage(imgname, srcinfo=srcinfo).wrap(0, 0)
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
@@ -278,17 +294,23 @@ class MyImage (Flowable):
                     iw, ih = img.size
                     xdpi, ydpi = img.info.get('dpi', (xdpi, ydpi))
                     keeptrying = False
-                except IOError: # PIL throws this when it's a broken/unknown image
+                except IOError:  # PIL throws this when it's a broken/unknown image
                     pass
             if keeptrying:
                 if extension not in ['jpg', 'jpeg']:
-                    log.error("The image (%s, %s) is broken or in an unknown format"
-                                , imgname, nodeid(node))
+                    log.error(
+                        "The image (%s, %s) is broken or in an unknown format",
+                        imgname,
+                        nodeid(node),
+                    )
                     raise ValueError
                 else:
                     # Can be handled by reportlab
-                    log.warning("Can't figure out size of the image (%s, %s). Install PIL for better results."
-                                , imgname, nodeid(node))
+                    log.warning(
+                        "Can't figure out size of the image (%s, %s). Install PIL for better results.",
+                        imgname,
+                        nodeid(node),
+                    )
                     iw = 1000
                     ih = 1000
 
@@ -304,60 +326,71 @@ class MyImage (Flowable):
 
         w = node.get('width')
         h = node.get('height')
-        if h is None and w is None: # Nothing specified
+        if h is None and w is None:  # Nothing specified
             # Guess from iw, ih
-            log.debug("Using image %s without specifying size."
+            log.debug(
+                "Using image %s without specifying size."
                 "Calculating based on image size at %ddpi [%s]",
-                imgname, xdpi, nodeid(node))
-            w = iw*inch/xdpi
-            h = ih*inch/ydpi
+                imgname,
+                xdpi,
+                nodeid(node),
+            )
+            w = iw * inch / xdpi
+            h = ih * inch / ydpi
         elif w is not None:
             # Node specifies only w
             # In this particular case, we want the default unit
             # to be pixels so we work like rst2html
             if w[-1] == '%':
                 kind = 'percentage_of_container'
-                w=int(w[:-1])
+                w = int(w[:-1])
             else:
                 # This uses default DPI setting because we
                 # are not using the image's "natural size"
                 # this is what LaTeX does, according to the
                 # docutils mailing list discussion
-                w = client.styles.adjustUnits(w, client.styles.tw,
-                                            default_unit='px')
+                w = client.styles.adjustUnits(w, client.styles.tw, default_unit='px')
 
             if h is None:
                 # h is set from w with right aspect ratio
-                h = w*ih/iw
+                h = w * ih / iw
             else:
-                h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
+                h = client.styles.adjustUnits(h, ih * inch / ydpi, default_unit='px')
         elif h is not None and w is None:
             if h[-1] != '%':
-                h = client.styles.adjustUnits(h, ih*inch/ydpi, default_unit='px')
+                h = client.styles.adjustUnits(h, ih * inch / ydpi, default_unit='px')
 
                 # w is set from h with right aspect ratio
-                w = h*iw/ih
+                w = h * iw / ih
             else:
-                log.error('Setting height as a percentage does **not** work. '\
-                          'ignoring height parameter [%s]', nodeid(node))
+                log.error(
+                    'Setting height as a percentage does **not** work. '
+                    'ignoring height parameter [%s]',
+                    nodeid(node),
+                )
                 # Set both from image data
-                w = iw*inch/xdpi
-                h = ih*inch/ydpi
+                w = iw * inch / xdpi
+                h = ih * inch / ydpi
 
         # Apply scale factor
-        w = w*scale
-        h = h*scale
+        w = w * scale
+        h = h * scale
 
         # And now we have this probably completely bogus size!
-        log.info("Image %s size calculated:  %fcm by %fcm [%s]",
-            imgname, w/cm, h/cm, nodeid(node))
+        log.info(
+            "Image %s size calculated:  %fcm by %fcm [%s]",
+            imgname,
+            w / cm,
+            h / cm,
+            nodeid(node),
+        )
 
         return w, h, kind
 
-    def _restrictSize(self,aW,aH):
+    def _restrictSize(self, aW, aH):
         return self.image._restrictSize(aW, aH)
 
-    def _unRestrictSize(self,aW,aH):
+    def _unRestrictSize(self, aW, aH):
         return self.image._unRestrictSize(aW, aH)
 
     def __deepcopy__(self, *whatever):
@@ -366,15 +399,17 @@ class MyImage (Flowable):
         return copy(self)
 
     def wrap(self, availWidth, availHeight):
-        if self.__kind=='percentage_of_container':
-            w, h= self.__width, self.__height
+        if self.__kind == 'percentage_of_container':
+            w, h = self.__width, self.__height
             if not w:
-                log.warning('Scaling image as % of container with w unset.'
-                'This should not happen, setting to 100')
+                log.warning(
+                    'Scaling image as % of container with w unset.'
+                    'This should not happen, setting to 100'
+                )
                 w = 100
-            scale=w/100.
-            w = availWidth*scale
-            h = w/self.__ratio
+            scale = w / 100.0
+            w = availWidth * scale
+            h = w / self.__ratio
             self.image.drawWidth, self.image.drawHeight = w, h
             return w, h
         else:
@@ -387,14 +422,16 @@ class MyImage (Flowable):
                     # adjust by height
                     # FIXME get rst file info (line number)
                     # here for better error message
-                    log.warning('image %s is too tall for the '\
-                                'frame, rescaling'%\
-                                self.filename)
+                    log.warning(
+                        'image %s is too tall for the '
+                        'frame, rescaling' % self.filename
+                    )
                     self.image.drawHeight = availHeight
-                    self.image.drawWidth = availHeight*self.__ratio
+                    self.image.drawWidth = availHeight * self.__ratio
             elif self.image.drawWidth > availWidth:
-                log.warning('image %s is too wide for the frame, rescaling'%\
-                            self.filename)
+                log.warning(
+                    'image %s is too wide for the frame, rescaling' % self.filename
+                )
                 self.image.drawWidth = availWidth
                 self.image.drawHeight = availWidth / self.__ratio
             return self.image.wrap(availWidth, availHeight)
@@ -403,15 +440,18 @@ class MyImage (Flowable):
         if self.target:
             offset = 0
             if self.image.hAlign == 'CENTER':
-                offset = _sW / 2.
+                offset = _sW / 2.0
             elif self.image.hAlign == 'RIGHT':
                 offset = _sW
-            canv.linkURL(self.target,
-                    (
-                    x + offset, y,
+            canv.linkURL(
+                self.target,
+                (
+                    x + offset,
+                    y,
                     x + offset + self.image.drawWidth,
-                    y + self.image.drawHeight),
-                    relative = True,
-                    #thickness = 3,
-                    )
+                    y + self.image.drawHeight,
+                ),
+                relative=True,
+                # thickness = 3,
+            )
         return self.image.drawOn(canv, x, y, _sW)

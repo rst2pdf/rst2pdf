@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#$URL$
-#$Date$
-#$Revision$
+# $URL$
+# $Date$
+# $Revision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date$
@@ -64,6 +64,7 @@ unstyled_tokens = ['']
 # It does not require anything of docutils and could also become a part of
 # pygments::
 
+
 class DocutilsInterface(object):
     """Parse `code` string and yield "classified" tokens.
 
@@ -89,14 +90,11 @@ class DocutilsInterface(object):
         # Get lexer for language (use text as fallback)
         try:
             if self.language and str(self.language).lower() != 'none':
-                lexer = get_lexer_by_name(self.language.lower(),
-                                        **self.custom_args
-                                        )
+                lexer = get_lexer_by_name(self.language.lower(), **self.custom_args)
             else:
                 lexer = get_lexer_by_name('text', **self.custom_args)
         except ValueError:
-            log.info("no pygments lexer for %s, using 'text'" \
-                % self.language)
+            log.info("no pygments lexer for %s, using 'text'" % self.language)
             # what happens if pygment isn't present ?
             lexer = get_lexer_by_name('text')
         return pygments.lex(self.code, lexer)
@@ -110,9 +108,9 @@ class DocutilsInterface(object):
             if ttype is lasttype:
                 lastval += value
             else:
-                yield(lasttype, lastval)
+                yield (lasttype, lastval)
                 (lasttype, lastval) = (ttype, value)
-        yield(lasttype, lastval)
+        yield (lasttype, lastval)
 
     def __iter__(self):
         """parse code string and yield "clasified" tokens
@@ -133,8 +131,18 @@ class DocutilsInterface(object):
 # --------------------
 # ::
 
-def code_block_directive(name, arguments, options, content, lineno,
-                       content_offset, block_text, state, state_machine):
+
+def code_block_directive(
+    name,
+    arguments,
+    options,
+    content,
+    lineno,
+    content_offset,
+    block_text,
+    state,
+    state_machine,
+):
     """Parse and classify content of a code_block."""
     if 'include' in options:
         try:
@@ -143,7 +151,7 @@ def code_block_directive(name, arguments, options, content, lineno,
             else:
                 encoding = 'utf-8'
             content = codecs.open(options['include'], 'r', encoding).read().rstrip()
-        except (IOError, UnicodeError): # no file or problem finding it or reading it
+        except (IOError, UnicodeError):  # no file or problem finding it or reading it
             log.error('Error reading file: "%s" L %s' % (options['include'], lineno))
             content = u''
         line_offset = 0
@@ -162,8 +170,10 @@ def code_block_directive(name, arguments, options, content, lineno,
                 # skip content in include_text before *and NOT incl.* a matching text
                 after_index = content.find(after_text)
                 if after_index < 0:
-                    raise state_machine.reporter.severe('Problem with "start-at" option of "%s" '
-                                      'code-block directive:\nText not found.' % options['start-at'])
+                    raise state_machine.reporter.severe(
+                        'Problem with "start-at" option of "%s" '
+                        'code-block directive:\nText not found.' % options['start-at']
+                    )
                 # patch mmueller start
                 # Move the after_index to the beginning of the line with the
                 # match.
@@ -186,8 +196,11 @@ def code_block_directive(name, arguments, options, content, lineno,
                 # skip content in include_text before *and incl.* a matching text
                 after_index = content.find(after_text)
                 if after_index < 0:
-                    raise state_machine.reporter.severe('Problem with "start-after" option of "%s" '
-                                      'code-block directive:\nText not found.' % options['start-after'])
+                    raise state_machine.reporter.severe(
+                        'Problem with "start-after" option of "%s" '
+                        'code-block directive:\nText not found.'
+                        % options['start-after']
+                    )
                 after_index = after_index + len(after_text)
 
                 # Move the after_index to the start of the line after the match
@@ -199,24 +212,27 @@ def code_block_directive(name, arguments, options, content, lineno,
                 line_offset = len(content[:after_index].splitlines())
                 content = content[after_index:]
 
-
             # same changes here for the same reason
             before_text = options.get('end-at', None)
             if before_text:
                 # skip content in include_text after *and incl.* a matching text
                 before_index = content.find(before_text)
                 if before_index < 0:
-                    raise state_machine.reporter.severe('Problem with "end-at" option of "%s" '
-                                      'code-block directive:\nText not found.' % options['end-at'])
-                content = content[:before_index + len(before_text)]
+                    raise state_machine.reporter.severe(
+                        'Problem with "end-at" option of "%s" '
+                        'code-block directive:\nText not found.' % options['end-at']
+                    )
+                content = content[: before_index + len(before_text)]
 
             before_text = options.get('end-before', None)
             if before_text:
                 # skip content in include_text after *and NOT incl.* a matching text
                 before_index = content.find(before_text)
                 if before_index < 0:
-                    raise state_machine.reporter.severe('Problem with "end-before" option of "%s" '
-                                      'code-block directive:\nText not found.' % options['end-before'])
+                    raise state_machine.reporter.severe(
+                        'Problem with "end-before" option of "%s" '
+                        'code-block directive:\nText not found.' % options['end-before']
+                    )
                 content = content[:before_index]
 
     else:
@@ -228,7 +244,7 @@ def code_block_directive(name, arguments, options, content, lineno,
     else:
         tabw = int(options.get('tab-width', 8))
 
-    content = content.replace('\t',' '*tabw)
+    content = content.replace('\t', ' ' * tabw)
 
     hl_lines = options.get('hl_lines', [])
     withln = "linenos" in options
@@ -251,7 +267,9 @@ def code_block_directive(name, arguments, options, content, lineno,
         linenumber_cls = 'linenumber'
         if hl_lines and lineno not in hl_lines:
             linenumber_cls = 'pygments-diml'
-        code_block += nodes.inline(fstr[1:] % lineno, fstr[1:] % lineno, classes=[linenumber_cls])
+        code_block += nodes.inline(
+            fstr[1:] % lineno, fstr[1:] % lineno, classes=[linenumber_cls]
+        )
 
     # parse content with pygments and add to code_block element
     for cls, value in DocutilsInterface(content, language, options):
@@ -259,7 +277,9 @@ def code_block_directive(name, arguments, options, content, lineno,
             cls = "diml"
         if withln and "\n" in value:
             linenumber_cls = 'linenumber'
-            if hl_lines and (lineno+1) not in hl_lines: # use lineno+1 as we're on the previous line when we render the next line number
+            if (
+                hl_lines and (lineno + 1) not in hl_lines
+            ):  # use lineno+1 as we're on the previous line when we render the next line number
                 linenumber_cls = 'pygments-diml'
             # Split on the "\n"s
             values = value.split("\n")
@@ -269,7 +289,9 @@ def code_block_directive(name, arguments, options, content, lineno,
             linenos = range(lineno, lineno + len(values))
             for chunk, ln in list(zip(values, linenos))[1:]:
                 if ln <= total_lines:
-                    code_block += nodes.inline(fstr % ln, fstr % ln, classes=[linenumber_cls])
+                    code_block += nodes.inline(
+                        fstr % ln, fstr % ln, classes=[linenumber_cls]
+                    )
                     code_block += nodes.Text(chunk, chunk)
             lineno += len(values) - 1
 
@@ -285,11 +307,13 @@ def code_block_directive(name, arguments, options, content, lineno,
 
     return [code_block]
 
+
 # Custom argument validators
 # --------------------------
 # ::
 #
 # Move to separated module??
+
 
 def zero_or_positive_int(argument):
     """
@@ -317,6 +341,7 @@ def string_list(argument):
         entries = argument.split()
     return entries
 
+
 def string_bool(argument):
     """
     Converts True, true, False, False in python boolean values
@@ -330,19 +355,19 @@ def string_bool(argument):
     elif argument.lower() == 'false':
         return False
     else:
-        raise ValueError('"%s" unknown; choose from "True" or "False"'
-                        % argument)
+        raise ValueError('"%s" unknown; choose from "True" or "False"' % argument)
+
 
 def csharp_unicodelevel(argument):
     return directives.choice(argument, ('none', 'basic', 'full'))
 
+
 def lhs_litstyle(argument):
     return directives.choice(argument, ('bird', 'latex'))
 
+
 def raw_compress(argument):
     return directives.choice(argument, ('gz', 'bz2'))
-
-
 
 
 # Register Directive
@@ -351,50 +376,50 @@ def raw_compress(argument):
 
 code_block_directive.arguments = (0, 1, 1)
 code_block_directive.content = 1
-code_block_directive.options = {'include': directives.unchanged_required,
-                                'start-at': directives.unchanged_required,
-                                'end-at': directives.unchanged_required,
-                                'start-after': directives.unchanged_required,
-                                'end-before': directives.unchanged_required,
-                                'linenos': directives.unchanged,
-                                'linenos_offset': zero_or_positive_int,
-                                'tab-width': directives.unchanged,
-                                'hl_lines': directives.positive_int_list,
-                                # generic
-                                'stripnl' : string_bool,
-                                'stripall': string_bool,
-                                'ensurenl': string_bool,
-                                'tabsize' : directives.positive_int,
-                                'encoding': directives.encoding,
-                                # Lua
-                                'func_name_hightlighting':string_bool,
-                                'disabled_modules': string_list,
-                                # Python Console
-                                'python3': string_bool,
-                                # Delphi
-                                'turbopascal':string_bool,
-                                'delphi' :string_bool,
-                                'freepascal': string_bool,
-                                'units': string_list,
-                                # Modula2
-                                'pim'   : string_bool,
-                                'iso'   : string_bool,
-                                'objm2' : string_bool,
-                                'gm2ext': string_bool,
-                                # CSharp
-                                'unicodelevel' : csharp_unicodelevel,
-                                # Literate haskell
-                                'litstyle' : lhs_litstyle,
-                                # Raw
-                                'compress': raw_compress,
-                                # Rst
-                                'handlecodeblocks': string_bool,
-                                # Php
-                                'startinline': string_bool,
-                                'funcnamehighlighting': string_bool,
-                                'disabledmodules': string_list,
-                                }
-
+code_block_directive.options = {
+    'include': directives.unchanged_required,
+    'start-at': directives.unchanged_required,
+    'end-at': directives.unchanged_required,
+    'start-after': directives.unchanged_required,
+    'end-before': directives.unchanged_required,
+    'linenos': directives.unchanged,
+    'linenos_offset': zero_or_positive_int,
+    'tab-width': directives.unchanged,
+    'hl_lines': directives.positive_int_list,
+    # generic
+    'stripnl': string_bool,
+    'stripall': string_bool,
+    'ensurenl': string_bool,
+    'tabsize': directives.positive_int,
+    'encoding': directives.encoding,
+    # Lua
+    'func_name_hightlighting': string_bool,
+    'disabled_modules': string_list,
+    # Python Console
+    'python3': string_bool,
+    # Delphi
+    'turbopascal': string_bool,
+    'delphi': string_bool,
+    'freepascal': string_bool,
+    'units': string_list,
+    # Modula2
+    'pim': string_bool,
+    'iso': string_bool,
+    'objm2': string_bool,
+    'gm2ext': string_bool,
+    # CSharp
+    'unicodelevel': csharp_unicodelevel,
+    # Literate haskell
+    'litstyle': lhs_litstyle,
+    # Raw
+    'compress': raw_compress,
+    # Rst
+    'handlecodeblocks': string_bool,
+    # Php
+    'startinline': string_bool,
+    'funcnamehighlighting': string_bool,
+    'disabledmodules': string_list,
+}
 
 
 # .. _doctutils: http://docutils.sf.net/
@@ -412,10 +437,12 @@ code_block_directive.options = {'include': directives.unchanged_required,
 if __name__ == '__main__':
     from docutils.core import publish_cmdline, default_description
     from docutils.parsers.rst import directives
+
     directives.register_directive('code-block', code_block_directive)
     description = "code-block directive test output" + default_description
     try:
         import locale
+
         locale.setlocale(locale.LC_ALL, '')
     except Exception:
         pass

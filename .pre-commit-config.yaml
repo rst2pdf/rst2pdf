@@ -1,0 +1,37 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+#
+# TODO(stephenfin): Enable flake8 when it's passing
+---
+default_language_version:
+  # force all unspecified python hooks to run python3
+  python: python3
+repos:
+  - repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+      - id: black
+        # NOTE(stephenfin): This is needed until the fix for
+        # https://github.com/psf/black/issues/438 is released
+        exclude: rst2pdf/tests/input
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: rst2pdf/tests/input
+      - id: mixed-line-ending
+        args: ['--fix', 'lf']
+        exclude: rst2pdf/tests/input
+      - id: check-byte-order-marker
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+        exclude: rst2pdf/tests/input
+      - id: check-yaml
+        files: .*\.(yaml|yml)$
+      - id: check-added-large-files
+#  - repo: https://gitlab.com/pycqa/flake8
+#    rev: 3.8.3
+#    hooks:
+#      - id: flake8

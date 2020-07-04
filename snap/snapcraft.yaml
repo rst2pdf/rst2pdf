@@ -1,5 +1,5 @@
 name: rst2pdf
-base: core18 
+base: core18
 version: '0.97'
 summary: Use a text editor. Make a PDF.
 description: |
@@ -24,4 +24,3 @@ apps:
       - home
       - removable-media
       - network
-

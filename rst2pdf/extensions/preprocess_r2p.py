@@ -114,6 +114,7 @@ class DummyFile(object):
     ''' Stores the path and content of a file which may, or may not,
         have been written to disk.
     '''
+
     def __init__(self, name, content):
         self.name = name
         self._content = content
@@ -130,7 +131,9 @@ class Preprocess(object):
         '''
 
         # fix keywords dict for use by the parser.
-        self.keywords = dict([(x + '::', getattr(self, 'handle_' + x)) for x in self.keywords])
+        self.keywords = dict(
+            [(x + '::', getattr(self, 'handle_' + x)) for x in self.keywords]
+        )
 
         self.widthcount = widthcount
 
@@ -181,7 +184,7 @@ class Preprocess(object):
             if not chunk.endswith('\n'):
                 continue
             result[-1] = chunk[:-1]
-            if chunk.index('\n') != len(chunk)-1:
+            if chunk.index('\n') != len(chunk) - 1:
                 continue
 
             # Parse the line to look for one of our keywords.
@@ -192,7 +195,12 @@ class Preprocess(object):
                 if func is None:
                     continue
                 chunk = chunk.split('::', 1)[1]
-            elif wasblank and len(tokens) == 1 and chunk[0].isalpha() and tokens[0].isalpha():
+            elif (
+                wasblank
+                and len(tokens) == 1
+                and chunk[0].isalpha()
+                and tokens[0].isalpha()
+            ):
                 func = handle_single
                 chunk = tokens[0]
             else:
@@ -259,8 +267,7 @@ class Preprocess(object):
         ''' Insert a raw pagebreak
         '''
         self.changed = True
-        self.result.extend(['', '', '.. raw:: pdf', '',
-                    '    PageBreak ' + chunk, ''])
+        self.result.extend(['', '', '.. raw:: pdf', '', '    PageBreak ' + chunk, ''])
 
     def handle_space(self, chunk):
         ''' Insert a raw space
@@ -268,8 +275,7 @@ class Preprocess(object):
         self.changed = True
         if len(chunk.replace(',', ' ').split()) == 1:
             chunk = '0 ' + chunk
-        self.result.extend(['', '', '.. raw:: pdf', '',
-                    '    Spacer ' + chunk, ''])
+        self.result.extend(['', '', '.. raw:: pdf', '', '    Spacer ' + chunk, ''])
 
     def handle_widths(self, chunk):
         ''' Insert a unique style in the stylesheet, and reference it
@@ -296,7 +302,9 @@ class Preprocess(object):
         values = ['%s%%' % x for x in values]
         self.widthcount += 1
         stylename = 'embeddedtablewidth%d' % self.widthcount
-        self.styles.setdefault('styles', {})[stylename] = dict(parent=parent, colWidths=values)
+        self.styles.setdefault('styles', {})[stylename] = dict(
+            parent=parent, colWidths=values
+        )
         self.result.extend(['', '', '.. class:: ' + stylename, ''])
 
     def handle_style(self, chunk):
@@ -313,9 +321,8 @@ class Preprocess(object):
             log.error("Empty .. style:: block found")
         try:
             styles = rson_loads(mystyles)
-        except ValueError as e: # Error parsing the JSON data
-                log.critical('Error parsing stylesheet "%s": %s'%\
-                    (mystyles, str(e)))
+        except ValueError as e:  # Error parsing the JSON data
+            log.critical('Error parsing stylesheet "%s": %s' % (mystyles, str(e)))
         else:
             self.styles.setdefault('styles', {}).update(styles)
 
@@ -345,7 +352,7 @@ class Preprocess(object):
     keywords = list(x[7:] for x in vars() if x.startswith('handle_'))
 
     # Generate the regular expression for parsing, and a split function using it.
-    blankline  = r'^([ \t]*\n)'
+    blankline = r'^([ \t]*\n)'
     singleword = r'^([A-Za-z]+[ \t]*\n)(?=[ \t]*\n)'
     comment = r'^(\.\.[ \t]+(?:%s)\:\:.*\n)' % '|'.join(keywords)
     expression = '(?:%s)' % '|'.join([blankline, singleword, comment])
@@ -357,12 +364,15 @@ class MyStyles(str):
         for a stylesheet that is not really a file.  It must be callable(),
         and str(x) must return the name of the stylesheet.
     '''
+
     def __new__(cls, styles):
         self = str.__new__(cls, 'Embedded Preprocess Styles')
         self.data = styles
         return self
+
     def __call__(self):
         return self.data
+
 
 def install(createpdf, options):
     ''' This is where we intercept the document conversion.

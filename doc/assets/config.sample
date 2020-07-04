@@ -42,8 +42,8 @@ fit_background_mode="center"
 
 break_level=0
 
-# How section breaks work. Can be "even", and sections start in an 
-# even page, "odd", and sections start in odd pages, or "any" and 
+# How section breaks work. Can be "even", and sections start in an
+# even page, "odd", and sections start in odd pages, or "any" and
 # sections start in the next page, be it even or odd.
 
 break_side="any"
@@ -77,10 +77,10 @@ footnote_backlinks=true
 inline_footnotes=false
 
 # Cover page template.
-# It will be searched in the document's folder, in ~/.rst2pdf/templates and 
+# It will be searched in the document's folder, in ~/.rst2pdf/templates and
 # in the templates subfolder of the package folder
 
-# custom_cover = cover.tmpl 
+# custom_cover = cover.tmpl
 
 # Use floating images.
 # Makes the behaviour of images with the :align: attribute more like rst2html's

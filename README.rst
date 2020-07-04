@@ -129,4 +129,3 @@ Contributing
 rst2pdf wishes to be a welcoming community. With that in mind, please refer to our `Community Code of Conduct`__.
 
 __ CODE_OF_CONDUCT.rst
-

@@ -12,6 +12,7 @@ from .styles import adjustUnits
 
 PageCounter = None
 
+
 def parseRaw(data, node):
     """Parse and process a simple DSL to handle creation of flowables.
 
@@ -30,8 +31,8 @@ def parseRaw(data, node):
     global PageCounter
     if PageCounter is None:
         from rst2pdf.createpdf import PageCounter as pc
-        PageCounter = pc
 
+        PageCounter = pc
 
     elements = []
     lines = data.splitlines()
@@ -64,7 +65,8 @@ def parseRaw(data, node):
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':
             elements.append(
-                flowables.MySpacer(adjustUnits(tokens[1]), adjustUnits(tokens[2])))
+                flowables.MySpacer(adjustUnits(tokens[1]), adjustUnits(tokens[2]))
+            )
         elif command == 'Transition':
             elements.append(flowables.Transition(*tokens[1:]))
         elif command == 'SetPageCounter':
@@ -72,7 +74,9 @@ def parseRaw(data, node):
         elif command == 'TextAnnotation':
             elements.append(flowables.TextAnnotation(*tokens[1:]))
         else:
-            log.error('Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node)))
+            log.error(
+                'Unknown command %s in raw pdf directive [%s]' % (command, nodeid(node))
+            )
     return elements
 
 
@@ -124,17 +128,23 @@ if HAS_XHTML2PDF:
                 media = [x.strip() for x in attr.media.lower().split(",") if x.strip()]
                 # print repr(media)
 
-                if (attr.get("type", "").lower() in ("", "text/css")
-                        and (not media or "all" in media or "print" in media
-                             or "pdf" in media)):
+                if attr.get("type", "").lower() in ("", "text/css") and (
+                    not media or "all" in media or "print" in media or "pdf" in media
+                ):
 
                     if name == "style":
                         for node in node.childNodes:
                             data += pisaPreLoop2(node, context, collect=True)
                         return u""
 
-                    if name == "link" and attr.href and attr.rel.lower() == "stylesheet":
-                        context.addCSS('\n@import "%s" %s;' % (attr.href, ",".join(media)))
+                    if (
+                        name == "link"
+                        and attr.href
+                        and attr.rel.lower() == "stylesheet"
+                    ):
+                        context.addCSS(
+                            '\n@import "%s" %s;' % (attr.href, ",".join(media))
+                        )
 
         for node in node.childNodes:
             result = pisaPreLoop2(node, context, collect=collect)
@@ -367,11 +377,22 @@ if HAS_XHTML2PDF:
         context.pathCallback = link_callback
 
         # Build story
-        context = pisaStory(data, path, link_callback, debug, default_css, xhtml,
-                            encoding, context=context, xml_output=xml_output)
+        context = pisaStory(
+            data,
+            path,
+            link_callback,
+            debug,
+            default_css,
+            xhtml,
+            encoding,
+            context=context,
+            xml_output=xml_output,
+        )
         return context.story
 
+
 else:  # no xhtml2pdf
+
     def parseHTML(data, none):
         log.error("You need xhtml2pdf installed to use the raw HTML directive.")
         return []
