@@ -955,20 +955,43 @@ gray. For example, to highlight ``print "line a"`` and ``print "line b"``:
 
 rst2pdf includes several stylesheets for highlighting code:
 
+* ``abap``
+* ``algol_nu``
+* ``algol``
+* ``arduino``
 * ``autumn``
 * ``borland``
 * ``bw``
 * ``colorful``
+* ``default``
 * ``emacs``
 * ``friendly``
 * ``fruity``
+* ``igor``
+* ``lovelace``
 * ``manni``
+* ``monokai``
 * ``murphy``
 * ``native``
+* ``paraiso-dark``
+* ``paraiso-light``
 * ``pastie``
 * ``perldoc``
+* ``rainbow_dash``
+* ``rrt``
+* ``sas``
+* ``solarized-dark``
+* ``solarized-light``
+* ``sphinx``
+* ``stata-dark``
+* ``stata-light``
+* ``stata``
+* ``styles``
+* ``tango``
 * ``trac``
+* ``vim``
 * ``vs``
+* ``xcode``
 
 You can use any of them instead of the default by adding, for example, a ``-s
 murphy`` to the command line.
