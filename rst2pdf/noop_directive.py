@@ -1,4 +1,5 @@
-from docutils.parsers import rst
+# -*- coding: utf-8 -*-
+# See LICENSE.txt for licensing terms
 
 
 def noop_directive(

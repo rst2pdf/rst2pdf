@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-# $URL$
-# $Date$
-# $Revision$
 
 '''
 This module provides one useful class:  NodeHandler
@@ -33,6 +30,7 @@ If no NodeHandler subclass has been created to handle that particular
 type of docutils node, then default processing will occur and a warning
 will be logged.
 '''
+
 import inspect
 import types
 

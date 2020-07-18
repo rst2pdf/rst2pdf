@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # An extension module for rst2pdf
 # Copyright 2010, Patrick Maupin
 # See LICENSE.txt for licensing terms

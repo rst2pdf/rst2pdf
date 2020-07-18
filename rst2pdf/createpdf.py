@@ -35,22 +35,18 @@
 #####################################################################################
 
 __docformat__ = 'reStructuredText'
+
 from importlib import import_module
 
 import sys
 import os
-import tempfile
 import re
-import string
 import logging
 
-from io import StringIO
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urlunparse
 from os.path import abspath, dirname, expanduser, join
 from copy import copy, deepcopy
 from optparse import OptionParser
-from pprint import pprint
-from xml.sax.saxutils import unescape, escape
 
 import docutils.readers.doctree
 import docutils.core
@@ -67,21 +63,14 @@ except ImportError:
 from reportlab.platypus import *
 from reportlab.platypus.doctemplate import IndexingFlowable
 from reportlab.platypus.flowables import _listWrapOn, _Container
-from reportlab.pdfbase.pdfdoc import PDFPageLabel
-
-# from reportlab.lib.enums import *
-# from reportlab.lib.units import *
-# from reportlab.lib.pagesizes import *
 
 from . import config
 
-from rst2pdf import counter_role, oddeven_directive
 from rst2pdf import pygments_code_block_directive  # code-block directive
 from rst2pdf import flowables
 from rst2pdf.flowables import *  # our own reportlab flowables
 from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
-from rst2pdf.aafigure_directive import Aanode
 from rst2pdf.log import log, nodeid
 from smartypants import smartypants
 from rst2pdf import styles as sty
@@ -98,6 +87,10 @@ from rst2pdf.opt_imports import (
 
 # Template engine for covers
 import jinja2
+
+# Side effects
+from rst2pdf import aafigure_directive  # noqa
+from rst2pdf import counter_role, oddeven_directive  # noqa
 
 
 numberingstyles = {

@@ -25,10 +25,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from docutils import nodes
-from docutils.nodes import General, Inline, Element, literal_block
+from docutils.nodes import Element, literal_block
 from docutils.parsers.rst import directives
-from docutils.parsers.rst import nodes
 from reportlab.graphics import renderPDF
 from docutils.parsers import rst
 from .opt_imports import aafigure

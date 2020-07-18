@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 # See LICENSE.txt for licensing terms
 
 # Some fragments of code are copied from Reportlab under this license:
@@ -35,12 +33,7 @@
 #
 #####################################################################################
 
-
-import os
-import tempfile
-import re
 from copy import copy
-
 
 import docutils.nodes
 import reportlab
@@ -49,31 +42,24 @@ from .aafigure_directive import Aanode
 from .basenodehandler import NodeHandler
 from .oddeven_directive import OddEvenNode
 
-from .log import log, nodeid
-from .utils import log, parseRaw, parseHTML
+from .utils import parseRaw, parseHTML
 from reportlab.platypus import Paragraph, TableStyle
-from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from .flowables import (
     Table,
     DelayedTable,
     SplitTable,
     Heading,
-    MyIndenter,
     MyTableOfContents,
     MySpacer,
     Separation,
     BoxedContainer,
-    BoundByWidth,
     MyPageBreak,
-    Reference,
     tablepadding,
     OddEven,
     XPreformatted,
 )
 from rst2pdf.math_flowable import Math
-
-from .opt_imports import wordaxe, Paragraph, ParagraphStyle
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):

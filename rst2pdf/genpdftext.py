@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-
-# $URL$
-# $Date$
-# $Revision$
-
 # See LICENSE.txt for licensing terms
 
 import os
@@ -12,13 +7,10 @@ from xml.sax.saxutils import escape
 
 from urllib.parse import urljoin, urlparse
 
-from reportlab.lib.units import cm
 from .opt_imports import Paragraph
 
 from .basenodehandler import NodeHandler
-from .flowables import MySpacer
 from .image import MyImage, missing
-from .log import log, nodeid
 
 
 class FontHandler(NodeHandler):

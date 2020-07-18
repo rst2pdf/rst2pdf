@@ -19,20 +19,16 @@ import sys
 import os
 import time
 from os import path
-from os.path import abspath, dirname, expanduser, join
-from pprint import pprint
-from copy import copy, deepcopy
-from xml.sax.saxutils import unescape, escape
-from traceback import print_exc
+from os.path import abspath, dirname
+from copy import copy
 
 from io import BytesIO
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urlunparse
 
-from pygments.lexers import get_lexer_by_name, guess_lexer
+from pygments.lexers import guess_lexer
 
 from docutils import writers
 from docutils import nodes
-from docutils import languages
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
@@ -49,14 +45,14 @@ else:
     from sphinx.environment import NoUri
 
 from sphinx.environment.adapters.indexentries import IndexEntries
-from sphinx.locale import admonitionlabels, versionlabels
+from sphinx.locale import versionlabels
 from sphinx.transforms import SphinxTransform
 
 if sphinx.__version__ >= '1.':
     from sphinx.locale import _
 
 import rst2pdf
-from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
+from rst2pdf import createpdf, pygments_code_block_directive
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 

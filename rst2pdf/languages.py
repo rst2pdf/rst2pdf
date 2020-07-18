@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
-# $URL$
-# $Date$
-# $Revision$
 
 from docutils.languages import get_language as get_language
 

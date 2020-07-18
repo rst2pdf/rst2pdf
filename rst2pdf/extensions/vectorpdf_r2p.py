@@ -9,7 +9,6 @@ try:
     from reportlab.platypus import Flowable
     from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-    import pdfrw
     from pdfrw.toreportlab import makerl
     from pdfrw.buildxobj import CacheXObj
 

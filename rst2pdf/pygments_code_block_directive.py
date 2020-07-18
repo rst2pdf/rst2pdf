@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# $URL$
-# $Date$
-# $Revision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date$
