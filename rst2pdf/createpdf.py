@@ -118,7 +118,7 @@ import jinja2
 # Side effects
 from rst2pdf.directives import aafigure  # noqa
 from rst2pdf.directives import oddeven  # noqa
-from rst2pdf.roles import counter  # noqa
+from rst2pdf.roles import counter as counter_role  # noqa
 
 
 numberingstyles = {

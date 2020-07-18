@@ -143,17 +143,13 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             )
             end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
-                tableData.append(
-                    [Spacer(1, style.spaceBefore),]
-                )
-            tableData.append(
-                [para,]
-            )
+                tableData.append([Spacer(1, style.spaceBefore)])
+            tableData.append([para])
 
         self._table = Table(tableData, colWidths=(availWidth,), style=self.tableStyle)
-
         self.width, self.height = self._table.wrapOn(self.canv, availWidth, availHeight)
-        return (self.width, self.height)
+
+        return self.width, self.height
 
 
 genelements.MyTableOfContents = DottedTableOfContents

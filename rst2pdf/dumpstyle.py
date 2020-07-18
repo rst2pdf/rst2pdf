@@ -34,7 +34,7 @@ def dumps(obj, forcestyledict=True):
     def dostr(result, obj, indent):
         try:
             float(obj)
-        except:
+        except ValueError:
             ok = True
         else:
             ok = obj == obj.strip()

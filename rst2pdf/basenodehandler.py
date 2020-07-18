@@ -160,7 +160,7 @@ class NodeHandler(metaclass=MetaHelper):
         if not hasattr(self, 'unkn_node'):
             self.unkn_node = set()
         cln = self.getclassname(node)
-        if not cln in self.unkn_node:
+        if cln not in self.unkn_node:
             self.unkn_node.add(cln)
             log.warning("Unkn. node (self.%s): %s [%s]", during, cln, nodeid(node))
             try:
@@ -210,7 +210,7 @@ class NodeHandler(metaclass=MetaHelper):
         try:
             if node['classes'] and node['classes'][0]:
                 # FIXME: Supports only one class, sorry ;-)
-                if client.styles.StyleSheet.has_key(node['classes'][0]):
+                if node['classes'][0] in client.styles.StyleSheet:
                     style = client.styles[node['classes'][0]]
                 else:
                     log.info(

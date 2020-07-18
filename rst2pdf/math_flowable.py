@@ -61,7 +61,7 @@ class Math(Flowable):
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 return width, height
-            except:
+            except Exception:
                 pass
                 # FIXME: report error
         return 10, 10
@@ -107,7 +107,7 @@ class Math(Flowable):
                 canv.setDash([])
                 for ox, oy, width, height in rects:
                     canv.rect(ox, oy + 2 * height, width, height, fill=1)
-            except:
+            except Exception:
                 # FIXME: report error
                 col_conv = ColorConverter()
                 rgb_color = col_conv.to_rgb(self.color)

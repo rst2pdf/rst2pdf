@@ -703,7 +703,7 @@ class StyleSheet(object):
         """
         # This alignment thing is exactly backwards from
         # the alignment for paragraphstyles
-        alignment = {0: 'LEFT', 1: 'CENTER', 2: 'RIGHT', 4: 'JUSTIFY', 8: 'DECIMAL',}[
+        alignment = {0: 'LEFT', 1: 'CENTER', 2: 'RIGHT', 4: 'JUSTIFY', 8: 'DECIMAL'}[
             self['table-heading'].alignment
         ]
         return [

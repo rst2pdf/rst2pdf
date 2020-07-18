@@ -134,11 +134,6 @@ class FancyHeading(MyImage, Heading):
         MyImage.__init__(self, *args, **kwargs)
 
     def drawOn(self, canv, x, y, _sW):
-
-        ## These two lines are magic.
-        # if isinstance(self.parent_id, tuple):
-        # self.parent_id=self.parent_id[0]
-
         # Add outline entry. This is copied from rst2pdf.flowables.heading
         canv.bookmarkHorizontal(self.parent_id, 0, y + self.image.height)
 

@@ -196,7 +196,7 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
         t_style = TableStyle(client.styles['hlist'].commands)
         cw = 100.0 / len(node.children)
         return [
-            DelayedTable(cells, colWidths=["%s%%" % cw,] * len(cells), style=t_style)
+            DelayedTable(cells, colWidths=['%s%%' % cw] * len(cells), style=t_style)
         ]
 
 

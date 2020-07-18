@@ -486,7 +486,7 @@ class SetNextTemplate(Flowable):
         if self.templateName:
             try:
                 self.canv.oldTemplateName = self.canv.templateName
-            except:
+            except Exception:
                 self.canv.oldTemplateName = 'oneColumn'
             self.canv.templateName = self.templateName
 

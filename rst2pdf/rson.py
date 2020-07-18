@@ -1,12 +1,4 @@
-################################################################################
-####  NOTE:  THIS IS STILL IN DEVELOPMENT:                                  ####
-####                                                                        ####
-####    - No encoder                                                        ####
-####    - Needs more tests!                                                 ####
-####                                                                        ####
-################################################################################
-
-'''
+"""
 RSON -- readable serial object notation
 
 RSON is a superset of JSON with relaxed syntax for human readability.
@@ -18,7 +10,7 @@ Simple usage example:
 Additional documentation available at:
 
 http://code.google.com/p/rson/
-'''
+"""
 
 __version__ = '0.08'
 
@@ -121,7 +113,7 @@ class Tokenizer(list):
     other = r'[\S](?:[^%s\n]*[^%s\s])*' % (re_delimiterset, re_delimiterset)
 
     pattern = '(%s)' % '|'.join(
-        [delimiter_pattern, triple_quoted_string, quoted_string, other, indentation,]
+        [delimiter_pattern, triple_quoted_string, quoted_string, other, indentation]
     )
 
     splitter = re.compile(pattern).split
@@ -146,13 +138,12 @@ class Tokenizer(list):
             # Get the indentation at the start of the file
             indentation = '\n' + sourcelist[0]
             linenum = 1
-            linestart = offset = 0
 
             # Set up to iterate over the source and add to the destination list
             sourceiter = iter(sourcelist)
             next_ = sourceiter.__next__
 
-            offset -= len(next_())
+            offset = 0 - len(next_())
 
             # Strip comment from first line
             if len(sourcelist) > 1 and sourcelist[1].startswith('#'):
@@ -175,7 +166,6 @@ class Tokenizer(list):
                         linenum += 1
                         indentation = token
                         offset -= len(token)
-                        linestart = offset
                         continue
                     else:
                         t0 = 'X'
@@ -453,7 +443,7 @@ class QuotedToken(object):
             try:
                 uni2 = next_()
                 nonmatch2 = next_()
-            except:
+            except Exception:
                 ok = False
             ok = ok and not nonmatch and uni2.startswith(b'\\u') and len(uni2) == 6
             if ok:

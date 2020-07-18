@@ -39,17 +39,9 @@ from sphinx.builders import Builder
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
 
-if sphinx.__version__ >= '2.1':
-    from sphinx.errors import NoUri
-else:
-    from sphinx.environment import NoUri
-
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import versionlabels
 from sphinx.transforms import SphinxTransform
-
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
 
 import rst2pdf
 from rst2pdf import createpdf
@@ -59,6 +51,14 @@ from rst2pdf.languages import get_language_available
 
 # Template engine for covers
 import jinja2
+
+if sphinx.__version__ >= '1.':
+    from sphinx.locale import _
+
+if sphinx.__version__ >= '2.1':
+    from sphinx.errors import NoUri
+else:
+    from sphinx.environment import NoUri
 
 
 class PDFBuilder(Builder):
@@ -287,13 +287,9 @@ class PDFBuilder(Builder):
         # We handle it right here
 
         for indexname, indexcls, content, collapse in self.domain_indices:
-            indexcontext = dict(
-                indextitle=indexcls.localname, content=content, collapse_index=collapse,
-            )
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
             self.sphinx_logger.info(' ' + indexname)
-            print
 
             output = ['DUMMY', '=====', '', '.. _modindex:\n\n']
             t = indexcls.localname
@@ -495,7 +491,6 @@ class PDFContents(Contents):
             elif isinstance(sect, nodes.section):
                 sections.append(sect)
         entries = []
-        autonum = 0
         # FIXME: depth should be taken from :maxdepth: (Issue 320)
         depth = self.toc_depth
         for section in sections:

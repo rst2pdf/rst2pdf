@@ -10,7 +10,7 @@ from reportlab.lib.units import cm, inch
 
 from urllib.request import urlretrieve
 
-from .opt_imports import PILImage, pdfinfo
+from .opt_imports import PILImage
 from .log import log, nodeid
 
 try:
@@ -134,7 +134,7 @@ class MyImage(Flowable):
             # First try to rasterize using the suggested backend
             backend = self.get_backend(filename, client)[1]
             return backend.raster(filename, client)
-        except:
+        except Exception:
             pass
 
         # Last resort: try everything
@@ -143,7 +143,7 @@ class MyImage(Flowable):
             try:
                 PILImage.open(filename)
                 return filename
-            except:
+            except Exception:
                 # Can't read it
                 pass
 
@@ -160,12 +160,10 @@ class MyImage(Flowable):
         or is missing), and backend is an Image class that can handle
         fname.
 
-
         If uri ensd with '.*' then the returned filename will be the best
         quality supported at the moment.
 
         That means:  PDF > SVG > anything else
-
         '''
 
         backend = defaultimage
@@ -244,7 +242,6 @@ class MyImage(Flowable):
             imgname = missing
 
         scale = float(node.get('scale', 100)) / 100
-        size_known = False
 
         # Figuring out the size to display of an image is ... annoying.
         # If the user provides a size with a unit, it's simple, adjustUnits
@@ -268,9 +265,8 @@ class MyImage(Flowable):
                 xobj = VectorPdf.load_xobj(srcinfo)
                 iw, ih = xobj.w, xobj.h
             else:
-                reader = pdfinfo.PdfFileReader(open(imgname, 'rb'))
-                box = [float(x) for x in reader.getPage(0)['/MediaBox']]
-                iw, ih = x2 - x1, y2 - y1
+                raise Exception('Need VectorPDF extension')
+
             # These are in pt, so convert to px
             iw = iw * xdpi / 72.0
             ih = ih * ydpi / 72.0
