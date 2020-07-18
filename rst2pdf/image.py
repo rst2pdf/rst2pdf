@@ -6,7 +6,7 @@ from os.path import abspath, dirname
 import sys
 from copy import copy
 from reportlab.platypus.flowables import Image, Flowable
-from reportlab.lib.units import *
+from reportlab.lib.units import cm, inch
 
 from urllib.request import urlretrieve
 
@@ -139,13 +139,6 @@ class MyImage(Flowable):
 
         # Last resort: try everything
 
-        if PILImage:
-            ext = '.png'
-        else:
-            ext = '.jpg'
-
-        extension = os.path.splitext(filename)[-1][1:].lower()
-
         if PILImage:  # See if pil can process it
             try:
                 PILImage.open(filename)
@@ -270,7 +263,6 @@ class MyImage(Flowable):
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
-
         elif extension == 'pdf':
             if VectorPdf is not None:
                 xobj = VectorPdf.load_xobj(srcinfo)
@@ -282,8 +274,6 @@ class MyImage(Flowable):
             # These are in pt, so convert to px
             iw = iw * xdpi / 72.0
             ih = ih * ydpi / 72.0
-            size_known = True  # Assume size from original PDF is OK
-
         else:
             keeptrying = True
             if PILImage:

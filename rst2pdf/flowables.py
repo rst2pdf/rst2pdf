@@ -6,16 +6,17 @@ __docformat__ = 'reStructuredText'
 from copy import copy
 import re
 import reportlab
+import sys
 
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import *
-from reportlab.lib.enums import *
-
-
-from reportlab.lib.units import *
+from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ
+from reportlab.platypus.doctemplate import FrameActionFlowable, FrameBreak, Indenter
+from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable, PageBreak, Spacer
+from reportlab.platypus.frames import Frame
+from reportlab.platypus.paragraph import _doLink
+from reportlab.platypus.tables import Table, TableStyle
 from reportlab.platypus.tableofcontents import TableOfContents
+from reportlab.platypus.xpreformatted import XPreformatted
 from reportlab.lib.styles import ParagraphStyle
 from xml.sax.saxutils import unescape
 
@@ -222,18 +223,6 @@ class DelayedTable(Table):
         self.hAlign = TA_CENTER
         self.splitByRow = splitByRow
 
-        ## Try to look more like a Table
-        # self._ncols = 2
-        # self._nosplitCmds= []
-        # self._nrows= 1
-        # self._rowHeights= [None]
-        # self._spanCmds= []
-        # self.ident= None
-        # self.repeatCols= 0
-        # self.repeatRows= 0
-        # self.splitByRow= 1
-        # self.vAlign= 'MIDDLE'
-
     def wrap(self, w, h):
         # Create the table, with the widths from colWidths reinterpreted
         # if needed as percentages of frame/cell/whatever width w is.
@@ -285,7 +274,7 @@ class DelayedTable(Table):
 
 def tablepadding(padding):
     if not isinstance(padding, (list, tuple)):
-        padding = [padding,] * 4
+        padding = [padding] * 4
     return (
         padding,
         ('TOPPADDING', [0, 0], [-1, -1], padding[0]),
@@ -403,13 +392,6 @@ class SplitTable(DelayedTable):
                             )
                         ]
                         if l2[1:] + text[l + 1 :]:
-                            ## Workaround for Issue 180 with wordaxe:
-                            # if wordaxe is not None:
-                            # l3.append(
-                            # Table([['',l2[1:]+text[l+1:]]],
-                            # colWidths=self.colWidths,
-                            # style=self.style))
-                            # else:
                             l3.append(
                                 SplitTable(
                                     [['', l2[1:] + text[l + 1 :]]],
@@ -951,7 +933,7 @@ class BoxedContainer(BoundByWidth):
 
     def identity(self, maxLen=None):
         return repr(
-            [u"BoxedContainer containing: ", [c.identity() for c in self.content],]
+            ['BoxedContainer containing: ', [c.identity() for c in self.content]]
         )[:80]
 
     def draw(self):
@@ -959,7 +941,6 @@ class BoxedContainer(BoundByWidth):
         canv.saveState()
         x = canv._x
         y = canv._y
-        _sW = 0
         lw = 0
         if self.style and self.style.borderWidth > 0:
             lw = self.style.borderWidth
@@ -1017,7 +998,7 @@ class BoxedContainer(BoundByWidth):
 if reportlab.Version == '2.1':
     import reportlab.platypus.paragraph as pla_para
 
-    ################Ugly stuff below
+    # ############### Ugly stuff below
     def _do_post_text(i, t_off, tx):
         """From reportlab's paragraph.py, patched to avoid underlined links"""
         xs = tx.XtraState
@@ -1056,7 +1037,7 @@ if reportlab.Version == '2.1':
 
     # Look behind you! A three-headed monkey!
     pla_para._do_post_text.func_code = _do_post_text.func_code
-    ############### End of the ugly
+    # ############## End of the ugly
 
 
 class MyTableOfContents(TableOfContents):

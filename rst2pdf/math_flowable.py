@@ -5,7 +5,8 @@ import tempfile
 import os
 import re
 
-from reportlab.platypus import *
+from reportlab.platypus.flowables import Flowable
+from reportlab.platypus import SimpleDocTemplate
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
@@ -67,7 +68,7 @@ class Math(Flowable):
 
     def drawOn(self, canv, x, y, _sW=0):
         if _sW and hasattr(self, 'hAlign'):
-            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
@@ -93,7 +94,7 @@ class Math(Flowable):
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-                    if not fontname in fonts:
+                    if fontname not in fonts:
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
                     canv.setFont(fontname, fontsize)
@@ -147,13 +148,11 @@ class Math(Flowable):
             import Image
             import ImageFont
             import ImageDraw
-            import ImageColor
         except ImportError:
             from PIL import (
                 Image,
                 ImageFont,
                 ImageDraw,
-                ImageColor,
             )
 
         if not HAS_MATPLOTLIB:

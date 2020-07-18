@@ -60,15 +60,42 @@ try:
 except ImportError:
     from docutils.utils.roman import toRoman
 
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import IndexingFlowable
-from reportlab.platypus.flowables import _listWrapOn, _Container
+import reportlab
+from reportlab.lib.units import cm
+from reportlab.platypus import doctemplate
+from reportlab.platypus.doctemplate import (
+    ActionFlowable,
+    BaseDocTemplate,
+    FrameActionFlowable,
+    IndexingFlowable,
+    LayoutError,
+    PageTemplate,
+)
+from reportlab.platypus.flowables import (
+    _listWrapOn,
+    _Container,
+    Flowable,
+    ImageAndFlowables,
+    PageBreak,
+    SlowPageBreak,
+)
+from reportlab.platypus.tables import TableStyle
 
 from . import config
 
 from rst2pdf.directives import code_block
 from rst2pdf import flowables
-from rst2pdf.flowables import *  # our own reportlab flowables
+from rst2pdf.flowables import (
+    BoundByWidth,
+    DelayedTable,
+    Heading,
+    MyPageBreak,
+    MySpacer,
+    OddEven,
+    Separation,
+    SmartFrame,
+    XXPreformatted,
+)
 from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
 from rst2pdf.log import log, nodeid
@@ -686,7 +713,7 @@ class RstToPdf(object):
                         log.info('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
-                ## Rearrange footnotes if needed
+                # Rearrange footnotes if needed
                 if self.real_footnotes:
                     newStory = []
                     fnPile = []
@@ -713,7 +740,7 @@ class RstToPdf(object):
                     continue
 
                 break
-            except ValueError as v:
+            except ValueError:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
                 # if v.args and str(v.args[0]).startswith('format not resolved'):
@@ -734,9 +761,6 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
-
-
-from reportlab.platypus import doctemplate
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -977,19 +1001,18 @@ class HeaderOrFooter(object):
                         if isinstance(cell, list):
                             data[r][c] = self.replaceTokens(cell, canv, doc, smarty)
                         else:
-                            row[c] = self.replaceTokens([cell,], canv, doc, smarty)[0]
+                            row[c] = self.replaceTokens([cell], canv, doc, smarty)[0]
                 elems[i] = DelayedTable(data, e._colWidths, e.style)
-
             elif isinstance(e, BoundByWidth):
                 for index, item in enumerate(e.content):
                     if isinstance(item, Paragraph):
                         e.content[index] = Paragraph(replace(item.text), item.style)
                 elems[i] = e
-
             elif isinstance(e, OddEven):
-                odd = self.replaceTokens([e.odd,], canv, doc, smarty)[0]
-                even = self.replaceTokens([e.even,], canv, doc, smarty)[0]
+                odd = self.replaceTokens([e.odd], canv, doc, smarty)[0]
+                even = self.replaceTokens([e.even], canv, doc, smarty)[0]
                 elems[i] = OddEven(odd, even)
+
         return elems
 
     def draw(self, pageobj, canv, doc, x, y, width, height):
@@ -1041,11 +1064,11 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, kind = MyImage.size_for_node(dict(uri=uri,), self.client)
+                w, h, _ = MyImage.size_for_node(dict(uri=uri,), self.client)
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
-                w, h, kind = 100, 100, 'direct'
+                w, h, = 100, 100
 
             pw, ph = self.styles.pw, self.styles.ph
             if self.client.background_fit_mode == 'center':
@@ -1766,6 +1789,7 @@ def patch_PDFDate():
 
     class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
+
         # gmt offset now suppported
         def __init__(self, invariant=True, ts=None, dateFormatter=None):
             now = (2000, 0o1, 0o1, 00, 00, 00, 0)
@@ -1773,9 +1797,6 @@ def patch_PDFDate():
             self.dateFormatter = dateFormatter
 
         def format(self, doc):
-            from time import timezone
-
-            dhh, dmm = timezone // 3600, (timezone % 3600) % 60
             dfmt = self.dateFormatter or (
                 lambda yyyy, mm, dd, hh, m, s: "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'"
                 % (yyyy, mm, dd, hh, m, s, 0, 0)
@@ -1901,12 +1922,12 @@ monkeypatch()
 
 
 def publish_secondary_doctree(text, main_tree, source_path):
-
     # This is a hack so the text substitutions defined
     # in the document are available when we process the cover
     # page. See Issue 322
     dt = main_tree
-    # Add substitutions  from the main doctree
+
+    # Add substitutions from the main doctree
     class addSubsts(Transform):
         default_priority = 219
 
