@@ -66,7 +66,7 @@ from reportlab.platypus.flowables import _listWrapOn, _Container
 
 from . import config
 
-from rst2pdf import pygments_code_block_directive  # code-block directive
+from rst2pdf.directives import code_block
 from rst2pdf import flowables
 from rst2pdf.flowables import *  # our own reportlab flowables
 from rst2pdf.sinker import Sinker
@@ -89,8 +89,9 @@ from rst2pdf.opt_imports import (
 import jinja2
 
 # Side effects
-from rst2pdf import aafigure_directive  # noqa
-from rst2pdf import counter_role, oddeven_directive  # noqa
+from rst2pdf.directives import aafigure  # noqa
+from rst2pdf.directives import oddeven  # noqa
+from rst2pdf.roles import counter  # noqa
 
 
 numberingstyles = {
@@ -214,12 +215,8 @@ class RstToPdf(object):
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
-            directives.register_directive(
-                'code-block', pygments_code_block_directive.code_block_directive
-            )
-            directives.register_directive(
-                'code', pygments_code_block_directive.code_block_directive
-            )
+            directives.register_directive('code-block', code_block.code_block_directive)
+            directives.register_directive('code', code_block.code_block_directive)
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx

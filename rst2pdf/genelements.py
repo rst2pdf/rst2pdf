@@ -38,9 +38,9 @@ from copy import copy
 import docutils.nodes
 import reportlab
 
-from .aafigure_directive import Aanode
 from .basenodehandler import NodeHandler
-from .oddeven_directive import OddEvenNode
+from .directives.aafigure import Aanode
+from .directives.oddeven import OddEvenNode
 
 from .utils import parseRaw, parseHTML
 from reportlab.platypus import Paragraph, TableStyle

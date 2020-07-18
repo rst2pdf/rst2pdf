@@ -1,36 +1,25 @@
-#!/usr/bin/python
-
-# $Id: rst2html.py 4564 2006-05-21 20:44:42Z wiemann $
-# Author: David Goodger <goodger@python.org>
-# Copyright: This module has been placed in the public domain.
+#!/usr/bin/env python3
 
 """
 A minimal front end to the Docutils Publisher, producing HTML.
 """
 
-try:
-    import locale
-
-    locale.setlocale(locale.LC_ALL, '')
-except:
-    pass
+import locale
 
 from docutils.core import publish_cmdline, default_description
 from docutils.parsers.rst import directives
-import rst2pdf.pygments_code_block_directive
-
-directives.register_directive(
-    'code-block', rst2pdf.pygments_code_block_directive.code_block_directive
-)
-
 from docutils.parsers.rst import roles
-import rst2pdf.counter_off_role
 
-roles.register_canonical_role('counter', rst2pdf.counter_off_role.counter_fn)
+from rst2pdf.directives import code_block
+from rst2pdf.directives import noop
+from rst2pdf.roles import counter_off
 
-import rst2pdf.noop_directive
 
-directives.register_directive('oddeven', rst2pdf.noop_directive.noop_directive)
+locale.setlocale(locale.LC_ALL, '')
+
+directives.register_directive('code-block', code_block.code_block_directive)
+directives.register_directive('oddeven', noop.noop_directive)
+roles.register_canonical_role('counter', counter_off.counter_fn)
 
 description = (
     'Generates (X)HTML documents from standalone reStructuredText '

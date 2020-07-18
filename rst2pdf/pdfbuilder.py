@@ -52,7 +52,8 @@ if sphinx.__version__ >= '1.':
     from sphinx.locale import _
 
 import rst2pdf
-from rst2pdf import createpdf, pygments_code_block_directive
+from rst2pdf import createpdf
+from rst2pdf.directives import code_block
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
@@ -777,7 +778,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             # FIXME: make tab width configurable
             content = [c.replace('\t', '        ') for c in content]
             replacement = nodes.literal_block()
-            replacement.children = pygments_code_block_directive.code_block_directive(
+            replacement.children = code_block.code_block_directive(
                 name=None,
                 arguments=[lang],
                 options=options,
