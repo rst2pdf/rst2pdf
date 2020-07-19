@@ -17,8 +17,7 @@ from copy import copy
 from io import BytesIO
 import logging
 import os
-from os import path
-from os.path import abspath, dirname
+import os.path
 import re
 import sys
 import time
@@ -30,8 +29,8 @@ from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
 import jinja2
-import sphinx
 from pygments.lexers import guess_lexer
+import sphinx
 from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.environment.adapters.indexentries import IndexEntries
@@ -139,7 +138,7 @@ class PDFBuilder(Builder):
                     config=self.config,
                 )
 
-                tgt_file = path.join(self.outdir, targetname + self.out_suffix)
+                tgt_file = os.path.join(self.outdir, targetname + self.out_suffix)
                 destination = FileOutput(
                     destination=open(tgt_file, 'wb'), encoding='utf-8'
                 )
@@ -417,11 +416,11 @@ class PDFBuilder(Builder):
                 continue
             targetname = self.env.doc2path(docname, self.outdir, self.out_suffix)
             try:
-                targetmtime = path.getmtime(targetname)
+                targetmtime = os.path.getmtime(targetname)
             except Exception:
                 targetmtime = 0
             try:
-                srcmtime = path.getmtime(self.env.doc2path(docname))
+                srcmtime = os.path.getmtime(self.env.doc2path(docname))
                 if srcmtime > targetmtime:
                     yield docname
             except EnvironmentError:
@@ -571,9 +570,9 @@ class PDFWriter(writers.Writer):
         self.repeat_table_rows = repeat_table_rows
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
         if style_path:
             self.style_path = style_path
         else:

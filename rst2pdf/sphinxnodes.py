@@ -19,14 +19,14 @@ import docutils
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
 
-from rst2pdf.log import nodeid, log
-from rst2pdf.flowables import (
+from .flowables import (
     MySpacer,
     MyIndenter,
     DelayedTable,
 )
-from rst2pdf.image import MyImage, VectorPdf
-from rst2pdf.nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+from .image import MyImage, VectorPdf
+from .log import nodeid, log
+from .nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 
 # ################# NodeHandler subclasses ###################
 

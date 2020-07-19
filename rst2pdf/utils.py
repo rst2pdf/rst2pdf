@@ -6,7 +6,7 @@ import shlex
 from reportlab.lib.colors import Color
 from reportlab.platypus.flowables import CondPageBreak
 
-from rst2pdf import flowables
+from . import flowables
 from .log import log, nodeid
 from .styles import adjustUnits
 

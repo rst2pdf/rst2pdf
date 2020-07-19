@@ -3,7 +3,7 @@
 
 from docutils.languages import get_language as get_language
 
-from rst2pdf.log import log
+from .log import log
 
 
 def get_language_silent(lang):

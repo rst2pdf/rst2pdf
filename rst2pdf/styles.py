@@ -1,28 +1,26 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from copy import copy
 import os
+import os.path
 import sys
 import re
-from copy import copy
-from os.path import abspath, dirname, join
 
 import docutils.nodes
-
 import reportlab
 import reportlab.lib.colors as colors
+from reportlab.lib.fonts import addMapping
+import reportlab.lib.pagesizes as pagesizes
+from reportlab.lib.styles import StyleSheet1, ParagraphStyle
 import reportlab.lib.units as units
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.fonts import addMapping
-from reportlab.lib.styles import StyleSheet1, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
-import reportlab.lib.pagesizes as pagesizes
 import reportlab.rl_config
-
-from rst2pdf.rson import loads as rson_loads
 
 from . import findfonts
 from .log import log
+from .rson import loads as rson_loads
 
 unit_separator = re.compile('(-?[0-9.]*)')
 
@@ -72,17 +70,17 @@ class StyleSheet(object):
         log.info('Using stylesheets: %s' % ','.join(flist))
         # find base path
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
 
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         # but the two default stylesheets will always
         # be loaded first
         flist = [
-            join(self.PATH, 'styles', 'styles.style'),
-            join(self.PATH, 'styles', 'default.style'),
+            os.path.join(self.PATH, 'styles', 'styles.style'),
+            os.path.join(self.PATH, 'styles', 'default.style'),
         ] + flist
 
         self.def_dpi = def_dpi

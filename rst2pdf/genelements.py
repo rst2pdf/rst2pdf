@@ -37,14 +37,12 @@ from copy import copy
 
 import docutils.nodes
 import reportlab
+from reportlab.platypus import Paragraph, TableStyle
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
 from .basenodehandler import NodeHandler
 from .directives.aafigure import Aanode
 from .directives.oddeven import OddEvenNode
-
-from .utils import parseRaw, parseHTML
-from reportlab.platypus import Paragraph, TableStyle
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from .flowables import (
     Table,
     DelayedTable,
@@ -59,7 +57,8 @@ from .flowables import (
     OddEven,
     XPreformatted,
 )
-from rst2pdf.math_flowable import Math
+from .math_flowable import Math
+from .utils import parseRaw, parseHTML
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):

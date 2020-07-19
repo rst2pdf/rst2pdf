@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
-import tempfile
 import os
 import re
+import tempfile
 
 from reportlab.platypus.flowables import Flowable
 from reportlab.platypus import SimpleDocTemplate
-from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
-from rst2pdf.log import log
+from .log import log
 
 try:
     from matplotlib import mathtext

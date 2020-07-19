@@ -551,6 +551,7 @@ class RstToPdf(object):
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
             self.doctree.walk(srf)
+
         if self.strip_elements_with_classes:
             from docutils.transforms.universal import StripClassesAndElements
 

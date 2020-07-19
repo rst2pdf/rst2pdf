@@ -17,7 +17,6 @@ except ImportError:
     # This is just to make nosetest happy on the CI server
     class Flowable:
         pass
-
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
 

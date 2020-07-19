@@ -103,9 +103,8 @@ file were automatically removed.
 import os
 import re
 
-from rst2pdf.rson import loads as rson_loads
-
 from rst2pdf.log import log
+from rst2pdf.rson import loads as rson_loads
 
 
 class DummyFile(object):
