@@ -4,11 +4,13 @@
 Creates a rst2pdf stylesheet for each pygments style.
 '''
 
-import sys
 import os
-from . import dumpstyle
+
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
+
+from . import dumpstyle
+
 
 # First get a list of all possible classes
 classnames = set()

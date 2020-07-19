@@ -36,10 +36,10 @@
 
 from copy import copy
 
-import reportlab
-import rst2pdf.genelements as genelements
 from reportlab.platypus import Spacer
 from reportlab.platypus.tableofcontents import drawPageNumbers
+
+import rst2pdf.genelements as genelements
 
 
 Table = genelements.Table
@@ -91,10 +91,7 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         # none, we make some dummy data to keep the table
         # from complaining
         if len(self._lastEntries) == 0:
-            if reportlab.Version <= '2.3':
-                _tempEntries = [(0, 'Placeholder for table of contents', 0)]
-            else:
-                _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
+            _tempEntries = [(0, 'Placeholder for table of contents', 0, None)]
         else:
             _tempEntries = self._lastEntries
 
@@ -119,10 +116,7 @@ class DottedTableOfContents(genelements.MyTableOfContents):
         for entry in _tempEntries:
             level, text, pageNum = entry[:3]
             left_col_level = level - base_level
-            if reportlab.Version > '2.3':  # For ReportLab post-2.3
-                style = self.getLevelStyle(left_col_level)
-            else:  # For ReportLab <= 2.3
-                style = self.levelStyles[left_col_level]
+            style = self.getLevelStyle(left_col_level)
 
             if self.dotsMinLevel >= 0 and left_col_level >= self.dotsMinLevel:
                 dot = ' . '
@@ -143,17 +137,13 @@ class DottedTableOfContents(genelements.MyTableOfContents):
             )
             end_info.append((style, pageNum, key, dot))
             if style.spaceBefore:
-                tableData.append(
-                    [Spacer(1, style.spaceBefore),]
-                )
-            tableData.append(
-                [para,]
-            )
+                tableData.append([Spacer(1, style.spaceBefore)])
+            tableData.append([para])
 
         self._table = Table(tableData, colWidths=(availWidth,), style=self.tableStyle)
-
         self.width, self.height = self._table.wrapOn(self.canv, availWidth, availHeight)
-        return (self.width, self.height)
+
+        return self.width, self.height
 
 
 genelements.MyTableOfContents = DottedTableOfContents

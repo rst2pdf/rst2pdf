@@ -2,7 +2,6 @@
 # See LICENSE.txt for licensing terms
 
 import logging
-import sys
 
 log = logging.getLogger('rst2pdf')
 _fmt = logging.Formatter('[%(levelname)s] %(filename)s:%(lineno)d %(message)s')
@@ -17,14 +16,17 @@ def nodeid(node):
     source text"""
     fname = 'UNKNOWN'
     line = 'UNKNOWN'
+
     try:
         if node.line:
             line = str(node.line)
-    except:
+    except Exception:
         pass
+
     try:
         if node.source:
             fname = str(node.source)
-    except:
+    except Exception:
         pass
+
     return 'near line %s in file %s' % (line, fname)

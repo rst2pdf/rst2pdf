@@ -6,7 +6,7 @@ import shlex
 from reportlab.lib.colors import Color
 from reportlab.platypus.flowables import CondPageBreak
 
-from rst2pdf import flowables
+from . import flowables
 from .log import log, nodeid
 from .styles import adjustUnits
 
@@ -60,7 +60,7 @@ def parseRaw(data, node):
                 elements.append(flowables.MyPageBreak(tokens[1], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
-                elements.append(flowables.CondPageBreak(99999))
+                elements.append(CondPageBreak(99999))
             else:
                 elements.append(CondPageBreak(float(tokens[1])))
         elif command == 'Spacer':

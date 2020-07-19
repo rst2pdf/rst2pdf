@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # An extension module for rst2pdf
 # Copyright 2010, Patrick Maupin
 # See LICENSE.txt for licensing terms
@@ -101,13 +100,11 @@ file were automatically removed.
 
 '''
 
-from collections import namedtuple
 import os
 import re
 
-from rst2pdf.rson import loads as rson_loads
-
 from rst2pdf.log import log
+from rst2pdf.rson import loads as rson_loads
 
 
 class DummyFile(object):
@@ -152,7 +149,7 @@ class Preprocess(object):
                 substyles = styles.get('styles')
                 if substyles is not None:
                     styles['styles'] = dict(substyles)
-            except:
+            except Exception:
                 pass
             else:
                 self.changed = True

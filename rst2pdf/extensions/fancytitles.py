@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
+import codecs
+import tempfile
+
+import docutils
+from reportlab.platypus.paragraph import Paragraph
+
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
 from rst2pdf.image import MyImage
-import docutils
-from rst2pdf.opt_imports import Paragraph
-import reportlab
-import tempfile
-import re
-from xml.sax.saxutils import unescape
-import codecs
 
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
@@ -61,9 +60,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
                 snum = fch.astext()
             else:
                 snum = None
-            maxdepth = 4
-            if reportlab.Version > '2.1':
-                maxdepth = 6
+            maxdepth = 6
 
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id = (node.parent.get('ids', [None]) or [None])[0] + u'-%s' % id(
@@ -134,11 +131,6 @@ class FancyHeading(MyImage, Heading):
         MyImage.__init__(self, *args, **kwargs)
 
     def drawOn(self, canv, x, y, _sW):
-
-        ## These two lines are magic.
-        # if isinstance(self.parent_id, tuple):
-        # self.parent_id=self.parent_id[0]
-
         # Add outline entry. This is copied from rst2pdf.flowables.heading
         canv.bookmarkHorizontal(self.parent_id, 0, y + self.image.height)
 

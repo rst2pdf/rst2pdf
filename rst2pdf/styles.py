@@ -1,32 +1,26 @@
 # -*- coding: utf-8 -*-
 # See LICENSE.txt for licensing terms
 
+from copy import copy
 import os
+import os.path
 import sys
 import re
-from copy import copy
-from os.path import abspath, dirname, join
 
 import docutils.nodes
-
 import reportlab
 import reportlab.lib.colors as colors
+from reportlab.lib.fonts import addMapping
+import reportlab.lib.pagesizes as pagesizes
+from reportlab.lib.styles import StyleSheet1, ParagraphStyle
 import reportlab.lib.units as units
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.fonts import addMapping
-from reportlab.lib.styles import StyleSheet1
 from reportlab.pdfbase import pdfmetrics
-import reportlab.lib.pagesizes as pagesizes
 import reportlab.rl_config
-
-from rst2pdf.rson import loads as rson_loads
 
 from . import findfonts
 from .log import log
-
-from .opt_imports import ParagraphStyle, wordaxe, wordaxe_version
-
-HAS_WORDAXE = wordaxe is not None
+from .rson import loads as rson_loads
 
 unit_separator = re.compile('(-?[0-9.]*)')
 
@@ -76,17 +70,17 @@ class StyleSheet(object):
         log.info('Using stylesheets: %s' % ','.join(flist))
         # find base path
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
 
         # flist is a list of stylesheet filenames.
         # They will be loaded and merged in order.
         # but the two default stylesheets will always
         # be loaded first
         flist = [
-            join(self.PATH, 'styles', 'styles.style'),
-            join(self.PATH, 'styles', 'default.style'),
+            os.path.join(self.PATH, 'styles', 'styles.style'),
+            os.path.join(self.PATH, 'styles', 'default.style'),
         ] + flist
 
         self.def_dpi = def_dpi
@@ -528,21 +522,6 @@ class StyleSheet(object):
                 if ('bulletFontSize' not in s) and ('fontSize' in s):
                     s['bulletFontSize'] = s['fontSize']
 
-                # If the borderPadding is a list and wordaxe <=0.3.2,
-                # convert it to an integer. Workaround for Issue
-                if 'borderPadding' in s and (
-                    (
-                        (HAS_WORDAXE and wordaxe_version <= 'wordaxe 0.3.2')
-                        or reportlab.Version < "2.3"
-                    )
-                    and isinstance(s['borderPadding'], list)
-                ):
-                    log.warning(
-                        'Using a borderPadding list in '
-                        'style %s with wordaxe <= 0.3.2 or Reportlab < 2.3. That is not '
-                        'supported, so it will probably look wrong' % s['name']
-                    )
-                    s['borderPadding'] = s['borderPadding'][0]
                 if 'spaceBefore' in s:
                     if isinstance(s['spaceBefore'], str) and s[
                         'spaceBefore'
@@ -703,7 +682,7 @@ class StyleSheet(object):
         """
         # This alignment thing is exactly backwards from
         # the alignment for paragraphstyles
-        alignment = {0: 'LEFT', 1: 'CENTER', 2: 'RIGHT', 4: 'JUSTIFY', 8: 'DECIMAL',}[
+        alignment = {0: 'LEFT', 1: 'CENTER', 2: 'RIGHT', 4: 'JUSTIFY', 8: 'DECIMAL'}[
             self['table-heading'].alignment
         ]
         return [

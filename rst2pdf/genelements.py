@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 # See LICENSE.txt for licensing terms
 
 # Some fragments of code are copied from Reportlab under this license:
@@ -35,45 +33,32 @@
 #
 #####################################################################################
 
-
-import os
-import tempfile
-import re
 from copy import copy
-
 
 import docutils.nodes
 import reportlab
-
-from .aafigure_directive import Aanode
-from .basenodehandler import NodeHandler
-from .oddeven_directive import OddEvenNode
-
-from .log import log, nodeid
-from .utils import log, parseRaw, parseHTML
 from reportlab.platypus import Paragraph, TableStyle
-from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+
+from .basenodehandler import NodeHandler
+from .directives.aafigure import Aanode
+from .directives.oddeven import OddEvenNode
 from .flowables import (
     Table,
     DelayedTable,
     SplitTable,
     Heading,
-    MyIndenter,
     MyTableOfContents,
     MySpacer,
     Separation,
     BoxedContainer,
-    BoundByWidth,
     MyPageBreak,
-    Reference,
     tablepadding,
     OddEven,
     XPreformatted,
 )
-from rst2pdf.math_flowable import Math
-
-from .opt_imports import wordaxe, Paragraph, ParagraphStyle
+from .math_flowable import Math
+from .utils import parseRaw, parseHTML
 
 
 class TocBuilderVisitor(docutils.nodes.SparseNodeVisitor):
@@ -153,7 +138,6 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
         spans = client.filltable(rows)
 
         data = []
-        cellStyles = []
         rowids = range(0, len(rows))
         for row, i in zip(rows, rowids):
             r = []
@@ -239,13 +223,6 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
         else:
             # Section/Subsection/etc.
             text = client.gen_pdftext(node)
-            fch = node.children[0]
-            if isinstance(fch, docutils.nodes.generated) and fch['classes'] == [
-                'sectnum'
-            ]:
-                snum = fch.astext()
-            else:
-                snum = None
             maxdepth = 6
             # The parent ID is the refid + an ID to make it unique for Sphinx
             parent_id = (
@@ -486,20 +463,7 @@ class HandleTopic(NodeHandler, docutils.nodes.topic):
             for s in toc.levelStyles:
                 # FIXME: awful slimy hack!
                 s.__class__ = reportlab.lib.styles.ParagraphStyle
-            ## Issue 117: add extra TOC levelStyles.
-            ## 9-deep should be enough.
-            # for i in range(4):
-            # ps = toc.levelStyles[-1].__class__(name='Level%d'%(i+5),
-            # parent=toc.levelStyles[-1],
-            # leading=toc.levelStyles[-1].leading,
-            # firstlineIndent=toc.levelStyles[-1].firstLineIndent,
-            # leftIndent=toc.levelStyles[-1].leftIndent+1*cm)
-            # toc.levelStyles.append(ps)
 
-            ## Override fontnames (defaults to Times-Roman)
-            # for levelStyle in toc.levelStyles:
-            # levelStyle.__dict__['fontName'] = \
-            # client.styles['tableofcontents'].fontName
             if 'local' in node_classes:
                 node.elements = [toc]
             else:
@@ -598,7 +562,7 @@ class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
         colWidths = client.styles['option-list'].colWidths
         node.elements = [
             DelayedTable(
-                [[client.PreformattedFit(optext, client.styles["literal"]), desc,]],
+                [[client.PreformattedFit(optext, client.styles["literal"]), desc]],
                 style=t_style,
                 colWidths=colWidths,
             )
@@ -686,14 +650,11 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
             # The first item in the list, so doesn't need
             # separation (it's provided by the list itself)
             sb = 0
-            # It also doesn't need a first-line-indent
-            fli = 0
         else:
             # Not the first item, so need to separate from
             # previous item. Account for space provided by
             # the item's content, too.
             sb = item_st.spaceBefore - item_st.spaceAfter
-            fli = item_st.firstLineIndent
 
         bStyle.spaceBefore = 0
 
@@ -703,10 +664,6 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
         if extra_space > 0:
             # The bullet is larger, move down the item text
             sb += extra_space
-            sbb = 0
-        else:
-            # The bullet is smaller, move down the bullet
-            sbb = -extra_space
 
         colWidths = getattr(style, 'colWidths', [])
         while len(colWidths) < 2:
@@ -867,24 +824,12 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
             st_name = node.get('classes')[0]
         style = client.styles[st_name]
         cmd = getattr(style, 'commands', [])
-        image = node.children[0]
-        if len(node.children) > 1:
-            caption = node.children[1]
-        else:
-            caption = None
-
-        if len(node.children) > 2:
-            legend = node.children[2:]
-        else:
-            legend = []
 
         w = node.get('width', client.styles['figure'].colWidths[0])
-        cw = [
-            w,
-        ]
+        cw = [w]
         sub_elems = client.gather_elements(node, style=None)
         t_style = TableStyle(cmd)
-        table = DelayedTable([[e,] for e in sub_elems], style=t_style, colWidths=cw)
+        table = DelayedTable([[e] for e in sub_elems], style=t_style, colWidths=cw)
         table.hAlign = node.get('align', 'CENTER').upper()
         return [
             MySpacer(0, style.spaceBefore),

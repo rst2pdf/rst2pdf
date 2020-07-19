@@ -35,22 +35,18 @@
 #####################################################################################
 
 __docformat__ = 'reStructuredText'
+
 from importlib import import_module
 
 import sys
 import os
-import tempfile
 import re
-import string
 import logging
 
-from io import StringIO
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urlunparse
 from os.path import abspath, dirname, expanduser, join
 from copy import copy, deepcopy
 from optparse import OptionParser
-from pprint import pprint
-from xml.sax.saxutils import unescape, escape
 
 import docutils.readers.doctree
 import docutils.core
@@ -64,40 +60,63 @@ try:
 except ImportError:
     from docutils.utils.roman import toRoman
 
-from reportlab.platypus import *
-from reportlab.platypus.doctemplate import IndexingFlowable
-from reportlab.platypus.flowables import _listWrapOn, _Container
-from reportlab.pdfbase.pdfdoc import PDFPageLabel
-
-# from reportlab.lib.enums import *
-# from reportlab.lib.units import *
-# from reportlab.lib.pagesizes import *
+import reportlab
+from reportlab.lib.units import cm
+from reportlab.platypus import doctemplate
+from reportlab.platypus.doctemplate import (
+    ActionFlowable,
+    BaseDocTemplate,
+    FrameActionFlowable,
+    IndexingFlowable,
+    LayoutError,
+    PageTemplate,
+)
+from reportlab.platypus.flowables import (
+    _listWrapOn,
+    _Container,
+    Flowable,
+    ImageAndFlowables,
+    PageBreak,
+    SlowPageBreak,
+)
+from reportlab.platypus.paragraph import Paragraph
+from reportlab.platypus.tables import TableStyle
 
 from . import config
 
-from rst2pdf import counter_role, oddeven_directive
-from rst2pdf import pygments_code_block_directive  # code-block directive
+from rst2pdf.directives import code_block
 from rst2pdf import flowables
-from rst2pdf.flowables import *  # our own reportlab flowables
+from rst2pdf.flowables import (
+    BoundByWidth,
+    DelayedTable,
+    Heading,
+    MyPageBreak,
+    MySpacer,
+    OddEven,
+    Separation,
+    SmartFrame,
+    XXPreformatted,
+)
 from rst2pdf.sinker import Sinker
 from rst2pdf.image import MyImage, missing
-from rst2pdf.aafigure_directive import Aanode
 from rst2pdf.log import log, nodeid
 from smartypants import smartypants
 from rst2pdf import styles as sty
 from rst2pdf.nodehandlers import nodehandlers
 from rst2pdf.languages import get_language_available
-from rst2pdf.opt_imports import (
-    Paragraph,
-    BaseHyphenator,
-    PyHyphenHyphenator,
-    DCWHyphenator,
-    sphinx as sphinx_module,
-    wordaxe,
-)
 
 # Template engine for covers
 import jinja2
+
+# Side effects
+from rst2pdf.directives import aafigure  # noqa
+from rst2pdf.directives import oddeven  # noqa
+from rst2pdf.roles import counter as counter_role  # noqa
+
+try:
+    import sphinx as sphinx_module
+except ImportError:
+    sphinx_module = None
 
 
 numberingstyles = {
@@ -221,12 +240,8 @@ class RstToPdf(object):
             self.gen_pdftext, self.gen_elements = sphinxhandlers(self)
         else:
             # These rst2pdf extensions conflict with sphinx
-            directives.register_directive(
-                'code-block', pygments_code_block_directive.code_block_directive
-            )
-            directives.register_directive(
-                'code', pygments_code_block_directive.code_block_directive
-            )
+            directives.register_directive('code-block', code_block.code_block_directive)
+            directives.register_directive('code', code_block.code_block_directive)
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
@@ -242,42 +257,6 @@ class RstToPdf(object):
         # Load the docutils language modules for all required languages
         for lang in self.styles.languages:
             self.docutils_languages[lang] = get_language_available(lang)[2]
-
-        # Load the hyphenators for all required languages
-        if wordaxe is not None:
-            for lang in self.styles.languages:
-                if lang.split('_', 1)[0] == 'de':
-                    try:
-                        wordaxe.hyphRegistry[lang] = DCWHyphenator('de', 5)
-                        continue
-                    except Exception:
-                        # hyphenators may not always be available or crash,
-                        # e.g. wordaxe issue 2809074 (http://is.gd/16lqs)
-                        log.warning(
-                            "Can't load wordaxe DCW hyphenator"
-                            " for German language, trying Py hyphenator instead"
-                        )
-                    else:
-                        continue
-                try:
-                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
-                except Exception:
-                    log.warning(
-                        "Can't load wordaxe Py hyphenator"
-                        " for language %s, trying base hyphenator",
-                        lang,
-                    )
-                else:
-                    continue
-                try:
-                    wordaxe.hyphRegistry[lang] = BaseHyphenator(lang)
-                except Exception:
-                    log.warning("Can't even load wordaxe base hyphenator")
-            log.info(
-                'hyphenation by default in %s , loaded %s',
-                self.styles['bodytext'].language,
-                ','.join(self.styles.languages),
-            )
 
         self.pending_targets = []
         self.targets = []
@@ -300,13 +279,6 @@ class RstToPdf(object):
         try:
             return self.styles['bodytext'].language
         except AttributeError:
-            # FIXME: this is pretty arbitrary, and will
-            # probably not do what you want.
-            # however, it should only happen if:
-            # * You specified the language of a style
-            # * Have no wordaxe installed.
-            # Since it only affects hyphenation, and wordaxe is
-            # not installed, t should have no effect whatsoever
             return os.environ['LANG'] or 'en'
 
     def text_for_label(self, label, style):
@@ -579,6 +551,7 @@ class RstToPdf(object):
             self.doctree.walk(snf)
             srf = SectRefExpander(self.doctree, snf.sectnums)
             self.doctree.walk(srf)
+
         if self.strip_elements_with_classes:
             from docutils.transforms.universal import StripClassesAndElements
 
@@ -696,7 +669,7 @@ class RstToPdf(object):
                         log.info('Forcing second pass so Total pages work')
                         elements.append(UnhappyOnce())
                         continue
-                ## Rearrange footnotes if needed
+                # Rearrange footnotes if needed
                 if self.real_footnotes:
                     newStory = []
                     fnPile = []
@@ -723,7 +696,7 @@ class RstToPdf(object):
                     continue
 
                 break
-            except ValueError as v:
+            except ValueError:
                 # FIXME: cross-document links come through here, which means
                 # an extra pass per cross-document reference. Which sucks.
                 # if v.args and str(v.args[0]).startswith('format not resolved'):
@@ -744,9 +717,6 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
-
-
-from reportlab.platypus import doctemplate
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -987,19 +957,18 @@ class HeaderOrFooter(object):
                         if isinstance(cell, list):
                             data[r][c] = self.replaceTokens(cell, canv, doc, smarty)
                         else:
-                            row[c] = self.replaceTokens([cell,], canv, doc, smarty)[0]
+                            row[c] = self.replaceTokens([cell], canv, doc, smarty)[0]
                 elems[i] = DelayedTable(data, e._colWidths, e.style)
-
             elif isinstance(e, BoundByWidth):
                 for index, item in enumerate(e.content):
                     if isinstance(item, Paragraph):
                         e.content[index] = Paragraph(replace(item.text), item.style)
                 elems[i] = e
-
             elif isinstance(e, OddEven):
-                odd = self.replaceTokens([e.odd,], canv, doc, smarty)[0]
-                even = self.replaceTokens([e.even,], canv, doc, smarty)[0]
+                odd = self.replaceTokens([e.odd], canv, doc, smarty)[0]
+                even = self.replaceTokens([e.even], canv, doc, smarty)[0]
                 elems[i] = OddEven(odd, even)
+
         return elems
 
     def draw(self, pageobj, canv, doc, x, y, width, height):
@@ -1051,11 +1020,11 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, kind = MyImage.size_for_node(dict(uri=uri,), self.client)
+                w, h, _ = MyImage.size_for_node(dict(uri=uri,), self.client)
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
-                w, h, kind = 100, 100, 'direct'
+                w, h, = 100, 100
 
             pw, ph = self.styles.pw, self.styles.ph
             if self.client.background_fit_mode == 'center':
@@ -1698,10 +1667,10 @@ def main(_args=None):
     if options.real_footnotes:
         options.inline_footnotes = True
 
-    if reportlab.Version < '2.3':
+    if reportlab.Version < '3.0':
         log.warning(
             'You are using Reportlab version %s.'
-            ' The suggested version is 2.3 or higher' % reportlab.Version
+            ' The suggested version is 3.0 or higher' % reportlab.Version
         )
 
     if options.invariant:
@@ -1776,6 +1745,7 @@ def patch_PDFDate():
 
     class PDFDate(pdfdoc.PDFObject):
         __PDFObject__ = True
+
         # gmt offset now suppported
         def __init__(self, invariant=True, ts=None, dateFormatter=None):
             now = (2000, 0o1, 0o1, 00, 00, 00, 0)
@@ -1783,9 +1753,6 @@ def patch_PDFDate():
             self.dateFormatter = dateFormatter
 
         def format(self, doc):
-            from time import timezone
-
-            dhh, dmm = timezone // 3600, (timezone % 3600) % 60
             dfmt = self.dateFormatter or (
                 lambda yyyy, mm, dd, hh, m, s: "D:%04d%02d%02d%02d%02d%02d%+03d'%02d'"
                 % (yyyy, mm, dd, hh, m, s, 0, 0)
@@ -1856,67 +1823,13 @@ def add_extensions(options):
             module.install(createpdf, options)
 
 
-def monkeypatch():
-    ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
-        This allows us to compare PDFs more easily.
-
-        There are two sets of changes here:
-
-        1)  rl_config.paraFontSizeHeightOffset = False
-
-            This reverts a change reportlab that messes up a lot of docs.
-            We may want to keep this one in here, or at least figure out
-            the right thing to do.  If we do NOT keep this one here,
-            we will have documents look different in RL2.3 than they do
-            in RL2.4.  This is probably unacceptable.
-
-        2) Everything else (below the paraFontSizeHeightOffset line):
-
-            These change some behavior in reportlab that affects the
-            graphics content stream without affecting the actual output.
-
-            We can remove these changes after making sure we are happy
-            and the checksums are good.
-    '''
-    import reportlab
-    from reportlab import rl_config
-    from reportlab.pdfgen.canvas import Canvas
-    from reportlab.pdfbase import pdfdoc
-
-    if getattr(reportlab, 'Version', None) != '2.4':
-        return
-
-    # NOTE:  THIS IS A REAL DIFFERENCE -- DEFAULT y-offset FOR CHARS CHANGES!!!
-    rl_config.paraFontSizeHeightOffset = False
-
-    # Fix the preamble.  2.4 winds up injecting an extra space, so we toast it.
-
-    def new_make_preamble(self):
-        self._old_make_preamble()
-        self._preamble = ' '.join(self._preamble.split())
-
-    Canvas._old_make_preamble = Canvas._make_preamble
-    Canvas._make_preamble = new_make_preamble
-
-    # A new optimization removes the CR/LF between 'endstream' and 'endobj'
-    # Remove it for comparison
-    pdfdoc.INDIRECTOBFMT = pdfdoc.INDIRECTOBFMT.replace('CLINEEND', 'LINEEND')
-
-    # By default, transparency is set, and by default, that changes PDF version
-    # to 1.4 in RL 2.4.
-    pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1, 3
-
-
-monkeypatch()
-
-
 def publish_secondary_doctree(text, main_tree, source_path):
-
     # This is a hack so the text substitutions defined
     # in the document are available when we process the cover
     # page. See Issue 322
     dt = main_tree
-    # Add substitutions  from the main doctree
+
+    # Add substitutions from the main doctree
     class addSubsts(Transform):
         default_priority = 219
 

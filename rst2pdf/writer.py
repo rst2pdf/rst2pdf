@@ -5,7 +5,7 @@ from StringIO import StringIO
 
 from docutils import writers
 
-from rst2pdf import createpdf
+from . import createpdf
 
 
 class PdfWriter(writers.Writer):

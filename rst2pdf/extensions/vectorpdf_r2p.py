@@ -9,7 +9,6 @@ try:
     from reportlab.platypus import Flowable
     from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 
-    import pdfrw
     from pdfrw.toreportlab import makerl
     from pdfrw.buildxobj import CacheXObj
 
@@ -18,7 +17,6 @@ except ImportError:
     # This is just to make nosetest happy on the CI server
     class Flowable:
         pass
-
         # TODO:  Looks the same as for other images, because I
         #        stole it from other image handlers.  Common base class???
 

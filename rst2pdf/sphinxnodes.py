@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-
-# $URL$
-# $Date$
-# $Revision$
-
 # See LICENSE.txt for licensing terms
 
 '''
@@ -20,24 +15,20 @@ are combined into the instantiated object.
 
 from copy import copy
 
-from rst2pdf.log import nodeid, log
-from rst2pdf.flowables import (
-    MySpacer,
-    MyIndenter,
-    Reference,
-    DelayedTable,
-    Table,
-)
-from rst2pdf.image import MyImage, VectorPdf
-
-from rst2pdf.opt_imports import Paragraph, sphinx
-
-from rst2pdf.nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+import docutils
 from reportlab.platypus import Paragraph, TableStyle
 import sphinx
-import docutils
 
-################## NodeHandler subclasses ###################
+from .flowables import (
+    MySpacer,
+    MyIndenter,
+    DelayedTable,
+)
+from .image import MyImage, VectorPdf
+from .log import nodeid, log
+from .nodehandlers import NodeHandler, FontHandler, HandleEmphasis
+
+# ################# NodeHandler subclasses ###################
 
 
 class SphinxHandler(NodeHandler):
@@ -143,13 +134,6 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
         return []
 
 
-if sphinx.__version__ < '1.0':
-
-    class HandleSphinxModule(SphinxHandler, sphinx.addnodes.module):
-        def gather_elements(self, client, node, style):
-            return [Reference('module-' + node['modname'])]
-
-
 # custom SPHINX nodes.
 # FIXME: make sure they are all here, and keep them all together
 
@@ -204,7 +188,7 @@ class HandleHList(SphinxHandler, sphinx.addnodes.hlist):
         t_style = TableStyle(client.styles['hlist'].commands)
         cw = 100.0 / len(node.children)
         return [
-            DelayedTable(cells, colWidths=["%s%%" % cw,] * len(cells), style=t_style)
+            DelayedTable(cells, colWidths=['%s%%' % cw] * len(cells), style=t_style)
         ]
 
 

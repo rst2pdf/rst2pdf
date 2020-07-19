@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# $URL$
-# $Date$
-# $Revision$
 
 # :Author: a Pygments author|contributor; Felix Wiemann; Guenter Milde
 # :Date: $Date$
@@ -33,6 +30,7 @@
 # ::
 
 import codecs
+
 from docutils import nodes
 from docutils.parsers.rst import directives
 
@@ -43,7 +41,7 @@ try:
 except ImportError:
     pass
 
-from .log import log
+from ..log import log
 
 
 # Customisation
@@ -247,8 +245,8 @@ def code_block_directive(
     content = content.replace('\t', ' ' * tabw)
 
     hl_lines = options.get('hl_lines', [])
-    withln = "linenos" in options
-    if not "linenos_offset" in options:
+    withln = 'linenos' in options
+    if 'linenos_offset' not in options:
         line_offset = 0
 
     try:

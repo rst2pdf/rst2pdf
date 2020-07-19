@@ -11,13 +11,15 @@ Ergo:
 '''
 
 import errno
+import subprocess
+import tempfile
+
 from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst import directives
+
 import rst2pdf.genelements as genelements
 from rst2pdf.image import MyImage
-import tempfile
-import subprocess
 
 
 class plantuml(nodes.General, nodes.Element):

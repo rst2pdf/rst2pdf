@@ -13,55 +13,43 @@
     :license: BSD, see LICENSE for details.
 """
 
+from copy import copy
+from io import BytesIO
 import logging
+import os
+import os.path
 import re
 import sys
-import os
 import time
-from os import path
-from os.path import abspath, dirname, expanduser, join
-from pprint import pprint
-from copy import copy, deepcopy
-from xml.sax.saxutils import unescape, escape
-from traceback import print_exc
-
-from io import BytesIO
-from urllib.parse import urljoin, urlparse, urlunparse
-
-from pygments.lexers import get_lexer_by_name, guess_lexer
+from urllib.parse import urlunparse
 
 from docutils import writers
 from docutils import nodes
-from docutils import languages
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
-
+import jinja2
+from pygments.lexers import guess_lexer
 import sphinx
 from sphinx import addnodes
 from sphinx.builders import Builder
+from sphinx.environment.adapters.indexentries import IndexEntries
+from sphinx.locale import _
+from sphinx.locale import versionlabels
+from sphinx.transforms import SphinxTransform
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
+
+import rst2pdf
+from rst2pdf import createpdf
+from rst2pdf.directives import code_block
+from rst2pdf.log import log
+from rst2pdf.languages import get_language_available
 
 if sphinx.__version__ >= '2.1':
     from sphinx.errors import NoUri
 else:
     from sphinx.environment import NoUri
-
-from sphinx.environment.adapters.indexentries import IndexEntries
-from sphinx.locale import admonitionlabels, versionlabels
-from sphinx.transforms import SphinxTransform
-
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
-
-import rst2pdf
-from rst2pdf import createpdf, pygments_code_block_directive, oddeven_directive
-from rst2pdf.log import log
-from rst2pdf.languages import get_language_available
-
-# Template engine for covers
-import jinja2
 
 
 class PDFBuilder(Builder):
@@ -150,7 +138,7 @@ class PDFBuilder(Builder):
                     config=self.config,
                 )
 
-                tgt_file = path.join(self.outdir, targetname + self.out_suffix)
+                tgt_file = os.path.join(self.outdir, targetname + self.out_suffix)
                 destination = FileOutput(
                     destination=open(tgt_file, 'wb'), encoding='utf-8'
                 )
@@ -290,13 +278,9 @@ class PDFBuilder(Builder):
         # We handle it right here
 
         for indexname, indexcls, content, collapse in self.domain_indices:
-            indexcontext = dict(
-                indextitle=indexcls.localname, content=content, collapse_index=collapse,
-            )
             # In HTML this is handled with a Jinja template, domainindex.html
             # We have to generate docutils stuff right here in the same way.
             self.sphinx_logger.info(' ' + indexname)
-            print
 
             output = ['DUMMY', '=====', '', '.. _modindex:\n\n']
             t = indexcls.localname
@@ -432,11 +416,11 @@ class PDFBuilder(Builder):
                 continue
             targetname = self.env.doc2path(docname, self.outdir, self.out_suffix)
             try:
-                targetmtime = path.getmtime(targetname)
+                targetmtime = os.path.getmtime(targetname)
             except Exception:
                 targetmtime = 0
             try:
-                srcmtime = path.getmtime(self.env.doc2path(docname))
+                srcmtime = os.path.getmtime(self.env.doc2path(docname))
                 if srcmtime > targetmtime:
                     yield docname
             except EnvironmentError:
@@ -498,7 +482,6 @@ class PDFContents(Contents):
             elif isinstance(sect, nodes.section):
                 sections.append(sect)
         entries = []
-        autonum = 0
         # FIXME: depth should be taken from :maxdepth: (Issue 320)
         depth = self.toc_depth
         for section in sections:
@@ -587,9 +570,9 @@ class PDFWriter(writers.Writer):
         self.repeat_table_rows = repeat_table_rows
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
-            self.PATH = abspath(dirname(sys.executable))
+            self.PATH = os.path.abspath(os.path.dirname(sys.executable))
         else:
-            self.PATH = abspath(dirname(__file__))
+            self.PATH = os.path.abspath(os.path.dirname(__file__))
         if style_path:
             self.style_path = style_path
         else:
@@ -781,7 +764,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             # FIXME: make tab width configurable
             content = [c.replace('\t', '        ') for c in content]
             replacement = nodes.literal_block()
-            replacement.children = pygments_code_block_directive.code_block_directive(
+            replacement.children = code_block.code_block_directive(
                 name=None,
                 arguments=[lang],
                 options=options,

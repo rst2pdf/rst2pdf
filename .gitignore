@@ -12,3 +12,4 @@ rst2pdf/tests/output/*.log
 .tox/
 dist/
 snap/.snapcraft
+/pip-wheel-metadata
