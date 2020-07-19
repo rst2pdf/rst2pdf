@@ -31,7 +31,12 @@ from docutils.parsers import rst
 from reportlab.graphics import renderPDF
 
 from ..log import log
-from ..opt_imports import aafigure
+
+try:
+    import aafigure
+    import aafigure.pdf
+except ImportError:
+    aafigure = None
 
 WARNED = False
 

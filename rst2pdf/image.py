@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from copy import copy
 import glob
 import os
 from os.path import abspath, dirname
 import sys
-from copy import copy
+from urllib.request import urlretrieve
+
+from PIL import Image as PILImage
 from reportlab.platypus.flowables import Image, Flowable
 from reportlab.lib.units import cm, inch
 
-from urllib.request import urlretrieve
-
-from .opt_imports import PILImage
 from .log import log, nodeid
 
 try:
+    # FIXME: We should handle this being missing or make it a requirement
     from .svgimage import SVGImage
 except ImportError:
     # svglib may optionally not be installed, which causes this error

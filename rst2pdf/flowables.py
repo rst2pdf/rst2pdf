@@ -7,22 +7,27 @@ from copy import copy
 import re
 import reportlab
 import sys
+from xml.sax.saxutils import unescape
 
-from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import cm
 from reportlab.platypus.doctemplate import FrameActionFlowable, FrameBreak, Indenter
-from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable, PageBreak, Spacer
+from reportlab.platypus.flowables import (
+    _listWrapOn,
+    _FUZZ,
+    Flowable,
+    NullDraw,
+    PageBreak,
+    Spacer,
+)
 from reportlab.platypus.frames import Frame
-from reportlab.platypus.paragraph import _doLink
+from reportlab.platypus.paragraph import _doLink, Paragraph
 from reportlab.platypus.tables import Table, TableStyle
 from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.platypus.xpreformatted import XPreformatted
-from reportlab.lib.styles import ParagraphStyle
-from xml.sax.saxutils import unescape
 
 from . import styles
-
-from .opt_imports import Paragraph, NullDraw
 from .log import log
 
 

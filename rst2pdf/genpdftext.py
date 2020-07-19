@@ -2,12 +2,11 @@
 # See LICENSE.txt for licensing terms
 
 import os
-import docutils.nodes
+from urllib.parse import urljoin, urlparse
 from xml.sax.saxutils import escape
 
-from urllib.parse import urljoin, urlparse
-
-from .opt_imports import Paragraph
+import docutils.nodes
+from reportlab.platypus.paragraph import Paragraph
 
 from .basenodehandler import NodeHandler
 from .image import MyImage, missing

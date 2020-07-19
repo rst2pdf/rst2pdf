@@ -79,6 +79,7 @@ from reportlab.platypus.flowables import (
     PageBreak,
     SlowPageBreak,
 )
+from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.tables import TableStyle
 
 from . import config
@@ -103,14 +104,6 @@ from smartypants import smartypants
 from rst2pdf import styles as sty
 from rst2pdf.nodehandlers import nodehandlers
 from rst2pdf.languages import get_language_available
-from rst2pdf.opt_imports import (
-    Paragraph,
-    BaseHyphenator,
-    PyHyphenHyphenator,
-    DCWHyphenator,
-    sphinx as sphinx_module,
-    wordaxe,
-)
 
 # Template engine for covers
 import jinja2
@@ -119,6 +112,11 @@ import jinja2
 from rst2pdf.directives import aafigure  # noqa
 from rst2pdf.directives import oddeven  # noqa
 from rst2pdf.roles import counter as counter_role  # noqa
+
+try:
+    import sphinx as sphinx_module
+except ImportError:
+    sphinx_module = None
 
 
 numberingstyles = {
@@ -260,42 +258,6 @@ class RstToPdf(object):
         for lang in self.styles.languages:
             self.docutils_languages[lang] = get_language_available(lang)[2]
 
-        # Load the hyphenators for all required languages
-        if wordaxe is not None:
-            for lang in self.styles.languages:
-                if lang.split('_', 1)[0] == 'de':
-                    try:
-                        wordaxe.hyphRegistry[lang] = DCWHyphenator('de', 5)
-                        continue
-                    except Exception:
-                        # hyphenators may not always be available or crash,
-                        # e.g. wordaxe issue 2809074 (http://is.gd/16lqs)
-                        log.warning(
-                            "Can't load wordaxe DCW hyphenator"
-                            " for German language, trying Py hyphenator instead"
-                        )
-                    else:
-                        continue
-                try:
-                    wordaxe.hyphRegistry[lang] = PyHyphenHyphenator(lang)
-                except Exception:
-                    log.warning(
-                        "Can't load wordaxe Py hyphenator"
-                        " for language %s, trying base hyphenator",
-                        lang,
-                    )
-                else:
-                    continue
-                try:
-                    wordaxe.hyphRegistry[lang] = BaseHyphenator(lang)
-                except Exception:
-                    log.warning("Can't even load wordaxe base hyphenator")
-            log.info(
-                'hyphenation by default in %s , loaded %s',
-                self.styles['bodytext'].language,
-                ','.join(self.styles.languages),
-            )
-
         self.pending_targets = []
         self.targets = []
 
@@ -317,13 +279,6 @@ class RstToPdf(object):
         try:
             return self.styles['bodytext'].language
         except AttributeError:
-            # FIXME: this is pretty arbitrary, and will
-            # probably not do what you want.
-            # however, it should only happen if:
-            # * You specified the language of a style
-            # * Have no wordaxe installed.
-            # Since it only affects hyphenation, and wordaxe is
-            # not installed, t should have no effect whatsoever
             return os.environ['LANG'] or 'en'
 
     def text_for_label(self, label, style):

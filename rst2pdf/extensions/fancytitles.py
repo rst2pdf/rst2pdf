@@ -4,11 +4,11 @@ import tempfile
 
 import docutils
 import reportlab
+from reportlab.platypus.paragraph import Paragraph
 
 import rst2pdf.genelements as genelements
 from rst2pdf.flowables import Heading, MyPageBreak
 from rst2pdf.image import MyImage
-from rst2pdf.opt_imports import Paragraph
 
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):

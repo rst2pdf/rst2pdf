@@ -10,16 +10,17 @@ from reportlab.platypus import SimpleDocTemplate
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-from rst2pdf.opt_imports import mathtext
-
-
 from rst2pdf.log import log
 
-HAS_MATPLOTLIB = mathtext is not None
-
-if HAS_MATPLOTLIB:
+try:
+    from matplotlib import mathtext
     from matplotlib.font_manager import FontProperties
     from matplotlib.colors import ColorConverter
+
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
+
 fonts = {}
 
 
