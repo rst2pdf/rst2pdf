@@ -1666,10 +1666,10 @@ def main(_args=None):
     if options.real_footnotes:
         options.inline_footnotes = True
 
-    if reportlab.Version < '2.3':
+    if reportlab.Version < '3.0':
         log.warning(
             'You are using Reportlab version %s.'
-            ' The suggested version is 2.3 or higher' % reportlab.Version
+            ' The suggested version is 3.0 or higher' % reportlab.Version
         )
 
     if options.invariant:
@@ -1820,60 +1820,6 @@ def add_extensions(options):
             )
         if hasattr(module, 'install'):
             module.install(createpdf, options)
-
-
-def monkeypatch():
-    ''' For initial test purposes, make reportlab 2.4 mostly perform like 2.3.
-        This allows us to compare PDFs more easily.
-
-        There are two sets of changes here:
-
-        1)  rl_config.paraFontSizeHeightOffset = False
-
-            This reverts a change reportlab that messes up a lot of docs.
-            We may want to keep this one in here, or at least figure out
-            the right thing to do.  If we do NOT keep this one here,
-            we will have documents look different in RL2.3 than they do
-            in RL2.4.  This is probably unacceptable.
-
-        2) Everything else (below the paraFontSizeHeightOffset line):
-
-            These change some behavior in reportlab that affects the
-            graphics content stream without affecting the actual output.
-
-            We can remove these changes after making sure we are happy
-            and the checksums are good.
-    '''
-    import reportlab
-    from reportlab import rl_config
-    from reportlab.pdfgen.canvas import Canvas
-    from reportlab.pdfbase import pdfdoc
-
-    if getattr(reportlab, 'Version', None) != '2.4':
-        return
-
-    # NOTE:  THIS IS A REAL DIFFERENCE -- DEFAULT y-offset FOR CHARS CHANGES!!!
-    rl_config.paraFontSizeHeightOffset = False
-
-    # Fix the preamble.  2.4 winds up injecting an extra space, so we toast it.
-
-    def new_make_preamble(self):
-        self._old_make_preamble()
-        self._preamble = ' '.join(self._preamble.split())
-
-    Canvas._old_make_preamble = Canvas._make_preamble
-    Canvas._make_preamble = new_make_preamble
-
-    # A new optimization removes the CR/LF between 'endstream' and 'endobj'
-    # Remove it for comparison
-    pdfdoc.INDIRECTOBFMT = pdfdoc.INDIRECTOBFMT.replace('CLINEEND', 'LINEEND')
-
-    # By default, transparency is set, and by default, that changes PDF version
-    # to 1.4 in RL 2.4.
-    pdfdoc.PDF_SUPPORT_VERSION['transparency'] = 1, 3
-
-
-monkeypatch()
 
 
 def publish_secondary_doctree(text, main_tree, source_path):
