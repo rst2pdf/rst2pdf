@@ -13,47 +13,39 @@
     :license: BSD, see LICENSE for details.
 """
 
+from copy import copy
+from io import BytesIO
 import logging
-import re
-import sys
 import os
-import time
 from os import path
 from os.path import abspath, dirname
-from copy import copy
-
-from io import BytesIO
+import re
+import sys
+import time
 from urllib.parse import urlunparse
-
-from pygments.lexers import guess_lexer
 
 from docutils import writers
 from docutils import nodes
 from docutils.transforms.parts import Contents
 from docutils.io import FileOutput
 import docutils.core
-
+import jinja2
 import sphinx
+from pygments.lexers import guess_lexer
 from sphinx import addnodes
 from sphinx.builders import Builder
-from sphinx.util.console import darkgreen, red
-from sphinx.util import SEP
-
 from sphinx.environment.adapters.indexentries import IndexEntries
+from sphinx.locale import _
 from sphinx.locale import versionlabels
 from sphinx.transforms import SphinxTransform
+from sphinx.util.console import darkgreen, red
+from sphinx.util import SEP
 
 import rst2pdf
 from rst2pdf import createpdf
 from rst2pdf.directives import code_block
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
-
-# Template engine for covers
-import jinja2
-
-if sphinx.__version__ >= '1.':
-    from sphinx.locale import _
 
 if sphinx.__version__ >= '2.1':
     from sphinx.errors import NoUri
