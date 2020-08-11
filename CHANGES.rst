@@ -11,7 +11,7 @@
 * Fixed: SVGlib is really optional now! (Issue #889)
 * Fixed: The README, LICENSE and CHANGES files are now packaged with the release tarball. (Issue 867)
 * Removed: Support for pdfrw has been removed and hence support for rendering SVGs using Inkscape has
-  also been removed.
+  also been removed. (Issue #896)
 
 0.97 (2020-05-09)
 -----------------
