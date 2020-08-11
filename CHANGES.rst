@@ -5,12 +5,13 @@
 * Added: We can now create coverage reports using ``tox -e coverage``. (Issues 890)
 * Changed: Update Pygments styles (Issue #882)
 * Changed: Update Pillow dependency in requirements.txt. (Issue #858)
-* Changed: Inkscape 1.0 final supported properly and use path on Windows. (Issue #870)
 * Changed: Use content-based comparison in tests. (Issue #854)
 * Fixed: Elements with that that don't have an rst2pdf element (e.g. subtitles, inline references) no
   longer cause a crash,  (Issue #889, #899)
 * Fixed: SVGlib is really optional now! (Issue #889)
 * Fixed: The README, LICENSE and CHANGES files are now packaged with the release tarball. (Issue 867)
+* Removed: Support for pdfrw has been removed and hence support for rendering SVGs using Inkscape has
+  also been removed.
 
 0.97 (2020-05-09)
 -----------------

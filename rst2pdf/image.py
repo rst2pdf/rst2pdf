@@ -19,9 +19,6 @@ except ImportError:
     # svglib may optionally not be installed, which causes this error
     SVGImage = None
 
-# This assignment could be overridden by an extension module
-VectorPdf = None
-
 # find base path
 if hasattr(sys, 'frozen'):
     PATH = abspath(dirname(sys.executable))
@@ -212,15 +209,8 @@ class MyImage(Flowable):
                 log.error('SVG image support requires svglib: %s', filename)
                 filename = missing
         elif extension in ['pdf']:
-            if VectorPdf is not None:
-                log.debug('Backend for %s is VectorPdf', filename)
-                backend = VectorPdf
-                filename = uri
-            else:
-                log.error(
-                    'PDF image support requires the vectorpdf extension: %s', filename,
-                )
-                filename = missing
+            log.error("PDF images are not supported")
+            filename = missing
         elif extension != 'jpg' and not PILImage:
             # No way to make this work
             log.error(
@@ -277,19 +267,6 @@ class MyImage(Flowable):
             # These are in pt, so convert to px
             iw = iw * xdpi / 72
             ih = ih * ydpi / 72
-        elif extension == 'pdf':
-            if VectorPdf is not None:
-                xobj = VectorPdf.load_xobj(srcinfo)
-                iw, ih = xobj.w, xobj.h
-            else:
-                raise Exception(
-                    'Documentation uses embedded PDFs which require the VectorPDF '
-                    'extension'
-                )
-
-            # These are in pt, so convert to px
-            iw = iw * xdpi / 72.0
-            ih = ih * ydpi / 72.0
         else:
             keeptrying = True
 

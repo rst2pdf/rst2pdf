@@ -5,7 +5,6 @@ dist: xenial
 addons:
   apt:
     packages:
-      - inkscape
       - texlive-latex-base
       - dvipng
       - plantuml

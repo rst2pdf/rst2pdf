@@ -181,12 +181,10 @@ For raster images, rst2pdf supports anything PIL (The Python Imaging Library)
 supports.  The exact list of supported formats varies according to your PIL
 version and system.
 
-For SVG support, you need to install svglib_ or use the inkscape extension.
+For SVG support, you need to install svglib_.
 
 Some features will not work when using these images. For example, gradients will
 not display, and text may cause problems depending on font availability.
-
-You can also use PDF images, via pdfrw.
 
 If you can choose between raster and vectorial images, for non-photographic
 images, vector files are usually smaller and look better, specially when
@@ -1846,9 +1844,8 @@ To use it in your existing Sphinx project you need to do the following:
     # Set the default DPI for images
     # pdf_default_dpi = 72
 
-    # Enable rst2pdf extension modules (default is only vectorpdf)
-    # you need vectorpdf if you want to use sphinx's graphviz support
-    # pdf_extensions = ['vectorpdf']
+    # Enable rst2pdf extension modules
+    # pdf_extensions = []
 
     # Page template name for "regular" pages
     # pdf_page_template = 'cutePage'
@@ -1910,13 +1907,6 @@ Preprocess (``-e preprocess``)
 .. include:: ../rst2pdf/extensions/preprocess_r2p.py
    :start-after:  '''
    :end-before: '''
-
-Inkscape (``-e inkscape``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. include:: ../rst2pdf/extensions/inkscape_r2p.py
-   :start-after: """
-   :end-before: """
 
 Dotted_TOC (``-e dotted_toc``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

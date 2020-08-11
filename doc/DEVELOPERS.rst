@@ -134,15 +134,14 @@ The *rst2pdf* test suite generates PDFs - stored in ``rst2pdf/tests/output`` -
 which are then compared against reference PDFs - stored in
 ``rst2pdf/tests/reference`` - using the `PyMuPDF`__ Python bindings for the
 `MuPDF`__ library. *rst2pdf* depends on a number of different tools and
-libraries, such as `ReportLab`__ and `Inkscape`__, and the output of these can
-vary slightly between releases. The *PyMuPDF* library allows us to compare the
-structure of the PDFs, with a minor amount of fuzzing to allow for minor
-differences caused by these changes in underlying dependencies.
+libraries, such as `ReportLab`__, and the output of these can vary slightly
+between releases. The *PyMuPDF* library allows us to compare the structure
+of the PDFs, with a minor amount of fuzzing to allow for minor differences
+caused by these changes in underlying dependencies.
 
 .. __: https://pymupdf.readthedocs.io/en/latest/
 .. __: https://mupdf.com/
 .. __: https://www.reportlab.com/
-.. __: https://inkscape.org/
 
 First run
 *********
