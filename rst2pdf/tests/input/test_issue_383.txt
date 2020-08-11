@@ -1,1 +1,2 @@
-.. image:: images/biohazard.*
+.. image:: images/middleware.*
+    :width: 50%
