@@ -22,7 +22,6 @@ markupsafe==1.1.1         # via jinja2
 matplotlib==3.1.2
 numpy==1.18.1             # via matplotlib
 packaging==20.0           # via sphinx
-pdfrw==0.4
 pillow==7.1.0             # via reportlab, xhtml2pdf
 pygments==2.5.2
 pyparsing==2.4.6          # via matplotlib, packaging

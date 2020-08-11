@@ -32,7 +32,6 @@ setup(
         'importlib_metadata',
         'jinja2',
         'packaging',
-        'pdfrw',
         'pygments',
         'reportlab',
         'smartypants',

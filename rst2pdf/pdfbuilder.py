@@ -946,7 +946,7 @@ def setup(app):
     app.add_config_value('pdf_repeat_table_rows', False, None)
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
-    app.add_config_value('pdf_extensions', ['vectorpdf'], None)
+    app.add_config_value('pdf_extensions', [], None)
     app.add_config_value('pdf_page_template', 'cutePage', None)
     app.add_config_value('pdf_invariant', False, None)
     app.add_config_value('pdf_real_footnotes', False, None)
