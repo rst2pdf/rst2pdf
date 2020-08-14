@@ -6,10 +6,9 @@ Creates a rst2pdf stylesheet for each pygments style.
 
 import os
 
+from dumpstyle import dumps
 from pygments.token import STANDARD_TYPES
 from pygments import styles as pstyles
-
-from . import dumpstyle
 
 
 # First get a list of all possible classes
@@ -66,7 +65,7 @@ def css2rl(css):
         style['textColor'] = 'black'
         styles.append([sname, style])
 
-    return dumpstyle.dumps({'styles': styles})
+    return dumps({'styles': styles})
 
 
 for name in list(pstyles.get_all_styles()):
