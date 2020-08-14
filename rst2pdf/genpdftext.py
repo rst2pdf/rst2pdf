@@ -256,7 +256,8 @@ class HandleTarget(NodeHandler, docutils.nodes.target):
 
 class HandleInline(NodeHandler, docutils.nodes.inline):
     def get_pre_post(self, client, node, replaceEnt):
-        r = client.styleToTags(node['classes'][0])
-        if r:
-            return r
+        if node['classes'] and node['classes'][0]:
+            r = client.styleToTags(node['classes'][0])
+            if r:
+                return r
         return '', ''
