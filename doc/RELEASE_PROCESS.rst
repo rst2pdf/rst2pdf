@@ -4,7 +4,22 @@ Release Process for rst2pdf
 
 This is an outline of what needs to be done in order to release rst2pdf.
 
-#. Update ``CHANGES.rst``
+#. Update ``CHANGES.rst``. Commit to a branch, PR and merge to master
+#. Ensure all PRs are attached to the milestone
+#. Close the milestone and create next one
+#. Use changelog-generator_ (or similar) to create a changelog
+
+   ::
+
+      $ changelog-generator -u rst2pdf -r rst2pdf -m 999
+
+#. Tag release with version number
+
+   ::
+
+      $ git tag -s 0.94
+      $ git push upstream 0.94
+
 #. Build manual
 
    ::
@@ -20,16 +35,6 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
    and upload to HTML and PDF to the website
    via a PR on the rst2pdf.github.io_ repo.
-
-#. Ensure all PRs are attached to the milestone
-#. Close the milestone and create next one
-#. Use changelog-generator_ (or similar) to create a changelog
-#. Tag release with version number
-
-   ::
-
-      $ git tag -s 0.94
-      $ git push upstream 0.94
 
 #. Update Releases section on GitHub project and paste in changelog
 #. Create rc distribution package

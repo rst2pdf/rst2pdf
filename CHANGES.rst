@@ -2,6 +2,9 @@
 {next}
 ------
 
+0.98 (2020-08-28)
+-----------------
+
 * Added: We can now create coverage reports using ``tox -e coverage``. (Issues 890)
 * Changed: Update Pygments styles (Issue #882)
 * Changed: Update Pillow dependency in requirements.txt. (Issue #858)
