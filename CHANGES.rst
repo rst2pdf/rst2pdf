@@ -2,8 +2,9 @@
 {next}
 ------
 
-* Changed Update Pygments styles (Issue #882)
-* Update Pillow dependency in requirements.txt. (Issue #858)
+* Added: We can now create coverage reports using ``tox -e coverage``. (Issues 890)
+* Changed: Update Pygments styles (Issue #882)
+* Changed: Update Pillow dependency in requirements.txt. (Issue #858)
 * Changed: Inkscape 1.0 final supported properly and use path on Windows. (Issue #870)
 * Changed: Use content-based comparison in tests. (Issue #854)
 * Fixed: Elements with that that don't have an rst2pdf element (e.g. subtitles, inline references) no

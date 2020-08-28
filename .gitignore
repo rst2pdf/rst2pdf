@@ -2,6 +2,7 @@
 __pycache__
 *.egg-info
 .coverage
+/htmlcov
 *.build_temp
 log.txt
 rst2pdf/tests/output/*.pdf

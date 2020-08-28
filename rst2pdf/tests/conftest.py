@@ -43,8 +43,23 @@ def _get_pages(pdf):
 
 
 def compare_pdfs(path_a, path_b):
-    pdf_a = fitz.open(path_a)
-    pdf_b = fitz.open(path_b)
+    try:
+        pdf_a = fitz.open(path_a)
+    except RuntimeError:
+        pytest.fail(
+            'Reference file at %r is not a valid PDF.'
+            % (os.path.relpath(path_a, ROOT_DIR),),
+            pytrace=False,
+        )
+
+    try:
+        pdf_b = fitz.open(path_b)
+    except RuntimeError:
+        pytest.fail(
+            'Output file at %r is not a valid PDF.'
+            % (os.path.relpath(path_b, ROOT_DIR),),
+            pytrace=False,
+        )
 
     # sanity check
 
