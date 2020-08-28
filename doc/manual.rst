@@ -726,7 +726,7 @@ applied to a table.  This happens in two cases:
    table. Currently these include:
 
    * Footnotes / endnotes (endnote style)
-   * Lists (item_list, bullet_list option_list and field_list styles)
+   * Lists (item-list, bullet-list, option-list and field-list styles)
 
 The options are as follows:
 
@@ -871,10 +871,10 @@ Lists
 
 Styling lists is mostly a matter of spacing and indentation.
 
-The space before and after a list is taken from the ``item_list`` and
-``bullet_list`` styles::
+The space before and after a list is taken from the ``item-list`` and
+``bullet-list`` styles::
 
-    ["item_list", {
+    ["item-list", {
       "parent": "bodytext",
       "spaceBefore": 0,
       "commands": [
@@ -884,7 +884,7 @@ The space before and after a list is taken from the ``item_list`` and
         "colWidths": ["20pt",null]
     }]
 
-    ["bullet_list", {
+    ["bullet-list", {
       "parent": "bodytext",
       "spaceBefore": 0,
       "commands": [
@@ -898,11 +898,11 @@ Yes, these are table styles, because they are implemented as tables. The
 ``RIGHTPADDING`` command and the ``colWidths`` option can be used to adjust the
 position of the bullet/item number.
 
-To control the separation between items, you use the ``item_list_item`` and
-``bullet_list_item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
+To control the separation between items, you use the ``item-list-item`` and
+``bullet-list-item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
 example::
 
-    ["bullet_list_item" , {
+    ["bullet-list-item" , {
       "parent": "bodytext",
       "spaceBefore": 20
     }]
