@@ -4,16 +4,14 @@ Release Process for rst2pdf
 
 This is an outline of what needs to be done in order to release rst2pdf.
 
-1. Update version number in ``setup.py``
-2. Update ``CHANGES.rst``
-3. Update version number and revision in manual
-4. Build manual
+#. Update ``CHANGES.rst``
+#. Build manual
 
    ::
 
      $ cd doc; ./gen_docs.sh
 
-   Add subject and autor to manual PDF's meta data using ExifTool_
+   Add subject and author to manual PDF's meta data using ExifTool_
 
    ::
 
@@ -23,18 +21,18 @@ This is an outline of what needs to be done in order to release rst2pdf.
    and upload to HTML and PDF to the website
    via a PR on the rst2pdf.github.io_ repo.
 
-6. Ensure all PRs are attached to the milestone
-7. Close the milestone and create next one
-8. Use changelog-generator_ (or similar) to create a changelog
-9. Tag release with version number
+#. Ensure all PRs are attached to the milestone
+#. Close the milestone and create next one
+#. Use changelog-generator_ (or similar) to create a changelog
+#. Tag release with version number
 
    ::
 
       $ git tag -s 0.94
       $ git push upstream 0.94
 
-10. Update Releases section on GitHub project and paste in changelog
-11. Create rc distribution package
+#. Update Releases section on GitHub project and paste in changelog
+#. Create rc distribution package
 
     ::
 
@@ -42,7 +40,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
 
-11. Upload the rc distribution to Test-PyPI_
+#. Upload the rc distribution to Test-PyPI_
 
     ::
 
@@ -50,7 +48,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     Check that it all looks correct on Test-PyPI. If not, fix and release a new rc.
 
-12. Test Test-PyPI release into a clean virtual env
+#. Test Test-PyPI release into a clean virtual env
 
     ::
 
@@ -65,7 +63,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
         $ rm -rf build/ rst2pdf.egg-info/ dist/
 
-13. Once rc version is working, release to PyPI_ by generating official release and uploading
+#. Once rc version is working, release to PyPI_ by generating official release and uploading
 
     ::
 

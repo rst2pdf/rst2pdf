@@ -4,8 +4,8 @@ How to use rst2pdf
 
 .. meta::
   :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>  and the contributors to the rst2pdf project;
-  :version: 0.98.dev
-  :revision: 2020050900
+  :version: :package-version:`rst2pdf`
+  :revision: :package-revision:`rst2pdf`
 
 .. header::
 
@@ -1361,6 +1361,27 @@ Also, the counters create targets for links with this scheme:
 ``#countername-number``.
 
 So ``#seq1-2`` should link to `the number 2 above <#seq1-2>`_
+
+
+The version, revision roles
+---------------------------
+
+.. note::
+
+    These are non-standard roles, which means they will only work with rst2pdf
+    and not with rst2html or any other docutils tools.
+
+The ``version`` and ``revision`` roles can be used to get the version and
+revision of an installed Python package. For example:
+
+.. code-block:: rst
+
+    Welcome to rst2pdf :version:`rst2pdf` (:revision:`rst2pdf`)!
+
+.. important::
+
+    The package in question must be installed in the same environment that you
+    are running rst2pdf in.
 
 
 The oddeven directive

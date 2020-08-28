@@ -112,6 +112,7 @@ import jinja2
 from rst2pdf.directives import aafigure  # noqa
 from rst2pdf.directives import oddeven  # noqa
 from rst2pdf.roles import counter as counter_role  # noqa
+from rst2pdf.roles import package as package_role  # noqa
 
 try:
     import sphinx as sphinx_module
