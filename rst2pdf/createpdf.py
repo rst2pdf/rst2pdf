@@ -1505,7 +1505,7 @@ def parse_commandline():
         dest='extensions',
         action="append",
         type="string",
-        default=['vectorpdf'],
+        default=[],
         help="Add a helper extension module to this invocation of rst2pdf "
         "(module must end in .py and be on the python path)",
     )

@@ -1,3 +1,12 @@
 pageSetup: firstTemplate: cutePage
 
-pageTemplates: cutePage: {background: "images/demo.pdf#page=6", foreground: images/confidential.png}
+pageTemplates:
+    cutePage:
+        background: "images/background.jpg"
+        foreground: images/confidential.png
+        showHeader: true
+        showFooter: false
+
+styles:
+    base:
+        textColor: #0433FF

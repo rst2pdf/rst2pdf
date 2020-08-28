@@ -46,5 +46,5 @@ pdf_use_coverpage = False
 
 pdf_verbosity = 0
 
-pdf_extensions = ['vectorpdf']
+pdf_extensions = []
 pdf_invariant = True

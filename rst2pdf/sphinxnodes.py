@@ -24,7 +24,7 @@ from .flowables import (
     MyIndenter,
     DelayedTable,
 )
-from .image import MyImage, VectorPdf
+from .image import MyImage
 from .log import nodeid, log
 from .nodehandlers import NodeHandler, FontHandler, HandleEmphasis
 
@@ -196,32 +196,17 @@ class HandleHighlightLang(SphinxHandler, sphinx.addnodes.highlightlang):
     pass
 
 
-graphviz_warn = False
-
 try:
     x = sphinx.ext.graphviz.graphviz
 
     class HandleSphinxGraphviz(SphinxHandler, sphinx.ext.graphviz.graphviz):
         def gather_elements(self, client, node, style):
             # Based on the graphviz extension
-            global graphviz_warn
             try:
-                # Is vectorpdf enabled?
-                if hasattr(VectorPdf, 'load_xobj'):
-                    # Yes, we have vectorpdf
-                    fname, outfn = sphinx.ext.graphviz.render_dot(
-                        node['builder'], node['code'], node['options'], 'pdf'
-                    )
-                else:
-                    # Use bitmap
-                    if not graphviz_warn:
-                        log.warning(
-                            'Using graphviz with PNG output. You get much better results if you enable the vectorpdf extension.'
-                        )
-                        graphviz_warn = True
-                    fname, outfn = sphinx.ext.graphviz.render_dot(
-                        node['builder'], node['code'], node['options'], 'png'
-                    )
+                # Use bitmap
+                fname, outfn = sphinx.ext.graphviz.render_dot(
+                    node['builder'], node['code'], node['options'], 'png'
+                )
                 if outfn:
                     client.to_unlink.append(outfn)
                     client.to_unlink.append(outfn + '.map')

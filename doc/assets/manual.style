@@ -7,15 +7,23 @@
         "frames": [
             ["0cm", "0cm", "100%", "100%"]
           ],
-        "background" : "assets/biohazard-cover.pdf",
         "showHeader" : false,
         "showFooter" : false
     }
   },
   "styles" : [
+    ["logoimage", {
+        alignment: TA_CENTER
+    }],
+
     ["title", {
         "fontName": "White Rabbit",
         "fontSize": 96
+    }],
+
+    ["subtitle", {
+        "fontName": "White Rabbit",
+        "fontSize": 38
     }],
 
     ["thin" , {
