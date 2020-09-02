@@ -33,3 +33,6 @@ pdf_use_index = True
 pdf_domain_indices = True
 pdf_invariant = True
 pdf_real_footnotes = True
+
+# Set a consistent date for the cover page
+today = 'April 29, 2018'
