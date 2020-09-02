@@ -363,7 +363,7 @@ class StyleSheet(object):
                         fname, pos = findfonts.guessFont(style[key])
 
                         if style[key] in embedded_fontnames:
-                            pass
+                            fontList = findfonts.autoEmbed(style[key])
                         else:
                             fontList = findfonts.autoEmbed(style[key])
                             if fontList:
