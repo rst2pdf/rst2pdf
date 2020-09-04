@@ -58,3 +58,6 @@ pdf_page_template = 'customPage'
 
 pdf_invariant = True
 pdf_real_footnotes = True
+
+# Set a consistent date for the cover page
+today = 'April 29, 2018'

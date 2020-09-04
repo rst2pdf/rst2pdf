@@ -33,3 +33,6 @@ pdf_break_level = 3
 pdf_verbosity = 0
 pdf_invariant = True
 pdf_real_footnotes = True
+
+# Set a consistent date for the cover page
+today = 'April 29, 2018'
