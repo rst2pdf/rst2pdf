@@ -88,7 +88,7 @@ class Tokenizer(list):
     # RSON syntax delimiters are tokenized separately from everything else.
     delimiterset = set(' { } [ ] : = , '.split())
 
-    re_delimiterset = ''.join(delimiterset).replace(']', r'\]')
+    re_delimiterset = ''.join(delimiterset).replace(']', r'\]').replace('[', r'\[')
 
     # Create a RE pattern for the delimiters
     delimiter_pattern = '[%s]' % re_delimiterset
