@@ -81,7 +81,7 @@ def compare_pdfs(path_a, path_b):
 
     def fuzzy_string_diff(string_a, string_b):
         words_a = string_a.split()
-        words_b = string_a.split()
+        words_b = string_b.split()
         assert words_a == words_b
 
     assert len(pages_a) == len(pages_b)
