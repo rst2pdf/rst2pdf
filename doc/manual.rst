@@ -3,9 +3,7 @@ How to use rst2pdf
 ==================
 
 .. meta::
-  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar>  and the contributors to the rst2pdf project;
-  :version: :package-version:`rst2pdf`
-  :revision: :package-revision:`rst2pdf`
+  :authors: rst2pdf project <https://rst2pdf.org>; Roberto Alsina <ralsina@netmanagers.com.ar> and the contributors to the rst2pdf project.
 
 .. header::
 
