@@ -362,12 +362,10 @@ class StyleSheet(object):
                         # See if we can find the font
                         fname, pos = findfonts.guessFont(style[key])
 
-                        if style[key] in embedded_fontnames:
-                            fontList = findfonts.autoEmbed(style[key])
-                        else:
-                            fontList = findfonts.autoEmbed(style[key])
-                            if fontList:
-                                embedded_fontnames.append(style[key])
+                        fontList = findfonts.autoEmbed(style[key])
+                        if style[key] not in embedded_fontnames and fontList:
+                            embedded_fontnames.append(style[key])
+
                         if not fontList:
                             if (fname, pos) in embedded_fontnames:
                                 fontList = None
@@ -375,6 +373,7 @@ class StyleSheet(object):
                                 fontList = findfonts.autoEmbed(fname)
                             if fontList:
                                 embedded_fontnames.append((fname, pos))
+
                         if fontList:
                             self.embedded += fontList
                             # Maybe the font we got is not called
