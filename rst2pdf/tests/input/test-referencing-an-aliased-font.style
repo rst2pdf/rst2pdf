@@ -1,0 +1,19 @@
+fontsAlias:
+    stdFont: DejaVu Sans Mono
+    stdBold: Tuffy
+
+styles:
+    normal:
+        fontName: DejaVu Sans Mono
+        textColor: #383745
+        fontSize: 12
+        alignment: TA_LEFT
+
+    heading:
+        fontName: stdFont
+        fontSize: 20
+        textColor: #1a8099
+
+    heading1:
+        parent: heading
+        fontSize: 16
