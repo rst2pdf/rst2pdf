@@ -452,6 +452,20 @@ and not on inline styles::
     "allowWidows": 5,
     "allowOrphans": 4
 
+The ``fontSize`` attribute can receive either a number for the size of the font
+or a percentage value, which is relative to the style's parent.
+For example, the following makes the ``title`` style use 64 as its
+``fontSize``::
+
+    ["heading", {
+      "fontSize": 32
+      }],
+
+    ["title", {
+      "parent": "heading",
+      "fontSize": "200%"
+      }]
+
 The following are the only attributes that work on styles when used for
 interpreted roles (inline styles):
 
