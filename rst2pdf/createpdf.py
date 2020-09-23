@@ -534,8 +534,13 @@ class RstToPdf(object):
                 settings_overrides[
                     'strip_elements_with_classes'
                 ] = self.strip_elements_with_classes
+                settings_overrides['exit_status_level'] = 3
+
                 self.doctree = docutils.core.publish_doctree(
-                    text, source_path=source_path, settings_overrides=settings_overrides
+                    text,
+                    source_path=source_path,
+                    settings_overrides=settings_overrides,
+                    enable_exit_status=True,
                 )
                 log.debug(self.doctree)
             else:
