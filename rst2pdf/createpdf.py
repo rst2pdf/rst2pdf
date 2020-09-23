@@ -545,7 +545,7 @@ class RstToPdf(object):
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
-                return
+                return 1
         else:
             self.doctree = doctree
 
@@ -723,6 +723,8 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
+
+        return 0
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -1689,7 +1691,7 @@ def main(_args=None):
 
     add_extensions(options)
 
-    RstToPdf(
+    return_code = RstToPdf(
         stylesheets=options.style,
         language=options.language,
         header=options.header,
@@ -1728,6 +1730,8 @@ def main(_args=None):
 
     if close_infile:
         infile.close()
+
+    sys.exit(return_code)
 
 
 # Ugly hack that fixes Issue 335
