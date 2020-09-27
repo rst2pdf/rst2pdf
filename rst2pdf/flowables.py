@@ -139,6 +139,7 @@ class Heading(Paragraph):
 
 class Separation(Flowable):
     """A simple <hr>-like flowable"""
+
     def __init__(self, style=None):
         self.style = style
 
