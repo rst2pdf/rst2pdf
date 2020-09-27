@@ -139,12 +139,15 @@ class Heading(Paragraph):
 
 class Separation(Flowable):
     """A simple <hr>-like flowable"""
+    def __init__(self, style=None):
+        self.style = style
 
     def wrap(self, w, h):
         self.w = w
         return w, 1 * cm
 
     def draw(self):
+        self.canv.setStrokeColor(self.style.textColor)
         self.canv.line(0, 0.5 * cm, self.w, 0.5 * cm)
 
 

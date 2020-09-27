@@ -699,7 +699,7 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
 
 class HandleTransition(NodeHandler, docutils.nodes.transition):
     def gather_elements(self, client, node, style):
-        return [Separation()]
+        return [Separation(style=client.styles['separation'])]
 
 
 class HandleBlockQuote(NodeHandler, docutils.nodes.block_quote):
