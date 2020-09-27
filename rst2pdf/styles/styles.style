@@ -207,6 +207,9 @@
       parent: normal
       alignment: TA_CENTER
 
+    separation:
+      parent: normal
+
     attribution:
       parent: bodytext
       alignment: TA_RIGHT
