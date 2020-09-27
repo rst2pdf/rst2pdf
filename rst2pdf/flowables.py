@@ -147,7 +147,8 @@ class Separation(Flowable):
         return w, 1 * cm
 
     def draw(self):
-        self.canv.setStrokeColor(self.style.textColor)
+        if self.style is not None:
+            self.canv.setStrokeColor(self.style.textColor)
         self.canv.line(0, 0.5 * cm, self.w, 0.5 * cm)
 
 
