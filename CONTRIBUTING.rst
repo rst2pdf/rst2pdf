@@ -28,7 +28,7 @@ Open a Pull Request
 We love pull requests!
 
 Please open a pull request if you have changes/fixes/improvements to share. This project is for all of us and we welcome changes. Your PR should include:
- 
+
 * A detailed description of what is being changed and importantly *why*.
 * Tests to cover the new feature, including reference PDFs.
 * An update to the manual if needed.
@@ -127,5 +127,3 @@ The ``..git-blame-ignore-revs`` file contains the list of commits to ignore
 and you can use this git config line to make ``git blame`` work more usefully::
 
     git config blame.ignoreRevsFile .git-blame-ignore-revs
-
-
