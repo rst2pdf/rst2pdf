@@ -52,6 +52,21 @@ Tests are in ``rst2pdf/tests`` directory. Within this folder:
 
 * ``reference`` holds the "correct" version of the PDF for this test. When adding a test, put the desired PDF output into this file as well as supplying the tests in the ``input`` folder.
 
+Run Checks Locally
+==================
+
+When you open a pull request, we run some automated checks to make sure everything is in order. We recommend you install these tools locally to check things over as you go along. We use the `pre-commit`__ framework, which you can install with pip::
+
+    pip install pre-commit
+
+Once installed, enable it by running this command::
+
+    pre-commit install --allow-missing-config
+
+.. __: https://pre-commit.com/
+
+It will let you know if any of the formatting/build tools are reporting problems.
+
 Run the Tests
 =============
 
