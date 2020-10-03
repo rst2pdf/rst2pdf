@@ -1,0 +1,108 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/Contents 7 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 6 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+4 0 obj
+<<
+/PageLabels 8 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
+>>
+endobj
+5 0 obj
+<<
+/Author () /CreationDate (D:20201003164110+08'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20201003164110+08'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+6 0 obj
+<<
+/Count 1 /Kids [ 3 0 R ] /Type /Pages
+>>
+endobj
+7 0 obj
+<<
+/Length 524
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This tests our support for separations.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 735.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Currently, only changing colors in the styles is supported.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 706.6772 cm
+1 0 0 RG
+n 0 14.17323 m 469.8898 14.17323 l S
+Q
+q
+1 0 0 1 62.69291 688.6772 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The above line should be red.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+8 0 obj
+<<
+/Nums [ 0 9 0 R ]
+>>
+endobj
+9 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000073 00000 n 
+0000000104 00000 n 
+0000000211 00000 n 
+0000000414 00000 n 
+0000000500 00000 n 
+0000000757 00000 n 
+0000000816 00000 n 
+0000001390 00000 n 
+0000001429 00000 n 
+trailer
+<<
+/ID 
+[<4413f86c22e8f0b9aa21fab18648bf5e><4413f86c22e8f0b9aa21fab18648bf5e>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 5 0 R
+/Root 4 0 R
+/Size 10
+>>
+startxref
+1462
+%%EOF
