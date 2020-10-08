@@ -126,6 +126,13 @@ __ https://rst2pdf.org/static/manual.pdf
 Contributing
 ------------
 
-rst2pdf wishes to be a welcoming community. With that in mind, please refer to our `Community Code of Conduct`__.
+See `CONTRIBUTING`__.
+
+__CONTRIBUTING.rst
+
+Code of conduct
+---------------
+
+rst2pdf is an inclusive and welcoming community. To participate in this project, everyone is bound by our `Community Code of Conduct`__.
 
 __ CODE_OF_CONDUCT.rst

@@ -2,50 +2,18 @@
 Help for rst2pdf developers
 ---------------------------
 
-Or, how do I hack this thing?
-
 Guidelines
 ~~~~~~~~~~
 
-In rst2pdf we want many things. We want ponies and icecream. But most of all,
-we want rst2pdf to kick ass. The best way to achieve that is making rst2pdf
-work right.  The best way to do *that* is through testing and documenting.
+If you want to do something inside rst2pdf, you are welcome! The process looks something like this:
 
-So, if you want to do something inside rst2pdf, you are welcome, but...
-
-* Create an Issue for the task. That's easy, just go to
-  https://github.com/rst2pdf/rst2pdf/issues and do it.
+* Create an Issue for the task at https://github.com/rst2pdf/rst2pdf/issues
 
 * If you intend to fix a bug:
 
   + Create a **minimal** test case that shows the bug.
 
   + Put it inside ``rst2pdf/tests/input`` like the others:
-
-    For tests that don't involve Sphinx (e.g. reproducible with `rst2pdf`):
-
-    - ``test_issue_NNN.txt`` is the test itself
-
-    - ``test_issue_NNN.cli`` is any needed command line arguments (if needed)
-
-    - ``test_issue_NNN.style`` is a custom stylesheet (if needed)
-
-    (where ``NNN`` is the number of the issue created earlier)
-
-    For tests that affect the Sphinx integration only, create a new Sphinx
-    "project" in the ``rst2pdf/tests/input`` directory using the
-    ``sphinx-quickstart`` tool. Name the directory ``sphinx-issueNNN``, where
-    ``NNN``` is once again the number of the issue created earlier. Use a
-    combined source and build directory and use dummy project and author names.
-    Don't include ``Makefile`` or ``make.bat`` file since they won't be used.
-    For example::
-
-      sphinx-quickstart rst2pdf/tests/input/sphinx-issue123 \
-        --project foo --author 'Joe Bloggs' -v 1.0.0 --language en \
-        --no-makefile --no-batchfile
-
-    Once complete, remove all unnecessary configuration from the generated
-    ``conf.py`` file to allow us focus on the issue.
 
   + Fix the bug
 
@@ -65,33 +33,14 @@ So, if you want to do something inside rst2pdf, you are welcome, but...
 
   + Submit a pull request.
 
-* Always, when committing something, check for regressions running the full
-  test suite, it takes only a minute or two. Keep in mind that regressions can
-  be trivial!
-
-  For example, if you change the spacing of definition lists, 3 or 4 tests will
-  regress.
-
-* Keep your Issues updated. If you are working on frobnozzing the gargles, then
-  by all means post it in the issue. There's no issue about it? You were meant
-  to create one, remember? ;-)
-
 * If you added a command line option, document it in ``doc/rst2pdf.txt``.  That
   will make it appear in the manual and in the man page.
-
-  Maybe it should also be available for sphinx users, let me know about it.
 
 * If you implemented a new feature, please document it in ``manual.rst`` (or in
   a separate file and add an include in ``manual.rst``)
 
 * If you implement an extension, make the docstring valid restructured text and
   link it to the manual like the others.
-
-Why should you bother with all this?
-
-It's important that you do it this way because it means that the rest of us
-know what you are doing. It also means you don't break rst2pdf.
-
 
 Git config
 ~~~~~~~~~~
@@ -123,9 +72,7 @@ Once installed, enable it like so::
 Continuous Integration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-There's a Travis build - see https://github.com/rst2pdf/rst2pdf/issues/621 for
-more information on the current status
-
+There's a Travis build that runs when we open a pull request or merge to master, it does some style checks and runs the test suite.
 
 Running tests
 ~~~~~~~~~~~~~
@@ -185,11 +132,6 @@ will mark the test as skipped when the test suite runs. This could be useful
 for inherited tests that we aren't confident of the correct output for, but
 where we don't want to delete/lose the test entirely.
 
-
-Getting commit rights
-~~~~~~~~~~~~~~~~~~~~~
-
-Just ask in the mailing list.
 
 .. note::
 
