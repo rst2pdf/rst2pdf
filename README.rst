@@ -18,9 +18,7 @@ The usual way of creating PDF from reStructuredText is by going through LaTeX.
 This tool provides an alternative by producing PDF directly using the ReportLab
 library.
 
-More information is available `at the main website`__
-
-__ https://rst2pdf.org
+More information is available at the `main website <https://rst2pdf.org>`_.
 
 
 Features
@@ -47,13 +45,9 @@ Features
 
 * Supports hyphenation and kerning (using wordaxe).
 
-* `Sphinx`__ integration
+* `Sphinx <https://www.sphinx-doc.org>`_ integration
 
-* `Full user's manual`__
-
-__ https://www.sphinx-doc.org/
-__ https://rst2pdf.org/static/manual.pdf
-
+* `Full user's manual <https://rst2pdf.org/static/manual.pdf>`_
 
 Installation
 ------------
@@ -118,21 +112,15 @@ option. For example::
     ]
 
 For information on the ``pdf_documents`` option and the many other options
-available, refer to the `manual`__.
-
-__ https://rst2pdf.org/static/manual.pdf
-
+available, refer to the `manual <https://rst2pdf.org/static/manual.pdf>`_.
 
 Contributing
 ------------
 
-See `CONTRIBUTING`__.
-
-__CONTRIBUTING.rst
+See `CONTRIBUTING <CONTRIBUTING.rst>`_.
 
 Code of conduct
 ---------------
 
-rst2pdf is an inclusive and welcoming community. To participate in this project, everyone is bound by our `Community Code of Conduct`__.
-
-__ CODE_OF_CONDUCT.rst
+rst2pdf is an inclusive and welcoming community. To participate in this project, everyone is bound by our
+`Community Code of Conduct <CODE_OF_CONDUCT.rst>`_.
