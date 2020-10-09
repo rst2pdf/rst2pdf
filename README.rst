@@ -81,6 +81,8 @@ can clone the repository and install this version::
     $ git checkout <desired-branch> # if you want something other than master
     $ pip install --user .
 
+Note that you may need to use ``sudo python setup.py install`` or ``sudo python3 setup.py install`` in this final step, depending on your configuration.
+
 You may want to install it in a virtualenv, but that is beyond the scope
 of this readme.
 
