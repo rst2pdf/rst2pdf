@@ -18,6 +18,7 @@ parts:
     source: .
     build-packages:
       - git
+    stage-packages:
       - fontconfig
 
 apps:
