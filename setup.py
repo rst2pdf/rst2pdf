@@ -39,7 +39,6 @@ setup(
     extras_require={
         'tests': ['pyPdf2', 'pymupdf'],
         'sphinx': ['sphinx'],
-        'hyphenation': ['wordaxe>=1.0'],
         'svgsupport': ['svglib'],
         'aafiguresupport': ['aafigure>=0.4'],
         'mathsupport': ['matplotlib'],
