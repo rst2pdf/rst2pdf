@@ -1510,53 +1510,35 @@ Hyphenation
 
 If you want good looking documents, you want to enable hyphenation.
 
-To do it, you need to install Wordaxe [#]_.
+To do it, you first need to install the ``pyphen`` python module.
 
-.. [#] Use Roberto Alsina's fork of Wordaxe from https://github.com/ralsina/wordaxe as
-       this works with later versions of ReportLab.
+Then, you need to specify the language in each style that you want hyphenation
+to work. To have hyphenation in the whole document, you can do it in the
+``base`` style.
 
-If after installing it you get the letter "s" or a black square instead of a
-hyphen, that means you need to replace the rl_codecs.py file from reportlab with
-the one from wordaxe.
+For example, for an English document, hyphenation can be turned on for the whole
+document with::
 
-For more information, see `this issue`_ in rst2pdf's bug tracker.
-
-.. _this issue: http://code.google.com/p/rst2pdf/issues/detail?id=5
-
-Also, you may need to set hyphenation to true in one or more styles, and the
-language for hyphenation via the command line or paragraph styles.
-
-For English, this should be enough::
-
-    ["bodytext" , {
-      "alignment": "justify",
-      "hyphenation": true
+    ["base" , {
+      "hyphenationLang": "en_US",
+      "embeddedHyphenation": 1
     }],
 
-If you are not an English speaker, you need to change the language using
-the ``-l`` or ``--language`` option.
-
-Since Wordaxe version 0.2.6, it can use the PyHyphen library if it's
-available. PyHyphen can use any OpenOffice dictionary, and can even download
-them automatically. [#]_
-
-.. [#] For more information, please check the PyHyphen website at http://pyhyphen.googlecode.com
-
-For example, this will enable German hyphenation globally::
-
-    rst2pdf -l de_DE mydocument.txt
+Notice the ``embeddedHyphenation`` option. It is optional, but it makes so that
+hyphenations will give preference to splitting words at embedded hyphens in the
+text.
 
 If you are creating a multilingual document, you can declare styles with
 specific languages.  For example, you could inherit ``bodytext`` for Spanish::
 
     ["bodytext_es" , {
       "parent": "bodytext",
-      "alignment": "justify",
-      "hyphenation": true,
-      "language": "es_ES"
+      "hyphenationLang": "es_ES",
+      "embeddedHyphenation": 1
     }],
 
-And all paragraphs declared of ``bodytext_es`` style would have Spanish hyphenation::
+And all paragraphs declared using the ``bodytext_es`` style would have Spanish
+hyphenation::
 
     .. class:: bodytext_es
 
@@ -1565,30 +1547,6 @@ And all paragraphs declared of ``bodytext_es`` style would have Spanish hyphenat
     en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
     (New York, 1917) y es una reimpresión literal, pero también morosa, de la
     *Encyclopaedia Britannica* de 1902.
-
-Here is the result (made thinner to force hyphenation):
-
-.. class:: thin
-
-Debo a la conjunción de un espejo y de una enciclopedia el descubrimiento de Uqbar.
-El espejo inquietaba el fondo de un corredor en una quinta de la calle Gaona,
-en Ramos Mejía; la enciclopedia falazmente se llama *The Anglo-American Cyclopaedía*
-(New York, 1917) y es una reimpresión literal, pero también morosa, de la
-*Encyclopaedia Britannica* de 1902.
-
-BTW: That's the beginning of "Tlön, Uqbar, Orbis Tertius", read it, it's cool.
-
-If you explicitly configure a language in a paragraph style and also pass a
-language in the command line, the style has priority, so remember:
-
-.. important::
-
-    If you configure the bodytext style to have a language, your document
-    is supposed to be in that language, regardless of what the command line
-    says.
-
-    If this is too confusing, let me know, I will try to figure out a simpler
-    way.
 
 
 Page Layout
