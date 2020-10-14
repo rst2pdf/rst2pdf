@@ -98,7 +98,7 @@ this, you can just work on your given virtualenv each time)::
     . env/bin/activate
 
     pip install pytest pytest-xdist
-    pip install -c requirements.txt .[tests,sphinx,hyphenation,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    pip install -c requirements.txt .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 
 Run tests
 *********
