@@ -11,7 +11,7 @@ bit of space using the new syntax:
 Now, we're going to test that we can use the syntax to include
 both restructured text and stylesheets:
 
-.. include:: test_style_width.txt
+.. include:: test_style_width.rst
 .. include:: test_style_width.style
 
 Now we're going to try to do a pagebreak:

@@ -16,7 +16,7 @@ def run():
     # work or not, that's testing ;-)
 
     for f in os.listdir(inpdir):
-        if f.endswith('.txt'):  # Test case
+        if f.endswith('.rst'):  # Test case
             print('Running: %s' % f)
             sheet = os.path.join(inpdir, f[:-4] + '.style')
             if os.path.exists(sheet):
