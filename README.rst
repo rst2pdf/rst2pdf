@@ -43,7 +43,7 @@ Features
 
 * Supports embedding almost any kind of raster or vector images.
 
-* Supports hyphenation and kerning (using wordaxe).
+* Supports hyphenation.
 
 * `Sphinx <https://www.sphinx-doc.org>`_ integration
 

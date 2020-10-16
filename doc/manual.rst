@@ -337,7 +337,6 @@ Font styles
     * ``twelvepoint`` makes the base font 12pt (default is 10pt)
     * ``tenpoint`` makes the base font 10pt
     * ``eightpoint`` makes the base font 8pt
-    * ``kerning`` switches to document to DejaVu Sans font and enables kerning.
 
 Page layout styles
     These stylesheets modify your page layout.
@@ -1731,29 +1730,6 @@ regular paragraphs, titles, headers, footers and block quotes.
 .. _smartypants: http://web.chad.org/projects/smartypants.py/
 
 
-Kerning
--------
-
-Kerning is the process of adjusting letter spacing. It is usually accepted that
-kerning makes your text look better.
-
-For example, if you are using proper kerning, the As and Ws in AWAWA will
-overlap slightly.
-
-If you want kerning in your PDFs, you need to do the following:
-
-* Use wordaxe at least 1.0.0
-
-* Use a TrueType font
-
-* Set kerning to true in your style. For example, if you want **all**
-  text to be kerned, you can set it in the "base" style.
-
-For convenience, a stylesheet that uses DejaVu fonts with kerning is provided as
-``kerning.json``, so you can copy and adapt to your needs, or just use it with
-the ``-s`` option.
-
-
 Sphinx
 ------
 
@@ -1798,7 +1774,7 @@ To use it in your existing Sphinx project you need to do the following:
     ]
 
     # A comma-separated list of custom stylesheets. Example:
-    pdf_stylesheets = ['sphinx', 'kerning', 'a4']
+    pdf_stylesheets = ['sphinx', 'a4']
 
     # A list of folders to search for stylesheets. Example:
     pdf_style_path = ['.', '_styles']
