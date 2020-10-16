@@ -113,10 +113,10 @@ class File(pytest.File):
             return cls(parent=parent, fspath=fspath)
 
 
-class TxtFile(File):
+class RstFile(File):
     def collect(self):
         name = os.path.splitext(self.fspath.basename)[0]
-        yield TxtItem.from_parent(parent=self, name=name)
+        yield RstItem.from_parent(parent=self, name=name)
 
 
 class SphinxFile(File):
@@ -219,9 +219,9 @@ class Item(pytest.Item):
         return self.fspath, 0, self.name
 
 
-class TxtItem(Item):
+class RstItem(Item):
     def _build(self):
-        input_ref = self.name + '.txt'
+        input_ref = self.name + '.rst'
         output_pdf = os.path.join(OUTPUT_DIR, self.name + '.pdf')
         output_log = os.path.join(OUTPUT_DIR, self.name + '.log')
 
@@ -329,8 +329,8 @@ def pytest_collect_file(parent, path):
 
     parent_dir = os.path.split(path.dirname)[-1]
 
-    if path.ext == '.txt' and parent_dir == 'input':
-        return TxtFile.from_parent(parent=parent, fspath=path)
+    if path.ext == '.rst' and parent_dir == 'input':
+        return RstFile.from_parent(parent=parent, fspath=path)
     elif path.basename == 'conf.py' and parent_dir.startswith('sphinx'):
         return SphinxFile.from_parent(parent=parent, fspath=path)
 
