@@ -41,7 +41,7 @@ def can_run(command_list):
     return _can_run
 
 
-check_dependency = {}
+check_dependency = {'plantuml': can_run(["plantuml", "-pipe"])}
 
 
 def _get_metadata(pdf):
