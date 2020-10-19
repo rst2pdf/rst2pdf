@@ -1548,6 +1548,9 @@ hyphenation::
     (New York, 1917) y es una reimpresión literal, pero también morosa, de la
     *Encyclopaedia Britannica* de 1902.
 
+If you want to disable hyphenation in a style that inherits ``hyphenationLang``
+from its parent, you can do so by setting ``hyphenationLang`` to ``0``.
+
 
 Page Layout
 -----------
