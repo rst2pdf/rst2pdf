@@ -108,7 +108,6 @@
       allowWidows: false
       allowOrphans: false
       hyphenation: false
-      kerning: false
       underline: false
       strike: false
       commands: []
