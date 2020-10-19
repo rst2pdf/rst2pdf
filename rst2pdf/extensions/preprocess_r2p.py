@@ -108,9 +108,9 @@ from rst2pdf.rson import loads as rson_loads
 
 
 class DummyFile(object):
-    ''' Stores the path and content of a file which may, or may not,
-        have been written to disk.
-    '''
+    """Stores the path and content of a file which may, or may not,
+    have been written to disk.
+    """
 
     def __init__(self, name, content):
         self.name = name
@@ -122,10 +122,10 @@ class DummyFile(object):
 
 class Preprocess(object):
     def __init__(self, sourcef, incfile=False, widthcount=0):
-        ''' Process a file and decorate the resultant Preprocess instance with
-            self.result (the preprocessed file) and self.styles (extracted stylesheet
-            information) for the caller.
-        '''
+        """Process a file and decorate the resultant Preprocess instance with
+        self.result (the preprocessed file) and self.styles (extracted stylesheet
+        information) for the caller.
+        """
 
         # fix keywords dict for use by the parser.
         self.keywords = dict(
@@ -255,29 +255,26 @@ class Preprocess(object):
         self.result.extend(['', '', '.. include:: ' + fname, ''])
 
     def handle_single(self, word):
-        ''' Prepend the singleword class in front of the word.
-        '''
+        """Prepend the singleword class in front of the word."""
         self.changed = True
         self.result.extend(['', '', '.. class:: singleword', '', word, ''])
 
     def handle_page(self, chunk):
-        ''' Insert a raw pagebreak
-        '''
+        """Insert a raw pagebreak"""
         self.changed = True
         self.result.extend(['', '', '.. raw:: pdf', '', '    PageBreak ' + chunk, ''])
 
     def handle_space(self, chunk):
-        ''' Insert a raw space
-        '''
+        """Insert a raw space"""
         self.changed = True
         if len(chunk.replace(',', ' ').split()) == 1:
             chunk = '0 ' + chunk
         self.result.extend(['', '', '.. raw:: pdf', '', '    Spacer ' + chunk, ''])
 
     def handle_widths(self, chunk):
-        ''' Insert a unique style in the stylesheet, and reference it
-            from a .. class:: comment.
-        '''
+        """Insert a unique style in the stylesheet, and reference it
+        from a .. class:: comment.
+        """
         self.changed = True
         chunk = chunk.replace(',', ' ').replace('%', ' ').split()
         if not chunk:
@@ -305,9 +302,9 @@ class Preprocess(object):
         self.result.extend(['', '', '.. class:: ' + stylename, ''])
 
     def handle_style(self, chunk):
-        ''' Parse through the source until we find lines that are no longer indented,
-            then pass our indented lines to the RSON parser.
-        '''
+        """Parse through the source until we find lines that are no longer indented,
+        then pass our indented lines to the RSON parser.
+        """
         self.changed = True
         if chunk:
             log.error(".. style:: does not recognize string %s" % repr(chunk))
@@ -324,10 +321,10 @@ class Preprocess(object):
             self.styles.setdefault('styles', {}).update(styles)
 
     def read_indented(self):
-        ''' Read data from source while it is indented (or blank).
-            Stop on the first non-indented line, and leave the rest
-            on the source.
-        '''
+        """Read data from source while it is indented (or blank).
+        Stop on the first non-indented line, and leave the rest
+        on the source.
+        """
         source = self.source
         data = None
         while source and not data:
@@ -357,10 +354,10 @@ class Preprocess(object):
 
 
 class MyStyles(str):
-    ''' This class conforms to the styles.py processing requirements
-        for a stylesheet that is not really a file.  It must be callable(),
-        and str(x) must return the name of the stylesheet.
-    '''
+    """This class conforms to the styles.py processing requirements
+    for a stylesheet that is not really a file.  It must be callable(),
+    and str(x) must return the name of the stylesheet.
+    """
 
     def __new__(cls, styles):
         self = str.__new__(cls, 'Embedded Preprocess Styles')
@@ -372,10 +369,10 @@ class MyStyles(str):
 
 
 def install(createpdf, options):
-    ''' This is where we intercept the document conversion.
-        Preprocess the restructured text, and insert our
-        new styles (if any).
-    '''
+    """This is where we intercept the document conversion.
+    Preprocess the restructured text, and insert our
+    new styles (if any).
+    """
     data = Preprocess(options.infile)
     options.infile = data.result
     if data.styles:

@@ -36,7 +36,8 @@ class SVGImage(Flowable):
             self.drawHeight = height or self.imageHeight
         elif kind in ['bound', 'proportional']:
             factor = min(
-                float(width) / self.imageWidth, float(height) / self.imageHeight,
+                float(width) / self.imageWidth,
+                float(height) / self.imageHeight,
             )
             self.drawWidth = self.imageWidth * factor
             self.drawHeight = self.imageHeight * factor

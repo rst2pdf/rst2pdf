@@ -475,7 +475,8 @@ class HandleTopic(NodeHandler, docutils.nodes.topic):
             else:
                 node.elements = [
                     Paragraph(
-                        client.gen_pdftext(node.children[0]), cstyles['heading1'],
+                        client.gen_pdftext(node.children[0]),
+                        cstyles['heading1'],
                     ),
                     toc,
                 ]
@@ -848,7 +849,8 @@ class HandleCaption(NodeHandler, docutils.nodes.caption):
     def gather_elements(self, client, node, style):
         return [
             Paragraph(
-                client.gather_pdftext(node), style=client.styles['figure-caption'],
+                client.gather_pdftext(node),
+                style=client.styles['figure-caption'],
             )
         ]
 
@@ -862,7 +864,8 @@ class HandleSidebar(NodeHandler, docutils.nodes.sidebar):
     def gather_elements(self, client, node, style):
         return [
             BoxedContainer(
-                client.gather_elements(node, style=None), client.styles['sidebar'],
+                client.gather_elements(node, style=None),
+                client.styles['sidebar'],
             )
         ]
 
@@ -1094,7 +1097,12 @@ class HandleMath(NodeHandler, docutils.nodes.math_block, docutils.nodes.math):
         node_fontsize = sty.fontSize
         node_color = '#' + sty.textColor.hexval()[2:]
         label = node.attributes.get('label')
-        mf = Math(node.astext(), label=label, fontsize=node_fontsize, color=node_color,)
+        mf = Math(
+            node.astext(),
+            label=label,
+            fontsize=node_fontsize,
+            color=node_color,
+        )
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()

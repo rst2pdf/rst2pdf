@@ -42,38 +42,38 @@ from .log import log, nodeid
 
 
 class MetaHelper(type):
-    ''' MetaHelper is designed to generically enable a few of the benefits of
-        using metaclasses by encapsulating some of the complexity of setting
-        them up.
+    """MetaHelper is designed to generically enable a few of the benefits of
+    using metaclasses by encapsulating some of the complexity of setting
+    them up.
 
-        If a base class uses MetaHelper (by assigning __metaclass__ = MetaHelper),
-        then that class (and its metaclass inheriting subclasses) can control
-        class creation behavior by defining a couple of helper functions.
+    If a base class uses MetaHelper (by assigning __metaclass__ = MetaHelper),
+    then that class (and its metaclass inheriting subclasses) can control
+    class creation behavior by defining a couple of helper functions.
 
-        1) A base class can define a _classpreinit function.  This function
-           is called during __new__ processing of the class object itself,
-           but only during subclass creation (not when the class defining
-           the _classpreinit is itself created).
+    1) A base class can define a _classpreinit function.  This function
+       is called during __new__ processing of the class object itself,
+       but only during subclass creation (not when the class defining
+       the _classpreinit is itself created).
 
-           The subclass object does not yet exist at the time _classpreinit
-           is called.  _classpreinit accepts all the parameters of the
-           __new__ function for the class itself (not the same as the __new__
-           function for the instantiation of class objects!) and must return
-           a tuple of the same objects.  A typical use of this would be to
-           modify the class bases before class creation.
+       The subclass object does not yet exist at the time _classpreinit
+       is called.  _classpreinit accepts all the parameters of the
+       __new__ function for the class itself (not the same as the __new__
+       function for the instantiation of class objects!) and must return
+       a tuple of the same objects.  A typical use of this would be to
+       modify the class bases before class creation.
 
-        2) Either a base class or a subclass can define a _classinit() function.
-           This function will be called immediately after the actual class has
-           been created, and can do whatever setup is required for the class.
-           Note that every base class (but not every subclass) which uses
-           MetaHelper MUST define _classinit, even if that definition is None.
+    2) Either a base class or a subclass can define a _classinit() function.
+       This function will be called immediately after the actual class has
+       been created, and can do whatever setup is required for the class.
+       Note that every base class (but not every subclass) which uses
+       MetaHelper MUST define _classinit, even if that definition is None.
 
-         MetaHelper also places an attribute into each class created with it.
-         _baseclass is set to None if this class has no superclasses which
-         also use MetaHelper, or to the first such MetaHelper-using baseclass.
-         _baseclass can be explicitly set inside the class definition, in
-         which case MetaHelper will not override it.
-    '''
+     MetaHelper also places an attribute into each class created with it.
+     _baseclass is set to None if this class has no superclasses which
+     also use MetaHelper, or to the first such MetaHelper-using baseclass.
+     _baseclass can be explicitly set inside the class definition, in
+     which case MetaHelper will not override it.
+    """
 
     def __new__(clstype, name, bases, clsdict):
         # Our base class is the first base in the class definition which
@@ -102,10 +102,10 @@ class MetaHelper(type):
 
 
 class NodeHandler(metaclass=MetaHelper):
-    ''' NodeHandler classes are used to dispatch
-       to the correct class to handle some node class
-       type, via a dispatchdict in the main class.
-    '''
+    """NodeHandler classes are used to dispatch
+    to the correct class to handle some node class
+    type, via a dispatchdict in the main class.
+    """
 
     dispatchdict = {}
 

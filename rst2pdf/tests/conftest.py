@@ -138,7 +138,8 @@ class Item(pytest.Item):
 
     def _fail(self, msg, output=None):
         pytest.fail(
-            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg, pytrace=False,
+            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg,
+            pytrace=False,
         )
 
     def runtest(self):
@@ -196,7 +197,8 @@ class Item(pytest.Item):
 
         if len(reference_files) != len(output_files):
             self._fail(
-                'Mismatch between number of files expected and generated', output,
+                'Mismatch between number of files expected and generated',
+                output,
             )
 
         reference_files.sort()
@@ -247,7 +249,9 @@ class TxtItem(Item):
 
         try:
             output = subprocess.check_output(
-                cmd, cwd=INPUT_DIR, stderr=subprocess.STDOUT,
+                cmd,
+                cwd=INPUT_DIR,
+                stderr=subprocess.STDOUT,
             )
             retcode = 0
         except subprocess.CalledProcessError as exc:
@@ -295,7 +299,9 @@ class SphinxItem(Item):
 
         try:
             output = subprocess.check_output(
-                cmd, cwd=INPUT_DIR, stderr=subprocess.STDOUT,
+                cmd,
+                cwd=INPUT_DIR,
+                stderr=subprocess.STDOUT,
             )
             retcode = 0
         except subprocess.CalledProcessError as exc:

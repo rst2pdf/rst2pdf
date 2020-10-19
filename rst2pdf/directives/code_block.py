@@ -98,8 +98,7 @@ class DocutilsInterface(object):
         return pygments.lex(self.code, lexer)
 
     def join(self, tokens):
-        """join subsequent tokens of same token-type
-        """
+        """join subsequent tokens of same token-type"""
         tokens = iter(tokens)
         (lasttype, lastval) = next(tokens)
         for ttype, value in tokens:
@@ -111,8 +110,7 @@ class DocutilsInterface(object):
         yield (lasttype, lastval)
 
     def __iter__(self):
-        """parse code string and yield "clasified" tokens
-        """
+        """parse code string and yield "clasified" tokens"""
         try:
             tokens = self.lex()
         except IOError:
