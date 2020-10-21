@@ -77,7 +77,7 @@ def compare_pdfs(path_a, path_b):
 
     def fuzzy_coord_diff(coord_a, coord_b):
         diff = abs(coord_a - coord_b)
-        assert diff / max(coord_a, coord_b) < 0.04  # allow an arbitrary diff
+        assert diff < 0.1
 
     def fuzzy_string_diff(string_a, string_b):
         words_a = string_a.split()
