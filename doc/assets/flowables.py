@@ -262,18 +262,15 @@ class DelayedTable(Table):
         self.t.drawOn(canvas, x, y, _sW)
 
     def identity(self, maxLen=None):
-        return (
-            "<%s at %s%s%s> containing: %s"
-            % (
-                self.__class__.__name__,
-                hex(id(self)),
-                self._frameName(),
-                getattr(self, 'name', '')
-                and (' name="%s"' % getattr(self, 'name', ''))
-                or '',
-                repr(self.data[0]),
-            )[:180]
-        )
+        return "<%s at %s%s%s> containing: %s" % (
+            self.__class__.__name__,
+            hex(id(self)),
+            self._frameName(),
+            getattr(self, 'name', '')
+            and (' name="%s"' % getattr(self, 'name', ''))
+            or '',
+            repr(self.data[0]),
+        )[:180]
 
 
 def tablepadding(padding):
@@ -420,7 +417,7 @@ class MySpacer(Spacer):
 
 class MyPageBreak(FrameActionFlowable):
     def __init__(self, templateName=None, breakTo='any'):
-        '''templateName switches the page template starting in the
+        """templateName switches the page template starting in the
         next page.
 
         breakTo can be 'any' 'even' or 'odd'.
@@ -434,7 +431,7 @@ class MyPageBreak(FrameActionFlowable):
         'any' is the default, and means it will always break
         only one page.
 
-        '''
+        """
 
         self.templateName = templateName
         self.breakTo = breakTo
@@ -763,7 +760,12 @@ class Sidebar(FrameActionFlowable):
                     FrameBreak(),
                     self.kif,
                     FrameCutter(
-                        w, frame.width - w, self.kif, padding, self.style.lpad, True,
+                        w,
+                        frame.width - w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        True,
                     ),
                     FrameBreak(),
                 ]
@@ -787,7 +789,12 @@ class Sidebar(FrameActionFlowable):
                     FrameBreak(),
                     self.kif,
                     FrameCutter(
-                        w, frame.width - w, self.kif, padding, self.style.lpad, False,
+                        w,
+                        frame.width - w,
+                        self.kif,
+                        padding,
+                        self.style.lpad,
+                        False,
                     ),
                     FrameBreak(),
                 ]
@@ -835,7 +842,8 @@ class BoundByWidth(Flowable):
         self.pad = self.border_padding(True, 0.1)
         maxWidth = float(
             min(
-                styles.adjustUnits(self.maxWidth, availWidth) or availWidth, availWidth,
+                styles.adjustUnits(self.maxWidth, availWidth) or availWidth,
+                availWidth,
             )
         )
         self.maxWidth = maxWidth
@@ -1032,8 +1040,8 @@ class MyTableOfContents(TableOfContents):
         rlabel = '-'.join(label.split('-')[:-1])
 
         def islocal(_node):
-            '''See if this node is "local enough" for this TOC.
-            This is for Issue 196'''
+            """See if this node is "local enough" for this TOC.
+            This is for Issue 196"""
             if self.parent is None:
                 return True
             while _node.parent:

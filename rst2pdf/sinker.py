@@ -4,9 +4,9 @@ from reportlab.platypus.flowables import _listWrapOn, _FUZZ, Flowable
 
 
 class Sinker(Flowable):
-    '''A flowable that always takes the rest of the frame.
+    """A flowable that always takes the rest of the frame.
     It then draws its contents (a list of sub-flowables)
-    at the bottom of that space'''
+    at the bottom of that space"""
 
     def __init__(self, content):
         self.content = content

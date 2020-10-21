@@ -30,10 +30,10 @@ class StyleSheet(object):
 
     @staticmethod
     def stylepairs(data):
-        ''' Allows pairs of style information to be expressed
-            in canonical reportlab list of two-item list/tuple,
-            or in a more human-readable dictionary.
-        '''
+        """Allows pairs of style information to be expressed
+        in canonical reportlab list of two-item list/tuple,
+        or in a more human-readable dictionary.
+        """
         styles = data.get('styles', {})
         try:
             stylenames = list(styles.keys())
@@ -254,7 +254,8 @@ class StyleSheet(object):
                             if not fontList[0].startswith(font):
                                 # We need to create font aliases, and use them
                                 for fname, aliasname in zip(
-                                    fontList, [font + suffix for suffix in suff],
+                                    fontList,
+                                    [font + suffix for suffix in suff],
                                 ):
                                     self.fontsAlias[aliasname] = fname
                         continue
@@ -383,7 +384,8 @@ class StyleSheet(object):
                                 # We need to create font aliases, and use them
                                 basefname = style[key].split('-')[0]
                                 for fname, aliasname in zip(
-                                    fontList, [basefname + suffix for suffix in suff],
+                                    fontList,
+                                    [basefname + suffix for suffix in suff],
                                 ):
                                     self.fontsAlias[aliasname] = fname
                                 style[key] = self.fontsAlias[basefname + suff[pos]]
@@ -569,12 +571,12 @@ class StyleSheet(object):
             return newst
 
     def readSheets(self, flist):
-        ''' Read in the stylesheets.  Return a list of
-            (sheetdata, sheetname) tuples.
+        """Read in the stylesheets.  Return a list of
+        (sheetdata, sheetname) tuples.
 
-            Orders included sheets in front
-            of including sheets.
-        '''
+        Orders included sheets in front
+        of including sheets.
+        """
 
         # Process from end of flist
         flist.reverse()
@@ -685,9 +687,19 @@ class StyleSheet(object):
             self['table-heading'].alignment
         ]
         return [
-            ('BACKGROUND', (0, 0), (-1, rows - 1), self['table-heading'].backColor,),
+            (
+                'BACKGROUND',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].backColor,
+            ),
             ('ALIGN', (0, 0), (-1, rows - 1), alignment),
-            ('TEXTCOLOR', (0, 0), (-1, rows - 1), self['table-heading'].textColor,),
+            (
+                'TEXTCOLOR',
+                (0, 0),
+                (-1, rows - 1),
+                self['table-heading'].textColor,
+            ),
             (
                 'FONT',
                 (0, 0),
@@ -705,7 +717,7 @@ class StyleSheet(object):
         return adjustUnits(v, total, self.def_dpi, default_unit, emsize=self.emsize)
 
     def combinedStyle(self, styles):
-        '''Given a list of style names, it merges them (the existing ones)
+        """Given a list of style names, it merges them (the existing ones)
         and returns a new style.
 
         The styles that don't exist are silently ignored.
@@ -714,7 +726,7 @@ class StyleSheet(object):
         style will be called 'merged_style1_style2'.
 
         The styles that are *later* in the list will have priority.
-        '''
+        """
 
         validst = [x for x in styles if x in self.StyleSheet]
         newname = '_'.join(['merged'] + validst)
@@ -849,8 +861,8 @@ validCommands = {
 
 
 def validateCommands(commands):
-    '''Given a list of reportlab's table commands, it fixes some common errors
-    and/or removes commands that can't be fixed'''
+    """Given a list of reportlab's table commands, it fixes some common errors
+    and/or removes commands that can't be fixed"""
 
     fixed = []
 
@@ -911,11 +923,11 @@ def validateCommands(commands):
 
 
 class CallableStyleSheet(str):
-    ''' Useful for programmatically generated stylesheets.
-        A generated stylesheet is a callable string (name),
-        which returns the pre-digested stylesheet data
-        when called.
-    '''
+    """Useful for programmatically generated stylesheets.
+    A generated stylesheet is a callable string (name),
+    which returns the pre-digested stylesheet data
+    when called.
+    """
 
     def __new__(cls, name, value=''):
         self = str.__new__(cls, name)

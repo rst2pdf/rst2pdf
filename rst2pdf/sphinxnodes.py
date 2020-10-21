@@ -36,11 +36,11 @@ class SphinxHandler(NodeHandler):
     dispatchdict = {}
 
     def __init__(self):
-        ''' This is where the magic happens.  Make a copy of the elements
-            in the non-sphinx dispatch dictionary, setting sphinxmode on
-            every element, and then overwrite that dictionary with any
-            sphinx-specific handlers.
-        '''
+        """This is where the magic happens.  Make a copy of the elements
+        in the non-sphinx dispatch dictionary, setting sphinxmode on
+        every element, and then overwrite that dictionary with any
+        sphinx-specific handlers.
+        """
         mydict = {}
         for key, value in self._baseclass.dispatchdict.items():
             value = copy(value)
@@ -129,7 +129,9 @@ class HandleSphinxIndex(SphinxHandler, sphinx.addnodes.index):
         except IndexError:
             if node['entries']:
                 log.error(
-                    "Can't process index entry: %s [%s]", node['entries'], nodeid(node),
+                    "Can't process index entry: %s [%s]",
+                    node['entries'],
+                    nodeid(node),
                 )
         return []
 

@@ -51,28 +51,28 @@ class RSONDecodeError(ValueError):
 
 
 class Tokenizer(list):
-    ''' The RSON tokenizer uses re.split() to rip the source string
-        apart into smaller strings which may or may not be true standalone
-        tokens.  Sufficient information is maintained to put Humpty-Dumpty
-        back together when necessary.
+    """The RSON tokenizer uses re.split() to rip the source string
+    apart into smaller strings which may or may not be true standalone
+    tokens.  Sufficient information is maintained to put Humpty-Dumpty
+    back together when necessary.
 
-        The tokens are kept in a reversed list.  This makes retrieving
-        the next token a low-cost pop() operation from the end of the list,
-        and facilitates arbitrary lookahead operations.
+    The tokens are kept in a reversed list.  This makes retrieving
+    the next token a low-cost pop() operation from the end of the list,
+    and facilitates arbitrary lookahead operations.
 
-        Each token is a tuple, containing the following elements:
-           [0] Negative character offset of token within the source string.
-               A negative offset is used so that the tokens are sorted
-               properly for bisect() for special operations.
-           [1] single-character string usually containing a character
-               which represents the token type (often the entire token).
-           [2] string containing entire token
-           [3] string (possibly null) containing whitespace after token
-           [4] Indentation value of line containing token
-                            (\n followed by 0 or more spaces)
-           [5] Line number of token
-           [6] Tokenizer object that the token belongs to (for error reporting)
-    '''
+    Each token is a tuple, containing the following elements:
+       [0] Negative character offset of token within the source string.
+           A negative offset is used so that the tokens are sorted
+           properly for bisect() for special operations.
+       [1] single-character string usually containing a character
+           which represents the token type (often the entire token).
+       [2] string containing entire token
+       [3] string (possibly null) containing whitespace after token
+       [4] Indentation value of line containing token
+                        (\n followed by 0 or more spaces)
+       [5] Line number of token
+       [6] Tokenizer object that the token belongs to (for error reporting)
+    """
 
     # Like Python, indentation is special.  I originally planned on making
     # the space character the only valid indenter, but that got messy
@@ -202,8 +202,7 @@ class Tokenizer(list):
 
     @staticmethod
     def sourceloc(token):
-        ''' Return the source location for a given token
-        '''
+        """Return the source location for a given token"""
         lineno = token[5]
         colno = offset = -token[0] + 1
         if lineno != 1:
@@ -212,8 +211,7 @@ class Tokenizer(list):
 
     @classmethod
     def error(cls, s, token):
-        ''' error performs generic error reporting for tokens
-        '''
+        """error performs generic error reporting for tokens"""
         offset, lineno, colno = cls.sourceloc(token)
 
         if token[1] == '@':
@@ -260,9 +258,9 @@ class BaseObjects(object):
             return list(startlist)
 
     class default_object(dict):
-        ''' By default, RSON objects are dictionaries that
-            allow attribute access to their existing contents.
-        '''
+        """By default, RSON objects are dictionaries that
+        allow attribute access to their existing contents.
+        """
 
         def __getattr__(self, key):
             return self[key]
@@ -295,9 +293,9 @@ class BaseObjects(object):
             return self
 
     def object_type_factory(self):
-        ''' This function returns constructors for RSON objects and arrays.
-            It handles simplejson compatible hooks as well.
-        '''
+        """This function returns constructors for RSON objects and arrays.
+        It handles simplejson compatible hooks as well.
+        """
         object_hook = self.object_hook
         object_pairs_hook = self.object_pairs_hook
 
@@ -326,9 +324,9 @@ class BaseObjects(object):
 
 
 class Dispatcher(object):
-    ''' Assumes that this is mixed-in to a class with an
-        appropriate parser_factory() method.
-    '''
+    """Assumes that this is mixed-in to a class with an
+    appropriate parser_factory() method.
+    """
 
     @classmethod
     def dispatcher_factory(cls):
@@ -358,8 +356,7 @@ class Dispatcher(object):
 
 
 class QuotedToken(object):
-    ''' Subclass or replace this if you don't like quoted string handling
-    '''
+    """Subclass or replace this if you don't like quoted string handling"""
 
     parse_encoded_chr = chr
     parse_quoted_str = staticmethod(lambda token, s, str=str: str(s))
@@ -436,9 +433,9 @@ class QuotedToken(object):
             return result
 
         def parse_double_unicode(uni, nonmatch, next_, token):
-            ''' Munged version of UCS-4 code pair stuff from
-                simplejson.
-            '''
+            """Munged version of UCS-4 code pair stuff from
+            simplejson.
+            """
             ok = True
             try:
                 uni2 = next_()
@@ -478,22 +475,22 @@ class QuotedToken(object):
 
 
 class UnquotedToken(object):
-    ''' Subclass or replace this if you don't like the unquoted
-        token handling.  This is designed to be a superset of JSON:
+    """Subclass or replace this if you don't like the unquoted
+    token handling.  This is designed to be a superset of JSON:
 
-          - Integers allowed to be expressed in octal, binary, or hex
-            as well as decimal.
+      - Integers allowed to be expressed in octal, binary, or hex
+        as well as decimal.
 
-          - Integers can have embedded underscores.
+      - Integers can have embedded underscores.
 
-          - Non-match of a special token will just be wrapped as a unicode
-            string.
+      - Non-match of a special token will just be wrapped as a unicode
+        string.
 
-          - Numbers can be preceded by '+' as well s '-'
-          - Numbers can be left-zero-filled
-          - If a decimal point is present, digits are required on either side,
-            but not both sides
-    '''
+      - Numbers can be preceded by '+' as well s '-'
+      - Numbers can be left-zero-filled
+      - If a decimal point is present, digits are required on either side,
+        but not both sides
+    """
 
     use_decimal = False
     parse_int = staticmethod(lambda s: int(s.replace('_', ''), 0))
@@ -553,16 +550,15 @@ class UnquotedToken(object):
 
 
 class EqualToken(object):
-    ''' Subclass or replace this if you don't like the = string handling
-    '''
+    """Subclass or replace this if you don't like the = string handling"""
 
     encode_equals_str = None
 
     @staticmethod
     def parse_equals(stringlist, indent, token):
-        ''' token probably not needed except maybe for error reporting.
-            Replace this with something that does what you want.
-        '''
+        """token probably not needed except maybe for error reporting.
+        Replace this with something that does what you want.
+        """
         # Strip any trailing whitespace to the right
         stringlist = [x.rstrip() for x in stringlist]
 
@@ -631,8 +627,7 @@ class EqualToken(object):
 
 
 class RsonParser(object):
-    ''' Parser for RSON
-    '''
+    """Parser for RSON"""
 
     disallow_trailing_commas = True
     disallow_rson_sublists = False
@@ -897,11 +892,11 @@ class RsonParser(object):
                 token = parse_one_dict_entry(stack, next, next(), [key], result)
 
         def parse_recurse(stack, next, tokens=None):
-            ''' parse_recurse ALWAYS returns a list or a dict.
-                (or the user variants thereof)
-                It is up to the caller to determine that it was an array
-                of length 1 and strip the contents out of the array.
-            '''
+            """parse_recurse ALWAYS returns a list or a dict.
+            (or the user variants thereof)
+            It is up to the caller to determine that it was an array
+            of length 1 and strip the contents out of the array.
+            """
             firsttok = stack[-1]
             value = rson_value_dispatch(firsttok[1], bad_top_value)(firsttok, next)
 

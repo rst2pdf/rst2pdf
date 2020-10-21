@@ -14,9 +14,9 @@ from json import loads as jloads
 
 
 def dumps(obj, forcestyledict=True):
-    ''' If forcestyledict is True, will attempt to
-        turn styles into a dictionary.
-    '''
+    """If forcestyledict is True, will attempt to
+    turn styles into a dictionary.
+    """
 
     def dofloat(result, obj, indent):
         s = '%.3f' % obj
@@ -124,9 +124,9 @@ def dumps(obj, forcestyledict=True):
 
 
 def fixspacing(s):
-    ''' Try to make the output prettier by inserting blank lines
-        in random places.
-    '''
+    """Try to make the output prettier by inserting blank lines
+    in random places.
+    """
     result = []
     indent = -1
     for line in s.splitlines():
@@ -143,8 +143,7 @@ def fixspacing(s):
 
 
 def fixstyle(obj):
-    ''' Try to convert styles into a dictionary
-    '''
+    """Try to convert styles into a dictionary"""
     if obj:
         if isinstance(obj, list):
             lengths = [len(x) for x in obj]
@@ -156,8 +155,7 @@ def fixstyle(obj):
 
 
 def convert(srcname):
-    ''' Convert a single file from .json to .style
-    '''
+    """Convert a single file from .json to .style"""
     print(srcname)
     sstr = open(srcname, 'rb').read()
     sdata = fixstyle(jloads(sstr))

@@ -29,7 +29,13 @@ missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
 
 def defaultimage(
-    filename, width=None, height=None, kind='direct', mask='auto', lazy=1, srcinfo=None,
+    filename,
+    width=None,
+    height=None,
+    kind='direct',
+    mask='auto',
+    lazy=1,
+    srcinfo=None,
 ):
     """Get default image backend.
 
@@ -214,7 +220,9 @@ class MyImage(Flowable):
         elif extension != 'jpg' and not PILImage:
             # No way to make this work
             log.error(
-                '%s image support requires Pillow: %s', extension.upper(), filename,
+                '%s image support requires Pillow: %s',
+                extension.upper(),
+                filename,
             )
             filename = missing
 

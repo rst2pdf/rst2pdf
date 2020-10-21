@@ -311,9 +311,9 @@ class RstToPdf(object):
         return sep + " "
 
     def styleToTags(self, style):
-        '''Takes a style name, returns a pair of opening/closing tags for it, like
+        """Takes a style name, returns a pair of opening/closing tags for it, like
         "<font face=helvetica size=14 color=red>". Used for inline
-        nodes (custom interpreted roles)'''
+        nodes (custom interpreted roles)"""
 
         try:
             s = self.styles[style]
@@ -341,9 +341,9 @@ class RstToPdf(object):
             return None
 
     def styleToFont(self, style):
-        '''Takes a style name, returns a font tag for it, like
+        """Takes a style name, returns a font tag for it, like
         "<font face=helvetica size=14 color=red>". Used for inline
-        nodes (custom interpreted roles)'''
+        nodes (custom interpreted roles)"""
 
         try:
             s = self.styles[style]
@@ -376,8 +376,8 @@ class RstToPdf(object):
 
     def bullet_for_node(self, node):
         """Takes a node, assumes it's some sort of
-           item whose parent is a list, and
-           returns the bullet text it should have"""
+        item whose parent is a list, and
+        returns the bullet text it should have"""
         b = ""
         t = 'item'
         if node.parent.get('start'):
@@ -791,16 +791,13 @@ class FancyDocTemplate(BaseDocTemplate):
                         flowables.insert(i, f)  # put split flowables back on the list
                 else:
                     if hasattr(f, '_postponed') and f._postponed > 4:
-                        ident = (
-                            "Flowable %s%s too large on page %d in frame %r%s of template %r"
-                            % (
-                                self._fIdent(f, 60, frame),
-                                doctemplate._fSizeString(f),
-                                self.page,
-                                self.frame.id,
-                                self.frame._aSpaceString(),
-                                self.pageTemplate.id,
-                            )
+                        ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % (
+                            self._fIdent(f, 60, frame),
+                            doctemplate._fSizeString(f),
+                            self.page,
+                            self.frame.id,
+                            self.frame._aSpaceString(),
+                            self.pageTemplate.id,
                         )
                         # leave to keep apart from the raise
                         raise LayoutError(ident)
@@ -863,9 +860,9 @@ class MyContainer(_Container, Flowable):
 
 
 class UnhappyOnce(IndexingFlowable):
-    '''An indexing flowable that is only unsatisfied once.
+    """An indexing flowable that is only unsatisfied once.
     If added to a story, it will make multiBuild run
-    at least two passes. Useful for ###Total###'''
+    at least two passes. Useful for ###Total###"""
 
     _unhappy = True
 
@@ -880,9 +877,9 @@ class UnhappyOnce(IndexingFlowable):
 
 
 class HeaderOrFooter(object):
-    """ A helper object for FancyPage (below)
-        HeaderOrFooter handles operations which are common
-        to both headers and footers
+    """A helper object for FancyPage (below)
+    HeaderOrFooter handles operations which are common
+    to both headers and footers
     """
 
     def __init__(self, items=None, isfooter=False, client=None):
@@ -985,8 +982,7 @@ class HeaderOrFooter(object):
 
 
 class FancyPage(PageTemplate):
-    """ A page template that handles changing layouts.
-    """
+    """A page template that handles changing layouts."""
 
     def __init__(self, _id, _head, _foot, client):
         self.client = client
@@ -999,19 +995,19 @@ class FancyPage(PageTemplate):
         PageTemplate.__init__(self, _id, [])
 
     def draw_background(self, which, canv):
-        ''' Draws a background and/or foreground image
-            on each page which uses the template.
+        """Draws a background and/or foreground image
+        on each page which uses the template.
 
-            Calculates the image one time, and caches
-            it for reuse on every page in the template.
+        Calculates the image one time, and caches
+        it for reuse on every page in the template.
 
-            How the background is drawn depends on the
-            --fit-background-mode option.
+        How the background is drawn depends on the
+        --fit-background-mode option.
 
-            If desired, we could add code to push it around
-            on the page, using stylesheets to align and/or
-            set the offset.
-        '''
+        If desired, we could add code to push it around
+        on the page, using stylesheets to align and/or
+        set the offset.
+        """
         uri = self.template[which]
         info = self.image_cache.get(uri)
         if info is None:
@@ -1021,11 +1017,19 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, _ = MyImage.size_for_node(dict(uri=uri,), self.client)
+                w, h, _ = MyImage.size_for_node(
+                    dict(
+                        uri=uri,
+                    ),
+                    self.client,
+                )
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
-                w, h, = 100, 100
+                w, h, = (
+                    100,
+                    100,
+                )
 
             pw, ph = self.styles.pw, self.styles.ph
             if self.client.background_fit_mode == 'center':
@@ -1054,7 +1058,7 @@ class FancyPage(PageTemplate):
     def is_left(self, page_num):
         """Default behavior is that the first page is on the left.
 
-           If the user has --first_page_on_right, the calculation is reversed.
+        If the user has --first_page_on_right, the calculation is reversed.
         """
         val = page_num % 2 == 1
         if self.client.first_page_on_right:
@@ -1064,7 +1068,7 @@ class FancyPage(PageTemplate):
     def beforeDrawPage(self, canv, doc):
         """Do adjustments to the page according to where we are in the document.
 
-           * Gutter margins on left or right as needed
+        * Gutter margins on left or right as needed
 
         """
 
@@ -1726,8 +1730,8 @@ reportlab.lib.utils.ImageReader.__deepcopy__ = lambda self, *x: copy(self)
 
 
 def patch_digester():
-    ''' Patch digester so that we can get the same results when image
-filenames change'''
+    """Patch digester so that we can get the same results when image
+    filenames change"""
     import reportlab.pdfgen.canvas as canvas
 
     cache = {}

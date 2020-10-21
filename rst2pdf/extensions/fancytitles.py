@@ -11,7 +11,7 @@ from rst2pdf.image import MyImage
 
 
 class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
-    '''
+    """
     This class will handle title nodes.
 
     It takes a "titletemplate.svg", replaces TITLEGOESHERE with
@@ -20,7 +20,7 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
 
     Since this class is defined in an extension, it
     effectively replaces rst2pdf.genelements.HandleTitle.
-    '''
+    """
 
     def gather_elements(self, client, node, style):
         # This method is copied from the HandleTitle class
@@ -111,8 +111,8 @@ class FancyTitleHandler(genelements.HandleParagraph, docutils.nodes.title):
 
 
 class FancyHeading(MyImage, Heading):
-    '''This is a cross between the Heading flowable, that adds outline
-    entries so you have a PDF TOC, and MyImage, that draws images'''
+    """This is a cross between the Heading flowable, that adds outline
+    entries so you have a PDF TOC, and MyImage, that draws images"""
 
     def __init__(self, *args, **kwargs):
         # The inicialization is taken from rst2pdf.flowables.Heading
