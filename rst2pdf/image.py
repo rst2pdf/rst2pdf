@@ -170,7 +170,7 @@ class MyImage(Flowable):
         If ``uri`` ends with '.*' then the returned filename will be the best
         quality supported at the moment.
 
-        That means: PDF > SVG > anything else
+        That means: SVG > PNG > JPG > GIF
         """
 
         backend = defaultimage
@@ -179,7 +179,7 @@ class MyImage(Flowable):
         filename, extension, options = self.split_uri(uri)
 
         if '*' in filename:
-            preferred = ['gif', 'jpg', 'png', 'svg', 'pdf']
+            preferred = ['gif', 'jpg', 'png', 'svg']
 
             # Find out what images are available
             available = glob.glob(filename)
