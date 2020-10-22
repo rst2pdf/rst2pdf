@@ -77,7 +77,7 @@ def compare_pdfs(path_a, path_b):
 
     def fuzzy_coord_diff(coord_a, coord_b):
         diff = abs(coord_a - coord_b)
-        threshold = 0.1  # 0.1 px is approximately 0.0353mm
+        threshold = 3  # 3 px is approximately 1.06mm
         assert (
             diff < threshold
         ), "Coordinates of the last printed block differs from the reference"
