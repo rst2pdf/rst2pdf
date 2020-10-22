@@ -15,14 +15,14 @@ size we requested. It's unknown if the size generated changes with different pla
 .. uml::
    :format: svg
 
-   scale max 150*150
+   scale 200 width
    Alice -> Bob: Hi!
    Alice <- Bob: How are you?
 
 .. uml::
    :format: png
 
-   scale max 150*150
+   scale 200 width
    Alice -> Bob: Hi!
    Alice <- Bob: How are you?
 
