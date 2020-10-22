@@ -77,12 +77,17 @@ def compare_pdfs(path_a, path_b):
 
     def fuzzy_coord_diff(coord_a, coord_b):
         diff = abs(coord_a - coord_b)
-        assert diff < 0.1
+        threshold = 0.1  # 0.1 px is approximately 0.0353mm
+        assert (
+            diff < threshold
+        ), "Coordinates of the last printed block differs from the reference"
 
     def fuzzy_string_diff(string_a, string_b):
         words_a = string_a.split()
         words_b = string_b.split()
-        assert words_a == words_b
+        assert (
+            words_a == words_b
+        ), "Text of the last printed block differs from the reference"
 
     assert len(pages_a) == len(pages_b)
     page_no = 0
