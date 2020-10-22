@@ -85,7 +85,10 @@ def compare_pdfs(path_a, path_b):
         assert words_a == words_b
 
     assert len(pages_a) == len(pages_b)
+    page_no = 0
     for page_a, page_b in zip(pages_a, pages_b):
+        page_no = page_no + 1
+        print(f"++ Page {page_no} ++")
         assert len(page_a) == len(page_b)
         for block_a, block_b in zip(page_a, page_b):
             # each block has the following format:
@@ -95,6 +98,8 @@ def compare_pdfs(path_a, path_b):
             # block_type and block_no should remain unchanged, but it's
             # possible for the blocks to move around the document slightly and
             # the text refold without breaking entirely
+            print(f"block_a: {block_a}")
+            print(f"block_b: {block_b}")
             fuzzy_coord_diff(block_a[0], block_b[0])
             fuzzy_coord_diff(block_a[1], block_b[1])
             fuzzy_coord_diff(block_a[2], block_b[2])
