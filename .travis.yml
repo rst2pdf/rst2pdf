@@ -18,8 +18,9 @@ install:
   - pip install pytest pre-commit
   - pip install -c requirements.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 env:
-  - TEST_CMD="pytest"
+  - TEST_CMD="pytest -v"
 script:
+  - pip freeze
   - $TEST_CMD
 matrix:
   include:
