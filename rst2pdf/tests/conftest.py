@@ -94,6 +94,10 @@ def compare_pdfs(path_a, path_b):
     for page_a, page_b in zip(pages_a, pages_b):
         page_no = page_no + 1
         print(f"++ Page {page_no} ++")
+        print(f"page_a: {page_a}")
+        print(f"page_b: {page_b}")
+        print("number of blocks in page_a: %s" % len(page_a))
+        print("number of blocks in page_b: %s" % len(page_b))
         assert len(page_a) == len(page_b)
         for block_a, block_b in zip(page_a, page_b):
             # each block has the following format:
