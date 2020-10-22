@@ -20,6 +20,7 @@ from docutils.parsers.rst import directives
 
 import rst2pdf.genelements as genelements
 from rst2pdf.image import MyImage
+from rst2pdf.styles import adjustUnits
 
 
 class plantuml(nodes.General, nodes.Element):
@@ -40,12 +41,16 @@ class UmlDirective(rst.Directive):
 
     You can use a :format: option to change between SVG and PNG diagrams, however,
     the SVG plantuml generates doesn't look very good to me.
+
+    Also, :width: and :height: are supported as per the image directive.
     """
 
     has_content = True
     option_spec = {
         'alt': directives.unchanged,
         'format': directives.unchanged,
+        'width': directives.length_or_unitless,
+        'height': directives.length_or_unitless,
     }
 
     def run(self):
@@ -53,6 +58,8 @@ class UmlDirective(rst.Directive):
         node['uml'] = '\n'.join(self.content)
         node['alt'] = self.options.get('alt', None)
         node['format'] = self.options.get('format', 'png')
+        node['width'] = self.options.get('width', None)
+        node['height'] = self.options.get('height', None)
         return [node]
 
 
@@ -89,8 +96,17 @@ class UMLHandler(genelements.NodeHandler, plantuml):
         if p.returncode != 0:
             raise PlantUmlError('error while running plantuml\n\n' + serr)
 
+        # Convert width and height if necessary
+        w = node['width']
+        if w is not None:
+            w = adjustUnits(w)
+
+        h = node['height']
+        if h is not None:
+            h = adjustUnits(h)
+
         # Add Image node with the right image
-        return [MyImage(tfile.name, client=client)]
+        return [MyImage(tfile.name, client=client, width=w, height=h)]
 
 
 directives.register_directive("uml", UmlDirective)
