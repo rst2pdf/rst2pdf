@@ -83,6 +83,13 @@ def compare_pdfs(path_a, path_b):
         ), "Coordinates of the last printed block differs from the reference"
 
     def fuzzy_string_diff(string_a, string_b):
+        a_is_image = string_a.startswith("<image: DeviceRGB")
+        b_is_image = string_b.startswith("<image: DeviceRGB")
+        if a_is_image and b_is_image:
+            # We can't necessarily control the image metadata text in the block (e.g. from plantuml), so we do not
+            # check it.
+            return
+
         words_a = string_a.split()
         words_b = string_b.split()
         assert (
