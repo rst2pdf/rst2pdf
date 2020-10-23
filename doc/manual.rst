@@ -54,6 +54,15 @@ default settings.
 However, if you want to customize the output, or are just curious to see what
 can be done, let's continue.
 
+Related Reading
+~~~~~~~~~~~~~~~
+
+As well as the rst2pdf-specific features described in this manual, you many also find it useful to refer to the ReStructuredText manual and information about its directives:
+
+* A ReStructureText Primer: https://docutils.sourceforge.io/docs/user/rst/quickstart.html
+* Quick ReStructuredText: https://docutils.sourceforge.io/docs/user/rst/quickref.html
+* ReStructuredText Specification: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html
+* ReStructuredText Directives: https://docutils.sourceforge.io/docs/ref/rst/directives.html
 
 Command line options
 --------------------
