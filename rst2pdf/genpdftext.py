@@ -100,12 +100,18 @@ class HandleReference(NodeHandler, docutils.nodes.reference):
                     post = u' (%s)' % uri
             else:
                 # A plain old link
-                pre += u'<a href="%s" color="%s">' % (uri, client.styles.linkColor,)
+                pre += u'<a href="%s" color="%s">' % (
+                    uri,
+                    client.styles.linkColor,
+                )
                 post = '</a>' + post
         else:
             uri = node.get('refid')
             if uri:
-                pre += u'<a href="#%s" color="%s">' % (uri, client.styles.linkColor,)
+                pre += u'<a href="#%s" color="%s">' % (
+                    uri,
+                    client.styles.linkColor,
+                )
                 post = '</a>' + post
         return pre, post
 
@@ -213,7 +219,9 @@ class HandleImage(NodeHandler, docutils.nodes.image):
 
 
 class HandleFootRef(
-    NodeHandler, docutils.nodes.footnote_reference, docutils.nodes.citation_reference,
+    NodeHandler,
+    docutils.nodes.footnote_reference,
+    docutils.nodes.citation_reference,
 ):
     def get_text(self, client, node, replaceEnt):
         # TODO: when used in Sphinx, all footnotes are autonumbered

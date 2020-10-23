@@ -32,7 +32,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -48,7 +48,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 930
+/Length 877
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -82,7 +82,7 @@ n 60 0 6 12 re f*
 n 66 0 6 12 re f*
 .960784 .960784 .862745 rg
 n 72 0 6 12 re f*
-BT 1 0 0 1 0 26 Tm 12 TL /F2 10 Tf 0 .501961 0 rg (def) Tj /F3 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (my_function) Tj 0 0 0 rg (\(\):) Tj 0 0 0 rg  T* (    ) Tj .729412 .129412 .129412 rg ("just a test") Tj 0 0 0 rg  T* (    ) Tj /F2 10 Tf 0 .501961 0 rg (print) Tj /F3 10 Tf 0 0 0 rg ( ) Tj .4 .4 .4 rg (8) Tj .4 .4 .4 rg (/) Tj .4 .4 .4 rg (2) Tj T* ET
+BT 1 0 0 1 0 26 Tm 12 TL /F2 10 Tf 0 .501961 0 rg (def) Tj /F3 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (my_function) Tj 0 0 0 rg (\(\):) Tj  T* (    ) Tj .729412 .129412 .129412 rg ("just a test") Tj 0 0 0 rg  T* (    ) Tj 0 .501961 0 rg (print) Tj 0 0 0 rg ( ) Tj .4 .4 .4 rg (8) Tj (/) Tj (2) Tj T* ET
 Q
 Q
 Q
@@ -93,21 +93,16 @@ endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000124 00000 n 
@@ -115,12 +110,11 @@ xref
 0000000341 00000 n 
 0000000446 00000 n 
 0000000649 00000 n 
-0000000753 00000 n 
-0000001010 00000 n 
-0000001069 00000 n 
-0000002049 00000 n 
-0000002096 00000 n 
-0000002137 00000 n 
+0000000736 00000 n 
+0000000993 00000 n 
+0000001052 00000 n 
+0000001979 00000 n 
+0000002020 00000 n 
 trailer
 <<
 /ID 
@@ -129,8 +123,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-2171
+2054
 %%EOF

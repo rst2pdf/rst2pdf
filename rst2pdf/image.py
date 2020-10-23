@@ -29,7 +29,13 @@ missing = os.path.join(PATH, 'images', 'image-missing.jpg')
 
 
 def defaultimage(
-    filename, width=None, height=None, kind='direct', mask='auto', lazy=1, srcinfo=None,
+    filename,
+    width=None,
+    height=None,
+    kind='direct',
+    mask='auto',
+    lazy=1,
+    srcinfo=None,
 ):
     """Get default image backend.
 
@@ -164,7 +170,7 @@ class MyImage(Flowable):
         If ``uri`` ends with '.*' then the returned filename will be the best
         quality supported at the moment.
 
-        That means: PDF > SVG > anything else
+        That means: SVG > PNG > JPG > GIF
         """
 
         backend = defaultimage
@@ -173,7 +179,7 @@ class MyImage(Flowable):
         filename, extension, options = self.split_uri(uri)
 
         if '*' in filename:
-            preferred = ['gif', 'jpg', 'png', 'svg', 'pdf']
+            preferred = ['gif', 'jpg', 'png', 'svg']
 
             # Find out what images are available
             available = glob.glob(filename)
@@ -214,7 +220,9 @@ class MyImage(Flowable):
         elif extension != 'jpg' and not PILImage:
             # No way to make this work
             log.error(
-                '%s image support requires Pillow: %s', extension.upper(), filename,
+                '%s image support requires Pillow: %s',
+                extension.upper(),
+                filename,
             )
             filename = missing
 

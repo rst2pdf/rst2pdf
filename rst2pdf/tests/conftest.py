@@ -77,15 +77,34 @@ def compare_pdfs(path_a, path_b):
 
     def fuzzy_coord_diff(coord_a, coord_b):
         diff = abs(coord_a - coord_b)
-        assert diff / max(coord_a, coord_b) < 0.04  # allow an arbitrary diff
+        threshold = 3  # 3 px is approximately 1.06mm
+        assert (
+            diff < threshold
+        ), "Coordinates of the last printed block differs from the reference"
 
     def fuzzy_string_diff(string_a, string_b):
+        a_is_image = string_a.startswith("<image: DeviceRGB")
+        b_is_image = string_b.startswith("<image: DeviceRGB")
+        if a_is_image and b_is_image:
+            # We can't necessarily control the image metadata text in the block (e.g. from plantuml), so we do not
+            # check it.
+            return
+
         words_a = string_a.split()
         words_b = string_b.split()
-        assert words_a == words_b
+        assert (
+            words_a == words_b
+        ), "Text of the last printed block differs from the reference"
 
     assert len(pages_a) == len(pages_b)
+    page_no = 0
     for page_a, page_b in zip(pages_a, pages_b):
+        page_no = page_no + 1
+        print(f"++ Page {page_no} ++")
+        print(f"page_a: {page_a}")
+        print(f"page_b: {page_b}")
+        print("number of blocks in page_a: %s" % len(page_a))
+        print("number of blocks in page_b: %s" % len(page_b))
         assert len(page_a) == len(page_b)
         for block_a, block_b in zip(page_a, page_b):
             # each block has the following format:
@@ -95,6 +114,8 @@ def compare_pdfs(path_a, path_b):
             # block_type and block_no should remain unchanged, but it's
             # possible for the blocks to move around the document slightly and
             # the text refold without breaking entirely
+            print(f"block_a: {block_a}")
+            print(f"block_b: {block_b}")
             fuzzy_coord_diff(block_a[0], block_b[0])
             fuzzy_coord_diff(block_a[1], block_b[1])
             fuzzy_coord_diff(block_a[2], block_b[2])
@@ -138,7 +159,8 @@ class Item(pytest.Item):
 
     def _fail(self, msg, output=None):
         pytest.fail(
-            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg, pytrace=False,
+            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg,
+            pytrace=False,
         )
 
     def runtest(self):
@@ -196,7 +218,8 @@ class Item(pytest.Item):
 
         if len(reference_files) != len(output_files):
             self._fail(
-                'Mismatch between number of files expected and generated', output,
+                'Mismatch between number of files expected and generated',
+                output,
             )
 
         reference_files.sort()
@@ -247,7 +270,9 @@ class TxtItem(Item):
 
         try:
             output = subprocess.check_output(
-                cmd, cwd=INPUT_DIR, stderr=subprocess.STDOUT,
+                cmd,
+                cwd=INPUT_DIR,
+                stderr=subprocess.STDOUT,
             )
             retcode = 0
         except subprocess.CalledProcessError as exc:
@@ -295,7 +320,9 @@ class SphinxItem(Item):
 
         try:
             output = subprocess.check_output(
-                cmd, cwd=INPUT_DIR, stderr=subprocess.STDOUT,
+                cmd,
+                cwd=INPUT_DIR,
+                stderr=subprocess.STDOUT,
             )
             retcode = 0
         except subprocess.CalledProcessError as exc:

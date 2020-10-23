@@ -18,15 +18,16 @@ install:
   - pip install pytest pre-commit
   - pip install -c requirements.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
 env:
-  - TEST_CMD="pytest"
+  - TEST_CMD="pytest -v"
 script:
+  - pip freeze
   - $TEST_CMD
 matrix:
   include:
     - name: "lint"
       python: 3.6
       env:
-        - TEST_CMD="pre-commit run --all-files"
+        - TEST_CMD="pre-commit run --all-files --show-diff-on-failure"
     - name: "3.6"
       python: 3.6
     - name: "3.7"

@@ -57,7 +57,9 @@ class Aanode(Element):
         # explicit :option: always precedes
         options.update(self.options)
         visitor = aafigure.process(
-            '\n'.join(self.content), aafigure.pdf.PDFOutputVisitor, options=options,
+            '\n'.join(self.content),
+            aafigure.pdf.PDFOutputVisitor,
+            options=options,
         )
         return renderPDF.GraphicsFlowable(visitor.drawing)
 
