@@ -24,6 +24,26 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'output')
 REFERENCE_DIR = os.path.join(ROOT_DIR, 'reference')
 
 
+def can_run(command_list):
+    def _can_run():
+        try:
+            p = subprocess.Popen(
+                command_list,
+                stdout=subprocess.PIPE,
+                stdin=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            p.terminate()
+        except FileNotFoundError:
+            return False
+        return True
+
+    return _can_run
+
+
+check_dependency = {'plantuml': can_run(["plantuml", "-pipe"])}
+
+
 def _get_metadata(pdf):
     metadata = pdf.metadata
 
@@ -174,6 +194,20 @@ class Item(pytest.Item):
                 ignore_reason = fh.read()
 
             pytest.skip(ignore_reason)
+
+        # if '.depends' file is present, check if all dependencies are
+        # satisfied, otherwise skip test
+
+        depends_file = os.path.join(INPUT_DIR, self.name + '.depends')
+        if os.path.exists(depends_file):
+            with open(depends_file) as fh:
+                for line in fh:
+                    dep = line.rstrip('\n')
+                    try:
+                        if not check_dependency[dep]():
+                            pytest.skip("Unmet dependency for test: %s" % line)
+                    except KeyError:
+                        pytest.skip("Unknown test dependency: %s" % line)
 
         # run the actual test
 
