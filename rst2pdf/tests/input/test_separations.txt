@@ -1,0 +1,7 @@
+This tests our support for separations.
+
+Currently, only changing colors in the styles is supported.
+
+---------------------------------
+
+The above line should be red.
