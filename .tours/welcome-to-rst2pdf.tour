@@ -1,0 +1,27 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Welcome to Rst2pdf",
+  "steps": [
+    {
+      "file": "README.rst",
+      "line": 82,
+      "description": "Install from source using this command. Re-run when you change code or switch branches."
+    },
+    {
+      "file": "README.rst",
+      "line": 117,
+      "description": "The manual is a good place to learn about rst2pdf features - there are also examples on the docs site https://rst2pdf.org ",
+      "selection": {
+        "start": {
+          "line": 117,
+          "character": 34
+        },
+        "end": {
+          "line": 117,
+          "character": 70
+        }
+      }
+    }
+  ],
+  "ref": "master"
+}
