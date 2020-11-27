@@ -23,6 +23,9 @@ jobs:
         pip install --upgrade setuptools
         pip install pytest pre-commit
         pip install -c requirements.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    - name: Lint
+      run: |
+        pre-commit run --all-files --show-diff-on-failure
     - name: Test with pytest
       run: |
         pytest -v
