@@ -26,6 +26,7 @@ jobs:
     - name: Lint
       run: |
         pre-commit run --all-files --show-diff-on-failure
+      if: matrix.python-version == '3.8'
     - name: Test with pytest
       run: |
         pytest -v
