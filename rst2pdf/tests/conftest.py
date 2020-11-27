@@ -216,7 +216,21 @@ class Item(pytest.Item):
         # verify results
 
         if retcode:
-            self._fail('Call failed with %d' % retcode, output)
+            exitcode_file = os.path.join(INPUT_DIR, self.name + '.exitcode')
+            if os.path.exists(exitcode_file):
+                with open(exitcode_file) as f:
+                    first_line = f.readline()
+                    expected_exitcode = int(first_line)
+                    if expected_exitcode == retcode:
+                        return
+                    else:
+                        self._fail(
+                            'Exit code of %d did not match expected %d'
+                            % (retcode, expected_exitcode),
+                            output,
+                        )
+            else:
+                self._fail('Call failed with %d' % retcode, output)
 
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         if no_pdf:
@@ -309,26 +323,28 @@ class RstItem(Item):
                 stderr=subprocess.STDOUT,
             )
             retcode = 0
+
+            output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
+            no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
+            if not os.path.exists(output_file) and not no_pdf:
+                self._fail(
+                    'File %r was not generated'
+                    % (os.path.relpath(output_file, ROOT_DIR),),
+                    output,
+                )
+            elif os.path.exists(output_file) and no_pdf:
+                self._fail(
+                    'File %r was erroneously generated'
+                    % (os.path.relpath(output_file, ROOT_DIR),),
+                    output,
+                )
+
         except subprocess.CalledProcessError as exc:
             output = exc.output
             retcode = exc.returncode
 
         with open(output_log, 'wb') as fh:
             fh.write(output)
-
-        output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
-        no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
-        if not os.path.exists(output_file) and not no_pdf:
-            self._fail(
-                'File %r was not generated' % (os.path.relpath(output_file, ROOT_DIR),),
-                output,
-            )
-        elif os.path.exists(output_file) and no_pdf:
-            self._fail(
-                'File %r was erroneously generated'
-                % (os.path.relpath(output_file, ROOT_DIR),),
-                output,
-            )
 
         return retcode, output
 
