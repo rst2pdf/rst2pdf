@@ -44,7 +44,7 @@ Tests are in ``rst2pdf/tests`` directory. Within this folder:
 
 * ``input`` holds the instructions for running a test.
 
-  - ``test_[name].txt`` holds the rst source for the test (yes, really)
+  - ``test_[name].rst`` holds the rst source for the test
   - ``test_[name].style`` has any stylesheet that should be applied for this test
   - ``test_[name].cli`` allows adding extra commands to the test (look for examples)
 
