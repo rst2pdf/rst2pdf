@@ -791,13 +791,16 @@ class FancyDocTemplate(BaseDocTemplate):
                         flowables.insert(i, f)  # put split flowables back on the list
                 else:
                     if hasattr(f, '_postponed') and f._postponed > 4:
-                        ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % (
-                            self._fIdent(f, 60, frame),
-                            doctemplate._fSizeString(f),
-                            self.page,
-                            self.frame.id,
-                            self.frame._aSpaceString(),
-                            self.pageTemplate.id,
+                        ident = (
+                            "Flowable %s%s too large on page %d in frame %r%s of template %r"
+                            % (
+                                self._fIdent(f, 60, frame),
+                                doctemplate._fSizeString(f),
+                                self.page,
+                                self.frame.id,
+                                self.frame._aSpaceString(),
+                                self.pageTemplate.id,
+                            )
                         )
                         # leave to keep apart from the raise
                         raise LayoutError(ident)
@@ -1017,12 +1020,7 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, _ = MyImage.size_for_node(
-                    dict(
-                        uri=uri,
-                    ),
-                    self.client,
-                )
+                w, h, _ = MyImage.size_for_node(dict(uri=uri,), self.client,)
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
@@ -1807,23 +1805,30 @@ def add_extensions(options):
             prefix = os.getcwd()
         if prefix not in sys.path:
             sys.path.insert(0, prefix)
+
         log.info('Importing extension module %s', repr(modname))
+
         firstname = path_given and modname or (modname + '_r2p')
         _names = [firstname, modname]
-        try:
-            for _name in _names:
-                try:
-                    module = import_module(_name, 'rst2pdf')
-                except ImportError:
-                    continue
-        except ImportError as e:
-            if str(e).split()[-1].replace("'", '') not in [firstname, modname]:
-                raise
+        import_exc = None
+        for _name in _names:
+            try:
+                module = import_module(_name, 'rst2pdf')
+                break
+            except ImportError as e:
+                import_exc = e
+        else:
+            if not import_exc:
+                continue
+
+            if str(import_exc).split()[-1].replace("'", '') not in [firstname, modname]:
+                raise import_exc
+
             raise SystemExit(
-                '\nError: Could not find module %s '
-                'in sys.path [\n    %s\n]\nExiting...\n'
-                % (modname, ',\n    '.join(sys.path))
+                '\nError: Could not find module %s in sys.path [\n    %s\n]\n'
+                'Exiting...\n' % (modname, ',\n    '.join(sys.path))
             )
+
         if hasattr(module, 'install'):
             module.install(createpdf, options)
 
