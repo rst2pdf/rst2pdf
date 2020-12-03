@@ -2,6 +2,12 @@
 {next}
 ------
 
+0.95.1 (2020-12-04)
+-------------------
+
+* Added: Explicitly support Python 3.4 and 3.5 so that pip installs this rather than 0.93
+  which does not work on any Python 3.x. (Issue #955)
+
 
 0.95 (2019-12-30)
 -----------------
