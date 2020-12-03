@@ -6,6 +6,7 @@ import os
 import os.path
 import sys
 import re
+import yaml
 
 import docutils.nodes
 import reportlab
@@ -610,7 +611,11 @@ class StyleSheet(object):
         fname = self.findStyle(ssname)
         if fname:
             try:
-                return rson_loads(open(fname).read())
+                # Is it an older rson/json stylesheet with .style extension?
+                if fname[-5:] == "style":
+                    return rson_loads(open(fname).read())
+                # Otherwise assume yaml/yml
+                return yaml.safe_load(open(fname).read())
             except ValueError as e:  # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s' % (fname, str(e)))
             except IOError as e:  # Error opening the ssheet
@@ -635,7 +640,7 @@ class StyleSheet(object):
                         return tfn
             return None
 
-        for ext in ['', '.style', '.json']:
+        for ext in ['', '.style', '.json', '.yaml', '.yml']:
             result = innerFind(self.StyleSearchPath, fn + ext)
             if result:
                 break
