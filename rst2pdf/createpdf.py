@@ -1590,7 +1590,7 @@ def main(_args=None):
             PATH = abspath(dirname(sys.executable))
         else:
             PATH = abspath(dirname(__file__))
-        with open(join(PATH, 'styles', 'styles.style')) as fh:
+        with open(join(PATH, 'styles', 'styles.yaml')) as fh:
             print(fh.read())
         sys.exit(0)
 

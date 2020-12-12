@@ -80,8 +80,8 @@ class StyleSheet(object):
         # but the two default stylesheets will always
         # be loaded first
         flist = [
-            os.path.join(self.PATH, 'styles', 'styles.style'),
-            os.path.join(self.PATH, 'styles', 'default.style'),
+            os.path.join(self.PATH, 'styles', 'styles.yaml'),
+            os.path.join(self.PATH, 'styles', 'default.yaml'),
         ] + flist
 
         self.def_dpi = def_dpi
@@ -612,7 +612,12 @@ class StyleSheet(object):
         if fname:
             try:
                 # Is it an older rson/json stylesheet with .style extension?
-                if fname[-5:] == "style":
+                root_ext = os.path.splitext(fname)
+                if root_ext[1] == ".style":
+                    log.warn(
+                        'Stylesheet "%s" in outdated format, recommend converting to YAML'
+                        % (fname)
+                    )
                     return rson_loads(open(fname).read())
                 # Otherwise assume yaml/yml
                 return yaml.safe_load(open(fname).read())
@@ -640,7 +645,7 @@ class StyleSheet(object):
                         return tfn
             return None
 
-        for ext in ['', '.style', '.json', '.yaml', '.yml']:
+        for ext in ['', '.yaml', '.yml', '.style', '.json']:
             result = innerFind(self.StyleSearchPath, fn + ext)
             if result:
                 break
