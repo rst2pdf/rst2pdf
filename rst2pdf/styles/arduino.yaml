@@ -1,0 +1,233 @@
+styles:
+  pygments-bp:
+    parent: code
+    textColor: '#728E00'
+  pygments-c:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-c1:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-ch:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-cm:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-cp:
+    parent: code
+    textColor: '#728E00'
+  pygments-cpf:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-cs:
+    parent: code
+    textColor: '#95a5a6'
+  pygments-dl:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-err:
+    parent: code
+    textColor: '#a61717'
+  pygments-esc:
+    parent: code
+    textColor: black
+  pygments-fm:
+    parent: code
+    textColor: '#D35400'
+  pygments-g:
+    parent: code
+    textColor: black
+  pygments-gd:
+    parent: code
+    textColor: black
+  pygments-ge:
+    parent: code
+    textColor: black
+  pygments-gh:
+    parent: code
+    textColor: black
+  pygments-gi:
+    parent: code
+    textColor: black
+  pygments-go:
+    parent: code
+    textColor: black
+  pygments-gp:
+    parent: code
+    textColor: black
+  pygments-gr:
+    parent: code
+    textColor: black
+  pygments-gs:
+    parent: code
+    textColor: black
+  pygments-gt:
+    parent: code
+    textColor: black
+  pygments-gu:
+    parent: code
+    textColor: black
+  pygments-hll:
+    backColor: '#ffffcc'
+    parent: code
+    textColor: black
+  pygments-il:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-k:
+    parent: code
+    textColor: '#728E00'
+  pygments-kc:
+    parent: code
+    textColor: '#00979D'
+  pygments-kd:
+    parent: code
+    textColor: '#728E00'
+  pygments-kn:
+    parent: code
+    textColor: '#728E00'
+  pygments-kp:
+    parent: code
+    textColor: '#00979D'
+  pygments-kr:
+    parent: code
+    textColor: '#00979D'
+  pygments-kt:
+    parent: code
+    textColor: '#00979D'
+  pygments-l:
+    parent: code
+    textColor: black
+  pygments-ld:
+    parent: code
+    textColor: black
+  pygments-m:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-mb:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-mf:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-mh:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-mi:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-mo:
+    parent: code
+    textColor: '#8A7B52'
+  pygments-n:
+    parent: code
+    textColor: '#434f54'
+  pygments-na:
+    parent: code
+    textColor: '#434f54'
+  pygments-nb:
+    parent: code
+    textColor: '#728E00'
+  pygments-nc:
+    parent: code
+    textColor: '#434f54'
+  pygments-nd:
+    parent: code
+    textColor: '#434f54'
+  pygments-ne:
+    parent: code
+    textColor: '#434f54'
+  pygments-nf:
+    parent: code
+    textColor: '#D35400'
+  pygments-ni:
+    parent: code
+    textColor: '#434f54'
+  pygments-nl:
+    parent: code
+    textColor: '#434f54'
+  pygments-nn:
+    parent: code
+    textColor: '#434f54'
+  pygments-no:
+    parent: code
+    textColor: '#434f54'
+  pygments-nt:
+    parent: code
+    textColor: '#434f54'
+  pygments-nv:
+    parent: code
+    textColor: '#434f54'
+  pygments-nx:
+    parent: code
+    textColor: '#728E00'
+  pygments-o:
+    parent: code
+    textColor: '#728E00'
+  pygments-ow:
+    parent: code
+    textColor: '#728E00'
+  pygments-p:
+    parent: code
+    textColor: black
+  pygments-py:
+    parent: code
+    textColor: '#434f54'
+  pygments-s:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-s1:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-s2:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sa:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sb:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sc:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sd:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-se:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sh:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-si:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sr:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-ss:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-sx:
+    parent: code
+    textColor: '#7F8C8D'
+  pygments-vc:
+    parent: code
+    textColor: '#434f54'
+  pygments-vg:
+    parent: code
+    textColor: '#434f54'
+  pygments-vi:
+    parent: code
+    textColor: '#434f54'
+  pygments-vm:
+    parent: code
+    textColor: '#434f54'
+  pygments-w:
+    parent: code
+    textColor: black
+  pygments-x:
+    parent: code
+    textColor: black

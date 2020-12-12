@@ -19,7 +19,7 @@ setup(
     package_data={
         'rst2pdf': [
             'styles/*.json',
-            'styles/*.style',
+            'styles/*.yaml',
             'images/*png',
             'images/*jpg',
             'templates/*tmpl',
