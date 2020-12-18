@@ -12,7 +12,7 @@ Now, we're going to test that we can use the syntax to include
 both restructured text and stylesheets:
 
 .. include:: test_style_width.rst
-.. include:: test_style_width.style
+.. include:: test_style_width.yaml
 
 Now we're going to try to do a pagebreak:
 
