@@ -29,5 +29,12 @@ jobs:
         pre-commit run --all-files --show-diff-on-failure
       if: matrix.python-version == '3.8'
     - name: Test with pytest
+      continue-on-error: true
       run: |
         pytest -v
+    - name: Archive test output
+      uses: actions/upload-artifact@v2
+      with:
+        name: failed-tests
+        path: rst2pdf/tests/output
+        retention-days: 8
