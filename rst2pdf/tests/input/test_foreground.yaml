@@ -1,0 +1,12 @@
+pageSetup:
+  firstTemplate: cutePage
+pageTemplates:
+  cutePage:
+    background: images/background.jpg
+    foreground: images/confidential.png
+    showFooter: false
+    showHeader: true
+styles:
+  base:
+    textColor: '#0433FF'
+

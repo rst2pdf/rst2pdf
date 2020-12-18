@@ -1,0 +1,7 @@
+styles:
+  code:
+    fontSize: 100%
+  code-bigger:
+    fontSize: 170%
+    parent: code
+

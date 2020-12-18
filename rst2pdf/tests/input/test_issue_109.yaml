@@ -1,0 +1,7 @@
+styles:
+  danger:
+    backColor: yellow
+  danger-heading:
+    backColor: yellow
+    textColor: red
+

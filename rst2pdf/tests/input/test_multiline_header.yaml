@@ -1,0 +1,18 @@
+pageTemplates:
+  oneColumn:
+    defaultFooter: 'This should be in two lines. 1.
+
+
+      And 2.'
+    defaultHeader: '.. class:: right
+
+
+      This should be aligned right.'
+    frames:
+    - - 0%
+      - 0%
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+
