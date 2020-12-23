@@ -20,7 +20,7 @@ Issues are always welcome here! Please give as much detail as you can; small rep
 Documentation Changes
 =====================
 
-Documentation fixes are _at least_ as valuable as code ones. The manual is in the file `doc/manual.rst` and gets converted to both PDF and HTML for https://rst2pdf.org. Please go ahead and open a pull request for each of the changes you think we need.
+Documentation fixes are *at least* as valuable as code ones. The manual is in the file `doc/manual.rst` and gets converted to both PDF and HTML for https://rst2pdf.org. Please go ahead and open a pull request for each of the changes you think we need.
 
 Open a Pull Request
 ===================
