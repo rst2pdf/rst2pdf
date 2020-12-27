@@ -6,7 +6,6 @@ import os
 import os.path
 import sys
 import re
-import yaml
 
 import docutils.nodes
 import reportlab
@@ -18,6 +17,7 @@ import reportlab.lib.units as units
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 import reportlab.rl_config
+import yaml
 
 from . import findfonts
 from .log import log
@@ -27,7 +27,7 @@ unit_separator = re.compile('(-?[0-9.]*)')
 
 
 class StyleSheet(object):
-    '''Class to handle a collection of stylesheets'''
+    """Class to handle a collection of stylesheets"""
 
     @staticmethod
     def stylepairs(data):
@@ -614,7 +614,7 @@ class StyleSheet(object):
                 # Is it an older rson/json stylesheet with .style extension?
                 root_ext = os.path.splitext(fname)
                 if root_ext[1] == ".style":
-                    log.warn(
+                    log.warning(
                         'Stylesheet "%s" in outdated format, recommend converting to YAML'
                         % (fname)
                     )
