@@ -10,7 +10,7 @@ import json
 import yaml
 from rst2pdf.dumpstyle import fixstyle
 
-from rson import loads as rloads
+from rst2pdf.rson import loads as rloads
 
 if __name__ == '__main__':
     fname = sys.argv[1]
@@ -21,5 +21,5 @@ if __name__ == '__main__':
     json_style = json.dumps(style_data)
     reparsed_style = json.loads(json_style)
 
-    yaml_style = yaml.dump(reparsed_style)
+    yaml_style = yaml.dump(reparsed_style, default_flow_style=None)
     print(yaml_style)
