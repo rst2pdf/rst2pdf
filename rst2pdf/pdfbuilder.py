@@ -784,14 +784,25 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         node['ids'] = ['%s_%s' % (self.footnotestack[-1], x) for x in node['ids']]
         node.children[0][0] = nodes.Text(str(self.footnotecounter))
         for id in node['backrefs']:
-            fnr = self.footnotedict[id]
-            fnr.children[0] = nodes.Text(str(self.footnotecounter))
+            try:
+                fnr = self.footnotedict[id]
+            except KeyError:
+                pass
+            else:
+                fnr.children[0] = nodes.Text(str(self.footnotecounter))
+        self.footnotedict[node['ids'][0]] = node
         self.footnotecounter += 1
 
     def visit_footnote_reference(self, node):
         node['ids'] = ['%s_%s' % (self.footnotestack[-1], x) for x in node['ids']]
         node['refid'] = '%s_%s' % (self.footnotestack[-1], node['refid'])
         self.footnotedict[node['ids'][0]] = node
+        try:
+            footnote = self.footnotedict[node['refid']]
+        except KeyError:
+            pass
+        else:
+            node.children[0] = nodes.Text(footnote.children[0][0])
 
     def visit_desc_annotation(self, node):
         pass
