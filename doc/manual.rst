@@ -393,6 +393,20 @@ You can make rst2pdf print the default stylesheet::
 
 This makes an excellent starting point for creating a stylesheet. The default one is always included by default, so only the values that should be changed need to be included in the new stylesheet.
 
+Migrating Stylesheet Format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Historically, rst2pdf had support for JSON and RSON stylesheets. Those stylesheets should still work if you are still using them but a warning will be produced::
+
+  [WARNING] styles.py:617 Stylesheet "./example.style" in outdated format, recommend converting to YAML
+
+To update your stylesheet, use the ``rst2pdf.style2yaml`` utility::
+
+  python3 -m rst2pdf.style2yaml example.style
+
+The command also accepts a list of paths, or wildcards, and by default will output the new stylesheet(s) to stdout. To write them to files instead, use the ``--save`` flag with the command above.
+
+
 Creating Stylesheets
 --------------------
 
