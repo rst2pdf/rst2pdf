@@ -656,25 +656,25 @@ Styling lists is mostly a matter of spacing and indentation.
 The space before and after a list is taken from the ``item-list`` and
 ``bullet-list`` styles::
 
-    ["item-list", {
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
-        ],
-        "colWidths": ["20pt",null]
-    }]
-
-    ["bullet-list", {
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
-        ],
-        "colWidths": ["20",null]
-    }],
+  styles:
+    item-list
+        parent: bodytext
+        spaceBefore: 0
+        commands:
+        - - VALIGN: [[0, 0], [-1, -1]]
+            - TOP
+        - - RIGHTPADDING: [[0, 0], [1, -1], 0]
+        colWidths:
+        - 20pt
+    - bullet-list
+        parent: bodytext
+        spaceBefore: 0
+        commands:
+        - - VALIGN: [[0, 0], [-1, -1]]
+            - TOP
+        - - RIGHTPADDING: [[0, 0], [1, -1], 0]
+        colWidths:
+        - '20'
 
 Yes, these are table styles, because they are implemented as tables. The
 ``RIGHTPADDING`` command and the ``colWidths`` option can be used to adjust the
@@ -684,10 +684,9 @@ To control the separation between items, you use the ``item-list-item`` and
 ``bullet-list-item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
 example::
 
-    ["bullet-list-item" , {
-      "parent": "bodytext",
-      "spaceBefore": 20
-    }]
+  bullet-list-item:
+    parent: bodytext
+    spaceBefore: 20
 
 Remember that this is only used **between items** and not before the first or
 after the last items.
@@ -834,13 +833,12 @@ Font Alias
 This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
 fonts::
 
-  "fontsAlias" : {
-    "stdFont": "Helvetica",
-    "stdBold": "Helvetica-Bold",
-    "stdItalic": "Helvetica-Oblique",
-    "stdBoldItalic": "Helvetica-BoldOblique",
-    "stdMono": "Courier"
-  },
+  fontsAlias:
+    stdFont: Helvetica
+    stdBold: Helvetica-Bold
+    stdItalic: Helvetica-Oblique
+    stdBoldItalic: Helvetica-BoldOblique
+    stdMono: Courier
 
 This defines the fonts used in the styles. You can use, for example, Helvetica
 directly in a style, but if later you want to use another font all through
@@ -1256,9 +1254,8 @@ The Easy Way
 
 Just use the font name in your style. For example, you can define this::
 
-    ["normal" , {
-      "fontName" : "fonty"
-    }]
+  normal:
+    fontName: fonty
 
 And then it *may* work.
 
@@ -1312,7 +1309,8 @@ So, I can use it if I put ``/usr/share/texmf-dist/fonts`` in my font path::
 
 And putting this in my stylesheet, for example::
 
-    [ "title", { "fontName" : "URWPalladioL-Bold" } ]
+    title:
+      fontName: URWPalladioL-Bold
 
 There are some standard aliases defined so you can use other names::
 
@@ -1335,12 +1333,12 @@ The stylesheet has an element is ``embeddedFonts`` that handles embedding True
 Type fonts in your PDF. Usually, it's empty, because with the default styles you
 are not using any font beyond the standard PDF fonts::
 
-  "embeddedFonts" : [ ],
+  embeddedFonts: []
 
 You can put there the name of the font, and rst2pdf will try to embed it as
 described above. Example::
 
-  "embeddedFonts" : [ "Tuffy" ],
+  embeddedFonts: [Tuffy]
 
 Or you can be explicit and tell rst2pdf the files that contain each variant of
 the font.
@@ -1348,7 +1346,7 @@ the font.
 Suppose you want to use the nice public domain `Tuffy font`_, then you need to
 give the filenames of all variants::
 
-  "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
+  embeddedFonts: [Tuffy.ttf, Tuffy_Bold.ttf, Tuffy_Italic.ttf, Tuffy_Bold_Italic.ttf]
 
 This will provide your styles with fonts called ``Tuffy``, ``Tuffy_Bold`` and so
 on.  They will be available with the names based on the filenames
@@ -1362,7 +1360,7 @@ a variant, use the "normal" variant instead.
 
 For example, if you only had ``Tuffy.ttf``::
 
-  "embeddedFonts" : [ ["Tuffy.ttf","Tuffy.ttf","Tuffy.ttf","Tuffy.ttf"] ],
+  embeddedFonts: [Tuffy.ttf, Tuffy.ttf, Tuffy.ttf, Tuffy.ttf]
 
 However, that means that italics and bold in styles using Tuffy will not work
 correctly (they will display as regular text).
@@ -1370,25 +1368,23 @@ correctly (they will display as regular text).
 If you want to use this as the base font for your document, you should change
 the ``fontsAlias`` section accordingly. For example::
 
-      "fontsAlias" : {
-        "stdFont": "Tuffy",
-        "stdBold": "Tuffy_Bold",
-        "stdItalic": "Tuffy_Italic",
-        "stdBoldItalic": "Tuffy_Bold_Italic",
-        "stdMono": "Courier"
-      },
+  fontsAlias:
+    stdFont: Tuffy
+    stdBold: Tuffy_Bold
+    stdItalic: Tuffy_Italic
+    stdBoldItalic: Tuffy_Bold_Italic
+    stdMono: Courier
 
 If, on the other hand, you only want a specific style to use the Tuffy font,
 don't change the ``fontAlias`` but rather set the ``fontName`` properties for
 that style. For example::
 
-    ["heading1" , {
-      "parent": "normal",
-      "fontName": "Tuffy_Bold",
-      "fontSize": 18,
-      "keepWithNext": true,
-      "spaceAfter": 6
-    }],
+  heading1:
+    parent: normal
+    fontName: Tuffy_Bold
+    fontSize: 18
+    keepWithNext: true
+    spaceAfter: 6
 
 .. _tuffy font: http://tulrich.com/fonts/
 
@@ -1756,10 +1752,9 @@ to work. To have hyphenation in the whole document, you can do it in the
 For example, for an English document, hyphenation can be turned on for the whole
 document with::
 
-    ["base" , {
-      "hyphenationLang": "en_US",
-      "embeddedHyphenation": 1
-    }],
+  base:
+    hyphenationLang: en-US
+    embeddedHyphenation: 1
 
 Notice the ``embeddedHyphenation`` option. It is optional, but it makes so that
 hyphenations will give preference to splitting words at embedded hyphens in the
@@ -1768,11 +1763,10 @@ text.
 If you are creating a multilingual document, you can declare styles with
 specific languages.  For example, you could inherit ``bodytext`` for Spanish::
 
-    ["bodytext_es" , {
-      "parent": "bodytext",
-      "hyphenationLang": "es_ES",
-      "embeddedHyphenation": 1
-    }],
+  bodytext_es:
+    parent: bodytext
+    hyphenationLang: es-ES
+    embeddedHyphenation: 1
 
 And all paragraphs declared using the ``bodytext_es`` style would have Spanish
 hyphenation::
