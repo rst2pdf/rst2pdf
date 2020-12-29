@@ -1,0 +1,19 @@
+pageSetup: {firstTemplate: coverPage}
+pageTemplates:
+  coverPage:
+    frames:
+    - [0cm, 0cm, 100%, 100%]
+    showFooter: false
+    showHeader: false
+styles:
+  centered: {alignment: center, parent: bodytext}
+  headertable:
+    colWidths: [20%, 60%, 20%]
+    commands: []
+    parent: table
+  logoimage: {alignment: TA_CENTER}
+  right: {alignment: right, parent: bodytext}
+  subtitle: {fontName: White Rabbit, fontSize: 38}
+  thin: {alignment: TA_JUSTIFY, hyphenation: true, language: es_ES, parent: bodytext,
+    width: 65%}
+  title: {fontName: White Rabbit, fontSize: 96}
