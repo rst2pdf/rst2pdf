@@ -5,7 +5,7 @@ import sys
 
 from setuptools import find_packages, setup
 
-version = '0.95'
+version = '0.95.1'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -39,7 +39,7 @@ rawhtmlsupport_require = ['xhtml2pdf']
 setup(
     name="rst2pdf",
     version=version,
-    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*',
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
     package_data=dict(rst2pdf=['styles/*.json',
 	'styles/*.style',
@@ -70,9 +70,10 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-	'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-	'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Documentation',
         'Topic :: Software Development :: Libraries :: Python Modules',
