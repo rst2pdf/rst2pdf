@@ -257,8 +257,16 @@ class HandleTarget(NodeHandler, docutils.nodes.target):
                 pre = u'<a name="%s"/>' % node['ids'][0]
                 client.targets.append(node['ids'][0])
         else:
-            pre = u'<a name="%s"/>' % node['refuri']
-            client.targets.append(node['refuri'])
+            for attr in ['refid', 'refuri']:
+                value = node.get(attr)
+                if value:
+                    pre = '<a name="%s"/>' % value
+                    client.targets.append(value)
+                    break
+            else:
+                raise ValueError(
+                    "Target node '%s' doesn't have neither 'refid' or 'refuri'" % node
+                )
         return pre, ''
 
 
