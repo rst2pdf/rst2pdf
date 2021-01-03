@@ -1,0 +1,4 @@
+styles:
+  headtitle:
+    parent: heading
+

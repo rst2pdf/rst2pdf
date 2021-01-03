@@ -296,7 +296,7 @@ class RstItem(Item):
             with open(cli_file) as fh:
                 cmd += shlex.split(fh.read())
 
-        style_file = os.path.join(INPUT_DIR, self.name + '.style')
+        style_file = os.path.join(INPUT_DIR, self.name + '.yaml')
         if os.path.exists(style_file):
             cmd += ['-s', os.path.basename(style_file)]
 

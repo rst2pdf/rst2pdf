@@ -1,0 +1,8 @@
+styles:
+  bodytext:
+    spaceAfter: 0
+    spaceBefore: 0
+  image:
+    spaceAfter: 18
+    spaceBefore: 12
+

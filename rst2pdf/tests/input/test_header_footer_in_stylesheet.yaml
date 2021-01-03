@@ -1,0 +1,24 @@
+pageSetup:
+  firstTemplate: myLayout
+  margin-bottom: 8mm
+  margin-left: 12mm
+  margin-right: 12mm
+  margin-top: 8mm
+pageTemplates:
+  myLayout:
+    defaultFooter: '  Footer: Section: ###Section###, Title: ###Title###, Page ###Page###
+      of ###Total###
+
+      '
+    defaultHeader: '  Header: Section: ###Section###, Title: ###Title###, Page ###Page###
+      of ###Total###
+
+      '
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rst2pdf manual.rst --custom-cover=assets/cover.tmpl -o output/pdf/manual.pdf -s assets/manual.style -b1
+rst2pdf manual.rst --custom-cover=assets/cover.tmpl -o output/pdf/manual.pdf -s assets/manual.yaml -b1
 
 # Determine correct name for rst2man
 RST2MAN="rst2man"

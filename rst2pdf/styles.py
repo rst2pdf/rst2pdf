@@ -17,6 +17,7 @@ import reportlab.lib.units as units
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 import reportlab.rl_config
+import yaml
 
 from . import findfonts
 from .log import log
@@ -26,7 +27,7 @@ unit_separator = re.compile('(-?[0-9.]*)')
 
 
 class StyleSheet(object):
-    '''Class to handle a collection of stylesheets'''
+    """Class to handle a collection of stylesheets"""
 
     @staticmethod
     def stylepairs(data):
@@ -79,8 +80,8 @@ class StyleSheet(object):
         # but the two default stylesheets will always
         # be loaded first
         flist = [
-            os.path.join(self.PATH, 'styles', 'styles.style'),
-            os.path.join(self.PATH, 'styles', 'default.style'),
+            os.path.join(self.PATH, 'styles', 'styles.yaml'),
+            os.path.join(self.PATH, 'styles', 'default.yaml'),
         ] + flist
 
         self.def_dpi = def_dpi
@@ -610,7 +611,17 @@ class StyleSheet(object):
         fname = self.findStyle(ssname)
         if fname:
             try:
-                return rson_loads(open(fname).read())
+                # TODO no longer needed when we drop support for rson
+                # Is it an older rson/json stylesheet with .style extension?
+                root_ext = os.path.splitext(fname)
+                if root_ext[1] == ".style":
+                    log.warning(
+                        'Stylesheet "%s" in outdated format, recommend converting to YAML'
+                        % (fname)
+                    )
+                    return rson_loads(open(fname).read())
+                # Otherwise assume yaml/yml
+                return yaml.safe_load(open(fname).read())
             except ValueError as e:  # Error parsing the JSON data
                 log.critical('Error parsing stylesheet "%s": %s' % (fname, str(e)))
             except IOError as e:  # Error opening the ssheet
@@ -635,7 +646,7 @@ class StyleSheet(object):
                         return tfn
             return None
 
-        for ext in ['', '.style', '.json']:
+        for ext in ['', '.yaml', '.yml', '.style', '.json']:
             result = innerFind(self.StyleSearchPath, fn + ext)
             if result:
                 break

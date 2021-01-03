@@ -1,9 +1,0 @@
-embeddedFonts: []
-        [WenQuanYiZenHei-01.ttf, WenQuanYiZenHei-01.ttf, WenQuanYiZenHei-01.ttf, WenQuanYiZenHei-01.ttf]
-
-fontsAlias:
-    stdBold: WenQuanYiZenHei-01
-    stdBoldItalic: WenQuanYiZenHei-01
-    stdFont: WenQuanYiZenHei-01
-    stdItalic: WenQuanYiZenHei-01
-

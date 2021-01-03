@@ -1,0 +1,233 @@
+styles:
+  pygments-bp:
+    parent: code
+    textColor: black
+  pygments-c:
+    parent: code
+    textColor: '#00ff00'
+  pygments-c1:
+    parent: code
+    textColor: '#00ff00'
+  pygments-ch:
+    parent: code
+    textColor: '#00ff00'
+  pygments-cm:
+    parent: code
+    textColor: '#00ff00'
+  pygments-cp:
+    parent: code
+    textColor: '#e5e5e5'
+  pygments-cpf:
+    parent: code
+    textColor: '#00ff00'
+  pygments-cs:
+    parent: code
+    textColor: '#00ff00'
+  pygments-dl:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-err:
+    parent: code
+    textColor: black
+  pygments-esc:
+    parent: code
+    textColor: black
+  pygments-fm:
+    parent: code
+    textColor: '#ffff00'
+  pygments-g:
+    parent: code
+    textColor: black
+  pygments-gd:
+    parent: code
+    textColor: black
+  pygments-ge:
+    parent: code
+    textColor: black
+  pygments-gh:
+    parent: code
+    textColor: black
+  pygments-gi:
+    parent: code
+    textColor: black
+  pygments-go:
+    parent: code
+    textColor: black
+  pygments-gp:
+    parent: code
+    textColor: black
+  pygments-gr:
+    parent: code
+    textColor: black
+  pygments-gs:
+    parent: code
+    textColor: black
+  pygments-gt:
+    parent: code
+    textColor: black
+  pygments-gu:
+    parent: code
+    textColor: black
+  pygments-hll:
+    backColor: '#0000ff'
+    parent: code
+    textColor: black
+  pygments-il:
+    parent: code
+    textColor: black
+  pygments-k:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kc:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kd:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kn:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kp:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kr:
+    parent: code
+    textColor: '#ff0000'
+  pygments-kt:
+    parent: code
+    textColor: '#ee82ee'
+  pygments-l:
+    parent: code
+    textColor: black
+  pygments-ld:
+    parent: code
+    textColor: black
+  pygments-m:
+    parent: code
+    textColor: black
+  pygments-mb:
+    parent: code
+    textColor: black
+  pygments-mf:
+    parent: code
+    textColor: black
+  pygments-mh:
+    parent: code
+    textColor: black
+  pygments-mi:
+    parent: code
+    textColor: black
+  pygments-mo:
+    parent: code
+    textColor: black
+  pygments-n:
+    parent: code
+    textColor: black
+  pygments-na:
+    parent: code
+    textColor: black
+  pygments-nb:
+    parent: code
+    textColor: black
+  pygments-nc:
+    parent: code
+    textColor: black
+  pygments-nd:
+    parent: code
+    textColor: black
+  pygments-ne:
+    parent: code
+    textColor: black
+  pygments-nf:
+    parent: code
+    textColor: '#ffff00'
+  pygments-ni:
+    parent: code
+    textColor: black
+  pygments-nl:
+    parent: code
+    textColor: black
+  pygments-nn:
+    parent: code
+    textColor: black
+  pygments-no:
+    parent: code
+    textColor: '#7fffd4'
+  pygments-nt:
+    parent: code
+    textColor: black
+  pygments-nv:
+    parent: code
+    textColor: '#eedd82'
+  pygments-nx:
+    parent: code
+    textColor: black
+  pygments-o:
+    parent: code
+    textColor: black
+  pygments-ow:
+    parent: code
+    textColor: black
+  pygments-p:
+    parent: code
+    textColor: black
+  pygments-py:
+    parent: code
+    textColor: black
+  pygments-s:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-s1:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-s2:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sa:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sb:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sc:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sd:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-se:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sh:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-si:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sr:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-ss:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-sx:
+    parent: code
+    textColor: '#87ceeb'
+  pygments-vc:
+    parent: code
+    textColor: '#eedd82'
+  pygments-vg:
+    parent: code
+    textColor: '#eedd82'
+  pygments-vi:
+    parent: code
+    textColor: '#eedd82'
+  pygments-vm:
+    parent: code
+    textColor: '#eedd82'
+  pygments-w:
+    parent: code
+    textColor: black
+  pygments-x:
+    parent: code
+    textColor: black

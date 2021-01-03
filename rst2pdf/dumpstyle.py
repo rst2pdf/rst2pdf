@@ -9,7 +9,7 @@
 import sys
 import os
 
-from rson import loads as rloads
+from rst2pdf.rson import loads as rloads
 from json import loads as jloads
 
 

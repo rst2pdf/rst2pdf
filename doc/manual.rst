@@ -1,4 +1,3 @@
-==================
 How to use rst2pdf
 ==================
 
@@ -112,57 +111,6 @@ If no input argument is provided, ``stdin`` will be used::
 If output is set to dash (``-``), output goes to ``stdout``::
 
     rst2pdf -o - readme.txt > output.pdf
-
-
-Headers and Footers
--------------------
-
-rST supports headers and footers, using the header and footer directive::
-
-  .. header::
-
-     This will be at the top of every page.
-
-Often, you may want to put a page number there, or a section name.The following
-magic tokens will be replaced (More may be added as rst2pdf evolves):
-
-``###Page###``
-    Replaced by the current page number.
-
-``###Title###``
-    Replaced by the document title
-
-``###Section###``
-    Replaced by the current section title
-
-``###SectNum###``
-    Replaced by the current section number. **Important:** You must use the
-    sectnum directive for this to work.
-
-``###Total###``
-    Replaced by the total number of pages in the document. Keep in mind that
-    this is the **real** number of pages, not the displayed number, so if you
-    play with `page counters`_ this number will probably be wrong.
-
-Headers and footers are visible by default but they can be disabled by specific
-`Page Templates`_ for example, cover pages. You can also set headers and footers
-via `command line options` or the `configuration file`_.
-
-If you want to do things like "put the page number on the *out* side of the
-page, check `The oddeven directive`_
-
-
-Footnotes
----------
-
-Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
-There is a real complicated technical reason for this: I can't figure out a
-clean way to do it right.
-
-You can get the same behaviour as with rst2html by specifying
-``--inline-footnotes``, and then the footnotes will appear where you put them
-(in other words, not footnotes, but "in-the-middle-of-text-notes" or just plain
-notes.)
 
 
 Images
@@ -283,8 +231,15 @@ If your image doesn't have a DPI property set, and doesn't have it's desired
 size specified, rst2pdf will arbitrarily decide it should use 300DPI (or
 whatever you choose with the ``--default-dpi`` option).
 
-Styles
-------
+Styling ReStructuredText
+------------------------
+
+For well-formatted and consistent PDFs, the best starting point is well-formatted and consistent markup. There are some excellent references for ReStructuredText which we won't reproduce here but they are highly recommended as a starting point for working with rst2pdf.
+
+In general, applying a stylesheet to a structured document will output a decent PDF with minimum fuss. That said, there are plenty of customisation and styling options available so read on if that sounds interesting.
+
+Applying Styles
+~~~~~~~~~~~~~~~
 
 You can style paragraphs with a style using the class directive::
 
@@ -300,21 +255,84 @@ Or inline styles using custom interpreted roles::
 
    I like color :redtext:`red`.
 
-For more information about this, please check the rST docs.
+For more information about this, please check the rST docs, and for style information check the section in this manual on `inline styles`_.
 
-The only special thing about using rst2pdf here is the syntax of
-the stylesheet.
+Headers and Footers
+~~~~~~~~~~~~~~~~~~~
 
-You can make rst2pdf print the default stylesheet::
+rST supports headers and footers, using the header and footer directive::
 
-  rst2pdf --print-stylesheet
+  .. header::
 
-If you want to add styles, just create a stylesheet, (or take the standard
-stylesheet and modify it) and pass it with the -s option::
+     This will be at the top of every page.
 
-  rst2pdf mydoc.txt -s mystyles.txt
+Often, you may want to put a page number there, or a section name.The following
+magic tokens will be replaced (More may be added as rst2pdf evolves):
 
-Those styles will always be searched in these places, in order:
+``###Page###``
+    Replaced by the current page number.
+
+``###Title###``
+    Replaced by the document title
+
+``###Section###``
+    Replaced by the current section title
+
+``###SectNum###``
+    Replaced by the current section number. **Important:** You must use the
+    sectnum directive for this to work.
+
+``###Total###``
+    Replaced by the total number of pages in the document. Keep in mind that
+    this is the **real** number of pages, not the displayed number, so if you
+    play with `page counters`_ this number will probably be wrong.
+
+Headers and footers are visible by default but they can be disabled by specific
+`Page Templates`_ for example, cover pages. You can also set headers and footers
+via `command line options` or the `configuration file`_.
+
+If you want to do things like "put the page number on the *out* side of the
+page, check `The oddeven directive`_
+
+
+Footnotes
+~~~~~~~~~
+
+Currently rst2pdf doesn't support real footnotes, and converts them to endnotes.
+There is a real complicated technical reason for this: I can't figure out a
+clean way to do it right.
+
+You can get the same behaviour as with rst2html by specifying
+``--inline-footnotes``, and then the footnotes will appear where you put them
+(in other words, not footnotes, but "in-the-middle-of-text-notes" or just plain
+notes.)
+
+
+Customizing PDF Output
+----------------------
+
+Stylesheets are used to control many aspects of the PDF output.
+
+ * General look and feel, colours, fonts, templates
+ * Page size
+ * Syntax highlighting for code
+
+The stylesheets use a YAML format (JSON is also supported). Older versions of this tool used an RSON format; this is also still supported but we recommend you check the section on `migrating to yaml stylesheets` and update them (it's painless!)
+
+Using Stylesheets
+~~~~~~~~~~~~~~~~~
+
+Specify a stylesheet to use with -s::
+
+  rst2pdf mydoc.rst -s mystyles
+
+Often it makes sense to specify multiple stylesheets, for example to set the page size, the main styles, and some syntax highlighting. In that case, use comma-separated values::
+
+  rst2pdf mydoc.rst -s a4,mystyles,murphy
+
+Order does matter: rst2pdf applies its own stylesheet first and then the list in given in order, so the last stylesheet in the list will take precedence over the ones that went before.
+
+Styles will always be searched in these places, in order:
 
 * What you specify using ``--stylesheet_path``
 
@@ -325,10 +343,6 @@ Those styles will always be searched in these places, in order:
 * ``~/.rst2pdf/styles``
 
 * The styles folder within rst2pdf's installation folder.
-
-You can use multiple ``-s`` options, or pass more than one stylesheet
-separated with commas. They are processed in the order you give them
-so the *last* one has priority.
 
 Included StyleSheets
 ~~~~~~~~~~~~~~~~~~~~
@@ -370,62 +384,88 @@ So, if you want to have a two-column, legal size, serif document with code in
 
     rst2pdf mydoc.txt -s twocolumn,serif,murphy,legal
 
-StyleSheet Syntax
-~~~~~~~~~~~~~~~~~
+Default Stylesheet
+~~~~~~~~~~~~~~~~~~
 
-It's a JSON file with several elements in it.
+You can make rst2pdf print the default stylesheet::
 
-Font Alias
-~~~~~~~~~~
+  rst2pdf --print-stylesheet
 
-This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
-fonts::
+This makes an excellent starting point for creating a stylesheet. The default one is always included by default, so only the values that should be changed need to be included in the new stylesheet.
 
-  "fontsAlias" : {
-    "stdFont": "Helvetica",
-    "stdBold": "Helvetica-Bold",
-    "stdItalic": "Helvetica-Oblique",
-    "stdBoldItalic": "Helvetica-BoldOblique",
-    "stdMono": "Courier"
-  },
+Migrating Stylesheet Format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This defines the fonts used in the styles. You can use, for example, Helvetica
-directly in a style, but if later you want to use another font all through
-your document, you will have to change it in each style. So, I suggest you
-use aliases.
+Historically, rst2pdf had support for JSON and RSON stylesheets. Those stylesheets should still work if you are still using them but a warning will be produced::
 
-The standard PDF fonts are these:
+  [WARNING] styles.py:617 Stylesheet "./example.style" in outdated format, recommend converting to YAML
 
-- ``Times_Roman``
-- ``Times-Bold``
-- ``Times-Italic``
-- ``Times-Bold-Italic``
-- ``Helvetica``
-- ``Helvetica_Bold``
-- ``Helvetica-Oblique``
-- ``Helvetica-Bold-Oblique``
-- ``Courier``
-- ``Courier-Bold``
-- ``Courier-Oblique``
-- ``Courier-Bold-Oblique``
-- ``Symbol``
-- ``Zapf-Dingbats``
+To update your stylesheet, use the ``rst2pdf.style2yaml`` utility::
 
-Style Definition
+  python3 -m rst2pdf.style2yaml example.style
+
+The command also accepts a list of paths, or wildcards, and by default will output the new stylesheet(s) to stdout. To write them to files instead, use the ``--save`` flag with the command above.
+
+
+Creating Stylesheets
+--------------------
+
+The stylesheets are YAML-formatted and give control over many aspects of how the PDF is rendered. The main aspects are the styles of the elements, the page setup and templates, and the fonts to use . These are described in the following sections.
+
+Only the settings that you want to change need to be included so for example, this would be a valid stylesheet:
+
+.. code-block:: yaml
+
+  pageSetup:
+    size: A5
+  fontsAlias:
+    stdFont: Times-Roman
+  styles:
+  - - normal
+    - fontSize: 14
+
+Styles in Detail
 ~~~~~~~~~~~~~~~~
 
-Then you have a ``styles`` which is a list of ``[ stylename, styleproperties
-]``. For example::
+At the top level there is a bit of an outlier: ``linkColor``. You can specify any color name or a hex value::
 
-    ["normal" , {
-      "parent": "base"
-    }],
+  linkColor: #330099
 
-This means that the style called ``normal`` inherits style ``base``. So, each
-property not defined in the normal style will be taken from the base style.
+Most of the other elements for colours and formatting are in the `styles` section.
 
-I suggest you do not remove any style from the default stylesheet. Add or modify
-at will, though.
+There are particular styles which have great effect, they are ``base``,
+``normal`` and ``bodytext``.
+
+Here's an example, the ``twelvepoint`` stylesheet:
+
+.. code-block:: yaml
+
+  styles:
+    base:
+      fontSize: 12
+
+Since all other styles inherit ``base``, changing the ``fontSize`` changes the
+``fontSize`` for everything in your document.
+
+The ``normal`` style is meant for most elements, so usually it's the same as
+changing ``base``.
+
+The ``bodytext`` style is for elements that form paragraphs. So, for example,
+you can set your document to be left-aligned like this:
+
+.. code-block:: yaml
+
+  styles:
+   - bodytext:
+        alignment: TA_LEFT
+
+There are elements, however, that don't inherit from ``bodytext``, for example
+headings and the styles used in the table of contents. Those are elements that
+are not real paragraphs, so they should not follow the indentation and spacing
+you use for your document's main content.
+
+The ``heading`` style is inherited by all sorts of titles: section titles, topic
+titles, admonition titles, etc.
 
 If your document requires a style that is not defined in your stylesheet, it
 will print a warning and use ``bodytext`` instead.
@@ -433,46 +473,186 @@ will print a warning and use ``bodytext`` instead.
 Also, the order of the styles is important: if ``styleA`` is the parent of
 ``styleB``, ``styleA`` should be earlier in the stylesheet.
 
-These are all the possible attributes for a style and their default values.
-Some of them, like alignment, apply only when used to paragraphs,
-and not on inline styles::
+Style Elements
+~~~~~~~~~~~~~~
 
-    "fontName":"Helvetica",
-    "fontSize":10,
-    "leading":12,
-    "leftIndent":0,
-    "rightIndent":0,
-    "firstLineIndent":0,
-    "alignment":"left",
-    "spaceBefore":0,
-    "spaceAfter":0,
-    "bulletFontName":"Helvetica",
-    "bulletFontSize":10,
-    "bulletText": "\u2022",
-    "bulletIndent":0,
-    "textColor": black,
-    "backColor":None,
-    "wordWrap":None,
-    "borderWidth": 0,
-    "borderPadding": 0,
-    "borderColor": None,
-    "borderRadius": None,
-    "allowWidows": 5,
-    "allowOrphans": 4
+Within the ``styles`` element, it is possible to configure each element type.
+The following section lays out the known options and examples of how to use them.
+(This list is known to be incomplete, we're working on it and accept any
+additions you have).
 
-The ``fontSize`` attribute can receive either a number for the size of the font
-or a percentage value, which is relative to the style's parent.
-For example, the following makes the ``title`` style use 64 as its
-``fontSize``::
+**parent**
 
-    ["heading", {
-      "fontSize": 32
-      }],
+Each style property can inherit from another, for example the ``code`` style inherits from the ``literal`` style which sets the font used for fixed-width text throughout the document.
 
-    ["title", {
-      "parent": "heading",
-      "fontSize": "200%"
-      }]
+Example:
+
+.. code-block:: yaml
+
+  code:
+    parent: literal
+
+**fontName**
+
+The name of the font to use for this type of element. It can be either the name
+of a font on your system, or one of the aliased fonts. The default is Helvetica
+as shown in the example here.
+
+Example:
+
+.. code-block:: yaml
+
+ fontName: Helvetica
+
+See also:
+
+ * `Font Alias`_
+ * `Fonts`_
+
+**fontSize**
+
+Use either a number (meaning point size) or a percentage. The default size for
+bodytext is 10.
+
+Example:
+
+.. code-block:: yaml
+
+  fontSize: 150%
+
+**leftIndent** and **rightIndent**
+
+Example:
+
+.. code-block:: yaml
+
+  leftIndent: 0
+  rightIndent: 0
+
+**firstLineIndent**
+
+Example:
+
+.. code-block:: yaml
+
+  firstLineIndent: 0
+
+**alignment**
+
+The paragraph justification of the text. The values ``TA_LEFT`` and ``TA_RIGHT`` can be used.
+
+Example:
+
+.. code-block:: yaml
+
+  alignment: TA_LEFT
+
+**spaceBefore** and **spaceAfter**
+
+The amount of vertical space included before or after an element. Especially useful when working with ``bullet-list`` and ``bullet-list-item`` elements.
+
+Example:
+
+.. code-block:: yaml
+
+  spaceBefore: 4
+  spaceAfter: 8
+
+**bullet** -related styles
+
+The bullets can be complex to style, but there are some tricks that might help. The vertical space before and after the list and item elements are controlled by the ``spaceBefore`` and ``spaceAfter`` properties. Also these lists are *tables* so those styles also apply.
+
+Example:
+
+.. code-block:: yaml
+
+  bulletFontName: Helvetica
+  bulletFontSize: 10
+  bulletText: "\u2022"
+  bulletIndent: 0
+
+See also:
+
+  * `Table Styles`_
+
+**textColor**
+
+Use either a color name, or a hex value including the ``#`` character at the start.
+
+Example:
+
+.. code-block:: yaml
+
+      textColor: black
+
+**backColor**
+
+Use either the value ``None``, a color name, or a hex value including the ``#`` character at the start. Sets the background color of the element.
+
+Example:
+
+.. code-block:: yaml
+
+  backColor: beige
+
+**wordWrap**
+
+Can be set to ``None``.
+
+Example:
+
+.. code-block:: yaml
+
+  wordWrap: None
+
+**border** -related styles
+
+Setting and styling the border for an element. The example is from the default code block style.
+
+Example:
+
+.. code-block:: yaml
+
+  borderColor: darkgray
+  borderPadding: 6
+  borderWidth: 0.5
+  borderRadius: None
+
+
+**allowWidows** and **allowOrphans**
+
+These directives are passed to ReportLab if they are present. Currently only implemented for paragraph styles.
+
+Example:
+
+.. code-block:: yaml
+
+    allowWidows: 5
+    allowOrphans: 4
+
+See also:
+
+* `Widows and Orphans`_
+
+
+**margin** -related styles
+
+This sets the margins of the element. On the ``pageSetup`` itself, you can use ``margin-gutter``. That's the
+margin in the center of a two-page spread.  This value is added to the left margin of odd pages and the right margin of even pages, adding (or removing, if it's negative) space "in the middle" of opposing pages.  If you intend to bound a printed copy, you may need extra space there. OTOH, if you will display it on-screen on a two-page format (common in many PDF readers, nice for ebooks), a negative value may be pleasant.
+
+Example:
+
+.. code-block:: yaml
+
+  margin-top: 2cm
+  margin-bottom: 2cm
+  margin-left: 2cm
+  margin-right: 2cm
+  margin-gutter: 0cm
+
+
+Inline Styles
+*************
 
 The following are the only attributes that work on styles when used for
 interpreted roles (inline styles):
@@ -481,6 +661,205 @@ interpreted roles (inline styles):
 * ``fontSize``
 * ``textColor``
 * ``backColor``
+
+Lists
+*****
+
+Styling lists is mostly a matter of spacing and indentation.
+
+The space before and after a list is taken from the ``item-list`` and
+``bullet-list`` styles::
+
+  styles:
+    item-list
+        parent: bodytext
+        spaceBefore: 0
+        commands:
+        - - VALIGN: [[0, 0], [-1, -1]]
+            - TOP
+        - - RIGHTPADDING: [[0, 0], [1, -1], 0]
+        colWidths:
+        - 20pt
+    - bullet-list
+        parent: bodytext
+        spaceBefore: 0
+        commands:
+        - - VALIGN: [[0, 0], [-1, -1]]
+            - TOP
+        - - RIGHTPADDING: [[0, 0], [1, -1], 0]
+        colWidths:
+        - '20'
+
+Yes, these are table styles, because they are implemented as tables. The
+``RIGHTPADDING`` command and the ``colWidths`` option can be used to adjust the
+position of the bullet/item number.
+
+To control the separation between items, you use the ``item-list-item`` and
+``bullet-list-item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
+example::
+
+  bullet-list-item:
+    parent: bodytext
+    spaceBefore: 20
+
+Remember that this is only used **between items** and not before the first or
+after the last items.
+
+Page Layout
+~~~~~~~~~~~
+
+There are some layouts available as standard stylesheets, but it is likely that you will also want to describe your own templates.
+
+Page Setup
+**********
+
+In your stylesheet, the ``pageSetup`` element controls your page layout.
+
+Here's the default stylesheet's element::
+
+  pageSetup:
+    size: A4
+    width:
+    height:
+    margin-top: 2cm
+    margin-bottom: 2cm
+    margin-left: 2cm
+    margin-right: 2cm
+    spacing-header: 5mm
+    spacing-footer: 5mm
+    margin-gutter: 0cm
+
+
+Size is one of the standard paper sizes, like ``A4`` or ``LETTER``.
+
+Here's a list: ``A0``, ``A1``, ``A2``, ``A3``, ``A4``, ``A5``, ``A6``, ``B0``,
+``B1``, ``B2``, ``B3``, ``B4``, ``B5``, ``B6``, ``LETTER``, ``LEGAL``,
+``ELEVENSEVENTEEN``.
+
+If you want a non-standard size, set size to null and use width and height.  When specifying width, height or margins, you need to use units, like inch (inches) or cm (centimeters). For example, a slide deck in a 16:9 ratio can be created as a document with width 32cm and height 18cm::
+
+  pageSetup:
+      size: null
+      width: 32cm
+      height: 18cm
+
+When both width/height and size are specified, size will be used, and
+width/height ignored.
+
+Page Templates
+**************
+
+By default, your document will have a single column of text covering the space
+between the margins. You can change that, though, in fact you can do so even in
+the middle of your document!
+
+.. _page templates:
+
+To do it, you need to define *Page Templates* in your stylesheet. The default
+stylesheet already has three of them:
+
+.. code-block:: yaml
+
+  pageTemplates:
+    coverPage:
+      frames:
+      - [0cm, 0cm, 100%, 100%]
+      showHeader: false
+      showFooter: false
+    oneColumn:
+      frames:
+      - [0cm, 0cm, 100%, 100%]
+    twoColumn:
+      frames:
+      - [0cm, 0cm, 49%, 100%]
+      - [51%, 0cm, 49%, 100%]
+
+A page template has a name (``oneColumn``, ``twoColumn``), some options, and a
+list of frames.  A frame is a list containing this::
+
+    [ left position, bottom position, width, height, left padding, bottom padding, right padding, top padding]
+
+All the padding values are optional and default to 6 points.
+
+For example, this defines a frame "at the very left", "at the very bottom", "a
+bit less than half a page wide" and "as tall as possible"::
+
+    ["0cm", "0cm", "49%", "100%"]
+
+And this means "the top third of the page"::
+
+    ["0cm", "66.66%", "100%", "33.34%"]
+
+You can use all the usual units, ``cm``, ``mm``, ``inch``, and ``%``, which
+means "percentage of the page (excluding margins and headers or footers)". Using
+``%`` is probably the smartest for columns and gives you a fluid layout, while
+the other units are better for more "fixed" elements.
+
+Since we can have more than one template, there is a way to specify which one we
+want to use, and a way to change from one to another.
+
+To specify the first template, do it in your stylesheet, in ``pageSetup``
+(``oneColumn`` is the default)::
+
+  pageSetup:
+    firstTemplate: oneColumn
+
+Then, to change to another template, in your document use this syntax (will
+change soon, though):
+
+.. code-block:: rst
+
+   .. raw:: pdf
+
+      PageBreak twoColumn
+
+That will trigger a page break, and the new page will use the twoColumn
+template.
+
+You can see an example of this in the *Montecristo* folder in the source
+package.
+
+The supported page template options and their defaults are:
+
+* ``showHeader`` : True
+
+* ``defaultHeader`` : None
+
+  Has the same effect as the header directive in the document.
+
+* ``showFooter`` : True
+
+* ``defaultFooter`` : None
+
+  Has the same effect as the footer directive in the document.
+
+* ``background``: None
+
+  The background should be an image, which will be centered in your page or
+  stretched to match your page size, depending on the ``--fit-background-mode``
+  option, so use with caution.
+
+.. _fontconfig: http://www.freedesktop.org/fontconfig/
+
+Font Alias
+~~~~~~~~~~
+
+This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
+fonts::
+
+  fontsAlias:
+    stdFont: Helvetica
+    stdBold: Helvetica-Bold
+    stdItalic: Helvetica-Oblique
+    stdBoldItalic: Helvetica-BoldOblique
+    stdMono: Courier
+
+This defines the fonts used in the styles. You can use, for example, Helvetica
+directly in a style, but if later you want to use another font all through
+your document, you will have to change it in each style. So, I suggest you
+use aliases.
+
+More information in the dedicated `Fonts`_ section.
 
 Widows and Orphans
 ~~~~~~~~~~~~~~~~~~
@@ -520,215 +899,12 @@ Currently, these semantics only work for literal blocks and code blocks.
 
 In future versions this may extend to ordinary paragraphs.
 
-Font Embedding
-~~~~~~~~~~~~~~
 
-There are thousands of excellent free True Type and Type 1 fonts available on
-the web, and you can use many of them in your documents by declaring them in
-your stylesheet.
-
-The Easy Way
-************
-
-Just use the font name in your style. For example, you can define this::
-
-    ["normal" , {
-      "fontName" : "fonty"
-    }]
-
-And then it *may* work.
-
-What would need to happen for this to work?
-
-Fonty is a True Type font:
-""""""""""""""""""""""""""
-
-1. You need to have it installed in your system, and have the fc-match
-   utility available (it's part of fontconfig_). You can test if it is
-   so by running this command::
-
-        $ fc-match fonty
-        fonty.ttf: "Fonty" "Normal"
-
-   If you are in Windows, I need your help ;-) or you can use `The Harder Way (True Type)`_
-
-2. The folder where ``fonty.ttf`` is located needs to be in your font path. You
-   can set it using the ``--font-path`` option. For example::
-
-        rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/fonts
-
-   You don't need to put the *exact* folder, just something that is above it.
-   In my own case, fonty is in ``/usr/share/fonts/TTF``
-
-Whenever a font is embedded, you can refer to it in a style by its name, and to
-its variants by the aliases ``Name-Oblique``, ``Name-Bold``,
-``Name-BoldOblique``.
-
-Fonty is a Type 1 font:
-"""""""""""""""""""""""
-
-You need it installed, and the folders where its font metric (``.afm``) and
-binary (``.pfb``) files are located need to be in your font fath.
-
-For example, the "URW Palladio L" font that came with my installation of TeX
-consists of the following files::
-
-    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
-    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb
-    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
-    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb
-    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplb8a.afm
-    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplbi8a.afm
-    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplr8a.afm
-    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplri8a.afm
-
-So, I can use it if I put ``/usr/share/texmf-dist/fonts`` in my font path::
-
-    rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/texmf-dist/fonts
-
-And putting this in my stylesheet, for example::
-
-    [ "title", { "fontName" : "URWPalladioL-Bold" } ]
-
-There are some standard aliases defined so you can use other names::
-
-    'ITC Bookman'            : 'URW Bookman L',
-    'ITC Avant Garde Gothic' : 'URW Gothic L',
-    'Palatino'               : 'URW Palladio L',
-    'New Century Schoolbook' : 'Century Schoolbook L',
-    'ITC Zapf Chancery'      : 'URW Chancery L'
-
-So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique``
-And it will mean ``URWPalladioL`` or ``CenturySchL-Ital``, respectively.
-
-Whenever a font is embedded, you can refer to it in a style by its name, and to
-its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique.
-
-The Harder Way (True Type)
-**************************
-
-The stylesheet has an element is ``embeddedFonts`` that handles embedding True
-Type fonts in your PDF. Usually, it's empty, because with the default styles you
-are not using any font beyond the standard PDF fonts::
-
-  "embeddedFonts" : [ ],
-
-You can put there the name of the font, and rst2pdf will try to embed it as
-described above. Example::
-
-  "embeddedFonts" : [ "Tuffy" ],
-
-Or you can be explicit and tell rst2pdf the files that contain each variant of
-the font.
-
-Suppose you want to use the nice public domain `Tuffy font`_, then you need to
-give the filenames of all variants::
-
-  "embeddedFonts" : [ ["Tuffy.ttf","Tuffy_Bold.ttf","Tuffy_Italic.ttf","Tuffy_Bold_Italic.ttf"] ],
-
-This will provide your styles with fonts called ``Tuffy``, ``Tuffy_Bold`` and so
-on.  They will be available with the names based on the filenames
-(``Tuffy_Bold``) and also by standard aliases similar to those of the standard
-PDF fonts (``Tuffy-Bold``, ``Tuffy-Oblique``, ``Tuffy-BoldOblique``, etc..)
-
-Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it
-will use ``Tuffy_Italic``. That's why it's better if you use fonts that provide
-the four variants, and you should put them in **that** order. If your font lacks
-a variant, use the "normal" variant instead.
-
-For example, if you only had ``Tuffy.ttf``::
-
-  "embeddedFonts" : [ ["Tuffy.ttf","Tuffy.ttf","Tuffy.ttf","Tuffy.ttf"] ],
-
-However, that means that italics and bold in styles using Tuffy will not work
-correctly (they will display as regular text).
-
-If you want to use this as the base font for your document, you should change
-the ``fontsAlias`` section accordingly. For example::
-
-      "fontsAlias" : {
-        "stdFont": "Tuffy",
-        "stdBold": "Tuffy_Bold",
-        "stdItalic": "Tuffy_Italic",
-        "stdBoldItalic": "Tuffy_Bold_Italic",
-        "stdMono": "Courier"
-      },
-
-If, on the other hand, you only want a specific style to use the Tuffy font,
-don't change the ``fontAlias`` but rather set the ``fontName`` properties for
-that style. For example::
-
-    ["heading1" , {
-      "parent": "normal",
-      "fontName": "Tuffy_Bold",
-      "fontSize": 18,
-      "keepWithNext": true,
-      "spaceAfter": 6
-    }],
-
-.. _tuffy font: http://tulrich.com/fonts/
-
-By default, rst2pdf will search for the fonts in its fonts folder and in the
-current folder. You can make it search another folder by passing the
-``--font-folder`` option, or you can use absolute paths in your stylesheet.
-
-The Harder Way (Type1)
-**********************
-
-To be written (and implemented and tested)
-
-Page Size and Margins
-~~~~~~~~~~~~~~~~~~~~~
-
-In your stylesheet, the ``pageSetup`` element controls your page layout.
-
-Here's the default stylesheet's element::
-
-  "pageSetup" : {
-    "size": "A4",
-    "width": null,
-    "height": null,
-    "margin-top": "2cm",
-    "margin-bottom": "2cm",
-    "margin-left": "2cm",
-    "margin-right": "2cm",
-    "spacing-header": "5mm",
-    "spacing-footer": "5mm",
-    "margin-gutter": "0cm"
-  },
-
-Size is one of the standard paper sizes, like ``A4`` or ``LETTER``.
-
-Here's a list: ``A0``, ``A1``, ``A2``, ``A3``, ``A4``, ``A5``, ``A6``, ``B0``,
-``B1``, ``B2``, ``B3``, ``B4``, ``B5``, ``B6``, ``LETTER``, ``LEGAL``,
-``ELEVENSEVENTEEN``.
-
-If you want a non-standard size, set size to null and use width and height.
-
-When specifying width, height or margins, you need to use units, like
-inch (inches) or cm (centimeters).
-
-When both width/height and size are specified, size will be used, and
-width/height ignored.
-
-All margins should be self-explanatory, except for margin-gutter. That's the
-margin in the center of a two-page spread.
-
-This value is added to the left margin of odd pages and the right margin of
-even pages, adding (or removing, if it's negative) space "in the middle" of
-opposing pages.
-
-If you intend to bound a printed copy, you may need extra space there. OTOH,
-if you will display it on-screen on a two-page format (common in many PDF
-readers, nice for ebooks), a negative value may be pleasant.
-
-Advanced: table styles
-~~~~~~~~~~~~~~~~~~~~~~
-
-This is new in 0.12.
+Table Styles
+~~~~~~~~~~~~
 
 These are a few extra options in styles that are only used when the style is
-applied to a table.  This happens in two cases:
+applied to a table. This happens in two cases:
 
 1) You are using the class directive on a table:
 
@@ -800,29 +976,6 @@ Commands
    If you don't specify column widths, the table will try to look proportional
    to the restructured text source.
 
-Multiple Stylesheets
-~~~~~~~~~~~~~~~~~~~~
-
-When you use a custom stylesheet, you don't need to define *everything* in it.
-Whatever you don't define will be taken from the default stylesheet. For
-example, if you only want to change page size, default font and font size, this
-would be enough:
-
-.. code-block:: js
-
-    {
-        "pageSetup" : {
-            "size": "A5",
-        },
-        "fontsAlias" : {
-            "stdFont": "Times-Roman",
-        },
-        "styles" : [
-            ["normal" , {
-            "fontSize": 14
-            }]
-        ]
-    }
 
 .. note::
 
@@ -848,86 +1001,6 @@ would be enough:
 .. raw:: pdf
 
     PageBreak
-
-Styling Your Document
-~~~~~~~~~~~~~~~~~~~~~
-
-Which styles you need to modify to achieve your desired result is not obvious.
-In this section, you will see some hints and pointers to that effect.
-
-The Base Styles
-***************
-
-There are three styles which have great effect, they are ``base``,
-``normal`` and ``bodytext``.
-
-Here's an example, the ``twelvepoint`` stylesheet::
-
-    {"styles": [["base", {"fontSize": 12}]]}
-
-Since all other styles inherit ``base``, changing the ``fontSize`` changes the
-``fontSize`` for everything in your document.
-
-The ``normal`` style is meant for most elements, so usually it's the same as
-changing ``base``.
-
-The ``bodytext`` style is for elements that form paragraphs. So, for example,
-you can set your document to be left-aligned like this::
-
-    {"styles": [["bodytext", {"alignment": "left"}]]}
-
-There are elements, however, that don't inherit from ``bodytext``, for example
-headings and the styles used in the table of contents. Those are elements that
-are not real paragraphs, so they should not follow the indentation and spacing
-you use for your document's main content.
-
-The ``heading`` style is inherited by all sorts of titles: section titles, topic
-titles, admonition titles, etc.
-
-Lists
-*****
-
-Styling lists is mostly a matter of spacing and indentation.
-
-The space before and after a list is taken from the ``item-list`` and
-``bullet-list`` styles::
-
-    ["item-list", {
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
-        ],
-        "colWidths": ["20pt",null]
-    }]
-
-    ["bullet-list", {
-      "parent": "bodytext",
-      "spaceBefore": 0,
-      "commands": [
-            [ "VALIGN", [ 0, 0 ], [ -1, -1 ], "TOP" ],
-            [ "RIGHTPADDING", [ 0, 0 ], [ 1, -1 ], 0 ]
-        ],
-        "colWidths": ["20",null]
-    }],
-
-Yes, these are table styles, because they are implemented as tables. The
-``RIGHTPADDING`` command and the ``colWidths`` option can be used to adjust the
-position of the bullet/item number.
-
-To control the separation between items, you use the ``item-list-item`` and
-``bullet-list-item`` styles' ``spaceBefore`` and ``spaceAfter`` options. For
-example::
-
-    ["bullet-list-item" , {
-      "parent": "bodytext",
-      "spaceBefore": 20
-    }]
-
-Remember that this is only used **between items** and not before the first or
-after the last items.
-
 
 Syntax Highlighting
 -------------------
@@ -1158,6 +1231,180 @@ Options
     ``linenos_offset`` makes the line count start from the real line number,
     instead of 1.
 
+Fonts
+-----
+
+Working with fonts on many different platforms is a challenge. Here you will find the best information we have, but questions and updates are always welcome.
+
+Standard PDF Fonts
+~~~~~~~~~~~~~~~~~~
+
+The standard PDF fonts are always available, here is the list:
+
+- ``Times_Roman``
+- ``Times-Bold``
+- ``Times-Italic``
+- ``Times-Bold-Italic``
+- ``Helvetica``
+- ``Helvetica_Bold``
+- ``Helvetica-Oblique``
+- ``Helvetica-Bold-Oblique``
+- ``Courier``
+- ``Courier-Bold``
+- ``Courier-Oblique``
+- ``Courier-Bold-Oblique``
+- ``Symbol``
+- ``Zapf-Dingbats``
+
+Font Embedding
+~~~~~~~~~~~~~~
+
+There are thousands of excellent free True Type and Type 1 fonts available on
+the web, and you can use many of them in your documents by declaring them in
+your stylesheet.
+
+The Easy Way
+************
+
+Just use the font name in your style. For example, you can define this::
+
+  normal:
+    fontName: fonty
+
+And then it *may* work.
+
+What would need to happen for this to work?
+
+Fonty is a True Type font:
+""""""""""""""""""""""""""
+
+1. You need to have it installed in your system, and have the fc-match
+   utility available (it's part of fontconfig_). You can test if it is
+   so by running this command::
+
+        $ fc-match fonty
+        fonty.ttf: "Fonty" "Normal"
+
+   If you are in Windows, I need your help ;-) or you can use `The Harder Way (True Type)`_
+
+2. The folder where ``fonty.ttf`` is located needs to be in your font path. You
+   can set it using the ``--font-path`` option. For example::
+
+        rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/fonts
+
+   You don't need to put the *exact* folder, just something that is above it.
+   In my own case, fonty is in ``/usr/share/fonts/TTF``
+
+Whenever a font is embedded, you can refer to it in a style by its name, and to
+its variants by the aliases ``Name-Oblique``, ``Name-Bold``,
+``Name-BoldOblique``.
+
+Fonty is a Type 1 font:
+"""""""""""""""""""""""
+
+You need it installed, and the folders where its font metric (``.afm``) and
+binary (``.pfb``) files are located need to be in your font fath.
+
+For example, the "URW Palladio L" font that came with my installation of TeX
+consists of the following files::
+
+    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb
+    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb
+    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
+    /usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb
+    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplb8a.afm
+    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplbi8a.afm
+    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplr8a.afm
+    /usr/share/texmf-dist/fonts/afm/urw/palatino/uplri8a.afm
+
+So, I can use it if I put ``/usr/share/texmf-dist/fonts`` in my font path::
+
+    rst2pdf mydoc.txt -s mystyle.style --font-path /usr/share/texmf-dist/fonts
+
+And putting this in my stylesheet, for example::
+
+    title:
+      fontName: URWPalladioL-Bold
+
+There are some standard aliases defined so you can use other names::
+
+    'ITC Bookman'            : 'URW Bookman L',
+    'ITC Avant Garde Gothic' : 'URW Gothic L',
+    'Palatino'               : 'URW Palladio L',
+    'New Century Schoolbook' : 'Century Schoolbook L',
+    'ITC Zapf Chancery'      : 'URW Chancery L'
+
+So, for example, you can use ``Palatino`` or ``New Century SchoolBook-Oblique``
+And it will mean ``URWPalladioL`` or ``CenturySchL-Ital``, respectively.
+
+Whenever a font is embedded, you can refer to it in a style by its name, and to
+its variants by the aliases Name-Oblique, Name-Bold, Name-BoldOblique.
+
+The Harder Way (True Type)
+**************************
+
+The stylesheet has an element is ``embeddedFonts`` that handles embedding True
+Type fonts in your PDF. Usually, it's empty, because with the default styles you
+are not using any font beyond the standard PDF fonts::
+
+  embeddedFonts: []
+
+You can put there the name of the font, and rst2pdf will try to embed it as
+described above. Example::
+
+  embeddedFonts: [Tuffy]
+
+Or you can be explicit and tell rst2pdf the files that contain each variant of
+the font.
+
+Suppose you want to use the nice public domain `Tuffy font`_, then you need to
+give the filenames of all variants::
+
+  embeddedFonts: [Tuffy.ttf, Tuffy_Bold.ttf, Tuffy_Italic.ttf, Tuffy_Bold_Italic.ttf]
+
+This will provide your styles with fonts called ``Tuffy``, ``Tuffy_Bold`` and so
+on.  They will be available with the names based on the filenames
+(``Tuffy_Bold``) and also by standard aliases similar to those of the standard
+PDF fonts (``Tuffy-Bold``, ``Tuffy-Oblique``, ``Tuffy-BoldOblique``, etc..)
+
+Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it
+will use ``Tuffy_Italic``. That's why it's better if you use fonts that provide
+the four variants, and you should put them in **that** order. If your font lacks
+a variant, use the "normal" variant instead.
+
+For example, if you only had ``Tuffy.ttf``::
+
+  embeddedFonts: [Tuffy.ttf, Tuffy.ttf, Tuffy.ttf, Tuffy.ttf]
+
+However, that means that italics and bold in styles using Tuffy will not work
+correctly (they will display as regular text).
+
+If you want to use this as the base font for your document, you should change
+the ``fontsAlias`` section accordingly. For example::
+
+  fontsAlias:
+    stdFont: Tuffy
+    stdBold: Tuffy_Bold
+    stdItalic: Tuffy_Italic
+    stdBoldItalic: Tuffy_Bold_Italic
+    stdMono: Courier
+
+If, on the other hand, you only want a specific style to use the Tuffy font,
+don't change the ``fontAlias`` but rather set the ``fontName`` properties for
+that style. For example::
+
+  heading1:
+    parent: normal
+    fontName: Tuffy_Bold
+    fontSize: 18
+    keepWithNext: true
+    spaceAfter: 6
+
+.. _tuffy font: http://tulrich.com/fonts/
+
+By default, rst2pdf will search for the fonts in its fonts folder and in the
+current folder. You can make it search another folder by passing the
+``--font-folder`` option, or you can use absolute paths in your stylesheet.
 
 Raw Directive
 -------------
@@ -1519,10 +1766,9 @@ to work. To have hyphenation in the whole document, you can do it in the
 For example, for an English document, hyphenation can be turned on for the whole
 document with::
 
-    ["base" , {
-      "hyphenationLang": "en_US",
-      "embeddedHyphenation": 1
-    }],
+  base:
+    hyphenationLang: en-US
+    embeddedHyphenation: 1
 
 Notice the ``embeddedHyphenation`` option. It is optional, but it makes so that
 hyphenations will give preference to splitting words at embedded hyphens in the
@@ -1531,11 +1777,10 @@ text.
 If you are creating a multilingual document, you can declare styles with
 specific languages.  For example, you could inherit ``bodytext`` for Spanish::
 
-    ["bodytext_es" , {
-      "parent": "bodytext",
-      "hyphenationLang": "es_ES",
-      "embeddedHyphenation": 1
-    }],
+  bodytext_es:
+    parent: bodytext
+    hyphenationLang: es-ES
+    embeddedHyphenation: 1
 
 And all paragraphs declared using the ``bodytext_es`` style would have Spanish
 hyphenation::
@@ -1550,108 +1795,6 @@ hyphenation::
 
 If you want to disable hyphenation in a style that inherits ``hyphenationLang``
 from its parent, you can do so by setting ``hyphenationLang`` to ``0``.
-
-
-Page Layout
------------
-
-By default, your document will have a single column of text covering the space
-between the margins. You can change that, though, in fact you can do so even in
-the middle of your document!
-
-.. _page templates:
-
-To do it, you need to define *Page Templates* in your stylesheet. The default
-stylesheet already has three of them::
-
-  "pageTemplates" : {
-    "coverPage": {
-        "frames": [
-            ["0cm", "0cm", "100%", "100%"]
-        ],
-        "showHeader" : false,
-        "showFooter" : false
-    },
-    "oneColumn": {
-        "frames": [
-            ["0cm", "0cm", "100%", "100%"]
-        ]
-    },
-    "twoColumn": {
-        "frames": [
-            ["0cm", "0cm", "49%", "100%"],
-            ["51%", "0cm", "49%", "100%"]
-        ]
-    }
-  }
-
-A page template has a name (``oneColumn``, ``twoColumn``), some options, and a
-list of frames.  A frame is a list containing this::
-
-    [ left position, bottom position, width, height, left padding, bottom padding, right padding, top padding]
-
-All the padding values are optional and default to 6 points.
-
-For example, this defines a frame "at the very left", "at the very bottom", "a
-bit less than half a page wide" and "as tall as possible"::
-
-    ["0cm", "0cm", "49%", "100%"]
-
-And this means "the top third of the page"::
-
-    ["0cm", "66.66%", "100%", "33.34%"]
-
-You can use all the usual units, ``cm``, ``mm``, ``inch``, and ``%``, which
-means "percentage of the page (excluding margins and headers or footers)". Using
-``%`` is probably the smartest for columns and gives you a fluid layout, while
-the other units are better for more "fixed" elements.
-
-Since we can have more than one template, there is a way to specify which one we
-want to use, and a way to change from one to another.
-
-To specify the first template, do it in your stylesheet, in ``pageSetup``
-(``oneColumn`` is the default)::
-
-  "pageSetup" : {
-    "firstTemplate": "oneColumn"
-  }
-
-Then, to change to another template, in your document use this syntax (will
-change soon, though):
-
-.. code-block:: rst
-
-   .. raw:: pdf
-
-      PageBreak twoColumn
-
-That will trigger a page break, and the new page will use the twoColumn
-template.
-
-You can see an example of this in the *Montecristo* folder in the source
-package.
-
-The supported page template options and their defaults are:
-
-* ``showHeader`` : True
-
-* ``defaultHeader`` : None
-
-  Has the same effect as the header directive in the document.
-
-* ``showFooter`` : True
-
-* ``defaultFooter`` : None
-
-  Has the same effect as the footer directive in the document.
-
-* ``background``: None
-
-  The background should be an image, which will be centered in your page or
-  stretched to match your page size, depending on the ``--fit-background-mode``
-  option, so use with caution.
-
-.. _fontconfig: http://www.freedesktop.org/fontconfig/
 
 
 Smart Quotes

@@ -1,0 +1,22 @@
+pageSetup:
+  firstTemplate: cutePage
+  height: 9cm
+  margin-bottom: 0mm
+  margin-gutter: 0cm
+  margin-left: .5cm
+  margin-right: 1cm
+  margin-top: 2mm
+  spacing-footer: 0mm
+  spacing-header: 2mm
+  width: 16cm
+pageTemplates:
+  cutePage:
+    background: images/background.svg
+    frames:
+    - - '0'
+      - '0'
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+

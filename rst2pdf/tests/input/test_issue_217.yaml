@@ -1,0 +1,27 @@
+styles:
+  bullet-list:
+    colWidths:
+    - '20'
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - RIGHTPADDING
+      - - 0
+        - 0
+      - - 1
+        - -1
+      - 0
+    parent: bodytext
+    spaceBefore: 0
+  bullet-list-item:
+    parent: bodytext
+    spaceBefore: 30
+  item-list-item:
+    parent: bodytext
+    spaceBefore: 30
+

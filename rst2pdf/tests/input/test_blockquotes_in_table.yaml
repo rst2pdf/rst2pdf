@@ -1,0 +1,7 @@
+pageSetup:
+  size: A4-landscape
+styles:
+  blockquote:
+    parent: normal
+    textColor: green
+

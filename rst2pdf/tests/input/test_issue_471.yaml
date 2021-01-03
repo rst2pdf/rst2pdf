@@ -1,0 +1,5 @@
+styles:
+  myclass:
+    fontSize: 50%
+    parent: base
+
