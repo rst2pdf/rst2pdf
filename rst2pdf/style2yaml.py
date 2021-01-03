@@ -59,6 +59,8 @@ def main():
                 with open(new_path, 'w') as file:
                     file.write(yaml_style)
         else:
+            print("# " + os.path.splitext(path)[0])
+            print("---")
             print(yaml_style)
 
 

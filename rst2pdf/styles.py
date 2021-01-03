@@ -611,6 +611,7 @@ class StyleSheet(object):
         fname = self.findStyle(ssname)
         if fname:
             try:
+                # TODO no longer needed when we drop support for rson
                 # Is it an older rson/json stylesheet with .style extension?
                 root_ext = os.path.splitext(fname)
                 if root_ext[1] == ".style":
