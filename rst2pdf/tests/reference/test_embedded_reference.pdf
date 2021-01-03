@@ -1,0 +1,145 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 7 0 R /XYZ 109.3829 733.0236 0 ] /Rect [ 83.26291 719.0236 109.3829 731.0236 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 7 0 R /XYZ 195.5429 733.0236 0 ] /Rect [ 142.1829 719.0236 195.5429 731.0236 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (http://man7.org/linux/man-pages/man2/ioctl.2.html)
+>> /Border [ 0 0 0 ] /Rect [ 83.26291 668.0236 107.7029 680.0236 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/Annots [ 4 0 R 5 0 R 6 0 R ] /Contents 13 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/Outlines 10 0 R /PageLabels 14 0 R /PageMode /UseNone /Pages 12 0 R /Type /Catalog
+>>
+endobj
+9 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title (Document title) /Trapped /False
+>>
+endobj
+10 0 obj
+<<
+/Count 1 /First 11 0 R /Last 11 0 R /Type /Outlines
+>>
+endobj
+11 0 obj
+<<
+/Dest [ 7 0 R /XYZ 62.69291 707.0236 0 ] /Parent 10 0 R /Title (Suspend-to-idle Resume Code Flow)
+>>
+endobj
+12 0 obj
+<<
+/Count 1 /Kids [ 7 0 R ] /Type /Pages
+>>
+endobj
+13 0 obj
+<<
+/Length 642
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+BT 1 0 0 1 0 4 Tm 165.4949 0 Td 24 TL /F2 20 Tf 0 0 0 rg (Document title) Tj T* -165.4949 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 719.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (See ) Tj 0 0 .501961 rg (below) Tj 0 0 0 rg (, in the ) Tj 0 0 .501961 rg (next section) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 686.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 3.5 Tm /F2 17.5 Tf 21 TL (Suspend-to-idle Resume Code Flow) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 668.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (See ) Tj 0 0 .501961 rg (ioctl\(\)) Tj 0 0 0 rg (.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+14 0 obj
+<<
+/Nums [ 0 15 0 R ]
+>>
+endobj
+15 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000073 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000333 00000 n 
+0000000500 00000 n 
+0000000667 00000 n 
+0000000868 00000 n 
+0000001103 00000 n 
+0000001208 00000 n 
+0000001479 00000 n 
+0000001553 00000 n 
+0000001673 00000 n 
+0000001733 00000 n 
+0000002426 00000 n 
+0000002467 00000 n 
+trailer
+<<
+/ID 
+[<81f33aa2752cbadb38522c32328d07da><81f33aa2752cbadb38522c32328d07da>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 9 0 R
+/Root 8 0 R
+/Size 16
+>>
+startxref
+2501
+%%EOF
