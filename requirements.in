@@ -9,3 +9,4 @@ sphinx==1.8.5
 svglib
 svg2rlg
 xhtml2pdf
+pyyaml

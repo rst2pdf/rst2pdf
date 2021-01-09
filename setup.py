@@ -35,6 +35,7 @@ setup(
         'pygments',
         'reportlab',
         'smartypants',
+        'pyyaml',
     ],
     extras_require={
         'tests': ['pyPdf2', 'pymupdf'],

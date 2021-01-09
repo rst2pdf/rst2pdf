@@ -31,6 +31,7 @@ pypdf2==1.26.0            # via -r requirements.in, xhtml2pdf
 python-bidi==0.4.2        # via xhtml2pdf
 python-dateutil==2.8.1    # via matplotlib
 pytz==2020.5              # via babel
+pyyaml==5.3.1             # via -r requirements.in
 reportlab==3.5.58         # via -r requirements.in, svglib, xhtml2pdf
 requests==2.25.1          # via sphinx
 six==1.15.0               # via cycler, html5lib, python-bidi, python-dateutil, sphinx, xhtml2pdf
