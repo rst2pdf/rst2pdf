@@ -24,9 +24,6 @@
 <!--- (Optional) If you are using Sphinx, please paste output of this too.-->
 `pip freeze | grep Sphinx`
 
-<!--- (Optional) If you are using wordaxe, please write the version of it below:.-->
-(Optional) wordaxe version :
-
 Which operating system are you using?
 
 **Additional information**
