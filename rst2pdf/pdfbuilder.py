@@ -35,7 +35,6 @@ from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import _
-from sphinx.domains.changeset import versionlabels
 from sphinx.transforms import SphinxTransform
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
