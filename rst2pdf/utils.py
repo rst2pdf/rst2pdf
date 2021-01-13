@@ -82,6 +82,7 @@ def parseRaw(data, node):
 
 HAS_XHTML2PDF = True
 try:
+    import xhtml2pdf.default  # NOQA
     from xhtml2pdf.util import COLOR_BY_NAME
     from xhtml2pdf.util import memoized
     from xhtml2pdf.context import pisaContext
