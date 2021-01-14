@@ -35,7 +35,6 @@ from sphinx import addnodes
 from sphinx.builders import Builder
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import _
-from sphinx.locale import versionlabels
 from sphinx.transforms import SphinxTransform
 from sphinx.util.console import darkgreen, red
 from sphinx.util import SEP
@@ -733,13 +732,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         raise nodes.SkipNode
 
     def visit_versionmodified(self, node):
-        text = versionlabels[node['type']] % node['version']
-        if len(node):
-            text += ': '
-        else:
-            text += '.'
         replacement = nodes.paragraph()
-        replacement += nodes.Text(text)
         replacement.extend(node.children)
         node.parent.replace(node, replacement)
 
