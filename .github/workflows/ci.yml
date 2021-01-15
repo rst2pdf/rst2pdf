@@ -39,6 +39,7 @@ jobs:
         pytest -v
     - name: Archive test output
       uses: actions/upload-artifact@v2
+      if: failure()
       with:
         name: failed-tests
         path: rst2pdf/tests/output
