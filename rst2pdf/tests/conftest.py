@@ -216,17 +216,17 @@ class Item(pytest.Item):
         # verify results
 
         if retcode:
-            exitcode_file = os.path.join(INPUT_DIR, self.name + '.exitcode')
-            if os.path.exists(exitcode_file):
-                with open(exitcode_file) as f:
+            retcode_file = os.path.join(INPUT_DIR, self.name + '.retcode')
+            if os.path.exists(retcode_file):
+                with open(retcode_file) as f:
                     first_line = f.readline()
-                    expected_exitcode = int(first_line)
-                    if expected_exitcode == retcode:
+                    expected_retcode = int(first_line)
+                    if expected_retcode == retcode:
                         return
                     else:
                         self._fail(
                             'Exit code of %d did not match expected %d'
-                            % (retcode, expected_exitcode),
+                            % (retcode, expected_retcode),
                             output,
                         )
             else:
