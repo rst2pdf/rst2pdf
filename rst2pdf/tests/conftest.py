@@ -322,28 +322,26 @@ class RstItem(Item):
                 stderr=subprocess.STDOUT,
             )
             retcode = 0
-
-            output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
-            no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
-            if not os.path.exists(output_file) and not no_pdf:
-                self._fail(
-                    'File %r was not generated'
-                    % (os.path.relpath(output_file, ROOT_DIR),),
-                    output,
-                )
-            elif os.path.exists(output_file) and no_pdf:
-                self._fail(
-                    'File %r was erroneously generated'
-                    % (os.path.relpath(output_file, ROOT_DIR),),
-                    output,
-                )
-
         except subprocess.CalledProcessError as exc:
             output = exc.output
             retcode = exc.returncode
 
         with open(output_log, 'wb') as fh:
             fh.write(output)
+
+        output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
+        no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
+        if not os.path.exists(output_file) and not no_pdf:
+            self._fail(
+                'File %r was not generated' % (os.path.relpath(output_file, ROOT_DIR),),
+                output,
+            )
+        elif os.path.exists(output_file) and no_pdf:
+            self._fail(
+                'File %r was erroneously generated'
+                % (os.path.relpath(output_file, ROOT_DIR),),
+                output,
+            )
 
         return retcode, output
 
