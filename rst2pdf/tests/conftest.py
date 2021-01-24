@@ -215,22 +215,21 @@ class Item(pytest.Item):
 
         # verify results
 
-        if retcode:
-            retcode_file = os.path.join(INPUT_DIR, self.name + '.retcode')
-            if os.path.exists(retcode_file):
-                with open(retcode_file) as f:
-                    first_line = f.readline()
-                    expected_retcode = int(first_line)
-                    if expected_retcode == retcode:
-                        return
-                    else:
-                        self._fail(
-                            'Exit code of %d did not match expected %d'
-                            % (retcode, expected_retcode),
-                            output,
-                        )
-            else:
-                self._fail('Call failed with %d' % retcode, output)
+        retcode_file = os.path.join(INPUT_DIR, self.name + '.retcode')
+        if os.path.exists(retcode_file):
+            with open(retcode_file) as f:
+                first_line = f.readline()
+                expected_retcode = int(first_line)
+                if expected_retcode == retcode:
+                    return
+                else:
+                    self._fail(
+                        'Exit code of %d did not match expected %d'
+                        % (retcode, expected_retcode),
+                        output,
+                    )
+        elif retcode > 0:
+            self._fail('Call failed with %d' % retcode, output)
 
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         if no_pdf:
