@@ -199,10 +199,10 @@ styles:
     parent: bodytext
     spaceBefore: 0
   definition-list-classifier:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   definition-list-term:
-    fontName: stdBold
+    fontName: fontSansBold
     keepWithNext: false
     parent: normal
     spaceAfter: 0
@@ -262,7 +262,7 @@ styles:
     spaceBefore: 6
   fieldname:
     alignment: TA_RIGHT
-    fontName: stdBold
+    fontName: fontSansBold
     parent: bodytext
   fieldvalue:
     parent: bodytext
@@ -286,7 +286,7 @@ styles:
     parent: bodytext
   figure-caption:
     alignment: TA_CENTER
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   figure-legend:
     parent: bodytext
@@ -330,7 +330,7 @@ styles:
   important-heading:
     parent: admonition-heading
   italic:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   item-list:
     colWidths:
@@ -361,7 +361,7 @@ styles:
     parent: code
   literal:
     firstLineIndent: 0
-    fontName: stdMono
+    fontName: fontMono
     hyphenation: false
     parent: normal
     wordWrap: null
@@ -659,7 +659,7 @@ styles:
     parent: heading
     spaceAfter: 36
   title-reference:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   toc:
     parent: normal
