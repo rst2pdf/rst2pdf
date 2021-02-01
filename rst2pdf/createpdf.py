@@ -791,16 +791,13 @@ class FancyDocTemplate(BaseDocTemplate):
                         flowables.insert(i, f)  # put split flowables back on the list
                 else:
                     if hasattr(f, '_postponed') and f._postponed > 4:
-                        ident = (
-                            "Flowable %s%s too large on page %d in frame %r%s of template %r"
-                            % (
-                                self._fIdent(f, 60, frame),
-                                doctemplate._fSizeString(f),
-                                self.page,
-                                self.frame.id,
-                                self.frame._aSpaceString(),
-                                self.pageTemplate.id,
-                            )
+                        ident = "Flowable %s%s too large on page %d in frame %r%s of template %r" % (
+                            self._fIdent(f, 60, frame),
+                            doctemplate._fSizeString(f),
+                            self.page,
+                            self.frame.id,
+                            self.frame._aSpaceString(),
+                            self.pageTemplate.id,
                         )
                         # leave to keep apart from the raise
                         raise LayoutError(ident)
@@ -1020,7 +1017,12 @@ class FancyPage(PageTemplate):
                 log.error("Missing %s image file: %s", which, uri)
                 return
             try:
-                w, h, _ = MyImage.size_for_node(dict(uri=uri,), self.client,)
+                w, h, _ = MyImage.size_for_node(
+                    dict(
+                        uri=uri,
+                    ),
+                    self.client,
+                )
             except ValueError:
                 # Broken image, return arbitrary stuff
                 uri = missing
