@@ -127,10 +127,17 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
                 colWidths.append(int(n['colwidth']))
 
         # colWidths are in no specific unit, really. Maybe ems.
-        # Convert them to %
-        colWidths = [int(x) for x in colWidths]
         tot = sum(colWidths)
-        colWidths = ["%s%%" % ((100.0 * w) / tot) for w in colWidths]
+        adjustedWidths = []
+        for x in colWidths:
+            # Convert them to %
+            w = 100 * x / tot
+            # narrow columns cause strange "huge height" from reportlab, hack for #967
+            if w < 4:
+                w = 4
+            adjustedWidths.append("%s%%" % w)
+
+        colWidths = adjustedWidths
 
         if 'colWidths' in style.__dict__:
             colWidths[: len(style.colWidths)] = style.colWidths
