@@ -132,7 +132,8 @@ class HandleTGroup(NodeHandler, docutils.nodes.tgroup):
         for x in colWidths:
             # Convert them to %
             w = 100 * x / tot
-            # narrow columns cause strange "huge height" from reportlab, hack for #967
+            # Limit minimum width of a column as narrow columns cause strange "huge height" from reportlab if the cell
+            # padding is larger than the calculated width. Hack for #967
             if w < 4:
                 w = 4
             adjustedWidths.append("%s%%" % w)
