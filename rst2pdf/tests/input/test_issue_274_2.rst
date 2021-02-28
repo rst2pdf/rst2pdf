@@ -171,7 +171,7 @@ ffff
 * fff f fçff föfffşff fffıffıffffı füfüfff.
 * fff ff fçff ffffff fffıfı üfffffff çffışıfıfff.
 * b f İş ffffffff, c f ffffff füfffffff ffıfı ffffffffffı.
-* İş fffıfffff fffüfffı'fff fffff_ ff fe-fff_ fçff fıfff fffffüf fff.
+* İş fffıfffff fffüfffı'fff fffff ff fe-fff_ fçff fıfff fffffüf fff.
 
 fffffff
 ~~~~~~~

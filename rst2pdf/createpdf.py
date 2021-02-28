@@ -534,13 +534,18 @@ class RstToPdf(object):
                 settings_overrides[
                     'strip_elements_with_classes'
                 ] = self.strip_elements_with_classes
+                settings_overrides['exit_status_level'] = 3
+
                 self.doctree = docutils.core.publish_doctree(
-                    text, source_path=source_path, settings_overrides=settings_overrides
+                    text,
+                    source_path=source_path,
+                    settings_overrides=settings_overrides,
+                    enable_exit_status=True,
                 )
                 log.debug(self.doctree)
             else:
                 log.error('Error: createPdf needs a text or a doctree')
-                return
+                return 1
         else:
             self.doctree = doctree
 
@@ -718,6 +723,8 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
+
+        return 0
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -1684,7 +1691,7 @@ def main(_args=None):
 
     add_extensions(options)
 
-    RstToPdf(
+    return_code = RstToPdf(
         stylesheets=options.style,
         language=options.language,
         header=options.header,
@@ -1723,6 +1730,8 @@ def main(_args=None):
 
     if close_infile:
         infile.close()
+
+    sys.exit(return_code)
 
 
 # Ugly hack that fixes Issue 335
