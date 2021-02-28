@@ -546,7 +546,7 @@ class RstToPdf(object):
                 except Exception as ex:
                     log.error(ex)
                     log.error("Cannot generate PDF, exiting")
-                    return
+                    return 1
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return 1
