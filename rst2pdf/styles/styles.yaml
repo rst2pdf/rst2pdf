@@ -57,7 +57,7 @@ styles:
   abstract:
     parent: normal
   admonition:
-    backColor: beige
+    backColor: cornsilk
     borderColor: darkgray
     borderPadding:
     - 16
@@ -149,7 +149,7 @@ styles:
     alignment: center
     parent: bodytext
   code:
-    backColor: beige
+    backColor: whitesmoke
     borderColor: darkgray
     borderPadding: 6
     borderWidth: 0.5
@@ -587,7 +587,7 @@ styles:
   separation:
     parent: normal
   sidebar:
-    backColor: beige
+    backColor: cornsilk
     borderColor: darkgray
     borderPadding: 8
     borderWidth: 0.5
@@ -638,7 +638,8 @@ styles:
     parent: normal
   table-heading:
     alignment: TA_CENTER
-    backColor: beige
+    backColor: gray
+    textColor: white
     borderPadding: 0
     parent: heading
     valign: BOTTOM
