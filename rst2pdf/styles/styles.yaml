@@ -302,7 +302,7 @@ styles:
     spaceAfter: 6
     spaceBefore: 12
     fontName: fontSerif
-    textColor: "#333333"
+    textColor: "#222222"
   heading1:
     fontSize: 175%
     parent: heading
