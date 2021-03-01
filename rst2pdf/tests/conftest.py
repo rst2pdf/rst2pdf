@@ -313,7 +313,8 @@ class RstItem(Item):
         if os.path.exists(style_file):
             cmd += ['-s', os.path.basename(style_file)]
 
-        cmd += ['-o', output_pdf]
+        if '-o' not in cmd:
+            cmd += ['-o', output_pdf]
 
         try:
             output = subprocess.check_output(
