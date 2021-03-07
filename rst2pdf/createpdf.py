@@ -1637,7 +1637,7 @@ def main(_args=None):
     if options.output:
         outfile = options.output
         if outfile == '-':
-            outfile = sys.stdout
+            outfile = sys.stdout.buffer
             options.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
@@ -1648,7 +1648,7 @@ def main(_args=None):
             else:
                 outfile = filename + '.pdf'
         else:
-            outfile = sys.stdout
+            outfile = sys.stdout.buffer
             options.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
