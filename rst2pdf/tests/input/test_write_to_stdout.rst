@@ -1,6 +1,8 @@
 This is my test
 ===============
 
+This test doesn't create a PDF because the output is to stdout, not to a file.
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at nunc scelerisque, tempor mauris sit amet,
 feugiat felis. Curabitur a purus ut leo condimentum mattis id eu enim. Interdum et malesuada fames ac ante
 ipsum primis in faucibus. Donec faucibus elit sed tincidunt blandit. Pellentesque mollis sed felis non congue.
