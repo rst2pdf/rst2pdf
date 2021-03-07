@@ -536,13 +536,16 @@ class RstToPdf(object):
                 ] = self.strip_elements_with_classes
                 settings_overrides['exit_status_level'] = 3
 
-                self.doctree = docutils.core.publish_doctree(
-                    text,
-                    source_path=source_path,
-                    settings_overrides=settings_overrides,
-                    enable_exit_status=True,
-                )
-                log.debug(self.doctree)
+                try:
+                    self.doctree = docutils.core.publish_doctree(
+                        text,
+                        source_path=source_path,
+                        settings_overrides=settings_overrides,
+                    )
+                    log.debug(self.doctree)
+                except Exception:
+                    log.error("Cannot generate PDF, exiting")
+                    return 1
             else:
                 log.error('Error: createPdf needs a text or a doctree')
                 return 1
