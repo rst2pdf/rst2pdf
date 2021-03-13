@@ -696,8 +696,10 @@ styles:
     parent: normal
   toc:
     parent: normal
-  toc1:
     fontName: fontSans
+    fontSize: 100%
+  toc1:
+    fontName: fontSansBold
     parent: toc
   toc10:
     leftIndent: 100
