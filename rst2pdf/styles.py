@@ -231,35 +231,8 @@ class StyleSheet(object):
 
             for font in embedded:
                 try:
-                    # Just a font name, try to embed it
-                    if isinstance(font, str):
-                        # See if we can find the font
-                        fname, pos = findfonts.guessFont(font)
-                        if font in embedded_fontnames:
-                            pass
-                        else:
-                            fontList = findfonts.autoEmbed(font)
-                            if fontList:
-                                embedded_fontnames.append(font)
-                        if not fontList:
-                            if (fname, pos) in embedded_fontnames:
-                                fontList = None
-                            else:
-                                fontList = findfonts.autoEmbed(fname)
-                        if fontList is not None:
-                            self.embedded += fontList
-                            # Maybe the font we got is not called
-                            # the same as the one we gave
-                            # so check that out
-                            suff = ["", "-Oblique", "-Bold", "-BoldOblique"]
-                            if not fontList[0].startswith(font):
-                                # We need to create font aliases, and use them
-                                for fname, aliasname in zip(
-                                    fontList,
-                                    [font + suffix for suffix in suff],
-                                ):
-                                    self.fontsAlias[aliasname] = fname
-                        continue
+                    # (removed the feature that supported a string here, this isn't
+                    # documented or supported)
 
                     # Each "font" is a list of four files, which will be
                     # used for regular / bold / italic / bold+italic
@@ -282,14 +255,15 @@ class StyleSheet(object):
                     if font[0].lower().endswith('.ttf'):  # A True Type font
                         for variant in font:
                             location = self.findFont(variant)
-                            pdfmetrics.registerFont(
-                                TTFont(str(variant.split('.')[0]), location)
-                            )
+                            # strip extension and leading path to get the name
+                            # to register the font under
+                            filename = os.path.basename(variant)
+                            fontname = str(filename.split('.')[0])
+                            pdfmetrics.registerFont(TTFont(fontname, location))
                             log.info(
-                                'Registering font: %s from %s'
-                                % (str(variant.split('.')[0]), location)
+                                'Registering font: %s from %s' % (fontname, location)
                             )
-                            self.embedded.append(str(variant.split('.')[0]))
+                            self.embedded.append(fontname)
 
                         # And map them all together
                         regular, bold, italic, bolditalic = [
@@ -540,9 +514,9 @@ class StyleSheet(object):
                 self.StyleSheet.add(ParagraphStyle(**s))
 
         self.emsize = self['base'].fontSize
-        # Make stdFont the basefont, for Issue 65
+        # Set the basefont, for Issue 65
         reportlab.rl_config.canvas_basefontname = self['base'].fontName
-        # Make stdFont the default font for table cell styles (Issue 65)
+        # Set a default font for table cell styles (Issue 65)
         reportlab.platypus.tables.CellStyle.fontname = self['base'].fontName
 
     def __getitem__(self, key):

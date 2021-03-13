@@ -5,5 +5,5 @@ embeddedFonts:
   - GL-Antique.ttf
 fontsAlias:
   stdBold: GL-Antique
-  stdMono: GL-Antique
+  fontMono: GL-Antique
 

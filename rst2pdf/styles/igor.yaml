@@ -3,31 +3,31 @@ styles:
     parent: code
     textColor: black
   pygments-c:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-c1:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-ch:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-cm:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-cp:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-cpf:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-cs:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#FF0000'
   pygments-dl:

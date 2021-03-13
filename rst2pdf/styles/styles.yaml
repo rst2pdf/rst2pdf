@@ -149,7 +149,7 @@ styles:
     alignment: center
     parent: bodytext
   code:
-    backColor: whitesmoke
+    backColor: aliceblue
     borderColor: darkgray
     borderPadding: 6
     borderWidth: 0.5
@@ -603,6 +603,7 @@ styles:
     parent: title
     spaceBefore: 12
   table:
+    parent: normal
     alignment: TA_CENTER
     commands:
     - - VALIGN
@@ -638,8 +639,6 @@ styles:
     parent: normal
   table-heading:
     alignment: TA_CENTER
-    backColor: gray
-    textColor: white
     borderPadding: 0
     parent: heading
     valign: BOTTOM

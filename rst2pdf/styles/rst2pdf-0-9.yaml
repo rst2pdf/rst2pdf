@@ -1,18 +1,8 @@
 embeddedFonts: []
 fontsAlias:
-  stdBold: Helvetica-Bold
-  stdBoldItalic: Helvetica-BoldOblique
-  stdFont: Helvetica
-  stdItalic: Helvetica-Oblique
-  stdMono: Courier
-  stdMonoBold: Courier-Bold
-  stdMonoBoldItalic: Courier-BoldOblique
-  stdMonoItalic: Courier-Oblique
-  stdSans: Helvetica
-  stdSansBold: Helvetica-Bold
-  stdSansBoldItalic: Helvetica-BoldOblique
-  stdSansItalic: Helvetica-Oblique
-  stdSerif: Times-Roman
+  fontSans: Helvetica
+  fontMono: Courier
+  fontSerif: Times-Roman
 linkColor: navy
 pageSetup:
   firstTemplate: oneColumn
@@ -133,12 +123,12 @@ styles:
     borderPadding: 0
     borderRadius: null
     borderWidth: 0
-    bulletFontName: stdFont
+    bulletFontName: fontSans
     bulletFontSize: 10
     bulletIndent: 0
     commands: []
     firstLineIndent: 0
-    fontName: stdFont
+    fontName: fontSans
     fontSize: 10
     hyphenation: false
     leading: 12
@@ -237,10 +227,10 @@ styles:
     parent: bodytext
     spaceBefore: 0
   definition-list-classifier:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   definition-list-term:
-    fontName: stdBold
+    fontName: fontSansBold
     keepWithNext: false
     parent: normal
     spaceAfter: 0
@@ -300,7 +290,7 @@ styles:
     spaceBefore: 6
   fieldname:
     alignment: TA_RIGHT
-    fontName: stdBold
+    fontName: fontSansBold
     parent: bodytext
   fieldvalue:
     parent: bodytext
@@ -324,7 +314,7 @@ styles:
     parent: bodytext
   figure-caption:
     alignment: TA_CENTER
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   figure-legend:
     parent: bodytext
@@ -340,25 +330,25 @@ styles:
     spaceAfter: 6
     spaceBefore: 12
   heading1:
-    fontName: stdBold
+    fontName: fontSansBold
     fontSize: 175%
     parent: heading
   heading2:
-    fontName: stdBold
+    fontName: fontSansBold
     fontSize: 150%
     parent: heading
   heading3:
-    fontName: stdBoldItalic
+    fontName: fontSansBoldItalic
     fontSize: 125%
     parent: heading
   heading4:
-    fontName: stdBoldItalic
+    fontName: fontSansBoldItalic
     parent: heading
   heading5:
-    fontName: stdBoldItalic
+    fontName: fontSansBoldItalic
     parent: heading
   heading6:
-    fontName: stdBoldItalic
+    fontName: fontSansBoldItalic
     parent: heading
   hint:
     parent: admonition
@@ -372,7 +362,7 @@ styles:
   important-heading:
     parent: admonition-heading
   italic:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   item-list:
     colWidths:
@@ -403,7 +393,7 @@ styles:
     parent: code
   literal:
     firstLineIndent: 0
-    fontName: stdMono
+    fontName: fontMono
     hyphenation: false
     parent: normal
     wordWrap: null
@@ -682,7 +672,7 @@ styles:
     alignment: TA_CENTER
     backColor: beige
     borderPadding: 0
-    parent: heading
+    parent: normal
     valign: BOTTOM
   table-title:
     alignment: TA_CENTER
@@ -696,18 +686,18 @@ styles:
     parent: admonition-heading
   title:
     alignment: TA_CENTER
-    fontName: stdBold
+    fontName: fontSansBold
     fontSize: 200%
     keepWithNext: false
     parent: heading
     spaceAfter: 10
   title-reference:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   toc:
     parent: normal
   toc1:
-    fontName: stdBold
+    fontName: fontSans
     parent: toc
   toc10:
     leftIndent: 100
