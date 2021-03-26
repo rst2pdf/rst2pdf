@@ -69,7 +69,7 @@ python-dateutil==2.8.1
     # via matplotlib
 pytz==2020.5
     # via babel
-pyyaml==5.3.1
+pyyaml==5.4
     # via -r requirements.in
 reportlab==3.5.58
     # via
