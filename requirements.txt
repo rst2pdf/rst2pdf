@@ -51,7 +51,7 @@ pillow==8.1.1
     #   matplotlib
     #   reportlab
     #   xhtml2pdf
-pygments==2.7.3
+pygments==2.7.4
     # via
     #   -r requirements.in
     #   sphinx
