@@ -57,7 +57,7 @@ endobj
 endobj
 8 0 obj
 <<
-/Outlines 13 0 R /PageLabels 14 0 R /PageMode /UseNone /Pages 10 0 R /Type /Catalog
+/PageLabels 13 0 R /PageMode /UseNone /Pages 10 0 R /Type /Catalog
 >>
 endobj
 9 0 obj
@@ -73,19 +73,20 @@ endobj
 endobj
 11 0 obj
 <<
-/Length 2086
+/Length 2099
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 534.9449 cm
+1 0 0 1 57.02362 534.9449 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 149.9055 51 cm
+1 0 0 1 155.5748 51 cm
 q
 170.0787 0 0 170.0787 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -95,27 +96,29 @@ q
 1 0 0 1 6 33 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 201.4299 0 Td (The caption.) Tj T* -201.4299 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 207.0992 0 Td (The caption.) Tj T* -207.0992 0 Td ET
 Q
 Q
 q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .744104 Tw (Above should be: a 6cm image, centered, a caption, centered. This legend should be full width of the) Tj T* 0 Tw (page, justified like regular bodytext.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.411079 Tw (Above should be: a 6cm image, centered, a caption, centered. This legend should be full width of the) Tj T* 0 Tw (page, justified like regular bodytext.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 534.9449 cm
 Q
 q
-1 0 0 1 62.69291 528.9449 cm
+1 0 0 1 57.02362 534.9449 cm
+Q
+q
+1 0 0 1 57.02362 528.9449 cm
 Q
 q
 1 0 0 1 212.5984 353.9055 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -142,14 +145,16 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 353.9055 cm
 Q
 q
-1 0 0 1 62.69291 347.9055 cm
+1 0 0 1 57.02362 353.9055 cm
 Q
 q
-1 0 0 1 362.5039 160.8661 cm
+1 0 0 1 57.02362 347.9055 cm
+Q
+q
+1 0 0 1 368.1732 160.8661 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -176,23 +181,28 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 160.8661 cm
 Q
 q
-1 0 0 1 62.69291 154.8661 cm
+1 0 0 1 57.02362 160.8661 cm
+Q
+q
+1 0 0 1 57.02362 160.8661 cm
 Q
  
 endstream
 endobj
 12 0 obj
 <<
-/Length 1485
+/Length 1529
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 577.9843 cm
+1 0 0 1 57.02362 759.0236 cm
+Q
+q
+1 0 0 1 57.02362 571.9843 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -219,14 +229,16 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 577.9843 cm
 Q
 q
-1 0 0 1 62.69291 571.9843 cm
+1 0 0 1 57.02362 571.9843 cm
 Q
 q
-1 0 0 1 212.5984 384.9449 cm
+1 0 0 1 57.02362 565.9843 cm
+Q
+q
+1 0 0 1 212.5984 378.9449 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -247,40 +259,36 @@ q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 62 Tm /F1 10 Tf 12 TL 3.601748 Tw (Above should be: a 3cm image,) Tj T* 0 Tw 1.269748 Tw (centered, inside a 6cm wide figure) Tj T* 0 Tw 6.23979 Tw (at the center of the page. A) Tj T* 0 Tw 8.03958 Tw (caption, centered. This legend) Tj T* 0 Tw 2.44479 Tw (should be full width of the figure,) Tj T* 0 Tw (justified like regular bodytext.) Tj T* ET
+BT 1 0 0 1 0 62 Tm /F1 10 Tf 12 TL 3.601748 Tw (Above should be: a 3cm image,) Tj T* 0 Tw 1.269748 Tw (centered, inside a 6cm wide figure) Tj T* 0 Tw -0.051609 Tw (at the center of the page. A caption,) Tj T* 0 Tw .043748 Tw (centered. This legend should be full) Tj T* 0 Tw 4.381748 Tw (width of the figure, justified like) Tj T* 0 Tw (regular bodytext.) Tj T* ET
 Q
 Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 384.9449 cm
+1 0 0 1 57.02362 378.9449 cm
 Q
  
 endstream
 endobj
 13 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 14 0 R 1 15 0 R ]
 >>
 endobj
 14 0 obj
 <<
-/Nums [ 0 15 0 R 1 16 0 R ]
->>
-endobj
-15 0 obj
-<<
 /S /D /St 1
 >>
 endobj
-16 0 obj
+15 0 obj
 <<
 /S /D /St 2
 >>
 endobj
 xref
-0 17
+0 16
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
@@ -290,14 +298,13 @@ xref
 0000000918 00000 n 
 0000001169 00000 n 
 0000001420 00000 n 
-0000001525 00000 n 
-0000001782 00000 n 
-0000001848 00000 n 
-0000003986 00000 n 
-0000005523 00000 n 
-0000005570 00000 n 
-0000005620 00000 n 
-0000005654 00000 n 
+0000001508 00000 n 
+0000001765 00000 n 
+0000001831 00000 n 
+0000003982 00000 n 
+0000005563 00000 n 
+0000005613 00000 n 
+0000005647 00000 n 
 trailer
 <<
 /ID 
@@ -306,8 +313,8 @@ trailer
 
 /Info 9 0 R
 /Root 8 0 R
-/Size 17
+/Size 16
 >>
 startxref
-5688
+5681
 %%EOF

@@ -22,7 +22,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
+/PageLabels 8 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
 >>
 endobj
 5 0 obj
@@ -38,22 +38,23 @@ endobj
 endobj
 7 0 obj
 <<
-/Length 2196
+/Length 2209
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 712.6772 cm
+1 0 0 1 57.02362 712.6772 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The objective of this file is to test transitions. The restructured text specification says that:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 706.6772 cm
+1 0 0 1 57.02362 706.6772 cm
 Q
 q
-1 0 0 1 62.69291 622.6772 cm
+1 0 0 1 57.02362 622.6772 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -61,7 +62,7 @@ q
 1 0 0 1 20 48 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .779985 Tw (The syntax for a transition marker is a horizontal line of 4 or more repeated punctuation characters.) Tj T* 0 Tw .759318 Tw (The syntax is the same as section title underlines without title text. Transition markers require blank) Tj T* 0 Tw (lines before and after.) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .22402 Tw (The syntax for a transition marker is a horizontal line of 4 or more repeated punctuation characters. The) Tj T* 0 Tw 1.293223 Tw (syntax is the same as section title underlines without title text. Transition markers require blank lines) Tj T* 0 Tw (before and after.) Tj T* ET
 Q
 Q
 q
@@ -74,60 +75,62 @@ Q
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 14 Tm 2.51811 Tw 12 TL /F1 10 Tf 0 0 0 rg (The processing system is free to render transitions in output in any way it likes. For example,) Tj T* 0 Tw (horizontal rules \() Tj (<) Tj (hr) Tj (>) Tj (\) in HTML output would be an obvious choice.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .323432 Tw 12 TL /F1 10 Tf 0 0 0 rg (The processing system is free to render transitions in output in any way it likes. For example, horizontal) Tj T* 0 Tw (rules \() Tj (<) Tj (hr) Tj (>) Tj (\) in HTML output would be an obvious choice.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 622.6772 cm
 Q
 q
-1 0 0 1 62.69291 604.6772 cm
+1 0 0 1 57.02362 622.6772 cm
+Q
+q
+1 0 0 1 57.02362 604.6772 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (So, let's try a transition here.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 576.3307 cm
-n 0 14.17323 m 469.8898 14.17323 l S
+1 0 0 1 57.02362 576.3307 cm
+0 0 0 RG
+n 0 14.17323 m 481.2283 14.17323 l S
 Q
 q
-1 0 0 1 62.69291 558.3307 cm
+1 0 0 1 57.02362 558.3307 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (And this should be after it.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 528.3307 cm
+1 0 0 1 57.02362 528.3307 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .511894 Tw (We also put a transition in the header and one in the footer, but docutils crashes on doing it that way, so) Tj T* 0 Tw (we add "headerSeparator" and "footerSeparator" to the page template in the stylesheet.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .296743 Tw (We also put a transition in the header and one in the footer, but docutils crashes on doing it that way, so we) Tj T* 0 Tw (add "headerSeparator" and "footerSeparator" to the page template in the stylesheet.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 166.4599 0 Td (This should appear in the header.) Tj T* -166.4599 0 Td ET
-Q
-Q
-q
-1 0 0 1 56.69291 744.8504 cm
-n 0 14.17323 m 481.8898 14.17323 l S
-Q
-q
-1 0 0 1 56.69291 68.69291 cm
-n 0 14.17323 m 481.8898 14.17323 l S
-Q
-q
-1 0 0 1 56.69291 56.69291 cm
+1 0 0 1 51.02362 773.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 169.2399 0 Td (This should appear in the footer.) Tj T* -169.2399 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 172.1292 0 Td (This should appear in the header.) Tj T* -172.1292 0 Td ET
+Q
+Q
+q
+1 0 0 1 51.02362 744.8504 cm
+n 0 14.17323 m 493.2283 14.17323 l S
+Q
+q
+1 0 0 1 51.02362 54.51969 cm
+n 0 14.17323 m 493.2283 14.17323 l S
+Q
+q
+1 0 0 1 51.02362 42.51969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 174.9092 0 Td (This should appear in the footer.) Tj T* -174.9092 0 Td ET
 Q
 Q
  
@@ -135,32 +138,26 @@ endstream
 endobj
 8 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 9 0 R ]
 >>
 endobj
 9 0 obj
-<<
-/Nums [ 0 10 0 R ]
->>
-endobj
-10 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 11
+0 10
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000414 00000 n 
-0000000516 00000 n 
-0000000773 00000 n 
-0000000832 00000 n 
-0000003079 00000 n 
-0000003125 00000 n 
-0000003165 00000 n 
+0000000500 00000 n 
+0000000757 00000 n 
+0000000816 00000 n 
+0000003076 00000 n 
+0000003115 00000 n 
 trailer
 <<
 /ID 
@@ -169,8 +166,8 @@ trailer
 
 /Info 5 0 R
 /Root 4 0 R
-/Size 11
+/Size 10
 >>
 startxref
-3199
+3148
 %%EOF

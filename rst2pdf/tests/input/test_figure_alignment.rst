@@ -23,6 +23,11 @@
    Above should be: a 3cm image, centered, inside a 6cm wide figure at the right
    side of the page. A caption, centered. This legend should be full width of the figure, justified like regular bodytext.
 
+.. raw:: pdf
+
+    PageBreak
+
+
 .. figure:: images/biohazard.png
    :figwidth: 6cm
    :width: 3cm

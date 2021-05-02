@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 6 0 R /F5 7 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 6 0 R
 >>
 endobj
 2 0 obj
@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -22,7 +22,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Contents 47 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
+/Contents 46 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -32,17 +32,22 @@ endobj
 endobj
 6 0 obj
 <<
-/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
 >>
 endobj
 7 0 obj
 <<
-/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F5 /Subtype /Type1 /Type /Font
+/Contents 47 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
 >>
 endobj
 8 0 obj
 <<
-/Contents 48 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
+/Contents 48 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -52,7 +57,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Contents 49 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
+/Contents 49 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -62,61 +67,41 @@ endobj
 endobj
 10 0 obj
 <<
-/Contents 50 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://launchpad.net/aafigure)
+>> /Border [ 0 0 0 ] /Rect [ 155.9636 356.8236 287.7136 368.8236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 11 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://launchpad.net/aafigure)
->> /Border [ 0 0 0 ] /Rect [ 161.6329 326.8236 293.3829 338.8236 ] /Subtype /Link /Type /Annot
+/Annots [ 10 0 R ] /Contents 50 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 12 0 obj
 <<
-/Annots [ 11 0 R ] /Contents 51 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
+/Contents 51 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
+>> /Rotate 0 /Trans <<
 
->> /Type /Page
+>> 
+  /Type /Page
 >>
 endobj
 13 0 obj
 <<
-/Contents 52 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (http://en.wikipedia.org/wiki/Benfords_law)
+>> /Border [ 0 0 0 ] /Rect [ 57.02362 103.8236 97.04362 115.8236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 14 0 obj
 <<
-/Contents 53 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
->>
-endobj
-15 0 obj
-<<
-/A <<
-/S /URI /Type /Action /URI (http://en.wikipedia.org/wiki/Benfords_law)
->> /Border [ 0 0 0 ] /Rect [ 62.69291 729.0236 102.7129 741.0236 ] /Subtype /Link /Type /Annot
->>
-endobj
-16 0 obj
-<<
-/Annots [ 15 0 R ] /Contents 54 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 46 0 R /Resources <<
+/Annots [ 13 0 R ] /Contents 52 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -124,264 +109,275 @@ endobj
 >> /Type /Page
 >>
 endobj
-17 0 obj
+15 0 obj
 <<
-/Outlines 19 0 R /PageLabels 55 0 R /PageMode /UseNone /Pages 46 0 R /Type /Catalog
+/Contents 53 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 45 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
 >>
 endobj
-18 0 obj
+16 0 obj
+<<
+/Outlines 18 0 R /PageLabels 54 0 R /PageMode /UseNone /Pages 45 0 R /Type /Catalog
+>>
+endobj
+17 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (aafigure README) /Trapped /False
 >>
 endobj
+18 0 obj
+<<
+/Count 30 /First 19 0 R /Last 37 0 R /Type /Outlines
+>>
+endobj
 19 0 obj
 <<
-/Count 30 /First 20 0 R /Last 38 0 R /Type /Outlines
+/Dest [ 5 0 R /XYZ 57.02362 705.0236 0 ] /Next 20 0 R /Parent 18 0 R /Title (Overview)
 >>
 endobj
 20 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 729.0236 0 ] /Next 21 0 R /Parent 19 0 R /Title (Overview)
+/Count 2 /Dest [ 5 0 R /XYZ 57.02362 600.0236 0 ] /First 21 0 R /Last 22 0 R /Next 23 0 R /Parent 18 0 R 
+  /Prev 19 0 R /Title (Installation)
 >>
 endobj
 21 0 obj
 <<
-/Count 2 /Dest [ 5 0 R /XYZ 62.69291 624.0236 0 ] /First 22 0 R /Last 23 0 R /Next 24 0 R /Parent 19 0 R 
-  /Prev 20 0 R /Title (Installation)
+/Dest [ 5 0 R /XYZ 57.02362 567.0236 0 ] /Next 22 0 R /Parent 20 0 R /Title (The package)
 >>
 endobj
 22 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 591.0236 0 ] /Next 23 0 R /Parent 21 0 R /Title (The package)
+/Dest [ 5 0 R /XYZ 57.02362 447.0236 0 ] /Parent 20 0 R /Prev 21 0 R /Title (The docutils plugin)
 >>
 endobj
 23 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 471.0236 0 ] /Parent 21 0 R /Prev 22 0 R /Title (The docutils plugin)
+/Dest [ 5 0 R /XYZ 57.02362 369.0236 0 ] /Next 24 0 R /Parent 18 0 R /Prev 20 0 R /Title (Implementation)
 >>
 endobj
 24 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 393.0236 0 ] /Next 25 0 R /Parent 19 0 R /Prev 21 0 R /Title (Implementation)
+/Count 2 /Dest [ 7 0 R /XYZ 57.02362 765.0236 0 ] /First 25 0 R /Last 26 0 R /Next 27 0 R /Parent 18 0 R 
+  /Prev 23 0 R /Title (Usage)
 >>
 endobj
 25 0 obj
 <<
-/Count 2 /Dest [ 8 0 R /XYZ 62.69291 765.0236 0 ] /First 26 0 R /Last 27 0 R /Next 28 0 R /Parent 19 0 R 
-  /Prev 24 0 R /Title (Usage)
+/Dest [ 7 0 R /XYZ 57.02362 732.0236 0 ] /Next 26 0 R /Parent 24 0 R /Title (Command line tool)
 >>
 endobj
 26 0 obj
 <<
-/Dest [ 8 0 R /XYZ 62.69291 732.0236 0 ] /Next 27 0 R /Parent 25 0 R /Title (Command line tool)
+/Dest [ 7 0 R /XYZ 57.02362 615.6236 0 ] /Parent 24 0 R /Prev 25 0 R /Title (Within reStructured text)
 >>
 endobj
 27 0 obj
 <<
-/Dest [ 8 0 R /XYZ 62.69291 615.6236 0 ] /Parent 25 0 R /Prev 26 0 R /Title (Within reStructured text)
+/Count 6 /Dest [ 7 0 R /XYZ 57.02362 502.4236 0 ] /First 28 0 R /Last 33 0 R /Next 34 0 R /Parent 18 0 R 
+  /Prev 24 0 R /Title (Short introduction)
 >>
 endobj
 28 0 obj
 <<
-/Count 6 /Dest [ 8 0 R /XYZ 62.69291 502.4236 0 ] /First 29 0 R /Last 34 0 R /Next 35 0 R /Parent 19 0 R 
-  /Prev 25 0 R /Title (Short introduction)
+/Dest [ 8 0 R /XYZ 57.02362 765.0236 0 ] /Next 29 0 R /Parent 27 0 R /Title (Lines)
 >>
 endobj
 29 0 obj
 <<
-/Dest [ 9 0 R /XYZ 62.69291 765.0236 0 ] /Next 30 0 R /Parent 28 0 R /Title (Lines)
+/Dest [ 8 0 R /XYZ 57.02362 451.8236 0 ] /Next 30 0 R /Parent 27 0 R /Prev 28 0 R /Title (Arrows)
 >>
 endobj
 30 0 obj
 <<
-/Dest [ 9 0 R /XYZ 62.69291 451.8236 0 ] /Next 31 0 R /Parent 28 0 R /Prev 29 0 R /Title (Arrows)
+/Dest [ 8 0 R /XYZ 57.02362 274.6236 0 ] /Next 31 0 R /Parent 27 0 R /Prev 29 0 R /Title (Boxes)
 >>
 endobj
 31 0 obj
 <<
-/Dest [ 9 0 R /XYZ 62.69291 274.6236 0 ] /Next 32 0 R /Parent 28 0 R /Prev 30 0 R /Title (Boxes)
+/Dest [ 8 0 R /XYZ 57.02362 125.4236 0 ] /Next 32 0 R /Parent 27 0 R /Prev 30 0 R /Title (Fills)
 >>
 endobj
 32 0 obj
 <<
-/Dest [ 9 0 R /XYZ 62.69291 125.4236 0 ] /Next 33 0 R /Parent 28 0 R /Prev 31 0 R /Title (Fills)
+/Dest [ 9 0 R /XYZ 57.02362 607.0236 0 ] /Next 33 0 R /Parent 27 0 R /Prev 31 0 R /Title (Text)
 >>
 endobj
 33 0 obj
 <<
-/Dest [ 10 0 R /XYZ 62.69291 607.0236 0 ] /Next 34 0 R /Parent 28 0 R /Prev 32 0 R /Title (Text)
+/Dest [ 9 0 R /XYZ 57.02362 201.4236 0 ] /Parent 27 0 R /Prev 32 0 R /Title (Other)
 >>
 endobj
 34 0 obj
 <<
-/Dest [ 10 0 R /XYZ 62.69291 201.4236 0 ] /Parent 28 0 R /Prev 33 0 R /Title (Other)
+/Dest [ 9 0 R /XYZ 57.02362 122.2236 0 ] /Next 35 0 R /Parent 18 0 R /Prev 27 0 R /Title (TODO)
 >>
 endobj
 35 0 obj
 <<
-/Dest [ 10 0 R /XYZ 62.69291 122.2236 0 ] /Next 36 0 R /Parent 19 0 R /Prev 28 0 R /Title (TODO)
+/Dest [ 11 0 R /XYZ 57.02362 437.8236 0 ] /Next 36 0 R /Parent 18 0 R /Prev 34 0 R /Title (Authors and Contact)
 >>
 endobj
 36 0 obj
 <<
-/Dest [ 12 0 R /XYZ 62.69291 407.8236 0 ] /Next 37 0 R /Parent 19 0 R /Prev 35 0 R /Title (Authors and Contact)
+/Dest [ 11 0 R /XYZ 57.02362 344.8236 0 ] /Next 37 0 R /Parent 18 0 R /Prev 35 0 R /Title (License)
 >>
 endobj
 37 0 obj
 <<
-/Dest [ 12 0 R /XYZ 62.69291 314.8236 0 ] /Next 38 0 R /Parent 19 0 R /Prev 36 0 R /Title (License)
+/Count 7 /Dest [ 11 0 R /XYZ 57.02362 293.8236 0 ] /First 38 0 R /Last 44 0 R /Parent 18 0 R /Prev 36 0 R 
+  /Title (Tests)
 >>
 endobj
 38 0 obj
 <<
-/Count 7 /Dest [ 12 0 R /XYZ 62.69291 263.8236 0 ] /First 39 0 R /Last 45 0 R /Parent 19 0 R /Prev 37 0 R 
-  /Title (Tests)
+/Dest [ 11 0 R /XYZ 57.02362 260.8236 0 ] /Next 39 0 R /Parent 37 0 R /Title (Simple tests)
 >>
 endobj
 39 0 obj
 <<
-/Dest [ 12 0 R /XYZ 62.69291 230.8236 0 ] /Next 40 0 R /Parent 38 0 R /Title (Simple tests)
+/Dest [ 12 0 R /XYZ 57.02362 765.0236 0 ] /Next 40 0 R /Parent 37 0 R /Prev 38 0 R /Title (Flow chart)
 >>
 endobj
 40 0 obj
 <<
-/Dest [ 13 0 R /XYZ 62.69291 697.0236 0 ] /Next 41 0 R /Parent 38 0 R /Prev 39 0 R /Title (Flow chart)
+/Dest [ 12 0 R /XYZ 57.02362 529.0236 0 ] /Next 41 0 R /Parent 37 0 R /Prev 39 0 R /Title (UML)
 >>
 endobj
 41 0 obj
 <<
-/Dest [ 13 0 R /XYZ 62.69291 461.0236 0 ] /Next 42 0 R /Parent 38 0 R /Prev 40 0 R /Title (UML)
+/Dest [ 12 0 R /XYZ 57.02362 197.8236 0 ] /Next 42 0 R /Parent 37 0 R /Prev 40 0 R /Title (Electronics)
 >>
 endobj
 42 0 obj
 <<
-/Dest [ 13 0 R /XYZ 62.69291 129.8236 0 ] /Next 43 0 R /Parent 38 0 R /Prev 41 0 R /Title (Electronics)
+/Dest [ 14 0 R /XYZ 57.02362 377.8236 0 ] /Next 43 0 R /Parent 37 0 R /Prev 41 0 R /Title (Timing diagrams)
 >>
 endobj
 43 0 obj
 <<
-/Dest [ 14 0 R /XYZ 62.69291 303.8236 0 ] /Next 44 0 R /Parent 38 0 R /Prev 42 0 R /Title (Timing diagrams)
+/Dest [ 14 0 R /XYZ 57.02362 139.8236 0 ] /Next 44 0 R /Parent 37 0 R /Prev 42 0 R /Title (Statistical diagrams)
 >>
 endobj
 44 0 obj
 <<
-/Dest [ 16 0 R /XYZ 62.69291 765.0236 0 ] /Next 45 0 R /Parent 38 0 R /Prev 43 0 R /Title (Statistical diagrams)
+/Dest [ 15 0 R /XYZ 57.02362 567.0236 0 ] /Parent 37 0 R /Prev 43 0 R /Title (Schedules)
 >>
 endobj
 45 0 obj
 <<
-/Dest [ 16 0 R /XYZ 62.69291 531.0236 0 ] /Parent 38 0 R /Prev 44 0 R /Title (Schedules)
+/Count 8 /Kids [ 5 0 R 7 0 R 8 0 R 9 0 R 11 0 R 12 0 R 14 0 R 15 0 R ] /Type /Pages
 >>
 endobj
 46 0 obj
 <<
-/Count 8 /Kids [ 5 0 R 8 0 R 9 0 R 10 0 R 12 0 R 13 0 R 14 0 R 16 0 R ] /Type /Pages
->>
-endobj
-47 0 obj
-<<
-/Length 5443
+/Length 5544
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 163.1342 0 Td (aafigure README) Tj T* -163.1342 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 684.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Overview) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 642.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 149.9349 0 Td (aafigure README) Tj T* -149.9349 0 Td ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .680491 Tw (The original idea was to parse ASCII art images, embedded in reST documents and output an image. This) Tj T* 0 Tw .705464 Tw (would mean that simple illustrations could be embedded as ASCII art in the reST source and still look nice) Tj T* 0 Tw (when converted to e.g. HTML.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 708.0236 cm
-q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Overview) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 666.0236 cm
+1 0 0 1 57.02362 612.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .013516 Tw (The original idea was to parse ASCII art images, embedded in reST documents and output an image. This) Tj T* 0 Tw .075542 Tw (would mean that simple illustrations could be embedded as ASCII art in the reST source and still look nice) Tj T* 0 Tw (when converted to e.g. HTML.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .166147 Tw (Since then the aafigure application also grew into a standalone application providing a command line tool for) Tj T* 0 Tw (ASCII art to image conversion.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 636.0236 cm
+1 0 0 1 57.02362 579.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .384651 Tw (Since then the aafigure application also grew into a standalone application providing a command line tool) Tj T* 0 Tw (for ASCII art to image conversion.) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Installation) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 603.0236 cm
+1 0 0 1 57.02362 549.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Installation) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (The package) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 573.0236 cm
+1 0 0 1 57.02362 519.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (The package) Tj T* ET
+BT 1 0 0 1 0 14 Tm 6.663453 Tw 12 TL /F1 10 Tf 0 0 0 rg (To install aafigure, you need to have administrator rights on your system \(be root\). Type) Tj T* 0 Tw /F3 10 Tf (python) Tj ( ) Tj (setup.py) Tj ( ) Tj (install) Tj /F1 10 Tf ( to install aafigure.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 543.0236 cm
+1 0 0 1 57.02362 489.0236 cm
 q
-BT 1 0 0 1 0 14 Tm 5.853555 Tw 12 TL /F1 10 Tf 0 0 0 rg (To install aafigure, you need to have administrator rights on your system \(be root\). Type) Tj T* 0 Tw /F3 10 Tf (python) Tj ( ) Tj (setup.py) Tj ( ) Tj (install) Tj /F1 10 Tf ( to install aafigure.) Tj T* ET
+BT 1 0 0 1 0 14 Tm -0.003038 Tw 12 TL /F1 10 Tf 0 0 0 rg (This installs a package that can be used from python \() Tj /F3 10 Tf (import) Tj ( ) Tj (aafigure) Tj /F1 10 Tf (\) and a command line script called) Tj T* 0 Tw /F3 10 Tf (aafigure) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 513.0236 cm
-q
-BT 1 0 0 1 0 14 Tm 1.09436 Tw 12 TL /F1 10 Tf 0 0 0 rg (This installs a package that can be used from python \() Tj /F3 10 Tf (import) Tj ( ) Tj (aafigure) Tj /F1 10 Tf (\) and a command line script) Tj T* 0 Tw (called ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf (.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 483.0236 cm
+1 0 0 1 57.02362 459.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .537045 Tw (The Python Imaging Library \(PIL\) needs to be installed when support for bitmap formats is desired and it) Tj T* 0 Tw (will need ReportLab for PDF output.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .211575 Tw (The Python Imaging Library \(PIL\) needs to be installed when support for bitmap formats is desired and it will) Tj T* 0 Tw (need ReportLab for PDF output.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 453.0236 cm
+1 0 0 1 57.02362 429.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (The docutils plugin) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (The docutils plugin) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 423.0236 cm
+1 0 0 1 57.02362 399.0236 cm
 q
-BT 1 0 0 1 0 14 Tm 2.59816 Tw 12 TL /F1 10 Tf 0 0 0 rg (The docutils-aafigure extension depends on the aafigure package also requires ) Tj /F3 10 Tf (setuptools) Tj /F1 10 Tf ( \(often) Tj T* 0 Tw (packaged as ) Tj /F3 10 Tf (python-setuptools) Tj /F1 10 Tf (\) and docutils itself \(0.5 or newer\) must be installed.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 3.628941 Tw 12 TL /F1 10 Tf 0 0 0 rg (The docutils-aafigure extension depends on the aafigure package also requires ) Tj /F3 10 Tf (setuptools) Tj /F1 10 Tf ( \(often) Tj T* 0 Tw (packaged as ) Tj /F3 10 Tf (python-setuptools) Tj /F1 10 Tf (\) and docutils itself \(0.5 or newer\) must be installed.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 405.0236 cm
+1 0 0 1 57.02362 381.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (After that, the ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( directive will be available.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 372.0236 cm
+1 0 0 1 57.02362 348.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Implementation) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Implementation) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 354.0236 cm
+1 0 0 1 57.02362 330.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Files in the ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( package:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 338.0236 cm
+1 0 0 1 57.02362 314.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (aafigure.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 323.0236 cm
+1 0 0 1 57.02362 299.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -395,15 +391,17 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 307.0236 cm
+1 0 0 1 57.02362 283.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (aa.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 292.0236 cm
+1 0 0 1 57.02362 268.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -417,15 +415,17 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 276.0236 cm
+1 0 0 1 57.02362 252.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (pdf.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 261.0236 cm
+1 0 0 1 57.02362 237.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -439,15 +439,17 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 245.0236 cm
+1 0 0 1 57.02362 221.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (pil.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 230.0236 cm
+1 0 0 1 57.02362 206.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -461,15 +463,17 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 214.0236 cm
+1 0 0 1 57.02362 190.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (svg.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 199.0236 cm
+1 0 0 1 57.02362 175.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -483,62 +487,65 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 181.0236 cm
+1 0 0 1 57.02362 157.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Files in the ) Tj /F3 10 Tf (docutils) Tj /F1 10 Tf ( directory:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 165.0236 cm
+1 0 0 1 57.02362 141.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (aafigure_directive.py) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 138.0236 cm
+1 0 0 1 57.02362 126.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
-BT 1 0 0 1 0 14 Tm  T* ET
+BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 0 cm
 q
-BT 1 0 0 1 0 14 Tm 2.140751 Tw 12 TL /F1 10 Tf 0 0 0 rg (Implements the ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( Docutils directive that takes these ASCII art figures and generates a) Tj T* 0 Tw (drawing.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Implements the ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( Docutils directive that takes these ASCII art figures and generates a drawing.) Tj T* ET
 Q
 Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 108.0236 cm
+1 0 0 1 57.02362 96.02362 cm
 q
-BT 1 0 0 1 0 14 Tm 1.962339 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( module contains code to parse ASCII art figures and create a list of of shapes. The) Tj T* 0 Tw (different output modules can walk through a list of shapes and write image files.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .321575 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( module contains code to parse ASCII art figures and create a list of of shapes. The different) Tj T* 0 Tw (output modules can walk through a list of shapes and write image files.) Tj T* ET
 Q
 Q
  
 endstream
 endobj
-48 0 obj
+47 0 obj
 <<
-/Length 7882
+/Length 7912
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Usage) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Usage) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 714.0236 cm
+1 0 0 1 57.02362 714.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Command line tool) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Command line tool) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 680.8236 cm
+1 0 0 1 57.02362 680.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -547,8 +554,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 0 0 0 rg
@@ -559,14 +566,14 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 660.8236 cm
+1 0 0 1 57.02362 660.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The tool can also read from standard in and supports many options. Please look at the command's help:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 627.6236 cm
+1 0 0 1 57.02362 627.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -575,8 +582,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 0 0 0 rg
@@ -587,13 +594,13 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 597.6236 cm
+1 0 0 1 57.02362 597.6236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Within reStructured text) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Within reStructured text) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 564.4236 cm
+1 0 0 1 57.02362 564.4236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -602,8 +609,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (./rst2html.py README.txt ) Tj (>) Tj (README.html) Tj T* ET
@@ -613,31 +620,31 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 544.4236 cm
+1 0 0 1 57.02362 544.4236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This results in the ) Tj /F3 10 Tf (README.html) Tj /F1 10 Tf ( file and a ) Tj /F3 10 Tf (.svg) Tj /F1 10 Tf ( file for each ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 514.4236 cm
+1 0 0 1 57.02362 514.4236 cm
 q
-BT 1 0 0 1 0 14 Tm .087045 Tw 12 TL /F1 10 Tf 0 0 0 rg (Display the resulting ) Tj /F3 10 Tf (README.html) Tj /F1 10 Tf ( file in a SVG capable browser. It has been tested with Firefox 1.5, 2.0) Tj T* 0 Tw (and 3.0.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .75402 Tw 12 TL /F1 10 Tf 0 0 0 rg (Display the resulting ) Tj /F3 10 Tf (README.html) Tj /F1 10 Tf ( file in a SVG capable browser. It has been tested with Firefox 1.5, 2.0) Tj T* 0 Tw (and 3.0.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 481.4236 cm
+1 0 0 1 57.02362 481.4236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Short introduction) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Short introduction) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 463.4236 cm
+1 0 0 1 57.02362 463.4236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This code in a reST document that is processed with the enhanced ) Tj /F3 10 Tf (rst2html.py) Tj /F1 10 Tf ( looks like this:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 406.2236 cm
+1 0 0 1 57.02362 406.2236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -646,8 +653,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 48 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 48 re B*
 Q
 q
 BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (.. aafigure::) Tj T*  T* (    --) Tj (>) Tj T* ET
@@ -657,18 +664,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 386.2236 cm
+1 0 0 1 57.02362 386.2236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Which results in an image like this:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 378.2236 cm
+1 0 0 1 57.02362 378.2236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -705,26 +712,27 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 360.2236 cm
+1 0 0 1 57.02362 360.2236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (aafigure) Tj /F1 10 Tf ( directive has the following options:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 354.2236 cm
+1 0 0 1 57.02362 354.2236 cm
 Q
 q
-1 0 0 1 62.69291 354.2236 cm
+1 0 0 1 57.02362 354.2236 cm
 Q
 q
-1 0 0 1 62.69291 342.2236 cm
+1 0 0 1 57.02362 342.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -736,18 +744,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 336.2236 cm
 Q
 q
-1 0 0 1 62.69291 324.2236 cm
+1 0 0 1 57.02362 336.2236 cm
+Q
+q
+1 0 0 1 57.02362 324.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -759,41 +769,45 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 318.2236 cm
 Q
 q
-1 0 0 1 62.69291 270.2236 cm
+1 0 0 1 57.02362 318.2236 cm
+Q
+q
+1 0 0 1 57.02362 270.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 33 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 38 Tm .978314 Tw 12 TL /F3 10 Tf 0 0 0 rg (:format:) Tj ( ) Tj (<) Tj (str) Tj (>) Tj /F1 10 Tf ( choose backend/output format: 'svg', 'png', all bitmap formats that PIL supports) Tj T* 0 Tw .972485 Tw (can be used but only few make sense. Line drawings have a good compression and better quality) Tj T* 0 Tw .741654 Tw (when saved as PNG rather than a JPEG. The best quality will be achieved with SVG, tough not all) Tj T* 0 Tw (browsers support this vector image format at this time.) Tj T* ET
+BT 1 0 0 1 0 38 Tm .321411 Tw 12 TL /F3 10 Tf 0 0 0 rg (:format:) Tj ( ) Tj (<) Tj (str) Tj (>) Tj /F1 10 Tf ( choose backend/output format: 'svg', 'png', all bitmap formats that PIL supports can) Tj T* 0 Tw 1.194897 Tw (be used but only few make sense. Line drawings have a good compression and better quality when) Tj T* 0 Tw .446019 Tw (saved as PNG rather than a JPEG. The best quality will be achieved with SVG, tough not all browsers) Tj T* 0 Tw (support this vector image format at this time.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 264.2236 cm
 Q
 q
-1 0 0 1 62.69291 252.2236 cm
+1 0 0 1 57.02362 264.2236 cm
+Q
+q
+1 0 0 1 57.02362 252.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -805,41 +819,45 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 246.2236 cm
 Q
 q
-1 0 0 1 62.69291 234.2236 cm
+1 0 0 1 57.02362 246.2236 cm
+Q
+q
+1 0 0 1 57.02362 234.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (:background:) Tj ( ) Tj (<) Tj (str) Tj (>) Tj /F1 10 Tf ( background color in the form ) Tj /F3 10 Tf (#rgb) Tj /F1 10 Tf ( or ) Tj /F3 10 Tf (#rrggbb) Tj /F1 10 Tf ( \() Tj /F5 10 Tf (not) Tj /F1 10 Tf ( for SVG output\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (:background:) Tj ( ) Tj (<) Tj (str) Tj (>) Tj /F1 10 Tf ( background color in the form ) Tj /F3 10 Tf (#rgb) Tj /F1 10 Tf ( or ) Tj /F3 10 Tf (#rrggbb) Tj /F1 10 Tf ( \() Tj /F4 10 Tf (not) Tj /F1 10 Tf ( for SVG output\)) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 228.2236 cm
 Q
 q
-1 0 0 1 62.69291 216.2236 cm
+1 0 0 1 57.02362 228.2236 cm
+Q
+q
+1 0 0 1 57.02362 216.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -851,18 +869,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 210.2236 cm
 Q
 q
-1 0 0 1 62.69291 198.2236 cm
+1 0 0 1 57.02362 210.2236 cm
+Q
+q
+1 0 0 1 57.02362 198.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -874,24 +894,26 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 192.2236 cm
 Q
 q
-1 0 0 1 62.69291 114.2236 cm
+1 0 0 1 57.02362 192.2236 cm
+Q
+q
+1 0 0 1 57.02362 114.2236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 63 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 15 cm
 q
-BT 1 0 0 1 0 50 Tm .21936 Tw 12 TL /F3 10 Tf 0 0 0 rg (:aspect:) Tj ( ) Tj (<) Tj (float) Tj (>) Tj /F1 10 Tf ( change aspect ratio. Effectively it is the width of the image that is multiplied by) Tj T* 0 Tw 2.196235 Tw (this factor. The default setting ) Tj /F3 10 Tf (1) Tj /F1 10 Tf ( is useful when shapes must have the same look when drawn) Tj T* 0 Tw 2.033828 Tw (horizontally or vertically. However, ) Tj /F3 10 Tf (:aspect:) Tj ( ) Tj (0.5) Tj /F1 10 Tf ( looks more like the original ASCII and even) Tj T* 0 Tw .207356 Tw (smaller factors may be useful for timing diagrams and such. But there is a risk that text is cropped or) Tj T* 0 Tw (is draw over an object beside it.) Tj T* ET
+BT 1 0 0 1 0 50 Tm .928022 Tw 12 TL /F3 10 Tf 0 0 0 rg (:aspect:) Tj ( ) Tj (<) Tj (float) Tj (>) Tj /F1 10 Tf ( change aspect ratio. Effectively it is the width of the image that is multiplied by) Tj T* 0 Tw 2.904897 Tw (this factor. The default setting ) Tj /F3 10 Tf (1) Tj /F1 10 Tf ( is useful when shapes must have the same look when drawn) Tj T* 0 Tw .198453 Tw (horizontally or vertically. However, ) Tj /F3 10 Tf (:aspect:) Tj ( ) Tj (0.5) Tj /F1 10 Tf ( looks more like the original ASCII and even smaller) Tj T* 0 Tw .791417 Tw (factors may be useful for timing diagrams and such. But there is a risk that text is cropped or is draw) Tj T* 0 Tw (over an object beside it.) Tj T* ET
 Q
 Q
 q
@@ -904,18 +926,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 108.2236 cm
 Q
 q
-1 0 0 1 62.69291 96.22362 cm
+1 0 0 1 57.02362 108.2236 cm
+Q
+q
+1 0 0 1 57.02362 96.22362 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -927,32 +951,33 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 96.22362 cm
+1 0 0 1 57.02362 96.22362 cm
 Q
  
 endstream
 endobj
-49 0 obj
+48 0 obj
 <<
-/Length 13794
+/Length 13853
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 747.0236 cm
+1 0 0 1 57.02362 747.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Lines) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Lines) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 705.0236 cm
+1 0 0 1 57.02362 705.0236 cm
 q
-BT 1 0 0 1 0 26 Tm .283171 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (-) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (|) Tj /F1 10 Tf ( are normally used for lines. ) Tj /F3 10 Tf (_) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (~) Tj /F1 10 Tf ( can also be used. They are slightly longer lines than the) Tj T* 0 Tw .815823 Tw /F3 10 Tf (-) Tj /F1 10 Tf (. ) Tj /F3 10 Tf (_) Tj /F1 10 Tf ( is drawn a bit lower and ) Tj /F3 10 Tf (~) Tj /F1 10 Tf ( a bit upper. ) Tj /F3 10 Tf (=) Tj /F1 10 Tf ( gives a thicker line. The later three line types can only be) Tj T* 0 Tw (drawn horizontally.) Tj T* ET
+BT 1 0 0 1 0 26 Tm -0.115486 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (-) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (|) Tj /F1 10 Tf ( are normally used for lines. ) Tj /F3 10 Tf (_) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (~) Tj /F1 10 Tf ( can also be used. They are slightly longer lines than the ) Tj /F3 10 Tf (-) Tj /F1 10 Tf (. ) Tj /F3 10 Tf (_) Tj /F1 10 Tf  T* 0 Tw .923841 Tw (is drawn a bit lower and ) Tj /F3 10 Tf (~) Tj /F1 10 Tf ( a bit upper. ) Tj /F3 10 Tf (=) Tj /F1 10 Tf ( gives a thicker line. The later three line types can only be drawn) Tj T* 0 Tw (horizontally.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 647.8236 cm
+1 0 0 1 57.02362 647.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -961,8 +986,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 48 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 48 re B*
 Q
 q
 0 0 0 rg
@@ -973,11 +998,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 615.8236 cm
+1 0 0 1 57.02362 615.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -1070,18 +1095,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 585.8236 cm
+1 0 0 1 57.02362 585.8236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .941098 Tw (It is also possible to draw diagonal lines. Their use is somewhat restricted tough. Not all cases work as) Tj T* 0 Tw (expected.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.571019 Tw (It is also possible to draw diagonal lines. Their use is somewhat restricted tough. Not all cases work as) Tj T* 0 Tw (expected.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 513.8236 cm
+1 0 0 1 57.02362 513.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -1710,18 +1735,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 495.8236 cm
+1 0 0 1 57.02362 495.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (And drawing longer diagonal lines with different angles looks ugly...) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 463.8236 cm
+1 0 0 1 57.02362 463.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -1782,20 +1807,20 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 433.8236 cm
+1 0 0 1 57.02362 433.8236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Arrows) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Arrows) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 415.8236 cm
+1 0 0 1 57.02362 415.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Arrow styles are:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 334.6236 cm
+1 0 0 1 57.02362 334.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -1804,8 +1829,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 72 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 72 re B*
 Q
 q
 BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (---) Tj (>) Tj (   | | | | | |) Tj T* (---) Tj (<) Tj (   | | | | | |) Tj T* (---o   ^ V v o O #) Tj T* (---O) Tj T* (---#) Tj T* ET
@@ -1815,11 +1840,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 286.6236 cm
+1 0 0 1 57.02362 286.6236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -2124,19 +2149,19 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 256.6236 cm
+1 0 0 1 57.02362 256.6236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Boxes) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Boxes) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 226.6236 cm
+1 0 0 1 57.02362 226.6236 cm
 q
-BT 1 0 0 1 0 14 Tm .463672 Tw 12 TL /F1 10 Tf 0 0 0 rg (Boxes are automatically draw when the edges are made with ) Tj /F3 10 Tf (+) Tj /F1 10 Tf (, filled boxes are made with ) Tj /F3 10 Tf (X) Tj /F1 10 Tf ( \(must be at) Tj T* 0 Tw (least two units high or wide\). It is also possible to make rounded edges in two ways:) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.060439 Tw 12 TL /F1 10 Tf 0 0 0 rg (Boxes are automatically draw when the edges are made with ) Tj /F3 10 Tf (+) Tj /F1 10 Tf (, filled boxes are made with ) Tj /F3 10 Tf (X) Tj /F1 10 Tf ( \(must be at) Tj T* 0 Tw (least two units high or wide\). It is also possible to make rounded edges in two ways:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 169.4236 cm
+1 0 0 1 57.02362 169.4236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -2145,8 +2170,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 48 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 48 re B*
 Q
 q
 0 0 0 rg
@@ -2157,11 +2182,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 137.4236 cm
+1 0 0 1 57.02362 137.4236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -2503,33 +2528,33 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 107.4236 cm
+1 0 0 1 57.02362 107.4236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Fills) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Fills) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 77.42362 cm
+1 0 0 1 57.02362 77.42362 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .016235 Tw (Upper case characters generate shapes with borders, lower case without border. Fills must be at least two) Tj T* 0 Tw (characters wide or high. \(This reduces the chance that it is detected as Fill instead of a string\)) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .724897 Tw (Upper case characters generate shapes with borders, lower case without border. Fills must be at least two) Tj T* 0 Tw (characters wide or high. \(This reduces the chance that it is detected as Fill instead of a string\)) Tj T* ET
 Q
 Q
  
 endstream
 endobj
-50 0 obj
+49 0 obj
 <<
-/Length 75424
+/Length 75866
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 661.0236 cm
+1 0 0 1 57.02362 661.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -9770,18 +9795,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 643.0236 cm
+1 0 0 1 57.02362 643.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Complex shapes can be filled:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 619.0236 cm
+1 0 0 1 57.02362 619.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -11522,34 +11547,34 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 589.0236 cm
+1 0 0 1 57.02362 589.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Text) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Text) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 571.0236 cm
+1 0 0 1 57.02362 571.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The images may contain text too. There are different styles to enter text:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 553.0236 cm
+1 0 0 1 57.02362 553.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F5 10 Tf 12 TL (direct) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (direct) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 535.0236 cm
+1 0 0 1 57.02362 535.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (By default are repeated characters detected as fill:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 489.8236 cm
+1 0 0 1 57.02362 489.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -11558,8 +11583,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 36 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 36 re B*
 Q
 q
 0 0 0 rg
@@ -11570,11 +11595,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 465.8236 cm
+1 0 0 1 57.02362 465.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -11759,21 +11784,21 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 447.8236 cm
+1 0 0 1 57.02362 447.8236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F5 10 Tf 12 TL (quoted) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (quoted) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 429.8236 cm
+1 0 0 1 57.02362 429.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Text between quotes has priority over any graphical meaning:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 384.6236 cm
+1 0 0 1 57.02362 384.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -11782,8 +11807,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 36 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 36 re B*
 Q
 q
 0 0 0 rg
@@ -11794,11 +11819,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 360.6236 cm
+1 0 0 1 57.02362 360.6236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -11945,26 +11970,26 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 330.6236 cm
+1 0 0 1 57.02362 330.6236 cm
 q
-BT 1 0 0 1 0 14 Tm .834488 Tw 12 TL /F3 10 Tf 0 0 0 rg (") Tj /F1 10 Tf (, ) Tj /F3 10 Tf (') Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (`) Tj /F1 10 Tf ( are all valid quotation marks. The quotes are not visible in the resulting image. This not only) Tj T* 0 Tw (disables fills \(see below\), it also treats ) Tj /F3 10 Tf (-) Tj /F1 10 Tf (, ) Tj /F3 10 Tf (|) Tj /F1 10 Tf ( etc. as text.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.401417 Tw 12 TL /F3 10 Tf 0 0 0 rg (") Tj /F1 10 Tf (, ) Tj /F3 10 Tf (') Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (`) Tj /F1 10 Tf ( are all valid quotation marks. The quotes are not visible in the resulting image. This not only) Tj T* 0 Tw (disables fills \(see below\), it also treats ) Tj /F3 10 Tf (-) Tj /F1 10 Tf (, ) Tj /F3 10 Tf (|) Tj /F1 10 Tf ( etc. as text.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 312.6236 cm
+1 0 0 1 57.02362 312.6236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F5 10 Tf 12 TL (textual option) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (textual option) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 282.6236 cm
+1 0 0 1 57.02362 282.6236 cm
 q
-BT 1 0 0 1 0 14 Tm .232651 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (:textual:) Tj /F1 10 Tf ( option disables horizontal fill detection. Fills are only detected when they are vertically at) Tj T* 0 Tw (least 2 characters high:) Tj T* ET
+BT 1 0 0 1 0 14 Tm .988556 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (:textual:) Tj /F1 10 Tf ( option disables horizontal fill detection. Fills are only detected when they are vertically at) Tj T* 0 Tw (least 2 characters high:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 237.4236 cm
+1 0 0 1 57.02362 237.4236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -11973,8 +11998,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 36 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 36 re B*
 Q
 q
 0 0 0 rg
@@ -11985,11 +12010,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 213.4236 cm
+1 0 0 1 57.02362 213.4236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -12078,13 +12103,13 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 183.4236 cm
+1 0 0 1 57.02362 183.4236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Other) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Other) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 150.2236 cm
+1 0 0 1 57.02362 150.2236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -12093,8 +12118,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 0 0 0 rg
@@ -12105,11 +12130,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 134.2236 cm
+1 0 0 1 57.02362 134.2236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -12169,59 +12194,62 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 101.2236 cm
+1 0 0 1 57.02362 101.2236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (TODO) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (TODO) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 89.22362 cm
+1 0 0 1 57.02362 89.22362 cm
 Q
 q
-1 0 0 1 62.69291 89.22362 cm
+1 0 0 1 57.02362 89.22362 cm
 Q
- 
-endstream
-endobj
-51 0 obj
-<<
-/Length 9852
->>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 65.22362 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .243735 Tw (Symbol detection: scan for predefined shapes in the ASCII image and output them as symbol from a) Tj T* 0 Tw (library) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .952397 Tw (Symbol detection: scan for predefined shapes in the ASCII image and output them as symbol from a) Tj T* 0 Tw (library) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 735.0236 cm
 Q
 q
-1 0 0 1 62.69291 723.0236 cm
+1 0 0 1 57.02362 62.69291 cm
+Q
+ 
+endstream
+endobj
+50 0 obj
+<<
+/Length 12729
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 753.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12234,18 +12262,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 717.0236 cm
 Q
 q
-1 0 0 1 62.69291 705.0236 cm
+1 0 0 1 57.02362 747.0236 cm
+Q
+q
+1 0 0 1 57.02362 735.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12258,18 +12288,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 699.0236 cm
 Q
 q
-1 0 0 1 62.69291 533.8236 cm
+1 0 0 1 57.02362 729.0236 cm
+Q
+q
+1 0 0 1 57.02362 563.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 150.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12284,6 +12316,7 @@ q
 Q
 q
 1 0 0 1 23 -3 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -12295,20 +12328,21 @@ q
 Q
 q
 1 0 0 1 20 48 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 78.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 66.2 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .920574 Tw (have an :option: to set color tags. Shapes that touch such a tag inherit it's color. The tag) Tj T* 0 Tw (would be visible in the ASCII source tough:) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL -0.106203 Tw (have an :option: to set color tags. Shapes that touch such a tag inherit it's color. The tag would) Tj T* 0 Tw (be visible in the ASCII source tough:) Tj T* ET
 Q
 Q
 q
@@ -12321,8 +12355,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 402.6898 60 re B*
+.941176 .972549 1 rg
+n -6 -6 414.0283 60 re B*
 Q
 q
 BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (.. aafigure::) Tj T* (    :colortag: 1:red, 2:blue) Tj T*  T* (    1---) Tj (>) Tj (  ---) Tj (>) Tj (2) Tj T* ET
@@ -12334,18 +12368,20 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 20 42 cm
 Q
 q
 1 0 0 1 20 30 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12357,6 +12393,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 20 30 cm
 Q
@@ -12364,10 +12401,11 @@ q
 1 0 0 1 20 0 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .966136 Tw (drawback: both are complex to implement, searching for shapes that belong together. It's also) Tj T* 0 Tw (not always wanted that e.g. when a line touches a box, both have the same color) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .515596 Tw (drawback: both are complex to implement, searching for shapes that belong together. It's also not) Tj T* 0 Tw (always wanted that e.g. when a line touches a box, both have the same color) Tj T* ET
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -12376,18 +12414,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 527.8236 cm
 Q
 q
-1 0 0 1 62.69291 515.8236 cm
+1 0 0 1 57.02362 557.8236 cm
+Q
+q
+1 0 0 1 57.02362 545.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12399,42 +12439,46 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 509.8236 cm
 Q
 q
-1 0 0 1 62.69291 485.8236 cm
+1 0 0 1 57.02362 539.8236 cm
+Q
+q
+1 0 0 1 57.02362 515.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .175777 Tw (Punctuation not included in strings \(now a bit improved but if it has a graphical meaning , then that is) Tj T* 0 Tw (chooses, even if it makes no sense\), underlines in strings are tricky to detect...) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .772545 Tw (Punctuation not included in strings \(now a bit improved but if it has a graphical meaning , then that is) Tj T* 0 Tw (chooses, even if it makes no sense\), underlines in strings are tricky to detect...) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 479.8236 cm
 Q
 q
-1 0 0 1 62.69291 467.8236 cm
+1 0 0 1 57.02362 509.8236 cm
+Q
+q
+1 0 0 1 57.02362 497.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12446,42 +12490,46 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 461.8236 cm
 Q
 q
-1 0 0 1 62.69291 437.8236 cm
+1 0 0 1 57.02362 491.8236 cm
+Q
+q
+1 0 0 1 57.02362 467.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.343876 Tw (Group shapes that belong to an object, so that it's easier to import and change the graphics in a) Tj T* 0 Tw (vector drawing program.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .290439 Tw (Group shapes that belong to an object, so that it's easier to import and change the graphics in a vector) Tj T* 0 Tw (drawing program.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 431.8236 cm
 Q
 q
-1 0 0 1 62.69291 419.8236 cm
+1 0 0 1 57.02362 461.8236 cm
+Q
+q
+1 0 0 1 57.02362 449.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12494,30 +12542,32 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 419.8236 cm
 Q
 q
-1 0 0 1 62.69291 386.8236 cm
+1 0 0 1 57.02362 449.8236 cm
+Q
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Authors and Contact) Tj T* ET
+1 0 0 1 57.02362 416.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Authors and Contact) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 374.8236 cm
+1 0 0 1 57.02362 404.8236 cm
 Q
 q
-1 0 0 1 62.69291 374.8236 cm
+1 0 0 1 57.02362 404.8236 cm
 Q
 q
-1 0 0 1 62.69291 362.8236 cm
+1 0 0 1 57.02362 392.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12530,18 +12580,20 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 356.8236 cm
 Q
 q
-1 0 0 1 62.69291 344.8236 cm
+1 0 0 1 57.02362 386.8236 cm
+Q
+q
+1 0 0 1 57.02362 374.8236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -12554,53 +12606,54 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 344.8236 cm
 Q
 q
-1 0 0 1 62.69291 326.8236 cm
-q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The project page is at ) Tj 0 0 .501961 rg (https://launchpad.net/aafigure) Tj 0 0 0 rg ( It should be used to report bugs and feature requests.) Tj T* ET
-Q
+1 0 0 1 57.02362 374.8236 cm
 Q
 q
-1 0 0 1 62.69291 293.8236 cm
+1 0 0 1 57.02362 356.8236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (License) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The project page is at ) Tj 0 .4 .6 rg (https://launchpad.net/aafigure) Tj 0 0 0 rg ( It should be used to report bugs and feature requests.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 275.8236 cm
+1 0 0 1 57.02362 323.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (License) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 305.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (BSD) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 242.8236 cm
+1 0 0 1 57.02362 272.8236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Tests) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Tests) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 212.8236 cm
+1 0 0 1 57.02362 242.8236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Simple tests) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Simple tests) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 194.8236 cm
+1 0 0 1 57.02362 224.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Different arrow types:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 170.8236 cm
+1 0 0 1 57.02362 200.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -12945,18 +12998,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 152.8236 cm
+1 0 0 1 57.02362 182.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Boxes and shapes:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 128.8236 cm
+1 0 0 1 57.02362 158.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -13006,21 +13059,12 @@ Q
 Q
 Q
 Q
- 
-endstream
-endobj
-52 0 obj
-<<
-/Length 26411
->>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 709.0236 cm
+1 0 0 1 57.02362 102.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -13466,18 +13510,27 @@ Q
 Q
 Q
 Q
+ 
+endstream
+endobj
+51 0 obj
+<<
+/Length 28257
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 679.0236 cm
+1 0 0 1 57.02362 747.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Flow chart) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Flow chart) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 473.0236 cm
+1 0 0 1 57.02362 541.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -13988,24 +14041,24 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 443.0236 cm
+1 0 0 1 57.02362 511.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (UML) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (UML) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 425.0236 cm
+1 0 0 1 57.02362 493.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (No not really, yet. But you get the idea.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 297.0236 cm
+1 0 0 1 57.02362 365.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -15050,11 +15103,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 213.8236 cm
+1 0 0 1 57.02362 281.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -15520,11 +15573,11 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 141.8236 cm
+1 0 0 1 57.02362 209.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -16225,33 +16278,24 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 111.8236 cm
+1 0 0 1 57.02362 179.8236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Electronics) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Electronics) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 93.82362 cm
+1 0 0 1 57.02362 161.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (It would be cool if it could display simple schematics.) Tj T* ET
 Q
 Q
- 
-endstream
-endobj
-53 0 obj
-<<
-/Length 37855
->>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 709.0236 cm
+1 0 0 1 57.02362 105.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -16710,20 +16754,21 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 703.0236 cm
+1 0 0 1 57.02362 99.82362 cm
 Q
 q
-1 0 0 1 62.69291 703.0236 cm
+1 0 0 1 57.02362 99.82362 cm
 Q
 q
-1 0 0 1 62.69291 691.0236 cm
+1 0 0 1 57.02362 87.82362 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -16735,15 +16780,25 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 691.0236 cm
 Q
 q
-1 0 0 1 62.69291 611.0236 cm
+1 0 0 1 57.02362 87.82362 cm
+Q
+ 
+endstream
+endobj
+52 0 obj
+<<
+/Length 33127
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 685.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -17384,20 +17439,21 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 605.0236 cm
+1 0 0 1 57.02362 679.0236 cm
 Q
 q
-1 0 0 1 62.69291 605.0236 cm
+1 0 0 1 57.02362 679.0236 cm
 Q
 q
-1 0 0 1 62.69291 593.0236 cm
+1 0 0 1 57.02362 667.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -17410,41 +17466,45 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 587.0236 cm
 Q
 q
-1 0 0 1 62.69291 563.0236 cm
+1 0 0 1 57.02362 661.0236 cm
+Q
+q
+1 0 0 1 57.02362 637.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
-BT 1 0 0 1 0 14 Tm 1.42436 Tw 12 TL /F1 10 Tf 0 0 0 rg (Caps not optimal. Too far apart in image, not very good recognisable in ASCII. Space cannot be) Tj T* 0 Tw (removed as the two ) Tj /F3 10 Tf (+) Tj /F1 10 Tf ( signs would be connected otherwise. The schematic below uses an other style.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 2.133022 Tw 12 TL /F1 10 Tf 0 0 0 rg (Caps not optimal. Too far apart in image, not very good recognisable in ASCII. Space cannot be) Tj T* 0 Tw (removed as the two ) Tj /F3 10 Tf (+) Tj /F1 10 Tf ( signs would be connected otherwise. The schematic below uses an other style.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 557.0236 cm
 Q
 q
-1 0 0 1 62.69291 545.0236 cm
+1 0 0 1 57.02362 631.0236 cm
+Q
+q
+1 0 0 1 57.02362 619.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -17457,22 +17517,23 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 545.0236 cm
 Q
 q
-1 0 0 1 62.69291 527.0236 cm
+1 0 0 1 57.02362 619.0236 cm
+Q
+q
+1 0 0 1 57.02362 601.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Here is a complete circuit with different parts:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 315.8236 cm
+1 0 0 1 57.02362 389.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -19100,17 +19161,17 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 285.8236 cm
+1 0 0 1 57.02362 359.8236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Timing diagrams) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Timing diagrams) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 231.8236 cm
+1 0 0 1 57.02362 305.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -19513,18 +19574,18 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 213.8236 cm
+1 0 0 1 57.02362 287.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Here is one with descriptions:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 77.82362 cm
+1 0 0 1 57.02362 151.8236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -20052,33 +20113,33 @@ Q
 Q
 Q
 Q
+q
+1 0 0 1 57.02362 121.8236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Statistical diagrams) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 103.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 .4 .6 rg (Benfords) Tj 0 0 0 rg ( distribution of the sizes of files on my hard drive:) Tj T* ET
+Q
+Q
  
 endstream
 endobj
-54 0 obj
+53 0 obj
 <<
-/Length 33161
+/Length 32893
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 747.0236 cm
-q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Statistical diagrams) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 729.0236 cm
-q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (Benfords) Tj 0 0 0 rg ( distribution of the sizes of files on my hard drive:) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 617.0236 cm
+1 0 0 1 57.02362 653.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -20713,17 +20774,17 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 599.0236 cm
+1 0 0 1 57.02362 635.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Just some bars:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 543.0236 cm
+1 0 0 1 57.02362 579.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -22136,17 +22197,17 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 513.0236 cm
+1 0 0 1 57.02362 549.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Schedules) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (Schedules) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 459.0236 cm
+1 0 0 1 57.02362 495.0236 cm
 q
 0 0 0 rg
-BT /F4 10 Tf 12 TL ET
-BT /F4 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
+BT /F2 10 Tf 12 TL ET
 0 0 0 RG
 [] 0 d
 0 J
@@ -24309,128 +24370,127 @@ Q
  
 endstream
 endobj
-55 0 obj
+54 0 obj
 <<
-/Nums [ 0 56 0 R 1 57 0 R 2 58 0 R 3 59 0 R 4 60 0 R 
-  5 61 0 R 6 62 0 R 7 63 0 R ]
+/Nums [ 0 55 0 R 1 56 0 R 2 57 0 R 3 58 0 R 4 59 0 R 
+  5 60 0 R 6 61 0 R 7 62 0 R ]
 >>
 endobj
-56 0 obj
+55 0 obj
 <<
 /S /D /St 1
 >>
 endobj
-57 0 obj
+56 0 obj
 <<
 /S /D /St 2
 >>
 endobj
-58 0 obj
+57 0 obj
 <<
 /S /D /St 3
 >>
 endobj
-59 0 obj
+58 0 obj
 <<
 /S /D /St 4
 >>
 endobj
-60 0 obj
+59 0 obj
 <<
 /S /D /St 5
 >>
 endobj
-61 0 obj
+60 0 obj
 <<
 /S /D /St 6
 >>
 endobj
-62 0 obj
+61 0 obj
 <<
 /S /D /St 7
 >>
 endobj
-63 0 obj
+62 0 obj
 <<
 /S /D /St 8
 >>
 endobj
 xref
-0 64
+0 63
 0000000000 65535 f 
 0000000073 00000 n 
-0000000144 00000 n 
-0000000251 00000 n 
-0000000363 00000 n 
-0000000468 00000 n 
-0000000673 00000 n 
-0000000782 00000 n 
-0000000897 00000 n 
-0000001102 00000 n 
-0000001307 00000 n 
-0000001513 00000 n 
-0000001696 00000 n 
-0000001921 00000 n 
-0000002127 00000 n 
-0000002333 00000 n 
-0000002527 00000 n 
-0000002752 00000 n 
-0000002858 00000 n 
-0000003131 00000 n 
-0000003206 00000 n 
-0000003315 00000 n 
-0000003480 00000 n 
-0000003592 00000 n 
-0000003712 00000 n 
-0000003840 00000 n 
-0000003998 00000 n 
-0000004116 00000 n 
-0000004241 00000 n 
-0000004412 00000 n 
-0000004518 00000 n 
-0000004638 00000 n 
-0000004757 00000 n 
-0000004876 00000 n 
-0000004995 00000 n 
-0000005102 00000 n 
-0000005221 00000 n 
-0000005355 00000 n 
-0000005477 00000 n 
-0000005623 00000 n 
-0000005737 00000 n 
-0000005862 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000455 00000 n 
+0000000660 00000 n 
+0000000775 00000 n 
+0000000980 00000 n 
+0000001185 00000 n 
+0000001390 00000 n 
+0000001573 00000 n 
+0000001798 00000 n 
+0000002004 00000 n 
+0000002198 00000 n 
+0000002423 00000 n 
+0000002629 00000 n 
+0000002735 00000 n 
+0000003008 00000 n 
+0000003083 00000 n 
+0000003192 00000 n 
+0000003357 00000 n 
+0000003469 00000 n 
+0000003589 00000 n 
+0000003717 00000 n 
+0000003875 00000 n 
+0000003993 00000 n 
+0000004118 00000 n 
+0000004289 00000 n 
+0000004395 00000 n 
+0000004515 00000 n 
+0000004634 00000 n 
+0000004753 00000 n 
+0000004871 00000 n 
+0000004977 00000 n 
+0000005095 00000 n 
+0000005229 00000 n 
+0000005351 00000 n 
+0000005497 00000 n 
+0000005611 00000 n 
+0000005736 00000 n 
+0000005854 00000 n 
 0000005980 00000 n 
-0000006106 00000 n 
-0000006236 00000 n 
-0000006371 00000 n 
-0000006482 00000 n 
-0000006589 00000 n 
-0000012084 00000 n 
-0000020018 00000 n 
-0000033865 00000 n 
-0000109342 00000 n 
-0000119246 00000 n 
-0000145710 00000 n 
-0000183618 00000 n 
-0000216832 00000 n 
-0000216939 00000 n 
-0000216973 00000 n 
-0000217007 00000 n 
-0000217041 00000 n 
-0000217075 00000 n 
-0000217109 00000 n 
-0000217143 00000 n 
-0000217177 00000 n 
+0000006110 00000 n 
+0000006245 00000 n 
+0000006356 00000 n 
+0000006462 00000 n 
+0000012058 00000 n 
+0000020022 00000 n 
+0000033928 00000 n 
+0000109847 00000 n 
+0000122629 00000 n 
+0000150939 00000 n 
+0000184119 00000 n 
+0000217065 00000 n 
+0000217172 00000 n 
+0000217206 00000 n 
+0000217240 00000 n 
+0000217274 00000 n 
+0000217308 00000 n 
+0000217342 00000 n 
+0000217376 00000 n 
+0000217410 00000 n 
 trailer
 <<
 /ID 
 [<1c8a5d161e95977b51bd811f52402a02><1c8a5d161e95977b51bd811f52402a02>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 18 0 R
-/Root 17 0 R
-/Size 64
+/Info 17 0 R
+/Root 16 0 R
+/Size 63
 >>
 startxref
-217211
+217444
 %%EOF

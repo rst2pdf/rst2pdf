@@ -1,7 +1,13 @@
 embeddedFonts: []
 fontsAlias:
   fontSans: Helvetica
+  fontSansBold: Helvetica-Bold
+  fontSansBoldItalic: Helvetica-BoldOblique
+  fontSansItalic: Helvetica-Oblique
   fontMono: Courier
+  fontMonoBold: Courier-Bold
+  fontMonoBoldItalic: Courier-BoldOblique
+  fontMonoItalic: Courier-Oblique
   fontSerif: Times-Roman
 linkColor: navy
 pageSetup:

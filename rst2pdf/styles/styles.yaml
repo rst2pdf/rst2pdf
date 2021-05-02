@@ -27,13 +27,30 @@ pageSetup:
   width: null
 pageTemplates:
   mainPage:
-    defaultFooter: '###Page###'
     frames:
     - - 0%
       - 0%
       - 100%
       - 100%
     showFooter: true
+    showHeader: true
+  decoratedPage:
+    defaultFooter: '###Page###'
+    defaultHeader: '###Section###'
+    frames:
+    - - 0%
+      - 0%
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+  emptyPage:
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: false
     showHeader: false
   coverPage:
     frames:
@@ -640,7 +657,7 @@ styles:
   table-heading:
     alignment: TA_CENTER
     borderPadding: 0
-    parent: heading
+    fontName: fontSansBold
     valign: BOTTOM
   table-title:
     alignment: TA_CENTER

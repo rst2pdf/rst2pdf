@@ -57,7 +57,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Outlines 15 0 R /PageLabels 16 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
+/PageLabels 15 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
 >>
 endobj
 10 0 obj
@@ -73,7 +73,7 @@ endobj
 endobj
 12 0 obj
 <<
-/Length 5182
+/Length 5176
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -103,6 +103,7 @@ q
 Q
 q
 1 0 0 1 34.34646 384.7559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -114,6 +115,7 @@ BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL .48203 Tw (This is a common paragraph. This i
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -136,7 +138,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 771.9969 108 re B*
 Q
 q
@@ -159,6 +161,7 @@ q
 Q
 q
 1 0 0 1 34.34646 114.3559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -172,7 +175,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 751.9969 108 re B*
 Q
 q
@@ -184,6 +187,7 @@ Q
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -198,6 +202,7 @@ Q
 Q
 q
 1 0 0 1 34.34646 48.51969 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 36.83622 Tm  T* ET
@@ -211,7 +216,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 745.9969 36 re B*
 Q
 q
@@ -225,17 +230,19 @@ Q
 q
 Q
 Q
+Q
  
 endstream
 endobj
 13 0 obj
 <<
-/Length 4415
+/Length 4407
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 34.34646 458.5559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 75.2 Tm  T* ET
@@ -249,7 +256,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 745.9969 84 re B*
 Q
 q
@@ -261,6 +268,7 @@ Q
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -280,7 +288,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 771.9969 108 re B*
 Q
 q
@@ -303,6 +311,7 @@ q
 Q
 q
 1 0 0 1 34.34646 188.1559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -316,7 +325,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 751.9969 108 re B*
 Q
 q
@@ -328,6 +337,7 @@ Q
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -345,6 +355,7 @@ q
 Q
 q
 1 0 0 1 34.34646 48.51969 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -360,6 +371,7 @@ q
 Q
 q
 1 0 0 1 20 0 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -373,7 +385,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 719.9969 84 re B*
 Q
 q
@@ -387,7 +399,9 @@ Q
 q
 Q
 Q
+Q
 q
+Q
 Q
 Q
  
@@ -395,17 +409,19 @@ endstream
 endobj
 14 0 obj
 <<
-/Length 3152
+/Length 2919
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
 1 0 0 1 34.34646 509.5559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 0 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -419,7 +435,7 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 719.9969 36 re B*
 Q
 q
@@ -433,10 +449,12 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 20 0 cm
 Q
 q
+Q
 Q
 Q
 q
@@ -461,6 +479,7 @@ q
 Q
 q
 1 0 0 1 34.34646 256.3559 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -476,6 +495,7 @@ q
 Q
 q
 1 0 0 1 20 0 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -489,49 +509,47 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n -6 -6 731.9969 180 re B*
 Q
 q
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 156 78 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 144 78 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 132 78 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 108 54 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 96 54 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 36 24 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 30 36 48 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 78 36 12 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 30 24 60 12 re f*
-.960784 .960784 .862745 rg
-n 96 24 108 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 30 12 60 12 re f*
-.960784 .960784 .862745 rg
-n 96 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 30 0 60 12 re f*
-BT 1 0 0 1 0 158 Tm 12 TL /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (Release Notes) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T*  T* /F4 10 Tf 0 0 .501961 rg (Release X) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=========) Tj /F2 10 Tf 0 0 0 rg  T* (Following issues have been fixed in this release:) Tj T*  T* (Fixes) Tj T*  T* 0 0 0 rg (  ..) Tj 0 0 0 rg ( ) Tj /F4 10 Tf .666667 .133333 1 rg (rolelist) Tj /F2 10 Tf 0 0 0 rg (::) Tj 0 0 0 rg ( bug) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:template:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (#${value}: ${text}) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:levelsup:) Tj /F2 10 Tf 0 0 0 rg ( ) Tj 0 0 1 rg (2) Tj 0 0 0 rg  T* (     ) Tj /F4 10 Tf 0 0 1 rg (:siblings:) Tj T* ET
+BT 1 0 0 1 0 158 Tm 12 TL /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (Release Notes) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=============) Tj /F2 10 Tf 0 0 0 rg  T*  T* /F4 10 Tf 0 0 .501961 rg (Release X) Tj /F2 10 Tf 0 0 0 rg  T* /F4 10 Tf 0 0 .501961 rg (=========) Tj /F2 10 Tf 0 0 0 rg  T* (Following issues have been fixed in this release:) Tj T*  T* (Fixes) Tj T*  T* (  ..) Tj ( ) Tj /F4 10 Tf .666667 .133333 1 rg (rolelist) Tj /F2 10 Tf 0 0 0 rg (::) Tj ( bug) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:template:) Tj /F2 10 Tf 0 0 0 rg ( #${value}: ${text}) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:levelsup:) Tj /F2 10 Tf 0 0 0 rg ( 2) Tj T* (     ) Tj /F4 10 Tf 0 0 1 rg (:siblings:) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
+Q
 Q
 Q
 q
 1 0 0 1 20 0 cm
 Q
 q
+Q
 Q
 Q
 q
@@ -542,31 +560,26 @@ endstream
 endobj
 15 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 16 0 R 1 17 0 R 2 18 0 R ]
 >>
 endobj
 16 0 obj
 <<
-/Nums [ 0 17 0 R 1 18 0 R 2 19 0 R ]
+/S /D /St 1
 >>
 endobj
 17 0 obj
 <<
-/S /D /St 1
->>
-endobj
-18 0 obj
-<<
 /S /D /St 2
 >>
 endobj
-19 0 obj
+18 0 obj
 <<
 /S /D /St 3
 >>
 endobj
 xref
-0 20
+0 19
 0000000000 65535 f 
 0000000073 00000 n 
 0000000134 00000 n 
@@ -577,16 +590,15 @@ xref
 0000000868 00000 n 
 0000000978 00000 n 
 0000001183 00000 n 
-0000001288 00000 n 
-0000001546 00000 n 
-0000001618 00000 n 
-0000006852 00000 n 
-0000011319 00000 n 
-0000014523 00000 n 
-0000014570 00000 n 
-0000014629 00000 n 
-0000014663 00000 n 
-0000014697 00000 n 
+0000001271 00000 n 
+0000001529 00000 n 
+0000001601 00000 n 
+0000006829 00000 n 
+0000011288 00000 n 
+0000014259 00000 n 
+0000014318 00000 n 
+0000014352 00000 n 
+0000014386 00000 n 
 trailer
 <<
 /ID 
@@ -595,8 +607,8 @@ trailer
 
 /Info 10 0 R
 /Root 9 0 R
-/Size 20
+/Size 19
 >>
 startxref
-14731
+14420
 %%EOF

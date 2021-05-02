@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R
+/F1 2 0 R /F2 3 0 R /F3 5 0 R
 >>
 endobj
 2 0 obj
@@ -12,12 +12,12 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -27,7 +27,12 @@ endobj
 endobj
 5 0 obj
 <<
-/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 11 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -35,70 +40,71 @@ endobj
   /Type /Page
 >>
 endobj
-6 0 obj
+7 0 obj
 <<
-/Outlines 11 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 12 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
 >>
 endobj
-7 0 obj
+8 0 obj
 <<
 /Author (Joe Writer) /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (This is the Title) /Trapped /False
 >>
 endobj
-8 0 obj
-<<
-/Count 2 /Kids [ 4 0 R 5 0 R ] /Type /Pages
->>
-endobj
 9 0 obj
 <<
-/Length 532
+/Count 2 /Kids [ 4 0 R 6 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Length 568
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 162.1449 0 Td (This is the Title) Tj T* -162.1449 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 177.5542 0 Td (This is the Title) Tj T* -177.5542 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 711.0236 cm
+1 0 0 1 57.02362 687.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 168.2624 0 Td (This is the Subtitle) Tj T* -168.2624 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 184.1467 0 Td (This is the Subtitle) Tj T* -184.1467 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 689.0236 cm
+1 0 0 1 57.02362 639.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (If the custom cover works, this is in the cover, and the text starts in the next page.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 689.0236 cm
+1 0 0 1 57.02362 639.0236 cm
 Q
  
 endstream
 endobj
-10 0 obj
+11 0 obj
 <<
-/Length 432
+/Length 436
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 750.0236 cm
+1 0 0 1 57.02362 750.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 36.93937 0 Td (Author:) Tj T* -36.93937 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 36.93937 0 Td (Author:) Tj T* -36.93937 0 Td ET
 Q
 Q
 q
@@ -111,19 +117,15 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This is the document.) Tj T* ET
 Q
 Q
  
 endstream
-endobj
-11 0 obj
-<<
-/Count 0 /Type /Outlines
->>
 endobj
 12 0 obj
 <<
@@ -144,29 +146,29 @@ xref
 0 15
 0000000000 65535 f 
 0000000073 00000 n 
-0000000114 00000 n 
-0000000221 00000 n 
-0000000333 00000 n 
-0000000536 00000 n 
-0000000740 00000 n 
-0000000844 00000 n 
-0000001128 00000 n 
-0000001193 00000 n 
-0000001775 00000 n 
-0000002258 00000 n 
-0000002305 00000 n 
-0000002355 00000 n 
-0000002389 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000340 00000 n 
+0000000544 00000 n 
+0000000656 00000 n 
+0000000860 00000 n 
+0000000947 00000 n 
+0000001231 00000 n 
+0000001296 00000 n 
+0000001915 00000 n 
+0000002402 00000 n 
+0000002452 00000 n 
+0000002486 00000 n 
 trailer
 <<
 /ID 
 [<2974d1f5d25232eebfac2d203e95d4ba><2974d1f5d25232eebfac2d203e95d4ba>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 7 0 R
-/Root 6 0 R
+/Info 8 0 R
+/Root 7 0 R
 /Size 15
 >>
 startxref
-2423
+2520
 %%EOF

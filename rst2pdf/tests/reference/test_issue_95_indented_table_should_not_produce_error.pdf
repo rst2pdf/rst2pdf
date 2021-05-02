@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R
 >>
 endobj
 2 0 obj
@@ -12,14 +12,19 @@ endobj
 endobj
 3 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (http://mms.itelcel.com/servlets/mms)
->> /Border [ 0 0 0 ] /Rect [ 291.8623 705.7736 450.2223 717.7736 ] /Subtype /Link /Type /Annot
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Annots [ 3 0 R ] /Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/A <<
+/S /URI /Type /Action /URI (http://mms.itelcel.com/servlets/mms)
+>> /Border [ 0 0 0 ] /Rect [ 291.2717 705.7736 449.6317 717.7736 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/Annots [ 4 0 R ] /Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -27,43 +32,44 @@ endobj
 >> /Type /Page
 >>
 endobj
-5 0 obj
+6 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
-6 0 obj
+7 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
-7 0 obj
-<<
-/Count 1 /Kids [ 4 0 R ] /Type /Pages
->>
-endobj
 8 0 obj
 <<
-/Length 3152
+/Count 1 /Kids [ 5 0 R ] /Type /Pages
+>>
+endobj
+9 0 obj
+<<
+/Length 3155
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 537.0236 cm
+1 0 0 1 57.02362 537.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 6 207 cm
+1 0 0 1 6 195 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL .1 0 Td (13.) Tj T* -0.1 0 Td ET
+BT 1 0 0 1 0 14 Tm /F2 10 Tf 12 TL 2 0 Td (13) Tj T* 6 0 Td (.) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -85,22 +91,23 @@ q
 Q
 q
 1 0 0 1 23 15 cm
+q
 1 1 1 rg
-n 0 168 446.8898 -18 re f*
+n 0 168 458.2283 -18 re f*
 .878431 .878431 .878431 rg
-n 0 150 446.8898 -30 re f*
+n 0 150 458.2283 -30 re f*
 1 1 1 rg
-n 0 120 446.8898 -30 re f*
+n 0 120 458.2283 -30 re f*
 .878431 .878431 .878431 rg
-n 0 90 446.8898 -18 re f*
+n 0 90 458.2283 -18 re f*
 1 1 1 rg
-n 0 72 446.8898 -18 re f*
+n 0 72 458.2283 -18 re f*
 .878431 .878431 .878431 rg
-n 0 54 446.8898 -18 re f*
+n 0 54 458.2283 -18 re f*
 1 1 1 rg
-n 0 36 446.8898 -18 re f*
+n 0 36 458.2283 -18 re f*
 .878431 .878431 .878431 rg
-n 0 18 446.8898 -18 re f*
+n 0 18 458.2283 -18 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -111,10 +118,9 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (MMS Server URL) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 153 cm
+1 0 0 1 211.2481 153 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
+0 .4 .6 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (http://mms.itelcel.com/servlets/mms) Tj T* ET
 Q
 Q
@@ -126,7 +132,7 @@ BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Use Specific Network Connection\(GPRS) Tj T*
 Q
 Q
 q
-1 0 0 1 206.1694 135 cm
+1 0 0 1 211.2481 135 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (<) Tj (check it) Tj (>) Tj T* ET
 Q
@@ -139,7 +145,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Network Connection) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 93 cm
+1 0 0 1 211.2481 93 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (pick "Modem: Standard 33600 bps Modem" from the) Tj T* (list) Tj T* ET
@@ -153,7 +159,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Wap Gateway IP Address) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 75 cm
+1 0 0 1 211.2481 75 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (148.233.151.240) Tj T* ET
@@ -167,7 +173,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Modem Used) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 57 cm
+1 0 0 1 211.2481 57 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Standard 33600 bps Modem) Tj T* ET
@@ -181,7 +187,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (GPRS APN) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 39 cm
+1 0 0 1 211.2481 39 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (mms.itelcel.com) Tj T* ET
@@ -195,7 +201,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Login name) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 21 cm
+1 0 0 1 211.2481 21 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (mmsgprs) Tj T* ET
@@ -209,7 +215,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Password) Tj T* ET
 Q
 Q
 q
-1 0 0 1 206.1694 3 cm
+1 0 0 1 211.2481 3 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (mmsgprs2003) Tj T* ET
@@ -220,18 +226,19 @@ q
 1 j
 0 0 0 RG
 .25 w
-n 0 150 m 446.8898 150 l S
-n 0 120 m 446.8898 120 l S
-n 0 90 m 446.8898 90 l S
-n 0 72 m 446.8898 72 l S
-n 0 54 m 446.8898 54 l S
-n 0 36 m 446.8898 36 l S
-n 0 18 m 446.8898 18 l S
-n 200.1694 0 m 200.1694 168 l S
-n 0 168 m 446.8898 168 l S
-n 0 0 m 446.8898 0 l S
+n 0 150 m 458.2283 150 l S
+n 0 120 m 458.2283 120 l S
+n 0 90 m 458.2283 90 l S
+n 0 72 m 458.2283 72 l S
+n 0 54 m 458.2283 54 l S
+n 0 36 m 458.2283 36 l S
+n 0 18 m 458.2283 18 l S
+n 205.2481 0 m 205.2481 168 l S
+n 0 168 m 458.2283 168 l S
+n 0 0 m 458.2283 0 l S
 n 0 0 m 0 168 l S
-n 446.8898 0 m 446.8898 168 l S
+n 458.2283 0 m 458.2283 168 l S
+Q
 Q
 Q
 q
@@ -247,16 +254,12 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 537.0236 cm
+1 0 0 1 57.02362 537.0236 cm
 Q
  
 endstream
-endobj
-9 0 obj
-<<
-/Count 0 /Type /Outlines
->>
 endobj
 10 0 obj
 <<
@@ -272,26 +275,26 @@ xref
 0 12
 0000000000 65535 f 
 0000000073 00000 n 
-0000000104 00000 n 
-0000000211 00000 n 
-0000000398 00000 n 
-0000000619 00000 n 
-0000000722 00000 n 
-0000000979 00000 n 
-0000001038 00000 n 
-0000004241 00000 n 
-0000004287 00000 n 
-0000004328 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000326 00000 n 
+0000000513 00000 n 
+0000000734 00000 n 
+0000000821 00000 n 
+0000001078 00000 n 
+0000001137 00000 n 
+0000004343 00000 n 
+0000004384 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 6 0 R
-/Root 5 0 R
+/Info 7 0 R
+/Root 6 0 R
 /Size 12
 >>
 startxref
-4362
+4418
 %%EOF

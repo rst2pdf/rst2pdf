@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
 >>
 endobj
 2 0 obj
@@ -12,17 +12,22 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
 endobj
 5 0 obj
 <<
-/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -30,44 +35,45 @@ endobj
   /Type /Page
 >>
 endobj
-6 0 obj
+7 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
 >>
 endobj
-7 0 obj
+8 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (Definition Lists) /Trapped /False
 >>
 endobj
-8 0 obj
-<<
-/Count 1 /Kids [ 5 0 R ] /Type /Pages
->>
-endobj
 9 0 obj
 <<
-/Length 1233
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Length 1236
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 177.5542 0 Td (Definition Lists) Tj T* -177.5542 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 693.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 162.7149 0 Td (Definition Lists) Tj T* -162.7149 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (Term) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 719.0236 cm
+1 0 0 1 57.02362 678.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Term) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 704.0236 cm
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -80,14 +86,16 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 688.0236 cm
+1 0 0 1 57.02362 662.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 0 rg (Term : ) Tj /F3 10 Tf 0 0 0 rg (classifier1) Tj /F2 10 Tf 0 0 0 rg ( : ) Tj /F3 10 Tf 0 0 0 rg (classifier2) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (Term : ) Tj /F4 10 Tf (classifier1) Tj /F3 10 Tf ( : ) Tj /F4 10 Tf (classifier2) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 655.0236 cm
+1 0 0 1 57.02362 629.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 20 Tm  T* ET
@@ -108,15 +116,17 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 639.0236 cm
+1 0 0 1 57.02362 613.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Term) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (Term) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 624.0236 cm
+1 0 0 1 57.02362 598.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -130,13 +140,9 @@ Q
 q
 Q
 Q
+Q
  
 endstream
-endobj
-10 0 obj
-<<
-/Count 0 /Type /Outlines
->>
 endobj
 11 0 obj
 <<
@@ -152,27 +158,27 @@ xref
 0 13
 0000000000 65535 f 
 0000000073 00000 n 
-0000000124 00000 n 
-0000000231 00000 n 
-0000000343 00000 n 
-0000000458 00000 n 
-0000000661 00000 n 
-0000000765 00000 n 
-0000001038 00000 n 
-0000001097 00000 n 
-0000002381 00000 n 
-0000002428 00000 n 
-0000002469 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000462 00000 n 
+0000000577 00000 n 
+0000000781 00000 n 
+0000000868 00000 n 
+0000001141 00000 n 
+0000001200 00000 n 
+0000002488 00000 n 
+0000002529 00000 n 
 trailer
 <<
 /ID 
 [<01f1bfb7e8d0b4f33d24a29f3aa3bb1f><01f1bfb7e8d0b4f33d24a29f3aa3bb1f>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 7 0 R
-/Root 6 0 R
+/Info 8 0 R
+/Root 7 0 R
 /Size 13
 >>
 startxref
-2503
+2563
 %%EOF

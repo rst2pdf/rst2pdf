@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -43,12 +43,12 @@ endobj
 endobj
 8 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 717.0236 0 ] /Next 9 0 R /Parent 7 0 R /Title (The section)
+/Dest [ 4 0 R /XYZ 57.02362 693.0236 0 ] /Next 9 0 R /Parent 7 0 R /Title (The section)
 >>
 endobj
 9 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 666.0236 0 ] /Parent 7 0 R /Prev 8 0 R /Title (Another Section)
+/Dest [ 4 0 R /XYZ 57.02362 642.0236 0 ] /Parent 7 0 R /Prev 8 0 R /Title (Another Section)
 >>
 endobj
 10 0 obj
@@ -58,47 +58,47 @@ endobj
 endobj
 11 0 obj
 <<
-/Length 810
+/Length 864
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 729.0236 cm
+1 0 0 1 57.02362 729.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 192.7149 0 Td (Test Doc) Tj T* -192.7149 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 204.2342 0 Td (Test Doc) Tj T* -204.2342 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 696.0236 cm
+1 0 0 1 57.02362 672.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (The section) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (The section) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 678.0236 cm
+1 0 0 1 57.02362 654.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The content) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 645.0236 cm
+1 0 0 1 57.02362 621.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Another Section) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Another Section) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
+1 0 0 1 51.02362 773.1969 cm
 q
-BT 1 0 0 1 0 2 Tm 209.8199 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is page 1) Tj T* -209.8199 0 Td ET
+BT 1 0 0 1 0 2 Tm 215.4892 0 Td 12 TL /F1 10 Tf 0 0 0 rg (This is page 1) Tj T* -215.4892 0 Td ET
 Q
 Q
 q
-1 0 0 1 56.69291 56.69291 cm
+1 0 0 1 51.02362 42.51969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 100.6049 0 Td (The document is called Test Doc and the section is The section) Tj T* -100.6049 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 106.2742 0 Td (The document is called Test Doc and the section is The section) Tj T* -106.2742 0 Td ET
 Q
 Q
  
@@ -120,16 +120,16 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000538 00000 n 
-0000000642 00000 n 
-0000000907 00000 n 
-0000000978 00000 n 
-0000001087 00000 n 
-0000001200 00000 n 
-0000001260 00000 n 
-0000002121 00000 n 
-0000002162 00000 n 
+0000000330 00000 n 
+0000000535 00000 n 
+0000000639 00000 n 
+0000000904 00000 n 
+0000000975 00000 n 
+0000001084 00000 n 
+0000001197 00000 n 
+0000001257 00000 n 
+0000002172 00000 n 
+0000002213 00000 n 
 trailer
 <<
 /ID 
@@ -141,5 +141,5 @@ trailer
 /Size 14
 >>
 startxref
-2196
+2247
 %%EOF

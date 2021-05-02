@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -27,7 +27,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -43,19 +43,19 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 312
+/Length 330
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 136.0249 0 Td (This should be 150%) Tj T* -136.0249 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 155.8942 0 Td (This should be 150%) Tj T* -155.8942 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 720.8189 cm
+1 0 0 1 57.02362 694.8189 cm
 q
 BT 1 0 0 1 0 1.700787 Tm 10.20472 TL /F1 8.503937 Tf 0 0 0 rg (This should be .3cm) Tj T* ET
 Q
@@ -65,33 +65,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000536 00000 n 
-0000000639 00000 n 
-0000000915 00000 n 
-0000000974 00000 n 
-0000001336 00000 n 
-0000001382 00000 n 
-0000001423 00000 n 
+0000000330 00000 n 
+0000000533 00000 n 
+0000000619 00000 n 
+0000000895 00000 n 
+0000000954 00000 n 
+0000001334 00000 n 
+0000001374 00000 n 
 trailer
 <<
 /ID 
@@ -100,8 +94,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-1457
+1408
 %%EOF

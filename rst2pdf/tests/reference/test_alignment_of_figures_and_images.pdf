@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -66,97 +66,98 @@ endobj
 endobj
 11 0 obj
 <<
-/Length 2440
+/Length 2473
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 76.02488 0 Td (Alignment for figures and images) Tj T* -76.02488 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 105.6342 0 Td (Alignment for figures and images) Tj T* -105.6342 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 719.0236 cm
+1 0 0 1 57.02362 693.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Unaligned PNG Image:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 291.6378 701.0236 cm
+1 0 0 1 291.6378 675.0236 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
 Q
 Q
 q
-1 0 0 1 62.69291 683.0236 cm
+1 0 0 1 57.02362 657.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align left:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 665.0236 cm
+1 0 0 1 57.02362 639.0236 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
 Q
 Q
 q
-1 0 0 1 62.69291 647.0236 cm
+1 0 0 1 57.02362 621.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align right:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 520.5827 629.0236 cm
+1 0 0 1 526.252 603.0236 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
 Q
 Q
 q
-1 0 0 1 62.69291 611.0236 cm
+1 0 0 1 57.02362 585.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align center:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 291.6378 593.0236 cm
+1 0 0 1 291.6378 567.0236 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
 Q
 Q
 q
-1 0 0 1 62.69291 573.0236 cm
+1 0 0 1 57.02362 547.0236 cm
 Q
 q
-1 0 0 1 62.69291 555.0236 cm
+1 0 0 1 57.02362 529.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Unaligned PNG Image with a ) Tj /F3 10 Tf (figwidth) Tj /F1 10 Tf ( of ) Tj /F3 10 Tf (50%) Tj /F1 10 Tf (:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 537.0236 cm
+1 0 0 1 57.02362 511.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Unaligned PNG figure:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 531.0236 cm
+1 0 0 1 57.02362 505.0236 cm
 Q
 q
-1 0 0 1 180.1654 513.0236 cm
+1 0 0 1 177.3307 487.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 111.4724 3 cm
+1 0 0 1 114.3071 3 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -165,25 +166,27 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 513.0236 cm
 Q
 q
-1 0 0 1 62.69291 495.0236 cm
+1 0 0 1 57.02362 487.0236 cm
+Q
+q
+1 0 0 1 57.02362 469.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align left:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 489.0236 cm
+1 0 0 1 57.02362 463.0236 cm
 Q
 q
-1 0 0 1 62.69291 471.0236 cm
+1 0 0 1 57.02362 445.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 111.4724 3 cm
+1 0 0 1 114.3071 3 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -192,25 +195,27 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 471.0236 cm
 Q
 q
-1 0 0 1 62.69291 453.0236 cm
+1 0 0 1 57.02362 445.0236 cm
+Q
+q
+1 0 0 1 57.02362 427.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align right:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 447.0236 cm
+1 0 0 1 57.02362 421.0236 cm
 Q
 q
-1 0 0 1 297.6378 429.0236 cm
+1 0 0 1 297.6378 403.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 111.4724 3 cm
+1 0 0 1 114.3071 3 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -219,25 +224,27 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 429.0236 cm
 Q
 q
-1 0 0 1 62.69291 411.0236 cm
+1 0 0 1 57.02362 403.0236 cm
+Q
+q
+1 0 0 1 57.02362 385.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Align center:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 405.0236 cm
+1 0 0 1 57.02362 379.0236 cm
 Q
 q
-1 0 0 1 180.1654 387.0236 cm
+1 0 0 1 177.3307 361.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 111.4724 3 cm
+1 0 0 1 114.3071 3 cm
 q
 12 0 0 12 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -246,8 +253,9 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 387.0236 cm
+1 0 0 1 57.02362 361.0236 cm
 Q
  
 endstream
@@ -268,16 +276,16 @@ xref
 0000000073 00000 n 
 0000000124 00000 n 
 0000000231 00000 n 
-0000000343 00000 n 
-0000000642 00000 n 
-0000000925 00000 n 
-0000001030 00000 n 
-0000001281 00000 n 
-0000001369 00000 n 
-0000001658 00000 n 
-0000001718 00000 n 
-0000004210 00000 n 
-0000004251 00000 n 
+0000000340 00000 n 
+0000000639 00000 n 
+0000000922 00000 n 
+0000001027 00000 n 
+0000001278 00000 n 
+0000001366 00000 n 
+0000001655 00000 n 
+0000001715 00000 n 
+0000004240 00000 n 
+0000004281 00000 n 
 trailer
 <<
 /ID 
@@ -289,5 +297,5 @@ trailer
 /Size 14
 >>
 startxref
-4285
+4315
 %%EOF
