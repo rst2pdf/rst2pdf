@@ -46,7 +46,7 @@ numpy==1.19.4
     # via matplotlib
 packaging==20.8
     # via sphinx
-pillow==8.1.1
+pillow==8.2.0
     # via
     #   matplotlib
     #   reportlab
