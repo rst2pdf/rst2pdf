@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -32,7 +32,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -48,24 +48,25 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 1172
+/Length 1196
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 Q
 q
-1 0 0 1 62.69291 669.0236 cm
-.960784 .960784 .862745 rg
-n 0 84 469.8898 -84 re f*
+1 0 0 1 57.02362 669.0236 cm
+q
+1 .972549 .862745 rg
+n 0 84 481.2283 -84 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 6 58 Tm  T* ET
 q
 1 0 0 1 16 53 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2.5 Tm /F2 12.5 Tf 15 TL (Note) Tj T* ET
 Q
 Q
@@ -78,6 +79,7 @@ Q
 Q
 q
 1 0 0 1 16 16 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -89,6 +91,7 @@ BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Definition) Tj T* ET
 Q
 Q
 q
+Q
 Q
 Q
 q
@@ -96,24 +99,26 @@ q
 1 j
 .662745 .662745 .662745 RG
 .5 w
-n 0 84 m 469.8898 84 l S
-n 0 0 m 469.8898 0 l S
+n 0 84 m 481.2283 84 l S
+n 0 0 m 481.2283 0 l S
 n 0 0 m 0 84 l S
-n 469.8898 0 m 469.8898 84 l S
+n 481.2283 0 m 481.2283 84 l S
 Q
 Q
-q
-1 0 0 1 62.69291 663.0236 cm
 Q
 q
-1 0 0 1 62.69291 647.0236 cm
+1 0 0 1 57.02362 663.0236 cm
+Q
+q
+1 0 0 1 57.02362 647.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (Term) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 632.0236 cm
+1 0 0 1 57.02362 632.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -127,8 +132,9 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 614.0236 cm
+1 0 0 1 57.02362 614.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The bug is that the definition is not indented when used in the note.) Tj T* ET
@@ -139,34 +145,28 @@ endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000124 00000 n 
 0000000231 00000 n 
-0000000350 00000 n 
-0000000462 00000 n 
-0000000665 00000 n 
-0000000769 00000 n 
-0000001026 00000 n 
-0000001085 00000 n 
-0000002308 00000 n 
-0000002355 00000 n 
-0000002396 00000 n 
+0000000340 00000 n 
+0000000452 00000 n 
+0000000655 00000 n 
+0000000742 00000 n 
+0000000999 00000 n 
+0000001058 00000 n 
+0000002305 00000 n 
+0000002346 00000 n 
 trailer
 <<
 /ID 
@@ -175,8 +175,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-2430
+2380
 %%EOF

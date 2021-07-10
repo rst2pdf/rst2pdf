@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -37,7 +37,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 11 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -53,15 +53,15 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 822
+/Length 851
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 198.0945 cm
+1 0 0 1 57.02362 198.0945 cm
 Q
 q
-1 0 0 1 62.69291 88.69449 cm
+1 0 0 1 57.02362 88.69449 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -70,9 +70,9 @@ q
 q
 .5 w
 .662745 .662745 .662745 RG
-.960784 .960784 .862745 rg
-n 0 0 435.2898 92 re
-B*
+1 .972549 .862745 rg
+n 0 0 446.6283 92 re
+B
 Q
 q
 q
@@ -80,7 +80,7 @@ q
 q
 1 0 0 1 8.6 68.6 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2.5 Tm /F2 12.5 Tf 15 TL (Sidebar Title) Tj T* ET
 Q
 Q
@@ -90,7 +90,7 @@ q
 q
 1 0 0 1 8.6 44.6 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Optional Subtitle) Tj T* ET
 Q
 Q
@@ -111,7 +111,7 @@ q
 1 0 0 1 8.6 8.6 cm
 q
 .545098 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 140.2349 0 Td (This is a rubric inside a sidebar) Tj T* -140.2349 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 145.9042 0 Td (This is a rubric inside a sidebar) Tj T* -145.9042 0 Td ET
 Q
 Q
 Q
@@ -125,12 +125,12 @@ endstream
 endobj
 10 0 obj
 <<
-/Length 392
+/Length 385
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 718.6236 cm
+1 0 0 1 57.02362 718.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -139,9 +139,9 @@ q
 q
 .5 w
 .662745 .662745 .662745 RG
-.960784 .960784 .862745 rg
-n 0 0 435.2898 29 re
-B*
+1 .972549 .862745 rg
+n 0 0 446.6283 29 re
+B
 Q
 q
 q
@@ -164,41 +164,35 @@ endstream
 endobj
 11 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 12 0 R 1 13 0 R ]
 >>
 endobj
 12 0 obj
 <<
-/Nums [ 0 13 0 R 1 14 0 R ]
->>
-endobj
-13 0 obj
-<<
 /S /D /St 1
 >>
 endobj
-14 0 obj
+13 0 obj
 <<
 /S /D /St 2
 >>
 endobj
 xref
-0 15
+0 14
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000340 00000 n 
-0000000543 00000 n 
-0000000747 00000 n 
-0000000851 00000 n 
-0000001108 00000 n 
-0000001173 00000 n 
-0000002045 00000 n 
-0000002488 00000 n 
-0000002535 00000 n 
-0000002585 00000 n 
-0000002619 00000 n 
+0000000330 00000 n 
+0000000533 00000 n 
+0000000737 00000 n 
+0000000824 00000 n 
+0000001081 00000 n 
+0000001146 00000 n 
+0000002047 00000 n 
+0000002483 00000 n 
+0000002533 00000 n 
+0000002567 00000 n 
 trailer
 <<
 /ID 
@@ -207,8 +201,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 15
+/Size 14
 >>
 startxref
-2653
+2601
 %%EOF

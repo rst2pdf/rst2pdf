@@ -22,7 +22,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
+/PageLabels 8 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
 >>
 endobj
 5 0 obj
@@ -38,36 +38,36 @@ endobj
 endobj
 7 0 obj
 <<
-/Length 1543
+/Length 1516
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 645.0236 cm
+1 0 0 1 57.02362 645.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Some content. If Issue 200 is not fixed, this will appear overlapping with the header.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 749.1969 cm
+1 0 0 1 51.02362 749.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 14.72988 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long) Tj T* -7.504998 0 Td (header. This is a long header. This is a long header. This is a long header. This is a long header. This is a) Tj T* 107.545 0 Td (long header. This is a long header. This is a long header.) Tj T* -114.7699 0 Td ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.054173 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 0 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 147.57 0 Td (This is a long header. This is a long header.) Tj T* -149.6242 0 Td ET
 Q
 Q
 q
-1 0 0 1 56.69291 713.1969 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 14.72988 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long) Tj T* -7.504998 0 Td (header. This is a long header. This is a long header. This is a long header. This is a long header. This is a) Tj T* 107.545 0 Td (long header. This is a long header. This is a long header.) Tj T* -114.7699 0 Td ET
-Q
-Q
-q
-1 0 0 1 56.69291 677.1969 cm
+1 0 0 1 51.02362 713.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 14.72988 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long) Tj T* -7.504998 0 Td (header. This is a long header. This is a long header. This is a long header. This is a long header. This is a) Tj T* 107.545 0 Td (long header. This is a long header. This is a long header.) Tj T* -114.7699 0 Td ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.054173 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 0 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 147.57 0 Td (This is a long header. This is a long header.) Tj T* -149.6242 0 Td ET
+Q
+Q
+q
+1 0 0 1 51.02362 677.1969 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.054173 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 0 0 Td (This is a long header. This is a long header. This is a long header. This is a long header. This is a long header.) Tj T* 147.57 0 Td (This is a long header. This is a long header.) Tj T* -149.6242 0 Td ET
 Q
 Q
  
@@ -75,32 +75,26 @@ endstream
 endobj
 8 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 9 0 R ]
 >>
 endobj
 9 0 obj
-<<
-/Nums [ 0 10 0 R ]
->>
-endobj
-10 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 11
+0 10
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000414 00000 n 
-0000000516 00000 n 
-0000000773 00000 n 
-0000000832 00000 n 
-0000002426 00000 n 
-0000002472 00000 n 
-0000002512 00000 n 
+0000000500 00000 n 
+0000000757 00000 n 
+0000000816 00000 n 
+0000002383 00000 n 
+0000002422 00000 n 
 trailer
 <<
 /ID 
@@ -109,8 +103,8 @@ trailer
 
 /Info 5 0 R
 /Root 4 0 R
-/Size 11
+/Size 10
 >>
 startxref
-2546
+2455
 %%EOF

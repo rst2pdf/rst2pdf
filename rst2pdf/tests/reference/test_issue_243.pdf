@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R
 >>
 endobj
 2 0 obj
@@ -12,7 +12,12 @@ endobj
 endobj
 3 0 obj
 <<
-/Contents 7 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 6 0 R /Resources <<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -20,67 +25,70 @@ endobj
   /Type /Page
 >>
 endobj
-4 0 obj
+5 0 obj
 <<
-/Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
-5 0 obj
+6 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
-6 0 obj
-<<
-/Count 1 /Kids [ 3 0 R ] /Type /Pages
->>
-endobj
 7 0 obj
 <<
-/Length 2498
+/Count 1 /Kids [ 4 0 R ] /Type /Pages
+>>
+endobj
+8 0 obj
+<<
+/Length 2499
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 735.0236 cm
+1 0 0 1 57.02362 735.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 2 0 Td (1.) Tj T* -2 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .960542 Tw (This is the first enumerated list item. The blank line above the first list item is required; blank lines) Tj T* 0 Tw (between list items \(such as below this paragraph\) are optional.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.590464 Tw (This is the first enumerated list item. The blank line above the first list item is required; blank lines) Tj T* 0 Tw (between list items \(such as below this paragraph\) are optional.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 729.0236 cm
 Q
 q
-1 0 0 1 62.69291 675.0236 cm
+1 0 0 1 57.02362 729.0236 cm
+Q
+q
+1 0 0 1 57.02362 675.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 39 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 2 0 Td (2.) Tj T* -2 0 Td ET
 Q
 Q
 q
@@ -94,54 +102,58 @@ q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .957765 Tw (This is the second paragraph in the second item in the list. The blank line above this paragraph is) Tj T* 0 Tw .20686 Tw (required. The left edge of this paragraph lines up with the paragraph above, both indented relative to) Tj T* 0 Tw (the bullet.) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.587686 Tw (This is the second paragraph in the second item in the list. The blank line above this paragraph is) Tj T* 0 Tw -0.119509 Tw (required. The left edge of this paragraph lines up with the paragraph above, both indented relative to the) Tj T* 0 Tw (bullet.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 675.0236 cm
 Q
 q
-1 0 0 1 62.69291 669.0236 cm
+1 0 0 1 57.02362 675.0236 cm
 Q
 q
-1 0 0 1 62.69291 669.0236 cm
+1 0 0 1 57.02362 669.0236 cm
 Q
 q
-1 0 0 1 62.69291 645.0236 cm
+1 0 0 1 57.02362 669.0236 cm
+Q
+q
+1 0 0 1 57.02362 645.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 9 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .324724 Tw (This is the first bullet list item. The blank line above the first list item is required; blank lines between) Tj T* 0 Tw (list items \(such as below this paragraph\) are optional.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .125417 Tw (This is the first bullet list item. The blank line above the first list item is required; blank lines between list) Tj T* 0 Tw (items \(such as below this paragraph\) are optional.) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 639.0236 cm
 Q
 q
-1 0 0 1 62.69291 585.0236 cm
+1 0 0 1 57.02362 639.0236 cm
+Q
+q
+1 0 0 1 57.02362 585.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 39 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 10.5 0 Td (\177) Tj T* -10.5 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
@@ -155,22 +167,18 @@ q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .957765 Tw (This is the second paragraph in the second item in the list. The blank line above this paragraph is) Tj T* 0 Tw .20686 Tw (required. The left edge of this paragraph lines up with the paragraph above, both indented relative to) Tj T* 0 Tw (the bullet.) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.587686 Tw (This is the second paragraph in the second item in the list. The blank line above this paragraph is) Tj T* 0 Tw -0.119509 Tw (required. The left edge of this paragraph lines up with the paragraph above, both indented relative to the) Tj T* 0 Tw (bullet.) Tj T* ET
 Q
 Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 585.0236 cm
+1 0 0 1 57.02362 585.0236 cm
 Q
  
 endstream
-endobj
-8 0 obj
-<<
-/Count 0 /Type /Outlines
->>
 endobj
 9 0 obj
 <<
@@ -186,25 +194,25 @@ xref
 0 11
 0000000000 65535 f 
 0000000073 00000 n 
-0000000104 00000 n 
-0000000211 00000 n 
-0000000414 00000 n 
-0000000516 00000 n 
-0000000773 00000 n 
-0000000832 00000 n 
-0000003381 00000 n 
-0000003427 00000 n 
-0000003467 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000326 00000 n 
+0000000529 00000 n 
+0000000615 00000 n 
+0000000872 00000 n 
+0000000931 00000 n 
+0000003481 00000 n 
+0000003521 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 5 0 R
-/Root 4 0 R
+/Info 6 0 R
+/Root 5 0 R
 /Size 11
 >>
 startxref
-3501
+3555
 %%EOF

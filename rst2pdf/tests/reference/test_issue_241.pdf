@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -43,12 +43,12 @@ endobj
 endobj
 8 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 765.0236 0 ] /Next 9 0 R /Parent 7 0 R /Title (AAAAA)
+/Dest [ 4 0 R /XYZ 57.02362 765.0236 0 ] /Next 9 0 R /Parent 7 0 R /Title (AAAAA)
 >>
 endobj
 9 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 732.0236 0 ] /Parent 7 0 R /Prev 8 0 R /Title (BBBBB)
+/Dest [ 4 0 R /XYZ 57.02362 732.0236 0 ] /Parent 7 0 R /Prev 8 0 R /Title (BBBBB)
 >>
 endobj
 10 0 obj
@@ -58,24 +58,24 @@ endobj
 endobj
 11 0 obj
 <<
-/Length 377
+/Length 413
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (AAAAA) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (AAAAA) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 711.0236 cm
+1 0 0 1 57.02362 711.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (BBBBB) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (BBBBB) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 693.0236 cm
+1 0 0 1 57.02362 693.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This test fails in python 2.4 as of r1459) Tj T* ET
@@ -100,16 +100,16 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000538 00000 n 
-0000000642 00000 n 
-0000000899 00000 n 
-0000000970 00000 n 
-0000001073 00000 n 
-0000001176 00000 n 
-0000001236 00000 n 
-0000001664 00000 n 
-0000001705 00000 n 
+0000000330 00000 n 
+0000000535 00000 n 
+0000000639 00000 n 
+0000000896 00000 n 
+0000000967 00000 n 
+0000001070 00000 n 
+0000001173 00000 n 
+0000001233 00000 n 
+0000001697 00000 n 
+0000001738 00000 n 
 trailer
 <<
 /ID 
@@ -121,5 +121,5 @@ trailer
 /Size 14
 >>
 startxref
-1739
+1772
 %%EOF
