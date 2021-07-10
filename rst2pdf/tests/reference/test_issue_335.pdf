@@ -32,7 +32,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -48,21 +48,22 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 511
+/Length 515
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Some stuff.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 56.69291 cm
+1 0 0 1 51.02362 56.69291 cm
+q
 1 1 1 rg
-n 0 18 481.8898 -18 re f*
+n 0 18 493.2283 -18 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -80,10 +81,11 @@ q
 1 j
 0 0 0 RG
 .25 w
-n 0 18 m 481.8898 18 l S
-n 0 0 m 481.8898 0 l S
+n 0 18 m 493.2283 18 l S
+n 0 0 m 493.2283 0 l S
 n 0 0 m 0 18 l S
-n 481.8898 0 m 481.8898 18 l S
+n 493.2283 0 m 493.2283 18 l S
+Q
 Q
 Q
  
@@ -91,33 +93,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000862 00000 n 
 0000001111 00000 n 
-0000001214 00000 n 
-0000001471 00000 n 
-0000001530 00000 n 
-0000002091 00000 n 
-0000002137 00000 n 
-0000002178 00000 n 
+0000001197 00000 n 
+0000001454 00000 n 
+0000001513 00000 n 
+0000002078 00000 n 
+0000002118 00000 n 
 trailer
 <<
 /ID 
@@ -126,8 +122,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-2212
+2152
 %%EOF

@@ -22,7 +22,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Outlines 8 0 R /PageLabels 9 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
+/PageLabels 8 0 R /PageMode /UseNone /Pages 6 0 R /Type /Catalog
 >>
 endobj
 5 0 obj
@@ -43,105 +43,99 @@ endobj
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 759.0236 cm
+1 0 0 1 57.02362 759.0236 cm
 Q
 q
-1 0 0 1 62.69291 747.0236 cm
+1 0 0 1 57.02362 747.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Line blocks are useful for addresses,) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 735.0236 cm
+1 0 0 1 57.02362 735.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (verse, and adornment-free lists.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 723.0236 cm
+1 0 0 1 57.02362 723.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 711.0236 cm
+1 0 0 1 57.02362 711.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 699.0236 cm
+1 0 0 1 57.02362 699.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 687.0236 cm
+1 0 0 1 57.02362 687.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Each new line begins with a) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 675.0236 cm
+1 0 0 1 57.02362 675.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (vertical bar \("|"\).) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 663.0236 cm
+1 0 0 1 57.02362 663.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 20 2 Tm /F1 10 Tf 12 TL (Line breaks and initial indents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 651.0236 cm
+1 0 0 1 57.02362 651.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 20 2 Tm /F1 10 Tf 12 TL (are preserved.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 651.0236 cm
+1 0 0 1 57.02362 651.0236 cm
 Q
  
 endstream
 endobj
 8 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 9 0 R ]
 >>
 endobj
 9 0 obj
-<<
-/Nums [ 0 10 0 R ]
->>
-endobj
-10 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 11
+0 10
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000414 00000 n 
-0000000516 00000 n 
-0000000773 00000 n 
-0000000832 00000 n 
-0000001986 00000 n 
-0000002032 00000 n 
-0000002072 00000 n 
+0000000500 00000 n 
+0000000757 00000 n 
+0000000816 00000 n 
+0000001970 00000 n 
+0000002009 00000 n 
 trailer
 <<
 /ID 
@@ -150,8 +144,8 @@ trailer
 
 /Info 5 0 R
 /Root 4 0 R
-/Size 11
+/Size 10
 >>
 startxref
-2106
+2042
 %%EOF

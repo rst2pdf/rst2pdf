@@ -27,7 +27,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -43,31 +43,31 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 6975
+/Length 5997
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (We are testing include a file using ) Tj /F2 10 Tf 0 0 0 rg (:include:) Tj /F1 10 Tf 0 0 0 rg ( with line numbers enabled using ) Tj /F2 10 Tf 0 0 0 rg (:linenos:) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (We are testing include a file using ) Tj /F2 10 Tf (:include:) Tj /F1 10 Tf ( with line numbers enabled using ) Tj /F2 10 Tf (:linenos:) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 735.0236 cm
+1 0 0 1 57.02362 735.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (In the following code blocks, the line numbers always should match the numbers in the content.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 717.0236 cm
+1 0 0 1 57.02362 717.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (First test: ) Tj /F2 10 Tf 0 0 0 rg (:linenos_offset:) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (First test: ) Tj /F2 10 Tf (:linenos_offset:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 623.8236 cm
+1 0 0 1 57.02362 623.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -76,90 +76,46 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 84 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 84 re B*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 60 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 60 12 12 re f*
+.941176 .972549 1 rg
 n 48 60 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
 n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
 n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
 n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 0 6 12 re f*
-BT 1 0 0 1 0 62 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj 0 0 0 rg (Line 1) Tj 0 0 0 rg  T* (2 ) Tj 0 0 0 rg (Line 2) Tj 0 0 0 rg  T* (3 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (5 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (6 ) Tj 0 0 0 rg (Line 6) Tj T* ET
-Q
-Q
-Q
-Q
-Q
-q
-1 0 0 1 62.69291 603.8236 cm
-q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Second test: ) Tj /F2 10 Tf 0 0 0 rg (:linenos_offset:) Tj /F1 10 Tf 0 0 0 rg ( & ) Tj /F2 10 Tf 0 0 0 rg (:start-at:) Tj ( ) Tj (Line) Tj ( ) Tj (3) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 522.6236 cm
-q
-q
-1 0 0 1 0 0 cm
-q
-1 0 0 1 6.6 6.6 cm
-q
-.662745 .662745 .662745 RG
-.5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 72 re B*
-Q
-q
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
-n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
-n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
-n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
-n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 0 12 12 re f*
-BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (3 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (5 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (6 ) Tj 0 0 0 rg (Line 6) Tj 0 0 0 rg  T* (7 ) Tj T* ET
+BT 1 0 0 1 0 62 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 1) Tj  T* (2 ) Tj (Line 2) Tj  T* (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
-1 0 0 1 62.69291 502.6236 cm
+1 0 0 1 57.02362 603.8236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Third test: ) Tj /F2 10 Tf 0 0 0 rg (:linenos_offset:) Tj /F1 10 Tf 0 0 0 rg ( & ) Tj /F2 10 Tf 0 0 0 rg (start-after:) Tj ( ) Tj (Line) Tj ( ) Tj (2) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Second test: ) Tj /F2 10 Tf (:linenos_offset:) Tj /F1 10 Tf ( & ) Tj /F2 10 Tf (:start-at:) Tj ( ) Tj (Line) Tj ( ) Tj (3) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 421.4236 cm
+1 0 0 1 57.02362 522.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -168,42 +124,42 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 72 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 72 re B*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
 n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
 n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
 n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 0 12 12 re f*
-BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (3 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (5 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (6 ) Tj 0 0 0 rg (Line 6) Tj 0 0 0 rg  T* (7 ) Tj T* ET
+BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj  T* (7 ) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
-1 0 0 1 62.69291 401.4236 cm
+1 0 0 1 57.02362 502.6236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Fourth test: ) Tj /F2 10 Tf 0 0 0 rg (:linenos_offset:) Tj /F1 10 Tf 0 0 0 rg ( & ) Tj /F2 10 Tf 0 0 0 rg (start-after:) Tj ( ) Tj (Lin) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Third test: ) Tj /F2 10 Tf (:linenos_offset:) Tj /F1 10 Tf ( & ) Tj /F2 10 Tf (start-after:) Tj ( ) Tj (Line) Tj ( ) Tj (2) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 308.2236 cm
+1 0 0 1 57.02362 421.4236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -212,53 +168,97 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 84 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 72 re B*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 60 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
+n 48 48 0 12 re f*
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
+n 48 36 0 12 re f*
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
+n 48 24 0 12 re f*
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
+n 48 12 0 12 re f*
+.941176 .972549 1 rg
+n 0 0 12 12 re f*
+BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj  T* (7 ) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 401.4236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Fourth test: ) Tj /F2 10 Tf (:linenos_offset:) Tj /F1 10 Tf ( & ) Tj /F2 10 Tf (start-after:) Tj ( ) Tj (Lin) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 308.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 84 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 60 12 12 re f*
+.941176 .972549 1 rg
 n 48 60 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
 n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
 n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
 n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 0 12 12 re f*
-BT 1 0 0 1 0 62 Tm 12 TL /F2 10 Tf 0 0 0 rg (2 ) Tj 0 0 0 rg (Line 2) Tj 0 0 0 rg  T* (3 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (5 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (6 ) Tj 0 0 0 rg (Line 6) Tj 0 0 0 rg  T* (7 ) Tj T* ET
+BT 1 0 0 1 0 62 Tm 12 TL /F2 10 Tf 0 0 0 rg (2 ) Tj (Line 2) Tj  T* (3 ) Tj (Line 3) Tj  T* (4 ) Tj (Line 4) Tj  T* (5 ) Tj (Line 5) Tj  T* (6 ) Tj (Line 6) Tj  T* (7 ) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
-1 0 0 1 62.69291 288.2236 cm
+1 0 0 1 57.02362 288.2236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (In the following, the line numbers always start at 1:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 270.2236 cm
+1 0 0 1 57.02362 270.2236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Fifth test: ) Tj /F2 10 Tf 0 0 0 rg (start-at:) Tj ( ) Tj (Line) Tj ( ) Tj (3) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Fifth test: ) Tj /F2 10 Tf (start-at:) Tj ( ) Tj (Line) Tj ( ) Tj (3) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 189.0236 cm
+1 0 0 1 57.02362 189.0236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -267,42 +267,42 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 72 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 72 re B*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
 n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
 n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
 n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 0 12 12 re f*
-BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (2 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (3 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 6) Tj 0 0 0 rg  T* (5 ) Tj T* ET
+BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 3) Tj  T* (2 ) Tj (Line 4) Tj  T* (3 ) Tj (Line 5) Tj  T* (4 ) Tj (Line 6) Tj  T* (5 ) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
-1 0 0 1 62.69291 169.0236 cm
+1 0 0 1 57.02362 169.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Sixth test: ) Tj /F2 10 Tf 0 0 0 rg (start-after:) Tj ( ) Tj (Line) Tj ( ) Tj (2) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Sixth test: ) Tj /F2 10 Tf (start-after:) Tj ( ) Tj (Line) Tj ( ) Tj (2) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 87.82362 cm
+1 0 0 1 57.02362 87.82362 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -311,29 +311,29 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 72 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 72 re B*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 48 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 48 12 12 re f*
+.941176 .972549 1 rg
 n 48 48 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 36 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 36 12 12 re f*
+.941176 .972549 1 rg
 n 48 36 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 24 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
 n 48 24 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 48 12 0 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 0 12 12 re f*
-BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj 0 0 0 rg (Line 3) Tj 0 0 0 rg  T* (2 ) Tj 0 0 0 rg (Line 4) Tj 0 0 0 rg  T* (3 ) Tj 0 0 0 rg (Line 5) Tj 0 0 0 rg  T* (4 ) Tj 0 0 0 rg (Line 6) Tj 0 0 0 rg  T* (5 ) Tj T* ET
+BT 1 0 0 1 0 50 Tm 12 TL /F2 10 Tf 0 0 0 rg (1 ) Tj (Line 3) Tj  T* (2 ) Tj (Line 4) Tj  T* (3 ) Tj (Line 5) Tj  T* (4 ) Tj (Line 6) Tj  T* (5 ) Tj T* ET
 Q
 Q
 Q
@@ -344,33 +344,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
 0000000326 00000 n 
 0000000529 00000 n 
-0000000632 00000 n 
-0000000889 00000 n 
-0000000948 00000 n 
-0000007974 00000 n 
-0000008020 00000 n 
-0000008061 00000 n 
+0000000615 00000 n 
+0000000872 00000 n 
+0000000931 00000 n 
+0000006979 00000 n 
+0000007019 00000 n 
 trailer
 <<
 /ID 
@@ -379,8 +373,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-8095
+7053
 %%EOF

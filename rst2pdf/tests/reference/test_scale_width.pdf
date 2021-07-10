@@ -32,7 +32,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -60,10 +60,10 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 154.252 cm
+1 0 0 1 57.02362 154.252 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .059806 Tw (If this has worked, then the background image is scaled for width only and) Tj T* 0 Tw (doesn't fill the page vertically.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .932005 Tw (If this has worked, then the background image is scaled for width only and) Tj T* 0 Tw (doesn't fill the page vertically.) Tj T* ET
 Q
 Q
  
@@ -71,33 +71,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000001497 00000 n 
 0000001746 00000 n 
-0000001849 00000 n 
-0000002106 00000 n 
-0000002165 00000 n 
-0000002555 00000 n 
-0000002601 00000 n 
-0000002642 00000 n 
+0000001832 00000 n 
+0000002089 00000 n 
+0000002148 00000 n 
+0000002538 00000 n 
+0000002578 00000 n 
 trailer
 <<
 /ID 
@@ -106,8 +100,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-2676
+2612
 %%EOF

@@ -13,8 +13,8 @@ endobj
 3 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (file:///Users/rob/Projects/python/rst2pdf/rst2pdf/tests/input/images/biohazard.pdf)
->> /Border [ 0 0 0 ] /Rect [ 101.5929 753.0236 116.5929 765.0236 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (file:///home/lorna/projects/rst2pdf/rst2pdf/tests/input/images/biohazard.pdf)
+>> /Border [ 0 0 0 ] /Rect [ 95.92362 753.0236 110.9236 765.0236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 4 0 obj
@@ -29,7 +29,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -45,14 +45,14 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 168
+/Length 164
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Relative ) Tj 0 0 .501961 rg (link) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Relative ) Tj 0 .4 .6 rg (link) Tj T* ET
 Q
 Q
  
@@ -60,33 +60,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
-0000000445 00000 n 
-0000000666 00000 n 
-0000000769 00000 n 
-0000001026 00000 n 
-0000001085 00000 n 
-0000001303 00000 n 
-0000001349 00000 n 
-0000001390 00000 n 
+0000000439 00000 n 
+0000000660 00000 n 
+0000000746 00000 n 
+0000001003 00000 n 
+0000001062 00000 n 
+0000001276 00000 n 
+0000001316 00000 n 
 trailer
 <<
 /ID 
@@ -95,8 +89,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-1424
+1350
 %%EOF

@@ -32,7 +32,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -48,26 +48,27 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 529
+/Length 533
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Test for the oddeven directive. The next construct prints "odd" on odd pages and "even" on even pages:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 735.0236 cm
+1 0 0 1 57.02362 735.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (So, this page is...) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 723.0236 cm
+1 0 0 1 57.02362 723.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -80,27 +81,29 @@ Q
 q
 Q
 Q
+Q
 q
-1 0 0 1 62.69291 723.0236 cm
+1 0 0 1 57.02362 723.0236 cm
 Q
  
 endstream
 endobj
 9 0 obj
 <<
-/Length 303
+/Length 307
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (And this page is...) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
@@ -113,45 +116,40 @@ Q
 q
 Q
 Q
+Q
  
 endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R 1 12 0 R ]
 >>
 endobj
 11 0 obj
 <<
-/Nums [ 0 12 0 R 1 13 0 R ]
->>
-endobj
-12 0 obj
-<<
 /S /D /St 1
 >>
 endobj
-13 0 obj
+12 0 obj
 <<
 /S /D /St 2
 >>
 endobj
 xref
-0 14
+0 13
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000414 00000 n 
 0000000617 00000 n 
-0000000721 00000 n 
-0000000978 00000 n 
-0000001043 00000 n 
-0000001622 00000 n 
-0000001975 00000 n 
-0000002022 00000 n 
-0000002072 00000 n 
-0000002106 00000 n 
+0000000704 00000 n 
+0000000961 00000 n 
+0000001026 00000 n 
+0000001609 00000 n 
+0000001966 00000 n 
+0000002016 00000 n 
+0000002050 00000 n 
 trailer
 <<
 /ID 
@@ -160,8 +158,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 14
+/Size 13
 >>
 startxref
-2140
+2084
 %%EOF
