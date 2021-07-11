@@ -37,12 +37,12 @@ endobj
 endobj
 6 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 169.4957 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 755.8394 142.5342 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 550.5338 756.4769 555.2598 766.6769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
@@ -131,7 +131,7 @@ BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 231.502 0 Td (index) Tj T* -231.502 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 745.0394 cm
+1 0 0 1 40.01575 721.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -144,30 +144,30 @@ BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 212.1795 0 Td (version 1.0.1) Tj T* -212.1795 
 Q
 Q
 q
-1 0 0 1 40.01575 650 cm
+1 0 0 1 40.01575 600 cm
 Q
 q
-1 0 0 1 40.01575 629.6 cm
+1 0 0 1 40.01575 579.6 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL 236.286 0 Td (lorenzo) Tj T* -236.286 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 544.5606 cm
+1 0 0 1 40.01575 494.5606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F1 12 Tf 14.4 TL 220.602 0 Td (April 29, 2018) Tj T* -220.602 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
  
 endstream
@@ -186,7 +186,7 @@ endstream
 endobj
 20 0 obj
 <<
-/Length 601
+/Length 594
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -203,31 +203,32 @@ BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Sphynx example document) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F1 8.5 Tf 0 .4 .6 rg (Sphynx example document) Tj T* ET
 Q
 Q
 q
 1 0 0 1 443.2441 3 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F1 8.5 Tf 10.2 TL 67.274 0 Td (1) Tj T* -67.274 0 Td ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 40.01575 751.0394 cm
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
 Q
  
 endstream
@@ -272,449 +273,449 @@ Q
 q
 1 0 0 1 40.01575 689.0394 cm
 q
-[] 0 d
-BT /F3 10 Tf 12 TL ET
-1 w
-0 0 0 RG
-1 0 0 1 0 0 cm
-0 j
-BT /F3 10 Tf 12 TL ET
 0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+BT /F3 10 Tf 12 TL ET
+0 0 0 RG
+[] 0 d
 0 J
+0 j
+1 w
+1 0 0 1 0 0 cm
 q
 1 0 0 1 0 0 cm
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 52 m 58 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 52 m 58 54 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 52 m 64 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 76 56 m 76 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 32 m 98 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 32 m 102 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 56 m 100 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 56 m 132 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 52 m 172 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 52 m 164 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 52 m 180 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 52 m 172 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 52 m 180 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 38 46 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 38 42 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 64 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 94 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 90 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 92 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 112 44 m 132 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 44 m 152 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 44 m 172 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 44 m 164 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 44 m 180 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 44 m 172 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 44 m 180 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 38 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 38 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 36 m 58 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 36 m 58 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 64 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 44 m 132 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 36 m 172 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 36 m 180 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 186 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 186 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 200 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 4 24 m 28 24 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 24 m 148 24 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 4 24 m 4 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 28 24 m 28 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 28 16 m 52 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 20 m 100 20 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 24 m 124 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 16 m 148 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 148 24 m 148 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 182 30 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 178 30 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 180 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 20 m 68 4 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 20 m 100 4 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 4 m 100 4 l S
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 72 9.6 Tm (box) Tj T* ET
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 128 9.6 Tm (..) Tj T* ET
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 120 1.6 Tm (Xenophon) Tj T* ET
 Q
 Q
@@ -793,14 +794,14 @@ xref
 0000002592 00000 n 
 0000003510 00000 n 
 0000003635 00000 n 
-0000004287 00000 n 
-0000004412 00000 n 
-0000008312 00000 n 
-0000008389 00000 n 
-0000008423 00000 n 
-0000008457 00000 n 
-0000008491 00000 n 
-0000008525 00000 n 
+0000004280 00000 n 
+0000004405 00000 n 
+0000008305 00000 n 
+0000008382 00000 n 
+0000008416 00000 n 
+0000008450 00000 n 
+0000008484 00000 n 
+0000008518 00000 n 
 trailer
 <<
 /ID 
@@ -812,7 +813,7 @@ trailer
 /Size 29
 >>
 startxref
-8559
+8552
 %%EOF
 %PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
@@ -853,12 +854,12 @@ endobj
 endobj
 6 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 754.0394 169.4957 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 755.8394 142.5342 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 12 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 550.5338 756.4769 555.2598 766.6769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
@@ -947,7 +948,7 @@ BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 231.502 0 Td (index) Tj T* -231.502 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 745.0394 cm
+1 0 0 1 40.01575 721.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -960,30 +961,30 @@ BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 212.1795 0 Td (version 1.0.1) Tj T* -212.1795 
 Q
 Q
 q
-1 0 0 1 40.01575 650 cm
+1 0 0 1 40.01575 600 cm
 Q
 q
-1 0 0 1 40.01575 629.6 cm
+1 0 0 1 40.01575 579.6 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL 236.286 0 Td (lorenzo) Tj T* -236.286 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 544.5606 cm
+1 0 0 1 40.01575 494.5606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F1 12 Tf 14.4 TL 220.602 0 Td (April 29, 2018) Tj T* -220.602 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
  
 endstream
@@ -1002,7 +1003,7 @@ endstream
 endobj
 20 0 obj
 <<
-/Length 601
+/Length 594
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -1019,31 +1020,32 @@ BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Sphynx example document) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F1 8.5 Tf 0 .4 .6 rg (Sphynx example document) Tj T* ET
 Q
 Q
 q
 1 0 0 1 443.2441 3 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F1 8.5 Tf 10.2 TL 67.274 0 Td (1) Tj T* -67.274 0 Td ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 40.01575 751.0394 cm
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
 Q
  
 endstream
@@ -1088,449 +1090,449 @@ Q
 q
 1 0 0 1 40.01575 689.0394 cm
 q
-[] 0 d
-BT /F3 10 Tf 12 TL ET
-1 w
-0 0 0 RG
-1 0 0 1 0 0 cm
-0 j
-BT /F3 10 Tf 12 TL ET
 0 0 0 rg
+BT /F3 10 Tf 12 TL ET
+BT /F3 10 Tf 12 TL ET
+0 0 0 RG
+[] 0 d
 0 J
+0 j
+1 w
+1 0 0 1 0 0 cm
 q
 1 0 0 1 0 0 cm
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 52 m 58 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 52 m 58 54 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 52 m 64 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 76 56 m 76 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 32 m 98 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 32 m 102 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 56 m 100 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 56 m 132 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 52 m 172 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 52 m 164 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 52 m 180 52 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 52 m 172 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 52 m 180 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 38 46 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 38 42 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 44 m 64 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 94 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 90 50 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 92 56 m 92 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 112 44 m 132 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 44 m 152 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 44 m 172 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 44 m 164 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 44 m 180 44 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 44 m 172 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 44 m 180 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 38 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 38 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 36 m 58 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 64 36 m 58 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 32 36 m 64 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 132 44 m 132 32 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 164 36 m 172 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 172 36 m 180 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 186 38 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 186 34 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 200 36 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 4 24 m 28 24 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 24 m 148 24 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 4 24 m 4 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 28 24 m 28 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 28 16 m 52 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 20 m 100 20 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 24 m 124 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 124 16 m 148 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 148 24 m 148 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 182 30 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 178 30 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 180 36 m 180 16 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 20 m 68 4 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 100 20 m 100 4 l S
 Q
 q
-[] 0 d
-.8 w
-0 j
 0 0 0 RG
+[] 0 d
 0 J
+0 j
+.8 w
 n 68 4 m 100 4 l S
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 72 9.6 Tm (box) Tj T* ET
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 128 9.6 Tm (..) Tj T* ET
 Q
 q
-BT /F4 8 Tf 9.6 TL ET
-BT /F4 8 Tf 9.6 TL ET
 0 0 0 rg
+BT /F4 8 Tf 9.6 TL ET
+BT /F4 8 Tf 9.6 TL ET
 BT 1 0 0 1 120 1.6 Tm (Xenophon) Tj T* ET
 Q
 Q
@@ -1609,14 +1611,14 @@ xref
 0000002592 00000 n 
 0000003510 00000 n 
 0000003635 00000 n 
-0000004287 00000 n 
-0000004412 00000 n 
-0000008312 00000 n 
-0000008389 00000 n 
-0000008423 00000 n 
-0000008457 00000 n 
-0000008491 00000 n 
-0000008525 00000 n 
+0000004280 00000 n 
+0000004405 00000 n 
+0000008305 00000 n 
+0000008382 00000 n 
+0000008416 00000 n 
+0000008450 00000 n 
+0000008484 00000 n 
+0000008518 00000 n 
 trailer
 <<
 /ID 
@@ -1628,5 +1630,5 @@ trailer
 /Size 29
 >>
 startxref
-8559
+8552
 %%EOF

@@ -37,7 +37,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -53,28 +53,29 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 758
+/Length 762
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Paragraph 1) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 Q
 q
-1 0 0 1 62.69291 247.1339 cm
+1 0 0 1 57.02362 235.7953 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 1 25 cm
 q
-467.8898 0 0 467.8898 0 0 cm
+479.2283 0 0 479.2283 0 0 cm
 /FormXob.rst2pdf_image_0 Do
 Q
 Q
@@ -82,7 +83,7 @@ q
 1 0 0 1 6 3 cm
 q
 .25098 .25098 .313725 rg
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 210.6049 0 Td (Figure 1) Tj T* -210.6049 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 216.2742 0 Td (Figure 1) Tj T* -216.2742 0 Td ET
 Q
 Q
 q
@@ -90,17 +91,18 @@ q
 1 j
 .690196 .690196 .721569 RG
 .5 w
-n 0 493.8898 m 469.8898 493.8898 l S
-n 0 24 m 469.8898 24 l S
-n 0 24 m 0 493.8898 l S
-n 469.8898 24 m 469.8898 493.8898 l S
+n 0 505.2283 m 481.2283 505.2283 l S
+n 0 24 m 481.2283 24 l S
+n 0 24 m 0 505.2283 l S
+n 481.2283 24 m 481.2283 505.2283 l S
 Q
 Q
-q
-1 0 0 1 62.69291 229.1339 cm
 Q
 q
-1 0 0 1 62.69291 217.1339 cm
+1 0 0 1 57.02362 217.7953 cm
+Q
+q
+1 0 0 1 57.02362 205.7953 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Paragraph 2) Tj T* ET
@@ -111,21 +113,16 @@ endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
@@ -133,12 +130,11 @@ xref
 0000000872 00000 n 
 0000000987 00000 n 
 0000001236 00000 n 
-0000001340 00000 n 
-0000001597 00000 n 
-0000001656 00000 n 
-0000002464 00000 n 
-0000002511 00000 n 
-0000002552 00000 n 
+0000001323 00000 n 
+0000001580 00000 n 
+0000001639 00000 n 
+0000002451 00000 n 
+0000002492 00000 n 
 trailer
 <<
 /ID 
@@ -147,8 +143,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-2586
+2526
 %%EOF

@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R /F5 6 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
 >>
 endobj
 2 0 obj
@@ -12,27 +12,22 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
 endobj
 5 0 obj
 <<
-/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
 >>
 endobj
 6 0 obj
 <<
-/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F5 /Subtype /Type1 /Type /Font
->>
-endobj
-7 0 obj
-<<
-/Contents 13 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 12 0 R /Resources <<
+/Contents 12 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 11 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -40,40 +35,40 @@ endobj
   /Type /Page
 >>
 endobj
-8 0 obj
+7 0 obj
 <<
-/Outlines 10 0 R /PageLabels 14 0 R /PageMode /UseNone /Pages 12 0 R /Type /Catalog
+/Outlines 9 0 R /PageLabels 13 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
 >>
 endobj
-9 0 obj
+8 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
+9 0 obj
+<<
+/Count 1 /First 10 0 R /Last 10 0 R /Type /Outlines
+>>
+endobj
 10 0 obj
 <<
-/Count 1 /First 11 0 R /Last 11 0 R /Type /Outlines
+/Dest [ 6 0 R /XYZ 57.02362 625.6236 0 ] /Parent 9 0 R /Title (Section)
 >>
 endobj
 11 0 obj
 <<
-/Dest [ 7 0 R /XYZ 62.69291 625.6236 0 ] /Parent 10 0 R /Title (Section)
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
 >>
 endobj
 12 0 obj
 <<
-/Count 1 /Kids [ 7 0 R ] /Type /Pages
->>
-endobj
-13 0 obj
-<<
-/Length 1791
+/Length 1834
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 637.6236 cm
+1 0 0 1 57.02362 637.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -82,9 +77,9 @@ q
 q
 .5 w
 .662745 .662745 .662745 RG
-.960784 .960784 .862745 rg
-n 0 0 435.2898 110 re
-B*
+1 .972549 .862745 rg
+n 0 0 446.6283 110 re
+B
 Q
 q
 q
@@ -92,7 +87,7 @@ q
 q
 1 0 0 1 8.6 86.6 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2.5 Tm /F2 12.5 Tf 15 TL (Sidebar Title) Tj T* ET
 Q
 Q
@@ -102,7 +97,7 @@ q
 q
 1 0 0 1 8.6 62.6 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Optional Subtitle) Tj T* ET
 Q
 Q
@@ -123,7 +118,7 @@ q
 1 0 0 1 8.6 26.6 cm
 q
 .545098 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 140.2349 0 Td (This is a rubric inside a sidebar) Tj T* -140.2349 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 145.9042 0 Td (This is a rubric inside a sidebar) Tj T* -145.9042 0 Td ET
 Q
 Q
 Q
@@ -143,20 +138,20 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 604.6236 cm
+1 0 0 1 57.02362 604.6236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F3 17.5 Tf 0 0 0 rg (Section) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Section) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 586.6236 cm
+1 0 0 1 57.02362 586.6236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This paragraph contains a literal block:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 529.4236 cm
+1 0 0 1 57.02362 529.4236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -165,64 +160,63 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 48 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 48 re B*
 Q
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F4 10 Tf 12 TL (Connecting... OK) Tj T* (Transmitting data... OK) Tj T* (Disconnecting... OK) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL (Connecting... OK) Tj T* (Transmitting data... OK) Tj T* (Disconnecting... OK) Tj T* ET
 Q
 Q
 Q
 Q
 Q
 q
-1 0 0 1 62.69291 497.4236 cm
+1 0 0 1 57.02362 497.4236 cm
 q
-BT 1 0 0 1 0 14 Tm .70936 Tw 12 TL /F1 10 Tf 0 0 0 rg (and thus consists of a simple paragraph, a literal block, and another simple paragraph. Nonetheless it is) Tj T* 0 Tw (semantically ) Tj /F5 10 Tf (one) Tj /F1 10 Tf ( paragraph.) Tj T* ET
+BT 1 0 0 1 0 14 Tm 1.418022 Tw 12 TL /F1 10 Tf 0 0 0 rg (and thus consists of a simple paragraph, a literal block, and another simple paragraph. Nonetheless it is) Tj T* 0 Tw (semantically ) Tj /F4 10 Tf (one) Tj /F1 10 Tf ( paragraph.) Tj T* ET
 Q
 Q
  
 endstream
 endobj
-14 0 obj
+13 0 obj
 <<
-/Nums [ 0 15 0 R ]
+/Nums [ 0 14 0 R ]
 >>
 endobj
-15 0 obj
+14 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 16
+0 15
 0000000000 65535 f 
 0000000073 00000 n 
-0000000144 00000 n 
-0000000251 00000 n 
-0000000370 00000 n 
-0000000482 00000 n 
-0000000587 00000 n 
-0000000702 00000 n 
-0000000907 00000 n 
-0000001012 00000 n 
-0000001269 00000 n 
-0000001343 00000 n 
-0000001438 00000 n 
-0000001498 00000 n 
-0000003341 00000 n 
-0000003382 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000455 00000 n 
+0000000570 00000 n 
+0000000775 00000 n 
+0000000879 00000 n 
+0000001136 00000 n 
+0000001209 00000 n 
+0000001303 00000 n 
+0000001363 00000 n 
+0000003249 00000 n 
+0000003290 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 9 0 R
-/Root 8 0 R
-/Size 16
+/Info 8 0 R
+/Root 7 0 R
+/Size 15
 >>
 startxref
-3416
+3324
 %%EOF

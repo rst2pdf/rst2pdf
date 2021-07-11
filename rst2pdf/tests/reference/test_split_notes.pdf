@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -37,7 +37,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 11 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -53,34 +53,35 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 1085
+/Length 1120
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 195.2598 cm
+1 0 0 1 57.02362 195.2598 cm
 Q
 q
-1 0 0 1 62.69291 177.2598 cm
+1 0 0 1 57.02362 177.2598 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Algo) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 165.2598 cm
+1 0 0 1 57.02362 165.2598 cm
 Q
 q
-1 0 0 1 62.69291 76.86614 cm
-.960784 .960784 .862745 rg
-n 0 88.3937 469.8898 -88.3937 re f*
+1 0 0 1 57.02362 76.86614 cm
+q
+1 .972549 .862745 rg
+n 0 88.3937 481.2283 -88.3937 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 6 62.3937 Tm  T* ET
 q
 1 0 0 1 16 57.3937 cm
 q
-0 0 0 rg
+.133333 .133333 .133333 rg
 BT 1 0 0 1 0 2.5 Tm /F2 12.5 Tf 15 TL (Note) Tj T* ET
 Q
 Q
@@ -88,7 +89,7 @@ q
 1 0 0 1 16 9.393701 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .403068 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a) Tj T* 0 Tw .151991 Tw (note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This) Tj T* 0 Tw .274222 Tw (is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL -0.11858 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw -0.11858 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw -0.11858 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw ET
 Q
 Q
 q
@@ -96,10 +97,11 @@ q
 1 j
 .662745 .662745 .662745 RG
 .5 w
-n 0 88.3937 m 469.8898 88.3937 l S
-n 0 0 m 469.8898 0 l S
+n 0 88.3937 m 481.2283 88.3937 l S
+n 0 0 m 481.2283 0 l S
 n 0 0 m 0 88.3937 l S
-n 469.8898 0 m 469.8898 88.3937 l S
+n 481.2283 0 m 481.2283 88.3937 l S
+Q
 Q
 Q
  
@@ -107,14 +109,15 @@ endstream
 endobj
 10 0 obj
 <<
-/Length 806
+/Length 790
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 697.0236 cm
-.960784 .960784 .862745 rg
-n 0 68 469.8898 -68 re f*
+1 0 0 1 57.02362 697.0236 cm
+q
+1 .972549 .862745 rg
+n 0 68 481.2283 -68 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 6 42 Tm  T* ET
@@ -122,7 +125,7 @@ q
 1 0 0 1 16 16 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .403068 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a) Tj T* 0 Tw .151991 Tw (note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This) Tj T* 0 Tw (is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL -0.11858 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw -0.11858 Tw (This is a note. This is a note. This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* 0 Tw (This is a note. This is a note. This is a note. This is a note. This is a note.) Tj T* ET
 Q
 Q
 q
@@ -130,55 +133,50 @@ q
 1 j
 .662745 .662745 .662745 RG
 .5 w
-n 0 68 m 469.8898 68 l S
-n 0 0 m 469.8898 0 l S
+n 0 68 m 481.2283 68 l S
+n 0 0 m 481.2283 0 l S
 n 0 0 m 0 68 l S
-n 469.8898 0 m 469.8898 68 l S
+n 481.2283 0 m 481.2283 68 l S
+Q
 Q
 Q
 q
-1 0 0 1 62.69291 691.0236 cm
+1 0 0 1 57.02362 691.0236 cm
 Q
  
 endstream
 endobj
 11 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 12 0 R 1 13 0 R ]
 >>
 endobj
 12 0 obj
 <<
-/Nums [ 0 13 0 R 1 14 0 R ]
->>
-endobj
-13 0 obj
-<<
 /S /D /St 1
 >>
 endobj
-14 0 obj
+13 0 obj
 <<
 /S /D /St 2
 >>
 endobj
 xref
-0 15
+0 14
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000340 00000 n 
-0000000543 00000 n 
-0000000747 00000 n 
-0000000851 00000 n 
-0000001108 00000 n 
-0000001173 00000 n 
-0000002309 00000 n 
-0000003166 00000 n 
-0000003213 00000 n 
-0000003263 00000 n 
-0000003297 00000 n 
+0000000330 00000 n 
+0000000533 00000 n 
+0000000737 00000 n 
+0000000824 00000 n 
+0000001081 00000 n 
+0000001146 00000 n 
+0000002317 00000 n 
+0000003158 00000 n 
+0000003208 00000 n 
+0000003242 00000 n 
 trailer
 <<
 /ID 
@@ -187,8 +185,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 15
+/Size 14
 >>
 startxref
-3331
+3276
 %%EOF
