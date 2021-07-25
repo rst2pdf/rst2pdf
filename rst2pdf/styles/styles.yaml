@@ -682,6 +682,7 @@ styles:
     parent: normal
     fontSize: 85%
   toc1:
+    fontName: fontSansBold
     parent: toc
   toc10:
     leftIndent: 100
