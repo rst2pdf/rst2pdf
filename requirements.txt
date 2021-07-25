@@ -46,12 +46,12 @@ numpy==1.19.4
     # via matplotlib
 packaging==20.8
     # via sphinx
-pillow==8.1.1
+pillow==8.2.0
     # via
     #   matplotlib
     #   reportlab
     #   xhtml2pdf
-pygments==2.7.3
+pygments==2.7.4
     # via
     #   -r requirements.in
     #   sphinx
@@ -104,7 +104,7 @@ tinycss2==1.1.0
     # via
     #   cssselect2
     #   svglib
-urllib3==1.26.3
+urllib3==1.26.4
     # via requests
 webencodings==0.5.1
     # via

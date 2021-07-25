@@ -46,7 +46,7 @@ q
 1 0 0 1 62.69291 709.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 44 Tm /F1 12 Tf 28 TL 5.79522 Tw (Using test_issue_68_1.style the paragraphs whould have normal leading. Using) Tj T* 0 Tw (test_issue_68_2.style they should have double spacing.) Tj T* ET
+BT 1 0 0 1 0 44 Tm /F1 12 Tf 28 TL 5.79522 Tw (Using test_issue_68_1.style the paragraphs should have normal leading. Using) Tj T* 0 Tw (test_issue_68_2.style they should have double spacing.) Tj T* ET
 Q
 Q
 q
