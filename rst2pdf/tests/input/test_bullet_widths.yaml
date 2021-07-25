@@ -1,3 +1,16 @@
+pageTemplates:
+  twoColumn:
+    frames:
+    - - 0cm
+      - 0cm
+      - 49%
+      - 100%
+    - - 51%
+      - 0cm
+      - 49%
+      - 100%
+    showFooter: true
+    showHeader: true
 styles:
   bullet-list:
     colWidths:
