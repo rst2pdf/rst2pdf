@@ -29,8 +29,8 @@ release = 'test'
 # (source start file, target name, title, author).
 pdf_documents = [('index', u'MyProject1', u'My Project', u'Author Name')]
 
-# A comma-separated list of custom stylesheets. Example:
-pdf_stylesheets = ['sphinx']
+# A comma-separated list of custom stylesheets
+pdf_stylesheets = ['sphinx', 'sphinx-issue388']
 
 # Language to be used for hyphenation support
 pdf_language = "en_US"

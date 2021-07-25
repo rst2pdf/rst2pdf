@@ -29,6 +29,9 @@ release = '0.0'
 # (source start file, target name, title, author).
 pdf_documents = [('test', 'Issue318', u'Issue 318 Documentation', u'Roberto Alsina')]
 
+# A comma-separated list of custom stylesheets
+pdf_stylesheets = ['sphinx', 'sphinx-issue318']
+
 pdf_use_index = True
 pdf_domain_indices = True
 pdf_invariant = True
