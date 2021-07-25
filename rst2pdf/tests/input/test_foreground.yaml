@@ -6,6 +6,11 @@ pageTemplates:
     foreground: images/confidential.png
     showFooter: false
     showHeader: true
+    frames:
+    - - 0%
+      - 0%
+      - 100%
+      - 100%
 styles:
   base:
     textColor: '#0433FF'

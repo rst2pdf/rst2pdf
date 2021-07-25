@@ -1,5 +1,7 @@
 pageSetup:
   firstTemplate: cutePage
+  margin-bottom: 2cm
+  margin-top: 2cm
 pageTemplates:
   cutePage:
     footerSeparator: true
