@@ -534,13 +534,21 @@ class RstToPdf(object):
                 settings_overrides[
                     'strip_elements_with_classes'
                 ] = self.strip_elements_with_classes
-                self.doctree = docutils.core.publish_doctree(
-                    text, source_path=source_path, settings_overrides=settings_overrides
-                )
-                log.debug(self.doctree)
+                settings_overrides['exit_status_level'] = 3
+
+                try:
+                    self.doctree = docutils.core.publish_doctree(
+                        text,
+                        source_path=source_path,
+                        settings_overrides=settings_overrides,
+                    )
+                    log.debug(self.doctree)
+                except Exception:
+                    log.error("Cannot generate PDF, exiting")
+                    return 1
             else:
                 log.error('Error: createPdf needs a text or a doctree')
-                return
+                return 1
         else:
             self.doctree = doctree
 
@@ -718,6 +726,8 @@ class RstToPdf(object):
                 os.unlink(fn)
             except OSError:
                 pass
+
+        return 0
 
 
 class FancyDocTemplate(BaseDocTemplate):
@@ -1630,7 +1640,7 @@ def main(_args=None):
     if options.output:
         outfile = options.output
         if outfile == '-':
-            outfile = sys.stdout
+            outfile = sys.stdout.buffer
             options.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
@@ -1641,7 +1651,7 @@ def main(_args=None):
             else:
                 outfile = filename + '.pdf'
         else:
-            outfile = sys.stdout
+            outfile = sys.stdout.buffer
             options.compressed = False
             # we must stay quiet
             log.setLevel(logging.CRITICAL)
@@ -1684,7 +1694,7 @@ def main(_args=None):
 
     add_extensions(options)
 
-    RstToPdf(
+    return_code = RstToPdf(
         stylesheets=options.style,
         language=options.language,
         header=options.header,
@@ -1723,6 +1733,8 @@ def main(_args=None):
 
     if close_infile:
         infile.close()
+
+    sys.exit(return_code)
 
 
 # Ugly hack that fixes Issue 335

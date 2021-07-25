@@ -215,7 +215,20 @@ class Item(pytest.Item):
 
         # verify results
 
-        if retcode:
+        retcode_file = os.path.join(INPUT_DIR, self.name + '.retcode')
+        if os.path.exists(retcode_file):
+            with open(retcode_file) as f:
+                first_line = f.readline()
+                expected_retcode = int(first_line)
+                if expected_retcode == retcode:
+                    return
+                else:
+                    self._fail(
+                        'Exit code of %d did not match expected %d'
+                        % (retcode, expected_retcode),
+                        output,
+                    )
+        elif retcode > 0:
             self._fail('Call failed with %d' % retcode, output)
 
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
@@ -300,7 +313,8 @@ class RstItem(Item):
         if os.path.exists(style_file):
             cmd += ['-s', os.path.basename(style_file)]
 
-        cmd += ['-o', output_pdf]
+        if '-o' not in cmd:
+            cmd += ['-o', output_pdf]
 
         try:
             output = subprocess.check_output(
