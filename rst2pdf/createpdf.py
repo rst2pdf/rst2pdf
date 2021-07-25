@@ -1132,6 +1132,10 @@ class FancyPage(PageTemplate):
             self.draw_background('background', canv)
 
         self.frames = []
+        if 'frames' not in self.template:
+            log.error('No frames in template')
+            sys.exit(1)
+
         for frame in self.template['frames']:
             frame = frame[:]
             while len(frame) < 8:
