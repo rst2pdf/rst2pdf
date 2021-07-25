@@ -4,8 +4,8 @@ embeddedFonts:
   - WenQuanYiZenHei-01.ttf
   - WenQuanYiZenHei-01.ttf
 fontsAlias:
-  stdBold: WenQuanYiZenHei-01
-  stdBoldItalic: WenQuanYiZenHei-01
-  stdFont: WenQuanYiZenHei-01
-  stdItalic: WenQuanYiZenHei-01
+  fontSerifBold: WenQuanYiZenHei-01
+  fontSerifBoldItalic: WenQuanYiZenHei-01
+  fontSerif: WenQuanYiZenHei-01
+  fontSerifItalic: WenQuanYiZenHei-01
 
