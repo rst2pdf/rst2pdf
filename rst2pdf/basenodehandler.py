@@ -191,7 +191,7 @@ class NodeHandler(metaclass=MetaHelper):
         return result
 
     def __call__(self, client):
-        ''' Get the dispatchers, wrapped up as methods for the client'''
+        '''Get the dispatchers, wrapped up as methods for the client'''
         textdispatch = types.MethodType(self.textdispatch, client)
         elemdispatch = types.MethodType(self.elemdispatch, client)
         return textdispatch, elemdispatch
