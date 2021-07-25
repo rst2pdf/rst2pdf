@@ -1,5 +1,5 @@
 pageTemplates:
-  oneColumn:
+  mainPage:
     defaultFooter: 'This should be in two lines. 1.
 
 
