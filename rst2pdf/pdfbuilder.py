@@ -228,7 +228,10 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
-            t = copy(self.env.indexentries)
+            
+            tmp = self.env.domains["index"]
+            
+            t = copy(tmp)
             try:
                 self.env.indexentries = {
                     docname: self.env.indexentries[docname + '-gen']
@@ -237,6 +240,9 @@ class PDFBuilder(Builder):
                 self.env.indexentries = {}
                 for dname in self.docnames:
                     self.env.indexentries[dname] = t.get(dname, [])
+            except:
+                pass
+            
             genindex = IndexEntries(self.env).create_index(self)
             self.env.indexentries = t
             # EOH (End Of Hack)
@@ -413,7 +419,7 @@ class PDFBuilder(Builder):
             if docname not in self.env.all_docs:
                 yield docname
                 continue
-            targetname = self.env.doc2path(docname, self.outdir, self.out_suffix)
+            targetname = self.env.doc2path(os.path.join(docname, self.outdir, self.out_suffix))
             try:
                 targetmtime = os.path.getmtime(targetname)
             except Exception:
