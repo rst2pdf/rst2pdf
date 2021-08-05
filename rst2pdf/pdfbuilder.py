@@ -234,12 +234,16 @@ class PDFBuilder(Builder):
             t = copy(tmp)
             try:
                 self.env.indexentries = {
-                    docname: self.env.indexentries[docname + '-gen']
+                    docname : self.env.indexentries[docname + '-gen']
                 }
             except KeyError:
                 self.env.indexentries = {}
                 for dname in self.docnames:
-                    self.env.indexentries[dname] = t.get(dname, [])
+                    try:
+                        self.env.indexentries[dname] = t.dname
+                    except:
+                        self.env.indexentries[dname] = []
+
             except:
                 pass
             
