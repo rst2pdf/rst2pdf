@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R
 >>
 endobj
 2 0 obj
@@ -12,17 +12,12 @@ endobj
 endobj
 3 0 obj
 <<
-/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/Contents 9 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -32,193 +27,206 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 8 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
 >>
 endobj
 6 0 obj
+<<
+/PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+>>
+endobj
+7 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
-7 0 obj
-<<
-/Count 2 /Kids [ 3 0 R 4 0 R ] /Type /Pages
->>
-endobj
 8 0 obj
 <<
-/Length 1836
+/Count 2 /Kids [ 4 0 R 5 0 R ] /Type /Pages
+>>
+endobj
+9 0 obj
+<<
+/Length 1850
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This bullet list should be divided exactly in mid-page:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 Q
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 Q
 q
-1 0 0 1 62.69291 672.0236 cm
+1 0 0 1 57.02362 672.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 69 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 225.4449 0 Td (\177) Tj T* -225.4449 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 228.6142 0 Td (\177) Tj T* -228.6142 0 Td ET
 Q
 Q
 q
-1 0 0 1 237.9449 -3 cm
+1 0 0 1 243.6142 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 74 Tm /F1 10 Tf 12 TL 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.19311 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long) Tj T* ET
+BT 1 0 0 1 0 74 Tm /F1 10 Tf 12 TL 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw 1.901772 Tw (Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 672.0236 cm
 Q
 q
-1 0 0 1 62.69291 654.0236 cm
+1 0 0 1 57.02362 672.0236 cm
+Q
+q
+1 0 0 1 57.02362 654.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This item list should be divided at 1/4th page width:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 654.0236 cm
+1 0 0 1 57.02362 654.0236 cm
 Q
 q
-1 0 0 1 62.69291 654.0236 cm
+1 0 0 1 57.02362 654.0236 cm
 Q
 q
-1 0 0 1 62.69291 609.0236 cm
+1 0 0 1 57.02362 609.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 33 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 103.1324 0 Td (1.) Tj T* -103.1324 0 Td ET
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 102.3071 0 Td (1.) Tj T* -102.3071 0 Td ET
 Q
 Q
 q
-1 0 0 1 120.4724 -3 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .147486 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw .147486 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw .147486 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long Long Long Long) Tj T* ET
-Q
-Q
-q
-Q
-Q
-q
-1 0 0 1 62.69291 609.0236 cm
-Q
-q
-1 0 0 1 62.69291 609.0236 cm
-Q
- 
-endstream
-endobj
-9 0 obj
-<<
-/Length 2183
->>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
-q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 123.3071 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 5.499426 Tw (This bullet list should be divided exactly in) Tj T* 0 Tw (mid-column \(1/4th page width\):) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 741.0236 cm
-Q
-q
-1 0 0 1 62.69291 741.0236 cm
-Q
-q
-1 0 0 1 62.69291 564.0236 cm
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-q
-1 0 0 1 6 165 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 102.563 0 Td (\177) Tj T* -102.563 0 Td ET
-Q
-Q
-q
-1 0 0 1 115.063 -3 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 170 Tm /F1 10 Tf 12 TL 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw 3.920997 Tw (Long Long Long Long) Tj T* 0 Tw (Long) Tj T* ET
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .801635 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw .801635 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw .801635 Tw (Long Long Long Long Long Long Long Long Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long Long Long Long) Tj T* ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 564.0236 cm
 Q
 q
-1 0 0 1 62.69291 534.0236 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 3.350748 Tw (This item list should be divided at 1/8th page) Tj T* 0 Tw (width:) Tj T* ET
-Q
+1 0 0 1 57.02362 609.0236 cm
 Q
 q
-1 0 0 1 62.69291 534.0236 cm
-Q
-q
-1 0 0 1 62.69291 534.0236 cm
-Q
-q
-1 0 0 1 62.69291 441.0236 cm
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-q
-1 0 0 1 6 81 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 41.6915 0 Td (1.) Tj T* -41.6915 0 Td ET
-Q
-Q
-q
-1 0 0 1 59.0315 -3 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 86 Tm /F1 10 Tf 12 TL 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 3.550898 Tw (Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long Long Long Long) Tj T* ET
-Q
-Q
-q
-Q
-Q
-q
-1 0 0 1 62.69291 441.0236 cm
+1 0 0 1 57.02362 609.0236 cm
 Q
  
 endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Length 2171
 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 6.293127 Tw (This bullet list should be divided exactly in) Tj T* 0 Tw (mid-column \(1/4th page width\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 741.0236 cm
+Q
+q
+1 0 0 1 57.02362 741.0236 cm
+Q
+q
+1 0 0 1 57.02362 564.0236 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 165 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 102.8409 0 Td (\177) Tj T* -102.8409 0 Td ET
+Q
+Q
+q
+1 0 0 1 117.8409 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 170 Tm /F1 10 Tf 12 TL 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw 4.846982 Tw (Long Long Long Long) Tj T* 0 Tw (Long) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 564.0236 cm
+Q
+q
+1 0 0 1 57.02362 546.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This item list should be divided at 1/8th page width:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 546.0236 cm
+Q
+q
+1 0 0 1 57.02362 546.0236 cm
+Q
+q
+1 0 0 1 57.02362 453.0236 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 81 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 39.42047 0 Td (1.) Tj T* -39.42047 0 Td ET
+Q
+Q
+q
+1 0 0 1 60.42047 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 86 Tm /F1 10 Tf 12 TL 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw 4.384283 Tw (Long Long Long Long Long Long) Tj T* 0 Tw (Long Long Long Long Long Long) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 453.0236 cm
+Q
+ 
+endstream
 endobj
 11 0 obj
 <<
@@ -239,28 +247,28 @@ xref
 0 14
 0000000000 65535 f 
 0000000073 00000 n 
-0000000104 00000 n 
-0000000211 00000 n 
-0000000414 00000 n 
-0000000617 00000 n 
-0000000721 00000 n 
-0000000978 00000 n 
-0000001043 00000 n 
-0000002930 00000 n 
-0000005164 00000 n 
-0000005211 00000 n 
-0000005261 00000 n 
-0000005295 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000326 00000 n 
+0000000529 00000 n 
+0000000733 00000 n 
+0000000820 00000 n 
+0000001077 00000 n 
+0000001142 00000 n 
+0000003043 00000 n 
+0000005266 00000 n 
+0000005316 00000 n 
+0000005350 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 6 0 R
-/Root 5 0 R
+/Info 7 0 R
+/Root 6 0 R
 /Size 14
 >>
 startxref
-5329
+5384
 %%EOF

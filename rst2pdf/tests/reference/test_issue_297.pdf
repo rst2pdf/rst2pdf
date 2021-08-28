@@ -37,7 +37,7 @@ endobj
 endobj
 7 0 obj
 <<
-/Outlines 11 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
 >>
 endobj
 8 0 obj
@@ -53,12 +53,12 @@ endobj
 endobj
 10 0 obj
 <<
-/Length 875
+/Length 731
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 727.8236 cm
+1 0 0 1 57.02362 727.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -67,27 +67,27 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 36 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 36 re B*
 Q
 q
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 0 12 18 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 24 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 30 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 36 12 24 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 60 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 72 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 78 12 12 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 24 0 234 12 re f*
-BT 1 0 0 1 0 14 Tm 12 TL /F2 10 Tf 0 0 0 rg (def) Tj /F3 10 Tf 0 0 0 rg ( ) Tj 0 0 0 rg (x) Tj 0 0 0 rg (\() Tj 0 0 0 rg (self) Tj 0 0 0 rg (,) Tj 0 0 0 rg ( ) Tj 0 0 0 rg (y) Tj 0 0 0 rg (\):) Tj 0 0 0 rg  T* (    ) Tj /F4 10 Tf 0 0 0 rg (# self above should be black, not green) Tj T* ET
+BT 1 0 0 1 0 14 Tm 12 TL /F2 10 Tf 0 0 0 rg (def) Tj /F3 10 Tf ( ) Tj (x) Tj (\() Tj (self) Tj (,) Tj ( ) Tj (y) Tj (\):) Tj  T* (    ) Tj /F4 10 Tf (# self above should be black, not green) Tj T* ET
 Q
 Q
 Q
@@ -98,21 +98,16 @@ endstream
 endobj
 11 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 12 0 R ]
 >>
 endobj
 12 0 obj
-<<
-/Nums [ 0 13 0 R ]
->>
-endobj
-13 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 14
+0 13
 0000000000 65535 f 
 0000000073 00000 n 
 0000000134 00000 n 
@@ -121,12 +116,11 @@ xref
 0000000456 00000 n 
 0000000569 00000 n 
 0000000773 00000 n 
-0000000877 00000 n 
-0000001134 00000 n 
-0000001193 00000 n 
-0000002119 00000 n 
-0000002166 00000 n 
-0000002207 00000 n 
+0000000860 00000 n 
+0000001117 00000 n 
+0000001176 00000 n 
+0000001958 00000 n 
+0000001999 00000 n 
 trailer
 <<
 /ID 
@@ -135,8 +129,8 @@ trailer
 
 /Info 8 0 R
 /Root 7 0 R
-/Size 14
+/Size 13
 >>
 startxref
-2241
+2033
 %%EOF

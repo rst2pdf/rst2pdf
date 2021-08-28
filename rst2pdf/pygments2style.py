@@ -46,15 +46,15 @@ def css2rl(css):
 
             # These two can come in any order
             if option == 'font-weight' and argument == 'bold':
-                if 'fontName' in style and style['fontName'] == 'stdMonoItalic':
-                    style['fontName'] = 'stdMonoBoldItalic'
+                if 'fontName' in style and style['fontName'] == 'fontMonoItalic':
+                    style['fontName'] = 'fontMonoBoldItalic'
                 else:
-                    style['fontName'] = 'stdMonoBold'
+                    style['fontName'] = 'fontMonoBold'
             if option == 'font-style' and argument == 'italic':
-                if 'fontName' in style and style['fontName'] == 'stdBold':
-                    style['fontName'] = 'stdMonoBoldItalic'
+                if 'fontName' in style and style['fontName'] == 'fontSansBold':
+                    style['fontName'] = 'fontMonoBoldItalic'
                 else:
-                    style['fontName'] = 'stdMonoItalic'
+                    style['fontName'] = 'fontMonoItalic'
         if style.get('textColor', None) is None:
             style['textColor'] = 'black'
         styles.append([sname, style])

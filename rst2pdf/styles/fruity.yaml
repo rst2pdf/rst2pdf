@@ -4,37 +4,37 @@ styles:
     textColor: '#ffffff'
   pygments-c:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-c1:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-ch:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-cm:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-cp:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#ff0007'
   pygments-cpf:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-cs:
     backColor: '#0f140f'
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#008800'
   pygments-dl:
@@ -47,7 +47,7 @@ styles:
     parent: code
     textColor: '#ffffff'
   pygments-fm:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#ff0086'
   pygments-g:
@@ -60,7 +60,7 @@ styles:
     parent: code
     textColor: '#ffffff'
   pygments-gh:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#ffffff'
   pygments-gi:
@@ -83,7 +83,7 @@ styles:
     parent: code
     textColor: '#ffffff'
   pygments-gu:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#ffffff'
   pygments-hll:
@@ -91,34 +91,34 @@ styles:
     parent: code
     textColor: black
   pygments-il:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-k:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-kc:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-kd:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-kn:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-kp:
     parent: code
     textColor: '#fb660a'
   pygments-kr:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-kt:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#cdcaa9'
   pygments-l:
@@ -128,34 +128,34 @@ styles:
     parent: code
     textColor: '#ffffff'
   pygments-m:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-mb:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-mf:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-mh:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-mi:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-mo:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#0086f7'
   pygments-n:
     parent: code
     textColor: '#ffffff'
   pygments-na:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#ff0086'
   pygments-nb:
@@ -171,7 +171,7 @@ styles:
     parent: code
     textColor: '#ffffff'
   pygments-nf:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#ff0086'
   pygments-ni:
@@ -187,7 +187,7 @@ styles:
     parent: code
     textColor: '#0086d2'
   pygments-nt:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#fb660a'
   pygments-nv:

@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -63,23 +63,23 @@ endobj
 endobj
 10 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 765.0236 0 ] /Next 11 0 R /Parent 9 0 R /Title (Keep with next test)
+/Dest [ 4 0 R /XYZ 57.02362 765.0236 0 ] /Next 11 0 R /Parent 9 0 R /Title (Keep with next test)
 >>
 endobj
 11 0 obj
 <<
-/Count 1 /Dest [ 5 0 R /XYZ 62.69291 765.0236 0 ] /First 12 0 R /Last 12 0 R /Next 13 0 R /Parent 9 0 R 
+/Count 1 /Dest [ 5 0 R /XYZ 57.02362 765.0236 0 ] /First 12 0 R /Last 12 0 R /Next 13 0 R /Parent 9 0 R 
   /Prev 10 0 R /Title (Another title)
 >>
 endobj
 12 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 732.0236 0 ] /Parent 11 0 R /Title (A subsection)
+/Dest [ 5 0 R /XYZ 57.02362 732.0236 0 ] /Parent 11 0 R /Title (A subsection)
 >>
 endobj
 13 0 obj
 <<
-/Dest [ 6 0 R /XYZ 62.69291 253.1339 0 ] /Parent 9 0 R /Prev 11 0 R /Title (Third title)
+/Dest [ 6 0 R /XYZ 57.02362 253.1339 0 ] /Parent 9 0 R /Prev 11 0 R /Title (Third title)
 >>
 endobj
 14 0 obj
@@ -89,31 +89,31 @@ endobj
 endobj
 15 0 obj
 <<
-/Length 649
+/Length 669
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Keep with next test) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Keep with next test) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 726.0236 cm
+1 0 0 1 57.02362 726.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This test checks that when a title is not left orphaned at the bottom of a page.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 187.4409 cm
+1 0 0 1 57.02362 187.4409 cm
 Q
 q
-1 0 0 1 62.69291 157.4409 cm
+1 0 0 1 57.02362 157.4409 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .677988 Tw (This is not very close to the bottom, so there's room for the "Another title" and "A subsection" left on the) Tj T* 0 Tw (page, but not enough to also include the sentence of content.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL -0.138174 Tw (This is not very close to the bottom, so there's room for the "Another title" and "A subsection" left on the page,) Tj T* 0 Tw (but not enough to also include the sentence of content.) Tj T* ET
 Q
 Q
  
@@ -121,62 +121,62 @@ endstream
 endobj
 16 0 obj
 <<
-/Length 432
+/Length 468
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Another title) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Another title) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 714.0236 cm
+1 0 0 1 57.02362 714.0236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (A subsection) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (A subsection) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 696.0236 cm
+1 0 0 1 57.02362 696.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The content should be in the same page as the title.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 696.0236 cm
+1 0 0 1 57.02362 696.0236 cm
 Q
  
 endstream
 endobj
 17 0 obj
 <<
-/Length 1350
+/Length 1374
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 283.1339 cm
+1 0 0 1 57.02362 283.1339 cm
 Q
 q
-1 0 0 1 62.69291 265.1339 cm
+1 0 0 1 57.02362 265.1339 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is not very close to the bottom) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 232.1339 cm
+1 0 0 1 57.02362 232.1339 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Third title) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Third title) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 130.1339 cm
+1 0 0 1 57.02362 130.1339 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 86 Tm /F1 10 Tf 12 TL .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw .643322 Tw (The content should be in the same page as the title The content should be in the same page as the title) Tj T* 0 Tw (The content should be in the same page as the title) Tj T* ET
+BT 1 0 0 1 0 86 Tm /F1 10 Tf 12 TL .219925 Tw (The content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw 1.183255 Tw (content should be in the same page as the title The content should be in the same page as the title The) Tj T* 0 Tw (content should be in the same page as the title) Tj T* ET
 Q
 Q
  
@@ -208,24 +208,24 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000538 00000 n 
-0000000743 00000 n 
-0000000948 00000 n 
-0000001052 00000 n 
-0000001309 00000 n 
-0000001382 00000 n 
-0000001501 00000 n 
-0000001666 00000 n 
-0000001766 00000 n 
-0000001877 00000 n 
-0000001949 00000 n 
-0000002649 00000 n 
-0000003132 00000 n 
-0000004534 00000 n 
-0000004593 00000 n 
-0000004627 00000 n 
-0000004661 00000 n 
+0000000330 00000 n 
+0000000535 00000 n 
+0000000740 00000 n 
+0000000945 00000 n 
+0000001049 00000 n 
+0000001306 00000 n 
+0000001379 00000 n 
+0000001498 00000 n 
+0000001663 00000 n 
+0000001763 00000 n 
+0000001874 00000 n 
+0000001946 00000 n 
+0000002666 00000 n 
+0000003185 00000 n 
+0000004611 00000 n 
+0000004670 00000 n 
+0000004704 00000 n 
+0000004738 00000 n 
 trailer
 <<
 /ID 
@@ -237,5 +237,5 @@ trailer
 /Size 22
 >>
 startxref
-4695
+4772
 %%EOF

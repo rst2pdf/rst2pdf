@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -32,7 +32,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -53,16 +53,16 @@ endobj
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 147.1349 0 Td (Test for issue #16:) Tj T* -147.1349 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 166.4542 0 Td (Test for issue #16:) Tj T* -166.4542 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 719.0236 cm
+1 0 0 1 57.02362 693.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The default role for interpreted text is ) Tj /F3 10 Tf 0 0 0 rg (Title Reference) Tj /F1 10 Tf 0 0 0 rg (.) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The default role for interpreted text is ) Tj /F3 10 Tf (Title Reference) Tj /F1 10 Tf (.) Tj T* ET
 Q
 Q
  
@@ -70,34 +70,28 @@ endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000124 00000 n 
 0000000231 00000 n 
-0000000343 00000 n 
-0000000458 00000 n 
-0000000661 00000 n 
-0000000765 00000 n 
-0000001041 00000 n 
-0000001100 00000 n 
-0000001531 00000 n 
-0000001578 00000 n 
-0000001619 00000 n 
+0000000340 00000 n 
+0000000455 00000 n 
+0000000658 00000 n 
+0000000745 00000 n 
+0000001021 00000 n 
+0000001080 00000 n 
+0000001511 00000 n 
+0000001552 00000 n 
 trailer
 <<
 /ID 
@@ -106,8 +100,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-1653
+1586
 %%EOF

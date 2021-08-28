@@ -1,3 +1,8 @@
+pageSetup:
+  margin-bottom: 2cm
+  margin-top: 2cm
+  margin-left: 2cm
+  margin-right: 2cm
 styles:
   thai:
     fontName: garuda

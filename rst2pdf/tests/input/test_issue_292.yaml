@@ -1,6 +1,6 @@
 styles:
   linenumber:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     textColor: '#00FF00'
   nobox:
     backColor: white

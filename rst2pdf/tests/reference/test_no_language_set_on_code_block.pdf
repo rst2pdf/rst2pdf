@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -48,32 +48,32 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 1014
+/Length 1000
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 189.7942 0 Td (No language) Tj T* -189.7942 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 693.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This test checks that the language attribute of a code-block does not cause an errror when it is not supplied.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 663.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 174.9349 0 Td (No language) Tj T* -174.9349 0 Td ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .243917 Tw (To pass, there should be no errors on the command line and the code block below should be styled as plain) Tj T* 0 Tw (text.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 707.0236 cm
-q
-BT 1 0 0 1 0 14 Tm 1.987765 Tw 12 TL /F1 10 Tf 0 0 0 rg (This test checks that the language attribute of a code-block does not cause an errror when it is not) Tj T* 0 Tw (supplied.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 677.0236 cm
-q
-0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .917882 Tw (To pass, there should be no errors on the command line and the code block below should be styled as) Tj T* 0 Tw (plain text.) Tj T* ET
-Q
-Q
-q
-1 0 0 1 62.69291 631.8236 cm
+1 0 0 1 57.02362 617.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -82,8 +82,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 36 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 36 re B*
 Q
 q
 0 0 0 rg
@@ -112,14 +112,14 @@ xref
 0000000073 00000 n 
 0000000124 00000 n 
 0000000231 00000 n 
-0000000343 00000 n 
-0000000448 00000 n 
-0000000651 00000 n 
-0000000738 00000 n 
-0000001006 00000 n 
-0000001065 00000 n 
-0000002130 00000 n 
-0000002171 00000 n 
+0000000340 00000 n 
+0000000445 00000 n 
+0000000648 00000 n 
+0000000735 00000 n 
+0000001003 00000 n 
+0000001062 00000 n 
+0000002113 00000 n 
+0000002154 00000 n 
 trailer
 <<
 /ID 
@@ -131,5 +131,5 @@ trailer
 /Size 12
 >>
 startxref
-2205
+2188
 %%EOF

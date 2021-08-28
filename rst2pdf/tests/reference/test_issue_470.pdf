@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -68,12 +68,12 @@ endobj
 endobj
 11 0 obj
 <<
-/Dest [ 7 0 R /XYZ 62.69291 765.0236 0 ] /Next 12 0 R /Parent 10 0 R /Title (Contenido)
+/Dest [ 7 0 R /XYZ 57.02362 765.0236 0 ] /Next 12 0 R /Parent 10 0 R /Title (Contenido)
 >>
 endobj
 12 0 obj
 <<
-/Dest [ 7 0 R /XYZ 62.69291 690.0236 0 ] /Parent 10 0 R /Prev 11 0 R /Title (Figura 1)
+/Dest [ 7 0 R /XYZ 57.02362 690.0236 0 ] /Parent 10 0 R /Prev 11 0 R /Title (Figura 1)
 >>
 endobj
 13 0 obj
@@ -83,25 +83,26 @@ endobj
 endobj
 14 0 obj
 <<
-/Length 571
+/Length 611
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Contenido) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Contenido) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 Q
 q
-1 0 0 1 62.69291 702.0236 cm
+1 0 0 1 57.02362 702.0236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 222.9449 3 cm
+1 0 0 1 228.6142 3 cm
 q
 24 0 0 24 0 0 cm
 /FormXob.rst2pdf_image_0 Do
@@ -110,17 +111,18 @@ Q
 q
 Q
 Q
-q
-1 0 0 1 62.69291 702.0236 cm
 Q
 q
-1 0 0 1 62.69291 669.0236 cm
+1 0 0 1 57.02362 702.0236 cm
+Q
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Figura 1) Tj T* ET
+1 0 0 1 57.02362 669.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Figura 1) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 651.0236 cm
+1 0 0 1 57.02362 651.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Esta es la Figura 1) Tj T* ET
@@ -145,19 +147,19 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000503 00000 n 
-0000000802 00000 n 
-0000001085 00000 n 
-0000001354 00000 n 
-0000001459 00000 n 
-0000001716 00000 n 
-0000001790 00000 n 
-0000001900 00000 n 
-0000002009 00000 n 
-0000002069 00000 n 
-0000002691 00000 n 
-0000002732 00000 n 
+0000000330 00000 n 
+0000000500 00000 n 
+0000000799 00000 n 
+0000001082 00000 n 
+0000001351 00000 n 
+0000001456 00000 n 
+0000001713 00000 n 
+0000001787 00000 n 
+0000001897 00000 n 
+0000002006 00000 n 
+0000002066 00000 n 
+0000002728 00000 n 
+0000002769 00000 n 
 trailer
 <<
 /ID 
@@ -169,5 +171,5 @@ trailer
 /Size 17
 >>
 startxref
-2766
+2803
 %%EOF

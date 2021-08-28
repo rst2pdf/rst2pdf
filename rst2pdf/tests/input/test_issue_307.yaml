@@ -1,3 +1,9 @@
+pageSetup:
+  margin-bottom: 2cm
+  margin-top: 2cm
+  margin-left: 2cm
+  margin-right: 2cm
+  firstTemplate: oneColumn
 pageTemplates:
   oneColumn:
     defaultFooter: '|biohazard| |Python|     **Customer Initials:** _______ Date:_______          Page

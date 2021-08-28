@@ -12,12 +12,12 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Italic /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
 endobj
 5 0 obj
@@ -32,7 +32,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -48,18 +48,18 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 344
+/Length 362
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-BT 1 0 0 1 0 4 Tm 158.2649 0 Td 24 TL /F2 20 Tf 0 0 0 rg (A title with a ) Tj /F3 20 Tf (tag) Tj T* -158.2649 0 Td ET
+BT 1 0 0 1 0 4 Tm 172.8342 0 Td 24 TL /F2 20 Tf .133333 .133333 .133333 rg (A title with a ) Tj /F3 20 Tf (tag) Tj T* -172.8342 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 719.0236 cm
+1 0 0 1 57.02362 693.0236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The window title should not have <) Tj (i) Tj (> in it.) Tj T* ET
 Q
@@ -69,34 +69,28 @@ endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000124 00000 n 
 0000000231 00000 n 
-0000000343 00000 n 
-0000000462 00000 n 
-0000000665 00000 n 
-0000000769 00000 n 
-0000001044 00000 n 
-0000001103 00000 n 
-0000001497 00000 n 
-0000001544 00000 n 
-0000001585 00000 n 
+0000000340 00000 n 
+0000000450 00000 n 
+0000000653 00000 n 
+0000000740 00000 n 
+0000001015 00000 n 
+0000001074 00000 n 
+0000001486 00000 n 
+0000001527 00000 n 
 trailer
 <<
 /ID 
@@ -105,8 +99,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-1619
+1561
 %%EOF

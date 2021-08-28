@@ -48,6 +48,7 @@ pdf_documents = [
         },
     ),
 ]
+pdf_stylesheets = ['sphinx', 'sphinx-issue364']
 pdf_use_index = False
 pdf_use_modindex = False
 pdf_use_coverpage = False

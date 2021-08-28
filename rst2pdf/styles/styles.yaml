@@ -1,41 +1,40 @@
 embeddedFonts: []
 fontsAlias:
-  stdBold: Helvetica-Bold
-  stdBoldItalic: Helvetica-BoldOblique
-  stdFont: Helvetica
-  stdItalic: Helvetica-Oblique
-  stdMono: Courier
-  stdMonoBold: Courier-Bold
-  stdMonoBoldItalic: Courier-BoldOblique
-  stdMonoItalic: Courier-Oblique
-  stdSans: Helvetica
-  stdSansBold: Helvetica-Bold
-  stdSansBoldItalic: Helvetica-BoldOblique
-  stdSansItalic: Helvetica-Oblique
-  stdSerif: Times-Roman
-linkColor: navy
+  fontSerifBold: Times-Bold
+  fontSerifBoldItalic: Times-BoldItalic
+  fontSerif: Times-Roman
+  fontSerifItalic: Times-Italic
+  fontMono: Courier
+  fontMonoBold: Courier-Bold
+  fontMonoBoldItalic: Courier-BoldOblique
+  fontMonoItalic: Courier-Oblique
+  fontSans: Helvetica
+  fontSansBold: Helvetica-Bold
+  fontSansBoldItalic: Helvetica-BoldOblique
+  fontSansItalic: Helvetica-Oblique
+linkColor: "#006699"
 pageSetup:
-  firstTemplate: oneColumn
+  firstTemplate: mainPage
   height: null
-  margin-bottom: 2cm
+  margin-bottom: 1.5cm
   margin-gutter: 0cm
-  margin-left: 2cm
-  margin-right: 2cm
+  margin-left: 1.8cm
+  margin-right: 1.8cm
   margin-top: 2cm
   size: A4
   spacing-footer: 5mm
   spacing-header: 5mm
   width: null
 pageTemplates:
-  coverPage:
+  mainPage:
     frames:
-    - - 0cm
-      - 0cm
+    - - 0%
+      - 0%
       - 100%
       - 100%
-    showFooter: false
-    showHeader: false
-  cutePage:
+    showFooter: true
+    showHeader: true
+  decoratedPage:
     defaultFooter: '###Page###'
     defaultHeader: '###Section###'
     frames:
@@ -53,39 +52,19 @@ pageTemplates:
       - 100%
     showFooter: false
     showHeader: false
+  coverPage:
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: false
+    showHeader: false
   oneColumn:
     frames:
     - - 0cm
       - 0cm
       - 100%
-      - 100%
-    showFooter: true
-    showHeader: true
-  threeColumn:
-    frames:
-    - - 2%
-      - 0cm
-      - 29.333%
-      - 100%
-    - - 35.333%
-      - 0cm
-      - 29.333%
-      - 100%
-    - - 68.666%
-      - 0cm
-      - 29.333%
-      - 100%
-    showFooter: true
-    showHeader: true
-  twoColumn:
-    frames:
-    - - 0cm
-      - 0cm
-      - 49%
-      - 100%
-    - - 51%
-      - 0cm
-      - 49%
       - 100%
     showFooter: true
     showHeader: true
@@ -95,7 +74,7 @@ styles:
   abstract:
     parent: normal
   admonition:
-    backColor: beige
+    backColor: cornsilk
     borderColor: darkgray
     borderPadding:
     - 16
@@ -133,12 +112,12 @@ styles:
     borderPadding: 0
     borderRadius: null
     borderWidth: 0
-    bulletFontName: stdFont
+    bulletFontName: fontMono
     bulletFontSize: 10
     bulletIndent: 0
     commands: []
     firstLineIndent: 0
-    fontName: stdFont
+    fontName: fontSans
     fontSize: 10
     hyphenation: false
     leading: 12
@@ -187,7 +166,7 @@ styles:
     alignment: center
     parent: bodytext
   code:
-    backColor: beige
+    backColor: aliceblue
     borderColor: darkgray
     borderPadding: 6
     borderWidth: 0.5
@@ -237,10 +216,10 @@ styles:
     parent: bodytext
     spaceBefore: 0
   definition-list-classifier:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   definition-list-term:
-    fontName: stdBold
+    fontName: fontSansBold
     keepWithNext: false
     parent: normal
     spaceAfter: 0
@@ -300,7 +279,7 @@ styles:
     spaceBefore: 6
   fieldname:
     alignment: TA_RIGHT
-    fontName: stdBold
+    fontName: fontSansBold
     parent: bodytext
   fieldvalue:
     parent: bodytext
@@ -324,7 +303,7 @@ styles:
     parent: bodytext
   figure-caption:
     alignment: TA_CENTER
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   figure-legend:
     parent: bodytext
@@ -339,26 +318,22 @@ styles:
     parent: normal
     spaceAfter: 6
     spaceBefore: 12
+    fontName: fontSerif
+    textColor: "#222222"
   heading1:
-    fontName: stdBold
     fontSize: 175%
     parent: heading
   heading2:
-    fontName: stdBold
     fontSize: 150%
     parent: heading
   heading3:
-    fontName: stdBoldItalic
     fontSize: 125%
     parent: heading
   heading4:
-    fontName: stdBoldItalic
     parent: heading
   heading5:
-    fontName: stdBoldItalic
     parent: heading
   heading6:
-    fontName: stdBoldItalic
     parent: heading
   hint:
     parent: admonition
@@ -372,7 +347,7 @@ styles:
   important-heading:
     parent: admonition-heading
   italic:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: bodytext
   item-list:
     colWidths:
@@ -403,7 +378,7 @@ styles:
     parent: code
   literal:
     firstLineIndent: 0
-    fontName: stdMono
+    fontName: fontMono
     hyphenation: false
     parent: normal
     wordWrap: null
@@ -629,7 +604,7 @@ styles:
   separation:
     parent: normal
   sidebar:
-    backColor: beige
+    backColor: cornsilk
     borderColor: darkgray
     borderPadding: 8
     borderWidth: 0.5
@@ -645,6 +620,7 @@ styles:
     parent: title
     spaceBefore: 12
   table:
+    parent: normal
     alignment: TA_CENTER
     commands:
     - - VALIGN
@@ -680,9 +656,8 @@ styles:
     parent: normal
   table-heading:
     alignment: TA_CENTER
-    backColor: beige
     borderPadding: 0
-    parent: heading
+    fontName: fontSansBold
     valign: BOTTOM
   table-title:
     alignment: TA_CENTER
@@ -696,18 +671,18 @@ styles:
     parent: admonition-heading
   title:
     alignment: TA_CENTER
-    fontName: stdBold
     fontSize: 200%
     keepWithNext: false
     parent: heading
-    spaceAfter: 10
+    spaceAfter: 36
   title-reference:
-    fontName: stdItalic
+    fontName: fontSansItalic
     parent: normal
   toc:
     parent: normal
+    fontSize: 85%
   toc1:
-    fontName: stdBold
+    fontName: fontSansBold
     parent: toc
   toc10:
     leftIndent: 100

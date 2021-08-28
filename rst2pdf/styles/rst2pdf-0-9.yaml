@@ -1,0 +1,757 @@
+embeddedFonts: []
+fontsAlias:
+  fontSans: Helvetica
+  fontSansBold: Helvetica-Bold
+  fontSansBoldItalic: Helvetica-BoldOblique
+  fontSansItalic: Helvetica-Oblique
+  fontMono: Courier
+  fontMonoBold: Courier-Bold
+  fontMonoBoldItalic: Courier-BoldOblique
+  fontMonoItalic: Courier-Oblique
+  fontSerif: Times-Roman
+linkColor: navy
+pageSetup:
+  firstTemplate: oneColumn
+  height: null
+  margin-bottom: 2cm
+  margin-gutter: 0cm
+  margin-left: 2cm
+  margin-right: 2cm
+  margin-top: 2cm
+  size: A4
+  spacing-footer: 5mm
+  spacing-header: 5mm
+  width: null
+pageTemplates:
+  coverPage:
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: false
+    showHeader: false
+  cutePage:
+    defaultFooter: '###Page###'
+    defaultHeader: '###Section###'
+    frames:
+    - - 0%
+      - 0%
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+  emptyPage:
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: false
+    showHeader: false
+  oneColumn:
+    frames:
+    - - 0cm
+      - 0cm
+      - 100%
+      - 100%
+    showFooter: true
+    showHeader: true
+  threeColumn:
+    frames:
+    - - 2%
+      - 0cm
+      - 29.333%
+      - 100%
+    - - 35.333%
+      - 0cm
+      - 29.333%
+      - 100%
+    - - 68.666%
+      - 0cm
+      - 29.333%
+      - 100%
+    showFooter: true
+    showHeader: true
+  twoColumn:
+    frames:
+    - - 0cm
+      - 0cm
+      - 49%
+      - 100%
+    - - 51%
+      - 0cm
+      - 49%
+      - 100%
+    showFooter: true
+    showHeader: true
+styles:
+  aafigure:
+    parent: literal
+  abstract:
+    parent: normal
+  admonition:
+    backColor: beige
+    borderColor: darkgray
+    borderPadding:
+    - 16
+    - 16
+    - 16
+    - 16
+    borderWidth: 0.5
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    parent: normal
+    spaceAfter: 6
+    spaceBefore: 12
+  admonition-heading:
+    parent: heading3
+  admonition-title:
+    parent: heading3
+  attention:
+    parent: admonition
+  attention-heading:
+    parent: admonition-heading
+  attribution:
+    alignment: TA_RIGHT
+    parent: bodytext
+  base:
+    alignment: TA_LEFT
+    allowOrphans: false
+    allowWidows: false
+    backColor: null
+    borderColor: null
+    borderPadding: 0
+    borderRadius: null
+    borderWidth: 0
+    bulletFontName: fontSans
+    bulletFontSize: 10
+    bulletIndent: 0
+    commands: []
+    firstLineIndent: 0
+    fontName: fontSans
+    fontSize: 10
+    hyphenation: false
+    leading: 12
+    leftIndent: 0
+    parent: null
+    rightIndent: 0
+    spaceAfter: 0
+    spaceBefore: 0
+    strike: false
+    textColor: black
+    underline: false
+    wordWrap: null
+  blockquote:
+    leftIndent: 20
+    parent: bodytext
+  bodytext:
+    alignment: TA_JUSTIFY
+    hyphenation: true
+    parent: normal
+    spaceBefore: 6
+  bullet-list:
+    colWidths:
+    - '20'
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - RIGHTPADDING
+      - - 0
+        - 0
+      - - 1
+        - -1
+      - 0
+    parent: bodytext
+  bullet-list-item:
+    parent: bodytext
+  caution:
+    parent: admonition
+  caution-heading:
+    parent: admonition-heading
+  center:
+    alignment: center
+    parent: bodytext
+  code:
+    backColor: beige
+    borderColor: darkgray
+    borderPadding: 6
+    borderWidth: 0.5
+    leftIndent: 0
+    parent: literal
+    spaceAfter: 8
+    spaceBefore: 8
+  contents:
+    parent: normal
+  danger:
+    parent: admonition
+  danger-heading:
+    parent: admonition-heading
+  dedication:
+    parent: normal
+  definition:
+    bulletIndent: 0
+    colWidths:
+    - 20pt
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - LEFTPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    - - BOTTOMPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    - - RIGHTPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    firstLineIndent: 0
+    parent: bodytext
+    spaceBefore: 0
+  definition-list-classifier:
+    fontName: fontSansItalic
+    parent: normal
+  definition-list-term:
+    fontName: fontSansBold
+    keepWithNext: false
+    parent: normal
+    spaceAfter: 0
+    spaceBefore: 4
+  endnote:
+    colWidths:
+    - 3cm
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - TOPPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    - - BOTTOMPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    - - RIGHTPADDING
+      - - 0
+        - 0
+      - - 1
+        - -1
+      - 0
+    parent: bodytext
+  error:
+    parent: admonition
+  error-heading:
+    parent: admonition-heading
+  field-list:
+    colWidths:
+    - 3cm
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - TOPPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+    parent: bodytext
+    spaceBefore: 6
+  fieldname:
+    alignment: TA_RIGHT
+    fontName: fontSansBold
+    parent: bodytext
+  fieldvalue:
+    parent: bodytext
+  figure:
+    alignment: TA_CENTER
+    colWidths:
+    - 100%
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - ALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - CENTER
+    parent: bodytext
+  figure-caption:
+    alignment: TA_CENTER
+    fontName: fontSansItalic
+    parent: bodytext
+  figure-legend:
+    parent: bodytext
+  footer:
+    alignment: TA_CENTER
+    parent: normal
+  header:
+    alignment: TA_CENTER
+    parent: normal
+  heading:
+    keepWithNext: true
+    parent: normal
+    spaceAfter: 6
+    spaceBefore: 12
+  heading1:
+    fontName: fontSansBold
+    fontSize: 175%
+    parent: heading
+  heading2:
+    fontName: fontSansBold
+    fontSize: 150%
+    parent: heading
+  heading3:
+    fontName: fontSansBoldItalic
+    fontSize: 125%
+    parent: heading
+  heading4:
+    fontName: fontSansBoldItalic
+    parent: heading
+  heading5:
+    fontName: fontSansBoldItalic
+    parent: heading
+  heading6:
+    fontName: fontSansBoldItalic
+    parent: heading
+  hint:
+    parent: admonition
+  hint-heading:
+    parent: admonition-heading
+  image:
+    alignment: TA_CENTER
+    parent: bodytext
+  important:
+    parent: admonition
+  important-heading:
+    parent: admonition-heading
+  italic:
+    fontName: fontSansItalic
+    parent: bodytext
+  item-list:
+    colWidths:
+    - 20pt
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - RIGHTPADDING
+      - - 0
+        - 0
+      - - 1
+        - -1
+      - 0
+    parent: bodytext
+  item-list-item:
+    parent: bodytext
+  line:
+    parent: lineblock
+    spaceBefore: 0
+  lineblock:
+    parent: bodytext
+  linenumber:
+    parent: code
+  literal:
+    firstLineIndent: 0
+    fontName: fontMono
+    hyphenation: false
+    parent: normal
+    wordWrap: null
+  normal:
+    parent: base
+  note:
+    parent: admonition
+  note-heading:
+    parent: admonition-heading
+  option-list:
+    colWidths:
+    - null
+    - null
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - TOPPADDING
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0
+  pygments-bp:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-c:
+    parent: code
+    textColor: '#008800'
+  pygments-c1:
+    parent: code
+    textColor: '#008800'
+  pygments-cm:
+    parent: code
+    textColor: '#008800'
+  pygments-cp:
+    parent: code
+    textColor: '#008800'
+  pygments-cs:
+    parent: code
+    textColor: '#008800'
+  pygments-diml:
+    parent: code
+    textColor: '#aaaaaa'
+  pygments-err:
+    parent: code
+  pygments-gd:
+    parent: code
+    textColor: '#A00000'
+  pygments-ge:
+    parent: code
+  pygments-gh:
+    parent: code
+    textColor: '#000080'
+  pygments-gi:
+    parent: code
+    textColor: '#00A000'
+  pygments-go:
+    parent: code
+    textColor: '#808080'
+  pygments-gp:
+    parent: code
+    textColor: '#000080'
+  pygments-gr:
+    parent: code
+    textColor: '#FF0000'
+  pygments-gs:
+    parent: code
+  pygments-gt:
+    parent: code
+    textColor: '#0040D0'
+  pygments-gu:
+    parent: code
+    textColor: '#800080'
+  pygments-hll:
+    backColor: '#ffffcc'
+    parent: code
+  pygments-il:
+    parent: code
+    textColor: '#666666'
+  pygments-k:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kc:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kd:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kn:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kp:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kr:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-kt:
+    parent: code
+    textColor: '#00BB00'
+  pygments-m:
+    parent: code
+    textColor: '#666666'
+  pygments-mf:
+    parent: code
+    textColor: '#666666'
+  pygments-mh:
+    parent: code
+    textColor: '#666666'
+  pygments-mi:
+    parent: code
+    textColor: '#666666'
+  pygments-mo:
+    parent: code
+    textColor: '#666666'
+  pygments-n:
+    parent: code
+  pygments-na:
+    parent: code
+    textColor: '#BB4444'
+  pygments-nb:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-nc:
+    parent: code
+    textColor: '#0000FF'
+  pygments-nd:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-ne:
+    parent: code
+    textColor: '#D2413A'
+  pygments-nf:
+    parent: code
+    textColor: '#00A000'
+  pygments-ni:
+    parent: code
+    textColor: '#999999'
+  pygments-nl:
+    parent: code
+    textColor: '#A0A000'
+  pygments-nn:
+    parent: code
+    textColor: '#0000FF'
+  pygments-no:
+    parent: code
+    textColor: '#880000'
+  pygments-nt:
+    parent: code
+    textColor: '#008000'
+  pygments-nv:
+    parent: code
+    textColor: '#B8860B'
+  pygments-nx:
+    parent: code
+  pygments-o:
+    parent: code
+    textColor: '#666666'
+  pygments-ow:
+    parent: code
+    textColor: '#AA22FF'
+  pygments-p:
+    parent: code
+  pygments-s:
+    parent: code
+    textColor: '#BB4444'
+  pygments-s1:
+    parent: code
+    textColor: '#BB4444'
+  pygments-s2:
+    parent: code
+    textColor: '#BB4444'
+  pygments-sb:
+    parent: code
+    textColor: '#BB4444'
+  pygments-sc:
+    parent: code
+    textColor: '#BB4444'
+  pygments-sd:
+    parent: code
+    textColor: '#BB4444'
+  pygments-se:
+    parent: code
+    textColor: '#BB6622'
+  pygments-sh:
+    parent: code
+    textColor: '#BB4444'
+  pygments-si:
+    parent: code
+    textColor: '#BB6688'
+  pygments-sr:
+    parent: code
+    textColor: '#BB6688'
+  pygments-ss:
+    parent: code
+    textColor: '#B8860B'
+  pygments-sx:
+    parent: code
+    textColor: '#008000'
+  pygments-vc:
+    parent: code
+    textColor: '#B8860B'
+  pygments-vg:
+    parent: code
+    textColor: '#B8860B'
+  pygments-vi:
+    parent: code
+    textColor: '#B8860B'
+  pygments-w:
+    parent: code
+    textColor: '#bbbbbb'
+  right:
+    alignment: right
+    parent: bodytext
+  rubric:
+    alignment: TA_CENTER
+    parent: bodytext
+    textColor: darkred
+  separation:
+    parent: normal
+  sidebar:
+    backColor: beige
+    borderColor: darkgray
+    borderPadding: 8
+    borderWidth: 0.5
+    float: none
+    parent: normal
+    width: 100%
+  sidebar-subtitle:
+    parent: heading4
+  sidebar-title:
+    parent: heading3
+  subtitle:
+    fontSize: 75%
+    parent: title
+    spaceBefore: 12
+  table:
+    alignment: TA_CENTER
+    commands:
+    - - VALIGN
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - TOP
+    - - INNERGRID
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0.25
+      - black
+    - - ROWBACKGROUNDS
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - - white
+        - '#E0E0E0'
+    - - BOX
+      - - 0
+        - 0
+      - - -1
+        - -1
+      - 0.25
+      - black
+    spaceAfter: 0
+    spaceBefore: 6
+  table-body:
+    parent: normal
+  table-heading:
+    alignment: TA_CENTER
+    backColor: beige
+    borderPadding: 0
+    parent: normal
+    valign: BOTTOM
+  table-title:
+    alignment: TA_CENTER
+    keepWithNext: false
+    parent: heading4
+  tableofcontents:
+    parent: normal
+  tip:
+    parent: admonition
+  tip-heading:
+    parent: admonition-heading
+  title:
+    alignment: TA_CENTER
+    fontName: fontSansBold
+    fontSize: 200%
+    keepWithNext: false
+    parent: heading
+    spaceAfter: 10
+  title-reference:
+    fontName: fontSansItalic
+    parent: normal
+  toc:
+    parent: normal
+    fontName: fontSans
+    fontSize: 100%
+  toc1:
+    fontName: fontSansBold
+    parent: toc
+  toc10:
+    leftIndent: 100
+    parent: toc
+  toc11:
+    leftIndent: 100
+    parent: toc
+  toc12:
+    leftIndent: 100
+    parent: toc
+  toc13:
+    leftIndent: 100
+    parent: toc
+  toc14:
+    leftIndent: 100
+    parent: toc
+  toc15:
+    leftIndent: 100
+    parent: toc
+  toc2:
+    leftIndent: 20
+    parent: toc
+  toc3:
+    leftIndent: 40
+    parent: toc
+  toc4:
+    leftIndent: 60
+    parent: toc
+  toc5:
+    leftIndent: 80
+    parent: toc
+  toc6:
+    leftIndent: 100
+    parent: toc
+  toc7:
+    leftIndent: 100
+    parent: toc
+  toc8:
+    leftIndent: 100
+    parent: toc
+  toc9:
+    leftIndent: 100
+    parent: toc
+  topic-title:
+    parent: heading3
+  warning:
+    parent: admonition
+  warning-heading:
+    parent: admonition-heading

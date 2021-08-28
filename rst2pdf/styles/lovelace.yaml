@@ -1,33 +1,33 @@
 styles:
   pygments-bp:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#388038'
   pygments-c:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#888888'
   pygments-c1:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#888888'
   pygments-ch:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#287088'
   pygments-cm:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#888888'
   pygments-cp:
     parent: code
     textColor: '#289870'
   pygments-cpf:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#888888'
   pygments-cs:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#888888'
   pygments-dl:
@@ -50,7 +50,7 @@ styles:
     parent: code
     textColor: '#c02828'
   pygments-ge:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: black
   pygments-gh:
@@ -69,7 +69,7 @@ styles:
     parent: code
     textColor: '#c02828'
   pygments-gs:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: black
   pygments-gt:
@@ -89,11 +89,11 @@ styles:
     parent: code
     textColor: '#2838b0'
   pygments-kc:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#444444'
   pygments-kd:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#2838b0'
   pygments-kn:
@@ -106,7 +106,7 @@ styles:
     parent: code
     textColor: '#2838b0'
   pygments-kt:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#2838b0'
   pygments-l:
@@ -206,7 +206,7 @@ styles:
     parent: code
     textColor: '#a848a8'
   pygments-sd:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: '#b85820'
   pygments-se:

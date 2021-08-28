@@ -4,5 +4,5 @@ embeddedFonts:
   - Tuffy_Italic.ttf
   - Tuffy_Bold_Italic.ttf
 fontsAlias:
-  stdFont: Tuffy
+  fontSans: Tuffy
 

@@ -32,7 +32,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Outlines 10 0 R /PageLabels 11 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/PageLabels 10 0 R /PageMode /UseNone /Pages 8 0 R /Type /Catalog
 >>
 endobj
 7 0 obj
@@ -48,39 +48,34 @@ endobj
 endobj
 9 0 obj
 <<
-/Length 274
+/Length 256
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F2 10 Tf 0 0 0 rg (TextAnnotation) Tj /F1 10 Tf 0 0 0 rg ( directive add an annotation to the PDF) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F2 10 Tf (TextAnnotation) Tj /F1 10 Tf ( directive add an annotation to the PDF) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 Q
  
 endstream
 endobj
 10 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 11 0 R ]
 >>
 endobj
 11 0 obj
-<<
-/Nums [ 0 12 0 R ]
->>
-endobj
-12 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 13
+0 12
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
@@ -88,12 +83,11 @@ xref
 0000000336 00000 n 
 0000000441 00000 n 
 0000000662 00000 n 
-0000000766 00000 n 
-0000001023 00000 n 
-0000001082 00000 n 
-0000001406 00000 n 
-0000001453 00000 n 
-0000001494 00000 n 
+0000000749 00000 n 
+0000001006 00000 n 
+0000001065 00000 n 
+0000001371 00000 n 
+0000001412 00000 n 
 trailer
 <<
 /ID 
@@ -102,8 +96,8 @@ trailer
 
 /Info 7 0 R
 /Root 6 0 R
-/Size 13
+/Size 12
 >>
 startxref
-1528
+1446
 %%EOF

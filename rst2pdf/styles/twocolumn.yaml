@@ -2,3 +2,16 @@ pageSetup:
   firstTemplate: twoColumn
   margin-left: 1cm
   margin-right: 1cm
+pageTemplates:
+  twoColumn:
+    frames:
+    - - 0cm
+      - 0cm
+      - 49%
+      - 100%
+    - - 51%
+      - 0cm
+      - 49%
+      - 100%
+    showFooter: true
+    showHeader: true

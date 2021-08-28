@@ -14,7 +14,7 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://foo.bar)
->> /Border [ 0 0 0 ] /Rect [ 62.69291 753.7736 123.8429 765.7736 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 57.02362 753.7736 118.1736 765.7736 ] /Subtype /Link /Type /Annot
 >>
 endobj
 4 0 obj
@@ -29,7 +29,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -45,15 +45,14 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 170
+/Length 151
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
+0 .4 .6 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (https://foo.bar) Tj T* ET
 Q
 Q
@@ -62,33 +61,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000000378 00000 n 
 0000000599 00000 n 
-0000000702 00000 n 
-0000000959 00000 n 
-0000001018 00000 n 
-0000001238 00000 n 
-0000001284 00000 n 
-0000001325 00000 n 
+0000000685 00000 n 
+0000000942 00000 n 
+0000001001 00000 n 
+0000001202 00000 n 
+0000001242 00000 n 
 trailer
 <<
 /ID 
@@ -97,8 +90,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-1359
+1276
 %%EOF

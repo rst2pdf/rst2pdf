@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 10 0 R /F4 16 0 R
+/F1 2 0 R /F2 3 0 R /F3 10 0 R
 >>
 endobj
 2 0 obj
@@ -17,7 +17,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Contents 25 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 24 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -27,7 +27,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Contents 26 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 25 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -37,17 +37,17 @@ endobj
 endobj
 6 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 40.01575 754.0394 66.13575 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 40.01575 755.8394 62.21775 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 550.5338 756.4769 555.2598 766.6769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
 <<
-/Annots [ 6 0 R 7 0 R ] /Contents 27 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 6 0 R 7 0 R ] /Contents 26 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -57,7 +57,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 27 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -89,7 +89,7 @@ endobj
 endobj
 14 0 obj
 <<
-/Annots [ 11 0 R 12 0 R 13 0 R ] /Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 11 0 R 12 0 R 13 0 R ] /Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -99,7 +99,7 @@ endobj
 endobj
 15 0 obj
 <<
-/Contents 30 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -109,22 +109,17 @@ endobj
 endobj
 16 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 755.0394 0 ] /Rect [ 40.01575 726.6394 65.57575 738.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 17 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 755.0394 0 ] /Rect [ 40.01575 726.6394 65.57575 738.6394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 724.0394 0 ] /Rect [ 40.01575 708.6394 65.57575 720.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 18 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 724.0394 0 ] /Rect [ 40.01575 708.6394 65.57575 720.6394 ] /Subtype /Link /Type /Annot
->>
-endobj
-19 0 obj
-<<
-/Annots [ 17 0 R 18 0 R ] /Contents 31 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 16 0 R 17 0 R ] /Contents 30 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -132,33 +127,33 @@ endobj
 >> /Type /Page
 >>
 endobj
-20 0 obj
+19 0 obj
 <<
-/Outlines 22 0 R /PageLabels 32 0 R /PageMode /UseNone /Pages 24 0 R /Type /Catalog
+/Outlines 21 0 R /PageLabels 31 0 R /PageMode /UseNone /Pages 23 0 R /Type /Catalog
 >>
 endobj
-21 0 obj
+20 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
+21 0 obj
+<<
+/Count 1 /First 22 0 R /Last 22 0 R /Type /Outlines
+>>
+endobj
 22 0 obj
 <<
-/Count 1 /First 23 0 R /Last 23 0 R /Type /Outlines
+/Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Parent 21 0 R /Title (Index)
 >>
 endobj
 23 0 obj
 <<
-/Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Parent 22 0 R /Title (Index)
+/Count 7 /Kids [ 4 0 R 5 0 R 8 0 R 9 0 R 14 0 R 15 0 R 18 0 R ] /Type /Pages
 >>
 endobj
 24 0 obj
-<<
-/Count 7 /Kids [ 4 0 R 5 0 R 8 0 R 9 0 R 14 0 R 15 0 R 19 0 R ] /Type /Pages
->>
-endobj
-25 0 obj
 <<
 /Length 863
 >>
@@ -178,7 +173,7 @@ BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 234.282 0 Td (test1) Tj T* -234.282 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 745.0394 cm
+1 0 0 1 40.01575 721.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -191,35 +186,35 @@ BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 215.5245 0 Td (version test) Tj T* -215.5245 0
 Q
 Q
 q
-1 0 0 1 40.01575 650 cm
+1 0 0 1 40.01575 600 cm
 Q
 q
-1 0 0 1 40.01575 629.6 cm
+1 0 0 1 40.01575 579.6 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL 245.286 0 Td (C.G.) Tj T* -245.286 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 544.5606 cm
+1 0 0 1 40.01575 494.5606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F1 12 Tf 14.4 TL 220.602 0 Td (April 29, 2018) Tj T* -220.602 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
  
 endstream
 endobj
-26 0 obj
+25 0 obj
 <<
 /Length 75
 >>
@@ -231,9 +226,9 @@ Q
  
 endstream
 endobj
-27 0 obj
+26 0 obj
 <<
-/Length 583
+/Length 576
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -250,36 +245,37 @@ BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Index) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F2 8.5 Tf 0 .4 .6 rg (Index) Tj T* ET
 Q
 Q
 q
 1 0 0 1 443.2441 3 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (3) Tj T* -66.44 0 Td ET
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F2 8.5 Tf 10.2 TL 67.274 0 Td (3) Tj T* -67.274 0 Td ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 40.01575 751.0394 cm
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
 Q
  
 endstream
 endobj
-28 0 obj
+27 0 obj
 <<
 /Length 75
 >>
@@ -291,9 +287,9 @@ Q
  
 endstream
 endobj
-29 0 obj
+28 0 obj
 <<
-/Length 1282
+/Length 1263
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -320,6 +316,7 @@ Q
 Q
 q
 1 0 0 1 40.01575 726.0394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -333,6 +330,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 40.01575 710.0394 cm
 q
@@ -341,6 +339,7 @@ Q
 Q
 q
 1 0 0 1 40.01575 695.0394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -354,6 +353,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 40.01575 677.0394 cm
 q
@@ -361,7 +361,7 @@ q
 n 0 0 30 12 re f*
 .933333 1 .8 rg
 n 52.24 0 30 12 re f*
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (term1) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (term2) Tj /F1 10 Tf 0 0 0 rg ( link to the glossary) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (term1) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (term2) Tj /F1 10 Tf ( link to the glossary) Tj T* ET
 Q
 Q
 q
@@ -380,7 +380,7 @@ Q
  
 endstream
 endobj
-30 0 obj
+29 0 obj
 <<
 /Length 75
 >>
@@ -392,9 +392,9 @@ Q
  
 endstream
 endobj
-31 0 obj
+30 0 obj
 <<
-/Length 655
+/Length 647
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -420,19 +420,19 @@ n -10 0 256.3496 20.4 re B*
 Q
 q
 .12549 .262745 .360784 rg
-BT 1 0 0 1 0 2.4 Tm /F4 12 Tf 14.4 TL (T) Tj T* ET
+BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL (T) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 726.6394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (term1) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 .4 .6 rg (term1) Tj  T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 708.6394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (term2) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 .4 .6 rg (term2) Tj  T* ET
 Q
 Q
 q
@@ -441,107 +441,106 @@ Q
  
 endstream
 endobj
+31 0 obj
+<<
+/Nums [ 0 32 0 R 1 33 0 R 2 34 0 R 3 35 0 R 4 36 0 R 
+  5 37 0 R 6 38 0 R ]
+>>
+endobj
 32 0 obj
 <<
-/Nums [ 0 33 0 R 1 34 0 R 2 35 0 R 3 36 0 R 4 37 0 R 
-  5 38 0 R 6 39 0 R ]
+/S /D /St 1
 >>
 endobj
 33 0 obj
 <<
-/S /D /St 1
+/S /D /St 2
 >>
 endobj
 34 0 obj
 <<
-/S /D /St 2
+/S /r /St 1
 >>
 endobj
 35 0 obj
 <<
-/S /r /St 1
+/S /r /St 2
 >>
 endobj
 36 0 obj
 <<
-/S /r /St 2
+/S /D /St 1
 >>
 endobj
 37 0 obj
 <<
-/S /D /St 1
->>
-endobj
-38 0 obj
-<<
 /S /D /St 2
 >>
 endobj
-39 0 obj
+38 0 obj
 <<
 /S /D /St 3
 >>
 endobj
 xref
-0 40
+0 39
 0000000000 65535 f 
 0000000073 00000 n 
-0000000136 00000 n 
-0000000243 00000 n 
-0000000355 00000 n 
-0000000560 00000 n 
-0000000765 00000 n 
-0000000933 00000 n 
-0000001101 00000 n 
-0000001330 00000 n 
-0000001535 00000 n 
-0000001646 00000 n 
-0000001815 00000 n 
-0000001984 00000 n 
-0000002187 00000 n 
-0000002426 00000 n 
-0000002632 00000 n 
-0000002752 00000 n 
-0000002921 00000 n 
-0000003090 00000 n 
-0000003322 00000 n 
-0000003428 00000 n 
-0000003686 00000 n 
-0000003760 00000 n 
-0000003854 00000 n 
-0000003953 00000 n 
-0000004867 00000 n 
-0000004992 00000 n 
-0000005626 00000 n 
-0000005751 00000 n 
-0000007085 00000 n 
-0000007210 00000 n 
-0000007916 00000 n 
-0000008014 00000 n 
-0000008048 00000 n 
-0000008082 00000 n 
-0000008116 00000 n 
-0000008150 00000 n 
-0000008184 00000 n 
-0000008218 00000 n 
+0000000125 00000 n 
+0000000232 00000 n 
+0000000344 00000 n 
+0000000549 00000 n 
+0000000754 00000 n 
+0000000922 00000 n 
+0000001090 00000 n 
+0000001319 00000 n 
+0000001524 00000 n 
+0000001635 00000 n 
+0000001804 00000 n 
+0000001973 00000 n 
+0000002176 00000 n 
+0000002415 00000 n 
+0000002621 00000 n 
+0000002790 00000 n 
+0000002959 00000 n 
+0000003191 00000 n 
+0000003297 00000 n 
+0000003555 00000 n 
+0000003629 00000 n 
+0000003723 00000 n 
+0000003822 00000 n 
+0000004736 00000 n 
+0000004861 00000 n 
+0000005488 00000 n 
+0000005613 00000 n 
+0000006928 00000 n 
+0000007053 00000 n 
+0000007751 00000 n 
+0000007849 00000 n 
+0000007883 00000 n 
+0000007917 00000 n 
+0000007951 00000 n 
+0000007985 00000 n 
+0000008019 00000 n 
+0000008053 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 21 0 R
-/Root 20 0 R
-/Size 40
+/Info 20 0 R
+/Root 19 0 R
+/Size 39
 >>
 startxref
-8252
+8087
 %%EOF
 %PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 10 0 R /F4 16 0 R
+/F1 2 0 R /F2 3 0 R /F3 10 0 R
 >>
 endobj
 2 0 obj
@@ -556,7 +555,7 @@ endobj
 endobj
 4 0 obj
 <<
-/Contents 25 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 24 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -566,7 +565,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Contents 26 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 25 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -576,17 +575,17 @@ endobj
 endobj
 6 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 40.01575 754.0394 66.13575 766.0394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 40.01575 755.8394 62.21775 766.0394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 549.6998 754.7894 555.2598 766.7894 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Rect [ 550.5338 756.4769 555.2598 766.6769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
 <<
-/Annots [ 6 0 R 7 0 R ] /Contents 27 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 6 0 R 7 0 R ] /Contents 26 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -596,7 +595,7 @@ endobj
 endobj
 9 0 obj
 <<
-/Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 27 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -628,7 +627,7 @@ endobj
 endobj
 14 0 obj
 <<
-/Annots [ 11 0 R 12 0 R 13 0 R ] /Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 11 0 R 12 0 R 13 0 R ] /Contents 28 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -638,7 +637,7 @@ endobj
 endobj
 15 0 obj
 <<
-/Contents 30 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Contents 29 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -648,22 +647,17 @@ endobj
 endobj
 16 0 obj
 <<
-/BaseFont /Helvetica-BoldOblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 755.0394 0 ] /Rect [ 40.01575 726.6394 65.57575 738.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 17 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 755.0394 0 ] /Rect [ 40.01575 726.6394 65.57575 738.6394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 724.0394 0 ] /Rect [ 40.01575 708.6394 65.57575 720.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 18 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 14 0 R /XYZ 40.01575 724.0394 0 ] /Rect [ 40.01575 708.6394 65.57575 720.6394 ] /Subtype /Link /Type /Annot
->>
-endobj
-19 0 obj
-<<
-/Annots [ 17 0 R 18 0 R ] /Contents 31 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 24 0 R /Resources <<
+/Annots [ 16 0 R 17 0 R ] /Contents 30 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 23 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -671,33 +665,33 @@ endobj
 >> /Type /Page
 >>
 endobj
-20 0 obj
+19 0 obj
 <<
-/Outlines 22 0 R /PageLabels 32 0 R /PageMode /UseNone /Pages 24 0 R /Type /Catalog
+/Outlines 21 0 R /PageLabels 31 0 R /PageMode /UseNone /Pages 23 0 R /Type /Catalog
 >>
 endobj
-21 0 obj
+20 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
+21 0 obj
+<<
+/Count 1 /First 22 0 R /Last 22 0 R /Type /Outlines
+>>
+endobj
 22 0 obj
 <<
-/Count 1 /First 23 0 R /Last 23 0 R /Type /Outlines
+/Dest [ 18 0 R /XYZ 40.01575 799.0394 0 ] /Parent 21 0 R /Title (Index)
 >>
 endobj
 23 0 obj
 <<
-/Dest [ 19 0 R /XYZ 40.01575 799.0394 0 ] /Parent 22 0 R /Title (Index)
+/Count 7 /Kids [ 4 0 R 5 0 R 8 0 R 9 0 R 14 0 R 15 0 R 18 0 R ] /Type /Pages
 >>
 endobj
 24 0 obj
-<<
-/Count 7 /Kids [ 4 0 R 5 0 R 8 0 R 9 0 R 14 0 R 15 0 R 19 0 R ] /Type /Pages
->>
-endobj
-25 0 obj
 <<
 /Length 863
 >>
@@ -717,7 +711,7 @@ BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 234.282 0 Td (test1) Tj T* -234.282 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 745.0394 cm
+1 0 0 1 40.01575 721.0394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -730,35 +724,35 @@ BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 215.5245 0 Td (version test) Tj T* -215.5245 0
 Q
 Q
 q
-1 0 0 1 40.01575 650 cm
+1 0 0 1 40.01575 600 cm
 Q
 q
-1 0 0 1 40.01575 629.6 cm
+1 0 0 1 40.01575 579.6 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL 245.286 0 Td (C.G.) Tj T* -245.286 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 544.5606 cm
+1 0 0 1 40.01575 494.5606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.4 Tm /F1 12 Tf 14.4 TL 220.602 0 Td (April 29, 2018) Tj T* -220.602 0 Td ET
 Q
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
 q
-1 0 0 1 40.01575 524.1606 cm
+1 0 0 1 40.01575 474.1606 cm
 Q
  
 endstream
 endobj
-26 0 obj
+25 0 obj
 <<
 /Length 75
 >>
@@ -770,9 +764,9 @@ Q
  
 endstream
 endobj
-27 0 obj
+26 0 obj
 <<
-/Length 583
+/Length 576
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -789,36 +783,37 @@ BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
 Q
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (Index) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F2 8.5 Tf 0 .4 .6 rg (Index) Tj T* ET
 Q
 Q
 q
 1 0 0 1 443.2441 3 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (3) Tj T* -66.44 0 Td ET
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F2 8.5 Tf 10.2 TL 67.274 0 Td (3) Tj T* -67.274 0 Td ET
 Q
 Q
 q
 Q
 Q
-q
-1 0 0 1 40.01575 751.0394 cm
 Q
 q
-1 0 0 1 40.01575 751.0394 cm
+1 0 0 1 40.01575 752.8394 cm
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
 Q
  
 endstream
 endobj
-28 0 obj
+27 0 obj
 <<
 /Length 75
 >>
@@ -830,9 +825,9 @@ Q
  
 endstream
 endobj
-29 0 obj
+28 0 obj
 <<
-/Length 1282
+/Length 1263
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -859,6 +854,7 @@ Q
 Q
 q
 1 0 0 1 40.01575 726.0394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -872,6 +868,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 40.01575 710.0394 cm
 q
@@ -880,6 +877,7 @@ Q
 Q
 q
 1 0 0 1 40.01575 695.0394 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 BT 1 0 0 1 0 2 Tm  T* ET
@@ -893,6 +891,7 @@ Q
 q
 Q
 Q
+Q
 q
 1 0 0 1 40.01575 677.0394 cm
 q
@@ -900,7 +899,7 @@ q
 n 0 0 30 12 re f*
 .933333 1 .8 rg
 n 52.24 0 30 12 re f*
-BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (term1) Tj /F1 10 Tf 0 0 0 rg ( and ) Tj /F3 10 Tf 0 0 0 rg (term2) Tj /F1 10 Tf 0 0 0 rg ( link to the glossary) Tj T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (term1) Tj /F1 10 Tf ( and ) Tj /F3 10 Tf (term2) Tj /F1 10 Tf ( link to the glossary) Tj T* ET
 Q
 Q
 q
@@ -919,7 +918,7 @@ Q
  
 endstream
 endobj
-30 0 obj
+29 0 obj
 <<
 /Length 75
 >>
@@ -931,9 +930,9 @@ Q
  
 endstream
 endobj
-31 0 obj
+30 0 obj
 <<
-/Length 655
+/Length 647
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -959,19 +958,19 @@ n -10 0 256.3496 20.4 re B*
 Q
 q
 .12549 .262745 .360784 rg
-BT 1 0 0 1 0 2.4 Tm /F4 12 Tf 14.4 TL (T) Tj T* ET
+BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL (T) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 726.6394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (term1) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 .4 .6 rg (term1) Tj  T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 708.6394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 .501961 rg (term2) Tj  T* ET
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 .4 .6 rg (term2) Tj  T* ET
 Q
 Q
 q
@@ -980,99 +979,98 @@ Q
  
 endstream
 endobj
+31 0 obj
+<<
+/Nums [ 0 32 0 R 1 33 0 R 2 34 0 R 3 35 0 R 4 36 0 R 
+  5 37 0 R 6 38 0 R ]
+>>
+endobj
 32 0 obj
 <<
-/Nums [ 0 33 0 R 1 34 0 R 2 35 0 R 3 36 0 R 4 37 0 R 
-  5 38 0 R 6 39 0 R ]
+/S /D /St 1
 >>
 endobj
 33 0 obj
 <<
-/S /D /St 1
+/S /D /St 2
 >>
 endobj
 34 0 obj
 <<
-/S /D /St 2
+/S /r /St 1
 >>
 endobj
 35 0 obj
 <<
-/S /r /St 1
+/S /r /St 2
 >>
 endobj
 36 0 obj
 <<
-/S /r /St 2
+/S /D /St 1
 >>
 endobj
 37 0 obj
 <<
-/S /D /St 1
->>
-endobj
-38 0 obj
-<<
 /S /D /St 2
 >>
 endobj
-39 0 obj
+38 0 obj
 <<
 /S /D /St 3
 >>
 endobj
 xref
-0 40
+0 39
 0000000000 65535 f 
 0000000073 00000 n 
-0000000136 00000 n 
-0000000243 00000 n 
-0000000355 00000 n 
-0000000560 00000 n 
-0000000765 00000 n 
-0000000933 00000 n 
-0000001101 00000 n 
-0000001330 00000 n 
-0000001535 00000 n 
-0000001646 00000 n 
-0000001815 00000 n 
-0000001984 00000 n 
-0000002187 00000 n 
-0000002426 00000 n 
-0000002632 00000 n 
-0000002752 00000 n 
-0000002921 00000 n 
-0000003090 00000 n 
-0000003322 00000 n 
-0000003428 00000 n 
-0000003686 00000 n 
-0000003760 00000 n 
-0000003854 00000 n 
-0000003953 00000 n 
-0000004867 00000 n 
-0000004992 00000 n 
-0000005626 00000 n 
-0000005751 00000 n 
-0000007085 00000 n 
-0000007210 00000 n 
-0000007916 00000 n 
-0000008014 00000 n 
-0000008048 00000 n 
-0000008082 00000 n 
-0000008116 00000 n 
-0000008150 00000 n 
-0000008184 00000 n 
-0000008218 00000 n 
+0000000125 00000 n 
+0000000232 00000 n 
+0000000344 00000 n 
+0000000549 00000 n 
+0000000754 00000 n 
+0000000922 00000 n 
+0000001090 00000 n 
+0000001319 00000 n 
+0000001524 00000 n 
+0000001635 00000 n 
+0000001804 00000 n 
+0000001973 00000 n 
+0000002176 00000 n 
+0000002415 00000 n 
+0000002621 00000 n 
+0000002790 00000 n 
+0000002959 00000 n 
+0000003191 00000 n 
+0000003297 00000 n 
+0000003555 00000 n 
+0000003629 00000 n 
+0000003723 00000 n 
+0000003822 00000 n 
+0000004736 00000 n 
+0000004861 00000 n 
+0000005488 00000 n 
+0000005613 00000 n 
+0000006928 00000 n 
+0000007053 00000 n 
+0000007751 00000 n 
+0000007849 00000 n 
+0000007883 00000 n 
+0000007917 00000 n 
+0000007951 00000 n 
+0000007985 00000 n 
+0000008019 00000 n 
+0000008053 00000 n 
 trailer
 <<
 /ID 
 [<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 21 0 R
-/Root 20 0 R
-/Size 40
+/Info 20 0 R
+/Root 19 0 R
+/Size 39
 >>
 startxref
-8252
+8087
 %%EOF

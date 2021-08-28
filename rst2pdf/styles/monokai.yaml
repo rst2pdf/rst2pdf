@@ -43,7 +43,7 @@ styles:
     parent: code
     textColor: '#f92672'
   pygments-ge:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: black
   pygments-gh:
@@ -62,7 +62,7 @@ styles:
     parent: code
     textColor: black
   pygments-gs:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: black
   pygments-gt:

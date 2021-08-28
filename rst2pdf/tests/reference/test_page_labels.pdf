@@ -12,7 +12,7 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
@@ -73,22 +73,22 @@ endobj
 endobj
 11 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 753.0236 0 ] /Next 12 0 R /Parent 10 0 R /Title (This should be page 1)
+/Dest [ 4 0 R /XYZ 57.02362 753.0236 0 ] /Next 12 0 R /Parent 10 0 R /Title (This should be page 1)
 >>
 endobj
 12 0 obj
 <<
-/Dest [ 5 0 R /XYZ 62.69291 753.0236 0 ] /Next 13 0 R /Parent 10 0 R /Prev 11 0 R /Title (This should be page 4)
+/Dest [ 5 0 R /XYZ 57.02362 753.0236 0 ] /Next 13 0 R /Parent 10 0 R /Prev 11 0 R /Title (This should be page 4)
 >>
 endobj
 13 0 obj
 <<
-/Dest [ 6 0 R /XYZ 62.69291 753.0236 0 ] /Next 14 0 R /Parent 10 0 R /Prev 12 0 R /Title (This should be page ii)
+/Dest [ 6 0 R /XYZ 57.02362 753.0236 0 ] /Next 14 0 R /Parent 10 0 R /Prev 12 0 R /Title (This should be page ii)
 >>
 endobj
 14 0 obj
 <<
-/Dest [ 7 0 R /XYZ 62.69291 753.0236 0 ] /Parent 10 0 R /Prev 13 0 R /Title (This should be page iii)
+/Dest [ 7 0 R /XYZ 57.02362 753.0236 0 ] /Parent 10 0 R /Prev 13 0 R /Title (This should be page iii)
 >>
 endobj
 15 0 obj
@@ -98,31 +98,31 @@ endobj
 endobj
 16 0 obj
 <<
-/Length 471
+/Length 489
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (This should be page 1) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (This should be page 1) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 714.0236 cm
+1 0 0 1 57.02362 714.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (In the PDF TOC, the page label should match what the headers say.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 714.0236 cm
+1 0 0 1 57.02362 714.0236 cm
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
+1 0 0 1 51.02362 773.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 238.1649 0 Td (1) Tj T* -238.1649 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 243.8342 0 Td (1) Tj T* -243.8342 0 Td ET
 Q
 Q
  
@@ -130,24 +130,24 @@ endstream
 endobj
 17 0 obj
 <<
-/Length 314
+/Length 332
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (This should be page 4) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (This should be page 4) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 726.0236 cm
+1 0 0 1 57.02362 726.0236 cm
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
+1 0 0 1 51.02362 773.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 238.1649 0 Td (4) Tj T* -238.1649 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 243.8342 0 Td (4) Tj T* -243.8342 0 Td ET
 Q
 Q
  
@@ -155,24 +155,24 @@ endstream
 endobj
 18 0 obj
 <<
-/Length 316
+/Length 334
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (This should be page ii) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (This should be page ii) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 726.0236 cm
+1 0 0 1 57.02362 726.0236 cm
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
+1 0 0 1 51.02362 773.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 238.7249 0 Td (ii) Tj T* -238.7249 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 244.3942 0 Td (ii) Tj T* -244.3942 0 Td ET
 Q
 Q
  
@@ -180,21 +180,21 @@ endstream
 endobj
 19 0 obj
 <<
-/Length 285
+/Length 303
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 732.0236 cm
+1 0 0 1 57.02362 732.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (This should be page iii) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (This should be page iii) Tj T* ET
 Q
 Q
 q
-1 0 0 1 56.69291 773.1969 cm
+1 0 0 1 51.02362 773.1969 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 237.6149 0 Td (iii) Tj T* -237.6149 0 Td ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 243.2842 0 Td (iii) Tj T* -243.2842 0 Td ET
 Q
 Q
  
@@ -231,27 +231,27 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000538 00000 n 
-0000000743 00000 n 
-0000000948 00000 n 
-0000001153 00000 n 
-0000001258 00000 n 
-0000001515 00000 n 
-0000001589 00000 n 
-0000001711 00000 n 
-0000001846 00000 n 
-0000001982 00000 n 
-0000002106 00000 n 
-0000002184 00000 n 
-0000002706 00000 n 
-0000003071 00000 n 
-0000003438 00000 n 
-0000003774 00000 n 
-0000003842 00000 n 
-0000003876 00000 n 
-0000003910 00000 n 
-0000003944 00000 n 
+0000000330 00000 n 
+0000000535 00000 n 
+0000000740 00000 n 
+0000000945 00000 n 
+0000001150 00000 n 
+0000001255 00000 n 
+0000001512 00000 n 
+0000001586 00000 n 
+0000001708 00000 n 
+0000001843 00000 n 
+0000001979 00000 n 
+0000002103 00000 n 
+0000002181 00000 n 
+0000002721 00000 n 
+0000003104 00000 n 
+0000003489 00000 n 
+0000003843 00000 n 
+0000003911 00000 n 
+0000003945 00000 n 
+0000003979 00000 n 
+0000004013 00000 n 
 trailer
 <<
 /ID 
@@ -263,5 +263,5 @@ trailer
 /Size 25
 >>
 startxref
-3978
+4047
 %%EOF

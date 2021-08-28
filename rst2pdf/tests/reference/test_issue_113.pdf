@@ -32,7 +32,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -53,14 +53,14 @@ endobj
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This should apear above the image) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 735.0236 cm
+1 0 0 1 57.02362 735.0236 cm
 q
 q
 88.56 0 0 20.64 0 0 cm
@@ -70,14 +70,14 @@ BT 1 0 0 1 0 2 Tm 12 TL 88.56 0 Td /F1 10 Tf 12 TL  T* -88.56 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 717.0236 cm
+1 0 0 1 57.02362 717.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This should appear below the image) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 699.0236 cm
+1 0 0 1 57.02362 699.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This is really not a rst2pdf bug, but a reportlabs bug \(already reported to them via mailing list\)) Tj T* ET
@@ -88,33 +88,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000104 00000 n 
 0000000211 00000 n 
 0000025332 00000 n 
 0000025581 00000 n 
-0000025684 00000 n 
-0000025941 00000 n 
-0000026000 00000 n 
-0000026697 00000 n 
-0000026743 00000 n 
-0000026784 00000 n 
+0000025667 00000 n 
+0000025924 00000 n 
+0000025983 00000 n 
+0000026680 00000 n 
+0000026720 00000 n 
 trailer
 <<
 /ID 
@@ -123,8 +117,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-26818
+26754
 %%EOF

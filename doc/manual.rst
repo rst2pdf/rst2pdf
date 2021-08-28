@@ -852,7 +852,7 @@ fonts::
     stdBold: Helvetica-Bold
     stdItalic: Helvetica-Oblique
     stdBoldItalic: Helvetica-BoldOblique
-    stdMono: Courier
+    fontMono: Courier
 
 This defines the fonts used in the styles. You can use, for example, Helvetica
 directly in a style, but if later you want to use another font all through
@@ -1387,7 +1387,7 @@ the ``fontsAlias`` section accordingly. For example::
     stdBold: Tuffy_Bold
     stdItalic: Tuffy_Italic
     stdBoldItalic: Tuffy_Bold_Italic
-    stdMono: Courier
+    fontMono: Courier
 
 If, on the other hand, you only want a specific style to use the Tuffy font,
 don't change the ``fontAlias`` but rather set the ``fontName`` properties for

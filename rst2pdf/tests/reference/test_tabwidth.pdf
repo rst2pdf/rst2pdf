@@ -27,7 +27,7 @@ endobj
 endobj
 5 0 obj
 <<
-/Outlines 9 0 R /PageLabels 10 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
+/PageLabels 9 0 R /PageMode /UseNone /Pages 7 0 R /Type /Catalog
 >>
 endobj
 6 0 obj
@@ -43,19 +43,19 @@ endobj
 endobj
 8 0 obj
 <<
-/Length 782
+/Length 770
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 753.0236 cm
+1 0 0 1 57.02362 753.0236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The next line has a 8-space tab:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 719.8236 cm
+1 0 0 1 57.02362 719.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -64,8 +64,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 0 0 0 rg
@@ -76,14 +76,14 @@ Q
 Q
 Q
 q
-1 0 0 1 62.69291 699.8236 cm
+1 0 0 1 57.02362 699.8236 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The next line has a 4-space tab:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 666.6236 cm
+1 0 0 1 57.02362 666.6236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -92,8 +92,8 @@ q
 q
 .662745 .662745 .662745 RG
 .5 w
-.960784 .960784 .862745 rg
-n -6 -6 468.6898 24 re B*
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
 Q
 q
 0 0 0 rg
@@ -108,33 +108,27 @@ endstream
 endobj
 9 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 10 0 R ]
 >>
 endobj
 10 0 obj
-<<
-/Nums [ 0 11 0 R ]
->>
-endobj
-11 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 12
+0 11
 0000000000 65535 f 
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
 0000000326 00000 n 
 0000000529 00000 n 
-0000000632 00000 n 
-0000000889 00000 n 
-0000000948 00000 n 
-0000001780 00000 n 
-0000001826 00000 n 
-0000001867 00000 n 
+0000000615 00000 n 
+0000000872 00000 n 
+0000000931 00000 n 
+0000001751 00000 n 
+0000001791 00000 n 
 trailer
 <<
 /ID 
@@ -143,8 +137,8 @@ trailer
 
 /Info 6 0 R
 /Root 5 0 R
-/Size 12
+/Size 11
 >>
 startxref
-1901
+1825
 %%EOF

@@ -42,11 +42,11 @@ styles:
     parent: code
     textColor: '#ef6155'
   pygments-ge:
-    fontName: stdMonoItalic
+    fontName: fontMonoItalic
     parent: code
     textColor: black
   pygments-gh:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#e7e9db'
   pygments-gi:
@@ -56,21 +56,21 @@ styles:
     parent: code
     textColor: black
   pygments-gp:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#776e71'
   pygments-gr:
     parent: code
     textColor: black
   pygments-gs:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: black
   pygments-gt:
     parent: code
     textColor: black
   pygments-gu:
-    fontName: stdMonoBold
+    fontName: fontMonoBold
     parent: code
     textColor: '#5bc4bf'
   pygments-hll:

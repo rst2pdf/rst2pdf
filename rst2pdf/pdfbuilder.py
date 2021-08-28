@@ -527,7 +527,7 @@ class PDFWriter(writers.Writer):
         splittables=True,
         srcdir='.',
         default_dpi=300,
-        page_template='cutePage',
+        page_template='decoratedPage',
         invariant=False,
         real_footnotes=False,
         use_toc=True,
@@ -951,7 +951,7 @@ def setup(app):
     app.add_config_value('pdf_breakside', 'odd', None)
     app.add_config_value('pdf_default_dpi', 300, None)
     app.add_config_value('pdf_extensions', [], None)
-    app.add_config_value('pdf_page_template', 'cutePage', None)
+    app.add_config_value('pdf_page_template', 'decoratedPage', None)
     app.add_config_value('pdf_invariant', False, None)
     app.add_config_value('pdf_real_footnotes', False, None)
     app.add_config_value('pdf_use_toc', True, None)

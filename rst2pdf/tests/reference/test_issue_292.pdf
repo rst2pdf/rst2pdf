@@ -37,7 +37,7 @@ endobj
 endobj
 7 0 obj
 <<
-/Outlines 11 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
 >>
 endobj
 8 0 obj
@@ -53,12 +53,12 @@ endobj
 endobj
 10 0 obj
 <<
-/Length 755
+/Length 679
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 740.8236 cm
+1 0 0 1 57.02362 740.8236 cm
 q
 q
 1 0 0 1 0 0 cm
@@ -66,24 +66,24 @@ q
 1 0 0 1 .1 .1 cm
 q
 1 1 1 rg
-n 0 0 469.6898 24 re f*
+n 0 0 481.0283 24 re f*
 Q
 q
-.960784 .960784 .862745 rg
-n 0 12 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
 n 12 12 432 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 444 12 0 12 re f*
-.960784 .960784 .862745 rg
-n 0 0 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
+n 0 0 12 12 re f*
+.941176 .972549 1 rg
 n 12 0 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 24 0 6 12 re f*
-.960784 .960784 .862745 rg
+.941176 .972549 1 rg
 n 36 0 6 12 re f*
-BT 1 0 0 1 0 14 Tm 12 TL /F2 10 Tf 0 1 0 rg (1 ) Tj /F3 10 Tf 0 0 0 rg (# The line numbers look too much like the code if Issue 292 is not fixed) Tj /F2 10 Tf 0 1 0 rg  T* (2 ) Tj /F4 10 Tf 0 0 0 rg (2) Tj 0 0 0 rg ( ) Tj 0 0 0 rg (+) Tj 0 0 0 rg ( ) Tj 0 0 0 rg (2) Tj T* ET
+BT 1 0 0 1 0 14 Tm 12 TL /F2 10 Tf 0 1 0 rg (1 ) Tj /F3 10 Tf 0 0 0 rg (# The line numbers look too much like the code if Issue 292 is not fixed) Tj /F2 10 Tf 0 1 0 rg  T* (2 ) Tj /F4 10 Tf 0 0 0 rg (2) Tj ( ) Tj (+) Tj ( ) Tj (2) Tj T* ET
 Q
 Q
 Q
@@ -94,21 +94,16 @@ endstream
 endobj
 11 0 obj
 <<
-/Count 0 /Type /Outlines
+/Nums [ 0 12 0 R ]
 >>
 endobj
 12 0 obj
-<<
-/Nums [ 0 13 0 R ]
->>
-endobj
-13 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 14
+0 13
 0000000000 65535 f 
 0000000073 00000 n 
 0000000134 00000 n 
@@ -117,12 +112,11 @@ xref
 0000000464 00000 n 
 0000000569 00000 n 
 0000000773 00000 n 
-0000000877 00000 n 
-0000001134 00000 n 
-0000001193 00000 n 
-0000001999 00000 n 
-0000002046 00000 n 
-0000002087 00000 n 
+0000000860 00000 n 
+0000001117 00000 n 
+0000001176 00000 n 
+0000001906 00000 n 
+0000001947 00000 n 
 trailer
 <<
 /ID 
@@ -131,8 +125,8 @@ trailer
 
 /Info 8 0 R
 /Root 7 0 R
-/Size 14
+/Size 13
 >>
 startxref
-2121
+1981
 %%EOF

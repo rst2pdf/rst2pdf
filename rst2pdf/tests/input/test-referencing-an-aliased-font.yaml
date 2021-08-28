@@ -1,9 +1,8 @@
 fontsAlias:
-  stdBold: Tuffy
-  stdFont: DejaVu Sans Mono
+  fontSerif: Tuffy
+  fontSans: DejaVu Sans Mono
 styles:
   heading:
-    fontName: stdFont
     fontSize: 20
     textColor: '#1a8099'
   heading1:

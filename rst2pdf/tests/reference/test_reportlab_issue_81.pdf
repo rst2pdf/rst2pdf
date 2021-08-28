@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
 >>
 endobj
 2 0 obj
@@ -12,12 +12,17 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Contents 11 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 10 0 R /Resources <<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 12 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 11 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 /Trans <<
 
@@ -25,111 +30,99 @@ endobj
   /Type /Page
 >>
 endobj
-5 0 obj
+6 0 obj
 <<
-/Outlines 7 0 R /PageLabels 12 0 R /PageMode /UseNone /Pages 10 0 R /Type /Catalog
+/Outlines 8 0 R /PageLabels 13 0 R /PageMode /UseNone /Pages 11 0 R /Type /Catalog
 >>
 endobj
-6 0 obj
+7 0 obj
 <<
 /Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (Testing A Reportlab Bug) /Trapped /False
 >>
 endobj
-7 0 obj
-<<
-/Count 2 /First 8 0 R /Last 9 0 R /Type /Outlines
->>
-endobj
 8 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 695.0236 0 ] /Next 9 0 R /Parent 7 0 R /Title (Software Notes)
+/Count 2 /First 9 0 R /Last 10 0 R /Type /Outlines
 >>
 endobj
 9 0 obj
 <<
-/Dest [ 4 0 R /XYZ 62.69291 536.0236 0 ] /Parent 7 0 R /Prev 8 0 R /Title (Software Notes)
+/Dest [ 5 0 R /XYZ 57.02362 669.0236 0 ] /Next 10 0 R /Parent 8 0 R /Title (Software Notes)
 >>
 endobj
 10 0 obj
 <<
-/Count 1 /Kids [ 4 0 R ] /Type /Pages
+/Dest [ 5 0 R /XYZ 57.02362 510.0236 0 ] /Parent 8 0 R /Prev 9 0 R /Title (Software Notes)
 >>
 endobj
 11 0 obj
 <<
-/Length 4517
+/Count 1 /Kids [ 5 0 R ] /Type /Pages
+>>
+endobj
+12 0 obj
+<<
+/Length 4182
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 741.0236 cm
+1 0 0 1 57.02362 741.0236 cm
 q
-0 0 0 rg
-BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 117.7149 0 Td (Testing A Reportlab Bug) Tj T* -117.7149 0 Td ET
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 139.7842 0 Td (Testing A Reportlab Bug) Tj T* -139.7842 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 707.0236 cm
+1 0 0 1 57.02362 681.0236 cm
 q
-BT 1 0 0 1 0 14 Tm .679488 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is from our issue 544. The test will fail with a known bug on versions of reportlab earlier than 3.3.8.) Tj T* 0 Tw (For the tests to pass, the two very similar tables below should be displayed similarly.) Tj T* ET
+BT 1 0 0 1 0 14 Tm .340397 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is from our issue 544. The test will fail with a known bug on versions of reportlab earlier than 3.3.8. For) Tj T* 0 Tw (the tests to pass, the two very similar tables below should be displayed similarly.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 674.0236 cm
+1 0 0 1 57.02362 648.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Software Notes) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Software Notes) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 662.0236 cm
+1 0 0 1 57.02362 636.0236 cm
 Q
 q
-1 0 0 1 62.69291 548.0236 cm
+1 0 0 1 57.02362 522.0236 cm
+q
 1 1 1 rg
-n 0 114 469.8898 -42 re f*
+n 0 114 481.2283 -42 re f*
 .878431 .878431 .878431 rg
-n 0 72 469.8898 -30 re f*
+n 0 72 481.2283 -30 re f*
 1 1 1 rg
-n 0 42 469.8898 -42 re f*
-.960784 .960784 .862745 rg
-n 0 114 469.8898 -42 re f*
+n 0 42 481.2283 -42 re f*
 0 0 0 rg
-BT /F1 10 Tf 12 TL ET
+BT /F3 10 Tf 12 TL ET
 q
 1 0 0 1 6 75 cm
 q
-.960784 .960784 .862745 rg
-n 0 0 21.19873 36 re f*
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL 1.279914 0 Td (Soft) Tj T* 1.105 0 Td (war) Tj T* 5.835 0 Td (e) Tj T* -8.219914 0 Td ET
 Q
+Q
+q
+1 0 0 1 39.99983 75 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.704367 0 Td (Soft) Tj T* .84 0 Td (war) Tj T* 5.275 0 Td (e) Tj T* -7.819367 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 37.12123 0 Td (Version) Tj T* -37.12123 0 Td ET
 Q
 Q
 q
-1 0 0 1 39.19873 75 cm
-q
-.960784 .960784 .862745 rg
-n 0 0 108.0262 12 re f*
-Q
+1 0 0 1 162.9223 75 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 37.06309 0 Td (Version) Tj T* -37.06309 0 Td ET
-Q
-Q
-q
-1 0 0 1 159.2249 75 cm
-q
-.960784 .960784 .862745 rg
-n 0 0 304.6648 12 re f*
-Q
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 139.2724 0 Td (Notes) Tj T* -139.2724 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 142.263 0 Td (Notes) Tj T* -142.263 0 Td ET
 Q
 Q
 0 0 0 rg
+BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 45 cm
 q
@@ -138,34 +131,34 @@ BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Ubu) Tj T* (ntu) Tj T* ET
 Q
 Q
 q
-1 0 0 1 39.19873 45 cm
+1 0 0 1 39.99983 45 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (15.04 \(Vivid Vervet\) or) Tj T* (15.10 \(Wily Werewolf\)) Tj T* ET
 Q
 Q
 q
-1 0 0 1 159.2249 45 cm
+1 0 0 1 162.9223 45 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Full-on systemd support. Investigate 16.04 LTS \(Xenial Xerus\) in) Tj T* (April, being wary of Python versions and Snappy packages.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Full-on systemd support. Investigate 16.04 LTS \(Xenial Xerus\) in April,) Tj T* (being wary of Python versions and Snappy packages.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL (deb) Tj T* (oots) Tj T* (trap) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL (deb) Tj T* (ootst) Tj T* (rap) Tj T* ET
 Q
 Q
 q
-1 0 0 1 39.19873 27 cm
+1 0 0 1 39.99983 27 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (>) Tj (= 1.0.77) Tj T* ET
 Q
 Q
 q
-1 0 0 1 159.2249 27 cm
+1 0 0 1 162.9223 27 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Generate filesystems for containers.) Tj T* ET
@@ -176,74 +169,63 @@ q
 1 j
 0 0 0 RG
 .25 w
-n 0 72 m 469.8898 72 l S
-n 0 42 m 469.8898 42 l S
-n 33.19873 0 m 33.19873 114 l S
-n 153.2249 0 m 153.2249 114 l S
-n 0 114 m 469.8898 114 l S
-n 0 0 m 469.8898 0 l S
+n 0 72 m 481.2283 72 l S
+n 0 42 m 481.2283 42 l S
+n 33.99983 0 m 33.99983 114 l S
+n 156.9223 0 m 156.9223 114 l S
+n 0 114 m 481.2283 114 l S
+n 0 0 m 481.2283 0 l S
 n 0 0 m 0 114 l S
-n 469.8898 0 m 469.8898 114 l S
+n 481.2283 0 m 481.2283 114 l S
 Q
-Q
-q
-1 0 0 1 62.69291 548.0236 cm
-Q
-q
-1 0 0 1 62.69291 515.0236 cm
-q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Software Notes) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 503.0236 cm
+1 0 0 1 57.02362 522.0236 cm
 Q
 q
-1 0 0 1 62.69291 401.0236 cm
+1 0 0 1 57.02362 489.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Software Notes) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 477.0236 cm
+Q
+q
+1 0 0 1 57.02362 375.0236 cm
+q
 1 1 1 rg
-n 0 102 469.8898 -30 re f*
+n 0 102 481.2283 -30 re f*
 .878431 .878431 .878431 rg
-n 0 72 469.8898 -30 re f*
+n 0 72 481.2283 -30 re f*
 1 1 1 rg
-n 0 42 469.8898 -42 re f*
-.960784 .960784 .862745 rg
-n 0 102 469.8898 -30 re f*
+n 0 42 481.2283 -42 re f*
 0 0 0 rg
-BT /F1 10 Tf 12 TL ET
+BT /F3 10 Tf 12 TL ET
 q
 1 0 0 1 6 75 cm
 q
-.960784 .960784 .862745 rg
-n 0 0 21.19873 24 re f*
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL 1.279914 0 Td (Soft) Tj T* 3.05 0 Td (wa) Tj T* -4.329914 0 Td ET
 Q
+Q
+q
+1 0 0 1 39.99983 75 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.704367 0 Td (Soft) Tj T* 2.505 0 Td (wa) Tj T* -4.209367 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 37.12123 0 Td (Version) Tj T* -37.12123 0 Td ET
 Q
 Q
 q
-1 0 0 1 39.19873 75 cm
-q
-.960784 .960784 .862745 rg
-n 0 0 108.0262 12 re f*
-Q
+1 0 0 1 162.9223 75 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 37.06309 0 Td (Version) Tj T* -37.06309 0 Td ET
-Q
-Q
-q
-1 0 0 1 159.2249 75 cm
-q
-.960784 .960784 .862745 rg
-n 0 0 304.6648 12 re f*
-Q
-q
-0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 139.2724 0 Td (Notes) Tj T* -139.2724 0 Td ET
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 142.263 0 Td (Notes) Tj T* -142.263 0 Td ET
 Q
 Q
 0 0 0 rg
+BT /F1 10 Tf 12 TL ET
 q
 1 0 0 1 6 45 cm
 q
@@ -252,34 +234,34 @@ BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Ubu) Tj T* (ntu) Tj T* ET
 Q
 Q
 q
-1 0 0 1 39.19873 45 cm
+1 0 0 1 39.99983 45 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (15.04 \(Vivid Vervet\) or) Tj T* (15.10 \(Wily Werewolf\)) Tj T* ET
 Q
 Q
 q
-1 0 0 1 159.2249 45 cm
+1 0 0 1 162.9223 45 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Full-on systemd support. Investigate 16.04 LTS \(Xenial Xerus\) in) Tj T* (April, being wary of Python versions and Snappy packages.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL (Full-on systemd support. Investigate 16.04 LTS \(Xenial Xerus\) in April,) Tj T* (being wary of Python versions and Snappy packages.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 6 3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL (deb) Tj T* (oots) Tj T* (trap) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL (deb) Tj T* (ootst) Tj T* (rap) Tj T* ET
 Q
 Q
 q
-1 0 0 1 39.19873 27 cm
+1 0 0 1 39.99983 27 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (>) Tj (= 1.0.77) Tj T* ET
 Q
 Q
 q
-1 0 0 1 159.2249 27 cm
+1 0 0 1 162.9223 27 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Generate filesystems for containers.) Tj T* ET
@@ -290,58 +272,60 @@ q
 1 j
 0 0 0 RG
 .25 w
-n 0 72 m 469.8898 72 l S
-n 0 42 m 469.8898 42 l S
-n 33.19873 0 m 33.19873 102 l S
-n 153.2249 0 m 153.2249 102 l S
-n 0 102 m 469.8898 102 l S
-n 0 0 m 469.8898 0 l S
+n 0 72 m 481.2283 72 l S
+n 0 42 m 481.2283 42 l S
+n 33.99983 0 m 33.99983 102 l S
+n 156.9223 0 m 156.9223 102 l S
+n 0 102 m 481.2283 102 l S
+n 0 0 m 481.2283 0 l S
 n 0 0 m 0 102 l S
-n 469.8898 0 m 469.8898 102 l S
+n 481.2283 0 m 481.2283 102 l S
+Q
 Q
 Q
 q
-1 0 0 1 62.69291 401.0236 cm
+1 0 0 1 57.02362 375.0236 cm
 Q
  
 endstream
 endobj
-12 0 obj
+13 0 obj
 <<
-/Nums [ 0 13 0 R ]
+/Nums [ 0 14 0 R ]
 >>
 endobj
-13 0 obj
+14 0 obj
 <<
 /S /D /St 1
 >>
 endobj
 xref
-0 14
+0 15
 0000000000 65535 f 
 0000000073 00000 n 
-0000000114 00000 n 
-0000000221 00000 n 
-0000000333 00000 n 
-0000000538 00000 n 
-0000000642 00000 n 
-0000000922 00000 n 
-0000000993 00000 n 
-0000001105 00000 n 
-0000001217 00000 n 
-0000001277 00000 n 
-0000005846 00000 n 
-0000005887 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000340 00000 n 
+0000000452 00000 n 
+0000000657 00000 n 
+0000000761 00000 n 
+0000001041 00000 n 
+0000001113 00000 n 
+0000001226 00000 n 
+0000001339 00000 n 
+0000001399 00000 n 
+0000005633 00000 n 
+0000005674 00000 n 
 trailer
 <<
 /ID 
 [<2ed722768da062e1a95ad0495a5f9724><2ed722768da062e1a95ad0495a5f9724>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
-/Info 6 0 R
-/Root 5 0 R
-/Size 14
+/Info 7 0 R
+/Root 6 0 R
+/Size 15
 >>
 startxref
-5921
+5708
 %%EOF

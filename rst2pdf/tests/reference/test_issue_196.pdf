@@ -12,27 +12,27 @@ endobj
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 62.69291 639.0236 0 ] /Rect [ 62.69291 690.0236 127.7029 702.0236 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 57.02362 642.6236 0 ] /Rect [ 57.02362 691.8236 108.5251 702.0236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 62.69291 639.0236 0 ] /Rect [ 527.0227 690.7736 532.5827 702.7736 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 57.02362 642.6236 0 ] /Rect [ 533.526 692.4611 538.252 702.6611 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 62.69291 609.0236 0 ] /Rect [ 62.69291 672.0236 127.7029 684.0236 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 57.02362 612.6236 0 ] /Rect [ 57.02362 675.6236 108.5251 685.8236 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 62.69291 609.0236 0 ] /Rect [ 527.0227 672.7736 532.5827 684.7736 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 8 0 R /XYZ 57.02362 612.6236 0 ] /Rect [ 533.526 676.2611 538.252 686.4611 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
@@ -63,23 +63,23 @@ endobj
 endobj
 12 0 obj
 <<
-/Dest [ 8 0 R /XYZ 62.69291 765.0236 0 ] /Next 13 0 R /Parent 11 0 R /Title (Section 1)
+/Dest [ 8 0 R /XYZ 57.02362 765.0236 0 ] /Next 13 0 R /Parent 11 0 R /Title (Section 1)
 >>
 endobj
 13 0 obj
 <<
-/Count 2 /Dest [ 8 0 R /XYZ 62.69291 732.0236 0 ] /First 14 0 R /Last 15 0 R /Parent 11 0 R /Prev 12 0 R 
+/Count 2 /Dest [ 8 0 R /XYZ 57.02362 732.0236 0 ] /First 14 0 R /Last 15 0 R /Parent 11 0 R /Prev 12 0 R 
   /Title (Section 2)
 >>
 endobj
 14 0 obj
 <<
-/Dest [ 8 0 R /XYZ 62.69291 639.0236 0 ] /Next 15 0 R /Parent 13 0 R /Title (SubSection A)
+/Dest [ 8 0 R /XYZ 57.02362 642.6236 0 ] /Next 15 0 R /Parent 13 0 R /Title (SubSection A)
 >>
 endobj
 15 0 obj
 <<
-/Dest [ 8 0 R /XYZ 62.69291 609.0236 0 ] /Parent 13 0 R /Prev 14 0 R /Title (SubSection B)
+/Dest [ 8 0 R /XYZ 57.02362 612.6236 0 ] /Parent 13 0 R /Prev 14 0 R /Title (SubSection B)
 >>
 endobj
 16 0 obj
@@ -89,73 +89,73 @@ endobj
 endobj
 17 0 obj
 <<
-/Length 1120
+/Length 1178
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 62.69291 744.0236 cm
+1 0 0 1 57.02362 744.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Section 1) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Section 1) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 711.0236 cm
+1 0 0 1 57.02362 711.0236 cm
 q
-BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Section 2) Tj T* ET
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Section 2) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 669.0236 cm
+1 0 0 1 57.02362 672.6236 cm
+q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 0 21 cm
+1 0 0 1 0 19.2 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (SubSection A) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F1 8.5 Tf 0 .4 .6 rg (SubSection A) Tj T* ET
 Q
 Q
 q
-1 0 0 1 397.8898 21 cm
+1 0 0 1 409.2283 19.2 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F1 8.5 Tf 10.2 TL 67.274 0 Td (1) Tj T* -67.274 0 Td ET
 Q
 Q
 q
 1 0 0 1 0 3 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F2 10 Tf 0 0 .501961 rg (SubSection B) Tj T* ET
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F1 8.5 Tf 0 .4 .6 rg (SubSection B) Tj T* ET
 Q
 Q
 q
-1 0 0 1 397.8898 3 cm
+1 0 0 1 409.2283 3 cm
 q
-0 0 .501961 rg
-0 0 .501961 RG
-BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL 66.44 0 Td (1) Tj T* -66.44 0 Td ET
-Q
-Q
-q
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F1 8.5 Tf 10.2 TL 67.274 0 Td (1) Tj T* -67.274 0 Td ET
 Q
 Q
 q
-1 0 0 1 62.69291 651.0236 cm
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 654.6236 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (The TOC above should only contain subsections.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 621.0236 cm
+1 0 0 1 57.02362 624.6236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (SubSection A) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (SubSection A) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 591.0236 cm
+1 0 0 1 57.02362 594.6236 cm
 q
-BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (SubSection B) Tj T* ET
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf .133333 .133333 .133333 rg (SubSection B) Tj T* ET
 Q
 Q
  
@@ -177,22 +177,22 @@ xref
 0000000073 00000 n 
 0000000114 00000 n 
 0000000221 00000 n 
-0000000333 00000 n 
-0000000500 00000 n 
-0000000667 00000 n 
-0000000834 00000 n 
-0000001001 00000 n 
-0000001242 00000 n 
-0000001347 00000 n 
-0000001605 00000 n 
-0000001679 00000 n 
-0000001789 00000 n 
-0000001938 00000 n 
-0000002051 00000 n 
-0000002164 00000 n 
-0000002224 00000 n 
-0000003396 00000 n 
-0000003437 00000 n 
+0000000330 00000 n 
+0000000497 00000 n 
+0000000662 00000 n 
+0000000829 00000 n 
+0000000994 00000 n 
+0000001235 00000 n 
+0000001340 00000 n 
+0000001598 00000 n 
+0000001672 00000 n 
+0000001782 00000 n 
+0000001931 00000 n 
+0000002044 00000 n 
+0000002157 00000 n 
+0000002217 00000 n 
+0000003447 00000 n 
+0000003488 00000 n 
 trailer
 <<
 /ID 
@@ -204,5 +204,5 @@ trailer
 /Size 20
 >>
 startxref
-3471
+3522
 %%EOF

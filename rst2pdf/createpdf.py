@@ -1088,6 +1088,9 @@ class FancyPage(PageTemplate):
         self.tw = styles.pw - styles.lm - styles.rm - styles.gm
         # What page template to use?
         tname = canv.__dict__.get('templateName', self.styles.firstTemplate)
+        if tname not in self.styles.pageTemplates:
+            log.error(f"Template '{tname}' is not defined")
+            sys.exit(1)
         self.template = self.styles.pageTemplates[tname]
         canv.templateName = tname
 
@@ -1132,6 +1135,10 @@ class FancyPage(PageTemplate):
             self.draw_background('background', canv)
 
         self.frames = []
+        if 'frames' not in self.template:
+            log.error('No frames in template')
+            sys.exit(1)
+
         for frame in self.template['frames']:
             frame = frame[:]
             while len(frame) < 8:
