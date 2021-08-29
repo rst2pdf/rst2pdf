@@ -172,6 +172,11 @@ class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
         return [Paragraph(pre + client.gather_pdftext(node), style)]
 
 
+class HandleSphinxDescSignatureLine(SphinxHandler, sphinx.addnodes.desc_signature_line):
+    def gather_elements(self, client, node, style):
+        pass
+
+
 class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):
     def gather_elements(self, client, node, style):
         return (
