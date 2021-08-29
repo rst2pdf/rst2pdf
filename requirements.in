@@ -1,12 +1,16 @@
-aafigure
+# Required packages
 docutils
-matplotlib
+importlib_metadata
+jinja2
+packaging
 pygments
-pyPdf2
+pyyaml
 reportlab
 smartypants
+
+# Extra packages
+aafigure
+matplotlib
 sphinx==1.8.5
 svglib
-svg2rlg
 xhtml2pdf
-pyyaml
