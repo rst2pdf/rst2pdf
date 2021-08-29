@@ -36,7 +36,7 @@ from sphinx.builders import Builder
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import _
 from sphinx.transforms import SphinxTransform
-from sphinx.util.console import darkgreen, red
+from sphinx.util.console import darkgreen, red  # type: ignore
 from sphinx.util import SEP
 
 import rst2pdf
@@ -161,7 +161,7 @@ class PDFBuilder(Builder):
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
         if not preliminary_document_data:
-            self.warn(
+            self.sphinx_logger.warning(
                 'no "pdf_documents" config value found; no documents ' 'will be written'
             )
             return
@@ -170,7 +170,7 @@ class PDFBuilder(Builder):
         for entry in preliminary_document_data:
             docname = entry[0]
             if docname not in self.env.all_docs:
-                self.warn(
+                self.sphinx_logger.warning(
                     '"pdf_documents" config value references unknown '
                     'document %s' % docname
                 )
@@ -201,7 +201,7 @@ class PDFBuilder(Builder):
                         )
                         self.docnames.add(includefile)
                     except Exception:
-                        self.warn(
+                        self.sphinx_logger.warning(
                             '%s: toctree contains ref to nonexisting file %r'
                             % (docname, includefile)
                         )
