@@ -228,17 +228,38 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
-            t = copy(self.env.indexentries)
-            try:
-                self.env.indexentries = {
-                    docname: self.env.indexentries[docname + '-gen']
-                }
-            except KeyError:
-                self.env.indexentries = {}
-                for dname in self.docnames:
-                    self.env.indexentries[dname] = t.get(dname, [])
-            genindex = IndexEntries(self.env).create_index(self)
-            self.env.indexentries = t
+            if hasattr(self.env, 'domains') and "index" in self.env.domains:
+                # Sphinx 2.4.0+ stores the index entries in self.env.domains["index"]
+                t = copy(self.env.domains["index"].data['entries'])
+                try:
+                    self.env.domains["index"].data["entries"] = {
+                        docname: self.env.domains["index"].data['entries'][
+                            docname + '-gen'
+                        ]
+                    }
+                except KeyError:
+                    self.env.domains["index"].data["entries"] = {}
+                    for dname in self.docnames:
+                        self.env.domains["index"].data["entries"][dname] = t.get(
+                            dname, []
+                        )
+
+                genindex = IndexEntries(self.env).create_index(self)
+                self.env.domains["index"].data['entries'] = t
+            elif hasattr(self.env, 'indexentries'):
+                # Sphinx 2.3.1 or lower stores the index entries in self.env.indexentries
+                t = copy(self.env.indexentries)
+                try:
+                    self.env.indexentries = {
+                        docname: self.env.indexentries[docname + '-gen']
+                    }
+                except KeyError:
+                    self.env.indexentries = {}
+                    for dname in self.docnames:
+                        self.env.indexentries[dname] = t.get(dname, [])
+
+                genindex = IndexEntries(self.env).create_index(self)
+                self.env.indexentries = t
             # EOH (End Of Hack)
 
             if genindex:  # No point in creating empty indexes
