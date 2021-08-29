@@ -109,17 +109,24 @@ six==1.16.0
     #   html5lib
     #   python-bidi
     #   python-dateutil
-    #   sphinx
     #   xhtml2pdf
 smartypants==2.0.1
     # via rst2pdf (setup.py)
 snowballstemmer==2.1.0
     # via sphinx
-sphinx==1.8.5
+sphinx==4.2.0
     # via rst2pdf (setup.py)
+sphinxcontrib-applehelp==1.0.2
+    # via sphinx
+sphinxcontrib-devhelp==1.0.2
+    # via sphinx
+sphinxcontrib-htmlhelp==2.0.0
+    # via sphinx
+sphinxcontrib-jsmath==1.0.1
+    # via sphinx
+sphinxcontrib-qthelp==1.0.3
+    # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
-    # via sphinxcontrib-websupport
-sphinxcontrib-websupport==1.2.4
     # via sphinx
 svglib==1.1.0
     # via rst2pdf (setup.py)
