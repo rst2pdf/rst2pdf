@@ -147,7 +147,11 @@ class HandleSphinxCentered(SphinxHandler, sphinx.addnodes.centered):
 
 class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
+        # Most node['desctype'] do not have a style attached and the default of "normal"
+        # is acceptable, so suppress the warning as it's irrelevant in this situation
+        client.styles.suppress_undefined_style_warning = True
         st = client.styles[node['desctype']]
+        client.styles.suppress_undefined_style_warning = False
         if st == client.styles['normal']:
             st = copy(client.styles['desc'])
             st.spaceBefore = 0
