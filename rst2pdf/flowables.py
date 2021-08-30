@@ -251,9 +251,43 @@ class DelayedTable(Table):
             repeatRows=self.repeatrows,
             splitByRow=True,
         )
+
+        self._set_max_page_height_on_cell_flowables(h)
+
         # splitByRow=self.splitByRow)
         self.t.hAlign = self.hAlign
         return self.t.wrap(w, h)
+
+    def _set_max_page_height_on_cell_flowables(self, height):
+        """Iterate over all cells in the table and set the maximum height onto the flowable.
+
+        This is useful to the flowable if its data cannot be rendered over a page boundary (e.g. an image) as it can
+        then resize itself to a valid height in its wrap() method.
+        """
+
+        def set_max_page_height_on_flowable(flowable, cell_style):
+            if hasattr(flowable, 'max_page_height'):
+                # Subtract padding from h only if it is a positive value
+                top_padding = cell_style.topPadding if cell_style.topPadding > 0 else 0
+                bottom_padding = (
+                    cell_style.topPadding if cell_style.bottomPadding > 0 else 0
+                )
+
+                h = abs(height - top_padding - bottom_padding) - _FUZZ
+                flowable.max_page_height = h
+
+        for row_index, row in enumerate(self.data):
+            for col_index, columns in enumerate(row):
+                # columns is either a list or a cell (for a single cell table)
+                if isinstance(columns, list):
+                    for cell in columns:
+                        set_max_page_height_on_flowable(
+                            cell, self.t._cellStyles[row_index][col_index]
+                        )
+                else:
+                    set_max_page_height_on_flowable(
+                        columns, self.t._cellStyles[row_index][col_index]
+                    )
 
     def split(self, w, h):
         if self.splitByRow:
