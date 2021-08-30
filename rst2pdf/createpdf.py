@@ -663,6 +663,7 @@ class RstToPdf(object):
         while True:
             try:
                 log.info("Starting build")
+                self.elements = elements
                 # See if this *must* be multipass
                 pdfdoc.multiBuild(elements)
                 # Force a multibuild pass
@@ -731,6 +732,23 @@ class RstToPdf(object):
 
 
 class FancyDocTemplate(BaseDocTemplate):
+    def onProgress(self, typ, value):
+        global _counter
+        message = ''
+        if typ == 'SIZE_EST':
+            log.debug(f'Number of flowables: {value}')
+        elif typ == 'PROGRESS':
+            message = f'Flowable {value}'
+            # add class name for this flowable if we can
+            if hasattr(self.client, 'elements'):
+                if 0 <= value < len(self.client.elements):
+                    element = self.client.elements[value]
+                    message += f" {type(element)}"
+            log.debug(f'Page {_counter}: {message}')
+
+    def afterInit(self):
+        self.setProgressCallBack(self.onProgress)
+
     def afterFlowable(self, flowable):
 
         if isinstance(flowable, Heading):
