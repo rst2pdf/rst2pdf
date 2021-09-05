@@ -38,7 +38,7 @@ setup(
         'smartypants',
     ],
     extras_require={
-        'aafiguresupport': ['aafigure>=0.4'],
+        'aafiguresupport': ['aafigure'],
         'mathsupport': ['matplotlib'],
         'rawhtmlsupport': ['xhtml2pdf'],
         'sphinx': ['sphinx'],
