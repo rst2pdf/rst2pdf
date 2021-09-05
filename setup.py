@@ -43,7 +43,7 @@ setup(
         'rawhtmlsupport': ['xhtml2pdf'],
         'sphinx': ['sphinx'],
         'svgsupport': ['svglib'],
-        'tests': ['pyPdf2', 'pymupdf', 'pytest'],
+        'tests': ['pymupdf', 'pytest'],
     },
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
