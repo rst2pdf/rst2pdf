@@ -40,6 +40,7 @@ setup(
     extras_require={
         'aafiguresupport': ['aafigure'],
         'mathsupport': ['matplotlib'],
+        'plantumlsupport': ['plantuml'],
         'rawhtmlsupport': ['xhtml2pdf'],
         'sphinx': ['sphinx'],
         'svgsupport': ['svglib'],
