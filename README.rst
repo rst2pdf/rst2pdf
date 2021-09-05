@@ -61,6 +61,11 @@ The latest released version may be installed from PyPI by using ``pip``::
 
     $ pip install --user rst2pdf
 
+rst2pdf also has support for a number of features that require additional dependencies. Installation of all the
+required dependencies using ``pip`` may be installed using::
+
+    $ pip install --user rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
+
 Install from Snap
 ~~~~~~~~~~~~~~~~~
 
