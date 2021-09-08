@@ -40,15 +40,13 @@ lxml==4.6.3
     # via svglib
 markupsafe==2.0.1
     # via jinja2
-matplotlib==3.3.4;python_version<"3.7"
-matplotlib==3.4.2;python_version>="3.7"
+matplotlib==3.4.2
     # via -r requirements.in
-numpy==1.19.5;python_version<"3.7"
-numpy==1.21.1;python_version>="3.7"
+numpy==1.21.1
     # via matplotlib
 packaging==21.0
     # via sphinx
-pillow==8.3.1
+pillow==8.3.2
     # via
     #   matplotlib
     #   reportlab
