@@ -42,7 +42,7 @@ setup(
         'mathsupport': ['matplotlib'],
         'plantumlsupport': ['plantuml'],
         'rawhtmlsupport': ['xhtml2pdf'],
-        'sphinx': ['sphinx'],
+        'sphinx': ['sphinx==1.8.5'],
         'svgsupport': ['svglib'],
         'tests': ['pymupdf', 'pytest'],
     },
