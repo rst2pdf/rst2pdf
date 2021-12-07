@@ -221,7 +221,6 @@ try:
                 return [Paragraph(node['code'], client.styles['code'])]
             return [MyImage(filename=outfn, client=client)]
 
-
 except AttributeError:
     # Probably the graphviz extension is not enabled
     pass

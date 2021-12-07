@@ -391,7 +391,6 @@ if HAS_XHTML2PDF:
         )
         return context.story
 
-
 else:  # no xhtml2pdf
 
     def parseHTML(data, none):
