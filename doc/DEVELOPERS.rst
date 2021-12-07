@@ -68,6 +68,8 @@ Once installed, enable it like so::
 
 .. __: https://pre-commit.com/
 
+If pre-commit locally behaves differently to CI, then run ``pre-commit clean`` to
+clear your cache before further investigation.
 
 Continuous Integration
 ~~~~~~~~~~~~~~~~~~~~~~
