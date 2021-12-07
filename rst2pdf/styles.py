@@ -293,16 +293,15 @@ class StyleSheet(object):
                             fname = font[0]
                         else:
                             fname = font
-                        log.error(
+                        log.critical(
                             "Error processing font %s: %s",
                             os.path.splitext(fname)[0],
                             str(e),
                         )
-                        log.error("Registering %s as Helvetica alias", fname)
-                        self.fontsAlias[fname] = 'Helvetica'
+                        sys.exit(1)
                     except Exception as e:
                         log.critical("Error processing font %s: %s", fname, str(e))
-                        continue
+                        sys.exit(1)
 
         # Go though all styles in all stylesheets and find all fontNames.
         # Then decide what to do with them

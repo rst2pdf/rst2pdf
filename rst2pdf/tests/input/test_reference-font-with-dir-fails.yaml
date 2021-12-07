@@ -1,0 +1,5 @@
+---
+embeddedFonts:
+  - [fonts/GenBasR.ttf, fonts/GenBasB.ttf, fonts/GenBasI.ttf, fonts/GenBasBI.ttf]
+
+fontsAlias: { stdFont: GenBasR, stdBold: GenBasB }
