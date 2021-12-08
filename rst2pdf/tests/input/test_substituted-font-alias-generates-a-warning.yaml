@@ -1,0 +1,9 @@
+---
+embeddedFonts:
+  - [fonts/ChunkFive-Regular.ttf, fonts/ChunkFive-Regular.ttf, fonts/ChunkFive-Regular.ttf, fonts/ChunkFive-Regular.ttf]
+
+fontsAlias: {stdFont: fonts/ChunkFive-Regular, stdBold: fonts/ChunkFive-Regular}
+
+styles:
+  heading: { fontName: stdBold, textColor: '#880000' }
+  normal: { fontName: stdFont, textColor: '#000088' }
