@@ -2,6 +2,33 @@
 {next}
 ------
 
+* Added: Python 3.9 & 3.10 are now supported (PR #969, #1043)
+* Added: Sphinx 4 is now supported. (PR #1020)
+* Added: Can now set background images using ``PageBreak``. (PR #1050)
+* Added: Can now set multiple style names in the ``class`` directive (PR #1048)
+* Added: ``pdf_smartquotes`` option is now supported with Sphinx builds (PR #1045)
+* Added: Add support for styling separations. (PR #927)
+* Changed: Outline entries that are deeper than the ToC are now collapsed (PR #1049)
+* Changed: ``math`` directive updated to support latest matplotlib (PR #1047)
+* Changed: the ``--very-verbose`` option provides more information when things go wrong. (PR #1025)
+* Changed: The default stylesheet has been improved. Use the ``rst2pdf-0.9`` stylesheet to apply the
+  previous default as per the "Migrating to the New Default Stylesheet" section of the manual. (PR #988)
+* Changed: Stylesheets are now in YAML. Migrate to the new format using ``python -m rst2pdf.style2yaml``
+  as per the "Migrating Stylesheet Format" section of the manual. (PR #956)
+* Fixed: An imagine that is too tall in a table cell is now resized to fit. (PR #1024)
+* Fixed: rst2pdf now writes to stdout again (PR #994)
+* Fixed: Ensure table columns are wide enough for use (PR #992)
+* Fixed: Better error messages for malformed RST (PR #990)
+* Fixed: The Sphinx versionadded & versionchanged directives work again (PR #982)
+* Fixed: Hyperlinks with embedded internal link aliases no longer crash. (PR #972, #979)
+* Fixed: A more sensible error message is displayed when importing an extension fails (PR #954)
+* Fixed: If rst2pdf errors, it should now return a non-zero status code. (PR #925, #1041, #1046)
+* Fixed: Various documentation improvements (PR #913, #933, #943)
+* Fixed: Addressed regular expression FutureWarning. (PR #908)
+  supported. (PR #937)
+* Removed: Documentation related to kerning has been removed as it depended on word-axe which is longer
+
+
 0.98 (2020-08-28)
 -----------------
 
@@ -12,9 +39,10 @@
 * Fixed: Elements with that that don't have an rst2pdf element (e.g. subtitles, inline references) no
   longer cause a crash,  (Issue #889, #899)
 * Fixed: SVGlib is really optional now! (Issue #889)
-* Fixed: The README, LICENSE and CHANGES files are now packaged with the release tarball. (Issue 867)
+* Fixed: The README, LICENSE and CHANGES files are now packaged with the release tarball. (Issue #867)
 * Removed: Support for pdfrw has been removed and hence support for rendering SVGs using Inkscape has
   also been removed. (Issue #896)
+* Removed: Wordaxe support has been removed (Issue #887)
 
 0.97 (2020-05-09)
 -----------------
