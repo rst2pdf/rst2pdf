@@ -396,7 +396,7 @@ This makes an excellent starting point for creating a stylesheet. The default on
 Migrating Stylesheet Format
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Historically, rst2pdf had support for JSON and RSON stylesheets. Those stylesheets should still work if you are still using them but a warning will be produced::
+Historically, (version 0.98 and earlier) rst2pdf had support for JSON and RSON stylesheets. Those stylesheets should still work if you are still using them but a warning will be produced::
 
   [WARNING] styles.py:617 Stylesheet "./example.style" in outdated format, recommend converting to YAML
 
@@ -405,6 +405,78 @@ To update your stylesheet, use the ``rst2pdf.style2yaml`` utility::
   python3 -m rst2pdf.style2yaml example.style
 
 The command also accepts a list of paths, or wildcards, and by default will output the new stylesheet(s) to stdout. To write them to files instead, use the ``--save`` flag with the command above.
+
+
+Migrating to the New Default Stylesheet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Historically (version 0.98 and earlier), rst2pdf used a different default style sheet. The updated default style file provide a more modern look to rst2pdf documents. To do this, it updates various spacing, margins and fonts. It also updates page template and font alias names and so you will need to make adjustments to derived style files.
+
+Until you make these adjustments, you can use the historical default style sheet using by adding the ``rst2pdf-0-9`` style using the ``-s`` command line switch. For example::
+
+   rst2pdf mydoc.rst -s rst2pdf-0-9,mystyle.yaml
+
+Updated Font Alias Names
+************************
+
+The font aliases used for the standard fonts have changed from those used in the historical default style sheeet. As such, you will need to update to the new names in any derivative style files.
+
+This table shows the old name and the equivalent new name:
+
++-----------------------+-------------------------+
+| Historical            | Current                 |
++=======================+=========================+
+| ``stdFont``           | ``fontSerif``           |
++-----------------------+-------------------------+
+| ``stdSerif``          | ``fontSerif``           |
++-----------------------+-------------------------+
+| ``stdBold``           | ``fontSerifBold``       |
++-----------------------+-------------------------+
+| ``stdBoldItalic``     | ``fontSerifBoldItalic`` |
++-----------------------+-------------------------+
+| ``stdItalic``         | ``fontSerifItalic``     |
++-----------------------+-------------------------+
+| ``stdMono``           | ``fontMono``            |
++-----------------------+-------------------------+
+| ``stdMonoBold``       | ``fontMonoBold``        |
++-----------------------+-------------------------+
+| ``stdMonoBoldItalic`` | ``fontMonoBoldItalic``  |
++-----------------------+-------------------------+
+| ``stdMonoItalic``     | ``fontMonoItalic``      |
++-----------------------+-------------------------+
+| ``stdSans``           | ``fontSans``            |
++-----------------------+-------------------------+
+| ``stdSansBold``       | ``fontSansBold``        |
++-----------------------+-------------------------+
+| ``stdSansBoldItalic`` | ``fontSansBoldItalic``  |
++-----------------------+-------------------------+
+| ``stdSansItalic``     | ``fontSansItalic``      |
++-----------------------+-------------------------+
+
+Updated Pate Template Names
+***************************
+
+The page template names used in the new default style sheet are different from the historical default style sheeet. As such, you will need to update to the new names in any derivative style files.
+
+This table shows the old name and the equivalent new name:
+
++-----------------+----------------------------------------------+
+| Historical      | Current                                      |
++=================+==============================================+
+| –               | ``mainPage``                                 |
++-----------------+----------------------------------------------+
+| ``cutePage``    | ``decoratedPage``                            |
++-----------------+----------------------------------------------+
+| ``emptyPage``   | ``emptyPage``                                |
++-----------------+----------------------------------------------+
+| ``oneColumn``   | ``oneColumn``                                |
++-----------------+----------------------------------------------+
+| ``twoColumn``   | Move to separate ``twocolumn`` template file |
++-----------------+----------------------------------------------+
+| ``threeColumn`` | –                                            |
++-----------------+----------------------------------------------+
+
+Note that ``firstTemplate`` is now ``mainPage``. Historically, it was ``oneColumn``.
 
 
 Creating Stylesheets
