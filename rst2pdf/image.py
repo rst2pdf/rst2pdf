@@ -97,6 +97,9 @@ class MyImage(Flowable):
         assert client is not None
         self.__kind = kind
 
+        # Maximum page height is used when resizing in wrap() as we can't render an image across a page boundary
+        self.max_page_height = 999999
+
         if filename.split("://")[0].lower() in ('http', 'ftp', 'https'):
             try:
                 filename2, _ = urlretrieve(filename)
@@ -391,6 +394,10 @@ class MyImage(Flowable):
         return copy(self)
 
     def wrap(self, availWidth, availHeight):
+        if self.max_page_height < availHeight:
+            # We can't render an image across a page boundary, so this is the tallest we can be
+            availHeight = self.max_page_height
+
         if self.__kind == 'percentage_of_container':
             w, h = self.__width, self.__height
             if not w:
