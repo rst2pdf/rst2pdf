@@ -135,6 +135,28 @@ will mark the test as skipped when the test suite runs. This could be useful
 for inherited tests that we aren't confident of the correct output for, but
 where we don't want to delete/lose the test entirely.
 
+Updating dependencies
+*********************
+
+The specific versions of all dependencies that are used for CI testing are stored in ``requirements.3.6.txt`` for
+Python 3.6 and ``requirements.3.7.txt`` for Python 3.7+.
+
+To update:
+
+1. Change to a venv that has Python 3.6 installed and run::
+
+      pip install pip-tools
+      pip-compile --extra=aafiguresupport --extra=mathsupport --extra=plantumlsupport \
+        --extra=rawhtmlsupport --extra=sphinx --extra=svgsupport --extra=tests \
+        --output-file requirements.3.6.txt setup.py
+
+2. Change to a venv that has Python 3.7 installed and run::
+
+      pip install pip-tools
+      pip-compile --extra=aafiguresupport --extra=mathsupport --extra=plantumlsupport \
+        --extra=rawhtmlsupport --extra=sphinx --extra=svgsupport --extra=tests \
+        --output-file requirements.3.7.txt setup.py
+
 Tips and Tricks
 ===============
 

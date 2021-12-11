@@ -33,17 +33,18 @@ setup(
         'jinja2',
         'packaging',
         'pygments',
+        'pyyaml',
         'reportlab',
         'smartypants',
-        'pyyaml',
     ],
     extras_require={
-        'tests': ['pyPdf2', 'pymupdf'],
-        'sphinx': ['sphinx'],
-        'svgsupport': ['svglib'],
-        'aafiguresupport': ['aafigure>=0.4'],
+        'aafiguresupport': ['aafigure'],
         'mathsupport': ['matplotlib'],
+        'plantumlsupport': ['plantuml'],
         'rawhtmlsupport': ['xhtml2pdf'],
+        'sphinx': ['sphinx==1.8.5'],
+        'svgsupport': ['svglib'],
+        'tests': ['pymupdf', 'pytest'],
     },
     # metadata for upload to PyPI
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
