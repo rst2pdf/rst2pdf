@@ -50,8 +50,8 @@ styles:
   code:
     allowOrphans: false
     allowWidows: false
-    backColor: '#EEFFCC'
-    borderColor: '#AACC99'
+    backColor: null
+    borderColor: null
     borderPadding:
     - 6
     - 0

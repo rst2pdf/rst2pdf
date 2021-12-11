@@ -69,6 +69,9 @@ class StyleSheet(object):
 
     def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
         log.info('Using stylesheets: %s' % ','.join(flist))
+
+        self.suppress_undefined_style_warning = False
+
         # find base path
         if hasattr(sys, 'frozen'):
             self.PATH = os.path.abspath(os.path.dirname(sys.executable))
@@ -531,19 +534,29 @@ class StyleSheet(object):
         if key in self.StyleSheet:
             return self.StyleSheet[key]
         else:
-            if key.startswith('pygments'):
-                log.info(
-                    "Using undefined style '%s'" ", aliased to style 'code'." % key
-                )
-                newst = copy(self.StyleSheet['code'])
+            # Sphinx 4 doesn't prepend "pygments-" to its style names when using pygments,
+            # so look to see if we have a pygemts style for this style name
+            pygments_key = "pygments-" + key
+            if pygments_key in self.StyleSheet:
+                return self.StyleSheet[pygments_key]
             else:
-                log.warning(
-                    "Using undefined style '%s'" ", aliased to style 'normal'." % key
-                )
-                newst = copy(self.StyleSheet['normal'])
-            newst.name = key
-            self.StyleSheet.add(newst)
-            return newst
+                if key.startswith('pygments'):
+                    if not self.suppress_undefined_style_warning:
+                        log.info(
+                            "Using undefined style '%s'"
+                            ", aliased to style 'code'." % key
+                        )
+                    newst = copy(self.StyleSheet['code'])
+                else:
+                    if not self.suppress_undefined_style_warning:
+                        log.warning(
+                            "Using undefined style '%s'"
+                            ", aliased to style 'normal'." % key
+                        )
+                    newst = copy(self.StyleSheet['normal'])
+                newst.name = key
+                self.StyleSheet.add(newst)
+                return newst
 
     def readSheets(self, flist):
         """Read in the stylesheets.  Return a list of

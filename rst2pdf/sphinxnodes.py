@@ -147,7 +147,11 @@ class HandleSphinxCentered(SphinxHandler, sphinx.addnodes.centered):
 
 class HandleSphinxDesc(SphinxHandler, sphinx.addnodes.desc):
     def gather_elements(self, client, node, style):
+        # Most node['desctype'] do not have a style attached and the default of "normal"
+        # is acceptable, so suppress the warning as it's irrelevant in this situation
+        client.styles.suppress_undefined_style_warning = True
         st = client.styles[node['desctype']]
+        client.styles.suppress_undefined_style_warning = False
         if st == client.styles['normal']:
             st = copy(client.styles['desc'])
             st.spaceBefore = 0
@@ -166,6 +170,11 @@ class HandleSphinxDescSignature(SphinxHandler, sphinx.addnodes.desc_signature):
                 pre += '<a name="%s" />' % i
                 client.targets.append(i)
         return [Paragraph(pre + client.gather_pdftext(node), style)]
+
+
+class HandleSphinxDescSignatureLine(SphinxHandler, sphinx.addnodes.desc_signature_line):
+    def gather_elements(self, client, node, style):
+        pass
 
 
 class HandleSphinxDescContent(SphinxHandler, sphinx.addnodes.desc_content):

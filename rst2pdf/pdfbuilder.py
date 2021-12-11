@@ -36,7 +36,7 @@ from sphinx.builders import Builder
 from sphinx.environment.adapters.indexentries import IndexEntries
 from sphinx.locale import _
 from sphinx.transforms import SphinxTransform
-from sphinx.util.console import darkgreen, red
+from sphinx.util.console import darkgreen, red  # type: ignore
 from sphinx.util import SEP
 
 import rst2pdf
@@ -161,7 +161,7 @@ class PDFBuilder(Builder):
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
         if not preliminary_document_data:
-            self.warn(
+            self.sphinx_logger.warning(
                 'no "pdf_documents" config value found; no documents ' 'will be written'
             )
             return
@@ -170,7 +170,7 @@ class PDFBuilder(Builder):
         for entry in preliminary_document_data:
             docname = entry[0]
             if docname not in self.env.all_docs:
-                self.warn(
+                self.sphinx_logger.warning(
                     '"pdf_documents" config value references unknown '
                     'document %s' % docname
                 )
@@ -201,7 +201,7 @@ class PDFBuilder(Builder):
                         )
                         self.docnames.add(includefile)
                     except Exception:
-                        self.warn(
+                        self.sphinx_logger.warning(
                             '%s: toctree contains ref to nonexisting file %r'
                             % (docname, includefile)
                         )
@@ -228,17 +228,38 @@ class PDFBuilder(Builder):
             # ALL the documents data, not just this one.
             # So, we preserve a copy, use just what we need, then
             # restore it.
-            t = copy(self.env.indexentries)
-            try:
-                self.env.indexentries = {
-                    docname: self.env.indexentries[docname + '-gen']
-                }
-            except KeyError:
-                self.env.indexentries = {}
-                for dname in self.docnames:
-                    self.env.indexentries[dname] = t.get(dname, [])
-            genindex = IndexEntries(self.env).create_index(self)
-            self.env.indexentries = t
+            if hasattr(self.env, 'domains') and "index" in self.env.domains:
+                # Sphinx 2.4.0+ stores the index entries in self.env.domains["index"]
+                t = copy(self.env.domains["index"].data['entries'])
+                try:
+                    self.env.domains["index"].data["entries"] = {
+                        docname: self.env.domains["index"].data['entries'][
+                            docname + '-gen'
+                        ]
+                    }
+                except KeyError:
+                    self.env.domains["index"].data["entries"] = {}
+                    for dname in self.docnames:
+                        self.env.domains["index"].data["entries"][dname] = t.get(
+                            dname, []
+                        )
+
+                genindex = IndexEntries(self.env).create_index(self)
+                self.env.domains["index"].data['entries'] = t
+            elif hasattr(self.env, 'indexentries'):
+                # Sphinx 2.3.1 or lower stores the index entries in self.env.indexentries
+                t = copy(self.env.indexentries)
+                try:
+                    self.env.indexentries = {
+                        docname: self.env.indexentries[docname + '-gen']
+                    }
+                except KeyError:
+                    self.env.indexentries = {}
+                    for dname in self.docnames:
+                        self.env.indexentries[dname] = t.get(dname, [])
+
+                genindex = IndexEntries(self.env).create_index(self)
+                self.env.indexentries = t
             # EOH (End Of Hack)
 
             if genindex:  # No point in creating empty indexes
@@ -413,7 +434,7 @@ class PDFBuilder(Builder):
             if docname not in self.env.all_docs:
                 yield docname
                 continue
-            targetname = self.env.doc2path(docname, self.outdir, self.out_suffix)
+            targetname = os.path.join(self.outdir, docname + self.out_suffix)
             try:
                 targetmtime = os.path.getmtime(targetname)
             except Exception:
