@@ -421,8 +421,8 @@ Only the settings that you want to change need to be included so for example, th
   fontsAlias:
     stdFont: Times-Roman
   styles:
-  - - normal
-    - fontSize: 14
+    normal:
+      fontSize: 14
 
 Styles in Detail
 ~~~~~~~~~~~~~~~~
