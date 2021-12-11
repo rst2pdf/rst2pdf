@@ -317,6 +317,12 @@ def autoEmbed(fname):
             variants = [fonts[x.lower()][0] for x in families[f[2]]]
     if not variants:  # Try fc-match
         variants = findTTFont(fname)
+        if variants:
+            vname = os.path.basename(variants[0])[:-4]
+            if vname != fname:
+                log.warn(
+                    "Could not find font '%s'. Substituting with %s." % (fname, vname)
+                )
     # It is a TT Font and we found it using fc-match (or found *something*)
     if variants:
         for variant in variants:

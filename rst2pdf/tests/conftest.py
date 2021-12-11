@@ -330,8 +330,28 @@ class RstItem(Item):
         with open(output_log, 'wb') as fh:
             fh.write(output)
 
+        expected_log_file = os.path.join(
+            os.path.join(INPUT_DIR, self.name + '.expected_log')
+        )
         output_file = os.path.join(OUTPUT_DIR, self.name + '.pdf')
         no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
+
+        if os.path.exists(expected_log_file):
+            # look for each line in expected_log_file within the output log
+            output_string = output.decode("utf-8")
+            with open(expected_log_file) as expected_log_file:
+                for message in expected_log_file:
+                    message = message.strip()
+                    if message and message not in output_string:
+                        self._fail(
+                            'Log message %s was not found' % message,
+                            output,
+                        )
+            if no_pdf:
+                # As we are looking for a log entry, we ignore any created pdf file if a .nopdf
+                # file exists. That is, it doesn't matter if the file was created or not.
+                return retcode, output
+
         if not os.path.exists(output_file) and not no_pdf:
             self._fail(
                 'File %r was not generated' % (os.path.relpath(output_file, ROOT_DIR),),
