@@ -57,7 +57,7 @@ def _get_pages(pdf):
     pages = []
 
     for page in pdf.pages():
-        pages.append(page.getText('blocks'))
+        pages.append(page.get_text('blocks'))
 
     return pages
 
