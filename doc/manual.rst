@@ -2038,6 +2038,9 @@ To use it in your existing Sphinx project you need to do the following:
     # Repeat table header on tables that cross a page boundary?
     pdf_repeat_table_rows = True
 
+    # Enable smart quotes (1, 2 or 3) or disable by setting to 0
+    pdf_smartquotes = 0
+
 3. (Optional) Modify your ``Makefile`` or ``make.bat`` file
 
     For ``Makefile`` (on \*nix systems)
