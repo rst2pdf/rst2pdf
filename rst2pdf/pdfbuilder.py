@@ -132,6 +132,9 @@ class PDFBuilder(Builder):
                     section_header_depth=opts.get(
                         'section_header_depth', self.config.section_header_depth
                     ),
+                    smartquotes=str(
+                        opts.get('pdf_smartquotes', self.config.pdf_smartquotes)
+                    ),
                     srcdir=self.srcdir,
                     style_path=opts.get('pdf_style_path', self.config.pdf_style_path),
                     config=self.config,
@@ -560,6 +563,7 @@ class PDFWriter(writers.Writer):
         baseurl=urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']),
         style_path=None,
         repeat_table_rows=False,
+        smartquotes='0',
         config={},
     ):
         writers.Writer.__init__(self)
@@ -588,6 +592,7 @@ class PDFWriter(writers.Writer):
         self.fit_background_mode = fit_background_mode
         self.section_header_depth = section_header_depth
         self.repeat_table_rows = repeat_table_rows
+        self.smartquotes = smartquotes
         self.baseurl = baseurl
         if hasattr(sys, 'frozen'):
             self.PATH = os.path.abspath(os.path.dirname(sys.executable))
@@ -709,6 +714,7 @@ class PDFWriter(writers.Writer):
             background_fit_mode=self.fit_background_mode,
             baseurl=self.baseurl,
             section_header_depth=self.section_header_depth,
+            smarty=self.smartquotes,
         ).createPdf(doctree=self.document, output=sio, compressed=self.compressed)
         self.output = sio.getvalue()
 
@@ -979,6 +985,7 @@ def setup(app):
     app.add_config_value('pdf_toc_depth', 9999, None)
     app.add_config_value('pdf_use_numbered_links', False, None)
     app.add_config_value('pdf_fit_background_mode', "scale", None)
+    app.add_config_value('pdf_smartquotes', 0, None)
     app.add_config_value('section_header_depth', 2, None)
     app.add_config_value(
         'pdf_baseurl', urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']), None
