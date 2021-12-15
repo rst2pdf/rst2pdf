@@ -17,3 +17,4 @@ styles:
   thin: {alignment: TA_JUSTIFY, hyphenation: true, language: es_ES, parent: bodytext,
     width: 65%}
   title: {fontName: White Rabbit, fontSize: 96}
+  mathformula: {alignment: TA_CENTER}

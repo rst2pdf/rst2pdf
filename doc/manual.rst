@@ -1777,6 +1777,8 @@ For example, here's how you use the math directive::
 
 And here's the result:
 
+.. class:: mathformula
+
 .. math::
 
    \frac{2 \pm \sqrt{7}}{3}
@@ -1788,9 +1790,8 @@ that is the job of the math *role*::
 
 Produces: This is :math:`\pi`
 
-Currently, the math role is slightly buggy, and in some cases will produce
-misaligned and generally broken output. Also, while the math directive embeds
-fonts and draws your formula as text, the math role embeds an image. That means:
+Note that while the math directive embeds fonts and draws your formula as text,
+the math role embeds an image. That means:
 
 * You can't copy the text of inline math
 
@@ -1804,25 +1805,10 @@ embedded in your PDF automatically (they are included with ``matplotlib``).
 .. _matplotlib: http://matplotlib.sf.net
 
 For an introduction to LaTeX syntax, see the "Typesetting Mathematical Formulae"
-chapter in "The Not So Short Introduction to LaTeX 2e":
-
-http://www.tex.ac.uk/tex-archive/info/lshort/english/lshort.pdf
+chapter in "The Not So Short Introduction to LaTeX 2e" at https://tobi.oetiker.ch/lshort/lshort.pdf
 
 Basically, the inline form ``$a^2$`` is similar to the math role, and the
 display form is similar to the math directive.
-
-rst2pdf doesn't support numbering equations yet.
-
-The math directive supports the following options:
-
-``:fontsize:``
-    Sets the font size used in the math directive. By default it will use the
-    paragraph's font and size.
-
-``:color:``
-    Can change the color of the math directive's output. Can take either a color
-    by name like ``red`` or a hex code like ``#4c050f``
-
 
 Hyphenation
 -----------
