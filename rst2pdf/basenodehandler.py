@@ -31,6 +31,7 @@ type of docutils node, then default processing will occur and a warning
 will be logged.
 '''
 
+from copy import copy
 import inspect
 import types
 
@@ -206,18 +207,38 @@ class NodeHandler(metaclass=MetaHelper):
     def gather_elements(self, client, node, style):
         return client.gather_elements(node, style=style)
 
+    def _get_non_default_values_from_style(self, style):
+        """Return a dictionary of all the items in the style that are changed from their default value"""
+        items = style.__dict__.copy()
+        defaults = style.defaults
+        for key in defaults.keys():
+            if defaults[key] == items[key]:
+                del items[key]
+        return items
+
     def getstyle(self, client, node, style):
         try:
             if node['classes'] and node['classes'][0]:
-                # FIXME: Supports only one class, sorry ;-)
-                if node['classes'][0] in client.styles.StyleSheet:
-                    style = client.styles[node['classes'][0]]
-                else:
-                    log.info(
-                        "Unknown class %s, ignoring. [%s]",
-                        node['classes'][0],
-                        nodeid(node),
-                    )
+                for n in range(len(node['classes'])):
+                    if node['classes'][n] in client.styles.StyleSheet:
+                        if n == 0:
+                            style = client.styles[node['classes'][n]]
+                        else:
+                            # merge the non-default properties of this style into the style we currently have
+                            style = copy(style)
+                            items = self._get_non_default_values_from_style(
+                                client.styles[node['classes'][n]]
+                            )
+                            items.pop("parent", None)
+                            name = f"{style.__dict__['name']}-{items['name']}"
+                            items['name'] = name
+                            style.__dict__.update(items)
+                    else:
+                        log.info(
+                            "Unknown class %s, ignoring. [%s]",
+                            n,
+                            nodeid(node),
+                        )
         except TypeError:  # Happens when a docutils.node.Text reaches here
             pass
 

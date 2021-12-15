@@ -1,0 +1,279 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author () /CreationDate (D:20211215154052+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20211215154052+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title (Multiple styles test) /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Length 3985
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 164.4942 0 Td (Multiple styles test) Tj T* -164.4942 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 693.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This test ensures that multiple classes can be applied to an element and that order matters.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 675.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Class definitions:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 569.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 96 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 72 36 12 re f*
+.941176 .972549 1 rg
+n 36 72 6 12 re f*
+.941176 .972549 1 rg
+n 12 60 18 12 re f*
+.941176 .972549 1 rg
+n 30 60 6 12 re f*
+.941176 .972549 1 rg
+n 24 48 54 12 re f*
+.941176 .972549 1 rg
+n 78 48 6 12 re f*
+.941176 .972549 1 rg
+n 90 48 18 12 re f*
+.941176 .972549 1 rg
+n 24 36 48 12 re f*
+.941176 .972549 1 rg
+n 72 36 6 12 re f*
+.941176 .972549 1 rg
+n 84 36 12 12 re f*
+.941176 .972549 1 rg
+n 12 24 18 12 re f*
+.941176 .972549 1 rg
+n 30 24 6 12 re f*
+.941176 .972549 1 rg
+n 24 12 54 12 re f*
+.941176 .972549 1 rg
+n 78 12 6 12 re f*
+.941176 .972549 1 rg
+n 90 12 24 12 re f*
+.941176 .972549 1 rg
+n 24 0 54 12 re f*
+.941176 .972549 1 rg
+n 78 0 6 12 re f*
+.941176 .972549 1 rg
+n 90 0 54 12 re f*
+BT 1 0 0 1 0 74 Tm 12 TL /F3 10 Tf 0 .501961 0 rg (styles) Tj /F4 10 Tf 0 0 0 rg (:) Tj  T* (  ) Tj /F3 10 Tf 0 .501961 0 rg (foo) Tj /F4 10 Tf 0 0 0 rg (:) Tj  T* (    ) Tj /F3 10 Tf 0 .501961 0 rg (textColor) Tj /F4 10 Tf 0 0 0 rg (:) Tj ( ) Tj (red) Tj  T* (    ) Tj /F3 10 Tf 0 .501961 0 rg (fontSize) Tj /F4 10 Tf 0 0 0 rg (:) Tj ( ) Tj (20) Tj  T* (  ) Tj /F3 10 Tf 0 .501961 0 rg (bar) Tj /F4 10 Tf 0 0 0 rg (:) Tj  T* (    ) Tj /F3 10 Tf 0 .501961 0 rg (textColor) Tj /F4 10 Tf 0 0 0 rg (:) Tj ( ) Tj (blue) Tj  T* (    ) Tj /F3 10 Tf 0 .501961 0 rg (alignment) Tj /F4 10 Tf 0 0 0 rg (:) Tj ( ) Tj (TA_CENTER) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 555.8236 cm
+Q
+q
+1 0 0 1 57.02362 543.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 543.8236 cm
+Q
+q
+1 0 0 1 57.02362 525.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F4 10 Tf 0 0 0 rg (..) Tj ( ) Tj (class::) Tj ( ) Tj (foo) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 501.8236 cm
+q
+1 0 0 rg
+BT 1 0 0 1 0 4 Tm /F1 20 Tf 24 TL (This is red, left aligned and large.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 495.8236 cm
+Q
+q
+1 0 0 1 57.02362 483.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 483.8236 cm
+Q
+q
+1 0 0 1 57.02362 465.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F4 10 Tf 0 0 0 rg (..) Tj ( ) Tj (class::) Tj ( ) Tj (bar) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 453.8236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 156.9692 0 Td (This is blue, centre aligned and small.) Tj T* -156.9692 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 447.8236 cm
+Q
+q
+1 0 0 1 57.02362 435.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 435.8236 cm
+Q
+q
+1 0 0 1 57.02362 417.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F4 10 Tf 0 0 0 rg (..) Tj ( ) Tj (class::) Tj ( ) Tj (foo) Tj ( ) Tj (bar) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 393.8236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 4 Tm /F1 20 Tf 24 TL 74.42417 0 Td (This is blue, centre aligned and large.) Tj T* -74.42417 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 387.8236 cm
+Q
+q
+1 0 0 1 57.02362 375.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL ( ) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 375.8236 cm
+Q
+q
+1 0 0 1 57.02362 357.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F4 10 Tf 0 0 0 rg (..) Tj ( ) Tj (class::) Tj ( ) Tj (bar) Tj ( ) Tj (foo) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 309.8236 cm
+q
+BT 1 0 0 1 0 28 Tm 20.06417 0 Td 24 TL /F1 20 Tf 1 0 0 rg (This is red, centre aligned \(as ) Tj /F4 20 Tf 0 0 0 rg (foo) Tj /F1 20 Tf 1 0 0 rg ( doesn't specify) Tj T* 132.18 0 Td (aligment\) and large.) Tj T* -152.2442 0 Td ET
+Q
+Q
+ 
+endstream
+endobj
+11 0 obj
+<<
+/Nums [ 0 12 0 R ]
+>>
+endobj
+12 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000073 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000460 00000 n 
+0000000565 00000 n 
+0000000769 00000 n 
+0000000856 00000 n 
+0000001133 00000 n 
+0000001192 00000 n 
+0000005229 00000 n 
+0000005270 00000 n 
+trailer
+<<
+/ID 
+[<acb6b3045000909311d5650b33e9c304><acb6b3045000909311d5650b33e9c304>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 13
+>>
+startxref
+5304
+%%EOF

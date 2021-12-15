@@ -249,6 +249,15 @@ You can style paragraphs with a style using the class directive::
 
   This one is not.
 
+Multiple styles can be listed and are applied in order::
+
+  .. class:: special redtext
+
+  This paragraph is special and is red.
+
+  This one is not.
+
+
 Or inline styles using custom interpreted roles::
 
    .. role:: redtext
