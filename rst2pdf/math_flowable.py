@@ -32,7 +32,7 @@ def enclose(s):
 
 
 class Math(Flowable):
-    def __init__(self, s, label=None, fontsize=12, color='black'):
+    def __init__(self, s, label=None, fontsize=12, color='black', alignment='CENTER'):
         self.s = s
         self.label = label
         self.fontsize = fontsize
@@ -46,7 +46,8 @@ class Math(Flowable):
                 " Install matplotlib."
             )
         Flowable.__init__(self)
-        self.hAlign = 'CENTER'
+
+        self.hAlign = alignment
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
@@ -63,14 +64,14 @@ class Math(Flowable):
 
     def drawOn(self, canv, x, y, _sW=0):
         if _sW and hasattr(self, 'hAlign'):
-            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+            from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
 
             a = self.hAlign
             if a in ('CENTER', 'CENTRE', TA_CENTER):
                 x = x + 0.5 * _sW
             elif a in ('RIGHT', TA_RIGHT):
                 x = x + _sW
-            elif a not in ('LEFT', TA_LEFT):
+            elif a not in ('LEFT', TA_LEFT, TA_JUSTIFY):
                 raise ValueError("Bad hAlign value " + str(a))
         height = 0
         if HAS_MATPLOTLIB:

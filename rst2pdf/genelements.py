@@ -1097,7 +1097,15 @@ class HandleAdmonition(
 class HandleMath(NodeHandler, docutils.nodes.math_block, docutils.nodes.math):
     def gather_elements(self, client, node, style):
         label = node.attributes.get('label')
-        return [Math(node.astext(), label, style.fontSize, style.textColor.rgb())]
+        return [
+            Math(
+                node.astext(),
+                label,
+                style.fontSize,
+                style.textColor.rgb(),
+                style.alignment,
+            )
+        ]
 
     def get_text(self, client, node, replaceEnt):
         # get style for current node
