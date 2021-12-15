@@ -38,7 +38,7 @@ class Math(Flowable):
         self.fontsize = fontsize
         self.color = color
         if HAS_MATPLOTLIB:
-            self.parser = mathtext.MathTextParser("Pdf")
+            self.parser = mathtext.MathTextParser("Path")
         else:
             log.error(
                 "Math support not available,"
@@ -51,20 +51,14 @@ class Math(Flowable):
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
             try:
-                (
-                    width,
-                    height,
-                    descent,
-                    glyphs,
-                    rects,
-                    used_characters,
-                ) = self.parser.parse(
+                (width, height, descent, _, _,) = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
                 return width, height
-            except Exception:
+            except Exception as e:
+                log.error(f"Math error in wrap: {e}")
                 pass
-                # FIXME: report error
+
         return 10, 10
 
     def drawOn(self, canv, x, y, _sW=0):
@@ -84,17 +78,12 @@ class Math(Flowable):
             canv.saveState()
             canv.translate(x, y)
             try:
-                (
-                    width,
-                    height,
-                    descent,
-                    glyphs,
-                    rects,
-                    used_characters,
-                ) = self.parser.parse(
+                (width, height, descent, glyphs, rects,) = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
-                for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
+
+                for font, fontsize, num, ox, oy in glyphs:
+                    fontname = font.fname
                     if fontname not in fonts:
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
@@ -108,8 +97,8 @@ class Math(Flowable):
                 canv.setDash([])
                 for ox, oy, width, height in rects:
                     canv.rect(ox, oy + 2 * height, width, height, fill=1)
-            except Exception:
-                # FIXME: report error
+            except Exception as e:
+                log.error(f"Math error: {e}")
                 col_conv = ColorConverter()
                 rgb_color = col_conv.to_rgb(self.color)
                 canv.setFillColorRGB(rgb_color[0], rgb_color[1], rgb_color[2])
@@ -127,7 +116,7 @@ class Math(Flowable):
         """Return the descent of this flowable,
         useful to align it when used inline."""
         if HAS_MATPLOTLIB:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
+            width, height, descent, glyphs, rects = self.parser.parse(
                 enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
             )
             return descent
@@ -138,59 +127,15 @@ class Math(Flowable):
 
         Required so we can put inline math in paragraphs.
         Returns the file name.
-        The file is caller's responsability.
+        The file is caller's responsibility.
 
         """
 
-        dpi = 72
-        scale = 10
-
-        try:
-            import Image
-            import ImageFont
-            import ImageDraw
-        except ImportError:
-            from PIL import (
-                Image,
-                ImageFont,
-                ImageDraw,
-            )
-
-        if not HAS_MATPLOTLIB:
-            img = Image.new('RGBA', (120, 120), (255, 255, 255, 0))
-        else:
-            width, height, descent, glyphs, rects, used_characters = self.parser.parse(
-                enclose(self.s), dpi, prop=FontProperties(size=self.fontsize)
-            )
-            img = Image.new(
-                'RGBA', (int(width * scale), int(height * scale)), (255, 255, 255, 0)
-            )
-            draw = ImageDraw.Draw(img)
-            for ox, oy, fontname, fontsize, num, symbol_name in glyphs:
-                font = ImageFont.truetype(fontname, int(fontsize * scale))
-                tw, th = draw.textsize(chr(num), font=font)
-                # No, I don't understand why that 4 is there.
-                # As we used to say in the pure math
-                # department, that was a numerical solution.
-                col_conv = ColorConverter()
-                fc = col_conv.to_rgb(self.color)
-                rgb_color = (int(fc[0] * 255), int(fc[1] * 255), int(fc[2] * 255))
-                draw.text(
-                    (ox * scale, (height - oy - fontsize + 4) * scale),
-                    chr(num),
-                    font=font,
-                    fill=rgb_color,
-                )
-            for ox, oy, w, h in rects:
-                x1 = ox * scale
-                x2 = x1 + w * scale
-                y1 = (height - oy) * scale
-                y2 = y1 + h * scale
-                draw.rectangle([x1, y1, x2, y2], (0, 0, 0))
+        s = enclose(self.s)
 
         fh, fn = tempfile.mkstemp(suffix=".png")
         os.close(fh)
-        img.save(fn)
+        mathtext.math_to_image(s, fn, prop=None, dpi=None, format='png')
         return fn
 
 
