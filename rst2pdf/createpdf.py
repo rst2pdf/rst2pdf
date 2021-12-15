@@ -543,7 +543,12 @@ class RstToPdf(object):
                         settings_overrides=settings_overrides,
                     )
                     log.debug(self.doctree)
-                except Exception:
+                except Exception as e:
+                    if log.isEnabledFor(logging.INFO):
+                        # Log exception with traceback if more detailed logging has been set
+                        log.exception('Error generating doctree')
+                    else:
+                        log.error(f"Error generating doctree: {e}")
                     log.error("Cannot generate PDF, exiting")
                     return 1
             else:
