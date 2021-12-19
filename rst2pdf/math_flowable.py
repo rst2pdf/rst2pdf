@@ -54,6 +54,9 @@ class Math(Flowable):
                 " Install matplotlib."
             )
 
+        if "\n" in s:
+            log.error("rst2pdf's math directive does not support multiple lines'")
+
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
             try:
