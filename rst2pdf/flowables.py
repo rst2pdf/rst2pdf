@@ -109,6 +109,7 @@ class Heading(Paragraph):
         parent_id=None,
         node=None,
         section_header_depth=2,
+        toc_depth=9999,
     ):
         # Issue 114: need to convert "&amp;" to "&" and such.
         # Issue 140: need to make it plain text
@@ -119,6 +120,7 @@ class Heading(Paragraph):
         self.parent_id = parent_id
         self.node = node
         self.section_header_depth = section_header_depth
+        self.toc_depth = toc_depth
         Paragraph.__init__(self, text, style, bulletText)
 
     def draw(self):
@@ -133,7 +135,14 @@ class Heading(Paragraph):
                 self.canv.sectNum = self.snum
             else:
                 self.canv.sectNum = ""
-        self.canv.addOutlineEntry(self.stext, self.parent_id, int(self.level), False)
+
+        # Close entry if it's below the toc depth
+        # (we add 1 to self.level as it's zero-indexed, but toc_depth is one-indexed.)
+        closed = None
+        if (self.level + 1) >= self.toc_depth:
+            closed = True
+
+        self.canv.addOutlineEntry(self.stext, self.parent_id, int(self.level), closed)
         Paragraph.draw(self)
 
 

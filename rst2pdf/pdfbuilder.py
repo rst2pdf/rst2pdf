@@ -714,6 +714,7 @@ class PDFWriter(writers.Writer):
             background_fit_mode=self.fit_background_mode,
             baseurl=self.baseurl,
             section_header_depth=self.section_header_depth,
+            toc_depth=self.toc_depth,
             smarty=self.smartquotes,
         ).createPdf(doctree=self.document, output=sio, compressed=self.compressed)
         self.output = sio.getvalue()
