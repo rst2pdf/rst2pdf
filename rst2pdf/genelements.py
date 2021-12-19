@@ -1101,24 +1101,16 @@ class HandleMath(NodeHandler, docutils.nodes.math_block, docutils.nodes.math):
             Math(
                 node.astext(),
                 label,
-                style.fontSize,
-                style.textColor.rgb(),
-                style.alignment,
+                style,
             )
         ]
 
     def get_text(self, client, node, replaceEnt):
+        """Generate an image of the math equation for the inline role usage"""
         # get style for current node
-        sty = client.styles.styleForNode(node)
-        node_fontsize = sty.fontSize
-        node_color = '#' + sty.textColor.hexval()[2:]
+        style = client.styles.styleForNode(node)
         label = node.attributes.get('label')
-        mf = Math(
-            node.astext(),
-            label=label,
-            fontsize=node_fontsize,
-            color=node_color,
-        )
+        mf = Math(node.astext(), label, style)
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()

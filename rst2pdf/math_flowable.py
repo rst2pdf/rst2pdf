@@ -32,11 +32,19 @@ def enclose(s):
 
 
 class Math(Flowable):
-    def __init__(self, s, label=None, fontsize=12, color='black', alignment='CENTER'):
-        self.s = s
+    def __init__(self, s, label=None, style=None):
+        Flowable.__init__(self)
+        self.s = s.strip()
         self.label = label
-        self.fontsize = fontsize
-        self.color = color
+        self.fontsize = 10
+        self.color = (0, 0, 0)
+        self.hAlign = 'LEFT'
+        if style:
+            self.style = style
+            self.fontsize = style.fontSize
+            self.color = style.textColor.rgb()
+            self.hAlign = style.alignment
+
         if HAS_MATPLOTLIB:
             self.parser = mathtext.MathTextParser("Path")
         else:
@@ -45,9 +53,6 @@ class Math(Flowable):
                 " some parts of this document will be rendered incorrectly."
                 " Install matplotlib."
             )
-        Flowable.__init__(self)
-
-        self.hAlign = alignment
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
@@ -55,7 +60,7 @@ class Math(Flowable):
                 (width, height, descent, _, _,) = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
-                return width, height
+                return width, height + descent
             except Exception as e:
                 log.error(f"Math error in wrap: {e}")
                 pass
@@ -77,11 +82,11 @@ class Math(Flowable):
         if HAS_MATPLOTLIB:
             global fonts
             canv.saveState()
-            canv.translate(x, y)
             try:
                 (width, height, descent, glyphs, rects,) = self.parser.parse(
                     enclose(self.s), 72, prop=FontProperties(size=self.fontsize)
                 )
+                canv.translate(x, y + descent)
 
                 for font, fontsize, num, ox, oy in glyphs:
                     fontname = font.fname
@@ -97,9 +102,11 @@ class Math(Flowable):
                 canv.setLineWidth(0)
                 canv.setDash([])
                 for ox, oy, width, height in rects:
-                    canv.rect(ox, oy + 2 * height, width, height, fill=1)
+                    canv.rect(ox, oy + height, width, height, fill=1)
             except Exception as e:
                 log.error(f"Math error: {e}")
+                log.exception("Math error!")
+                canv.translate(x, y)
                 col_conv = ColorConverter()
                 rgb_color = col_conv.to_rgb(self.color)
                 canv.setFillColorRGB(rgb_color[0], rgb_color[1], rgb_color[2])
@@ -107,6 +114,7 @@ class Math(Flowable):
             canv.restoreState()
         else:
             canv.saveState()
+            canv.translate(x, y)
             canv.drawString(x, y, self.s)
             canv.restoreState()
         if self.label:
