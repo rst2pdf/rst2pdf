@@ -15,7 +15,7 @@ from .log import log
 try:
     from matplotlib import mathtext
     from matplotlib.font_manager import FontProperties
-    from matplotlib.colors import ColorConverter
+    from matplotlib.colors import to_rgb
 
     HAS_MATPLOTLIB = True
 except ImportError:
@@ -97,8 +97,7 @@ class Math(Flowable):
                         fonts[fontname] = fontname
                         pdfmetrics.registerFont(TTFont(fontname, fontname))
                     canv.setFont(fontname, fontsize)
-                    col_conv = ColorConverter()
-                    rgb_color = col_conv.to_rgb(self.color)
+                    rgb_color = to_rgb(self.color)
                     canv.setFillColorRGB(rgb_color[0], rgb_color[1], rgb_color[2])
                     canv.drawString(ox, oy, chr(num))
 
@@ -110,8 +109,7 @@ class Math(Flowable):
                 log.error(f"Math error: {e}")
                 log.exception("Math error!")
                 canv.translate(x, y)
-                col_conv = ColorConverter()
-                rgb_color = col_conv.to_rgb(self.color)
+                rgb_color = to_rgb(self.color)
                 canv.setFillColorRGB(rgb_color[0], rgb_color[1], rgb_color[2])
                 canv.drawString(0, 0, self.s)
             canv.restoreState()
@@ -143,11 +141,55 @@ class Math(Flowable):
 
         """
 
-        s = enclose(self.s)
+        dpi = 72
+        scale = 72
+
+        try:
+            import Image
+            import ImageFont
+            import ImageDraw
+        except ImportError:
+            from PIL import (
+                Image,
+                ImageFont,
+                ImageDraw,
+            )
+
+        if not HAS_MATPLOTLIB:
+            img = Image.new('RGBA', (120, 120), (255, 255, 255, 0))
+        else:
+            (width, height, descent, glyphs, rects,) = self.parser.parse(
+                enclose(self.s), dpi, prop=FontProperties(size=self.fontsize)
+            )
+            img = Image.new(
+                'RGBA',
+                (int(width * scale), int((height + descent) * scale)),
+                (255, 255, 255, 0),
+            )
+            log.critical(f"descent = {descent}")
+            draw = ImageDraw.Draw(img)
+            for font, fontsize, num, ox, oy in glyphs:
+                fontname = font.fname
+                image_font = ImageFont.truetype(fontname, int(fontsize * scale))
+                log.critical(f"chr(num) = {chr(num)}")
+                fc = to_rgb(self.color)
+                rgb_color = (int(fc[0] * 255), int(fc[1] * 255), int(fc[2] * 255))
+                draw.text(
+                    (ox * scale, (height + 1 - oy - fontsize) * scale),
+                    chr(num),
+                    font=image_font,
+                    fill=rgb_color,
+                )
+            for ox, oy, w, h in rects:
+                x1 = ox * scale
+                x2 = x1 + w * scale
+                y1 = (height - 1 - oy) * scale
+                y2 = y1 + (h * scale)
+                draw.rectangle([x1, y1, x2, y2], (0, 0, 0))
 
         fh, fn = tempfile.mkstemp(suffix=".png")
         os.close(fh)
-        mathtext.math_to_image(s, fn, prop=None, dpi=None, format='png')
+        img.save(fn)
         return fn
 
 

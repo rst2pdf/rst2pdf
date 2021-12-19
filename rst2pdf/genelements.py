@@ -1111,6 +1111,7 @@ class HandleMath(NodeHandler, docutils.nodes.math_block, docutils.nodes.math):
         style = client.styles.styleForNode(node)
         label = node.attributes.get('label')
         mf = Math(node.astext(), label, style)
+        mf.fontsize = style.fontSize * 0.95
         w, h = mf.wrap(0, 0)
         descent = mf.descent()
         img = mf.genImage()
