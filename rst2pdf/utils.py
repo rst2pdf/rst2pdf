@@ -18,7 +18,7 @@ def parseRaw(data, node):
 
     Supported (can add others on request):
 
-    * PageBreak
+    * PageBreak [<template name>] [background={img_filename.jpg}] [background_fit_mode={mode (e.g. stretch)}]
     * EvenPageBreak
     * OddPageBreak
     * FrameBreak
@@ -37,7 +37,7 @@ def parseRaw(data, node):
     elements = []
     lines = data.splitlines()
     for line in lines:
-        lexer = shlex.shlex(line)
+        lexer = shlex.shlex(line, punctuation_chars=True)
         lexer.whitespace += ','
         tokens = list(lexer)
         if not tokens:
@@ -47,17 +47,17 @@ def parseRaw(data, node):
             if len(tokens) == 1:
                 elements.append(flowables.MyPageBreak())
             else:
-                elements.append(flowables.MyPageBreak(tokens[1]))
+                elements.append(flowables.MyPageBreak(tokens[1:]))
         elif command == 'EvenPageBreak':
             if len(tokens) == 1:
                 elements.append(flowables.MyPageBreak(breakTo='even'))
             else:
-                elements.append(flowables.MyPageBreak(tokens[1], breakTo='even'))
+                elements.append(flowables.MyPageBreak(tokens[1:], breakTo='even'))
         elif command == 'OddPageBreak':
             if len(tokens) == 1:
                 elements.append(flowables.MyPageBreak(breakTo='odd'))
             else:
-                elements.append(flowables.MyPageBreak(tokens[1], breakTo='odd'))
+                elements.append(flowables.MyPageBreak(tokens[1:], breakTo='odd'))
         elif command == 'FrameBreak':
             if len(tokens) == 1:
                 elements.append(CondPageBreak(99999))

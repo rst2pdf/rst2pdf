@@ -455,7 +455,7 @@ class MySpacer(Spacer):
 
 
 class MyPageBreak(FrameActionFlowable):
-    def __init__(self, templateName=None, breakTo='any'):
+    def __init__(self, args=None, templateName=None, breakTo='any'):
         """templateName switches the page template starting in the
         next page.
 
@@ -476,12 +476,38 @@ class MyPageBreak(FrameActionFlowable):
         self.breakTo = breakTo
         self.forced = False
         self.extraContent = []
+        self.background = None
+        self.background_fit_mode = None
+
+        if args:
+            # args is a set of key=value pairs, with the exception of the first one
+            # which may be the tempate name
+            for k, arg in enumerate(args):
+                parts = arg.split("=", 2)
+                if parts[0] == arg:
+                    if k == 0:
+                        self.templateName = arg
+                else:
+                    # If we recognised the key, then set the appropriate property to the value
+                    # for use in SetNextTemplate()
+                    key, value = parts
+                    key = key.lower()
+                    if key == 'background':
+                        self.background = value.strip('"\'')
+                    elif key == 'fit-background-mode':
+                        self.background_fit_mode = value
+                    elif key == 'template' or key == 'templatename':
+                        self.templateName = value
 
     def frameAction(self, frame):
         frame._generated_content = []
         if self.breakTo == 'any':  # Break only once. None if at top of page
             if not frame._atTop:
-                frame._generated_content.append(SetNextTemplate(self.templateName))
+                frame._generated_content.append(
+                    SetNextTemplate(
+                        self.templateName, self.background, self.background_fit_mode
+                    )
+                )
                 frame._generated_content.append(PageBreak())
         elif self.breakTo == 'odd':  # Break once if on even page, twice
             # on odd page, none if on top of odd page
@@ -518,11 +544,15 @@ class SetNextTemplate(Flowable):
 
     """
 
-    def __init__(self, templateName=None):
+    def __init__(self, templateName=None, background=None, background_fit_mode=None):
         self.templateName = templateName
+        self.background = background
+        self.background_fit_mode = background_fit_mode
         Flowable.__init__(self)
 
     def draw(self):
+        self.canv.background = self.background
+        self.canv.background_fit_mode = self.background_fit_mode
         if self.templateName:
             try:
                 self.canv.oldTemplateName = self.canv.templateName
@@ -553,6 +583,7 @@ class ResetNextTemplate(Flowable):
             self.canv.oldTemplateName,
             self.canv.templateName,
         )
+        self.canv.background = None
 
     def wrap(self, aW, aH):
         return 0, 0

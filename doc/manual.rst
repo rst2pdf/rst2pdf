@@ -1495,7 +1495,7 @@ The syntax is shell-like, here's an example::
 
     .. raw:: pdf
 
-        PageBreak
+        PageBreak background=images/background.jpg fit-background-mode=scale
 
     Another page. Now some space:
 
@@ -1564,10 +1564,18 @@ There are three kinds of page breaks:
 ``OddPageBreak``
     Break to the next **odd** numbered page
 
-Each of them can take an additional number which is the name of the next page
-template. For example::
+Each of them can take an optional argument which is the name of the next page template. For example::
 
     PageBreak twoColumn
+
+In addition, two additional attributes are supported: ``background`` and ``fit-background-mode``. These allow
+setting the background image for this page and how to fit it (One of scale, scale_width or center). For example::
+
+   PageBreak mainPage background="images/background.jpg"
+
+or::
+
+   PageBreak background=images/background.jpg fit-background-mode=scale
 
 Frame Breaks
 ~~~~~~~~~~~~
