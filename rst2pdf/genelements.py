@@ -244,6 +244,7 @@ class HandleTitle(HandleParagraph, docutils.nodes.title):
                     parent_id=parent_id,
                     node=node,
                     section_header_depth=client.section_header_depth,
+                    toc_depth=client.toc_depth,
                 )
             ]
             if client.depth <= client.breaklevel:

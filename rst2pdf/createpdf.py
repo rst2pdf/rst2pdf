@@ -110,6 +110,7 @@ import jinja2
 
 # Side effects
 from rst2pdf.directives import aafigure  # noqa
+from rst2pdf.directives import contents  # noqa
 from rst2pdf.directives import oddeven  # noqa
 from rst2pdf.roles import counter as counter_role  # noqa
 from rst2pdf.roles import package as package_role  # noqa
@@ -161,6 +162,7 @@ class RstToPdf(object):
         floating_images=False,
         numbered_links=False,
         section_header_depth=2,
+        toc_depth=0,
         raw_html=False,
         strip_elements_with_classes=[],
     ):
@@ -225,6 +227,7 @@ class RstToPdf(object):
         self.show_frame = show_frame
         self.numbered_links = numbered_links
         self.section_header_depth = section_header_depth
+        self.toc_depth = toc_depth
         self.img_dir = os.path.join(self.PATH, 'images')
         self.raw_html = raw_html
         self.strip_elements_with_classes = strip_elements_with_classes
@@ -571,6 +574,10 @@ class RstToPdf(object):
 
             sce = StripClassesAndElements(self.doctree)
             sce.apply()
+
+        if self.toc_depth == 0:
+            # use the `:depth:` option from `.. contents::`
+            self.toc_depth = contents.Contents.depth
 
         try:
             elements = self.gen_elements(self.doctree)
