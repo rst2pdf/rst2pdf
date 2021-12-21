@@ -1,21 +1,30 @@
-A simple formula:
+Math Directive Tests
+====================
+
+Test the ``math`` directive. A simple formula:
 
 .. math:: \alpha > \beta
 
-
-One with a few horizontal lines:
+One with a horizontal line:
 
 .. math::
 
    \frac{2 \pm \sqrt{7}}{3}
 
 
-Inline replacements works, too: |AA| <-- there should be an alpha + beta
+Styled version (blue, larger & centered):
 
-You can use a math role: :math:`\alpha + \beta`  but it has some problems 
-with spacing and if things are not one-line: :math:`\alpha^2`.
+.. class:: formula
 
-Don't push it, the directive just works better: :math:`\frac{2 \pm \sqrt{7}}{3}`
+.. math::
 
-.. |AA| math:: \alpha + \beta^2
+   \frac{2 \pm \sqrt{7}}{3}
 
+
+This below should go in two lines:
+
+.. math::
+
+   (a + b)^2 = a^2 + 2ab + b^2
+
+   (a - b)^2 = a^2 - 2ab + b^2

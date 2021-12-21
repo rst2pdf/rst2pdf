@@ -572,7 +572,16 @@ class RstToPdf(object):
             sce = StripClassesAndElements(self.doctree)
             sce.apply()
 
-        elements = self.gen_elements(self.doctree)
+        try:
+            elements = self.gen_elements(self.doctree)
+        except Exception as e:
+            if log.isEnabledFor(logging.INFO):
+                # Log exception with traceback if more detailed logging has been set
+                log.exception('Error generating document elements')
+            else:
+                log.error(f"Error generating document elements: {e}")
+            log.error("Cannot generate PDF, exiting")
+            return 1
 
         # Find cover template, save it in cover_file
         jinja_env = jinja2.Environment(

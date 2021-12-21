@@ -2,6 +2,6 @@ These two should produce the same output:
 
 .. default-role:: math
 
-:math:`abcdefgh`
+:math:`a^2 + b^2 = c^2`
 
-`abcdefgh`
+`a^2 + b^2 = c^2`

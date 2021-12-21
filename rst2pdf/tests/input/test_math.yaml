@@ -1,0 +1,6 @@
+---
+styles:
+   formula:
+      fontSize: 34
+      textColor: '#0000FF'
+      alignment: TA_CENTER
