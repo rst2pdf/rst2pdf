@@ -1058,7 +1058,11 @@ class FancyPage(PageTemplate):
         set the offset.
         """
         uri = self.template[which]
-        info = self.image_cache.get(uri)
+        background_fit_mode = self.client.background_fit_mode
+        if 'background_fit_mode' in self.template:
+            background_fit_mode = self.template['background_fit_mode']
+
+        info = self.image_cache.get(f"{uri}{background_fit_mode}")
         if info is None:
             fname, _, _ = MyImage.split_uri(uri)
             if not os.path.exists(fname):
@@ -1081,20 +1085,18 @@ class FancyPage(PageTemplate):
                 )
 
             pw, ph = self.styles.pw, self.styles.ph
-            if self.client.background_fit_mode == 'center':
+            if background_fit_mode == 'center':
                 scale = min(1.0, 1.0 * pw / w, 1.0 * ph / h)
                 sw, sh = w * scale, h * scale
                 x, y = (pw - sw) / 2.0, (ph - sh) / 2.0
-            elif self.client.background_fit_mode == 'scale':
+            elif background_fit_mode == 'scale':
                 x, y = 0, 0
                 sw, sh = pw, ph
-            elif self.client.background_fit_mode == 'scale_width':
+            elif background_fit_mode == 'scale_width':
                 x, y = 0, 0
                 sw, sh = pw, h
             else:
-                log.error(
-                    'Unknown background fit mode: %s' % self.client.background_fit_mode
-                )
+                log.error('Unknown background fit mode: %s' % background_fit_mode)
                 # Do scale anyway
                 x, y = 0, 0
                 sw, sh = pw, ph
@@ -1125,6 +1127,7 @@ class FancyPage(PageTemplate):
 
         styles = self.styles
         self.tw = styles.pw - styles.lm - styles.rm - styles.gm
+
         # What page template to use?
         tname = canv.__dict__.get('templateName', self.styles.firstTemplate)
         if tname not in self.styles.pageTemplates:
@@ -1132,6 +1135,15 @@ class FancyPage(PageTemplate):
             sys.exit(1)
         self.template = self.styles.pageTemplates[tname]
         canv.templateName = tname
+
+        # Any background with fit mode?
+        background = canv.__dict__.get('background', None)
+        if background:
+            self.template = self.template.copy()
+            self.template['background'] = background
+            background_fit_mode = canv.__dict__.get('background_fit_mode', None)
+            if background_fit_mode:
+                self.template['background_fit_mode'] = background_fit_mode
 
         doct = getattr(canv, '_doctemplate', None)
         canv._doctemplate = None  # to make _listWrapOn work
