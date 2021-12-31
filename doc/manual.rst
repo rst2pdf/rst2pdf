@@ -241,6 +241,12 @@ In general, applying a stylesheet to a structured document will output a decent 
 Applying Styles
 ~~~~~~~~~~~~~~~
 
+rst2pdf applies a default set of styles to the document. This default set can be viewed using ``rst2pdf --print-stylesheet`` which prints outh ``rst2pdf/styles/styles.yaml``.
+
+Each subsequent style within each style sheet file specified the ``--stylesheets`` CLI parameter is then registered in the the list of known styles known to rst2pdf. If the name of the style is already known, then the attributes specified in the style are applied "on top" of the already registered style.
+
+rst2pdf will then resolve the ``parent`` style, which is why the order of inclusion matters per-style-name, not globally. That is, if you set the color of ``bodytext`` first in a file and then set the color of ``normal`` in a subsequent file, then the color you have set for ``bodytext`` will be the color used for paragraphs (unless overridden by a ``class`` directive. Further information on cereating stylesheet files is available in `Creating Stylesheets`_.
+
 You can style paragraphs with a style using the class directive::
 
   .. class:: special
