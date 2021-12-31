@@ -1,0 +1,8 @@
+styles:
+  foo:
+    textColor: red
+    fontSize: 20
+  bar:
+    textColor: blue
+    alignment: TA_CENTER
+
