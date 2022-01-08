@@ -1,0 +1,337 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 13 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Outlines 9 0 R /PageLabels 14 0 R /PageMode /UseNone /Pages 12 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title (Test of multiple stylesheet files) /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 2 /First 10 0 R /Last 11 0 R /Type /Outlines
+>>
+endobj
+10 0 obj
+<<
+/Dest [ 6 0 R /XYZ 57.02362 362.2236 0 ] /Next 11 0 R /Parent 9 0 R /Title (Page orientation)
+>>
+endobj
+11 0 obj
+<<
+/Dest [ 6 0 R /XYZ 57.02362 311.2236 0 ] /Parent 9 0 R /Prev 10 0 R /Title (Colours)
+>>
+endobj
+12 0 obj
+<<
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+13 0 obj
+<<
+/Length 5885
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 115.0642 0 Td (Test of multiple stylesheet files) Tj T* -115.0642 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 693.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 1 rg (This test ensures that multiple style files are applied as we expect.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 675.0236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This CLI is used:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 641.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 24 re B*
+Q
+q
+1 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (-s a4-landscape,a4,green_text.yaml,blue_text.yaml,red_text.yaml) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 621.8236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (green_text.yaml:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 552.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 60 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 36 18 12 re f*
+.941176 .972549 1 rg
+n 0 24 36 12 re f*
+.941176 .972549 1 rg
+n 36 24 6 12 re f*
+.941176 .972549 1 rg
+n 12 12 48 12 re f*
+.941176 .972549 1 rg
+n 60 12 6 12 re f*
+.941176 .972549 1 rg
+n 24 0 54 12 re f*
+.941176 .972549 1 rg
+n 78 0 6 12 re f*
+.941176 .972549 1 rg
+n 90 0 30 12 re f*
+BT 1 0 0 1 0 38 Tm 12 TL /F4 10 Tf 0 0 1 rg (---) Tj /F3 10 Tf 1 0 0 rg  T* /F4 10 Tf 0 .501961 0 rg (styles) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (  ) Tj /F4 10 Tf 0 .501961 0 rg (bodytext) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (    ) Tj /F4 10 Tf 0 .501961 0 rg (textColor) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg ( ) Tj (green) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 532.6236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (blue_text.yaml:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 463.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 60 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 36 18 12 re f*
+.941176 .972549 1 rg
+n 0 24 36 12 re f*
+.941176 .972549 1 rg
+n 36 24 6 12 re f*
+.941176 .972549 1 rg
+n 12 12 48 12 re f*
+.941176 .972549 1 rg
+n 60 12 6 12 re f*
+.941176 .972549 1 rg
+n 24 0 54 12 re f*
+.941176 .972549 1 rg
+n 78 0 6 12 re f*
+.941176 .972549 1 rg
+n 90 0 24 12 re f*
+BT 1 0 0 1 0 38 Tm 12 TL /F4 10 Tf 0 0 1 rg (---) Tj /F3 10 Tf 1 0 0 rg  T* /F4 10 Tf 0 .501961 0 rg (styles) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (  ) Tj /F4 10 Tf 0 .501961 0 rg (bodytext) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (    ) Tj /F4 10 Tf 0 .501961 0 rg (textColor) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg ( ) Tj (blue) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 443.4236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (red_text.yaml:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 374.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 60 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 36 18 12 re f*
+.941176 .972549 1 rg
+n 0 24 36 12 re f*
+.941176 .972549 1 rg
+n 36 24 6 12 re f*
+.941176 .972549 1 rg
+n 12 12 36 12 re f*
+.941176 .972549 1 rg
+n 48 12 6 12 re f*
+.941176 .972549 1 rg
+n 24 0 54 12 re f*
+.941176 .972549 1 rg
+n 78 0 6 12 re f*
+.941176 .972549 1 rg
+n 90 0 18 12 re f*
+BT 1 0 0 1 0 38 Tm 12 TL /F4 10 Tf 0 0 1 rg (---) Tj /F3 10 Tf 1 0 0 rg  T* /F4 10 Tf 0 .501961 0 rg (styles) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (  ) Tj /F4 10 Tf 0 .501961 0 rg (normal) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg  T* (    ) Tj /F4 10 Tf 0 .501961 0 rg (textColor) Tj /F3 10 Tf 0 0 0 rg (:) Tj 1 0 0 rg ( ) Tj (red) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 341.2236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Page orientation) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 323.2236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 1 rg (The order of ) Tj /F3 10 Tf 1 0 0 rg (a4-landscape) Tj /F1 10 Tf 0 0 1 rg ( and then ) Tj /F3 10 Tf 1 0 0 rg (a4) Tj /F1 10 Tf 0 0 1 rg ( means that the final page size set will be A4 portrait.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 290.2236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Colours) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 272.2236 cm
+q
+0 0 1 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The paragraph text is blue.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 230.2236 cm
+q
+BT 1 0 0 1 0 26 Tm -0.108333 Tw 12 TL /F1 10 Tf 0 0 1 rg (This is because even though ) Tj /F3 10 Tf 1 0 0 rg (red_text.yaml) Tj /F1 10 Tf 0 0 1 rg ( is applied last, it is setting the text colour of ) Tj /F3 10 Tf 1 0 0 rg (normal) Tj /F1 10 Tf 0 0 1 rg (, whereas) Tj T* 0 Tw .290522 Tw /F3 10 Tf 1 0 0 rg (blue_text.yaml) Tj /F1 10 Tf 0 0 1 rg ( sets the text colour of ) Tj /F3 10 Tf 1 0 0 rg (bodytext) Tj /F1 10 Tf 0 0 1 rg (. As ) Tj /F3 10 Tf 1 0 0 rg (bodytext) Tj /F1 10 Tf 0 0 1 rg ( has a ) Tj /F3 10 Tf 1 0 0 rg (parent) Tj /F1 10 Tf 0 0 1 rg ( of ) Tj /F3 10 Tf 1 0 0 rg (normal) Tj /F1 10 Tf 0 0 1 rg (, then the last) Tj T* 0 Tw (file \(left to right\) that sets the ) Tj /F3 10 Tf 1 0 0 rg (bodytext) Tj /F1 10 Tf 0 0 1 rg ( style, so the specification in ) Tj /F3 10 Tf 1 0 0 rg (green_text.yaml) Tj /F1 10 Tf 0 0 1 rg ( is ignored.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 224.2236 cm
+Q
+q
+1 0 0 1 57.02362 212.2236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 1 rg (Note that all ) Tj /F3 10 Tf 1 0 0 rg (literal) Tj /F1 10 Tf 0 0 1 rg ( elements are red as ) Tj /F3 10 Tf 1 0 0 rg (literal) Tj /F1 10 Tf 0 0 1 rg ( has a parent of ) Tj /F3 10 Tf 1 0 0 rg (normal) Tj /F1 10 Tf 0 0 1 rg ( which is now red.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 188.2236 cm
+q
+BT 1 0 0 1 0 14 Tm .13213 Tw 12 TL /F1 10 Tf 0 0 1 rg (Also, all headings are black as their parent is ) Tj /F3 10 Tf 1 0 0 rg (heading) Tj /F1 10 Tf 0 0 1 rg ( which explicitly sets textColor to black even though it) Tj T* 0 Tw (has a parent of ) Tj /F3 10 Tf 1 0 0 rg (normal) Tj /F1 10 Tf 0 0 1 rg (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 188.2236 cm
+Q
+ 
+endstream
+endobj
+14 0 obj
+<<
+/Nums [ 0 15 0 R ]
+>>
+endobj
+15 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000073 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000455 00000 n 
+0000000565 00000 n 
+0000000770 00000 n 
+0000000874 00000 n 
+0000001164 00000 n 
+0000001237 00000 n 
+0000001353 00000 n 
+0000001460 00000 n 
+0000001520 00000 n 
+0000007457 00000 n 
+0000007498 00000 n 
+trailer
+<<
+/ID 
+[<ba8cbbfc3e6c2df030a527b678d0ee44><ba8cbbfc3e6c2df030a527b678d0ee44>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 16
+>>
+startxref
+7532
+%%EOF
