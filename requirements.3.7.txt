@@ -57,7 +57,7 @@ markupsafe==2.0.1
     # via jinja2
 matplotlib==3.5.1
     # via rst2pdf (setup.py)
-numpy==1.21.4
+numpy==1.21.0
     # via matplotlib
 packaging==21.3
     # via
