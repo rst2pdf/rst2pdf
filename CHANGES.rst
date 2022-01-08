@@ -2,6 +2,9 @@
 {next}
 ------
 
+0.99 (2022-01-08)
+-----------------
+
 * Added: Python 3.9 & 3.10 are now supported (PR #969, #1043)
 * Added: Sphinx 4 is now supported. (PR #1020)
 * Added: Can now set background images using ``PageBreak``. (PR #1050)
