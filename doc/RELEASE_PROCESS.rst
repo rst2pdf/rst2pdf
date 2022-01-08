@@ -4,7 +4,12 @@ Release Process for rst2pdf
 
 This is an outline of what needs to be done in order to release rst2pdf.
 
-#. Update ``CHANGES.rst``. Commit to a branch, PR and merge to master
+#. Install dependencies that you'll need
+   ::
+
+      $ pip install setuptools setuptools_scm wheel twine
+
+#. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to master
 #. Ensure all PRs are attached to the milestone
 #. Close the milestone and create next one
 #. Use changelog-generator_ (or similar) to create a changelog
@@ -102,7 +107,7 @@ It should contain the following:
 .. _rst2pdf.github.io: https://github.com/rst2pdf/rst2pdf.github.io
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
 .. _Test-PyPI: https://test.pypi.org
-.. _PyPI: https://test.pypi.org
+.. _PyPI: https://pypi.org
 
 
 Releasing as a Snap
