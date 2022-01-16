@@ -15,7 +15,9 @@
 * Changed: ``math`` directive updated to support latest matplotlib (PR #1047)
 * Changed: the ``--very-verbose`` option provides more information when things go wrong. (PR #1025)
 * Changed: The default stylesheet has been improved. Use the ``rst2pdf-0.9`` stylesheet to apply the
-  previous default as per the "Migrating to the New Default Stylesheet" section of the manual. (PR #988)
+  previous default as per the "Migrating to the New Default Stylesheet" section of the manual. Also,
+  the ``twoColumn`` style is no longer part of the default styles and is now a separate style. Add
+  ``-s twocolumn`` to apply it or, for Sphinx add ``pdf_stylesheets = ['twocolumn']`` (PR #988)
 * Changed: Stylesheets are now in YAML. Migrate to the new format using ``python -m rst2pdf.style2yaml``
   as per the "Migrating Stylesheet Format" section of the manual. (PR #956)
 * Fixed: An imagine that is too tall in a table cell is now resized to fit. (PR #1024)
