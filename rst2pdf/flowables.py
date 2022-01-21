@@ -931,6 +931,14 @@ class BoundByWidth(Flowable):
             self.content, maxWidth, None, fakeWidth=False
         )
         if self.width > maxWidth:
+            if self.mode == 'error':
+                log.error(
+                    "BoundByWidth too wide to fit in frame (%s > %s): %s",
+                    self.width,
+                    maxWidth,
+                    self.identity(),
+                )
+                sys.exit(1)
             if self.mode != 'shrink':
                 self.scale = 1.0
                 log.warning(
