@@ -87,7 +87,7 @@ pyparsing==3.0.6
     #   httplib2
     #   matplotlib
     #   packaging
-pypdf2==1.26.0
+pypdf2==1.27.5
     # via xhtml2pdf
 pytest==6.2.5
     # via rst2pdf (setup.py)
