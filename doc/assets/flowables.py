@@ -262,15 +262,18 @@ class DelayedTable(Table):
         self.t.drawOn(canvas, x, y, _sW)
 
     def identity(self, maxLen=None):
-        return "<%s at %s%s%s> containing: %s" % (
-            self.__class__.__name__,
-            hex(id(self)),
-            self._frameName(),
-            getattr(self, 'name', '')
-            and (' name="%s"' % getattr(self, 'name', ''))
-            or '',
-            repr(self.data[0]),
-        )[:180]
+        return (
+            "<%s at %s%s%s> containing: %s"
+            % (
+                self.__class__.__name__,
+                hex(id(self)),
+                self._frameName(),
+                getattr(self, 'name', '')
+                and (' name="%s"' % getattr(self, 'name', ''))
+                or '',
+                repr(self.data[0]),
+            )[:180]
+        )
 
 
 def tablepadding(padding):
