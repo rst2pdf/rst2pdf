@@ -52,7 +52,7 @@ Features
 Installation
 ------------
 
-*rst2pdf* supports Python 3.6 or greater. Version 0.97 was the last version to support Python 2.7.
+*rst2pdf* supports Python 3.7 or greater. Version 0.99 was the last version to support Python 3.6 and 0.97 was the last version to support Python 2.7.
 
 Install from PyPI
 ~~~~~~~~~~~~~~~~~

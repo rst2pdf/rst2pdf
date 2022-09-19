@@ -9,7 +9,7 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9, '3.10']
+        python-version: [3.7, 3.8, 3.9, '3.10']
         experimental: [false]
 
     steps:
@@ -26,14 +26,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install --upgrade setuptools
         pip install pytest pre-commit
-    - name: Install dependencies for Python 3.6
+    - name: Install dependencies for Python
       run: |
-        pip install -c requirements.3.6.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-      if: matrix.python-version == '3.6'
-    - name: Install dependencies for Python 3.7+
-      run: |
-        pip install -c requirements.3.7.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
-      if: matrix.python-version != '3.6'
+        pip install -c requirements.txt -e .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
     - name: Lint
       run: |
         pre-commit run --all-files --show-diff-on-failure
