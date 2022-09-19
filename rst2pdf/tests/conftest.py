@@ -83,8 +83,8 @@ def compare_pdfs(path_a, path_b):
 
     # sanity check
 
-    assert pdf_a.isPDF
-    assert pdf_b.isPDF
+    assert pdf_a.is_pdf
+    assert pdf_b.is_pdf
 
     # compare metadata
 
