@@ -5,8 +5,8 @@ __pycache__
 /htmlcov
 *.build_temp
 log.txt
-rst2pdf/tests/output/*.pdf
-rst2pdf/tests/output/*.log
+/tests/output/*.pdf
+/tests/output/*.log
 .vscode/
 .python-version
 .venv/

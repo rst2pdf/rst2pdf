@@ -13,23 +13,23 @@ If you want to do something inside rst2pdf, you are welcome! The process looks s
 
   + Create a **minimal** test case that shows the bug.
 
-  + Put it inside ``rst2pdf/tests/input`` like the others:
+  + Put it inside ``tests/input`` like the others:
 
   + Fix the bug
 
     During this process, you can run the individual test case to quickly
     iterate. For example::
 
-      pytest rst2pdf/tests/input/test_issue_NNN.txt
+      pytest tests/input/test_issue_NNN.txt
 
     You may also wish to check the logs and output::
 
-      less rst2pdf/tests/output/test_issue_NNN.log
-      xdg-open rst2pdf/tests/output/test_issue_NNN.pdf  # or 'open' on MacOS
+      less tests/output/test_issue_NNN.log
+      xdg-open tests/output/test_issue_NNN.pdf  # or 'open' on MacOS
 
   + Once resolved, copy the generated output PDF, if any, to
-    ``rst2pdf/tests/reference`` and commit this along with the files in
-    ``rst2pdf/tests/input``.
+    ``tests/reference`` and commit this along with the files in
+    ``tests/input``.
 
   + Submit a pull request.
 
@@ -79,9 +79,9 @@ There's a Travis build that runs when we open a pull request or merge to master,
 Running tests
 ~~~~~~~~~~~~~
 
-The *rst2pdf* test suite generates PDFs - stored in ``rst2pdf/tests/output`` -
+The *rst2pdf* test suite generates PDFs - stored in ``tests/output`` -
 which are then compared against reference PDFs - stored in
-``rst2pdf/tests/reference`` - using the `PyMuPDF`__ Python bindings for the
+``tests/reference`` - using the `PyMuPDF`__ Python bindings for the
 `MuPDF`__ library. *rst2pdf* depends on a number of different tools and
 libraries, such as `ReportLab`__, and the output of these can vary slightly
 between releases. The *PyMuPDF* library allows us to compare the structure
@@ -121,7 +121,7 @@ Running a single test
 
 To run one test only, simply pass the file or directory to pytest. For example::
 
-  pytest rst2pdf/tests/input/sphinx-repeat-table-rows
+  pytest tests/input/sphinx-repeat-table-rows
 
 This will run one test and show the output.
 

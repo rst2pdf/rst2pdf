@@ -42,5 +42,5 @@ jobs:
       if: failure()
       with:
         name: failed-tests
-        path: rst2pdf/tests/output
+        path: tests/output
         retention-days: 8
