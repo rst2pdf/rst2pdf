@@ -166,12 +166,10 @@ class Math(Flowable):
                 (int(width * scale), int((height + descent) * scale)),
                 (255, 255, 255, 0),
             )
-            log.critical(f"descent = {descent}")
             draw = ImageDraw.Draw(img)
             for font, fontsize, num, ox, oy in glyphs:
                 fontname = font.fname
                 image_font = ImageFont.truetype(fontname, int(fontsize * scale))
-                log.critical(f"chr(num) = {chr(num)}")
                 fc = to_rgb(self.color)
                 rgb_color = (int(fc[0] * 255), int(fc[1] * 255), int(fc[2] * 255))
                 draw.text(
