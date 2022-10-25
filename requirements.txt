@@ -86,7 +86,7 @@ pyparsing==3.0.6
     #   packaging
 pypdf2==1.27.5
     # via xhtml2pdf
-pytest==6.2.5
+pytest==7.2.0
     # via rst2pdf (setup.py)
 python-bidi==0.4.2
     # via xhtml2pdf
