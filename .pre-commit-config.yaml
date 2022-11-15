@@ -29,7 +29,7 @@ repos:
       - id: check-yaml
         files: .*\.(yaml|yml)$
       - id: check-added-large-files
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/pycqa/flake8
     rev: 3.9.2
     hooks:
       - id: flake8
