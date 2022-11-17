@@ -16,6 +16,7 @@ import tempfile
 import fitz
 from packaging import version
 import pytest
+from pathlib import Path
 
 
 ROOT_DIR = os.path.realpath(os.path.dirname(__file__))
@@ -150,8 +151,8 @@ class File(pytest.File):
     if version.parse(pytest.__version__) < version.parse('5.4.0'):
 
         @classmethod
-        def from_parent(cls, parent, fspath):
-            return cls(parent=parent, fspath=fspath)
+        def from_parent(cls, parent, path):
+            return cls(parent=parent, path=path)
 
 
 class RstFile(File):
@@ -425,9 +426,9 @@ def pytest_collect_file(parent, path):
     parent_dir = os.path.split(path.dirname)[-1]
 
     if path.ext == '.rst' and parent_dir == 'input':
-        return RstFile.from_parent(parent=parent, fspath=path)
+        return RstFile.from_parent(parent=parent, path=Path(path))
     elif path.basename == 'conf.py' and parent_dir.startswith('sphinx'):
-        return SphinxFile.from_parent(parent=parent, fspath=path)
+        return SphinxFile.from_parent(parent=parent, path=Path(path))
 
 
 collect_ignore = ['rst2pdf/tests/input/*.py']
