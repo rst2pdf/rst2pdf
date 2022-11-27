@@ -71,7 +71,7 @@ markupsafe==2.1.1
     # via jinja2
 matplotlib==3.6.2
     # via rst2pdf (setup.py)
-numpy==1.23.4
+numpy==1.23.5
     # via
     #   contourpy
     #   matplotlib
