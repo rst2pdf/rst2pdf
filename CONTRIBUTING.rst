@@ -142,7 +142,7 @@ Updating dependencies
 
 The specific versions of all dependencies that are used for CI testing are stored in ``requirements.txt``.
 
-To update, change to a venv that has Python 3.7+ installed and run::
+To update, change to a venv that has Python 3.8+ installed and run::
 
       pip install pip-tools
       pip-compile --extra=aafiguresupport --extra=mathsupport --extra=plantumlsupport \
