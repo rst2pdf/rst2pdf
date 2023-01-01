@@ -29,7 +29,7 @@ click==8.1.3
     # via pyhanko
 contourpy==1.0.6
     # via matplotlib
-cryptography==38.0.3
+cryptography==38.0.4
     # via
     #   pyhanko
     #   pyhanko-certvalidator
