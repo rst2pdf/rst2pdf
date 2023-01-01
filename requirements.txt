@@ -191,7 +191,7 @@ webencodings==0.5.1
     #   tinycss2
 xhtml2pdf==0.2.8
     # via rst2pdf (setup.py)
-zipp==3.10.0
+zipp==3.11.0
     # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
