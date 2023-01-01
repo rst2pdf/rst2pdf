@@ -182,7 +182,7 @@ tzlocal==4.2
     # via pyhanko
 uritools==4.0.0
     # via pyhanko-certvalidator
-urllib3==1.26.12
+urllib3==1.26.13
     # via requests
 webencodings==0.5.1
     # via
