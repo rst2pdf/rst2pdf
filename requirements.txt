@@ -104,7 +104,7 @@ pyhanko-certvalidator==0.19.6
     # via
     #   pyhanko
     #   xhtml2pdf
-pymupdf==1.21.0
+pymupdf==1.21.1
     # via rst2pdf (setup.py)
 pyparsing==3.0.9
     # via
