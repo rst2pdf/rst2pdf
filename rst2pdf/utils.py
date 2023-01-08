@@ -3,6 +3,7 @@
 
 import shlex
 
+import jinja2
 from reportlab.lib.colors import Color
 from reportlab.platypus.flowables import CondPageBreak
 
@@ -396,3 +397,14 @@ else:  # no xhtml2pdf
     def parseHTML(data, none):
         log.error("You need xhtml2pdf installed to use the raw HTML directive.")
         return []
+
+
+class DependencyRecordingFileSystemLoader(jinja2.FileSystemLoader):
+    def __init__(self, *args, record_dependencies=None, **kwargs):
+        self.record_dependencies = record_dependencies
+        super().__init__(*args, **kwargs)
+
+    def get_source(self, environment, template):
+        r = (_, path, _) = super().get_source(environment, template)
+        self.record_dependencies.add(path)
+        return r

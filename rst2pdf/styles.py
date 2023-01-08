@@ -67,7 +67,14 @@ class StyleSheet(object):
                 name = names.pop()
                 yield name, styles[name]
 
-    def __init__(self, flist, font_path=None, style_path=None, def_dpi=300):
+    def __init__(
+        self,
+        flist,
+        font_path=None,
+        style_path=None,
+        def_dpi=300,
+        record_dependencies=None,
+    ):
         log.info('Using stylesheets: %s' % ','.join(flist))
 
         self.suppress_undefined_style_warning = False
@@ -139,6 +146,7 @@ class StyleSheet(object):
         self.emsize = 10
 
         self.languages = []
+        self.record_dependencies = record_dependencies
 
         ssdata = self.readSheets(flist)
 
@@ -261,6 +269,8 @@ class StyleSheet(object):
                             # strip extension and leading path to get the name
                             # to register the font under
                             filename = os.path.basename(variant)
+                            if self.record_dependencies:
+                                self.record_dependencies.add(filename)
                             fontname = str(filename.split('.')[0])
                             pdfmetrics.registerFont(TTFont(fontname, location))
                             log.info(
@@ -596,6 +606,9 @@ class StyleSheet(object):
 
         fname = self.findStyle(ssname)
         if fname:
+            if self.record_dependencies:
+                self.record_dependencies.add(fname)
+
             try:
                 # TODO no longer needed when we drop support for rson
                 # Is it an older rson/json stylesheet with .style extension?
