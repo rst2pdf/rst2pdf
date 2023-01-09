@@ -179,7 +179,7 @@ tzdata==2022.7
     # via pytz-deprecation-shim
 tzlocal==4.2
     # via pyhanko
-uritools==4.0.0
+uritools==4.0.1
     # via pyhanko-certvalidator
 urllib3==1.26.13
     # via requests
