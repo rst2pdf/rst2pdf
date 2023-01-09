@@ -149,7 +149,7 @@ smartypants==2.0.1
     # via rst2pdf (setup.py)
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==5.3.0
+sphinx==6.1.2
     # via rst2pdf (setup.py)
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
