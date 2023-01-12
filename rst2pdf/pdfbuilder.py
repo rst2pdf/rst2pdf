@@ -991,7 +991,7 @@ def setup(app):
     app.add_config_value(
         'pdf_baseurl', urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']), None
     )
-    app.add_config_value('subtitle_prefix', "version", None)
+    app.add_config_value('subtitle_prefix', 'version', None)
 
     project_doc = app.config.project + ' Documentation'
     app.config.pdf_documents.append(
