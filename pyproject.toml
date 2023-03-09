@@ -1,5 +1,78 @@
+[project]
+name = "rst2pdf"
+description = "Convert reStructured Text to PDF via ReportLab."
+requires-python = ">=3.8"
+authors=[{name = "rst2pdf maintainers", email= "maintainers@rstpdf.org"}]
+license={file="LICENSE.txt"}
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Environment :: Console',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Topic :: Documentation',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Text Processing',
+    'Topic :: Utilities',
+]
+keywords = ['restructured', 'convert', 'rst', 'pdf', 'docutils', 'pygments', 'reportlab']
+dependencies = [
+    'docutils',
+    'importlib_metadata',
+    'jinja2',
+    'packaging',
+    'pygments',
+    'pyyaml',
+    'reportlab',
+    'smartypants',
+]
+dynamic = ["version", "readme"]
+
+[project.optional-dependencies]
+aafiguresupport = ['aafigure']
+mathsupport = ['matplotlib']
+plantumlsupport = ['plantuml']
+rawhtmlsupport = ['xhtml2pdf']
+sphinx = ['sphinx']
+svgsupport = ['svglib']
+tests = ['pymupdf', 'pytest']
+
+[project.urls]
+homepage = 'https://rst2pdf.org'
+source = 'https://github.com/rst2pdf/rst2pdf'
+download = 'https://github.com/rst2pdf/rst2pdf/releases'
+bug_reports = 'https://github.com/rst2pdf/rst2pdf/issues'
+changelog = 'https://github.com/rst2pdf/rst2pdf/blob/main/CHANGES.rst'
+
+[project.scripts]
+rst2pdf = 'rst2pdf.createpdf:main'
+
 [build-system]
-requires = ['setuptools', 'setuptools-scm', 'wheel']
+requires = ["setuptools>=65", "setuptools_scm[toml]>=7"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst"]}
+
+[tool.setuptools.packages.find]
+where = ["rst2pdf"]
+
+[tool.setuptools.package-data]
+"*" = [
+    'styles/*.json',
+    'styles/*.yaml',
+    'images/*png',
+    'images/*jpg',
+    'templates/*tmpl'
+]
+
+[tool.setuptools.exclude-package-data]
+rst2pdf = ['ez_setup', 'examples', 'tests']
 
 [tool.black]
 line-length = 88
@@ -18,3 +91,57 @@ exclude = '''
   | tests/input
 )
 '''
+
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    minversion = 3.1
+    envlist = py37,docs,style
+    ignore_basepython_conflict = true
+
+    [testenv]
+    basepython = python3
+    usedevelop = true
+    description =
+      Run unit tests against {envname}.
+    deps =
+      -r requirements.txt
+      pytest
+      pytest-cov
+      pytest-xdist
+      pymupdf
+      coverage
+    commands =
+      pytest -n auto {posargs}
+
+    [testenv:coverage]
+    description =
+      Generate coverage data.
+    commands =
+      pytest -n auto --cov {posargs}
+      coverage html
+
+    [testenv:docs]
+    description =
+      Build documentation.
+    changedir =
+      {toxinidir}/doc
+    whitelist_externals =
+      cp
+    deps =
+      -r requirements.txt
+    commands =
+      rst2pdf manual.rst --custom-cover=assets/cover.tmpl -o output/manual.pdf -s assets/manual.style -b1
+      rst2man.py rst2pdf.rst output/rst2pdf.1
+      python rst2html-manual.py --stylesheet=assets/manual.css manual.rst output/manual.html
+      cp assets/biohazard.png output/html/assets/
+
+    [testenv:style]
+    description =
+      Run style checks.
+    deps =
+      flake8
+    commands =
+      flake8 doc rst2pdf pyproject.toml
+
+"""
