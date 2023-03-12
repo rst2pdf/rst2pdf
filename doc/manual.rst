@@ -2015,9 +2015,9 @@ To use it in your existing Sphinx project you need to do the following:
 
     # Name of the cover page template to use
     # pdf_cover_template = 'sphinxcover.tmpl'
-	
-	# Label to use as a prefix for the subtitle on the cover page
-	# subtitle_prefix = 'version'
+
+    # Label to use as a prefix for the subtitle on the cover page
+    # subtitle_prefix = 'version'
 
     # Documents to append as an appendix to all manuals.
     # pdf_appendices = []
