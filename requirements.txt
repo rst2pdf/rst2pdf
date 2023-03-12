@@ -45,7 +45,7 @@ exceptiongroup==1.1.0
     # via pytest
 fonttools==4.38.0
     # via matplotlib
-future==0.18.2
+future==0.18.3
     # via arabic-reshaper
 html5lib==1.1
     # via xhtml2pdf
