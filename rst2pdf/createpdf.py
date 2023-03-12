@@ -54,6 +54,7 @@ import docutils.nodes
 from docutils.parsers.rst import directives
 from docutils.readers import standalone
 from docutils.transforms import Transform
+from docutils.utils import DependencyList
 
 try:
     from roman import toRoman
@@ -83,6 +84,7 @@ from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.tables import TableStyle
 
 from . import config
+from .utils import DependencyRecordingFileSystemLoader
 
 from rst2pdf.directives import code_block
 from rst2pdf import flowables
@@ -165,6 +167,7 @@ class RstToPdf(object):
         toc_depth=0,
         raw_html=False,
         strip_elements_with_classes=[],
+        record_dependencies=None,
     ):
         self.debugLinesPdf = False
         self.depth = 0
@@ -197,6 +200,7 @@ class RstToPdf(object):
         self.font_path = font_path
         self.style_path = style_path
         self.def_dpi = def_dpi
+        self.record_dependencies = DependencyList(record_dependencies)
         self.loadStyles(stylesheets)
 
         self.docutils_languages = {}
@@ -271,7 +275,11 @@ class RstToPdf(object):
             styleSheets = []
 
         self.styles = sty.StyleSheet(
-            styleSheets, self.font_path, self.style_path, def_dpi=self.def_dpi
+            styleSheets,
+            self.font_path,
+            self.style_path,
+            def_dpi=self.def_dpi,
+            record_dependencies=self.record_dependencies,
         )
 
     def style_language(self, style):
@@ -560,6 +568,9 @@ class RstToPdf(object):
         else:
             self.doctree = doctree
 
+        for dep in self.doctree.settings.record_dependencies.list:
+            self.record_dependencies.add(dep)
+
         if self.numbered_links:
             # Transform all links to sections so they show numbers
             from .sectnumlinks import SectNumFolder, SectRefExpander
@@ -592,12 +603,13 @@ class RstToPdf(object):
 
         # Find cover template, save it in cover_file
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(
+            loader=DependencyRecordingFileSystemLoader(
                 [
                     self.basedir,
                     os.path.expanduser('~/.rst2pdf'),
                     os.path.join(self.PATH, 'templates'),
-                ]
+                ],
+                record_dependencies=self.record_dependencies,
             ),
             autoescape=jinja2.select_autoescape(['html', 'xml']),
         )
@@ -1622,6 +1634,14 @@ def parse_commandline():
         help='Remove elements with this CLASS from the output. Can be used multiple times.',
     )
 
+    parser.add_option(
+        '--record-dependencies',
+        dest='record_dependencies',
+        metavar='FILE',
+        default=False,
+        help='Write output file dependencies to FILE',
+    )
+
     return parser
 
 
@@ -1785,6 +1805,7 @@ def main(_args=None):
         raw_html=options.raw_html,
         section_header_depth=int(options.section_header_depth),
         strip_elements_with_classes=options.strip_elements_with_classes,
+        record_dependencies=options.record_dependencies,
     ).createPdf(
         text=options.infile.read(),
         source_path=options.infile.name,

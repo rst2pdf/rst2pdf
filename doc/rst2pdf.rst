@@ -170,6 +170,9 @@ The possible values are:
                       Remove elements with this CLASS from the output. Can
                       be used multiple times.
 
+--record-dependencies=FILE
+                      Write output file dependencies to FILE.
+
 
 EXAMPLES
 --------
