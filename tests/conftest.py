@@ -431,4 +431,4 @@ def pytest_collect_file(parent, path):
         return SphinxFile.from_parent(parent=parent, path=Path(path))
 
 
-collect_ignore = ['rst2pdf/tests/input/*.py']
+collect_ignore = ['tests/input/*.py']

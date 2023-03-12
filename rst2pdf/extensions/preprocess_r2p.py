@@ -7,7 +7,7 @@
 preprocess is a rst2pdf extension module (invoked by ``-e preprocess``
 on the rst2pdf command line).
 
-There is a testcase for this file at rst2pdf/tests/test_preprocess.txt
+There is a testcase for this file at tests/test_preprocess.txt
 
 This preprocesses the source text file before handing it to docutils.
 

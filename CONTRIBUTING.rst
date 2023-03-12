@@ -40,7 +40,7 @@ Project Structure
 
 The code for the project is in ``rst2pdf`` inside the main project directory.
 
-Tests are in ``rst2pdf/tests`` directory. Within this folder:
+Tests are in ``tests`` directory. Within this folder:
 
 * ``input`` holds the instructions for running a test.
 
@@ -83,9 +83,9 @@ Please run the tests :) They also run automatically along with some style checki
 Context
 *******
 
-The *rst2pdf* test suite generates PDFs - stored in ``rst2pdf/tests/output`` -
+The *rst2pdf* test suite generates PDFs - stored in ``tests/output`` -
 which are then compared against reference PDFs - stored in
-``rst2pdf/tests/reference`` - using the `PyMuPDF`__ Python bindings for the
+``tests/reference`` - using the `PyMuPDF`__ Python bindings for the
 `MuPDF`__ library. *rst2pdf* depends on a number of different tools and
 libraries, such as `ReportLab`__, and the output of these can vary slightly
 between releases. The *PyMuPDF* library allows us to compare the structure
@@ -124,7 +124,7 @@ Running a single test
 
 To run one test only, pass the file or directory to pytest. For example::
 
-  pytest rst2pdf/tests/input/sphinx-repeat-table-rows
+  pytest tests/input/sphinx-repeat-table-rows
 
 This will run one test and show the output.
 

@@ -11,21 +11,21 @@ repos:
       - id: black
         # NOTE(stephenfin): This is needed until the fix for
         # https://github.com/psf/black/issues/438 is released
-        exclude: rst2pdf/tests/input
+        exclude: tests/input
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.2.0
     hooks:
       - id: trailing-whitespace
-        exclude: rst2pdf/tests/input
+        exclude: tests/input
       - id: mixed-line-ending
         args: ['--fix', 'lf']
-        exclude: rst2pdf/tests/input
+        exclude: tests/input
       - id: check-byte-order-marker
       - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: rst2pdf/tests/input
+        exclude: tests/input
       - id: check-yaml
         files: .*\.(yaml|yml)$
       - id: check-added-large-files
@@ -35,4 +35,4 @@ repos:
       - id: flake8
         # NOTE(stephenfin): This is needed until the fix for
         # https://github.com/psf/black/issues/438 is released
-        exclude: rst2pdf/tests/input
+        exclude: tests/input

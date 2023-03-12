@@ -15,6 +15,6 @@ exclude = '''
     | build
     | dist
   )/
-  | rst2pdf/tests/input
+  | tests/input
 )
 '''
