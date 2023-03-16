@@ -41,9 +41,9 @@ docutils==0.19
     # via
     #   rst2pdf (setup.py)
     #   sphinx
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
     # via pytest
-fonttools==4.39.0
+fonttools==4.39.2
     # via matplotlib
 html5lib==1.1
     # via xhtml2pdf
