@@ -83,7 +83,7 @@ endobj
 endobj
 15 0 obj
 <<
-/Length 8024
+/Length 7780
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -777,32 +777,61 @@ q
 1 0 0 1 23 27.15748 cm
 Q
 q
-1 0 0 1 23 -2.84252 cm
+1 0 0 1 23 9.15748 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 6 15 cm
+1 0 0 1 6 3 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL 8 0 Td (\177) Tj T* -8 0 Td ET
 Q
 Q
 q
-1 0 0 1 23 15 cm
+1 0 0 1 23 3 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (baz11) Tj T* ET
 Q
 Q
 q
-1 0 0 1 23 9 cm
-Q
-q
-1 0 0 1 23 9 cm
+1 0 0 1 23 -3 cm
 Q
 q
 1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+Q
+q
+Q
+Q
+Q
+ 
+endstream
+endobj
+16 0 obj
+<<
+/Length 1640
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 681.0236 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 71 Tm  T* ET
+q
+1 0 0 1 23 51 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 17 Tm  T* ET
+q
+1 0 0 1 23 15 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
@@ -824,35 +853,6 @@ q
 Q
 Q
 Q
-q
-Q
-Q
-Q
-q
-Q
-Q
-Q
- 
-endstream
-endobj
-16 0 obj
-<<
-/Length 1396
->>
-stream
-1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
-q
-1 0 0 1 57.02362 693.0236 cm
-q
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-BT 1 0 0 1 6 59 Tm  T* ET
-q
-1 0 0 1 23 51 cm
-q
-0 0 0 rg
-BT /F1 10 Tf 12 TL ET
-BT 1 0 0 1 6 5 Tm  T* ET
 q
 1 0 0 1 23 9 cm
 Q
@@ -978,7 +978,7 @@ Q
 Q
 Q
 q
-1 0 0 1 57.02362 693.0236 cm
+1 0 0 1 57.02362 681.0236 cm
 Q
  
 endstream
@@ -1016,7 +1016,7 @@ xref
 0000001640 00000 n 
 0000001745 00000 n 
 0000001811 00000 n 
-0000009887 00000 n 
+0000009643 00000 n 
 0000011335 00000 n 
 0000011385 00000 n 
 0000011419 00000 n 

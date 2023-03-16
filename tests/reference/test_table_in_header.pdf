@@ -58,27 +58,27 @@ endobj
 endobj
 10 0 obj
 <<
-/Length 3666
+/Length 3732
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
 q
-1 0 0 1 57.02362 678.3307 cm
+1 0 0 1 57.02362 672.3307 cm
 q
 BT 1 0 0 1 0 4 Tm 141.4842 0 Td 24 TL /F2 20 Tf .133333 .133333 .133333 rg (Tables \(header & footer\)) Tj T* -141.4842 0 Td ET
 Q
 Q
 q
-1 0 0 1 57.02362 618.3307 cm
+1 0 0 1 57.02362 612.3307 cm
 q
 BT 1 0 0 1 0 14 Tm .076917 Tw 12 TL /F1 10 Tf 0 0 0 rg (If this has worked, then the table in the header & footer should have the same number of rows and columsns) Tj T* 0 Tw (as the table below) Tj T* ET
 Q
 Q
 q
-1 0 0 1 57.02362 612.3307 cm
+1 0 0 1 57.02362 606.3307 cm
 Q
 q
-1 0 0 1 57.02362 549.6378 cm
+1 0 0 1 57.02362 543.6378 cm
 q
 1 1 1 rg
 n 0 62.69291 481.2283 -20.89764 re f*
@@ -139,10 +139,13 @@ Q
 Q
 Q
 q
-1 0 0 1 57.02362 549.6378 cm
+1 0 0 1 57.02362 543.6378 cm
 Q
 q
-1 0 0 1 51.02362 722.5039 cm
+1 0 0 1 51.02362 779.1969 cm
+Q
+q
+1 0 0 1 51.02362 716.5039 cm
 q
 1 1 1 rg
 n 0 62.69291 493.2283 -20.89764 re f*
@@ -201,6 +204,9 @@ n 0 0 m 0 62.69291 l S
 n 493.2283 0 m 493.2283 62.69291 l S
 Q
 Q
+Q
+q
+1 0 0 1 51.02362 105.2126 cm
 Q
 q
 1 0 0 1 51.02362 42.51969 cm
@@ -289,8 +295,8 @@ xref
 0000001436 00000 n 
 0000001719 00000 n 
 0000001778 00000 n 
-0000005496 00000 n 
-0000005537 00000 n 
+0000005562 00000 n 
+0000005603 00000 n 
 trailer
 <<
 /ID 
@@ -302,5 +308,5 @@ trailer
 /Size 13
 >>
 startxref
-5571
+5637
 %%EOF
