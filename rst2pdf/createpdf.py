@@ -200,7 +200,10 @@ class RstToPdf(object):
         self.font_path = font_path
         self.style_path = style_path
         self.def_dpi = def_dpi
-        self.record_dependencies = DependencyList(record_dependencies)
+        if record_dependencies is not None:
+            self.record_dependencies = DependencyList(record_dependencies)
+        else:
+            self.record_dependencies = None
         self.loadStyles(stylesheets)
 
         self.docutils_languages = {}
@@ -568,8 +571,9 @@ class RstToPdf(object):
         else:
             self.doctree = doctree
 
-        for dep in self.doctree.settings.record_dependencies.list:
-            self.record_dependencies.add(dep)
+        if self.record_dependencies is not None:
+            for dep in self.doctree.settings.record_dependencies.list:
+                self.record_dependencies.add(dep)
 
         if self.numbered_links:
             # Transform all links to sections so they show numbers

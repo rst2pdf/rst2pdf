@@ -406,5 +406,6 @@ class DependencyRecordingFileSystemLoader(jinja2.FileSystemLoader):
 
     def get_source(self, environment, template):
         r = (_, path, _) = super().get_source(environment, template)
-        self.record_dependencies.add(path)
+        if self.record_dependencies is not None:
+            self.record_dependencies.add(path)
         return r
