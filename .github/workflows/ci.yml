@@ -10,7 +10,10 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10']
-        experimental: [true]
+        experimental: [false]
+        include:
+          - python-version: '3.11'
+            experimental: true
 
     steps:
     - uses: actions/checkout@v2
