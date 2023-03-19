@@ -2,6 +2,10 @@
 {next}
 ------
 
+* Updated tests to use ReportLab 3.6.12. Note that ReportLab 3.6.5 introduced some layout changes in rst2pdf's output.
+  We have noticed that header/footer spacing is different, the space before nested bullets is bigger than before and
+  that some fully-justified text paragraphs now wrap differently.
+
 0.99 (2022-01-08)
 -----------------
 
