@@ -2,9 +2,19 @@
 {next}
 ------
 
-* Updated tests to use ReportLab 3.6.12. Note that ReportLab 3.6.5 introduced some layout changes in rst2pdf's output.
-  We have noticed that header/footer spacing is different, the space before nested bullets is bigger than before and
-  that some fully-justified text paragraphs now wrap differently.
+
+0.100 (2023-03-20)
+------------------
+
+* Added: New command line option ``--record-dependencies`` to write out the list of files that were
+  used to create the PDF.(PR #1111)
+* Added: Python 3.11 is now experimentally supported. Please report any issues found. (PR #1133)
+* Changed: Updated tests to use ReportLab 3.6.12. Note that ReportLab 3.6.5 introduced some layout
+  changes in rst2pdf's output. We have noticed that header/footer spacing is different, the space
+  before nested bullets is bigger than before and that some fully-justified text paragraphs now
+  wrap differently. (PR #1110)
+* Fixed: The ``twoColumn`` style has been reinstated as its used with Sphinx. (PR #1126)
+
 
 0.99 (2022-01-08)
 -----------------
