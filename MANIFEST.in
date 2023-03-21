@@ -1,0 +1,11 @@
+prune */__pycache__
+prune *.egg-info
+prune rst2pdf/examples
+prune rst2pdf/tests
+prune rst2pdf/ezsetup
+prune snap
+prune doc
+prune .*
+exclude .*
+exclude *.md
+exclude *.txt

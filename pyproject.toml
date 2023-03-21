@@ -71,9 +71,6 @@ where = ["rst2pdf"]
     'templates/*tmpl'
 ]
 
-[tool.setuptools.exclude-package-data]
-rst2pdf = ['ez_setup', 'examples', 'tests']
-
 [tool.black]
 line-length = 88
 target-version = ['py36']
@@ -91,6 +88,9 @@ exclude = '''
   | tests/input
 )
 '''
+
+[tool.pytest.ini_options]
+testpaths = ["rst2pdf/tests"]
 
 [tool.tox]
 legacy_tox_ini = """
