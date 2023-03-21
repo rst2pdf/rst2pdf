@@ -1,8 +1,6 @@
 prune */__pycache__
 prune *.egg-info
-prune rst2pdf/examples
-prune rst2pdf/tests
-prune rst2pdf/ezsetup
+prune tests
 prune snap
 prune doc
 prune .*

@@ -60,7 +60,7 @@ build-backend = "setuptools.build_meta"
 readme = {file = ["README.rst"]}
 
 [tool.setuptools.packages.find]
-where = ["rst2pdf"]
+include = ["rst2pdf"]
 
 [tool.setuptools.package-data]
 "*" = [
@@ -90,7 +90,7 @@ exclude = '''
 '''
 
 [tool.pytest.ini_options]
-testpaths = ["rst2pdf/tests"]
+testpaths = ["tests"]
 
 [tool.tox]
 legacy_tox_ini = """
