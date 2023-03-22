@@ -47,7 +47,7 @@ fonttools==4.39.2
     # via matplotlib
 html5lib==1.1
     # via xhtml2pdf
-httplib2==0.21.0
+httplib2==0.22.0
     # via plantuml
 idna==3.4
     # via requests
