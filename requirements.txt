@@ -173,7 +173,7 @@ tomli==2.0.1
     # via pytest
 typing-extensions==4.5.0
     # via qrcode
-tzdata==2022.7
+tzdata==2023.2
     # via pytz-deprecation-shim
 tzlocal==4.2
     # via pyhanko
