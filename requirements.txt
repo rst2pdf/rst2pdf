@@ -108,7 +108,7 @@ pyparsing==3.0.9
     # via
     #   httplib2
     #   matplotlib
-pypdf==3.5.2
+pypdf==3.7.0
     # via xhtml2pdf
 pypng==0.20220715.0
     # via qrcode
