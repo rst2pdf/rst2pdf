@@ -303,7 +303,7 @@ class RstItem(Item):
                 else:
                     os.remove(path)
 
-        cmd = ['rst2pdf', '--date-invariant', '-v', input_ref]
+        cmd = ['rst2pdf', '--lang', 'en', '--date-invariant', '-v', input_ref]
 
         cli_file = os.path.join(INPUT_DIR, self.name + '.cli')
         if os.path.exists(cli_file):
