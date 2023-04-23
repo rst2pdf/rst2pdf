@@ -12,6 +12,12 @@ This is an outline of what needs to be done in order to release rst2pdf.
 #. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to master
 #. Ensure all PRs are attached to the milestone
 #. Close the milestone and create next one
+#. Checkout main and ensure that your working copy is clean
+
+   ::
+
+      $ git checkout main
+
 #. Use changelog-generator_ (or similar) to create a changelog
 
    ::
@@ -27,9 +33,14 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Build manual
 
+   You will need the `White Rabbit`_ font installed. We check out the tag first so that the version
+   on the first page of the PDF is labelled as final and then generate the HTMl and PDF docs.
+
    ::
 
+     $ git checkout 0.94
      $ cd doc; ./gen_docs.sh
+     $ git checkout main
 
    Add subject and author to manual PDF's meta data using ExifTool_
 
@@ -41,7 +52,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
    and upload to HTML and PDF to the website
    via a PR on the rst2pdf.github.io_ repo.
 
-#. Update Releases section on GitHub project and paste in changelog
+#. Update Releases_ section on GitHub project and paste in changelog
 #. Create rc distribution package
 
     ::
@@ -63,9 +74,9 @@ This is an outline of what needs to be done in order to release rst2pdf.
     ::
 
        $ pip install --index-url https://test.pypi.org/simple \
-         --extra-index-url https://pypi.org/simple rst2pdf
+         --extra-index-url https://pypi.org/simple --pre rst2pdf
 
-    It should install and be able to create PDF documents from rst files
+    It should install the rc release on Test PyPI and be able to create PDF documents from rst files
 
     Delete the build artifacts and dist files with:
 
@@ -103,9 +114,11 @@ It should contain the following:
    username: {your PyPi username}
 
 
-.. _ExifTool: https://www.sno.phy.queensu.ca/~phil/exiftool/
-.. _rst2pdf.github.io: https://github.com/rst2pdf/rst2pdf.github.io
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
+.. _White Rabbit:: https://squaregear.net/fonts/whitrabt.html
+.. _ExifTool: https://www.sno.phy.queensu.ca/~phil/exiftool/
+.. _Releases: https://github.com/rst2pdf/rst2pdf/releases
+.. _rst2pdf.github.io: https://github.com/rst2pdf/rst2pdf.github.io
 .. _Test-PyPI: https://test.pypi.org
 .. _PyPI: https://pypi.org
 
