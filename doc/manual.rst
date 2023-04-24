@@ -506,7 +506,7 @@ Only the settings that you want to change need to be included so for example, th
   pageSetup:
     size: A5
   fontsAlias:
-    stdFont: Times-Roman
+    fontSerif: Times-Roman
   styles:
     normal:
       fontSize: 14
@@ -935,10 +935,10 @@ This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
 fonts::
 
   fontsAlias:
-    stdFont: Helvetica
-    stdBold: Helvetica-Bold
-    stdItalic: Helvetica-Oblique
-    stdBoldItalic: Helvetica-BoldOblique
+    fontSerif: Helvetica
+    fontSerifBold: Helvetica-Bold
+    fontSerifItalic: Helvetica-Oblique
+    fontSerifBoldItalic: Helvetica-BoldOblique
     fontMono: Courier
 
 This defines the fonts used in the styles. You can use, for example, Helvetica
@@ -1470,10 +1470,10 @@ If you want to use this as the base font for your document, you should change
 the ``fontsAlias`` section accordingly. For example::
 
   fontsAlias:
-    stdFont: Tuffy
-    stdBold: Tuffy_Bold
-    stdItalic: Tuffy_Italic
-    stdBoldItalic: Tuffy_Bold_Italic
+    fontSans: Tuffy
+    fontSansBoldfontSansBold: Tuffy_Bold
+    fontSansItalic: Tuffy_Italic
+    fontSansBoldItalic: Tuffy_Bold_Italic
     fontMono: Courier
 
 If, on the other hand, you only want a specific style to use the Tuffy font,
