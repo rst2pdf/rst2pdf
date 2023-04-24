@@ -649,7 +649,7 @@ class RstToPdf(object):
                 t_style = TableStyle(self.styles['endnote'].commands)
                 colWidths = self.styles['endnote'].colWidths
                 elements.append(
-                    DelayedTable([[n[0], n[1]]], style=t_style, colWidths=colWidths)
+                    DelayedTable([[n[0], n[1]]], colWidths=colWidths, style=t_style)
                 )
 
         if self.floating_images:

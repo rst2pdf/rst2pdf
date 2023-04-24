@@ -300,8 +300,8 @@ class HandleField(NodeHandler, docutils.nodes.field):
         return [
             DelayedTable(
                 [[fn, fb]],
-                style=t_style,
                 colWidths=client.styles['field-list'].colWidths,
+                style=t_style,
             )
         ]
 
@@ -380,7 +380,7 @@ class HandleAuthors(NodeHandler, docutils.nodes.authors):
                 client.gather_elements(node, style=style),
             ]
         ]
-        return [DelayedTable(td, style=t_style, colWidths=colWidths)]
+        return [DelayedTable(td, colWidths=colWidths, style=t_style)]
 
 
 class HandleFList(NodeHandler):
@@ -579,8 +579,8 @@ class HandleOptionListItem(NodeHandler, docutils.nodes.option_list_item):
         node.elements = [
             DelayedTable(
                 [[client.PreformattedFit(optext, client.styles["literal"]), desc]],
-                style=t_style,
                 colWidths=colWidths,
+                style=t_style,
             )
         ]
         return node.elements
@@ -690,8 +690,8 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
                 MySpacer(0, sb),
                 SplitTable(
                     [[Paragraph(b, style=bStyle), el]],
-                    style=t_style,
                     colWidths=colWidths,
+                    style=t_style,
                 ),
             ]
         else:
@@ -699,8 +699,8 @@ class HandleListItem(NodeHandler, docutils.nodes.list_item):
                 MySpacer(0, sb),
                 DelayedTable(
                     [[Paragraph(b, style=bStyle), el]],
-                    style=t_style,
                     colWidths=colWidths,
+                    style=t_style,
                 ),
             ]
         return node.elements
@@ -845,7 +845,7 @@ class HandleFigure(NodeHandler, docutils.nodes.figure):
         cw = [w]
         sub_elems = client.gather_elements(node, style=None)
         t_style = TableStyle(cmd)
-        table = DelayedTable([[e] for e in sub_elems], style=t_style, colWidths=cw)
+        table = DelayedTable([[e] for e in sub_elems], colWidths=cw, style=t_style)
         table.hAlign = node.get('align', 'CENTER').upper()
         return [
             MySpacer(0, style.spaceBefore),
@@ -920,7 +920,7 @@ class HandleTBody(NodeHandler, docutils.nodes.tbody):
             t.append(r)
         t_style = TableStyle(client.styles['table'].commands)
         colWidths = client.styles['table'].colWidths
-        return [DelayedTable(t, style=t_style, colWidths=colWidths)]
+        return [DelayedTable(t, colWidths=colWidths, style=t_style)]
 
 
 class HandleFootnote(NodeHandler, docutils.nodes.footnote, docutils.nodes.citation):
@@ -969,7 +969,7 @@ class HandleFootnote(NodeHandler, docutils.nodes.footnote, docutils.nodes.citati
             colWidths = client.styles['endnote'].colWidths
             node.elements = [
                 MySpacer(0, st.spaceBefore),
-                DelayedTable([[label, contents]], style=t_style, colWidths=colWidths),
+                DelayedTable([[label, contents]], colWidths=colWidths, style=t_style),
                 MySpacer(0, st.spaceAfter),
             ]
             if client.real_footnotes:
@@ -1075,8 +1075,8 @@ class HandleAdmonition(
                 MySpacer(0, st.spaceBefore),
                 SplitTable(
                     [['', rows]],
-                    style=t_style,
                     colWidths=[0, None],
+                    style=t_style,
                     padding=st.borderPadding,
                 ),
                 MySpacer(0, st.spaceAfter),
@@ -1089,7 +1089,7 @@ class HandleAdmonition(
             t_style.add(*p4)
             node.elements = [
                 MySpacer(0, st.spaceBefore),
-                DelayedTable([['', rows]], style=t_style, colWidths=[0, None]),
+                DelayedTable([['', rows]], colWidths=[0, None], style=t_style),
                 MySpacer(0, st.spaceAfter),
             ]
         return node.elements
