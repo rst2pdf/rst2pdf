@@ -175,7 +175,7 @@ typing-extensions==4.5.0
     # via qrcode
 tzdata==2022.7
     # via pytz-deprecation-shim
-tzlocal==4.2
+tzlocal==5.0.1
     # via pyhanko
 uritools==4.0.1
     # via pyhanko-certvalidator
