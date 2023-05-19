@@ -272,23 +272,28 @@ def code_block_directive(
         if hl_lines and lineno not in hl_lines:
             cls = "diml"
         if withln and "\n" in value:
-            linenumber_cls = 'linenumber'
-            if (
-                hl_lines and (lineno + 1) not in hl_lines
-            ):  # use lineno+1 as we're on the previous line when we render the next line number
-                linenumber_cls = 'pygments-diml'
             # Split on the "\n"s
             values = value.split("\n")
             # The first piece, pass as-is
-            code_block += nodes.Text(values[0], values[0])
+            c = ''
+            if cls != '':
+                c = 'pygments-diml'
+            code_block += nodes.inline(values[0], values[0], classes=[c])
+
             # On the second and later pieces, insert \n and linenos
             linenos = range(lineno, lineno + len(values))
             for chunk, ln in list(zip(values, linenos))[1:]:
                 if ln <= total_lines:
+                    linenumber_cls = 'linenumber'
+                    c = ''
+                    if hl_lines and (ln) not in hl_lines:
+                        linenumber_cls = 'pygments-diml'
+                        c = 'pygments-diml'
+
                     code_block += nodes.inline(
                         fstr % ln, fstr % ln, classes=[linenumber_cls]
                     )
-                    code_block += nodes.Text(chunk, chunk)
+                    code_block += nodes.inline(chunk, chunk, classes=[c])
             lineno += len(values) - 1
 
         elif cls in unstyled_tokens:
