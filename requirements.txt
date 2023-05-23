@@ -133,7 +133,7 @@ reportlab==3.6.12
     #   rst2pdf (setup.py)
     #   svglib
     #   xhtml2pdf
-requests==2.28.2
+requests==2.31.0
     # via
     #   pyhanko
     #   pyhanko-certvalidator
