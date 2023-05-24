@@ -20,12 +20,12 @@ If you want to do something inside rst2pdf, you are welcome! The process looks s
     During this process, you can run the individual test case to quickly
     iterate. For example::
 
-      pytest tests/input/test_issue_NNN.txt
+      pytest tests/input/test_summary_of_test.txt
 
     You may also wish to check the logs and output::
 
-      less tests/output/test_issue_NNN.log
-      xdg-open tests/output/test_issue_NNN.pdf  # or 'open' on MacOS
+      less tests/output/test_summary_of_test.log
+      xdg-open tests/output/test_summary_of_test.pdf  # or 'open' on macOS
 
   + Once resolved, copy the generated output PDF, if any, to
     ``tests/reference`` and commit this along with the files in
@@ -41,6 +41,35 @@ If you want to do something inside rst2pdf, you are welcome! The process looks s
 
 * If you implement an extension, make the docstring valid restructured text and
   link it to the manual like the others.
+
+Initial checkout
+----------------
+
+Clone the repo from https://github.com/rst2pdf/rst2pdf, then install and
+activate a venv::
+
+    git clone https://github.com/rst2pdf/rst2pdf
+    cd rst2pdf
+    python3 -m venv .venv
+    . .venv/bin/activate
+
+Ensure that setuptools and pip are up to date::
+
+    pip install --upgrade setuptools pip
+
+Now you can install rst2pdf from this source code::
+
+    pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+
+
+Note, that on Apple Silicon Macs, you may need this to get tests passing::
+
+    pip install reportlab==3.6.12 --force-reinstall --no-cache-dir --global-option=build_ext
+
+(Look in ``requirements.txt`` for the version of reportlab to use.)
+
+You can now work on rst2pdf development. Once complete, you can deactivate the
+venv with ``deactivate``.
 
 Git config
 ~~~~~~~~~~
@@ -74,7 +103,8 @@ clear your cache before further investigation.
 Continuous Integration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-There's a Travis build that runs when we open a pull request or merge to master, it does some style checks and runs the test suite.
+There's a GitHub Actions workflow that runs when we open a pull request or
+merge to main, it does some style checks and runs the test suite.
 
 Running tests
 ~~~~~~~~~~~~~
@@ -92,29 +122,19 @@ caused by these changes in underlying dependencies.
 .. __: https://mupdf.com/
 .. __: https://www.reportlab.com/
 
-First run
-*********
+To run all the tests enable your venv first if it's not enabled and then call ``pytest``::
 
-To run the tests for the first time, you will need to do some setup (after
-this, you can just work on your given virtualenv each time)::
-
-    python -m venv env
-    . env/bin/activate
-
-    pip install pytest pytest-xdist
-    pip install -c requirements.txt .[tests,sphinx,hyphenation,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
     pytest
 
-Next runs
-*********
+You can also run tests in parallel using ``pytest-xdist`` by passing the ``-n auto`` flag.
 
-To run all tests, run::
+Firstly install::
 
-  pytest
+    pip install pytest-xdist
 
-You can also run tests in parallel by passing the ``-n auto`` flag::
+Then run the tests in parallel::
 
-  pytest -n auto
+    pytest -n auto
 
 Running a single test
 *********************
