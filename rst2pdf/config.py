@@ -28,7 +28,7 @@ class ConfigError(Exception):
         self.msg = msg
 
 
-conf = configparser.SafeConfigParser()
+conf = configparser.ConfigParser()
 
 
 def parseConfig(extracf=None):
@@ -36,7 +36,7 @@ def parseConfig(extracf=None):
     cflist = ["/etc/rst2pdf.conf", cfname]
     if extracf:
         cflist.append(extracf)
-    conf = configparser.SafeConfigParser()
+    conf = configparser.ConfigParser()
     conf.read(cflist)
 
 
