@@ -1,6 +1,3 @@
-.. image:: https://travis-ci.org/rst2pdf/rst2pdf.svg?branch=master
-    :target: https://travis-ci.org/rst2pdf/rst2pdf
-
 .. image:: https://img.shields.io/pypi/v/rst2pdf.svg
     :target: https://pypi.org/project/rst2pdf/
 
@@ -57,14 +54,14 @@ Installation
 Install from PyPI
 ~~~~~~~~~~~~~~~~~
 
-The latest released version may be installed from PyPI by using ``pip``::
+The latest released version may be installed from PyPI by using ``pipx``::
 
-    $ pip install --user rst2pdf
+    $ pipx install rst2pdf
 
 rst2pdf also has support for a number of features that require additional dependencies. Installation of all the
-required dependencies using ``pip`` may be installed using::
+required dependencies using ``pipx`` may be installed using::
 
-    $ pip install --user rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
+    $ pipx install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
 Install from Snap
 ~~~~~~~~~~~~~~~~~
@@ -83,13 +80,10 @@ can clone the repository and install this version::
 
     $ git clone https://github.com/rst2pdf/rst2pdf
     $ cd rst2pdf
-    $ git checkout <desired-branch> # if you want something other than master
-    $ pip install --user .
+    $ git checkout <desired-branch> # if you want something other than main
+    $ pipx install .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
-Note that you may need to use ``sudo python setup.py install`` or ``sudo python3 setup.py install`` in this final step, depending on your configuration.
-
-You may want to install it in a virtualenv, but that is beyond the scope
-of this readme.
+If you intend to work on rst2pdf's source code, see ``doc/DEVELOPERS.rst``.
 
 
 Usage
