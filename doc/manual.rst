@@ -506,7 +506,7 @@ Only the settings that you want to change need to be included so for example, th
   pageSetup:
     size: A5
   fontsAlias:
-    stdFont: Times-Roman
+    fontSerif: Times-Roman
   styles:
     normal:
       fontSize: 14
@@ -935,10 +935,10 @@ This is the ``fontsAlias`` element. By default, it uses some of the standard PDF
 fonts::
 
   fontsAlias:
-    stdFont: Helvetica
-    stdBold: Helvetica-Bold
-    stdItalic: Helvetica-Oblique
-    stdBoldItalic: Helvetica-BoldOblique
+    fontSerif: Helvetica
+    fontSerifBold: Helvetica-Bold
+    fontSerifItalic: Helvetica-Oblique
+    fontSerifBoldItalic: Helvetica-BoldOblique
     fontMono: Courier
 
 This defines the fonts used in the styles. You can use, for example, Helvetica
@@ -1436,18 +1436,15 @@ are not using any font beyond the standard PDF fonts::
 
   embeddedFonts: []
 
-You can put there the name of the font, and rst2pdf will try to embed it as
-described above. Example::
+The `embeddedFonts` element is a list of the font files that you want to embed
+into your PDF document. For each font, you provide the filenames of the four
+variants of the file (normal, bold, italic, bold italic).
 
-  embeddedFonts: [Tuffy]
+For example, suppose you want to use the nice public domain `Tuffy font`_, then
+you need to give the filenames of all variants::
 
-Or you can be explicit and tell rst2pdf the files that contain each variant of
-the font.
-
-Suppose you want to use the nice public domain `Tuffy font`_, then you need to
-give the filenames of all variants::
-
-  embeddedFonts: [Tuffy.ttf, Tuffy_Bold.ttf, Tuffy_Italic.ttf, Tuffy_Bold_Italic.ttf]
+  embeddedFonts:
+    - [Tuffy.ttf, Tuffy_Bold.ttf, Tuffy_Italic.ttf, Tuffy_Bold_Italic.ttf]
 
 This will provide your styles with fonts called ``Tuffy``, ``Tuffy_Bold`` and so
 on.  They will be available with the names based on the filenames
@@ -1456,12 +1453,14 @@ PDF fonts (``Tuffy-Bold``, ``Tuffy-Oblique``, ``Tuffy-BoldOblique``, etc..)
 
 Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it
 will use ``Tuffy_Italic``. That's why it's better if you use fonts that provide
-the four variants, and you should put them in **that** order. If your font lacks
-a variant, use the "normal" variant instead.
+the four variants, and that you lsit them in the correct order.
+
+If your font lacks a variant, use the "normal" variant instead.
 
 For example, if you only had ``Tuffy.ttf``::
 
-  embeddedFonts: [Tuffy.ttf, Tuffy.ttf, Tuffy.ttf, Tuffy.ttf]
+  embeddedFonts:
+    - [Tuffy.ttf, Tuffy.ttf, Tuffy.ttf, Tuffy.ttf]
 
 However, that means that italics and bold in styles using Tuffy will not work
 correctly (they will display as regular text).
@@ -1470,10 +1469,10 @@ If you want to use this as the base font for your document, you should change
 the ``fontsAlias`` section accordingly. For example::
 
   fontsAlias:
-    stdFont: Tuffy
-    stdBold: Tuffy_Bold
-    stdItalic: Tuffy_Italic
-    stdBoldItalic: Tuffy_Bold_Italic
+    fontSans: Tuffy
+    fontSansBoldfontSansBold: Tuffy_Bold
+    fontSansItalic: Tuffy_Italic
+    fontSansBoldItalic: Tuffy_Bold_Italic
     fontMono: Courier
 
 If, on the other hand, you only want a specific style to use the Tuffy font,
