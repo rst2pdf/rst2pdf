@@ -1,3 +1,9 @@
-include README.rst
-include LICENSE.txt
-include CHANGES.rst
+prune */__pycache__
+prune *.egg-info
+prune tests
+prune snap
+prune doc
+prune .*
+exclude .*
+exclude *.md
+exclude *.txt
