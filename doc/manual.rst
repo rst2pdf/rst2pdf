@@ -1453,7 +1453,7 @@ PDF fonts (``Tuffy-Bold``, ``Tuffy-Oblique``, ``Tuffy-BoldOblique``, etc..)
 
 Now, if you use *italics* in a paragraph whose style uses the Tuffy font, it
 will use ``Tuffy_Italic``. That's why it's better if you use fonts that provide
-the four variants, and that you lsit them in the correct order.
+the four variants, and that you list them in the correct order.
 
 If your font lacks a variant, use the "normal" variant instead.
 
