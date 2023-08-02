@@ -2,6 +2,16 @@
 {next}
 ------
 
+0.101 (2023-08-02)
+------------------
+
+* Changed: We now recommend using pipx to install rst2pdf. (PR #1166)
+* Changed: The manual's examples for embedding fonts are now better. (PR #1156)
+* Fixed: The ``twocolumn.yaml`` stylesheet has been restored after inadvertent removal in 0.100. (PR #1160)
+* Fixed: We now use ``ConfigParser`` so that we are ready for 3.12. (PR #1171)
+* Fixed: Tests now run correctly regardless of locale. (PR #1145)
+* Fixed: Arguments when calling ``DelayedTable`` are now in the correct order. (PR #1150)
+
 
 0.100 (2023-03-20)
 ------------------
