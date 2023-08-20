@@ -236,7 +236,7 @@ class NodeHandler(metaclass=MetaHelper):
                     else:
                         log.info(
                             "Unknown class %s, ignoring. [%s]",
-                            n,
+                            node['classes'][n],
                             nodeid(node),
                         )
         except TypeError:  # Happens when a docutils.node.Text reaches here
