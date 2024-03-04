@@ -39,7 +39,7 @@ docutils==0.20.1
     # via
     #   rst2pdf (setup.py)
     #   sphinx
-fonttools==4.42.0
+fonttools==4.43.0
     # via matplotlib
 html5lib==1.1
     # via xhtml2pdf
