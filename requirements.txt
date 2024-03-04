@@ -141,7 +141,7 @@ snowballstemmer==2.2.0
     # via sphinx
 sphinx==7.1.2
     # via rst2pdf (setup.py)
-sphinxcontrib-applehelp==1.0.4
+sphinxcontrib-applehelp==1.0.8
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
     # via sphinx
