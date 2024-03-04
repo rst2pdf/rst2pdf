@@ -112,7 +112,7 @@ pytest==7.4.0
     # via rst2pdf (setup.py)
 python-bidi==0.4.2
     # via xhtml2pdf
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via matplotlib
 pyyaml==6.0.1
     # via
