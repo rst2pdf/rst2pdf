@@ -1,0 +1,351 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 15 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+5 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 15 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 10 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 40.01575 755.8394 143.9282 766.0394 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/Border [ 0 0 0 ] /Contents () /Dest [ 10 0 R /XYZ 40.01575 787.0394 0 ] /Rect [ 550.5338 756.4769 555.2598 766.6769 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/Annots [ 6 0 R 7 0 R ] /Contents 18 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 15 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/Contents 19 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 15 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/Contents 20 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 15 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+11 0 obj
+<<
+/Outlines 13 0 R /PageLabels 21 0 R /PageMode /UseNone /Pages 15 0 R /Type /Catalog
+>>
+endobj
+12 0 obj
+<<
+/Author () /CreationDate (D:20230820212442+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20230820212442+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+13 0 obj
+<<
+/Count 1 /First 14 0 R /Last 14 0 R /Type /Outlines
+>>
+endobj
+14 0 obj
+<<
+/Dest [ 10 0 R /XYZ 40.01575 787.0394 0 ] /Parent 13 0 R /Title (Sphinx subtitle prefix test)
+>>
+endobj
+15 0 obj
+<<
+/Count 5 /Kids [ 4 0 R 5 0 R 8 0 R 9 0 R 10 0 R ] /Type /Pages
+>>
+endobj
+16 0 obj
+<<
+/Length 888
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 775.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+.12549 .262745 .360784 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 207.052 0 Td (My Project) Tj T* -207.052 0 Td ET
+Q
+Q
+q
+1 0 0 1 40.01575 721.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 24 re B*
+Q
+q
+.12549 .262745 .360784 rg
+BT 1 0 0 1 0 3 Tm /F2 15 Tf 18 TL 169.677 0 Td (Subtle Subtitle Prefix 1.1) Tj T* -169.677 0 Td ET
+Q
+Q
+q
+1 0 0 1 40.01575 600 cm
+Q
+q
+1 0 0 1 40.01575 579.6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2.4 Tm /F2 12 Tf 14.4 TL 219.954 0 Td (Author Name) Tj T* -219.954 0 Td ET
+Q
+Q
+q
+1 0 0 1 40.01575 494.5606 cm
+Q
+q
+1 0 0 1 40.01575 474.1606 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2.4 Tm /F1 12 Tf 14.4 TL 213.924 0 Td (August 20, 2023) Tj T* -213.924 0 Td ET
+Q
+Q
+q
+1 0 0 1 40.01575 474.1606 cm
+Q
+q
+1 0 0 1 40.01575 474.1606 cm
+Q
+ 
+endstream
+endobj
+17 0 obj
+<<
+/Length 75
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 799.0394 cm
+Q
+ 
+endstream
+endobj
+18 0 obj
+<<
+/Length 598
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 775.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Contents) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 3 cm
+q
+BT 1 0 0 1 0 1.7 Tm 10.2 TL /F2 8.5 Tf 0 .4 .6 rg (Sphinx subtitle prefix test) Tj T* ET
+Q
+Q
+q
+1 0 0 1 443.2441 3 cm
+q
+0 .4 .6 rg
+BT 1 0 0 1 0 1.7 Tm /F2 8.5 Tf 10.2 TL 67.274 0 Td (1) Tj T* -67.274 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
+Q
+q
+1 0 0 1 40.01575 752.8394 cm
+Q
+ 
+endstream
+endobj
+19 0 obj
+<<
+/Length 75
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 799.0394 cm
+Q
+ 
+endstream
+endobj
+20 0 obj
+<<
+/Length 610
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 40.01575 763.0394 cm
+q
+.8 .8 .8 RG
+.3 w
+.94902 .94902 .94902 rg
+n -10 0 525.2441 30 re B*
+Q
+q
+BT 1 0 0 1 0 4 Tm 24 TL /F2 20 Tf .12549 .262745 .360784 rg (Sphinx subtitle prefix test) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 745.0394 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This document exists to test subtitles on the cover page.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 34.01575 807.2126 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Sphinx subtitle prefix test) Tj T* ET
+Q
+Q
+q
+1 0 0 1 34.01575 22.67717 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (1) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+21 0 obj
+<<
+/Nums [ 0 22 0 R 1 23 0 R 2 24 0 R 3 25 0 R 4 26 0 R ]
+>>
+endobj
+22 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+23 0 obj
+<<
+/S /D /St 2
+>>
+endobj
+24 0 obj
+<<
+/S /r /St 1
+>>
+endobj
+25 0 obj
+<<
+/S /r /St 2
+>>
+endobj
+26 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 27
+0000000000 65535 f 
+0000000073 00000 n 
+0000000114 00000 n 
+0000000221 00000 n 
+0000000333 00000 n 
+0000000538 00000 n 
+0000000743 00000 n 
+0000000911 00000 n 
+0000001079 00000 n 
+0000001308 00000 n 
+0000001513 00000 n 
+0000001719 00000 n 
+0000001825 00000 n 
+0000002083 00000 n 
+0000002157 00000 n 
+0000002273 00000 n 
+0000002358 00000 n 
+0000003297 00000 n 
+0000003422 00000 n 
+0000004071 00000 n 
+0000004196 00000 n 
+0000004857 00000 n 
+0000004934 00000 n 
+0000004968 00000 n 
+0000005002 00000 n 
+0000005036 00000 n 
+0000005070 00000 n 
+trailer
+<<
+/ID 
+[<8fd540f5be961cb34587f6a6079a6650><8fd540f5be961cb34587f6a6079a6650>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 12 0 R
+/Root 11 0 R
+/Size 27
+>>
+startxref
+5104
+%%EOF
