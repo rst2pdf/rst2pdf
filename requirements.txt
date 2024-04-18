@@ -120,7 +120,7 @@ pyyaml==6.0.1
     #   rst2pdf (setup.py)
 qrcode==7.4.2
     # via pyhanko
-reportlab==3.6.13
+reportlab==4.2.0
     # via
     #   rst2pdf (setup.py)
     #   svglib
