@@ -681,7 +681,7 @@ class PDFWriter(writers.Writer):
             # Feed data to the template, get restructured text.
             cover_text = template.render(
                 title=self.document.settings.title or visitor.elements['title'],
-                subtitle='%s %s' % (_('version'), self.config.version),
+                subtitle='%s %s' % (self.config.subtitle_prefix, self.config.version),
                 authors=authors,
                 date=date,
             )
@@ -992,6 +992,7 @@ def setup(app):
     app.add_config_value(
         'pdf_baseurl', urlunparse(['file', os.getcwd() + os.sep, '', '', '', '']), None
     )
+    app.add_config_value('subtitle_prefix', 'version', None)
 
     project_doc = app.config.project + ' Documentation'
     app.config.pdf_documents.append(
