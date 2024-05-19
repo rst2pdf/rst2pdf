@@ -54,6 +54,7 @@ else:
 class PDFBuilder(Builder):
     name = 'pdf'
     out_suffix = '.pdf'
+    supported_image_types = ['image/svg+xml', 'image/png', 'image/gif', 'image/jpeg']
 
     def init(self):
         self.docnames = []
