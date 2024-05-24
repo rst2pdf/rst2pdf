@@ -128,3 +128,6 @@ pdf_repeat_table_rows = True
 
 # Enable smart quotes (1, 2 or 3) or disable by setting to 0
 pdf_smartquotes = 0
+
+# Set a consistent date for the cover page
+today = 'August 20, 2023'
