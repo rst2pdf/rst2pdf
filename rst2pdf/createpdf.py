@@ -1447,7 +1447,7 @@ def parse_commandline():
         action="store_true",
         dest='raw_html',
         default=def_raw_html,
-        help='Support embeddig raw HTML. Default=%s' % def_raw_html,
+        help='Support embedding raw HTML. Default=%s' % def_raw_html,
     )
 
     parser.add_option(
