@@ -6,7 +6,7 @@
 #
 aafigure==0.6
     # via rst2pdf (setup.py)
-alabaster==0.7.13
+alabaster==0.7.16
     # via sphinx
 arabic-reshaper==3.0.0
     # via xhtml2pdf
@@ -15,41 +15,43 @@ asn1crypto==1.5.1
     #   oscrypto
     #   pyhanko
     #   pyhanko-certvalidator
-babel==2.12.1
+babel==2.15.0
     # via sphinx
-certifi==2023.7.22
+certifi==2024.2.2
     # via requests
-cffi==1.15.1
+cffi==1.16.0
     # via cryptography
-charset-normalizer==3.2.0
+chardet==5.2.0
+    # via reportlab
+charset-normalizer==3.3.2
     # via requests
-click==8.1.6
+click==8.1.7
     # via pyhanko
-contourpy==1.1.0
+contourpy==1.2.1
     # via matplotlib
-cryptography==42.0.5
+cryptography==42.0.7
     # via
     #   pyhanko
     #   pyhanko-certvalidator
 cssselect2==0.7.0
     # via svglib
-cycler==0.11.0
+cycler==0.12.1
     # via matplotlib
-docutils==0.20.1
+docutils==0.21.2
     # via
     #   rst2pdf (setup.py)
     #   sphinx
-fonttools==4.43.0
+fonttools==4.52.1
     # via matplotlib
 html5lib==1.1
     # via xhtml2pdf
 httplib2==0.22.0
     # via plantuml
-idna==3.4
+idna==3.7
     # via requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==6.8.0
+importlib-metadata==7.1.0
     # via rst2pdf (setup.py)
 iniconfig==2.0.0
     # via pytest
@@ -57,21 +59,21 @@ jinja2==3.1.4
     # via
     #   rst2pdf (setup.py)
     #   sphinx
-kiwisolver==1.4.4
+kiwisolver==1.4.5
     # via matplotlib
-lxml==4.9.3
+lxml==5.2.2
     # via svglib
-markupsafe==2.1.3
+markupsafe==2.1.5
     # via jinja2
-matplotlib==3.7.2
+matplotlib==3.9.0
     # via rst2pdf (setup.py)
-numpy==1.24.4
+numpy==1.26.4
     # via
     #   contourpy
     #   matplotlib
 oscrypto==1.3.0
     # via pyhanko-certvalidator
-packaging==23.1
+packaging==24.0
     # via
     #   matplotlib
     #   pytest
@@ -84,35 +86,37 @@ pillow==10.3.0
     #   xhtml2pdf
 plantuml==0.3.0
     # via rst2pdf (setup.py)
-pluggy==1.2.0
+pluggy==1.5.0
     # via pytest
-pycparser==2.21
+pycparser==2.22
     # via cffi
-pygments==2.15.1
+pygments==2.18.0
     # via
     #   rst2pdf (setup.py)
     #   sphinx
-pyhanko==0.20.0
+pyhanko==0.25.0
     # via xhtml2pdf
-pyhanko-certvalidator==0.23.0
+pyhanko-certvalidator==0.26.3
     # via
     #   pyhanko
     #   xhtml2pdf
-pymupdf==1.22.5
+pymupdf==1.24.4
     # via rst2pdf (setup.py)
-pyparsing==3.0.9
+pymupdfb==1.24.3
+    # via pymupdf
+pyparsing==3.1.2
     # via
     #   httplib2
     #   matplotlib
-pypdf==3.17.0
+pypdf==4.2.0
     # via xhtml2pdf
 pypng==0.20220715.0
     # via qrcode
-pytest==7.4.0
+pytest==8.2.1
     # via rst2pdf (setup.py)
 python-bidi==0.4.2
     # via xhtml2pdf
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via matplotlib
 pyyaml==6.0.1
     # via
@@ -120,12 +124,12 @@ pyyaml==6.0.1
     #   rst2pdf (setup.py)
 qrcode==7.4.2
     # via pyhanko
-reportlab==3.6.13
+reportlab==4.0.9
     # via
     #   rst2pdf (setup.py)
     #   svglib
     #   xhtml2pdf
-requests==2.32.0
+requests==2.32.2
     # via
     #   pyhanko
     #   pyhanko-certvalidator
@@ -139,42 +143,42 @@ smartypants==2.0.1
     # via rst2pdf (setup.py)
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==7.1.2
+sphinx==7.3.7
     # via rst2pdf (setup.py)
-sphinxcontrib-applehelp==1.0.4
+sphinxcontrib-applehelp==1.0.8
     # via sphinx
-sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-devhelp==1.0.6
     # via sphinx
-sphinxcontrib-htmlhelp==2.0.1
+sphinxcontrib-htmlhelp==2.0.5
     # via sphinx
 sphinxcontrib-jsmath==1.0.1
     # via sphinx
-sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-qthelp==1.0.7
     # via sphinx
-sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-serializinghtml==1.1.10
     # via sphinx
 svglib==1.5.1
     # via
     #   rst2pdf (setup.py)
     #   xhtml2pdf
-tinycss2==1.2.1
+tinycss2==1.3.0
     # via
     #   cssselect2
     #   svglib
-typing-extensions==4.7.1
+typing-extensions==4.12.0
     # via qrcode
-tzlocal==5.0.1
+tzlocal==5.2
     # via pyhanko
-uritools==4.0.1
+uritools==4.0.2
     # via pyhanko-certvalidator
-urllib3==2.0.7
+urllib3==2.2.1
     # via requests
 webencodings==0.5.1
     # via
     #   cssselect2
     #   html5lib
     #   tinycss2
-xhtml2pdf==0.2.11
+xhtml2pdf==0.2.15
     # via rst2pdf (setup.py)
-zipp==3.16.2
+zipp==3.18.2
     # via importlib-metadata
