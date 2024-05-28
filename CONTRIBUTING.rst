@@ -73,7 +73,11 @@ Once installed, enable it by running this command::
 
 .. __: https://pre-commit.com/
 
-It will let you know if any of the formatting/build tools are reporting problems.
+It will let you know if any of the formatting/build tools are reporting problems when you commit your changes.
+
+To run the pre-commit checks manually, run this command::
+
+    pre-commit run --all-files --show-diff-on-failure
 
 Run the Tests
 =============
