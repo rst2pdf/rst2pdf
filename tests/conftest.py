@@ -16,7 +16,6 @@ import tempfile
 import fitz
 from packaging import version
 import pytest
-from pathlib import Path
 
 
 ROOT_DIR = os.path.realpath(os.path.dirname(__file__))
@@ -419,16 +418,18 @@ class CompareException(Exception):
     """Custom exception for error reporting."""
 
 
-def pytest_collect_file(parent, path):
-    if not (path.fnmatch('*/input') or path.fnmatch('*/input/*')):
+def pytest_collect_file(file_path, parent):
+
+    parent_directory = file_path.parents[0]
+    if "input" not in str(parent_directory):
         return
 
-    parent_dir = os.path.split(path.dirname)[-1]
+    parent_dir = os.path.split(parent_directory)[-1]
 
-    if path.ext == '.rst' and parent_dir == 'input':
-        return RstFile.from_parent(parent=parent, path=Path(path))
-    elif path.basename == 'conf.py' and parent_dir.startswith('sphinx'):
-        return SphinxFile.from_parent(parent=parent, path=Path(path))
+    if file_path.suffix == '.rst' and parent_dir == 'input':
+        return RstFile.from_parent(parent=parent, path=file_path)
+    elif file_path.stem == 'conf.py' and parent_dir.startswith('sphinx'):
+        return SphinxFile.from_parent(parent=parent, path=file_path)
 
 
 collect_ignore = ['tests/input/*.py']
