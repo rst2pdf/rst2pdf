@@ -9,7 +9,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
       $ pip install setuptools setuptools_scm wheel twine
 
-#. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to master
+#. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
 #. Ensure all PRs are attached to the milestone
 #. Close the milestone and create next one
 #. Checkout main and ensure that your working copy is clean
@@ -33,27 +33,38 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Build manual
 
-   You will need the `White Rabbit`_ font installed. We check out the tag first so that the version
+   You will need the `White Rabbit`_ font installed. We check out the tag install via pip first so that the version
    on the first page of the PDF is labelled as final and then generate the HTMl and PDF docs.
 
    ::
 
      $ git checkout 0.94
-     $ cd doc; ./gen_docs.sh
+     $ pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+
+     $ cd doc; ./gen_docs.sh; cd ..
      $ git checkout main
 
    Add subject and author to manual PDF's meta data using ExifTool_
 
    ::
 
-     $ exiftool -PDF:Subject="v0.94 r2019011700" output/pdf/manual.pdf
-     $ exiftool -PDF:Author="rst2pdf project; Roberto Alsina" output/pdf/manual.pdf
+     $ exiftool -PDF:Subject="v0.94 r2019011700" doc/output/pdf/manual.pdf
+     $ exiftool -PDF:Author="rst2pdf project; Roberto Alsina" doc/output/pdf/manual.pdf
 
    and upload to HTML and PDF to the website
    via a PR on the rst2pdf.github.io_ repo.
 
-#. Update Releases_ section on GitHub project and paste in changelog
+#. Create a new release in the Releases_ section on GitHub project
+
+   Draft a new release, selecting the newly pushed tag and setting the Release Title to the tag name. To create the
+   description, press the "Generate release notes" button and then remove the items that were by dependabot.
+
+   Publish the release.
+
 #. Create rc distribution package
+
+    Double check that you do not have any changes in your working directory that are not committed. If you do, stash
+    them as otherwise uploading to PyPI will not work.
 
     ::
 
@@ -61,11 +72,33 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
 
+#. Setup PyPI if you haven't already
+
+    Create a ``~/.pypirc`` file with sections for rst2pdf and testrstpdf which are then used with ``twine`` via the
+    ``--repository`` switch.
+
+    It should contain the following:
+
+    ::
+
+        [rst2pdf]
+          username = __token__
+          password = {your token here}
+
+        [testrst2pdf]
+          repository = https://test.pypi.org/legacy/
+          username = __token__
+          password = {your token here}
+
+
+    You can get your token from the account settings section of https://pypi.org/ & https://test.pypi.org/
+
+
 #. Upload the rc distribution to Test-PyPI_
 
     ::
 
-       $ twine upload --repository testpypi dist/*
+       $ twine upload --repository testrst2pdf dist/*
 
     Check that it all looks correct on Test-PyPI. If not, fix and release a new rc.
 
@@ -89,7 +122,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
     ::
 
        $ python setup.py egg_info -b "" sdist bdist_wheel
-       $ twine upload --repository pypi dist/*
+       $ twine upload --repository rst2pdf dist/*
 
 
     Check that the release is correct on PyPI_ and then delete the build artifacts and dist files with:
@@ -98,20 +131,9 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
         $ rm -rf build/ rst2pdf.egg-info/ dist/
 
-|
-|
+#. That's it!
 
-*Note:* create a ``~/.pypirc`` file to make the ``--repository`` switch work with ``twine``.
-It should contain the following:
-
-::
-
-   [pypi]
-   username: {your PyPi username}
-
-   [testpypi]
-   repository: https://test.pypi.org/legacy/
-   username: {your PyPi username}
+    A new release of rst2pdf is now live. Celebrate by shouting about it from the rooftops!
 
 
 .. _changelog-generator: https://github.com/weierophinney/changelog_generator
