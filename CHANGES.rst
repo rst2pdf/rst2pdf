@@ -2,6 +2,14 @@
 {next}
 ------
 
+0.102 (2024-06-05)
+------------------
+
+* Added: We now set ``supported_image_type`` attribute in the Sphinx builder (PR #1201)
+* Changed: We now support ReportLab 4 and xhtml2pdf 0.12.2 (PR #1214)
+* Fixed: CI now correctly fails if the tests fail (PR #1212)
+
+
 0.101 (2023-08-02)
 ------------------
 
