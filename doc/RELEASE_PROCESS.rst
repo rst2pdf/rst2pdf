@@ -34,7 +34,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 #. Build manual
 
    You will need the `White Rabbit`_ font installed. We check out the tag install via pip first so that the version
-   on the first page of the PDF is labelled as final and then generate the HTMl and PDF docs.
+   on the first page of the PDF is labelled as final and then generate the HTML and PDF docs.
 
    ::
 
