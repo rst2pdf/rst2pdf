@@ -9,6 +9,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
       $ pip install setuptools setuptools_scm wheel twine
 
+#. You will also need the need the `White Rabbit`_ font installed in order to create the manual
 #. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
 #. Ensure all PRs are attached to the milestone
 #. Close the milestone and create next one
@@ -33,13 +34,18 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Build manual
 
-   You will need the `White Rabbit`_ font installed. We check out the tag install via pip first so that the version
-   on the first page of the PDF is labelled as final and then generate the HTML and PDF docs.
+   Check out the tag first and then install via pip. We do this so that the version number that
+   is rendered to the first page of the PDF is displayed as "{version number} (final)" rather than
+   as a dev version.
 
    ::
 
      $ git checkout 0.94
      $ pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+
+   Generate the HTML and PDF docs:
+
+   ::
 
      $ cd doc; ./gen_docs.sh; cd ..
      $ git checkout main
