@@ -72,7 +72,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
 
-#. Setup PyPI if you haven't already
+#. Set up PyPI if you haven't already
 
     Create a ``~/.pypirc`` file with sections for rst2pdf and testrstpdf which are then used with ``twine`` via the
     ``--repository`` switch.
