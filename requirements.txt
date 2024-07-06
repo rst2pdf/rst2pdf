@@ -17,7 +17,7 @@ asn1crypto==1.5.1
     #   pyhanko-certvalidator
 babel==2.15.0
     # via sphinx
-certifi==2024.2.2
+certifi==2024.7.4
     # via requests
 cffi==1.16.0
     # via cryptography
