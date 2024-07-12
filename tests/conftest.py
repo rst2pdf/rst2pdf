@@ -13,9 +13,13 @@ import shutil
 import subprocess
 import tempfile
 
-import fitz
 from packaging import version
 import pytest
+
+try:
+    import fitz
+except ImportError:
+    import fitz_old as fitz
 
 
 ROOT_DIR = os.path.realpath(os.path.dirname(__file__))
