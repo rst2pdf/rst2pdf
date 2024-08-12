@@ -180,5 +180,5 @@ webencodings==0.5.1
     #   tinycss2
 xhtml2pdf==0.2.15
     # via rst2pdf (setup.py)
-zipp==3.18.2
+zipp==3.20.0
     # via importlib-metadata
