@@ -12,7 +12,7 @@ jobs:
         python-version: ['3.9', '3.10', '3.11', '3.12']
         experimental: [false]
         include:
-          - python-version: '3.13'
+          - python-version: '3.13.0-rc.1'
             experimental: true
 
     steps:
