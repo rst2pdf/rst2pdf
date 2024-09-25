@@ -9,10 +9,10 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        python-version: ['3.9', '3.10']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
         experimental: [false]
         include:
-          - python-version: '3.11'
+          - python-version: '3.13.0-rc.1'
             experimental: true
 
     steps:
@@ -40,7 +40,7 @@ jobs:
       run: |
         pytest -v
     - name: Archive test output
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: failed-tests

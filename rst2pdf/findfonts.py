@@ -320,7 +320,7 @@ def autoEmbed(fname):
         if variants:
             vname = os.path.basename(variants[0])[:-4]
             if vname != fname:
-                log.warn(
+                log.warning(
                     "Could not find font '%s'. Substituting with %s." % (fname, vname)
                 )
     # It is a TT Font and we found it using fc-match (or found *something*)
