@@ -19,7 +19,7 @@ babel==2.15.0
     # via sphinx
 certifi==2024.2.2
     # via requests
-cffi==1.16.0
+cffi==1.17.1
     # via cryptography
 chardet==5.2.0
     # via reportlab
