@@ -79,7 +79,7 @@ packaging==24.0
     #   pytest
     #   rst2pdf (setup.py)
     #   sphinx
-pillow==10.3.0
+pillow==10.4.0
     # via
     #   matplotlib
     #   reportlab
