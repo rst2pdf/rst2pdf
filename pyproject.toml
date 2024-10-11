@@ -1,5 +1,69 @@
 [build-system]
-requires = ['setuptools', 'setuptools-scm', 'wheel']
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rst2pdf"
+authors = [
+    {name = "rst2pdf maintainers", email = "maintainers@rstpdf.org"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Documentation",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "docutils",
+    "importlib_metadata",
+    "jinja2",
+    "packaging",
+    "pygments",
+    "pyyaml",
+    "reportlab",
+    "smartypants",
+]
+description = "Convert reStructured Text to PDF via ReportLab."
+dynamic = ["version"]
+keywords= [
+    "convert",
+    "docutils",
+    "pdf",
+    "pygments",
+    "reportlab'",
+    "restructured",
+    "rst",
+]
+license = {file = "LICENSE.txt"}
+readme = "README.rst"
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+aafiguresupport = ["aafigure"]
+mathsupport = ["matplotlib"]
+plantumlsupport = ["plantuml"]
+rawhtmlsupport = ["xhtml2pdf"]
+sphinx = ["sphinx"]
+svgsupport = ["svglib"]
+tests = ["pymupdf", "pytest"]
+
+[project.scripts]
+rst2pdf = "rst2pdf.createpdf:main"
+
+[project.urls]
+Homepage = "https://rst2pdf.org"
+Changelog = "https://github.com/rst2pdf/rst2pdf/blob/master/CHANGES.rst"
+Releases = "https://github.com/rst2pdf/rst2pdf/releases"
+Source = "https://github.com/rst2pdf/rst2pdf"
+"Bug Reports" = "https://github.com/rst2pdf/rst2pdf/issues"
 
 [tool.black]
 line-length = 88
@@ -18,3 +82,8 @@ exclude = '''
   | tests/input
 )
 '''
+
+[tool.setuptools]
+packages = ["rst2pdf"]
+
+[tool.setuptools_scm]
