@@ -72,6 +72,9 @@ This is an outline of what needs to be done in order to release rst2pdf.
     Double check that you do not have any changes in your working directory that are not committed. If you do, stash
     them as otherwise uploading to PyPI will not work.
 
+    Note this step uses a workaround as per https://github.com/pypa/setuptools/issues/4129 as ``build`` and
+    ``setuptools`` don't have full support for appending arbitrary tags to version numbers at build time.
+
     ::
 
        $ echo -e "[egg_info]\ntag_build=rc1\n" > /tmp/build_opts.cfg
