@@ -151,7 +151,7 @@ To update, change to a venv that has Python 3.8+ installed and run::
       pip install pip-tools
       pip-compile --extra=aafiguresupport --extra=mathsupport --extra=plantumlsupport \
         --extra=rawhtmlsupport --extra=sphinx --extra=svgsupport --extra=tests \
-        --output-file requirements.txt setup.py
+        --output-file requirements.txt pyproject.toml
 
 Tips and Tricks
 ===============

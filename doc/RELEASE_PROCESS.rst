@@ -7,7 +7,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 #. Install dependencies that you'll need
    ::
 
-      $ pip install setuptools setuptools_scm wheel twine
+      $ pip install build twine
 
 #. You will also need the need the `White Rabbit`_ font installed in order to create the manual
 #. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
@@ -74,9 +74,10 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     ::
 
-       $ python setup.py egg_info -b "rc1" sdist bdist_wheel
+       $ echo -e "[egg_info]\ntag_build=rc1\n" > /tmp/build_opts.cfg
+       $ DIST_EXTRA_CONFIG=/tmp/build_opts.cfg python -m build
 
-    If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
+    If you're doing an alphaX, betaX or postX, then change ``tag_build=rc1`` appropriately
 
 #. Set up PyPI if you haven't already
 
@@ -127,7 +128,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     ::
 
-       $ python setup.py egg_info -b "" sdist bdist_wheel
+       $ python -m build
        $ twine upload --repository rst2pdf dist/*
 
 
