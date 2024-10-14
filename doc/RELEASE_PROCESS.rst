@@ -41,7 +41,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
    ::
 
      $ git checkout 0.94
-     $ pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+     $ pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
 
    Generate the HTML and PDF docs:
 
@@ -79,6 +79,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
        $ echo -e "[egg_info]\ntag_build=rc1\n" > /tmp/build_opts.cfg
        $ DIST_EXTRA_CONFIG=/tmp/build_opts.cfg python -m build
+       $ rm /tmp/build_opts.cfg
 
     If you're doing an alphaX, betaX or postX, then change ``tag_build=rc1`` appropriately
 
