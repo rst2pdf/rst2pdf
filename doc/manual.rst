@@ -1265,9 +1265,9 @@ You can use the ``code-block`` directive with an external file, using the
 ``:include:`` option::
 
   .. code-block:: python
-     :include: setup.py
+     :include: my_script.py
 
-This will give a warning if ``setup.py`` doesn't exist or can't be opened.
+This will give a warning if ``my_script.py`` doesn't exist or can't be opened.
 
 Include with Boundaries
 ***********************

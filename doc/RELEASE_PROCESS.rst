@@ -7,7 +7,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 #. Install dependencies that you'll need
    ::
 
-      $ pip install setuptools setuptools_scm wheel twine
+      $ pip install build twine
 
 #. You will also need the need the `White Rabbit`_ font installed in order to create the manual
 #. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
@@ -41,7 +41,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
    ::
 
      $ git checkout 0.94
-     $ pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+     $ pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
 
    Generate the HTML and PDF docs:
 
@@ -72,11 +72,16 @@ This is an outline of what needs to be done in order to release rst2pdf.
     Double check that you do not have any changes in your working directory that are not committed. If you do, stash
     them as otherwise uploading to PyPI will not work.
 
+    Note this step uses a workaround as per https://github.com/pypa/setuptools/issues/4129 as ``build`` and
+    ``setuptools`` don't have full support for appending arbitrary tags to version numbers at build time.
+
     ::
 
-       $ python setup.py egg_info -b "rc1" sdist bdist_wheel
+       $ echo -e "[egg_info]\ntag_build=rc1\n" > /tmp/build_opts.cfg
+       $ DIST_EXTRA_CONFIG=/tmp/build_opts.cfg python -m build
+       $ rm /tmp/build_opts.cfg
 
-    If you're doing an alphaX, betaX or postX, then change ``-b "rc1"`` appropriately
+    If you're doing an alphaX, betaX or postX, then change ``tag_build=rc1`` appropriately
 
 #. Set up PyPI if you haven't already
 
@@ -127,7 +132,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     ::
 
-       $ python setup.py egg_info -b "" sdist bdist_wheel
+       $ python -m build
        $ twine upload --repository rst2pdf dist/*
 
 

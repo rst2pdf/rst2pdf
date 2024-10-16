@@ -106,11 +106,11 @@ Set up to run tests
 To run the tests for the first time, you will need to do some setup (after
 this, you can just work on your given virtualenv each time)::
 
-    python -m venv env
-    . env/bin/activate
+    python -m venv .venv
+    . .venv/bin/activate
 
     pip install pytest pytest-xdist
-    pip install -c requirements.txt .[tests,sphinx,svgsupport,aafiguresupport,mathsupport,rawhtmlsupport]
+    pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
 
 Run tests
 *********
@@ -151,7 +151,7 @@ To update, change to a venv that has Python 3.8+ installed and run::
       pip install pip-tools
       pip-compile --extra=aafiguresupport --extra=mathsupport --extra=plantumlsupport \
         --extra=rawhtmlsupport --extra=sphinx --extra=svgsupport --extra=tests \
-        --output-file requirements.txt setup.py
+        --output-file requirements.txt pyproject.toml
 
 Tips and Tricks
 ===============

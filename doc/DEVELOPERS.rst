@@ -59,8 +59,7 @@ Ensure that setuptools and pip are up to date::
 
 Now you can install rst2pdf from this source code::
 
-    pip install  -c requirements.txt -e .[aafiguresupport,mathsupport,rawhtmlsupport,sphinx,svgsupport,tests]
-
+    pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
 
 Note, that on Apple Silicon Macs, you may need this to get tests passing::
 
