@@ -22,14 +22,14 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "docutils",
-    "importlib_metadata",
-    "jinja2",
-    "packaging",
-    "pygments",
-    "pyyaml",
-    "reportlab",
-    "smartypants",
+    "docutils~=0.20.0",
+    "importlib-metadata~=8.0",
+    "jinja2~=3.0",
+    "packaging~=24.0",
+    "pygments~=2.0",
+    "pyyaml~=6.0",
+    "reportlab~=4.0",
+    "smartypants~=2.0",
 ]
 description = "Convert reStructured Text to PDF via ReportLab."
 dynamic = ["version"]
@@ -53,7 +53,6 @@ plantumlsupport = ["plantuml"]
 rawhtmlsupport = ["xhtml2pdf"]
 sphinx = ["sphinx"]
 svgsupport = ["svglib"]
-tests = ["pymupdf", "pytest"]
 
 [project.scripts]
 rst2pdf = "rst2pdf.createpdf:main"
@@ -74,7 +73,6 @@ exclude = '''
   /(
       \.eggs
     | \.git
-    | \.tox
     | \.venv
     | build
     | dist
@@ -87,3 +85,10 @@ exclude = '''
 packages = ["rst2pdf"]
 
 [tool.setuptools_scm]
+
+[tool.uv]
+dev-dependencies = [
+    "pymupdf~=1.0,<1.24.11",
+    "pytest-xdist~=3.0",
+    "pytest~=8.0",
+]

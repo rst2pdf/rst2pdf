@@ -49,19 +49,22 @@ Features
 Installation
 ------------
 
-*rst2pdf* supports Python 3.8 or greater. Version 0.99 was the last version to support Python 3.6 & 3.7, with 0.97 the last version to support Python 2.7.
+*rst2pdf* supports Python 3.8 or greater. Version 0.99 was the last version to support Python 3.6 & 3.7, with 0.97 the
+last version to support Python 2.7.
 
 Install from PyPI
 ~~~~~~~~~~~~~~~~~
 
-The latest released version may be installed from PyPI by using ``pipx``::
+The latest released version may be installed from PyPI by using `uv <https://docs.astral.sh/uv>`_::
 
-    $ pipx install rst2pdf
+    $ uv tool install rst2pdf
+
+If you don't have ``uv``, please see `the installation docs <https://docs.astral.sh/uv/getting-started/installation/>`_
 
 rst2pdf also has support for a number of features that require additional dependencies. Installation of all the
-required dependencies using ``pipx`` may be installed using::
+required dependencies using ``uv`` may be installed using::
 
-    $ pipx install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
+    $ uv tool install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
 Install from Snap
 ~~~~~~~~~~~~~~~~~
@@ -81,10 +84,9 @@ can clone the repository and install this version::
     $ git clone https://github.com/rst2pdf/rst2pdf
     $ cd rst2pdf
     $ git checkout <desired-branch> # if you want something other than main
-    $ pipx install .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
+    $ uv tool install .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
 If you intend to work on rst2pdf's source code, see ``doc/DEVELOPERS.rst``.
-
 
 Usage
 -----
