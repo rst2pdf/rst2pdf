@@ -34,7 +34,7 @@ jobs:
     - name: Lint
       run: |
         uvx pre-commit run --all-files --show-diff-on-failure
-      if: matrix.python-version == '3.9'
+      if: matrix.python-version == '3.12'
     - name: Test with pytest
       run: |
         uv run pytest -v
