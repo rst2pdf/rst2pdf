@@ -994,16 +994,17 @@ def setup(app):
     )
     app.add_config_value('subtitle_prefix', 'version', None)
 
-    project_doc = app.config.project + ' Documentation'
-    app.config.pdf_documents.append(
-        (
-            app.config.master_doc,
-            app.config.project,
-            project_doc,
-            app.config.copyright,
-            'manual',
+    if len(app.config.pdf_documents) == 0:
+        project_doc = app.config.project + ' Documentation'
+        app.config.pdf_documents.append(
+            (
+                app.config.master_doc,
+                app.config.project,
+                project_doc,
+                app.config.copyright,
+                'manual',
+            )
         )
-    )
 
     return {
         'version': rst2pdf.version,
