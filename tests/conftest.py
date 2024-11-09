@@ -432,7 +432,7 @@ def pytest_collect_file(file_path, parent):
 
     if file_path.suffix == '.rst' and parent_dir == 'input':
         return RstFile.from_parent(parent=parent, path=file_path)
-    elif file_path.stem == 'conf.py' and parent_dir.startswith('sphinx'):
+    elif file_path.name == 'conf.py' and parent_dir.startswith('sphinx'):
         return SphinxFile.from_parent(parent=parent, path=file_path)
 
 
