@@ -200,6 +200,8 @@ Miscellaneous Options
 Configuration File
 -------------------
 
+The configuration file uses an **INI-style** format with sections and key-value pairs. Comments are prefixed with ``#``.
+
 Since version 0.8, rst2pdf will read (if it is available) configuration files in
 ``/etc/rst2pdf.conf`` and ``~/.rst2pdf/config``.
 
@@ -210,11 +212,100 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
        systems. if you are using rst2pdf in other systems, please contact me and
        tell me where the system-wide config file should be.
 
-Here's an example file showing some of the currently available options:
+Configuration Options
+~~~~~~~~~~~~~~~~~~~~~
+
+The table below provides detailed descriptions of the available configuration options.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+     - Default Value
+   * - ``stylesheets``
+     - Comma-separated list of custom stylesheets.
+     - ``""``
+   * - ``compressed``
+     - Generate a compressed PDF. Use ``true``/``false`` or ``1``/``0``.
+     - ``false``
+   * - ``font_path``
+     - Colon-separated list of folders to search for fonts.
+     - ``""``
+   * - ``stylesheet_path``
+     - Colon-separated list of folders to search for stylesheets.
+     - ``""``
+   * - ``language``
+     - Language for hyphenation and localization.
+     - ``en_US``
+   * - ``header``
+     - Default page header. Use ``null`` for no header.
+     - ``null``
+   * - ``footer``
+     - Default page footer. Use ``null`` for no footer.
+     - ``null``
+   * - ``fit_mode``
+     - Handle oversized literal blocks. Options: ``shrink``, ``truncate``, ``overflow``.
+     - ``shrink``
+   * - ``fit_background_mode``
+     - Adjust background images. Options: ``scale``, ``center``.
+     - ``center``
+   * - ``break_level``
+     - Maximum heading level that starts on a new page.
+     - ``0``
+   * - ``break_side``
+     - Section break alignment. Options: ``even``, ``odd``, ``any``.
+     - ``any``
+   * - ``blank_first_page``
+     - Add a blank page at the start of the document.
+     - ``false``
+   * - ``first_page_even``
+     - Treat the first page as even.
+     - ``false``
+   * - ``smartquotes``
+     - Configure smart quotes transformation.
+
+       Accepted values:
+
+       - ``0``: Suppress all transformations.
+       - ``1``: Default transformations for quotes, em-dashes, and ellipses.
+       - ``2``: Use typewriter shorthand for dashes.
+       - ``3``: Invert shorthand for dashes.
+
+     - ``0``
+   * - ``footnote_backlinks``
+     - Enable footnote backlinks.
+     - ``true``
+   * - ``inline_footnotes``
+     - Show footnotes inline.
+     - ``false``
+   * - ``custom_cover``
+     - Template file for the cover page.
+     - ``cover.tmpl``
+   * - ``floating_images``
+     - Enable floating images for alignment.
+     - ``false``
+   * - ``raw_html``
+     - Enable support for the ``..raw:: html`` directive.
+     - ``false``
+
+Example Configuration File
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here's an example configuration file showing the expected format:
 
 .. code-block:: ini
-   :include: assets/config.sample
 
+    # This is an example config file. Modify and place in ~/.rst2pdf/config
+
+    [general]
+    stylesheets="fruity.json,a4paper.json,verasans.json"
+
+    # Folders to search for stylesheets.
+    stylesheet_path="~/styles:/usr/share/styles"
+
+    # Language to be used for hyphenation support
+    language="en_US"
 
 Pipe usage
 ----------
