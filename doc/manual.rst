@@ -1506,20 +1506,6 @@ The options are:
 ``:end-at: string``
     will include file up to the first occurrence of string, string **included**
 
-Let's display a class from rst2pdf::
-
-      .. code-block:: python
-         :include: assets/flowables.py
-         :start-at: class Separation(Flowable):
-         :end-before: class Reference(Flowable):
-
-This command gives
-
-.. code-block:: python
-    :include: assets/flowables.py
-    :start-at: class Separation(Flowable):
-    :end-before: class Reference(Flowable):
-
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
@@ -2303,29 +2289,31 @@ Extensions
 rst2pdf can get new features from *extensions*. Extensions are python modules
 that can be enabled with the ``-e`` option.
 
-Several are included with rst2pdf.
+Several are included with rst2pdf, and you can also develop extensions yourself.
+Find the included extensions_ by inspecting the codebase, each file includes some
+additional information about the extension.
 
-Preprocess (``-e preprocess``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _extensions: https://github.com/rst2pdf/rst2pdf/tree/main/rst2pdf/extensions
 
-.. include:: ../rst2pdf/extensions/preprocess_r2p.py
-   :start-after:  '''
-   :end-before: '''
+Extensions include with rst2pdf:
 
-Dotted_TOC (``-e dotted_toc``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ``dotted_toc`` - a (very) experimental extension to add dots to the table of
+  contents list between the titles and the page numbers.
 
-.. include:: ../rst2pdf/extensions/dotted_toc.py
-   :start-after:  '''
-   :end-before: '''
+- ``fancy_titles`` - an experimental extension to render headings with an SVG template.
 
+- ``plantuml_r2p`` - basic PlantUML support.
+
+- ``preprocess`` - preprocessing tool to make source file changes before
+  handing it to docutils, can help keep compatibility between different output
+  destinations.
 
 Developers
 ----------
 
-.. include:: DEVELOPERS.rst
-   :start-line: 4
+To contribute to rst2pdf, visit the project_ on GitHub to get started.
 
+.. _project: https://github.com/rst2pdf/rst2pdf
 
 Licenses
 --------
