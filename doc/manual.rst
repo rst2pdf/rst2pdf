@@ -66,10 +66,136 @@ As well as the rst2pdf-specific features described in this manual, you many also
 Command line options
 --------------------
 
-.. include:: rst2pdf.rst
-   :start-line: 30
-   :end-before: EXAMPLES
+Use the following options to control the output of `rst2pdf` on the command line.
 
+General Options
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-h, --help``
+     - Show the help message and exit.
+   * - ``--version``
+     - Print the version number and exit.
+   * - ``-q, --quiet``
+     - Print less information.
+   * - ``-v, --verbose``
+     - Print debug information.
+   * - ``--very-verbose``
+     - Print even more debug information.
+
+File and Configuration
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``--config=FILE``
+     - Config file to use. Default: ``~/.rst2pdf/config``.
+   * - ``-o FILE, --output=FILE``
+     - Write the PDF to ``FILE``.
+   * - ``--record-dependencies=FILE``
+     - Write output file dependencies to ``FILE``.
+
+Styling Options
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-s STYLESHEETS, --stylesheets=STYLESHEETS``
+     - A comma-separated list of custom stylesheets. Default: ``""``.
+   * - ``--stylesheet-path=FOLDERLIST``
+     - A colon-separated list of folders to search for stylesheets. Default: ``""``.
+   * - ``--print-stylesheet``
+     - Print the default stylesheet and exit.
+   * - ``--font-path=FOLDERLIST``
+     - A colon-separated list of folders to search for fonts. Default: ``""``.
+
+
+PDF Options
+~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-c, --compressed``
+     - Create a compressed PDF. Default: ``False``.
+   * - ``--baseurl=URL``
+     - The base URL for relative URLs.
+   * - ``--header=HEADER``
+     - Page header if not specified in the document.
+   * - ``--footer=FOOTER``
+     - Page footer if not specified in the document.
+   * - ``--first-page-on-right``
+     - When using double-sided pages, the first page will start on the right-hand side (Book Style).
+   * - ``--blank-first-page``
+     - Add a blank page at the beginning of the document.
+   * - ``--custom-cover=FILE``
+     - Template file used for the cover page. Default: ``cover.tmpl``.
+
+Formatting Options
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``--section-header-depth=N``
+     - Sections up to this depth will be used in the header and footer's replacement of ``###Section###``. Default: ``2``.
+   * - ``--smart-quotes=VALUE``
+     - Convert ASCII quotes, ellipses, and dashes to typographically correct equivalents. Default: ``0``.
+
+       Accepted values:
+
+       - ``0``: Suppress all transformations.
+       - ``1``: Default transformations for quotes, em-dashes, and ellipses.
+       - ``2``: Use typewriter shorthand for dashes.
+       - ``3``: Invert shorthand for dashes.
+
+   * - ``--fit-literal-mode=MODE``
+     - Handle literals that are too wide. Options: ``error``, ``overflow``, ``shrink``, ``truncate``. Default: ``shrink``.
+   * - ``--fit-background-mode=MODE``
+     - Fit the background image to the page. Options: ``scale``, ``scale_width``, ``center``. Default: ``center``.
+
+Miscellaneous Options
+~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-e EXTENSIONS, --extension-module=EXTENSIONS``
+     - Add a helper extension module (must end in ``.py`` and be on the Python path).
+   * - ``--inline-links``
+     - Show targets in parentheses instead of active links.
+   * - ``--repeat-table-rows``
+     - Repeat the header row for each split table.
+   * - ``--raw-html``
+     - Support embedding raw HTML. Default: ``False``.
+   * - ``--no-footnote-backlinks``
+     - Disable footnote backlinks. Default: ``False``.
+   * - ``--inline-footnotes``
+     - Show footnotes inline. Default: ``True``.
+   * - ``--default-dpi=NUMBER``
+     - DPI for objects sized in pixels. Default: ``300``.
+   * - ``--show-frame-boundary``
+     - Show frame borders (useful for debugging). Default: ``False``.
+   * - ``--disable-splittables``
+     - Disable splittable flowables in some elements. Useful if a document cannot otherwise be processed.
+   * - ``--break-side=VALUE``
+     - Section break behavior. Options: ``even``, ``odd``, ``any``.
 
 Configuration File
 -------------------
