@@ -66,13 +66,141 @@ As well as the rst2pdf-specific features described in this manual, you many also
 Command line options
 --------------------
 
-.. include:: rst2pdf.rst
-   :start-line: 30
-   :end-before: EXAMPLES
+Use the following options to control the output of `rst2pdf` on the command line.
 
+General Options
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-h, --help``
+     - Show the help message and exit.
+   * - ``--version``
+     - Print the version number and exit.
+   * - ``-q, --quiet``
+     - Print less information.
+   * - ``-v, --verbose``
+     - Print debug information.
+   * - ``--very-verbose``
+     - Print even more debug information.
+
+File and Configuration
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``--config=FILE``
+     - Config file to use. Default: ``~/.rst2pdf/config``.
+   * - ``-o FILE, --output=FILE``
+     - Write the PDF to ``FILE``.
+   * - ``--record-dependencies=FILE``
+     - Write output file dependencies to ``FILE``.
+
+Styling Options
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-s STYLESHEETS, --stylesheets=STYLESHEETS``
+     - A comma-separated list of custom stylesheets. Default: ``""``.
+   * - ``--stylesheet-path=FOLDERLIST``
+     - A colon-separated list of folders to search for stylesheets. Default: ``""``.
+   * - ``--print-stylesheet``
+     - Print the default stylesheet and exit.
+   * - ``--font-path=FOLDERLIST``
+     - A colon-separated list of folders to search for fonts. Default: ``""``.
+
+
+PDF Options
+~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-c, --compressed``
+     - Create a compressed PDF. Default: ``False``.
+   * - ``--baseurl=URL``
+     - The base URL for relative URLs.
+   * - ``--header=HEADER``
+     - Page header if not specified in the document.
+   * - ``--footer=FOOTER``
+     - Page footer if not specified in the document.
+   * - ``--first-page-on-right``
+     - When using double-sided pages, the first page will start on the right-hand side (Book Style).
+   * - ``--blank-first-page``
+     - Add a blank page at the beginning of the document.
+   * - ``--custom-cover=FILE``
+     - Template file used for the cover page. Default: ``cover.tmpl``.
+
+Formatting Options
+~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``--section-header-depth=N``
+     - Sections up to this depth will be used in the header and footer's replacement of ``###Section###``. Default: ``2``.
+   * - ``--smart-quotes=VALUE``
+     - Convert ASCII quotes, ellipses, and dashes to typographically correct equivalents. Default: ``0``.
+
+       Accepted values:
+
+       - ``0``: Suppress all transformations.
+       - ``1``: Default transformations for quotes, em-dashes, and ellipses.
+       - ``2``: Use typewriter shorthand for dashes.
+       - ``3``: Invert shorthand for dashes.
+
+   * - ``--fit-literal-mode=MODE``
+     - Handle literals that are too wide. Options: ``error``, ``overflow``, ``shrink``, ``truncate``. Default: ``shrink``.
+   * - ``--fit-background-mode=MODE``
+     - Fit the background image to the page. Options: ``scale``, ``scale_width``, ``center``. Default: ``center``.
+
+Miscellaneous Options
+~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+   * - ``-e EXTENSIONS, --extension-module=EXTENSIONS``
+     - Add a helper extension module (must end in ``.py`` and be on the Python path).
+   * - ``--inline-links``
+     - Show targets in parentheses instead of active links.
+   * - ``--repeat-table-rows``
+     - Repeat the header row for each split table.
+   * - ``--raw-html``
+     - Support embedding raw HTML. Default: ``False``.
+   * - ``--no-footnote-backlinks``
+     - Disable footnote backlinks. Default: ``False``.
+   * - ``--inline-footnotes``
+     - Show footnotes inline. Default: ``True``.
+   * - ``--default-dpi=NUMBER``
+     - DPI for objects sized in pixels. Default: ``300``.
+   * - ``--show-frame-boundary``
+     - Show frame borders (useful for debugging). Default: ``False``.
+   * - ``--disable-splittables``
+     - Disable splittable flowables in some elements. Useful if a document cannot otherwise be processed.
+   * - ``--break-side=VALUE``
+     - Section break behavior. Options: ``even``, ``odd``, ``any``.
 
 Configuration File
 -------------------
+
+The configuration file uses an **INI-style** format with sections and key-value pairs. Comments are prefixed with ``#``.
 
 Since version 0.8, rst2pdf will read (if it is available) configuration files in
 ``/etc/rst2pdf.conf`` and ``~/.rst2pdf/config``.
@@ -84,11 +212,100 @@ The user's file at ``~/.rst2pdf/config`` will have priority over the system's at
        systems. if you are using rst2pdf in other systems, please contact me and
        tell me where the system-wide config file should be.
 
-Here's an example file showing some of the currently available options:
+Configuration Options
+~~~~~~~~~~~~~~~~~~~~~
+
+The table below provides detailed descriptions of the available configuration options.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Option
+     - Description
+     - Default Value
+   * - ``stylesheets``
+     - Comma-separated list of custom stylesheets.
+     - ``""``
+   * - ``compressed``
+     - Generate a compressed PDF. Use ``true``/``false`` or ``1``/``0``.
+     - ``false``
+   * - ``font_path``
+     - Colon-separated list of folders to search for fonts.
+     - ``""``
+   * - ``stylesheet_path``
+     - Colon-separated list of folders to search for stylesheets.
+     - ``""``
+   * - ``language``
+     - Language for hyphenation and localization.
+     - ``en_US``
+   * - ``header``
+     - Default page header. Use ``null`` for no header.
+     - ``null``
+   * - ``footer``
+     - Default page footer. Use ``null`` for no footer.
+     - ``null``
+   * - ``fit_mode``
+     - Handle oversized literal blocks. Options: ``shrink``, ``truncate``, ``overflow``.
+     - ``shrink``
+   * - ``fit_background_mode``
+     - Adjust background images. Options: ``scale``, ``center``.
+     - ``center``
+   * - ``break_level``
+     - Maximum heading level that starts on a new page.
+     - ``0``
+   * - ``break_side``
+     - Section break alignment. Options: ``even``, ``odd``, ``any``.
+     - ``any``
+   * - ``blank_first_page``
+     - Add a blank page at the start of the document.
+     - ``false``
+   * - ``first_page_even``
+     - Treat the first page as even.
+     - ``false``
+   * - ``smartquotes``
+     - Configure smart quotes transformation.
+
+       Accepted values:
+
+       - ``0``: Suppress all transformations.
+       - ``1``: Default transformations for quotes, em-dashes, and ellipses.
+       - ``2``: Use typewriter shorthand for dashes.
+       - ``3``: Invert shorthand for dashes.
+
+     - ``0``
+   * - ``footnote_backlinks``
+     - Enable footnote backlinks.
+     - ``true``
+   * - ``inline_footnotes``
+     - Show footnotes inline.
+     - ``false``
+   * - ``custom_cover``
+     - Template file for the cover page.
+     - ``cover.tmpl``
+   * - ``floating_images``
+     - Enable floating images for alignment.
+     - ``false``
+   * - ``raw_html``
+     - Enable support for the ``..raw:: html`` directive.
+     - ``false``
+
+Example Configuration File
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here's an example configuration file showing the expected format:
 
 .. code-block:: ini
-   :include: assets/config.sample
 
+    # This is an example config file. Modify and place in ~/.rst2pdf/config
+
+    [general]
+    stylesheets="fruity.json,a4paper.json,verasans.json"
+
+    # Folders to search for stylesheets.
+    stylesheet_path="~/styles:/usr/share/styles"
+
+    # Language to be used for hyphenation support
+    language="en_US"
 
 Pipe usage
 ----------
@@ -1289,20 +1506,6 @@ The options are:
 ``:end-at: string``
     will include file up to the first occurrence of string, string **included**
 
-Let's display a class from rst2pdf::
-
-      .. code-block:: python
-         :include: assets/flowables.py
-         :start-at: class Separation(Flowable):
-         :end-before: class Reference(Flowable):
-
-This command gives
-
-.. code-block:: python
-    :include: assets/flowables.py
-    :start-at: class Separation(Flowable):
-    :end-before: class Reference(Flowable):
-
 .. _supported: http://pygments.org/docs/lexers/
 
 .. _pygments: http://pygments.org/
@@ -2086,29 +2289,31 @@ Extensions
 rst2pdf can get new features from *extensions*. Extensions are python modules
 that can be enabled with the ``-e`` option.
 
-Several are included with rst2pdf.
+Several are included with rst2pdf, and you can also develop extensions yourself.
+Find the included extensions_ by inspecting the codebase, each file includes some
+additional information about the extension.
 
-Preprocess (``-e preprocess``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _extensions: https://github.com/rst2pdf/rst2pdf/tree/main/rst2pdf/extensions
 
-.. include:: ../rst2pdf/extensions/preprocess_r2p.py
-   :start-after:  '''
-   :end-before: '''
+Extensions include with rst2pdf:
 
-Dotted_TOC (``-e dotted_toc``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ``dotted_toc`` - a (very) experimental extension to add dots to the table of
+  contents list between the titles and the page numbers.
 
-.. include:: ../rst2pdf/extensions/dotted_toc.py
-   :start-after:  '''
-   :end-before: '''
+- ``fancy_titles`` - an experimental extension to render headings with an SVG template.
 
+- ``plantuml_r2p`` - basic PlantUML support.
+
+- ``preprocess`` - preprocessing tool to make source file changes before
+  handing it to docutils, can help keep compatibility between different output
+  destinations.
 
 Developers
 ----------
 
-.. include:: DEVELOPERS.rst
-   :start-line: 4
+To contribute to rst2pdf, visit the project_ on GitHub to get started.
 
+.. _project: https://github.com/rst2pdf/rst2pdf
 
 Licenses
 --------
