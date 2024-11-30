@@ -1,0 +1,297 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/PageLabels 11 0 R /PageMode /UseNone /Pages 9 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title (Highlight lines) /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Length 4983
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 741.0236 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 180.8842 0 Td (Highlight lines) Tj T* -180.8842 0 Td ET
+Q
+Q
+q
+1 0 0 1 57.02362 681.0236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.58989 Tw 12 TL /F1 10 Tf 0 0 0 rg (The following code-blocks should dim all lines that are not marked with ) Tj /F3 10 Tf (emphasize-lines) Tj /F1 10 Tf (, and so the) Tj T* 0 Tw (effect is to highlight the selected lines.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 663.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (This feature is an alias of the ) Tj /F3 10 Tf (hl_lines) Tj /F1 10 Tf ( feature, since this option is used by Sphinx.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 645.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (With this block of plain text, lines 1 and 3 are dimmed:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 587.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 48 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 24 12 12 re f*
+.941176 .972549 1 rg
+n 12 24 30 12 re f*
+.941176 .972549 1 rg
+n 42 24 0 12 re f*
+.941176 .972549 1 rg
+n 0 12 12 12 re f*
+.941176 .972549 1 rg
+n 84 12 0 12 re f*
+.941176 .972549 1 rg
+n 0 0 12 12 re f*
+.941176 .972549 1 rg
+n 12 0 120 12 re f*
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf .666667 .666667 .666667 rg (1 ) Tj (To be) Tj 0 0 0 rg  T* (2 ) Tj (or not to be) Tj .666667 .666667 .666667 rg  T* (3 ) Tj (that is the question) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 57.02362 567.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (For this block of Python, lines 1, 2, 4, 6, 8, 9 and 10 are dimmed:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 426.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.941176 .972549 1 rg
+n -6 -6 480.0283 132 re B*
+Q
+q
+.941176 .972549 1 rg
+n 0 108 18 12 re f*
+.941176 .972549 1 rg
+n 18 108 36 12 re f*
+.941176 .972549 1 rg
+n 54 108 6 12 re f*
+.941176 .972549 1 rg
+n 60 108 6 12 re f*
+.941176 .972549 1 rg
+n 66 108 6 12 re f*
+.941176 .972549 1 rg
+n 72 108 6 12 re f*
+.941176 .972549 1 rg
+n 78 108 0 12 re f*
+.941176 .972549 1 rg
+n 0 96 18 12 re f*
+.941176 .972549 1 rg
+n 18 96 0 12 re f*
+.941176 .972549 1 rg
+n 0 84 18 12 re f*
+.941176 .972549 1 rg
+n 18 84 12 12 re f*
+.941176 .972549 1 rg
+n 36 84 36 12 re f*
+.941176 .972549 1 rg
+n 78 84 6 12 re f*
+.941176 .972549 1 rg
+n 90 84 6 12 re f*
+.941176 .972549 1 rg
+n 96 84 6 12 re f*
+.941176 .972549 1 rg
+n 102 84 0 12 re f*
+.941176 .972549 1 rg
+n 0 72 18 12 re f*
+.941176 .972549 1 rg
+n 18 72 24 12 re f*
+.941176 .972549 1 rg
+n 42 72 30 12 re f*
+.941176 .972549 1 rg
+n 72 72 6 12 re f*
+.941176 .972549 1 rg
+n 78 72 102 12 re f*
+.941176 .972549 1 rg
+n 180 72 6 12 re f*
+.941176 .972549 1 rg
+n 186 72 0 12 re f*
+.941176 .972549 1 rg
+n 0 60 18 12 re f*
+.941176 .972549 1 rg
+n 18 60 24 12 re f*
+.941176 .972549 1 rg
+n 48 60 36 12 re f*
+.941176 .972549 1 rg
+n 90 60 12 12 re f*
+.941176 .972549 1 rg
+n 108 60 6 12 re f*
+.941176 .972549 1 rg
+n 114 60 6 12 re f*
+.941176 .972549 1 rg
+n 120 60 0 12 re f*
+.941176 .972549 1 rg
+n 0 48 18 12 re f*
+.941176 .972549 1 rg
+n 18 48 24 12 re f*
+.941176 .972549 1 rg
+n 42 48 30 12 re f*
+.941176 .972549 1 rg
+n 72 48 6 12 re f*
+.941176 .972549 1 rg
+n 78 48 36 12 re f*
+.941176 .972549 1 rg
+n 114 48 6 12 re f*
+.941176 .972549 1 rg
+n 120 48 0 12 re f*
+.941176 .972549 1 rg
+n 0 36 18 12 re f*
+.941176 .972549 1 rg
+n 18 36 24 12 re f*
+.941176 .972549 1 rg
+n 42 36 6 12 re f*
+.941176 .972549 1 rg
+n 48 36 0 12 re f*
+.941176 .972549 1 rg
+n 0 24 18 12 re f*
+.941176 .972549 1 rg
+n 18 24 24 12 re f*
+.941176 .972549 1 rg
+n 42 24 30 12 re f*
+.941176 .972549 1 rg
+n 72 24 6 12 re f*
+.941176 .972549 1 rg
+n 78 24 102 12 re f*
+.941176 .972549 1 rg
+n 180 24 6 12 re f*
+.941176 .972549 1 rg
+n 186 24 0 12 re f*
+.941176 .972549 1 rg
+n 0 12 18 12 re f*
+.941176 .972549 1 rg
+n 18 12 0 12 re f*
+.941176 .972549 1 rg
+n 0 0 18 12 re f*
+.941176 .972549 1 rg
+n 18 0 30 12 re f*
+.941176 .972549 1 rg
+n 48 0 6 12 re f*
+.941176 .972549 1 rg
+n 54 0 210 12 re f*
+.941176 .972549 1 rg
+n 264 0 6 12 re f*
+BT 1 0 0 1 0 110 Tm 12 TL /F3 10 Tf .666667 .666667 .666667 rg ( 1 ) Tj (number) Tj ( ) Tj (=) Tj ( ) Tj (0) Tj  T* ( 2 ) Tj 0 0 0 rg  T* ( 3 ) Tj /F4 10 Tf 0 .501961 0 rg (if) Tj /F3 10 Tf 0 0 0 rg ( ) Tj (number) Tj ( ) Tj .4 .4 .4 rg (>) Tj 0 0 0 rg ( ) Tj .4 .4 .4 rg (0) Tj 0 0 0 rg (:) Tj .666667 .666667 .666667 rg  T* ( 4 ) Tj (    ) Tj (print) Tj (\() Tj ("Positive number") Tj (\)) Tj 0 0 0 rg  T* ( 5 ) Tj /F4 10 Tf 0 .501961 0 rg (elif) Tj /F3 10 Tf 0 0 0 rg ( ) Tj (number) Tj ( ) Tj .4 .4 .4 rg (==) Tj 0 0 0 rg ( ) Tj .4 .4 .4 rg (0) Tj 0 0 0 rg (:) Tj .666667 .666667 .666667 rg  T* ( 6 ) Tj (    ) Tj (print) Tj (\() Tj ('Zero') Tj (\)) Tj 0 0 0 rg  T* ( 7 ) Tj /F4 10 Tf 0 .501961 0 rg (else) Tj /F3 10 Tf 0 0 0 rg (:) Tj .666667 .666667 .666667 rg  T* ( 8 ) Tj (    ) Tj (print) Tj (\() Tj ('Negative number') Tj (\)) Tj  T* ( 9 ) Tj  T* (10 ) Tj (print) Tj (\() Tj ('This statement is always executed') Tj (\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+11 0 obj
+<<
+/Nums [ 0 12 0 R ]
+>>
+endobj
+12 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000073 00000 n 
+0000000134 00000 n 
+0000000241 00000 n 
+0000000350 00000 n 
+0000000455 00000 n 
+0000000565 00000 n 
+0000000769 00000 n 
+0000000856 00000 n 
+0000001128 00000 n 
+0000001187 00000 n 
+0000006222 00000 n 
+0000006263 00000 n 
+trailer
+<<
+/ID 
+[<19b7a0fd1e8e4f96176fce9e6b5d3271><19b7a0fd1e8e4f96176fce9e6b5d3271>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 13
+>>
+startxref
+6297
+%%EOF
