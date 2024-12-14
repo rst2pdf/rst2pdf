@@ -242,7 +242,7 @@ def code_block_directive(
 
     content = content.replace('\t', ' ' * tabw)
 
-    # option hl_lines renamed to emphasize-lines for Sphinx compatibility
+    # hl_lines is the option, but if it isn't used, the alias emphasize-lines is also supported for Sphinx compatibility
     hl_lines = options.get('hl_lines', [])
     # if hl_lines isn't used, check if emphasize-lines should be
     if hl_lines == []:
