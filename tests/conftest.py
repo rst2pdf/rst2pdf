@@ -183,7 +183,7 @@ class Item(pytest.Item):
 
     def _fail(self, msg, output=None):
         pytest.fail(
-            f'{msg}:\n\n{output.decode("utf-8")}' if output else msg,
+            f'{msg}: \n\n{output.decode("utf-8")}' if output else msg,
             pytrace=False,
         )
 
