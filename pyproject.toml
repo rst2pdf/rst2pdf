@@ -88,6 +88,7 @@ packages = ["rst2pdf"]
 
 [tool.uv]
 dev-dependencies = [
+    "flake8>=5.0.4",
     "pymupdf~=1.0,<1.24.11",
     "pytest-xdist~=3.0",
     "pytest~=8.0",
