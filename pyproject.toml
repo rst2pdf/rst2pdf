@@ -44,14 +44,14 @@ keywords= [
 ]
 license = {file = "LICENSE.txt"}
 readme = "README.rst"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 aafiguresupport = ["aafigure"]
 mathsupport = ["matplotlib"]
 plantumlsupport = ["plantuml"]
 rawhtmlsupport = ["xhtml2pdf"]
-sphinx = ["sphinx"]
+sphinx = ["sphinx>7.3"]
 svgsupport = ["svglib"]
 
 [project.scripts]
