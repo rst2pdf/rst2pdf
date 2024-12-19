@@ -53,7 +53,7 @@ Installation
 last version to support Python 2.7.
 
 Install from PyPI (pipx)
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The latest released version may be installed from PyPI by using ``pipx``::
 
@@ -65,7 +65,7 @@ required dependencies using ``pipx`` may be installed using::
     $ pipx install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
 Install from PyPI (uv)
-~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 As with ``pipx`` above, the latest released version may be installed from PyPI by using
 `uv <https://docs.astral.sh/uv>`_::
