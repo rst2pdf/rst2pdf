@@ -30,7 +30,7 @@ repos:
         files: .*\.(yaml|yml)$
       - id: check-added-large-files
   - repo: https://github.com/pycqa/flake8
-    rev: 3.9.2
+    rev: 5.0.4
     hooks:
       - id: flake8
         # NOTE(stephenfin): This is needed until the fix for

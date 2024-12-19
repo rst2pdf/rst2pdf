@@ -4,11 +4,7 @@ Release Process for rst2pdf
 
 This is an outline of what needs to be done in order to release rst2pdf.
 
-#. Install dependencies that you'll need
-   ::
-
-      $ pip install build twine
-
+#. Install ``uv``, please see `the installation docs <https://docs.astral.sh/uv/getting-started/installation/>`_
 #. You will also need the need the `White Rabbit`_ font installed in order to create the manual
 #. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
 #. Ensure all PRs are attached to the milestone
@@ -25,7 +21,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
       $ changelog-generator -u rst2pdf -r rst2pdf -m 999
 
-#. Tag release with version number
+#. Tag release with version number e.g.
 
    ::
 
@@ -34,14 +30,14 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Build manual
 
-   Check out the tag first and then install via pip. We do this so that the version number that
+   Check out the tag first and then install via ``uv``. We do this so that the version number that
    is rendered to the first page of the PDF is displayed as "{version number} (final)" rather than
    as a dev version.
 
    ::
 
      $ git checkout 0.94
-     $ pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
+     $ uv sync --all-extras
 
    Generate the HTML and PDF docs:
 
@@ -50,7 +46,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
      $ cd doc; ./gen_docs.sh; cd ..
      $ git checkout main
 
-   Add subject and author to manual PDF's meta data using ExifTool_
+   Add subject and author to manual PDF's meta data using ExifTool_ e.g.
 
    ::
 
@@ -78,69 +74,47 @@ This is an outline of what needs to be done in order to release rst2pdf.
     ::
 
        $ echo -e "[egg_info]\ntag_build=rc1\n" > /tmp/build_opts.cfg
-       $ DIST_EXTRA_CONFIG=/tmp/build_opts.cfg python -m build
+       $ DIST_EXTRA_CONFIG=/tmp/build_opts.cfg uv build
        $ rm /tmp/build_opts.cfg
 
     If you're doing an alphaX, betaX or postX, then change ``tag_build=rc1`` appropriately
 
-#. Set up PyPI if you haven't already
-
-    Create a ``~/.pypirc`` file with sections for rst2pdf and testrstpdf which are then used with ``twine`` via the
-    ``--repository`` switch.
-
-    It should contain the following:
+#. Upload the rc distribution to Test-PyPI_. You can get your token from the account settings section of
+   https://test.pypi.org/.
 
     ::
 
-        [rst2pdf]
-          username = __token__
-          password = {your token here}
-
-        [testrst2pdf]
-          repository = https://test.pypi.org/legacy/
-          username = __token__
-          password = {your token here}
-
-
-    You can get your token from the account settings section of https://pypi.org/ & https://test.pypi.org/
-
-
-#. Upload the rc distribution to Test-PyPI_
-
-    ::
-
-       $ twine upload --repository testrst2pdf dist/*
+       $ uv publish --publish-url https://test.pypi.org/legacy/ --token {your token here}
 
     Check that it all looks correct on Test-PyPI. If not, fix and release a new rc.
 
-#. Test Test-PyPI release into a clean virtual env
+#. Test Test-PyPI release into a clean virtual env (specify the correct version number below). It should install the
+   rc release on Test PyPI and be able to create PDF documents from rst files e.g.
 
     ::
 
-       $ pip install --index-url https://test.pypi.org/simple \
-         --extra-index-url https://pypi.org/simple --pre rst2pdf
+       $ uvx -n --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple --prerelease allow \
+         --index-strategy unsafe-best-match rst2pdf@0.101rc1 tests/input/test_tableofcontents.rst
 
-    It should install the rc release on Test PyPI and be able to create PDF documents from rst files
-
-    Delete the build artifacts and dist files with:
+#. Delete the build artifacts and dist files with:
 
     ::
 
-        $ rm -rf build/ rst2pdf.egg-info/ dist/
+       $ rm -rf build/ rst2pdf.egg-info/ dist/
 
-#. Once rc version is working, release to PyPI_ by generating official release and uploading
+#. Once rc version is working, release to PyPI_ by generating building the release and publishing. You can get your
+   token from the account settings section of https://pypi.org/.
 
     ::
 
-       $ python -m build
-       $ twine upload --repository rst2pdf dist/*
-
+       $ uv build --no-sources
+       $ uv publish --token {your token here}
 
     Check that the release is correct on PyPI_ and then delete the build artifacts and dist files with:
 
     ::
 
-        $ rm -rf build/ rst2pdf.egg-info/ dist/
+       $ rm -rf build/ rst2pdf.egg-info/ dist/
 
 #. That's it!
 
@@ -163,4 +137,4 @@ Releasing as a Snap
 
 2. Run ``snapcraft`` and note the filename of the output
 
-3. Now publish (the ``rst2pdf`` namespace is associated with @lornajane's Ubuntu account) by doing ``snapcraft push --release=stable [the snape filename from the previous step]``
+3. Now publish (the ``rst2pdf`` namespace is associated with @lornajane's Ubuntu account) by doing ``snapcraft push --release=stable [the snap filename from the previous step]``

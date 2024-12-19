@@ -20,7 +20,7 @@ If you want to do something inside rst2pdf, you are welcome! The process looks s
     During this process, you can run the individual test case to quickly
     iterate. For example::
 
-      pytest tests/input/test_summary_of_test.txt
+      uv run pytest tests/input/test_summary_of_test.txt
 
     You may also wish to check the logs and output::
 
@@ -36,8 +36,8 @@ If you want to do something inside rst2pdf, you are welcome! The process looks s
 * If you added a command line option, document it in ``doc/rst2pdf.txt``.  That
   will make it appear in the manual and in the man page.
 
-* If you implemented a new feature, please document it in ``manual.rst`` (or in
-  a separate file and add an include in ``manual.rst``)
+* If you implemented a new feature, please document it in ``doc/manual.rst`` (or in
+  a separate file and add an include in ``doc/manual.rst``)
 
 * If you implement an extension, make the docstring valid restructured text and
   link it to the manual like the others.
@@ -50,25 +50,11 @@ activate a venv::
 
     git clone https://github.com/rst2pdf/rst2pdf
     cd rst2pdf
-    python3 -m venv .venv
-    . .venv/bin/activate
+    uv sync --all-extras
 
-Ensure that setuptools and pip are up to date::
+If you don't have ``uv``, please see `the installation docs <https://docs.astral.sh/uv/getting-started/installation/>`_
 
-    pip install --upgrade setuptools pip
-
-Now you can install rst2pdf from this source code::
-
-    pip install -c requirements.txt -e .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport,tests]
-
-Note, that on Apple Silicon Macs, you may need this to get tests passing::
-
-    pip install reportlab==3.6.12 --force-reinstall --no-cache-dir --global-option=build_ext
-
-(Look in ``requirements.txt`` for the version of reportlab to use.)
-
-You can now work on rst2pdf development. Once complete, you can deactivate the
-venv with ``deactivate``.
+You can now work on rst2pdf development.
 
 Git config
 ~~~~~~~~~~
@@ -85,10 +71,9 @@ Pre-commit
 ~~~~~~~~~~
 
 *rst2pdf* uses the `pre-commit`__ framework to automate various style checkers.
-This must be enabled locally. You can install this using *pip* or your local
-package manager. For example, to install using *pip*::
+This must be enabled locally. You can install this using ``uv``::
 
-    pip install pre-commit
+    uv tool install pre-commit
 
 Once installed, enable it like so::
 
@@ -121,26 +106,20 @@ caused by these changes in underlying dependencies.
 .. __: https://mupdf.com/
 .. __: https://www.reportlab.com/
 
-To run all the tests enable your venv first if it's not enabled and then call ``pytest``::
+To run all the tests via ``pytest`` use::
 
-    pytest
+    uv run pytest
 
 You can also run tests in parallel using ``pytest-xdist`` by passing the ``-n auto`` flag.
 
-Firstly install::
-
-    pip install pytest-xdist
-
-Then run the tests in parallel::
-
-    pytest -n auto
+    uv run pytest -n auto
 
 Running a single test
 *********************
 
 To run one test only, simply pass the file or directory to pytest. For example::
 
-  pytest tests/input/sphinx-repeat-table-rows
+  uv run pytest tests/input/sphinx-repeat-table-rows
 
 This will run one test and show the output.
 
