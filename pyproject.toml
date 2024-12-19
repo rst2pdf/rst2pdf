@@ -88,7 +88,14 @@ packages = ["rst2pdf"]
 [dependency-groups]
 dev = [
     "flake8>=5.0.4",
-    "pymupdf~=1.0,<1.24.11",
+    "pymupdf~=1.0",
     "pytest-xdist~=3.0",
     "pytest~=8.0",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:sys.*",  # see https://github.com/swig/swig/issues/2881
+    "ignore::DeprecationWarning:importlib.*",  # see https://github.com/swig/swig/issues/2881
+#    "default::DeprecationWarning:rst2pdf.*:",  # except from rst2pdf
 ]
