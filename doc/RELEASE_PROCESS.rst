@@ -102,13 +102,13 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
        $ rm -rf build/ rst2pdf.egg-info/ dist/
 
-#. Once rc version is working, release to PyPI_ by generating official release and uploading
+#. Once rc version is working, release to PyPI_ by generating building the release and publishing. You can get your
+   token from the account settings section of https://pypi.org/.
 
     ::
 
        $ uv build --no-sources
        $ uv publish --token {your token here}
-
 
     Check that the release is correct on PyPI_ and then delete the build artifacts and dist files with:
 
