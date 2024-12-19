@@ -69,10 +69,6 @@ install with ``uv``::
 
     uv tool install pre-commit
 
-Or using ``pipx``::
-
-    pipx install pre-commit
-
 Once installed, enable it by running this command::
 
     pre-commit install --allow-missing-config
