@@ -9,11 +9,11 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
         experimental: [false]
-        include:
-          - python-version: '3.13.0-rc.1'
-            experimental: true
+        # include:
+        #   - python-version: '3.14-rc'
+        #     experimental: true
 
     steps:
     - uses: actions/checkout@v2
