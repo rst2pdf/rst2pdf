@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "docutils~=0.20.0",
+    "docutils~=0.21.2",
     "importlib-metadata~=8.0",
     "jinja2~=3.0",
     "packaging~=24.0",
