@@ -17,12 +17,12 @@
 <!--Which python version are you using?-->
 `python -V`
 
-`pip freeze | grep rst2pdf`
+`uv pip freeze | grep rst2pdf`
 
-`pip freeze | grep reportlab`
+`uv pip freeze | grep reportlab`
 
 <!--- (Optional) If you are using Sphinx, please paste output of this too.-->
-`pip freeze | grep Sphinx`
+`uv pip freeze | grep Sphinx`
 
 Which operating system are you using?
 
