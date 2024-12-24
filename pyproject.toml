@@ -65,6 +65,9 @@ Releases = "https://github.com/rst2pdf/rst2pdf/releases"
 Source = "https://github.com/rst2pdf/rst2pdf"
 "Bug Reports" = "https://github.com/rst2pdf/rst2pdf/issues"
 
+[tool.uv]
+cache-keys = [{ git = { commit = true, tags = true } }]
+
 [tool.black]
 line-length = 88
 target-version = ['py36']
