@@ -3,6 +3,12 @@
 ------
 
 
+0.103.1 (2024-12-24)
+--------------------
+* Changed: Updated pyproject classifiers to include Python 3.13 (PR #1258)
+* Changed: Various project changes to allow releasing using uv (PR #1255, PR #1256, PR #1257)
+
+
 0.103 (2024-12-24)
 ------------------
 
