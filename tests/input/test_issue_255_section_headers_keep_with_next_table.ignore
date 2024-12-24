@@ -1,0 +1,5 @@
+Headers have the ``KeepWithNext`` attribute set, however if the next item
+is a table, then the headers do not keep with it over a page break as they
+do with a paragraph.
+
+Believed to be a ReportLab bug as per Issue 255.
