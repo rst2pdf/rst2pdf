@@ -15,28 +15,36 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
       $ git checkout main
 
-#. Use changelog-generator_ (or similar) to create a changelog
+#. Use changelog-generator_ (or similar) to create a changelog for the tag's message
 
    ::
 
-      $ changelog-generator -u rst2pdf -r rst2pdf -m 999
+      $ changelog-generator -u rst2pdf -r rst2pdf -m {id of milestone}
 
 #. Tag release with version number e.g.
 
    ::
 
-      $ git tag -s 0.94
-      $ git push upstream 0.94
+      $ git tag -s 0.103
+
+#. Update the uv.lock file with the correct version number, move the tag and push
+
+      $ uv lock
+      $ git add uv.lock
+      $ git commit -m "Update uv.lock for version 0.103"
+      $ git tag -s 0.103 -f
+      $ git push upstream 0.103
 
 #. Build manual
 
-   Check out the tag first and then install via ``uv``. We do this so that the version number that
+   Check out the tag first if it's not already checked out from the previous step.
+   Install via ``uv``. We do this so that the version number that
    is rendered to the first page of the PDF is displayed as "{version number} (final)" rather than
    as a dev version.
 
    ::
 
-     $ git checkout 0.94
+     $ git checkout 0.103
      $ uv sync --all-extras
 
    Generate the HTML and PDF docs:
@@ -50,7 +58,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
    ::
 
-     $ exiftool -PDF:Subject="v0.94 r2019011700" doc/output/pdf/manual.pdf
+     $ exiftool -PDF:Subject="v0.103 r2019011700" doc/output/pdf/manual.pdf
      $ exiftool -PDF:Author="rst2pdf project; Roberto Alsina" doc/output/pdf/manual.pdf
 
    and upload to HTML and PDF to the website
@@ -94,7 +102,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
     ::
 
        $ uvx -n --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple --prerelease allow \
-         --index-strategy unsafe-best-match rst2pdf@0.101rc1 tests/input/test_tableofcontents.rst
+         --index-strategy unsafe-best-match rst2pdf@0.103rc1 tests/input/test_tableofcontents.rst
 
 #. Delete the build artifacts and dist files with:
 
