@@ -37,8 +37,7 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Build manual
 
-   Check out the tag first if it's not already checked out from the previous step.
-   Install via ``uv``. We do this so that the version number that
+   Check out the tag first and then install via ``uv``. We do this so that the version number that
    is rendered to the first page of the PDF is displayed as "{version number} (final)" rather than
    as a dev version.
 
