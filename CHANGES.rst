@@ -2,6 +2,18 @@
 {next}
 ------
 
+
+0.103 (2024-12-24)
+------------------
+
+* Added: We now support Python 3.13 (PR #1236)
+* Added: We now support ``emphasize-lines`` asa an alias for ``hl_lines`` (PR #1246)
+* Changed: Support PyMuPDF when it's installed as fitz_old (PR #1225)
+* Changed: We now use pyproject.toml and uv (PR #1240, PR #1242)
+* Fixed: We now run our Sphinx tests again (PR #1241)
+* Fixed: We no longer add a second document to Sphinx builds (PR #1243)
+
+
 0.102 (2024-06-05)
 ------------------
 
