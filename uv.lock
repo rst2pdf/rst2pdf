@@ -1413,7 +1413,7 @@ wheels = [
 
 [[package]]
 name = "rst2pdf"
-version = "0.0.0"
+version = "0.103.1"
 source = { editable = "." }
 dependencies = [
     { name = "docutils" },
