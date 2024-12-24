@@ -87,6 +87,10 @@ exclude = '''
 
 [tool.setuptools]
 packages = ["rst2pdf"]
+ # FIXME: this is a workaround; see:
+ #   - https://github.com/astral-sh/uv/issues/9513
+ #   - https://github.com/pypa/setuptools/issues/4759
+ license-files = []
 
 [tool.setuptools_scm]
 # Presence of the [tool.setuptools_scm] table enables setuptools-scm
