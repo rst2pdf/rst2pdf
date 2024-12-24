@@ -85,6 +85,10 @@ exclude = '''
 [tool.setuptools]
 packages = ["rst2pdf"]
 
+[tool.setuptools_scm]
+# Presence of the [tool.setuptools_scm] table enables setuptools-scm
+
+
 [dependency-groups]
 dev = [
     "flake8>=5.0.4",
