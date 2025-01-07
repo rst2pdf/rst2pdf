@@ -1,0 +1,167 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+1 0 obj
+<<
+/F1 2 0 R /F2 4 0 R /F3 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/Contents 13 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Times-Roman /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 14 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Outlines 9 0 R /PageLabels 15 0 R /PageMode /UseNone /Pages 12 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author () /CreationDate (D:20000101000000+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+  /Subject (\(unspecified\)) /Title () /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 2 /First 10 0 R /Last 11 0 R /Type /Outlines
+>>
+endobj
+10 0 obj
+<<
+/Dest [ 6 0 R /XYZ 57.02362 765.0236 0 ] /Next 11 0 R /Parent 9 0 R /Title (H1)
+>>
+endobj
+11 0 obj
+<<
+/Dest [ 6 0 R /XYZ 57.02362 732.0236 0 ] /Parent 9 0 R /Prev 10 0 R /Title (Heading)
+>>
+endobj
+12 0 obj
+<<
+/Count 2 /Kids [ 3 0 R 6 0 R ] /Type /Pages
+>>
+endobj
+13 0 obj
+<<
+/Length 74
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 169.748 cm
+Q
+ 
+endstream
+endobj
+14 0 obj
+<<
+/Length 875
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 57.02362 744.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (H1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 711.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf .133333 .133333 .133333 rg (Heading) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 669.0236 cm
+q
+BT 1 0 0 1 0 26 Tm .332102 Tw 12 TL /F1 10 Tf 0 0 0 rg (This text is too long to fit onto page 1 due to the large vertical space so this paragraph will be pushed to the) Tj T* 0 Tw .725785 Tw (next page \(page 2\). As the heading style is marked ) Tj /F3 10 Tf (KeepWithNext) Tj /F1 10 Tf (, we expect that both the Heading and) Tj T* 0 Tw (H1 headers will also be pushed onto page 2, leaving page 1 blank.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 57.02362 651.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The test fails if the headers are still on page 1.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+15 0 obj
+<<
+/Nums [ 0 16 0 R 1 17 0 R ]
+>>
+endobj
+16 0 obj
+<<
+/S /D /St 1
+>>
+endobj
+17 0 obj
+<<
+/S /D /St 2
+>>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000073 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000436 00000 n 
+0000000545 00000 n 
+0000000650 00000 n 
+0000000855 00000 n 
+0000000959 00000 n 
+0000001216 00000 n 
+0000001289 00000 n 
+0000001391 00000 n 
+0000001498 00000 n 
+0000001564 00000 n 
+0000001688 00000 n 
+0000002614 00000 n 
+0000002664 00000 n 
+0000002698 00000 n 
+trailer
+<<
+/ID 
+[<2db82f8d13fc9aad0f6ac8c1445975f3><2db82f8d13fc9aad0f6ac8c1445975f3>]
+% ReportLab generated PDF document -- digest (http://www.reportlab.com)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 18
+>>
+startxref
+2732
+%%EOF
