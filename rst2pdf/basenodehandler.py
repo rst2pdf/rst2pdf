@@ -35,8 +35,8 @@ from copy import copy
 import inspect
 import types
 
-from smartypants import smartypants
 import docutils.nodes
+from docutils.utils import smartquotes
 
 from .flowables import BoundByWidth, TocEntry
 from .log import log, nodeid
@@ -290,14 +290,14 @@ class NodeHandler(metaclass=MetaHelper):
     def get_text(self, client, node, replaceEnt):
         return client.gather_pdftext(node)
 
-    def apply_smartypants(self, text, smarty, node):
-        # Try to be clever about when to use smartypants
+    def apply_replacements(self, text, smarty, node):
+        # Try to be clever about when to replace characters
         if node.__class__ in (
             docutils.nodes.paragraph,
             docutils.nodes.block_quote,
             docutils.nodes.title,
         ):
-            return smartypants(text, smarty)
+            return smartquotes.smartyPants(text, smarty)
         return text
 
     # End overridable attributes and methods for textdispatch
@@ -313,6 +313,6 @@ class NodeHandler(metaclass=MetaHelper):
         except UnicodeDecodeError:
             pass
 
-        text = self.apply_smartypants(text, client.smartypants_attributes, node)
+        text = self.apply_replacements(text, client.smartypants_attributes, node)
         node.pdftext = text
         return text
