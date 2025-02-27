@@ -606,20 +606,27 @@ class RstToPdf(object):
             return 1
 
         # Find cover template, save it in cover_file
+        template_dirs = [
+            self.basedir,
+            os.path.expanduser('~/.rst2pdf'),
+            os.path.join(self.PATH, 'templates'),
+        ]
+
+        # Si self.custom_cover es una ruta absoluta, agregar su directorio al inicio de la lista
+        if os.path.isabs(self.custom_cover):
+            template_dirs.insert(0, os.path.dirname(self.custom_cover))
+
         jinja_env = jinja2.Environment(
             loader=DependencyRecordingFileSystemLoader(
-                [
-                    self.basedir,
-                    os.path.expanduser('~/.rst2pdf'),
-                    os.path.join(self.PATH, 'templates'),
-                ],
+                template_dirs,
                 record_dependencies=self.record_dependencies,
             ),
             autoescape=jinja2.select_autoescape(['html', 'xml']),
         )
 
         try:
-            template = jinja_env.get_template(self.custom_cover)
+            # Buscar solo por el nombre del archivo sin la ruta
+            template = jinja_env.get_template(os.path.basename(self.custom_cover))
         except jinja2.TemplateNotFound:
             log.error("Can't find cover template %s, using default" % self.custom_cover)
             template = jinja_env.get_template('cover.tmpl')
