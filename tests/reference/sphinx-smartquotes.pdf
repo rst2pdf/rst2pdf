@@ -58,7 +58,7 @@ endobj
 endobj
 11 0 obj
 <<
-/Length 970
+/Length 1391
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -84,34 +84,49 @@ q
 1 0 0 1 40.01575 739.0394 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \226 B) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \226 B has an en-dash between A and B) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 721.0394 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \227 B) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \227 B has an em-dash between A and B) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 703.0394 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (\223A B\224) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (\223A B\224 has curly double quotes around A and B) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 685.0394 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \205 B) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (\221A B\222 has curly single quotes around A and B) Tj T* ET
 Q
 Q
 q
 1 0 0 1 40.01575 667.0394 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (\221) Tj (\221) Tj (A B\222\222) Tj T* ET
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (\223A B\222\222 has curly quotes around A and B) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 649.0394 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \205 B has an elipsis between A and B) Tj T* ET
+Q
+Q
+q
+1 0 0 1 40.01575 631.0394 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A \205 B has an elipsis between A and B) Tj T* ET
 Q
 Q
  
@@ -141,8 +156,8 @@ xref
 0000001085 00000 n 
 0000001206 00000 n 
 0000001266 00000 n 
-0000002287 00000 n 
-0000002328 00000 n 
+0000002709 00000 n 
+0000002750 00000 n 
 trailer
 <<
 /ID 
@@ -154,5 +169,5 @@ trailer
 /Size 14
 >>
 startxref
-2362
+2784
 %%EOF
