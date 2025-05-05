@@ -602,7 +602,7 @@ class RstToPdf(object):
         jinja_env = jinja2.Environment(
             loader=DependencyRecordingFileSystemLoader(
                 [
-                    #added dir of the pathfile
+                    # added dir of the pathfile
                     os.path.dirname(self.custom_cover),
                     self.basedir,
                     os.path.expanduser('~/.rst2pdf'),
@@ -614,7 +614,7 @@ class RstToPdf(object):
         )
 
         try:
-            #finally get template in dirs list de filename
+            # finally get template in dirs list de filename
             template = jinja_env.get_template(os.path.basename(self.custom_cover))
         except jinja2.TemplateNotFound:
             log.error("Can't find cover template %s, using default" % self.custom_cover)
