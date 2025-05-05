@@ -27,7 +27,7 @@ dependencies = [
     "docutils~=0.21.2",
     "importlib-metadata~=8.0",
     "jinja2~=3.0",
-    "packaging~=24.0",
+    "packaging~=25.0",
     "pygments~=2.0",
     "pyyaml~=6.0",
     "reportlab~=4.0",
@@ -66,6 +66,7 @@ Source = "https://github.com/rst2pdf/rst2pdf"
 "Bug Reports" = "https://github.com/rst2pdf/rst2pdf/issues"
 
 [tool.uv]
+required-version = ">=0.5.21"
 cache-keys = [{ git = { commit = true, tags = true } }]
 
 [tool.black]
