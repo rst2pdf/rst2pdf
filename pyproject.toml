@@ -66,6 +66,7 @@ Source = "https://github.com/rst2pdf/rst2pdf"
 "Bug Reports" = "https://github.com/rst2pdf/rst2pdf/issues"
 
 [tool.uv]
+required-version = ">=0.5.21"
 cache-keys = [{ git = { commit = true, tags = true } }]
 
 [tool.black]
