@@ -2,17 +2,15 @@
 
 from docutils import nodes
 from docutils.parsers.rst import roles
-import importlib_metadata
+import importlib.metadata
 import packaging.version
 
 
 def _get_version(package):
     """Get version from the usual methods."""
-    # TODO(stephenfin): Switch to 'importlib.metadata' once we drop support for
-    # Python < 3.8
     try:
-        parsed_version = packaging.version.parse(importlib_metadata.version(package))
-    except importlib_metadata.PackageNotFoundError:
+        parsed_version = packaging.version.parse(importlib.metadata.version(package))
+    except importlib.metadata.PackageNotFoundError:
         return 'UNKNOWN', 'UNKNOWN'
 
     version = '.'.join(str(r) for r in parsed_version.release)

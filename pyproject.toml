@@ -25,7 +25,6 @@ classifiers = [
 ]
 dependencies = [
     "docutils~=0.21.2",
-    "importlib-metadata~=8.0",
     "jinja2~=3.0",
     "packaging~=25.0",
     "pygments~=2.0",
