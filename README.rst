@@ -44,7 +44,7 @@ Features
 
 * `Sphinx <https://www.sphinx-doc.org>`_ integration
 
-* `Full user's manual <https://rst2pdf.org/static/manual.pdf>`_
+* `Full user's manual <https://rst2pdf.org/manual.html>`_
 
 Installation
 ------------
