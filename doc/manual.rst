@@ -651,7 +651,7 @@ Until you make these adjustments, you can use the historical default style sheet
 Updated Font Alias Names
 ************************
 
-The font aliases used for the standard fonts have changed from those used in the historical default style sheeet. As such, you will need to update to the new names in any derivative style files.
+The font aliases used for the standard fonts have changed from those used in the historical default style sheet. As such, you will need to update to the new names in any derivative style files.
 
 This table shows the old name and the equivalent new name:
 
@@ -2341,7 +2341,7 @@ This is the license for rst2pdf::
     THE SOFTWARE.
 
 
-Some fragments of rstpdf are copied from ReportLab under the following license::
+Some fragments of rst2pdf are copied from ReportLab under the following license::
 
     Copyright (c) 2000-2008, ReportLab Inc.
     All rights reserved.
