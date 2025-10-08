@@ -25,10 +25,12 @@ jobs:
       run: uv python install ${{ matrix.python-version }}
     - name: Install apt dependencies
       run: |
-        sudo apt-get update && sudo apt-get -y install plantuml libxml2-dev libxslt-dev python3-dev
+        sudo apt-get update && sudo apt-get -y install plantuml libxml2-dev libxslt-dev python3-dev libffi-dev libcairo2-dev pkg-config
     - name: Install dependencies for Python
       run: |
         uv sync --all-extras --python ${{ matrix.python-version }}
+      env:
+        PYO3_USE_ABI3_FORWARD_COMPATIBILITY: 1
     - name: Lint
       run: |
         uvx pre-commit run --all-files --show-diff-on-failure

@@ -28,7 +28,7 @@ dependencies = [
     "jinja2~=3.0",
     "packaging~=25.0",
     "pygments~=2.0",
-    "pyyaml~=6.0",
+    "pyyaml>=6.0.1",
     "reportlab~=4.0",
 ]
 description = "Convert reStructured Text to PDF via ReportLab."
