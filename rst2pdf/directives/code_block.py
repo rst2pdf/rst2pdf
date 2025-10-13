@@ -248,7 +248,9 @@ def code_block_directive(
     if hl_lines == []:
         hl_lines = options.get('emphasize-lines', [])
 
-    withln = 'linenos' in options
+    # Here the value of "linenos" will generally be the empty string if the user supplied and desired it, but we also
+    # want to allow it to be present and explicitly disabled
+    withln = options.get("linenos", False) not in ("false", "False", False)
     if 'linenos_offset' not in options:
         line_offset = 0
 
