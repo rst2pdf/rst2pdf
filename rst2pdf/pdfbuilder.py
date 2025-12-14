@@ -865,9 +865,9 @@ class PDFTranslator(nodes.SparseNodeVisitor):
                     n = nodes.strong()
                     n += nodes.Text(lastname)
                     replacement += n
-                    replacement += nodes.Text(' ::=  ')
+                    replacement += nodes.Text(' ::=')
                 else:
-                    replacement += nodes.Text(' ' * (maxlen + 6))
+                    replacement += nodes.Text(' ' * (maxlen + 4))
 
                 production.walkabout(self)
                 replacement.children.extend(production.children)
