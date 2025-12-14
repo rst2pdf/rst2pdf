@@ -45,7 +45,7 @@ from rst2pdf.directives import code_block
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
-if sphinx.__version__ >= '2.1':
+if sphinx.version_info >= (2, 1):
     from sphinx.errors import NoUri
 else:
     from sphinx.environment import NoUri
@@ -847,7 +847,7 @@ class PDFTranslator(nodes.SparseNodeVisitor):
         replacement = nodes.literal_block(classes=["code"])
 
         # Sphinx 8+ uses pre-formatted children in productionlist nodes (#13326)
-        has_formatting = sphinx.__version__ >= '8.2'
+        has_formatting = sphinx.version_info >= (8, 2)
 
         names = []
         for production in node:
