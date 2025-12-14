@@ -845,19 +845,20 @@ class PDFTranslator(nodes.SparseNodeVisitor):
 
     def visit_productionlist(self, node):
         replacement = nodes.literal_block(classes=["code"])
+
+        # Sphinx 8+ uses pre-formatted children in productionlist nodes (#13326)
+        has_formatting = sphinx.__version__ >= '8.2'
+
         names = []
         for production in node:
             names.append(production['tokenname'])
         maxlen = max(len(name) for name in names)
+
         for production in node:
-            # Check if this is new Sphinx format with pre-formatted children
-            if len(production.children) > 0 and hasattr(
-                production.children[0], 'tagname'
-            ):
+            if has_formatting:
                 # New Sphinx/docutils: production children already contain formatted content
                 # We need to reconstruct in the old format to avoid duplication
                 replacement.children.extend(production.children)
-
             else:
                 # Old Sphinx/docutils format, so we need to format manually
                 if production['tokenname']:
