@@ -850,17 +850,29 @@ class PDFTranslator(nodes.SparseNodeVisitor):
             names.append(production['tokenname'])
         maxlen = max(len(name) for name in names)
         for production in node:
-            if production['tokenname']:
-                lastname = production['tokenname'].ljust(maxlen)
-                n = nodes.strong()
-                n += nodes.Text(lastname)
-                replacement += n
-                replacement += nodes.Text(' ::= ')
+            # Check if this is new Sphinx format with pre-formatted children
+            if len(production.children) > 0 and hasattr(
+                production.children[0], 'tagname'
+            ):
+                # New Sphinx/docutils: production children already contain formatted content
+                # We need to reconstruct in the old format to avoid duplication
+                replacement.children.extend(production.children)
+
             else:
-                replacement += nodes.Text('%s     ' % (' ' * len(lastname)))
-            production.walkabout(self)
-            replacement.children.extend(production.children)
-            replacement += nodes.Text('\n')
+                # Old Sphinx/docutils format, so we need to format manually
+                if production['tokenname']:
+                    lastname = production['tokenname'].ljust(maxlen)
+                    n = nodes.strong()
+                    n += nodes.Text(lastname)
+                    replacement += n
+                    replacement += nodes.Text(' ::=  ')
+                else:
+                    replacement += nodes.Text(' ' * (maxlen + 6))
+
+                production.walkabout(self)
+                replacement.children.extend(production.children)
+                replacement += nodes.Text('\n')
+
         node.parent.replace(node, replacement)
         raise nodes.SkipNode
 
