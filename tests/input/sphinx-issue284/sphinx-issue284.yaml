@@ -1,0 +1,17 @@
+styles:
+  code:
+    # Code style from test_issue_154 to match the way we did
+    # code style before update in #1021. As this style has a
+    # background colour, it's easy to see that it's been applied.
+    parent: literal
+    allowOrphans: false
+    allowWidows: false
+    backColor: '#EEFFCC'
+    borderColor: '#AACC99'
+    borderPadding:
+    - 6
+    - 0
+    - 0
+    - 4
+    borderWidth: 0.3
+    spaceBefore: 0

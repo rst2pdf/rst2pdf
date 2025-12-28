@@ -45,7 +45,7 @@ from rst2pdf.directives import code_block
 from rst2pdf.log import log
 from rst2pdf.languages import get_language_available
 
-if sphinx.__version__ >= '2.1':
+if sphinx.version_info >= (2, 1):
     from sphinx.errors import NoUri
 else:
     from sphinx.environment import NoUri
@@ -845,22 +845,35 @@ class PDFTranslator(nodes.SparseNodeVisitor):
 
     def visit_productionlist(self, node):
         replacement = nodes.literal_block(classes=["code"])
+
+        # Sphinx 8+ uses pre-formatted children in productionlist nodes (#13326)
+        has_formatting = sphinx.version_info >= (8, 2)
+
         names = []
         for production in node:
             names.append(production['tokenname'])
         maxlen = max(len(name) for name in names)
+
         for production in node:
-            if production['tokenname']:
-                lastname = production['tokenname'].ljust(maxlen)
-                n = nodes.strong()
-                n += nodes.Text(lastname)
-                replacement += n
-                replacement += nodes.Text(' ::= ')
+            if has_formatting:
+                # New Sphinx/docutils: production children already contain formatted content
+                # We need to reconstruct in the old format to avoid duplication
+                replacement.children.extend(production.children)
             else:
-                replacement += nodes.Text('%s     ' % (' ' * len(lastname)))
-            production.walkabout(self)
-            replacement.children.extend(production.children)
-            replacement += nodes.Text('\n')
+                # Old Sphinx/docutils format, so we need to format manually
+                if production['tokenname']:
+                    lastname = production['tokenname'].ljust(maxlen)
+                    n = nodes.strong()
+                    n += nodes.Text(lastname)
+                    replacement += n
+                    replacement += nodes.Text(' ::=')
+                else:
+                    replacement += nodes.Text(' ' * (maxlen + 4))
+
+                production.walkabout(self)
+                replacement.children.extend(production.children)
+                replacement += nodes.Text('\n')
+
         node.parent.replace(node, replacement)
         raise nodes.SkipNode
 

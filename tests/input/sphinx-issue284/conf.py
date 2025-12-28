@@ -34,7 +34,7 @@ release = '1.0.1'
 pdf_documents = [('index', u'index', u'index', u'lorenzo')]
 
 # A comma-separated list of custom stylesheets. Example:
-pdf_stylesheets = ['sphinx']
+pdf_stylesheets = ['sphinx', 'sphinx-issue284']
 
 # Language to be used for hyphenation support
 pdf_language = "en_US"

@@ -405,9 +405,16 @@ class SplitTable(DelayedTable):
                                     colWidths=self.colWidths,
                                     style=self.style,
                                 )
-                                _w, _h = first_t.wrap(w, h)
-                                if _h <= h:
-                                    break
+                                try:
+                                    _w, _h = first_t.wrap(w, h)
+                                    if _h <= h:
+                                        break
+                                except (ValueError, TypeError) as e:
+                                    # If ReportLab raises an error, log it and treat it as "doesn't fit"
+                                    log.warning(
+                                        f"Table wrap failed during list splitting: {e}. "
+                                        f"This may be a ReportLab bug. Continuing with fallback."
+                                    )
                             l -= 1
 
                         if l > 0:
