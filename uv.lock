@@ -1682,6 +1682,15 @@ wheels = [
 ]
 
 [[package]]
+name = "roman"
+version = "5.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9c/7c/3901b35ed856329bf98e84da8e5e0b4d899ea0027eee222f1be42a24ff3f/roman-5.2.tar.gz", hash = "sha256:275fe9f46290f7d0ffaea1c33251b92b8e463ace23660508ceef522e7587cb6f", size = 8185, upload-time = "2025-11-11T08:03:57.025Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/14/ea3cdd7276fcd731a9003fe4abeb6b395a38110ddff6a6a509f4ee00f741/roman-5.2-py3-none-any.whl", hash = "sha256:89d3b47400388806d06ff77ea77c79ab080bc127820dea6bf34e1f1c1b8e676e", size = 6041, upload-time = "2025-11-11T08:03:56.051Z" },
+]
+
+[[package]]
 name = "roman-numerals"
 version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1700,6 +1709,7 @@ dependencies = [
     { name = "pygments" },
     { name = "pyyaml" },
     { name = "reportlab" },
+    { name = "roman" },
 ]
 
 [package.optional-dependencies]
@@ -1741,6 +1751,7 @@ requires-dist = [
     { name = "pygments", specifier = "~=2.0" },
     { name = "pyyaml", specifier = ">=6.0.1" },
     { name = "reportlab", specifier = "~=4.0" },
+    { name = "roman", specifier = ">=5.2" },
     { name = "sphinx", marker = "python_full_version >= '3.11' and extra == 'sphinx'", specifier = ">=8.2" },
     { name = "svglib", marker = "extra == 'svgsupport'" },
     { name = "xhtml2pdf", marker = "extra == 'rawhtmlsupport'" },

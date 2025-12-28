@@ -30,6 +30,7 @@ dependencies = [
     "pygments~=2.0",
     "pyyaml>=6.0.1",
     "reportlab~=4.0",
+    "roman>=5.2",
 ]
 description = "Convert reStructured Text to PDF via ReportLab."
 dynamic = ["version"]
