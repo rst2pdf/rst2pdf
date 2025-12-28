@@ -1,17 +1,12 @@
-========
-testing
-========
+=====================
+Testing malformed RST
+=====================
 
-big heading
-===========
-
-heading
--------
 This file has malformed RST and so will not generate a PDF and will set the return status code to 1.
 
-big heading
-===========
+This is an invalid table:
 
-::
-..
-    a set of text for testing
+===  ===
+A    B
+===
+C    D
