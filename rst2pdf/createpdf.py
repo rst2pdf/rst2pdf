@@ -542,6 +542,7 @@ class RstToPdf(object):
                     'strip_elements_with_classes'
                 ] = self.strip_elements_with_classes
                 settings_overrides['exit_status_level'] = 3
+                settings_overrides['halt_level'] = 3
 
                 try:
                     self.doctree = docutils.core.publish_doctree(
