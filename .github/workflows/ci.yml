@@ -43,6 +43,6 @@ jobs:
       uses: actions/upload-artifact@v5
       if: failure()
       with:
-        name: failed-tests
+        name: failed-tests-${{ matrix.python-version }}
         path: tests/output
         retention-days: 8
