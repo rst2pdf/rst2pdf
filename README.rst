@@ -24,7 +24,7 @@ Features
 * User-defined page layout. Multiple frames per page, multiple layouts per
   document.
 
-* Page transitions
+* Page transitions.
 
 * Cascading stylesheet mechanism, define only what you want changed.
 
@@ -42,7 +42,7 @@ Features
 
 * Supports hyphenation.
 
-* `Sphinx <https://www.sphinx-doc.org>`_ integration
+* `Sphinx <https://www.sphinx-doc.org>`_ integration.
 
 * `Full user's manual <https://rst2pdf.org/manual.html>`_
 
@@ -52,8 +52,8 @@ Installation
 *rst2pdf* supports Python 3.9 or greater. Version 0.102 was the last version to support Python 3.8. Version 0.99 was
 the last version to support Python 3.6 & 3.7, with 0.97 the last version to support Python 2.7.
 
-Install from PyPI (pipx)
-~~~~~~~~~~~~~~~~~~~~~~~~
+Option 1: Install from PyPI (pipx)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The latest released version may be installed from PyPI by using ``pipx``::
 
@@ -64,8 +64,8 @@ required dependencies using ``pipx`` may be installed using::
 
     $ pipx install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
-Install from PyPI (uv)
-~~~~~~~~~~~~~~~~~~~~~~
+Option 2: Install from PyPI (uv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As with ``pipx`` above, the latest released version may be installed from PyPI by using
 `uv <https://docs.astral.sh/uv>`_::
@@ -78,16 +78,16 @@ Installation of all the required dependencies using ``uv`` may be installed usin
 
     $ uv tool install rst2pdf[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
-Install from Snap
-~~~~~~~~~~~~~~~~~
+Option 3: Install from Snap
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you are using a system that supports `snaps <https://snapcraft.io/>`__
 then you can install from there with::
 
     $ snap install rst2pdf
 
-Install from GitHub
-~~~~~~~~~~~~~~~~~~~
+Option 4: Install from GitHub
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Work on rst2pdf has restarted on GitHub, with the goals of adding new
 features, addressing outstanding issues, and not breaking anything. You
@@ -98,7 +98,7 @@ can clone the repository and install this version::
     $ git checkout <desired-branch> # if you want something other than main
     $ uv tool install .[aafiguresupport,mathsupport,plantumlsupport,rawhtmlsupport,sphinx,svgsupport]
 
-If you intend to work on rst2pdf's source code, see ``doc/DEVELOPERS.rst``.
+If you intend to work on rst2pdf's source code, see `doc/DEVELOPERS <doc/DEVELOPERS.rst>`_.
 
 Usage
 -----
@@ -132,10 +132,6 @@ available, refer to the `manual <https://rst2pdf.org/static/manual.pdf>`_.
 Contributing
 ------------
 
-See `CONTRIBUTING <CONTRIBUTING.rst>`_.
+*  If you’d like to report a bug, suggest a feature, or open a pull request, please see `Contributing <CONTRIBUTING.rst>`_.
 
-Code of conduct
----------------
-
-rst2pdf is an inclusive and welcoming community. To participate in this project, everyone is bound by our
-`Community Code of Conduct <CODE_OF_CONDUCT.rst>`_.
+*  If you want to work with the source code (set up a local dev environment, run tests, etc.), please see `Developers guide <doc/DEVELOPERS.rst>`_.
