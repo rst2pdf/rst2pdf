@@ -2,6 +2,7 @@
 {next}
 ------
 
+* Added: We now support Python 3.14 (PR #1285)
 * Changed: We now use docutil's smart quotes rather than the old, abandoned smartypants library (PR #1253)
 
 0.103.1 (2024-12-24)
