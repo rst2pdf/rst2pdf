@@ -11,8 +11,12 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
+        skip-sphinx: [false]
         experimental: [false]
-        # include:
+        include:
+          - python-version: '3.10'
+            skip-sphinx: true
+            experimental: false
         #   - python-version: '3.14-rc'
         #     experimental: true
 
@@ -27,11 +31,18 @@ jobs:
     - name: Install apt dependencies
       run: |
         sudo apt-get update && sudo apt-get -y install plantuml libxml2-dev libxslt-dev python3-dev libffi-dev libcairo2-dev pkg-config
-    - name: Install dependencies for Python
+    - name: Install dependencies for Python (with Sphinx)
       run: |
         uv sync --all-extras --python ${{ matrix.python-version }}
       env:
         PYO3_USE_ABI3_FORWARD_COMPATIBILITY: 1
+      if: matrix.skip-sphinx == false
+    - name: Install dependencies for Python (without Sphinx)
+      run: |
+        uv sync --extra aafiguresupport --extra mathsupport --extra plantumlsupport --extra rawhtmlsupport --extra svgsupport --python ${{ matrix.python-version }}
+      env:
+        PYO3_USE_ABI3_FORWARD_COMPATIBILITY: 1
+      if: matrix.skip-sphinx == true
     - name: Lint
       run: |
         uvx pre-commit run --all-files --show-diff-on-failure
@@ -43,6 +54,6 @@ jobs:
       uses: actions/upload-artifact@v5
       if: failure()
       with:
-        name: failed-tests
+        name: failed-tests-${{ matrix.python-version }}-${{ matrix.skip-sphinx }}
         path: tests/output
         retention-days: 8
