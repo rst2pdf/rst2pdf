@@ -51,8 +51,12 @@ check_dependency = {'plantuml': can_run(["plantuml", "-pipe"])}
 def _get_metadata(pdf):
     metadata = pdf.metadata
 
+    # Do not compare dates as they will differ each time the PDF is generated
     del metadata['creationDate']
     del metadata['modDate']
+
+    # Do not compare the ReportLab producer string as it may differ between versions
+    del metadata['producer']
 
     return metadata
 
