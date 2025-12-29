@@ -60,7 +60,12 @@ from docutils.utils import smartquotes
 try:
     from roman import toRoman
 except ImportError:
-    from docutils.utils.roman import toRoman
+    # The roman pacakge is not available, so use our internal version
+    from rst2pdf.roman_numerals import RomanNumeral
+
+    def toRoman(n):
+        return str(RomanNumeral(n))
+
 
 import reportlab
 from reportlab.lib.units import cm
