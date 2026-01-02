@@ -3,19 +3,18 @@ python
 
 .. code-block:: python
 
-    import os, shutil, sys, tempfile, urllib2
+    import os, sys
 
-    tmpeggs = tempfile.mkdtemp()
+    def get_env_var(name: str) -> str:
+    """Get required environment variable or exit with error."""
+    value = os.getenv(name)
+    if not value:
+        print(f"Error: Environment variable {name} is not set", file=sys.stderr)
+        sys.exit(1)
+    return value
 
-    try:
-        import pkg_resources
-    except ImportError:
-        ez = {}
-        exec urllib2.urlopen('http://peak.telecommunity.com/dist/ez_setup.py'
-                             ).read() in ez
-        ez['use_setuptools'](to_dir=tmpeggs, download_delay=0)
+    base_url = get_env_var("BASE_URL").rstrip("/")
 
-        import pkg_resources
 
 apache
 ======
