@@ -9,6 +9,8 @@
 * Note: With Pillow 11.1.0+, the dpi for an image is now populated correctly for images using cm. This
     affects the way images are sized as rst2pdf will now use the image's dpi value rather than defaulting
     to 300dpi.
+* Changed: We now use our own copy of docutils _roman_numerals.py from v0.22.4 (PR #1294)
+* Removed: Support for Python 3.9. Python 3.10 is the new minimum supported version of Python. (PR #1294)
 
 0.103.1 (2024-12-24)
 --------------------

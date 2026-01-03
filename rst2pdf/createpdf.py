@@ -60,7 +60,12 @@ from docutils.utils import smartquotes
 try:
     from roman import toRoman
 except ImportError:
-    from docutils.utils.roman import toRoman
+    # The roman package is not available, so use our internal version
+    from rst2pdf.roman_numerals import RomanNumeral
+
+    def toRoman(n):
+        return str(RomanNumeral(n))
+
 
 import reportlab
 from reportlab.lib.units import cm
@@ -542,6 +547,7 @@ class RstToPdf(object):
                     'strip_elements_with_classes'
                 ] = self.strip_elements_with_classes
                 settings_overrides['exit_status_level'] = 3
+                settings_overrides['halt_level'] = 3
 
                 try:
                     self.doctree = docutils.core.publish_doctree(
