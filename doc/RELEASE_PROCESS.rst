@@ -6,34 +6,18 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
 #. Install ``uv``, please see `the installation docs <https://docs.astral.sh/uv/getting-started/installation/>`_
 #. You will also need the need the `White Rabbit`_ font installed in order to create the manual
-#. Update ``CHANGES.rst`` to add the version number and date. Commit to a branch, PR and merge to main
+
+#. Update ``CHANGES.rst`` to add the version number and date
+#. Run ``uv lock`` to update the ``uv.lock`` file
+#. Commit to a branch, PR and merge to main
+
 #. Ensure all PRs are attached to the milestone
 #. Close the milestone and create next one
-#. Checkout main and ensure that your working copy is clean
 
-   ::
-
-      $ git checkout main
-
-#. Use changelog-generator_ (or similar) to create a changelog for the tag's message
-
-   ::
-
-      $ changelog-generator -u rst2pdf -r rst2pdf -m {id of milestone}
-
-#. Tag release with version number e.g.
-
-   ::
-
-      $ git tag -s 0.103
-
-#. Update the uv.lock file with the correct version number, move the tag and push
-
-      $ uv lock
-      $ git add uv.lock
-      $ git commit -m "Update uv.lock for version 0.103"
-      $ git tag -s 0.103 -f
-      $ git push upstream 0.103
+#. On the Releases page, click "Draft a new release"
+#. Go to "Choose a tag" and type the new tag name (e.g., 0.103) to create on publish, target the main branch
+#. Click "Generate release notes" and edit the resulting output
+#. Now publish the new release
 
 #. Build manual
 
@@ -53,22 +37,15 @@ This is an outline of what needs to be done in order to release rst2pdf.
      $ cd doc; ./gen_docs.sh; cd ..
      $ git checkout main
 
-   Add subject and author to manual PDF's meta data using ExifTool_ e.g.
+   Add subject (version info plus r, datetime, and revision number) and author to manual PDF's meta data using ExifTool_ e.g.
 
    ::
 
-     $ exiftool -PDF:Subject="v0.103 r2019011700" doc/output/pdf/manual.pdf
+     $ exiftool -PDF:Subject="v0.104 r2026010800" doc/output/pdf/manual.pdf
      $ exiftool -PDF:Author="rst2pdf project; Roberto Alsina" doc/output/pdf/manual.pdf
 
    and upload to HTML and PDF to the website
    via a PR on the rst2pdf.github.io_ repo.
-
-#. Create a new release in the Releases_ section on GitHub project
-
-   Draft a new release, selecting the newly pushed tag and setting the Release Title to the tag name. To create the
-   description, press the "Generate release notes" button and then remove the items that were by dependabot.
-
-   Publish the release.
 
 #. Create rc distribution package
 
@@ -95,13 +72,16 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
     Check that it all looks correct on Test-PyPI. If not, fix and release a new rc.
 
-#. Test Test-PyPI release into a clean virtual env (specify the correct version number below). It should install the
-   rc release on Test PyPI and be able to create PDF documents from rst files e.g.
+#. Test Test-PyPI release into a clean virtual env in your project root
+   (specify the correct version number below). It should install the rc release
+   on Test PyPI and be able to create PDF documents from rst files e.g.
 
     ::
 
        $ uvx -n --index-url https://test.pypi.org/simple --extra-index-url https://pypi.org/simple --prerelease allow \
-         --index-strategy unsafe-best-match rst2pdf@0.103rc1 tests/input/test_tableofcontents.rst
+         --index-strategy unsafe-best-match rst2pdf@0.104rc1 tests/input/test_tableofcontents.rst
+
+   Look in the ``tests/input/`` directory and check that the ``test_tableofcontents.pdf`` file was created.
 
 #. Delete the build artifacts and dist files with:
 
@@ -128,7 +108,6 @@ This is an outline of what needs to be done in order to release rst2pdf.
     A new release of rst2pdf is now live. Celebrate by shouting about it from the rooftops!
 
 
-.. _changelog-generator: https://github.com/weierophinney/changelog_generator
 .. _White Rabbit:: https://squaregear.net/fonts/whitrabt.html
 .. _ExifTool: https://www.sno.phy.queensu.ca/~phil/exiftool/
 .. _Releases: https://github.com/rst2pdf/rst2pdf/releases
