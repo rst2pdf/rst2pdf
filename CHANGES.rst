@@ -1,10 +1,12 @@
 
-{next}
-------
+
+0.104 (2026-01-08)
+------------------
 
 * Added: We now support Python 3.14 (PR #1285)
 * Changed: We now use docutil's smart quotes rather than the old, abandoned smartypants library (PR #1253)
 * Changed: When using Sphinx 8.2.0+, rst2pdf uses Sphinx's formatting for the productionlist directive
+* Changed: Improved handling of linenos directive in code blocks(PR #1286)
 * Note: A change in svglib results in text with SVGs rendering slightly smaller. See commit ``3a9955ca``
 * Note: With Pillow 11.1.0+, the dpi for an image is now populated correctly for images using cm. This
     affects the way images are sized as rst2pdf will now use the image's dpi value rather than defaulting
