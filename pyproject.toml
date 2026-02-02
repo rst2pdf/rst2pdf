@@ -104,7 +104,7 @@ dev = [
     "flake8>=5.0.4",
     "pymupdf~=1.0",
     "pytest-xdist~=3.0",
-    "pytest~=8.0",
+    "pytest~=9.0",
 ]
 
 [tool.pytest.ini_options]
