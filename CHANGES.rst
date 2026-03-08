@@ -1,4 +1,8 @@
 
+0.105 (2026-01-09)
+------------------
+* Changed: We have updated our dependencies to support the latest version of packaging (v)26 and pytest (v9)
+
 
 0.104 (2026-01-08)
 ------------------
@@ -13,6 +17,7 @@
     to 300dpi.
 * Changed: We now use our own copy of docutils _roman_numerals.py from v0.22.4 (PR #1294)
 * Removed: Support for Python 3.9. Python 3.10 is the new minimum supported version of Python. (PR #1294)
+
 
 0.103.1 (2024-12-24)
 --------------------
