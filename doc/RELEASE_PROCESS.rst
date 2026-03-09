@@ -23,12 +23,13 @@ This is an outline of what needs to be done in order to release rst2pdf.
 
    Check out the tag first and then install via ``uv``. We do this so that the version number that
    is rendered to the first page of the PDF is displayed as "{version number} (final)" rather than
-   as a dev version.
+   as a dev version. Also activate the venv so that we're using this version of rst2pdf.
 
    ::
 
      $ git checkout 0.103
      $ uv sync --all-extras
+     $ . venv/bin/activate
 
    Generate the HTML and PDF docs:
 
@@ -102,6 +103,13 @@ This is an outline of what needs to be done in order to release rst2pdf.
     ::
 
        $ rm -rf build/ rst2pdf.egg-info/ dist/
+
+#. Deactivate the venv and then check out the main branch again
+
+    ::
+
+       $ deactivate
+       $ git checkout main
 
 #. That's it!
 
