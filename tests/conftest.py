@@ -45,7 +45,11 @@ def can_run(command_list):
     return _can_run
 
 
-check_dependency = {'plantuml': can_run(["plantuml", "-pipe"])}
+# For each dependency, a function to check if it's available
+check_dependency = {
+    'plantuml': can_run(["plantuml", "-pipe"]),
+    'sphinx': can_run(["sphinx-build", "--version"]),
+}
 
 
 def _get_metadata(pdf):
