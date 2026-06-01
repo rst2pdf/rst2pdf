@@ -93,6 +93,7 @@ from . import config
 from .utils import DependencyRecordingFileSystemLoader
 
 from rst2pdf.directives import code_block
+from rst2pdf.directives import csv_table
 from rst2pdf import flowables
 from rst2pdf.flowables import (
     BoundByWidth,
@@ -251,6 +252,7 @@ class RstToPdf(object):
             # These rst2pdf extensions conflict with sphinx
             directives.register_directive('code-block', code_block.code_block_directive)
             directives.register_directive('code', code_block.code_block_directive)
+            directives.register_directive('csv-table', csv_table.BackwardCompatibleCSVTable)
             self.gen_pdftext, self.gen_elements = nodehandlers(self)
 
         self.sphinx = sphinx
