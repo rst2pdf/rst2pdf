@@ -1657,15 +1657,15 @@ wheels = [
 
 [[package]]
 name = "reportlab"
-version = "4.4.4"
+version = "5.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "charset-normalizer" },
     { name = "pillow" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f8/fa/ed71f3e750afb77497641eb0194aeda069e271ce6d6931140f8787e0e69a/reportlab-4.4.4.tar.gz", hash = "sha256:cb2f658b7f4a15be2cc68f7203aa67faef67213edd4f2d4bdd3eb20dab75a80d", size = 3711935, upload-time = "2025-09-19T10:43:36.502Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/41/d6/4b7b0cf56880eb96533e607967be6a939e344675601e033d113a0bfa1f4e/reportlab-5.0.0.tar.gz", hash = "sha256:e4494a0c6623ae213bb856fba523171b2b54a7bf629fda02d5e525a7b899a784", size = 3701928, upload-time = "2026-06-18T11:34:31.145Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/57/66/e040586fe6f9ae7f3a6986186653791fb865947f0b745290ee4ab026b834/reportlab-4.4.4-py3-none-any.whl", hash = "sha256:299b3b0534e7202bb94ed2ddcd7179b818dcda7de9d8518a57c85a58a1ebaadb", size = 1954981, upload-time = "2025-09-19T10:43:33.589Z" },
+    { url = "https://files.pythonhosted.org/packages/a3/07/70085c17a369605f15e301d10ab902115019b1126c7253d964afc230c7d6/reportlab-5.0.0-py3-none-any.whl", hash = "sha256:9d5a3affa84919e1111ede580031266a570e93b1ce388219621347965ff1d93c", size = 1956710, upload-time = "2026-06-18T11:34:29.07Z" },
 ]
 
 [[package]]
@@ -1757,7 +1757,7 @@ requires-dist = [
     { name = "plantuml", marker = "extra == 'plantumlsupport'" },
     { name = "pygments", specifier = "~=2.0" },
     { name = "pyyaml", specifier = ">=6.0.1" },
-    { name = "reportlab", specifier = "~=4.0" },
+    { name = "reportlab", specifier = "~=5.0" },
     { name = "sphinx", marker = "python_full_version == '3.10.*' and extra == 'sphinx'", specifier = ">7.3" },
     { name = "sphinx", marker = "python_full_version >= '3.11' and extra == 'sphinx'", specifier = ">=8.2" },
     { name = "svglib", marker = "extra == 'svgsupport'" },
@@ -2033,7 +2033,7 @@ wheels = [
 
 [[package]]
 name = "xhtml2pdf"
-version = "0.2.17"
+version = "0.2.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "arabic-reshaper" },
@@ -2046,7 +2046,7 @@ dependencies = [
     { name = "reportlab" },
     { name = "svglib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/da/9a/3b29831d8617ecbcf0b0aaa2b3e1b24f3fd1bbd204678ae86e9fee2f4239/xhtml2pdf-0.2.17.tar.gz", hash = "sha256:09ddbc31aa0e38a16f2f3cb73be89af5f7c968c17a564afdd685d280e39c526d", size = 139727, upload-time = "2025-02-23T23:17:02.484Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6b/79/e7315cad4af7f13ef6cd79e84a9a1007879da723dab6a16a66ce29a51e12/xhtml2pdf-0.2.14.tar.gz", hash = "sha256:4b33a94921898ed5c0431b46701380dc91ff4aae6d28c99679431ea696edd38c", size = 156072, upload-time = "2024-01-20T16:37:47.638Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/93/ca/d53764f0534ff857239595f090f4cb83b599d226cc326c7de5eb3d802715/xhtml2pdf-0.2.17-py3-none-any.whl", hash = "sha256:61a7ecac829fed518f7dbcb916e9d56bea6e521e02e54644b3d0ca33f0658315", size = 125349, upload-time = "2025-02-24T20:44:42.604Z" },
+    { url = "https://files.pythonhosted.org/packages/81/20/3dce859d8eade8ca8c224b25e4f933cdbdd532811466ebcf0b598cac0949/xhtml2pdf-0.2.14-py3-none-any.whl", hash = "sha256:dfdd81c5b6fbb06fc7afb1db7af2a313cbaee14e7aa079ead43189a27722b09f", size = 124991, upload-time = "2024-01-20T16:37:45.128Z" },
 ]
