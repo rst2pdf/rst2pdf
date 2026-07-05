@@ -81,6 +81,20 @@ def parseRaw(data, node):
     return elements
 
 
+# xhtml2pdf imports ShowBoundaryValue from reportlab.platypus.frames, but
+# ReportLab 5 dropped that re-export (it lives in reportlab.pdfgen.canvas
+# since 4.1), so restore it before importing xhtml2pdf. xhtml2pdf 0.2.14 is
+# the only version installable alongside ReportLab 5 (0.2.15+ pin
+# reportlab<5), and it still uses the old import location, so this shim is
+# needed until xhtml2pdf supports ReportLab 5.
+# See https://github.com/xhtml2pdf/xhtml2pdf/issues/751
+import reportlab.platypus.frames  # NOQA: E402
+
+if not hasattr(reportlab.platypus.frames, 'ShowBoundaryValue'):
+    from reportlab.pdfgen.canvas import ShowBoundaryValue
+
+    reportlab.platypus.frames.ShowBoundaryValue = ShowBoundaryValue
+
 HAS_XHTML2PDF = True
 try:
     import xhtml2pdf.default  # NOQA
