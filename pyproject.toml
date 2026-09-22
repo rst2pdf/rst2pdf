@@ -48,7 +48,7 @@ requires-python = ">=3.11"
 
 [project.optional-dependencies]
 aafiguresupport = ["aafigure"]
-mathsupport = ["matplotlib"]
+mathsupport = ["matplotlib>=3.11"]
 plantumlsupport = ["plantuml"]
 rawhtmlsupport = ["xhtml2pdf"]
 sphinx = ["sphinx>=8.2"]
