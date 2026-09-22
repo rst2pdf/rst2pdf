@@ -24,6 +24,20 @@ except ImportError:
 fonts = {}
 
 
+def _glyph_fields(glyph):
+    """Return font, size, character code, x and y for one math glyph.
+
+    MathTextParser("path") gained a glyph index in Matplotlib 3.11, inserted
+    after the character code. Releases before that yield five fields.
+    https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.11.0.html
+    """
+    if len(glyph) >= 6:
+        font, fontsize, num, _glyph_index, ox, oy = glyph[:6]
+    else:
+        font, fontsize, num, ox, oy = glyph
+    return font, fontsize, num, ox, oy
+
+
 def enclose(s):
     """Enclose the string in $...$ if needed"""
     if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
@@ -91,7 +105,8 @@ class Math(Flowable):
                 )
                 canv.translate(x, y + descent)
 
-                for font, fontsize, num, ox, oy in glyphs:
+                for glyph in glyphs:
+                    font, fontsize, num, ox, oy = _glyph_fields(glyph)
                     fontname = font.fname
                     if fontname not in fonts:
                         fonts[fontname] = fontname
@@ -167,7 +182,8 @@ class Math(Flowable):
                 (255, 255, 255, 0),
             )
             draw = ImageDraw.Draw(img)
-            for font, fontsize, num, ox, oy in glyphs:
+            for glyph in glyphs:
+                font, fontsize, num, ox, oy = _glyph_fields(glyph)
                 fontname = font.fname
                 image_font = ImageFont.truetype(fontname, int(fontsize * scale))
                 fc = to_rgb(self.color)
