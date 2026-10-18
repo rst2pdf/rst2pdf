@@ -127,7 +127,7 @@ option. For example::
     ]
 
 For information on the ``pdf_documents`` option and the many other options
-available, refer to the `manual <https://rst2pdf.org/static/manual.pdf>`_.
+available, refer to the `manual <https://rst2pdf.org/manual.html#sphinx>`_.
 
 Contributing
 ------------
