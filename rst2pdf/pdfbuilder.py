@@ -695,7 +695,7 @@ class PDFWriter(writers.Writer):
             createpdf.patch_PDFDate()
             createpdf.patch_digester()
 
-        createpdf.RstToPdf(
+        status = createpdf.RstToPdf(
             sphinx=True,
             stylesheets=self.stylesheets,
             language=self.__language,
@@ -718,6 +718,8 @@ class PDFWriter(writers.Writer):
             toc_depth=self.toc_depth,
             smarty=self.smartquotes,
         ).createPdf(doctree=self.document, output=sio, compressed=self.compressed)
+        if status:
+            self.builder._app.statuscode = 1
         self.output = sio.getvalue()
 
     def supports(self, format):
