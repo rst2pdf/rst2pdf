@@ -696,10 +696,26 @@ class RstToPdf(object):
             if not isinstance(elements[-1], UnhappyOnce):
                 log.info('Forcing second pass so Total pages work')
                 elements.append(UnhappyOnce())
+
+        # Store keepWithNext as ReportLab clears them when building, so we can
+        # restore before a rebuild (e.g. when ###Total### is in the footer)
+        keep_with_next = [
+            (e, e.__dict__['keepWithNext'])
+            for e in elements
+            if 'keepWithNext' in e.__dict__
+        ]
+
         while True:
             try:
                 log.info("Starting build")
                 self.elements = elements
+
+                # Restore keepWithNext on every element that it was set on
+                for e in elements:
+                    e.__dict__.pop('keepWithNext', None)
+                for e, value in keep_with_next:
+                    e.keepWithNext = value
+
                 # See if this *must* be multipass
                 pdfdoc.multiBuild(elements)
                 # Force a multibuild pass

@@ -1,4 +1,11 @@
 
+{next}
+------
+
+* Fixed: ``keepWithNext`` is now honoured when the document is built more than once (such as when
+  a header or footer contains ``###Total###``). (PR #1310)
+
+
 0.105 (2026-01-09)
 ------------------
 * Changed: We have updated our dependencies to support the latest version of packaging (v)26 and pytest (v9)
