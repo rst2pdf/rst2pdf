@@ -14,10 +14,11 @@ jobs:
         experimental: [false]
         skip-sphinx: [false]
         include:
-          - python-version: '3.10'
+          - python-version: '3.14'
             skip-sphinx: true
             experimental: false
         #   - python-version: '3.14-rc'
+        #     skip-sphinx: false
         #     experimental: true
 
     steps:
