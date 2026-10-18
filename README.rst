@@ -49,8 +49,9 @@ Features
 Installation
 ------------
 
-*rst2pdf* supports Python 3.10 or greater. Version 0.103 was the last version
-to support Python 3.9 Version 0.102 was the last version to support Python 3.8.
+*rst2pdf* supports Python 3.11 or greater. Version 0.105 was the last version
+to support Python 3.10, Version 0.103 was the last version to support Python
+3.9, Version 0.102 was the last version to support Python 3.8.
 
 Install from PyPI (pipx)
 ~~~~~~~~~~~~~~~~~~~~~~~~
