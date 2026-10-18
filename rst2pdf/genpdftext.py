@@ -78,11 +78,20 @@ class HandleTitleReference(FontHandler, docutils.nodes.title_reference):
 class HandleReference(NodeHandler, docutils.nodes.reference):
     def get_pre_post(self, client, node, replaceEnt):
         pre, post = '', ''
+        # A reference can itself be the destination of another link: the
+        # contents transformation gives every entry it generates an id and
+        # then points the section title back at it.  Emit those ids as
+        # anchors, the way the docutils writers do, or such a link ends up
+        # naming a destination that is nowhere in the document.
+        for i in node.get('ids', []):
+            if i not in client.targets:
+                pre += u'<a name="%s"/>' % i
+                client.targets.append(i)
         uri = node.get('refuri')
         if uri:
             # Issue 366: links to "#" make no sense in a PDF
             if uri == "#":
-                return "", ""
+                return pre, ""
             if uri.startswith('#'):
                 pass
             elif client.baseurl:  # Need to join the uri with the base url
