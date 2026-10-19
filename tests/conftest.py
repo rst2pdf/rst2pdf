@@ -7,11 +7,13 @@ See LICENSE.txt for licensing terms
 """
 
 import glob
+import hashlib
 import os
 import shlex
 import shutil
 import subprocess
 import tempfile
+import urllib.request
 
 from packaging import version
 import pytest
@@ -28,24 +30,61 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'output')
 REFERENCE_DIR = os.path.join(ROOT_DIR, 'reference')
 
 
-def can_run(command_list):
-    def _can_run():
-        try:
-            p = subprocess.Popen(
-                command_list,
-                stdout=subprocess.PIPE,
-                stdin=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            )
-            p.terminate()
-        except FileNotFoundError:
-            return False
-        return True
-
-    return _can_run
+# Use a specific version of PlantUML in our tests
+PLANTUML_VERSION = '1.2026.8'
+PLANTUML_SHA256 = '0f77e5f769836b3dee340e207fe497c3e4c43e973d559e3c306915da9c32e34c'
+PLANTUML_URL = (
+    'https://repo1.maven.org/maven2/net/sourceforge/plantuml/plantuml/'
+    f'{PLANTUML_VERSION}/plantuml-{PLANTUML_VERSION}.jar'
+)
+PLANTUML_DIR = os.path.join(ROOT_DIR, '.plantuml')
 
 
-check_dependency = {'plantuml': can_run(["plantuml", "-pipe"])}
+def _download_plantuml(jar_path):
+    """Download and verify our PlantUML jar"""
+    with urllib.request.urlopen(PLANTUML_URL) as response:
+        data = response.read()
+
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != PLANTUML_SHA256:
+        raise RuntimeError(
+            f'SHA-256 of {PLANTUML_URL} is {digest}, expected {PLANTUML_SHA256}'
+        )
+
+    fd, tmp_path = tempfile.mkstemp(dir=PLANTUML_DIR, suffix='.jar')
+    with os.fdopen(fd, 'wb') as fh:
+        fh.write(data)
+    os.replace(tmp_path, jar_path)
+
+
+def _setup_plantuml():
+    """Set up our own PlantUML.
+
+    Return False if Java is unavailable, or raise if running in CI.
+    """
+    try:
+        # Run `java -version` as macOS has a `java` stub that fails without a JDK
+        subprocess.run(['java', '-version'], capture_output=True, check=True)
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        if os.environ.get('CI'):
+            raise RuntimeError('Java is required for PlantUML but `java` failed')
+        return False
+
+    # Download PlantUML if it doesn't already exist
+    os.makedirs(PLANTUML_DIR, exist_ok=True)
+    jar_path = os.path.join(PLANTUML_DIR, f'plantuml-{PLANTUML_VERSION}.jar')
+    if not os.path.exists(jar_path):
+        _download_plantuml(jar_path)
+
+    # Set PLANTUML_JAR for ./bin/plantuml and put it first on PATH
+    os.environ['PLANTUML_JAR'] = jar_path
+    bin_dir = os.path.join(ROOT_DIR, 'bin')
+    if not os.environ['PATH'].startswith(bin_dir + os.pathsep):
+        os.environ['PATH'] = bin_dir + os.pathsep + os.environ['PATH']
+    return True
+
+
+check_dependency = {'plantuml': _setup_plantuml}
 
 
 def _get_metadata(pdf):
