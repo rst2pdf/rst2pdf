@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs the PlantUML jar downloaded by tests/conftest.py, which sets PLANTUML_JAR
+: "${PLANTUML_JAR:?PLANTUML_JAR is not set}"
+exec java -Djava.awt.headless=true -jar "$PLANTUML_JAR" "$@"
