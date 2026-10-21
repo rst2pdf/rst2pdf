@@ -99,7 +99,7 @@ packages = ["rst2pdf"]
 [dependency-groups]
 dev = [
     "flake8>=5.0.4",
-    "pymupdf~=1.0",
+    "pymupdf~=2.0",
     "pytest-xdist~=3.0",
     "pytest~=9.0",
 ]
