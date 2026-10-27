@@ -59,6 +59,7 @@ class PDFBuilder(Builder):
     def init(self):
         self.docnames = []
         self.document_data = []
+        self.failed_documents = []
         self.sphinx_logger = sphinx.util.logging.getLogger(__name__)
 
     def write(self, *ignored):
@@ -161,6 +162,7 @@ class PDFBuilder(Builder):
             except Exception:
                 log.exception('Failed to build doc')
                 self.sphinx_logger.info(red("FAILED"))
+                self.failed_documents.append(entry)
 
     def init_document_data(self):
         preliminary_document_data = map(list, self.config.pdf_documents)
@@ -695,7 +697,7 @@ class PDFWriter(writers.Writer):
             createpdf.patch_PDFDate()
             createpdf.patch_digester()
 
-        createpdf.RstToPdf(
+        retcode = createpdf.RstToPdf(
             sphinx=True,
             stylesheets=self.stylesheets,
             language=self.__language,
@@ -718,6 +720,8 @@ class PDFWriter(writers.Writer):
             toc_depth=self.toc_depth,
             smarty=self.smartquotes,
         ).createPdf(doctree=self.document, output=sio, compressed=self.compressed)
+        if retcode:
+            raise RuntimeError('Cannot generate PDF (exit code %d)' % retcode)
         self.output = sio.getvalue()
 
     def supports(self, format):
@@ -969,8 +973,15 @@ def try_parse(src):
     return True
 
 
+def set_status_on_failure(app, exception):
+    """Make sphinx-build exit with an error if any PDF failed to build."""
+    if exception is None and getattr(app.builder, 'failed_documents', None):
+        app.statuscode = 1
+
+
 def setup(app):
     app.add_builder(PDFBuilder)
+    app.connect('build-finished', set_status_on_failure)
     # PDF options
     app.add_config_value('pdf_documents', [], None)
     app.add_config_value('pdf_stylesheets', ['sphinx'], None)
