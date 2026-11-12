@@ -2,7 +2,6 @@
 # See LICENSE.txt for licensing terms
 
 import os
-import re
 import tempfile
 
 from reportlab.platypus.flowables import Flowable
@@ -25,10 +24,25 @@ fonts = {}
 
 
 def enclose(s):
-    """Enclose the string in $...$ if needed"""
-    if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
-        s = u"$%s$" % s
+    """Normalize whitespace and enclose a math expression in ``$...$``.
+
+    Docutils preserves line breaks in ``math`` directives, but matplotlib's
+    mathtext parser only accepts a single-line expression.  A line break in
+    reStructuredText is normally just source formatting, so replace runs of
+    whitespace with a single space before handing the expression to
+    matplotlib.
+    """
+    s = ' '.join(s.split())
+    if not (s.startswith('$') and s.endswith('$')):
+        s = f"${s}$"
     return s
+
+
+def unpack_glyph(glyph):
+    """Return the glyph values used by rst2pdf across matplotlib versions."""
+    font, fontsize, num, *position = glyph
+    ox, oy = position[-2:]
+    return font, fontsize, num, ox, oy
 
 
 class Math(Flowable):
@@ -53,9 +67,6 @@ class Math(Flowable):
                 " some parts of this document will be rendered incorrectly."
                 " Install matplotlib."
             )
-
-        if "\n" in s:
-            log.error("rst2pdf's math directive does not support multiple lines'")
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
@@ -91,7 +102,8 @@ class Math(Flowable):
                 )
                 canv.translate(x, y + descent)
 
-                for font, fontsize, num, ox, oy in glyphs:
+                for glyph in glyphs:
+                    font, fontsize, num, ox, oy = unpack_glyph(glyph)
                     fontname = font.fname
                     if fontname not in fonts:
                         fonts[fontname] = fontname
@@ -167,7 +179,8 @@ class Math(Flowable):
                 (255, 255, 255, 0),
             )
             draw = ImageDraw.Draw(img)
-            for font, fontsize, num, ox, oy in glyphs:
+            for glyph in glyphs:
+                font, fontsize, num, ox, oy = unpack_glyph(glyph)
                 fontname = font.fname
                 image_font = ImageFont.truetype(fontname, int(fontsize * scale))
                 fc = to_rgb(self.color)
