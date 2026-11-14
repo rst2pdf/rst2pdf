@@ -4,6 +4,9 @@
 
 * Added: We now support Python 3.15 (PR #1321)
 * Removed: Support for Python 3.10. Python 3.11 is the new minimum supported version of Python. (PR #1321)
+* Added: Support for Matplotlib 3.11 (PR #1315)
+* Note: With Matplotlib 3.11, displayed math is positioned slightly differently, as Matplotlib now
+    reports a different height for it.
 
 
 0.105 (2026-03-09)
