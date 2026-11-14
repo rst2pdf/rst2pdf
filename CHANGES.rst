@@ -1,6 +1,14 @@
 
-0.105 (2026-01-09)
+{next}
+------
+
+* Added: We now support Python 3.15 (PR #1321)
+* Removed: Support for Python 3.10. Python 3.11 is the new minimum supported version of Python. (PR #1321)
+
+
+0.105 (2026-03-09)
 ------------------
+
 * Changed: We have updated our dependencies to support the latest version of packaging (v)26 and pytest (v9)
 
 
@@ -21,6 +29,7 @@
 
 0.103.1 (2024-12-24)
 --------------------
+
 * Changed: Updated pyproject classifiers to include Python 3.13 (PR #1258)
 * Changed: Various project changes to allow releasing using uv (PR #1255, PR #1256, PR #1257)
 
