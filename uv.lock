@@ -1474,7 +1474,7 @@ requires-dist = [
     { name = "aafigure", marker = "extra == 'aafiguresupport'" },
     { name = "docutils", specifier = ">=0.21.2" },
     { name = "jinja2", specifier = "~=3.0" },
-    { name = "matplotlib", marker = "extra == 'mathsupport'", specifier = ">=3.11" },
+    { name = "matplotlib", marker = "extra == 'mathsupport'" },
     { name = "packaging", specifier = "~=26.0" },
     { name = "plantuml", marker = "extra == 'plantumlsupport'" },
     { name = "pygments", specifier = "~=2.0" },
