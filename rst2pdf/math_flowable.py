@@ -28,9 +28,12 @@ def _glyph_fields(glyph):
     """Return font, size, character code, x and y for one math glyph.
 
     Matplotlib 3.11's MathTextParser("path") yields font, font size, character
-    code, glyph index, x, y. Draw with the character code and ignore the index.
+    code, glyph index, x, y. Earlier versions yield the five fields without the
+    glyph index. Draw with the character code and ignore the index.
     https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.11.0.html
     """
+    if len(glyph) == 5:
+        return glyph
     font, fontsize, num, _glyph_index, ox, oy = glyph[:6]
     return font, fontsize, num, ox, oy
 
