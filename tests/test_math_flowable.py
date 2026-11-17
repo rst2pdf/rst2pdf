@@ -1,4 +1,6 @@
-from rst2pdf.math_flowable import Math, enclose, unpack_glyph
+import pytest
+
+from rst2pdf.math_flowable import Math, _glyph_fields, enclose
 
 
 def test_enclose_normalizes_multiline_expression():
@@ -30,9 +32,14 @@ def test_math_wrap_accepts_source_line_breaks():
     assert height > 0
 
 
-def test_unpack_glyph_accepts_old_and_new_matplotlib_results():
+def test_glyph_fields_accepts_old_and_new_matplotlib_results():
     old_glyph = ('font', 10, 97, 1.5, 2.5)
     new_glyph = ('font', 10, 97, 68, 1.5, 2.5)
 
-    assert unpack_glyph(old_glyph) == ('font', 10, 97, 1.5, 2.5)
-    assert unpack_glyph(new_glyph) == ('font', 10, 97, 1.5, 2.5)
+    assert _glyph_fields(old_glyph) == ('font', 10, 97, 1.5, 2.5)
+    assert _glyph_fields(new_glyph) == ('font', 10, 97, 1.5, 2.5)
+
+
+def test_glyph_fields_rejects_unexpected_result():
+    with pytest.raises(ValueError, match="Unexpected math glyph with 4 fields"):
+        _glyph_fields(('font', 10, 97, 1.5))

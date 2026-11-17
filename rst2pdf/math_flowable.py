@@ -38,11 +38,21 @@ def enclose(s):
     return s
 
 
-def unpack_glyph(glyph):
-    """Return the glyph values used by rst2pdf across matplotlib versions."""
-    font, fontsize, num, *position = glyph
-    ox, oy = position[-2:]
-    return font, fontsize, num, ox, oy
+def _glyph_fields(glyph):
+    """Return font, size, character code, x and y for one math glyph.
+
+    Matplotlib 3.11 added a glyph index after the character code in glyphs
+    returned by a path-outputting MathTextParser. Ignore that index because
+    rst2pdf draws characters using their character codes.
+    """
+    if len(glyph) == 5:
+        font, fontsize, character_code, ox, oy = glyph
+    elif len(glyph) == 6:
+        font, fontsize, character_code, _glyph_index, ox, oy = glyph
+    else:
+        raise ValueError(f"Unexpected math glyph with {len(glyph)} fields")
+
+    return font, fontsize, character_code, ox, oy
 
 
 class Math(Flowable):
@@ -103,7 +113,7 @@ class Math(Flowable):
                 canv.translate(x, y + descent)
 
                 for glyph in glyphs:
-                    font, fontsize, num, ox, oy = unpack_glyph(glyph)
+                    font, fontsize, num, ox, oy = _glyph_fields(glyph)
                     fontname = font.fname
                     if fontname not in fonts:
                         fonts[fontname] = fontname
@@ -180,7 +190,7 @@ class Math(Flowable):
             )
             draw = ImageDraw.Draw(img)
             for glyph in glyphs:
-                font, fontsize, num, ox, oy = unpack_glyph(glyph)
+                font, fontsize, num, ox, oy = _glyph_fields(glyph)
                 fontname = font.fname
                 image_font = ImageFont.truetype(fontname, int(fontsize * scale))
                 fc = to_rgb(self.color)
