@@ -51,6 +51,10 @@ else:
     from sphinx.environment import NoUri
 
 
+class PDFGenerationError(Exception):
+    """createPdf() failed and has already logged the cause."""
+
+
 class PDFBuilder(Builder):
     name = 'pdf'
     out_suffix = '.pdf'
@@ -159,6 +163,10 @@ class PDFBuilder(Builder):
                 self.sphinx_logger.info("writing " + targetname + "... ")
                 docwriter.write(doctree, destination)
                 self.sphinx_logger.info("done")
+            except PDFGenerationError:
+                log.error('Failed to build doc')
+                self.sphinx_logger.info(red("FAILED"))
+                self.failed_documents.append(entry)
             except Exception:
                 log.exception('Failed to build doc')
                 self.sphinx_logger.info(red("FAILED"))
@@ -721,7 +729,7 @@ class PDFWriter(writers.Writer):
             smarty=self.smartquotes,
         ).createPdf(doctree=self.document, output=sio, compressed=self.compressed)
         if retcode:
-            raise RuntimeError('Cannot generate PDF (exit code %d)' % retcode)
+            raise PDFGenerationError('Cannot generate PDF (exit code %d)' % retcode)
         self.output = sio.getvalue()
 
     def supports(self, format):
