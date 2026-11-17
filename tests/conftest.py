@@ -410,13 +410,14 @@ class SphinxItem(Item):
         with open(output_log, 'wb') as fh:
             fh.write(output)
 
+        no_pdf = os.path.exists(os.path.join(INPUT_DIR, self.name + '.nopdf'))
         pdf_files = glob.glob(os.path.join(build_dir, '*.pdf'))
         if pdf_files:
             if len(pdf_files) == 1:
                 shutil.copyfile(pdf_files[0], output_pdf)
             else:
                 shutil.copytree(build_dir, output_pdf)
-        else:
+        elif not no_pdf:
             self._fail('Output PDF not generated', output)
 
         shutil.rmtree(build_dir)
