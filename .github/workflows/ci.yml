@@ -24,9 +24,19 @@ jobs:
         enable-cache: true
     - name: Set up Python ${{ matrix.python-version }}
       run: uv python install ${{ matrix.python-version }}
+    - name: Set up Java for PlantUML
+      uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: '21'
+    - name: Cache PlantUML
+      uses: actions/cache@v6
+      with:
+        path: tests/.plantuml/*.jar
+        key: plantuml-${{ hashFiles('tests/conftest.py') }}
     - name: Install apt dependencies
       run: |
-        sudo apt-get update && sudo apt-get -y install plantuml libxml2-dev libxslt-dev python3-dev libffi-dev libcairo2-dev pkg-config
+        sudo apt-get update && sudo apt-get -y install libxml2-dev libxslt-dev python3-dev libffi-dev libcairo2-dev pkg-config
     - name: Install dependencies for Python
       run: |
         uv sync --all-extras --python ${{ matrix.python-version }}

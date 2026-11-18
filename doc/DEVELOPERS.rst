@@ -132,6 +132,30 @@ will mark the test as skipped when the test suite runs. This could be useful
 for inherited tests that we aren't confident of the correct output for, but
 where we don't want to delete/lose the test entirely.
 
+PlantUML tests
+**************
+
+The PlantUML tests use a specific version of PlantUML, so that both local and
+CI tests produce the same diagrams. The first time these tests run, we
+download the PlantUML jar into ``tests/.plantuml`` and run it with the
+``tests/bin/plantuml`` wrapper script.
+
+If a working ``java`` command is not on the ``PATH``, then the PlantUML tests
+are skipped.
+
+On macOS, ``/usr/bin/java`` is a stub that fails until a JDK is installed. To
+use Homebrew's OpenJDK:
+
+1. Install it::
+
+     brew install openjdk
+
+2. Link it so the system ``java`` finds it::
+
+     sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+On Linux, install a JRE from your package manager, such as
+``default-jre-headless`` on Debian or Ubuntu.
 
 .. note::
 
