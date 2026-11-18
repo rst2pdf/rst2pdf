@@ -7,6 +7,7 @@
 * Added: Support for Matplotlib 3.11 (PR #1315)
 * Note: With Matplotlib 3.11, displayed math is positioned slightly differently, as Matplotlib now
     reports a different height for it.
+* Fixed: sphinx-build now exits with a non-zero status when rst2pdf cannot generate a PDF (PR #1327)
 
 
 0.105 (2026-03-09)
