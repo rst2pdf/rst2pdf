@@ -2,7 +2,6 @@
 # See LICENSE.txt for licensing terms
 
 import os
-import re
 import tempfile
 
 from reportlab.platypus.flowables import Flowable
@@ -39,10 +38,35 @@ def _glyph_fields(glyph):
 
 
 def enclose(s):
-    """Enclose the string in $...$ if needed"""
-    if not re.match(r'.*\$.+\$.*', s, re.MULTILINE | re.DOTALL):
-        s = u"$%s$" % s
+    """Normalize whitespace and enclose a math expression in ``$...$``.
+
+    Docutils preserves line breaks in ``math`` directives, but matplotlib's
+    mathtext parser only accepts a single-line expression.  A line break in
+    reStructuredText is normally just source formatting, so replace runs of
+    whitespace with a single space before handing the expression to
+    matplotlib.
+    """
+    s = ' '.join(s.split())
+    if not (s.startswith('$') and s.endswith('$')):
+        s = f"${s}$"
     return s
+
+
+def _glyph_fields(glyph):
+    """Return font, size, character code, x and y for one math glyph.
+
+    Matplotlib 3.11 added a glyph index after the character code in glyphs
+    returned by a path-outputting MathTextParser. Ignore that index because
+    rst2pdf draws characters using their character codes.
+    """
+    if len(glyph) == 5:
+        font, fontsize, character_code, ox, oy = glyph
+    elif len(glyph) == 6:
+        font, fontsize, character_code, _glyph_index, ox, oy = glyph
+    else:
+        raise ValueError(f"Unexpected math glyph with {len(glyph)} fields")
+
+    return font, fontsize, character_code, ox, oy
 
 
 class Math(Flowable):
@@ -67,9 +91,6 @@ class Math(Flowable):
                 " some parts of this document will be rendered incorrectly."
                 " Install matplotlib."
             )
-
-        if "\n" in s:
-            log.error("rst2pdf's math directive does not support multiple lines'")
 
     def wrap(self, aW, aH):
         if HAS_MATPLOTLIB:
