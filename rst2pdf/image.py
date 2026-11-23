@@ -2,10 +2,14 @@
 
 from copy import copy
 import glob
+import mimetypes
 import os
 from os.path import abspath, dirname
+import shutil
 import sys
-from urllib.request import urlretrieve
+import tempfile
+from urllib.parse import urlparse
+from urllib.request import urlopen
 
 from PIL import Image as PILImage
 from reportlab.platypus.flowables import Image, Flowable
@@ -26,6 +30,23 @@ else:
     PATH = abspath(dirname(__file__))
 
 missing = os.path.join(PATH, 'images', 'image-missing.jpg')
+
+
+def retrieve_image(uri):
+    """Download a remote image to a temporary file and return its path.
+
+    The backend is chosen by file extension, so the file keeps one: the URL's
+    own if it names an image type, otherwise one from the Content-Type header.
+    """
+    with urlopen(uri) as response:
+        extension = os.path.splitext(urlparse(uri).path)[1]
+        guessed_type = mimetypes.guess_type('image' + extension)[0] or ''
+        content_type = response.headers.get_content_type()
+        if not guessed_type.startswith('image/') and content_type.startswith('image/'):
+            extension = mimetypes.guess_extension(content_type) or extension
+        with tempfile.NamedTemporaryFile(suffix=extension, delete=False) as fh:
+            shutil.copyfileobj(response, fh)
+    return fh.name
 
 
 def defaultimage(
@@ -102,10 +123,8 @@ class MyImage(Flowable):
 
         if filename.split("://")[0].lower() in ('http', 'ftp', 'https'):
             try:
-                filename2, _ = urlretrieve(filename)
-                if filename != filename2:
-                    client.to_unlink.append(filename2)
-                    filename = filename2
+                filename = retrieve_image(filename)
+                client.to_unlink.append(filename)
             except IOError:
                 filename = missing
         self.filename, self._backend = self.get_backend(filename, client)
@@ -244,7 +263,7 @@ class MyImage(Flowable):
         if uri.split('://')[0].lower() not in ('http', 'ftp', 'https'):
             uri = os.path.join(client.basedir, uri)
         else:
-            uri, _ = urlretrieve(uri)
+            uri = retrieve_image(uri)
             client.to_unlink.append(uri)
 
         srcinfo = client, uri
