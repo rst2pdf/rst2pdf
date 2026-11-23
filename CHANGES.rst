@@ -8,6 +8,7 @@
 * Note: With Matplotlib 3.11, displayed math is positioned slightly differently, as Matplotlib now
     reports a different height for it.
 * Fixed: sphinx-build now exits with a non-zero status when rst2pdf cannot generate a PDF (PR #1327)
+* Fixed: Images referenced by URL keep their file extension when downloaded, so SVGs referenced by URL are recognised (PR #1334)
 
 
 0.105 (2026-03-09)
